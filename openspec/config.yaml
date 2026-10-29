@@ -1,0 +1,120 @@
+schema: spec-driven
+
+context: |
+  Product: gridprims.com — the US power grid's math, files, and public data in
+  one free tab. A static, client-side catalog of grid tools for the people who
+  plan, build, run, or pay for electricity. Two doors, one engine:
+    - Households (about 143M residential customers): check a bill from its
+      totals, compare use with the average home, find the cheapest plan on
+      their own use, find their utility, see the grid's cleanest hours.
+    - Professionals: facility and fleet managers, co-op and municipal utility
+      engineers, solar and storage developers, data center siting teams, city
+      and state utility commission staff, ratepayer advocates, reporters, and
+      students.
+  Product record: PRODUCT.md. Visual contract: DESIGN.md (public road-sign
+  direction, light by default, chosen 2026-10-29).
+
+  Sister sites (same ethos, same family patterns): sophiewell.com (health),
+  geoprims.com (geospatial), roughlogic.com (trades), enklayve.com (personal
+  finance), vaulytica.com (contracts), encryptalotta.com (privacy).
+
+  Two surfaces, one core, zero third-party code:
+    - The static website on Cloudflare is for humans.
+    - A local-only MCP server (`node mcp/server.mjs` from a clone) is for
+      developers who point their AI agents at it. It never opens a network
+      connection and reads only folders allowed at launch.
+    - Both run the same modules. No npm packages, frameworks, SDKs, CDNs, or
+      CAPTCHAs; only JavaScript, web platform APIs, and Node.js built-ins.
+      Cloudflare hosts; public publishers supply data at build time.
+
+  Value add, in priority order (why gridprims exists):
+    1. Instant, private first look at your own meter data and bill. Drop an
+       interval file or Green Button export and get peaks, load factor,
+       demand-charge drivers, coincident-peak exposure, tariff re-pricing, and a
+       battery/solar screen in under a second, without uploading anything.
+       Hand off to REopt (NLR, formerly NREL) for full optimization.
+    2. A dated, cited, downloadable copy of public US grid data (EIA, EPA,
+       LBNL, OpenEI rates) and one plain-language page per utility,
+       plant, and region. Public grid data is getting harder to find; we keep a
+       versioned copy with sources.
+    3. Hourly emissions and hourly matching from the same meter file, built
+       on EIA's public-domain hourly grid data (free alternative to paid
+       signals that forbid reuse).
+    3a. Households at launch: bill check from totals, plan finder, usage
+       benchmark, and per-utility guides to downloading meter data (getting
+       the file is the main barrier; see docs/research/09).
+    4. Phase 2, only if 1–3 are used: grid calculators (first free browser
+       IEEE 738 line rating and Order 881 tables), large-load tariff and
+       take-or-pay screens, ratepayer tools (proposed rate on your own data,
+       revenue requirement), electrification headroom and EV fleet tools.
+
+  Ethos (non-negotiable):
+    - Zero ads, zero accounts, zero tracking, zero server-side compute.
+    - User inputs and files never leave the device. Only static assets are
+      fetched. Sole exception: a problem report the user reviews and sends.
+    - Answer first, in a plain sentence, with example values prefilled. Every
+      result shows its work, its sources, and the as-of date of any data used.
+    - Screening estimates, labeled as such. Never a utility study, never
+      investment or legal advice, never operational grid control.
+    - Public data only. Never publish Critical Energy/Electric Infrastructure
+      Information (CEII) or anything we are not licensed to redistribute.
+    - Licensing: code MIT; gridprims text and derived tables CC BY 4.0 unless
+      an input requires share-alike; upstream credits travel with every file.
+    - English at launch, every string translation-ready; Spanish in phase 2.
+    - Link, don't rebuild: Interconnection.fyi (live queues), GridStatus
+      (market data), REopt (full DER optimization), roughlogic.com (building
+      wiring and NEC math).
+    - Prove value before breadth: hero tools first, grow only with real use.
+
+  Domain vocabulary:
+    - "Interval": one metered reading over a fixed period (5, 15, 30, or 60
+      min). An "8760" is one year of hourly intervals.
+    - kW is power (demand); kWh is energy. Interval files may carry either;
+      tools state which they assume and how they converted.
+    - "Billing demand": the demand value a tariff charges, after its window,
+      ratchet, and power-factor rules. Never assume it equals the peak interval.
+    - "Coincident peak" (CP): a customer's load during the grid operator's
+      system peak interval(s) (ERCOT 4CP, PJM 5CP/1CP, NYISO, ISO-NE).
+    - Emissions are reported in metric tons of CO₂ (and CO₂e) site-wide;
+      rates in lb/MWh as publishers state them.
+    - "As-of date": the date the source published the data, distinct from the
+      date we retrieved it. Both are shown.
+    - Times are local prevailing time at the meter unless the file says
+      otherwise; DST gaps and repeats are handled explicitly.
+
+  Conventions:
+    - Conventional Commits; American English; ISO 8601 dates in data.
+    - Tool ids: `<domain>.<group>.<operation>` in lowercase kebab segments.
+    - Research briefs live in docs/research/ (01-09); specs cite them.
+      Re-check rule-status items (docs/research/06) at every phase gate.
+    - DESIGN.md is the visual and interaction contract for every page.
+
+rules:
+  proposal:
+    - Lead with the user value, then the mechanism.
+    - Name the existing tool we hand off to or deliberately do better than.
+    - Include a Non-goals list.
+  specs:
+    - Every numeric requirement names its unit and tolerance.
+    - Every tool family names its reference source and at least one
+      independent test-vector source.
+    - Every dataset requirement names publisher, license, and as-of date rule.
+    - Cover messy real-world input explicitly (DST, gaps, duplicates, mixed
+      units, partial years, multiple meters).
+  design:
+    - Record alternatives considered for each decision.
+  tasks:
+    - Each task states how it is verified.
+
+operations:
+  apply:
+    guidance:
+      - Implement establish-platform-foundation and add-local-mcp-server
+        before any tool change.
+      - A tool is not done until its examples pass identically on the
+        website and through the MCP server.
+      - Never add a package dependency; add an own implementation and list
+        it in docs/own-implementations.md.
+      - Follow the phase order in plan-launch-and-value-proof.
+      - A tool is not done until its worked examples pass and its page passes
+        the DESIGN.md glance and mobile checks.
