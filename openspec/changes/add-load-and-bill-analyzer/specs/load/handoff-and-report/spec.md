@@ -21,7 +21,7 @@ The tool SHALL export the cleaned load as a CSV in the shape REopt accepts for a
 
 #### Scenario: File not on a calendar year
 - **WHEN** a file covers July 2025 to June 2026
-- **THEN** the export re-stitches the months into calendar year 2026 order aligned by weekday (each day mapped to the same weekday in the target year), and the notes file lists the mapping
+- **THEN** the export re-stitches the months into calendar year 2026 order aligned by weekday, filling the 1 or 2 target days left over (365 days is not a whole number of weeks) from the nearest already-mapped day with the same weekday, and the notes file lists the mapping and every filled day
 
 #### Scenario: Leap year
 - **WHEN** the data covers calendar year 2024

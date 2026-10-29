@@ -86,7 +86,7 @@ The bill engine SHALL match stored outputs from an independent bill calculator (
 - **THEN** every monthly total is within 0.5% or the documented-difference list explains the gap
 
 ### Requirement: Charges the reference engines cannot check
-Charge types neither reference engine models (power-factor adjustments, demand windows other than 15 minutes, and coincident demand, per `docs/research/07`) SHALL be verified against hand computations and published tariff examples, at least two per type, to the cent.
+Charge types the reference engines cannot check from a URDB record (power-factor adjustments and demand windows other than 15 minutes, which neither models; and coincident demand, which PySAM does not model and REopt.jl does not read from URDB, per `docs/research/07`) SHALL be verified against hand computations and published tariff examples, at least two per type, to the cent. Coincident demand MAY also be cross-checked against REopt.jl with its coincident-peak inputs supplied directly.
 
 #### Scenario: Power factor checked by hand
 - **WHEN** CI runs the stored Austin Energy power-factor example (13.5 kW at 0.87 PF billed at 0.90)

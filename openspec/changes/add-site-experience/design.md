@@ -11,7 +11,7 @@ Visual contract: `DESIGN.md` (road-sign direction, chosen 2026-10-29). Product r
 ## Decisions
 
 ### D1. Command-first home with two doors
-The home page leads with the command bar and two lanes of tool cells: For your home (check my bill, find my utility, cheapest plan on my data, cleanest hours) and For your work (load and bill workbench, utility and plant data, hourly emissions, data library, agent server).
+The home page leads with the command bar and two lanes of tool cells: For your home (check my bill, is my use high, cheapest plan on my data, find my utility, cleanest hours) and For your work (load and bill workbench, utility and plant data, hourly emissions, data library, agent server).
 
 | Alternative | Why not |
 |---|---|

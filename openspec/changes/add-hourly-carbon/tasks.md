@@ -16,4 +16,4 @@
 
 - [ ] 3.1 Run the OGE cross-check; verify differences per region are within 10% or documented
 - [ ] 3.2 Run every worked example through the MCP server; verify identical structured results
-- [ ] 3.3 DESIGN.md glance test, 320 px sweep, keyboard pass; verify CI green
+- [ ] 3.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green

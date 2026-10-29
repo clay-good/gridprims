@@ -1,7 +1,7 @@
 ## 1. Repository and zero-dependency gates
 
 - [ ] 1.1 Create the layout from design D15 with a README in each top-level directory; verify `ls` shows every directory and README
-- [ ] 1.2 Add the dependency gate (no dependency fields, no `node_modules`, only listed font files); verify it fails on a fixture that adds a package
+- [ ] 1.2 Add the dependency gate (no dependency fields, no `node_modules`, only listed font files) and record each shipped font's license and SHA-256 (Overpass and Overpass Mono are dual-licensed SIL OFL 1.1 and LGPL 2.1; `RedHatOfficial/Overpass`); verify it fails on a fixture that adds a package and on a font file with no license record
 - [ ] 1.3 Add the platform-API gate and `docs/platform-apis.md` (API, version introduced, stability); verify it fails on a fixture that uses an experimental Node API
 - [ ] 1.4 Pin Node 24.12+ and run CI on Node 24 and 26; verify a clean clone builds and tests with no install step
 - [ ] 1.5 Start `docs/own-implementations.md`; verify every general-purpose module has an entry
@@ -39,7 +39,7 @@
 - [ ] 5.2 Implement worker parsing with progress and cancel; verify 35,040 rows parse in under 1 s on the reference profile
 - [ ] 5.3 Implement the editable parse receipt; verify changing the time zone recomputes every result in a fixture
 - [ ] 5.4 Handle DST, gaps, duplicates, multiple meters, negative values; verify the spring-forward, conflicting-duplicate, mixed-unit, two-meter, partial-year, fall-back, and gap scenarios
-- [ ] 5.5 Read Green Button `uom`, `powerOfTenMultiplier`, `flowDirection`, `intervalLength`, and `LocalTimeParameters` per ESPI; verify the multiplier and export-channel scenarios on synthetic fixtures only (no Green Button Alliance sample files are committed; their site terms limit reuse, `docs/research/08`)
+- [ ] 5.5 Read Green Button `uom`, `powerOfTenMultiplier`, `flowDirection`, `intervalLength`, and `LocalTimeParameters` per ESPI; verify the multiplier and export-channel scenarios on synthetic fixtures plus any OpenESPI sample or test file that carries an explicit Apache-2.0 header, recorded per file with its header (files without an open header are not committed, per `docs/research/08`)
 
 ## 6. Data snapshots
 

@@ -33,3 +33,4 @@ None.
 ## Impact
 
 - Phase 2. Reuses the interval series, bill engine, and storage screen's dispatch helpers.
+- Owns and registers two datasets: EAGLE-I county outage records (ORNL, CC BY 4.0, v4 covering 2014–2025) and county end-use load shapes from NLR End-Use Load Profiles (ResStock and ComStock, pinned release, CC BY 4.0), both packed in state shards. `add-household-bill-check` owns the separate whole-home residential shapes.

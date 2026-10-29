@@ -27,10 +27,10 @@ From totals alone, TOU energy is split across periods using a typical residentia
 ### D4. Retail choice and CCAs as supply plus delivery
 Where customers choose a supplier (Texas competitive areas; default service in states such as PA, OH, IL, MD, NJ, NY, MA, CT) or are served by a California community choice aggregator, the bill is the utility's delivery tariff plus the supply price (and, for CCAs, the utility's exit fee, the PCIA). In Texas, the user enters their plan from its Electricity Facts Label (energy charge, base charge, and any usage credits); TDU delivery charges come from tariffs versioned by effective date, since they change at least twice a year. For CCAs, the user enters the CCA generation rate and the PCIA vintage rate from the bill. Alternative: scrape Power to Choose offers or CCA rate pages. Rejected: brittle, terms unverified, and offers change often; we link instead.
 
-### D6. Discount programs modify every plan
+### D5. Discount programs modify every plan
 CARE, FERA, and medical baseline are not plans; they are discounts or extra baseline allowances applied on top of a plan. The user ticks the programs they are on, and the engine applies each program's percent discount or added kWh to every plan it covers. Alternative: list them as plans. Rejected: misprices every plan for income-qualified homes.
 
-### D5. No invented percentiles
+### D6. No invented percentiles
 EIA-861 gives totals and customer counts, not distributions, so the benchmark compares to averages only and says so. Alternative: estimate a percentile from ResStock. Rejected: a modeled stock is not the utility's customers.
 
 ## Risks / Trade-offs

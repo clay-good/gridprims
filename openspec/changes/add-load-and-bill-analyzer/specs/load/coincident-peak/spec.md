@@ -12,7 +12,7 @@ The tool SHALL support ERCOT 4CP (the four monthly 15-minute system peak interva
 - **THEN** ERCOT 4CP is preselected and the other programs remain selectable
 
 ### Requirement: Program rules are versioned by rule year
-Each program definition SHALL carry its method (number of coincident peaks, which months, interval length, and whether the hour label is hour-beginning or hour-ending in the operator's time basis), the rule year it applies to, its source document, and its effective dates. An adopted rule change (see `docs/research/06` and design D5) SHALL be added as a new version without altering results for earlier years.
+Each program definition SHALL carry its method (number of coincident peaks, which months, interval length, and whether the operator's published stamp marks the start or the end of that interval, in the operator's time basis), the rule year it applies to, its source document, and its effective dates. An adopted rule change (see `docs/research/06` and design D5) SHALL be added as a new version without altering results for earlier years.
 
 #### Scenario: Older year uses older rule
 - **WHEN** a user analyzes 2025 data in ERCOT after a 12CP rule version is added
@@ -21,6 +21,10 @@ Each program definition SHALL carry its method (number of coincident peaks, whic
 #### Scenario: Method change, not just a date change
 - **WHEN** a 12CP version with 30-minute intervals is added
 - **THEN** the tool re-averages the user's intervals to 30 minutes for that version and refuses the version for hourly files with an explanation
+
+#### Scenario: ERCOT interval-ending stamps
+- **WHEN** ERCOT publishes a 4CP interval stamped 17:00 CPT
+- **THEN** it is stored as the 15-minute interval from 16:45 to 17:00 CPT, and a fixture pins this so a 15-minute shift fails CI
 
 #### Scenario: Hour label conventions
 - **WHEN** PJM publishes a July 5CP hour as hour ending 18:00 EPT and NYISO publishes a July peak as the hour beginning 18:00 EDT

@@ -8,7 +8,7 @@ Nobody free does this today (`docs/research/02`):
 - **Paid tools** (Energy Toolbase from $170/user/month, EnergyCAP per meter, HOMER from $1,575/year) need accounts and uploads.
 - We found **no free Green Button viewer** and **no free coincident-peak (4CP/5CP) calculator**.
 
-The audience is large: about 19.5M commercial and 1.1M industrial customers (EIA, 2024), 168M smart meters, and about 5M commercial customers facing demand charges of $15/kW or more (`docs/research/03` §8). Demand charges can be up to 40% of a commercial bill.
+The audience is large: about 19.5M commercial and 1.1M industrial customers (EIA, 2024), 168M smart meters, and about 5M of 18M commercial customers facing demand charges of $15/kW or more (McLaren et al., 2017; `docs/research/03` §8). Demand charges can be up to 40% of a commercial bill.
 
 ## What Changes
 
@@ -44,5 +44,6 @@ None (depends on `establish-platform-foundation`, which this change does not alt
 
 ## Impact
 
+- Phase 1 (launch), per `plan-launch-and-value-proof`.
 - Adds the load workbench page, six tool families, and their worked examples.
 - Depends on the URDB snapshot owned by `add-public-grid-data`; owns the ERCOT 4CP interval snapshot.

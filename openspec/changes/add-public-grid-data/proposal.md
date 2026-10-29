@@ -43,5 +43,6 @@ None.
 
 ## Impact
 
+- Phase 1 (launch), per `plan-launch-and-value-proof`.
 - Adds roughly 15,000–20,000 prerendered pages, which requires the paid Workers plan (foundation design D4).
 - Adds datasets to the registry: EIA-860, EIA-860M, EIA-861, EIA-923, EIA-930 rollups, EPA eGRID and its ZIP-to-subregion table, LBNL Queued Up, URDB, FERC Form 714 annual peaks via PUDL (used by utility pages, the Learn data-center explainer, and phase 2 large-load tools), and the Census ZCTA-to-county relationship file for lookup; PUDL is also a cross-check.

@@ -196,8 +196,8 @@ The color strategy is **Committed**: guide-sign green owns the top rail and the 
 | Sign color | Token | Meaning on gridprims | Shape and pairing | Never used for |
 |---|---|---|---|---|
 | Guide green | `--guide` | The answer; the site shell; primary action | Rectangle sign, white legend | Decoration, chart series other than measured data |
-| Work-zone orange | `--work-zone` | Screening estimate, example values, sample file, review pending, approximate, preview of a draft method | Full-width strip under the answer, black legend, diamond glyph | Errors, warnings |
-| Warning yellow | `--warning` | Something the user should check: stale data, "Needs review", a tariff out of date, a gap excluded, an ineligible rate | Chip with diamond glyph, black legend | Estimates (that is orange) |
+| Work-zone orange | `--work-zone` | Screening estimate, example values, sample file, approximate, preview of a draft method, and never-yet-reviewed ("Review pending", "Unverified") | Full-width strip under the answer, black legend, diamond glyph | Errors, warnings, expired reviews |
+| Warning yellow | `--warning` | Something once good that needs re-checking: stale data, an expired review ("Needs review"), a tariff out of date, a gap excluded, an ineligible rate | Chip with diamond glyph, black legend | Estimates or never-reviewed items (those are orange) |
 | Service blue | `--service` | Handoffs to other tools and sites, links, focus ring | Rectangle sign with arrow, white legend | Body emphasis |
 | Learn brown | `--learn` | Glossary terms, guides, "how to get your data" | Rectangle sign, white legend; dotted underline on glossary terms | Data |
 | Regulatory white | `--panel` with `--ink` rules | Sources, citations, method, the parse receipt, facts tables | White panel, black 1px rules, mono text | — |
@@ -245,7 +245,7 @@ Validated with the dataviz palette validator (2026-10-29; adjacent pairs, OKLab 
 | What-if (battery, shifted load, proposed rate) | `#eb6834` | `#e0612a` | 2 px line; the work-zone hue because a what-if is an estimate |
 | Reference lines (tariff windows, grid peaks, thresholds) | `--muted`, dashed | `--muted`, dashed | 1 px, labeled directly |
 | Sequential (heatmaps, carbon intensity) | one-hue blue ramp `#cde2fb` → `#0d366b` | same ramp, `#184f95` floor | lightest step means "near zero" |
-| Diverging (above or below average) | blue ↔ red, gray midpoint `#f0efec` / `#383835` | | equal steps per arm |
+| Diverging (above or below average) | blue ↔ red, gray midpoint `#f0efec` / `#383835` | | equal steps per arm; this red is a scale step, not the `--stop` token, and both arms are labeled with what they mean ("above average", "below average"), never with good or bad |
 
 **Fuel palette** (fixed order, used for generation mix everywhere; color follows the fuel, never its rank):
 
@@ -260,11 +260,13 @@ Validated with the dataviz palette validator (2026-10-29; adjacent pairs, OKLab 
 | 7 | Battery storage | `#d55181` | `#d55181` |
 | — | Other (oil, geothermal, biomass, unknown) | `#8a8f8b` with 45° hatch | `#6f7671` with 45° hatch |
 
+Natural gas shares its hex with the what-if series on purpose: the two never appear in one chart, because a generation-mix chart shows fuels and a what-if chart shows measured against what-if load. A chart that would need both uses the fuel palette and labels the what-if series directly.
+
 Validator results: light passes every gate (worst adjacent CVD ΔE 9.1, normal-vision 17.2); night passes every gate. Wind and solar sit below 3:1 on the light panel, so generation charts always ship direct labels and the table view. "Other" is a textured neutral, always direct-labeled, and never a hue slot. Fuels beyond these fold into Other; no generated ninth hue.
 
 ## Typography
 
-One family carries the product, as working tools should: **Overpass** (SIL Open Font License; designed by Delve Withrington, descended from the Highway Gothic sign alphabet) for display, UI, and body; **Overpass Mono** for data. Two families, self-hosted, subset to Latin plus the symbols used (°, ², ³, ₂, →, ×, ÷, −, ±, ≤, ≥), `woff2` only, `font-display: swap`. Font budget: at most 4 files (Overpass 400 and 800 variable or static, Overpass Mono 500, Overpass Italic 400 only if needed) and at most 120 KB total. Fallback stack metrics are matched with `size-adjust` so swaps do not shift layout.
+One family carries the product, as working tools should: **Overpass** (dual-licensed SIL Open Font License 1.1 and LGPL 2.1, from `RedHatOfficial/Overpass`; designed by Delve Withrington and others, descended from the Highway Gothic sign alphabet) for display, UI, and body; **Overpass Mono** for data. Both ship under the OFL option, recorded with their license text and SHA-256 per `platform/zero-dependency`. Two families, self-hosted, subset to Latin plus the symbols used (°, ², ³, ₂, →, ×, ÷, −, ±, ≤, ≥), `woff2` only, `font-display: swap`. Font budget: at most 4 files (Overpass 400 and 800 variable or static, Overpass Mono 500, Overpass Italic 400 only if needed) and at most 120 KB total. Fallback stack metrics are matched with `size-adjust` so swaps do not shift layout.
 
 Fixed rem scale, not fluid, ratio about 1.2 for UI:
 

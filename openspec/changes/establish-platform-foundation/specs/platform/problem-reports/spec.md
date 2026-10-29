@@ -12,11 +12,11 @@ Every tool and entity page SHALL have a "Report a problem" control. The report S
 - **THEN** the preview shows the tool id, versions, and an empty message box, and no file data
 
 ### Requirement: Abuse protection without third parties
-The report endpoint SHALL resist spam using only the host platform and our own code: per-client rate limits enforced at the edge, a hidden honeypot field, a small proof-of-work computed in the browser before sending, and payload size and schema limits. It SHALL NOT load any third-party script.
+The report endpoint SHALL resist spam using only the host platform and our own code: a per-client limit of 10 reports per 10 minutes enforced at each edge location, a hidden honeypot field, a small proof-of-work computed in the browser before sending, and payload size and schema limits. It SHALL NOT load any third-party script.
 
 #### Scenario: Flood
-- **WHEN** one client sends reports through one edge location in a 10-minute window
-- **THEN** reports beyond the 10th may be refused and every report beyond the 15th is refused, with a plain message saying when to try again
+- **WHEN** one client sends 20 reports through one edge location in a 10-minute window
+- **THEN** every report after the 10th is refused with a plain message saying when to try again
 
 #### Scenario: Honeypot filled
 - **WHEN** a submission fills the hidden field

@@ -30,4 +30,4 @@ None.
 
 ## Impact
 
-- Phase 2. Adds a conductor starter library from public-domain sources and stored reference outputs from `linerate` and `pypacity` for verification.
+- Phase 2, except the conversion half of `calc/energy-units-and-emissions`, which phase 0 builds as the foundation's reference tool (`establish-platform-foundation` design D10). Adds a conductor starter library from public-domain sources and stored reference outputs from `linerate` and `pypacity` for verification.

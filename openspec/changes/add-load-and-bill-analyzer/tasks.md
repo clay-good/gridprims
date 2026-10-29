@@ -2,8 +2,8 @@
 
 - [ ] 1.1 Extend the foundation's fixture library (foundation task 5.1) with bill, ratchet, holiday, export, and coincident-peak cases; verify each fixture's receipt and expected results match their stored files
 - [ ] 1.2 Consume the URDB snapshot owned by `add-public-grid-data`, partitioned by state; verify the bill tools fetch only state shards
-- [ ] 1.3 Snapshot ERCOT 4CP intervals for 2018–2025 from ERCOT's files (2021 times from PUCT Project 51878 item 52, per `docs/research/06`) and add 2026 when ERCOT posts it; verify each year has four intervals matching ERCOT's published values
-- [ ] 1.4 Buy and review NAESB REQ.21; verify the Green Button parser notes cite clause numbers for each handled element
+- [ ] 1.3 Snapshot ERCOT 4CP intervals for 2018–2025 from ERCOT's files, and add 2026 when ERCOT posts it (expected late November); verify 2018–2020 and 2022–2025 each have four interval-ending stamps matching ERCOT's published values, and that 2021 ships as dates only, flagged "times not published", until a primary source supplies them (`docs/research/06`)
+- [ ] 1.4 Record the Green Button field map in `docs/derivations/green-button.md` from the Apache-2.0 ESPI schema; verify every handled element names its schema type and enumeration, and that no requirement depends on buying the standard
 
 ## 2. Interval insights
 
@@ -53,4 +53,4 @@
 - [ ] 8.0 Run every worked example and fixture through the local MCP server (`gridprims_analyze_file`, `gridprims_run`); verify identical structured results to the website
 
 - [ ] 8.1 Practitioner review by one energy manager and one co-op engineer, or "review pending" labels; verify the review record in `docs/review-signoffs.md`
-- [ ] 8.2 DESIGN.md glance test, 320 px sweep, keyboard pass, budgets; verify CI green
+- [ ] 8.2 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green

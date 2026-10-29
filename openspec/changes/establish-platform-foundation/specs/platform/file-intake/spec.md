@@ -72,7 +72,7 @@ Intake SHALL handle and report: header rows and footers, multiple meters in one 
 - **THEN** the receipt reports one gap of 24 hours with its dates, and peak and bill results state that the gap is excluded
 
 ### Requirement: Green Button fields read by the standard
-The Green Button reader SHALL follow NAESB REQ.21 (ESPI 4.0, with 4.1 noted) and SHALL scale every value by its ReadingType `uom` and 10^`powerOfTenMultiplier` and SHALL never assume watt-hours; SHALL keep delivered (`flowDirection` 1) and received (`flowDirection` 19) channels as separate series; SHALL read `intervalLength` and `duration` in seconds;.
+The Green Button reader SHALL follow the Apache-2.0 ESPI schema (`espi.xsd` 4.0, and 4.1 where a file declares it), citing each handled element's schema type and enumeration, and SHALL scale every value by its ReadingType `uom` and 10^`powerOfTenMultiplier` and SHALL never assume watt-hours; SHALL keep delivered (`flowDirection` 1) and received (`flowDirection` 19) channels as separate series; and SHALL read `intervalLength` and `duration` in seconds.
 
 #### Scenario: Kilowatt-hour multiplier
 - **WHEN** a file declares `uom` 72 (Wh) with `powerOfTenMultiplier` 3
@@ -80,14 +80,18 @@ The Green Button reader SHALL follow NAESB REQ.21 (ESPI 4.0, with 4.1 noted) and
 
 #### Scenario: Independent schema check
 - **WHEN** CI validates the Green Button fixtures
-- **THEN** each passes the ESPI XML schema (Apache-2.0) and matches a receipt computed by hand from the standard's field definitions
+- **THEN** each passes the ESPI XML schema (Apache-2.0) and matches a receipt computed by hand from the schema's field definitions
+
+#### Scenario: No paywalled source required
+- **WHEN** a reviewer traces any Green Button behavior to its source
+- **THEN** every element cites the open schema, an openly licensed sample file, or a cited utility document, and nothing cites purchased text
 
 #### Scenario: Solar export channel
 - **WHEN** a file has both `flowDirection` 1 and 19 readings
 - **THEN** the receipt lists two series, delivered and received, and no tool nets them before computing demand
 
 ### Requirement: Green Button local time from the file
-The Green Button reader SHALL take local time from the file's `LocalTimeParameters` (`tzOffset` and the DST start and end rule fields) rather than the browser's time zone, and SHALL show both on the receipt when they differ.
+The Green Button reader SHALL take local time from the file's `LocalTimeParameters` (`tzOffset`, `dstOffset`, and the DST start and end rule bitfields) rather than the browser's time zone, and SHALL show both on the receipt when they differ.
 
 #### Scenario: Traveling user
 - **WHEN** a user in Eastern time opens a file whose `LocalTimeParameters` give Pacific time

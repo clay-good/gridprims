@@ -13,7 +13,7 @@ Audience and job: households checking a bill on a phone; professionals at a desk
 
 THESIS: Public road signs for the public grid. Answers are posted like guide signs: big, plain, legible at a glance, and trusted because the sign code is consistent everywhere. Refuses the category default of a dark dashboard with glowing neon accents.
 
-OWN-WORLD: Light pavement-gray ground, white work surfaces, a guide-sign green shell rail, white legends on green for the answer. The federal sign colour code carries meaning: orange = screening estimate or work in progress, yellow = warning, blue = handoff or service, brown = learn and explainers, white panels with black rules = regulatory facts and sources. Overpass (a free font descended from the highway-sign alphabet) for display and UI; Overpass Mono for data. Night theme = retroreflective signs: dark asphalt ground, legends that glow but never blur.
+OWN-WORLD: Light pavement-gray ground, white work surfaces, a guide-sign green shell rail, white legends on green for the answer. The federal sign colour code carries meaning: orange = screening estimate or work in progress, yellow = warning, blue = handoff or service, brown = learn and explainers, white panels with black rules = regulatory facts and sources. Overpass (a free font descended from the highway-sign alphabet) for display and UI; Overpass Mono for data. Night theme = retroreflective signs: dark asphalt ground, legends that stay crisp, with no glow and no blur (DESIGN.md is authoritative; revised 2026-10-29).
 
 STORY: The visitor sees the answer first as a posted sign, reads one plain sentence, trusts it because the source and as-of date sit on it like a mile marker, then adjusts inputs or follows the blue sign to a deeper tool.
 

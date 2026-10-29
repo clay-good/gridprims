@@ -3,9 +3,9 @@
 Methods, formulas, and tariff examples are in `docs/research/03`; competitor gaps in `docs/research/02`; data licenses in `docs/research/01`. This change builds one page, the load workbench (the DESIGN.md "File workbench" archetype), with six tool families behind tabs that share one loaded file.
 
 Key facts that shape the design:
-- Green Button ESPI XML stores UTC epoch seconds and integer values scaled by `powerOfTenMultiplier`; the full NAESB REQ.21 standard costs $250.
+- Green Button ESPI XML stores UTC epoch seconds and integer values scaled by `powerOfTenMultiplier`. The ESPI schema (`espi.xsd` 4.0, and 4.1) is Apache-2.0 under a one-time NAESB exception and carries every code list the parser needs; only the business-practice prose is paywalled ($250, with a free evaluation copy on request).
 - URDB is CC0 with bulk downloads (`usurdb.json.gz`, about 15 MB; API v8 needs a free key and is not used at runtime); it encodes 12 × 24 period schedules, tiers, flat and TOU demand, ratchets, coincident demand, fixed and minimum charges in several units ($/day, $/year, kVA, daily demand). Only about 150 utilities are re-checked yearly.
-- REopt.jl (now v1.0.1 under the `NatLabRockies` GitHub org) ignores `demandwindow` and coincident charges; PySAM Utilityrate5 is the second reference engine; neither models power factor (`docs/research/07`). REopt's load file is exactly 8,760, 17,520, or 35,040 kW values, no header, dropping December 31 in leap years.
+- REopt.jl (now v1.0.1 under the `NatLabRockies` GitHub org) ignores `demandwindow` and does not read URDB's coincident fields (though its engine accepts coincident-peak inputs directly); PySAM Utilityrate5 is the second reference engine; neither models power factor (`docs/research/07`). REopt's load file is exactly 8,760, 17,520, or 35,040 kW values, no header, dropping December 31 in leap years.
 - ERCOT allows redistribution of 4CP data; PJM, NYISO, and ISO-NE do not.
 - The PUCT has proposed replacing 4CP with 12CP on 30-minute intervals (Project 58000; SB 6 requires adoption by 2026-12-31); PJM winter changes start with delivery year 2027/28. ERCOT 4CP intervals for 2018–2025 are verified from ERCOT's files, except 2021 times (`docs/research/06`).
 
@@ -49,9 +49,20 @@ Each program is a dated definition (number of peaks, months, interval length, ho
 Alternative: one definition per operator with year parameters. Rejected: the Texas proposal changes the count and interval length, not just dates.
 
 ### D6. Green Button support
-Parse ESPI XML `IntervalBlock`s and Green Button CSV per foundation spec `platform/file-intake` (unit multipliers, flow direction, file-declared time rules). Validate against the ESPI schema (Apache-2.0) and our own synthetic files only; no Green Button Alliance sample files are committed, because the Alliance's site terms limit use to private, non-commercial purposes (`docs/research/08`). Buy NAESB REQ.21 ($250; ESPI 4.0, with 4.1 listed) before declaring the parser stable.
+Parse ESPI XML `IntervalBlock`s and Green Button CSV per foundation spec `platform/file-intake` (unit multipliers, flow direction, file-declared time rules). The parser is built from openly licensed artifacts only, and no standard purchase gates stability:
 
-Alternative: rely on public samples alone. Rejected: their license is unclear and they miss the utility CSV shapes people actually download.
+| Source | License | What it gives us |
+|---|---|---|
+| `espi.xsd` 4.0 and 4.1 | Apache-2.0 (NAESB exception) | Normative element and type definitions, and the `uom`, `powerOfTenMultiplier`, `flowDirection`, `accumulationBehaviour`, `timeAttribute`, and `TimeConfiguration` code lists |
+| OpenESPI sample and test files carrying an Apache-2.0 header | Apache-2.0 | Independent real-shaped vectors, recorded per file |
+| Utility "supported data elements" documents | Public pages, cited | Which elements each utility actually emits |
+
+Each handled element cites its schema type and enumeration rather than a clause number. If prose is ever needed to settle an ambiguity, a maintainer requests NAESB's free evaluation copy, reads it, and records the finding in their own words in `docs/derivations/green-button.md`; the text is never quoted or committed.
+
+| Alternative | Why not |
+|---|---|
+| Buy REQ.21 for $250 | Buys copyrighted prose we may not quote; the schema we may use already carries every code list (`docs/research/07`). |
+| Rely on third-party guides and guesswork | Guesses on unit codes and DST rules silently corrupt every result. |
 
 ### D7. Fixtures
 Alternative considered: anonymized real customer files. Rejected: re-identification risk and consent burden.
