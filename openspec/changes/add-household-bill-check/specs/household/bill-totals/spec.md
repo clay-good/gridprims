@@ -58,6 +58,32 @@ When the user enters the amount paid, the tool SHALL show the difference in doll
 - **WHEN** the computed bill is $115.00 and the user paid $131.40
 - **THEN** the tool shows +$16.40 (14.3%) and lists taxes, riders, and fuel adjustments as likely causes, with the tariff's unmodeled items named
 
+### Requirement: Forecast the bill you are partway through
+Given a billing period in progress, as a meter file ending today or a mid-cycle reading with its date, the tool SHALL project the period's energy and price it on the selected tariff, showing the amount so far, the projected total, and the days remaining.
+
+#### Scenario: Two weeks in, weekday method
+- **WHEN** 14 days of a 30-day period show 460 kWh (weekdays averaging 30 kWh and weekend days 40 kWh), the remaining 16 days contain 11 weekdays and 5 weekend days, and the tariff is a flat $0.12 per kWh with a $10.00 monthly charge
+- **THEN** the remaining days project to 530 kWh (11 × 30 plus 5 × 40), the period projects to 990 kWh and $128.80, labeled as a projection from 14 days with 16 days remaining
+
+### Requirement: Projection method named
+The projection SHALL scale use by the days left using the same weekdays already seen in this period, falling back to the period's daily average when fewer than 7 days are present, SHALL name whichever method it used, and SHALL state that a demand charge can still rise.
+
+#### Scenario: Method named
+- **WHEN** 20 days of a period are present
+- **THEN** the result says the remaining days were projected from the same weekdays already in this period
+
+#### Scenario: Fewer than a week
+- **WHEN** 5 days of a period are present
+- **THEN** the result says the remaining days were projected from the period's daily average, because fewer than 7 days give no weekday pattern
+
+#### Scenario: Demand not final
+- **WHEN** the account is on a tariff with a demand charge, which is uncommon for a household but does occur
+- **THEN** the demand line shows the highest demand so far, says it can still rise, and the projected total is labeled a floor for that charge
+
+#### Scenario: Too little data
+- **WHEN** fewer than 3 days of the period are present
+- **THEN** no projection is shown and the tool says to come back with more days
+
 ### Requirement: Effective price
 For each period and the year, the tool SHALL show the effective price in cents per kWh (amount ÷ kWh, from paid amounts when entered, otherwise computed), computed in exact decimal and rounded half-up to 0.01 cents, beside the utility's bundled average residential price from EIA-861 with its data year; for delivery-only utilities it SHALL show no average price and say why (`data/utility-pages`).
 

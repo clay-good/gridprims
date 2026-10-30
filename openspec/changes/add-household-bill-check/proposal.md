@@ -13,6 +13,7 @@ It reuses the bill engine from `add-load-and-bill-analyzer` and the URDB snapsho
 ## What Changes
 
 - **Bill totals check:** enter 1 to 24 billing periods (dates, kWh, optional dollars); price them on the chosen tariff, compare with what you paid, and see your effective price per kWh against your utility's average.
+- **Mid-cycle forecast:** for the period you are partway through, the amount so far and the projected total, with the method shown.
 - **Usage benchmark:** your yearly use against your utility's and your state's average home (EIA-861), and your month-to-month pattern, without invented percentiles.
 - **Plan finder:** every residential plan your utility has in the URDB snapshot priced on your use, ranked by cost; time-of-use plans priced exactly from a meter file, or estimated from totals with a typical hourly shape for your area (labeled as an estimate). Retail-choice areas (Texas, default-service states) and California community choice aggregation (CCA) areas price delivery from the utility tariff and supply from the plan you enter. Discount programs (CARE, FERA, medical baseline) apply across every plan.
 

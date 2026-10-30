@@ -16,10 +16,13 @@ This change decides what ships first, what "ready" means, how we measure use wit
   - `add-household-bill-check`: check a bill from its totals, compare use with the average home, and find the cheapest plan on your own use.
   - `add-public-grid-data`: versioned snapshots of EIA, EPA, and LBNL data, plus one page per utility, plant, and balancing authority.
   - `add-hourly-carbon`: hourly emissions and hourly matching from the same meter file, on public-domain EIA data.
-  - `add-learn-and-data-guides`: the glossary, per-utility guides to downloading meter data, and ten explainers.
+  - `add-learn-and-data-guides`: the glossary, per-utility guides to downloading meter data, and eleven explainers.
+  - `add-program-fact-pages` (link index only): the dated list of everything we deliberately link to instead of rebuilding.
   - The rest of `add-site-experience`: the two-door home page, catalog, discoverability, and trust page content.
-- **Phase 2, only if phase 1 meets its bar:** `add-grid-calculators` (IEEE 738 line rating and Order 881 tables first), `add-large-load-screen`, `add-ratepayer-tools`, `add-electrification-tools` (now including a backup-power sizer), and Spanish pages.
-- **A definition of launch-ready** and **value measures without tracking** (see design).
+- **Phase 2, only if phase 1 meets its bar:** `add-weather-normalization` (was it the weather or me?), `add-large-load-screen`, `add-ratepayer-tools`, and `add-electrification-tools` (now including a backup-power sizer).
+- **Phase 3, only if phase 2 meets the same bar:** `add-grid-calculators` (line rating, ambient-adjusted rating tables, power-factor correction, transformer sizing), `add-reliability-tools` (indices from a co-op's own outage log), `add-measured-plant-emissions` (and the published error in our own hourly estimate), `add-program-fact-pages` (net metering and community solar), `add-interconnection-screens`, and Spanish pages.
+- **Trust and continuity throughout:** security disclosure and contribution rules in phase 0, archive deposits, published costs, and a succession plan in phase 1.
+- **A definition of launch-ready**, **value measures without tracking**, and **the same gate on every phase** (see design).
 
 ## Capabilities
 

@@ -85,8 +85,10 @@ context: |
   Conventions:
     - Conventional Commits; American English; ISO 8601 dates in data.
     - Tool ids: `<domain>.<group>.<operation>` in lowercase kebab segments.
-    - Research briefs live in docs/research/ (01-09); specs cite them.
+    - Research briefs live in docs/research/ (01-13); specs cite them.
       Re-check rule-status items (docs/research/06) at every phase gate.
+      Never state an unverified research item as a fact; reverify it or mark
+      it in the spec as needing confirmation before publication.
     - DESIGN.md is the visual and interaction contract for every page.
 
 rules:
@@ -117,4 +119,13 @@ operations:
         it in docs/own-implementations.md.
       - Follow the phase order in plan-launch-and-value-proof.
       - A tool is not done until its worked examples pass and its page passes
-        the DESIGN.md glance and mobile checks.
+        the DESIGN.md gates: both themes, 320 px sweep, keyboard pass, print,
+        and the performance budget.
+      - Any quantity more than one tool reports is computed once in the shared
+        core; two tools must never disagree on the same file.
+      - A dataset ships only with publisher, license, redistribution basis,
+        attribution text, and an as-of rule in the registry, and exactly one
+        owning change.
+      - Where a standard is paywalled, implement from the openly licensed
+        artifact (a schema, a regulator's rule, an agency's form instructions)
+        and cite that; never buy prose we may not quote.

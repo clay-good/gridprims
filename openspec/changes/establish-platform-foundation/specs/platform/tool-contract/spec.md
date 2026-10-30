@@ -36,6 +36,28 @@ Every result SHALL render as a big number with its unit plus one plain sentence 
 - **WHEN** a result is displayed or copied
 - **THEN** every number in it carries a unit or is explicitly unitless (a ratio or percent)
 
+### Requirement: One file, one set of numbers
+Every tool that reads a loaded file SHALL read the one canonical interval series intake produced, with the receipt's current choices, and SHALL NOT re-parse the file or derive its own series. Any quantity more than one tool reports (peak demand and its timestamp, total energy, load factor, monthly peaks, interval count) SHALL be computed once in the shared core, and CI SHALL fail when two surfaces or two tools report different values for the same fixture.
+
+#### Scenario: Peak agrees everywhere
+- **WHEN** a fixture is loaded and the workbench, the bill, the carbon tab, and the service-headroom report each state the March peak
+- **THEN** all four show the same kW value and the same timestamp
+
+#### Scenario: Receipt change propagates
+- **WHEN** the user changes the assumed time zone on the receipt
+- **THEN** every tool's results recompute from the rebuilt series, and none keeps a value from the previous assumption
+
+### Requirement: Precision never exceeds the inputs
+Each manifest SHALL declare the rounding of every output, and no output SHALL be shown or copied with more precision than its inputs and method support. A result that depends on a user-entered or published value SHALL NOT be shown to more significant figures than that value carries.
+
+#### Scenario: Coarse rate entered
+- **WHEN** a user enters a transmission rate of "$4" per kW-month, carrying one significant figure, and the raw product is $44,400.00
+- **THEN** the result is shown as $40,000, with a note that the rate's single significant figure limits it, and entering "$4.00" instead yields $44,400
+
+#### Scenario: Copied card matches the page
+- **WHEN** a result card is copied
+- **THEN** every number in the text is rounded exactly as shown on the page
+
 ### Requirement: Screening label
 Every tool whose output could be mistaken for an engineering study, a bill, or a utility determination SHALL show a one-line screening label next to the answer stating what the result is not and who decides (for example: "Screening estimate. Your utility's study is the final word.").
 

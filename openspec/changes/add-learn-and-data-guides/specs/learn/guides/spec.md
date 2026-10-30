@@ -5,11 +5,11 @@ Answers the questions people actually ask about bills, rates, emissions, and the
 ## ADDED Requirements
 
 ### Requirement: Launch explainers
-At launch the Learn section SHALL publish these explainers: Why is my bill so high; Flat versus time-of-use rates; Demand charges explained; Coincident peaks (4CP, 5CP, and capacity tags); How to read your meter data; What a rate case is and how to comment; How big is a data center request; Hourly versus annual emissions; What a balancing authority is; How gridprims keeps public data.
+At launch the Learn section SHALL publish these explainers: Why is my bill so high; Flat versus time-of-use rates; Demand charges explained; Coincident peaks (4CP, 5CP, and capacity tags); How to read your meter data; What a rate case is and how to comment; How big is a data center request; Hourly versus annual emissions; What a balancing authority is; Where does my power come from (power content labels and fuel mix); How gridprims keeps public data.
 
 #### Scenario: Learn index
 - **WHEN** a visitor opens Learn
-- **THEN** all ten explainers, the glossary, and the get-your-data index are listed
+- **THEN** all eleven explainers, the glossary, the get-your-data index, and the program link index are listed
 
 ### Requirement: Summary first, then detail
 Each explainer SHALL open with a summary of at most three sentences at reading grade 8 or below, then sections of at most 300 words each, and SHALL end with a "Try it" link that opens a launched tool or page with the explainer's example prefilled through the URL fragment (the rate case explainer opens the household bill check with a current and an edited tariff; the data center explainer opens the requested utility's page with its annual peak and sales).

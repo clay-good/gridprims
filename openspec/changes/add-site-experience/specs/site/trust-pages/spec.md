@@ -26,7 +26,33 @@ Each tool SHALL have a methods page generated from its manifest: the method in p
 - **THEN** its methods page shows "Passed on Nov 2, 2026" with the tolerance
 
 ### Requirement: Corrections policy and public log
-The Corrections page SHALL state how errors are reported, triaged, fixed, and disclosed. Every fix that changes a published number SHALL add a log entry (generated from `docs/corrections.md`) with the date, affected tool or page, old and new value for a sample input, cause, and the problem report id if any, and SHALL appear in the corrections feed.
+The Corrections page SHALL state how errors are reported, triaged, fixed, and disclosed. Every fix that changes a published number SHALL add a log entry (generated from `docs/corrections.md`) with the date, tier, affected tool or page, old and new value for a sample input, cause, and the problem report id if any, and SHALL appear in the corrections feed.
+
+#### Scenario: Log entry fields
+- **WHEN** a fix changes a published number
+- **THEN** the log gains a dated entry naming the tier, the page or tool, the old and new value for a sample input, and the cause, and the corrections feed gains the same entry
+
+### Requirement: Three correction tiers
+Corrections SHALL be recorded in one of three tiers: a **correction** (a number or statement was wrong and is now fixed), a **note of concern** (we suspect a problem and are checking, with the number still shown and flagged), and a **withdrawal** (the number or page is removed because we cannot stand behind it, with the page kept at its URL explaining why).
+
+#### Scenario: Note of concern
+- **WHEN** a publisher's own file is suspected of a unit error we have not confirmed
+- **THEN** the affected numbers stay visible with a dated note of concern, and the log records the tier
+
+#### Scenario: Withdrawal keeps its URL
+- **WHEN** a page is withdrawn because its source dataset turns out to be unlicensed
+- **THEN** the URL still resolves and explains what was removed and when, rather than returning 404
+
+### Requirement: The old value stays readable
+A corrected page SHALL carry a dated inline note at the affected number giving the previous value and what changed, for at least 12 months. A published snapshot SHALL NEVER be edited in place; a correction SHALL supersede it with a new version, and the superseded version SHALL stay downloadable, marked superseded with a link to its replacement.
+
+#### Scenario: Corrected utility page
+- **WHEN** a utility's average price is corrected from 14.4 to 12.9 cents
+- **THEN** the page shows the new value with a dated note naming the old value and the cause, and the note stays for at least 12 months
+
+#### Scenario: Snapshot superseded, not edited
+- **WHEN** a dataset version is found to contain a parsing error
+- **THEN** a new version is published, the old version stays downloadable with its original checksum and a "superseded" label linking the replacement, and no file in the old version changes
 
 #### Scenario: Wrong tariff parse fixed
 - **WHEN** a fix changes a bill result for a URDB rate

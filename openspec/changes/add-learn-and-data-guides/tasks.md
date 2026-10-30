@@ -15,6 +15,6 @@
 
 ## 3. Guides
 
-- [ ] 3.1 Write the ten launch explainers with generated numbers and "Try it" links; verify every number has a source stamp or a dated citation
+- [ ] 3.1 Write the eleven launch explainers with generated numbers and "Try it" links; verify every number has a source stamp or a dated citation
 - [ ] 3.2 Add review-date and stale-number checks; verify the year-old explainer scenario
 - [ ] 3.3 Run DESIGN.md gates on Learn pages (both themes, 320 px, keyboard, print); verify CI green

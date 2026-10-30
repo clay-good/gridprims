@@ -6,11 +6,15 @@ colors:
   pavement: "#f3f5f2"
   panel: "#ffffff"
   raise: "#e9eee9"
+  panel-hover: "#eef3ef"
+  panel-active: "#e2e9e4"
   ink: "#121a15"
   muted: "#4b5850"
   line: "#c5cec7"
   field-border: "#76837b"
   guide-green: "#00704a"
+  guide-green-hover: "#005c3d"
+  guide-green-active: "#004a31"
   guide-text: "#005c3d"
   service-blue: "#1d4f91"
   learn-brown: "#6b4226"
@@ -142,6 +146,12 @@ components:
     rounded: "{rounded.field}"
     padding: "12px 18px"
     height: "44px"
+  button-primary-hover:
+    backgroundColor: "{colors.guide-green-hover}"
+    textColor: "{colors.legend-white}"
+  button-primary-active:
+    backgroundColor: "{colors.guide-green-active}"
+    textColor: "{colors.legend-white}"
   button-secondary:
     backgroundColor: "{colors.panel}"
     textColor: "{colors.ink}"
@@ -149,6 +159,17 @@ components:
     rounded: "{rounded.field}"
     padding: "12px 18px"
     height: "44px"
+  button-secondary-hover:
+    backgroundColor: "{colors.panel-hover}"
+    textColor: "{colors.ink}"
+  tool-cell:
+    backgroundColor: "{colors.panel}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.field}"
+    padding: "16px"
+  tool-cell-hover:
+    backgroundColor: "{colors.panel-hover}"
+    textColor: "{colors.ink}"
   input:
     backgroundColor: "{colors.panel}"
     textColor: "{colors.ink}"
@@ -215,6 +236,10 @@ The theme follows the OS setting (`prefers-color-scheme`); with no OS preference
 | `--bg` (pavement) | `#f3f5f2` | `#111613` |
 | `--panel` | `#ffffff` | `#1a201d` |
 | `--raise` | `#e9eee9` | `#232b27` |
+| `--panel-hover` (hover surface) | `#eef3ef` | `#283129` |
+| `--panel-active` (pressed surface) | `#e2e9e4` | `#303a33` |
+| `--guide-hover` (green field, hover) | `#005c3d` | `#005c3d` |
+| `--guide-active` (green field, pressed) | `#004a31` | `#004a31` |
 | `--ink` | `#121a15` | `#edf2ee` |
 | `--muted` | `#4b5850` | `#a5b1aa` |
 | `--line` (decorative rules) | `#c5cec7` | `#36423c` |
@@ -232,6 +257,8 @@ The theme follows the OS setting (`prefers-color-scheme`); with no OS preference
 | `--stop` (text) | `#b3261e` | `#ff8a80` |
 | `--ok` (text) | `#17693c` | `#5fd394` |
 | `--focus` | `#1d4f91` | `#ffcd00` |
+
+State colors: white on the hover green clears 8.08:1 and on the pressed green 10.38:1 in both themes, since those fields are theme-invariant; `--ink` on the hover and pressed surfaces clears 15.79:1 and 14.36:1 in light and 11.87:1 and 10.42:1 in night. Shadows, focus rings, and transitions live in the prose below rather than the token block, which the DESIGN.md format limits to eight properties per component.
 
 Contrast, computed 2026-10-29 (WCAG 2.2): every text token clears 4.5:1 on `--bg`, `--panel`, and `--raise` in its theme. Legends on sign fields: white on guide green 6.15:1, white on service blue 8.14:1, white on learn brown 8.63:1, black on work-zone orange 6.80:1, black on warning yellow 12.57:1, white on stop red 6.54:1. Input borders clear 3:1 against every surface (light 3.37–3.96, night 3.66–5.13). The focus ring clears 7:1 against `--bg` in both themes. The style lint recomputes these and fails below the thresholds.
 

@@ -49,7 +49,7 @@ Nobody free answers "what is my own meter data and bill actually saying, and is 
 
 ## Evidence on Hand
 
-- Research briefs: `docs/research/01`–`09`.
+- Research briefs: `docs/research/01`–`13`. Each tags facts verified or unverified; where two briefs disagree, the later, more specific direct check wins and the conflict is recorded in the affected change's design.
 - No users, testimonials, endorsements, or accuracy benchmarks exist yet. Never fabricate them; accuracy claims come only from CI results.
 
 ## Product Principles

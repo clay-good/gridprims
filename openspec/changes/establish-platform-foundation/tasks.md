@@ -14,6 +14,8 @@
 - [ ] 2.2 Generate tool pages, command-bar entries, MCP descriptions and schemas, and docs from manifests; verify snapshot tests show identical labels, units, and citations everywhere
 - [ ] 2.3 Implement fragment-encoded share state; verify a copied link reproduces inputs and result in a fresh browser profile
 - [ ] 2.4 Implement tool versioning and the public changelog; verify a fixture result change without a version bump fails CI
+- [ ] 2.5 Implement shared-quantity computation and the cross-tool agreement check; verify the peak-agrees-everywhere and receipt-change scenarios across web and MCP
+- [ ] 2.6 Implement declared rounding and the significant-figures rule; verify the coarse-rate and copied-card scenarios
 
 ## 3. Own implementations
 

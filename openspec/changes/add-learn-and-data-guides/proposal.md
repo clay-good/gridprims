@@ -13,7 +13,7 @@ We link rather than rebuild: utilities' own help pages, the Green Button Allianc
 
 - **Glossary:** about 150 terms used by phase 1 tools, each with a one-line definition at reading grade 8 or below, a worked example with numbers, the tools that use it, and a citation. It powers the glossary popover on every page.
 - **Get your data:** one guide per utility for the 25 largest utilities and Smart Meter Texas, plus generic guides for common co-op and municipal portals. Each states its verification status and date, gives phone steps, and has a fallback request letter.
-- **Guides:** ten launch explainers, each with cited and dated numbers and a link that opens a tool prefilled with the example.
+- **Guides:** eleven launch explainers, each with cited and dated numbers and a link that opens a tool prefilled with the example. "Where does my power come from" explains power content labels and which states require them, and points at the federal generation and emissions data we already ship, because no state publishes a reusable national file (`docs/research/13`).
 
 ## Capabilities
 

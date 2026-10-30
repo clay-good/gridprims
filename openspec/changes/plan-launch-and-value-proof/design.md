@@ -17,13 +17,18 @@ Research: `docs/research/01` (data and licensing), `02` (competitors and gaps), 
 
 | Phase | Changes | Exit criteria |
 |---|---|---|
-| 0 | `establish-platform-foundation`, `add-local-mcp-server`, `add-site-experience` (shell, URLs, strings, trust page templates) | Foundation, MCP, and shell tasks verified; egress and no-network tests green; a fresh clone runs everything with only Node.js |
-| 1 | `add-load-and-bill-analyzer`, `add-household-bill-check`, `add-public-grid-data`, `add-hourly-carbon`, `add-learn-and-data-guides`, rest of `add-site-experience` | Every hero tool launch-ready (D2) on web and MCP; both home-page doors working; public launch |
-| 2 | `add-grid-calculators`, `add-large-load-screen`, `add-ratepayer-tools`, `add-electrification-tools` | Phase 1 meets the bar in D3 within 6 months of launch; order within phase 2 follows D3's evidence (search demand and requests) |
+| 0 | `establish-platform-foundation`, `add-local-mcp-server`, `add-site-experience` (shell, URLs, strings, trust page templates), `add-trust-and-continuity` (security disclosure and contribution rules) | Foundation, MCP, and shell tasks verified; egress and no-network tests green; a fresh clone runs everything with only Node.js; the contribution rules exist before the first curated fact |
+| 1 | `add-load-and-bill-analyzer`, `add-household-bill-check`, `add-public-grid-data`, `add-hourly-carbon`, `add-learn-and-data-guides`, rest of `add-site-experience`, `add-trust-and-continuity` (archive deposit, costs, succession), `add-program-fact-pages` (link index only) | Every hero tool launch-ready (D2) on web and MCP; both home-page doors working; every dataset deposited to a public archive; public launch |
+| 2 | `add-weather-normalization`, `add-large-load-screen`, `add-ratepayer-tools`, `add-electrification-tools` | Phase 1 meets the bar in D3 within 6 months of launch; order within the phase follows D3's evidence |
+| 3 | `add-grid-calculators`, `add-reliability-tools`, `add-measured-plant-emissions`, `add-program-fact-pages` (net metering and community solar), `add-interconnection-screens`, Spanish pages, `add-program-fact-pages` (qualifying-facility checklist) | Phase 2 meets the same bar again; each change still earns its place against D3's evidence rather than shipping because it is written |
 
 Alternative: one big launch with every change. Rejected: spreads verification and review thin, and launches tools nobody has asked for.
 
-Phase 0 also builds the energy unit converter as the reference tool (foundation design D10).
+Phase 0 also builds the energy unit converter as the reference tool (foundation design D10); the rest of `add-grid-calculators` waits for phase 3.
+
+Why phase 2 is these four: weather normalization answers the most-asked question on both doors and reuses the launch engines whole (`docs/research/10`); the large-load and ratepayer tools are the two highest novelty-and-impact items our research found after hourly carbon (`docs/research/05`, ranks 2 and 3); electrification covers ranks 4, 7, 9, and 11 on one page set.
+
+Why phase 3 is the rest: the engineering primitives, the co-op reliability tools, the measured-emissions cross-check, the program pages, and the interconnection screens each serve a narrower audience or depend on a phase 2 result. The interconnection screens are last among the tools because research found that the decisive screens cannot be answered from public data at all (`docs/research/12`), so the change ships explanation rather than computation.
 
 Apply order inside phase 1, so every dataset has one owner and is built before it is used: `add-public-grid-data` tasks 1.0, 1.1, 1.3, and 1.4 (owns EIA-860, 860M, 861, 923, eGRID and its ZIP table, URDB, LBNL, Form 714, ZCTA), then `add-hourly-carbon` task 1 (owns EIA-930 hourly), then `add-public-grid-data` task 1.2 (rollups of the hourly snapshot) and the rest of that change, then `add-load-and-bill-analyzer` (owns ERCOT 4CP; uses URDB), then `add-household-bill-check` (owns typical residential shapes and Texas TDU tariffs; uses the bill engine), then the remaining carbon tasks, then `add-learn-and-data-guides` (its fixture check needs the intake fixture library) and the home and catalog tasks of `add-site-experience`.
 
@@ -69,17 +74,22 @@ Also measured, to steer phase 2 order: requests to household pages versus profes
 | SPP data | Link only | SPP terms require written permission for commercial publications and do not define the term (`docs/research/08`) |
 | DSIRE incentives and net-metering data | Link only in v1 | CC BY-SA 4.0 would force share-alike on any table that uses it; EIA-861 net-metering data covers the main facts |
 | Spanish pages | Phase 2, revisited at the phase 1 review | Owner chose translation-ready at launch (2026-10-29); research recommends Spanish at launch (D5) |
-| PURPA Form 556 helper, community solar and net metering fact pages | Defer | Lower impact (`docs/research/05`, rank 12) |
+| PURPA Form 556 helper, community solar and net metering fact pages | Scheduled in phase 3 (`add-program-fact-pages`) | Licensing questions resolved in `docs/research/13`; still last because they are reading pages, not tools |
 | Grid model file linting (PSS/E, OpenDSS) | Defer | Small audience; CEII-adjacent files |
 | PDF bill reading | Defer | Hard to do well on the device; interval data covers the main job |
 | Hosted MCP endpoint, npm package, one-click bundles | Cut for now | Local clone is the distribution; no server compute |
 
-### D5. Two doors, one engine
+### D5. Every phase has the same gate
+A phase opens only when the previous one meets the bar in D3. Writing a change is not shipping it: all nineteen changes are fully specified so none is designed under deadline, and each still has to earn its phase. If a phase fails its bar, the response is to improve what is live, not to start the next phase.
+
+Alternative: ship everything written. Rejected: that is the breadth-before-value failure the whole plan exists to avoid.
+
+### D6. Two doors, one engine
 Households get their own front door at launch (owner decision, 2026-10-29): bill check from totals, usage benchmark, and plan finder, all on the professional bill engine. Alternative: professionals first. Rejected: households are the largest audience (about 143M residential customers) and bill anxiety is at a record (`docs/research/09`).
 
 Spanish is held to phase 2 by the owner's choice, with every string translation-ready (`add-site-experience` design D6). The research case for launching in Spanish (16% of adults are smartphone-only, rising to 28% of Hispanic adults; 2.7% of households are Spanish-speaking with limited English; Texas requires Spanish customer materials) is re-weighed at the phase 1 review using the value log.
 
-### D6. Visual direction
+### D7. Visual direction
 DESIGN.md commits to the public road-sign direction (owner choice, 2026-10-29): light by default, guide-green answer signs, and the federal sign color code for every caveat. It replaced a dark control-room concept that matched a common generated-UI look and printed poorly.
 
 ## Risks / Trade-offs
@@ -89,3 +99,5 @@ DESIGN.md commits to the public road-sign direction (owner choice, 2026-10-29): 
 - **Practitioner review is slow to get.** Mitigation: launch with "review pending" labels rather than wait.
 - **Get-your-data guides go stale.** Mitigation: verification levels and dates on every guide, 12-month re-checks, and problem reports per guide.
 - **Rules change mid-build** (Texas 12CP proposal, PJM winter changes, FERC large-load). Mitigation: versioned program and tariff-term definitions; re-check `docs/research/06` items at each phase gate.
+- **Research briefs can disagree.** Two briefs reached opposite conclusions about the federal hosting-capacity index on the same day. Mitigation: the later, more specific direct check wins, the conflict is recorded in the affected change's design rather than resolved silently, and every brief tags each fact verified or unverified.
+- **Nineteen written changes invite shipping by inventory.** Mitigation: D5's one gate per phase, and the explicit rule that a written change still has to earn its phase.
