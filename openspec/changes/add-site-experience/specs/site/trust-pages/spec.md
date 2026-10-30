@@ -5,11 +5,11 @@ Shows, rather than claims, why a free site deserves trust: who runs it, how each
 ## ADDED Requirements
 
 ### Requirement: Trust page set
-The site SHALL publish these pages, each linked from the footer: About, Methods, Privacy, Accessibility, Corrections, Changelog, License and how to cite, Sources and credits (every upstream publisher with its required credit text), Review status, and Developers. The footer SHALL also link the sister sites.
+The site SHALL publish these pages, each linked from the footer: About, Methods, Privacy, Accessibility, Corrections, Changelog, License and how to cite, Sources and credits (every upstream publisher with its required credit text), Review status, Limits (`site/limitations`), and Developers. The footer SHALL also link the sister sites.
 
 #### Scenario: Footer links
 - **WHEN** any page is rendered
-- **THEN** its footer links to all ten trust pages and the sister sites
+- **THEN** its footer links to all eleven trust pages and the sister sites
 
 ### Requirement: About states who runs it and how it is paid for
 The About page SHALL name the maintainer, state how hosting and data costs are paid with the actual monthly cost from the hosting invoice (for example the $5/month Workers plan plus the domain), and state that gridprims takes no advertising, sponsorship, affiliate fees, or lead-generation payments. If funding is ever accepted, the page SHALL name each funder. It SHALL NOT invent users, partners, or endorsements.

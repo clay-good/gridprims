@@ -19,11 +19,11 @@ Every number derived from a dataset SHALL be shown with a source stamp naming pu
 - **THEN** the stamp beside it names EIA-861, the data year, the EIA release date, and our retrieval date
 
 ### Requirement: Staleness is visible
-Each registry entry SHALL declare its expected refresh cadence. A dataset's age is today minus the publisher's as-of date of the version we serve; when the age exceeds the cadence plus 60 days, every page that uses it SHALL show a "may be out of date" note with the date we last checked for an update.
+Each registry entry SHALL declare its expected refresh cadence. Lateness SHALL be computed by the single rule in `ledger/continuity` (a publisher's posted date where one exists, otherwise the historical cadence, with a 30-day grace period), and this capability SHALL NOT define a second rule. When that rule reports a dataset late, every page that uses it SHALL show a "may be out of date" note with the date we last checked for an update.
 
-#### Scenario: Stale date computed
-- **WHEN** an annual dataset's served version has an as-of date of 2025-10-07
-- **THEN** pages show the staleness note from 2026-12-06 (365 + 60 days later)
+#### Scenario: One lateness rule
+- **WHEN** an annual dataset's served version has an as-of date of 2025-10-07 and the publisher posted no next-release date
+- **THEN** lateness is inferred from the annual cadence with the 30-day grace, so pages show the staleness note from 2026-11-06, by the same rule the ledger publishes
 
 #### Scenario: Delayed federal release
 - **WHEN** the publisher's next annual release is 90 days late
@@ -41,7 +41,7 @@ Datasets MAY refresh their current shards as often as weekly, but permanent vers
 - **THEN** CI fails and lists the largest contributors by dataset
 
 ### Requirement: Snapshots are immutable and downloadable
-Each dataset version SHALL be stored at a permanent, versioned URL and never edited in place. The data page SHALL offer every version for download as gzip-compressed CSV (split by year or state when large) with its checksum and a changelog of row-level differences from the previous version. The same version SHALL be available to the local MCP server in the shard format the website uses.
+Each dataset version SHALL be stored at a permanent, versioned URL and never edited in place. The data page SHALL offer every version for download as gzip-compressed CSV (split by year or state when large) with its checksum, and SHALL link the version's diff, which `ledger/snapshot-diffs` owns and computes; this capability SHALL NOT compute a second diff. The same version SHALL be available to the local MCP server in the shard format the website uses.
 
 #### Scenario: Reproduce an old page
 - **WHEN** a researcher downloads the 2026-10 snapshot of EIA-860 a year later

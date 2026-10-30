@@ -1,6 +1,6 @@
 ## Context
 
-Research: `docs/research/01` (data and licensing), `02` (competitors and gaps), `03` (methods and audience sizes), `04` (MCP and zero-dependency stack), `05` (novel capabilities), `06` (rule status, 2026-10-29), `07` (methods and formats), `08` (licenses), `09` (households and data access). The realistic audience is specialist and in the low tens of thousands per month for the pro tools; scale beyond that comes from plain-language public data pages (estimate, 2026-10-27). The launch must be small, excellent, and easy to find, on both surfaces: the website for humans and the local MCP server for developers' agents.
+Research: `docs/research/01`–`16`, gathered 2026-10-27 to 2026-10-29. Briefs `14`–`16` reframed the ambition: owning a tariff corpus is contested and unsuited to a static site, but nobody measures tariff accuracy, nobody publishes the status of public energy datasets, and no free in-browser US grid scenario model exists. The realistic audience is specialist and in the low tens of thousands per month for the pro tools; scale beyond that comes from plain-language public data pages (estimate, 2026-10-27). The launch must be small, excellent, and easy to find, on both surfaces: the website for humans and the local MCP server for developers' agents.
 
 ## Goals / Non-Goals
 
@@ -17,16 +17,18 @@ Research: `docs/research/01` (data and licensing), `02` (competitors and gaps), 
 
 | Phase | Changes | Exit criteria |
 |---|---|---|
-| 0 | `establish-platform-foundation`, `add-local-mcp-server`, `add-site-experience` (shell, URLs, strings, trust page templates), `add-trust-and-continuity` (security disclosure and contribution rules) | Foundation, MCP, and shell tasks verified; egress and no-network tests green; a fresh clone runs everything with only Node.js; the contribution rules exist before the first curated fact |
-| 1 | `add-load-and-bill-analyzer`, `add-household-bill-check`, `add-public-grid-data`, `add-hourly-carbon`, `add-learn-and-data-guides`, rest of `add-site-experience`, `add-trust-and-continuity` (archive deposit, costs, succession), `add-program-fact-pages` (link index only) | Every hero tool launch-ready (D2) on web and MCP; both home-page doors working; every dataset deposited to a public archive; public launch |
-| 2 | `add-weather-normalization`, `add-large-load-screen`, `add-ratepayer-tools`, `add-electrification-tools` | Phase 1 meets the bar in D3 within 6 months of launch; order within the phase follows D3's evidence |
-| 3 | `add-grid-calculators`, `add-reliability-tools`, `add-measured-plant-emissions`, `add-program-fact-pages` (net metering and community solar), `add-interconnection-screens`, Spanish pages, `add-program-fact-pages` (qualifying-facility checklist) | Phase 2 meets the same bar again; each change still earns its place against D3's evidence rather than shipping because it is written |
+| 0 | `establish-platform-foundation` (including validation levels), `add-local-mcp-server`, `add-site-experience` (shell, URLs, strings, trust page templates, **the limits page**), `add-trust-and-continuity` (security disclosure and contribution rules) | Foundation, MCP, and shell tasks verified; egress and no-network tests green; a fresh clone runs everything with only Node.js; the contribution rules exist before the first curated fact; **the limits page ships before any tool** |
+| 1 | `add-load-and-bill-analyzer`, `add-household-bill-check`, `add-public-grid-data`, `add-hourly-carbon`, `add-learn-and-data-guides`, rest of `add-site-experience`, `add-trust-and-continuity` (archive deposit, costs, succession), `add-program-fact-pages` (link index only), `add-data-continuity-ledger` (snapshot diffs only) | Every hero tool launch-ready (D2) on web and MCP; both home-page doors working; every dataset deposited to a public archive; every tool's validation level published on the limits page; public launch |
+| 2 | `add-tariff-conformance-suite`, `add-data-continuity-ledger` (the rest), `add-weather-normalization`, `add-large-load-screen`, `add-ratepayer-tools`, `add-electrification-tools` | Phase 1 meets the bar in D3 within 6 months of launch; the conformance suite leads because it is how the bill engine stops being self-checked; order after it follows D3's evidence |
+| 3 | `add-grid-calculators`, `add-reliability-tools`, `add-measured-plant-emissions`, `add-program-fact-pages` (net metering, community solar, qualifying-facility checklist), `add-interconnection-screens`, `add-grid-scenario-model`, Spanish pages | Phase 2 meets the same bar again; each change still earns its place against D3's evidence rather than shipping because it is written. `add-grid-scenario-model` comes last among the tools: it is the most ambitious and the easiest to mistake for a planning study, so it ships only once the measurement work has established the project's honesty |
 
 Alternative: one big launch with every change. Rejected: spreads verification and review thin, and launches tools nobody has asked for.
 
 Phase 0 also builds the energy unit converter as the reference tool (foundation design D10); the rest of `add-grid-calculators` waits for phase 3.
 
-Why phase 2 is these four: weather normalization answers the most-asked question on both doors and reuses the launch engines whole (`docs/research/10`); the large-load and ratepayer tools are the two highest novelty-and-impact items our research found after hourly carbon (`docs/research/05`, ranks 2 and 3); electrification covers ranks 4, 7, 9, and 11 on one page set.
+Why phase 2 is these six: the conformance suite and the ledger are how our numbers stop resting on our own word; weather normalization answers the most-asked question on both doors and reuses the launch engines whole (`docs/research/10`); the large-load and ratepayer tools are the two highest novelty-and-impact items our research found after hourly carbon (`docs/research/05`, ranks 2 and 3); electrification covers ranks 4, 7, 9, and 11 on one page set.
+
+Why the conformance suite leads phase 2: at launch every bill tool will sit at self-checked, because no independent comparison will have run against real ground truth. The suite is the cheapest path to cross-checked, it gives the limits page a real number instead of an admission, and it is the one piece of the tariff problem a static site can own (`docs/research/14`).
 
 Why phase 3 is the rest: the engineering primitives, the co-op reliability tools, the measured-emissions cross-check, the program pages, and the interconnection screens each serve a narrower audience or depend on a phase 2 result. The interconnection screens are last among the tools because research found that the decisive screens cannot be answered from public data at all (`docs/research/12`), so the change ships explanation rather than computation.
 
@@ -36,6 +38,7 @@ Why these for launch: one dropped file powers the professional tools (bill, coin
 
 ### D2. Launch-ready, per hero tool
 - Stable manifest; every output has a unit, rounding, and citation.
+- A declared validation level with its committed evidence, published on the limits page; a level claimed beyond its evidence blocks the release.
 - At least one worked example from an independent source passes, with third-party reference outputs stored as fixtures.
 - Real-shaped fixtures pass: at least 20 utility export shapes, including Green Button XML, Smart Meter Texas CSV, DST, gaps, multiple meters, and every shape a launch get-your-data guide names.
 - Identical structured results on the website and the local MCP server.
@@ -79,17 +82,32 @@ Also measured, to steer phase 2 order: requests to household pages versus profes
 | PDF bill reading | Defer | Hard to do well on the device; interval data covers the main job |
 | Hosted MCP endpoint, npm package, one-click bundles | Cut for now | Local clone is the distribution; no server compute |
 
-### D5. Every phase has the same gate
-A phase opens only when the previous one meets the bar in D3. Writing a change is not shipping it: all nineteen changes are fully specified so none is designed under deadline, and each still has to earn its phase. If a phase fails its bar, the response is to improve what is live, not to start the next phase.
+### D5. Validation is a declared level, not a vibe
+Every tool declares one of four validation levels with committed evidence (`platform/citations-and-verification`), and the limits page publishes the whole table. A stable tool must reach cross-checked, which is the independent worked example D2 already requires; a tool at unvalidated or self-checked ships as experimental or not at all. At launch we therefore expect stable tools at cross-checked and **none at field-verified**, and the site will say exactly that. Building before fully validating is deliberate: field evidence (a real bill, a utility's own study, a practitioner's own calculation) only exists once people use the thing, and shipping nothing until then means shipping nothing for years.
+
+| Alternative | Why not |
+|---|---|
+| Wait for field verification before launching | The ground truth it needs only arrives once people use the thing; the wait is indefinite. |
+| Let stable tools ship at self-checked | Agreeing with ourselves is not evidence; cross-checked is the existing bar and it stays. |
+| Launch without declaring the status | That is the ordinary dishonesty of free tools, and it is what the limits page exists to refuse. |
+| One global disclaimer | Hides that the unit converter and the battery screen carry utterly different risk. |
+
+### D6. Feedback is the validation pipeline
+Problem reports, user-contributed bill figures, and practitioner corrections are the mechanism that raises validation levels. Each tool's limits entry names the specific evidence that would raise it, and the conformance suite and the ledger are where that evidence accumulates.
+
+Alternative: treat reports only as bug triage. Rejected: a report that a number is wrong is the field evidence we otherwise cannot get.
+
+### D7. Every phase has the same gate
+A phase opens only when the previous one meets the bar in D3. Writing a change is not shipping it: all twenty-two changes are fully specified so none is designed under deadline, and each still has to earn its phase. If a phase fails its bar, the response is to improve what is live, not to start the next phase.
 
 Alternative: ship everything written. Rejected: that is the breadth-before-value failure the whole plan exists to avoid.
 
-### D6. Two doors, one engine
+### D8. Two doors, one engine
 Households get their own front door at launch (owner decision, 2026-10-29): bill check from totals, usage benchmark, and plan finder, all on the professional bill engine. Alternative: professionals first. Rejected: households are the largest audience (about 143M residential customers) and bill anxiety is at a record (`docs/research/09`).
 
 Spanish is held to phase 2 by the owner's choice, with every string translation-ready (`add-site-experience` design D6). The research case for launching in Spanish (16% of adults are smartphone-only, rising to 28% of Hispanic adults; 2.7% of households are Spanish-speaking with limited English; Texas requires Spanish customer materials) is re-weighed at the phase 1 review using the value log.
 
-### D7. Visual direction
+### D9. Visual direction
 DESIGN.md commits to the public road-sign direction (owner choice, 2026-10-29): light by default, guide-green answer signs, and the federal sign color code for every caveat. It replaced a dark control-room concept that matched a common generated-UI look and printed poorly.
 
 ## Risks / Trade-offs
@@ -100,4 +118,5 @@ DESIGN.md commits to the public road-sign direction (owner choice, 2026-10-29): 
 - **Get-your-data guides go stale.** Mitigation: verification levels and dates on every guide, 12-month re-checks, and problem reports per guide.
 - **Rules change mid-build** (Texas 12CP proposal, PJM winter changes, FERC large-load). Mitigation: versioned program and tariff-term definitions; re-check `docs/research/06` items at each phase gate.
 - **Research briefs can disagree.** Two briefs reached opposite conclusions about the federal hosting-capacity index on the same day. Mitigation: the later, more specific direct check wins, the conflict is recorded in the affected change's design rather than resolved silently, and every brief tags each fact verified or unverified.
-- **Nineteen written changes invite shipping by inventory.** Mitigation: D5's one gate per phase, and the explicit rule that a written change still has to earn its phase.
+- **Launching unvalidated could burn trust once rather than build it slowly.** Mitigation: validation levels on every result, the limits page before the first tool, refusal to produce the figures the data cannot support, and a correction process that publishes our errors rather than quietly fixing them.
+- **Twenty-two written changes invite shipping by inventory.** Mitigation: D7's one gate per phase, and the explicit rule that a written change still has to earn its phase.

@@ -205,6 +205,8 @@ Principles (unchanged in spirit from the first concept):
 - **No submit buttons.** Inputs recompute on change. Over 100 ms, show progress and keep the old answer visible, marked as updating.
 - **Never scroll sideways.** At 320 px nothing in the page scrolls horizontally. Wide tables and charts pan inside their own box.
 - **Honest by construction.** Examples, samples, estimates, and stale data are labeled where they appear, using the work-zone orange strip.
+- **Say how well checked it is.** Every answer carries its validation level and the evidence behind it, and an unvalidated tool says so beside the number, not in a footer. Where we can measure our own error, the error sits next to the answer.
+- **Refusals are answers.** When public data cannot support a figure, the page says so plainly, says why, and says what would change it, rather than estimating anyway.
 
 Anti-references: dark dashboards with glowing neon accents; trading-terminal density on a household page; road-sign kitsch (shields as decoration, fake reflective gradients, arrows that point nowhere).
 
@@ -217,7 +219,7 @@ The color strategy is **Committed**: guide-sign green owns the top rail and the 
 | Sign color | Token | Meaning on gridprims | Shape and pairing | Never used for |
 |---|---|---|---|---|
 | Guide green | `--guide` | The answer; the site shell; primary action | Rectangle sign, white legend | Decoration, chart series other than measured data |
-| Work-zone orange | `--work-zone` | Screening estimate, example values, sample file, approximate, preview of a draft method, and never-yet-reviewed ("Review pending", "Unverified") | Full-width strip under the answer, black legend, diamond glyph | Errors, warnings, expired reviews |
+| Work-zone orange | `--work-zone` | Screening estimate, example values, sample file, approximate, preview of a draft method, never-yet-reviewed ("Review pending", "Unverified"), and validation levels 0 and 1 ("Unvalidated", "Self-checked") | Full-width strip under the answer, black legend, diamond glyph | Errors, warnings, expired reviews |
 | Warning yellow | `--warning` | Something once good that needs re-checking: stale data, an expired review ("Needs review"), a tariff out of date, a gap excluded, an ineligible rate | Chip with diamond glyph, black legend | Estimates or never-reviewed items (those are orange) |
 | Service blue | `--service` | Handoffs to other tools and sites, links, focus ring | Rectangle sign with arrow, white legend | Body emphasis |
 | Learn brown | `--learn` | Glossary terms, guides, "how to get your data" | Rectangle sign, white legend; dotted underline on glossary terms | Data |
@@ -226,6 +228,18 @@ The color strategy is **Committed**: guide-sign green owns the top rail and the 
 | OK green | `--ok` | Checks passed: worked example verified, checksum matched | Check glyph plus text | The answer (that is guide green) |
 
 Color never carries meaning alone: every chip and strip has a glyph and a text label, and each glyph shape is unique (rectangle, diamond, octagon, check).
+
+### Three axes, one strip
+
+A tool carries three independent facts, and they must not fight for the same color:
+
+| Axis | Values | Where it shows |
+|---|---|---|
+| Stability | experimental, stable | A chip beside the tool's name, never on the answer |
+| Validation level | unvalidated, self-checked, cross-checked, field-verified | The validation stamp below the answer sign |
+| Practitioner review | none, pending, signed off | Named inside the validation stamp's evidence line, and on the review-status page |
+
+Only one work-zone strip ever appears per answer. When more than one reason qualifies, they stack in that single strip separated by " · ", ordered strongest first: screening estimate, then unvalidated or self-checked, then example or sample data, then approximate, then review pending. A green check in the validation stamp and an orange strip can therefore sit on the same answer without contradiction: the check reports that an independent comparison passed, the strip reports that the result is still a screening estimate and that no practitioner has reviewed it. Neither overrides the other, because they answer different questions.
 
 ### Light and night themes
 
@@ -336,6 +350,7 @@ Flat and tonal, like signs on posts: no drop shadows on content. Depth comes fro
 | Component | Role | Spec |
 |---|---|---|
 | **Answer sign** | the payoff | Green field, white legend. Label line (title size), the number on the answer ladder with its unit, one plain sentence (body size, max 2 lines), and a **source tab** at the lower right: white tab, mono, "EIA-861 · 2025 · as of Oct 7, 2026". `aria-live="polite"`, announced once 500 ms after inputs settle. States: example (orange strip reads "Example values"), live, updating (number at 60% opacity with a thin progress rule on the sign's bottom edge), error (field stays green, legend replaced by what is missing and how to fix it). |
+| **Validation stamp** | how well checked this is | A mono line directly **below** the answer sign and above the screening strip (the sign's lower right belongs to the source tab), reading the level and its evidence: "Self-checked · our own worked examples, passed Nov 2, 2026". Levels 2 and 3 carry the `--ok` check glyph with the evidence linked; levels 0 and 1 carry the diamond glyph and also raise the work-zone strip. Evidence older than 90 days adds a yellow "needs a fresh run" chip, matching the limits table. Always links the limits page. Never absent, never collapsed. |
 | **Screening strip** | the honesty line | Orange full-width strip directly under the answer sign, black legend, diamond glyph: "Screening estimate. Your utility's study is the final word." Also used for: Example values, Sample file, Review pending, Approximate (hourly data), Draft method. One strip per answer; several reasons stack in one strip separated by " · ". |
 | **Handoff sign** | go deeper elsewhere | Blue field, white legend, arrow glyph: "Full storage design → REopt". Plain link, carries no user data. |
 | **Command bar** | ask in plain words | Full-width under the rail; `⌘K`, `Ctrl+K`, `/` focus. Mono input. Results list groups Tools, Places (utilities, plants, regions), Data, Learn; each result previews the answer when inputs parsed ("12 MWh = 40.95 MMBtu"). Home page shows typed examples until focused. |
@@ -367,6 +382,8 @@ Flat and tonal, like signs on posts: no drop shadows on content. Depth comes fro
 ## Do's and Don'ts
 
 **Do**
+- Show the validation level on every answer, and raise the orange strip when it is unvalidated or only self-checked.
+- State a refusal plainly, with its reason and what would change it, when the data cannot support a number.
 - Post one answer per sign. If a tool has two answers, the second goes on answer-m below the sign.
 - Put every caveat in the orange strip or a yellow chip, in plain words, in the place it applies.
 - Use the sign code consistently on every page. A color means the same thing everywhere.
@@ -374,6 +391,8 @@ Flat and tonal, like signs on posts: no drop shadows on content. Depth comes fro
 - Test both themes, 320 px, keyboard only, and print for every page.
 
 **Don't**
+- Don't present an unvalidated number without its level, hide the level behind a tab, or let a copied card drop it.
+- Don't imply review, certification, or endorsement without a record in the sign-off log.
 - Don't use sign shapes or highway shields as decoration, or draw fake reflective gradients, glows, or road textures.
 - Don't put more than one answer sign in a viewport.
 - Don't use orange for errors or yellow for estimates.

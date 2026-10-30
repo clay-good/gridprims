@@ -21,8 +21,14 @@
 - [ ] 4.3 Generate Atom feeds for changelog, data releases, and corrections; verify each validates against the Atom schema and the EIA-860 scenario
 - [ ] 4.4 Commit six section social cards with sources; verify each is 1200 × 630 and at most 100 KB
 
-## 5. Trust pages (phase 0 templates, phase 1 content)
+## 5. Limits page (phase 0, before any tool ships)
 
-- [ ] 5.1 Generate Methods, Changelog, Sources, Review status, and Corrections from manifests and records; verify the worked-example status and wrong-tariff scenarios
-- [ ] 5.2 Write About, Privacy, Accessibility, License and how to cite, and Developers; verify every claim on About traces to an invoice or record and the copied citation scenario
-- [ ] 5.3 Run DESIGN.md gates (both themes, 320 px, keyboard, print) on every trust page; verify CI green
+- [ ] 5.1 Generate the limits page and its JSON from manifests, CI results, the registry, the corrections log, the curated cannot-do list, and the unverified-claim register; verify the reached-from-a-result, first-screen (at 320 px), phase-0-page, section-not-yet-populated, launch-reality, stale-evidence, three-axes, minimum-contents, cited-reason, asked-for-something-on-the-list, late-dataset, unverified-dependency, path-to-field-verified, no-invented-accuracy, unsupported-endorsement, pending-labels, agent-reads-the-limits, and capability-added scenarios
+- [ ] 5.2 Maintain the curated cannot-do list and the unverified-claim register as checked records; verify a shipped page citing an unverified claim with no register entry fails the build
+- [ ] 5.3 Run DESIGN.md gates on the limits page (both themes, 320 px sweep, keyboard pass, print); verify CI green
+
+## 6. Trust pages (phase 0 templates, phase 1 content)
+
+- [ ] 6.1 Generate Methods, Changelog, Sources, Review status, and Corrections from manifests and records; verify the worked-example status and wrong-tariff scenarios
+- [ ] 6.2 Write About, Privacy, Accessibility, License and how to cite, and Developers; verify every claim on About traces to an invoice or record and the copied citation scenario
+- [ ] 6.3 Run DESIGN.md gates (both themes, 320 px, keyboard, print) on every trust page; verify CI green

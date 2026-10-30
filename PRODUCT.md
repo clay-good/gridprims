@@ -37,6 +37,8 @@ Nobody free answers "what is my own meter data and bill actually saying, and is 
 
 - Zero ads, accounts, cookies, tracking, and server compute. Inputs and files never leave the device; the only exception is a problem report the user previews and sends.
 - Screening estimates, labeled as such. Never a utility study, legal or investment advice, or grid control.
+- Every tool declares a validation level (unvalidated, self-checked, cross-checked, field-verified) with committed evidence, shown beside its answer and listed on a generated limits page. A tool may ship as stable only at cross-checked or above; anything at unvalidated or self-checked ships labeled experimental or not at all. At launch we expect stable tools cross-checked and **none field-verified**, because real bills, utility studies, and practitioner checks only arrive once people use the site. That is why we build before we can fully validate, and why user reports are the validation pipeline.
+- We refuse the numbers public data cannot support, and say why: no loss-of-load or adequacy figures, no nodal prices, no pass-or-fail interconnection verdicts, no forecasts.
 - Public data only; never CEII; only data we may redistribute.
 - English at launch with all copy held in one place (manifests and string files) so Spanish can follow in phase 2.
 - Licensing: code MIT; gridprims' own page text and derived data CC BY 4.0, except tables whose inputs require otherwise (ISO-published data keeps its publisher's terms; share-alike inputs keep share-alike), with each upstream credit carried through.
@@ -49,7 +51,7 @@ Nobody free answers "what is my own meter data and bill actually saying, and is 
 
 ## Evidence on Hand
 
-- Research briefs: `docs/research/01`–`13`. Each tags facts verified or unverified; where two briefs disagree, the later, more specific direct check wins and the conflict is recorded in the affected change's design.
+- Research briefs: `docs/research/01`–`16`. Each tags facts verified or unverified; where two briefs disagree, the later, more specific direct check wins and the conflict is recorded in the affected change's design.
 - No users, testimonials, endorsements, or accuracy benchmarks exist yet. Never fabricate them; accuracy claims come only from CI results.
 
 ## Product Principles
@@ -57,7 +59,7 @@ Nobody free answers "what is my own meter data and bill actually saying, and is 
 1. Answer first, then show the work.
 2. Your data stays yours, and the page says so when it matters.
 3. Every number has a unit, a source, and a date.
-4. Honest about limits: say what is excluded, approximate, or stale.
+4. Honest about limits: say what is excluded, approximate, or stale, and publish our own error where we can measure it.
 5. Link, don't rebuild.
 
 ## Accessibility & Inclusion

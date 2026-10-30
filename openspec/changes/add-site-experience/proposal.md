@@ -11,6 +11,7 @@ We deliberately do not rebuild what sister sites and partners do: building wirin
 - **Home and navigation:** a command-first home page with two doors (For your home, For your work), section landing pages, a full tool catalog, stable URLs with redirects, and a helpful 404.
 - **Discoverability:** unique titles and descriptions, canonical URLs, structured data for datasets and glossary terms, sitemaps dated by data rather than by build, Atom feeds for the changelog and data releases, and one static social card per section.
 - **Trust pages:** about, methods, privacy, accessibility statement, corrections policy and log, changelog, license and how to cite, sources, review status, and a developer page.
+- **Limits page:** one generated page stating what gridprims cannot do and why, every tool's validation level and the evidence behind it, every known problem, and what evidence would change each verdict, published as a page and as JSON.
 - **Translation-ready:** every string in string files, locale-aware number and date formatting, layouts tested with 35% longer text, and a reserved `/es/` path. Spanish itself is phase 2.
 
 ## Capabilities
@@ -20,6 +21,7 @@ We deliberately do not rebuild what sister sites and partners do: building wirin
 - `site/home-and-navigation`: The home page, section pages, tool catalog, URL scheme, and 404.
 - `site/discoverability`: Search, sharing, and feed metadata generated from manifests and the data registry.
 - `site/trust-pages`: The pages that show who runs gridprims, how it works, how it handles data and errors, and how to reuse it.
+- `site/limitations`: The generated limits page: what we cannot do, what is unvalidated, what is known wrong, and what would change it.
 - `site/translation-ready`: String externalization and locale handling so translation needs no code change.
 
 ### Modified Capabilities
@@ -35,5 +37,5 @@ None. (Builds on `platform/app-shell` and `platform/tool-contract`, which this c
 
 ## Impact
 
-- Phase 0 (shell, URL scheme, string files, trust page templates) and phase 1 (home content, catalog, feeds) per `plan-launch-and-value-proof`.
+- Phase 0 (shell, URL scheme, string files, trust page templates, and the limits page, which must exist before any tool ships) and phase 1 (home content, catalog, feeds) per `plan-launch-and-value-proof`.
 - Adds a redirects file, sitemaps, feeds, and string files to the build; adds a literal-copy lint and a pseudo-locale layout test to CI.

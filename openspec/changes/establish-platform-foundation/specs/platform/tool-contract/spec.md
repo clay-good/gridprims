@@ -5,7 +5,18 @@ Defines the manifest every gridprims tool publishes and the behavior every tool 
 ## ADDED Requirements
 
 ### Requirement: Every tool publishes a manifest
-Each tool SHALL publish a manifest with: id (`<domain>.<group>.<operation>`), title, purpose, archetype, inputs (unit, canonical unit, range, example value), outputs (unit, rounding), method, assumptions, citations, dataset ids, worked examples, related tools, handoff links, and stability. The page, command-bar entry, MCP description and schemas, and docs SHALL be generated from the manifest; none SHALL restate a field by hand.
+Each tool SHALL publish a manifest with: id (`<domain>.<group>.<operation>`), title, purpose, archetype, inputs (unit, canonical unit, range, example value), outputs (unit, rounding), method, assumptions, citations, dataset ids, worked examples, related tools, handoff links, stability, validation level with its evidence (`platform/citations-and-verification`), and known limitations.
+
+#### Scenario: Manifest fields present
+- **WHEN** a tool manifest is validated
+- **THEN** every listed field is present, and a missing validation level, limitations list, or citation fails the build naming the tool and the field
+
+### Requirement: Every surface is generated from the manifest
+The page, command-bar entry, MCP description and schemas, and docs SHALL be generated from the manifest; none SHALL restate a field by hand.
+
+#### Scenario: One source for every surface
+- **WHEN** a manifest's input unit changes
+- **THEN** the page, the command-bar entry, the MCP schema, and the docs all change with it in the same build
 
 #### Scenario: Missing citation blocks the build
 - **WHEN** a tool manifest has no citation
@@ -57,6 +68,13 @@ Each manifest SHALL declare the rounding of every output, and no output SHALL be
 #### Scenario: Copied card matches the page
 - **WHEN** a result card is copied
 - **THEN** every number in the text is rounded exactly as shown on the page
+
+### Requirement: Refusals are first-class answers
+A tool asked for a capability on the published cannot-do list SHALL decline, state the reason in one plain sentence, link that list's entry, and SHALL NOT produce an estimate in its place. A refusal SHALL be a normal result on both surfaces, not an error.
+
+#### Scenario: Refused capability
+- **WHEN** a user or an agent asks a tool for a resource-adequacy figure
+- **THEN** the tool returns a refusal naming the reason and linking the limits page entry, and no number is produced
 
 ### Requirement: Screening label
 Every tool whose output could be mistaken for an engineering study, a bill, or a utility determination SHALL show a one-line screening label next to the answer stating what the result is not and who decides (for example: "Screening estimate. Your utility's study is the final word.").

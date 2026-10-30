@@ -85,7 +85,7 @@ context: |
   Conventions:
     - Conventional Commits; American English; ISO 8601 dates in data.
     - Tool ids: `<domain>.<group>.<operation>` in lowercase kebab segments.
-    - Research briefs live in docs/research/ (01-13); specs cite them.
+    - Research briefs live in docs/research/ (01-16); specs cite them.
       Re-check rule-status items (docs/research/06) at every phase gate.
       Never state an unverified research item as a fact; reverify it or mark
       it in the spec as needing confirmation before publication.
@@ -129,3 +129,10 @@ operations:
       - Where a standard is paywalled, implement from the openly licensed
         artifact (a schema, a regulator's rule, an agency's form instructions)
         and cite that; never buy prose we may not quote.
+      - Every tool declares a validation level with committed evidence; a
+        level claimed beyond its evidence fails the build, and the limits
+        page publishes the whole table.
+      - Where we can measure our own error, publish it beside the answer
+        rather than disclaiming it in prose.
+      - Refuse any figure the public data cannot support, name the refusal
+        on the limits page, and say what would change it.

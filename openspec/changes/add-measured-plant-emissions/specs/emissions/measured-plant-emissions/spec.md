@@ -5,22 +5,29 @@ Shows what large fossil plants actually measured at the stack, by month and by h
 ## ADDED Requirements
 
 ### Requirement: Dataset and provenance
-The dataset SHALL contain, per monitored unit: measured carbon dioxide (short tons, converted to metric tons at 0.90718474 metric tons per short ton, the factor shown on the page), sulfur dioxide, nitrogen oxides, heat input, and operating time, aggregated to monthly per unit and plant and to hourly per region per year.
+The dataset SHALL contain, per monitored unit: measured carbon dioxide (short tons, converted to metric tons at 0.90718474 metric tons per short ton, the factor shown on the page), sulfur dioxide, nitrogen oxides, heat input, gross load (MWh, labeled gross), and operating time, aggregated to monthly per unit and plant and to hourly per region per year.
 
 #### Scenario: Contents and conversion
 - **WHEN** a monitored unit's monthly row is built
 - **THEN** it carries carbon dioxide in metric tons converted at 0.90718474 from short tons, sulfur dioxide and nitrogen oxides in their reported units, heat input, and operating time
 
 ### Requirement: Registered to EPA CAMPD
-The dataset SHALL be registered with the U.S. Environmental Protection Agency's Clean Air Markets Program Data (CAMPD) as publisher, the redistribution basis recorded as a United States federal work not subject to domestic copyright, EPA's suggested citation as the required attribution, and the source file dates as the as-of date.
+The dataset SHALL be registered with the U.S. Environmental Protection Agency's Clean Air Markets Program Data (CAMPD) as publisher, the redistribution basis recorded as EPA's own stated terms for this data, EPA's suggested citation as the required attribution, and the source file dates as the as-of date.
 
 #### Scenario: Registry entry
 - **WHEN** a visitor opens the dataset in the data library
-- **THEN** it names EPA CAMPD, the federal-works basis, EPA's suggested citation, the data period, and our retrieval date
+- **THEN** it names EPA CAMPD, EPA's stated terms as the basis, EPA's suggested citation, the data period, and our retrieval date
+
+### Requirement: EPA's terms are not assumed to be public domain
+The registry entry SHALL record that EPA's disclaimer limits use to non-commercial, scientific, and educational purposes, states that content may be protected by copyright, and dedicates only EPA's geospatial data to the public domain (`docs/research/15`). Tables derived from this dataset SHALL carry those terms rather than being relicensed.
+
+#### Scenario: Derived table keeps the terms
+- **WHEN** a fleet or plant table derived from this dataset is published
+- **THEN** it carries EPA's stated terms rather than CC BY 4.0
 
 #### Scenario: Open license question recorded
-- **WHEN** EPA's page states a citation but no license
-- **THEN** the registry entry records that, names it as an open verification item, and the dataset still ships on the federal-works basis
+- **WHEN** EPA's page states a citation and a disclaimer rather than a license
+- **THEN** the registry entry records the disclaimer's wording verbatim, names the terms as an open verification item, and the dataset ships under those stated terms rather than an assumed public-domain basis
 
 ### Requirement: No key reaches either surface
 The agency key SHALL be used only in the build environment, SHALL NOT be committed, and SHALL NOT appear in any shipped file. The website and the local agent server SHALL read only our own shipped snapshots.

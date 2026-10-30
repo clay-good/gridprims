@@ -42,8 +42,14 @@ All copy lives in per-locale string files (JSON keyed by message id, with ICU-st
 | gettext `.po` files | Needs a parser for a second format; JSON is native. |
 | Machine translation at runtime | Third-party service and unreviewed text. |
 
-### D7. Trust pages generated from the record
-Methods, changelog, sources, review status, and the corrections log are rendered from manifests, the dataset registry, `docs/review-signoffs.md`, and `docs/corrections.md`, so they cannot drift from what ships. Alternative: hand-written pages. Rejected: they go stale.
+### D7. The limits page is generated, and it ships before the tools
+Methods, changelog, sources, review status, the corrections log, and the limits page are rendered from manifests, the dataset registry, CI results, `docs/review-signoffs.md`, `docs/corrections.md`, and a curated cannot-do list. The limits page lands in phase 0, before any tool ships, because a tool that ships before the page describing its limits has already overstated itself.
+
+| Alternative | Why not |
+|---|---|
+| A hand-written disclaimer page | Goes stale the first week, and the staleness is invisible to the reader. |
+| A disclaimer in the footer only | Nobody reads it, and it cannot carry per-tool validation status. |
+| Wait for validation before publishing limits | Backwards: the page is most needed exactly when least is validated. |
 
 ## Risks / Trade-offs
 
