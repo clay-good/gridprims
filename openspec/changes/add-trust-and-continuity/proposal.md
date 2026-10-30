@@ -11,7 +11,7 @@ Everything here is a static file or a rule, not a committee: `security.txt`, a d
 ## What Changes
 
 - **Security disclosure:** an RFC 9116 `/.well-known/security.txt` with a monitored expiry, and a one-page coordinated-disclosure policy with safe harbor, acknowledgement and fix targets, and a scope limited to the site and its one Worker.
-- **Data continuity:** every dataset version mirrored to a public archive with a persistent identifier, an annual deposit to a second archive, source code archived, published running costs, and a succession plan with named successors and a dead-man rule.
+- **Data continuity:** every dataset version mirrored to a public archive with a persistent identifier, an annual deposit to a second archive, source code archived, published running costs, and published revival steps anyone can follow without permission from us or cooperation from anybody.
 - **Curated contributions:** the provenance, review, and conflict-of-interest rules every hand-maintained fact must pass, a public comment window before any change to a published number, and quarantine for bulk contributions.
 - **Corrections** are strengthened in `add-site-experience`'s trust pages (tiers, the old value kept visible, and never editing a published snapshot in place) rather than specified twice.
 
@@ -20,7 +20,7 @@ Everything here is a static file or a rule, not a committee: `security.txt`, a d
 ### New Capabilities
 
 - `trust/security-disclosure`: How to report a security problem and what we promise in return.
-- `trust/data-continuity`: Archive deposits, persistent identifiers, published costs, and succession.
+- `trust/data-continuity`: Archive deposits, persistent identifiers, published costs, and revival steps anyone can follow.
 - `trust/curated-contributions`: Provenance, review, and conflict rules for hand-maintained facts.
 
 ### Modified Capabilities
@@ -32,6 +32,7 @@ None. (`site/trust-pages` gains its corrections detail inside `add-site-experien
 - A bug bounty, paid rewards, or a vulnerability-reward platform.
 - A governance committee, voting, or formal membership.
 - Legal advice, or any promise we cannot keep with one maintainer.
+- Named successors, handover agreements, dead-man switches, or any step that waits on a person. Continuity is mechanical: archived source, deposited inputs, a reproducible build, and licenses that already permit anyone to revive it.
 - Accepting personal data, meter files, or account details from contributors.
 - Publishing a VPAT; `docs/research/13` finds it is a procurement artifact whose value comes from vendor liability. The accessibility statement in `site/trust-pages` covers conformance, and a VPAT is offered on request.
 

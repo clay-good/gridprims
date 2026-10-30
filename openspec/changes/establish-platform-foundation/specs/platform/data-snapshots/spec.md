@@ -58,6 +58,42 @@ Before publication, every dataset that describes grid infrastructure SHALL pass 
 - **WHEN** we later ship transmission line geometry from a public archive of a formerly public federal layer
 - **THEN** the registry entry records the archive, its DOI, its confirmed license, and the date the original layer was public
 
+### Requirement: Redistribution posture is automatic, and never blocks a build
+Every dataset's registry entry SHALL carry a posture the build derives from the terms recorded for it, with no human sign-off anywhere in the path:
+
+#### Scenario: Posture derived from recorded terms
+- **WHEN** the pipeline records a dataset's terms
+- **THEN** it assigns `mirror` when those terms are a recognized reusable license or a public-domain dedication captured from the publisher's own page, `derive` when the terms are absent, unrecognized, or restrictive but the underlying values are facts we may compute over, and `link` when even that is unclear
+
+#### Scenario: Unclear terms downgrade instead of blocking
+- **WHEN** a dataset's terms cannot be recognized automatically
+- **THEN** the build continues with the lower posture, publishes what that posture allows, and records why, and SHALL NOT fail or wait for a person
+
+### Requirement: What each posture may publish
+Under `mirror` we may republish the publisher's files and our derived tables. Under `derive` we SHALL publish only values we computed ourselves (counts, sums, averages, joins, and per-entity facts), credit the publisher, link the original, and SHALL NOT republish its files. Under `link` we SHALL publish no values from it, only a description and a link. Every page and download SHALL show the posture in force and the terms it rests on.
+
+#### Scenario: Derive posture on a queue dataset
+- **WHEN** a queue dataset's terms are not a recognized reusable license
+- **THEN** the pages show our own computed counts and capacity by state, county, type, and status, credit the publisher, link the original file, and offer no copy of it
+
+#### Scenario: Posture shown
+- **WHEN** a visitor opens any dataset page
+- **THEN** it states whether we mirror, derive, or only link, and quotes the recorded terms
+
+### Requirement: Terms are captured, not interpreted
+The pipeline SHALL fetch and archive the publisher's own terms page with each refresh, store its text and the date, and compare it with the previous capture. A change in that text SHALL reduce the posture to the safer option until the new text matches a recognized license again.
+
+#### Scenario: Terms page changes
+- **WHEN** a publisher's license wording changes between refreshes
+- **THEN** the posture drops to the safer option automatically, the change is recorded with both texts, and the affected pages switch to what the lower posture allows
+
+### Requirement: Takedown is honored without argument
+Each dataset page and the terms page SHALL carry a contact for publishers and rights holders, and a stated practice of removing or reducing a dataset to `link` on a credible request, before any dispute about whether the request is correct.
+
+#### Scenario: Publisher objects
+- **WHEN** a publisher asks us to stop republishing their file
+- **THEN** that dataset drops to `link`, the change is recorded in the changelog, and the removal is not contingent on agreeing with the request
+
 ### Requirement: License per output table
 Every file gridprims publishes SHALL carry a license chosen from its inputs: CC BY 4.0 by default for gridprims-derived tables; the stricter share-alike license when any input requires it (for example CC BY-SA 4.0 for DSIRE-derived data); and ODbL in a separate file for any OpenStreetMap-derived data. Files under different share-alike licenses SHALL NOT be merged.
 

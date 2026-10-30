@@ -25,12 +25,16 @@ Entries SHALL be built from regulator orders, tariff sheets, and statutes. Compi
 - **WHEN** a contributor adds a term citing only a news article
 - **THEN** the data check fails and asks for the order or tariff sheet
 
-### Requirement: Verification
-Every entry SHALL be checked by a second person against its cited documents before publication, recorded with name and date in the entry's review field.
+### Requirement: Verification is automatic and public
+Every non-empty field SHALL carry two independent archived primary citations per `trust/curated-contributions`, and the build SHALL check that automatically. Because the citations and the archived documents are published with the entry, any reader can check it; no second-person review record SHALL gate publication.
 
-#### Scenario: Unreviewed entry
-- **WHEN** an entry has no second-person review record
-- **THEN** it is not published
+#### Scenario: Field with one citation
+- **WHEN** a field cites only one document
+- **THEN** the check fails for that field, the entry publishes without it marked "Not public", and nothing waits on a reviewer
+
+#### Scenario: Reader can check it
+- **WHEN** a visitor opens a tariff entry
+- **THEN** every field shows both citations with their archived copies, so the entry is checkable without us
 
 ### Requirement: Comparison view
 The table SHALL be filterable by state, status, and threshold, and SHALL let the user compare up to four tariffs side by side with differences highlighted.

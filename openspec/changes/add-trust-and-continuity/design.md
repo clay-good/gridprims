@@ -27,13 +27,17 @@ Each permanent dataset version is deposited to a public research archive that mi
 | Only the git host | Not an archive; a terms change or account closure removes it. |
 | One archive | A single point of failure for the thing whose whole point is survival. |
 
-### D3. Succession with a dead-man rule
-The continuity page names successors who have agreed, states that if the maintainer is unreachable for 180 days the named successors may take over the domain and repository, and records where the archive deposits and the domain registration sit. The domain is registered well ahead of expiry.
+### D3. Evergreen by construction, not by succession
+There is no named successor and no dead-man rule, because both are promises a person has to keep. Instead the project is built so that reviving it needs nobody's cooperation: the source is archived at every release, each release's inputs are deposited in public archives under their own identifiers, the build is reproducible from those inputs with a stated runtime, and the licenses already permit anyone to rebuild and host it. The continuity page is the instruction sheet for doing that. The domain is registered well ahead of expiry so the current copy outlives inattention.
 
-Alternative: an informal "someone will pick it up". Rejected: that is what every abandoned public dataset assumed.
+| Alternative | Why not |
+|---|---|
+| Name a successor who agrees in writing | A human gate: it needs someone to agree, re-confirm, and still be reachable years later, and it fails silently when they are not. |
+| A dead-man switch on the maintainer's activity | Needs a service to run it and a person to receive the handover; both are things that can lapse. |
+| An informal "someone will pick it up" | What every abandoned public dataset assumed. The difference here is that the steps, the inputs, and the rights are published in advance. |
 
 ### D4. Provenance beats seniority
-A curated fact ships only with a primary source URL, publisher, retrieval date, and an archive link, and a change to any published number waits out a public comment window. Where a second reviewer is not available, two independent primary sources substitute, because the point is checkability, not authority.
+A curated fact ships only with a primary source URL, publisher, retrieval date, and an archive link, and every disputable field carries two independent archived primary sources. There is no reviewer step at all: the point is that a stranger can check the fact from the published citations, so the check is a build rule rather than a person's approval.
 
 | Alternative | Why not |
 |---|---|
@@ -50,4 +54,4 @@ Correction tiers and the keep-the-old-value rule are written into `site/trust-pa
 
 - **Safe harbour wording is a legal statement.** Mitigation: use plain language, keep scope narrow, and say it is not legal advice.
 - **A comment window slows urgent fixes.** Mitigation: a correction that removes a wrong number may ship at once; the window applies to changing a number to a new claimed value.
-- **Named successors may lapse.** Mitigation: the continuity page carries a yearly re-confirmation date and CI flags it when stale.
+- **Revival steps can rot as the build changes.** Mitigation: the yearly restore test runs the published steps from the archives alone and fails when they no longer work, which is a machine check rather than a person's promise.

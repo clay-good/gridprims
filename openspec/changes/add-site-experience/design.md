@@ -42,7 +42,16 @@ All copy lives in per-locale string files (JSON keyed by message id, with ICU-st
 | gettext `.po` files | Needs a parser for a second format; JSON is native. |
 | Machine translation at runtime | Third-party service and unreviewed text. |
 
-### D7. The limits page is generated, and it ships before the tools
+### D7. A simplicity budget, enforced by the build
+The visitor surface has fixed limits (6 nav sections, 5 cells a lane, 5 visible inputs and one chart on a first screen, nothing interrupting arrival), and a new tool reaches the home page only by replacing one. The limits are in the build, not in anyone's judgment, because 22 changes of planned capability will otherwise arrive as 22 things on a page.
+
+| Alternative | Why not |
+|---|---|
+| Trust taste to keep it simple | Every individual addition looks reasonable; the sum is the clutter that makes free tools unusable. |
+| Add a navigation layer as the tool count grows | Depth hides things from the people who need them most; the command bar and the catalog already serve finding. |
+| No limit, just good defaults | A limit that fails a build is the only kind that survives a backlog. |
+
+### D8. The limits page is generated, and it ships before the tools
 Methods, changelog, sources, review status, the corrections log, and the limits page are rendered from manifests, the dataset registry, CI results, `docs/review-signoffs.md`, `docs/corrections.md`, and a curated cannot-do list. The limits page lands in phase 0, before any tool ships, because a tool that ships before the page describing its limits has already overstated itself.
 
 | Alternative | Why not |

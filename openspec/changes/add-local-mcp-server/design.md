@@ -39,7 +39,7 @@ Alternative to the manual agent evaluation: an automated run against a hosted mo
 - No-network: every example under `sandbox-exec` (macOS) or `unshare -rn` (Linux).
 - Path security: traversal, symlink, device-file, and size-cap fixtures.
 - Golden surface and client-snippet smoke tests (copied pattern from geoprims).
-- Agent evaluation: 40+ requests with fixtures, run by a maintainer with an agent of their choice before each release and recorded by hand. It needs a third-party model, so it is a release checklist item, not part of the automated test suite.
+- Agent evaluation: 40+ requests with fixtures. The model-free parts (tool exists, arguments validate, replayed calls produce the recorded values) run in CI and gate the release; running the set through an actual model needs a third-party service, so it is advisory and never a gate.
 
 ## Risks / Trade-offs
 

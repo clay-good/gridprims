@@ -29,4 +29,4 @@
 ## 5. Setup and evaluation
 
 - [ ] 5.1 Write the client-snippet source, README section, developer page, and smoke test; verify each snippet launches the server
-- [ ] 5.2 Build the 40-request evaluation set with fixtures and the manual release checklist; verify a baseline run is recorded in the first release notes
+- [ ] 5.2 Build the 40-request evaluation set with fixtures and its model-free CI checks; verify the automatic-part and model-run-advisory scenarios

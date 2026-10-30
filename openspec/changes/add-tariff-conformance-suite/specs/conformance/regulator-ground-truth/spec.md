@@ -27,11 +27,11 @@ The dataset SHALL be registered with each state commission named as the source p
 - **THEN** that state's rows are excluded and the registry records why
 
 ### Requirement: Extraction is reviewed and its error rate published
-Figures extracted from published documents SHALL pass the curated-contribution rules (primary source, archive link, and either a second reviewer or two independent sources). A hand-checked random sample of at least 100 rows SHALL be re-read by a person each release, and the measured extraction error rate SHALL be published with the release.
+Figures extracted from published documents SHALL pass the curated-contribution rules (primary source and archived copy), and each figure SHALL be extracted twice by two independent methods. Rows whose two extractions disagree SHALL be excluded automatically and counted. The disagreement rate SHALL be published with each release as the measured extraction error rate, with no human sampling step.
 
 #### Scenario: Extraction error rate published
 - **WHEN** a release ships
-- **THEN** it states the sample size, the number of rows found wrong on re-reading, and the resulting error rate with its date
+- **THEN** it states how many rows were extracted, how many the two methods disagreed on, and the resulting rate with its date, all computed by the build
 
 #### Scenario: Figure that cannot be read confidently
 - **WHEN** a value in a source document is ambiguous or illegible

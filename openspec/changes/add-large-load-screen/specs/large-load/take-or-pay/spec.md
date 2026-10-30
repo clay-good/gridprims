@@ -34,7 +34,7 @@ When the tariff defines an exit fee, the calculator SHALL compute the fee if the
 - **THEN** the exposure at year 5 equals the sum of minimum bills for years 6 through 14
 
 ### Requirement: Verification
-Where an order or tariff filing includes a worked minimum-bill or exit-fee example, the calculator SHALL reproduce it exactly (to the cent) as a stored fixture. Because none was found as of 2026-10-29 (`docs/research/06`), every seeded tariff SHALL also have at least one fixture computed by hand from the tariff text by a second person, recorded with name and date, and regulator staff exhibits SHALL be added when found.
+Where an order or tariff filing includes a worked minimum-bill or exit-fee example, the calculator SHALL reproduce it exactly (to the cent) as a stored fixture. Because none was found as of 2026-10-29 (`docs/research/06`), every seeded tariff SHALL also have at least one fixture derived from the tariff text whose full arithmetic is published beside the result, so any reader can check it, and regulator staff exhibits SHALL be added when found.
 
 #### Scenario: Filing example reproduced
 - **WHEN** CI runs a stored example taken from a utility filing

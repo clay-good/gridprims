@@ -18,6 +18,6 @@
 - [ ] 3.1 Add the archive deposit to the release process with series and version identifiers shown in the library; verify the citation and archive-pending scenarios
 - [ ] 3.2 Add the second annual archive deposit and source-code archiving; verify the overdue scenario at a 13-month fixture
 - [ ] 3.3 Publish running costs on About from invoices; verify the figure carries its date and source
-- [ ] 3.4 Publish the continuity page with successors, the 180-day rule, and locations; verify the stale-confirmation and no-successor scenarios
+- [ ] 3.4 Publish the continuity page with the revival steps, archive identifiers, release tags, runtime, build command, and per-dataset upstream terms; verify the revival-steps, maintainer-unreachable, and no-permission scenarios
 - [ ] 3.5 Run the yearly restore test from archives alone; verify checksums match the published digests and the result is recorded
 - [ ] 3.6 Run DESIGN.md gates on the disclosure policy, continuity, and costs pages (both themes, 320 px sweep, keyboard pass, print); verify CI green

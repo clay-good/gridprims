@@ -2,7 +2,7 @@
 
 - [ ] 1.1 Identify every state commission bill-comparison publication, record its terms per state, and exclude any whose terms restrict reuse; verify the redistribution-basis-per-state scenario
 - [ ] 1.2 Extract rows with per-figure provenance (document, date, page, utility, consumption level, stated assumptions); verify the row-provenance, unstated-taxes, and ambiguous-figure scenarios
-- [ ] 1.3 Re-read a random sample of at least 100 rows by hand each release and publish the measured extraction error rate; verify the error-rate scenario
+- [ ] 1.3 Extract every figure twice by two independent methods, exclude and count disagreements automatically, and publish the rate each release; verify the error-rate scenario
 - [ ] 1.4 Publish coverage by state, commission, utility, and consumption level, with absences and reasons; verify the missing-state scenario
 - [ ] 1.5 State what the regulator figures do and do not prove before every table and download; verify the limits-stated scenario
 

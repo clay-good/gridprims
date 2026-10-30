@@ -16,7 +16,11 @@ Each vector SHALL contain: a tariff in URPX (LF Energy, version recorded), a loa
 - **THEN** it declares those two types and no others, so a reader cannot mistake it for evidence about demand charges
 
 ### Requirement: Provenance of every expected value
-The expected bill SHALL come from one of four sources, recorded per vector with its own citation: a state commission bill-comparison publication (document, date, page, utility, consumption level); a utility's own published typical-bill table; a figure a user read off their own bill and typed in, with no bill document retained; or a hand computation from the filed tariff sheet by a named reviewer on a recorded date. A vector whose expected value came from our own engine SHALL NOT be published.
+A vector's expected bill SHALL come from a source independent of our engine, recorded with its own citation, and a vector whose expected value came from our own engine SHALL NOT be published.
+
+#### Scenario: Accepted sources
+- **WHEN** a vector's provenance is validated
+- **THEN** it is one of: a state commission bill-comparison publication (document, date, page, utility, consumption level); a utility's own published typical-bill table; a figure a user read off their own bill and typed in, with no bill document retained; or a computation from the filed tariff sheet published with its full arithmetic
 
 #### Scenario: Self-generated expected value refused
 - **WHEN** a contributor submits a vector whose expected bill our engine produced

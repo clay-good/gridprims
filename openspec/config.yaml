@@ -136,3 +136,8 @@ operations:
         rather than disclaiming it in prose.
       - Refuse any figure the public data cannot support, name the refusal
         on the limits page, and say what would change it.
+      - No step may wait on a person. Where terms, review, or confirmation
+        are uncertain, the build takes the safer automatic option and says
+        so; it never blocks, and it never asks anyone to sign off.
+      - Keep the visitor surface inside the simplicity budget; new capability
+        reaches the home page by replacing something, not by adding to it.

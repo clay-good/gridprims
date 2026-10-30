@@ -5,11 +5,33 @@ Shows, rather than claims, why a free site deserves trust: who runs it, how each
 ## ADDED Requirements
 
 ### Requirement: Trust page set
-The site SHALL publish these pages, each linked from the footer: About, Methods, Privacy, Accessibility, Corrections, Changelog, License and how to cite, Sources and credits (every upstream publisher with its required credit text), Review status, Limits (`site/limitations`), and Developers. The footer SHALL also link the sister sites.
+The site SHALL publish these pages, each linked from the footer: About, Methods, Privacy, Accessibility, Corrections, Changelog, License and how to cite, Sources and credits (every upstream publisher with its required credit text), Review status, Limits (`site/limitations`), Terms and disclaimer, and Developers. The footer SHALL also link the sister sites.
 
 #### Scenario: Footer links
 - **WHEN** any page is rendered
-- **THEN** its footer links to all eleven trust pages and the sister sites
+- **THEN** its footer links to all twelve trust pages and the sister sites
+
+### Requirement: Terms and disclaimer
+The site SHALL publish a terms and disclaimer page, linked from the footer of every page and from the limits page.
+
+#### Scenario: What it states
+- **WHEN** a visitor reads the terms page
+- **THEN** it states in plain words that gridprims is a free public utility provided as is with no warranty of any kind, express or implied, including fitness for a particular purpose; that every result is a screening estimate and not engineering, legal, tax, financial, or safety advice, and not a utility study, bill, or determination; that the visitor is responsible for decisions they make with it and should confirm anything that matters with their utility, their electrician, or their own professional; that we accept no liability for loss arising from use of the site, to the extent the law allows; that data belongs to its publishers under the terms each dataset page records; and how to report an error or ask for removal
+
+#### Scenario: Linked everywhere
+- **WHEN** any page renders
+- **THEN** its footer links the terms and disclaimer page
+
+#### Scenario: Plain language
+- **WHEN** a visitor reads the page
+- **THEN** it is written at the site's normal reading level, in short sentences, with no block of legal text a visitor would skip
+
+### Requirement: The disclaimer never substitutes for care
+The terms page SHALL state that the disclaimer is not a reason to publish a number we cannot support, and SHALL link the limits page and the refusal list, so a reader can see what we decline to compute rather than only what we disclaim.
+
+#### Scenario: Disclaimer points at the limits
+- **WHEN** a visitor reads the disclaimer
+- **THEN** it links the limits page and says plainly that we refuse figures the public data cannot support, rather than estimating them behind a warning
 
 ### Requirement: About states who runs it and how it is paid for
 The About page SHALL name the maintainer, state how hosting and data costs are paid with the actual monthly cost from the hosting invoice (for example the $5/month Workers plan plus the domain), and state that gridprims takes no advertising, sponsorship, affiliate fees, or lead-generation payments. If funding is ever accepted, the page SHALL name each funder. It SHALL NOT invent users, partners, or endorsements.

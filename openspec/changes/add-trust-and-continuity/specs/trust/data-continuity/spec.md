@@ -29,16 +29,23 @@ The About page SHALL state the actual annual running cost from invoices (hosting
 - **WHEN** a visitor reads the About page
 - **THEN** it gives a dollar figure for the last 12 months with the date it was computed, and no estimate presented as a fact
 
-### Requirement: Succession plan
-The continuity page SHALL name the maintainer, name at least one successor who has agreed in writing, state that if the maintainer is unreachable for 180 days the named successors may take over the domain, repository, and archive records, record where the domain registration and archive deposits sit, and carry a date it was last re-confirmed.
+### Requirement: Anyone can revive it, with no handover
+The continuity page SHALL explain, in steps a stranger can follow, how to bring gridprims back if nobody is maintaining it: clone the archived source at a release tag, fetch that release's archived inputs from the public archives by their identifiers, run the build with the stated runtime, and deploy the static output anywhere. It SHALL NOT name a successor, require anyone to agree to anything, or depend on contacting the maintainer.
 
-#### Scenario: Stale confirmation
-- **WHEN** the plan was last re-confirmed more than 12 months ago
-- **THEN** the page shows a "needs re-confirmation" note with the date and CI warns
+#### Scenario: Revival steps published
+- **WHEN** a visitor opens the continuity page
+- **THEN** it gives the archive identifiers, the release tags, the runtime version, the build command, and the licenses that permit all of it, with no step that waits on a person
 
-#### Scenario: No successor yet
-- **WHEN** no successor has agreed
-- **THEN** the page says so plainly and states what would happen to the archives, rather than implying a plan exists
+#### Scenario: Maintainer unreachable
+- **WHEN** the maintainer stops responding
+- **THEN** nothing on the page or in the archives needs their action, because the source, the inputs, and the licenses already permit anyone to rebuild and host it
+
+### Requirement: The licenses make revival legal without permission
+The continuity page SHALL state that the code is under a permissive license, that gridprims' own text and derived tables are under an attribution license, and that each upstream dataset carries its own recorded terms, so a reviver needs no permission from us and knows exactly which upstream terms travel with what.
+
+#### Scenario: No permission needed
+- **WHEN** someone forks the project to revive it
+- **THEN** the page confirms they need nothing from us, and names the upstream terms they inherit per dataset
 
 ### Requirement: The archives are enough to rebuild
 The deposited material SHALL be sufficient to rebuild the site: the normalized snapshots, their manifests and checksums, the archived raw publisher inputs for each release, and the source at that tag. A restore SHALL be tested at least once a year from the archives alone.

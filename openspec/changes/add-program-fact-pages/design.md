@@ -36,13 +36,14 @@ Every entry in the index records what the thing is, who maintains it, what it co
 
 Alternative: scatter links across pages only. Rejected: nobody can audit the promise, and dead links accumulate invisibly.
 
-### D5. License re-confirmation gates the community solar pages
-The community solar pages do not build until a maintainer records, in the registry entry, the license read on the publisher's own landing page. Catalog records are evidence, not the publisher's word.
+### D5. The license is captured automatically, and the posture decides
+The pipeline fetches the publisher's own landing page on each refresh, records its terms text and the date, and `platform/data-snapshots` derives the posture from that. Catalog metadata has already been wrong about this publisher once, so it is never the basis on its own; but an unrecognized license downgrades what we publish rather than stopping the build, so the pages always ship in some form.
 
 | Alternative | Why not |
 |---|---|
-| Ship on the catalog record's license field | Catalog metadata has already been wrong about this publisher once, which is why the question reopened. |
-| Defer the pages until the publisher is asked in writing | The landing page is the publisher's own statement and is usually enough; writing is the fallback if it is silent. |
+| Block the pages until a person confirms the license | A human gate that stalls indefinitely, on a project with one maintainer, for a page that could have shipped as our own aggregates all along. |
+| Ship the file on the catalog record's license field | Catalog metadata was wrong about this publisher once already. |
+| Drop the pages entirely while the license is unclear | Throws away the state-level facts, which we may compute and publish whatever the file's terms turn out to be. |
 
 ## Risks / Trade-offs
 

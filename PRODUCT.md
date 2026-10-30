@@ -61,6 +61,7 @@ Nobody free answers "what is my own meter data and bill actually saying, and is 
 3. Every number has a unit, a source, and a date.
 4. Honest about limits: say what is excluded, approximate, or stale, and publish our own error where we can measure it.
 5. Link, don't rebuild.
+6. Stay small on the surface. Capability grows behind a search box and a catalog; the page a visitor lands on does not.
 
 ## Accessibility & Inclusion
 

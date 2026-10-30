@@ -133,12 +133,23 @@ The tool names, schemas, and descriptions SHALL be recorded in a committed golde
 - **THEN** the golden-surface test fails and shows the difference
 
 ### Requirement: Agent evaluation
-The repository SHALL include an evaluation set of at least 40 realistic developer requests covering every phase 1 tool family, with expected tool calls and key values. Because running it needs a third-party model, it SHALL be a manual release checklist item: a maintainer runs it with an agent of their choice and records the agent, date, and pass rate in the release notes. It SHALL NOT be part of the automated test suite.
+The repository SHALL include an evaluation set of at least 40 realistic developer requests covering every phase 1 tool family, with expected tool calls and key values.
+
+#### Scenario: Set covers every tool family
+- **WHEN** the evaluation set is validated
+- **THEN** every phase 1 tool family appears in at least one request, and each request names its expected tool and key values
+
+### Requirement: The model-free parts gate, the model run does not
+The parts of the evaluation that need no model SHALL run automatically in CI: that every request's expected tool exists, that its arguments validate against that tool's schema, and that replaying the expected calls produces the recorded key values. Running the set through an actual model SHALL be optional and advisory, never a release gate; when someone does run it, the agent, date, and pass rate are recorded.
 
 #### Scenario: Household and professional requests
 - **WHEN** the evaluation set is reviewed
 - **THEN** it includes requests such as "what drives this facility's demand charges?" with a fixture file and "which plan is cheapest for these 12 bills?"
 
-#### Scenario: Release checklist
-- **WHEN** a recorded pass rate is more than 10 points below the previous release
-- **THEN** the release checklist is not complete until the cause is fixed or explained in the changelog
+#### Scenario: Automatic part gates the release
+- **WHEN** a request's expected tool call no longer validates against that tool's schema
+- **THEN** CI fails, because that part needs no model
+
+#### Scenario: Model run is advisory
+- **WHEN** nobody has run the set through a model for this release
+- **THEN** the release proceeds, and the evaluation page says the last model run's agent, date, and pass rate, or that none has been run

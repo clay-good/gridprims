@@ -12,6 +12,7 @@ We deliberately do not rebuild what sister sites and partners do: building wirin
 - **Discoverability:** unique titles and descriptions, canonical URLs, structured data for datasets and glossary terms, sitemaps dated by data rather than by build, Atom feeds for the changelog and data releases, and one static social card per section.
 - **Trust pages:** about, methods, privacy, accessibility statement, corrections policy and log, changelog, license and how to cite, sources, review status, and a developer page.
 - **Limits page:** one generated page stating what gridprims cannot do and why, every tool's validation level and the evidence behind it, every known problem, and what evidence would change each verdict, published as a page and as JSON.
+- **Terms and disclaimer:** a plain-language page covering the as-is nature of a free public utility, that results are screening estimates and not professional advice, who is responsible for decisions, the publishers' own terms, and how to report an error or ask for removal.
 - **Translation-ready:** every string in string files, locale-aware number and date formatting, layouts tested with 35% longer text, and a reserved `/es/` path. Spanish itself is phase 2.
 
 ## Capabilities

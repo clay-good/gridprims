@@ -205,6 +205,7 @@ Principles (unchanged in spirit from the first concept):
 - **No submit buttons.** Inputs recompute on change. Over 100 ms, show progress and keep the old answer visible, marked as updating.
 - **Never scroll sideways.** At 320 px nothing in the page scrolls horizontally. Wide tables and charts pan inside their own box.
 - **Honest by construction.** Examples, samples, estimates, and stale data are labeled where they appear, using the work-zone orange strip.
+- **Simple on arrival, always.** Six sections, five cells a lane, five visible inputs and one chart on a first screen, and nothing that interrupts arrival: no modal, tour, banner, or consent prompt. A new tool earns its place on the home page by replacing one, never by adding a row.
 - **Say how well checked it is.** Every answer carries its validation level and the evidence behind it, and an unvalidated tool says so beside the number, not in a footer. Where we can measure our own error, the error sits next to the answer.
 - **Refusals are answers.** When public data cannot support a figure, the page says so plainly, says why, and says what would change it, rather than estimating anyway.
 

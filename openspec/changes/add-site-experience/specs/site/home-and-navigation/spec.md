@@ -15,6 +15,24 @@ The home page SHALL show, in its first viewport at 360 × 640 px and wider, the 
 - **WHEN** the home page loads with JavaScript disabled
 - **THEN** every cell is a working link, and the command bar is replaced by a link to the tool catalog
 
+### Requirement: Simplicity budget
+The visitor-facing surface SHALL stay inside fixed limits, checked in the build: at most 6 sections in the top rail; at most 5 tool cells per home-page lane; at most 5 inputs visible on a tool page's first screen, with any others behind one "More options" control; at most one chart on a tool page's first screen; and no modal, overlay, tour, banner, or interstitial on arrival, including cookie and consent notices, which are unnecessary because nothing is stored or tracked.
+
+#### Scenario: Budget exceeded
+- **WHEN** a change would put a seventh section in the top rail or a sixth cell in a lane
+- **THEN** the build fails and names what must be removed or merged first
+
+#### Scenario: Nothing interrupts arrival
+- **WHEN** a first-time visitor opens any page
+- **THEN** the page's content is the first thing they see, with no overlay, tour, banner, or consent prompt
+
+### Requirement: Growth replaces, it does not accumulate
+A new tool SHALL reach a home-page lane only by replacing a cell already there, decided by the value measures in `plan-launch-and-value-proof`, and the catalog SHALL remain the one place where every tool is listed. The home page SHALL NOT grow a new row to fit a new tool.
+
+#### Scenario: New tool promoted
+- **WHEN** a new tool earns a place on the home page
+- **THEN** the change names the cell it replaces, and the replaced tool remains in the catalog and its section page
+
 ### Requirement: Tool cells say what you need
 Every tool cell on the home page, section pages, and catalog SHALL show the DESIGN.md furniture: name, the question it answers, what you need (nothing, a ZIP code, bill totals, or a meter file), and the data as-of date. Cells SHALL make no accuracy, popularity, or endorsement claim the build does not prove.
 

@@ -15,12 +15,16 @@ Every field in a curated record SHALL carry a primary source: a URL, the publish
 - **WHEN** a field cites a regulator page with no archived copy
 - **THEN** the check fails and names the field, because regulator URLs move
 
-### Requirement: Review, or two independent sources
-A curated record SHALL NOT be published until either a second person has checked it against its cited sources (recorded with name and date) or every disputable field cites two independent primary sources. Which route was used SHALL be recorded on the record.
+### Requirement: Two independent primary sources, checked automatically
+Every disputable field in a curated record SHALL cite two independent primary sources, each with an archived copy the build fetched and stored. The check is automatic: a field with fewer than two archived primary citations fails the data check. No human review step, named reviewer, or sign-off SHALL gate publication.
 
-#### Scenario: Single maintainer, two sources
-- **WHEN** no second reviewer is available and a tariff's threshold is cited to both the commission's order and the utility's filed tariff sheet
-- **THEN** the record may publish, and it records "two independent sources" as its review route
+#### Scenario: Two sources present
+- **WHEN** a tariff's threshold cites both the commission's order and the utility's filed tariff sheet, each archived
+- **THEN** the record publishes, and both citations with their archive dates appear on it
+
+#### Scenario: Only one source
+- **WHEN** a field cites a single document
+- **THEN** the data check fails and names the field, and the record publishes without that field rather than waiting for a person
 
 ### Requirement: Comment window before changing a published number
 A change that alters a number already published SHALL open for public comment for 7 days before it merges, announced in the corrections feed, except that removing or flagging a number found to be wrong MAY ship at once and then follow the corrections process.

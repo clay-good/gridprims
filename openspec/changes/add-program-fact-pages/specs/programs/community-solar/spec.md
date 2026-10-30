@@ -4,12 +4,16 @@ Answers "is there community solar in my state, and how much?" from a national la
 
 ## ADDED Requirements
 
-### Requirement: License confirmed on the publisher's page before shipping
-These pages SHALL NOT build until the registry entry records the license of the National Laboratory of the Rockies "Sharing the Sun" community solar dataset as read on that laboratory's own landing page, with the date read and the license text quoted, because catalog records are evidence rather than the publisher's own statement. The entry SHALL also record the publisher, the snapshot date as the data period, and the required attribution.
+### Requirement: Terms captured automatically, posture decides
+The pipeline SHALL capture the National Laboratory of the Rockies "Sharing the Sun" dataset's terms from the publisher's own landing page on each refresh, record the text, the date, the publisher, the snapshot date as the data period, and the required attribution, and let `platform/data-snapshots` derive the posture. The pages SHALL build under whichever posture applies, with no human confirmation step.
 
-#### Scenario: License unconfirmed
-- **WHEN** the registry entry carries only a catalog record's license field
-- **THEN** the build excludes the community solar pages and the state pages omit the section
+#### Scenario: Only a catalog record available
+- **WHEN** the publisher's own page states no license and only a catalog record does
+- **THEN** the posture is `derive`, the pages show our own computed project counts and capacity with the credit and a link to the dataset, and no copy of the file is published
+
+#### Scenario: Publisher's page states the license
+- **WHEN** the captured page text matches a recognized reusable license
+- **THEN** the posture is `mirror`, the quoted text and its capture date are recorded, and downloads are offered
 
 ### Requirement: State pages
 Each state page SHALL show the number of community solar projects and their capacity (MW), split by status (operating and pending) and by program type where the dataset provides it, with the dataset's snapshot date.

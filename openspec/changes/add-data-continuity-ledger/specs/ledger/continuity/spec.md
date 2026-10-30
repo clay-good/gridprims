@@ -29,16 +29,16 @@ When a publisher removes or changes a previously posted release date, the row SH
 - **WHEN** a page that said a release was expected in a given month no longer says so
 - **THEN** the row records both versions with their dates and links the archived copy, and states no cause
 
-### Requirement: Notify the publisher before a first late or first finding
-Before a dataset is first shown as late, or a consistency finding is first published, the publisher SHALL be notified through their own contact channel and the notice date recorded. Any reply SHALL be published inline beside the row, unedited and attributed. A finding SHALL NOT be withheld for lack of a reply.
+### Requirement: Publishers can always reply, and nothing waits on them
+Every row and finding SHALL link the publisher's own notice where one exists and SHALL carry a standing invitation to reply, with a contact that reaches us. Any reply SHALL be published inline beside the row, unedited and attributed. Publication SHALL NOT wait on a notice being sent, a reply being received, or any person taking an action first.
 
 #### Scenario: Reply published
 - **WHEN** a publisher replies explaining a delay
 - **THEN** the reply appears beside the row, unedited, with its date and attribution
 
-#### Scenario: No reply
-- **WHEN** 30 days pass with no reply
-- **THEN** the row publishes with a note that we notified the publisher on the recorded date and received no reply
+#### Scenario: Nothing is held back
+- **WHEN** a dataset first qualifies as late
+- **THEN** the row publishes on that build, with the publisher's own notice linked and the invitation to reply, and no step waits on a person
 
 ### Requirement: The on-time majority is stated first
 The page SHALL state, above the table, how many tracked datasets are current and how many are late, so the ledger cannot be read as a claim that public energy data is broadly unreliable.

@@ -26,10 +26,13 @@ A dataset is late only against a date the publisher posted, cited. Where no date
 | Call anything past its historical cadence late | Publishers reschedule for legitimate reasons; an unposted date is not a broken promise. |
 | Only report posted dates | The most important case, a promise silently deleted from a page, would vanish from the ledger. |
 
-### D3. Notify first, publish the reply inline
-Before a dataset's first "late" or a first published consistency finding, the publisher is notified through their own contact channel, with the date recorded. Any reply is published inline beside the finding, unedited. A finding is not withheld for lack of a reply.
+### D3. Always reachable, never gated
+Every row links the publisher's own notice and carries a standing invitation to reply, and any reply is published inline, unedited. Nothing waits on a notice being sent or answered, because a ledger that needs a person to act before it updates is a ledger that stops updating.
 
-Alternative: publish without notice. Rejected: the precedents that earned standing all notified first, and a publisher's explanation is usually the most useful thing on the row.
+| Alternative | Why not |
+|---|---|
+| Notify the publisher before each first finding | A human gate on every row: it stalls the ledger whenever nobody sends the notice, which is most of the time. |
+| Publish with no way to reply | Loses the publisher's explanation, which is usually the most useful thing on the row. |
 
 ### D4. The interchange identity is the flagship check
 The hourly grid data asserts that interchange between two balancing authorities nets to zero, and that the pairs sum to the reported total. Both are computable from the published files and neither has ever been published. We measure them per pair, per balancing authority, and per year, in energy and percent, and state plainly that an imbalance is a reporting inconsistency rather than physics.

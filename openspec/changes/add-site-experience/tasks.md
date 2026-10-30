@@ -13,6 +13,7 @@
 
 - [ ] 3.1 Build the home page with two lanes of tool cells generated from manifests; verify the 360 × 640 first-viewport and no-JavaScript scenarios
 - [ ] 3.2 Build the tool catalog with filters; verify the bill-totals filter scenario and that unbuilt tools appear nowhere
+- [ ] 3.3 Enforce the simplicity budget in the build and the replace-not-add rule; verify the budget-exceeded, nothing-interrupts-arrival, and new-tool-promoted scenarios
 
 ## 4. Discoverability (phase 1)
 
@@ -30,5 +31,5 @@
 ## 6. Trust pages (phase 0 templates, phase 1 content)
 
 - [ ] 6.1 Generate Methods, Changelog, Sources, Review status, and Corrections from manifests and records; verify the worked-example status and wrong-tariff scenarios
-- [ ] 6.2 Write About, Privacy, Accessibility, License and how to cite, and Developers; verify every claim on About traces to an invoice or record and the copied citation scenario
+- [ ] 6.2 Write About, Privacy, Accessibility, License and how to cite, Terms and disclaimer, and Developers; verify every claim on About traces to an invoice or record, the copied citation scenario, and the linked-everywhere, plain-language, and disclaimer-points-at-the-limits scenarios
 - [ ] 6.3 Run DESIGN.md gates (both themes, 320 px, keyboard, print) on every trust page; verify CI green

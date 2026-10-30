@@ -41,7 +41,18 @@ The tool SHALL state that minimum daytime load is unavailable for most feeders, 
 - **THEN** it is shown as that utility's own assumption with its citation, alongside the band
 
 ### Requirement: State fallbacks, by technology and only when confirmed
-A state that codifies a fallback percentage in its rules SHALL have that value shown as the state's own, separately from the band, with its own citation; where a state's rule splits the fallback by generator technology, every value SHALL be shown against its technology. A fallback that `docs/research/12` tags as needing reverification SHALL NOT be published as a state rule until a maintainer reads the rule text.
+A state that codifies a fallback percentage in its rules SHALL have that value shown as the state's own, separately from the band, with its own citation; where a state's rule splits the fallback by generator technology, every value SHALL be shown against its technology.
+
+#### Scenario: Technology-split fallback
+- **WHEN** a state's rule sets one percentage for inverter-based generators and another for rotating machines
+- **THEN** both are shown against their technology as that state's rule, with its citation, separately from the band
+
+### Requirement: A fallback appears only once its rule text is archived
+A fallback SHALL be published as a state rule only when its entry carries the rule's own archived text per `trust/curated-contributions`; otherwise the band is shown with a note that a state fallback may exist and is not yet sourced. The check is automatic and nothing waits on a person.
+
+#### Scenario: Rule text not archived
+- **WHEN** a state's fallback has no archived rule text
+- **THEN** the band is shown with that note, and the build does not wait or fail
 
 #### Scenario: Codified fallback
 - **WHEN** a user's state writes a percentage-of-peak fallback into its rules, with different values for inverter-based and rotating generators
