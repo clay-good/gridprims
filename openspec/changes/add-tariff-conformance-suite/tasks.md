@@ -20,7 +20,7 @@
 - [ ] 3.1 Implement the per-rate comparison with arithmetic shown and untestable rates counted; verify the disagreement-reported and untestable-rate scenarios
 - [ ] 3.2 Implement counts and distributions with no composite index; verify the no-composite scenario and that no ranking appears
 - [ ] 3.3 Implement the disagreement wording rules and the confirmed-error record; verify the unresolved and confirmed scenarios
-- [ ] 3.4 Report confirmed errors upstream before publishing them as errors; verify the upstream-report-recorded scenario
+- [ ] 3.4 Publish disagreements immediately and record any upstream report afterwards; verify the published-immediately and reported-later scenarios
 - [ ] 3.5 Publish the method, versions, checksums, rate list, and results as files; verify an independent rerun reproduces the numbers
 - [ ] 3.6 Include our own engine in the table; verify the our-result-shown scenario
 - [ ] 3.7 Wire the scorecard into validation levels and the limits page; verify the validation-level-raised scenario

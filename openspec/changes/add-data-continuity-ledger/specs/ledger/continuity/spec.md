@@ -54,6 +54,28 @@ A dataset that a publisher discontinues SHALL stay in the ledger marked disconti
 - **WHEN** a publisher retires a dataset
 - **THEN** its row stays, marked discontinued with its notice and archived copy, and names the successor if one was announced
 
+### Requirement: The pipeline's own health is published
+The ledger SHALL carry rows for the automation itself: the last successful run of each scheduled workflow, the last successful refresh per dataset, each workflow's current enabled state as the host reports it, any workflow the host disabled and when it was re-enabled, and the date of the last successful archive deposit and restore test.
+
+#### Scenario: Automation rows present
+- **WHEN** the ledger is generated
+- **THEN** it carries a row per scheduled workflow with its last success, its enabled state, and its declared staleness threshold, plus the last deposit and restore-test dates
+
+### Requirement: The pipeline's health is aged on the device
+The ledger JSON SHALL carry the time it was generated, and every page reporting these SHALL compute their age in the browser against the visitor's clock, so a pipeline that has stopped shows as stalled even though no build has run since (`platform/automation`).
+
+#### Scenario: Pipeline stalled
+- **WHEN** no scheduled run has succeeded for longer than its declared staleness threshold
+- **THEN** the page computes that on the device and shows the automation as stalled with the last successful run's date per workflow, and the limits page repeats it
+
+#### Scenario: Stale ledger still tells the truth
+- **WHEN** a visitor loads the ledger 60 days after the last successful build
+- **THEN** every row shows an age of at least 60 days and the automation shows as stalled, because the age is computed from the generated-at time rather than written at build time
+
+#### Scenario: Host disabled a schedule
+- **WHEN** the host disables a scheduled workflow for inactivity and the pipeline re-enables it
+- **THEN** the ledger records the disable, the detection, and the re-enable with their dates
+
 ### Requirement: Our own datasets are in the ledger
 Datasets gridprims publishes SHALL appear in the ledger on the same terms, including our own lateness, broken links, and corrections.
 
@@ -73,4 +95,4 @@ The ledger SHALL be published as a page and as a JSON file at a stable URL, with
 
 #### Scenario: Machine-readable ledger
 - **WHEN** a researcher fetches the JSON
-- **THEN** it carries every row with the same fields and the generation date
+- **THEN** it carries every row with the same fields, the generation date, and the per-workflow staleness thresholds needed to compute staleness without us

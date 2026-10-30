@@ -10,7 +10,7 @@ This change decides what ships first, what "ready" means, how we measure use wit
 
 ## What Changes
 
-- **Phase 0, foundation:** `establish-platform-foundation` (zero dependencies, data operations), `add-local-mcp-server` (agents from day one), and the shell of `add-site-experience` (navigation, stable URLs, translation-ready strings, trust page templates).
+- **Phase 0, foundation:** `establish-platform-foundation` (zero dependencies, and a CI pipeline that keeps every dataset fresh with nobody in the path), `add-local-mcp-server` (agents from day one), and the shell of `add-site-experience` (navigation, stable URLs, translation-ready strings, trust page templates).
 - **Phase 1, launch (two doors, one engine):**
   - `add-load-and-bill-analyzer`: read any interval file, explain the bill line by line, re-price it on other tariffs, show coincident-peak exposure, screen a battery and solar, and export a clean REopt-ready file.
   - `add-household-bill-check`: check a bill from its totals, compare use with the average home, and find the cheapest plan on your own use.
@@ -21,7 +21,7 @@ This change decides what ships first, what "ready" means, how we measure use wit
   - The rest of `add-site-experience`: the two-door home page, catalog, discoverability, and trust page content.
 - **Phase 2, only if phase 1 meets its bar:** `add-tariff-conformance-suite` first (the test vectors and accuracy scorecard that move the bill tools off our own word), then the rest of `add-data-continuity-ledger`, `add-weather-normalization` (was it the weather or me?), `add-large-load-screen`, `add-ratepayer-tools`, and `add-electrification-tools` (now including a backup-power sizer).
 - **Phase 3, only if phase 2 meets the same bar:** `add-grid-calculators` (line rating, ambient-adjusted rating tables, power-factor correction, transformer sizing), `add-reliability-tools` (indices from a co-op's own outage log), `add-measured-plant-emissions` (and the published error in our own hourly estimate), `add-program-fact-pages` (net metering, community solar, qualifying-facility checklist), `add-interconnection-screens`, Spanish pages, and last `add-grid-scenario-model`, held to the end because it is the easiest to mistake for a planning study.
-- **Trust and continuity throughout:** security disclosure, contribution rules, and the limits page in phase 0; archive deposits, published costs, a succession plan, and the snapshot diff log in phase 1.
+- **Trust and continuity throughout:** security disclosure, contribution rules, and the limits page in phase 0; archive deposits, published costs, the continuity page's revival steps, and the snapshot diff log in phase 1.
 - **The referee work, phases 2 and 3:** `add-tariff-conformance-suite` (published test vectors and the first reproducible accuracy scorecard for US tariff data), `add-data-continuity-ledger` (per-dataset status, diffs, and the publisher-asserted identities nobody has measured), and `add-grid-scenario-model` (the first free in-browser US grid scenario model, which shows its own error against what actually happened before it answers anything).
 - **A definition of launch-ready**, **value measures without tracking**, **declared validation levels with a public limits page**, and **the same gate on every phase** (see design).
 

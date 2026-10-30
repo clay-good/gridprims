@@ -30,7 +30,7 @@ Each registry entry SHALL declare its expected refresh cadence. Lateness SHALL b
 - **THEN** pages show the staleness note and the registry page lists the dataset as "waiting on publisher"
 
 ### Requirement: Version cadence and file budget
-Datasets MAY refresh their current shards as often as weekly, but permanent versions SHALL be cut at most monthly. The deployable file count SHALL stay at or below 80,000, checked in CI.
+Datasets MAY refresh their current shards as often as their recipe's schedule allows, but permanent versions SHALL be cut at most monthly, by the pipeline on a schedule rather than by anyone deciding. The deployable file count SHALL stay at or below 80,000, checked in CI.
 
 #### Scenario: Two versions in one month
 - **WHEN** a second permanent version of the same dataset is cut in the same calendar month
@@ -39,6 +39,17 @@ Datasets MAY refresh their current shards as often as weekly, but permanent vers
 #### Scenario: Budget exceeded
 - **WHEN** a build would deploy 80,001 files
 - **THEN** CI fails and lists the largest contributors by dataset
+
+### Requirement: Where each kind of file lives
+Normalized outputs, manifests, checksums, and the ledger SHALL be committed to the repository. Raw publisher inputs for each version SHALL be published as release assets, because they are large and immutable. Durable copies of both SHALL be deposited to a public research archive on every release. CI artifacts and caches SHALL NOT be relied on for anything that must outlive a run, because the host deletes them.
+
+#### Scenario: Large raw input
+- **WHEN** a publisher's raw file is 400 MB
+- **THEN** it is attached to the release and deposited to the archive, and the repository holds only its checksum and manifest entry
+
+#### Scenario: Nothing depends on an artifact
+- **WHEN** CI artifacts expire
+- **THEN** no published page, download, or rebuild path breaks, because none pointed at an artifact
 
 ### Requirement: Snapshots are immutable and downloadable
 Each dataset version SHALL be stored at a permanent, versioned URL and never edited in place. The data page SHALL offer every version for download as gzip-compressed CSV (split by year or state when large) with its checksum, and SHALL link the version's diff, which `ledger/snapshot-diffs` owns and computes; this capability SHALL NOT compute a second diff. The same version SHALL be available to the local MCP server in the shard format the website uses.
@@ -54,9 +65,9 @@ Before publication, every dataset that describes grid infrastructure SHALL pass 
 - **WHEN** a contributor proposes adding substation bus data from a non-public planning model
 - **THEN** the screen fails and the dataset is not added
 
-#### Scenario: Archived public map (phase 2, only if its license is confirmed)
+#### Scenario: Archived public map
 - **WHEN** we later ship transmission line geometry from a public archive of a formerly public federal layer
-- **THEN** the registry entry records the archive, its DOI, its confirmed license, and the date the original layer was public
+- **THEN** the registry entry records the archive, its identifier, the terms captured from its own page, the posture derived from them, and the date the original layer was public
 
 ### Requirement: Redistribution posture is automatic, and never blocks a build
 Every dataset's registry entry SHALL carry a posture the build derives from the terms recorded for it, with no human sign-off anywhere in the path:
@@ -116,8 +127,8 @@ Each published file's manifest SHALL list every upstream source with its require
 - **THEN** the output is CC BY 4.0 and its manifest credits EIA and Catalyst Cooperative with "modified by gridprims"
 
 ### Requirement: Data stays on our origin
-Datasets SHALL be served from gridprims origins only. Tools SHALL NOT query agency APIs from the browser.
+Shards, derived tables, and normalized downloads SHALL be served from gridprims origins only, and tools SHALL NOT query agency APIs from the browser. Raw publisher inputs and archive deposits live off-origin by design (foundation design D16) and SHALL appear only as links a visitor may follow, never as a request a page makes.
 
 #### Scenario: No agency API at runtime
 - **WHEN** CI records the network requests of every data page
-- **THEN** none targets eia.gov, epa.gov, openei.org, or any other third-party host
+- **THEN** none targets eia.gov, epa.gov, openei.org, or any other third-party host, and the raw-input and archive entries appear only as anchors

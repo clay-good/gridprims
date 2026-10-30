@@ -22,6 +22,24 @@ Every stable tool SHALL pass at least one worked example taken from a source ind
 - **WHEN** a code change moves a worked-example result outside its tolerance
 - **THEN** CI fails and names the tool, example, expected value, actual value, and tolerance
 
+### Requirement: Data-driven examples are pinned to a snapshot
+A worked example whose result depends on a dataset SHALL name the snapshot version it was computed against and SHALL be evaluated against that version, so a scheduled refresh cannot silently move it.
+
+#### Scenario: Example names its version
+- **WHEN** a worked example depends on a dataset
+- **THEN** it records the snapshot version it was computed against, and CI evaluates it against that version rather than the current one
+
+### Requirement: A refresh that moves an example re-pins it
+When a refresh changes a data-driven example's result beyond its tolerance, the run SHALL re-pin the example to the new version, record the old and new values on the methods page and in the corrections log, and lower the tool's validation level until its evidence is re-established. It SHALL NOT fail the build.
+
+#### Scenario: Refresh moves an example
+- **WHEN** a new dataset version changes a worked example's result beyond its tolerance
+- **THEN** the run re-pins the example, publishes both values with the version that changed, lowers the tool's validation level, and the build stays green
+
+#### Scenario: Code change moves an example
+- **WHEN** a code change moves a worked-example result outside its tolerance against the pinned version
+- **THEN** CI fails, as before, because that is a defect rather than new data
+
 ### Requirement: Show the work
 Every result SHALL offer a "How we got this" panel with: the method in plain words, the formula or algorithm steps, every assumption with its value, intermediate values, and the citations.
 

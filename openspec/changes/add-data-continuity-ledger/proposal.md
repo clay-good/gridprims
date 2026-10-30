@@ -12,7 +12,7 @@ We follow the precedent of the clinical-trials and prescribing trackers that ear
 
 ## What Changes
 
-- **Continuity ledger:** one row per dataset with its expected cadence, last actual vintage, published next-release date, days late, the authoritative notice, canonical URL and its current status, and the archive identifier, published as a page and as JSON.
+- **Continuity ledger:** one row per dataset with its expected cadence, last actual vintage, published next-release date, days late, the authoritative notice, canonical URL and its current status, and the archive identifier, published as a page and as JSON — plus rows for our own automation, so a stalled pipeline is visible to anyone rather than only in CI logs.
 - **Snapshot diffs:** the public form of our own release computation: files added, removed, or changed; columns added or dropped; row-count deltas; checksums; and how much published history moved between releases.
 - **Consistency checks:** a small set of arithmetic identities the publishers themselves assert, measured and published, starting with the hourly interchange identity that nobody has ever quantified, plus reliability reporting coverage and the liveness of every URL we cite.
 
@@ -20,7 +20,7 @@ We follow the precedent of the clinical-trials and prescribing trackers that ear
 
 ### New Capabilities
 
-- `ledger/continuity`: Per-dataset cadence, vintage, lateness, notice, URL status, and archive identifier. (Distinct from the project's own succession page in `trust/data-continuity`, which covers what happens to gridprims; this covers the status of the datasets we republish.)
+- `ledger/continuity`: Per-dataset cadence, vintage, lateness, notice, URL status, and archive identifier. (Distinct from the project's own continuity page in `trust/data-continuity`, which covers how anyone revives gridprims; this covers the status of the datasets we republish.)
 - `ledger/snapshot-diffs`: What changed between releases, including revisions to published history.
 - `ledger/consistency-checks`: Publisher-asserted identities measured and published as checks.
 

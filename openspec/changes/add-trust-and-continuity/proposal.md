@@ -6,7 +6,7 @@ The risk here is not an attacker; it is disappearance and drift. HIFLD Open, a f
 
 We hand the durable copies to institutions built for permanence rather than reinventing them: a public research archive mints the persistent identifiers and holds every dataset version, a second public archive holds an annual deposit, and a public code archive holds the source. We deliberately do better than the common practice of a project's own backups, which die with the account that pays for them, and than the vulnerability-reward platforms a one-maintainer project cannot staff.
 
-Everything here is a static file or a rule, not a committee: `security.txt`, a disclosure policy, a corrections log, provenance rules for curated facts, an archive deposit, and a published succession plan.
+Everything here is a static file or a rule, not a committee: `security.txt`, a disclosure policy, a corrections log, provenance rules for curated facts, an archive deposit, and published revival steps.
 
 ## What Changes
 
@@ -38,6 +38,6 @@ None. (`site/trust-pages` gains its corrections detail inside `add-site-experien
 
 ## Impact
 
-- Phase 0 for `security.txt`, the disclosure policy, and the contribution rules (they gate the first curated data); phase 1 for the archive deposit, costs page, and succession plan.
+- Phase 0 for `security.txt`, the disclosure policy, and the contribution rules (they gate the first curated data); phase 1 for the archive deposit, the costs page, and the continuity page's revival steps.
 - Adds `/.well-known/security.txt`, a `/continuity/` page, and a pull-request template with the provenance and conflict questions.
 - Adds a deposit step to the release process and an expiry check to CI.

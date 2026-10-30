@@ -1,10 +1,10 @@
 ## 1. Repository and zero-dependency gates
 
-- [ ] 1.1 Create the layout from design D15 with a README in each top-level directory; verify `ls` shows every directory and README
+- [ ] 1.1 Create the layout from design D17 with a README in each top-level directory; verify `ls` shows every directory and README
 - [ ] 1.2 Add the dependency gate (no dependency fields, no `node_modules`, only listed font files) and record each shipped font's license and SHA-256 (Overpass and Overpass Mono are dual-licensed SIL OFL 1.1 and LGPL 2.1; `RedHatOfficial/Overpass`); verify it fails on a fixture that adds a package and on a font file with no license record
 - [ ] 1.3 Add the platform-API gate and `docs/platform-apis.md` (API, version introduced, stability); verify it fails on a fixture that uses an experimental Node API
 - [ ] 1.4 Pin Node 24.12+ and run CI on Node 24 and 26; verify a clean clone builds and tests with no install step
-- [ ] 1.5 Start `docs/own-implementations.md`; verify every general-purpose module has an entry
+- [ ] 1.5 Start `docs/own-implementations.md` with a build check that every general-purpose module has an entry; verify the check fails on an unlisted module rather than relying on a review
 - [ ] 1.6 Commit the fixture data subset (D11); verify every worked example runs offline from a fresh clone
 - [ ] 1.7 Add the deployable file-count gate (80,000); verify it fails on a fixture build over the limit
 
@@ -67,10 +67,20 @@
 - [ ] 8.1 Worker route with D1, honeypot, proof-of-work, rate limiting, and size limits; verify the flood and honeypot scenarios and that no third-party script loads
 - [ ] 8.2 Retention cleanup and privacy-page disclosure; verify a fixture report closed 181 days ago is deleted
 
-## 9. Data operations
+## 9. Data operations and automation
 
-- [ ] 9.1 Daily publisher release watch that opens refresh tasks; verify the new EIA-923 month scenario against a fixture page
-- [ ] 9.2 Runbook links in the registry and the runbook validator; verify the missing-runbook scenario
-- [ ] 9.3 Row-count and schema validators that keep the previous version live; verify the truncated-download scenario
+- [ ] 9.1 Scheduled per-dataset check-and-refresh workflows that publish end to end with no approval step; verify the new EIA-923 month and cadence scenarios against fixture pages
+- [ ] 9.2 Machine-readable refresh recipes in the registry and their validator; verify the missing-recipe and quirk-encoded scenarios
+- [ ] 9.3 Row-count and schema validators that keep the previous version live, publish the failure, and open an issue; verify the truncated-download and one-dataset-fails scenarios
 - [ ] 9.4 Post-deploy smoke test with rollback; verify the header-regression scenario on staging
-- [ ] 9.5 Weekly outbound link check; verify the moved-handoff scenario
+- [ ] 9.5 Weekly outbound link check publishing to the ledger; verify the moved-handoff scenario
+- [ ] 9.6 Write every workflow with only our own Node scripts and first-party actions pinned by SHA, with the lockfile committed and repository policy set; verify the marketplace-action and same-pipeline-on-a-laptop scenarios
+- [ ] 9.7 Implement the three schedule defenses (commit per run, in-run re-enable of inactivity-disabled workflows, and the off-host check); verify the disabled-workflow, all-disabled, and staleness-visible scenarios
+- [ ] 9.8 Set credential scopes, forbid expiring credentials and the pull-request target trigger, and scan outputs for secrets; verify the fork-pull-request, expiring-token, and secret-scan scenarios
+- [ ] 9.9 Implement concurrency groups, off-the-hour schedules, idempotent re-runs, and changed-file-only deploys; verify the re-run, overlapping-schedule, and unchanged-files scenarios
+- [ ] 9.10 Publish every run's actions to the ledger; verify the run-recorded scenario
+- [ ] 9.11 Implement the automatic redistribution posture and terms capture, with posture shown on every dataset page and download; verify the posture-derived, unclear-terms, derive-posture, posture-shown, terms-page-changes, and publisher-objects scenarios
+- [ ] 9.12 Implement the storage split (normalized plus manifests in git, raw inputs as release assets, durable copies in the archive) and the repository-size and per-file gates; verify the large-raw-input, nothing-depends-on-an-artifact, oversized-file, and repository-budget scenarios
+- [ ] 9.13 Implement view-time staleness (generated-at in every manifest and the ledger, age computed on the device) and per-workflow staleness thresholds; verify the pipeline-dead-for-a-month, computed-age, daily-stall, and weekly-within-threshold scenarios
+- [ ] 9.14 Implement the watchdog handler on the existing Worker with its heartbeat, and the in-run self-heal step; verify the load-bearing, independent, best-effort, and watchdog-is-watched scenarios
+- [ ] 9.15 Pin the runner label, assert the Node floor, and add the floating-label canary; verify the runner-image-changes and node-floor scenarios

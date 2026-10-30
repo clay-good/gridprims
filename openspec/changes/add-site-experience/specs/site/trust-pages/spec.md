@@ -5,11 +5,11 @@ Shows, rather than claims, why a free site deserves trust: who runs it, how each
 ## ADDED Requirements
 
 ### Requirement: Trust page set
-The site SHALL publish these pages, each linked from the footer: About, Methods, Privacy, Accessibility, Corrections, Changelog, License and how to cite, Sources and credits (every upstream publisher with its required credit text), Review status, Limits (`site/limitations`), Terms and disclaimer, and Developers. The footer SHALL also link the sister sites.
+The site SHALL publish these pages, each linked from the footer: About, Methods, Privacy, Accessibility, Corrections, Changelog, License and how to cite, Sources and credits (every upstream publisher with its required credit text), Review status, Limits (`site/limitations`), Terms and disclaimer, Continuity (`trust/data-continuity`), and Developers. The footer SHALL also link the sister sites.
 
 #### Scenario: Footer links
 - **WHEN** any page is rendered
-- **THEN** its footer links to all twelve trust pages and the sister sites
+- **THEN** its footer links to every page in that set and the sister sites
 
 ### Requirement: Terms and disclaimer
 The site SHALL publish a terms and disclaimer page, linked from the footer of every page and from the limits page.
@@ -49,6 +49,10 @@ Each tool SHALL have a methods page generated from its manifest: the method in p
 
 ### Requirement: Corrections policy and public log
 The Corrections page SHALL state how errors are reported, triaged, fixed, and disclosed. Every fix that changes a published number SHALL add a log entry (generated from `docs/corrections.md`) with the date, tier, affected tool or page, old and new value for a sample input, cause, and the problem report id if any, and SHALL appear in the corrections feed.
+
+#### Scenario: Automated refresh changes a number
+- **WHEN** a scheduled refresh changes a published value beyond its dataset's declared threshold
+- **THEN** that run writes a dated corrections entry naming the page, the old and new values, and the dataset version that changed it, with no person involved
 
 #### Scenario: Log entry fields
 - **WHEN** a fix changes a published number

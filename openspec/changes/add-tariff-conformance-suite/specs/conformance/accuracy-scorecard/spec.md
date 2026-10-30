@@ -33,12 +33,16 @@ Each disagreement SHALL be phrased as a disagreement between named sources, SHAL
 - **WHEN** a maintainer reads the filed tariff and finds the database record wrong
 - **THEN** the entry records the finding, the reader, the date, and the date it was reported upstream
 
-### Requirement: Reported upstream before published as an error
-A confirmed error SHALL be reported through the database maintainer's own correction process, with the report date recorded, before the scorecard describes it as an error.
+### Requirement: Published at once, reported upstream when it happens
+A disagreement SHALL publish as soon as it is computed, in the neutral wording this capability requires, and SHALL NOT wait on anyone sending a report. Where an upstream report is made, its date and any reference SHALL be recorded on the entry afterwards.
 
-#### Scenario: Upstream report recorded
-- **WHEN** a confirmed error is published
-- **THEN** its entry shows the date it was reported upstream and the maintainer's reference if one was issued
+#### Scenario: Disagreement published immediately
+- **WHEN** a run computes a disagreement
+- **THEN** it appears in that release with both figures and both sources, and nothing waits on an upstream report
+
+#### Scenario: Upstream report recorded later
+- **WHEN** an upstream report is made
+- **THEN** the entry gains its date and reference without changing the published figures
 
 ### Requirement: Reproducible by anyone
 Each release SHALL publish its method, the database version and its checksum, the ground-truth release, the exact rate list tested, and its results as files, so a third party can rerun it and get the same numbers.

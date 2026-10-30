@@ -61,6 +61,13 @@ Pages SHALL use the URL scheme in design D2, keyed by EIA utility id, EIA plant 
 - **WHEN** EIA-861 renames utility 14328 and its slug changes
 - **THEN** the old URL returns a 301 to the new one, and the sitemap lists only the new one
 
+### Requirement: Redirect rules stay inside the host's cap
+Because the host caps the number of redirect rules, the build SHALL keep the rule count inside a declared budget with headroom, collapse rules to prefix patterns where it can, and fail with the count and the largest groups named when the budget is reached.
+
+#### Scenario: Redirect budget reached
+- **WHEN** accumulated renames would push the rule count past the declared budget
+- **THEN** the build fails, names the count and the largest groups, and the entity ids in the URL scheme mean most renames need no rule at all
+
 #### Scenario: Removed page
 - **WHEN** a plant falls below the content minimum after a data release
 - **THEN** its old URL redirects to its state page with a note in the data library changelog, rather than returning 404

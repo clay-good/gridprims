@@ -33,12 +33,16 @@ Each dataset version's diff SHALL be published at a stable URL, linked from the 
 - **WHEN** a researcher opens a three-year-old version
 - **THEN** its diff against the version before it is still published
 
-### Requirement: Breaking changes are flagged to our own build
-A diff that removes or renames a column, or changes a unit, that any tool or page depends on SHALL fail the build until the dependency is updated, and the ledger SHALL record that the change was breaking for us.
+### Requirement: A breaking upstream change pins that dataset, not the build
+A diff that removes or renames a column, or changes a unit, that any tool or page depends on SHALL pin that dataset to its previous version, publish the break on the ledger and the limits page naming the column and the tools affected, and open an issue. It SHALL NOT fail the build, block other datasets, or stop the deploy.
 
 #### Scenario: Breaking change
 - **WHEN** a renamed column feeds a tool
-- **THEN** the build fails naming the tool and the column, and the ledger row records the break
+- **THEN** that dataset stays on its previous version, the ledger and limits page name the column and the tools affected, an issue is opened, and every other dataset still publishes
+
+#### Scenario: Pin released
+- **WHEN** the dependency is updated to the new column
+- **THEN** the next scheduled run unpins the dataset and publishes the new version
 
 ### Requirement: Machine-readable
 Diffs SHALL be published as JSON alongside the page, under CC BY 4.0, with the two version identifiers and checksums they compare.

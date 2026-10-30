@@ -17,7 +17,7 @@ This is phase 0. Every other change depends on it.
 - **Citations and verification.** Every result cites a standard or dataset by edition and section. Every tool passes worked examples from an independent source.
 - **App shell.** The command bar, the four page archetypes from `DESIGN.md` (road-sign direction, chosen 2026-10-29), light and night themes that follow the device setting, offline install, and performance budgets.
 - **Problem reports.** The family's opt-in report button: the user previews the full payload and sends it; the server stores it and computes nothing.
-- **Data operations.** A daily publisher release watch, per-dataset runbooks, validators that block partial updates, post-deploy smoke tests with rollback, and weekly link checks.
+- **Data operations and automation.** Scheduled CI that checks each publisher on its own cadence and, when it finds a release, fetches, validates, normalizes, snapshots, builds, deploys, deposits, and republishes the ledger in one run, with no approval step. Machine-readable refresh recipes, validators that keep the previous version live and publish their failure, post-deploy smoke tests with rollback, weekly link checks, and three independent defenses against the git host silently disabling a schedule.
 
 ## Capabilities
 
@@ -31,7 +31,8 @@ This is phase 0. Every other change depends on it.
 - `platform/citations-and-verification`: Citations, worked examples, and the honesty rules for claims.
 - `platform/app-shell`: Command bar, page archetypes, themes, offline use, and performance budgets.
 - `platform/problem-reports`: The opt-in, user-previewed problem report, protected without third-party CAPTCHAs.
-- `platform/data-operations`: Release watching, safe refreshes, live-site checks, and link checks, so one maintainer can keep data fresh.
+- `platform/data-operations`: Release watching, safe refreshes, live-site checks, and link checks, all unattended.
+- `platform/automation`: The CI contract: everything recurring runs on schedule with our own scripts, least-privilege non-expiring credentials, defenses against the host disabling schedules, and the pipeline's own behavior published.
 
 ### Modified Capabilities
 

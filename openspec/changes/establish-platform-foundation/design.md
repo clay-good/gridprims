@@ -1,6 +1,6 @@
 ## Context
 
-Greenfield repository. Motivation is in `proposal.md`; research is in `docs/research/01`–`09` (gathered 2026-10-27 to 2026-10-29); the platform and MCP findings are in `docs/research/04`, formats in `07`, licenses in `08`. The visual contract is `DESIGN.md`; product truth is `PRODUCT.md`. Constraints that shape every decision:
+Greenfield repository. Motivation is in `proposal.md`; research is in `docs/research/01`–`17` (gathered 2026-10-27 to 2026-10-30), with the CI and hosting limits behind D12, D14, D15 and D16 in `17`; the platform and MCP findings are in `docs/research/04`, formats in `07`, licenses in `08`. The visual contract is `DESIGN.md`; product truth is `PRODUCT.md`. Constraints that shape every decision:
 
 - **Two surfaces, one core.** A static website for humans and a local-only MCP server (`add-local-mcp-server`) for developers' agents. Both run the same JavaScript modules and must return identical results.
 - **Zero third-party code** (`platform/zero-dependency`). Only the JavaScript language, web platform APIs, and Node.js built-ins. Cloudflare hosts the site; public publishers supply data at build time. Nothing else.
@@ -56,7 +56,7 @@ Parquet is not realistic without a library. We ship:
 - **Chart and query data:** one packed binary file per partition (a short JSON header with column names, types, units, offsets, and row count, followed by little-endian typed-array columns). Browsers and Node read them with `ArrayBuffer` views; no parser beyond the header.
 - **Lookups:** small JSON shards partitioned by state, balancing authority, or year only (privacy spec).
 
-**Versions and the file budget.** Only the current version of each dataset is served as shards. Permanent versions are cut on a fixed schedule (monthly at most, even when data refreshes weekly) and kept as CSV.gz downloads plus the raw publisher inputs, each split under 20 MiB. A CI gate counts deployable files and fails above 80,000, leaving 20% headroom under the 100,000-file paid limit. If archives outgrow the budget, old versions move to Cloudflare R2 behind the same origin; that is a hosting change, not a new dependency.
+**Versions and the file budget.** Only the current version of each dataset is served as shards. Permanent versions are cut on a fixed schedule (monthly at most, even when data refreshes weekly). Normalized CSV.gz downloads are deployed with the site, split under 20 MiB per file; the raw publisher inputs for each version are not deployed at all but attached unsplit to the release and deposited to the archive (D16). A CI gate counts deployable files and fails above 80,000, leaving 20% headroom under the 100,000-file paid limit. If archives outgrow the budget, old versions move to Cloudflare R2 behind the same origin; that is a hosting change, not a new dependency.
 
 **Reproducibility.** Raw publisher files used for each version are archived with their checksums, so a release rebuild uses archived inputs, not live fetches.
 
@@ -91,7 +91,15 @@ The energy unit converter (`calc/energy-units-and-emissions`, conversion part on
 A small fixture subset of every dataset (three states, three balancing authorities, one year) is committed under `verify/fixtures/data/`, so a fresh clone can run every test and every worked example offline. Full data comes from release archives or the data commands. Alternative: no committed data, download on first run. Rejected: breaks offline tests and the fresh-clone promise.
 
 ### D12. Allowed development-time services
-Outside the product, development uses only: the git host for the repository, locally installed browsers for end-to-end tests, Cloudflare for deploys, and public publishers for data. None is called by the website or the MCP server at runtime, and none is a package. Alternative: hosted CI services with marketplace actions. Rejected: each action is third-party code; CI runs our own scripts only.
+Outside the product, development uses only: the git host for the repository, its CI runners, and its actions API; locally installed browsers for end-to-end tests; Cloudflare for hosting, deploys, and the one scheduled watchdog handler (D15); a public research archive for durable deposits; and public publishers for data. None is called by the website or the MCP server at runtime, and none is a package.
+
+CI runs our own Node scripts and nothing else: no marketplace actions, no action that is not GitHub's own, and every workflow step is either a runner-preinstalled tool (`node`, `git`) or a script in this repository, so the same pipeline runs on a laptop. Repository policy enforces local-actions-only and full-length commit SHA pinning, and the workflow lockfile is committed.
+
+| Alternative | Why not |
+|---|---|
+| Marketplace actions for fetch, deploy, and release | Each is third-party code running with our credentials, against the rule the whole project rests on, and each is a supply-chain surface we cannot audit per release. |
+| A hosted CI service other than the git host's | A second account, a second bill, and a second thing to outlive the maintainer. |
+| Shell pipelines using `jq`, `gh`, and `curl` | They work on the runner and not on every contributor's machine; Node is already our one runtime, so the pipeline stays reproducible locally. |
 
 ### D13. Light theme first, following the device
 The theme follows `prefers-color-scheme` and is light when the device states no preference (DESIGN.md, chosen 2026-10-29). Most use is in daylight at desks, on phones, and on printed handouts.
@@ -101,10 +109,39 @@ The theme follows `prefers-color-scheme` and is light when the device states no 
 | Dark by default (the first concept) | Matched a common generated-UI look, prints poorly, and fights daylight use. |
 | Light only | Night use and user preference are real; the token set already defines both. |
 
-### D14. Release watch, not auto-publish
-Publisher changes open a refresh task; a person runs the refresh and validators decide whether it ships (spec `platform/data-operations`). Alternative: fully automatic refresh and deploy. Rejected: federal files change shape without notice (EIA-930 added fuel columns on 2025-01-01), and a silent bad release damages trust more than a late one.
+### D14. Fully automatic refresh, publish, and deploy; validators are the only gate
+Scheduled CI fetches, validates, normalizes, snapshots, builds, deploys, deposits, and republishes the ledger with no human in the path (spec `platform/automation`). Structural validators decide whether a refresh ships: schema, key uniqueness, checksum, and row-count bounds. When they fail, the previous version stays live, the failure is published on the ledger, and an issue is opened automatically; nothing waits for a person either way.
 
-### D15. Repository layout
+Federal files do change shape without notice, which is why the validators exist and why a failure is loud and public rather than a blocked queue. The terms page and the limits page carry the accuracy posture, so an automatically refreshed number that proves wrong is handled by the corrections process, not by a reviewer standing in front of every release.
+
+| Alternative | Why not |
+|---|---|
+| Open a refresh task for a person to run | The original design, and a human gate: with one maintainer it becomes the reason data goes stale, which is the failure this project exists to avoid. |
+| Auto-publish with no validators | A truncated download would silently replace good data; the validators cost nothing and are themselves automatic. |
+| Require review only for "big" changes | Someone has to define big, then be available; both are people problems. The row-count bounds already express it as a rule. |
+
+### D15. The watchdog is the Worker we already run
+The off-host check that re-enables disabled schedules is a scheduled handler on the single Cloudflare Worker this project already deploys for problem reports. It is not a new service, a new account, or a new bill. It holds one credential, scoped to writing this repository's actions API and nothing else, and it does two things on a schedule: re-enable any workflow the host disabled, and start a run if the published freshness has gone stale. It writes a dated heartbeat into the ledger so that it, too, is watched.
+
+This is the one piece of scheduled server compute in the project, and it exists because the host's inactivity rule can disable every schedule at once with no notification. The site itself still has no server compute: no page calls it, and if it stops, the view-time staleness in every page is what tells visitors.
+
+| Alternative | Why not |
+|---|---|
+| A second CI provider as the watchdog | A new account and bill to outlive the maintainer, for a job of two API calls. |
+| Only in-host self-healing | The host can disable the self-healing workflow too, which `docs/research/17` names as the single most likely way this stops silently. |
+| No watchdog, rely on the commit-as-activity defense | That defense is the one thing research could not verify. |
+| A person checking monthly | The human gate this whole design removes. |
+
+### D16. Durable storage is split three ways
+Normalized outputs, checksums, manifests, and the ledger are committed to git, which keeps the repository well under the size GitHub recommends and makes every change reviewable as a diff. Raw publisher inputs for each release go to GitHub Releases (2 GiB per asset, 1,000 assets per release, no total-size limit) because they are large and immutable. Durable copies go to a public research archive by API on every release, because CI artifacts expire at 90 days and caches evict after 7 and neither is storage.
+
+| Alternative | Why not |
+|---|---|
+| Commit raw inputs to git | Blows past the 100 MiB per-file hard block and the 1 GB repository guidance within a year. |
+| Keep raw inputs only as CI artifacts | They are deleted at 90 days; the reproducibility promise would expire with them. |
+| Keep everything only in the archive | A rebuild would depend on one external service being up and unchanged. |
+
+### D17. Repository layout
 One repository with separate top-level folders by role. Alternative: separate repositories for site, MCP, and pipeline. Rejected: the shared core would be copied or published as a package.
 
 
@@ -115,14 +152,15 @@ One repository with separate top-level folders by role. Alternative: separate re
 | `DESIGN.md` | Visual and interaction contract |
 | `core/` | Tool functions and manifests; no DOM, no Node-only APIs |
 | `parsers/` | CSV, XML, XLSX, time zones; shared by web and MCP |
-| `pipeline/` | Dataset fetchers, validators, snapshot and render scripts |
+| `pipeline/` | Dataset fetchers, validators, snapshot and render scripts; the same scripts CI runs on schedule |
+| `.github/workflows/` | Scheduled pipelines, each calling only our own Node scripts |
 | `site/` | Templates, page modules, styles, fonts, service worker |
 | `mcp/` | Local stdio MCP server (`server.mjs`) |
 | `data/` | Built dataset shards and manifests (checked into release archives) |
 | `worker/` | The Cloudflare Worker (static assets and `/api/reports`) |
 | `verify/` | Golden vectors, stored reference outputs, browser driver, egress test, budgets, claims gate |
 | `data/curated/` | Hand-maintained records (glossary, get-your-data guides, large-load terms, regulator links), each with a schema |
-| `docs/` | Research, runbooks, corrections log, review sign-offs, own-implementations list, platform APIs |
+| `docs/` | Research, corrections log, review sign-offs, own-implementations list, platform APIs |
 
 ## Risks / Trade-offs
 

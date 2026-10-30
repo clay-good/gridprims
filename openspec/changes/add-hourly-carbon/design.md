@@ -31,7 +31,7 @@ Alternative: the API's hourly series. Rejected: it lacks consumption-based inten
 ### D5. Refresh
 Alternative: refresh hourly data daily. Rejected: the file budget and monthly version cadence; weekly refresh of the last 60 days is enough for history-based tools.
 
-Current shards refresh weekly for the last 60 days from EIA's bulk files (no API key); a permanent version is cut monthly, per the foundation's version cadence and file budget, with revision history kept in each version's changelog (spec `carbon/hourly-intensity-data`).
+Current shards refresh weekly for the last 60 days from EIA's bulk files (no API key), and a permanent version is cut monthly, both on schedules the pipeline runs unattended (`platform/automation`), with revision history kept in each version's changelog (spec `carbon/hourly-intensity-data`).
 
 ### D6. Hour convention
 Alternative: keep EIA's hour-ending labels and convert in each tool. Rejected: every tool would repeat the conversion and one would get it wrong.

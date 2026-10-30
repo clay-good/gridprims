@@ -56,7 +56,11 @@ The page SHALL carry a curated list of capabilities gridprims does not and will 
 - **THEN** the tool declines per `platform/tool-contract`, explains why in one sentence, and links this page's entry
 
 ### Requirement: Known problems and open questions, generated
-The page SHALL list, from the project's records: every dataset currently past its staleness window with how late it is; every open correction and note of concern; every tool whose reference engine cannot check a charge type; and every capability waiting on a license confirmation.
+The page SHALL list, from the project's records: whether the automation that keeps the site fresh is running or stalled, with the last successful run's date; every dataset currently past its staleness window with how late it is; every open correction and note of concern; every tool whose reference engine cannot check a charge type; and every dataset whose derived posture limits what we publish, with the terms that produced it.
+
+#### Scenario: Automation stalled
+- **WHEN** no scheduled refresh has succeeded for longer than its published interval
+- **THEN** the limits page says the automation is stalled, gives the last successful run's date, and notes that every page's data is as old as that date
 
 #### Scenario: Late dataset listed
 - **WHEN** an emissions dataset is two years past its expected release

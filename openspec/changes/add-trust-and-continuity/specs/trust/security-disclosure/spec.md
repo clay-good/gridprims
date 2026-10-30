@@ -11,12 +11,16 @@ The site SHALL serve `/.well-known/security.txt` over HTTPS as `text/plain; char
 - **WHEN** a researcher fetches `/.well-known/security.txt`
 - **THEN** it returns plain text with a contact address, an expiry under a year away, and a link to the disclosure policy
 
-### Requirement: The expiry cannot go stale
-CI SHALL fail when `Expires` is in the past or within 30 days, because an expired file is treated as invalid by clients.
+### Requirement: The expiry is generated, never maintained
+The `Expires` field SHALL be generated at build time as eleven months after the build date, so it can never lapse while the pipeline runs and no one has to renew it. CI SHALL assert that the generated file's expiry is in the future, as a guard on the generator rather than a reminder to a person.
 
-#### Scenario: Expiry approaching
-- **WHEN** the recorded expiry is 20 days away
-- **THEN** CI fails and names the file and the new date to set
+#### Scenario: Expiry regenerated
+- **WHEN** any build runs
+- **THEN** the published file's expiry is eleven months after that build's date
+
+#### Scenario: Generator broken
+- **WHEN** a change would emit an expiry in the past
+- **THEN** CI fails and names the generator
 
 ### Requirement: Disclosure policy with safe harbor
 A single policy page SHALL state: what is in scope (this site, its static assets, and the problem-report endpoint) and out of scope (third-party services we do not run, and the publishers whose data we copy); that good-faith research following the policy will not be pursued; that testing SHALL NOT use other people's data, degrade service, or attempt denial of service; a target of 5 business days to acknowledge and 90 days to fix or explain; and that it is not legal advice.

@@ -3,12 +3,13 @@
 - [ ] 1.1 Define the ledger row schema and generate rows from the dataset registry and release records; verify the row-fields and posted-versus-inferred scenarios
 - [ ] 1.2 Implement the 30-day grace period and the due-versus-late distinction; verify the within-grace scenario
 - [ ] 1.3 Capture posted release dates each check and record changes with archived copies; verify the promise-removed scenario
-- [ ] 1.4 Implement the notify-first workflow with recorded dates and inline replies; verify the reply-published and no-reply scenarios
+- [ ] 1.4 Implement the standing invitation to reply with inline published replies and no pre-publication step; verify the reply-published and nothing-is-held-back scenarios
 - [ ] 1.5 Publish the on-time counts above the table; verify the mostly-current scenario
 - [ ] 1.6 Handle discontinued and moved datasets; verify the discontinued scenario
 - [ ] 1.7 Include our own datasets on the same terms; verify the our-lateness scenario
 - [ ] 1.8 Implement weekly link-liveness checks over every cited URL; verify the dead-citation scenario
 - [ ] 1.9 Publish the page and the JSON and serve both to the MCP server; verify the machine-readable scenario
+- [ ] 1.10 Publish the automation's own health rows (last successful run per workflow and per dataset, enabled state, disable and re-enable events, last deposit and restore test) with view-time ageing; verify the automation-rows, pipeline-stalled, stale-ledger, and host-disabled scenarios
 
 ## 2. Snapshot diffs (phase 1, from the foundation's release process)
 

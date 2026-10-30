@@ -26,19 +26,19 @@ Every disputable field in a curated record SHALL cite two independent primary so
 - **WHEN** a field cites a single document
 - **THEN** the data check fails and names the field, and the record publishes without that field rather than waiting for a person
 
-### Requirement: Comment window before changing a published number
-A change that alters a number already published SHALL open for public comment for 7 days before it merges, announced in the corrections feed, except that removing or flagging a number found to be wrong MAY ship at once and then follow the corrections process.
+### Requirement: Changes publish at once, and stay open to comment
+A change that alters a number already published SHALL publish as soon as its two-source check passes, with the previous value kept visible per `site/trust-pages`, and SHALL be announced in the corrections feed with a comment thread that stays open for at least 30 days afterwards. Nothing SHALL wait on a comment period, a reply, or a merge decision by a person.
 
 #### Scenario: Correcting upward
-- **WHEN** a contribution would change a published minimum-bill percentage from 80% to 85%
-- **THEN** the proposed change, its sources, and the old value are posted for 7 days before merging
+- **WHEN** a contribution changes a published minimum-bill percentage from 80% to 85% with two archived primary sources
+- **THEN** it publishes on that build, the corrections feed records both values and the sources, and comments stay open afterwards
 
 #### Scenario: Urgent removal
 - **WHEN** a published figure is found to cite the wrong utility
 - **THEN** it is removed or flagged immediately, and the corrections log records the removal the same day
 
 ### Requirement: Conflicts of interest are disclosed
-The contribution template SHALL ask whether the contributor is employed by, paid by, or representing any party the record concerns, and the answer SHALL be recorded with the record. A contribution with an undisclosed conflict found later SHALL be re-reviewed.
+The contribution template SHALL ask whether the contributor is employed by, paid by, or representing any party the record concerns, and the answer SHALL be recorded with the record. A contribution with an undisclosed conflict found later SHALL be re-checked against the two-source rule by the data check, and its record flagged on the page until it passes.
 
 #### Scenario: Utility employee contributes
 - **WHEN** an employee of the utility proposes a correction to its own tariff entry

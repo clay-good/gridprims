@@ -38,7 +38,8 @@ Our own static site generator (foundation design D3) renders entity pages from t
 
 Alternative for D3: client-side rendering of long-tail pages. Rejected: facts must work without JavaScript and be indexable.
 
-### D4. Refresh cadence
+### D4. Refresh cadence, run by the pipeline
+Each cadence below is a schedule in the dataset's refresh recipe that CI executes end to end (`platform/automation`); none requires anyone to start it.
 
 | Dataset | Cadence | Notes |
 |---|---|---|
