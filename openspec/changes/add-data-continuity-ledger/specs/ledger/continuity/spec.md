@@ -16,7 +16,7 @@ Each row SHALL record: dataset id and title, publisher, expected cadence, the vi
 - **THEN** the row reports lateness as inferred from the historical cadence, shows that cadence, and does not cite a posted promise
 
 ### Requirement: The 30-day grace period
-A dataset SHALL NOT be shown as late until 30 days past its posted or inferred due date, and the row SHALL show the due date and the grace period so the reader can see the rule.
+Lateness SHALL follow the single rule in `platform/data-snapshots` rather than a second definition here: a dataset SHALL NOT be shown as late until 30 days past its posted or inferred due date, and the row SHALL show the due date, whether it was posted or inferred, and the grace period so the reader can see the rule.
 
 #### Scenario: Within grace
 - **WHEN** a dataset is 12 days past its posted date

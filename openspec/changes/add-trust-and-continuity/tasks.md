@@ -7,9 +7,9 @@
 
 ## 2. Curated contributions (phase 0, before the first curated dataset)
 
-- [ ] 2.1 Add provenance fields (source URL, publisher, retrieval date, archive link) to every curated schema; verify the secondary-source and missing-archive scenarios
-- [ ] 2.2 Implement the review-route field and the two-source rule; verify a record publishes by either route and not without one
-- [ ] 2.3 Add the 7-day comment window to the change process with the corrections feed announcement; verify the correcting-upward and urgent-removal scenarios
+- [ ] 2.1 Add provenance fields (source URL, publisher, retrieval date, committed capture and its checksum) to every curated schema; verify the secondary-source and stored-capture scenarios
+- [ ] 2.2 Implement the two-source rule as an automatic data check, with the single-source label where a second primary source is recorded unreachable; verify the two-sources, only-one-source, and unreachable-second-source scenarios and that no human review step or review-route field exists
+- [ ] 2.3 Publish changed numbers immediately with the old value kept visible and a comment thread open at least 30 days after; verify the correcting-upward and urgent-removal scenarios
 - [ ] 2.4 Add the conflict-of-interest question to the contribution template; verify it is recorded on the record
 - [ ] 2.5 Implement the bulk-batch label and revert path; verify the 60-guide scenario and that a bulk batch cannot change a published number
 

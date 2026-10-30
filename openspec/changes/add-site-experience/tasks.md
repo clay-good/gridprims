@@ -1,7 +1,7 @@
 ## 1. Shell and URLs (phase 0)
 
 - [ ] 1.1 Implement the top rail, section landing pages, and the menu below 768 px; verify `aria-current` and the keyboard path in the browser driver
-- [ ] 1.2 Implement the design D2 URL scheme and the generated `_redirects` file; verify the renamed-utility and removed-page scenarios and the published-URL check
+- [ ] 1.2 Implement the design D2 URL scheme, the generated `_redirects` file, and the 1,500-rule budget; verify the renamed-utility, redirect-budget, and published-URL checks against synthetic fixtures in phase 0, and the removed-page scenario once content minimums exist in phase 1
 - [ ] 1.3 Implement the 404 page with on-device suggestions; verify the `/utility/oncor/` scenario and that no request carries the path
 
 ## 2. Strings and locales (phase 0)

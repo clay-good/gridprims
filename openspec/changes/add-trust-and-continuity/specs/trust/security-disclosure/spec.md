@@ -5,7 +5,7 @@ Tells a security researcher exactly where to report a problem and what we will d
 ## ADDED Requirements
 
 ### Requirement: security.txt
-The site SHALL serve `/.well-known/security.txt` over HTTPS as `text/plain; charset=utf-8`, containing `Contact`, `Expires` (RFC 3339, less than one year ahead), `Policy`, `Preferred-Languages`, and `Canonical`, per RFC 9116.
+The site SHALL serve `/.well-known/security.txt` over HTTPS as `text/plain; charset=utf-8`, containing `Contact`, `Expires` (RFC 3339, less than one year ahead), `Policy`, `Preferred-Languages`, and `Canonical`, per RFC 9116. The contact address, policy URL, and canonical URL SHALL be generated from one place in the repository's configuration so no page states them separately.
 
 #### Scenario: Fields present
 - **WHEN** a researcher fetches `/.well-known/security.txt`

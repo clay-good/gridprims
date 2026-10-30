@@ -71,4 +71,4 @@ Alternative for D8: let the screening label carry it. Rejected: a label says the
 - **A browser model will be mistaken for a planning study.** Mitigation: the mandatory backtest, the omissions list on every page, the screening label in every copied card, and links to the proper models.
 - **Derived heat rates and substituted fuel prices can invert merit order.** Mitigation: per-unit uncertainty, the share of capacity affected on every result, and the backtest, which exposes exactly this failure.
 - **The backtest may look poor.** Mitigation: that is the honest outcome and the most useful thing we can publish; a poor fit is reported as a limit on what the scenario can tell you.
-- **Scope creep toward a planning model.** Mitigation: the non-goals, D6's refusals, and D7's deferral.
+- **Scope creep toward a planning model.** Mitigation: the non-goals, D6's refusals, and D7's refusal.

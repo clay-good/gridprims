@@ -59,8 +59,12 @@ Every page SHALL be served with a CSP that sets at least `default-src 'self'`, `
 - **THEN** the CSP and security headers match the required policy
 
 ### Requirement: Supply-chain integrity
-Each release SHALL be built from a tagged commit with the supported Node.js version, SHALL publish SHA-256 digests of every deployed file and of the MCP release archive, and SHALL publish a software bill of materials listing zero third-party packages and every self-hosted font with its license (per `platform/zero-dependency`).
+Each release SHALL be built from a tagged commit with the supported Node.js version, SHALL derive every date the build generates from that commit's timestamp so the output is reproducible, SHALL publish SHA-256 digests of every deployed file and of the MCP release archive, and SHALL publish a software bill of materials listing zero third-party packages and every self-hosted font with its license (per `platform/zero-dependency`).
 
 #### Scenario: Reproducible release
 - **WHEN** anyone rebuilds a release tag with a supported Node.js version and the archived raw data inputs for that release
 - **THEN** every deployed file's SHA-256 matches the published digest list
+
+#### Scenario: Build-time dates come from the tag
+- **WHEN** a build writes a date it generated (a generated-at time, a disclosure expiry, a copyright year)
+- **THEN** it derives that date from the tagged commit's own timestamp rather than the wall clock, so two rebuilds of one tag are byte-identical

@@ -1,5 +1,7 @@
 ## Why
 
+**Value up front:** every gridprims tool loads fast, runs on your own device, reads your meter file without uploading it, and shows the publisher, license, and date behind every number. This change builds that floor once, so no tool has to.
+
 gridprims.com promises that anyone can check their meter data, read public grid data, and run grid math in a browser tab, for free, without uploading anything, with the source next to every number. That promise holds only if every tool shares one contract: files stay on the device, data carries its publisher, license, and as-of date, results show their method, and nothing pretends to be a utility study.
 
 Existing tools each break one part of it. REopt (from NLR, formerly NREL) is free and thorough but sends your load file to a server and takes minutes. Paid platforms (EnergyCAP, Energy Toolbase) need an account. Public data lives in dozens of agency portals with different formats, and some of it (the federal HIFLD Open map layers) has already gone offline. This change builds the floor every gridprims tool stands on.

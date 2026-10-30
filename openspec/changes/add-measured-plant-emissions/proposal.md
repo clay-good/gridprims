@@ -41,4 +41,4 @@ Both are rendered by their owning capability from what this change provides; the
 
 - Phase 3, per `plan-launch-and-value-proof`, after the phase 1 carbon tools it checks.
 - Adds the monitored-emissions dataset to the registry, aggregated at build time to monthly per unit and hourly per region, because the raw hourly national files are far too large to ship whole.
-- Needs a free agency key at build time only; the key never reaches the browser or the local agent server.
+- The site build uses a free agency key for incremental refreshes; the key never reaches the browser or the local agent server. The keyless bulk download is the source for `build-data` in `add-local-mcp-server`, so anyone can rebuild the same files without a key, and the two paths are checked against each other.

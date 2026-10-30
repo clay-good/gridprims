@@ -19,8 +19,8 @@ The site SHALL publish a limits page at a stable URL, linked from the footer of 
 The page SHALL ship in phase 0 with the sections whose inputs then exist: the honest summary, the cannot-do list, the validation level and known limitations of every tool published so far, and the unverified-claim register.
 
 #### Scenario: Phase 0 page
-- **WHEN** the limits page ships before any tool
-- **THEN** it carries the summary, the cannot-do list, and the unverified-claim register, and says the per-tool table is empty because no tool has shipped
+- **WHEN** the limits page ships before the reference tool, which is the first tool phase 0 builds
+- **THEN** it carries the summary, the cannot-do list, and the unverified-claim register, and says the per-tool table is empty until the first tool ships; once the reference tool lands, the same build gives it the table's first row
 
 ### Requirement: Sections not yet populated say so
 Sections whose inputs arrive in a later phase SHALL appear as soon as those inputs do, and until then SHALL state that they are not yet populated and name what will populate them: evidence dates from continuous integration results, staleness and known-problem rows from the dataset ledger, and the corrections list from the corrections log.
@@ -67,7 +67,7 @@ The page SHALL list, from the project's records: whether the automation that kee
 - **THEN** the page lists it with its expected and actual dates and the pages that use it
 
 ### Requirement: The unverified-claim register
-The page SHALL list every research claim a shipped page depends on that is still unverified, from a curated register in which each entry names the claim, the research brief and section, the pages or tools that rely on it, and what would confirm it. A shipped page citing an unverified claim with no register entry SHALL fail the build.
+The page SHALL list every research claim a shipped page depends on that is still unverified, from a curated machine-readable register (the research briefs stay prose; the register is the structured artifact) in which each entry names a claim id, the research brief and section, the pages or tools that rely on it, and what would confirm it. Each page or manifest SHALL declare the claim ids it relies on, and the build SHALL fail when a declared id has no register entry.
 
 #### Scenario: Unverified dependency listed
 - **WHEN** a shipped page relies on a research item still tagged unverified
@@ -106,7 +106,7 @@ The claims lint SHALL exempt, by name, the generated vocabulary that states the 
 - **THEN** it passes, because that phrase is on the exempt list as a statement that review has not happened
 
 ### Requirement: Machine-readable
-The page's contents SHALL also be published as a JSON file at a stable URL, with the same validation levels, limitations, cannot-do entries, and known problems, so agents and other sites can read our limits rather than infer them. The local agent server SHALL expose the same record.
+The page's contents SHALL also be published as a JSON file at a stable URL, with the same validation levels, limitations, cannot-do entries, and known problems, so agents and other sites can read our limits rather than infer them. The local agent server SHALL expose the same record as an MCP resource, so an agent can read our limits without one of the six tools being spent on it.
 
 #### Scenario: Agent reads the limits
 - **WHEN** an agent asks what gridprims cannot do

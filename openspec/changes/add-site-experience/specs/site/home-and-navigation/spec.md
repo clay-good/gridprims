@@ -16,7 +16,7 @@ The home page SHALL show, in its first viewport at 360 × 640 px and wider, the 
 - **THEN** every cell is a working link, and the command bar is replaced by a link to the tool catalog
 
 ### Requirement: Simplicity budget
-The visitor-facing surface SHALL stay inside fixed limits, checked in the build: at most 6 sections in the top rail; at most 5 tool cells per home-page lane; at most 5 inputs visible on a tool page's first screen, with any others behind one "More options" control; at most one chart on a tool page's first screen; and no modal, overlay, tour, banner, or interstitial on arrival, including cookie and consent notices, which are unnecessary because nothing is stored or tracked.
+The visitor-facing surface SHALL stay inside fixed limits, checked in the build: at most 6 sections in the top rail; at most 5 tool cells per home-page lane; at most 5 inputs and at most one chart visible on a tool page's first screen; and no modal, overlay, tour, banner, or interstitial on arrival, including cookie and consent notices, which are unnecessary because nothing is stored or tracked.
 
 #### Scenario: Budget exceeded
 - **WHEN** a change would put a seventh section in the top rail or a sixth cell in a lane
@@ -25,6 +25,13 @@ The visitor-facing surface SHALL stay inside fixed limits, checked in the build:
 #### Scenario: Nothing interrupts arrival
 - **WHEN** a first-time visitor opens any page
 - **THEN** the page's content is the first thing they see, with no overlay, tour, banner, or consent prompt
+
+### Requirement: Each tool declares its first-screen inputs
+Every tool manifest SHALL name the inputs that appear on its first screen, and the build SHALL check that set against the limit of 5 however many inputs the tool has in total. Every other input SHALL sit behind one "More options" control.
+
+#### Scenario: Input-heavy tool
+- **WHEN** the line-rating tool declares 13 inputs and names 5 of them as its first-screen set
+- **THEN** the build passes and renders the other 8 behind "More options"; had it named 6, the build would fail
 
 ### Requirement: Growth replaces, it does not accumulate
 A new tool SHALL reach a home-page lane only by replacing a cell already there, decided by the value measures in `plan-launch-and-value-proof`, and the catalog SHALL remain the one place where every tool is listed. The home page SHALL NOT grow a new row to fit a new tool.
@@ -62,10 +69,10 @@ Pages SHALL use the URL scheme in design D2, keyed by EIA utility id, EIA plant 
 - **THEN** the old URL returns a 301 to the new one, and the sitemap lists only the new one
 
 ### Requirement: Redirect rules stay inside the host's cap
-Because the host caps the number of redirect rules, the build SHALL keep the rule count inside a declared budget with headroom, collapse rules to prefix patterns where it can, and fail with the count and the largest groups named when the budget is reached.
+Because the host caps the number of redirect rules, the build SHALL keep the rule count at or below 1,500, which leaves headroom under the host's static-rule cap, collapse rules to prefix patterns where it can, and fail with the count and the largest groups named when the budget is reached.
 
 #### Scenario: Redirect budget reached
-- **WHEN** accumulated renames would push the rule count past the declared budget
+- **WHEN** accumulated renames would push the rule count past 1,500
 - **THEN** the build fails, names the count and the largest groups, and the entity ids in the URL scheme mean most renames need no rule at all
 
 #### Scenario: Removed page

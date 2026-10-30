@@ -52,5 +52,5 @@
 
 - [ ] 8.0 Run every worked example and fixture through the local MCP server (`gridprims_analyze_file`, `gridprims_run`); verify identical structured results to the website
 
-- [ ] 8.1 Practitioner review by one energy manager and one co-op engineer, or "review pending" labels; verify the review record in `docs/review-signoffs.md`
+- [ ] 8.1 Publish "review pending" labels for every tool awaiting practitioner review, and record a sign-off in `docs/review-signoffs.md` if one arrives; verify the labels are generated from that file and that nothing waits on a reviewer
 - [ ] 8.2 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green

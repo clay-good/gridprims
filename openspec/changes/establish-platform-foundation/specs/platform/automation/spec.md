@@ -5,7 +5,7 @@ Runs everything recurring on the git host's CI with nobody in the path: fetching
 ## ADDED Requirements
 
 ### Requirement: The whole pipeline is scheduled and unattended
-Fetching, validating, normalizing, snapshotting, building, deploying, depositing to the archive, and regenerating the ledger SHALL run as scheduled CI workflows that publish without human approval. No workflow SHALL wait for a review, an issue to be closed, a label, or any manual trigger as a condition of publishing.
+Fetching, validating, normalizing, snapshotting, building, deploying, and regenerating the published health record SHALL run as scheduled CI workflows that publish without human approval. Archive deposits join the same runs when `trust/data-continuity` ships in phase 1, and that capability owns them. No workflow SHALL wait for a review, an issue to be closed, a label, or any manual trigger as a condition of publishing.
 
 #### Scenario: New publisher release
 - **WHEN** a dataset's scheduled check finds a new release upstream
@@ -35,17 +35,17 @@ Workflows SHALL name a pinned runner image label rather than a floating one, and
 
 #### Scenario: Node floor asserted
 - **WHEN** a job starts
-- **THEN** it checks the runtime version against the declared floor before doing any work
+- **THEN** it checks the runtime version against the Node floor in foundation design D2 before doing any work, and fails naming both versions if the runner is below it
 
 ### Requirement: Repository size stays inside the host's guidance
-CI SHALL assert, on every run that commits, that no committed file exceeds the host's per-file warning size and that the repository's packed size stays under a declared budget with headroom beneath the host's guidance. Exceeding the budget SHALL fail that run with the largest contributors named, rather than being discovered years later as a rejected push.
+CI SHALL assert, on every run that commits, that no committed file exceeds 25 MiB (half the host's 50 MiB warning and a quarter of its 100 MiB hard block) and that the repository's packed size stays under 1 GB, which is the host's own "ideally under" figure and leaves wide headroom beneath the 5 GB it strongly recommends. Exceeding the budget SHALL fail that run with the largest contributors named, rather than being discovered years later as a rejected push.
 
 #### Scenario: Oversized file
-- **WHEN** a normalized output would be committed above the per-file warning size
+- **WHEN** a normalized output would be committed above 25 MiB
 - **THEN** the run fails, names the file and its size, and directs it to the release assets instead
 
 #### Scenario: Repository approaching the budget
-- **WHEN** packed size passes the declared budget
+- **WHEN** packed size passes 1 GB
 - **THEN** the run fails and lists the largest paths by size
 
 ### Requirement: Validators are the only gate, and failure is public
@@ -99,6 +99,10 @@ Every shipped data manifest and the ledger JSON SHALL carry the time it was gene
 - **WHEN** the pipeline has not run for 30 days and no new build has been deployed
 - **THEN** every page still shows its data as 30 days old, computed on the device, and the limits page says the automation appears stalled
 
+#### Scenario: JavaScript disabled
+- **WHEN** a prerendered entity page is read with JavaScript disabled
+- **THEN** it shows the data's generated-at date as a plain date, and the computed age is added by script when it runs, so a no-script reader still sees when the data is from
+
 #### Scenario: Freshness is a computed age, not a stored label
 - **WHEN** a page states how current its data is
 - **THEN** it states an age derived from the generated-at time and the current clock, never a phrase baked in at build time
@@ -138,7 +142,7 @@ Because the git host disables scheduled workflows in a public repository after a
 - **THEN** its heartbeat in the ledger goes stale, the in-host self-heal step reports it, and visitors see the staleness through the view-time age, so no single watchdog is the only thing standing
 
 #### Scenario: Staleness is visible to visitors
-- **WHEN** no successful refresh has run for longer than the published interval
+- **WHEN** no successful refresh has run for longer than that workflow's declared staleness threshold
 - **THEN** the ledger and the limits page show the pipeline as stalled with the last successful run's date, without anyone being told privately first
 
 ### Requirement: Schedules are spread and runs do not overlap
@@ -164,8 +168,23 @@ Workflows SHALL stay inside the host's and the hosting provider's documented lim
 - **THEN** it is split into per-partition jobs rather than being allowed to time out
 
 ### Requirement: Everything the pipeline does is published
-Each run SHALL record, in the ledger, what it checked, what it changed, what it published, what it deposited, what failed, and how long it took, so the pipeline's own behavior is public data rather than private logs.
+Each run SHALL record what it checked, what it changed, what it published, what it deposited, what failed, and how long it took, so the pipeline's own behavior is public data rather than private logs.
+
+#### Scenario: Behaviour is public, not in logs
+- **WHEN** someone wants to know what the pipeline did last week
+- **THEN** they can read it from a published file without access to CI logs
+
+### Requirement: The pipeline health record
+That record SHALL be a JSON file published at `/health/pipeline.json` carrying a generated-at time, a row per scheduled workflow (its interval, staleness threshold, last successful run, and enabled state), a row per dataset (last check, last refresh, current posture, last failure), and the last archive deposit and restore test. `ledger/continuity` later absorbs this record and SHALL keep the same fields and URL rather than replacing it.
+
+#### Scenario: Health record published
+- **WHEN** any scheduled run completes
+- **THEN** `/health/pipeline.json` is republished with its generated-at time and a row per workflow and per dataset
 
 #### Scenario: Run recorded
 - **WHEN** a scheduled run completes
-- **THEN** the ledger gains an entry naming the datasets checked, those refreshed, the versions cut, the deposits made, any failures, and the run's duration
+- **THEN** the health record gains an entry naming the datasets checked, those refreshed, the versions cut, any deposits made, any failures, and the run's duration
+
+#### Scenario: One record, two phases
+- **WHEN** the ledger ships later
+- **THEN** it reads and extends the same health record at the same URL, and no page has to change which file it reads

@@ -81,8 +81,8 @@ The tool SHALL require the line section's annual peak load as a user input from 
 - **THEN** no load-ratio result is produced, and the tool links to `interconnect/feeder-data-paths`
 
 ### Requirement: Verification
-The screen arithmetic SHALL be checked against at least one worked screen example published by a utility, a state commission, or a government laboratory report (cited, with the vintage read), and against hand-computed fixtures for at least 6 cases spanning over-threshold, under-threshold, flips-inside-the-band, settled-both-ways, utility-provided minimum load, and a codified state fallback, matching exactly to 0.1 percentage point.
+The screen arithmetic SHALL be checked against hand-computed fixtures, which are the standing gate, and, where a freely published worked screen example from a utility, a state commission, or a government laboratory report is located and its vintage read, against that example too for at least 6 cases spanning over-threshold, under-threshold, flips-inside-the-band, settled-both-ways, utility-provided minimum load, and a codified state fallback, matching exactly to 0.1 percentage point.
 
 #### Scenario: Fixture set
 - **WHEN** CI runs the six fixtures
-- **THEN** every ratio and every met-or-not-met result matches the stored hand computation, and the published example reproduces within its printed precision
+- **THEN** every ratio and every met-or-not-met result matches the stored hand computation, and any registered published example reproduces within its printed precision

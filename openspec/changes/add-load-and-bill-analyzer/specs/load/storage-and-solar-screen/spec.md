@@ -12,7 +12,7 @@ For a battery of power P (kW) and energy E (kWh), the screen SHALL find, per bil
 - **THEN** the threshold falls by 26.7 kW ± 0.1 kW (160 kWh delivered ÷ 6 h, with round-trip losses taken on charging), and the result explains that energy, not power, limited savings
 
 ### Requirement: Disclosed assumptions
-The screen SHALL show and let the user change: round-trip efficiency (default 85% AC-to-AC, cited to NLR ATB 2025, losses taken on charging), usable state-of-charge window (default 10–90%), perfect foresight (always on, labeled as an upper bound), and degradation (reported as equivalent full cycles per year; no capacity fade in v1). Excluded effects (auxiliary load, forecast error, export rules, interconnection limits, incentives) SHALL be listed on the result.
+The screen SHALL show and let the user change: round-trip efficiency (default 85% AC-to-AC, taken from the registered NLR Annual Technology Baseline dataset that `calc/storage-and-cost` owns, with losses taken on charging), usable state-of-charge window (default 10–90%), perfect foresight (always on, labeled as an upper bound), and degradation (reported as equivalent full cycles per year; no capacity fade in v1).
 
 #### Scenario: Upper-bound label
 - **WHEN** savings are displayed
@@ -53,3 +53,11 @@ Perfect-foresight threshold dispatch is optimal for a single flat monthly demand
 #### Scenario: Bound check
 - **WHEN** CI compares the screen with the stored demand-only REopt results
 - **THEN** every case's screen savings are at least 98% of REopt's
+
+### Requirement: Excluded effects are listed on the result
+The result SHALL list the effects the screen does not model: auxiliary load, forecast error, export rules, interconnection limits, and incentives.
+
+#### Scenario: Exclusions travel with the answer
+- **WHEN** a screen result is shown, copied, or exported
+- **THEN** the excluded-effects list accompanies it
+

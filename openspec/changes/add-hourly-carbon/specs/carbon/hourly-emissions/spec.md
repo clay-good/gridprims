@@ -41,7 +41,7 @@ The tool SHALL attribute only the difference between the hourly result and the f
 - **THEN** the first gap is labeled "timing" and the second "region, basis, and year"
 
 ### Requirement: Regions without hourly data
-EIA-930 covers the lower 48 states only. For Alaska, Hawaii, and any balancing authority with no hourly data for the period, the tool SHALL say hourly data is not available and SHALL show the eGRID annual result only.
+EIA-930's published regions cover the lower 48 states; the exclusion of Alaska and Hawaii is our inference from the published region list and is carried in the limits page's unverified-claim register until EIA's own coverage statement is cited. For Alaska, Hawaii, and any balancing authority with no hourly data for the period, the tool SHALL say hourly data is not available and SHALL show the eGRID annual result only.
 
 #### Scenario: Hawaii user
 - **WHEN** a user's utility is in Hawaii

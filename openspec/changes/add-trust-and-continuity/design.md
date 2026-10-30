@@ -11,14 +11,14 @@ Practices and sources are in `docs/research/13` (verified 2026-10-29): RFC 9116 
 ## Decisions
 
 ### D1. Two required fields, and an expiry that cannot rot
-`security.txt` carries `Contact`, `Expires` (under one year), `Policy`, `Preferred-Languages`, and `Canonical`, and CI fails when the expiry is within 30 days, so the file cannot quietly become invalid.
+`security.txt` carries `Contact`, `Expires`, `Policy`, `Preferred-Languages`, and `Canonical`. The expiry is generated as eleven months after the tagged commit's date, so it cannot lapse while the pipeline runs, and CI asserts only that the generated value is in the future, as a guard on the generator rather than a reminder to a person.
 
 | Alternative | Why not |
 |---|---|
 | No `security.txt` | Researchers then guess where to write, or post publicly first. |
 | Add `Encryption` with a PGP key | A key one maintainer must hold, rotate, and actually read; the research found it is commonly stale and unused. |
 
-### D2. Public archive mirror, not our own backup
+### D2. Zenodo as the primary archive, not our own backup
 Each permanent dataset version is deposited to a public research archive that mints a persistent identifier: one identifier for the series and one per version, with the version identifier used in citations. A second, independent deposit is made annually, and the source is archived to a code archive.
 
 | Alternative | Why not |

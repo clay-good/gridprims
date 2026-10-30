@@ -5,18 +5,22 @@ Keeps hand-maintained facts (tariff terms, data-download guides, glossary entrie
 ## ADDED Requirements
 
 ### Requirement: No fact without provenance
-Every field in a curated record SHALL carry a primary source: a URL, the publisher, the retrieval date, and a link to an archived copy of that page. A field whose source is a news article, a vendor page, a compilation we may not reuse, or an unsourced claim SHALL NOT be published; it SHALL read "Not public" or be omitted.
+Every field in a curated record SHALL carry a primary source: a URL, the publisher, the retrieval date, and our own stored capture of that page (its text or PDF, committed with its checksum), so the citation survives the source moving. A field whose source is a news article, a vendor page, a compilation we may not reuse, or an unsourced claim SHALL NOT be published; it SHALL read "Not public" or be omitted.
+
+#### Scenario: No external archiving service needed
+- **WHEN** a citation is recorded
+- **THEN** the stored capture in the repository satisfies it; a public web-archive URL may be recorded in addition where one exists but is never required, because no external archiving service is in the allowed-services list
 
 #### Scenario: Secondary source rejected
 - **WHEN** a contribution cites a trade-press article for a tariff's minimum bill percentage
 - **THEN** the data check fails and asks for the order or tariff sheet, with its archive link
 
-#### Scenario: Archive link missing
-- **WHEN** a field cites a regulator page with no archived copy
+#### Scenario: Stored capture missing
+- **WHEN** a field cites a regulator page with no stored capture committed
 - **THEN** the check fails and names the field, because regulator URLs move
 
 ### Requirement: Two independent primary sources, checked automatically
-Every disputable field in a curated record SHALL cite two independent primary sources, each with an archived copy the build fetched and stored. The check is automatic: a field with fewer than two archived primary citations fails the data check. No human review step, named reviewer, or sign-off SHALL gate publication.
+Every disputable field in a curated record SHALL cite two independent primary sources, each with a stored capture committed alongside it. The check is automatic: a field with fewer than two archived primary citations fails the data check. No human review step, named reviewer, or sign-off SHALL gate publication.
 
 #### Scenario: Two sources present
 - **WHEN** a tariff's threshold cites both the commission's order and the utility's filed tariff sheet, each archived

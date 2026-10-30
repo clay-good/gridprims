@@ -19,9 +19,9 @@ Licenses, release dates, and the ship/avoid table are in `docs/research/01` (ver
 |---|---|---|---|
 | EIA-860, 860M, 861, 923 | EIA bulk files, cross-checked with PUDL tables | EIA utility id, plant code, generator id | Public domain (EIA asks for a dated credit) |
 | FERC Form 714 annual peaks | PUDL release (v2026.10.0 covers 2006–2025) with its respondent-to-EIA crosswalk | EIA utility id | CC BY 4.0, credit Catalyst Cooperative |
-| eGRID ZIP-to-subregion | EPA Power Profiler table published with each eGRID edition | ZIP, subregion | Public domain |
+| eGRID ZIP-to-subregion | EPA Power Profiler table published with each eGRID edition | ZIP, subregion | EPA's captured terms; posture derived, not assumed |
 | EIA-930 | Hourly snapshot owned by `add-hourly-carbon` (EIA bulk files, no key), rolled up daily and monthly here | BA code | Public domain |
-| eGRID | EPA download page | plant code, subregion | Public domain |
+| eGRID | EPA download page | plant code, subregion | EPA's captured terms; posture derived, not assumed |
 | URDB | OpenEI bulk gzip JSON | URDB label | CC0 |
 | LBNL Queued Up | LBNL data file | LBNL project id | CC BY 4.0, credit LBNL and GridTracker |
 | ZCTA-to-county | Census 2020 `tab20_zcta520_county20_natl.txt` (pipe-delimited, land-area overlap) | ZCTA, county FIPS | Public domain |
@@ -34,7 +34,7 @@ Alternative: PUDL as the only source. Rejected for v1 because PUDL releases lag 
 Plant pages show county and state only. Alternative: plant coordinates on a self-hosted map. Rejected for v1: needs map tiles we would have to build and host, and adds CEII review effort for no answer a county does not give. EIA publishes plant coordinates, so this is not a legal requirement; it keeps v1 free of basemaps and third-party map tiles, avoids implying precision we do not render, and keeps the CEII review simple. Revisit for phase 2 siting tools.
 
 ### D3. Page generation and budgets
-Our own static site generator (foundation design D3) renders entity pages from the normalized shards at build. Each page has at most one chart island; facts and tables are static HTML. Expected counts: about 3,000 utility pages (fewer after the content minimum), roughly 12,000–14,000 plant pages, about 66 balancing authority pages, 51 state pages, 27 eGRID subregion pages. Total stays under the 100,000-file paid-plan limit with room for growth.
+Our own static site generator (foundation design D3) renders entity pages from the normalized shards at build. Each page has at most one chart island; facts and tables are static HTML. Expected counts: about 3,000 utility pages (fewer after the content minimum), roughly 12,000–14,000 plant pages, about 66 balancing authority pages, 51 state pages, and one page per eGRID subregion as the snapshot lists them (26 in eGRID2023). Total stays under the 100,000-file paid-plan limit with room for growth.
 
 Alternative for D3: client-side rendering of long-tail pages. Rejected: facts must work without JavaScript and be indexable.
 

@@ -25,12 +25,26 @@ Entries SHALL be built from regulator orders, tariff sheets, and statutes. Compi
 - **WHEN** a contributor adds a term citing only a news article
 - **THEN** the data check fails and asks for the order or tariff sheet
 
+### Requirement: The curated terms dataset is registered
+The curated large-load tariff terms SHALL be a registered dataset with gridprims as publisher, CC BY 4.0 as its license, each row crediting its own primary sources, the last-checked date as the as-of date, and downloadable rows, so anyone can audit or reuse the comparison.
+
+#### Scenario: Terms downloadable
+- **WHEN** a researcher opens the terms comparison
+- **THEN** the rows download with each field's citations, archived copies, and the last-checked date
+
 ### Requirement: Verification is automatic and public
 Every non-empty field SHALL carry two independent archived primary citations per `trust/curated-contributions`, and the build SHALL check that automatically. Because the citations and the archived documents are published with the entry, any reader can check it; no second-person review record SHALL gate publication.
 
 #### Scenario: Field with one citation
-- **WHEN** a field cites only one document
+- **WHEN** a field cites only one document and no unreachable second source is recorded
 - **THEN** the check fails for that field, the entry publishes without it marked "Not public", and nothing waits on a reviewer
+
+### Requirement: One archived source where the second is unreachable
+Where a second primary source is demonstrably unreachable, the field SHALL publish on one archived primary citation, labeled "single source", with the unreachable document, the attempt date, and the response recorded.
+
+#### Scenario: Second source unreachable
+- **WHEN** AEP Ohio's tiered minimum is in the utility's own filed tariff sheet but the commission docket does not serve the order
+- **THEN** the field publishes from the tariff sheet, labeled "single source" with the blocked docket recorded, so the take-or-pay fixtures that use it stay publishable
 
 #### Scenario: Reader can check it
 - **WHEN** a visitor opens a tariff entry

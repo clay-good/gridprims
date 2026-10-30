@@ -1,6 +1,6 @@
 ## Why
 
-**Value up front:** anyone who wants to use the bill and load tools can learn, in plain steps for their own utility, how to download their meter data on a phone or computer. If their utility offers no download, they get a short request to send it, or a way to start from bill totals instead. Every term of art on the site is one tap from a plain definition, and ten short explainers answer the questions people actually ask about bills, rates, and the grid.
+**Value up front:** anyone who wants to use the bill and load tools can learn, in plain steps for their own utility, how to download their meter data on a phone or computer. If their utility offers no download, they get a short request to send it, or a way to start from bill totals instead. Every term of art on the site is one tap from a plain definition, and eleven short explainers answer the questions people actually ask about bills, rates, and the grid.
 
 Why (`docs/research/09`):
 - **Getting the file is the hardest step.** Of the 25 largest US utilities, about 8 have a verified self-serve interval download; the rest have a download that is non-standard or unverified, show none for homes (Duke, PacifiCorp, and Alabama Power among them), or could not be checked. No utility-neutral, current guide exists.

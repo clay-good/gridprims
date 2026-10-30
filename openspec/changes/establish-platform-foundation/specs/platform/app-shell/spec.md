@@ -31,7 +31,7 @@ Calculator and workbench inputs SHALL recompute results on change, with no submi
 
 #### Scenario: Slider drag
 - **WHEN** a user drags the battery power slider on a one-year 15-minute file
-- **THEN** the threshold line and savings update at least 10 times per second on the reference device
+- **THEN** the threshold line and savings update at least 10 times per second on the reference profile
 
 ### Requirement: Themes
 The site SHALL offer the light and night (dark) themes defined in DESIGN.md, SHALL follow the operating system's `prefers-color-scheme` setting, SHALL use light when the system states no preference, and SHALL apply a saved user choice before first paint so no frame flashes the wrong theme.

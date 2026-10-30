@@ -5,7 +5,7 @@
 Why now and why us (`docs/research/01`, `02`):
 - Public grid data is fragile. HIFLD Open went offline in September 2025. EIA lost about 30% of its staff (353 to 246, per `docs/research/01`), and eGRID2024 is about nine months late. A versioned, checksummed copy with provenance is a public good in itself.
 - The data is free but scattered across EIA forms 860, 861, 923, and 930, EPA eGRID, LBNL's queue file, and OpenEI's rate database, each with its own ids and formats. PUDL cleans much of it for analysts; nobody turns it into pages a city staffer, reporter, or ratepayer can read.
-- Every core source can legally be redistributed: EIA and EPA are public domain, URDB is CC0, PUDL and LBNL Queued Up are CC BY 4.0.
+- Every core source's redistribution posture is derived from the publisher's own captured terms, never assumed: EIA's works are federal public domain, URDB is CC0, PUDL and LBNL Queued Up are CC BY 4.0, and EPA's terms are captured verbatim because EPA's own disclaimer limits use rather than dedicating the content (`emissions/measured-plant-emissions`).
 
 These pages are also the broad door to the site: they answer common searches and lead specialists to the load and bill tools.
 

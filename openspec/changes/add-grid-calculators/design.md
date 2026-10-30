@@ -13,7 +13,7 @@ The conversion part of `calc/energy-units-and-emissions` is built in phase 0 as 
 ## Decisions
 
 ### D1. Implement the heat balance from the published method, verify against stored outputs
-We implement the steady-state heat balance from our own reading of the standard (purchased copy kept by the maintainer, not distributed) and verify against 50 stored cases run once in `linerate` and `pypacity`. Alternative: port one library. Rejected: their licenses would need tracking, and two independent references catch more errors than one port.
+We derive the steady-state heat balance from the two open implementations (`linerate` and `pypacity`) and the Order 881 rule text, and verify against 50 stored cases run once in each, so no purchase gates the build and every term a reader checks is checkable from a free source. We buy nothing and quote no standard text. Alternative: implement from a purchased copy of IEEE 738. Rejected: `openspec/config.yaml` forbids buying prose we may not quote, and a method a reader cannot check against any free source fails `platform/citations-and-verification`.
 
 ### D2. Conductor starter library: names and diameters, resistance by the user
 The starter library ships conductor names, stranding, and diameters from RUS Bulletin 1724E-200 (public domain), each entry cited. AC resistance at two temperatures is entered by the user from their manufacturer's data sheet, with a link explaining where it is printed.

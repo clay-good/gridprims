@@ -51,7 +51,7 @@ The calculation SHALL reproduce at least two worked existing-load examples from 
 - **THEN** the headroom in amps matches within 0.1 A
 
 ### Requirement: Code citation without NFPA text
-The report SHALL cite the NEC edition and section the user selects, with no default (the section is 220.87 in the 2023 NEC and 120.87 in the 2026 NEC), paraphrase the method, and state that the authority having jurisdiction decides which edition applies and whether the method may be used. It SHALL NOT reproduce NFPA text.
+The report SHALL cite the NEC edition and section the user selects, with no default (the section is 220.87 in the 2023 NEC; the 2026 edition renumbers it, reported as 120.87 from a secondary source and carried in the limits page's unverified-claim register until the adopted code is read through NFPA's free read-only access), paraphrase the method, and state that the authority having jurisdiction decides which edition applies and whether the method may be used. It SHALL NOT reproduce NFPA text.
 
 #### Scenario: Edition shown
 - **WHEN** a report is generated

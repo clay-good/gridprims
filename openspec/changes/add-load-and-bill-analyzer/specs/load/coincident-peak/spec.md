@@ -31,11 +31,15 @@ Each program definition SHALL carry its method (number of coincident peaks, whic
 - **THEN** the PJM hour starts at 21:00Z and the NYISO hour starts at 22:00Z, and a fixture pins each conversion
 
 ### Requirement: Published peak intervals only
-System peak intervals SHALL come from the grid operator's published values, with source and as-of date. The tool SHALL NOT forecast future peak days in v1.
+System peak intervals SHALL come from the grid operator's published values, with source and as-of date. The tool SHALL NOT forecast future peak days in v1. Where the operator publishes a peak day but no interval time, the year SHALL be stored and shown as date-only with a flag, and interval-level results for it SHALL be withheld rather than estimated.
 
 #### Scenario: Peaks not yet published
 - **WHEN** the data covers a summer whose 4CP intervals ERCOT has not yet published
 - **THEN** the tool says the intervals are not yet published and does not estimate them
+
+#### Scenario: Date-only year
+- **WHEN** a user analyses 2021, whose ERCOT 4CP days are published but whose interval times are no longer served
+- **THEN** the four days are shown flagged "date only, interval time not published", no 15-minute result is computed for them, and the flag is repeated on any export
 
 ### Requirement: Peak intervals ship only where licensed
 Where the operator's terms allow redistribution (ERCOT, per `docs/research/01` and `06`), peak intervals SHALL ship in our snapshot, registered with ERCOT as publisher, its terms retained (not relicensed), and ERCOT's posting date as the as-of date. Where terms reserve rights or forbid redistribution (PJM, NYISO, ISO-NE), the tool SHALL link to the operator's list and let the user enter dates and hours, until a legal review approves shipping a cited factual excerpt.
@@ -53,7 +57,7 @@ For each program the tool SHALL show the user's load in each system peak interva
 
 #### Scenario: ERCOT eligibility note
 - **WHEN** ERCOT 4CP is shown
-- **THEN** a note says 4CP transmission charges apply to customers billed on 4CP demand under their wires utility's tariff (typically interval-metered loads above 700 kW) and links the tariff
+- **THEN** a note says 4CP transmission charges apply to customers billed on 4CP demand under their wires utility's tariff, which sets the applicability threshold, and links that tariff sheet
 
 #### Scenario: PJM capacity cost
 - **WHEN** a peak load contribution is 1,000 kW, the scaling factor 1.05, the price $329.17/MW-day, and the delivery year 365 days

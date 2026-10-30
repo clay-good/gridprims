@@ -44,5 +44,5 @@ Alternative: show measured figures without the coverage share. Rejected: a parti
 ## Risks / Trade-offs
 
 - **The cross-check may embarrass our own primary dataset.** Mitigation: that is the point; publishing the error is more trustworthy than a caveat sentence, and the carbon results link to it.
-- **Agency terms are not stated as a license.** Mitigation: registry records the federal-works basis and the suggested citation, and the open item stays until confirmed.
+- **Agency terms are not stated as a license.** Mitigation: registry records EPA's stated terms verbatim and the suggested citation, the posture is derived from that captured text rather than assumed, and the open item stays until confirmed.
 - **Build-time key management.** Mitigation: the key lives only in the build environment, is never committed, and the no-network tests prove neither surface uses it.

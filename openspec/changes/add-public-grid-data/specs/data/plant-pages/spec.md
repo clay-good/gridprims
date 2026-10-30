@@ -44,6 +44,13 @@ Where eGRID covers the plant, the page SHALL show annual CO₂ emissions in metr
 - **WHEN** the newest eGRID edition is older than the newest EIA-923 year
 - **THEN** the emissions section names both years so the mismatch is visible
 
+### Requirement: Verification against published aggregates
+Capacity factor, mid-year proration, and the short-ton and pound-to-metric-ton conversions SHALL each be checked in CI against hand-computed fixtures, and the generation and capacity totals for a sampled set of at least 20 plants SHALL be checked against EIA's own published plant-level tables for the same snapshot, matching within 0.1%. A mismatch SHALL fail the build with the plant code and both figures named.
+
+#### Scenario: Sampled plant disagrees
+- **WHEN** a sampled plant's annual net generation differs from EIA's published table by more than 0.1%
+- **THEN** CI fails, naming the plant code, our figure, EIA's figure, and the snapshot version
+
 ### Requirement: Content minimum
 A plant page SHALL be generated only for plants with at least one operating or planned generator and at least four sourced facts.
 

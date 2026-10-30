@@ -11,7 +11,7 @@ It also makes every other number on the site more honest: a tariff comparison, a
 
 ## What Changes
 
-- **Degree-day data:** daily temperature history by weather station from NOAA's daily global historical climatology network, trimmed to the fields we need and shipped as static per-station files, plus the published 1991–2020 normals for a "normal year" comparison, and the station index used to pick a station near a ZIP code on the device.
+- **Degree-day data:** daily temperature history by weather station from NOAA's daily global historical climatology network, trimmed to the fields we need and packed into the existing state shards so no asset URL names a station, county, or ZIP, plus the published 1991–2020 normals for a "normal year" comparison, and the station index used to pick a station near a ZIP code on the device.
 - **Baseline model:** fit the user's own use against heating and cooling degree days using the open change-point family (flat, heating-only, cooling-only, and heating-plus-cooling), with a balance-point search, published rejection rules, and goodness-of-fit reported in plain words. Works from interval data or from monthly bill totals.
 - **Change explainer:** split the difference between two periods into a weather part, a use part, and an unexplained part; give the weather-normalized annual use; and state plainly when the model is too poor to answer.
 

@@ -16,7 +16,7 @@ Every page SHALL accept a dropped or chosen file. Intake SHALL detect the format
 - **THEN** intake says PDF bills are not read in v1 and links to the instructions for downloading interval data or Green Button from the user's utility
 
 ### Requirement: Parsing happens off the main thread with limits
-Files SHALL be parsed in a worker on the device. Intake SHALL accept files up to 200,000,000 bytes and SHALL warn above 50,000,000 bytes. A parse of 35,040 rows (one year of 15-minute data) SHALL finish in under 1 second on the reference mid-range device.
+Files SHALL be parsed in a worker on the device. Intake SHALL accept files up to 200,000,000 bytes and SHALL warn above 50,000,000 bytes. A parse of 35,040 rows (one year of 15-minute data) SHALL finish in under 1 second on the reference profile defined in `platform/app-shell`, which is the one reference machine the whole project uses.
 
 #### Scenario: Large file
 - **WHEN** a user drops a 120 MB multi-meter CSV
@@ -72,7 +72,11 @@ Intake SHALL handle and report: header rows and footers, multiple meters in one 
 - **THEN** the receipt reports one gap of 24 hours with its dates, and peak and bill results state that the gap is excluded
 
 ### Requirement: Green Button fields read by the standard
-The Green Button reader SHALL follow the Apache-2.0 ESPI schema (`espi.xsd` 4.0, and 4.1 where a file declares it), citing each handled element's schema type and enumeration, and SHALL scale every value by its ReadingType `uom` and 10^`powerOfTenMultiplier` and SHALL never assume watt-hours; SHALL keep delivered (`flowDirection` 1) and received (`flowDirection` 19) channels as separate series; and SHALL read `intervalLength` and `duration` in seconds.
+The Green Button reader SHALL follow the Apache-2.0 ESPI schema (`espi.xsd` 4.0), citing each handled element's schema type and enumeration, and SHALL scale every value by its ReadingType `uom` and 10^`powerOfTenMultiplier` and SHALL never assume watt-hours; SHALL keep delivered (`flowDirection` 1) and received (`flowDirection` 19) channels as separate series; and SHALL read `intervalLength` and `duration` in seconds.
+
+#### Scenario: Only the 4.0 schema is implemented
+- **WHEN** the reader is built
+- **THEN** it implements `espi.xsd` 4.0 only, because the published 4.1 schema still declares version 3.3.20190408 and no file is known to declare 4.1; a 4.1 branch is added when such a file is seen
 
 #### Scenario: Kilowatt-hour multiplier
 - **WHEN** a file declares `uom` 72 (Wh) with `powerOfTenMultiplier` 3
@@ -80,7 +84,7 @@ The Green Button reader SHALL follow the Apache-2.0 ESPI schema (`espi.xsd` 4.0,
 
 #### Scenario: Independent schema check
 - **WHEN** CI validates the Green Button fixtures
-- **THEN** each passes the ESPI XML schema (Apache-2.0) and matches a receipt computed by hand from the schema's field definitions
+- **THEN** each matches a receipt computed by hand from the schema's field definitions, and each element we read is checked against the schema's declared type and enumeration by our own narrow checker rather than a general schema validator
 
 #### Scenario: No paywalled source required
 - **WHEN** a reviewer traces any Green Button behavior to its source

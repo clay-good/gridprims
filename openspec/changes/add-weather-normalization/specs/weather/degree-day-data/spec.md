@@ -49,8 +49,8 @@ The app SHALL ship a station index (identifier, name, coordinates, elevation, an
 - **THEN** the receipt names the station, its distance in miles, its elevation difference, its period of record, and the share of days present over the analysis period
 
 ### Requirement: Coverage and gaps are reported
-Missing or flagged daily observations SHALL be counted and reported, never silently filled. The open method documentation sets a limit of 6 consecutive missing **hours** of temperature data for hourly models; since this change fits daily and billing-period models, the tool SHALL set its own daily floor, name it as a gridprims choice rather than the published rule, and apply the sufficiency rules in `weather/baseline-model`.
+Missing or flagged daily observations SHALL be counted and reported, never silently filled. The open method documentation sets a limit of 6 consecutive missing **hours** of temperature data for hourly models; since this change fits daily and billing-period models, the tool SHALL set its own daily floor at 7 consecutive missing days within the period, name that floor as a gridprims choice rather than the published rule, and apply the sufficiency rules in `weather/baseline-model`.
 
 #### Scenario: Station with a gap
-- **WHEN** a station is missing more consecutive days than the disclosed daily floor
+- **WHEN** a station is missing 9 consecutive days, more than the disclosed 7-day floor
 - **THEN** the receipt reports the gap with its dates, names the floor as gridprims' own, and suggests the next nearest station

@@ -60,6 +60,8 @@ Parquet is not realistic without a library. We ship:
 
 **Reproducibility.** Raw publisher files used for each version are archived with their checksums, so a release rebuild uses archived inputs, not live fetches.
 
+Alternative for D5: ship Parquet or Arrow shards for the chart and query data. Rejected: both need a third-party reader in the browser, which `platform/zero-dependency` forbids, and our packed binary header costs about thirty lines of our own code to read.
+
 The MCP server reads the same files from the clone's `data/` folder (see `add-local-mcp-server`).
 
 ### D6. Own parsers
@@ -91,7 +93,7 @@ The energy unit converter (`calc/energy-units-and-emissions`, conversion part on
 A small fixture subset of every dataset (three states, three balancing authorities, one year) is committed under `verify/fixtures/data/`, so a fresh clone can run every test and every worked example offline. Full data comes from release archives or the data commands. Alternative: no committed data, download on first run. Rejected: breaks offline tests and the fresh-clone promise.
 
 ### D12. Allowed development-time services
-Outside the product, development uses only: the git host for the repository, its CI runners, and its actions API; locally installed browsers for end-to-end tests; Cloudflare for hosting, deploys, and the one scheduled watchdog handler (D15); a public research archive for durable deposits; and public publishers for data. None is called by the website or the MCP server at runtime, and none is a package.
+Outside the product, development uses only: the git host for the repository, its CI runners, and its actions API; locally installed browsers for end-to-end tests; Cloudflare for hosting, deploys, and the one scheduled watchdog handler (D15); two independent public research archives for durable deposits and a public code archive for the source at each release tag (`trust/data-continuity`); and public publishers for data. None is called by the website or the MCP server at runtime, and none is a package.
 
 CI runs our own Node scripts and nothing else: no marketplace actions, no action that is not GitHub's own, and every workflow step is either a runner-preinstalled tool (`node`, `git`) or a script in this repository, so the same pipeline runs on a laptop. Repository policy enforces local-actions-only and full-length commit SHA pinning, and the workflow lockfile is committed.
 

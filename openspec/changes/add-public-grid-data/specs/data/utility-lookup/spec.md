@@ -37,11 +37,18 @@ County lookup SHALL require a state, since county names repeat across states.
 - **THEN** the tool asks which state before fetching anything
 
 ### Requirement: eGRID subregion and balancing authority
-The lookup SHALL also return the eGRID subregion(s) for the ZIP from EPA's Power Profiler ZIP-to-subregion table (EPA, public domain; published with each eGRID edition) and the utility's balancing authority from EIA-861, for use by the carbon tools; ZIPs in more than one subregion SHALL list each.
+The lookup SHALL also return the eGRID subregion(s) for the ZIP from EPA's Power Profiler ZIP-to-subregion table (EPA; published with each eGRID edition, with EPA's own stated terms captured and the redistribution posture derived from them per `platform/data-snapshots`, never assumed public domain) and the utility's balancing authority from EIA-861, for use by the carbon tools; ZIPs in more than one subregion SHALL list each.
 
 #### Scenario: Two subregions
 - **WHEN** a ZIP maps to two eGRID subregions
 - **THEN** both are listed and the carbon tools ask the user to choose
+
+### Requirement: Verification of the lookup chain
+The ZIP → ZCTA → county → utility chain SHALL be checked in CI against at least 50 stored cases spanning single-utility ZIPs, overlapping ZIPs, ZIPs with no ZCTA, multi-county ZIPs, and ZIPs in more than one eGRID subregion, each case's expected answer taken from the publishers' own files rather than from our output. CI SHALL also check that the returned utilities' service-territory rows exist in the EIA-861 snapshot for every case.
+
+#### Scenario: Chain regression
+- **WHEN** a snapshot refresh changes the utility a stored case resolves to
+- **THEN** CI fails, names the ZIP, the old and new utilities, and the snapshot version, so the change is recorded rather than shipped silently
 
 ### Requirement: Invalid input
 The lookup SHALL reject inputs that are not five-digit ZIP codes or known county names and SHALL say what it expects.

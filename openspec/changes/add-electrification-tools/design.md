@@ -1,6 +1,6 @@
 ## Context
 
-Research in `docs/research/05` §5–6, `07`, and `08`. The 2026 NEC renumbers 220.87 as 120.87; the 30-day option's bar on sites with solar, wind, or peak shaving and the averaging details come from secondary sources and must be checked against the published code (purchased or read through NFPA's free read-only access) before launch. NLR End-Use Load Profiles and EAGLE-I v4 are confirmed CC BY 4.0, so typical shapes and county outage history can ship with credit.
+Research in `docs/research/05` §5–6, `07`, and `08`. The 2026 NEC renumbers 220.87, reported as 120.87 by a secondary source; that number, the 30-day option's bar on sites with solar, wind, or peak shaving, and the averaging details are all unverified and must be checked through NFPA's free read-only access and the state adoption rules before launch. Nothing here is gated on buying a copy of the code. NLR End-Use Load Profiles and EAGLE-I v4 are confirmed CC BY 4.0, so typical shapes and county outage history can ship with credit. The county end-use shapes here and the whole-home residential shapes in `add-household-bill-check` are two derived tables from one End-Use Load Profiles release: each is registered under its own dataset id, so the one-owner gate can check the split mechanically rather than resting on prose.
 
 ## Goals / Non-Goals
 

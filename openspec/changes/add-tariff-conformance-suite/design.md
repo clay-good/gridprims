@@ -25,7 +25,7 @@ Tariff records are emitted in URPX (LF Energy, v0.5.1), with its SHACL structura
 Alternative: our own schema. Rejected: it would be strictly worse than a format designed with a national laboratory, and it would isolate the vectors from everyone who could use them.
 
 ### D3. Ground truth comes from regulators, extracted with per-figure provenance
-Expected bills come first from state commission bill-comparison publications, which commissions compute from the filed tariffs. Every extracted figure records the document, its date, the page, the utility, and the consumption level, and extraction is reviewed under the curated-contribution rules.
+Expected bills come first from state commission bill-comparison publications, which commissions compute from the filed tariffs. Every extracted figure records the document, its date, the page, the utility, and the consumption level, and every figure is extracted twice by two independent automatic methods, with disagreements excluded and counted; no reviewer step gates publication.
 
 | Alternative | Why not |
 |---|---|
@@ -47,7 +47,7 @@ The scorecard publishes per-utility and per-rate disagreements with the arithmet
 | Rank utilities by tariff data quality | The utility did not write the database entry; the ranking would punish the wrong party. |
 
 ### D6. A disagreement is a question, not an accusation
-Every disagreement entry names the filed tariff sheet, our arithmetic, the regulator's figure, and the database's figure, and invites correction. Confirmed database errors are reported upstream through the maintainer's own process before we publish them as errors, with the report date recorded.
+Every disagreement entry names the filed tariff sheet, our arithmetic, the regulator's figure, and the database's figure, and invites correction. Confirmed database errors publish at once, and the upstream report through the maintainer's own process is sent and its date recorded afterwards, matching `conformance/accuracy-scorecard`.
 
 Alternative for D6: publish disagreements as database errors immediately. Rejected: in a sample of our own early checks the filed tariff sometimes vindicated the database, and an accusation retracted later costs more standing than a question answered slowly.
 
@@ -58,7 +58,7 @@ Alternative for D7: exempt our own engine from the suite while it matures. Rejec
 
 ## Risks / Trade-offs
 
-- **Extraction from published documents is laborious and error-prone.** Mitigation: per-figure provenance, two-source or second-reviewer rules, and a published extraction error rate from a hand-checked sample.
-- **We may be wrong and the database right.** Mitigation: D6's wording, upstream reporting first, and our own engine subject to the same suite.
+- **Extraction from published documents is laborious and error-prone.** Mitigation: per-figure provenance, two independent automatic extraction methods, and a published extraction error rate measured as the disagreement rate between them.
+- **We may be wrong and the database right.** Mitigation: D6's wording, an upstream report recorded with every confirmed error, and our own engine subject to the same suite.
 - **Coverage will look thin at first.** Mitigation: publish coverage as a first-class number rather than hiding behind a headline accuracy figure.
 - **Upstream projects may see us as competing.** Mitigation: emit their format, consume their corpus, credit them, and file every gap we find.

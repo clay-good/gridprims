@@ -12,7 +12,7 @@ Each entry SHALL have: term, aliases, a one-line definition of at most 25 words,
 - **THEN** the entry shows the definition, the unit $/kW, an example ("412 kW × $18.50/kW = $7,622"), the bill tools that use it, and its citation
 
 ### Requirement: Readable definitions
-Every one-line definition SHALL score at reading grade 8 or below on the site's own Flesch-Kincaid check, which SHALL reproduce published example scores from the formula's source report (Kincaid et al., 1975, U.S. Navy, public domain) within 0.5 grade, and the build SHALL fail on any definition above grade 8.
+Every one-line definition SHALL score at reading grade 8 or below on the site's own Flesch-Kincaid check, whose implementation SHALL reproduce hand-computed scores for at least five stored sentences spanning the syllable and sentence-length edge cases, exactly to 0.1 grade, and the build SHALL fail on any definition above grade 8.
 
 #### Scenario: Too complex
 - **WHEN** a definition reads "The maximum averaged real power demand registered during the billing determinant window"

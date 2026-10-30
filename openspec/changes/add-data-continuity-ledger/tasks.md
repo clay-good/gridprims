@@ -16,7 +16,7 @@
 - [ ] 2.1 Publish per-version diffs of files, columns, row counts, and keyed row changes; verify the column-dropped and largest-changes scenarios
 - [ ] 2.2 Implement revision reporting with magnitude distributions and neutral wording; verify the history-revised and neutral-wording scenarios
 - [ ] 2.3 Keep every version's diff at a stable URL linked from the library and the ledger; verify the historical-diff scenario
-- [ ] 2.4 Fail the build on a breaking change to a depended-on column or unit; verify the breaking-change scenario
+- [ ] 2.4 On a breaking change to a depended-on column or unit, pin the dataset to its last good snapshot, publish with that pin shown, and open an issue, without failing the build or blocking other datasets or the deploy; verify the breaking-change scenario
 - [ ] 2.5 Publish diffs as JSON with both versions and checksums; verify the diff-JSON scenario
 
 ## 3. Consistency checks

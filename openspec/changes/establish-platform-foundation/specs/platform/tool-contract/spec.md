@@ -26,6 +26,17 @@ The page, command-bar entry, MCP description and schemas, and docs SHALL be gene
 - **WHEN** the build renders a tool page
 - **THEN** every input label, unit, and citation on the page matches the manifest byte for byte
 
+### Requirement: Stable means cross-checked
+A tool SHALL NOT be marked stable below validation level 2 (cross-checked) as `platform/citations-and-verification` defines it. A tool at unvalidated or self-checked SHALL ship labeled experimental or not at all, and the build SHALL fail when a manifest claims stable at a lower level.
+
+#### Scenario: Stable claimed at self-checked
+- **WHEN** a manifest declares stability "stable" with validation level 1
+- **THEN** the build fails and names the tool, its level, and the level stable requires
+
+#### Scenario: Launch expectation
+- **WHEN** the limits page is generated at launch
+- **THEN** every stable tool reads cross-checked, no tool reads field-verified, and every tool below cross-checked carries the "Preview" label
+
 ### Requirement: Every tool works on both surfaces
 A tool SHALL NOT be marked stable until its worked examples pass on the website and through the local MCP server with identical structured results.
 
@@ -41,7 +52,7 @@ Every tool page SHALL load with its first worked example already computed and vi
 - **THEN** the answer card shows the example result without any user action, and the label "Example values" is visible next to it
 
 ### Requirement: Results are plain sentences with units
-Every result SHALL render as a big number with its unit plus one plain sentence at reading grade 8 or below on the site's own Flesch-Kincaid check (`add-learn-and-data-guides` design D4). Every numeric output SHALL state its unit and SHALL be rounded to the precision declared in the manifest.
+Every result SHALL render as a big number with its unit plus one plain sentence at reading grade 8 or below on the site's own Flesch-Kincaid check, whose module is built in phase 0 with the shell and reused by `add-learn-and-data-guides` later. Every numeric output SHALL state its unit and SHALL be rounded to the precision declared in the manifest.
 
 #### Scenario: Unit shown with every number
 - **WHEN** a result is displayed or copied
@@ -103,3 +114,11 @@ Each tool SHALL carry a version. A change that alters any output for the same in
 #### Scenario: Corrected formula
 - **WHEN** a defect fix changes a result
 - **THEN** the tool version increases and the changelog names the tool, the old and new values for a sample input, and the reason
+
+### Requirement: Reused routines live in the shared core too
+A derived routine more than one tool runs SHALL exist once in the shared core and SHALL be named in the manifest of every tool that calls it, so the one-implementation rule covers methods as well as quantities.
+
+#### Scenario: The two known shared routines
+- **WHEN** the manifests are built
+- **THEN** the monthly-threshold dispatch names `load/storage-and-solar-screen` and `electrify/ev-fleet-charging` as its callers, and the load-shift what-if names `load/tariff-comparison`, `household/plan-finder`, and `carbon/cleanest-hours`, each pointing at one shared-core module
+

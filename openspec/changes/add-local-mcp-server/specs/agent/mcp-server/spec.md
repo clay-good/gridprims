@@ -29,12 +29,16 @@ The server SHALL support MCP `2026-07-28` (per-request `_meta` version, `server/
 ### Requirement: Meta-tool surface
 By default the server SHALL expose exactly six tools: `gridprims_search` (find tools, entities, datasets, and Learn entries such as glossary terms from plain words), `gridprims_describe` (a tool's inputs, method, and citations), `gridprims_run` (run a tool), `gridprims_analyze_file` (parse an allowed local file into a handle and receipt), `gridprims_query_data` (look up or filter public datasets), and `gridprims_prepare_report` (prepare a problem report for a human).
 
+#### Scenario: Resources carry the catalog and the limits
+- **WHEN** a client lists resources
+- **THEN** it receives the dataset catalog and the limits record, which are resources rather than tools, so the tool surface stays at exactly six
+
 #### Scenario: Tool list is fixed and ordered
 - **WHEN** a client lists tools twice
 - **THEN** it receives the same six tools in the same order with `ttlMs` of 86,400,000 and `cacheScope` public
 
 ### Requirement: Schemas and annotations
-Each tool SHALL declare an `inputSchema` and `outputSchema` in JSON Schema 2020-12 and the annotations `readOnlyHint: true`, `idempotentHint: true`, `openWorldHint: false`, and `destructiveHint: false`.
+Each tool SHALL publish an `inputSchema` and `outputSchema` written in JSON Schema 2020-12 (which we emit for clients to read; we do not implement a general validator, and our own argument checking is explicit code) and the annotations `readOnlyHint: true`, `idempotentHint: true`, `openWorldHint: false`, and `destructiveHint: false`.
 
 #### Scenario: Annotations present
 - **WHEN** a client lists tools
@@ -133,11 +137,11 @@ The tool names, schemas, and descriptions SHALL be recorded in a committed golde
 - **THEN** the golden-surface test fails and shows the difference
 
 ### Requirement: Agent evaluation
-The repository SHALL include an evaluation set of at least 40 realistic developer requests covering every phase 1 tool family, with expected tool calls and key values.
+The repository SHALL include an evaluation set of realistic developer requests, with expected tool calls and key values, covering every tool family that exists at the time: at least one per family in phase 0, and at least 40 requests covering every phase 1 family once those ship.
 
 #### Scenario: Set covers every tool family
 - **WHEN** the evaluation set is validated
-- **THEN** every phase 1 tool family appears in at least one request, and each request names its expected tool and key values
+- **THEN** every tool family that exists appears in at least one request, each request names its expected tool and key values, and the phase 1 count of at least 40 is checked once phase 1 tools ship
 
 ### Requirement: The model-free parts gate, the model run does not
 The parts of the evaluation that need no model SHALL run automatically in CI: that every request's expected tool exists, that its arguments validate against that tool's schema, and that replaying the expected calls produces the recorded key values. Running the set through an actual model SHALL be optional and advisory, never a release gate; when someone does run it, the agent, date, and pass rate are recorded.

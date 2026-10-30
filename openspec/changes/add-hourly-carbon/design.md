@@ -24,7 +24,7 @@ Use the newest official eGRID edition (eGRID2023 as of 2026-10-29; eGRID2024 is 
 Alternative: default to the unofficial edition because it is newer. Rejected: users cite eGRID by its official edition in reports.
 
 ### D4. Source files and their quirks
-Per `docs/research/07`: consumption-based CO₂ intensity is published only in EIA's per-balancing-authority `.xlsx` files (60–115 MB each, from 2018-07-01), not in the API or the six-month CSVs, and every file back to 2015 is rebuilt daily. The pipeline downloads them at build time, pins the download date as the snapshot's as-of date, and precomputes compact shards. Fuel columns for battery storage and solar or wind with integrated batteries begin 2025-01-01; earlier years have no such columns, which the shards record as absent, not zero.
+Per `docs/research/07`: consumption-based CO₂ intensity is published only in EIA's per-balancing-authority `.xlsx` files (38–115 MB each as measured 2026-10-29, from 2018-07-01), not in the API or the six-month CSVs, and every file back to 2015 is rebuilt daily. The pipeline downloads them at build time, pins the download date as the snapshot's as-of date, and precomputes compact shards. Fuel columns for battery storage and solar or wind with integrated batteries begin 2025-01-01; earlier years have no such columns, which the shards record as absent, not zero.
 
 Alternative: the API's hourly series. Rejected: it lacks consumption-based intensity and starts in 2019.
 

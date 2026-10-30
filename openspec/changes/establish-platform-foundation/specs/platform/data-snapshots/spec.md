@@ -19,7 +19,14 @@ Every number derived from a dataset SHALL be shown with a source stamp naming pu
 - **THEN** the stamp beside it names EIA-861, the data year, the EIA release date, and our retrieval date
 
 ### Requirement: Staleness is visible
-Each registry entry SHALL declare its expected refresh cadence. Lateness SHALL be computed by the single rule in `ledger/continuity` (a publisher's posted date where one exists, otherwise the historical cadence, with a 30-day grace period), and this capability SHALL NOT define a second rule. When that rule reports a dataset late, every page that uses it SHALL show a "may be out of date" note with the date we last checked for an update.
+Each registry entry SHALL declare its expected refresh cadence. When a dataset is late by the rule below, every page that uses it SHALL show a "may be out of date" note with the date we last checked for an update.
+
+#### Scenario: Note appears on every page using it
+- **WHEN** a dataset is late
+- **THEN** every page showing a number from it carries the note with the last-checked date
+
+### Requirement: The one lateness rule
+Lateness SHALL be computed by one rule, defined here and cited rather than redefined by `ledger/continuity`: a dataset is due on the publisher's posted next-release date where one exists, otherwise on its historical cadence, and is late 30 days after that date. Every row SHALL state whether its due date was posted or inferred.
 
 #### Scenario: One lateness rule
 - **WHEN** an annual dataset's served version has an as-of date of 2025-10-07 and the publisher posted no next-release date
@@ -74,7 +81,15 @@ Every dataset's registry entry SHALL carry a posture the build derives from the 
 
 #### Scenario: Posture derived from recorded terms
 - **WHEN** the pipeline records a dataset's terms
-- **THEN** it assigns `mirror` when those terms are a recognized reusable license or a public-domain dedication captured from the publisher's own page, `derive` when the terms are absent, unrecognized, or restrictive but the underlying values are facts we may compute over, and `link` when even that is unclear
+- **THEN** it assigns `mirror` when those terms match the recognized set, `derive` when the terms are absent, unrecognized, or restrictive but the underlying values are facts we may compute over, and `link` when even that is unclear
+
+#### Scenario: The recognized set is explicit
+- **WHEN** the matcher is applied
+- **THEN** it recognizes only this list, by identifier or by the publisher's own words: CC0-1.0, CC-BY-4.0, CC-BY-SA-4.0 (share-alike, kept in its own file), ODbL-1.0 (kept in its own file), Apache-2.0, MIT, and an explicit United States federal public-domain dedication; anything else, including a citation request with no license and any "non-commercial" or "educational use" wording, is unrecognized
+
+#### Scenario: Hand-set posture wins while the matcher is young
+- **WHEN** a registry entry carries an explicit posture set by hand
+- **THEN** that posture is used, the matcher's verdict is recorded beside it as advisory, and a disagreement is published on the pipeline health record so the matcher can be promoted once it agrees across every launch dataset
 
 #### Scenario: Unclear terms downgrade instead of blocking
 - **WHEN** a dataset's terms cannot be recognized automatically

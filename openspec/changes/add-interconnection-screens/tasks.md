@@ -1,8 +1,8 @@
 ## 1. Curated thresholds
 
 - [ ] 1.1 Define the jurisdiction screen record schema (process, screen, threshold, test basis, who answers, citation, vintage read, last checked) under `trust/curated-contributions`; verify a record missing a citation or vintage fails the check
-- [ ] 1.2 Enter the federal procedures from an accepted tariff of confirmed vintage, and the jurisdictions named in `docs/research/12`; verify each threshold against its primary document by the two-source or second-reviewer route
-- [ ] 1.3 Record per-utility minimum-load assumptions and state codified fallbacks with citations; verify each is attributed to its own source and never presented as ours, and reverify the items `docs/research/12` tags unverified (the two states' codified fallbacks among them) before publishing any of them
+- [ ] 1.2 Enter the federal procedures from an accepted tariff of confirmed vintage, and the jurisdictions named in `docs/research/12`; verify each threshold against its primary document by the two-source route, or, where a second primary source is recorded unreachable, by the single-source label; no reviewer route exists
+- [ ] 1.3 Record per-utility minimum-load assumptions and state codified fallbacks with citations; verify each is attributed to its own source and never presented as ours, and recheck the items `docs/research/12` tags unverified (the two states' codified fallbacks among them) automatically against their archived text, publishing each with its check result rather than holding it for a person
 - [ ] 1.4 Build the misquoted-threshold correction list from rule text; verify every entry cites the rule and the vintage read
 
 ## 2. Process router
@@ -43,5 +43,5 @@
 ## 6. Surfaces
 
 - [ ] 6.1 Run every worked example through the MCP server; verify identical structured results and that no tool returns a pass or fail for a model-dependent screen
-- [ ] 6.2 Confirm the CEII screen finds no infrastructure data in this change's outputs; verify the signed checklist in the registry
+- [ ] 6.2 Confirm the automatic CEII screen finds no infrastructure data in this change's outputs; verify the documented screen record in the registry, with no signature
 - [ ] 6.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green

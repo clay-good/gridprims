@@ -5,11 +5,11 @@ Sizes a distribution transformer for a known load and shows how heavily an exist
 ## ADDED Requirements
 
 ### Requirement: Size from load
-Given load as kVA, or as kW with a power factor, or as amps at a voltage, and the phase configuration, the tool SHALL compute required apparent power in kVA (three-phase: √3 × V line-to-line × A ÷ 1,000; single-phase: V × A ÷ 1,000) and SHALL name the next larger standard rating from a public-domain list of standard distribution transformer ratings (a government engineering bulletin, cited with its edition and date), or ask the user for a rating when no public list covers the case.
+Given load as kVA, or as kW with a power factor, or as amps at a voltage, and the phase configuration, the tool SHALL compute required apparent power in kVA (three-phase: √3 × V line-to-line × A ÷ 1,000; single-phase: V × A ÷ 1,000).
 
 #### Scenario: Three-phase from amps
 - **WHEN** load is 600 A at 480 V three-phase
-- **THEN** required apparent power is 498.8 kVA and the next standard rating named is 500 kVA
+- **THEN** required apparent power is 498.8 kVA, and the user enters the rating they are considering (500 kVA) rather than the tool naming a standard size
 
 ### Requirement: Loading of an existing transformer
 Given a transformer rating and a load (entered, or the peak from a loaded interval file), the tool SHALL show loading as a percent of rating to 0.1, the headroom in kVA, and the load's power factor assumption.
@@ -30,8 +30,16 @@ The tool SHALL NOT compute permissible overload duration, hot-spot or top-oil te
 - **THEN** the page states that the tool does not answer it and names the loading guide by number without reproducing it
 
 ### Requirement: Verification
-Conversions SHALL match hand computations exactly to 0.1 kVA for at least three cases spanning single-phase, three-phase, and amps-from-kVA, stored as fixtures, and SHALL reproduce at least one worked transformer-sizing example published by a government engineering bulletin or a utility guide (cited) within 0.1 kVA.
+Conversions SHALL match hand computations exactly to 0.1 kVA for at least three cases spanning single-phase, three-phase, and amps-from-kVA, stored as fixtures. Where a freely published worked transformer-sizing example is located, CI SHALL also reproduce it within 0.1 kVA; no such example is registered yet, so the hand-computed fixtures are the standing gate.
 
 #### Scenario: Round trip
 - **WHEN** CI converts 498.8 kVA back to amps at 480 V three-phase
 - **THEN** the result is 600 A within 0.1 A
+
+### Requirement: Standard ratings come from the user, not from a paywalled list
+The tool SHALL ask the user for the transformer rating they are considering, because the standard distribution transformer ratings are published only in a paywalled standard (IEEE C57.12.00) that we neither buy nor quote. Where a freely published government or utility list of ratings is located and registered, the tool MAY offer the next larger rating from it, cited with its edition and date.
+
+#### Scenario: No list registered
+- **WHEN** no free ratings list is registered
+- **THEN** the tool names no standard size, asks for the rating, and says why
+

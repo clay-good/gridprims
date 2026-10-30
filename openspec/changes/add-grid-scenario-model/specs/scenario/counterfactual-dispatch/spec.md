@@ -23,7 +23,7 @@ Each run SHALL state that it omits unit commitment (start-up costs, minimum run 
 - **THEN** the omissions list accompanies it
 
 ### Requirement: Interchange and storage handled explicitly
-Interchange SHALL be taken from the recorded data as a fixed hourly quantity rather than optimized, and storage SHALL either be excluded or dispatched by a declared simple rule, with whichever choice is in force stated on the result.
+Interchange SHALL be taken from the recorded data as a fixed hourly quantity rather than optimized, and storage SHALL be excluded from dispatch in v1, its recorded net charge and discharge instead subtracted from and added to the hourly load it must serve, exactly as interchange is handled. The result SHALL state that storage is not optimized.
 
 #### Scenario: Interchange fixed
 - **WHEN** a region imported in an hour
@@ -73,11 +73,11 @@ Dispatch SHALL run entirely in the browser over shipped static data, with no req
 - **THEN** no request contains any sentinel value
 
 ### Requirement: Verification against an independent implementation
-The dispatch SHALL reproduce stored outputs from a third-party model (for example a PyPSA-USA or GridPath configuration), run once by a maintainer and committed as fixtures, for at least 3 region-years, matching generation by fuel within 0.5% and the marginal unit in at least 99% of hours.
+The dispatch SHALL reproduce stored outputs from a third-party model (for example a PyPSA-USA or GridPath configuration), run once by a maintainer and committed as fixtures, for at least 3 region-years, matching generation by fuel within 0.5%. Marginal-unit agreement SHALL NOT be a gate, because no third-party model shares our inputs; instead the marginal-fuel distribution from each model SHALL be published side by side with the hours they disagree.
 
 #### Scenario: Third-party comparison
 - **WHEN** CI runs a stored third-party comparison for a region-year
-- **THEN** every fuel total is within 0.5% and the marginal unit matches in at least 99% of hours, or the case is documented as an expected difference
+- **THEN** every fuel total is within 0.5% or the case is documented as an expected difference, and the two marginal-fuel distributions are published with the share of hours they disagree
 
 ### Requirement: Expected differences recorded, and absences stated
 Because no third-party model shares our exact inputs and simplifications, each fixture SHALL record which differences are expected and why. Where no third-party comparison can be configured, the backtest page SHALL state plainly that the region-year is unverified against any outside model, rather than presenting agreement with our own second implementation as independent.
@@ -88,4 +88,4 @@ Because no third-party model shares our exact inputs and simplifications, each f
 
 #### Scenario: Reference comparison
 - **WHEN** CI runs the stored region-year comparisons
-- **THEN** every fuel total is within 0.5% and the marginal unit matches in at least 99% of hours, or the case is documented
+- **THEN** every fuel total is within 0.5% or the case is documented, and the marginal-fuel disagreement share is published rather than gated

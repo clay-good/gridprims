@@ -12,7 +12,7 @@ Everything here is a static file or a rule, not a committee: `security.txt`, a d
 
 - **Security disclosure:** an RFC 9116 `/.well-known/security.txt` with a monitored expiry, and a one-page coordinated-disclosure policy with safe harbor, acknowledgement and fix targets, and a scope limited to the site and its one Worker.
 - **Data continuity:** every dataset version mirrored to a public archive with a persistent identifier, an annual deposit to a second archive, source code archived, published running costs, and published revival steps anyone can follow without permission from us or cooperation from anybody.
-- **Curated contributions:** the provenance, review, and conflict-of-interest rules every hand-maintained fact must pass, a public comment window before any change to a published number, and quarantine for bulk contributions.
+- **Curated contributions:** the provenance and conflict-of-interest rules every hand-maintained fact must pass, publication at once with the old value kept visible and a comment thread open at least 30 days afterwards, and quarantine for bulk contributions. No reviewer and no comment window gates a change.
 - **Corrections** are strengthened in `add-site-experience`'s trust pages (tiers, the old value kept visible, and never editing a published snapshot in place) rather than specified twice.
 
 ## Capabilities

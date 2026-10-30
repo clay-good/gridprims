@@ -92,7 +92,11 @@ For each period and the year, the tool SHALL show the effective price in cents p
 - **THEN** the effective price is 14.38 cents per kWh and the utility average is shown with "EIA-861, 2025"
 
 ### Requirement: Verification
-The totals path SHALL reproduce, to the cent for modeled components, at least five published residential bill examples: typical-bill tables at stated kWh levels from utility tariff filings or regulator bill comparisons, and Texas EFL average prices at 500, 1,000, and 2,000 kWh, each priced with the TDU rates in force on the EFL's date. Sources SHALL be cited in the fixtures.
+The totals path SHALL reproduce, to the cent for modeled components, at least five published residential bill examples: state regulators' typical-bill tables at the kWh levels those regulators publish, and Texas EFL average prices at the consumption levels the PUCT rule sets. Sources SHALL be cited in the fixtures.
+
+#### Scenario: Regulator levels used as published
+- **WHEN** fixtures are built from regulator typical-bill tables
+- **THEN** they use each regulator's own levels as `docs/research/14` §6 records them (Florida 100–1,500 kWh, Indiana 500/1,000/1,500/2,000 kWh, Illinois 100–3,000 kWh, the Texas PUC monthly reports), and each EFL fixture cites the PUCT rule that sets its levels and the TDU rates in force on the EFL's date
 
 #### Scenario: EFL average price
 - **WHEN** CI prices a stored EFL at 1,000 kWh

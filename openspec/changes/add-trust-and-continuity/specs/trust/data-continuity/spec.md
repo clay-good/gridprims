@@ -5,7 +5,7 @@ Makes the data outlive the project: every published version is archived elsewher
 ## ADDED Requirements
 
 ### Requirement: Every permanent version is archived off-site
-Each permanent dataset version SHALL be deposited by the pipeline, through the archive's own interface on the same run that cuts the version, to a public research archive that mints a persistent identifier, with one identifier for the dataset series and one for each version. The deposit SHALL NOT require anyone to upload anything. The data library SHALL show both, and citations SHALL use the version identifier.
+Each permanent dataset version SHALL be deposited by the pipeline, through the archive's own interface on the same run that cuts the version, to Zenodo (whose versioning interface `docs/research/17` verifies, with a sandbox for canaries), with one identifier for the dataset series and one for each version. The deposit SHALL NOT require anyone to upload anything. The data library SHALL show both, and citations SHALL use the version identifier.
 
 #### Scenario: Version bundled to fit the archive
 - **WHEN** a dataset version consists of more shard files than the archive accepts in one record

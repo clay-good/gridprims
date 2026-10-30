@@ -2,7 +2,7 @@
 
 **Value up front:** before a school adds EV chargers, a shop adds a heat pump, or a homeowner adds a car charger, they can drop the meter file they already have and see how much room is left on their existing electric service under the measured-demand method the National Electrical Code allows, and what the new load would do to their peak and their bill under managed or unmanaged charging. The electrician and inspector still decide; gridprims brings them the numbers.
 
-Why (`docs/research/05` §6 and §5; licenses confirmed in `docs/research/08`): the NEC's existing-load method (220.87 in the 2023 NEC, renumbered 120.87 in 2026) lets an electrician size added load from 12 months of maximum demand data, or, with conditions, 30 days of 15-minute readings, which is exactly what a Green Button file contains. Service upgrades are slow and expensive; avoiding an unnecessary one is a direct saving. EV fleets fail economically on demand charges when charging is unmanaged. No free tool connects a real meter file to either question.
+Why (`docs/research/05` §6 and §5; licenses confirmed in `docs/research/08`): the NEC's existing-load method (220.87 in the 2023 NEC, renumbered in 2026, reported as 120.87 and not yet verified) lets an electrician size added load from 12 months of maximum demand data, or, with conditions, 30 days of 15-minute readings, which is exactly what a Green Button file contains. Service upgrades are slow and expensive; avoiding an unnecessary one is a direct saving. EV fleets fail economically on demand charges when charging is unmanaged. No free tool connects a real meter file to either question.
 
 ## What Changes
 

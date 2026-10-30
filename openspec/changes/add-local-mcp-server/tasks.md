@@ -23,7 +23,7 @@
 
 ## 4. Data commands
 
-- [ ] 4.1 Implement `get-data` with SHA-256 verification against the committed digest list; verify the tampered-file scenario and that a tampered remote digest list is ignored
+- [ ] 4.1 Implement `get-data` with SHA-256 verification against the committed digest list, tested against a local fixture server (and the staging origin once one exists, since phase 0 has not yet deployed the public site); verify the tampered-file scenario and that a tampered remote digest list is ignored
 - [ ] 4.2 Implement `build-data` with a checksum diff report; verify a rebuild of one dataset matches the published snapshot
 
 ## 5. Setup and evaluation

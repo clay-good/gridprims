@@ -1,7 +1,7 @@
 ## 1. Data
 
 - [ ] 1.1 Build the build-time pipeline from the agency's bulk files to monthly per-unit and hourly per-region-year shards; verify no file exceeds the per-file budget and the total stays inside the file-count gate
-- [ ] 1.2 Register the dataset with the federal-works basis, the suggested citation, and the open license question; verify the registry and open-item scenarios
+- [ ] 1.2 Register the dataset with EPA's own stated terms captured verbatim, the suggested citation, and the posture derived from those terms rather than an assumed public-domain or federal-works basis; verify the registry and open-item scenarios
 - [ ] 1.3 Keep the agency key out of every shipped artifact; verify the key-absent scan and that the no-network tests still pass
 - [ ] 1.4 Build unit-to-plant, unit-to-region, and unit-to-fuel crosswalks with an unmatched-rows report; verify no row is matched by name alone
 - [ ] 1.5 Run the 10-unit, 3-state, 2-year check against the agency's published summaries; verify every value matches or is documented
