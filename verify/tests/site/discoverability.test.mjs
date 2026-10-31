@@ -43,7 +43,8 @@ test('every page has a unique title, a fitted description, a canonical URL, Open
     assert.ok(!titles.has(title), `${f}: duplicate title ${title}`);
     titles.add(title);
     for (const tag of ['og:title', 'og:description', 'og:url', 'og:site_name']) assert.match(html, new RegExp(`<meta property="${tag}" content="[^"]+">`), `${f} ${tag}`);
-    assert.match(html, /<meta name="twitter:card" content="summary">/);
+    assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
+    assert.match(html, /<meta property="og:image" content="https:\/\/gridprims\.com\/site\/cards\/[a-z]+\.png">/);
     assert.match(html, /<link rel="canonical" href="https:\/\/gridprims\.com\//);
     const crumbs = ld(html).find((x) => x['@type'] === 'BreadcrumbList');
     assert.ok(crumbs && crumbs.itemListElement[0].name === 'Home', `${f} breadcrumbs`);

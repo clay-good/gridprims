@@ -61,7 +61,7 @@ ${plants.length ? html`<section><h2>${t('state.plants', { count: plants.length.t
 ${tableView([t('state.col.plant'), t('queue.col.county'), t('plant.nameplate'), t('plant.operator')],
     [...plants].sort((a, b) => b.nameplateMw - a.nameplateMw || a.name.localeCompare(b.name)).map((p) => [html`<a href="${plantPath(p.id)}">${p.name}</a>`, p.county ?? '', `${mw(p.nameplateMw)} MW`, p.utilityName ?? '']), t('state.plantsCaption', { name: s.name }))}
 </section>` : ''}`;
-  return layout({ i18n, title: pageTitle(t('state.title', { name: s.name })), description: t('state.description', { name: s.name }), path: statePath(s.code), body, section: 'grid' });
+  return layout({ i18n, title: pageTitle(t('state.title', { name: s.name })), description: t('state.description', { name: s.name }), path: statePath(s.code), body, section: 'grid', card: 'data' });
 }
 
 /** @param {{subregion: any, sources: any, i18n: any}} p */
@@ -88,5 +88,5 @@ ${sourceStamp(sources.egrid, sources.egrid.tables[0], i18n)}
   <div><dt>${t('subregion.plants')}</dt><dd class="mono">${whole(r.plants)}</dd></div>
 </dl>
 </section>`;
-  return layout({ i18n, title: pageTitle(`${r.subregion_name} (${r.subregion})`), description: t('subregion.description', { name: r.subregion_name, code: r.subregion }), path: subregionPath(r.subregion), body, section: 'carbon' });
+  return layout({ i18n, title: pageTitle(`${r.subregion_name} (${r.subregion})`), description: t('subregion.description', { name: r.subregion_name, code: r.subregion }), path: subregionPath(r.subregion), body, section: 'carbon', card: 'data' });
 }

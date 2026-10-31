@@ -6,6 +6,8 @@ import { SECTIONS } from '../ui/sections.mjs';
 import { DESCRIPTION_MAX, fit, jsonLd } from '../lib/meta.mjs';
 
 const ORIGIN = 'https://gridprims.com';
+/** The sections with a social card (site/cards/<section>.png); every page shows its section's card. */
+export const CARDS = ['home', 'bills', 'data', 'carbon', 'grid', 'learn'];
 
 /** Runs before first paint so a saved theme never flashes the wrong one. Its hash goes in the CSP. */
 export const THEME_SCRIPT = "document.documentElement.dataset.js='1';try{var t=localStorage.getItem('gridprims-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}";
@@ -24,7 +26,7 @@ export const TRUST_PAGES = [['about', '/about/'], ['methods', '/methods/'], ['pr
 /** The family of sites that share gridprims' ethos (PRODUCT.md, Brand Commitments). */
 export const SISTERS = ['sophiewell.com', 'geoprims.com', 'roughlogic.com', 'enklayve.com', 'vaulytica.com', 'encryptalotta.com'];
 
-export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null, structured = [], crumbs = null, feed = null }) {
+export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null, structured = [], crumbs = null, feed = null, card = null }) {
   const { t } = i18n;
   const summary = fit(description, DESCRIPTION_MAX);
   // Breadcrumbs on every page: home, the section, then the page, as the page's own links show them.
@@ -45,7 +47,10 @@ ${feed ? html`<link rel="alternate" type="application/atom+xml" title="${feed.ti
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${summary}">
 <meta property="og:url" content="${ORIGIN}${path}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="${ORIGIN}/site/cards/${card ?? (CARDS.includes(section) ? section : 'home')}.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${title}">
 <meta name="twitter:description" content="${summary}">
 ${[breadcrumbs, ...structured].map((o) => html`<script type="application/ld+json">${raw(jsonLd(o))}</script>`)}

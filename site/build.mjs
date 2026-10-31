@@ -53,7 +53,7 @@ import strings from './strings/en-US.mjs';
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 /** Folders the browser imports from, copied as-is: the same files the tests run. */
-const SHARED = ['core', 'parsers', 'site/lib', 'site/ui', 'site/pages', 'site/strings', 'site/samples', 'site/styles/site.css'];
+const SHARED = ['core', 'parsers', 'site/lib', 'site/ui', 'site/pages', 'site/strings', 'site/samples', 'site/styles/site.css', 'site/cards'];
 
 /** @param {string} s */
 export const sha256 = (s) => createHash('sha256').update(s).digest('hex');
@@ -264,7 +264,7 @@ export async function build(opts = {}) {
   // Dataset shards are cached as they are visited, not precached, so the shell stays small as data grows.
   // Entity pages (thousands of plants) are cached as visited too, not precached.
   // So are the lookup's state shards (2.4 MB in all): a visitor needs only their own state's.
-  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json'));
+  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('site/cards/'));
   const version = sha256(shell.map((f) => `${f}:${sha256(readFileSync(join(outDir, f)))}`).join('\n')).slice(0, 12);
   const urls = shell.map((f) => `/${f.replace(/(^|\/)index\.html$/, '$1')}`);
   writeFileSync(join(outDir, 'sw.js'), serviceWorkerSource({ version, files: urls }));

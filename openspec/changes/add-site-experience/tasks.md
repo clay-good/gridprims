@@ -20,7 +20,7 @@
 - [x] 4.1 Generate titles, descriptions, canonical URLs, and JSON-LD; verify the duplicate-title failure and the dataset markup scenario
 - [x] 4.2 Generate sitemaps with data-dated `lastmod` and `robots.txt`; verify an unchanged rebuild leaves every `lastmod` unchanged
 - [x] 4.3 Generate Atom feeds for changelog, data releases, and corrections; verify each validates against the Atom schema and the EIA-860 scenario
-- [ ] 4.4 Commit six section social cards with sources; verify each is 1200 × 630 and at most 100 KB
+- [x] 4.4 Commit six section social cards with sources; verify each is 1200 × 630 and at most 100 KB
 
 ## 5. Limits page (phase 0, before any tool ships)
 

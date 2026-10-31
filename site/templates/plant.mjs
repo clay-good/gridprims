@@ -84,5 +84,5 @@ ${tableView([t('plant.gen.id'), t('plant.gen.technology'), t('plant.gen.fuel'), 
   p.generators.map((g) => [g.id, g.technology ?? '', g.energySource ?? '', g.nameplateMw === null ? '' : `${mw(g.nameplateMw)} MW`, g.operatingYear ?? '', statusLine(g, i18n, monthLabel)]), t('plant.generatorsCaption', { name: p.name }))}
 ${sources.eia860m ? sourceStamp(sources.eia860m, sources.eia860m.tables[0], i18n) : ''}
 </section>`;
-  return layout({ i18n, title: pageTitle(t('plant.title', { name: titleName })), description: t('plant.description', { name: p.name, county: p.county ?? '', state: p.state }), path: plantPath(p.id), body, section: 'grid' });
+  return layout({ i18n, title: pageTitle(t('plant.title', { name: titleName })), description: t('plant.description', { name: p.name, county: p.county ?? '', state: p.state }), path: plantPath(p.id), body, section: 'grid', card: 'data' });
 }

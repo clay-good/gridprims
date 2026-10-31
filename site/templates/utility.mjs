@@ -116,5 +116,5 @@ ${owned.length ? html`<h3>${t('utility.plants')}</h3><ul class="tool-list">${own
 <p data-rates>${u.rates ? t('utility.ratesCount', { count: u.rates.count, newest: u.rates.newest ? i18n.date(u.rates.newest) : t('plant.unknown') }) : t('utility.ratesNone')}</p>
 ${sources.urdb && u.rates ? sourceStamp(sources.urdb, sources.urdb.tables[0], i18n) : ''}
 </section>`;
-  return layout({ i18n, title: pageTitle(titleName), description: t('utility.description', { name: u.name, states: u.states.join(', ') }), path: utilityPath(u.id), body, section: 'bills' });
+  return layout({ i18n, title: pageTitle(titleName), description: t('utility.description', { name: u.name, states: u.states.join(', ') }), path: utilityPath(u.id), body, section: 'bills', card: 'data' });
 }
