@@ -58,6 +58,9 @@
       "title": "Annual peak demand per FERC Form 714 respondent, with the EIA ids it maps to",
       "dataPeriod": "2006-2025",
       "rows": 2231,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "year",

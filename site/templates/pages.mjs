@@ -10,6 +10,7 @@ import { lateness } from '../../core/lib/lateness.mjs';
 import { CLONE, DATA_DIR, snippets } from '../../mcp/clients.mjs';
 import { SECTIONS, sectionOf } from '../ui/sections.mjs';
 import { ORIGIN } from '../config.mjs';
+import { libraryList, libraryParts } from './library.mjs';
 
 /** One input control, labeled from the manifest. */
 function field(inp, value, i18n) {
@@ -164,14 +165,14 @@ function toolCell({ href, section, name, question, needs }, { t }) {
  * A section landing page: only tools and pages that exist, never "coming soon".
  * @param {{id: string, tools: any[], datasets: any[], i18n: any}} p
  */
-export function sectionPage({ id, tools, datasets = [], i18n }) {
+export function sectionPage({ id, tools, datasets = [], entries = new Map(), i18n }) {
   const { t } = i18n;
   const cells = tools.filter(({ manifest: m }) => sectionOf(m.id) === id).map(({ manifest: m }) => ({ href: toolPath(m.id), section: id, name: m.title, question: m.purpose, needs: m.inputs.some((x) => x.type === 'file') ? 'file' : 'none' }));
   if (id === 'bills') cells.unshift({ href: '/files/', section: 'bills', name: t('section.workbench'), question: t('section.workbench.what'), needs: 'file' });
   const body = html`<h1>${t(`section.${id}`)}</h1><p class="purpose">${t(`section.${id}.intro`)}</p>
 ${cells.length || (id === 'data' && datasets.length) ? '' : html`<p>${t('section.empty')}</p>`}
 ${cells.length ? html`<ul class="tool-list">${cells.map((c) => toolCell(c, i18n))}</ul>` : ''}
-${id === 'data' && datasets.length ? html`<ul class="tool-list">${datasets.map((d) => html`<li class="tool-cell"><p class="cell-section">${d.publisher}</p><a href="/data/${d.dataset}/">${d.title}</a><p>${t('data.stamp', { publisher: d.publisher, title: d.title, period: d.tables[0].dataPeriod, asOf: i18n.date(d.asOf), retrieved: i18n.date(d.retrieved), license: d.tables[0].license })}</p></li>`)}</ul>` : ''}`;
+${id === 'data' && datasets.length ? html`<h2>${t('library.title')}</h2>${libraryList({ datasets, entries, i18n })}` : ''}`;
   const path = SECTIONS.find((x) => x.id === id).path;
   return layout({ i18n, title: `${t(`section.${id}`)} · ${t('site.name')}`, description: t(`section.${id}.intro`), path, body, section: id });
 }
@@ -249,12 +250,14 @@ export function reportPage({ i18n }) {
 }
 
 /** A dataset page, generated from its version manifest (platform/data-snapshots). */
-export function datasetPage({ manifest: m, i18n, posture = m.posture, termsRow, takedown }) {
+export function datasetPage({ manifest: m, i18n, posture = m.posture, termsRow, takedown, entry = null, versions = [m], shas = {} }) {
   const { t, date } = i18n;
   const late = lateness(m);
   const publishes = posture !== 'link';
+  const lib = libraryParts({ manifest: m, entry, versions, shas, i18n });
   const body = html`<h1>${m.title}</h1>
 <p class="purpose">${m.publisher}</p>
+${lib.about}
 ${sourceStamp(m, m.tables[0], i18n)}
 <p class="mono">${t('data.age', { date: date(m.generatedAt.slice(0, 10)) })} <span data-age-from="${m.generatedAt}" data-age-one="${t('data.ageDays', { count: 1 })}" data-age-other="${t('data.ageDays', { count: 2 }).replace('2', '{count}')}"></span></p>
 ${takedown ? html`<p class="warning-chip">${t('data.takedownApplied', { date: date(takedown.date) })}</p>` : termsRow?.changed ? html`<p class="warning-chip">${t('data.termsChanged', { date: date(termsRow.checked) })}</p>` : ''}
@@ -268,10 +271,13 @@ ${takedown ? html`<p class="warning-chip">${t('data.takedownApplied', { date: da
   <p>${t('data.takedown')}</p>
 </section>
 ${publishes ? html`<section><h2>${t('data.download')}</h2>
-  <ul>${m.tables.map((tb) => html`<li><a href="/data/${m.dataset}/${m.version}/${tb.download.path}" download>${t('data.downloadLine', { table: tb.name, rows: tb.rows.toLocaleString('en-US'), size: tb.download.bytes.toLocaleString('en-US') })}</a><br><span class="mono">${t('data.sha')} ${tb.download.sha256}</span></li>`)}</ul>
+  <ul>${m.tables.map((tb) => html`<li><a href="/data/${m.dataset}/${m.version}/${tb.download.path}" download>${t('data.downloadLine', { table: tb.name, rows: tb.rows.toLocaleString('en-US'), size: tb.download.bytes.toLocaleString('en-US') })}</a><br><span class="mono">${t('data.sha')} ${tb.download.sha256}</span>${lib.perTable(tb)}</li>`)}</ul>
+  ${lib.urls}
+  ${lib.cite}
   <h3>${t('data.raw')}</h3>
   <ul>${m.raw.map((r) => html`<li class="mono"><a href="${r.release ?? r.url}">${t('data.rawLine', { name: r.name, size: r.bytes.toLocaleString('en-US'), sha: r.sha256 })}</a></li>`)}</ul>
 </section>` : ''}
+${lib.versions}
 ${m.tables.map((tb) => html`<section><h2>${t('data.columns', { table: tb.title ?? tb.name })}</h2><div class="table-wrap"><table>
   <thead><tr><th scope="col">${t('data.col.name')}</th><th scope="col">${t('data.col.type')}</th><th scope="col">${t('data.col.unit')}</th></tr></thead>
   <tbody>${tb.columns.map((c) => html`<tr><th scope="row" class="mono">${c.name}</th><td class="mono">${c.type}</td><td>${c.unit ?? ''}</td></tr>`)}</tbody>
@@ -306,7 +312,16 @@ export function developersPage({ i18n }) {
   const body = html`<h1>${t('dev.title')}</h1><p class="purpose">${t('dev.intro')}</p>
 <p>${t('dev.steps', { clone: CLONE, dir: DATA_DIR })}</p>
 ${snippets().map((s) => html`<h2>${s.client}</h2><p class="mono">${s.file}</p><pre class="mono report-preview" data-snippet="${s.client}">${s.text}</pre>`)}
-<p>${t('dev.tools')}</p>`;
+<p>${t('dev.tools')}</p>
+<section id="data-api"><h2>${t('dev.data.title')}</h2>
+<p>${t('dev.data.intro')}</p>
+<div class="table-wrap"><table><caption>${t('dev.data.title')}</caption>
+<thead><tr><th scope="col">${t('dev.data.address')}</th><th scope="col">${t('dev.data.what')}</th></tr></thead>
+<tbody>${['current', 'manifest', 'download', 'shard', 'latest'].map((k) => html`<tr><th scope="row" class="mono">${t(`dev.data.${k}.path`)}</th><td>${t(`dev.data.${k}`)}</td></tr>`)}</tbody>
+</table></div>
+<p>${t('dev.data.cors')}</p>
+<pre class="mono report-preview" data-snippet="fetch">${t('dev.data.example', { origin: ORIGIN })}</pre>
+<p>${t('dev.data.more')}</p></section>`;
   return layout({ i18n, title: `${t('dev.title')} · ${t('site.name')}`, description: t('dev.intro'), path: '/developers/', body });
 }
 

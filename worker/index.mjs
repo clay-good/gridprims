@@ -27,6 +27,13 @@ async function withHeaders(res, status = res.status) {
   return out;
 }
 
+/** Data files are a public API: any origin may read them, and nothing sent with them is personal. */
+function openData(res) {
+  res.headers.set('access-control-allow-origin', '*');
+  res.headers.set('cross-origin-resource-policy', 'cross-origin');
+  return res;
+}
+
 export default {
   /**
    * @param {Request} request
@@ -41,7 +48,17 @@ export default {
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       return withHeaders(new Response('Method not allowed', { status: 405, headers: { allow: 'GET, HEAD' } }));
     }
+    // The static data API (add-public-grid-data: data library): /data/<id>/latest/<file> redirects to
+    // the current version, and every data file can be read from any origin, without credentials.
+    const latest = /^\/data\/([a-z0-9-]+)\/latest\/(.+)$/.exec(url.pathname);
+    if (latest) {
+      const cur = await env.ASSETS.fetch(new Request(new URL(`/data/${latest[1]}/current.json`, url), request));
+      if (!cur.ok) return openData(await withHeaders(await env.ASSETS.fetch(new Request(new URL('/404.html', url), request)), 404));
+      const { version } = await cur.json();
+      return openData(await withHeaders(new Response(null, { status: 302, headers: { location: `/data/${latest[1]}/${version}/${latest[2]}`, 'cache-control': 'public, max-age=300' } })));
+    }
     const res = await env.ASSETS.fetch(request);
+    if (url.pathname.startsWith('/data/') && res.ok && !url.pathname.endsWith('/')) return openData(await withHeaders(res));
     if (res.status === 404) {
       const notFound = await env.ASSETS.fetch(new Request(new URL('/404.html', url), request));
       return withHeaders(notFound, 404);

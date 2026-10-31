@@ -52,6 +52,9 @@
       "title": "Power plants with operator, county, and balancing authority",
       "dataPeriod": "2025",
       "rows": 17349,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "plant_id",
@@ -487,6 +490,9 @@
       "title": "Generators: operable, proposed, and retired or canceled, with capacity, fuel, and dates",
       "dataPeriod": "2025",
       "rows": 36573,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "plant_id",

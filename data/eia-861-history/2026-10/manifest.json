@@ -78,6 +78,9 @@
       "title": "Sales, revenue, and customers by utility, state, and sector, 2021 to 2025",
       "dataPeriod": "2021-2025",
       "rows": 14134,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "data_year",
@@ -576,6 +579,9 @@
       "title": "Texas wires utilities' delivery-only figures, 2021 to 2025",
       "dataPeriod": "2021-2025",
       "rows": 32,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "data_year",

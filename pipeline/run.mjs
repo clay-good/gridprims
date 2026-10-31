@@ -44,6 +44,31 @@ export function findEntry(pattern, entries) {
 }
 
 /**
+ * Row-level changes from a table's previous version, by the table's key: rows
+ * added, removed, and changed, and, when the table names a column, the five
+ * largest changes in it (EIA-860's nameplate capacity, for one).
+ * @param {any[]} rows @param {any[]} before @param {string[]} key @param {string} [column]
+ */
+export function changesFrom(rows, before, key, column) {
+  const k = (r) => key.map((f) => r[f]).join('|');
+  const old = new Map(before.map((r) => [k(r), r]));
+  const now = new Map(rows.map((r) => [k(r), r]));
+  let changed = 0;
+  const deltas = [];
+  for (const [id, r] of now) {
+    const o = old.get(id);
+    if (!o) continue;
+    if (Object.keys(r).some((c) => r[c] !== o[c])) {
+      changed++;
+      if (column && r[column] !== o[column]) deltas.push({ key: id, from: o[column] ?? null, to: r[column] ?? null });
+    }
+  }
+  const out = { added: [...now.keys()].filter((id) => !old.has(id)).length, removed: [...old.keys()].filter((id) => !now.has(id)).length, changed };
+  if (column) out.largest = deltas.sort((a, b) => Math.abs((b.to ?? 0) - (b.from ?? 0)) - Math.abs((a.to ?? 0) - (a.from ?? 0)) || (a.key < b.key ? -1 : 1)).slice(0, 5);
+  return out;
+}
+
+/**
  * Check rows against the recipe's validate step and the previous version.
  * @returns {string[]} failures
  */
@@ -183,6 +208,9 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const asOfMonth = `${MONTHS[Number(vintage.asOf.slice(5, 7)) - 1]} ${vintage.asOf.slice(0, 4)}`;
   const attribution = entry.attribution.replace('{asOfMonth}', asOfMonth).replace('{release}', vintage.release ?? '');
   const self = { id: dataset, publisher: entry.publisher, license: entry.inputLicense ?? 'public-domain', attribution };
+  // The changelog compares with the version before this one; a re-run in the same month keeps that base.
+  const base = previous && (previous.version === version ? previous.previousVersion ?? null : previous.version);
+  const baseManifest = base && existsSync(join(datasetDir, base, 'manifest.json')) ? JSON.parse(readFileSync(join(datasetDir, base, 'manifest.json'), 'utf8')) : null;
   const tables = [];
   for (const { tb, rows, schema, by, unmatched, dataPeriod } of ready) {
     const table = tb.name;
@@ -209,8 +237,12 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     writeFileSync(join(dir, `${table}.csv.gz`), csv);
     const tooBig = [...shards.map((s) => [s.path, s.bytes]), [`${table}.csv.gz`, csv.length]].filter(([, b]) => b > MAX_FILE_BYTES);
     if (tooBig.length) return { ok: false, failures: tooBig.map(([p, b]) => `${p} is ${b} bytes, over the 20 MiB limit`) };
+    const bt = baseManifest?.tables.find((x) => x.name === table);
+    const before = bt ? bt.shards.flatMap((sh) => readShard(readFileSync(join(datasetDir, base, sh.path))).rows()) : null;
+    const key = tb.recipe.find((st) => st.step === 'validate').key;
+    const changes = before ? { from: base, ...changesFrom(rows, before, key, tb.changelog?.column) } : { first: true };
     tables.push({
-      name: table, title: tb.title, dataPeriod, rows: rows.length, columns: schema, partition: by,
+      name: table, title: tb.title, dataPeriod, rows: rows.length, changes, columns: schema, partition: by,
       shards, download: { path: `${table}.csv.gz`, bytes: csv.length, sha256: sha256(csv), format: 'text/csv; gzip' },
       license: lic.license, credits: lic.credits, notices: lic.notices,
       ...(joinedFrom[table] ? { joinedFrom: joinedFrom[table] } : {}),
@@ -230,6 +262,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
       return { url: r.url, name: r.url.split('/').pop(), bytes: r.bytes.length, sha256: r.sha256, ...(name ? { file: name } : ready.some((x) => x.entryName) ? { entries: ready.map((x) => x.entryName) } : {}), ...(!name && upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) };
     }),
     ...(vintage.release ? { release: vintage.release } : {}),
+    ...(base ? { previousVersion: base } : {}),
     tables,
   };
   writeFileSync(join(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');

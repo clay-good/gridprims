@@ -86,6 +86,7 @@ export function validateEntry(e) {
     }
   }
   if (e.posture !== undefined && !['mirror', 'derive', 'link'].includes(e.posture)) fail('posture', 'must be mirror, derive, or link');
+  if (typeof e.description?.contains !== 'string' || typeof e.description?.excludes !== 'string') fail('description', 'needs what the dataset contains and what it does not, for the data library');
   return errors;
 }
 

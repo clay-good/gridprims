@@ -51,6 +51,9 @@
       "title": "Net generation and fuel consumed by plant, prime mover, and fuel, by month",
       "dataPeriod": "2025",
       "rows": 18888,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "plant_id",

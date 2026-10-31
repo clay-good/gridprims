@@ -49,6 +49,9 @@
       "title": "Rates in effect, by state, with their structures and schedules",
       "dataPeriod": "2026-10",
       "rows": 38765,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "label",

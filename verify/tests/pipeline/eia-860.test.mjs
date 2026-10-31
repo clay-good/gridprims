@@ -12,6 +12,7 @@ import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { validateEntry } from '../../../pipeline/lib/registry.mjs';
 import { readShard } from '../../../core/lib/shard.mjs';
 import { EXPECTED_HEADER } from '../../../pipeline/normalize/eia-860-plants.mjs';
+import { EXPECTED_HEADERS as EXPECTED_GEN } from '../../../pipeline/normalize/eia-860-generators.mjs';
 import entry from '../../../pipeline/registry/eia-860.mjs';
 import { eia860Zip, generatorRows, smallTables } from '../../fixtures/data/eia-860/workbook.mjs';
 
@@ -86,4 +87,24 @@ test('registry: EIA-860 passes the CEII screen as infrastructure, owned by add-p
   assert.equal(entry.owner, 'add-public-grid-data');
   const { checklist, ...rest } = entry.ceii;
   assert.match(validateEntry({ ...entry, ceii: rest }).join('\n'), /ceii\.checklist\.publicSourceOnly is not confirmed/);
+});
+
+test('a new version\'s changelog counts added, removed, and changed rows by key, with the largest capacity changes', async () => {
+  const out = mkdtempSync(join(tmpdir(), 'gridprims-860-'));
+  const first = await run({ outDir: out });
+  assert.deepEqual(first.manifest.tables.map((t) => t.changes), [{ first: true }, { first: true }]);
+  // A revised release: one generator uprated, one gone, one new.
+  const g = generatorRows();
+  g.Operable[0][EXPECTED_GEN.Operable.indexOf('Nameplate Capacity (MW)')] = 120;
+  g.Operable.splice(1, 1);
+  g.Proposed.push([...g.Proposed[0]]);
+  g.Proposed[1][EXPECTED_GEN.Proposed.indexOf('Generator ID')] = 'GT8';
+  const next = await run({ outDir: out, retrieved: '2026-11-30', input: eia860Zip({ generators: g }) });
+  assert.equal(next.ok, true, next.failures?.join('\n'));
+  assert.equal(next.manifest.previousVersion, '2026-10');
+  const gens = next.manifest.tables.find((t) => t.name === 'generators').changes;
+  assert.deepEqual({ ...gens, largest: gens.largest.slice(0, 1) }, { from: '2026-10', added: 1, removed: 1, changed: 1, largest: [{ key: '9|1|operable', from: 86.9, to: 120 }] });
+  // A re-run in the same month replaces the version but keeps comparing with the one before.
+  const again = await run({ outDir: out, retrieved: '2026-11-30', input: eia860Zip({ generators: g }) });
+  assert.equal(again.manifest.tables.find((t) => t.name === 'generators').changes.from, '2026-10');
 });

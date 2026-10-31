@@ -5,6 +5,7 @@
 export default {
   id: 'eia-860',
   title: 'Annual Electric Generator Report (Form EIA-860)',
+  description: { contains: 'Every US power plant of 1 MW or more and its generators, operable, proposed, and retired, with capacity, technology, fuel, and dates, as of the end of 2025.', excludes: 'No coordinates, street addresses, grid voltages, or pipeline names; no generation (that is EIA-923).' },
   publisher: 'U.S. Energy Information Administration',
   sourceUrl: 'https://www.eia.gov/electricity/data/eia860/',
   terms: {
@@ -55,6 +56,8 @@ export default {
     {
       name: 'generators',
       title: 'Generators: operable, proposed, and retired or canceled, with capacity, fuel, and dates',
+      // The changelog lists the five largest nameplate changes (a revised final release, for one).
+      changelog: { column: 'nameplate_mw' },
       recipe: [
         { step: 'unzip', entry: '3_1_Generator_Y{year}.xlsx' },
         { step: 'read-xlsx', sheets: ['Operable', 'Proposed', 'Retired and Canceled'], headerRows: 2 },

@@ -48,6 +48,9 @@
       "title": "Generators by status as of the month: operating, planned, retired, canceled or postponed",
       "dataPeriod": "2026-09",
       "rows": 39908,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "plant_id",

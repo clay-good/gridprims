@@ -48,6 +48,9 @@
       "title": "ZCTAs and the counties they share land with, with each county's share",
       "dataPeriod": "2020",
       "rows": 46953,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "zcta",

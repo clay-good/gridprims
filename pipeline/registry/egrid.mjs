@@ -8,6 +8,7 @@ const EDITION = 'eGRID2023 (revision 2)';
 export default {
   id: 'egrid',
   title: 'Emissions & Generation Resource Integrated Database (eGRID)',
+  description: { contains: "eGRID2023: each plant's emissions, generation, and fuel; each subregion's total output and non-baseload emission rates; and EPA's ZIP-to-subregion lookup.", excludes: 'No hourly or marginal rates, and no plant coordinates; eGRID2024 has not been released.' },
   publisher: 'U.S. Environmental Protection Agency',
   sourceUrl: 'https://www.epa.gov/egrid',
   terms: {

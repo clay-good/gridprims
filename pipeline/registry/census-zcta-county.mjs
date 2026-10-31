@@ -5,6 +5,7 @@
 export default {
   id: 'census-zcta-county',
   title: '2020 ZCTA to County Relationship File (U.S. Census Bureau)',
+  description: { contains: "Each 2020 Census ZIP Code Tabulation Area and the counties it shares land with, with each county's share of its land.", excludes: 'ZCTAs approximate postal ZIP codes; PO-box-only ZIPs have none.' },
   publisher: 'U.S. Census Bureau',
   sourceUrl: 'https://www.census.gov/geographies/reference-files/time-series/geo/relationship-files.2020.html',
   terms: {

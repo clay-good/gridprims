@@ -49,6 +49,9 @@
       "title": "Interconnection requests with status, dates, county, type, and capacity",
       "dataPeriod": "2025",
       "rows": 38201,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "q_id",

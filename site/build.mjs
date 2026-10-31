@@ -128,7 +128,11 @@ export async function build(opts = {}) {
     const termsRow = health?.datasets.find((d) => d.id === id)?.terms;
     // The posture in force: a takedown, then the latest terms check, then the registry (hand-set or derived from the terms).
     const posture = entry.takedown ? 'link' : termsRow?.posture ?? postureOf(entry).posture;
-    write(`/data/${id}/`, datasetPage({ manifest: JSON.parse(readFileSync(join(ROOT, 'data', id, version, 'manifest.json'), 'utf8')), i18n, posture, termsRow, takedown: entry.takedown }));
+    // Every version folder, newest first, with its manifest's checksum for the citation.
+    const versions = readdirSync(join(ROOT, 'data', id), { withFileTypes: true }).filter((d) => d.isDirectory() && /^\d{4}-\d{2}$/.test(d.name)).map((d) => d.name).sort().reverse();
+    const shas = Object.fromEntries(versions.map((v) => [v, sha256(readFileSync(join(ROOT, 'data', id, v, 'manifest.json')))]));
+    write(`/data/${id}/`, datasetPage({ manifest: JSON.parse(readFileSync(join(ROOT, 'data', id, version, 'manifest.json'), 'utf8')), i18n, posture, termsRow, takedown: entry.takedown, entry, shas,
+      versions: versions.map((v) => JSON.parse(readFileSync(join(ROOT, 'data', id, v, 'manifest.json'), 'utf8'))) }));
     // Under the link posture no values are published, so none of the dataset's files deploy.
     if (posture === 'link') rmSync(join(outDir, 'data', id), { recursive: true, force: true });
   }
@@ -164,7 +168,8 @@ export async function build(opts = {}) {
   write('/report/', reportPage({ i18n }));
   write('/', homePage({ tools: TOOLS, i18n }));
   write('/404.html', notFoundPage({ tools: TOOLS, i18n }));
-  for (const id of ['bills', 'data', 'carbon', 'grid', 'learn']) write(`/${id}/`, sectionPage({ id, tools: TOOLS, datasets, i18n }));
+  const entries = new Map(await Promise.all(datasets.map(async (d) => [d.dataset, (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${d.dataset}.mjs`)).href)).default])));
+  for (const id of ['bills', 'data', 'carbon', 'grid', 'learn']) write(`/${id}/`, sectionPage({ id, tools: TOOLS, datasets, entries, i18n }));
 
   writeFileSync(join(outDir, '_redirects'), redirectsFile(redirects));
   mkdirSync(join(outDir, '.well-known'), { recursive: true });

@@ -29,8 +29,8 @@
 
 ## 6. Data library
 
-- [ ] 6.1 Render library pages with versions, checksums, changelogs, and citations; verify the copied citation text and a re-downloaded checksum match
-- [ ] 6.2 Serve versioned file URLs with a `latest` redirect and open CORS, and document them on the Developers page; verify the notebook scenario from a second origin and the per-file license scenario
+- [x] 6.1 Render library pages with versions, checksums, changelogs, and citations; verify the copied citation text and a re-downloaded checksum match
+- [x] 6.2 Serve versioned file URLs with a `latest` redirect and open CORS, and document them on the Developers page; verify the notebook scenario from a second origin and the per-file license scenario
 
 ## 7. Launch readiness
 

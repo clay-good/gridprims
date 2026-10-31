@@ -5,6 +5,7 @@
 export default {
   id: 'urdb',
   title: 'U.S. Utility Rate Database (OpenEI)',
+  description: { contains: 'The OpenEI rates still in effect in October 2026, with their tiers, schedules, and demand charges, placed in each state their utility serves.', excludes: 'No expired rates, and no riders or fuel adjustments the database does not hold; many rates are years old.' },
   publisher: 'OpenEI (National Laboratory of the Rockies), with rates entered by contributors',
   sourceUrl: 'https://apps.openei.org/USURDB/',
   terms: {

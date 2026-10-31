@@ -57,6 +57,9 @@
       "title": "Plant emissions, generation, fuel, and subregion",
       "dataPeriod": "2023",
       "rows": 12612,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "plant_id",
@@ -583,6 +586,9 @@
       "title": "Subregion total output and non-baseload emission rates",
       "dataPeriod": "2023",
       "rows": 27,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "subregion",
@@ -703,6 +709,9 @@
       "title": "ZIP codes and the eGRID subregions they fall in (EPA Power Profiler)",
       "dataPeriod": "2023",
       "rows": 41588,
+      "changes": {
+        "first": true
+      },
       "columns": [
         {
           "name": "zip",
