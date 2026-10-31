@@ -56,7 +56,7 @@ import strings from './strings/en-US.mjs';
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 /** Folders the browser imports from, copied as-is: the same files the tests run. */
-const SHARED = ['core', 'parsers', 'site/lib', 'site/ui', 'site/pages', 'site/strings', 'site/samples', 'site/styles/site.css', 'site/cards'];
+const SHARED = ['core', 'parsers', 'site/lib', 'site/ui', 'site/pages', 'site/strings', 'site/samples', 'site/styles/site.css', 'site/cards', 'site/fonts'];
 
 /** @param {string} s */
 export const sha256 = (s) => createHash('sha256').update(s).digest('hex');
