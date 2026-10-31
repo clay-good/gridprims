@@ -35,8 +35,29 @@ export function laneCells(lane, { tools, exists, asOf }, { t }) {
   }).filter(Boolean);
 }
 
-/** @param {{tools: any[], i18n: any, exists: (p: string) => boolean, asOf: (ids: string[]) => string | null}} p */
-export function homePage({ tools, i18n, exists, asOf }) {
+/** The worked plate: the shipped sample, already read, so the page proves the product before it lists it. */
+function proofPlate(p, { t, date }) {
+  const n = (x, d = 0) => x.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const figure = (label, value, unit) => html`<div class="figure"><p class="legend">${label}</p><p class="figure-value">${value}<span class="figure-unit">${unit}</span></p></div>`;
+  return html`<section class="proof" aria-labelledby="proof-title">
+  <h2 id="proof-title" class="legend">${t('home.proof.title')}</h2>
+  <div class="answer"><div class="sign">
+    <p class="label">${t('home.proof.peak')}</p>
+    <p class="number">${n(p.peakKw, 1)}<span class="unit">kW</span></p>
+    <p class="sentence">${t('home.proof.sentence', { when: date(new Date(p.peakStartMs).toISOString().slice(0, 10)) })}</p>
+    <span class="source-tab">${t('home.proof.basis', { file: p.file, intervals: n(p.intervals), from: date(new Date(p.fromMs).toISOString().slice(0, 10)), to: date(new Date(p.toMs).toISOString().slice(0, 10)) })}</span>
+  </div></div>
+  <div class="figures">
+    ${figure(t('home.proof.energy'), n(p.totalKwh), 'kWh')}
+    ${figure(t('home.proof.loadFactor'), n(p.loadFactor * 100, 1), '%')}
+    ${figure(t('home.proof.intervals'), n(p.intervals), '')}
+  </div>
+  <p class="proof-actions"><a class="button primary" href="/files/">${t('home.proof.open')}</a> <span class="unit-hint">${t('home.proof.privacy')}</span></p>
+</section>`;
+}
+
+/** @param {{tools: any[], i18n: any, exists: (p: string) => boolean, asOf: (ids: string[]) => string | null, proof?: any}} p */
+export function homePage({ tools, i18n, exists, asOf, proof = null }) {
   const { t } = i18n;
   const lane = (id) => {
     const cells = laneCells(id, { tools, exists, asOf }, i18n);
@@ -44,6 +65,7 @@ export function homePage({ tools, i18n, exists, asOf }) {
   };
   // The rail already carries the wordmark, so the heading is the tagline: both lanes fit a 360 × 640 first screen.
   const body = html`<h1 class="home-title">${t('site.tagline')}</h1>
+${proof ? proofPlate(proof, i18n) : ''}
 ${lane('home')}
 ${lane('work')}
 <p><a href="${CATALOG_PATH}">${t('home.allTools')}</a></p>`;
