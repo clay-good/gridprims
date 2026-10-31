@@ -7,6 +7,7 @@
 import { html } from '../lib/html.mjs';
 import { heatmapChart, lineChart, tableView } from '../lib/chart.mjs';
 import { formatNumber } from '../../core/lib/precision.mjs';
+import { reviewChip } from './workbench-review.mjs';
 import { baseload, demandOver, durationCurve, flags, heatmap, profiles, quality } from '../../core/lib/load-insights.mjs';
 
 const num = (x, sig = 3) => formatNumber(x, { sigFigs: sig });
@@ -16,9 +17,9 @@ const hourText = (h) => (h === 0 ? 'midnight' : h === 12 ? 'noon' : h < 12 ? `${
 /**
  * @param {any} v the workbench's view of one series
  * @param {{t: Function}} i18n
- * @param {{when: (ms: number, zone: string) => string, window?: {minutes: number, mode: 'block' | 'rolling'}, aggregate?: {meters: any[], peakKw: number, diversityKw: number}}} opts
+ * @param {{when: (ms: number, zone: string) => string, window?: {minutes: number, mode: 'block' | 'rolling'}, aggregate?: {meters: any[], peakKw: number, diversityKw: number}, reviewed?: Set<string>}} opts
  */
-export function renderInsights(v, { t }, { when, window: w, aggregate }) {
+export function renderInsights(v, { t }, { when, window: w, aggregate, reviewed = new Set() }) {
   const s = v.series;
   const b = baseload(s);
   const fl = flags(s, v.zone);
@@ -27,7 +28,7 @@ export function renderInsights(v, { t }, { when, window: w, aggregate }) {
   const curve = durationCurve(s);
   const p = profiles(s, v.zone);
   const heat = heatmap(s, v.zone);
-  return html`<h2>${t('insights.title')}</h2>
+  return html`<h2>${t('insights.title')} ${reviewChip('load.interval-insights', reviewed, { t })}</h2>
   <p><button class="button" type="button" data-reopt-export>${t('reopt.export')}</button></p>
   <div data-reopt-result aria-live="polite"></div>
   ${q.label ? html`<p class="strip" data-partial>${t('insights.partial', { label: q.label })}</p>` : ''}

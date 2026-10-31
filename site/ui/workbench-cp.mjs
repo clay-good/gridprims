@@ -7,14 +7,15 @@
 import { html } from '../lib/html.mjs';
 import { formatNumber } from '../../core/lib/precision.mjs';
 import { PROGRAMS } from '../../core/lib/coincident-peak.mjs';
+import { reviewChip } from './workbench-review.mjs';
 
 const num = (x) => formatNumber(x, { sigFigs: 4 });
 const money = (x) => `$${x.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-/** The panel's form. @param {{t: Function}} i18n */
-export function cpPanel({ t }) {
+/** The panel's form. @param {{t: Function}} i18n @param {Set<string>} [reviewed] */
+export function cpPanel({ t }, reviewed = new Set()) {
   return html`<section class="panel picker" data-cp aria-labelledby="cp-title">
-  <h2 id="cp-title">${t('cp.title')}</h2>
+  <h2 id="cp-title">${t('cp.title')} ${reviewChip('load.coincident-peak', reviewed, { t })}</h2>
   <p>${t('cp.intro')}</p>
   <form class="picker-row" data-cp-form novalidate>
     <div class="field"><label for="cp-program">${t('cp.program')}</label><select id="cp-program" name="program">${PROGRAMS.map((p) => html`<option value="${p.id}">${p.name}</option>`)}</select></div>

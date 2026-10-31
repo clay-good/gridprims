@@ -16,6 +16,7 @@ import { tariffPicker } from '../ui/tariff-picker.mjs';
 import { averagePicker } from '../ui/average-picker.mjs';
 import { billPanel } from '../ui/workbench-bill.mjs';
 import { cpPanel } from '../ui/workbench-cp.mjs';
+import { WORKBENCH_CAPABILITIES } from '../ui/workbench-review.mjs';
 
 /** Pickers that fill a tool's inputs from public data: the section they render and the script that runs it. */
 const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'] };
@@ -222,9 +223,9 @@ export function settingsPage({ i18n }) {
 }
 
 /** The file workbench: a dropzone, the receipt, and the answer for the loaded file. */
-export function filesPage({ i18n }) {
+export function filesPage({ i18n, reviewed = new Set() }) {
   const { t } = i18n;
-  const body = html`<article data-workbench>
+  const body = html`<article data-workbench data-reviewed="${[...reviewed].filter((id) => id.startsWith('load.')).join(' ')}">
   <h1>${t('files.title')}</h1>
   <p class="purpose">${t('files.purpose')}</p>
   <noscript><p class="panel">${t('files.needsJs')}</p></noscript>
@@ -244,8 +245,8 @@ export function filesPage({ i18n }) {
   <p><button class="button" type="button" data-make-report>${t('report.make')}</button></p>
   <section class="panel report-view" data-report-view hidden aria-labelledby="report-view-title"></section>
   <section class="panel" data-insights></section>
-  ${billPanel(i18n)}
-  ${cpPanel(i18n)}
+  ${billPanel(i18n, reviewed)}
+  ${cpPanel(i18n, reviewed)}
   <section class="panel" data-receipt></section>
 </article>
 <div class="drag-overlay" data-overlay hidden><p>${t('files.dragging')}</p></div>`;
@@ -444,7 +445,8 @@ export function reviewPage({ tools, signoffs, i18n }) {
   const { t } = i18n;
   const body = html`<h1>${t('review.title')}</h1><p class="purpose">${t('review.intro')}</p>
 <div class="table-wrap"><table><thead><tr><th scope="col">${t('review.col.tool')}</th><th scope="col">${t('review.col.status')}</th></tr></thead>
-<tbody>${tools.map(({ manifest: m }) => html`<tr><th scope="row"><a href="${toolPath(m.id)}">${m.title}</a></th><td>${signoffs.some((x) => x.tool === m.id) ? t('limits.review.signed off') : t('strip.reviewPending')}</td></tr>`)}</tbody></table></div>`;
+<tbody>${tools.map(({ manifest: m }) => html`<tr><th scope="row"><a href="${toolPath(m.id)}">${m.title}</a></th><td>${signoffs.some((x) => x.tool === m.id) ? t('limits.review.signed off') : t('strip.reviewPending')}</td></tr>`)}
+${WORKBENCH_CAPABILITIES.map(([id, key]) => html`<tr data-capability="${id}"><th scope="row"><a href="/files/">${t(key)}</a> <span class="unit-hint mono">${id}</span></th><td>${signoffs.some((x) => x.tool === id) ? t('limits.review.signed off') : t('strip.reviewPending')}</td></tr>`)}</tbody></table></div>`;
   return layout({ i18n, title: `${t('review.title')} · ${t('site.name')}`, description: t('review.intro'), path: '/review-status/', body });
 }
 

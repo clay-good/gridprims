@@ -6,6 +6,7 @@
 
 import { html } from '../lib/html.mjs';
 import { formatNumber } from '../../core/lib/precision.mjs';
+import { reviewChip } from './workbench-review.mjs';
 
 const money = (x) => `$${x.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const qty = (x) => formatNumber(x, { decimals: 2 });
@@ -15,10 +16,10 @@ export const CONDITION_BOXES = ['electric-vehicle', 'space-heating', 'net-meteri
 export const hourText = (h) => (h % 24 === 0 ? 'midnight' : h === 12 ? 'noon' : h < 12 ? `${h} am` : `${h - 12} pm`);
 const rateText = (r, unit) => (unit === 'kWh' ? `$${formatNumber(r, { decimals: 5 })}/kWh` : unit === 'kW' || unit === 'kVA' ? `$${formatNumber(r, { decimals: 2 })}/${unit}` : money(r));
 
-/** The empty panel the page script fills. @param {{t: Function}} i18n */
-export function billPanel({ t }) {
+/** The empty panel the page script fills. @param {{t: Function}} i18n @param {Set<string>} [reviewed] */
+export function billPanel({ t }, reviewed = new Set()) {
   return html`<section class="panel picker" id="plans" data-bill aria-labelledby="bill-title">
-  <h2 id="bill-title">${t('bill.title')}</h2>
+  <h2 id="bill-title">${t('bill.title')} ${reviewChip('load.bill-explainer', reviewed, { t })}</h2>
   <p>${t('bill.intro')}</p>
   <form class="picker-row" data-bill-zip novalidate>
     <div class="field"><label for="bill-zip">${t('bill.picker.zip')}</label>
@@ -31,7 +32,7 @@ export function billPanel({ t }) {
   <p data-bill-holidays-field hidden><label><input type="checkbox" data-bill-holidays> ${t('bill.holidays')}</label></p>
   <div data-bill-result aria-live="polite"></div>
   <div data-compare-field hidden>
-    <h3>${t('compare.title')}</h3>
+    <h3>${t('compare.title')} ${reviewChip('load.tariff-comparison', reviewed, { t })}</h3>
     <fieldset data-conditions hidden><legend>${t('plans.conditions')}</legend>
       ${CONDITION_BOXES.map((c) => html`<label class="check"><input type="checkbox" name="have" value="${c}"> ${t(`plans.have.${c}`)}</label>`)}
     </fieldset>
@@ -47,7 +48,7 @@ export function billPanel({ t }) {
     <div data-compare-result aria-live="polite"></div>
   </div>
   <div data-screen-field hidden>
-    <h3>${t('screen.title')}</h3>
+    <h3>${t('screen.title')} ${reviewChip('load.storage-screen', reviewed, { t })}</h3>
     <p>${t('screen.intro')}</p>
     <form class="picker-row" data-screen novalidate>
       ${[['power', 'screen.power'], ['energy', 'screen.energy'], ['roundTrip', 'screen.roundTrip', '85'], ['socMin', 'screen.socMin', '10'], ['socMax', 'screen.socMax', '90'], ['cost', 'screen.cost'], ['solarKw', 'screen.solarKw']].map(([name, label, value]) => html`<div class="field"><label for="screen-${name}">${t(label)}</label><input id="screen-${name}" name="${name}" class="mono" inputmode="decimal" autocomplete="off" value="${value ?? ''}"></div>`)}

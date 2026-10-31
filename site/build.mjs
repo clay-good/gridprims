@@ -119,7 +119,9 @@ export async function build(opts = {}) {
   writeFileSync(join(outDir, 'limits/limits.json'), JSON.stringify(limits, null, 2) + '\n');
   write('/changelog/', changelogPage({ entries: changelog, i18n }));
   write('/settings/', settingsPage({ i18n }));
-  write('/files/', filesPage({ i18n }));
+  // Workbench capabilities carry "Review pending" until docs/review-signoffs.md has a row for them.
+  const reviewedIds = new Set(tableRows(readFileSync(join(ROOT, 'docs/review-signoffs.md'), 'utf8')).keys());
+  write('/files/', filesPage({ i18n, reviewed: reviewedIds }));
   write('/privacy/', privacyPage({ i18n }));
   write('/developers/', developersPage({ i18n }));
   write('/security/', securityPage({ i18n }));

@@ -67,7 +67,8 @@ function render() {
 /** "What this file says", with the demand window the user picked. */
 function renderInsightsPanel() {
   const v = current.view;
-  $('[data-insights]').innerHTML = String(renderInsights(v, i18n, { when, window: current.window, aggregate: v.aggregate }));
+  const reviewed = new Set(($('[data-workbench]').dataset.reviewed ?? '').split(' ').filter(Boolean));
+  $('[data-insights]').innerHTML = String(renderInsights(v, i18n, { when, window: current.window, aggregate: v.aggregate, reviewed }));
   $('[data-insights]').dataset.rendered = String(Number($('[data-insights]').dataset.rendered ?? 0) + 1);
 }
 $('[data-insights]').addEventListener('change', (e) => {
