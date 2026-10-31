@@ -12,6 +12,19 @@ export const LEGACY = ['2025-11-25', '2025-06-18'];
 export const SUPPORTED = [MODERN, ...LEGACY];
 export const SERVER_INFO = { name: 'gridprims', version: '0.1.0' };
 export const LIST_TTL_MS = 86_400_000;
+export const MAX_MESSAGE_BYTES = 102_400;
+
+/**
+ * Keep a tool result's message under the size limit: when the JSON text copy
+ * for older clients would push it over, the copy becomes a short note and the
+ * structured content (already paged by the tool) stays whole.
+ */
+function fitResult(result, id) {
+  const size = (r) => new TextEncoder().encode(JSON.stringify({ jsonrpc: '2.0', id, result: r })).length;
+  if (size(result) <= MAX_MESSAGE_BYTES || !result.structuredContent) return result;
+  const note = 'This result is large, so its full detail is in structuredContent only. Page through intervals with nextCursor.';
+  return { ...result, content: [{ type: 'text', text: note }] };
+}
 
 const VERSION_KEY = 'io.modelcontextprotocol/protocolVersion';
 const CAPABILITIES = { tools: { listChanged: false }, resources: { listChanged: false, subscribe: false } };
@@ -44,6 +57,7 @@ export function checkArguments(schema, args) {
     if (!p) return `Unknown argument "${k}". Accepted: ${Object.keys(schema.properties ?? {}).join(', ')}.`;
     const type = Array.isArray(v) ? 'array' : v === null ? 'null' : typeof v;
     if (p.type === 'integer' ? !Number.isInteger(v) : p.type === 'object' ? type !== 'object' : type !== p.type) return `"${k}" must be ${p.type === 'integer' ? 'a whole number' : `a ${p.type}`}.`;
+    if (p.enum && !p.enum.includes(v)) return `"${k}" must be one of ${p.enum.join(', ')}.`;
     if (typeof v === 'string' && ((p.minLength && v.length < p.minLength) || (p.maxLength && v.length > p.maxLength))) return `"${k}" must be ${p.minLength ?? 0} to ${p.maxLength ?? 'any number of'} characters.`;
     if (typeof v === 'number' && ((p.minimum !== undefined && v < p.minimum) || (p.maximum !== undefined && v > p.maximum))) return `"${k}" must be from ${p.minimum} to ${p.maximum}.`;
   }
@@ -114,7 +128,7 @@ export function createServer(opts = {}) {
           const problem = checkArguments(tool.inputSchema, args);
           const result = problem ? fail(problem) : await handlers[tool.name](args);
           log(opts.debug ? `${tool.name} ${Date.now() - started} ms ${JSON.stringify(args)}` : `${tool.name} ${Date.now() - started} ms`);
-          return respond(complete(result));
+          return respond(complete(fitResult(result, id)));
         }
         default:
           return error(id, -32601, `Method not found: ${method}`);

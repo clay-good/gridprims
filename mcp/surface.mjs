@@ -100,12 +100,23 @@ export const TOOL_SURFACE = [
       additionalProperties: false,
       properties: {
         path: { type: 'string', description: 'An absolute path, or one relative to an allowed folder.' },
-        handle: { type: 'string', description: 'A handle from an earlier call, to see its receipt again.' },
+        handle: { type: 'string', description: 'A handle from an earlier call: returns its receipt, or re-reads it with new choices without touching the file again.' },
+        zone: { type: 'string', description: 'IANA time zone of the meter, such as America/Chicago. Default: from a Green Button file, else this computer\'s zone.' },
+        stampsMark: { type: 'string', enum: ['auto', 'start', 'end'], description: 'Whether timestamps mark interval starts or ends. Default: detected.' },
+        quantity: { type: 'string', enum: ['auto', 'energy', 'demand'], description: 'Whether values are energy (kWh) or demand (kW). Default: from the column header.' },
+        series: { type: 'integer', minimum: 0, maximum: 1000, description: 'Also return the first page of this series\' intervals.' },
+        cursor: { type: 'string', description: 'nextCursor from a previous page.' },
       },
     },
     outputSchema: {
       type: 'object',
-      properties: { handle: STR, receipt: OBJ, source_text: { type: 'array', items: STR } },
+      properties: {
+        handle: STR, format: STR, receipt: OBJ,
+        series: { type: 'array', items: { type: 'object', properties: { index: { type: 'integer' }, channel: STR, intervals: { type: 'integer' }, totalKwh: { type: 'number' }, peakKw: { type: 'number' }, peakStartUtc: STR, loadFactor: {}, monthly: { type: 'array', items: OBJ } } } },
+        intervals: OBJ,
+        source_text: { type: 'array', items: STR },
+        rows: { type: 'array', items: { type: 'array' } }, nextCursor: STR,
+      },
     },
   },
   {

@@ -6,6 +6,11 @@ import { runTool } from '../core/contract/run.mjs';
 import { buildCommandIndex, searchCommands } from '../core/contract/command.mjs';
 import { VALIDATION_LEVELS } from '../core/contract/manifest.mjs';
 import { checkPath } from './files.mjs';
+import { createHandleStore } from './handles.mjs';
+import { intakeFile } from '../core/intake/index.mjs';
+import { loadStats } from '../core/lib/load-stats.mjs';
+import { readFileSync } from 'node:fs';
+import { basename } from 'node:path';
 
 export const SITE = 'https://gridprims.com';
 const toolPath = (id) => `/tools/${id.split('.').join('/')}/`;
@@ -16,12 +21,81 @@ export const ok = (structured) => ({ content: [{ type: 'text', text: JSON.string
 /** A result the model can act on: isError with a message naming the field and the fix. */
 export const fail = (message, structured) => ({ content: [{ type: 'text', text: message }], ...(structured ? { structuredContent: structured } : {}), isError: true });
 
+export const PAGE_ROWS = 1000;
+const iso = (ms) => (Number.isFinite(ms) ? new Date(ms).toISOString() : null);
+const r4 = (x) => (x === null || !Number.isFinite(x) ? x : Math.round(x * 1e4) / 1e4);
+const truncate = (t) => [...String(t)].slice(0, 80).join('');
+
+/**
+ * The receipt as an agent sees it: computed values and fixed vocabulary only.
+ * Every string that came from the file (headers, meter names) is moved into
+ * source_text, and series are referred to by index.
+ */
+export function agentView(result, handle) {
+  const rc = result.receipt;
+  const sourceText = new Set();
+  for (const t of rc.columns.source_text ?? []) sourceText.add(truncate(t));
+  for (const v of rc.columns.values ?? []) sourceText.add(truncate(v));
+  const zone = rc.time.zone;
+  const series = result.series.map((s, index) => {
+    if (s.meter) sourceText.add(truncate(s.meter));
+    const st = loadStats(s, zone);
+    return {
+      index, channel: s.channel, intervalMinutes: s.intervalMinutes, unitRead: s.unitRead, quantity: s.quantity,
+      intervals: st.intervals, totalKwh: r4(st.totalKwh), peakKw: r4(st.peakKw), peakStartUtc: iso(st.peakStartMs), loadFactor: r4(st.loadFactor),
+      monthly: st.monthly.map((m) => ({ month: m.month, kwh: r4(m.kwh), peakKw: r4(m.peakKw), peakStartUtc: iso(m.peakStartMs), intervals: m.intervals })),
+      ...(s.meter ? { meterNameInSourceText: true } : {}),
+    };
+  });
+  const seriesIndex = (meter, channel) => result.series.findIndex((s) => s.meter === meter && s.channel === channel);
+  return {
+    handle,
+    format: result.format,
+    receipt: {
+      file: { size: rc.file.size, rowsRead: rc.file.rowsRead, rowsSkipped: rc.file.rowsSkipped, ...(rc.file.encoding ? { encoding: rc.file.encoding } : {}), ...(rc.file.delimiter ? { delimiter: rc.file.delimiter } : {}) },
+      layout: rc.columns.layout,
+      time: {
+        intervalMinutes: rc.time.intervalMinutes, mixedIntervals: rc.time.mixedIntervals, stampsMark: rc.time.stampsMark, stampsDetected: rc.time.stampsDetected,
+        stampsReason: rc.time.stampsReason,
+        zone, ...(rc.time.zoneFromFile ? { zoneFromFile: rc.time.zoneFromFile } : {}), firstStartUtc: iso(rc.time.firstMs), lastStartUtc: iso(rc.time.lastMs), months: rc.time.months,
+      },
+      values: { quantity: rc.values.quantity, unitsRead: rc.values.unitsRead, unitAssumed: Boolean(rc.values.assumption) },
+      quality: {
+        gaps: rc.quality.gaps.map((g) => ({ series: seriesIndex(g.meter, g.channel), startUtc: iso(g.startMs), endUtc: iso(g.endMs), intervals: g.intervals })),
+        duplicates: { identical: rc.quality.duplicates.identical, conflicting: rc.quality.duplicates.conflicting, rule: rc.quality.duplicates.rule },
+        repeatedIntervalsKept: rc.quality.dst.repeatedKept,
+      },
+      choices: rc.choices,
+    },
+    series,
+    source_text: [...sourceText],
+  };
+}
+
+const encodeCursor = (c) => Buffer.from(JSON.stringify(c)).toString('base64url');
+const decodeCursor = (s) => { try { return JSON.parse(Buffer.from(s, 'base64url').toString()); } catch { return null; } };
+
 const unknownTool = (id) => fail(`No tool has the id ${JSON.stringify(id)}. Known tools: ${TOOLS.map((t) => t.manifest.id).join(', ')}. Use gridprims_search to find one.`);
 
 /**
- * @param {{allowDirs: string[]}} ctx
+ * One page of a series' intervals: [start UTC, kWh] rows with an opaque, deterministic cursor.
+ * @param {{result: any}} entry
+ */
+function page(entry, handle, index, offset) {
+  const s = entry.result.series[index];
+  if (!s) return { series: index, rows: [], error: `No series ${index}; this file has ${entry.result.series.length}.` };
+  const end = Math.min(offset + PAGE_ROWS, s.startMs.length);
+  const rows = [];
+  for (let i = offset; i < end; i++) rows.push([iso(s.startMs[i]), s.kwh[i]]);
+  return { series: index, columns: ['startUtc', 'kwh'], offset, total: s.startMs.length, rows, ...(end < s.startMs.length ? { nextCursor: encodeCursor({ h: handle, s: index, o: end }) } : {}) };
+}
+
+/**
+ * @param {{allowDirs: string[], zone?: string}} ctx
  */
 export function createHandlers(ctx) {
+  const handles = createHandleStore();
+  const deviceZone = ctx.zone ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
   return {
     gridprims_search({ query, limit = 8 }) {
       const results = searchCommands(String(query), INDEX, limit).map((r) => ({
@@ -57,13 +131,34 @@ export function createHandlers(ctx) {
       return ok(r);
     },
 
-    gridprims_analyze_file({ path, handle }) {
-      if (handle !== undefined) return fail('That handle is unknown or expired. Analyze the file again to get a new one.');
-      const checked = checkPath(path, ctx.allowDirs);
+    async gridprims_analyze_file({ path, handle, zone, stampsMark, quantity, series, cursor }) {
+      let entry;
+      if (cursor !== undefined) {
+        const c = decodeCursor(cursor);
+        entry = c && handles.get(c.h);
+        if (!entry) return fail('That cursor is unknown or its handle expired. Analyze the file again.');
+        return ok(page(entry, c.h, c.s, c.o));
+      }
+      if (handle !== undefined && path === undefined) {
+        entry = handles.get(handle);
+        if (!entry) return fail('That handle is unknown or expired. Analyze the file again to get a new one.');
+        if (zone === undefined && stampsMark === undefined && quantity === undefined) {
+          return ok(series === undefined ? entry.view : { ...entry.view, intervals: page(entry, handle, series, 0) });
+        }
+      }
+      const checked = entry ? { ok: true } : checkPath(path, ctx.allowDirs);
       if (!checked.ok) return fail(checked.message);
-      // The path passed every check, but nothing is read until intake can turn
-      // the file into an interval series (foundation tasks 6.1 to 6.6).
-      return fail('This file is allowed, but this build cannot read meter files yet: file intake is still being built. Nothing was read.');
+      const bytes = entry ? entry.bytes : new Uint8Array(readFileSync(checked.path));
+      const choices = {
+        zone: zone ?? entry?.choices.zone ?? deviceZone, zoneSet: zone !== undefined || Boolean(entry?.choices.zoneSet),
+        stampsMark: stampsMark ?? entry?.choices.stampsMark ?? 'auto', quantity: quantity ?? entry?.choices.quantity ?? 'auto',
+      };
+      const r = await intakeFile(bytes, { name: entry?.name ?? basename(checked.path) }, choices);
+      if (!r.ok) return fail(r.message);
+      const value = { bytes, name: entry?.name ?? basename(checked.path), choices, result: r };
+      const id = handles.put(value);
+      value.view = agentView(r, id);
+      return ok(series === undefined ? value.view : { ...value.view, intervals: page(value, id, series, 0) });
     },
 
     gridprims_query_data({ dataset }) {
