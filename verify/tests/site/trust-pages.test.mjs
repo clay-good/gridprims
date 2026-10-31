@@ -57,7 +57,7 @@ test('the license page gives copyable citations for a page, a result, and a data
   assert.match(html, /CC BY 4\.0/);
   assert.match(html, /Limits\. gridprims\. https:\/\/gridprims\.com\/limits\/ \(accessed \d{4}-\d{2}-\d{2}\)\./);
   assert.match(html, /&quot;12 MWh is 40\.95 MMBtu\.&quot; Energy unit converter, version \d+\.\d+\.\d+\. gridprims\./);
-  assert.match(html, /Annual Electric Power Industry Report \(Form EIA-861\), version 2026-10 \(as of 2026-10-07\)\. Source: U\.S\. Energy Information Administration, Form EIA-861 \(Oct 2026\)\./);
+  assert.match(html, /\(Form (EIA-86[01])\), version 2026-10 \(as of 2026-\d\d-\d\d\)\. Source: U\.S\. Energy Information Administration, Form \1 \([A-Z][a-z]{2} 2026\)\./);
 });
 
 test('review status comes only from records: every tool reads "Review pending" and the strip says so', () => {

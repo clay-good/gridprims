@@ -1,7 +1,7 @@
-# Daily release watch and refresh for EIA-861 (platform/automation). Publishes
+# Daily release watch and refresh for EIA-861 and EIA-860 (platform/automation). Publishes
 # with no approval step: validators are the only gate. Every step is git, node,
 # or a script in this repository; actions are GitHub's own, pinned by SHA.
-name: refresh-eia-861
+name: refresh-eia
 
 on:
   schedule:
@@ -14,7 +14,7 @@ permissions:
   actions: write   # re-enable workflows the host disabled for inactivity
 
 concurrency:
-  group: refresh-eia-861
+  group: refresh-eia
   cancel-in-progress: false
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
       - name: Assert the Node floor
         run: node verify/node-floor.mjs
       - name: Self-heal, check, refresh, and record
-        run: node pipeline/scheduled.mjs refresh-eia-861
+        run: node pipeline/scheduled.mjs refresh-eia
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Gates on the result
@@ -41,5 +41,5 @@ jobs:
           git config user.name "gridprims pipeline"
           git config user.email "pipeline@gridprims.com"
           git add data
-          git diff --cached --quiet || git commit -m "chore(data): scheduled refresh-eia-861 run"
+          git diff --cached --quiet || git commit -m "chore(data): scheduled refresh-eia run"
           git pull --rebase && git push

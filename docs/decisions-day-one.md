@@ -76,7 +76,7 @@ Tests live in `verify/tests/`, mirroring the folder they test, so nothing under 
 |---|---|---|---|
 | `ci.yml` | push, pull request | on change | n/a |
 | `safari.yml` | push touching browser-run code, and weekly Thursday 06:53 UTC | weekly | 504 hours |
-| `refresh-eia-861.yml` | schedule | daily 09:17 UTC | 72 hours |
+| `refresh-eia.yml` | schedule | daily 09:17 UTC | 72 hours |
 | `link-check.yml` | schedule | weekly, Tuesday 07:23 UTC | 504 hours |
 | `canary.yml` | schedule (floating runner label) | weekly, Wednesday 05:41 UTC | 504 hours |
 | `smoke.yml` | after deploy | with each deploy (task 8.6) | — |
@@ -128,4 +128,4 @@ Checked against the published schemas on 2026-10-30 (committed under `verify/ref
 
 ## 10. Reproducing a snapshot from the publisher
 
-`node pipeline/build-data.mjs` rebuilds every served dataset from the publisher's own file and compares checksums with the committed manifest. On 2026-10-31 it rebuilt EIA-861 (version 2026-10) live from `eia.gov`: the raw file's SHA-256 matched the pinned `f59f6c73…a396`, and all 51 shards and the CSV download matched byte for byte. `node pipeline/get-data.mjs` fetches the same files from gridprims.com and accepts each only if it matches the digest committed in the clone.
+`node pipeline/build-data.mjs` rebuilds every served dataset from the publisher's own file and compares checksums with the committed manifest. On 2026-10-31 it rebuilt EIA-861 (version 2026-10) live from `eia.gov`: the raw file's SHA-256 matched the pinned `f59f6c73…a396`, and all 51 shards and the CSV download matched byte for byte. On 2026-10-30, with three EIA-861 tables and EIA-860's plants and generators, both datasets rebuilt from EIA's pinned files (EIA-860 `2b27929d…08ba`) with every shard and download matching. `node pipeline/get-data.mjs` fetches the same files from gridprims.com and accepts each only if it matches the digest committed in the clone.

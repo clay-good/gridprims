@@ -85,14 +85,19 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     const zipEntry = zip.find((e) => e.name === entryName);
     if (!zipEntry) { failures.push(`${tb.name}: ${entryName} is not in the download`); continue; }
     const read = step('read-xlsx');
-    const wb = await readXlsx(await readZipEntry(raw, zipEntry), { sheet: read.sheet });
+    const bytes = await readZipEntry(raw, zipEntry);
+    // One sheet hands the normalizer its rows; a list of sheets hands it rows by sheet name.
+    const sheets = read.sheets ? Object.fromEntries(await Promise.all(read.sheets.map(async (sheet) => [sheet, (await readXlsx(bytes, { sheet })).rows]))) : (await readXlsx(bytes, { sheet: read.sheet })).rows;
     const normalizer = await import(pathToFileURL(join(ROOT, 'pipeline/normalize', `${step('normalize').module}.mjs`)).href);
-    const { rows, problems } = normalizer.normalize(wb.rows, read.headerRows);
+    const { rows, problems } = normalizer.normalize(sheets, read.headerRows);
     if (problems.length) { failures.push(...problems.map((p) => `${tb.name}: schema: ${p}`)); continue; }
     const prevRows = previous?.tables.find((t) => t.name === tb.name && t.dataPeriod === String(year))?.rows;
     const bad = validateRows(rows, step('validate'), prevRows);
+    const by = step('partition').by;
+    const unplaced = rows.filter((r) => r[by] === null || r[by] === undefined).length;
+    if (unplaced) bad.push(`${unplaced} rows have no ${by} to partition by`);
     if (bad.length) { failures.push(...bad.map((f) => `${tb.name}: ${f}`)); continue; }
-    ready.push({ tb, rows, schema: normalizer.SCHEMA, by: step('partition').by, entryName });
+    ready.push({ tb, rows, schema: normalizer.SCHEMA, by, entryName });
   }
   if (failures.length) return { ok: false, failures };
 

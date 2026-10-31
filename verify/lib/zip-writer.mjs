@@ -79,3 +79,21 @@ export function writeZip(files) {
   for (const c of all) { out.set(c, p); p += c.length; }
   return out;
 }
+
+const NS = 'xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"';
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\r/g, '&#13;').replace(/\n/g, '&#10;');
+const col = (i) => (i < 26 ? String.fromCharCode(65 + i) : String.fromCharCode(64 + Math.floor(i / 26)) + String.fromCharCode(65 + (i % 26)));
+const cell = (v, r, i) => (v === null || v === undefined ? '' : typeof v === 'number' ? `<c r="${col(i)}${r}"><v>${v}</v></c>` : `<c r="${col(i)}${r}" t="inlineStr"><is><t xml:space="preserve">${esc(v)}</t></is></c>`);
+
+/**
+ * A minimal .xlsx with inline-string cells, one worksheet per entry, in order.
+ * @param {Record<string, Array<Array<string | number | null>>>} sheets rows by sheet name
+ */
+export function writeXlsx(sheets) {
+  const names = Object.keys(sheets);
+  return writeZip([
+    { name: 'xl/workbook.xml', data: `<workbook ${NS}><sheets>${names.map((n, k) => `<sheet name="${esc(n)}" sheetId="${k + 1}" r:id="rId${k + 1}"/>`).join('')}</sheets></workbook>` },
+    { name: 'xl/_rels/workbook.xml.rels', data: `<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${names.map((_, k) => `<Relationship Id="rId${k + 1}" Target="worksheets/sheet${k + 1}.xml"/>`).join('')}</Relationships>` },
+    ...names.map((n, k) => ({ name: `xl/worksheets/sheet${k + 1}.xml`, data: `<worksheet ${NS}><sheetData>${sheets[n].map((r, j) => `<row r="${j + 1}">${r.map((v, i) => cell(v, j + 1, i)).join('')}</row>`).join('')}</sheetData></worksheet>` })),
+  ]);
+}

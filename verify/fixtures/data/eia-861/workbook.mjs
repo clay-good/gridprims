@@ -3,15 +3,10 @@
 // rows, a footnote), its Reliability_States and Counties_States sheets, zipped
 // the way EIA ships them, for offline pipeline tests.
 
-import { writeZip } from '../../../lib/zip-writer.mjs';
+import { writeXlsx, writeZip } from '../../../lib/zip-writer.mjs';
 import { EXPECTED_HEADER } from '../../../../pipeline/normalize/eia-861-sales.mjs';
 import { EXPECTED_HEADER as RELIABILITY_HEADER } from '../../../../pipeline/normalize/eia-861-reliability.mjs';
 import { EXPECTED_HEADER as TERRITORY_HEADER } from '../../../../pipeline/normalize/eia-861-service-territory.mjs';
-
-const NS = 'xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"';
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\r/g, '&#13;').replace(/\n/g, '&#10;');
-const col = (i) => (i < 26 ? String.fromCharCode(65 + i) : 'A' + String.fromCharCode(65 + i - 26));
-const cell = (v, r, i) => (v === null ? '' : typeof v === 'number' ? `<c r="${col(i)}${r}"><v>${v}</v></c>` : `<c r="${col(i)}${r}" t="inlineStr"><is><t xml:space="preserve">${esc(v)}</t></is></c>`);
 
 /** The data rows: 3 states, a withheld group, "." values, a blank ownership. */
 export function sampleRows(year = 2025, extra = 0) {
@@ -42,15 +37,7 @@ export function territoryRows(year = 2025) {
   return [[year, 1015, 'Austin Energy', '', 'TX', 'Travis'], [year, 1015, 'Austin Energy', '', 'TX', 'Williamson'], [year, 84, 'A & N Electric Coop', 'Y', 'VA', 'Accomack']];
 }
 
-const workbook = (sheetName, all) => {
-  const sheet = all.map((r, k) => `<row r="${k + 1}">${r.map((v, i) => cell(v, k + 1, i)).join('')}</row>`).join('');
-  return writeZip([
-    { name: 'xl/workbook.xml', data: `<workbook ${NS}><sheets><sheet name="${sheetName}" sheetId="1" r:id="rId1"/><sheet name="Territories" sheetId="2" r:id="rId2"/></sheets></workbook>` },
-    { name: 'xl/_rels/workbook.xml.rels', data: '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Target="worksheets/sheet2.xml"/></Relationships>' },
-    { name: 'xl/worksheets/sheet1.xml', data: `<worksheet ${NS}><sheetData>${sheet}</sheetData></worksheet>` },
-    { name: 'xl/worksheets/sheet2.xml', data: `<worksheet ${NS}><sheetData/></worksheet>` },
-  ]);
-};
+const workbook = (sheetName, all) => writeXlsx({ [sheetName]: all, Territories: [] });
 
 /** @param {{year?: number, rows?: any[][], header?: string[], reliability?: any[][], territory?: any[][], territoryHeader?: string[], omit?: string[]}} [o] */
 export function eia861Zip(o = {}) {

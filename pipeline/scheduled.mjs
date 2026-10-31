@@ -2,7 +2,7 @@
 // disabled, check each of this workflow's datasets and refresh what changed,
 // open an issue for each failure, and republish the health record. The same
 // script runs on a laptop; only the credentials differ.
-//   node pipeline/scheduled.mjs refresh-eia-861
+//   node pipeline/scheduled.mjs refresh-eia
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';

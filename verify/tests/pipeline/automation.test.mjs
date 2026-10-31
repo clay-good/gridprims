@@ -52,11 +52,11 @@ test('first run snapshots, a quiet run records only the check, and a new data ye
   // Seed a served 2025 version as the registry-pinned snapshot would.
   opts.entries['eia-861'].vintages = { 2025: { url: URL25, asOf: '2026-10-07', sha256: null } };
 
-  const first = await scheduledRun('refresh-eia-861', { ...opts, fetch: fakeEia(site), now: at('2026-10-31T09:17:00Z') });
+  const first = await scheduledRun('refresh-eia', { ...opts, fetch: fakeEia(site), now: at('2026-10-31T09:17:00Z') });
   assert.equal(first.datasets[0].refreshed, true);
   assert.equal(first.datasets[0].version, '2026-10');
 
-  const quiet = await scheduledRun('refresh-eia-861', { ...opts, fetch: fakeEia(site), now: at('2026-11-01T09:17:00Z') });
+  const quiet = await scheduledRun('refresh-eia', { ...opts, fetch: fakeEia(site), now: at('2026-11-01T09:17:00Z') });
   assert.deepEqual([quiet.datasets[0].checked, quiet.datasets[0].refreshed, quiet.datasets[0].failure], [true, false, undefined]);
   let h = readHealth(r);
   const row = h.datasets.find((d) => d.id === 'eia-861');
@@ -64,7 +64,7 @@ test('first run snapshots, a quiet run records only the check, and a new data ye
   assert.equal(row.lastRefresh, '2026-10-31T09:17:00.000Z', 'a quiet check does not count as a refresh');
 
   site[URL26] = { bytes: eia861Zip({ year: 2026 }), lastModified: 'Mon, 30 Aug 2027 12:00:00 GMT' };
-  const fresh = await scheduledRun('refresh-eia-861', { ...opts, fetch: fakeEia(site), now: at('2027-09-01T09:17:00Z') });
+  const fresh = await scheduledRun('refresh-eia', { ...opts, fetch: fakeEia(site), now: at('2027-09-01T09:17:00Z') });
   assert.equal(fresh.datasets[0].found, 'new data year 2026');
   const m = JSON.parse(readFileSync(join(out, 'eia-861/2027-09/manifest.json'), 'utf8'));
   assert.equal(m.asOf, '2027-08-30', 'as-of is the publisher\'s date, not ours');
@@ -78,11 +78,11 @@ test('a failing validator keeps the previous version, publishes the failure with
   const site = { [URL25]: { bytes: eia861Zip({ rows: sampleRows(2025, 40) }), lastModified: 'Wed, 07 Oct 2026 13:48:05 GMT' } };
   const host = fakeHost();
   const opts = { root: r, outDir: out, host, entries: { 'eia-861': { ...small, vintages: { 2025: { url: URL25, asOf: '2026-10-07', sha256: null } } } } };
-  await scheduledRun('refresh-eia-861', { ...opts, fetch: fakeEia(site), now: at('2026-10-31T09:17:00Z') });
+  await scheduledRun('refresh-eia', { ...opts, fetch: fakeEia(site), now: at('2026-10-31T09:17:00Z') });
   // The publisher replaces the file with a truncated one.
   site[URL25] = { bytes: eia861Zip({ rows: sampleRows(2025).slice(0, 3) }), lastModified: 'Thu, 05 Nov 2026 10:00:00 GMT' };
-  await scheduledRun('refresh-eia-861', { ...opts, fetch: fakeEia(site), now: at('2026-11-05T09:17:00Z') });
-  await scheduledRun('refresh-eia-861', { ...opts, fetch: fakeEia(site), now: at('2026-11-06T09:17:00Z') });
+  await scheduledRun('refresh-eia', { ...opts, fetch: fakeEia(site), now: at('2026-11-05T09:17:00Z') });
+  await scheduledRun('refresh-eia', { ...opts, fetch: fakeEia(site), now: at('2026-11-06T09:17:00Z') });
   const h = readHealth(r);
   const row = h.datasets.find((d) => d.id === 'eia-861');
   assert.equal(row.version, '2026-10', 'the previous version stays live');
@@ -97,7 +97,7 @@ test('a failing validator keeps the previous version, publishes the failure with
 test('self-heal re-enables workflows the host disabled, and the record says so', async () => {
   const r = root();
   const host = fakeHost(['link-check', 'canary']);
-  const run = await scheduledRun('refresh-eia-861', { root: r, outDir: join(r, 'data'), host, fetch: fakeEia({}), now: at('2026-10-31T09:17:00Z'), entries: { 'eia-861': { ...small, vintages: { 2025: { url: URL25, asOf: '2026-10-07', sha256: null } } } } });
+  const run = await scheduledRun('refresh-eia', { root: r, outDir: join(r, 'data'), host, fetch: fakeEia({}), now: at('2026-10-31T09:17:00Z'), entries: { 'eia-861': { ...small, vintages: { 2025: { url: URL25, asOf: '2026-10-07', sha256: null } } } } });
   assert.deepEqual(run.enabledEvents, ['link-check', 'canary']);
   const h = readHealth(r);
   assert.equal(h.workflows.find((w) => w.id === 'canary').reenabledAt, '2026-10-31T09:17:00.000Z');
@@ -106,16 +106,16 @@ test('self-heal re-enables workflows the host disabled, and the record says so',
 test('every run is recorded with what it checked, refreshed, and how long it took', async () => {
   const r = root();
   const times = ['2026-10-31T09:17:00Z', '2026-10-31T09:17:42Z'];
-  await scheduledRun('refresh-eia-861', { root: r, outDir: join(r, 'data'), host: fakeHost(), fetch: fakeEia({}), now: () => new Date(times.shift() ?? '2026-10-31T09:17:42Z'), entries: { 'eia-861': { ...small, vintages: { 2025: { url: URL25, asOf: '2026-10-07', sha256: null } } } } });
+  await scheduledRun('refresh-eia', { root: r, outDir: join(r, 'data'), host: fakeHost(), fetch: fakeEia({}), now: () => new Date(times.shift() ?? '2026-10-31T09:17:42Z'), entries: { 'eia-861': { ...small, vintages: { 2025: { url: URL25, asOf: '2026-10-07', sha256: null } } } } });
   const h = readHealth(r);
   assert.equal(h.generatedAt, '2026-10-31T09:17:42.000Z');
-  assert.equal(h.runs[0].workflow, 'refresh-eia-861');
+  assert.equal(h.runs[0].workflow, 'refresh-eia');
   assert.equal(h.runs[0].durationMs, 42_000);
-  assert.deepEqual(h.workflows.map((w) => [w.id, w.intervalHours, w.thresholdHours]), [['refresh-eia-861', 24, 72], ['link-check', 168, 504], ['canary', 168, 504], ['heartbeat', 24, 72]]);
+  assert.deepEqual(h.workflows.map((w) => [w.id, w.intervalHours, w.thresholdHours]), [['refresh-eia', 24, 72], ['link-check', 168, 504], ['canary', 168, 504], ['heartbeat', 24, 72]]);
 });
 
 test('staleness thresholds: a daily workflow is stalled after 4 days; a weekly one is not after 9', () => {
-  const daily = WORKFLOWS.find((w) => w.id === 'refresh-eia-861');
+  const daily = WORKFLOWS.find((w) => w.id === 'refresh-eia');
   const weekly = WORKFLOWS.find((w) => w.id === 'link-check');
   const now = Date.parse('2026-11-10T00:00:00Z');
   assert.equal(stalled(daily, '2026-11-06T00:00:00Z', now), true);
