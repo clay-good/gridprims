@@ -24,7 +24,7 @@ export const TRUST_PAGES = [['about', '/about/'], ['methods', '/methods/'], ['pr
 /** The family of sites that share gridprims' ethos (PRODUCT.md, Brand Commitments). */
 export const SISTERS = ['sophiewell.com', 'geoprims.com', 'roughlogic.com', 'enklayve.com', 'vaulytica.com', 'encryptalotta.com'];
 
-export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null, structured = [], crumbs = null }) {
+export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null, structured = [], crumbs = null, feed = null }) {
   const { t } = i18n;
   const summary = fit(description, DESCRIPTION_MAX);
   // Breadcrumbs on every page: home, the section, then the page, as the page's own links show them.
@@ -39,6 +39,7 @@ export function layout({ i18n, title, description, path, body, modules = [], sec
 <title>${title}</title>
 <meta name="description" content="${summary}">
 <link rel="canonical" href="${ORIGIN}${path}">
+${feed ? html`<link rel="alternate" type="application/atom+xml" title="${feed.title}" href="${feed.href}">` : ''}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${t('site.name')}">
 <meta property="og:title" content="${title}">

@@ -25,6 +25,8 @@ import { utilityPages } from './entities/utilities.mjs';
 import { utilityPage, utilityPath } from './templates/utility.mjs';
 import { regionPages } from './entities/regions.mjs';
 import { DESCRIPTION_MAX, TITLE_MAX, uniqueNames } from './lib/meta.mjs';
+import { robotsTxt, sitemaps } from './lib/sitemap.mjs';
+import { atomFeed, releaseEntry } from './lib/atom.mjs';
 import { statePage, statePath, subregionPage, subregionPath } from './templates/region.mjs';
 import { lookupData } from './entities/lookup.mjs';
 import { LOOKUP_PATH, lookupPage } from './templates/lookup.mjs';
@@ -191,6 +193,45 @@ export async function build(opts = {}) {
   if (duplicates.length || tooLong.length) {
     throw new Error(`page metadata: ${[...duplicates.map(([t, p]) => `"${t}" is the title of ${p.join(', ')}`), ...tooLong].slice(0, 20).join('; ')}`);
   }
+
+  // Sitemaps: each page dated by the newest as-of date of the data it shows, or its tool version's date,
+  // so a rebuild with unchanged data leaves every date as it was.
+  const newestAsOf = (manifests) => Object.values(manifests ?? {}).filter(Boolean).reduce((m, x) => (x.asOf > m ? x.asOf : m), '0000-00-00');
+  const toolDate = new Map(TOOLS.map(({ manifest: m }) => [m.id, changelog.find((c) => c.toolId === m.id && c.version === m.version)?.date ?? null]));
+  const fallback = [...toolDate.values()].filter(Boolean).sort().at(-1) ?? buildDate.slice(0, 10);
+  const datasetAsOf = new Map(datasets.map((d) => [d.dataset, d.asOf]));
+  const familyDate = [['/plants/', plants && newestAsOf(plants.sources)], ['/utilities/', utilities && newestAsOf(utilities.sources)], ['/states/', regions && newestAsOf(regions.sources)],
+    ['/subregions/', regions?.sources.egrid?.asOf], ['/queue/', q?.manifest.asOf], ['/lookup/', lookup && newestAsOf(lookup.sources)]];
+  const lastmodOf = (path) => {
+    const tool = TOOLS.find(({ manifest: m }) => path === toolPath(m.id) || path === `/methods/${m.id}/`);
+    if (tool) return toolDate.get(tool.manifest.id) ?? fallback;
+    const ds = /^\/data\/([a-z0-9-]+)\/$/.exec(path);
+    if (ds && datasetAsOf.has(ds[1])) return datasetAsOf.get(ds[1]);
+    return familyDate.find(([prefix, d]) => d && path.startsWith(prefix))?.[1] ?? fallback;
+  };
+  const listed = pages.filter((p) => p.endsWith('/')).map((p) => ({ path: p, lastmod: lastmodOf(p) }));
+  for (const [file, xml] of Object.entries(sitemaps(listed, ORIGIN).files)) {
+    mkdirSync(dirname(join(outDir, file)), { recursive: true });
+    writeFileSync(join(outDir, file), xml);
+  }
+  writeFileSync(join(outDir, 'robots.txt'), robotsTxt(ORIGIN));
+
+  // Atom feeds: the changelog, every dataset version, and corrections. Each feed's date is its newest entry's.
+  mkdirSync(join(outDir, 'feeds'), { recursive: true });
+  const feed = (name, title, page, entries) => writeFileSync(join(outDir, `feeds/${name}.xml`), atomFeed({ id: `${ORIGIN}/feeds/${name}.xml`, title, self: `${ORIGIN}/feeds/${name}.xml`, alternate: `${ORIGIN}${page}`, author: strings['site.name'], entries: entries.length ? entries : [], empty: fallback }));
+  feed('changelog', strings['feeds.changelog'], '/changelog/', changelog.map((c) => ({
+    id: `${ORIGIN}/changelog/#${c.toolId ?? 'site'}-${c.version}`, title: `${TOOLS.find((x) => x.manifest.id === c.toolId)?.manifest.title ?? c.toolId ?? strings['site.name']} ${c.version}`, updated: c.date, link: `${ORIGIN}/changelog/`, summary: c.reason,
+  })));
+  const releases = [];
+  for (const d of datasets) {
+    const versions = readdirSync(join(ROOT, 'data', d.dataset), { withFileTypes: true }).filter((x) => x.isDirectory() && /^\d{4}-\d{2}$/.test(x.name)).map((x) => x.name);
+    const short = entries.get(d.dataset)?.shortTitle ?? d.title;
+    for (const v of versions) {
+      releases.push(releaseEntry(JSON.parse(readFileSync(join(ROOT, 'data', d.dataset, v, 'manifest.json'), 'utf8')), short, ORIGIN));
+    }
+  }
+  feed('data', strings['feeds.data'], '/data/', releases);
+  feed('corrections', strings['feeds.corrections'], '/corrections/', corrections.map((c, i) => ({ id: `${ORIGIN}/corrections/#${c.date}-${i}`, title: `${c.tier}: ${c.subject}`, updated: c.date, link: `${ORIGIN}/corrections/`, summary: c.cause })));
 
   writeFileSync(join(outDir, '_redirects'), redirectsFile(redirects));
   mkdirSync(join(outDir, '.well-known'), { recursive: true });

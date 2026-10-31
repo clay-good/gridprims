@@ -175,7 +175,7 @@ ${cells.length || (id === 'data' && datasets.length) ? '' : html`<p>${t('section
 ${cells.length ? html`<ul class="tool-list">${cells.map((c) => toolCell(c, i18n))}</ul>` : ''}
 ${id === 'data' && datasets.length ? html`<h2>${t('library.title')}</h2>${libraryList({ datasets, entries, i18n })}` : ''}`;
   const path = SECTIONS.find((x) => x.id === id).path;
-  return layout({ i18n, title: `${t(`section.${id}`)} · ${t('site.name')}`, description: t(`section.${id}.intro`), path, body, section: id });
+  return layout({ i18n, title: `${t(`section.${id}`)} · ${t('site.name')}`, description: t(`section.${id}.intro`), path, body, section: id, feed: id === 'data' ? { title: t('feeds.data'), href: '/feeds/data.xml' } : null });
 }
 
 /** @param {{entries: any[], i18n: any}} p */
@@ -186,7 +186,7 @@ export function changelogPage({ entries, i18n }) {
   <thead><tr><th scope="col">${t('changelog.col.date')}</th><th scope="col">${t('changelog.col.tool')}</th><th scope="col">${t('changelog.col.version')}</th><th scope="col">${t('changelog.col.reason')}</th></tr></thead>
   <tbody>${entries.map((e) => html`<tr><td class="mono">${e.date}</td><td>${e.toolId ? html`<a href="${toolPath(e.toolId)}">${e.toolId}</a>` : ''}</td><td class="mono">${e.version}</td><td>${e.kind === 'security' ? html`${t('changelog.security')} ` : ''}${e.reason}${e.sample ? html` ${t('changelog.sample', { old: e.sample.old, new: e.sample.new })}` : ''}${e.credit ? html` ${t('changelog.credit', { name: e.credit })}` : ''}</td></tr>`)}</tbody>
 </table></div>`;
-  return layout({ i18n, title: `${t('changelog.title')} · ${t('site.name')}`, description: t('changelog.intro'), path: '/changelog/', body });
+  return layout({ i18n, title: `${t('changelog.title')} · ${t('site.name')}`, description: t('changelog.intro'), path: '/changelog/', body, feed: { title: t('feeds.changelog'), href: '/feeds/changelog.xml' } });
 }
 
 /** The settings page: what this device holds, and erasing it (platform/privacy-and-security). */
@@ -395,7 +395,7 @@ export function correctionsPage({ entries, i18n }) {
 <h2>${t('corrections.policy')}</h2>${prose([t('corrections.policyBody'), t('corrections.tiers')])}
 <h2>${t('corrections.log')}</h2>
 ${entries.length ? html`<ul>${entries.map((e) => html`<li><span class="mono">${date(e.date)}</span> · ${t(`corrections.tier.${e.tier}`)} · ${t('corrections.line', { subject: e.subject, cause: e.cause })}${e.sample ? html` ${t('corrections.sample', e.sample)}` : ''}</li>`)}</ul>` : html`<p>${t('corrections.none')}</p>`}`;
-  return layout({ i18n, title: `${t('corrections.title')} · ${t('site.name')}`, description: t('corrections.policyBody'), path: '/corrections/', body });
+  return layout({ i18n, title: `${t('corrections.title')} · ${t('site.name')}`, description: t('corrections.policyBody'), path: '/corrections/', body, feed: { title: t('feeds.corrections'), href: '/feeds/corrections.xml' } });
 }
 
 /** @param {{i18n: any, datasets: any[]}} p */
