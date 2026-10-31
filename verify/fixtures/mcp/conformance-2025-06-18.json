@@ -480,14 +480,28 @@
           {
             "name": "gridprims_query_data",
             "title": "Query public grid data",
-            "description": "Look up or filter the public datasets in this clone's data folder (EIA, EPA, LBNL, OpenEI rates), each with its publisher, license, and as-of date. Reads local files only; it never downloads. The gridprims://datasets resource lists what is available.",
+            "description": "Look up or filter the public datasets in this clone's data folder (EIA, EPA, LBNL, OpenEI rates), each with its publisher, license, and as-of date; or, with entity and id, get one plant, utility, state, eGRID subregion, or ZIP code exactly as its gridprims.com page shows it. Reads local files only; it never downloads. The gridprims://datasets resource lists what is available.",
             "inputSchema": {
               "type": "object",
               "additionalProperties": false,
-              "required": [
-                "dataset"
-              ],
               "properties": {
+                "entity": {
+                  "type": "string",
+                  "enum": [
+                    "plant",
+                    "utility",
+                    "state",
+                    "subregion",
+                    "zip"
+                  ],
+                  "description": "Look up one entity as its page shows it, instead of filtering a dataset."
+                },
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 20,
+                  "description": "With entity: an EIA plant code or utility id, a state code such as TX, an eGRID subregion such as ERCT, or a five-digit ZIP."
+                },
                 "dataset": {
                   "type": "string",
                   "description": "A dataset id from the gridprims://datasets resource."
@@ -510,6 +524,21 @@
             "outputSchema": {
               "type": "object",
               "properties": {
+                "entity": {
+                  "type": "object"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "sources": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
                 "dataset": {
                   "type": "object"
                 },

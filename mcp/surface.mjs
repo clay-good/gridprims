@@ -122,19 +122,20 @@ export const TOOL_SURFACE = [
   {
     name: 'gridprims_query_data',
     title: 'Query public grid data',
-    description: 'Look up or filter the public datasets in this clone\'s data folder (EIA, EPA, LBNL, OpenEI rates), each with its publisher, license, and as-of date. Reads local files only; it never downloads. The gridprims://datasets resource lists what is available.',
+    description: 'Look up or filter the public datasets in this clone\'s data folder (EIA, EPA, LBNL, OpenEI rates), each with its publisher, license, and as-of date; or, with entity and id, get one plant, utility, state, eGRID subregion, or ZIP code exactly as its gridprims.com page shows it. Reads local files only; it never downloads. The gridprims://datasets resource lists what is available.',
     inputSchema: {
       type: 'object',
       additionalProperties: false,
-      required: ['dataset'],
       properties: {
+        entity: { type: 'string', enum: ['plant', 'utility', 'state', 'subregion', 'zip'], description: 'Look up one entity as its page shows it, instead of filtering a dataset.' },
+        id: { type: 'string', minLength: 1, maxLength: 20, description: 'With entity: an EIA plant code or utility id, a state code such as TX, an eGRID subregion such as ERCT, or a five-digit ZIP.' },
         dataset: { type: 'string', description: 'A dataset id from the gridprims://datasets resource.' },
         table: { type: 'string', description: 'A table of that dataset, such as reliability. Default: its first table. The gridprims://datasets resource lists each dataset\'s tables.' },
         filter: { type: 'object', description: 'Column values to match exactly, such as {"state": "TX", "utility_id": 44372}. Filtering on the partition column (state) reads only that shard.' },
         limit: { type: 'integer', minimum: 1, maximum: 500 },
       },
     },
-    outputSchema: { type: 'object', properties: { dataset: OBJ, table: STR, columns: { type: 'array', items: OBJ }, rows: { type: 'array', items: OBJ }, matched: { type: 'integer' }, truncated: { type: 'boolean' } } },
+    outputSchema: { type: 'object', properties: { entity: OBJ, kind: STR, url: STR, sources: { type: 'array', items: OBJ }, dataset: OBJ, table: STR, columns: { type: 'array', items: OBJ }, rows: { type: 'array', items: OBJ }, matched: { type: 'integer' }, truncated: { type: 'boolean' } } },
   },
   {
     name: 'gridprims_prepare_report',

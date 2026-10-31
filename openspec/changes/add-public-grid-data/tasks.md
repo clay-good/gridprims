@@ -34,7 +34,7 @@
 
 ## 7. Launch readiness
 
-- [ ] 7.0 Serve every entity and lookup through `gridprims_query_data` from the same shards; verify 100 sampled answers match the pages
+- [x] 7.0 Serve every entity and lookup through `gridprims_query_data` from the same shards; verify 100 sampled answers match the pages
 
 - [ ] 7.1 Run the CEII screen automatically on every dataset at build; verify the documented screen record is written to the registry for each dataset, with no signature and nothing waiting on a person
 - [ ] 7.2 Run budgets, 320 px sweep, no-JavaScript fact check, and accessibility on a sample of 200 entity pages; verify CI green

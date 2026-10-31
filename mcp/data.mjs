@@ -61,3 +61,55 @@ export function limitsInputs(dir = DATA_DIR) {
   const datasets = catalog(dir).map((d) => JSON.parse(readFileSync(join(dir, d.id, d.version, 'manifest.json'), 'utf8')));
   return { cannotDo, claims, health, datasets, generatedAt: health?.generatedAt ?? null, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') };
 }
+
+/**
+ * The facts an entity page shows, computed by the same code the site builds pages with, from the
+ * same shards (add-public-grid-data task 7.0). Assembled once per data folder.
+ */
+const entityCache = new Map();
+async function entities(dir) {
+  if (!entityCache.has(dir)) {
+    entityCache.set(dir, (async () => {
+      const [{ plantPages }, { utilityPages }, { regionPages }, { lookupData }] = await Promise.all([
+        import('../site/entities/plants.mjs'), import('../site/entities/utilities.mjs'), import('../site/entities/regions.mjs'), import('../site/entities/lookup.mjs'),
+      ]);
+      const plants = plantPages(dir);
+      const utilities = utilityPages(dir);
+      const regions = utilities && regionPages(dir, utilities.utilities);
+      return { plants, utilities, regions, lookup: lookupData(dir) };
+    })());
+  }
+  return entityCache.get(dir);
+}
+
+export const ENTITY_KINDS = ['plant', 'utility', 'state', 'subregion', 'zip'];
+
+/**
+ * One entity as its page shows it, with the page's address.
+ * @param {'plant' | 'utility' | 'state' | 'subregion' | 'zip'} kind
+ * @param {string} id an EIA plant code or utility id, a state code, an eGRID subregion code, or a five-digit ZIP
+ * @returns {Promise<{entity: any, url: string, sources: any} | {error: string}>}
+ */
+export async function entity(kind, id, dir = DATA_DIR) {
+  const e = await entities(dir);
+  const key = String(id).trim();
+  if (kind === 'plant' || kind === 'utility') {
+    const list = kind === 'plant' ? e.plants?.plants : e.utilities?.utilities.filter((u) => u.page);
+    const found = list?.find((x) => String(x.id) === key);
+    if (!found) return { error: `No ${kind} page for id ${JSON.stringify(key)}. Find ids with gridprims_search, or query the eia-${kind === 'plant' ? '860' : '861'} dataset.` };
+    return { entity: found, url: `/${kind}s/${found.id}/`, sources: (kind === 'plant' ? e.plants : e.utilities).sources };
+  }
+  if (kind === 'state') {
+    const found = e.regions?.states.find((s) => s.code === key.toUpperCase());
+    return found ? { entity: found, url: `/states/${found.code.toLowerCase()}/`, sources: e.regions.sources } : { error: `No state ${JSON.stringify(key)}. Use a two-letter code such as TX or DC.` };
+  }
+  if (kind === 'subregion') {
+    const found = e.regions?.subregions.find((s) => s.subregion === key.toUpperCase());
+    return found ? { entity: found, url: `/subregions/${found.subregion.toLowerCase()}/`, sources: { egrid: e.regions.sources.egrid } } : { error: `No eGRID subregion ${JSON.stringify(key)}. Subregions: ${e.regions?.subregions.map((s) => s.subregion).join(', ')}.` };
+  }
+  const { parseZip, lookupZip, statesFor } = await import('../core/lib/zip-lookup.mjs');
+  const z = parseZip(key);
+  if (!z.ok) return { error: z.reason === 'four-digits' ? `A ZIP code has five digits. Did you mean ${z.suggestion}?` : 'A ZIP code is five digits, such as 78701.' };
+  const shards = Object.fromEntries(statesFor(z.zip, e.lookup.zip3).map((st) => [st, e.lookup.shards.get(st)]));
+  return { entity: { ...lookupZip(z.zip, shards), note: 'ZIP areas are approximated by Census ZCTAs; an address may be served by only one of the utilities listed.' }, url: '/lookup/', sources: e.lookup.sources };
+}
