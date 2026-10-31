@@ -134,7 +134,7 @@ main { padding-bottom: var(--s7); }
 /* Screening and example values are stamped, tight and flat, never a full-bleed hazard bar. */
 .strip {
   background: var(--panel); color: var(--ink); padding: var(--s3) var(--s4);
-  border: 1px solid var(--line); border-left: 3px solid var(--work-zone); border-radius: var(--r-field);
+  border: 1px solid var(--work-zone); border-radius: var(--r-field);
   font-size: .8125rem; font-weight: 500;
   display: flex; gap: var(--s2); align-items: center; flex-wrap: wrap;
 }
