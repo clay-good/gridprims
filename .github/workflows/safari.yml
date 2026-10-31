@@ -1,0 +1,37 @@
+# Safari runs the parser suite through the built-in safaridriver (foundation
+# design D8). macOS minutes cost ten times Linux minutes on a private
+# repository, so this runs when code a browser executes changes, and weekly.
+name: safari
+
+on:
+  push:
+    branches: [main]
+    paths: ['parsers/**', 'core/**', 'site/**', 'verify/browser/**', 'verify/lib/browser.mjs', 'verify/tests/browser/parsers.test.mjs']
+  schedule:
+    - cron: '53 6 * * 4'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: safari
+  cancel-in-progress: false
+
+jobs:
+  safari:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26'
+      - name: Enable Safari automation
+        run: sudo safaridriver --enable
+      - name: Parser suite in Safari
+        run: node --test verify/tests/browser/parsers.test.mjs
+        env:
+          GRIDPRIMS_SAFARI_TESTS: '1'
