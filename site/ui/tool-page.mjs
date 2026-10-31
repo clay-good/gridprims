@@ -12,9 +12,16 @@ export const LIMITS_PATH = '/limits/';
 export const toolPath = (id) => `/tools/${id.split('.').join('/')}/`;
 
 /** Short publisher names for the source tab, from the manifest's citations. */
-export function sourceTab(manifest) {
+export function sourceTab(manifest, i18n) {
   const names = manifest.citations.map((c) => c.source.split(',')[0].replace(/^NIST Special Publication/, 'NIST SP'));
-  return [...new Set(names)].join(' · ');
+  const source = [...new Set(names)].join(', ');
+  const when = [...new Set(manifest.citations.map((c) => c.edition).filter(Boolean))][0] ?? null;
+  if (!i18n) return source;
+  // One band everywhere: what it came from, when, and how well checked.
+  return i18n.t('answer.basis', {
+    source, when: when ?? i18n.t('answer.basisNoDate'),
+    checked: i18n.t(`validation.${manifest.validation.level}`),
+  });
 }
 
 /**
@@ -55,7 +62,7 @@ export function renderAnswer(manifest, result, i18n, { isExample, reviewed = fal
       <p class="label">${out.label}</p>
       <p class="number" data-output="${out.name}">${o.unit === '$' ? html`<span class="unit">$</span>${o.display}` : html`${o.display}<span class="unit">${o.unit}</span>`}</p>
       <p class="sentence">${result.sentence}</p>
-      <span class="source-tab mono">${sourceTab(manifest)}</span>
+      <span class="source-tab">${sourceTab(manifest, i18n)}</span>
     </div>`;
   } else if (result.status === 'refused') {
     sign = html`<div class="sign" data-state="refused">
