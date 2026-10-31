@@ -5,8 +5,9 @@
 import { compareActual, intervalBills } from '../../core/lib/interval-bill.mjs';
 import { compareRates, shiftLoad } from '../../core/lib/rate-compare.mjs';
 import { findPlans } from '../../core/lib/plan-finder.mjs';
+import { alignSolar, EXCLUDED, netLoad, payback, peakShave, readPvwatts, savings, UPPER_BOUND } from '../../core/lib/storage-screen.mjs';
 import { readNumber } from '../../core/lib/bill-totals.mjs';
-import { rateOption, renderBills, renderComparison, renderRanking } from '../ui/workbench-bill.mjs';
+import { rateOption, renderBills, renderComparison, renderRanking, renderScreen } from '../ui/workbench-bill.mjs';
 import { getJson, utilitiesForZip } from './zip-utilities.js';
 
 /**
@@ -37,6 +38,7 @@ export function setupBill({ i18n, view, when, showOnChart }) {
     $('[data-compare-run]').textContent = t('compare.run', { count: same.length, sector: (rec.sector ?? '').toLowerCase() });
     $('[data-compare-field]').hidden = same.length < 2;
     $('[data-conditions]').hidden = rec.sector !== 'Residential';
+    $('[data-screen-field]').hidden = false;
     $('[data-compare-result]').replaceChildren();
   }
 
@@ -86,6 +88,33 @@ export function setupBill({ i18n, view, when, showOnChart }) {
   });
   $('[data-bill-utility]').addEventListener('change', showUtility);
   $('[data-bill-rate]').addEventListener('change', price);
+  // The battery and solar screen, on the rate priced above.
+  $('[data-screen]').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const v = view();
+    if (!v || !priced) return;
+    const f = new FormData(e.target);
+    const n = (k) => readNumber(String(f.get(k) ?? '').trim());
+    const out = $('[data-screen-result]');
+    let solar = null;
+    let after = { delivered: v.series };
+    const file = f.get('pvwatts');
+    if (file && file.size) {
+      const pv = readPvwatts(await file.text());
+      if (pv.status !== 'ok') { out.replaceChildren(el('p', pv.reason, { className: 'errors' })); return; }
+      solar = alignSolar(v.series, pv, { zone: v.zone, systemKw: n('solarKw') ?? undefined });
+      after = netLoad(v.series, solar.kwh);
+    }
+    let shave = null;
+    if (n('power') > 0 && n('energy') > 0) {
+      shave = peakShave(after.delivered, { powerKw: n('power'), energyKwh: n('energy'), roundTrip: (n('roundTrip') ?? 85) / 100, socMin: (n('socMin') ?? 10) / 100, socMax: (n('socMax') ?? 90) / 100 }, v.zone);
+      after = { ...after, delivered: shave.series };
+    }
+    if (!solar && !shave) { out.replaceChildren(el('p', t('screen.nothing'))); return; }
+    const saved = savings(v.series, after, priced.rec, { zone: v.zone });
+    out.innerHTML = String(renderScreen({ shave, solar, saved, back: payback(n('cost'), saved.total * (12 / Math.max(1, saved.months))), excluded: EXCLUDED, upperBound: UPPER_BOUND }, i18n));
+    panel.dataset.screened = String(Number(panel.dataset.screened ?? 0) + 1);
+  });
   $('[data-compare-run]').addEventListener('click', () => compare(null));
   $('[data-conditions]').addEventListener('change', () => { if ($('[data-compare-result]').childElementCount) compare(null); });
   $('[data-shift]').addEventListener('submit', (e) => {

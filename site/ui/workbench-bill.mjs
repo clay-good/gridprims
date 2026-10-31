@@ -46,8 +46,40 @@ export function billPanel({ t }) {
     </form>
     <div data-compare-result aria-live="polite"></div>
   </div>
+  <div data-screen-field hidden>
+    <h3>${t('screen.title')}</h3>
+    <p>${t('screen.intro')}</p>
+    <form class="picker-row" data-screen novalidate>
+      ${[['power', 'screen.power'], ['energy', 'screen.energy'], ['roundTrip', 'screen.roundTrip', '85'], ['socMin', 'screen.socMin', '10'], ['socMax', 'screen.socMax', '90'], ['cost', 'screen.cost'], ['solarKw', 'screen.solarKw']].map(([name, label, value]) => html`<div class="field"><label for="screen-${name}">${t(label)}</label><input id="screen-${name}" name="${name}" class="mono" inputmode="decimal" autocomplete="off" value="${value ?? ''}"></div>`)}
+      <div class="field"><label for="screen-pvwatts">${t('screen.pvwatts')}</label><input id="screen-pvwatts" name="pvwatts" type="file" accept=".csv,text/csv"></div>
+      <button class="button" type="submit">${t('screen.run')}</button>
+    </form>
+    <p class="unit-hint">${t('screen.pvwattsHint')} <a href="https://pvwatts.nlr.gov/">${t('screen.pvwattsLink')}</a></p>
+    <div data-screen-result aria-live="polite"></div>
+  </div>
   <p class="strip">${t('bill.privacy')}</p>
 </section>`;
+}
+
+/**
+ * The battery and solar screen's result.
+ * @param {{shave: any, solar: any, saved: any, back: any, excluded: string[], upperBound: string}} r
+ * @param {{t: Function}} i18n
+ */
+export function renderScreen(r, { t }) {
+  return html`${r.shave ? html`<table data-screen-months><thead><tr><th scope="col">${t('bill.col.month')}</th><th scope="col" class="num">${t('screen.col.peak')}</th><th scope="col" class="num">${t('screen.col.newPeak')}</th><th scope="col">${t('screen.col.limit')}</th></tr></thead>
+    <tbody>${r.shave.months.map((m) => html`<tr><th scope="row">${m.month}</th><td class="num">${qty(m.peakKw)} kW</td><td class="num">${qty(m.newPeakKw)} kW</td><td>${t(`screen.limit.${m.limit}`)}</td></tr>`)}</tbody></table>
+    <p>${r.shave.limitText} ${t('screen.cycles', { cycles: formatNumber(r.shave.cycles, { decimals: 1 }) })}</p>` : ''}
+  ${r.solar ? html`<ul class="unit-hint">${r.solar.notes.map((n) => html`<li>${n}</li>`)}</ul>` : ''}
+  <p class="number" data-screen-savings>${money(r.saved.total)}</p>
+  <p class="sentence">${t('screen.savings', { demand: money(r.saved.demand), energy: money(r.saved.energy), months: r.saved.months })}</p>
+  ${r.solar && r.saved.lateMonths === r.saved.months && r.saved.demand < 1 ? html`<p>${t('screen.lateSolar')}</p>` : ''}
+  <p class="strip" data-upper-bound>${r.upperBound}</p>
+  ${r.saved.limits.map((x) => html`<p class="warning-chip">${x}</p>`)}
+  ${r.back.years !== null && r.saved.months < 12 ? html`<p class="unit-hint">${t('screen.annualized', { months: r.saved.months })}</p>` : ''}
+  <p data-payback>${r.back.years === null ? html`${r.back.prompt}${r.back.atbUrl ? html` <a href="${r.back.atbUrl}">${t('screen.atb')}</a>` : ''}` : t('screen.payback', { years: formatNumber(r.back.years, { decimals: 1, fixed: true }) })}</p>
+  <p class="unit-hint" data-excluded>${t('screen.excluded', { list: r.excluded.join(', ') })}</p>
+  <p><a class="handoff" href="https://reopt.nlr.gov/tool">${t('screen.reopt')}</a></p>`;
 }
 
 /** One rate's option text: name, sector, and dates. */

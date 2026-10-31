@@ -1,7 +1,7 @@
 ## 1. Fixtures and reference data
 
 - [ ] 1.1 Extend the foundation's fixture library (foundation task 5.1) with bill, ratchet, holiday, export, and coincident-peak cases; verify each fixture's receipt and expected results match their stored files
-- [ ] 1.2 Consume the URDB snapshot owned by `add-public-grid-data`, partitioned by state; verify the bill tools fetch only state shards
+- [x] 1.2 Consume the URDB snapshot owned by `add-public-grid-data`, partitioned by state; verify the bill tools fetch only state shards
 - [ ] 1.3 Snapshot ERCOT 4CP intervals for 2018–2025 from ERCOT's files, and add 2026 when ERCOT posts it (expected late November); verify 2018–2020 and 2022–2025 each have four interval-ending stamps matching ERCOT's published values, and that 2021 ships as dates only, flagged "times not published", until a primary source supplies them (`docs/research/06`)
 - [ ] 1.4 Record the Green Button field map in `docs/derivations/green-button.md` from the Apache-2.0 ESPI schema; verify every handled element names its schema type and enumeration, and that no requirement depends on buying the standard
 
@@ -36,10 +36,10 @@
 
 ## 6. Storage and solar screen
 
-- [ ] 6.1 Implement monthly threshold dispatch (D4); verify the energy-limited scenario
-- [ ] 6.2 Implement assumption controls and excluded-effects list; verify the upper-bound label appears with every savings figure
-- [ ] 6.3 Implement PVWatts export intake with typical-year alignment and net load; verify the evening-peak scenario and a leap-year, DST alignment fixture
-- [ ] 6.4 Implement payback and REopt handoff; verify the no-cost scenario
+- [x] 6.1 Implement monthly threshold dispatch (D4); verify the energy-limited scenario
+- [x] 6.2 Implement assumption controls and excluded-effects list; verify the upper-bound label appears with every savings figure
+- [x] 6.3 Implement PVWatts export intake with typical-year alignment and net load; verify the evening-peak scenario and a leap-year, DST alignment fixture
+- [x] 6.4 Implement payback and REopt handoff; verify the no-cost scenario
 - [ ] 6.5 Run the demand-only REopt bound check on 5 redistributable profiles × 3 tariffs; verify every case is at least 98% of REopt's demand savings
 
 ## 7. Handoff and report

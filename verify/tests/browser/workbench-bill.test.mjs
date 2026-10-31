@@ -59,6 +59,13 @@ for (const kind of ['chrome', 'firefox']) {
       await browser.evaluate("(() => { const f = document.querySelector('[data-shift]'); f.kw.value = '20'; f.from.value = '14'; f.to.value = '11'; f.requestSubmit(); })()");
       await waitFor(browser, "document.querySelector('[data-bill]').dataset.compared === '2'");
       assert.match(await browser.evaluate("document.querySelector('[data-compare-result] .strip').textContent"), /With 20 kW moved from 2 pm to 11 am for 4 hours, on weekdays\./);
+      // The battery screen on the same rate: savings, the upper-bound label, and what it leaves out.
+      await browser.evaluate("(() => { const f = document.querySelector('[data-screen]'); f.power.value = '20'; f.energy.value = '40'; f.cost.value = '30000'; f.requestSubmit(); })()");
+      await waitFor(browser, "document.querySelector('[data-bill]').dataset.screened === '1'");
+      assert.match(await browser.evaluate("document.querySelector('[data-screen-savings]').textContent"), /^\$[\d,]+\.\d\d$/);
+      assert.match(await browser.evaluate("document.querySelector('[data-upper-bound]').textContent"), /upper bound/);
+      assert.match(await browser.evaluate("document.querySelector('[data-excluded]').textContent"), /^Not modeled: auxiliary load, forecast error/);
+      assert.match(await browser.evaluate("document.querySelector('[data-payback]').textContent"), /^Simple payback: [\d.,]+ years\.$|^With no annual savings/);
       await browser.evaluate("document.querySelector('[data-line=demand] [data-show-ms]').click()");
       await waitFor(browser, `document.querySelector('[data-chart]').dataset.highlight === '${ms}'`);
       // The first utility listed is shown on arrival, then the chosen one: no other utility's rates are fetched.
