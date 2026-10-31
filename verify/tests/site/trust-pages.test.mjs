@@ -2,7 +2,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
@@ -12,6 +12,7 @@ import { createI18n } from '../../../site/lib/i18n.mjs';
 import strings from '../../../site/strings/en-US.mjs';
 import { TOOLS } from '../../../core/tools/index.mjs';
 import { pagesOf } from '../../gates/urls.mjs';
+import { ROOT } from '../../../pipeline/run.mjs';
 import { fleschKincaid } from '../../../core/lib/readability.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
@@ -57,7 +58,13 @@ test('the license page gives copyable citations for a page, a result, and a data
   assert.match(html, /CC BY 4\.0/);
   assert.match(html, /Limits\. gridprims\. https:\/\/gridprims\.com\/limits\/ \(accessed \d{4}-\d{2}-\d{2}\)\./);
   assert.match(html, /&quot;12 MWh is 40\.95 MMBtu\.&quot; Energy unit converter, version \d+\.\d+\.\d+\. gridprims\./);
-  assert.match(html, /\(Form (EIA-86[01])\), version 2026-10 \(as of 2026-\d\d-\d\d\)\. Source: U\.S\. Energy Information Administration, Form \1 \([A-Z][a-z]{2} 2026\)\./);
+  // The data citation uses one served dataset: whichever it is, it reads "<title>, version <v> (as of <date>). <credit>".
+  const served = readdirSync(join(ROOT, 'data')).filter((id) => existsSync(join(ROOT, 'data', id, 'current.json'))).map((id) => {
+    const { version } = JSON.parse(readFileSync(join(ROOT, 'data', id, 'current.json'), 'utf8'));
+    return JSON.parse(readFileSync(join(ROOT, 'data', id, version, 'manifest.json'), 'utf8'));
+  });
+  const esc = (x) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+  assert.ok(served.some((m) => html.includes(esc(`${m.title}, version ${m.version} (as of ${m.asOf}). ${m.attribution}`))), 'a served dataset is cited with its version, as-of date, and credit');
 });
 
 test('review status comes only from records: every tool reads "Review pending" and the strip says so', () => {

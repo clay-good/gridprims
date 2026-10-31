@@ -112,8 +112,9 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
       input = Object.fromEntries(step('read-parquet').files.map((f) => [f, readParquet(raws[f].bytes)]));
     } else {
       read = step('read-xlsx');
-      // A workbook inside a zip (EIA-860, 861, 923), or the raw file is the workbook (EIA-860M).
-      let bytes = raw;
+      // A workbook inside a zip (EIA-860, 861, 923), or the raw file is the workbook (EIA-860M), or one
+      // named file of several (eGRID's data workbook and its ZIP lookup).
+      let bytes = read.file ? raws[read.file].bytes : raw;
       if (step('unzip')) {
         const found = findEntry(step('unzip').entry.replace('{year}', String(year)), zip);
         if (found.problem) { failures.push(`${tb.name}: ${found.problem}`); continue; }
@@ -129,7 +130,8 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     const prevRows = previous?.tables.find((t) => t.name === tb.name && t.dataPeriod === (dataPeriod ?? String(year)))?.rows;
     const bad = validateRows(rows, step('validate'), prevRows);
     const by = step('partition').by;
-    const unplaced = rows.filter((r) => r[by] === null || r[by] === undefined).length;
+    // partition by null: one national shard, for small tables or ones a later join splits by state.
+    const unplaced = by === null ? 0 : rows.filter((r) => r[by] === null || r[by] === undefined).length;
     if (unplaced) bad.push(`${unplaced} rows have no ${by} to partition by`);
     if (bad.length) { failures.push(...bad.map((f) => `${tb.name}: ${f}`)); continue; }
     ready.push({ tb, rows, schema: normalizer.SCHEMA, by, entryName, dataPeriod: dataPeriod ?? String(year) });
@@ -147,9 +149,9 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   for (const { tb, rows, schema, by, dataPeriod } of ready) {
     const table = tb.name;
     mkdirSync(join(dir, table), { recursive: true });
-    const parts = [...new Set(rows.map((r) => r[by]))].sort();
+    const parts = by === null ? ['US'] : [...new Set(rows.map((r) => r[by]))].sort();
     const shards = parts.map((st) => {
-      const part = rows.filter((r) => r[by] === st);
+      const part = by === null ? rows : rows.filter((r) => r[by] === st);
       const bytes = writeShard(part, schema, { dataset, version, table, state: st });
       const path = `${table}/${st}.bin`;
       writeFileSync(join(dir, path), bytes);

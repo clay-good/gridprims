@@ -1,0 +1,756 @@
+{
+  "dataset": "egrid",
+  "version": "2026-10",
+  "title": "Emissions & Generation Resource Integrated Database (eGRID)",
+  "publisher": "U.S. Environmental Protection Agency",
+  "sourceUrl": "https://www.epa.gov/egrid",
+  "terms": {
+    "url": "https://www.epa.gov/egrid/egrid-questions-and-answers",
+    "section": "25) Can I use eGRID data commercially and how do I cite it?",
+    "text": "eGRID data is produced by the United States Environmental Protection Agency (EPA) under the public domain and is available for use both non-commercially and commercially. The following citations for eGRID Data are suggested: APA: United States Environmental Protection Agency (EPA). (2025). Emissions & Generation Resource Integrated Database (eGRID), 2023. Washington DC: Office of Atmospheric Protection, Clean Air and Power Division. https://www.epa.gov/egrid.",
+    "captured": "2026-10-31"
+  },
+  "redistributionBasis": {
+    "kind": "public domain",
+    "note": "U.S. federal government work (17 U.S.C. 105); EPA states eGRID is in the public domain"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "derive",
+    "license": null,
+    "reason": "restrictive wording; only our own computed values may be published",
+    "agrees": false
+  },
+  "license": "public domain (U.S. federal government work (17 U.S.C. 105); EPA states eGRID is in the public domain)",
+  "attribution": "United States Environmental Protection Agency (EPA). Emissions & Generation Resource Integrated Database (eGRID), eGRID2023 (revision 2), Jun 2025. https://www.epa.gov/egrid",
+  "asOf": "2025-06-16",
+  "retrieved": "2026-10-31",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "cadence": {
+    "every": "annual",
+    "nextRelease": {
+      "date": "2026-01-31",
+      "posted": true,
+      "note": "EPA planned eGRID2024 for January 2026; it has not appeared"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://www.epa.gov/system/files/documents/2025-06/egrid2023_data_rev2.xlsx",
+      "name": "egrid2023_data_rev2.xlsx",
+      "bytes": 21213301,
+      "sha256": "895cd81dd8662406189ad8adf5a2578dcb362cdb5cff7cca81b10ee6bd2447c6",
+      "file": "data"
+    },
+    {
+      "url": "https://www.epa.gov/system/files/documents/2025-06/power_profiler_zipcode_tool_v14.3.xlsx",
+      "name": "power_profiler_zipcode_tool_v14.3.xlsx",
+      "bytes": 3155568,
+      "sha256": "457b0191916debb12802138a1ffbfc39953eca83b035aeaeeffca2b38076fe01",
+      "file": "zips"
+    }
+  ],
+  "release": "eGRID2023 (revision 2)",
+  "tables": [
+    {
+      "name": "plants",
+      "title": "Plant emissions, generation, fuel, and subregion",
+      "dataPeriod": "2023",
+      "rows": 12612,
+      "columns": [
+        {
+          "name": "plant_id",
+          "type": "f64"
+        },
+        {
+          "name": "plant_name",
+          "type": "str"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "county",
+          "type": "str"
+        },
+        {
+          "name": "fips_state",
+          "type": "str"
+        },
+        {
+          "name": "fips_county",
+          "type": "str"
+        },
+        {
+          "name": "data_year",
+          "type": "f64"
+        },
+        {
+          "name": "subregion",
+          "type": "str"
+        },
+        {
+          "name": "subregion_name",
+          "type": "str"
+        },
+        {
+          "name": "ba_code",
+          "type": "str"
+        },
+        {
+          "name": "nerc_region",
+          "type": "str"
+        },
+        {
+          "name": "iso_rto",
+          "type": "str"
+        },
+        {
+          "name": "utility_id",
+          "type": "f64"
+        },
+        {
+          "name": "utility_name",
+          "type": "str"
+        },
+        {
+          "name": "sector",
+          "type": "str"
+        },
+        {
+          "name": "primary_fuel",
+          "type": "str"
+        },
+        {
+          "name": "fuel_category",
+          "type": "str"
+        },
+        {
+          "name": "chp",
+          "type": "str"
+        },
+        {
+          "name": "pumped_storage",
+          "type": "str"
+        },
+        {
+          "name": "nameplate_mw",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "capacity_factor",
+          "type": "f64",
+          "unit": "fraction"
+        },
+        {
+          "name": "net_generation_mwh",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "heat_input_mmbtu",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "co2_tons",
+          "type": "f64",
+          "unit": "short tons"
+        },
+        {
+          "name": "co2e_tons",
+          "type": "f64",
+          "unit": "short tons"
+        },
+        {
+          "name": "nox_tons",
+          "type": "f64",
+          "unit": "short tons"
+        },
+        {
+          "name": "so2_tons",
+          "type": "f64",
+          "unit": "short tons"
+        },
+        {
+          "name": "ch4_lb",
+          "type": "f64",
+          "unit": "lb"
+        },
+        {
+          "name": "n2o_lb",
+          "type": "f64",
+          "unit": "lb"
+        },
+        {
+          "name": "co2_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        },
+        {
+          "name": "co2e_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "plants/AK.bin",
+          "state": "AK",
+          "rows": 152,
+          "bytes": 35840,
+          "sha256": "5311ce3d62670fba14283bfca4f02a0afec7fa5d8c71f7c6a92ea3bce2cf87b9"
+        },
+        {
+          "path": "plants/AL.bin",
+          "state": "AL",
+          "rows": 78,
+          "bytes": 20968,
+          "sha256": "a54c14d2c1bd4eb828cc662e388e78e625ba254981fb406d7b1502d440438da5"
+        },
+        {
+          "path": "plants/AR.bin",
+          "state": "AR",
+          "rows": 90,
+          "bytes": 23936,
+          "sha256": "5b82e0a37b87cd9ac682469991e77577fbbc634b9dc6a14b086139dfe4e37b14"
+        },
+        {
+          "path": "plants/AZ.bin",
+          "state": "AZ",
+          "rows": 157,
+          "bytes": 38184,
+          "sha256": "7a75b155042ec9345f5a5dc4784fa3734fa94992437503b05791f5b0edd568ae"
+        },
+        {
+          "path": "plants/CA.bin",
+          "state": "CA",
+          "rows": 1727,
+          "bytes": 381608,
+          "sha256": "a1e132062c56f9475934291b6a48415f897da2170b8b31c8589ba5c3fb96a6cd"
+        },
+        {
+          "path": "plants/CO.bin",
+          "state": "CO",
+          "rows": 280,
+          "bytes": 65936,
+          "sha256": "8f174777523b047af9b1557fd5360026818219f554ae9537185d8a3f27b2bd93"
+        },
+        {
+          "path": "plants/CT.bin",
+          "state": "CT",
+          "rows": 162,
+          "bytes": 39464,
+          "sha256": "484b1c4960596ec44df05a1786817ca572300966bf08f33f5e52b235c568ca02"
+        },
+        {
+          "path": "plants/DC.bin",
+          "state": "DC",
+          "rows": 14,
+          "bytes": 6384,
+          "sha256": "ebd647d165f24ae097d1ef2d0e53b9abbf8cdddc4cf390db83c529489d9f694c"
+        },
+        {
+          "path": "plants/DE.bin",
+          "state": "DE",
+          "rows": 31,
+          "bytes": 10536,
+          "sha256": "a038b41568225f4db43fe686489f6f17fec1510a28e6b0a3bf79a0d9032c5041"
+        },
+        {
+          "path": "plants/FL.bin",
+          "state": "FL",
+          "rows": 269,
+          "bytes": 63104,
+          "sha256": "fd6c8e979c979bea12bf670b8c5e0b8a795e9362db99c52b4acef1a0af7dbde7"
+        },
+        {
+          "path": "plants/GA.bin",
+          "state": "GA",
+          "rows": 250,
+          "bytes": 59656,
+          "sha256": "e1cd8ab556f56c374b3405663de0fa14e9bda02d5c4e28c51472d3db63ff63fa"
+        },
+        {
+          "path": "plants/HI.bin",
+          "state": "HI",
+          "rows": 69,
+          "bytes": 18664,
+          "sha256": "55b5749e2be2028a6f8783efb57109fdad81bb286cf33b2595d8e62b367b6b61"
+        },
+        {
+          "path": "plants/IA.bin",
+          "state": "IA",
+          "rows": 287,
+          "bytes": 68200,
+          "sha256": "0d669641a7652ffc69294e751bb216dd7c0fdf4f07dbe6a00b0750278fb62200"
+        },
+        {
+          "path": "plants/ID.bin",
+          "state": "ID",
+          "rows": 140,
+          "bytes": 34728,
+          "sha256": "6da3f1fa54da004f49935bed661fc9eb6dc88aee0dd3d9e391672a20b6919e8b"
+        },
+        {
+          "path": "plants/IL.bin",
+          "state": "IL",
+          "rows": 344,
+          "bytes": 82704,
+          "sha256": "5db0d27c262c2227058afffdfbff5d952aa2b2811cdf18e4737d970786010336"
+        },
+        {
+          "path": "plants/IN.bin",
+          "state": "IN",
+          "rows": 204,
+          "bytes": 49408,
+          "sha256": "c96232142533a03c595b65072d7df2814002f827582eaddf2759b88ef00a03c1"
+        },
+        {
+          "path": "plants/KS.bin",
+          "state": "KS",
+          "rows": 167,
+          "bytes": 41984,
+          "sha256": "b3a5ebbf40d087e0f18b42184cb16013b1cc28f1ed6267d19ac118882981e553"
+        },
+        {
+          "path": "plants/KY.bin",
+          "state": "KY",
+          "rows": 54,
+          "bytes": 15504,
+          "sha256": "b49b143d24d5149af1b87cfe6715c70d6ddd33038d228272eed6d27aa27732bf"
+        },
+        {
+          "path": "plants/LA.bin",
+          "state": "LA",
+          "rows": 85,
+          "bytes": 23000,
+          "sha256": "4170b9c7c08d644b165cf609dd6b90b0d0cdd62c8ba901cb363a8e1ed3ae895e"
+        },
+        {
+          "path": "plants/MA.bin",
+          "state": "MA",
+          "rows": 624,
+          "bytes": 142328,
+          "sha256": "5c7dc20557d02c8ecc9389765717107525603704f7c83a57ce437ada24830dd3"
+        },
+        {
+          "path": "plants/MD.bin",
+          "state": "MD",
+          "rows": 189,
+          "bytes": 46152,
+          "sha256": "2861c30b0566717650c9235f976d2bad9575e2a510b9195074ad0c689468c762"
+        },
+        {
+          "path": "plants/ME.bin",
+          "state": "ME",
+          "rows": 175,
+          "bytes": 42272,
+          "sha256": "83844977011fb5430117aed7a91dfa162a63b5e06033b282263380bc86f17083"
+        },
+        {
+          "path": "plants/MI.bin",
+          "state": "MI",
+          "rows": 273,
+          "bytes": 64112,
+          "sha256": "cfe2ca1a9418177707b05494285b1876ce317ee355c165d480ffe0229e5af47a"
+        },
+        {
+          "path": "plants/MN.bin",
+          "state": "MN",
+          "rows": 759,
+          "bytes": 170144,
+          "sha256": "d37d7231262afa039b754e3b469cb44e39dbbbe47127ec624012e0acbebb92c0"
+        },
+        {
+          "path": "plants/MO.bin",
+          "state": "MO",
+          "rows": 130,
+          "bytes": 32856,
+          "sha256": "6f1522a65483cde33aa01f19ccd4dadf97fecf24cd6a39f1353ef48d443cf7ee"
+        },
+        {
+          "path": "plants/MS.bin",
+          "state": "MS",
+          "rows": 50,
+          "bytes": 15056,
+          "sha256": "400b76ca70e8bff8a6e333f9356dc5fc0adf3f7591b0b672ee73545020150bbb"
+        },
+        {
+          "path": "plants/MT.bin",
+          "state": "MT",
+          "rows": 68,
+          "bytes": 19024,
+          "sha256": "16ba0901f9373731eb2f76dd2cedd2b07891cc4dd52dbdc4aea175c048122d8b"
+        },
+        {
+          "path": "plants/NC.bin",
+          "state": "NC",
+          "rows": 895,
+          "bytes": 195008,
+          "sha256": "86ce07032c6b2f4750a918670620f5c49f3fd8160b00077912f48f220960b41e"
+        },
+        {
+          "path": "plants/ND.bin",
+          "state": "ND",
+          "rows": 59,
+          "bytes": 16992,
+          "sha256": "0d68edc372e88bc713126cfda84e5db2b73e4cd57faa60998737019a74378f98"
+        },
+        {
+          "path": "plants/NE.bin",
+          "state": "NE",
+          "rows": 126,
+          "bytes": 32040,
+          "sha256": "8e5f88362542fdffaf3b96d2c1d50d3c74c482cb07a9a4039234c0e29001f507"
+        },
+        {
+          "path": "plants/NH.bin",
+          "state": "NH",
+          "rows": 61,
+          "bytes": 17048,
+          "sha256": "c261940d8454e207aab7dbab2157ac0e39b8ac03d60f99c1180682a852f33f05"
+        },
+        {
+          "path": "plants/NJ.bin",
+          "state": "NJ",
+          "rows": 401,
+          "bytes": 92576,
+          "sha256": "e65a068211c3df74a31be5957de9b505e48a81849d00f541b7d7c94e9aeec3b0"
+        },
+        {
+          "path": "plants/NM.bin",
+          "state": "NM",
+          "rows": 140,
+          "bytes": 35120,
+          "sha256": "765fb1376568c59401b7910bc48931dc99ceabb55201f1cbcc909b5624376b3c"
+        },
+        {
+          "path": "plants/NV.bin",
+          "state": "NV",
+          "rows": 109,
+          "bytes": 27968,
+          "sha256": "4bcab4e74fde232867e592f6699a85abe8807b1287bdedd097bf7916acee8661"
+        },
+        {
+          "path": "plants/NY.bin",
+          "state": "NY",
+          "rows": 897,
+          "bytes": 201592,
+          "sha256": "1b411075cd017f72ce1bf6d1532b178cba77b0e4221d164ff24c27d0ff1034c0"
+        },
+        {
+          "path": "plants/OH.bin",
+          "state": "OH",
+          "rows": 194,
+          "bytes": 47800,
+          "sha256": "6006d8629bfb9f5928c542cc79e91bc45e2b6afcf76b2516e4b0c37904fe995e"
+        },
+        {
+          "path": "plants/OK.bin",
+          "state": "OK",
+          "rows": 128,
+          "bytes": 32496,
+          "sha256": "491645a61576f94212f61ae79e43b5811a1b3c5026648dce5f2def9f7d64f60d"
+        },
+        {
+          "path": "plants/OR.bin",
+          "state": "OR",
+          "rows": 267,
+          "bytes": 62064,
+          "sha256": "4ccbf724ece24b83ac060c81e4ecb37066d2855ed98fda8bb30e1116bc9bbe89"
+        },
+        {
+          "path": "plants/PA.bin",
+          "state": "PA",
+          "rows": 248,
+          "bytes": 60696,
+          "sha256": "a749d3116041449ed94ca340783a116afbf8ec0bb8d1987ec18fd8336eb39176"
+        },
+        {
+          "path": "plants/PR.bin",
+          "state": "PR",
+          "rows": 62,
+          "bytes": 17368,
+          "sha256": "da387bb2431ffad71aad3a0e2a8ea2ceba27d6b38655f8602ca48ad51ff4d985"
+        },
+        {
+          "path": "plants/RI.bin",
+          "state": "RI",
+          "rows": 96,
+          "bytes": 25384,
+          "sha256": "3ad64b6b13b914325b0cb17932143e384a7b350e81919ce278052399f16f56d6"
+        },
+        {
+          "path": "plants/SC.bin",
+          "state": "SC",
+          "rows": 203,
+          "bytes": 48232,
+          "sha256": "94ed3815a21828a75eb42087423c1730c7e7a5ab8f11ada49b2bf5e5777a70df"
+        },
+        {
+          "path": "plants/SD.bin",
+          "state": "SD",
+          "rows": 52,
+          "bytes": 15296,
+          "sha256": "a2e28f31b8727714174bb8a0366e7358aef3b3f336a6acb1c4b0f440b27414b4"
+        },
+        {
+          "path": "plants/TN.bin",
+          "state": "TN",
+          "rows": 87,
+          "bytes": 22888,
+          "sha256": "a40b09311bb0ab23d8a040fcbdabdb36cd997abd0432a5be8947a7bfdaf0ece7"
+        },
+        {
+          "path": "plants/TX.bin",
+          "state": "TX",
+          "rows": 824,
+          "bytes": 185048,
+          "sha256": "5d8a57b379a5348c7025c39c7975fda4539e8fd7b8c85a1986114996a1600bdb"
+        },
+        {
+          "path": "plants/UT.bin",
+          "state": "UT",
+          "rows": 117,
+          "bytes": 29792,
+          "sha256": "6cc5cba387f81c604e09c480ed2ebefe44aa5d8574be0eb4b1fc01ba2a342b41"
+        },
+        {
+          "path": "plants/VA.bin",
+          "state": "VA",
+          "rows": 219,
+          "bytes": 53200,
+          "sha256": "5d1b7af1a96cf7c2464f46d09e44b48c8679f5364d54a3ec944e9fe250cd0937"
+        },
+        {
+          "path": "plants/VT.bin",
+          "state": "VT",
+          "rows": 117,
+          "bytes": 28784,
+          "sha256": "52ad6b67625fcaa594cbde730c6adeef3bf15629c6901b743c01c9d0e485238c"
+        },
+        {
+          "path": "plants/WA.bin",
+          "state": "WA",
+          "rows": 142,
+          "bytes": 34640,
+          "sha256": "121cdf07df6ca4abeec68584add8056313f9cad924d909bd9e859ff54bffff4a"
+        },
+        {
+          "path": "plants/WI.bin",
+          "state": "WI",
+          "rows": 234,
+          "bytes": 54144,
+          "sha256": "5cb74d1ebc586d204412cb24b555c30aa18feeca2b33de81547514e4e8664d72"
+        },
+        {
+          "path": "plants/WV.bin",
+          "state": "WV",
+          "rows": 36,
+          "bytes": 11752,
+          "sha256": "e135070a30780ce09ee22b6a010aa90a8ef6512b9c85b15009c9d20025d602cc"
+        },
+        {
+          "path": "plants/WY.bin",
+          "state": "WY",
+          "rows": 70,
+          "bytes": 18424,
+          "sha256": "b01110d0d4d66c1fd4fe895eb5f8ed69df29feb45df49e6d401c4135367377a3"
+        }
+      ],
+      "download": {
+        "path": "plants.csv.gz",
+        "bytes": 579975,
+        "sha256": "cdc1aefc9b3dd1de577771d1c0370ece07cc70b4b5619bb9dc1542b834c3ce2a",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Environmental Protection Agency",
+          "attribution": "United States Environmental Protection Agency (EPA). Emissions & Generation Resource Integrated Database (eGRID), eGRID2023 (revision 2), Jun 2025. https://www.epa.gov/egrid",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "subregions",
+      "title": "Subregion total output and non-baseload emission rates",
+      "dataPeriod": "2023",
+      "rows": 27,
+      "columns": [
+        {
+          "name": "subregion",
+          "type": "str"
+        },
+        {
+          "name": "subregion_name",
+          "type": "str"
+        },
+        {
+          "name": "data_year",
+          "type": "f64"
+        },
+        {
+          "name": "nameplate_mw",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "net_generation_mwh",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "nonbaseload_generation_mwh",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "co2_tons",
+          "type": "f64",
+          "unit": "short tons"
+        },
+        {
+          "name": "co2e_tons",
+          "type": "f64",
+          "unit": "short tons"
+        },
+        {
+          "name": "co2_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        },
+        {
+          "name": "co2e_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        },
+        {
+          "name": "ch4_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        },
+        {
+          "name": "n2o_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        },
+        {
+          "name": "nox_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        },
+        {
+          "name": "so2_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        },
+        {
+          "name": "nonbaseload_co2_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        },
+        {
+          "name": "nonbaseload_co2e_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        },
+        {
+          "name": "nonbaseload_nox_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        },
+        {
+          "name": "nonbaseload_so2_rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb/MWh"
+        }
+      ],
+      "partition": null,
+      "shards": [
+        {
+          "path": "subregions/US.bin",
+          "state": "US",
+          "rows": 27,
+          "bytes": 6272,
+          "sha256": "88049ede66dda62f694e2f24422c38157d2854ae3563258c0dee9b9cdbae92a7"
+        }
+      ],
+      "download": {
+        "path": "subregions.csv.gz",
+        "bytes": 2348,
+        "sha256": "2563581241a64fc24a7ca053f86ebd02e154325703b1e3f4cbffd88433826b3f",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Environmental Protection Agency",
+          "attribution": "United States Environmental Protection Agency (EPA). Emissions & Generation Resource Integrated Database (eGRID), eGRID2023 (revision 2), Jun 2025. https://www.epa.gov/egrid",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "zip_subregions",
+      "title": "ZIP codes and the eGRID subregions they fall in (EPA Power Profiler)",
+      "dataPeriod": "2023",
+      "rows": 41588,
+      "columns": [
+        {
+          "name": "zip",
+          "type": "str"
+        },
+        {
+          "name": "subregion_1",
+          "type": "str"
+        },
+        {
+          "name": "subregion_2",
+          "type": "str"
+        },
+        {
+          "name": "subregion_3",
+          "type": "str"
+        },
+        {
+          "name": "subregions",
+          "type": "f64",
+          "unit": "count"
+        }
+      ],
+      "partition": null,
+      "shards": [
+        {
+          "path": "zip_subregions/US.bin",
+          "state": "US",
+          "rows": 41588,
+          "bytes": 1331848,
+          "sha256": "b2f57881c6b43bd173807f9e0de4bcf511711442dc3b2b20280d563e27625b1a"
+        }
+      ],
+      "download": {
+        "path": "zip_subregions.csv.gz",
+        "bytes": 106573,
+        "sha256": "86d313c4f2a4cda0ea33798e89b1909638144548fc641e72f2f8181424355ab8",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Environmental Protection Agency",
+          "attribution": "United States Environmental Protection Agency (EPA). Emissions & Generation Resource Integrated Database (eGRID), eGRID2023 (revision 2), Jun 2025. https://www.epa.gov/egrid",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}
