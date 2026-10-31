@@ -11,6 +11,7 @@
  * @type {Array<{date: string, toolId: string | null, version: string, reason: string, kind?: 'security', credit?: string, sample?: {inputs: object, old: string, new: string}}>}
  */
 export default [
+  { date: '2026-10-31', toolId: 'ratepayer.revenue-requirement.explain', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'calc.line-rating.ampacity', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'calc.cost.lcoe', version: '0.2.0', reason: 'Cross-checked against NLR ATB 2025\'s published LCOE for nine technologies. No answer changed; results now report validation level 2.', sample: { inputs: { fcr: 0.07, capex: 1000, fom: 20, cf: 25, vom: 0, fuel: 0 }, old: '$41.10/MWh (level 1)', new: '$41.10/MWh (level 2)' } },
   { date: '2026-10-31', toolId: 'calc.cost.lcoe', version: '0.1.0', reason: 'First release.' },

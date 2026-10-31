@@ -1,0 +1,77 @@
+{
+  "toolId": "ratepayer.revenue-requirement.explain",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "spec",
+      "result": {
+        "status": "ok",
+        "toolId": "ratepayer.revenue-requirement.explain",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "total": {
+            "value": 783333333,
+            "unit": "$ a year",
+            "display": "783,333,333"
+          },
+          "perPoint": {
+            "value": 13333333,
+            "unit": "$ a year",
+            "display": "13,333,333"
+          },
+          "perCustomerMonth": {
+            "value": 0.89,
+            "unit": "$ a month",
+            "display": "0.89"
+          },
+          "ret": {
+            "value": 150000000,
+            "unit": "$ a year",
+            "display": "150,000,000"
+          },
+          "incomeTax": {
+            "value": 33333333,
+            "unit": "$ a year",
+            "display": "33,333,333"
+          },
+          "wacc": {
+            "value": 7.5,
+            "unit": "%",
+            "display": "7.5"
+          }
+        },
+        "sentence": "The revenue requirement is $783,333,333. Each point of return on equity is worth $13,333,333 a year, about $0.89 a month per home.",
+        "notes": [],
+        "work": {
+          "method": "Revenue requirement = O&M + depreciation + taxes other than income + income tax + rate base × weighted cost of capital, where the weighted cost of capital is equity share × return on equity + debt share × cost of debt, and income tax on the equity return is that return × t ÷ (1 − t).",
+          "steps": [
+            "Weighted cost of capital: 50% equity × 10% + 50% debt × 5% = 7.5%.",
+            "Return on rate base: $2,000,000,000 × 7.5% = $150,000,000.",
+            "Income tax on the equity return: $100,000,000 × 25% ÷ (1 − 25%) = $33,333,333.",
+            "Revenue requirement: O&M $400,000,000 + depreciation $150,000,000 + other taxes $50,000,000 + income tax $33,333,333 + return $150,000,000 = $783,333,333.",
+            "One point less return on equity (10% to 9%) lowers it by $13,333,333: $10,000,000 of return and $3,333,333 of income tax.",
+            "Per home: $13,333,333 × 40% residential share ÷ 500,000 residential customers ÷ 12 = $0.89 a month. This is an approximation: rates are not set by revenue share alone."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Income tax is grossed up on the equity return only, at one combined rate; deferred taxes and tax credits are left out.",
+            "The per-home figure spreads a change in proportion to the residential share of revenue; a rate case's cost allocation can differ."
+          ],
+          "citations": [
+            {
+              "source": "Regulatory Assistance Project, Electricity Regulation in the US: A Guide",
+              "edition": "Second edition, 2016",
+              "locator": "Chapter 9, the revenue requirement and its components",
+              "url": "https://www.raponline.org/knowledge-center/electricity-regulation-in-the-us-a-guide-2/"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "An explainer, not a rate case: a commission's order sets the actual figures."
+      }
+    }
+  ]
+}

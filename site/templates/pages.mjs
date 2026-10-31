@@ -16,6 +16,7 @@ import { tariffPicker } from '../ui/tariff-picker.mjs';
 import { averagePicker } from '../ui/average-picker.mjs';
 import { billPanel } from '../ui/workbench-bill.mjs';
 import { cpPanel } from '../ui/workbench-cp.mjs';
+import { proposalPanel } from '../ui/workbench-proposal.mjs';
 import { WORKBENCH_CAPABILITIES } from '../ui/workbench-review.mjs';
 import { ratingTablePanel } from '../ui/line-rating-table.mjs';
 import { conductorPicker } from '../ui/conductor-picker.mjs';
@@ -252,6 +253,7 @@ export function filesPage({ i18n, reviewed = new Set() }) {
   <section class="panel report-view" data-report-view hidden aria-labelledby="report-view-title"></section>
   <section class="panel" data-insights></section>
   ${billPanel(i18n, reviewed)}
+  ${proposalPanel(i18n)}
   ${cpPanel(i18n, reviewed)}
   <section class="panel" data-receipt></section>
 </article>

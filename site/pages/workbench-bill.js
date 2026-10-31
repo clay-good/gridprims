@@ -18,7 +18,7 @@ import { getJson, utilitiesForZip } from './zip-utilities.js';
  * @param {{i18n: any, view: () => any, when: (ms: number, zone: string) => string, showOnChart: (ms: number, kw: number) => void, onUtility?: (u: any) => void}} p
  *   view returns the workbench's current view of the loaded series, or null
  */
-export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {} }) {
+export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {}, onPriced = () => {} }) {
   const { t } = i18n;
   const panel = document.querySelector('[data-bill]');
   const $ = (sel) => panel.querySelector(sel);
@@ -42,6 +42,7 @@ export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {} 
     $('[data-bill-result]').innerHTML = String(renderBills(rec, bills, i18n, { when: (ms) => when(ms, v.zone), dataStart }));
     priced = { rec, bills };
     panel.dataset.priced = rec.id;
+    onPriced();
     const same = rates.filter((r) => r.sector === rec.sector);
     $('[data-compare-run]').textContent = t('compare.run', { count: same.length, sector: (rec.sector ?? '').toLowerCase() });
     $('[data-compare-field]').hidden = same.length < 2;
@@ -175,5 +176,6 @@ export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {} 
     refresh: () => { if (rates.length) price(); },
     /** What the report needs from this panel. */
     state: () => ({ priced, ranking: last.ranking, screen: last.screen, urdbAsOf: asOf, period: view() ? period(view()) : '' }),
+    utility: () => utilityName,
   };
 }

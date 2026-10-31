@@ -1,0 +1,83 @@
+{
+ "engine": "NREL PySAM 7.1.1.post1 Utilityrate5",
+ "proposal": "fixed charge +$8 a month; energy rates \u00d7 1.07 (adjustments folded in); demand rates \u00d7 1.10",
+ "loads": {
+  "office-2018-hourly.csv": "5929af3e7e6a3c412fb41fe1f844e28f6d7ada881f7235035e4e5b06f622291c",
+  "home-2018-hourly.csv": "e8aa03ecbc4fa4e6b3bcddd180a0e0829125cd1d59509a53020d36d9dfefefc2",
+  "plant-2018-hourly.csv": "4ead67a0604d40acc9fd2b3d09684911e536ed6f01393934c97b40cfffc4b2d3"
+ },
+ "cases": [
+  {
+   "rate": "539f6a0aec4f024411ec8ac1",
+   "why": "tiered energy",
+   "load": "office-2018-hourly.csv",
+   "current": 45351.9149,
+   "proposed": 48576.3489,
+   "diff": 3224.434
+  },
+  {
+   "rate": "539f6a0aec4f024411ec8ac1",
+   "why": "tiered energy",
+   "load": "home-2018-hourly.csv",
+   "current": 2243.8394,
+   "proposed": 2450.7082,
+   "diff": 206.8688
+  },
+  {
+   "rate": "539f6a0aec4f024411ec8ac1",
+   "why": "tiered energy",
+   "load": "plant-2018-hourly.csv",
+   "current": 422911.2,
+   "proposed": 452564.784,
+   "diff": 29653.584
+  },
+  {
+   "rate": "539f6a23ec4f024411ec8be1",
+   "why": "time-of-use energy",
+   "load": "office-2018-hourly.csv",
+   "current": 59195.5811,
+   "proposed": 63419.7318,
+   "diff": 4224.1507
+  },
+  {
+   "rate": "539f6a23ec4f024411ec8be1",
+   "why": "time-of-use energy",
+   "load": "home-2018-hourly.csv",
+   "current": 1983.7878,
+   "proposed": 2203.1129,
+   "diff": 219.3251
+  },
+  {
+   "rate": "539f6a23ec4f024411ec8be1",
+   "why": "time-of-use energy",
+   "load": "plant-2018-hourly.csv",
+   "current": 557490.03,
+   "proposed": 596594.7921,
+   "diff": 39104.7621
+  },
+  {
+   "rate": "539f6a0aec4f024411ec8ac9",
+   "why": "monthly demand",
+   "load": "office-2018-hourly.csv",
+   "current": 51416.8312,
+   "proposed": 55564.9332,
+   "diff": 4148.102
+  },
+  {
+   "rate": "539f6a0aec4f024411ec8ac9",
+   "why": "monthly demand",
+   "load": "home-2018-hourly.csv",
+   "current": 2925.2487,
+   "proposed": 3161.8861,
+   "diff": 236.6375
+  },
+  {
+   "rate": "539f6a0aec4f024411ec8ac9",
+   "why": "monthly demand",
+   "load": "plant-2018-hourly.csv",
+   "current": 441608.952,
+   "proposed": 476340.5786,
+   "diff": 34731.6266
+  }
+ ]
+}

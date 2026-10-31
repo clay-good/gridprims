@@ -57,6 +57,19 @@ for (const kind of ['chrome', 'firefox']) {
       assert.equal(ranked.length + listed, austin.filter((r) => r.sector === 'Commercial').length, 'every commercial rate is ranked or listed as not eligible');
       assert.ok(ranked.includes(austin[pick].id));
       assert.match(await browser.evaluate("document.querySelector('[data-compare-result]').textContent"), /Based on this file's past use\./);
+      // A proposal: the fixed charge raised by $10 a month shows in the difference list and the impact, and the draft states it.
+      assert.equal(await browser.evaluate("document.querySelector('[data-proposal]').hidden"), false);
+      const fixedNow = Number(await browser.evaluate("document.querySelector('[data-path=fixed]').value"));
+      await browser.evaluate(`(() => { document.querySelector('[data-path=fixed]').value = '${fixedNow + 10}'; document.querySelector('[data-proposal-run]').click(); })()`);
+      await waitFor(browser, "document.querySelector('[data-proposal]').dataset.compared === '1'");
+      assert.match(await browser.evaluate("document.querySelector('[data-differences]').textContent"), /^Fixed charge: \$[\d.,]+ → \$[\d.,]+ per month$/);
+      assert.match(await browser.evaluate("document.querySelector('[data-proposal-diff]').textContent"), /^\+\$10\.00$/, 'the sample covers one month');
+      await browser.evaluate("(() => { const f = document.querySelector('[data-draft-form]'); f.regulator.value = 'Public Utility Commission of Texas'; f.docket.value = '55555'; f.requestSubmit(); })()");
+      await waitFor(browser, "document.querySelector('[data-proposal]').dataset.draft");
+      const draft = await browser.evaluate("document.querySelector('[data-proposal]').dataset.draft");
+      assert.match(draft, /^To the Public Utility Commission of Texas, regarding docket 55555:/);
+      assert.match(draft, /\[Your own views go here\.\]/);
+      assert.doesNotMatch(draft, /sample-office-15min/);
       // The comparison card: the top three rates, the period, the URDB date, and gridprims.com.
       await browser.evaluate("document.querySelector('[data-copy-card=ranking]').click()");
       await waitFor(browser, "document.querySelector('[data-bill]').dataset.card?.startsWith('What this load would have cost')");

@@ -253,6 +253,45 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 - Resistance must be entered from the manufacturer's data; no public-domain resistance table exists.
 - Clear-sky solar gain; haze, industrial atmosphere, and ground reflection are not modeled.
 
+## Revenue requirement explainer (`ratepayer.revenue-requirement.explain`)
+
+Where a utility's requested revenue comes from, and what one point of return on equity is worth on a home's bill.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Rate base | `rateBase` | $ | 0 to 10000000000000 | 2000000000 |
+| Return on equity | `roe` | % | 0 to 50 | 10 |
+| Equity share of capital | `equityRatio` | % | 0 to 100 | 50 |
+| Cost of debt | `costOfDebt` | % | 0 to 50 | 5 |
+| Operation and maintenance | `om` | $ a year | 0 to 10000000000000 | 400000000 |
+| Depreciation | `depreciation` | $ a year | 0 to 10000000000000 | 150000000 |
+| Taxes other than income | `otherTaxes` | $ a year | 0 to 10000000000000 | 50000000 |
+| Income tax rate | `taxRate` | % | 0 to 99 | 25 |
+| Residential share of revenue | `residentialShare` | % | 0 to 100 | 40 |
+| Residential customers (0 to skip) | `residentialCustomers` | customers | 0 to 1000000000 | 500000 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Revenue requirement | `total` | $ a year | 0 decimals |
+| One point of return on equity | `perPoint` | $ a year | 0 decimals |
+| One point, per home | `perCustomerMonth` | $ a month | 2 decimals |
+| Return on rate base | `ret` | $ a year | 0 decimals |
+| Income tax on the equity return | `incomeTax` | $ a year | 0 decimals |
+| Weighted cost of capital | `wacc` | % | 3 decimals |
+
+**Method.** Revenue requirement = O&M + depreciation + taxes other than income + income tax + rate base × weighted cost of capital, where the weighted cost of capital is equity share × return on equity + debt share × cost of debt, and income tax on the equity return is that return × t ÷ (1 − t).
+
+**Sources.**
+
+- Regulatory Assistance Project, Electricity Regulation in the US: A Guide, Second edition, 2016, Chapter 9, the revenue requirement and its components (https://www.raponline.org/knowledge-center/electricity-regulation-in-the-us-a-guide-2/)
+
+**Known limits.**
+
+- A simplified cost-of-service formula: no deferred taxes, tax credits, or riders.
+- Figures from FERC Form 1 are total-company and may cover more than one state or service.
+
 ## Bill check (`household.bill-totals.check`)
 
 Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.
