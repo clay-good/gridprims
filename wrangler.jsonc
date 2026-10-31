@@ -1,0 +1,25 @@
+// The one Cloudflare Worker (foundation design D4): the built site in dist/
+// as static assets, with the reports database, the report rate limiter, and
+// the nightly schedule. `wrangler deploy` runs the build first, so the same
+// command works on this machine and in Cloudflare's own builds from GitHub.
+// Wrangler is not a dependency of this repository: it is the host's own CLI.
+{
+  "name": "gridprims",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2026-10-01",
+  "build": { "command": "node site/build.mjs" },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "gridprims-reports", "database_id": "56d4c19c-31f8-4a18-9daf-2a717a3dbca4" }
+  ],
+  "ratelimits": [
+    { "name": "REPORT_LIMITER", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } }
+  ],
+  "triggers": { "crons": ["29 3 * * *"] },
+  "observability": { "enabled": true }
+}

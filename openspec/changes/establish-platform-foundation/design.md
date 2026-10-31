@@ -41,8 +41,12 @@ A Node script renders pages from templates (tagged template literals returning e
 | Astro, Eleventy, Next.js | Package dependencies with frequent major-version churn. |
 | Client-side rendering of entity pages | Breaks "facts work without JavaScript" and hurts search. |
 
-### D4. Hosting: Cloudflare Workers static assets on the paid plan, deployed without Wrangler
-Everything (pages, app code, datasets) is served from `gridprims.com` as static assets; no R2 bucket and no data subdomain. Datasets are split so no file exceeds 20 MiB. The paid plan ($5/month) is required for the file count. A deploy script uses Cloudflare's direct-upload API with `fetch` and `crypto` only, so Wrangler (a package) is not needed.
+### D4. Hosting: Cloudflare Workers static assets on the paid plan, deployed with the host's own Wrangler
+Everything (pages, app code, datasets) is served from `gridprims.com` as static assets; no R2 bucket and no data subdomain. Datasets are split so no file exceeds 20 MiB. The paid plan ($5/month) is required for the file count: the free plan allows 20,000 static asset files per Worker version and a build is already over that, mostly one page per power plant.
+
+`wrangler.jsonc` holds the one Worker's configuration, and `wrangler deploy` runs the site build first, so one command deploys from a workstation and Cloudflare's Git-connected Workers Builds runs the same one on its side when a commit lands on `main`. Wrangler stays out of `package.json`: it is the host's own CLI, never a dependency of this repository, which the dry run confirms (research `04` §Deploy without Wrangler left that unverified).
+
+`pipeline/deploy.mjs` remains for a deploy where no Wrangler is available: it uses Cloudflare's direct-upload API with `fetch` and `crypto` only, and needs an API token with no expiry. It was the first path; Wrangler replaced it because the account's own credential is a Wrangler OAuth login, which that API refuses.
 
 | Alternative | Why not |
 |---|---|

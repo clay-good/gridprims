@@ -319,6 +319,9 @@ export async function build(opts = {}) {
   const urls = shell.map((f) => `/${f.replace(/(^|\/)index\.html$/, '$1')}`);
   writeFileSync(join(outDir, 'sw.js'), serviceWorkerSource({ version, files: urls }));
 
+  // The host serves everything in the deploy root, so the internal files are named here
+  // instead: _redirects is the host's own, and it reads that itself.
+  writeFileSync(join(outDir, '.assetsignore'), '_csp-hashes.json\n_manifest.json\n');
   const files = walk(outDir).filter((f) => f !== '_manifest.json');
   const manifest = files.map((f) => ({ path: f, sha256: sha256(readFileSync(join(outDir, f))) }));
   writeFileSync(join(outDir, '_manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
