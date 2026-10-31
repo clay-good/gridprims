@@ -6,6 +6,7 @@ import { layout } from './layout.mjs';
 import { sourceStamp } from '../ui/source-stamp.mjs';
 import { tableView } from '../lib/chart.mjs';
 import { utilityPath } from './utility.mjs';
+import { pageTitle } from '../lib/meta.mjs';
 
 export const statePath = (code) => `/states/${code.toLowerCase()}/`;
 export const subregionPath = (code) => `/subregions/${code.toLowerCase()}/`;
@@ -55,7 +56,7 @@ ${tableView([t('state.col.utility'), t('utility.ownership'), t('utility.col.cust
     s.utilities.map((u) => [u.page ? html`<a href="${utilityPath(u.id)}">${u.name}</a>` : u.name, u.ownership ?? '', whole(u.customers), whole(u.sales)]), t('state.utilities'))}
 <p>${t('state.utilitiesNote')}</p>
 </section>`;
-  return layout({ i18n, title: `${s.name} · ${t('site.name')}`, description: t('state.description', { name: s.name }), path: statePath(s.code), body, section: 'grid' });
+  return layout({ i18n, title: pageTitle(t('state.title', { name: s.name })), description: t('state.description', { name: s.name }), path: statePath(s.code), body, section: 'grid' });
 }
 
 /** @param {{subregion: any, sources: any, i18n: any}} p */
@@ -82,5 +83,5 @@ ${sourceStamp(sources.egrid, sources.egrid.tables[0], i18n)}
   <div><dt>${t('subregion.plants')}</dt><dd class="mono">${whole(r.plants)}</dd></div>
 </dl>
 </section>`;
-  return layout({ i18n, title: `${r.subregion_name} (${r.subregion}) · ${t('site.name')}`, description: t('subregion.description', { name: r.subregion_name, code: r.subregion }), path: subregionPath(r.subregion), body, section: 'carbon' });
+  return layout({ i18n, title: pageTitle(`${r.subregion_name} (${r.subregion})`), description: t('subregion.description', { name: r.subregion_name, code: r.subregion }), path: subregionPath(r.subregion), body, section: 'carbon' });
 }

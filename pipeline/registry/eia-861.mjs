@@ -6,6 +6,7 @@
 export default {
   id: 'eia-861',
   title: 'Annual Electric Power Industry Report (Form EIA-861)',
+  shortTitle: 'EIA-861: utility sales, prices, and reliability',
   description: { contains: "Every US electric utility's 2025 retail sales, revenue, and customers by state and sector; Texas wires utilities' delivery-only figures; outage duration and frequency; and the counties each utility serves.", excludes: 'No rates or bills, no hourly data, and no net metering or distributed generation files (those belong to the program fact pages).' },
   publisher: 'U.S. Energy Information Administration',
   sourceUrl: 'https://www.eia.gov/electricity/data/eia861/',

@@ -4,6 +4,7 @@
 export default {
   id: 'lbnl-queued-up',
   title: 'Queued Up: Interconnection Queue Data File (Lawrence Berkeley National Laboratory)',
+  shortTitle: 'Queued Up: interconnection queues (LBNL)',
   description: { contains: 'Every interconnection queue request LBNL tracked through the end of 2025, with status, dates, county, type, and capacity.', excludes: "No point-of-interconnection names and no live status; a request's status may have changed since." },
   publisher: 'Lawrence Berkeley National Laboratory and GridTracker',
   sourceUrl: 'https://emp.lbl.gov/queues',

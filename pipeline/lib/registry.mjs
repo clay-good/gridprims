@@ -86,6 +86,7 @@ export function validateEntry(e) {
     }
   }
   if (e.posture !== undefined && !['mirror', 'derive', 'link'].includes(e.posture)) fail('posture', 'must be mirror, derive, or link');
+  if (e.shortTitle !== undefined && (typeof e.shortTitle !== 'string' || e.shortTitle.length > 48)) fail('shortTitle', 'must be at most 48 characters, so the page title fits in 60');
   if (typeof e.description?.contains !== 'string' || typeof e.description?.excludes !== 'string') fail('description', 'needs what the dataset contains and what it does not, for the data library');
   return errors;
 }

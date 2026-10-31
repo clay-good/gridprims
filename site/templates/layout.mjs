@@ -3,6 +3,9 @@
 import { html, raw } from '../lib/html.mjs';
 import { gridPulse } from '../ui/grid-pulse.mjs';
 import { SECTIONS } from '../ui/sections.mjs';
+import { DESCRIPTION_MAX, fit, jsonLd } from '../lib/meta.mjs';
+
+const ORIGIN = 'https://gridprims.com';
 
 /** Runs before first paint so a saved theme never flashes the wrong one. Its hash goes in the CSP. */
 export const THEME_SCRIPT = "document.documentElement.dataset.js='1';try{var t=localStorage.getItem('gridprims-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}";
@@ -12,6 +15,7 @@ export const THEME_SCRIPT = "document.documentElement.dataset.js='1';try{var t=l
  *   i18n: {t: Function, locale: string},
  *   title: string, description: string, path: string,
  *   body: import('../lib/html.mjs').Html, modules?: string[], section?: string, pulse?: any,
+ *   structured?: object[], crumbs?: Array<[string, string]>,
  * }} p
  */
 /** The trust page set every footer links (site/trust-pages). */
@@ -20,16 +24,30 @@ export const TRUST_PAGES = [['about', '/about/'], ['methods', '/methods/'], ['pr
 /** The family of sites that share gridprims' ethos (PRODUCT.md, Brand Commitments). */
 export const SISTERS = ['sophiewell.com', 'geoprims.com', 'roughlogic.com', 'enklayve.com', 'vaulytica.com', 'encryptalotta.com'];
 
-export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null }) {
+export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null, structured = [], crumbs = null }) {
   const { t } = i18n;
+  const summary = fit(description, DESCRIPTION_MAX);
+  // Breadcrumbs on every page: home, the section, then the page, as the page's own links show them.
+  const sec = SECTIONS.find((x) => x.id === section);
+  const trail = crumbs ?? [[t('nav.home'), '/'], ...(sec && sec.path !== '/' && sec.path !== path ? [[t(`nav.${sec.id}`), sec.path]] : []), ...(path !== '/' ? [[title.replace(/ · [^·]+$/, ''), path]] : [])];
+  const breadcrumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: trail.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, item: `${ORIGIN}${href}` })) };
   return html`<!doctype html>
 <html lang="${i18n.locale.split('-')[0]}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
-<meta name="description" content="${description}">
-<link rel="canonical" href="https://gridprims.com${path}">
+<meta name="description" content="${summary}">
+<link rel="canonical" href="${ORIGIN}${path}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="${t('site.name')}">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${summary}">
+<meta property="og:url" content="${ORIGIN}${path}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="${title}">
+<meta name="twitter:description" content="${summary}">
+${[breadcrumbs, ...structured].map((o) => html`<script type="application/ld+json">${raw(jsonLd(o))}</script>`)}
 <script>${raw(THEME_SCRIPT)}</script>
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">

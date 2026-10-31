@@ -24,6 +24,7 @@ import { plantPage, plantPath } from './templates/plant.mjs';
 import { utilityPages } from './entities/utilities.mjs';
 import { utilityPage, utilityPath } from './templates/utility.mjs';
 import { regionPages } from './entities/regions.mjs';
+import { DESCRIPTION_MAX, TITLE_MAX, uniqueNames } from './lib/meta.mjs';
 import { statePage, statePath, subregionPage, subregionPath } from './templates/region.mjs';
 import { lookupData } from './entities/lookup.mjs';
 import { LOOKUP_PATH, lookupPage } from './templates/lookup.mjs';
@@ -74,11 +75,23 @@ export async function build(opts = {}) {
   try { buildDate = execFileSync('git', ['log', '-1', '--format=%cI'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || buildDate; } catch { /* not a git checkout */ }
   const healthFile = join(ROOT, 'data/health/pipeline.json');
   const health = existsSync(healthFile) ? JSON.parse(readFileSync(healthFile, 'utf8')) : null;
+  // Every page's title and description, checked once all are written (site/discoverability).
+  const titles = new Map();
+  const tooLong = [];
+  const decode = (x) => x.replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
   const write = (path, html) => {
     const file = path.endsWith('/') ? join(outDir, path, 'index.html') : join(outDir, path);
     mkdirSync(dirname(file), { recursive: true });
-    writeFileSync(file, String(html));
+    const text = String(html);
+    writeFileSync(file, text);
     pages.push(path);
+    if (!path.endsWith('/')) return;
+    const title = decode(/<title>([^<]*)<\/title>/.exec(text)?.[1] ?? '');
+    const description = decode(/<meta name="description" content="([^"]*)">/.exec(text)?.[1] ?? '');
+    titles.set(title, [...(titles.get(title) ?? []), path]);
+    // The pseudo-locale stretches text on purpose, so lengths are checked in the real locale only.
+    if (!opts.pseudo && title.length > TITLE_MAX) tooLong.push(`${path}: title is ${title.length} characters`);
+    if (!opts.pseudo && description.length > DESCRIPTION_MAX) tooLong.push(`${path}: description is ${description.length} characters`);
   };
 
   for (const tool of TOOLS) {
@@ -141,7 +154,10 @@ export async function build(opts = {}) {
   const utilities = utilityPages(join(ROOT, 'data'));
   const withPage = new Set((utilities?.utilities ?? []).filter((u) => u.page).map((u) => u.id));
   const plantIds = new Set((plants?.plants ?? []).map((p) => p.id));
-  for (const plant of plants?.plants ?? []) write(plantPath(plant.id), plantPage({ plant, sources: plants.sources, i18n, utilityPath: (id) => (withPage.has(id) ? utilityPath(id) : null) }));
+  // Titles must be unique: a shared name gets its state, then its id.
+  const plantNames = uniqueNames((plants?.plants ?? []).map((p) => ({ key: p.id, name: p.name, state: p.state, id: p.id })), 'plant');
+  const utilityNames = uniqueNames((utilities?.utilities ?? []).filter((u) => u.page).map((u) => ({ key: u.id, name: u.name, state: u.homeState, id: u.id })), 'utility');
+  for (const plant of plants?.plants ?? []) write(plantPath(plant.id), plantPage({ plant, sources: plants.sources, i18n, titleName: plantNames.get(plant.id), utilityPath: (id) => (withPage.has(id) ? utilityPath(id) : null) }));
   const regions = utilities && regionPages(join(ROOT, 'data'), utilities.utilities);
   for (const state of regions?.states ?? []) write(statePath(state.code), statePage({ state, sources: regions.sources, i18n }));
   for (const subregion of regions?.subregions ?? []) write(subregionPath(subregion.subregion), subregionPage({ subregion, sources: regions.sources, i18n }));
@@ -164,12 +180,17 @@ export async function build(opts = {}) {
     writeFileSync(join(outDir, 'lookup/pages.json'), JSON.stringify([...withPage].sort((a, b) => a - b)));
     write(LOOKUP_PATH, lookupPage({ i18n, sources: lookup.sources }));
   }
-  for (const utility of utilities?.utilities ?? []) if (utility.page) write(utilityPath(utility.id), utilityPage({ utility, sources: utilities.sources, i18n, plantHasPage: (id) => plantIds.has(id) }));
+  for (const utility of utilities?.utilities ?? []) if (utility.page) write(utilityPath(utility.id), utilityPage({ utility, sources: utilities.sources, i18n, titleName: utilityNames.get(utility.id), plantHasPage: (id) => plantIds.has(id) }));
   write('/report/', reportPage({ i18n }));
   write('/', homePage({ tools: TOOLS, i18n }));
   write('/404.html', notFoundPage({ tools: TOOLS, i18n }));
   const entries = new Map(await Promise.all(datasets.map(async (d) => [d.dataset, (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${d.dataset}.mjs`)).href)).default])));
   for (const id of ['bills', 'data', 'carbon', 'grid', 'learn']) write(`/${id}/`, sectionPage({ id, tools: TOOLS, datasets, entries, i18n }));
+
+  const duplicates = [...titles].filter(([, paths]) => paths.length > 1);
+  if (duplicates.length || tooLong.length) {
+    throw new Error(`page metadata: ${[...duplicates.map(([t, p]) => `"${t}" is the title of ${p.join(', ')}`), ...tooLong].slice(0, 20).join('; ')}`);
+  }
 
   writeFileSync(join(outDir, '_redirects'), redirectsFile(redirects));
   mkdirSync(join(outDir, '.well-known'), { recursive: true });

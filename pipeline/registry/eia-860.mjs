@@ -5,6 +5,7 @@
 export default {
   id: 'eia-860',
   title: 'Annual Electric Generator Report (Form EIA-860)',
+  shortTitle: 'EIA-860: power plants and generators',
   description: { contains: 'Every US power plant of 1 MW or more and its generators, operable, proposed, and retired, with capacity, technology, fuel, and dates, as of the end of 2025.', excludes: 'No coordinates, street addresses, grid voltages, or pipeline names; no generation (that is EIA-923).' },
   publisher: 'U.S. Energy Information Administration',
   sourceUrl: 'https://www.eia.gov/electricity/data/eia860/',

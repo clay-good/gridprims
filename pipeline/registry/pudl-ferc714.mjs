@@ -8,6 +8,7 @@ const base = `https://s3.us-west-2.amazonaws.com/pudl.catalyst.coop/${RELEASE}`;
 export default {
   id: 'pudl-ferc714',
   title: 'Annual peak demand by planning area (FERC Form 714, through PUDL)',
+  shortTitle: 'FERC Form 714 annual peaks (PUDL)',
   description: { contains: "Annual peak demand for each FERC Form 714 respondent from 2006 to 2025, with PUDL's crosswalk to EIA utility and balancing authority ids.", excludes: "No hourly demand (it stays in PUDL's file), and no peak for a year whose every hour PUDL flags." },
   publisher: 'Catalyst Cooperative (PUDL), from FERC Form 714',
   sourceUrl: 'https://catalyst.coop/pudl/',

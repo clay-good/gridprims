@@ -9,6 +9,7 @@ import { sourceStamp } from '../ui/source-stamp.mjs';
 import { lineChart, tableView } from '../lib/chart.mjs';
 import { SECTORS } from '../entities/utilities.mjs';
 import { plantPath } from './plant.mjs';
+import { pageTitle } from '../lib/meta.mjs';
 
 export const utilityPath = (id) => `/utilities/${id}/`;
 
@@ -56,7 +57,7 @@ ${sources.history ? sourceStamp(sources.history, sources.history.tables[0], i18n
 /**
  * @param {{utility: any, sources: any, i18n: any, plantHasPage?: (id: number) => boolean}} p
  */
-export function utilityPage({ utility: u, sources, i18n, plantHasPage = () => false }) {
+export function utilityPage({ utility: u, sources, i18n, plantHasPage = () => false, titleName = u.name }) {
   const { t, has } = i18n;
   const fuel = (code) => (has(`fuel.${code}`) ? t(`fuel.${code}`) : code);
   const k = (kind) => u.kinds[kind];
@@ -115,5 +116,5 @@ ${owned.length ? html`<h3>${t('utility.plants')}</h3><ul class="tool-list">${own
 <p data-rates>${u.rates ? t('utility.ratesCount', { count: u.rates.count, newest: u.rates.newest ? i18n.date(u.rates.newest) : t('plant.unknown') }) : t('utility.ratesNone')}</p>
 ${sources.urdb && u.rates ? sourceStamp(sources.urdb, sources.urdb.tables[0], i18n) : ''}
 </section>`;
-  return layout({ i18n, title: `${u.name} · ${t('site.name')}`, description: t('utility.description', { name: u.name, states: u.states.join(', ') }), path: utilityPath(u.id), body, section: 'bills' });
+  return layout({ i18n, title: pageTitle(titleName), description: t('utility.description', { name: u.name, states: u.states.join(', ') }), path: utilityPath(u.id), body, section: 'bills' });
 }

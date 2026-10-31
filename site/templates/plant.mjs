@@ -7,6 +7,7 @@ import { layout } from './layout.mjs';
 import { sourceStamp } from '../ui/source-stamp.mjs';
 import { tableView } from '../lib/chart.mjs';
 import { METRIC_TONS_PER_SHORT_TON } from '../../core/lib/plant-math.mjs';
+import { pageTitle } from '../lib/meta.mjs';
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const mw = (x) => x.toLocaleString('en-US', { maximumFractionDigits: 1 });
@@ -34,7 +35,7 @@ function plannedList(p, { t }) {
 /**
  * @param {{plant: any, sources: any, i18n: any, utilityPath?: (id: number) => string | null}} p
  */
-export function plantPage({ plant: p, sources, i18n, utilityPath = () => null }) {
+export function plantPage({ plant: p, sources, i18n, utilityPath = () => null, titleName = p.name }) {
   const { t } = i18n;
   const period = sources.eia860m?.tables[0].dataPeriod;
   const monthLabel = period ? `${MONTHS[Number(period.slice(5)) - 1]} ${period.slice(0, 4)}` : null;
@@ -83,5 +84,5 @@ ${tableView([t('plant.gen.id'), t('plant.gen.technology'), t('plant.gen.fuel'), 
   p.generators.map((g) => [g.id, g.technology ?? '', g.energySource ?? '', g.nameplateMw === null ? '' : `${mw(g.nameplateMw)} MW`, g.operatingYear ?? '', statusLine(g, i18n, monthLabel)]), t('plant.generatorsCaption', { name: p.name }))}
 ${sources.eia860m ? sourceStamp(sources.eia860m, sources.eia860m.tables[0], i18n) : ''}
 </section>`;
-  return layout({ i18n, title: `${p.name} · ${t('site.name')}`, description: t('plant.description', { name: p.name, county: p.county ?? '', state: p.state }), path: plantPath(p.id), body, section: 'grid' });
+  return layout({ i18n, title: pageTitle(t('plant.title', { name: titleName })), description: t('plant.description', { name: p.name, county: p.county ?? '', state: p.state }), path: plantPath(p.id), body, section: 'grid' });
 }

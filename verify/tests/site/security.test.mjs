@@ -59,5 +59,5 @@ test('the policy states scope, the out-of-scope route, safe harbor, the rules, a
 test('a security fix appears in the changelog with the reporter credited only by name', () => {
   const html = String(changelogPage({ entries: [{ date: '2026-11-02', toolId: null, version: '', kind: 'security', reason: 'The report form now rejects oversized attachments earlier.', credit: 'A. Researcher' }], i18n: createI18n(strings, 'en-US') }));
   assert.match(html, /Security fix\. The report form now rejects oversized attachments earlier\. Reported by A\. Researcher\./);
-  assert.doesNotMatch(html, /@/);
+  assert.doesNotMatch(html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, ''), /@/, 'no address appears; JSON-LD keys such as @type are not addresses');
 });

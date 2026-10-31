@@ -6,6 +6,7 @@
 export default {
   id: 'eia-860m',
   title: 'Monthly Update to the Annual Electric Generator Report (Form EIA-860M)',
+  shortTitle: 'EIA-860M: monthly generator status',
   description: { contains: "Every generator's status as of September 2026: operating, planned, retired, and canceled or postponed, with capacity and planned dates.", excludes: 'No coordinates or map links, and no Puerto Rico sheets.' },
   publisher: 'U.S. Energy Information Administration',
   sourceUrl: 'https://www.eia.gov/electricity/data/eia860m/',

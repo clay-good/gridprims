@@ -5,6 +5,7 @@
 export default {
   id: 'eia-923',
   title: 'Power Plant Operations Report (Form EIA-923)',
+  shortTitle: 'EIA-923: plant generation and fuel',
   description: { contains: "Net generation by month and year and fuel consumed in 2025, by plant, prime mover, and fuel, including EIA's state-level estimates for small plants.", excludes: 'Only the final annual file, not the monthly year-to-date one; no fuel receipts, costs, or environmental data.' },
   publisher: 'U.S. Energy Information Administration',
   sourceUrl: 'https://www.eia.gov/electricity/data/eia923/',

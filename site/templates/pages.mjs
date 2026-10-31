@@ -10,7 +10,8 @@ import { lateness } from '../../core/lib/lateness.mjs';
 import { CLONE, DATA_DIR, snippets } from '../../mcp/clients.mjs';
 import { SECTIONS, sectionOf } from '../ui/sections.mjs';
 import { ORIGIN } from '../config.mjs';
-import { libraryList, libraryParts } from './library.mjs';
+import { datasetLd, libraryList, libraryParts } from './library.mjs';
+import { pageTitle } from '../lib/meta.mjs';
 
 /** One input control, labeled from the manifest. */
 function field(inp, value, i18n) {
@@ -136,7 +137,7 @@ export function homePage({ tools, i18n }) {
 <p class="strip">${t('home.preview')}</p>
 <h2>${t('home.tools')}</h2>
 <ul class="tool-list">${tools.map(({ manifest: m }) => html`<li class="tool-cell"><a href="${toolPath(m.id)}">${m.title}</a><p>${m.purpose}</p></li>`)}</ul>`;
-  return layout({ i18n, title: `${t('site.name')} · ${t('site.tagline')}`, description: t('site.tagline'), path: '/', body, section: 'home' });
+  return layout({ i18n, title: t('home.pageTitle'), description: t('site.tagline'), path: '/', body, section: 'home' });
 }
 
 /**
@@ -283,7 +284,8 @@ ${m.tables.map((tb) => html`<section><h2>${t('data.columns', { table: tb.title ?
   <thead><tr><th scope="col">${t('data.col.name')}</th><th scope="col">${t('data.col.type')}</th><th scope="col">${t('data.col.unit')}</th></tr></thead>
   <tbody>${tb.columns.map((c) => html`<tr><th scope="row" class="mono">${c.name}</th><td class="mono">${c.type}</td><td>${c.unit ?? ''}</td></tr>`)}</tbody>
 </table></div></section>`)}`;
-  return layout({ i18n, title: `${m.title} · ${t('site.name')}`, description: `${m.title}, ${m.publisher}`, path: `/data/${m.dataset}/`, body, section: 'data' });
+  return layout({ i18n, title: pageTitle(entry?.shortTitle ?? m.title), description: `${m.title}, ${m.publisher}`, path: `/data/${m.dataset}/`, body, section: 'data',
+    structured: [datasetLd(m, shas[m.version], publishes)] });
 }
 
 /**

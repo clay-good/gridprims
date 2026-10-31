@@ -31,6 +31,7 @@ export default {
   ...eia861,
   id: 'eia-861-history',
   title: 'Annual Electric Power Industry Report (Form EIA-861), 2021 to 2025',
+  shortTitle: 'EIA-861 utility sales, 2021 to 2025',
   description: { contains: 'The same sales, revenue, customer, and delivery-only figures for each year from 2021 to 2025, for trends.', excludes: "Only the sales and delivery sheets; reliability and territory are the current year's only." },
   attribution: 'Source: U.S. Energy Information Administration, Form EIA-861, 2021 to 2025 ({asOfMonth}).',
   owner: 'add-public-grid-data',

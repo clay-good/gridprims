@@ -63,3 +63,20 @@ ${tb.changes?.largest?.length ? html`<ul>${tb.changes.largest.map((x) => html`<l
 </table></div></section>`,
   };
 }
+
+/**
+ * schema.org Dataset markup for a library page: the creator, license, data period, and each download
+ * with its SHA-256, all of which the page shows. No ratings, reviews, or prices.
+ */
+export function datasetLd(m, manifestSha, publishes = true) {
+  const years = [...new Set(m.tables.flatMap((t) => t.dataPeriod.split('-').filter((x) => /^\d{4}$/.test(x))))].sort();
+  return {
+    '@context': 'https://schema.org', '@type': 'Dataset', name: m.title, url: `${ORIGIN}/data/${m.dataset}/`, version: m.version,
+    creator: { '@type': 'Organization', name: m.publisher }, publisher: { '@type': 'Organization', name: 'gridprims' },
+    license: m.tables[0].license === 'CC-BY-4.0' ? 'https://creativecommons.org/licenses/by/4.0/' : m.license,
+    temporalCoverage: years.length > 1 ? `${years[0]}/${years.at(-1)}` : years[0] ?? m.tables[0].dataPeriod,
+    dateModified: m.retrieved, isBasedOn: m.sourceUrl, identifier: `sha256:${manifestSha}`,
+    // Under the link posture no file is offered, so none is listed.
+    distribution: !publishes ? undefined : m.tables.map((t) => ({ '@type': 'DataDownload', name: t.title ?? t.name, encodingFormat: 'text/csv', contentUrl: `${ORIGIN}/data/${m.dataset}/${m.version}/${t.download.path}`, sha256: t.download.sha256 })),
+  };
+}

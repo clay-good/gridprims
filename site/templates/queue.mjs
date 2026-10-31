@@ -9,6 +9,7 @@ import { sourceStamp } from '../ui/source-stamp.mjs';
 import { tableView } from '../lib/chart.mjs';
 import { STATE_NAMES } from '../entities/regions.mjs';
 import { WITHDRAWAL_COHORT } from '../entities/queue.mjs';
+import { pageTitle } from '../lib/meta.mjs';
 
 export const queuePath = (st) => (st ? `/queue/${st.toLowerCase()}/` : '/queue/');
 export const LIVE_STATUS = 'https://www.interconnection.fyi/';
@@ -68,5 +69,5 @@ ${tableView([t('queue.col.project'), t('queue.col.county'), t('state.col.type'),
     s.projects.map((p) => [p.project_name ?? p.q_id, p.county ?? '', p.type_clean ?? '', p.mw_1 === null ? '' : whole(p.mw_1), p.q_date ?? '', p.ia_phase ?? '', p.utility ?? p.entity ?? '', html`<a href="${LIVE_STATUS}">${t('queue.liveShort')}</a>`]), t('queue.projectsCaption', { state: name }))}
 </section>` : ''}
 ${sourceStamp(q.manifest, q.manifest.tables[0], i18n)}`;
-  return layout({ i18n, title: `${t('queue.stateTitle', { state: name })} · ${t('site.name')}`, description: t('queue.description'), path: queuePath(s.state), body, section: 'grid' });
+  return layout({ i18n, title: pageTitle(t('queue.stateTitle', { state: name })), description: t('queue.description'), path: queuePath(s.state), body, section: 'grid' });
 }
