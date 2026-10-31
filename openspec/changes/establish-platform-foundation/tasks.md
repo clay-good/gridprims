@@ -22,7 +22,7 @@
 - [x] 3.2 Define the manifest schema from that decision record; verify it accepts a sample manifest and rejects each missing required field
 - [ ] 3.3 Generate tool pages, command-bar entries, MCP descriptions and schemas, and docs from manifests; verify snapshot tests show identical labels, units, and citations everywhere
 - [x] 3.4 Implement fragment-encoded share state; verify a copied link reproduces inputs and result in a fresh browser profile
-- [ ] 3.5 Implement tool versioning and the public changelog; verify a fixture result change without a version bump fails CI
+- [x] 3.5 Implement tool versioning and the public changelog; verify a fixture result change without a version bump fails CI
 - [ ] 3.6 Implement shared-quantity computation and the cross-tool agreement check; verify the peak-agrees-everywhere and receipt-change scenarios across web and MCP
 - [ ] 3.7 Implement declared rounding and the significant-figures rule; verify the coarse-rate and copied-card scenarios
 - [x] 3.8 Build the reference tool `calc.energy-units.convert` end to end (manifest, conversion core, golden vectors from the cited constants, page, command-bar entry, MCP parity, validation level with its evidence); verify the 12 MWh conversion, the unit-and-source display, and identical results on web and MCP
@@ -36,7 +36,7 @@
 - [x] 4.4 Time-zone and DST helper on `Intl`; verify the DST fixture suite in Chrome, Firefox, Safari, and Node
 - [ ] 4.5 Static site generator with escaped templates; verify a 20,000-page fixture builds in under 10 minutes on a CI runner of the pinned image and that unescaped input fails a test
 - [ ] 4.6 SVG chart components per DESIGN.md's Charts section; verify peak-preserving downsampling and table views
-- [ ] 4.7 Flesch-Kincaid readability module with a syllable exceptions list, used by the result-sentence gate; verify against 20 hand-scored sentences within 0.5 grade
+- [x] 4.7 Flesch-Kincaid readability module with a syllable exceptions list, used by the result-sentence gate; verify against 20 hand-scored sentences within 0.5 grade
 - [x] 4.8 Browser driver over CDP (Chrome) and WebDriver BiDi (Firefox) with `safaridriver`; verify it loads a page, records requests, and resizes to 320 px in each browser
 
 ## 5. Privacy and security
@@ -69,7 +69,7 @@
 ## 8. Citations, verification, app shell
 
 - [ ] 8.1 Golden-vector runner with tolerances and stored third-party reference outputs; verify a drifted fixture fails
-- [ ] 8.2 "How we got this" panel and the claims gate; verify an untested accuracy claim fails the build
+- [x] 8.2 "How we got this" panel and the claims gate; verify an untested accuracy claim fails the build
 - [x] 8.3 Shell, DESIGN.md tokens, components, light and night themes, command bar; verify "12 MWh to MMBtu" opens the reference unit converter (D10) filled in, the saved-theme and no-preference scenarios, and the contrast lint against the DESIGN.md ratios
 - [ ] 8.4 PWA with offline tools; verify the load workbench parses a file in airplane mode after one visit
 - [ ] 8.5 Budgets on the reference profile, accessibility checks (including the screen-reader pacing and popover scenarios), and 320 px sweep through the own browser driver; verify CI fails on an oversized fixture page

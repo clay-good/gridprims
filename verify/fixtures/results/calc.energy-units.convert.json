@@ -1,0 +1,428 @@
+{
+  "toolId": "calc.energy-units.convert",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "mwh-to-mmbtu",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.energy-units.convert",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "value": {
+            "value": 40.95,
+            "unit": "MMBtu",
+            "display": "40.95"
+          }
+        },
+        "sentence": "12 MWh is 40.95 MMBtu.",
+        "notes": [],
+        "work": {
+          "method": "Convert the amount to joules with its unit's definition, then from joules to the target unit. Fuels use EIA's published average heat content in Btu.",
+          "steps": [
+            "Convert MWh to joules: 1 MWh = 3.6 GJ.",
+            "Convert joules to MMBtu: 1 MMBtu = 1,000,000 Btu.",
+            "So 1 MWh = 3.41214 MMBtu. 12 × 3.41214 = 40.9457.",
+            "Every constant here is exact by definition."
+          ],
+          "constants": [
+            {
+              "text": "1 MWh = 3.41214 MMBtu",
+              "source": "Derived from the SI definitions (NIST SP 811)",
+              "exact": true
+            },
+            {
+              "text": "1 MWh = 3.6 GJ",
+              "source": "NIST SP 811 (2008), Appendix B.8",
+              "exact": true
+            },
+            {
+              "text": "1 MMBtu = 1,000,000 Btu",
+              "source": "EIA, British thermal units (Btu)",
+              "exact": true
+            }
+          ],
+          "assumptions": [
+            "Btu means the International Table Btu, 1,055.05585262 joules.",
+            "A therm is 100,000 Btu.",
+            "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
+          ],
+          "citations": [
+            {
+              "source": "NIST Special Publication 811, Guide for the Use of the International System of Units",
+              "edition": "2008",
+              "locator": "Appendix B.8, British thermal unit (IT) and kilowatt hour to joule",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            },
+            {
+              "source": "EIA, Heat Content of Natural Gas Consumed",
+              "edition": "Annual, 2025",
+              "locator": "US, delivered to consumers, Btu per cubic foot",
+              "url": "https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm"
+            },
+            {
+              "source": "EIA, Monthly Energy Review",
+              "edition": "Appendix A",
+              "locator": "Table A1, approximate heat content of petroleum products",
+              "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/mer_A_FULL.pdf"
+            },
+            {
+              "source": "EIA, Energy conversion calculators",
+              "edition": "2026 estimates",
+              "locator": "Coal, electric power sector, Btu per short ton",
+              "url": "https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php"
+            },
+            {
+              "source": "EIA, British thermal units (Btu)",
+              "edition": "Energy Explained",
+              "locator": "Therm and MMBtu definitions",
+              "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+      }
+    },
+    {
+      "example": "gas-to-btu",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.energy-units.convert",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "value": {
+            "value": 1036000,
+            "unit": "Btu",
+            "display": "1,036,000"
+          }
+        },
+        "sentence": "1,000 ft³ of natural gas is about 1,036,000 Btu.",
+        "notes": [],
+        "work": {
+          "method": "Convert the amount to joules with its unit's definition, then from joules to the target unit. Fuels use EIA's published average heat content in Btu.",
+          "steps": [
+            "Convert ft³ of natural gas to joules: 1 cubic foot of natural gas = 1,036 Btu (US average).",
+            "Convert joules to Btu: 1 Btu (International Table) = 1,055.05585262 J.",
+            "So 1 ft³ of natural gas = 1,036 Btu. 1,000 × 1,036 = 1,036,000.",
+            "A fuel heat content is an average, so real fuel varies. The result is shown to the figures that average carries."
+          ],
+          "constants": [
+            {
+              "text": "1 ft³ of natural gas = 1,036 Btu",
+              "source": "EIA average heat content, via the Btu",
+              "exact": false
+            },
+            {
+              "text": "1 cubic foot of natural gas = 1,036 Btu (US average)",
+              "source": "EIA, Heat Content of Natural Gas Consumed, US delivered to consumers",
+              "year": "2025",
+              "exact": false
+            },
+            {
+              "text": "1 Btu (International Table) = 1,055.05585262 J",
+              "source": "NIST SP 811 (2008), Appendix B.8",
+              "exact": true
+            }
+          ],
+          "assumptions": [
+            "Btu means the International Table Btu, 1,055.05585262 joules.",
+            "A therm is 100,000 Btu.",
+            "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
+          ],
+          "citations": [
+            {
+              "source": "NIST Special Publication 811, Guide for the Use of the International System of Units",
+              "edition": "2008",
+              "locator": "Appendix B.8, British thermal unit (IT) and kilowatt hour to joule",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            },
+            {
+              "source": "EIA, Heat Content of Natural Gas Consumed",
+              "edition": "Annual, 2025",
+              "locator": "US, delivered to consumers, Btu per cubic foot",
+              "url": "https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm"
+            },
+            {
+              "source": "EIA, Monthly Energy Review",
+              "edition": "Appendix A",
+              "locator": "Table A1, approximate heat content of petroleum products",
+              "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/mer_A_FULL.pdf"
+            },
+            {
+              "source": "EIA, Energy conversion calculators",
+              "edition": "2026 estimates",
+              "locator": "Coal, electric power sector, Btu per short ton",
+              "url": "https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php"
+            },
+            {
+              "source": "EIA, British thermal units (Btu)",
+              "edition": "Energy Explained",
+              "locator": "Therm and MMBtu definitions",
+              "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+      }
+    },
+    {
+      "example": "kwh-to-btu",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.energy-units.convert",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "value": {
+            "value": 3412,
+            "unit": "Btu",
+            "display": "3,412"
+          }
+        },
+        "sentence": "1 kWh is 3,412 Btu.",
+        "notes": [],
+        "work": {
+          "method": "Convert the amount to joules with its unit's definition, then from joules to the target unit. Fuels use EIA's published average heat content in Btu.",
+          "steps": [
+            "Convert kWh to joules: 1 kWh = 3.6 MJ.",
+            "Convert joules to Btu: 1 Btu (International Table) = 1,055.05585262 J.",
+            "So 1 kWh = 3,412.14 Btu. 1 × 3,412.14 = 3,412.14.",
+            "Every constant here is exact by definition."
+          ],
+          "constants": [
+            {
+              "text": "1 kWh = 3,412.14 Btu",
+              "source": "Derived from the SI definitions (NIST SP 811)",
+              "exact": true
+            },
+            {
+              "text": "1 kWh = 3.6 MJ",
+              "source": "NIST SP 811 (2008), Appendix B.8",
+              "exact": true
+            },
+            {
+              "text": "1 Btu (International Table) = 1,055.05585262 J",
+              "source": "NIST SP 811 (2008), Appendix B.8",
+              "exact": true
+            }
+          ],
+          "assumptions": [
+            "Btu means the International Table Btu, 1,055.05585262 joules.",
+            "A therm is 100,000 Btu.",
+            "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
+          ],
+          "citations": [
+            {
+              "source": "NIST Special Publication 811, Guide for the Use of the International System of Units",
+              "edition": "2008",
+              "locator": "Appendix B.8, British thermal unit (IT) and kilowatt hour to joule",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            },
+            {
+              "source": "EIA, Heat Content of Natural Gas Consumed",
+              "edition": "Annual, 2025",
+              "locator": "US, delivered to consumers, Btu per cubic foot",
+              "url": "https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm"
+            },
+            {
+              "source": "EIA, Monthly Energy Review",
+              "edition": "Appendix A",
+              "locator": "Table A1, approximate heat content of petroleum products",
+              "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/mer_A_FULL.pdf"
+            },
+            {
+              "source": "EIA, Energy conversion calculators",
+              "edition": "2026 estimates",
+              "locator": "Coal, electric power sector, Btu per short ton",
+              "url": "https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php"
+            },
+            {
+              "source": "EIA, British thermal units (Btu)",
+              "edition": "Energy Explained",
+              "locator": "Therm and MMBtu definitions",
+              "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+      }
+    },
+    {
+      "example": "therm-to-kwh",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.energy-units.convert",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "value": {
+            "value": 29.31,
+            "unit": "kWh",
+            "display": "29.31"
+          }
+        },
+        "sentence": "1 therm is 29.31 kWh.",
+        "notes": [],
+        "work": {
+          "method": "Convert the amount to joules with its unit's definition, then from joules to the target unit. Fuels use EIA's published average heat content in Btu.",
+          "steps": [
+            "Convert therms to joules: 1 therm = 100,000 Btu.",
+            "Convert joules to kWh: 1 kWh = 3.6 MJ.",
+            "So 1 therm = 29.3071 kWh. 1 × 29.3071 = 29.3071.",
+            "Every constant here is exact by definition."
+          ],
+          "constants": [
+            {
+              "text": "1 therm = 29.3071 kWh",
+              "source": "Derived from the SI definitions (NIST SP 811)",
+              "exact": true
+            },
+            {
+              "text": "1 therm = 100,000 Btu",
+              "source": "EIA, British thermal units (Btu)",
+              "exact": true
+            },
+            {
+              "text": "1 kWh = 3.6 MJ",
+              "source": "NIST SP 811 (2008), Appendix B.8",
+              "exact": true
+            }
+          ],
+          "assumptions": [
+            "Btu means the International Table Btu, 1,055.05585262 joules.",
+            "A therm is 100,000 Btu.",
+            "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
+          ],
+          "citations": [
+            {
+              "source": "NIST Special Publication 811, Guide for the Use of the International System of Units",
+              "edition": "2008",
+              "locator": "Appendix B.8, British thermal unit (IT) and kilowatt hour to joule",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            },
+            {
+              "source": "EIA, Heat Content of Natural Gas Consumed",
+              "edition": "Annual, 2025",
+              "locator": "US, delivered to consumers, Btu per cubic foot",
+              "url": "https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm"
+            },
+            {
+              "source": "EIA, Monthly Energy Review",
+              "edition": "Appendix A",
+              "locator": "Table A1, approximate heat content of petroleum products",
+              "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/mer_A_FULL.pdf"
+            },
+            {
+              "source": "EIA, Energy conversion calculators",
+              "edition": "2026 estimates",
+              "locator": "Coal, electric power sector, Btu per short ton",
+              "url": "https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php"
+            },
+            {
+              "source": "EIA, British thermal units (Btu)",
+              "edition": "Energy Explained",
+              "locator": "Therm and MMBtu definitions",
+              "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+      }
+    },
+    {
+      "example": "coal-to-mmbtu",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.energy-units.convert",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "value": {
+            "value": 18.79,
+            "unit": "MMBtu",
+            "display": "18.79"
+          }
+        },
+        "sentence": "1 short ton of coal is about 18.79 MMBtu.",
+        "notes": [],
+        "work": {
+          "method": "Convert the amount to joules with its unit's definition, then from joules to the target unit. Fuels use EIA's published average heat content in Btu.",
+          "steps": [
+            "Convert short tons of coal to joules: 1 short ton of coal = 18,792,000 Btu (electric power sector average).",
+            "Convert joules to MMBtu: 1 MMBtu = 1,000,000 Btu.",
+            "So 1 short ton of coal = 18.792 MMBtu. 1 × 18.792 = 18.792.",
+            "A fuel heat content is an average, so real fuel varies. The result is shown to the figures that average carries."
+          ],
+          "constants": [
+            {
+              "text": "1 short ton of coal = 18.792 MMBtu",
+              "source": "EIA average heat content, via the Btu",
+              "exact": false
+            },
+            {
+              "text": "1 short ton of coal = 18,792,000 Btu (electric power sector average)",
+              "source": "EIA, Energy conversion calculators, electric power sector",
+              "year": "2026 estimate",
+              "exact": false
+            },
+            {
+              "text": "1 MMBtu = 1,000,000 Btu",
+              "source": "EIA, British thermal units (Btu)",
+              "exact": true
+            }
+          ],
+          "assumptions": [
+            "Btu means the International Table Btu, 1,055.05585262 joules.",
+            "A therm is 100,000 Btu.",
+            "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
+          ],
+          "citations": [
+            {
+              "source": "NIST Special Publication 811, Guide for the Use of the International System of Units",
+              "edition": "2008",
+              "locator": "Appendix B.8, British thermal unit (IT) and kilowatt hour to joule",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            },
+            {
+              "source": "EIA, Heat Content of Natural Gas Consumed",
+              "edition": "Annual, 2025",
+              "locator": "US, delivered to consumers, Btu per cubic foot",
+              "url": "https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm"
+            },
+            {
+              "source": "EIA, Monthly Energy Review",
+              "edition": "Appendix A",
+              "locator": "Table A1, approximate heat content of petroleum products",
+              "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/mer_A_FULL.pdf"
+            },
+            {
+              "source": "EIA, Energy conversion calculators",
+              "edition": "2026 estimates",
+              "locator": "Coal, electric power sector, Btu per short ton",
+              "url": "https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php"
+            },
+            {
+              "source": "EIA, British thermal units (Btu)",
+              "edition": "Energy Explained",
+              "locator": "Therm and MMBtu definitions",
+              "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+      }
+    }
+  ]
+}

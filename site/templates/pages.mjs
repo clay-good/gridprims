@@ -108,3 +108,14 @@ export function notFoundPage({ i18n }) {
 <ul><li><a href="/">${t('nav.home')}</a></li><li><a href="/limits/">${t('nav.limits')}</a></li></ul>`;
   return layout({ i18n, title: `${t('notFound.title')} · ${t('site.name')}`, description: t('notFound.body'), path: '/404.html', body });
 }
+
+/** @param {{entries: any[], i18n: any}} p */
+export function changelogPage({ entries, i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('changelog.title')}</h1><p class="purpose">${t('changelog.intro')}</p>
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col">${t('changelog.col.date')}</th><th scope="col">${t('changelog.col.tool')}</th><th scope="col">${t('changelog.col.version')}</th><th scope="col">${t('changelog.col.reason')}</th></tr></thead>
+  <tbody>${entries.map((e) => html`<tr><td class="mono">${e.date}</td><td><a href="${toolPath(e.toolId)}">${e.toolId}</a></td><td class="mono">${e.version}</td><td>${e.reason}${e.sample ? html` ${t('changelog.sample', { old: e.sample.old, new: e.sample.new })}` : ''}</td></tr>`)}</tbody>
+</table></div>`;
+  return layout({ i18n, title: `${t('changelog.title')} · ${t('site.name')}`, description: t('changelog.intro'), path: '/changelog/', body });
+}

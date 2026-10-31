@@ -23,6 +23,7 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | Local MCP server (`node mcp/server.mjs`): MCP `2026-07-28` plus legacy `2025-11-25` and `2025-06-18`, six meta-tools, `--allow-dir` file allowlist, no network | Search, describe, run, analyze-file (with handles and paged intervals), and report prep working; responses checked against the official schemas; every worked example matches the website in Node, Chrome, and Firefox, and passes with networking disabled |
 | File intake core: format detection from content, header-row and column recognition, interval-start or -ending stamps, DST gap and repeat, duplicates, gaps, meters, channels, and units, with a receipt of every choice | Built and tested against 21 utility-shaped fixtures |
 | Green Button ESPI 4.0 XML (plain or zipped): `uom` and multiplier scaling, delivered and received channels kept apart, local time from the file | Built; checked against an Apache-licensed OpenESPI sample whose receipt was computed independently. The parsing worker and receipt UI are next |
+| Honesty gates: result sentences at grade 8 or below (own Flesch-Kincaid, checked on 21 hand-scored sentences), no accuracy or endorsement claims in prose, and result snapshots that fail a changed answer without a version bump; public changelog at `/changelog/` | Built and tested |
 | Overpass fonts, data snapshots, Worker | Not started |
 
 The plan is in [`openspec/changes/`](openspec/changes/): 22 changes, built in the phase order in [`plan-launch-and-value-proof`](openspec/changes/plan-launch-and-value-proof/). The shapes everything generates from are in [`docs/decisions-day-one.md`](docs/decisions-day-one.md).
@@ -33,7 +34,7 @@ Needs only Node.js 24.12 or later. There is no install step.
 
 ```sh
 npm test          # unit, worked-example, gate, and browser tests (node:test)
-npm run check     # every repository gate against the working tree
+npm run check     # every repository gate (GRIDPRIMS_RECORD=1 refreshes result snapshots after a version bump)
 npm run build     # render the site into dist/
 npm run serve     # serve dist/ at http://127.0.0.1:8080
 ```

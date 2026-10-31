@@ -10,6 +10,9 @@ import { checkFileCount } from './gates/file-count.mjs';
 import { checkManifests } from './gates/manifests.mjs';
 import { checkStyle } from './gates/style.mjs';
 import { checkCopy } from './gates/copy.mjs';
+import { checkVersions } from './gates/versions.mjs';
+import { checkClaims } from './gates/claims.mjs';
+import { checkSentences } from './gates/sentences.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -21,6 +24,9 @@ const gates = [
   ['manifests and worked examples', () => checkManifests(root)],
   ['style tokens and contrast', () => checkStyle(root)],
   ['no literal copy in templates', () => checkCopy(root)],
+  ['result versions and changelog', () => checkVersions(root, { record: Boolean(process.env.GRIDPRIMS_RECORD) })],
+  ['no unproven claims', () => checkClaims(root)],
+  ['result sentences at grade 8 or below', () => checkSentences(root)],
 ];
 
 let failed = 0;
