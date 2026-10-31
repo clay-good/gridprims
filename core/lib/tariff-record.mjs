@@ -6,6 +6,16 @@
 // charge in a unit the engine does not support becomes a named unmodeled
 // item, never a guess.
 
+/**
+ * The deploy root is served by a host that counts files, and one file per
+ * utility was 2,818 of them. The workbench's rates are grouped into this many
+ * buckets by utility id instead: every rate of a utility lands in one bucket,
+ * so the page needs no index, and a bucket is about 200 KB (45 KB over the wire).
+ */
+export const RATE_BUCKETS = 256;
+
+/** The bucket holding a utility's rates. */
+export const rateBucket = (utilityId) => Number(utilityId) % RATE_BUCKETS;
 const json = (s) => (typeof s === 'string' ? JSON.parse(s) : s ?? null);
 const money = (x) => `$${x.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 6 })}`;
 // URDB stores a few rates as text ("8.18"), so every rate is read as a number.

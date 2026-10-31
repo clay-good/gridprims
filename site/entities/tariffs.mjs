@@ -6,7 +6,7 @@
 
 import { served } from './plants.mjs';
 import { classify, toTariff } from '../../core/lib/urdb-tariff.mjs';
-import { fromUrdb } from '../../core/lib/tariff-record.mjs';
+import { fromUrdb, rateBucket } from '../../core/lib/tariff-record.mjs';
 
 /** @param {string} dataDir */
 export function tariffData(dataDir) {
@@ -46,5 +46,10 @@ export function rateRecords(dataDir) {
     list.push(fromUrdb(r));
   }
   for (const list of byUtility.values()) list.sort((a, b) => (b.effective ?? '').localeCompare(a.effective ?? '') || a.name.localeCompare(b.name));
-  return { byUtility, asOf: urdb.manifest.asOf };
+  const byBucket = new Map();
+  for (const [id, list] of [...byUtility].sort((a, b) => Number(a[0]) - Number(b[0]))) {
+    const k = rateBucket(id);
+    (byBucket.get(k) ?? byBucket.set(k, []).get(k)).push(...list);
+  }
+  return { byUtility, byBucket, asOf: urdb.manifest.asOf };
 }

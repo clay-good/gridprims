@@ -10,9 +10,11 @@ import { join } from 'node:path';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { sharedSite } from '../../lib/shared-site.mjs';
+import { rateBucket } from '../../../core/lib/tariff-record.mjs';
 
 const out = await sharedSite();
-const austin = JSON.parse(readFileSync(join(out, 'bills/rates/1015.json'), 'utf8')).rates;
+const ratesOf = (id) => JSON.parse(readFileSync(join(out, `bills/rates/${rateBucket(id)}.json`), 'utf8')).rates.filter((r) => String(r.utilityId) === String(id));
+const austin = ratesOf(1015);
 // A rate the sample office (a peak well under 300 kW) is eligible for, with a monthly demand charge.
 const pick = austin.findIndex((r) => /^Commercial - Secondary Voltage 10kW-300kW - Inside/.test(r.name));
 
@@ -93,7 +95,7 @@ for (const kind of ['chrome', 'firefox']) {
       await waitFor(browser, `document.querySelector('[data-chart]').dataset.highlight === '${ms}'`);
       // The first utility listed is shown on arrival, then the chosen one: no other utility's rates are fetched.
       const fetched = [...new Set(log.map((u) => new URL(u, server.url).pathname).filter((p) => p.startsWith('/bills/rates/')))].sort();
-      assert.deepEqual(fetched, ['/bills/rates/1015.json', '/bills/rates/44372.json']);
+      assert.deepEqual(fetched, [...new Set([1015, 44372].map((id) => `/bills/rates/${rateBucket(id)}.json`))].sort(), 'one bucket a utility, and no other');
     } finally {
       await browser.close();
       await server.close();
@@ -104,9 +106,14 @@ for (const kind of ['chrome', 'firefox']) {
 // A utility with an EV plan among its residential rates, a ZIP it serves, and its name in the lookup.
 const evUtility = (() => {
   const shards = readdirSync(join(out, 'lookup')).filter((f) => /^[A-Z]{2}\.json$/.test(f)).map((f) => JSON.parse(readFileSync(join(out, 'lookup', f), 'utf8')));
+  const byUtility = new Map();
   for (const f of readdirSync(join(out, 'bills/rates')).sort()) {
-    const id = Number(f.replace('.json', ''));
-    const res = JSON.parse(readFileSync(join(out, 'bills/rates', f), 'utf8')).rates.filter((r) => r.sector === 'Residential');
+    for (const r of JSON.parse(readFileSync(join(out, 'bills/rates', f), 'utf8')).rates) {
+      if (r.sector !== 'Residential') continue;
+      (byUtility.get(Number(r.utilityId)) ?? byUtility.set(Number(r.utilityId), []).get(Number(r.utilityId))).push(r);
+    }
+  }
+  for (const [id, res] of [...byUtility].sort((a, b) => a[0] - b[0])) {
     const ev = res.find((r) => /electric vehicle/i.test(r.name) && !r.unmodeled.length);
     const plain = res.find((r) => /^Residential( Service)?$/i.test(r.name) && !r.unmodeled.length);
     if (!ev || !plain) continue;

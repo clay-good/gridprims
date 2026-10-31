@@ -230,11 +230,12 @@ export async function build(opts = {}) {
   // ERCOT's published 4CP intervals, for the workbench's coincident-peak panel.
   mkdirSync(join(outDir, 'bills'), { recursive: true });
   writeFileSync(join(outDir, 'bills/ercot-4cp.json'), readFileSync(join(ROOT, 'data/curated/ercot-4cp.json')));
-  // The workbench's bill on a meter file: each utility's rates as tariff records, fetched only for the chosen utility.
+  // The workbench's bill on a meter file: rates as tariff records, in buckets by utility id, so the
+  // page fetches one bucket and keeps the rates of the utility it was asked for.
   const records = rateRecords(join(ROOT, 'data'));
   if (records) {
     mkdirSync(join(outDir, 'bills/rates'), { recursive: true });
-    for (const [id, list] of records.byUtility) writeFileSync(join(outDir, `bills/rates/${id}.json`), JSON.stringify({ asOf: records.asOf, rates: list }));
+    for (const [bucket, list] of [...records.byBucket].sort((a, b) => a[0] - b[0])) writeFileSync(join(outDir, `bills/rates/${bucket}.json`), JSON.stringify({ asOf: records.asOf, rates: list }));
   }
   for (const utility of utilities?.utilities ?? []) if (utility.page) write(utilityPath(utility.id), utilityPage({ utility, sources: utilities.sources, i18n, titleName: utilityNames.get(utility.id), plantHasPage: (id) => plantIds.has(id) }));
   write('/report/', reportPage({ i18n }));

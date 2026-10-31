@@ -7,6 +7,7 @@ import { compareRates, shiftLoad } from '../../core/lib/rate-compare.mjs';
 import { findPlans } from '../../core/lib/plan-finder.mjs';
 import { alignSolar, EXCLUDED, netLoad, payback, peakShave, readPvwatts, savings, UPPER_BOUND } from '../../core/lib/storage-screen.mjs';
 import { readNumber } from '../../core/lib/bill-totals.mjs';
+import { rateBucket } from '../../core/lib/tariff-record.mjs';
 import { rateOption, renderBills, renderComparison, renderRanking, renderScreen } from '../ui/workbench-bill.mjs';
 import { billCard, rankingCard, screenCard } from '../../core/lib/result-cards.mjs';
 
@@ -77,7 +78,9 @@ export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {},
     $('[data-bill-holidays-field]').hidden = true;
     $('[data-bill-result]').replaceChildren();
     if (!u) return;
-    ({ rates = [], asOf = null } = await getJson(`/bills/rates/${u.id}.json`).catch(() => ({})));
+    const bucket = await getJson(`/bills/rates/${rateBucket(u.id)}.json`).catch(() => ({}));
+    asOf = bucket.asOf ?? null;
+    rates = (bucket.rates ?? []).filter((r) => String(r.utilityId) === String(u.id));
     if (!rates.length) { $('[data-bill-result]').append(el('p', t('bill.none', { utility: u.name }))); return; }
     $('[data-bill-rate]').replaceChildren(...rates.map((r, i) => el('option', rateOption(r, i18n), { value: String(i) })));
     $('[data-bill-rate-field]').hidden = false;
