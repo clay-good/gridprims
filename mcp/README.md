@@ -7,6 +7,11 @@ node mcp/server.mjs                          # tools only, no file access
 node mcp/server.mjs --allow-dir ~/meter-data # let it read files in one folder (repeatable)
 ```
 
+The documented client commands add Node's permission model (`--permission` with one `--allow-fs-read` per path) as defense in depth; see `docs/platform-apis.md` for what it does and does not block on Node 24 and 26.
+
+```sh
+```
+
 | Path | What |
 |---|---|
 | `server.mjs` | stdio entry: one JSON-RPC message per line on stdout, logs on stderr, exits when stdin closes |
@@ -15,6 +20,8 @@ node mcp/server.mjs --allow-dir ~/meter-data # let it read files in one folder (
 | `handlers.mjs` | What each tool does, through the shared core |
 | `handles.mjs` | In-memory file handles with a 60-minute idle expiry |
 | `files.mjs` | The `--allow-dir` allowlist: realpath checks, symlink escapes, regular files only, 200,000,000-byte cap |
+| `clients.mjs` | Setup snippets for Claude Code, Claude Desktop, VS Code, and Cursor; the README and the developer page are generated from it, and a smoke test launches each one |
+| `eval/requests.mjs` | The agent evaluation set; CI checks its model-free half |
 | `golden-surface.json` | The pinned tool surface; any change fails CI until this file changes with it |
 
 | Tool | State |

@@ -15,7 +15,7 @@ import { createI18n } from './lib/i18n.mjs';
 import { toolPath } from './ui/tool-page.mjs';
 import { tokensCss } from './styles/tokens.mjs';
 import { serviceWorkerSource } from './sw.mjs';
-import { calculatorPage, changelogPage, datasetPage, filesPage, homePage, limitsPage, notFoundPage, privacyPage, reportPage, settingsPage } from './templates/pages.mjs';
+import { calculatorPage, changelogPage, datasetPage, developersPage, filesPage, homePage, limitsPage, notFoundPage, privacyPage, reportPage, settingsPage } from './templates/pages.mjs';
 import changelog from '../data/curated/changelog.mjs';
 import { THEME_SCRIPT } from './templates/layout.mjs';
 import { walk } from '../verify/lib/walk.mjs';
@@ -70,6 +70,7 @@ export async function build(opts = {}) {
   write('/settings/', settingsPage({ i18n }));
   write('/files/', filesPage({ i18n }));
   write('/privacy/', privacyPage({ i18n }));
+  write('/developers/', developersPage({ i18n }));
   for (const id of existsSync(join(ROOT, 'data')) ? readdirSync(join(ROOT, 'data')) : []) {
     const cur = join(ROOT, 'data', id, 'current.json');
     if (!existsSync(cur)) continue;

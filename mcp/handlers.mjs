@@ -132,7 +132,7 @@ export function createHandlers(ctx) {
       return ok(r);
     },
 
-    async gridprims_analyze_file({ path, handle, zone, stampsMark, quantity, series, cursor }) {
+    async gridprims_analyze_file({ path, handle, zone, stampsMark, quantity, series, cursor }, run = {}) {
       let entry;
       if (cursor !== undefined) {
         const c = decodeCursor(cursor);
@@ -154,7 +154,7 @@ export function createHandlers(ctx) {
         zone: zone ?? entry?.choices.zone ?? deviceZone, zoneSet: zone !== undefined || Boolean(entry?.choices.zoneSet),
         stampsMark: stampsMark ?? entry?.choices.stampsMark ?? 'auto', quantity: quantity ?? entry?.choices.quantity ?? 'auto',
       };
-      const r = await intakeFile(bytes, { name: entry?.name ?? basename(checked.path) }, choices);
+      const r = await intakeFile(bytes, { name: entry?.name ?? basename(checked.path) }, choices, { signal: run.signal, onProgress: (f) => run.progress?.(f, 'reading the file') });
       if (!r.ok) return fail(r.message);
       const value = { bytes, name: entry?.name ?? basename(checked.path), choices, result: r };
       const id = handles.put(value);

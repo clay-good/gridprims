@@ -3,7 +3,7 @@
 - [x] 1.1 Implement stdio framing, JSON-RPC dispatch, and stderr logging; verify a malformed line returns a parse error and the server keeps running
 - [x] 1.2 Implement `2026-07-28` (`server/discover`, `_meta` version, `resultType`, `ttlMs`, `cacheScope`) and legacy `initialize`; verify recorded conformance pairs for all three versions
 - [x] 1.3 Implement error `-32022` and `-32602` handling; verify the unknown-version scenario
-- [ ] 1.4 Implement progress, cancellation, and output pagination; verify the cancel and 35,040-row scenarios
+- [x] 1.4 Implement progress, cancellation, and output pagination; verify the cancel and 35,040-row scenarios
 
 ## 2. Tools
 
@@ -19,7 +19,7 @@
 - [x] 3.2 Implement `source_text` quarantine; verify the injected-header scenario
 - [x] 3.3 Add the sandboxed no-network test; verify it fails on a fixture tool that opens a socket
 - [x] 3.4 Default logs without values or paths; verify stderr in a fixture run
-- [ ] 3.5 Record Node permission-model behavior (file reads, workers, network) on Node 24 and 26 in `docs/platform-apis.md`; verify the documented launch command works on both
+- [x] 3.5 Record Node permission-model behavior (file reads, workers, network) on Node 24 and 26 in `docs/platform-apis.md`; verify the documented launch command works on both
 
 ## 4. Data commands
 
@@ -28,5 +28,5 @@
 
 ## 5. Setup and evaluation
 
-- [ ] 5.1 Write the client-snippet source, README section, developer page, and smoke test; verify each snippet launches the server
-- [ ] 5.2 Build the 40-request evaluation set with fixtures and its model-free CI checks; verify the automatic-part and model-run-advisory scenarios
+- [x] 5.1 Write the client-snippet source, README section, developer page, and smoke test; verify each snippet launches the server
+- [x] 5.2 Build the 40-request evaluation set with fixtures and its model-free CI checks; verify the automatic-part and model-run-advisory scenarios

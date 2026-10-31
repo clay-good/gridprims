@@ -7,6 +7,7 @@ import { renderAnswer, renderWork, toolPath } from '../ui/tool-page.mjs';
 import { VALIDATION_LEVELS } from '../../core/contract/manifest.mjs';
 import { sourceStamp } from '../ui/source-stamp.mjs';
 import { lateness } from '../../core/lib/lateness.mjs';
+import { CLONE, DATA_DIR, snippets } from '../../mcp/clients.mjs';
 
 /** One input control, labeled from the manifest. */
 function field(inp, value, i18n) {
@@ -235,4 +236,14 @@ ${h.datasets.filter((d) => d.failure).map((d) => html`<p class="warning-chip">${
   </tr>`)}</tbody>
 </table></div>
 <p><a href="/health/pipeline.json">${t('health.record')}</a></p>`;
+}
+
+/** The developer page: the MCP client snippets, generated from mcp/clients.mjs. */
+export function developersPage({ i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('dev.title')}</h1><p class="purpose">${t('dev.intro')}</p>
+<p>${t('dev.steps', { clone: CLONE, dir: DATA_DIR })}</p>
+${snippets().map((s) => html`<h2>${s.client}</h2><p class="mono">${s.file}</p><pre class="mono report-preview" data-snippet="${s.client}">${s.text}</pre>`)}
+<p>${t('dev.tools')}</p>`;
+  return layout({ i18n, title: `${t('dev.title')} · ${t('site.name')}`, description: t('dev.intro'), path: '/developers/', body });
 }

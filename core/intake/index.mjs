@@ -52,7 +52,8 @@ const REFUSALS = {
  * @param {Uint8Array} bytes
  * @param {{name?: string}} file
  * @param {import('./tabular.mjs').Choices} choices
- * @param {{onProgress?: (fraction: number) => void}} [opts] progress through the text, 0 to 1, while parsing
+ * @param {{onProgress?: (fraction: number) => void, signal?: AbortSignal}} [opts] progress through the text, 0 to 1, while parsing;
+ *   a signal stops the read between chunks
  */
 export async function intakeFile(bytes, file, choices, opts = {}) {
   const t0 = performance.now();
@@ -67,8 +68,11 @@ export async function intakeFile(bytes, file, choices, opts = {}) {
     const parser = createDelimitedParser({ delimiter, onRow: (r) => rows.push(r) });
     const CHUNK = 1 << 20;
     for (let i = 0; i < text.length; i += CHUNK) {
+      if (opts.signal?.aborted) throw opts.signal.reason ?? new Error('canceled');
       parser.push(text.slice(i, i + CHUNK));
       opts.onProgress?.(Math.min(1, (i + CHUNK) / text.length));
+      // Yield between chunks so a cancellation or a progress tick can run.
+      if (opts.signal || opts.onProgress) await new Promise((r) => setTimeout(r, 0));
     }
     parser.end();
     result = readTable(rows, choices, { ...meta, format, encoding, delimiter: delimiter === '\t' ? 'tab' : delimiter });

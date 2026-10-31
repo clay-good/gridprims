@@ -66,10 +66,14 @@ export function checkArguments(schema, args) {
 }
 
 /**
- * @param {{allowDirs?: string[], log?: (line: string) => void, debug?: boolean}} [opts]
+ * @param {{allowDirs?: string[], log?: (line: string) => void, debug?: boolean, notify?: (msg: object) => void, handlers?: Record<string, Function>}} [opts]
+ *   notify sends notifications (progress); handlers replaces tool handlers in tests
  */
 export function createServer(opts = {}) {
-  const handlers = createHandlers({ allowDirs: opts.allowDirs ?? [] });
+  const handlers = { ...createHandlers({ allowDirs: opts.allowDirs ?? [] }), ...opts.handlers };
+  const notify = opts.notify ?? (() => {});
+  /** In-flight tool calls, so a cancellation can stop the work, not just its answer. */
+  const inflight = new Map();
   const log = opts.log ?? (() => {});
   const cancelled = new Set();
   let legacyVersion = null;
@@ -90,7 +94,7 @@ export function createServer(opts = {}) {
     const { id, method, params = {} } = msg;
     const isNotification = id === undefined;
 
-    if (method === 'notifications/cancelled') { cancelled.add(params.requestId); return null; }
+    if (method === 'notifications/cancelled') { cancelled.add(params.requestId); inflight.get(params.requestId)?.abort(new Error('canceled by the client')); return null; }
     if (isNotification) return null; // notifications/initialized and others need no answer
 
     if (method === 'initialize') {
@@ -127,7 +131,31 @@ export function createServer(opts = {}) {
           if (!tool) return error(id, -32602, `Unknown tool ${JSON.stringify(params.name)}`, { known: TOOL_SURFACE.map((t) => t.name) });
           const args = params.arguments ?? {};
           const problem = checkArguments(tool.inputSchema, args);
-          const result = problem ? fail(problem) : await handlers[tool.name](args);
+          if (problem) return respond(complete(fail(problem)));
+          // Progress at least once a second after the first second of work, when the request asks for it.
+          const token = params._meta?.progressToken;
+          const controller = new AbortController();
+          inflight.set(id, controller);
+          let fraction = 0;
+          let message = 'working';
+          let ticker = null;
+          const starter = token === undefined ? null : setTimeout(() => {
+            const tick = () => { if (!controller.signal.aborted) notify({ jsonrpc: '2.0', method: 'notifications/progress', params: { progressToken: token, progress: fraction, total: 1, message } }); };
+            tick();
+            ticker = setInterval(tick, 1000);
+          }, 1000);
+          let result;
+          try {
+            result = await handlers[tool.name](args, { signal: controller.signal, progress: (f, m) => { fraction = f; if (m) message = m; } });
+          } catch (e) {
+            if (controller.signal.aborted) return null; // canceled: send nothing more for this request
+            throw e;
+          } finally {
+            clearTimeout(starter);
+            clearInterval(ticker);
+            inflight.delete(id);
+          }
+          if (controller.signal.aborted) return null;
           log(opts.debug ? `${tool.name} ${Date.now() - started} ms ${JSON.stringify(args)}` : `${tool.name} ${Date.now() - started} ms`);
           return respond(complete(fitResult(result, id)));
         }

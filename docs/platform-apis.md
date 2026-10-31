@@ -43,3 +43,19 @@ None is called by a page or by the MCP server at runtime.
 | Two public research archives | Durable dataset deposits (`trust/data-continuity`) |
 | A public code archive | Source at each release tag |
 | Public data publishers | Data fetched at build time |
+
+## Node permission model with the MCP server
+
+Measured 2026-10-31 with `node --permission --allow-fs-read=<clone>` (MCP task 3.5). The documented launch commands (`mcp/clients.mjs`) add the permission model as defense in depth. It is not the no-network guarantee; the sandboxed test in `verify/tests/mcp/security.test.mjs` is.
+
+| Behavior under `--permission` | Node 24.12.0 | Node 26.12.1 |
+|---|---|---|
+| Read inside an allowed path | allowed | allowed |
+| Read outside allowed paths | refused (`ERR_ACCESS_DENIED`) | refused (`ERR_ACCESS_DENIED`) |
+| Open a network socket | **allowed**: the model does not cover the network on 24 | refused (`ERR_ACCESS_DENIED`); `--allow-net` exists to permit it |
+| Start a worker thread | refused without `--allow-worker` | refused without `--allow-worker` |
+
+| `--allow-fs-read=a,b` (comma list) | **not valid**: warns and allows neither path | **not valid**: same |
+| `--allow-fs-read=a --allow-fs-read=b` | allows both | allows both |
+
+The MCP server parses files on its main thread, so it needs no `--allow-worker`. The client snippets pass one `--allow-fs-read` per path; the smoke test in `verify/tests/mcp/clients.test.mjs` launches each one, and it is what caught the comma form failing.

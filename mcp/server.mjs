@@ -15,8 +15,8 @@ const { values } = parseArgs({
 });
 
 const log = (line) => process.stderr.write(`gridprims: ${line}\n`);
-const server = createServer({ allowDirs: realAllowDirs(values['allow-dir']), debug: values.debug, log });
 const send = (msg) => { if (msg) process.stdout.write(JSON.stringify(msg) + '\n'); };
+const server = createServer({ allowDirs: realAllowDirs(values['allow-dir']), debug: values.debug, log, notify: send });
 
 const pending = new Set();
 const lines = createInterface({ input: process.stdin, crlfDelay: Infinity });

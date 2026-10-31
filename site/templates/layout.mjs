@@ -56,7 +56,7 @@ ${body}
 </main>
 <footer>
   <div class="wrap">
-    <ul><li><a href="/limits/">${t('nav.limits')}</a></li><li><a href="/changelog/">${t('nav.changelog')}</a></li><li><a href="/settings/">${t('nav.settings')}</a></li><li><a href="/privacy/">${t('nav.privacy')}</a></li><li><a href="/report/" data-report>${t('report.title')}</a></li></ul>
+    <ul><li><a href="/limits/">${t('nav.limits')}</a></li><li><a href="/changelog/">${t('nav.changelog')}</a></li><li><a href="/settings/">${t('nav.settings')}</a></li><li><a href="/privacy/">${t('nav.privacy')}</a></li><li><a href="/developers/">${t('nav.developers')}</a></li><li><a href="/report/" data-report>${t('report.title')}</a></li></ul>
     <p>${t('footer.privacy')}</p>
     <p>${t('footer.license')}</p>
   </div>
