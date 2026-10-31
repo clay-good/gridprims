@@ -1,6 +1,7 @@
 // The shell around every page (DESIGN.md Layout): top rail, command bar, main, footer.
 
 import { html, raw } from '../lib/html.mjs';
+import { gridPulse } from '../ui/grid-pulse.mjs';
 
 /** Runs before first paint so a saved theme never flashes the wrong one. Its hash goes in the CSP. */
 export const THEME_SCRIPT = "try{var t=localStorage.getItem('gridprims-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}";
@@ -9,10 +10,10 @@ export const THEME_SCRIPT = "try{var t=localStorage.getItem('gridprims-theme');i
  * @param {{
  *   i18n: {t: Function, locale: string},
  *   title: string, description: string, path: string,
- *   body: import('../lib/html.mjs').Html, modules?: string[], section?: string,
+ *   body: import('../lib/html.mjs').Html, modules?: string[], section?: string, pulse?: any,
  * }} p
  */
-export function layout({ i18n, title, description, path, body, modules = [], section }) {
+export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null }) {
   const { t } = i18n;
   const nav = [['home', '/'], ['files', '/files/'], ['data', '/data/eia-861/'], ['limits', '/limits/']];
   return html`<!doctype html>
@@ -39,6 +40,7 @@ ${modules.map((m) => html`<script type="module" src="${m}"></script>`)}
     <nav aria-label="${t('nav.label')}"><ul>
       ${nav.map(([id, href]) => html`<li><a href="${href}"${section === id ? raw(' aria-current="page"') : ''}>${t(`nav.${id}`)}</a></li>`)}
     </ul></nav>
+    ${gridPulse(pulse, i18n)}
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="${t('theme.toggle')}">${t('theme.night')}</button>
   </div>
 </header>

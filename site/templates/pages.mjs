@@ -51,7 +51,7 @@ export function calculatorPage({ manifest, example, result, i18n }) {
     ${manifest.inputs.filter((i) => i.type !== 'file').map((i) => field(i, example.inputs[i.name] ?? i.example, i18n))}
   </form>
   <details class="panel" data-work-panel>
-    <summary>${t('work.title')}</summary>
+    <summary><h2 class="summary-heading">${t('work.title')}</h2></summary>
     <div data-work>${renderWork(manifest, result, i18n)}</div>
   </details>
   <section class="panel">
@@ -153,7 +153,7 @@ export function filesPage({ i18n }) {
     <p><strong>${t('files.drop')}</strong></p>
     <p class="mono">${t('files.formats')}</p>
     <p><button class="button" type="button" data-choose>${t('files.choose')}</button>
-      <input type="file" data-file hidden accept=".csv,.txt,.tsv,.xml,.xlsx,.zip"></p>
+      <input type="file" data-file hidden accept=".csv,.txt,.tsv,.xml,.xlsx,.zip" aria-label="${t('files.choose')}"></p>
     <p><a href="/learn/get-your-data/">${t('files.noFile')}</a></p>
   </div>
   <div class="progress" data-progress hidden><p data-progress-label></p><progress max="1" value="0"></progress>
