@@ -228,10 +228,17 @@ const fromJson = (text) => { const v = JSON.parse(text); return v === '__undefin
  */
 export async function waitFor(browser, expression, ms = 10_000) {
   const end = Date.now() + ms;
+  let last = null;
   for (;;) {
-    const v = await browser.evaluate(expression);
-    if (v) return v;
-    if (Date.now() > end) throw new Error(`timed out after ${ms} ms waiting for: ${expression}`);
+    // Mid-navigation the old document is gone before the new one exists, so an error here means "not yet".
+    try {
+      const v = await browser.evaluate(expression);
+      if (v) return v;
+      last = null;
+    } catch (e) {
+      last = e;
+    }
+    if (Date.now() > end) throw new Error(`timed out after ${ms} ms waiting for: ${expression}${last ? ` (last error: ${last.message})` : ''}`);
     await new Promise((r) => setTimeout(r, 50));
   }
 }

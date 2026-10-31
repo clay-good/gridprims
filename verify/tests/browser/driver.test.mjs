@@ -39,3 +39,13 @@ test('BiDi remote values convert to plain values', () => {
   assert.deepEqual(fromBidi({ type: 'object', value: [['a', { type: 'array', value: [{ type: 'number', value: 1 }, { type: 'number', value: 'NaN' }] }]] }), { a: [1, NaN] });
   assert.equal(fromBidi({ type: 'undefined' }), undefined);
 });
+
+test('waitFor treats an evaluation error during navigation as "not yet", and names the last error on timeout', async () => {
+  const { waitFor } = await import('../../lib/browser.mjs');
+  let calls = 0;
+  const navigating = { evaluate: async () => { calls++; if (calls < 3) throw new TypeError("Cannot read properties of null (reading 'dataset')"); return 'ready'; } };
+  assert.equal(await waitFor(navigating, 'document.documentElement.dataset.ready', 2000), 'ready');
+  assert.equal(calls, 3);
+  const broken = { evaluate: async () => { throw new Error('context destroyed'); } };
+  await assert.rejects(waitFor(broken, 'x', 120), /timed out after 120 ms waiting for: x \(last error: context destroyed\)/);
+});
