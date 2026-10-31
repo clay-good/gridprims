@@ -51,7 +51,7 @@ test('asset hashes follow Cloudflare\'s documented recipe', () => {
   assert.equal(assetHash(bytes, 'index.html'), want);
   const m = assetManifest(dist);
   assert.ok(m['/index.html'] && m['/sw.js'] && m['/data/eia-861/2026-10/sales/TX.bin']);
-  assert.ok(!Object.keys(m).some((p) => p.includes('/_')), 'internal files are not deployed');
+  assert.deepEqual(Object.keys(m).filter((p) => p.includes('/_')), ['/_redirects'], 'internal files are not deployed; _redirects is the one Cloudflare reads');
 });
 
 test('a first deploy uploads every file, then deploys the Worker with the completion token and bindings', async () => {
