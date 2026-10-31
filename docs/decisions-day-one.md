@@ -61,7 +61,7 @@ The deployable file-count gate (`verify/gates/file-count.mjs`) counts `dist/` an
 
 | Command | Runs |
 |---|---|
-| `npm test` (or `node --test --test-force-exit "verify/tests/**/*.test.mjs"`) | Unit, golden-vector, and gate tests with `node:test` |
+| `npm test` | Unit, golden-vector, gate, and pipeline tests in parallel, then the browser tests one file at a time so browsers never compete for the machine |
 | `npm run check` (or `node verify/check.mjs`) | Every repository gate against the working tree |
 
 Tests live in `verify/tests/`, mirroring the folder they test, so nothing under `site/` or `core/` ships a test file. Gate fixtures live in `verify/fixtures/gates/`. No install step: `npm` only reads the scripts.

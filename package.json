@@ -8,7 +8,7 @@
     "node": ">=24.12.0"
   },
   "scripts": {
-    "test": "node --test --test-force-exit \"verify/tests/**/*.test.mjs\"",
+    "test": "node --test --test-force-exit \"verify/tests/{core,gates,intake,mcp,parsers,pipeline,site,tools}/**/*.test.mjs\" && node --test --test-force-exit --test-concurrency=1 \"verify/tests/browser/*.test.mjs\"",
     "check": "node verify/check.mjs",
     "build": "node site/build.mjs",
     "serve": "node verify/serve.mjs"

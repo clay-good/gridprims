@@ -102,3 +102,11 @@ test('manifests gate: fails on an unregistered tool folder and on a drifted exam
   assert.match(errors, /calc\.sample\.orphan: folder is not registered/);
   assert.match(errors, /calc\.sample\.double example two: y expected 4, got 4\.02, tolerance ±0/);
 });
+
+test('npm test covers every test folder, so a new one is never silently skipped', async () => {
+  const { readdirSync, readFileSync } = await import('node:fs');
+  const script = JSON.parse(readFileSync(join(repo, 'package.json'), 'utf8')).scripts.test;
+  for (const d of readdirSync(join(repo, 'verify/tests'), { withFileTypes: true }).filter((x) => x.isDirectory())) {
+    assert.ok(new RegExp(`[{,/]${d.name}[,}/]`).test(script), `verify/tests/${d.name} is not in the npm test script`);
+  }
+});
