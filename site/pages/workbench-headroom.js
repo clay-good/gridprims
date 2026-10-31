@@ -14,6 +14,7 @@ export function setupHeadroom({ i18n, view, when }) {
   const form = panel.querySelector('[data-headroom-form]');
   const out = panel.querySelector('[data-headroom-result]');
   let last = null;
+  let params = null;
   const show = (r, o = {}) => {
     last = r;
     out.innerHTML = String(renderHeadroom(r, i18n, { toolUrl: TOOL_URL, ...o }));
@@ -38,7 +39,8 @@ export function setupHeadroom({ i18n, view, when }) {
     const md = maxDemand(q.series, s.fromMs, s.toMs);
     const period = s.period === '12-month' ? t('headroom.period12', { from: s.from, to: s.to }) : t('headroom.period30', { days: s.days, from: when(s.fromMs, v.zone), to: when(s.toMs - 1, v.zone) });
     const phase = form.phase.value === '3' ? 3 : 1;
-    const r = headroomReport({ maxKw: md.kw, period: s.period, powerFactor, volts, phase, ratingA, hasGeneration: form.generation.checked || exported, edition: form.edition.value, source: t('headroom.source', { period }) });
+    params = { powerFactor, volts, phase, ratingA, hasGeneration: form.generation.checked || exported, edition: form.edition.value };
+    const r = headroomReport({ maxKw: md.kw, period: s.period, ...params, source: t('headroom.source', { period }) });
     if (r.status === 'refused' && exported) r.reason = `${t('headroom.exported')} ${r.reason}`;
     show(r, { when: when(md.atMs, v.zone), period, phase });
     panel.querySelector('[data-headroom-print]')?.addEventListener('click', () => {
@@ -50,5 +52,5 @@ export function setupHeadroom({ i18n, view, when }) {
     });
   });
   panel.dataset.ready = 'true';
-  return { state: () => last };
+  return { state: () => last, params: () => params };
 }

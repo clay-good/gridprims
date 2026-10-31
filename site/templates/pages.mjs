@@ -25,6 +25,7 @@ import { outagePicker } from '../ui/outage-picker.mjs';
 import REGULATORS from '../../data/curated/regulators.mjs';
 import { headroomPanel } from '../ui/workbench-headroom.mjs';
 import { evPanel } from '../ui/workbench-ev.mjs';
+import { addedPanel } from '../ui/workbench-added.mjs';
 
 /** Sections a tool's page adds below its inputs, with the script that runs them. */
 const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'] };
@@ -262,6 +263,7 @@ export function filesPage({ i18n, reviewed = new Set() }) {
   ${cpPanel(i18n, reviewed)}
   ${headroomPanel(i18n, reviewed)}
   ${evPanel(i18n, reviewed)}
+  ${addedPanel(i18n, reviewed)}
   <section class="panel" data-receipt></section>
 </article>
 <div class="drag-overlay" data-overlay hidden><p>${t('files.dragging')}</p></div>`;

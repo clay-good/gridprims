@@ -13,6 +13,7 @@ export const WORKBENCH_CAPABILITIES = [
   ['load.coincident-peak', 'cp.title', 'data-cp'],
   ['electrify.service-headroom', 'headroom.title', 'data-headroom'],
   ['electrify.ev-fleet', 'ev.title', 'data-ev'],
+  ['electrify.added-load', 'added.title', 'data-added'],
 ];
 
 /** The chip beside a capability's heading: "Review pending" or "Reviewed". */

@@ -21,7 +21,7 @@ const run = (fields) => `(() => { const f = document.querySelector('[data-headro
 for (const kind of ['chrome', 'firefox']) {
   const skip = !findBrowser(kind) && `${kind} is not installed`;
 
-  test(`${kind}: service headroom: too little data, then a 30-day figure with its steps, then no figure for a solar site; EV charging against it`, { skip, timeout: 60_000 }, async () => {
+  test(`${kind}: service headroom: too little data, then a 30-day figure with its steps, then no figure for a solar site; EV charging and a new load against it`, { skip, timeout: 60_000 }, async () => {
     const server = await serve(out);
     const browser = await launch(kind);
     try {
@@ -69,6 +69,15 @@ for (const kind of ['chrome', 'firefox']) {
       assert.match(ev, /The highest monthly peak goes from [\d,.]+ kW to [\d,.]+ kW with unmanaged charging, or [\d,.]+ kW with managed charging\./);
       assert.equal(await browser.evaluate("document.querySelectorAll('[data-ev-month]').length"), 4, 'June to September');
       assert.match(await browser.evaluate("document.querySelector('[data-ev-service]').textContent"), /Unmanaged: [\d,.]+ kW at 125% at the site peak, against [\d,.]+ kVA of headroom\./);
+
+      // A new load by schedule: 50 kW every hour raises each month's peak by 50 kW, and the headroom is rechecked.
+      await browser.evaluate("(() => { const f = document.querySelector('[data-added-form]'); f.kind.value = 'schedule'; f.kind.dispatchEvent(new Event('change')); f.schedule.value = Array(24).fill(50).join(' '); f.requestSubmit(); })()");
+      await waitFor(browser, "document.querySelector('[data-added]').dataset.ran === '1'");
+      assert.equal(await browser.evaluate("document.querySelectorAll('[data-added-month]').length"), 4);
+      assert.match(await browser.evaluate("document.querySelector('[data-added-steps]').textContent"), /the same every month/);
+      const [before, after] = await browser.evaluate("[...document.querySelector('[data-added-month]').querySelectorAll('td')].slice(0, 2).map((td) => Number(td.textContent.replace(/,/g, '')))");
+      assert.ok(Math.abs(after - before - 50) < 0.11, `${before} → ${after}`);
+      assert.match(await browser.evaluate("document.querySelector('[data-added-headroom]').textContent"), /Service headroom goes from [\d,.]+ A to [\d,.]+ A\./);
     } finally {
       await browser.close();
       await server.close();
