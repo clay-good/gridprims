@@ -365,6 +365,41 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 - County outage history means some customers in the county were out, not this address; durations are a typical guide, not a worst case.
 - No inverter losses, battery aging, or temperature derating.
 
+## Reliability indices (`reliability.outage-log.indices`)
+
+The reliability indices you report, from your own outage log, with every exclusion shown.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Interruptions | `events` |  |  | 2025-03-14 18:40, 420, 95 2025-06-02 23:30, 400, 105 2025-07-19 14:05, 5200, 310 2025-09-08 09:15, 150, 4 |
+| Customers served | `customersServed` | customers | 1 to 50000000 | 12000 |
+| Period start | `from` |  |  | 2025-01-01 |
+| Period end | `to` |  |  | 2025-12-31 |
+| Sustained if longer than | `threshold` | minutes | 0 to 600 | 5 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Interruptions per customer served | `perCustomer` | interruptions | 2 decimals |
+| Minutes per customer served | `minutesPerCustomer` | minutes | 1 decimals |
+| Minutes per interrupted customer | `minutesPerInterrupted` | minutes | 2 decimals |
+| Service available | `availability` | % | 4 decimals |
+| Sustained interruptions | `sustainedEvents` | interruptions | 0 decimals |
+| Customer minutes | `customerMinutes` | customer-minutes | 0 decimals |
+
+**Method.** Interruptions per customer = customers interrupted ÷ customers served. Minutes per customer = customer minutes ÷ customers served. Minutes per interrupted customer = customer minutes ÷ customers interrupted. Availability = 1 − minutes per customer ÷ minutes in the period.
+
+**Sources.**
+
+- Form EIA-861, Annual Electric Power Industry Report, instructions, OMB 1905-0129, Schedule 3 Part B: the two indices the form collects; a sustained interruption is one of more than 5 minutes; see docs/derivations/reliability.md (https://www.eia.gov/survey/form/eia_861/instructions.pdf)
+- IEEE PES Boston chapter tutorial, John Teixeira, National Grid, February 19, 2019, Slides 75 to 90: the indices the federal form does not collect, and the major-event-day threshold (https://site.ieee.org/boston-pes/files/2019/03/IEEE-1366-Reliability-Indices-2-2019.pdf)
+
+**Known limits.**
+
+- Indices counting how often each customer was interrupted need per-customer records an event log does not hold; they are reported as unavailable, never estimated.
+- Major event days need daily figures over several years: the workbench computes them from a whole log.
+
 ## Bill check (`household.bill-totals.check`)
 
 Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.

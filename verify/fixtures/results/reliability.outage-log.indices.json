@@ -1,0 +1,168 @@
+{
+  "toolId": "reliability.outage-log.indices",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "spec-annual",
+      "result": {
+        "status": "ok",
+        "toolId": "reliability.outage-log.indices",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "perCustomer": {
+            "value": 1.5,
+            "unit": "interruptions",
+            "display": "1.5"
+          },
+          "minutesPerCustomer": {
+            "value": 200,
+            "unit": "minutes",
+            "display": "200.0"
+          },
+          "minutesPerInterrupted": {
+            "value": 133.33,
+            "unit": "minutes",
+            "display": "133.33"
+          },
+          "availability": {
+            "value": 99.9619,
+            "unit": "%",
+            "display": "99.9619"
+          },
+          "sustainedEvents": {
+            "value": 1,
+            "unit": "interruptions",
+            "display": "1"
+          },
+          "customerMinutes": {
+            "value": 2400000,
+            "unit": "customer-minutes",
+            "display": "2,400,000"
+          }
+        },
+        "sentence": "The typical customer lost power 1.5 times, for 200.0 minutes in all. The lights were on 99.9619% of the time.",
+        "notes": [],
+        "work": {
+          "method": "Interruptions per customer = customers interrupted ÷ customers served. Minutes per customer = customer minutes ÷ customers served. Minutes per interrupted customer = customer minutes ÷ customers interrupted. Availability = 1 − minutes per customer ÷ minutes in the period.",
+          "steps": [
+            "Period: 2025-01-01 to 2025-12-31, 525,600 minutes. Customers served: 12,000. Check that figure matches the one you report; the federal form asks for customers served without saying how to average it.",
+            "Sustained interruptions: 1 longer than 5 minutes. Momentary: 0 of 5 minutes or less, left out of the indices below.",
+            "18,000 customers interrupted ÷ 12,000 customers served = 1.5 interruptions per customer",
+            "2,400,000 customer minutes ÷ 12,000 customers served = 200 minutes per customer",
+            "2,400,000 customer minutes ÷ 18,000 customers interrupted = 133.33 minutes per interrupted customer",
+            "1 − 200 minutes per customer ÷ 525,600 minutes in the period = 99.9619% available",
+            "Momentary interruptions: not computed: no momentary interruptions in this log. Many utilities do not log them, so a low figure can mean they were never recorded.",
+            "Every event is counted here, including 0 planned. Major event days need daily figures over several years, which the workbench computes from a whole log.",
+            "Not computed, and not estimated: customers interrupted more than a set number of times; customers who went without power longer than a set duration. Each needs a record of each interruption against each customer's own service point, which an event log does not contain.",
+            "Sources: interruptions and minutes per customer, Form EIA-861 instructions, Schedule 3 Part B (public domain): the sum of customers interrupted over the year, divided by the customers served. Minutes per interrupted customer and availability, New Mexico 17.9.589 NMAC, and the IEEE PES Boston chapter tutorial (Teixeira, National Grid, February 19, 2019), slides 75 to 90. The federal form does not collect it."
+          ],
+          "constants": [],
+          "assumptions": [
+            "An interruption longer than the threshold is sustained; one of the threshold or less is momentary and left out of these indices.",
+            "Customers served is the figure you enter, not an average we compute."
+          ],
+          "citations": [
+            {
+              "source": "Form EIA-861, Annual Electric Power Industry Report, instructions",
+              "edition": "OMB 1905-0129",
+              "locator": "Schedule 3 Part B: the two indices the form collects; a sustained interruption is one of more than 5 minutes; see docs/derivations/reliability.md",
+              "url": "https://www.eia.gov/survey/form/eia_861/instructions.pdf"
+            },
+            {
+              "source": "IEEE PES Boston chapter tutorial, John Teixeira, National Grid",
+              "edition": "February 19, 2019",
+              "locator": "Slides 75 to 90: the indices the federal form does not collect, and the major-event-day threshold",
+              "url": "https://site.ieee.org/boston-pes/files/2019/03/IEEE-1366-Reliability-Indices-2-2019.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "You are responsible for what you file; this computes the indices from the log you give it."
+      }
+    },
+    {
+      "example": "momentary-split",
+      "result": {
+        "status": "ok",
+        "toolId": "reliability.outage-log.indices",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "perCustomer": {
+            "value": 0.04,
+            "unit": "interruptions",
+            "display": "0.04"
+          },
+          "minutesPerCustomer": {
+            "value": 3.3,
+            "unit": "minutes",
+            "display": "3.3"
+          },
+          "minutesPerInterrupted": {
+            "value": 95,
+            "unit": "minutes",
+            "display": "95"
+          },
+          "availability": {
+            "value": 99.9994,
+            "unit": "%",
+            "display": "99.9994"
+          },
+          "sustainedEvents": {
+            "value": 1,
+            "unit": "interruptions",
+            "display": "1"
+          },
+          "customerMinutes": {
+            "value": 39900,
+            "unit": "customer-minutes",
+            "display": "39,900"
+          }
+        },
+        "sentence": "The typical customer lost power 0.04 times, for 3.3 minutes in all. The lights were on 99.9994% of the time.",
+        "notes": [],
+        "work": {
+          "method": "Interruptions per customer = customers interrupted ÷ customers served. Minutes per customer = customer minutes ÷ customers served. Minutes per interrupted customer = customer minutes ÷ customers interrupted. Availability = 1 − minutes per customer ÷ minutes in the period.",
+          "steps": [
+            "Period: 2025-01-01 to 2025-12-31, 525,600 minutes. Customers served: 12,000. Check that figure matches the one you report; the federal form asks for customers served without saying how to average it.",
+            "Sustained interruptions: 1 longer than 5 minutes. Momentary: 1 of 5 minutes or less, left out of the indices below.",
+            "420 customers interrupted ÷ 12,000 customers served = 0.04 interruptions per customer",
+            "39,900 customer minutes ÷ 12,000 customers served = 3.3 minutes per customer",
+            "39,900 customer minutes ÷ 420 customers interrupted = 95 minutes per interrupted customer",
+            "1 − 3.3 minutes per customer ÷ 525,600 minutes in the period = 99.9994% available",
+            "150 customers interrupted briefly ÷ 12,000 customers served = 0.01 per customer",
+            "Every event is counted here, including 0 planned. Major event days need daily figures over several years, which the workbench computes from a whole log.",
+            "Not computed, and not estimated: customers interrupted more than a set number of times; customers who went without power longer than a set duration. Each needs a record of each interruption against each customer's own service point, which an event log does not contain.",
+            "Sources: interruptions and minutes per customer, Form EIA-861 instructions, Schedule 3 Part B (public domain): the sum of customers interrupted over the year, divided by the customers served. Minutes per interrupted customer and availability, New Mexico 17.9.589 NMAC, and the IEEE PES Boston chapter tutorial (Teixeira, National Grid, February 19, 2019), slides 75 to 90. The federal form does not collect it."
+          ],
+          "constants": [],
+          "assumptions": [
+            "An interruption longer than the threshold is sustained; one of the threshold or less is momentary and left out of these indices.",
+            "Customers served is the figure you enter, not an average we compute."
+          ],
+          "citations": [
+            {
+              "source": "Form EIA-861, Annual Electric Power Industry Report, instructions",
+              "edition": "OMB 1905-0129",
+              "locator": "Schedule 3 Part B: the two indices the form collects; a sustained interruption is one of more than 5 minutes; see docs/derivations/reliability.md",
+              "url": "https://www.eia.gov/survey/form/eia_861/instructions.pdf"
+            },
+            {
+              "source": "IEEE PES Boston chapter tutorial, John Teixeira, National Grid",
+              "edition": "February 19, 2019",
+              "locator": "Slides 75 to 90: the indices the federal form does not collect, and the major-event-day threshold",
+              "url": "https://site.ieee.org/boston-pes/files/2019/03/IEEE-1366-Reliability-Indices-2-2019.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "You are responsible for what you file; this computes the indices from the log you give it."
+      }
+    }
+  ]
+}

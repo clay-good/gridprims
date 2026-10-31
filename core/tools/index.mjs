@@ -21,6 +21,8 @@ import serviceHeadroom from './electrify.service-headroom.check/manifest.mjs';
 import * as serviceHeadroomImpl from './electrify.service-headroom.check/tool.mjs';
 import backupPower from './electrify.backup-power.size/manifest.mjs';
 import * as backupPowerImpl from './electrify.backup-power.size/tool.mjs';
+import outageIndices from './reliability.outage-log.indices/manifest.mjs';
+import * as outageIndicesImpl from './reliability.outage-log.indices/tool.mjs';
 import billTotalsCheck from './household.bill-totals.check/manifest.mjs';
 import * as billTotalsCheckImpl from './household.bill-totals.check/tool.mjs';
 import usageBenchmark from './household.usage-benchmark.compare/manifest.mjs';
@@ -37,6 +39,7 @@ export const TOOLS = [
   { manifest: revenueRequirement, impl: revenueRequirementImpl },
   { manifest: serviceHeadroom, impl: serviceHeadroomImpl },
   { manifest: backupPower, impl: backupPowerImpl },
+  { manifest: outageIndices, impl: outageIndicesImpl },
   { manifest: billTotalsCheck, impl: billTotalsCheckImpl },
   { manifest: usageBenchmark, impl: usageBenchmarkImpl },
 ];

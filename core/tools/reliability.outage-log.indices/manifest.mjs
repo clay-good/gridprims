@@ -1,0 +1,47 @@
+export default {
+  id: 'reliability.outage-log.indices',
+  version: '0.1.0',
+  title: 'Reliability indices',
+  purpose: 'The reliability indices you report, from your own outage log, with every exclusion shown.',
+  archetype: 'calculator',
+  firstScreen: ['events', 'customersServed', 'from', 'to'],
+  inputs: [
+    { name: 'events', label: 'Interruptions', type: 'text', multiline: true, example: '2025-03-14 18:40, 420, 95\n2025-06-02 23:30, 400, 105\n2025-07-19 14:05, 5200, 310\n2025-09-08 09:15, 150, 4', hint: 'One a line: the start, the customers interrupted, and the minutes. Add the word planned for planned work.' },
+    { name: 'customersServed', label: 'Customers served', type: 'number', unit: 'customers', range: { min: 1, max: 50e6 }, precision: 'exact', example: 12000 },
+    { name: 'from', label: 'Period start', type: 'text', example: '2025-01-01', hint: 'As 2025-01-01.' },
+    { name: 'to', label: 'Period end', type: 'text', example: '2025-12-31', hint: 'As 2025-12-31; the day itself is included.' },
+    { name: 'threshold', label: 'Sustained if longer than', type: 'number', unit: 'minutes', range: { min: 0, max: 600 }, precision: 'exact', example: 5, hint: 'The federal form uses 5 minutes. Change it only for a state rule that differs.' },
+  ],
+  outputs: [
+    { name: 'perCustomer', label: 'Interruptions per customer served', unit: 'interruptions', rounding: { decimals: 2 } },
+    { name: 'minutesPerCustomer', label: 'Minutes per customer served', unit: 'minutes', rounding: { decimals: 1, fixed: true } },
+    { name: 'minutesPerInterrupted', label: 'Minutes per interrupted customer', unit: 'minutes', rounding: { decimals: 2 } },
+    { name: 'availability', label: 'Service available', unit: '%', rounding: { decimals: 4, fixed: true } },
+    { name: 'sustainedEvents', label: 'Sustained interruptions', unit: 'interruptions', rounding: { decimals: 0 } },
+    { name: 'customerMinutes', label: 'Customer minutes', unit: 'customer-minutes', rounding: { decimals: 0 } },
+  ],
+  method: 'Interruptions per customer = customers interrupted ÷ customers served. Minutes per customer = customer minutes ÷ customers served. Minutes per interrupted customer = customer minutes ÷ customers interrupted. Availability = 1 − minutes per customer ÷ minutes in the period.',
+  assumptions: [
+    'An interruption longer than the threshold is sustained; one of the threshold or less is momentary and left out of these indices.',
+    'Customers served is the figure you enter, not an average we compute.',
+  ],
+  citations: [
+    { source: 'Form EIA-861, Annual Electric Power Industry Report, instructions', edition: 'OMB 1905-0129', locator: 'Schedule 3 Part B: the two indices the form collects; a sustained interruption is one of more than 5 minutes; see docs/derivations/reliability.md', url: 'https://www.eia.gov/survey/form/eia_861/instructions.pdf' },
+    { source: 'IEEE PES Boston chapter tutorial, John Teixeira, National Grid', edition: 'February 19, 2019', locator: 'Slides 75 to 90: the indices the federal form does not collect, and the major-event-day threshold', url: 'https://site.ieee.org/boston-pes/files/2019/03/IEEE-1366-Reliability-Indices-2-2019.pdf' },
+  ],
+  datasets: [],
+  examples: [
+    { id: 'spec-annual', title: 'A year against 12,000 customers served', inputs: { events: '2025-03-14 18:40, 18000, 133.3333333333333', customersServed: 12000, from: '2025-01-01', to: '2025-12-31', threshold: 5 }, expect: { perCustomer: { value: 1.5, tolerance: { abs: 0.005 }, display: '1.5' }, minutesPerCustomer: { value: 200, tolerance: { abs: 0.05 }, display: '200.0' }, minutesPerInterrupted: { value: 133.33, tolerance: { abs: 0.005 }, display: '133.33' }, availability: { value: 99.9619, tolerance: { abs: 0.00005 }, display: '99.9619' } }, source: 'reliability/index-calculator spec, scenario "Annual indices": 18,000 customer interruptions and 2,400,000 customer minutes' },
+    { id: 'momentary-split', title: 'A log holding one brief interruption', inputs: { events: '2025-03-14 18:40, 420, 95\n2025-09-08 09:15, 150, 4', customersServed: 12000, from: '2025-01-01', to: '2025-12-31', threshold: 5 }, expect: { sustainedEvents: { value: 1, tolerance: { abs: 0 }, display: '1' }, perCustomer: { value: 0.035, tolerance: { abs: 0.005 }, display: '0.04' } }, source: 'Own example: the 4-minute interruption is momentary and left out of the sustained indices' },
+  ],
+  related: [],
+  handoffs: [{ label: 'Form EIA-861 instructions (EIA)', url: 'https://www.eia.gov/survey/form/eia_861/instructions.pdf' }],
+  stability: 'experimental',
+  validation: { level: 1, evidence: [{ kind: 'own-examples', summary: 'The spec\'s 1.5 interruptions, 200.0 minutes, 133.33 minutes per interrupted customer, and 99.9619% availability pass, and the momentary split.' }] },
+  toRaise: 'Reproducing a published worked example of the sustained indices to its printed precision would raise it to cross-checked.',
+  screeningLabel: 'You are responsible for what you file; this computes the indices from the log you give it.',
+  limitations: [
+    'Indices counting how often each customer was interrupted need per-customer records an event log does not hold; they are reported as unavailable, never estimated.',
+    'Major event days need daily figures over several years: the workbench computes them from a whole log.',
+  ],
+};
