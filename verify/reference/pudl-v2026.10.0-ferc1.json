@@ -1,0 +1,33 @@
+{
+ "source": "PUDL v2026.10.0 (Catalyst Cooperative, CC BY 4.0), FERC Form 1, report year 2025, electric rows, computed with pyarrow",
+ "files": {
+  "core_ferc1__yearly_income_statements_sched114": "fe797e5704ec2c4ead48ecfac5a628a47cd771d9219938b19da4747babf529be",
+  "out_ferc1__yearly_rate_base": "ccb899408adfc522b322690f70a2e536922a078c9b5c3f86a48bafcccef6e72d"
+ },
+ "utilities": {
+  "295": {
+   "name": "Georgia Power Company",
+   "operation_expense": 4968520089.0,
+   "maintenance_expense": 774036538.0,
+   "depreciation_expense": 1724308235.0,
+   "taxes_other_than_income": 574664080.0,
+   "rate_base": 42250925376.375
+  },
+  "170": {
+   "name": "Duke Energy Carolinas, LLC",
+   "operation_expense": 3993543460.0,
+   "maintenance_expense": 540801250.0,
+   "depreciation_expense": 1628630055.0,
+   "taxes_other_than_income": 347850777.0,
+   "rate_base": 32258354014.75
+  },
+  "92": {
+   "name": "American Transmission Company LLC",
+   "operation_expense": 115336739.0,
+   "maintenance_expense": 78969907.0,
+   "depreciation_expense": 242566894.0,
+   "taxes_other_than_income": 34901787.0,
+   "rate_base": 6579853888.75
+  }
+ }
+}

@@ -286,6 +286,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 **Sources.**
 
 - Regulatory Assistance Project, Electricity Regulation in the US: A Guide, Second edition, 2016, Chapter 9, the revenue requirement and its components (https://www.raponline.org/knowledge-center/electricity-regulation-in-the-us-a-guide-2/)
+- FERC Form 1, through Catalyst Cooperative's PUDL (CC BY 4.0), PUDL v2026.10.0, report year 2025, Income statement (schedule 114) and PUDL's rate-base derivation; see docs/derivations/rate-base.md (https://catalyst.coop/pudl/)
 
 **Known limits.**
 

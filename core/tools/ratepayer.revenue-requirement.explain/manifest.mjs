@@ -6,7 +6,7 @@ export default {
   archetype: 'calculator',
   firstScreen: ['rateBase', 'roe', 'equityRatio', 'costOfDebt', 'om'],
   inputs: [
-    { name: 'rateBase', label: 'Rate base', type: 'number', unit: '$', range: { min: 0, max: 1e13 }, precision: 'exact', example: 2000000000 },
+    { name: 'rateBase', label: 'Rate base', type: 'number', unit: '$', picker: 'ferc1', range: { min: 0, max: 1e13 }, precision: 'exact', example: 2000000000 },
     { name: 'roe', label: 'Return on equity', type: 'number', unit: '%', range: { min: 0, max: 50 }, precision: 'exact', example: 10 },
     { name: 'equityRatio', label: 'Equity share of capital', type: 'number', unit: '%', range: { min: 0, max: 100 }, precision: 'exact', example: 50 },
     { name: 'costOfDebt', label: 'Cost of debt', type: 'number', unit: '%', range: { min: 0, max: 50 }, precision: 'exact', example: 5 },
@@ -32,8 +32,9 @@ export default {
   ],
   citations: [
     { source: 'Regulatory Assistance Project, Electricity Regulation in the US: A Guide', edition: 'Second edition, 2016', locator: 'Chapter 9, the revenue requirement and its components', url: 'https://www.raponline.org/knowledge-center/electricity-regulation-in-the-us-a-guide-2/' },
+    { source: 'FERC Form 1, through Catalyst Cooperative\'s PUDL (CC BY 4.0)', edition: 'PUDL v2026.10.0, report year 2025', locator: 'Income statement (schedule 114) and PUDL\'s rate-base derivation; see docs/derivations/rate-base.md', url: 'https://catalyst.coop/pudl/' },
   ],
-  datasets: [],
+  datasets: ['pudl-ferc1', 'eia-861'],
   examples: [
     { id: 'spec', title: 'A $2 billion rate base at 10% equity return', inputs: { rateBase: 2000000000, roe: 10, equityRatio: 50, costOfDebt: 5, om: 400000000, depreciation: 150000000, otherTaxes: 50000000, taxRate: 25, residentialShare: 40, residentialCustomers: 500000 }, expect: { wacc: { value: 7.5, tolerance: { abs: 0.0005 }, display: '7.5' }, ret: { value: 150000000, tolerance: { abs: 1 }, display: '150,000,000' }, incomeTax: { value: 33333333.33, tolerance: { abs: 1 }, display: '33,333,333' }, perPoint: { value: 13333333.33, tolerance: { abs: 1 }, display: '13,333,333' }, perCustomerMonth: { value: 0.89, tolerance: { abs: 0.005 }, display: '0.89' } }, source: 'ratepayer/revenue-requirement spec, scenarios "Return on rate base" and "ROE sensitivity"' },
   ],

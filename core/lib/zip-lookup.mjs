@@ -51,7 +51,7 @@ function utilitiesFor(counties, shards) {
       const key = `${c.state}|${id}`;
       if (seen.has(key)) continue;
       const u = s.utilities[id];
-      seen.set(key, { id, state: c.state, name: u.name, ownership: u.ownership, customers: u.customers, kinds: u.kinds, bas: u.bas, resKwh: u.resKwh ?? null });
+      seen.set(key, { id, state: c.state, name: u.name, ownership: u.ownership, customers: u.customers, kinds: u.kinds, bas: u.bas, resKwh: u.resKwh ?? null, resCustomers: u.resCustomers ?? null, resShare: u.resShare ?? null });
     }
   }
   const all = [...seen.values()].sort((a, b) => b.customers - a.customers || a.name.localeCompare(b.name));

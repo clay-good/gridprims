@@ -35,8 +35,11 @@ export function lookupData(dataDir) {
   for (const r of [...sales.rows, ...(delivery?.rows ?? [])]) {
     if (r.utility_id === 88888) continue;
     const k = `${r.state}|${r.utility_id}`;
-    const e = inState.get(k) ?? inState.set(k, { name: r.utility_name, ownership: r.ownership, customers: 0, kinds: new Set(), bas: new Set() }).get(k);
+    const e = inState.get(k) ?? inState.set(k, { name: r.utility_name, ownership: r.ownership, customers: 0, resCustomers: 0, resRevenue: 0, revenue: 0, kinds: new Set(), bas: new Set() }).get(k);
     e.customers += r.tot_customers ?? 0;
+    e.resCustomers += r.res_customers ?? 0;
+    e.resRevenue += r.res_revenue ?? 0;
+    e.revenue += r.tot_revenue ?? 0;
     e.kinds.add(r.service_type);
     if (r.ba_code) e.bas.add(r.ba_code);
   }
@@ -52,7 +55,7 @@ export function lookupData(dataDir) {
       const c = (s.counties[f] ??= { name: names.get(f) ?? r.county, utilities: [] });
       if (!c.utilities.includes(r.utility_id)) c.utilities.push(r.utility_id);
       const u = inState.get(`${r.state}|${r.utility_id}`);
-      s.utilities[r.utility_id] ??= { name: u?.name ?? r.utility_name, ownership: u?.ownership ?? null, customers: u?.customers ?? 0, kinds: [...(u?.kinds ?? [])].sort(), bas: [...(u?.bas ?? [])].sort(), resKwh: averages.utility(r.state, r.utility_id) };
+      s.utilities[r.utility_id] ??= { name: u?.name ?? r.utility_name, ownership: u?.ownership ?? null, customers: u?.customers ?? 0, kinds: [...(u?.kinds ?? [])].sort(), bas: [...(u?.bas ?? [])].sort(), resKwh: averages.utility(r.state, r.utility_id), resCustomers: u?.resCustomers ?? 0, resShare: u?.revenue ? Math.round((u.resRevenue / u.revenue) * 1000) / 10 : null };
     }
   }
 

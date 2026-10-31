@@ -28,3 +28,18 @@ test('every input is editable: changing one changes the answer', () => {
   const b = runTool(manifest, impl, { ...base, om: base.om + 1e6 }).outputs.total.value;
   assert.equal(b - a, 1e6);
 });
+
+test('the Form 1 snapshot matches figures computed independently from PUDL\'s files for three utilities', async () => {
+  const { readFileSync } = await import('node:fs');
+  const { join } = await import('node:path');
+  const { served } = await import('../../../site/entities/plants.mjs');
+  const ROOT = join(import.meta.dirname, '../../..');
+  const ref = JSON.parse(readFileSync(join(ROOT, 'verify/reference/pudl-v2026.10.0-ferc1.json'), 'utf8'));
+  const rows = served(join(ROOT, 'data'), 'pudl-ferc1', 'revenue_inputs').rows.filter((r) => r.year === 2025);
+  for (const [id, want] of Object.entries(ref.utilities)) {
+    const got = rows.find((r) => r.utility_id_ferc1 === Number(id));
+    assert.equal(got.utility_name_ferc1, want.name);
+    for (const k of ['operation_expense', 'maintenance_expense', 'depreciation_expense', 'taxes_other_than_income', 'rate_base']) assert.ok(Math.abs((got[k] ?? 0) - want[k]) < 1, `${want.name} ${k}`);
+  }
+  assert.equal(rows.find((r) => r.utility_id_ferc1 === 295).utility_ids_eia, '7140', 'Georgia Power maps to its EIA id');
+});

@@ -972,4 +972,9 @@ export default {
   'draft.regulatorBlank': '[regulator]',
   'draft.docketBlank': '[docket number]',
   'draft.utilityBlank': '[your utility]',
+  'ferc1.title': 'Start from your utility\'s own figures',
+  'ferc1.none': '{utility} does not file FERC Form 1 (most co-ops and municipal utilities do not). Fill the fields from the rate case filing.',
+  'ferc1.filled': 'O&M, depreciation, taxes, and rate base filled from {name}\'s FERC Form 1 for {year}: total-company, approximate, from Form 1.',
+  'ferc1.rateBase': 'Rate base, approximate, from Form 1 ({year}): net plant and other items ${plant}, net deferred income taxes ${adit}, net working capital ${wc}.',
+  'ferc1.residential': 'Residential share of revenue {share}% and {customers} residential customers, from EIA-861.',
 };

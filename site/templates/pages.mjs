@@ -20,12 +20,13 @@ import { proposalPanel } from '../ui/workbench-proposal.mjs';
 import { WORKBENCH_CAPABILITIES } from '../ui/workbench-review.mjs';
 import { ratingTablePanel } from '../ui/line-rating-table.mjs';
 import { conductorPicker } from '../ui/conductor-picker.mjs';
+import { ferc1Picker } from '../ui/ferc1-picker.mjs';
 
 /** Sections a tool's page adds below its inputs, with the script that runs them. */
 const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'] };
 
 /** Pickers that fill a tool's inputs from public data: the section they render and the script that runs it. */
-const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'], 'rus-conductor': [conductorPicker, '/site/pages/conductor-picker.js'] };
+const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'], 'rus-conductor': [conductorPicker, '/site/pages/conductor-picker.js'], 'ferc1': [ferc1Picker, '/site/pages/ferc1-picker.js'] };
 const pickersOf = (manifest) => [...new Set(manifest.inputs.map((i) => i.picker).filter(Boolean))].map((p) => PICKERS[p]);
 
 /** One input control, labeled from the manifest. */

@@ -1,0 +1,184 @@
+{
+  "dataset": "pudl-ferc1",
+  "version": "2026-10",
+  "title": "Revenue-requirement inputs from FERC Form 1 (through PUDL)",
+  "publisher": "Catalyst Cooperative (PUDL), from FERC Form 1",
+  "sourceUrl": "https://catalyst.coop/pudl/",
+  "terms": {
+    "url": "https://github.com/catalyst-cooperative/pudl/blob/main/README.rst#licensing",
+    "section": "Licensing",
+    "text": "In general, our code, data, and other work are permissively licensed for use by anybody, for any purpose, so long as you give us credit for the work we've done. The PUDL software is released under the MIT License. The PUDL data and documentation are published under the Creative Commons Attribution License v4.0 (CC-BY-4.0).",
+    "captured": "2026-10-31",
+    "license": "CC-BY-4.0"
+  },
+  "redistributionBasis": {
+    "kind": "named license",
+    "note": "CC BY 4.0; the underlying FERC Form 1 filings are U.S. federal government records"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "CC-BY-4.0",
+    "reason": "recognized CC-BY-4.0",
+    "agrees": true
+  },
+  "license": "named license (CC BY 4.0; the underlying FERC Form 1 filings are U.S. federal government records)",
+  "attribution": "Catalyst Cooperative, Public Utility Data Liberation (PUDL) v2026.10.0, CC BY 4.0, from FERC Form 1.",
+  "asOf": "2026-10-14",
+  "retrieved": "2026-10-31",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "cadence": {
+    "every": "quarterly",
+    "nextRelease": {
+      "date": "2027-01-31",
+      "posted": false,
+      "note": "PUDL cuts a stable release about each quarter; the date is inferred, not posted"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://s3.us-west-2.amazonaws.com/pudl.catalyst.coop/v2026.10.0/core_ferc1__yearly_income_statements_sched114.parquet",
+      "name": "core_ferc1__yearly_income_statements_sched114.parquet",
+      "bytes": 2420902,
+      "sha256": "fe797e5704ec2c4ead48ecfac5a628a47cd771d9219938b19da4747babf529be",
+      "file": "income"
+    },
+    {
+      "url": "https://s3.us-west-2.amazonaws.com/pudl.catalyst.coop/v2026.10.0/out_ferc1__yearly_rate_base.parquet",
+      "name": "out_ferc1__yearly_rate_base.parquet",
+      "bytes": 2840872,
+      "sha256": "ccb899408adfc522b322690f70a2e536922a078c9b5c3f86a48bafcccef6e72d",
+      "file": "rateBase"
+    },
+    {
+      "url": "https://s3.us-west-2.amazonaws.com/pudl.catalyst.coop/v2026.10.0/core_pudl__assn_ferc1_pudl_utilities.parquet",
+      "name": "core_pudl__assn_ferc1_pudl_utilities.parquet",
+      "bytes": 14275,
+      "sha256": "204d9de4e8a3299eae30e7c58f14e09a2b13597c9d2748dac96df6b274690e76",
+      "file": "ferc1Pudl"
+    },
+    {
+      "url": "https://s3.us-west-2.amazonaws.com/pudl.catalyst.coop/v2026.10.0/core_pudl__assn_eia_pudl_utilities.parquet",
+      "name": "core_pudl__assn_eia_pudl_utilities.parquet",
+      "bytes": 323218,
+      "sha256": "1907b79291ee2ccf68201e4b8c7ee3d7af5458ff89e6ed1a93cddce13dfbc453",
+      "file": "eiaPudl"
+    }
+  ],
+  "release": "v2026.10.0",
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": false,
+    "columnsChecked": 14,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Company-level financial totals; no facility, location, or network data."
+  },
+  "tables": [
+    {
+      "name": "revenue_inputs",
+      "title": "Revenue-requirement inputs per electric Form 1 respondent and year, total-company",
+      "dataPeriod": "1994-2025",
+      "rows": 6835,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "year",
+          "type": "f64"
+        },
+        {
+          "name": "utility_id_ferc1",
+          "type": "f64"
+        },
+        {
+          "name": "utility_name_ferc1",
+          "type": "str"
+        },
+        {
+          "name": "utility_ids_eia",
+          "type": "str",
+          "unit": "space-separated EIA utility ids"
+        },
+        {
+          "name": "operation_expense",
+          "type": "f64",
+          "unit": "$"
+        },
+        {
+          "name": "maintenance_expense",
+          "type": "f64",
+          "unit": "$"
+        },
+        {
+          "name": "depreciation_expense",
+          "type": "f64",
+          "unit": "$"
+        },
+        {
+          "name": "amortization_expense",
+          "type": "f64",
+          "unit": "$"
+        },
+        {
+          "name": "taxes_other_than_income",
+          "type": "f64",
+          "unit": "$"
+        },
+        {
+          "name": "operating_revenues",
+          "type": "f64",
+          "unit": "$"
+        },
+        {
+          "name": "rate_base",
+          "type": "f64",
+          "unit": "$"
+        },
+        {
+          "name": "rate_base_net_adit",
+          "type": "f64",
+          "unit": "$"
+        },
+        {
+          "name": "rate_base_working_capital",
+          "type": "f64",
+          "unit": "$"
+        },
+        {
+          "name": "rate_base_plant_and_other",
+          "type": "f64",
+          "unit": "$"
+        }
+      ],
+      "partition": null,
+      "shards": [
+        {
+          "path": "revenue_inputs/US.bin",
+          "state": "US",
+          "rows": 6835,
+          "bytes": 727216,
+          "sha256": "2fbc77f37203f34d100b539bdd5b511bcba563fa237c0dec89e673728631828c"
+        }
+      ],
+      "download": {
+        "path": "revenue_inputs.csv.gz",
+        "bytes": 404263,
+        "sha256": "da4fc993fe6d1d19cbee6af3a5c3ad8c2985dc7ffe6c58f2d4ee4be3e5bb45a6",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "Catalyst Cooperative (PUDL), from FERC Form 1",
+          "attribution": "Catalyst Cooperative, Public Utility Data Liberation (PUDL) v2026.10.0, CC BY 4.0, from FERC Form 1.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}

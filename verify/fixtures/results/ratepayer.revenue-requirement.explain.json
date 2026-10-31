@@ -63,10 +63,23 @@
               "edition": "Second edition, 2016",
               "locator": "Chapter 9, the revenue requirement and its components",
               "url": "https://www.raponline.org/knowledge-center/electricity-regulation-in-the-us-a-guide-2/"
+            },
+            {
+              "source": "FERC Form 1, through Catalyst Cooperative's PUDL (CC BY 4.0)",
+              "edition": "PUDL v2026.10.0, report year 2025",
+              "locator": "Income statement (schedule 114) and PUDL's rate-base derivation; see docs/derivations/rate-base.md",
+              "url": "https://catalyst.coop/pudl/"
             }
           ]
         },
-        "datasets": [],
+        "datasets": [
+          {
+            "id": "pudl-ferc1"
+          },
+          {
+            "id": "eia-861"
+          }
+        ],
         "stability": "experimental",
         "validationLevel": 1,
         "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",

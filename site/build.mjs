@@ -30,6 +30,7 @@ import { atomFeed, releaseEntry } from './lib/atom.mjs';
 import { statePage, statePath, subregionPage, subregionPath } from './templates/region.mjs';
 import { lookupData } from './entities/lookup.mjs';
 import { rateRecords, tariffData } from './entities/tariffs.mjs';
+import { served } from './entities/plants.mjs';
 import { LOOKUP_PATH, lookupPage } from './templates/lookup.mjs';
 import { CATALOG_PATH, catalogPage, homePage, STATES_PATH, statesIndexPage } from './templates/home.mjs';
 import { checkSimplicity } from './ui/home-lanes.mjs';
@@ -194,6 +195,18 @@ export async function build(opts = {}) {
   if (tariffs) {
     mkdirSync(join(outDir, 'bills/tariffs'), { recursive: true });
     for (const [st, s] of tariffs.shards) writeFileSync(join(outDir, `bills/tariffs/${st}.json`), JSON.stringify(s));
+  }
+  // Form 1 revenue-requirement inputs by EIA utility id, latest year, for the explainer's prefill.
+  const ferc1 = served(join(ROOT, 'data'), 'pudl-ferc1', 'revenue_inputs');
+  if (ferc1) {
+    const latest = Math.max(...ferc1.rows.map((r) => r.year));
+    const byEia = {};
+    for (const r of ferc1.rows) {
+      if (r.year !== latest || !r.utility_ids_eia || r.rate_base === null) continue;
+      for (const id of r.utility_ids_eia.split(' ')) byEia[id] = { name: r.utility_name_ferc1, year: r.year, om: (r.operation_expense ?? 0) + (r.maintenance_expense ?? 0), depreciation: (r.depreciation_expense ?? 0) + (r.amortization_expense ?? 0), otherTaxes: r.taxes_other_than_income ?? 0, rateBase: r.rate_base, adit: r.rate_base_net_adit, workingCapital: r.rate_base_working_capital, plantAndOther: r.rate_base_plant_and_other };
+    }
+    mkdirSync(join(outDir, 'bills'), { recursive: true });
+    writeFileSync(join(outDir, 'bills/ferc1.json'), JSON.stringify({ release: ferc1.manifest.release ?? ferc1.manifest.version, asOf: ferc1.manifest.asOf, utilities: byEia }));
   }
   // ERCOT's published 4CP intervals, for the workbench's coincident-peak panel.
   mkdirSync(join(outDir, 'bills'), { recursive: true });
