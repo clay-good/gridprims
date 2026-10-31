@@ -17,9 +17,14 @@ import { averagePicker } from '../ui/average-picker.mjs';
 import { billPanel } from '../ui/workbench-bill.mjs';
 import { cpPanel } from '../ui/workbench-cp.mjs';
 import { WORKBENCH_CAPABILITIES } from '../ui/workbench-review.mjs';
+import { ratingTablePanel } from '../ui/line-rating-table.mjs';
+import { conductorPicker } from '../ui/conductor-picker.mjs';
+
+/** Sections a tool's page adds below its inputs, with the script that runs them. */
+const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'] };
 
 /** Pickers that fill a tool's inputs from public data: the section they render and the script that runs it. */
-const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'] };
+const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'], 'rus-conductor': [conductorPicker, '/site/pages/conductor-picker.js'] };
 const pickersOf = (manifest) => [...new Set(manifest.inputs.map((i) => i.picker).filter(Boolean))].map((p) => PICKERS[p]);
 
 /** One input control, labeled from the manifest. */
@@ -81,6 +86,7 @@ export function calculatorPage({ manifest, example, result, i18n, reviewed = fal
     ${manifest.inputs.some((i) => i.type !== 'file' && !manifest.firstScreen.includes(i.name)) ? html`<details class="more-options"><summary>${t('tool.moreOptions')}</summary>
     ${manifest.inputs.filter((i) => i.type !== 'file' && !manifest.firstScreen.includes(i.name)).map((i) => field(i, example.inputs[i.name] ?? i.example, i18n))}</details>` : ''}
   </form>
+  ${EXTRAS[manifest.id] ? EXTRAS[manifest.id][0](i18n) : ''}
   <details class="panel" data-work-panel>
     <summary><h2 class="summary-heading">${t('work.title')}</h2></summary>
     <div data-work>${renderWork(manifest, result, i18n)}</div>
@@ -91,7 +97,7 @@ export function calculatorPage({ manifest, example, result, i18n, reviewed = fal
   </section>
   ${manifest.handoffs.length ? html`<section><h2>${t('tool.handoffs')}</h2>${manifest.handoffs.map((h) => html`<p><a class="handoff" href="${h.url}">${h.label} ${raw('&rarr;')}</a></p>`)}</section>` : ''}
 </article>`;
-  return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js', ...pickersOf(manifest).map(([, script]) => script)], section: sectionOf(manifest.id) });
+  return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js', ...pickersOf(manifest).map(([, script]) => script), ...(EXTRAS[manifest.id] ? [EXTRAS[manifest.id][1]] : [])], section: sectionOf(manifest.id) });
 }
 
 /**

@@ -1,0 +1,243 @@
+{
+ "source": "USDA Rural Utilities Service, Bulletin 1724E-200, Design Manual for High Voltage Transmission Lines, revised May 2009, Appendix B, ACSR Conductors, NESC District Loadings (bulletin pages B-3 and B-4)",
+ "url": "https://www.govinfo.gov/content/pkg/GOVPUB-A68-PURL-LPS124223/pdf/GOVPUB-A68-PURL-LPS124223.pdf",
+ "license": "U.S. federal government work, public domain",
+ "sha256": "bddcaa34ae8bf490e2f4c3bec06e89fb0f16cd9aced7e4318bc2a4a2b638ae7f",
+ "note": "Diameters only. The bulletin gives no AC resistance, and no public-domain resistance table was found, so the user enters resistance from the manufacturer.",
+ "conductors": [
+  {
+   "name": "Raven",
+   "size": "1/0",
+   "stranding": "6/1",
+   "diameterIn": 0.398
+  },
+  {
+   "name": "Quail",
+   "size": "2/0",
+   "stranding": "6/1",
+   "diameterIn": 0.447
+  },
+  {
+   "name": "Pigeon",
+   "size": "4/0",
+   "stranding": "6/1",
+   "diameterIn": 0.502
+  },
+  {
+   "name": "Penguin",
+   "size": "266.8 kcmil",
+   "stranding": "6/1",
+   "diameterIn": 0.563
+  },
+  {
+   "name": "Waxwing",
+   "size": "266.8 kcmil",
+   "stranding": "18/1",
+   "diameterIn": 0.609
+  },
+  {
+   "name": "Partridge",
+   "size": "336.4 kcmil",
+   "stranding": "26/7",
+   "diameterIn": 0.642
+  },
+  {
+   "name": "Merlin",
+   "size": "336.4 kcmil",
+   "stranding": "18/1",
+   "diameterIn": 0.684
+  },
+  {
+   "name": "Linnet",
+   "size": "336.4 kcmil",
+   "stranding": "26/7",
+   "diameterIn": 0.721
+  },
+  {
+   "name": "Oriole",
+   "size": "397.5 kcmil",
+   "stranding": "30/7",
+   "diameterIn": 0.741
+  },
+  {
+   "name": "Chickadee",
+   "size": "397.5 kcmil",
+   "stranding": "18/1",
+   "diameterIn": 0.743
+  },
+  {
+   "name": "Ibis",
+   "size": "397.5 kcmil",
+   "stranding": "26/7",
+   "diameterIn": 0.783
+  },
+  {
+   "name": "Lark",
+   "size": "397.5 kcmil",
+   "stranding": "30/7",
+   "diameterIn": 0.806
+  },
+  {
+   "name": "Pelican",
+   "size": "477 kcmil",
+   "stranding": "18/1",
+   "diameterIn": 0.814
+  },
+  {
+   "name": "Flicker",
+   "size": "477 kcmil",
+   "stranding": "24/7",
+   "diameterIn": 0.846
+  },
+  {
+   "name": "Hawk",
+   "size": "477 kcmil",
+   "stranding": "26/7",
+   "diameterIn": 0.858
+  },
+  {
+   "name": "Hen",
+   "size": "477 kcmil",
+   "stranding": "30/7",
+   "diameterIn": 0.883
+  },
+  {
+   "name": "Osprey",
+   "size": "556.5 kcmil",
+   "stranding": "18/1",
+   "diameterIn": 0.879
+  },
+  {
+   "name": "Parakeet",
+   "size": "556.5 kcmil",
+   "stranding": "24/7",
+   "diameterIn": 0.914
+  },
+  {
+   "name": "Dove",
+   "size": "556.5 kcmil",
+   "stranding": "26/7",
+   "diameterIn": 0.927
+  },
+  {
+   "name": "Eagle",
+   "size": "556.5 kcmil",
+   "stranding": "30/7",
+   "diameterIn": 0.953
+  },
+  {
+   "name": "Kingbird",
+   "size": "636 kcmil",
+   "stranding": "18/1",
+   "diameterIn": 0.94
+  },
+  {
+   "name": "Rook",
+   "size": "636 kcmil",
+   "stranding": "24/7",
+   "diameterIn": 0.997
+  },
+  {
+   "name": "Gosbeak",
+   "size": "636 kcmil",
+   "stranding": "26/7",
+   "diameterIn": 0.99
+  },
+  {
+   "name": "Egret",
+   "size": "636 kcmil",
+   "stranding": "30/19",
+   "diameterIn": 1.019
+  },
+  {
+   "name": "Cuckoo",
+   "size": "795 kcmil",
+   "stranding": "24/7",
+   "diameterIn": 1.092
+  },
+  {
+   "name": "Drake",
+   "size": "795 kcmil",
+   "stranding": "26/7",
+   "diameterIn": 1.108
+  },
+  {
+   "name": "Mallard",
+   "size": "795 kcmil",
+   "stranding": "30/19",
+   "diameterIn": 1.14
+  },
+  {
+   "name": "Tern",
+   "size": "795 kcmil",
+   "stranding": "45/7",
+   "diameterIn": 1.063
+  },
+  {
+   "name": "Condor",
+   "size": "795 kcmil",
+   "stranding": "54/7",
+   "diameterIn": 1.093
+  },
+  {
+   "name": "Rail",
+   "size": "954 kcmil",
+   "stranding": "45/7",
+   "diameterIn": 1.165
+  },
+  {
+   "name": "Cardinal",
+   "size": "954 kcmil",
+   "stranding": "54/7",
+   "diameterIn": 1.196
+  },
+  {
+   "name": "Bunting",
+   "size": "1192.5 kcmil",
+   "stranding": "45/7",
+   "diameterIn": 1.302
+  },
+  {
+   "name": "Grackle",
+   "size": "1192.5 kcmil",
+   "stranding": "54/19",
+   "diameterIn": 1.338
+  },
+  {
+   "name": "Bittern",
+   "size": "1272 kcmil",
+   "stranding": "45/7",
+   "diameterIn": 1.345
+  },
+  {
+   "name": "Pheasant",
+   "size": "1272 kcmil",
+   "stranding": "54/19",
+   "diameterIn": 1.382
+  },
+  {
+   "name": "Lapwing",
+   "size": "1590 kcmil",
+   "stranding": "45/7",
+   "diameterIn": 1.502
+  },
+  {
+   "name": "Falcon",
+   "size": "1590 kcmil",
+   "stranding": "54/19",
+   "diameterIn": 1.545
+  },
+  {
+   "name": "Chukar",
+   "size": "1780 kcmil",
+   "stranding": "84/19",
+   "diameterIn": 1.602
+  },
+  {
+   "name": "Bluebird",
+   "size": "2156 kcmil",
+   "stranding": "84/19",
+   "diameterIn": 1.762
+  }
+ ]
+}

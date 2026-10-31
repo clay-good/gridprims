@@ -1,0 +1,85 @@
+{
+  "toolId": "calc.line-rating.ampacity",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "drake-like",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.line-rating.ampacity",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "amps": {
+            "value": 1026,
+            "unit": "A",
+            "display": "1,026"
+          },
+          "mva": {
+            "value": 408.7,
+            "unit": "MVA",
+            "display": "408.7"
+          },
+          "convection": {
+            "value": 25.01,
+            "unit": "W/ft or W/m",
+            "display": "25.01"
+          },
+          "radiation": {
+            "value": 11.92,
+            "unit": "W/ft or W/m",
+            "display": "11.92"
+          },
+          "solar": {
+            "value": 6.85,
+            "unit": "W/ft or W/m",
+            "display": "6.85"
+          }
+        },
+        "sentence": "The line can carry 1,026 A at 100 °C. In 2 ft/s of wind, the air takes away 25.01 W/ft of heat.",
+        "notes": [],
+        "work": {
+          "method": "At the maximum conductor temperature, the steady-state current is √((convective cooling + radiated heat loss − solar heat gain) ÷ AC resistance), following the IEEE 738-2023 heat balance: forced convection by the larger of its low- and high-wind correlations with the wind-angle factor, or natural convection if larger; radiation from emissivity and the temperatures; clear-sky solar gain from the sun's position, elevation, and line bearing; and resistance interpolated between the two values entered.",
+          "steps": [
+            "Resistance at 100 °C, interpolated from the two values entered: 0.15090 Ω/mile.",
+            "Convective cooling: 25.012 W/ft (forced 25.012, natural 12.929; the larger is used), IEEE 738 clause on convective heat loss.",
+            "Radiated heat loss: 11.921 W/ft; solar heat gain: 6.847 W/ft on 2025-06-10 at solar hour 11.",
+            "Ampacity: √((cooling + radiation − solar) ÷ resistance) = 1,026 A.",
+            "Three-phase rating at 230 kV: √3 × 230 kV × 1.026 kA = 408.7 MVA.",
+            "This is the conductor's thermal limit only; terminal equipment, emergency ratings, and clearances also limit a line."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Weather is steady at the values entered; the rating is for that weather only.",
+            "A clear atmosphere; no ground albedo is added to the solar gain.",
+            "Temperatures are in °C in both unit systems, as IEEE 738 states them."
+          ],
+          "citations": [
+            {
+              "source": "IEEE 738-2023, Standard for Calculating the Current-Temperature Relationship of Bare Overhead Conductors",
+              "edition": "2023",
+              "locator": "Steady-state heat balance: convective, radiated, and solar heat terms and conductor resistance (cited, not reproduced)",
+              "paywalled": true
+            },
+            {
+              "source": "linerate 5.0.0 (Statnett), an open implementation of IEEE 738 and CIGRE 601",
+              "edition": "5.0.0",
+              "locator": "IEEE738 thermal model, used only to generate the stored reference cases",
+              "url": "https://github.com/statnett/linerate"
+            },
+            {
+              "source": "pypacity 0.1.3, an open implementation of IEEE 738",
+              "edition": "0.1.3",
+              "locator": "Steady-state rating mode, used only to generate the stored reference cases",
+              "url": "https://github.com/gteasoft/pypacity"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
+        "screeningLabel": "Screening estimate: a conductor thermal limit only, not a facility rating; terminal equipment, emergency ratings, and clearances also limit a line."
+      }
+    }
+  ]
+}

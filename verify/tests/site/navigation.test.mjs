@@ -28,7 +28,7 @@ test('section pages list only what exists, never "coming soon"', () => {
   assert.match(page('/bills/'), /href="\/files\/">Read your meter file</);
   assert.match(page('/data/'), /href="\/data\/eia-861\/">Annual Electric Power Industry Report/);
   assert.match(page('/carbon/'), /Nothing in this section has shipped yet/);
-  for (const p of pagesOf(out)) assert.doesNotMatch(page(p), /coming soon|line rating/i, p);
+  for (const p of pagesOf(out)) assert.doesNotMatch(page(p), /coming soon/i, p);
 });
 
 test('the URL record: a renamed utility without a redirect fails; with an id rule it passes', () => {

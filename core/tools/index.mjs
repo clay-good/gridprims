@@ -13,6 +13,8 @@ import storageBasics from './calc.storage.basics/manifest.mjs';
 import * as storageBasicsImpl from './calc.storage.basics/tool.mjs';
 import costLcoe from './calc.cost.lcoe/manifest.mjs';
 import * as costLcoeImpl from './calc.cost.lcoe/tool.mjs';
+import lineAmpacity from './calc.line-rating.ampacity/manifest.mjs';
+import * as lineAmpacityImpl from './calc.line-rating.ampacity/tool.mjs';
 import billTotalsCheck from './household.bill-totals.check/manifest.mjs';
 import * as billTotalsCheckImpl from './household.bill-totals.check/tool.mjs';
 import usageBenchmark from './household.usage-benchmark.compare/manifest.mjs';
@@ -25,6 +27,7 @@ export const TOOLS = [
   { manifest: transformerSize, impl: transformerSizeImpl },
   { manifest: storageBasics, impl: storageBasicsImpl },
   { manifest: costLcoe, impl: costLcoeImpl },
+  { manifest: lineAmpacity, impl: lineAmpacityImpl },
   { manifest: billTotalsCheck, impl: billTotalsCheckImpl },
   { manifest: usageBenchmark, impl: usageBenchmarkImpl },
 ];

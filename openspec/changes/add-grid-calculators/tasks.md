@@ -1,9 +1,9 @@
 ## 1. Line rating
 
-- [ ] 1.1 Implement the steady-state heat balance with unit conversion at the boundary; verify the metric-equivalence scenario
-- [ ] 1.2 Generate and commit 50 reference cases from `linerate` and `pypacity`; verify every case within 1% or documented
-- [ ] 1.3 Ambient-adjusted rating table and CSV export; verify the table export scenario
-- [ ] 1.4 Build the conductor starter library from public-domain sources with per-entry citations; verify every entry has a source and license
+- [x] 1.1 Implement the steady-state heat balance with unit conversion at the boundary; verify the metric-equivalence scenario
+- [x] 1.2 Generate and commit 50 reference cases from `linerate` and `pypacity`; verify every case within 1% or documented
+- [x] 1.3 Ambient-adjusted rating table and CSV export; verify the table export scenario
+- [x] 1.4 Build the conductor starter library from public-domain sources with per-entry citations; verify every entry has a source and license
 
 ## 2. Units, emissions, storage, cost
 

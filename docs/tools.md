@@ -204,6 +204,55 @@ Version 0.2.0 · experimental · validation level 2, cross-checked
 - A simple LCOE: no degradation, construction period, or tax detail beyond what the fixed charge rate carries.
 - No defaults are offered; read the ATB for costs and capacity factors by technology.
 
+## Overhead conductor ampacity (`calc.line-rating.ampacity`)
+
+How much current a bare overhead conductor can carry in given weather, by the IEEE 738 heat balance.
+
+Version 0.1.0 · experimental · validation level 2, cross-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Units | `units` | choice | `us`, `si` | us |
+| Conductor diameter | `diameter` | in or mm | 0.001 to 2000 | 1.108 |
+| AC resistance at the low temperature | `r1` | Ω/mile or Ω/km | 0.000001 to 100 | 0.117 |
+| Low resistance temperature | `t1` | °C | -50 to 300 | 25 |
+| AC resistance at the high temperature | `r2` | Ω/mile or Ω/km | 0.000001 to 100 | 0.1396 |
+| High resistance temperature | `t2` | °C | -50 to 300 | 75 |
+| Maximum conductor temperature | `maxTemp` | °C | -40 to 300 | 100 |
+| Air temperature | `ambient` | °C | -60 to 60 | 40 |
+| Wind speed | `wind` | ft/s or m/s | 0 to 200 | 2 |
+| Wind angle to the conductor | `windAngle` | degrees | 0 to 90 | 90 |
+| Emissivity | `emissivity` | fraction | 0 to 1 | 0.8 |
+| Solar absorptivity | `absorptivity` | fraction | 0 to 1 | 0.8 |
+| Elevation | `elevation` | ft or m | -500 to 30000 | 0 |
+| Latitude | `latitude` | degrees north | -90 to 90 | 30 |
+| Line bearing | `lineAzimuth` | degrees east of north | 0 to 360 | 90 |
+| Date | `date` |  |  | 2025-06-10 |
+| Solar hour (12 is solar noon) | `solarHour` | h | 0 to 24 | 11 |
+| Line-to-line voltage, for MVA (0 to skip) | `kv` | kV | 0 to 1500 | 230 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Steady-state ampacity | `amps` | A | 0 decimals |
+| Three-phase rating | `mva` | MVA | 1 decimals |
+| Convective cooling | `convection` | W/ft or W/m | 2 decimals |
+| Radiated heat loss | `radiation` | W/ft or W/m | 2 decimals |
+| Solar heat gain | `solar` | W/ft or W/m | 2 decimals |
+
+**Method.** At the maximum conductor temperature, the steady-state current is √((convective cooling + radiated heat loss − solar heat gain) ÷ AC resistance), following the IEEE 738-2023 heat balance: forced convection by the larger of its low- and high-wind correlations with the wind-angle factor, or natural convection if larger; radiation from emissivity and the temperatures; clear-sky solar gain from the sun's position, elevation, and line bearing; and resistance interpolated between the two values entered.
+
+**Sources.**
+
+- IEEE 738-2023, Standard for Calculating the Current-Temperature Relationship of Bare Overhead Conductors, 2023, Steady-state heat balance: convective, radiated, and solar heat terms and conductor resistance (cited, not reproduced)
+- linerate 5.0.0 (Statnett), an open implementation of IEEE 738 and CIGRE 601, 5.0.0, IEEE738 thermal model, used only to generate the stored reference cases (https://github.com/statnett/linerate)
+- pypacity 0.1.3, an open implementation of IEEE 738, 0.1.3, Steady-state rating mode, used only to generate the stored reference cases (https://github.com/gteasoft/pypacity)
+
+**Known limits.**
+
+- Steady state only: no transient or emergency rating.
+- Resistance must be entered from the manufacturer's data; no public-domain resistance table exists.
+- Clear-sky solar gain; haze, industrial atmosphere, and ground reflection are not modeled.
+
 ## Bill check (`household.bill-totals.check`)
 
 Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.
