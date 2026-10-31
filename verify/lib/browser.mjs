@@ -197,6 +197,8 @@ async function launchChrome(exe, profile) {
     async setViewport(width, height) {
       await cmd('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
     },
+    /** Raw DevTools Protocol access, for the reference-profile throttling only Chrome offers. */
+    cdp: cmd,
     async screenshot() {
       const { data } = await cmd('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true });
       return Buffer.from(data, 'base64');
