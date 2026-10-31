@@ -1,12 +1,12 @@
 ## 1. Repository and zero-dependency gates
 
-- [ ] 1.1 Create the layout from design D17 with a README in each top-level directory; verify `ls` shows every directory and README
-- [ ] 1.2 Add the dependency gate (no dependency fields, no `node_modules`, only listed font files) and record each shipped font's license and SHA-256 (Overpass and Overpass Mono are dual-licensed SIL OFL 1.1 and LGPL 2.1; `RedHatOfficial/Overpass`); verify it fails on a fixture that adds a package and on a font file with no license record
-- [ ] 1.3 Add the platform-API gate and `docs/platform-apis.md` (API, version introduced, stability); verify it fails on a fixture that uses an experimental Node API
+- [x] 1.1 Create the layout from design D17 with a README in each top-level directory; verify `ls` shows every directory and README
+- [x] 1.2 Add the dependency gate (no dependency fields, no `node_modules`, only listed font files) and record each shipped font's license and SHA-256 (Overpass and Overpass Mono are dual-licensed SIL OFL 1.1 and LGPL 2.1; `RedHatOfficial/Overpass`); verify it fails on a fixture that adds a package and on a font file with no license record
+- [x] 1.3 Add the platform-API gate and `docs/platform-apis.md` (API, version introduced, stability); verify it fails on a fixture that uses an experimental Node API
 - [ ] 1.4 Pin Node 24.12+ and run CI on Node 24 and 26; verify a clean clone builds and tests with no install step
-- [ ] 1.5 Start `docs/own-implementations.md` with a build check that every general-purpose module has an entry; verify the check fails on an unlisted module rather than relying on a review
+- [x] 1.5 Start `docs/own-implementations.md` with a build check that every general-purpose module has an entry; verify the check fails on an unlisted module rather than relying on a review
 - [ ] 1.6 Commit the phase-0 fixture subset: EIA-861 (the one dataset phase 0 builds) plus synthetic fixtures for every other shape, and record that the full three-state, three-balancing-authority subset in D11 is a phase-1 exit item; verify every phase-0 worked example runs offline from a fresh clone
-- [ ] 1.7 Add the deployable file-count gate (80,000); verify it fails on a fixture build over the limit
+- [x] 1.7 Add the deployable file-count gate (80,000); verify it fails on a fixture build over the limit
 
 ## 2. Measure before committing the risky numbers
 
@@ -18,8 +18,8 @@
 
 ## 3. Tool contract
 
-- [ ] 3.1 Write `docs/decisions-day-one.md` fixing the artifacts everything else generates from, and review it before any other task: the manifest file format and location with every field's type and cardinality and the archetype enumeration; the dataset registry and refresh-recipe format with its step vocabulary; the build output layout (what lands in the deploy root versus `data/`, and how the deploy manifest is derived); the test layout and the one command a contributor runs; the CI workflow inventory with each workflow's trigger and interval; the report endpoint's payload and storage schema; nothing further for the reference machine, which is the throttled reference profile in `platform/app-shell` everywhere, including the parse budget; and the report proof-of-work difficulty (target about 300 ms on a mid-range phone). Verify every later phase-0 task cites this file rather than inventing its own shape
-- [ ] 3.2 Define the manifest schema from that decision record; verify it accepts a sample manifest and rejects each missing required field
+- [x] 3.1 Write `docs/decisions-day-one.md` fixing the artifacts everything else generates from, and review it before any other task: the manifest file format and location with every field's type and cardinality and the archetype enumeration; the dataset registry and refresh-recipe format with its step vocabulary; the build output layout (what lands in the deploy root versus `data/`, and how the deploy manifest is derived); the test layout and the one command a contributor runs; the CI workflow inventory with each workflow's trigger and interval; the report endpoint's payload and storage schema; nothing further for the reference machine, which is the throttled reference profile in `platform/app-shell` everywhere, including the parse budget; and the report proof-of-work difficulty (target about 300 ms on a mid-range phone). Verify every later phase-0 task cites this file rather than inventing its own shape
+- [x] 3.2 Define the manifest schema from that decision record; verify it accepts a sample manifest and rejects each missing required field
 - [ ] 3.3 Generate tool pages, command-bar entries, MCP descriptions and schemas, and docs from manifests; verify snapshot tests show identical labels, units, and citations everywhere
 - [ ] 3.4 Implement fragment-encoded share state; verify a copied link reproduces inputs and result in a fresh browser profile
 - [ ] 3.5 Implement tool versioning and the public changelog; verify a fixture result change without a version bump fails CI

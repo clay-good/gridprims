@@ -1,0 +1,14 @@
+{
+  "name": "gridprims",
+  "private": true,
+  "description": "The US power grid's math, files, and public data in one free tab.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24.12.0"
+  },
+  "scripts": {
+    "test": "node --test \"verify/tests/**/*.test.mjs\"",
+    "check": "node verify/check.mjs"
+  }
+}

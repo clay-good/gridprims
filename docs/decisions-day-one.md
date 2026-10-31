@@ -1,0 +1,100 @@
+# Day-one decisions
+
+The shapes every later phase-0 task generates from (foundation task 3.1). When a task needs a file format, a path, or a schedule, it cites a section here rather than inventing one. Changing a shape means editing this file in the same commit as the code.
+
+## 1. Tool manifest
+
+**Location.** One folder per tool: `core/tools/<tool-id>/`, holding `manifest.mjs` (default export: a plain object) and `tool.mjs` (exports `compute(inputs)`). The folder name equals the tool id. A `.mjs` module rather than JSON so the browser and Node import it with no import attributes and no fetch.
+
+**Validator.** `core/contract/manifest.mjs` (`validateManifest`). The build fails on any error and names the tool and the field.
+
+| Field | Type | Cardinality | Notes |
+|---|---|---|---|
+| `id` | string | 1 | `<domain>.<group>.<operation>`, each segment lowercase kebab |
+| `version` | string | 1 | semver; bumped when any output changes for the same input (task 3.5) |
+| `title`, `purpose` | string | 1 | purpose is one plain sentence |
+| `archetype` | enum | 1 | `calculator`, `file-workbench`, `entity-page`, `explorer` (DESIGN.md) |
+| `inputs` | object | 1+ | `name`, `label`, `type` (`number`, `enum`, `text`, `file`), `example`; numbers add `unit`, `canonicalUnit`, `range {min,max}`, `precision` (`exact` or `measured`); enums add `options [{value,label}]` |
+| `outputs` | object | 1+ | `name`, `label`, `unit` (or `unitless: true`), `rounding {sigFigs}` or `{decimals}` |
+| `method` | string | 1 | plain words |
+| `assumptions` | string | 0+ | |
+| `citations` | object | 1+ | `source`, `edition`, `locator`, `url` (or `paywalled: true`) |
+| `datasets` | string | 0+ | registry ids |
+| `examples` | object | 1+ | `id`, `title`, `inputs`, `expect {<output>: {value, tolerance {abs or rel}, display?}}`, `source` |
+| `related` | string | 0+ | tool ids |
+| `handoffs` | object | 0+ | `label`, `url`; plain links, never carrying inputs |
+| `sharedRoutines` | string | 0+ | shared-core module paths the tool calls |
+| `stability` | enum | 1 | `experimental` or `stable`; `stable` needs validation level 2+ |
+| `validation` | object | 1 | `level` 0–3 and `evidence [{kind, summary, path?}]` |
+| `limitations` | string | 1+ | |
+| `screeningLabel` | string | 0–1 | required when the output could pass for a study, a bill, or a utility decision |
+
+**Evidence kinds.** `own-examples` (supports level 1), `reference-output` (a committed file under `verify/reference/`, level 2), `published-example` (a cited published worked example with a committed file, level 2), `field-case` (level 3, at least 3). A level above what the evidence supports fails the build.
+
+**Precision.** A number input marked `exact` (a stated quantity to convert) does not limit output precision; one marked `measured` (a rate, a reading) limits it to its own significant figures (`core/lib/precision.mjs`). This is how the converter's "12 MWh → 40.95 MMBtu" and the tool contract's "$4 → $40,000" both hold.
+
+## 2. Structured result
+
+`core/contract/run.mjs` (`runTool`) wraps every tool, so the web page and the MCP server return the same object:
+
+| `status` | Carries |
+|---|---|
+| `ok` | `outputs {<name>: {value, unit, display}}`, `sentence`, `work {method, steps, constants, assumptions, citations}`, `toolId`, `toolVersion`, `validationLevel`, `validationMeaning`, `stability`, `screeningLabel?` |
+| `invalid` | `errors [{field, message}]`, where the message says what to type instead |
+| `refused` | `reason` (one plain sentence), `limitsUrl` |
+
+## 3. Dataset registry and refresh recipes
+
+One file per dataset: `pipeline/registry/<dataset-id>.mjs` (default export). Registry fields are the ones `platform/data-snapshots` lists. The recipe is an ordered list of steps from a closed vocabulary: `fetch`, `unzip`, `gunzip`, `read-xlsx`, `read-csv`, `normalize` (names a module in `pipeline/normalize/`), `validate` (names validators and bounds), `partition`, `write-shards`, `write-csv-gz`. Quirks are steps with a fixture, never prose.
+
+## 4. Build output
+
+| Path | What |
+|---|---|
+| `dist/` | The deploy root: pages, app code, `data/` shards and downloads. The deploy manifest is the sorted list of `dist/` paths with SHA-256s, written to `dist/_manifest.json` |
+| `data/` (repo) | Normalized shards, manifests, and checksums committed to git; copied into `dist/data/` |
+
+The deployable file-count gate (`verify/gates/file-count.mjs`) counts `dist/` and fails above 80,000.
+
+## 5. Tests and the one command
+
+| Command | Runs |
+|---|---|
+| `npm test` (or `node --test "verify/tests/**/*.test.mjs"`) | Unit, golden-vector, and gate tests with `node:test` |
+| `npm run check` (or `node verify/check.mjs`) | Every repository gate against the working tree |
+
+Tests live in `verify/tests/`, mirroring the folder they test, so nothing under `site/` or `core/` ships a test file. Gate fixtures live in `verify/fixtures/gates/`. No install step: `npm` only reads the scripts.
+
+## 6. CI workflows
+
+| Workflow | Trigger | Interval | Staleness threshold |
+|---|---|---|---|
+| `ci.yml` | push, pull request | on change | n/a |
+| `refresh-<dataset>.yml` | schedule | per recipe cadence, at least daily check, off the hour | 4 days for daily |
+| `link-check.yml` | schedule | weekly, Tuesday 07:23 UTC | 9 days |
+| `smoke.yml` | after deploy, and daily 05:41 UTC | daily | 4 days |
+| `self-heal.yml` | schedule | daily 06:17 UTC | 4 days |
+
+Every step is `node <our script>` or `git`; actions are GitHub's own, pinned by full commit SHA.
+
+## 7. Problem report endpoint
+
+`POST /api/reports`, JSON, at most 16 KiB.
+
+| Field | Type | Limit |
+|---|---|---|
+| `toolId`, `toolVersion` | string | 64 |
+| `datasets` | `[{id, version}]` | 20 |
+| `pageUrl` | string, no fragment | 512 |
+| `message` | string | 4,000 |
+| `attachment` | object, only when the user ticks the box; never file contents | 8 KiB |
+| `website` | honeypot, must be empty | |
+| `pow` | `{nonce, hash}` | |
+
+**Storage (D1).** Table `reports (id TEXT PRIMARY KEY, received_at TEXT, closed_at TEXT, payload TEXT)`. Rate-limit counters live in the Rate Limiting binding, never in this table.
+
+**Proof of work.** SHA-256 over `nonce + ":" + canonical payload` with 18 leading zero bits, about 262,000 hashes on average, which targets about 300 ms on a mid-range phone with `crypto.subtle`. Re-measured on the reference profile when the dialog is built (task 9.3).
+
+## 8. Reference machine
+
+The throttled reference profile in `platform/app-shell` everywhere, including the parse budget. No separate reference machine.
