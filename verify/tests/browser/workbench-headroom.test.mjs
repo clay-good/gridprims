@@ -21,7 +21,7 @@ const run = (fields) => `(() => { const f = document.querySelector('[data-headro
 for (const kind of ['chrome', 'firefox']) {
   const skip = !findBrowser(kind) && `${kind} is not installed`;
 
-  test(`${kind}: service headroom: too little data, then a 30-day figure with its steps, then no figure for a solar site`, { skip, timeout: 60_000 }, async () => {
+  test(`${kind}: service headroom: too little data, then a 30-day figure with its steps, then no figure for a solar site; EV charging against it`, { skip, timeout: 60_000 }, async () => {
     const server = await serve(out);
     const browser = await launch(kind);
     try {
@@ -58,6 +58,17 @@ for (const kind of ['chrome', 'firefox']) {
       await waitFor(browser, "document.querySelector('[data-headroom]').dataset.ran === '4'");
       assert.match(await browser.evaluate("document.querySelector('[data-headroom-result]').textContent"), /does not allow the 30-day option/);
       assert.equal(await browser.evaluate("document.querySelector('[data-headroom-amps]')"), null);
+
+      // EV charging on the same file, checked against the headroom once it is back.
+      await browser.evaluate(run('f.generation.checked = false;'));
+      await waitFor(browser, "document.querySelector('[data-headroom]').dataset.ran === '5'");
+      await browser.evaluate("(() => { const f = document.querySelector('[data-ev-form]'); f.groups.value = '10 buses, 300 kWh, 60 kW, 20:00 to 00:00\\n10 vehicles, 120 kWh, 60 kW, 18:00 to 06:00'; f.requestSubmit(); })()");
+      await waitFor(browser, "document.querySelector('[data-ev]').dataset.ran === '1'");
+      const ev = await browser.evaluate("document.querySelector('[data-ev-result]').textContent");
+      assert.match(ev, /at most 240\.0 kWh in its dwell at full power, 60\.0 kWh short/);
+      assert.match(ev, /The highest monthly peak goes from [\d,.]+ kW to [\d,.]+ kW with unmanaged charging, or [\d,.]+ kW with managed charging\./);
+      assert.equal(await browser.evaluate("document.querySelectorAll('[data-ev-month]').length"), 4, 'June to September');
+      assert.match(await browser.evaluate("document.querySelector('[data-ev-service]').textContent"), /Unmanaged: [\d,.]+ kW at 125% at the site peak, against [\d,.]+ kVA of headroom\./);
     } finally {
       await browser.close();
       await server.close();

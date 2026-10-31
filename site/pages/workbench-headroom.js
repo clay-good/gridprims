@@ -13,7 +13,12 @@ export function setupHeadroom({ i18n, view, when }) {
   const panel = document.querySelector('[data-headroom]');
   const form = panel.querySelector('[data-headroom-form]');
   const out = panel.querySelector('[data-headroom-result]');
-  const show = (r, o = {}) => { out.innerHTML = String(renderHeadroom(r, i18n, { toolUrl: TOOL_URL, ...o })); panel.dataset.ran = String(Number(panel.dataset.ran ?? 0) + 1); };
+  let last = null;
+  const show = (r, o = {}) => {
+    last = r;
+    out.innerHTML = String(renderHeadroom(r, i18n, { toolUrl: TOOL_URL, ...o }));
+    panel.dataset.ran = String(Number(panel.dataset.ran ?? 0) + 1);
+  };
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -45,4 +50,5 @@ export function setupHeadroom({ i18n, view, when }) {
     });
   });
   panel.dataset.ready = 'true';
+  return { state: () => last };
 }

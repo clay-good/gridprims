@@ -16,9 +16,9 @@ const i18n = createI18n(strings, 'en-US');
 const out = await sharedSite();
 const chips = (html) => [...html.matchAll(/data-review="([^"]+)">([^<]+)</g)].map((m) => [m[1], m[2]]);
 
-test('with no sign-offs, every workbench capability reads "Review pending", and the review page lists all six', () => {
+test('with no sign-offs, every workbench capability reads "Review pending", and the review page lists all seven', () => {
   const files = readFileSync(join(out, 'files/index.html'), 'utf8');
-  assert.deepEqual(chips(files), [['load.bill-explainer', 'Review pending'], ['load.tariff-comparison', 'Review pending'], ['load.storage-screen', 'Review pending'], ['load.coincident-peak', 'Review pending'], ['electrify.service-headroom', 'Review pending']]);
+  assert.deepEqual(chips(files), [['load.bill-explainer', 'Review pending'], ['load.tariff-comparison', 'Review pending'], ['load.storage-screen', 'Review pending'], ['load.coincident-peak', 'Review pending'], ['electrify.service-headroom', 'Review pending'], ['electrify.ev-fleet', 'Review pending']]);
   const review = readFileSync(join(out, 'review-status/index.html'), 'utf8');
   for (const [id] of WORKBENCH_CAPABILITIES) assert.match(review, new RegExp(`data-capability="${id.replace('.', '\\.')}"[\\s\\S]*?Review pending`), id);
 });

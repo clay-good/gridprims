@@ -12,6 +12,7 @@ import { WORKBENCH_VERSION } from './workbench-bill.js';
 import { setupCp } from './workbench-cp.js';
 import { setupProposal } from './workbench-proposal.js';
 import { setupHeadroom } from './workbench-headroom.js';
+import { setupEv } from './workbench-ev.js';
 import { preselect } from '../../core/lib/coincident-peak.mjs';
 import { formatNumber } from '../../core/lib/precision.mjs';
 import strings from '../strings/en-US.mjs';
@@ -123,7 +124,8 @@ let proposal = null;
 bill = setupBill({ i18n, view: () => current?.view ?? null, when, showOnChart, onUtility: (u) => cp?.preselect(preselect(u.bas ?? [])), onPriced: () => proposal?.refresh() });
 proposal = setupProposal({ i18n, view: () => current?.view ?? null, priced: () => bill.state().priced, utility: () => bill.utility(), period: () => bill.state().period, version: WORKBENCH_VERSION });
 cp = setupCp({ i18n, view: () => current?.view ?? null, when });
-setupHeadroom({ i18n, view: () => current?.view ?? null, when });
+const headroom = setupHeadroom({ i18n, view: () => current?.view ?? null, when });
+setupEv({ i18n, view: () => current?.view ?? null, priced: () => bill.state().priced, headroom: headroom.state });
 // The home page's "Cheapest plan on my data" opens here, at the plan finder.
 if (location.hash === '#plans') $('[data-bill]').scrollIntoView({ block: 'start' });
 
