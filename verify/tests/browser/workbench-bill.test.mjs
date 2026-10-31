@@ -38,6 +38,15 @@ for (const kind of ['chrome', 'firefox']) {
       assert.match(await browser.evaluate("document.querySelector('[data-bill-result]').textContent"), new RegExp(`URDB rate ${austin[pick].id}`));
       const ms = await browser.evaluate("document.querySelector('[data-line=demand] [data-show-ms]').dataset.showMs");
       assert.match(await browser.evaluate("document.querySelector('[data-line=demand] [data-show-ms]').textContent"), /^Set by \w{3} \d+, \d{4} at \d+:\d\d (am|pm), [\d.,]+ kW: show on the chart$/);
+      // An actual bill 6% above the first month's computed total: the difference and its causes, never a billing error.
+      const first = await browser.evaluate("document.querySelector('[data-bill-month]').dataset.billMonth");
+      const computed = await browser.evaluate("Number(document.querySelector('[data-bill-month] summary').textContent.match(/\\$([\\d,]+\\.\\d\\d)/)[1].replace(/,/g, ''))");
+      const actual = (Math.round(computed * 106) / 100).toFixed(2);
+      await browser.evaluate(`(() => { const i = document.querySelector('[data-actual="${first}"]'); i.value = '${actual}'; i.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+      await waitFor(browser, `document.querySelector('[data-compare="${first}"]').textContent.includes('Likely causes')`);
+      const said = await browser.evaluate(`document.querySelector('[data-compare="${first}"]').textContent`);
+      assert.match(said, /\(\+6%\)/);
+      assert.match(said, /A difference is not a billing error\./);
       await browser.evaluate("document.querySelector('[data-line=demand] [data-show-ms]').click()");
       await waitFor(browser, `document.querySelector('[data-chart]').dataset.highlight === '${ms}'`);
       // The first utility listed is shown on arrival, then the chosen one: no other utility's rates are fetched.

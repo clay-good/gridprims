@@ -50,7 +50,9 @@ export function renderBills(rec, bills, { t }, { when, dataStart }) {
     <tbody>${m.lines.map((l) => html`<tr data-line="${l.kind}"><td>${l.label}${l.note ? html`<br><span class="unit-hint">${l.note}</span>` : ''}${l.setting && Number.isFinite(l.setting.startMs) ? html`<br><button class="button link" type="button" data-show-ms="${l.setting.startMs}" data-show-kw="${l.setting.kw}">${t('bill.setBy', { when: when(l.setting.startMs), kw: qty(l.setting.kw) })}</button>` : ''}</td>
       <td class="num">${qty(l.quantity)} ${l.unit}</td><td class="num">${rateText(l.rate, l.unit)}</td><td class="num">${money(l.amount)}</td></tr>`)}</tbody></table>
     ${m.holidays.length ? html`<p class="unit-hint">${t('bill.holidaysUsed', { list: m.holidays.join(', ') })}</p>` : ''}
-    ${m.excluded.length ? html`<ul class="unit-hint">${m.excluded.map((x) => html`<li>${x}</li>`)}</ul>` : ''}</details>`;
+    ${m.excluded.length ? html`<ul class="unit-hint">${m.excluded.map((x) => html`<li>${x}</li>`)}</ul>` : ''}
+    <div class="field"><label for="actual-${m.month}">${t('bill.actual')}</label><input id="actual-${m.month}" class="mono" inputmode="decimal" autocomplete="off" data-actual="${m.month}"></div>
+    <div data-compare="${m.month}" aria-live="polite"></div></details>`;
   return html`<p class="stamp mono">${t('bill.source', { id: rec.id, effective: rec.effective ?? t('bill.picker.noDate'), revised: rec.lastRevised ?? t('bill.picker.noDate') })}${rec.source ? html` <a href="${rec.source}">${t('bill.picker.source')}</a>` : ''}</p>
   ${stale ? html`<p class="warning-chip" data-bill-stale>${t('bill.stale', { date: rec.end })}</p>` : ''}
   <p class="number" data-bill-total>${money(total)}</p>
@@ -59,4 +61,11 @@ export function renderBills(rec, bills, { t }, { when, dataStart }) {
   ${rec.unmodeled.length ? html`<p class="strip">${t('bill.unmodeled', { list: rec.unmodeled.join(', ') })}</p>` : ''}
   ${bills.months.map(month)}
   <p class="unit-hint">${t('bill.months')}</p>`;
+}
+
+/** The comparison with an actual bill, in plain words. @param {{diff: number, pct: number | null, causes: string[]}} c */
+export function renderComparison(c, computed, actual, { t }) {
+  const sign = c.diff > 0 ? '+' : c.diff < 0 ? '−' : '';
+  return html`<p>${t('bill.compare', { actual: money(actual), computed: money(computed), diff: `${sign}${money(Math.abs(c.diff))}`, pct: c.pct === null ? '' : ` (${sign}${Math.abs(c.pct)}%)` })}</p>
+  ${c.diff !== 0 ? html`<p>${t('bill.causes')}</p><ul>${c.causes.map((x) => html`<li>${x}</li>`)}</ul>` : ''}`;
 }

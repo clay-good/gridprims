@@ -127,3 +127,17 @@ test('a daily fixed charge, a 30-minute window over 15-minute data, and a minimu
   assert.equal(line(jan, 'Fixed charge')[0].amount, 15.5);
   assert.equal(jan.total, 900, 'the minimum bill tops it up');
 });
+
+test('riders missing: a computed total 6% below the actual bill names the unmodeled charges and riders, never a billing error', async () => {
+  const { compareActual } = await import('../../../core/lib/interval-bill.mjs');
+  const rec = fromManual({ energyRate: 0.1, fixedMonthly: 20 });
+  rec.unmodeled.push('monthly fuel adjustments');
+  const [apr] = intervalBills(series(utc('2026-04-01T00:00:00'), 30 * 24, 60, () => 1), rec, { zone: 'UTC' }).months;
+  assert.equal(apr.total, 92);
+  const c = compareActual(apr, { total: 97.52, byKind: { energy: 77.52, fixed: 20 } }, rec);
+  assert.deepEqual([c.diff, c.pct], [5.52, 6]);
+  assert.deepEqual(c.byKind, [{ kind: 'energy', computed: 72, actual: 77.52, diff: 5.52 }, { kind: 'fixed', computed: 20, actual: 20, diff: 0 }]);
+  assert.match(c.causes[0], /not modeled here: monthly fuel adjustments/);
+  assert.match(c.causes[1], /riders or surcharges/);
+  assert.doesNotMatch(c.causes.join(' '), /billing error|overcharg|wrong/i);
+});

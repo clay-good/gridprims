@@ -226,3 +226,27 @@ export function intervalBills(delivered, rec, opts) {
   }
   return { months: out, notes, unmodeled: rec.unmodeled };
 }
+
+/**
+ * A computed month against the user's actual bill: the difference overall and by kind of charge, and the
+ * likely causes in plain words. A difference is never called a billing error.
+ * @param {any} month one month from intervalBills
+ * @param {{total: number, byKind?: Partial<Record<'energy' | 'demand' | 'fixed', number>>}} actual dollars from the bill
+ * @param {any} rec the tariff record
+ */
+export function compareActual(month, actual, rec) {
+  const diff = Math.round((actual.total - month.total) * 100) / 100;
+  const pct = month.total ? Math.round((diff / month.total) * 1000) / 10 : null;
+  const byKind = Object.entries(actual.byKind ?? {}).map(([kind, amount]) => {
+    const computed = Math.round(month.lines.filter((l) => l.kind === kind).reduce((n, l) => n + l.amount, 0) * 100) / 100;
+    return { kind, computed, actual: amount, diff: Math.round((amount - computed) * 100) / 100 };
+  });
+  const causes = [];
+  if (diff > 0) {
+    if (rec.unmodeled.length) causes.push(`Charges this tariff has that are not modeled here: ${rec.unmodeled.join(', ')}.`);
+    causes.push('Taxes, franchise fees, and riders or surcharges that the rate database does not list.');
+  } else if (diff < 0) causes.push('A credit or discount on your account, or a rate change since the rate database was updated.');
+  causes.push('Different billing period dates: these bills use calendar months, and your meter-read dates may differ.');
+  if (byKind.some((k) => k.kind === 'demand' && Math.abs(k.diff) > 0.01) || rec.flatDemand || rec.demand) causes.push('A meter multiplier, or a different demand window, on your account.');
+  return { diff, pct, byKind, causes };
+}

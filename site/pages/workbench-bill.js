@@ -2,8 +2,9 @@
 // URDB rates, and price the loaded series on it here. Requests go only for
 // the lookup shards a ZIP needs and the chosen utility's rate file.
 
-import { intervalBills } from '../../core/lib/interval-bill.mjs';
-import { rateOption, renderBills } from '../ui/workbench-bill.mjs';
+import { compareActual, intervalBills } from '../../core/lib/interval-bill.mjs';
+import { readNumber } from '../../core/lib/bill-totals.mjs';
+import { rateOption, renderBills, renderComparison } from '../ui/workbench-bill.mjs';
 import { getJson, utilitiesForZip } from './zip-utilities.js';
 
 /**
@@ -17,6 +18,7 @@ export function setupBill({ i18n, view, when, showOnChart }) {
   const el = (tag, text, attrs = {}) => Object.assign(document.createElement(tag), { textContent: text ?? '' }, attrs);
   let utilities = [];
   let rates = [];
+  let priced = null; // {rec, bills}
 
   function price() {
     const rec = rates[Number($('[data-bill-rate]').value)];
@@ -26,6 +28,7 @@ export function setupBill({ i18n, view, when, showOnChart }) {
     const bills = intervalBills(v.series, rec, { zone: v.zone, received, holidays: $('[data-bill-holidays]').checked });
     const dataStart = new Intl.DateTimeFormat('en-CA', { timeZone: v.zone }).format(new Date(v.series.startMs[0]));
     $('[data-bill-result]').innerHTML = String(renderBills(rec, bills, i18n, { when: (ms) => when(ms, v.zone), dataStart }));
+    priced = { rec, bills };
     panel.dataset.priced = rec.id;
   }
 
@@ -59,6 +62,16 @@ export function setupBill({ i18n, view, when, showOnChart }) {
   $('[data-bill-utility]').addEventListener('change', showUtility);
   $('[data-bill-rate]').addEventListener('change', price);
   $('[data-bill-holidays]').addEventListener('change', price);
+  // An actual bill's total, typed into a month: the difference and its likely causes.
+  $('[data-bill-result]').addEventListener('input', (e) => {
+    const key = e.target.dataset.actual;
+    if (!key || !priced) return;
+    const box = $(`[data-compare="${key}"]`);
+    const total = readNumber(e.target.value.replace(/^\$/, ''));
+    const month = priced.bills.months.find((m) => m.month === key);
+    if (total === null || !month) { box.replaceChildren(); return; }
+    box.innerHTML = String(renderComparison(compareActual(month, { total }, priced.rec), month.total, total, i18n));
+  });
   $('[data-bill-result]').addEventListener('click', (e) => {
     const b = e.target.closest('[data-show-ms]');
     if (b) showOnChart(Number(b.dataset.showMs), Number(b.dataset.showKw));

@@ -735,4 +735,7 @@ export default {
   'bill.unmodeled': 'Not modeled, and left out of the total: {list}.',
   'bill.months': 'Bills use calendar months, because a meter file has no meter-read dates; your utility\'s billing periods may run differently.',
   'bill.none': 'The Utility Rate Database lists no rates for {utility}.',
+  'bill.actual': 'Your actual bill for this month ($)',
+  'bill.compare': 'Your bill: {actual}. Computed: {computed}. Difference: {diff}{pct}.',
+  'bill.causes': 'A difference is not a billing error. Likely causes:',
 };
