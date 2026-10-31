@@ -1,0 +1,500 @@
+{
+  "dataset": "census-zcta-county",
+  "version": "2026-10",
+  "title": "2020 ZCTA to County Relationship File (U.S. Census Bureau)",
+  "publisher": "U.S. Census Bureau",
+  "sourceUrl": "https://www.census.gov/geographies/reference-files/time-series/geo/relationship-files.2020.html",
+  "terms": {
+    "url": "https://www.census.gov/about/policies/citation.html",
+    "section": "Public-Use Statement",
+    "text": "Proper citation ensures that Census Bureau statistical products and research can be discovered, reused, replicated for verification, and credited for recognition to measure usage and impact. Data users who create their own estimates using data from disseminated tables and other data should cite the Census Bureau as the source of the original data only. Conclusions drawn from any analysis of these data are the sole responsibility of the performing party.",
+    "captured": "2026-10-31"
+  },
+  "redistributionBasis": {
+    "kind": "public domain",
+    "note": "U.S. federal government work (17 U.S.C. 105); the Census page above states no license, so the matcher's advisory reads derive"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "derive",
+    "license": null,
+    "reason": "terms absent or unrecognized; values are facts we may compute over",
+    "agrees": false
+  },
+  "license": "public domain (U.S. federal government work (17 U.S.C. 105); the Census page above states no license, so the matcher's advisory reads derive)",
+  "attribution": "Source: U.S. Census Bureau, 2020 ZCTA to County Relationship File.",
+  "asOf": "2021-12-09",
+  "retrieved": "2026-10-31",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "cadence": {
+    "every": "annual",
+    "nextRelease": {
+      "date": "2031-12-31",
+      "posted": false,
+      "note": "Relationship files follow each decennial census; the 2030 file is not expected before late 2031"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://www2.census.gov/geo/docs/maps-data/data/rel2020/zcta520/tab20_zcta520_county20_natl.txt",
+      "name": "tab20_zcta520_county20_natl.txt",
+      "bytes": 6821287,
+      "sha256": "3ed41278d637dc249e0323306f68be8a6c234e3090f4de88ef328dee71aeaaaf"
+    }
+  ],
+  "tables": [
+    {
+      "name": "zcta_counties",
+      "title": "ZCTAs and the counties they share land with, with each county's share",
+      "dataPeriod": "2020",
+      "rows": 46953,
+      "columns": [
+        {
+          "name": "zcta",
+          "type": "str"
+        },
+        {
+          "name": "county_fips",
+          "type": "str"
+        },
+        {
+          "name": "county_name",
+          "type": "str"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "state_fips",
+          "type": "str"
+        },
+        {
+          "name": "land_part_m2",
+          "type": "f64",
+          "unit": "square meters"
+        },
+        {
+          "name": "zcta_land_m2",
+          "type": "f64",
+          "unit": "square meters"
+        },
+        {
+          "name": "share_of_zcta_land",
+          "type": "f64",
+          "unit": "fraction"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "zcta_counties/AK.bin",
+          "state": "AK",
+          "rows": 258,
+          "bytes": 15264,
+          "sha256": "0c0084a31ff6fbc4cfdfe1a3ff2caa2df5e44605d502c8273da12913230f0c53"
+        },
+        {
+          "path": "zcta_counties/AL.bin",
+          "state": "AL",
+          "rows": 979,
+          "bytes": 50976,
+          "sha256": "71f1f6d0fa03dd53c037a7062d161eb2b8343725fa28246032d8feb59d02a2f1"
+        },
+        {
+          "path": "zcta_counties/AR.bin",
+          "state": "AR",
+          "rows": 922,
+          "bytes": 48344,
+          "sha256": "8ed7c9c749f7aa2a0ac91feb28254597a2541233d0072cbce25e43a3657d8880"
+        },
+        {
+          "path": "zcta_counties/AS.bin",
+          "state": "AS",
+          "rows": 4,
+          "bytes": 1208,
+          "sha256": "f3662b0da48b045ec68038851d53ea0ad1beefe0378a5016e65ae47e933178fc"
+        },
+        {
+          "path": "zcta_counties/AZ.bin",
+          "state": "AZ",
+          "rows": 465,
+          "bytes": 25160,
+          "sha256": "ab00439805202b38a019cdf07083323cc76b6f89caa0e1939a489ea3c61fd97b"
+        },
+        {
+          "path": "zcta_counties/CA.bin",
+          "state": "CA",
+          "rows": 1995,
+          "bytes": 104704,
+          "sha256": "76ae7d44a0de036beb0929eea457aece052a5640c260f2ce0cd4378581f42c18"
+        },
+        {
+          "path": "zcta_counties/CO.bin",
+          "state": "CO",
+          "rows": 713,
+          "bytes": 38184,
+          "sha256": "1cde1fefb62502e0788eda22ccf4c19ae3740d8e7d98b908035eff44f3a8244d"
+        },
+        {
+          "path": "zcta_counties/CT.bin",
+          "state": "CT",
+          "rows": 299,
+          "bytes": 16640,
+          "sha256": "9fd1c8b9bc4b183e51e71390c0b24accd6ffb0554640b933bd6c38c5ded5cb4d"
+        },
+        {
+          "path": "zcta_counties/DC.bin",
+          "state": "DC",
+          "rows": 57,
+          "bytes": 3952,
+          "sha256": "94c536b277480f888ccaab56301bb82fcf8cc3d11d2f884430a501be70f9f07a"
+        },
+        {
+          "path": "zcta_counties/DE.bin",
+          "state": "DE",
+          "rows": 75,
+          "bytes": 4888,
+          "sha256": "cc88040637f1791c8dda8f31bb25de5808d0e7a778091a5649fb03fa88d36f98"
+        },
+        {
+          "path": "zcta_counties/FL.bin",
+          "state": "FL",
+          "rows": 1174,
+          "bytes": 62392,
+          "sha256": "4eaf9a434d72746a4e502a711064b8bfed8393ca9bba57d2e694a5e9d68ce18d"
+        },
+        {
+          "path": "zcta_counties/GA.bin",
+          "state": "GA",
+          "rows": 1333,
+          "bytes": 69544,
+          "sha256": "9db4e93ba4a7833d6786a2d974626c553276e8b6f8bd3349e1b4df2a3fe4bb92"
+        },
+        {
+          "path": "zcta_counties/GU.bin",
+          "state": "GU",
+          "rows": 7,
+          "bytes": 1320,
+          "sha256": "f5e85f1c6ff37c13de8010a2a0d1906add04227698fda7388031fbb8a69d95bc"
+        },
+        {
+          "path": "zcta_counties/HI.bin",
+          "state": "HI",
+          "rows": 97,
+          "bytes": 6120,
+          "sha256": "076d18b64828ad0178348e91ff05041c556c16cd7bdda34274822dc809f5ef36"
+        },
+        {
+          "path": "zcta_counties/IA.bin",
+          "state": "IA",
+          "rows": 1572,
+          "bytes": 80352,
+          "sha256": "a79819b67205eb30439d77fe61825de3ffff01cb4d2bdce9712f6141404b0ed7"
+        },
+        {
+          "path": "zcta_counties/ID.bin",
+          "state": "ID",
+          "rows": 386,
+          "bytes": 21312,
+          "sha256": "3ca28dc4027d3630c4aff4aba65afe170e7c993eef0771eca5a9b5b07d411afa"
+        },
+        {
+          "path": "zcta_counties/IL.bin",
+          "state": "IL",
+          "rows": 2002,
+          "bytes": 102744,
+          "sha256": "8618317649afdf41b9e58c3f3d5ea0e259494df486b31f0ff810708e27b4019e"
+        },
+        {
+          "path": "zcta_counties/IN.bin",
+          "state": "IN",
+          "rows": 1302,
+          "bytes": 66968,
+          "sha256": "33922650fa2d3a6a89d50863f251493df4a72f888d46621342fa84712d5507c3"
+        },
+        {
+          "path": "zcta_counties/KS.bin",
+          "state": "KS",
+          "rows": 1154,
+          "bytes": 59984,
+          "sha256": "42ac8fa720d1906f81144d2f96f9b9c1223f3a0137a1b5c66924880241dd987d"
+        },
+        {
+          "path": "zcta_counties/KY.bin",
+          "state": "KY",
+          "rows": 1193,
+          "bytes": 62672,
+          "sha256": "d231b29e769a5bbb9cea7e71455af5721227e8f65a90090ad41b680ba42fd49f"
+        },
+        {
+          "path": "zcta_counties/LA.bin",
+          "state": "LA",
+          "rows": 728,
+          "bytes": 39048,
+          "sha256": "ed38d0a90f6b67cbd0b67ddae11854e10b115c2c507c5a714bd43cdbbeff5766"
+        },
+        {
+          "path": "zcta_counties/MA.bin",
+          "state": "MA",
+          "rows": 565,
+          "bytes": 30512,
+          "sha256": "c506341870054ef02c97e2aa6a04c0d540ced9b05f45a28aae280887cb1d73fd"
+        },
+        {
+          "path": "zcta_counties/MD.bin",
+          "state": "MD",
+          "rows": 563,
+          "bytes": 30200,
+          "sha256": "b28c3f7a5f04515f44cee00f86b99ce38cfdf05fb08359fe9bab1fe0cf05661b"
+        },
+        {
+          "path": "zcta_counties/ME.bin",
+          "state": "ME",
+          "rows": 443,
+          "bytes": 24296,
+          "sha256": "6f79ecc5895ce105e0c3283bc085fe005f6428447128965ca5294d747e254008"
+        },
+        {
+          "path": "zcta_counties/MI.bin",
+          "state": "MI",
+          "rows": 1431,
+          "bytes": 73976,
+          "sha256": "b0f0637d76fdb21e856bee62bd60155e283a85b4a59ccf1e45c555584c4970d5"
+        },
+        {
+          "path": "zcta_counties/MN.bin",
+          "state": "MN",
+          "rows": 1359,
+          "bytes": 70056,
+          "sha256": "6baf695e2f725a4367ee150ad00a4bdd2dd3b815352e0f881d0ce2f83a1e5f5b"
+        },
+        {
+          "path": "zcta_counties/MO.bin",
+          "state": "MO",
+          "rows": 1640,
+          "bytes": 84280,
+          "sha256": "862a57195971239850fcd570faf581f95b394ec4af53d1c6a11f48849b766d0d"
+        },
+        {
+          "path": "zcta_counties/MP.bin",
+          "state": "MP",
+          "rows": 3,
+          "bytes": 1184,
+          "sha256": "515959a571d12288f1e63ab772b095655339e952d1ca26e4aedf920f9569e28a"
+        },
+        {
+          "path": "zcta_counties/MS.bin",
+          "state": "MS",
+          "rows": 771,
+          "bytes": 40376,
+          "sha256": "8948adf79317954328e72613d359a548b96817650b5adc966f575b020f02c45d"
+        },
+        {
+          "path": "zcta_counties/MT.bin",
+          "state": "MT",
+          "rows": 517,
+          "bytes": 28152,
+          "sha256": "b3dd7896693c9de2707d91d7bc8718c39ddaa4cf8f6be582984400cb73e0a73f"
+        },
+        {
+          "path": "zcta_counties/NC.bin",
+          "state": "NC",
+          "rows": 1292,
+          "bytes": 67120,
+          "sha256": "acf069604d8e0922985826207b33e6f4f91fce8b73ad318cfac2c087a6903fc6"
+        },
+        {
+          "path": "zcta_counties/ND.bin",
+          "state": "ND",
+          "rows": 641,
+          "bytes": 33680,
+          "sha256": "c0512e74bb88ac9969f4d7f8de8f4639126525ec2e8caa0ffa53c57ca7c55104"
+        },
+        {
+          "path": "zcta_counties/NE.bin",
+          "state": "NE",
+          "rows": 979,
+          "bytes": 51048,
+          "sha256": "f9d1fb5ca7807b6da1e36e73f076cd8398fad483209b83880bda4f6f00dd5bc2"
+        },
+        {
+          "path": "zcta_counties/NH.bin",
+          "state": "NH",
+          "rows": 265,
+          "bytes": 14864,
+          "sha256": "1bc4f14fb63159ff59bf53c63f85168ac43ab6e3b47ccf2265a629b7aba65c33"
+        },
+        {
+          "path": "zcta_counties/NJ.bin",
+          "state": "NJ",
+          "rows": 673,
+          "bytes": 35896,
+          "sha256": "6b8656b91f6421b93c60a5998d32db6fa809b9131f164524a36bd9e3e2953130"
+        },
+        {
+          "path": "zcta_counties/NM.bin",
+          "state": "NM",
+          "rows": 461,
+          "bytes": 25104,
+          "sha256": "6444a07959814708ed769965c228ab2321fc21ff35ef0db7b6d78798288aa845"
+        },
+        {
+          "path": "zcta_counties/NV.bin",
+          "state": "NV",
+          "rows": 202,
+          "bytes": 11704,
+          "sha256": "499dabb391d9960852c37b7163adfed114bf209ad14f9566553850dd219ce20c"
+        },
+        {
+          "path": "zcta_counties/NY.bin",
+          "state": "NY",
+          "rows": 2201,
+          "bytes": 114000,
+          "sha256": "99212f967c18c1150ac2081363c280b4c1b98e3f0fc35a1a6c876193ab14eb10"
+        },
+        {
+          "path": "zcta_counties/OH.bin",
+          "state": "OH",
+          "rows": 1852,
+          "bytes": 94480,
+          "sha256": "7273eefb1cbfb73dd51bd65536b9718ac11b7dab9b6193bef3b146004fec6b0e"
+        },
+        {
+          "path": "zcta_counties/OK.bin",
+          "state": "OK",
+          "rows": 1012,
+          "bytes": 52712,
+          "sha256": "0849b5ef6a6a68a7fab82533e2dc42cf7b870b973a6e6d82f8880be287c7b9d3"
+        },
+        {
+          "path": "zcta_counties/OR.bin",
+          "state": "OR",
+          "rows": 529,
+          "bytes": 28576,
+          "sha256": "00bbb054c7469fda8d8192ae1addc01b2fe242b58d1b24516f049bb38f9041e0"
+        },
+        {
+          "path": "zcta_counties/PA.bin",
+          "state": "PA",
+          "rows": 2245,
+          "bytes": 116120,
+          "sha256": "1de323ab9d7aa63a3c7c48e79c21fe21de66a728c994135938341166c72d410f"
+        },
+        {
+          "path": "zcta_counties/PR.bin",
+          "state": "PR",
+          "rows": 250,
+          "bytes": 15264,
+          "sha256": "459accd3bd78df84efe883fbb06c265a452016ffd27dc83bd80806a3d641aa13"
+        },
+        {
+          "path": "zcta_counties/RI.bin",
+          "state": "RI",
+          "rows": 83,
+          "bytes": 5384,
+          "sha256": "ef68900bc7e0e4793f734c54addb3887fe8df731578b178809475124120b7cac"
+        },
+        {
+          "path": "zcta_counties/SC.bin",
+          "state": "SC",
+          "rows": 626,
+          "bytes": 33080,
+          "sha256": "3faef7995a9c283d0d4be22d0f6bf476c1affbafcbe02f7611ce0e4a1c1fd62a"
+        },
+        {
+          "path": "zcta_counties/SD.bin",
+          "state": "SD",
+          "rows": 656,
+          "bytes": 34648,
+          "sha256": "b2ab4b726bb0af9ecda3605f40b43885330fbfde99edef04961f04a2da79e0f7"
+        },
+        {
+          "path": "zcta_counties/TN.bin",
+          "state": "TN",
+          "rows": 1065,
+          "bytes": 55312,
+          "sha256": "063b4c3cd6ec47494057a75c7b5baea436b3683f735007fe3e99d51751018012"
+        },
+        {
+          "path": "zcta_counties/TX.bin",
+          "state": "TX",
+          "rows": 2893,
+          "bytes": 150480,
+          "sha256": "73843738dd8507731b475dccbea7fc3519dc8b30a299129959001f7f080d82ce"
+        },
+        {
+          "path": "zcta_counties/UT.bin",
+          "state": "UT",
+          "rows": 326,
+          "bytes": 18416,
+          "sha256": "350f42bc5257e7a022569b11bf516dd0c1c15f97f6e584da3438da31522e0110"
+        },
+        {
+          "path": "zcta_counties/VA.bin",
+          "state": "VA",
+          "rows": 1314,
+          "bytes": 69496,
+          "sha256": "96cd093f6533221ffb59bdd22f4a83c9188f5a860a96aa4bd9d99b1f56748901"
+        },
+        {
+          "path": "zcta_counties/VI.bin",
+          "state": "VI",
+          "rows": 6,
+          "bytes": 1312,
+          "sha256": "578b2fcebb72168f44e986b85858739a9e22f83ab2cf12cc452a11621da348c2"
+        },
+        {
+          "path": "zcta_counties/VT.bin",
+          "state": "VT",
+          "rows": 309,
+          "bytes": 17048,
+          "sha256": "e8e11048d7f31d3768a83fd68e24f04a1668735fc9ab15642dfcd6d27597298e"
+        },
+        {
+          "path": "zcta_counties/WA.bin",
+          "state": "WA",
+          "rows": 700,
+          "bytes": 37584,
+          "sha256": "4d06c747e618686a5a83be80005e7a28d6e70e4eed94fb1880cba861b2e723f1"
+        },
+        {
+          "path": "zcta_counties/WI.bin",
+          "state": "WI",
+          "rows": 1202,
+          "bytes": 61904,
+          "sha256": "2fefbaf58d359837736538eadd63ad80f1ed26bb43abc093cd2e1a0e030a7a08"
+        },
+        {
+          "path": "zcta_counties/WV.bin",
+          "state": "WV",
+          "rows": 955,
+          "bytes": 50280,
+          "sha256": "c5bf90a9792cb7540f95dd187a60fccc72fe8a966000557651957f1c0fe839e8"
+        },
+        {
+          "path": "zcta_counties/WY.bin",
+          "state": "WY",
+          "rows": 209,
+          "bytes": 12176,
+          "sha256": "2ca93b0074111f9d3b487991660b99445a099ba60ebfb4e9dd1a3c6d6a48489f"
+        }
+      ],
+      "download": {
+        "path": "zcta_counties.csv.gz",
+        "bytes": 677141,
+        "sha256": "fb57e7a1a52e0a0be10de7a7b8a06dd516ddc972af9ca7fc0adcdbe7459a968a",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Census Bureau",
+          "attribution": "Source: U.S. Census Bureau, 2020 ZCTA to County Relationship File.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}

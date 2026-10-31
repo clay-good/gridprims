@@ -12,6 +12,7 @@ import { parseArgs } from 'node:util';
 import { gzipSync } from 'node:zlib';
 import { readXlsx, readZipDirectory, readZipEntry } from '../parsers/xlsx.mjs';
 import { readParquet } from '../parsers/parquet.mjs';
+import { decodeText, parseDelimited } from '../parsers/delimited.mjs';
 import { writeShard } from './lib/shard-writer.mjs';
 import { postureOf, validateEntry } from './lib/registry.mjs';
 import { tableLicense } from './lib/licenses.mjs';
@@ -107,7 +108,11 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     let input;
     let read = {};
     let entryName = null;
-    if (step('read-parquet')) {
+    if (step('read-csv')) {
+      // A delimited text file (Census's pipe-delimited relationship files): rows of strings, the header first.
+      const csv = step('read-csv');
+      input = parseDelimited(decodeText(csv.file ? raws[csv.file].bytes : raw).text, { delimiter: csv.delimiter }).rows;
+    } else if (step('read-parquet')) {
       // Parquet files hand the normalizer a reader per file, so it can aggregate a row group at a time.
       input = Object.fromEntries(step('read-parquet').files.map((f) => [f, readParquet(raws[f].bytes)]));
     } else {

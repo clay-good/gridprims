@@ -70,7 +70,7 @@ export function validateEntry(e) {
       checkSteps(t.recipe, `${where}.recipe`, fail);
       for (const need of TABLE_STEPS) if (!t.recipe.some((s) => s.step === need)) fail(`${where}.recipe`, `has no ${need} step`);
       const has = (step) => t.recipe.some((s) => s.step === step);
-      if (!has('read-xlsx') && !has('read-parquet')) fail(`${where}.recipe`, 'has no read: read-xlsx (after unzip when the download is a zip) or read-parquet');
+      if (!has('read-xlsx') && !has('read-parquet') && !has('read-csv')) fail(`${where}.recipe`, 'has no read: read-xlsx (after unzip when the download is a zip), read-csv, or read-parquet');
       t.recipe.filter((s) => s.step === 'read-parquet' || (s.step === 'read-xlsx' && s.file)).forEach((s) => (s.files ?? [s.file]).forEach((f) => { if (!Object.values(e.vintages ?? {}).every((v) => v.files?.[f])) fail(`${where}.recipe ${s.step}`, `names file "${f}", which a vintage does not list`); }));
     });
   } else if (e.tables !== undefined) fail('tables', 'must be a list of tables');
