@@ -12,6 +12,7 @@ import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serveWorker } from '../../lib/worker-server.mjs';
 import { createServer } from '../../../mcp/protocol.mjs';
 import { DIR } from '../../fixtures/intake/make.mjs';
+import convert from '../../../core/tools/calc.energy-units.convert/manifest.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
 await build({ outDir: out });
@@ -26,10 +27,10 @@ for (const kind of ['chrome', 'firefox']) {
     try {
       await browser.goto(`${server.url}/tools/calc/energy-units/convert/#value=7&from=therm&to=kWh`);
       await waitFor(browser, 'document.documentElement.dataset.ready');
-      await browser.evaluate(`document.querySelector('[data-strip] [data-report]').click()`);
+      await browser.evaluate(`document.querySelector('[data-report-answer]').click()`);
       assert.equal(await browser.evaluate(`document.querySelector('[data-report-dialog]').open`), true);
       assert.deepEqual(await browser.evaluate(preview), {
-        toolId: 'calc.energy-units.convert', toolVersion: '0.1.0', datasets: [],
+        toolId: 'calc.energy-units.convert', toolVersion: convert.version, datasets: [],
         pageUrl: `${server.url}/tools/calc/energy-units/convert/`, message: '',
       }, 'default payload: ids, versions, the page without its fragment, an empty message');
 

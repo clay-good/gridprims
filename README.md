@@ -12,7 +12,7 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 |---|---|
 | Repository layout, zero-dependency gate, platform-API gate, own-implementations gate, file-count gate | Built and tested |
 | Tool manifest schema, validator, and the shared `runTool` entry point | Built and tested |
-| Reference tool `calc.energy-units.convert` | Built end to end: manifest, core, worked examples, page, command bar, MCP. Self-checked, experimental |
+| Reference tool `calc.energy-units.convert` | Built end to end: manifest, core, worked examples, page, command bar, MCP. **Stable, cross-checked**: its SI conversions agree with NIST SP 811 Appendix B.8 to every figure NIST prints (fuel averages are EIA's own, with no independent source) |
 | Own parsers: delimited text (encoding, delimiter, quotes, chunks) and XML that refuses DTDs and entities | Built and tested |
 | Time-zone and DST helper on `Intl` (spring gap, fall repeat, transitions) | Built and tested in Node, Chrome, Firefox, and Safari |
 | `.xlsx` reader (own ZIP directory, `DecompressionStream` inflate, shared strings, date formats, cached values only) | Built and tested against 10 workbook shapes in Node, Chrome, Firefox, and Safari |

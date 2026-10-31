@@ -68,7 +68,7 @@
 
 ## 8. Citations, verification, app shell
 
-- [ ] 8.1 Golden-vector runner with tolerances and stored third-party reference outputs; verify a drifted fixture fails
+- [x] 8.1 Golden-vector runner with tolerances and stored third-party reference outputs; verify a drifted fixture fails
 - [x] 8.2 "How we got this" panel and the claims gate; verify an untested accuracy claim fails the build
 - [x] 8.3 Shell, DESIGN.md tokens, components, light and night themes, command bar; verify "12 MWh to MMBtu" opens the reference unit converter (D10) filled in, the saved-theme and no-preference scenarios, and the contrast lint against the DESIGN.md ratios
 - [x] 8.4 PWA with offline tools; verify the load workbench parses a file in airplane mode after one visit

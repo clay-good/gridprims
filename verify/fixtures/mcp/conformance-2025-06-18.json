@@ -629,13 +629,13 @@
         "content": [
           {
             "type": "text",
-            "text": "{\"status\":\"ok\",\"toolId\":\"calc.energy-units.convert\",\"toolVersion\":\"0.1.0\",\"outputs\":{\"value\":{\"value\":29.31,\"unit\":\"kWh\",\"display\":\"29.31\"}},\"sentence\":\"1 therm is 29.31 kWh.\",\"notes\":[],\"work\":{\"method\":\"Convert the amount to joules with its unit's definition, then from joules to the target unit. Fuels use EIA's published average heat content in Btu.\",\"steps\":[\"Convert therms to joules: 1 therm = 100,000 Btu.\",\"Convert joules to kWh: 1 kWh = 3.6 MJ.\",\"So 1 therm = 29.3071 kWh. 1 × 29.3071 = 29.3071.\",\"Every constant here is exact by definition.\"],\"constants\":[{\"text\":\"1 therm = 29.3071 kWh\",\"source\":\"Derived from the SI definitions (NIST SP 811)\",\"exact\":true},{\"text\":\"1 therm = 100,000 Btu\",\"source\":\"EIA, British thermal units (Btu)\",\"exact\":true},{\"text\":\"1 kWh = 3.6 MJ\",\"source\":\"NIST SP 811 (2008), Appendix B.8\",\"exact\":true}],\"assumptions\":[\"Btu means the International Table Btu, 1,055.05585262 joules.\",\"A therm is 100,000 Btu.\",\"Fuel heat contents are US averages for the year shown, not the content of any one delivery.\"],\"citations\":[{\"source\":\"NIST Special Publication 811, Guide for the Use of the International System of Units\",\"edition\":\"2008\",\"locator\":\"Appendix B.8, British thermal unit (IT) and kilowatt hour to joule\",\"url\":\"https://www.nist.gov/pml/special-publication-811\"},{\"source\":\"EIA, Heat Content of Natural Gas Consumed\",\"edition\":\"Annual, 2025\",\"locator\":\"US, delivered to consumers, Btu per cubic foot\",\"url\":\"https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm\"},{\"source\":\"EIA, Monthly Energy Review\",\"edition\":\"Appendix A\",\"locator\":\"Table A1, approximate heat content of petroleum products\",\"url\":\"https://www.eia.gov/totalenergy/data/monthly/pdf/mer_A_FULL.pdf\"},{\"source\":\"EIA, Energy conversion calculators\",\"edition\":\"2026 estimates\",\"locator\":\"Coal, electric power sector, Btu per short ton\",\"url\":\"https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php\"},{\"source\":\"EIA, British thermal units (Btu)\",\"edition\":\"Energy Explained\",\"locator\":\"Therm and MMBtu definitions\",\"url\":\"https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php\"}]},\"datasets\":[],\"stability\":\"experimental\",\"validationLevel\":1,\"validationMeaning\":\"Our own worked examples and consistency tests pass, but no independent check has been run yet.\"}"
+            "text": "{\"status\":\"ok\",\"toolId\":\"calc.energy-units.convert\",\"toolVersion\":\"0.2.0\",\"outputs\":{\"value\":{\"value\":29.31,\"unit\":\"kWh\",\"display\":\"29.31\"}},\"sentence\":\"1 therm is 29.31 kWh.\",\"notes\":[],\"work\":{\"method\":\"Convert the amount to joules with its unit's definition, then from joules to the target unit. Fuels use EIA's published average heat content in Btu.\",\"steps\":[\"Convert therms to joules: 1 therm = 100,000 Btu.\",\"Convert joules to kWh: 1 kWh = 3.6 MJ.\",\"So 1 therm = 29.3071 kWh. 1 × 29.3071 = 29.3071.\",\"Every constant here is exact by definition.\"],\"constants\":[{\"text\":\"1 therm = 29.3071 kWh\",\"source\":\"Derived from the SI definitions (NIST SP 811)\",\"exact\":true},{\"text\":\"1 therm = 100,000 Btu\",\"source\":\"EIA, British thermal units (Btu)\",\"exact\":true},{\"text\":\"1 kWh = 3.6 MJ\",\"source\":\"NIST SP 811 (2008), Appendix B.8\",\"exact\":true}],\"assumptions\":[\"Btu means the International Table Btu, 1,055.05585262 joules.\",\"A therm is 100,000 Btu (International Table), as EIA defines it. NIST SP 811 calls this the therm (EC); its therm (U.S.) is about 0.024% smaller.\",\"Fuel heat contents are US averages for the year shown, not the content of any one delivery.\"],\"citations\":[{\"source\":\"NIST Special Publication 811, Guide for the Use of the International System of Units\",\"edition\":\"2008\",\"locator\":\"Appendix B.8, British thermal unit (IT) and kilowatt hour to joule\",\"url\":\"https://www.nist.gov/pml/special-publication-811\"},{\"source\":\"EIA, Heat Content of Natural Gas Consumed\",\"edition\":\"Annual, 2025\",\"locator\":\"US, delivered to consumers, Btu per cubic foot\",\"url\":\"https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm\"},{\"source\":\"EIA, Monthly Energy Review\",\"edition\":\"Appendix A\",\"locator\":\"Table A1, approximate heat content of petroleum products\",\"url\":\"https://www.eia.gov/totalenergy/data/monthly/pdf/mer_A_FULL.pdf\"},{\"source\":\"EIA, Energy conversion calculators\",\"edition\":\"2026 estimates\",\"locator\":\"Coal, electric power sector, Btu per short ton\",\"url\":\"https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php\"},{\"source\":\"EIA, British thermal units (Btu)\",\"edition\":\"Energy Explained\",\"locator\":\"Therm and MMBtu definitions\",\"url\":\"https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php\"}]},\"datasets\":[],\"stability\":\"stable\",\"validationLevel\":2,\"validationMeaning\":\"Results agree with an independent implementation or a published worked example within a stated tolerance.\"}"
           }
         ],
         "structuredContent": {
           "status": "ok",
           "toolId": "calc.energy-units.convert",
-          "toolVersion": "0.1.0",
+          "toolVersion": "0.2.0",
           "outputs": {
             "value": {
               "value": 29.31,
@@ -672,7 +672,7 @@
             ],
             "assumptions": [
               "Btu means the International Table Btu, 1,055.05585262 joules.",
-              "A therm is 100,000 Btu.",
+              "A therm is 100,000 Btu (International Table), as EIA defines it. NIST SP 811 calls this the therm (EC); its therm (U.S.) is about 0.024% smaller.",
               "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
             ],
             "citations": [
@@ -709,9 +709,9 @@
             ]
           },
           "datasets": [],
-          "stability": "experimental",
-          "validationLevel": 1,
-          "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+          "stability": "stable",
+          "validationLevel": 2,
+          "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance."
         },
         "isError": false,
         "_meta": {

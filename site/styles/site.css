@@ -90,6 +90,7 @@ main { padding-bottom: var(--s7); }
   background: var(--panel); color: var(--ink); border: 1px solid var(--field-border);
 }
 .button:hover { background: var(--panel-hover); }
+a.button { display: inline-flex; align-items: center; text-decoration: none; }
 .button:active { background: var(--panel-active); }
 .errors { color: var(--stop); }
 

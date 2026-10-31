@@ -38,8 +38,9 @@ test('first paint shows the worked example answer, labeled Example values, with 
   const html = page('/tools/calc/energy-units/convert/');
   assert.match(html, /data-output="value">40\.95<span class="unit">MMBtu<\/span>/);
   assert.match(html, /<p class="sentence">12 MWh is 40\.95 MMBtu\.<\/p>/);
-  assert.match(html, /data-strip>[\s\S]*Self-checked only[\s\S]*Example values/);
-  assert.match(html, /Self-checked · Five worked examples/);
+  assert.match(html, /data-strip>[\s\S]*Example values/);
+  assert.doesNotMatch(html, /Self-checked only/, 'a cross-checked tool carries no level strip');
+  assert.match(html, /class="ok"[\s\S]*Cross-checked · Five worked examples[\s\S]*NIST SP 811 Appendix B\.8/);
   assert.match(html, /href="\/limits\/#calc\.energy-units\.convert"/);
   assert.match(html, /<noscript>/);
 });

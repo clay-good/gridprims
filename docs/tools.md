@@ -6,7 +6,7 @@ Generated from the tool manifests by `node site/docs.mjs`. Do not edit by hand.
 
 Convert energy between kWh, MWh, Btu, therms, joules, and common fuels, with every constant and its source shown.
 
-Version 0.1.0 · experimental · validation level 1, self-checked
+Version 0.2.0 · stable · validation level 2, cross-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|

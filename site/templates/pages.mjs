@@ -43,6 +43,7 @@ export function calculatorPage({ manifest, example, result, i18n }) {
     <div class="answer-actions">
       <button class="button" type="button" data-copy>${t('answer.copy')}</button>
       <button class="button" type="button" data-share>${t('answer.share')}</button>
+      <a class="button" href="/report/" data-report data-report-answer>${t('strip.report')}</a>
     </div>
     <p class="skip" aria-live="polite" data-announce></p>
   </section>

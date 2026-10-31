@@ -1,0 +1,23 @@
+{
+  "source": "NIST Special Publication 811 (2008), Guide for the Use of the International System of Units, Appendix B.8, Factors for Units Listed Alphabetically",
+  "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+  "retrieved": "2026-10-31",
+  "note": "Rows copied as NIST prints them (factor to the joule, with NIST's digit grouping). Values are facts published by a U.S. federal agency. The therm (U.S.) row is kept to record why the converter names which therm it uses.",
+  "rows": [
+    { "unit": "British thermal unit IT (Btu IT)", "to": "joule (J)", "printed": "1.055 056 E+03" },
+    { "unit": "kilowatt hour (kW · h)", "to": "joule (J)", "printed": "3.6 E+06" },
+    { "unit": "kilowatt hour (kW · h)", "to": "megajoule (MJ)", "printed": "3.6 E+00" },
+    { "unit": "watt hour (W · h)", "to": "joule (J)", "printed": "3.6 E+03" },
+    { "unit": "therm (EC)", "to": "joule (J)", "printed": "1.055 06 E+08" },
+    { "unit": "therm (U.S.)", "to": "joule (J)", "printed": "1.054 804 E+08" },
+    { "unit": "quad (10^15 Btu IT)", "to": "joule (J)", "printed": "1.055 056 E+18" }
+  ],
+  "vectors": [
+    { "id": "nist-btu-j", "row": 0, "inputs": { "value": 1, "from": "Btu", "to": "J" } },
+    { "id": "nist-kwh-j", "row": 1, "inputs": { "value": 1, "from": "kWh", "to": "J" } },
+    { "id": "nist-kwh-mj", "row": 2, "inputs": { "value": 1, "from": "kWh", "to": "MJ" } },
+    { "id": "nist-wh-j", "row": 3, "inputs": { "value": 1, "from": "Wh", "to": "J" } },
+    { "id": "nist-therm-ec-j", "row": 4, "inputs": { "value": 1, "from": "therm", "to": "J" } },
+    { "id": "nist-quad-j", "row": 6, "inputs": { "value": 1000000000, "from": "MMBtu", "to": "J" } }
+  ]
+}

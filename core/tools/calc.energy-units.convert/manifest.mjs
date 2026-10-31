@@ -4,7 +4,7 @@ const options = UNITS.map((u) => ({ value: u.id, label: u.label, unit: u.unit, .
 
 export default {
   id: 'calc.energy-units.convert',
-  version: '0.1.0',
+  version: '0.2.0',
   title: 'Energy unit converter',
   purpose: 'Convert energy between kWh, MWh, Btu, therms, joules, and common fuels, with every constant and its source shown.',
   archetype: 'calculator',
@@ -20,7 +20,7 @@ export default {
   method: 'Convert the amount to joules with its unit\'s definition, then from joules to the target unit. Fuels use EIA\'s published average heat content in Btu.',
   assumptions: [
     'Btu means the International Table Btu, 1,055.05585262 joules.',
-    'A therm is 100,000 Btu.',
+    'A therm is 100,000 Btu (International Table), as EIA defines it. NIST SP 811 calls this the therm (EC); its therm (U.S.) is about 0.024% smaller.',
     'Fuel heat contents are US averages for the year shown, not the content of any one delivery.',
   ],
   citations: [
@@ -42,11 +42,12 @@ export default {
   handoffs: [
     { label: 'EIA energy conversion calculators', url: 'https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php' },
   ],
-  stability: 'experimental',
+  stability: 'stable',
   validation: {
-    level: 1,
+    level: 2,
     evidence: [
       { kind: 'own-examples', summary: 'Five worked examples, built from the cited NIST and EIA constants, pass within their tolerances.' },
+      { kind: 'published-example', path: 'verify/reference/nist-sp811-b8-energy.json', summary: 'Btu, watt-hour, kilowatt-hour, therm, and quad conversions agree with NIST SP 811 Appendix B.8 to every figure NIST prints. Fuel conversions reproduce EIA\'s published averages, which have no independent source.' },
     ],
   },
   limitations: [

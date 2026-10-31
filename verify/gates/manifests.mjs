@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { validateManifest } from '../../core/contract/manifest.mjs';
 import { runExamples } from '../lib/examples.mjs';
+import { runReferenceVectors } from '../lib/reference-vectors.mjs';
 
 /**
  * @param {string} root
@@ -24,7 +25,7 @@ export async function checkManifests(root) {
   for (const tool of TOOLS) {
     const found = validateManifest(tool.manifest, { fileExists });
     errors.push(...found);
-    if (found.length === 0) errors.push(...runExamples(tool));
+    if (found.length === 0) errors.push(...runExamples(tool), ...runReferenceVectors(tool, root));
   }
   return errors;
 }

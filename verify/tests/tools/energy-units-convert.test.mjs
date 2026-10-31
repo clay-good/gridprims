@@ -68,8 +68,18 @@ test('a word typed as the amount returns a field message, not a number', () => {
   assert.equal(r.errors[0].field, 'value');
 });
 
-test('the result says it is self-checked, not settled', () => {
+test('the result says how well checked it is: cross-checked against NIST, stable', () => {
   const r = run({ value: 12, from: 'MWh', to: 'MMBtu' });
-  assert.equal(r.validationLevel, 1);
-  assert.equal(r.stability, 'experimental');
+  assert.equal(r.validationLevel, 2);
+  assert.match(r.validationMeaning, /independent implementation or a published worked example/);
+  assert.equal(r.stability, 'stable');
+});
+
+test('stored NIST SP 811 vectors pass, and a drifted constant fails naming the vector', async () => {
+  const { runReferenceVectors, readPrinted } = await import('../../lib/reference-vectors.mjs');
+  const root = new URL('../../..', import.meta.url).pathname;
+  assert.deepEqual(runReferenceVectors(tool, root), []);
+  assert.deepEqual(readPrinted('1.055 056 E+03'), { value: 1055.056, sigFigs: 7 });
+  const drifted = { ...tool, impl: { compute: (v) => { const r = tool.impl.compute(v); return { ...r, outputs: { value: r.outputs.value * 1.0001 } }; } } };
+  assert.match(runReferenceVectors(drifted, root).join('\n'), /calc\.energy-units\.convert reference nist-btu-j \(NIST Special Publication 811 \(2008\)\): expected 1055\.056, got 1055\.16/);
 });

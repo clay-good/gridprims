@@ -1,13 +1,13 @@
 {
   "toolId": "calc.energy-units.convert",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "results": [
     {
       "example": "mwh-to-mmbtu",
       "result": {
         "status": "ok",
         "toolId": "calc.energy-units.convert",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "value": {
             "value": 40.95,
@@ -44,7 +44,7 @@
           ],
           "assumptions": [
             "Btu means the International Table Btu, 1,055.05585262 joules.",
-            "A therm is 100,000 Btu.",
+            "A therm is 100,000 Btu (International Table), as EIA defines it. NIST SP 811 calls this the therm (EC); its therm (U.S.) is about 0.024% smaller.",
             "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
           ],
           "citations": [
@@ -81,9 +81,9 @@
           ]
         },
         "datasets": [],
-        "stability": "experimental",
-        "validationLevel": 1,
-        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+        "stability": "stable",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance."
       }
     },
     {
@@ -91,7 +91,7 @@
       "result": {
         "status": "ok",
         "toolId": "calc.energy-units.convert",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "value": {
             "value": 1036000,
@@ -129,7 +129,7 @@
           ],
           "assumptions": [
             "Btu means the International Table Btu, 1,055.05585262 joules.",
-            "A therm is 100,000 Btu.",
+            "A therm is 100,000 Btu (International Table), as EIA defines it. NIST SP 811 calls this the therm (EC); its therm (U.S.) is about 0.024% smaller.",
             "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
           ],
           "citations": [
@@ -166,9 +166,9 @@
           ]
         },
         "datasets": [],
-        "stability": "experimental",
-        "validationLevel": 1,
-        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+        "stability": "stable",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance."
       }
     },
     {
@@ -176,7 +176,7 @@
       "result": {
         "status": "ok",
         "toolId": "calc.energy-units.convert",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "value": {
             "value": 3412,
@@ -213,7 +213,7 @@
           ],
           "assumptions": [
             "Btu means the International Table Btu, 1,055.05585262 joules.",
-            "A therm is 100,000 Btu.",
+            "A therm is 100,000 Btu (International Table), as EIA defines it. NIST SP 811 calls this the therm (EC); its therm (U.S.) is about 0.024% smaller.",
             "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
           ],
           "citations": [
@@ -250,9 +250,9 @@
           ]
         },
         "datasets": [],
-        "stability": "experimental",
-        "validationLevel": 1,
-        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+        "stability": "stable",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance."
       }
     },
     {
@@ -260,7 +260,7 @@
       "result": {
         "status": "ok",
         "toolId": "calc.energy-units.convert",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "value": {
             "value": 29.31,
@@ -297,7 +297,7 @@
           ],
           "assumptions": [
             "Btu means the International Table Btu, 1,055.05585262 joules.",
-            "A therm is 100,000 Btu.",
+            "A therm is 100,000 Btu (International Table), as EIA defines it. NIST SP 811 calls this the therm (EC); its therm (U.S.) is about 0.024% smaller.",
             "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
           ],
           "citations": [
@@ -334,9 +334,9 @@
           ]
         },
         "datasets": [],
-        "stability": "experimental",
-        "validationLevel": 1,
-        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+        "stability": "stable",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance."
       }
     },
     {
@@ -344,7 +344,7 @@
       "result": {
         "status": "ok",
         "toolId": "calc.energy-units.convert",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "value": {
             "value": 18.79,
@@ -382,7 +382,7 @@
           ],
           "assumptions": [
             "Btu means the International Table Btu, 1,055.05585262 joules.",
-            "A therm is 100,000 Btu.",
+            "A therm is 100,000 Btu (International Table), as EIA defines it. NIST SP 811 calls this the therm (EC); its therm (U.S.) is about 0.024% smaller.",
             "Fuel heat contents are US averages for the year shown, not the content of any one delivery."
           ],
           "citations": [
@@ -419,9 +419,9 @@
           ]
         },
         "datasets": [],
-        "stability": "experimental",
-        "validationLevel": 1,
-        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+        "stability": "stable",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance."
       }
     }
   ]

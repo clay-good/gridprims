@@ -29,7 +29,8 @@ for (const kind of ['chrome', 'firefox']) {
       // Change the amount: the answer updates with no submit, and the example label goes away.
       await browser.evaluate(`(() => { const i = document.querySelector('#in-value'); i.value = '1'; i.dispatchEvent(new Event('input', { bubbles: true })); })()`);
       assert.equal(await browser.evaluate(text('[data-answer] .sentence')), '1 MWh is 3.412 MMBtu.');
-      assert.doesNotMatch(await browser.evaluate(text('[data-strip]')), /Example values/);
+      assert.equal(await browser.evaluate(`document.querySelector('[data-strip]')?.textContent ?? ''`).then((x) => /Example values/.test(x)), false);
+      assert.equal(await browser.evaluate(`Boolean(document.querySelector('[data-report-answer]'))`), true, 'a report control stays beside every answer');
       assert.equal(await browser.evaluate('location.hash'), '#value=1&from=MWh&to=MMBtu');
 
       // A typed word gives a field message, not a number.
