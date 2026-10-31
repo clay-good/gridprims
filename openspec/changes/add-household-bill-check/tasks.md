@@ -7,7 +7,7 @@
 
 ## 2. Bill totals
 
-- [ ] 2.1 Period entry with validation flags and TOU kWh by period; verify the overlapping, duplicate, typing-error, and net-metered scenarios
+- [x] 2.1 Period entry with validation flags and TOU kWh by period; verify the overlapping, duplicate, typing-error, and net-metered scenarios
 - [x] 2.2 Totals pricing with day proration; verify the $115.00 and the 480/420 kWh scenarios
 - [x] 2.3 Paid-amount comparison and effective price; verify the +$16.40 and 14.38-cent scenarios
 - [x] 2.5 Mid-cycle forecast with the weekday-scaled method; verify the fourteen-days-in, demand-not-final, and too-little-data scenarios

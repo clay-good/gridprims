@@ -9,7 +9,7 @@ export const LANE_MAX = 5;
 /** @type {Record<'home' | 'work', Array<{id: string, tool?: string, path?: string, needs: 'none' | 'zip' | 'bill' | 'file', data?: string[]}>>} */
 export const LANES = {
   home: [
-    { id: 'bill-check', tool: 'bills.check', needs: 'bill' },
+    { id: 'bill-check', tool: 'household.bill-totals.check', needs: 'bill' },
     { id: 'use-high', tool: 'bills.use-high', needs: 'file' },
     { id: 'cheapest-plan', tool: 'bills.cheapest-plan', needs: 'file' },
     { id: 'find-utility', path: '/lookup/', needs: 'zip', data: ['census-zcta-county', 'eia-861', 'egrid'] },

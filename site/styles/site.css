@@ -105,13 +105,16 @@ a.button { display: inline-flex; align-items: center; text-decoration: none; }
 /* Inputs */
 .inputs { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); margin: var(--s4) 0; }
 .field label { display: block; font-size: .875rem; font-weight: 600; margin-bottom: var(--s1); }
-.field input, .field select {
+.field input, .field select, .field textarea {
   width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--field-border); border-radius: var(--r-field);
   background: var(--panel); color: var(--ink); font-family: "Overpass Mono", ui-monospace, Menlo, Consolas, monospace; font-size: .875rem;
 }
 .field .unit-hint { color: var(--muted); font-size: .875rem; }
 .field .error { color: var(--stop); font-size: .875rem; margin: var(--s1) 0 0; }
-.field input[aria-invalid="true"] { border-color: var(--stop); }
+.field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: var(--stop); }
+.field textarea { min-height: 7rem; resize: vertical; }
+.field.wide { grid-column: 1 / -1; }
+.picker-row { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); align-items: end; }
 
 /* Regulatory panels: work, sources, limits */
 .panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-field); padding: var(--s4); margin: var(--s4) 0; }
@@ -135,6 +138,14 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
 .tool-list { list-style: none; padding: 0; display: grid; gap: var(--s3); }
 .tool-cell { background: var(--panel); border-left: 4px solid var(--guide); border-radius: var(--r-field); padding: var(--s4); }
 .tool-cell a { font-weight: 700; font-size: 1.25rem; }
+/* On phones a home lane is a list of names and what each needs, so both lanes and up to five cells each fit the first screen. */
+@media (max-width: 767px) {
+  .lane .tool-cell { padding: var(--s2) var(--s3); }
+  .lane .tool-cell .question { display: none; }
+  .lane .tool-cell .work-zone { display: inline-block; padding: 0 var(--s2); margin: 0 var(--s2) 0 0; font-size: .75rem; }
+  .lane .tool-cell a { font-size: 1.125rem; }
+  .lane .tool-cell .unit-hint { margin: var(--s1) 0 0; }
+}
 
 footer { border-top: 1px solid var(--line); padding: var(--s5) 0; color: var(--muted); font-size: .875rem; }
 footer ul { list-style: none; padding: 0; display: flex; gap: var(--s3); flex-wrap: wrap; }

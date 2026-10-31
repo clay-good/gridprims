@@ -33,3 +33,36 @@ Version 0.2.0 · stable · validation level 2, cross-checked
 - Fuel results use national averages; the gas or oil you buy can differ by a few percent.
 - The coal figure is EIA's estimate for coal burned in power plants, not for home or industrial coal.
 - Volumes and weights of fuels are not converted to each other except through their energy.
+
+## Bill check (`household.bill-totals.check`)
+
+Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Billing periods | `periods` |  |  | 2026-03-01 to 2026-03-30, 800 kWh, paid $131.40 |
+| Tariff | `tariff` |  |  | {"fixedMonthly":10,"seasons":[{"name":"all year","from":"01-01","tiers":[{"upTo":500,"rate":0.12},{"rate":0.15}]}]} |
+| Split a period that crosses a season by days | `prorate` | choice | `yes`, `no` | yes |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Computed bill | `total` | $ | 2 decimals |
+| Effective price | `effectivePrice` | ¢/kWh | 2 decimals |
+| Paid minus computed | `difference` | $ | 2 decimals |
+| Paid minus computed, percent | `differencePct` | % | 1 decimals |
+
+**Method.** Check the periods first (overlaps, duplicates, periods over 45 days, a month that reads like an extra digit, negative kWh). Then price each period on the tariff: the fixed charge, each tier's kWh at its rate, and the minimum bill, in exact micro-dollars rounded to the cent line by line. A period that crosses a season splits its kWh and tier allowances by days. Time-of-use bills are priced from the kWh in each period as the bill prints them.
+
+**Sources.**
+
+- OpenEI Utility Rate Database (URDB), snapshot 2026-10, Energy rate structure, weekday and weekend schedules, fixed and minimum charges (https://openei.org/wiki/Utility_Rate_Database)
+- OpenEI, Utility Rates API documentation, version 7, Field definitions: energyratestructure (rate, adj, max, unit), fixedchargefirstmeter, mincharge (https://openei.org/services/doc/rest/util_rates/?version=7)
+
+**Known limits.**
+
+- Taxes, local fees, and riders that the tariff data leaves out are not included, so a real bill is usually higher.
+- Time-of-use energy is priced only from the kWh in each period as the bill prints them; a tiered time-of-use rate cannot be priced from totals.
+- Demand charges need meter data and are not priced here.
+- Export credits for net-metered months are not modeled; such a month prices only the charges that do not depend on kWh.

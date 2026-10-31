@@ -53,7 +53,7 @@ async function preview(r) {
   const out = runTool(manifest, impl, r.values);
   if (out.status !== 'ok') return '';
   const first = Object.values(out.outputs)[0];
-  return `= ${first.display} ${first.unit}`;
+  return first.unit === '$' ? `= $${first.display}` : `= ${first.display} ${first.unit}`;
 }
 
 function render() {

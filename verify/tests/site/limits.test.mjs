@@ -35,7 +35,7 @@ test('launch reality: no tool is field-verified, the page says so, and gives the
   assert.equal(L.counts['field-verified'], 0);
   const html = page(L);
   assert.match(html, /No tool here is field-verified/);
-  assert.match(html, /Tools by how well checked they are: Unvalidated 0, Self-checked 0, Cross-checked 1, Field-verified 0\./);
+  assert.match(html, /Tools by how well checked they are: Unvalidated 0, Self-checked 1, Cross-checked 1, Field-verified 0\./);
 });
 
 test('the three axes are separate columns, and a cross-checked tool with no sign-off reads "Review pending"', () => {
@@ -50,7 +50,7 @@ test('stale evidence: a pass older than 90 days shows the date with a "needs a f
   const L = record({ health: { tools: [{ id: 'calc.energy-units.convert', evidencePassed: old }] } });
   assert.equal(L.tools[0].needsFreshRun, true);
   assert.match(page(L), /last passed Aug 1, 2026<\/span> <span class="warning-chip">needs a fresh run/);
-  const fresh = record({ health: { tools: [{ id: 'calc.energy-units.convert', evidencePassed: '2026-10-30T09:20:00Z' }] } });
+  const fresh = record({ health: { tools: TOOLS.map(({ manifest }) => ({ id: manifest.id, evidencePassed: '2026-10-30T09:20:00Z' })) } });
   assert.doesNotMatch(page(fresh), /needs a fresh run/);
 });
 

@@ -56,7 +56,7 @@ export function applyRounding(x, rule) {
  * precision than the rule allows. Very large or small magnitudes use
  * E notation so a display never pretends to carry trailing digits.
  * @param {number} x
- * @param {{sigFigs?: number, decimals?: number}} rule
+ * @param {{sigFigs?: number, decimals?: number, fixed?: boolean}} rule fixed keeps trailing zeros, as money shows cents
  */
 export function formatNumber(x, rule) {
   if (!Number.isFinite(x)) return String(x);
@@ -68,6 +68,6 @@ export function formatNumber(x, rule) {
   /** @type {Intl.NumberFormatOptions} */
   const opts = rule.sigFigs !== undefined
     ? { maximumSignificantDigits: rule.sigFigs }
-    : { minimumFractionDigits: 0, maximumFractionDigits: rule.decimals ?? 20 };
+    : { minimumFractionDigits: rule.fixed ? rule.decimals : 0, maximumFractionDigits: rule.decimals ?? 20 };
   return new Intl.NumberFormat('en-US', opts).format(r);
 }

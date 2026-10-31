@@ -35,7 +35,7 @@ for (const kind of ['chrome', 'firefox']) {
     }
   });
 
-  test(`${kind}: filtering the catalog by "bill totals" hides every tool and says none match`, { skip, timeout: 60_000 }, async () => {
+  test(`${kind}: filtering the catalog by "bill totals" shows the bill check, and a filter nothing meets says none match`, { skip, timeout: 60_000 }, async () => {
     const server = await serve(out);
     const browser = await launch(kind);
     try {
@@ -46,8 +46,11 @@ for (const kind of ['chrome', 'firefox']) {
       assert.ok(all >= 3);
       const pick = (name, value) => browser.evaluate(`(() => { const s = document.querySelector('select[name=${name}]'); s.value = '${value}'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
       await pick('needs', 'bill');
-      assert.equal(await visible(), 0);
+      assert.equal(await visible(), 1, 'the bill check');
+      await pick('stability', 'stable');
+      assert.equal(await visible(), 0, 'the bill check is a preview');
       assert.equal(await browser.evaluate(`document.querySelector('[data-catalog-empty]').hidden`), false);
+      await pick('stability', '');
       await pick('needs', 'zip');
       assert.equal(await visible(), 1, 'the ZIP lookup');
       await pick('needs', '');

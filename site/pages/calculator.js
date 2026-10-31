@@ -25,11 +25,12 @@ const readForm = () => Object.fromEntries(new FormData(form).entries());
 
 function showErrors(errors) {
   for (const el of form.querySelectorAll('[name]')) {
-    const err = errors.find((e) => e.field === el.name);
+    // A field can have several problems at once (two overlaps and a duplicate); show them all.
+    const errs = errors.filter((e) => e.field === el.name);
     const msg = form.querySelector(`#${el.id}-error`);
-    el.setAttribute('aria-invalid', err ? 'true' : 'false');
-    msg.hidden = !err;
-    msg.textContent = err ? err.message : '';
+    el.setAttribute('aria-invalid', errs.length ? 'true' : 'false');
+    msg.hidden = !errs.length;
+    msg.textContent = errs.map((e) => e.message).join(' ');
   }
 }
 

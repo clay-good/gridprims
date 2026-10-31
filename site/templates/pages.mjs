@@ -12,6 +12,7 @@ import { SECTIONS, sectionOf } from '../ui/sections.mjs';
 import { ORIGIN } from '../config.mjs';
 import { datasetLd, libraryList, libraryParts } from './library.mjs';
 import { pageTitle } from '../lib/meta.mjs';
+import { tariffPicker } from '../ui/tariff-picker.mjs';
 
 /** One input control, labeled from the manifest. */
 function field(inp, value, i18n) {
@@ -23,6 +24,20 @@ function field(inp, value, i18n) {
       <p class="error" id="${errId}" hidden></p></div>`;
   }
   const unit = inp.unit ?? '';
+  if (inp.multiline) {
+    const hintId = `${id}-hint`;
+    return html`<div class="field wide"><label for="${id}">${inp.label}</label>
+    ${inp.hint ? html`<p class="unit-hint" id="${hintId}">${inp.hint}</p>` : ''}
+    <textarea id="${id}" name="${inp.name}" class="mono" rows="4" autocomplete="off" spellcheck="false" aria-describedby="${inp.hint ? `${hintId} ` : ''}${errId}">${value}</textarea>
+    <p class="error" id="${errId}" hidden></p></div>`;
+  }
+  // A tariff filled in by the picker: shown, and editable, behind a disclosure.
+  if (inp.picker) {
+    return html`<details class="field wide"><summary>${i18n.t('tool.tariffJson')}</summary>
+    <label for="${id}">${inp.label}</label>
+    <textarea id="${id}" name="${inp.name}" class="mono" rows="4" autocomplete="off" spellcheck="false" aria-describedby="${errId}">${value}</textarea>
+    <p class="error" id="${errId}" hidden></p></details>`;
+  }
   return html`<div class="field"><label for="${id}">${inp.label}${unit ? html` <span class="unit-hint">(${unit})</span>` : ''}</label>
     <input id="${id}" name="${inp.name}" type="text" inputmode="decimal" value="${value}" autocomplete="off" aria-describedby="${errId}">
     <p class="error" id="${errId}" hidden></p></div>`;
@@ -52,6 +67,7 @@ export function calculatorPage({ manifest, example, result, i18n, reviewed = fal
     </div>
     <p class="skip" aria-live="polite" data-announce></p>
   </section>
+  ${manifest.inputs.some((i) => i.picker === 'urdb-tariff') ? tariffPicker(i18n) : ''}
   <form class="inputs" data-inputs aria-label="${t('tool.inputs')}" novalidate>
     ${manifest.inputs.filter((i) => i.type !== 'file' && manifest.firstScreen.includes(i.name)).map((i) => field(i, example.inputs[i.name] ?? i.example, i18n))}
     ${manifest.inputs.some((i) => i.type !== 'file' && !manifest.firstScreen.includes(i.name)) ? html`<details class="more-options"><summary>${t('tool.moreOptions')}</summary>
@@ -67,7 +83,7 @@ export function calculatorPage({ manifest, example, result, i18n, reviewed = fal
   </section>
   ${manifest.handoffs.length ? html`<section><h2>${t('tool.handoffs')}</h2>${manifest.handoffs.map((h) => html`<p><a class="handoff" href="${h.url}">${h.label} ${raw('&rarr;')}</a></p>`)}</section>` : ''}
 </article>`;
-  return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js'], section: sectionOf(manifest.id) });
+  return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js', ...(manifest.inputs.some((i) => i.picker === 'urdb-tariff') ? ['/site/pages/tariff-picker.js'] : [])], section: sectionOf(manifest.id) });
 }
 
 /**

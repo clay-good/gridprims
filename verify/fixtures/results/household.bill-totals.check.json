@@ -1,0 +1,188 @@
+{
+  "toolId": "household.bill-totals.check",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "tiered",
+      "result": {
+        "status": "ok",
+        "toolId": "household.bill-totals.check",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "total": {
+            "value": 115,
+            "unit": "$",
+            "display": "115.00"
+          },
+          "effectivePrice": {
+            "value": 14.38,
+            "unit": "¢/kWh",
+            "display": "14.38"
+          }
+        },
+        "sentence": "This period comes to $115.00 on this tariff.",
+        "notes": [],
+        "work": {
+          "method": "Check the periods first (overlaps, duplicates, periods over 45 days, a month that reads like an extra digit, negative kWh). Then price each period on the tariff: the fixed charge, each tier's kWh at its rate, and the minimum bill, in exact micro-dollars rounded to the cent line by line. A period that crosses a season splits its kWh and tier allowances by days. Time-of-use bills are priced from the kWh in each period as the bill prints them.",
+          "steps": [
+            "March 1 to March 30, 2026 (30 days, 800 kWh): fixed $10.00; all year tier 1, 500 kWh × 12¢ = $60.00; all year tier 2, 300 kWh × 15¢ = $45.00. Total $115.00.",
+            "Effective price: $115.00 ÷ 800 kWh = 14.38¢ per kWh, from the computed bills."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The tariff is the one in force for the whole period; a rate change within a period is treated like a season change only when it is entered as one.",
+            "A tier allowance stated per day is multiplied by the days in the period.",
+            "The effective price uses the amounts paid when every period has one, otherwise the computed bills."
+          ],
+          "citations": [
+            {
+              "source": "OpenEI Utility Rate Database (URDB)",
+              "edition": "snapshot 2026-10",
+              "locator": "Energy rate structure, weekday and weekend schedules, fixed and minimum charges",
+              "url": "https://openei.org/wiki/Utility_Rate_Database"
+            },
+            {
+              "source": "OpenEI, Utility Rates API documentation",
+              "edition": "version 7",
+              "locator": "Field definitions: energyratestructure (rate, adj, max, unit), fixedchargefirstmeter, mincharge",
+              "url": "https://openei.org/services/doc/rest/util_rates/?version=7"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "urdb"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+      }
+    },
+    {
+      "example": "season-split",
+      "result": {
+        "status": "ok",
+        "toolId": "household.bill-totals.check",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "total": {
+            "value": 106.8,
+            "unit": "$",
+            "display": "106.80"
+          },
+          "effectivePrice": {
+            "value": 11.87,
+            "unit": "¢/kWh",
+            "display": "11.87"
+          }
+        },
+        "sentence": "This period comes to $106.80 on this tariff.",
+        "notes": [],
+        "work": {
+          "method": "Check the periods first (overlaps, duplicates, periods over 45 days, a month that reads like an extra digit, negative kWh). Then price each period on the tariff: the fixed charge, each tier's kWh at its rate, and the minimum bill, in exact micro-dollars rounded to the cent line by line. A period that crosses a season splits its kWh and tier allowances by days. Time-of-use bills are priced from the kWh in each period as the bill prints them.",
+          "steps": [
+            "June 15 to July 14, 2026 (30 days, 900 kWh): non-summer tier 1, 480 kWh × 10¢ = $48.00; summer tier 1, 420 kWh × 14¢ = $58.80. Total $106.80. Season change split by days: 16 days at non-summer rates, 14 days at summer rates.",
+            "Effective price: $106.80 ÷ 900 kWh = 11.87¢ per kWh, from the computed bills."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The tariff is the one in force for the whole period; a rate change within a period is treated like a season change only when it is entered as one.",
+            "A tier allowance stated per day is multiplied by the days in the period.",
+            "The effective price uses the amounts paid when every period has one, otherwise the computed bills."
+          ],
+          "citations": [
+            {
+              "source": "OpenEI Utility Rate Database (URDB)",
+              "edition": "snapshot 2026-10",
+              "locator": "Energy rate structure, weekday and weekend schedules, fixed and minimum charges",
+              "url": "https://openei.org/wiki/Utility_Rate_Database"
+            },
+            {
+              "source": "OpenEI, Utility Rates API documentation",
+              "edition": "version 7",
+              "locator": "Field definitions: energyratestructure (rate, adj, max, unit), fixedchargefirstmeter, mincharge",
+              "url": "https://openei.org/services/doc/rest/util_rates/?version=7"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "urdb"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+      }
+    },
+    {
+      "example": "paid-more",
+      "result": {
+        "status": "ok",
+        "toolId": "household.bill-totals.check",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "total": {
+            "value": 115,
+            "unit": "$",
+            "display": "115.00"
+          },
+          "effectivePrice": {
+            "value": 16.43,
+            "unit": "¢/kWh",
+            "display": "16.43"
+          },
+          "difference": {
+            "value": 16.4,
+            "unit": "$",
+            "display": "16.40"
+          },
+          "differencePct": {
+            "value": 14.3,
+            "unit": "%",
+            "display": "14.3"
+          }
+        },
+        "sentence": "This period comes to $115.00 on this tariff; you paid $16.40 more (14.3%).",
+        "notes": [],
+        "work": {
+          "method": "Check the periods first (overlaps, duplicates, periods over 45 days, a month that reads like an extra digit, negative kWh). Then price each period on the tariff: the fixed charge, each tier's kWh at its rate, and the minimum bill, in exact micro-dollars rounded to the cent line by line. A period that crosses a season splits its kWh and tier allowances by days. Time-of-use bills are priced from the kWh in each period as the bill prints them.",
+          "steps": [
+            "March 1 to March 30, 2026 (30 days, 800 kWh): fixed $10.00; all year tier 1, 500 kWh × 12¢ = $60.00; all year tier 2, 300 kWh × 15¢ = $45.00. Total $115.00.",
+            "Effective price: $131.40 ÷ 800 kWh = 16.43¢ per kWh, from the amounts paid.",
+            "You paid $131.40 against $115.00 computed: +$16.40 (+14.3%). A difference is not a billing error. Likely causes: taxes and fees, riders and fuel adjustments the tariff data leaves out, different period dates, or an estimated meter read."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The tariff is the one in force for the whole period; a rate change within a period is treated like a season change only when it is entered as one.",
+            "A tier allowance stated per day is multiplied by the days in the period.",
+            "The effective price uses the amounts paid when every period has one, otherwise the computed bills."
+          ],
+          "citations": [
+            {
+              "source": "OpenEI Utility Rate Database (URDB)",
+              "edition": "snapshot 2026-10",
+              "locator": "Energy rate structure, weekday and weekend schedules, fixed and minimum charges",
+              "url": "https://openei.org/wiki/Utility_Rate_Database"
+            },
+            {
+              "source": "OpenEI, Utility Rates API documentation",
+              "edition": "version 7",
+              "locator": "Field definitions: energyratestructure (rate, adj, max, unit), fixedchargefirstmeter, mincharge",
+              "url": "https://openei.org/services/doc/rest/util_rates/?version=7"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "urdb"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+      }
+    }
+  ]
+}

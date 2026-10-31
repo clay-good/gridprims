@@ -53,7 +53,7 @@ export function renderAnswer(manifest, result, i18n, { isExample, reviewed = fal
     const o = result.outputs[out.name];
     sign = html`<div class="sign" data-state="${isExample ? 'example' : 'live'}">
       <p class="label">${out.label}</p>
-      <p class="number" data-output="${out.name}">${o.display}<span class="unit">${o.unit}</span></p>
+      <p class="number" data-output="${out.name}">${o.unit === '$' ? html`<span class="unit">$</span>${o.display}` : html`${o.display}<span class="unit">${o.unit}</span>`}</p>
       <p class="sentence">${result.sentence}</p>
       <span class="source-tab mono">${sourceTab(manifest)}</span>
     </div>`;

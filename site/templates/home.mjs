@@ -17,7 +17,7 @@ export const STATES_PATH = '/states/';
 /** A cell: name, the question it answers, what you need, and the data's as-of date (DESIGN.md "Tool cell"). */
 function cell({ href, name, question, needs, asOf, stable, section }, { t, date }) {
   return html`<li class="tool-cell" data-section="${section}" data-needs="${needs}" data-stability="${stable ? 'stable' : 'experimental'}">
-  ${stable ? '' : html`<p class="work-zone">${t('catalog.preview')}</p>`}<a href="${href}">${name}</a><p>${question}</p>
+  ${stable ? '' : html`<p class="work-zone">${t('catalog.preview')}</p>`}<a href="${href}">${name}</a><p class="question">${question}</p>
   <p class="unit-hint">${t('section.needs', { what: t(`section.needs.${needs}`) })}${asOf ? html` · ${t('home.asOf', { date: date(asOf) })}` : ''}</p></li>`;
 }
 
@@ -60,7 +60,7 @@ export function catalogPage({ tools, i18n, exists, asOf }) {
     href: c.path, name: t(`home.cell.${c.id}`), question: t(`home.cell.${c.id}.question`), needs: c.needs, stable: true, section: PAGE_TOOLS.find(([id]) => id === c.id)[1], asOf: c.data ? asOf(c.data) : null,
   }));
   const cells = [
-    ...tools.map(({ manifest: m }) => ({ href: toolPath(m.id), name: m.title, question: m.purpose, needs: m.inputs.some((x) => x.type === 'file') ? 'file' : 'none', stable: m.stability === 'stable', section: sectionOf(m.id), asOf: null })),
+    ...tools.map(({ manifest: m }) => ({ href: toolPath(m.id), name: m.title, question: m.purpose, needs: [...LANES.home, ...LANES.work].find((c) => c.tool === m.id)?.needs ?? (m.inputs.some((x) => x.type === 'file') ? 'file' : 'none'), stable: m.stability === 'stable', section: sectionOf(m.id), asOf: null })),
     ...pageTools,
   ].sort((a, b) => a.name.localeCompare(b.name));
   const select = (name, options) => html`<label>${t(`catalog.filter.${name}`)}<select name="${name}" data-filter="${name}"><option value="">${t('catalog.any')}</option>${options.map(([v, label]) => html`<option value="${v}">${label}</option>`)}</select></label>`;
