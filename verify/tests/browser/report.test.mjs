@@ -14,7 +14,7 @@ import { createServer } from '../../../mcp/protocol.mjs';
 import { DIR } from '../../fixtures/intake/make.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-build({ outDir: out });
+await build({ outDir: out });
 const preview = `JSON.parse(document.querySelector('[data-report-preview]').textContent)`;
 
 for (const kind of ['chrome', 'firefox']) {

@@ -14,7 +14,7 @@ import { serve } from '../../lib/static-server.mjs';
 import { applyReferenceProfile, BUDGETS } from '../../lib/reference-profile.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-build({ outDir: out });
+await build({ outDir: out });
 const skip = !findBrowser('chrome') && 'chrome is not installed';
 const ready = 'new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r() : setTimeout(f, 20); f(); })';
 

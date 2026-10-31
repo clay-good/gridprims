@@ -6,7 +6,7 @@
 import { createHash } from 'node:crypto';
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { TOOLS } from '../core/tools/index.mjs';
 import { runTool } from '../core/contract/run.mjs';
 import { buildCommandIndex } from '../core/contract/command.mjs';
@@ -34,7 +34,7 @@ export const sha256 = (s) => createHash('sha256').update(s).digest('hex');
  * @param {{outDir?: string}} [opts]
  * @returns {{outDir: string, pages: string[], files: number}}
  */
-export function build(opts = {}) {
+export async function build(opts = {}) {
   const outDir = opts.outDir ?? join(ROOT, 'dist');
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(outDir, { recursive: true });
@@ -45,6 +45,8 @@ export function build(opts = {}) {
 
   const i18n = createI18n(strings, 'en-US');
   const pages = [];
+  const healthFile = join(ROOT, 'data/health/pipeline.json');
+  const health = existsSync(healthFile) ? JSON.parse(readFileSync(healthFile, 'utf8')) : null;
   const write = (path, html) => {
     const file = path.endsWith('/') ? join(outDir, path, 'index.html') : join(outDir, path);
     mkdirSync(dirname(file), { recursive: true });
@@ -61,8 +63,6 @@ export function build(opts = {}) {
     write(toolPath(manifest.id), calculatorPage({ manifest, example, result, i18n }));
   }
   writeFileSync(join(outDir, 'command-index.json'), JSON.stringify(buildCommandIndex(TOOLS, toolPath)) + '\n');
-  const healthFile = join(ROOT, 'data/health/pipeline.json');
-  const health = existsSync(healthFile) ? JSON.parse(readFileSync(healthFile, 'utf8')) : null;
   write('/limits/', limitsPage({ tools: TOOLS, i18n, health }));
   if (health) { mkdirSync(join(outDir, 'health'), { recursive: true }); cpSync(healthFile, join(outDir, 'health/pipeline.json')); }
   writeFileSync(join(outDir, 'limits/limits.json'), JSON.stringify(limitsRecord(TOOLS), null, 2) + '\n');
@@ -74,7 +74,12 @@ export function build(opts = {}) {
     const cur = join(ROOT, 'data', id, 'current.json');
     if (!existsSync(cur)) continue;
     const { version } = JSON.parse(readFileSync(cur, 'utf8'));
-    write(`/data/${id}/`, datasetPage({ manifest: JSON.parse(readFileSync(join(ROOT, 'data', id, version, 'manifest.json'), 'utf8')), i18n }));
+    const entry = (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${id}.mjs`)).href)).default;
+    const termsRow = health?.datasets.find((d) => d.id === id)?.terms;
+    const posture = entry.takedown ? 'link' : termsRow?.posture ?? entry.posture;
+    write(`/data/${id}/`, datasetPage({ manifest: JSON.parse(readFileSync(join(ROOT, 'data', id, version, 'manifest.json'), 'utf8')), i18n, posture, termsRow, takedown: entry.takedown }));
+    // Under the link posture no values are published, so none of the dataset's files deploy.
+    if (posture === 'link') rmSync(join(outDir, 'data', id), { recursive: true, force: true });
   }
   write('/report/', reportPage({ i18n }));
   write('/', homePage({ tools: TOOLS, i18n }));
@@ -104,6 +109,6 @@ export function build(opts = {}) {
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
-  const r = build({ outDir: process.argv[2] });
+  const r = await build({ outDir: process.argv[2] });
   console.log(`built ${r.pages.length} pages, ${r.files} files in ${r.outDir}`);
 }

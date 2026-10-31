@@ -32,6 +32,21 @@ export function github(o = {}) {
       }
       return fixed;
     },
+    /**
+     * Attach a raw publisher file to the release for its dataset version, creating the
+     * release when it does not exist (foundation design D16). Returns the asset's URL.
+     */
+    async publishRawAsset({ tag, name, bytes, contentType = 'application/zip' }) {
+      let rel;
+      try { rel = await call('GET', `/releases/tags/${tag}`); } catch { rel = await call('POST', '/releases', { tag_name: tag, name: tag, body: `Raw publisher inputs for ${tag}, unchanged, with their SHA-256 in the dataset manifest.`, make_latest: 'false' }); }
+      const existing = (rel.assets ?? []).find((a) => a.name === name);
+      if (existing) return existing.browser_download_url;
+      const res = await f(`https://uploads.github.com/repos/${repo}/releases/${rel.id}/assets?name=${encodeURIComponent(name)}`, {
+        method: 'POST', headers: { authorization: `Bearer ${token}`, accept: 'application/vnd.github+json', 'content-type': contentType, 'user-agent': 'gridprims-pipeline' }, body: bytes,
+      });
+      if (!res.ok) throw new Error(`upload ${name}: HTTP ${res.status}`);
+      return (await res.json()).browser_download_url;
+    },
     /** Open an issue unless one with the same title is still open. */
     async openIssue(title, body) {
       const open = await call('GET', `/issues?state=open&labels=pipeline&per_page=100`);

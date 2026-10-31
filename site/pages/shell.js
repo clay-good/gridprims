@@ -115,6 +115,12 @@ for (const cell of document.querySelectorAll('[data-health-row]')) {
   cell.classList.toggle('stalled', stalled);
 }
 
+// Data age, from its generated-at time and this device's clock (platform/automation).
+for (const el of document.querySelectorAll('[data-age-from]')) {
+  const days = Math.floor((Date.now() - Date.parse(el.dataset.ageFrom)) / 86_400_000);
+  if (days >= 0) el.textContent = `(${(days === 1 ? el.dataset.ageOne : el.dataset.ageOther.replace('{count}', days.toLocaleString('en-US')))})`;
+}
+
 // Offline after the first visit: the service worker caches the app shell.
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => { /* offline use is a bonus, never a requirement */ });
 

@@ -25,6 +25,7 @@
   "attribution": "Source: U.S. Energy Information Administration, Form EIA-861 (Oct 2026).",
   "asOf": "2026-10-07",
   "retrieved": "2026-10-31",
+  "generatedAt": "2026-10-31T00:00:00Z",
   "cadence": {
     "every": "annual",
     "nextRelease": {

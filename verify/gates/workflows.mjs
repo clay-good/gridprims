@@ -26,6 +26,9 @@ export function checkWorkflows(root) {
       const line = src.split('\n')[at(m.index) - 1];
       if (/^\s*(run:|[^:]*$)/.test(line) || /run:/.test(line)) errors.push(`.github/workflows/${f}:${at(m.index)}: event text interpolated into a shell line; pass it through an environment variable`);
     }
+    // Scheduled runs avoid the top of the hour and never race another run of themselves.
+    for (const m of src.matchAll(/cron:\s*'(\S+)\s/g)) if (m[1] === '0' || m[1] === '00') errors.push(`.github/workflows/${f}:${at(m.index)}: scheduled at the top of the hour; pick an off-the-hour minute`);
+    if (/^\s*schedule:/m.test(src) && (!/^concurrency:/m.test(src) || /cancel-in-progress:\s*true/.test(src))) errors.push(`.github/workflows/${f}: a scheduled workflow needs a concurrency group that queues runs (cancel-in-progress: false)`);
     for (const m of src.matchAll(/runs-on:\s*(\S+)/g)) {
       if (/-latest$/.test(m[1]) && f !== 'canary.yml') errors.push(`.github/workflows/${f}:${at(m.index)}: runs on the floating label ${m[1]}; pin an image such as ubuntu-24.04`);
     }

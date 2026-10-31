@@ -12,7 +12,7 @@ import { serve } from '../../lib/static-server.mjs';
 import { DIR } from '../../fixtures/intake/make.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-build({ outDir: out });
+await build({ outDir: out });
 const ready = 'new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r() : setTimeout(f, 20); f(); })';
 const controlled = `new Promise((r) => { const f = () => navigator.serviceWorker.controller ? r(true) : setTimeout(f, 50); f(); })`;
 

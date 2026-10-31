@@ -185,26 +185,29 @@ export function reportPage({ i18n }) {
 }
 
 /** A dataset page, generated from its version manifest (platform/data-snapshots). */
-export function datasetPage({ manifest: m, i18n }) {
+export function datasetPage({ manifest: m, i18n, posture = m.posture, termsRow, takedown }) {
   const { t, date } = i18n;
   const late = lateness(m);
+  const publishes = posture !== 'link';
   const body = html`<h1>${m.title}</h1>
 <p class="purpose">${m.publisher}</p>
 ${m.tables.map((tb) => sourceStamp(m, tb, i18n))}
+<p class="mono">${t('data.age', { date: date(m.generatedAt.slice(0, 10)) })} <span data-age-from="${m.generatedAt}" data-age-one="${t('data.ageDays', { count: 1 })}" data-age-other="${t('data.ageDays', { count: 2 }).replace('2', '{count}')}"></span></p>
+${takedown ? html`<p class="warning-chip">${t('data.takedownApplied', { date: date(takedown.date) })}</p>` : termsRow?.changed ? html`<p class="warning-chip">${t('data.termsChanged', { date: date(termsRow.checked) })}</p>` : ''}
 <p>${late.posted ? t('data.duePosted', { due: date(late.due) }) : t('data.dueInferred', { due: date(late.due) })}</p>
 <section class="panel"><h2>${t('data.posture')}</h2>
-  <p><strong>${t(`data.posture.${m.posture}`)}</strong></p>
+  <p><strong>${t(`data.posture.${posture}`)}</strong></p>
   <p>${t('data.terms', { date: date(m.terms.captured) })}</p>
   <blockquote class="mono">${m.terms.text}</blockquote>
   <p><a href="${m.terms.url}">${t('data.termsLink')}</a></p>
   <h3>${t('data.attribution')}</h3><p>${m.attribution}</p>
   <p>${t('data.takedown')}</p>
 </section>
-<section><h2>${t('data.download')}</h2>
+${publishes ? html`<section><h2>${t('data.download')}</h2>
   <ul>${m.tables.map((tb) => html`<li><a href="/data/${m.dataset}/${m.version}/${tb.download.path}" download>${t('data.downloadLine', { table: tb.name, rows: tb.rows.toLocaleString('en-US'), size: tb.download.bytes.toLocaleString('en-US') })}</a><br><span class="mono">${t('data.sha')} ${tb.download.sha256}</span></li>`)}</ul>
   <h3>${t('data.raw')}</h3>
-  <ul>${m.raw.map((r) => html`<li class="mono"><a href="${r.url}">${t('data.rawLine', { name: r.name, size: r.bytes.toLocaleString('en-US'), sha: r.sha256 })}</a></li>`)}</ul>
-</section>
+  <ul>${m.raw.map((r) => html`<li class="mono"><a href="${r.release ?? r.url}">${t('data.rawLine', { name: r.name, size: r.bytes.toLocaleString('en-US'), sha: r.sha256 })}</a></li>`)}</ul>
+</section>` : ''}
 ${m.tables.map((tb) => html`<section><h2>${t('data.columns')}</h2><div class="table-wrap"><table>
   <thead><tr><th scope="col">${t('data.col.name')}</th><th scope="col">${t('data.col.type')}</th><th scope="col">${t('data.col.unit')}</th></tr></thead>
   <tbody>${tb.columns.map((c) => html`<tr><th scope="row" class="mono">${c.name}</th><td class="mono">${c.type}</td><td>${c.unit ?? ''}</td></tr>`)}</tbody>

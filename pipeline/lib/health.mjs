@@ -46,10 +46,12 @@ export function recordRun(root, run) {
       lastRefresh: d.refreshed ? run.finished : prev?.lastRefresh ?? null,
       version: d.version ?? prev?.version ?? null,
       posture: d.posture ?? prev?.posture ?? null,
+      terms: d.terms ?? prev?.terms ?? null,
       // A failure keeps the date it first appeared until a run succeeds.
       failure: d.failure ? { reason: d.failure, since: prev?.failure?.since ?? run.finished, last: run.finished } : null,
     };
     h.datasets = [...h.datasets.filter((x) => x.id !== d.id), row].sort((a, b) => a.id.localeCompare(b.id));
+    if (d.release) row.lastRelease = d.release;
   }
   if (run.links) h.links = run.links;
   for (const id of run.enabledEvents ?? []) {
@@ -57,7 +59,9 @@ export function recordRun(root, run) {
     if (w) w.reenabledAt = run.finished;
   }
   const durationMs = Date.parse(run.finished) - Date.parse(run.started);
-  h.runs = [{ workflow: run.workflow, started: run.started, finished: run.finished, durationMs, ok: run.ok, datasets: run.datasets ?? [], notes: run.notes ?? [] }, ...h.runs].slice(0, RUNS_KEPT);
+  // Runs keep what happened, not the bytes of what was fetched.
+  const summary = (run.datasets ?? []).map(({ raw, terms, ...d }) => ({ ...d, ...(terms ? { termsChanged: terms.changed } : {}) }));
+  h.runs = [{ workflow: run.workflow, started: run.started, finished: run.finished, durationMs, ok: run.ok, datasets: summary, notes: run.notes ?? [] }, ...h.runs].slice(0, RUNS_KEPT);
   writeFileSync(healthPath(root), JSON.stringify(h, null, 2) + '\n');
   return h;
 }

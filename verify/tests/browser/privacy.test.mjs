@@ -13,7 +13,7 @@ import { serve } from '../../lib/static-server.mjs';
 import { foreign, leaks } from '../../lib/requests.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-build({ outDir: out });
+await build({ outDir: out });
 const pages = walk(out).filter((f) => f.endsWith('.html')).map((f) => `/${f.replace(/index\.html$/, '')}`);
 const SENTINEL = '918273.645';
 

@@ -4,6 +4,8 @@
 // script runs on a laptop; only the credentials differ.
 //   node pipeline/scheduled.mjs refresh-eia-861
 
+import { readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { checkDataset } from './check.mjs';
 import { readHealth, recordRun } from './lib/health.mjs';
@@ -42,6 +44,18 @@ export async function scheduledRun(workflowId, o = {}) {
   for (const id of w.datasets) {
     // Each dataset stands alone: one failing never stops the others.
     const r = await checkDataset({ dataset: id, entry: o.entries?.[id], outDir: o.outDir, fetch: o.fetch, today: started.slice(0, 10) });
+    // Raw publisher files go to a release, never into git (foundation design D16).
+    if (r.raw && host.available && host.publishRawAsset) {
+      try {
+        const url = await host.publishRawAsset({ tag: `data-${id}-${r.raw.version}`, name: r.raw.name, bytes: r.raw.bytes });
+        const file = join(o.outDir ?? join(root, 'data'), id, r.raw.version, 'manifest.json');
+        const m = JSON.parse(readFileSync(file, 'utf8'));
+        m.raw[0].release = url;
+        writeFileSync(file, JSON.stringify(m, null, 2) + '\n');
+        r.release = url;
+      } catch (e) { notes.push(`could not attach the raw ${id} file to a release: ${e.message}`); }
+    }
+    delete r.raw;
     datasets.push(r);
     if (r.failure && host.available) {
       try { await host.openIssue(`Pipeline: ${id} refresh failed`, `The scheduled check of ${id} failed on ${started.slice(0, 10)}. The previous version stays live.\n\n\`\`\`\n${r.failure}\n\`\`\`\n\nThis issue was opened by pipeline/scheduled.mjs; it closes nothing and blocks nothing.`); } catch (e) { notes.push(`could not open an issue for ${id}: ${e.message}`); }

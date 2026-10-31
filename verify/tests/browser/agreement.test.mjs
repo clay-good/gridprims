@@ -14,7 +14,7 @@ import { createServer } from '../../../mcp/protocol.mjs';
 import { DIR } from '../../fixtures/intake/make.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-build({ outDir: out });
+await build({ outDir: out });
 const FILES = ['smart-meter-texas.csv', 'conflicting-duplicate.csv', 'dst-fall-back.csv'];
 const ZONE = 'America/Chicago';
 

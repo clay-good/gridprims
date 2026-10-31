@@ -15,7 +15,7 @@ import { foreign } from '../../lib/requests.mjs';
 import { offsetMinutes } from '../../../parsers/time.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-build({ outDir: out });
+await build({ outDir: out });
 const ready = 'new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r() : setTimeout(f, 20); f(); })';
 const text = (sel) => `document.querySelector(${JSON.stringify(sel)}).textContent.trim().replace(/\\s+/g, ' ')`;
 const settle = (ms = 400) => `new Promise((r) => setTimeout(r, ${ms}))`;

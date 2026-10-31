@@ -167,3 +167,28 @@ test('the repository\'s own workflows pass the policy, and only the canary float
   assert.deepEqual(checkWorkflows(join(import.meta.dirname, '../../..')), []);
 });
 
+
+test('CI policy: a scheduled workflow at the top of the hour or without a queueing concurrency group fails', () => {
+  const bad = fixtureRepo({ '.github/workflows/r.yml': `on:
+  schedule:
+    - cron: '0 9 * * *'
+concurrency:
+  group: r
+  cancel-in-progress: true
+jobs:
+  x:
+    runs-on: ubuntu-24.04
+` });
+  const errors = checkWorkflows(bad).join('\n');
+  assert.match(errors, /top of the hour/);
+  assert.match(errors, /concurrency group that queues runs/);
+});
+
+test('secret scan: credential-shaped strings are found; ordinary text is not', async () => {
+  const { findSecrets, checkSecrets } = await import('../../gates/secrets.mjs');
+  assert.deepEqual(findSecrets(`token ghp_${'a'.repeat(36)}`), ['GitHub token']);
+  assert.deepEqual(findSecrets('-----BEGIN PRIVATE KEY-----'), ['private key']);
+  assert.deepEqual(findSecrets('authorization: Bearer abcdefghijklmnopqrstuvwxyz123456'), ['bearer header']);
+  assert.deepEqual(findSecrets('GITHUB_TOKEN: ${{ github.token }} and sha256 f59f6c732bf685fe0a1591b32227f5ce572dc0dfd26bb5caaeed128ac4e3a396'), []);
+  assert.deepEqual(checkSecrets(join(import.meta.dirname, '../../..')), []);
+});

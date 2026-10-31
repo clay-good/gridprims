@@ -16,6 +16,7 @@ import { checkSentences } from './gates/sentences.mjs';
 import { checkRegistry } from './gates/registry.mjs';
 import { checkWorkflows } from './gates/workflows.mjs';
 import { checkRepoSize } from './gates/repo-size.mjs';
+import { checkSecrets } from './gates/secrets.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -33,6 +34,7 @@ const gates = [
   ['dataset registry and snapshots', () => checkRegistry(root)],
   ['CI uses only our scripts and pinned first-party actions', () => checkWorkflows(root)],
   ['repository size', () => checkRepoSize(root)],
+  ['no secrets in outputs or tracked files', () => checkSecrets(root)],
 ];
 
 let failed = 0;

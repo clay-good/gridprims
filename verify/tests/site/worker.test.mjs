@@ -12,7 +12,7 @@ import { checkHeaders } from '../../lib/smoke.mjs';
 import { TYPES } from '../../lib/static-server.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-build({ outDir: out });
+await build({ outDir: out });
 const ASSETS = {
   async fetch(r) {
     const path = new URL(typeof r === 'string' ? r : r.url).pathname;

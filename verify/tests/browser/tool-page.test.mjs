@@ -11,7 +11,7 @@ import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-build({ outDir: out });
+await build({ outDir: out });
 const PATH = '/tools/calc/energy-units/convert/';
 const ready = 'new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r(true) : setTimeout(f, 20); f(); })';
 const text = (sel) => `document.querySelector(${JSON.stringify(sel)}).textContent.trim().replace(/\\s+/g, ' ')`;

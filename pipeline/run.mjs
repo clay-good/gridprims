@@ -114,7 +114,8 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     dataset, version, title: entry.title, publisher: entry.publisher, sourceUrl: entry.sourceUrl,
     terms: entry.terms, redistributionBasis: entry.redistributionBasis, posture, postureAdvisory: { ...advisory, agrees },
     license: `${entry.redistributionBasis.kind}${entry.redistributionBasis.note ? ` (${entry.redistributionBasis.note})` : ''}`, attribution,
-    asOf: vintage.asOf, retrieved, cadence: entry.cadence,
+    // When this version was generated: the retrieval day, so a re-run of the same input reproduces it exactly.
+    asOf: vintage.asOf, retrieved, generatedAt: `${retrieved}T00:00:00Z`, cadence: entry.cadence,
     raw: [{ url: vintage.url, name: vintage.url.split('/').pop(), bytes: raw.length, sha256: rawSha, entry: entryName, ...(upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) }],
     tables: [{
       name: table, dataPeriod: String(year), rows: rows.length, columns: normalizer.SCHEMA, partition: step('partition').by,

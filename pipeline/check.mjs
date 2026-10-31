@@ -8,6 +8,7 @@ import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { ROOT, runRecipe } from './run.mjs';
+import { compareTerms, postureInForce } from './lib/terms.mjs';
 
 /** The release a HEAD request describes, or null when the URL has nothing. */
 async function head(url, f) {
@@ -19,7 +20,7 @@ const asOfOf = (lastModified, fallback) => (lastModified ? new Date(lastModified
 
 /**
  * @param {{dataset: string, entry?: any, outDir?: string, fetch?: typeof fetch, today?: string}} o
- * @returns {Promise<{id: string, checked: boolean, refreshed: boolean, version?: string, posture?: string, failure?: string, found?: string}>}
+ * @returns {Promise<{id: string, checked: boolean, refreshed: boolean, version?: string, posture?: string, terms?: object, failure?: string, found?: string, raw?: {name: string, bytes: Uint8Array, version: string}}>}
  */
 export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 'data'), fetch: f = fetch, today = new Date().toISOString().slice(0, 10) }) {
   const entry = given ?? (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${dataset}.mjs`)).href)).default;
@@ -34,6 +35,15 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
     return null;
   };
 
+  // Capture the terms page every run; a change lowers the posture until it is recognized again.
+  let terms = null;
+  try {
+    const res = await f(entry.terms.url, { headers: { 'user-agent': 'gridprims-pipeline (+https://gridprims.com)' } });
+    if (res.ok) terms = { ...compareTerms(entry, await res.text()), checked: today };
+  } catch { terms = null; }
+  const posture = postureInForce(entry, terms);
+  const termsRow = terms ? { checked: today, changed: terms.changed, posture, ...(terms.excerpt ? { excerpt: terms.excerpt } : {}), ...(entry.takedown ? { takedown: entry.takedown } : {}) } : undefined;
+
   try {
     // A new data year beats a revision of the served one.
     let target = null;
@@ -46,7 +56,7 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
       if (changed) target = { year: servedYear, upstream: now, why: `revised ${servedYear} file` };
       if (!manifest && now) target = { year: servedYear, upstream: now, why: 'first snapshot' };
     }
-    if (!target) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, posture: manifest?.posture };
+    if (!target) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, posture, terms: termsRow };
 
     const res = await f(target.upstream.url);
     if (!res.ok) return { id: dataset, checked: true, refreshed: false, failure: `download ${target.upstream.url}: HTTP ${res.status}` };
@@ -56,7 +66,7 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
     if (!r.ok) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: r.failures.join('; ') };
     // Re-running on unchanged input reproduces the same files, so this is a refresh only when something changed.
     const same = manifest && manifest.version === r.version && JSON.stringify(manifest.tables) === JSON.stringify(r.manifest.tables);
-    return { id: dataset, checked: true, refreshed: !same, version: r.version, posture: r.manifest.posture, found: target.why };
+    return { id: dataset, checked: true, refreshed: !same, version: r.version, posture, terms: termsRow, found: target.why, raw: same ? undefined : { name: r.manifest.raw[0].name, bytes: input, version: r.version } };
   } catch (e) {
     return { id: dataset, checked: false, refreshed: false, version: manifest?.version, failure: `check failed: ${e.message}` };
   }

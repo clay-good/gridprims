@@ -14,7 +14,7 @@ import { importSpecifiers } from '../../lib/walk.mjs';
 import { serveWorker } from '../../lib/worker-server.mjs';
 
 const dist = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-build({ outDir: dist });
+await build({ outDir: dist });
 
 /** A stand-in Cloudflare API that records calls and keeps the hashes it already has. */
 function fakeCloudflare({ have = new Set(), token = { status: 'active' }, rateLimitOnce = false } = {}) {

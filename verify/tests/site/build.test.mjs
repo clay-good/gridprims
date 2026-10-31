@@ -12,7 +12,7 @@ import { decodeState, encodeState, isExampleState } from '../../../site/ui/share
 import { checkFileCount } from '../../gates/file-count.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-const result = build({ outDir: out });
+const result = await build({ outDir: out });
 const page = (p) => readFileSync(join(out, p.endsWith('/') ? `${p}index.html` : p), 'utf8');
 
 test('builds every calculator page, the limits page, home, and 404', () => {
@@ -59,11 +59,11 @@ test('handoffs carry no inputs', () => {
   for (const [, href] of html.matchAll(/class="handoff" href="([^"]+)"/g)) assert.doesNotMatch(href, /[?#]/);
 });
 
-test('the deploy manifest lists every file with its checksum, and a rebuild reproduces it', () => {
+test('the deploy manifest lists every file with its checksum, and a rebuild reproduces it', async () => {
   const m = JSON.parse(page('/_manifest.json'));
   for (const { path, sha256 } of m) assert.equal(createHash('sha256').update(readFileSync(join(out, path))).digest('hex'), sha256, path);
   const again = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
-  build({ outDir: again });
+  await build({ outDir: again });
   assert.equal(readFileSync(join(again, '_manifest.json'), 'utf8'), page('/_manifest.json'));
 });
 
