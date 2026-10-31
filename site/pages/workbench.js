@@ -1,0 +1,136 @@
+// The file workbench: drop or choose a file, parse it in a worker, show the
+// answer, the editable receipt, and the chart. Files stay in memory unless the
+// user ticks "Keep this file on this device".
+
+import { createI18n } from '../lib/i18n.mjs';
+import { renderAnswer, renderChart, renderReceipt, viewOf } from '../ui/workbench.mjs';
+import strings from '../strings/en-US.mjs';
+
+const i18n = createI18n(strings, 'en-US');
+const { t } = i18n;
+const $ = (sel) => document.querySelector(sel);
+const SAMPLE = { url: '/site/samples/sample-office-15min.csv', name: 'sample-office-15min.csv', zone: 'America/Chicago' };
+const deviceZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+const KEPT_DB = 'gridprims-files';
+
+let current = null; // {bytes, name, sample, choices, result, index}
+let worker = null;
+
+function newWorker() {
+  worker?.terminate();
+  worker = new Worker(new URL('./intake-worker.js', import.meta.url), { type: 'module' });
+}
+
+/** Parse bytes in the worker with the given choices; resolves with the result or a refusal. */
+function parse(bytes, name, choices) {
+  newWorker();
+  $('[data-progress]').hidden = false;
+  $('[data-progress-label]').textContent = t('files.reading', { name });
+  const bar = $('[data-progress] progress');
+  bar.value = 0;
+  return new Promise((resolve) => {
+    worker.onmessage = (e) => {
+      const m = e.data;
+      if (m.type === 'progress') { bar.value = m.fraction; return; }
+      $('[data-progress]').hidden = true;
+      resolve(m);
+    };
+    worker.onerror = (e) => { $('[data-progress]').hidden = true; resolve({ type: 'refused', message: e.message }); };
+    worker.postMessage({ bytes: bytes.slice(0), name, choices });
+  });
+}
+
+function render() {
+  const v = viewOf(current.result, current.index);
+  $('[data-answer]').innerHTML = String(renderAnswer(v, i18n, { sample: current.sample }));
+  $('[data-receipt]').innerHTML = String(renderReceipt(v, i18n));
+  $('[data-chart]').innerHTML = String(renderChart(v, i18n));
+  $('[data-keep]').checked = Boolean(current.kept);
+  $('[data-keep]').disabled = current.sample;
+}
+
+async function load(bytes, name, { sample = false, kept = false, choices } = {}) {
+  $('[data-error]').hidden = true;
+  const ch = choices ?? { zone: sample ? SAMPLE.zone : deviceZone, stampsMark: 'auto', quantity: 'auto' };
+  const m = await parse(bytes, name, ch);
+  if (m.type === 'canceled') return;
+  if (m.type !== 'done') {
+    $('[data-error]').hidden = false;
+    $('[data-error]').innerHTML = '';
+    const p = document.createElement('span');
+    p.textContent = `${t('files.refused')} ${m.message} `;
+    const a = Object.assign(document.createElement('a'), { href: m.learnUrl ?? '/learn/get-your-data/', textContent: t('files.noFile') });
+    $('[data-error]').append(p, a);
+    return;
+  }
+  current = { bytes, name, sample, kept, choices: ch, result: m.result, index: current?.name === name ? current.index : 0 };
+  if (current.index >= m.result.series.length) current.index = 0;
+  render();
+  document.documentElement.dataset.ready = 'true';
+}
+
+async function fromFile(file) {
+  if (!file) return;
+  await load(new Uint8Array(await file.arrayBuffer()), file.name);
+  await keep(false);
+}
+
+// Receipt choices re-run the read with the new choice.
+$('[data-receipt]').addEventListener('change', async (e) => {
+  const name = e.target.dataset.choice;
+  if (!name || !current) return;
+  if (name === 'series') { current.index = Number(e.target.value); render(); return; }
+  const choices = { ...current.choices, [name]: e.target.value, ...(name === 'zone' ? { zoneSet: true } : {}) };
+  await load(current.bytes, current.name, { sample: current.sample, kept: current.kept, choices });
+});
+
+$('[data-cancel]').addEventListener('click', () => {
+  newWorker();
+  $('[data-progress]').hidden = true;
+  $('[data-error]').hidden = false;
+  $('[data-error]').textContent = t('files.canceled');
+});
+
+$('[data-choose]').addEventListener('click', () => $('[data-file]').click());
+$('[data-file]').addEventListener('change', (e) => fromFile(e.target.files[0]));
+
+// Drop anywhere on the page; while dragging, say plainly that nothing is uploaded.
+let depth = 0;
+addEventListener('dragenter', (e) => { e.preventDefault(); depth++; $('[data-overlay]').hidden = false; });
+addEventListener('dragleave', () => { depth = Math.max(0, depth - 1); if (!depth) $('[data-overlay]').hidden = true; });
+addEventListener('dragover', (e) => e.preventDefault());
+addEventListener('drop', (e) => { e.preventDefault(); depth = 0; $('[data-overlay]').hidden = true; fromFile(e.dataTransfer?.files?.[0]); });
+
+// "Keep this file on this device": the only way a file outlives the tab.
+function db() {
+  return new Promise((resolve, reject) => {
+    const r = indexedDB.open(KEPT_DB, 1);
+    r.onupgradeneeded = () => r.result.createObjectStore('files');
+    r.onsuccess = () => resolve(r.result);
+    r.onerror = () => reject(r.error);
+  });
+}
+async function keep(on) {
+  if (!current || current.sample) return;
+  const d = await db();
+  await new Promise((res) => {
+    const tx = d.transaction('files', 'readwrite');
+    if (on) tx.objectStore('files').put({ name: current.name, bytes: current.bytes, choices: current.choices }, 'current');
+    else tx.objectStore('files').delete('current');
+    tx.oncomplete = res;
+  });
+  d.close();
+  current.kept = on;
+}
+async function keptFile() {
+  if (!globalThis.indexedDB?.databases || !(await indexedDB.databases()).some((x) => x.name === KEPT_DB)) return null;
+  const d = await db();
+  const v = await new Promise((res) => { const r = d.transaction('files').objectStore('files').get('current'); r.onsuccess = () => res(r.result); r.onerror = () => res(null); });
+  d.close();
+  return v ?? null;
+}
+$('[data-keep]').addEventListener('change', (e) => keep(e.target.checked));
+
+const kept = await keptFile().catch(() => null);
+if (kept) await load(kept.bytes, kept.name, { kept: true, choices: kept.choices });
+else await load(new Uint8Array(await (await fetch(SAMPLE.url)).arrayBuffer()), SAMPLE.name, { sample: true });

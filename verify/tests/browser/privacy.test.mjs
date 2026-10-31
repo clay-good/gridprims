@@ -10,17 +10,12 @@ import { build } from '../../../site/build.mjs';
 import { walk } from '../../lib/walk.mjs';
 import { findBrowser, launch } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
+import { foreign, leaks } from '../../lib/requests.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
 build({ outDir: out });
 const pages = walk(out).filter((f) => f.endsWith('.html')).map((f) => `/${f.replace(/index\.html$/, '')}`);
 const SENTINEL = '918273.645';
-
-/** Requests that leave our origin. */
-export const foreign = (requests, origin) => requests.filter((u) => !u.startsWith(origin) && !/^(data|blob|about):/.test(u));
-
-/** Requests whose URL, headers, or body carry a sentinel. */
-export const leaks = (log, sentinel) => log.filter((r) => [r.url, JSON.stringify(r.headers), r.body].some((x) => String(x).includes(sentinel) || String(x).includes(sentinel.replace('.', ''))));
 
 // A deliberately leaking page and a page that loads an external font, to prove the checks can fail.
 writeFileSync(join(out, 'leak.html'), `<!doctype html><meta charset="utf-8"><input id="v"><script type="module">document.querySelector('#v').addEventListener('input', (e) => fetch('/collect?v=' + e.target.value));</script>`);

@@ -137,3 +137,29 @@ export function settingsPage({ i18n }) {
 </section>`;
   return layout({ i18n, title: `${t('settings.title')} · ${t('site.name')}`, description: t('settings.intro'), path: '/settings/', body, modules: ['/site/pages/settings.js'] });
 }
+
+/** The file workbench: a dropzone, the receipt, and the answer for the loaded file. */
+export function filesPage({ i18n }) {
+  const { t } = i18n;
+  const body = html`<article data-workbench>
+  <h1>${t('files.title')}</h1>
+  <p class="purpose">${t('files.purpose')}</p>
+  <noscript><p class="panel">${t('files.needsJs')}</p></noscript>
+  <div class="dropzone" data-dropzone>
+    <p><strong>${t('files.drop')}</strong></p>
+    <p class="mono">${t('files.formats')}</p>
+    <p><button class="button" type="button" data-choose>${t('files.choose')}</button>
+      <input type="file" data-file hidden accept=".csv,.txt,.tsv,.xml,.xlsx,.zip"></p>
+    <p><a href="/learn/get-your-data/">${t('files.noFile')}</a></p>
+  </div>
+  <div class="progress" data-progress hidden><p data-progress-label></p><progress max="1" value="0"></progress>
+    <button class="button" type="button" data-cancel>${t('files.cancel')}</button></div>
+  <p class="errors" role="alert" data-error hidden></p>
+  <section class="answer" aria-live="polite" data-answer></section>
+  <p><label><input type="checkbox" data-keep> ${t('files.keep')}</label> <span class="unit-hint">${t('files.keepNote')}</span></p>
+  <div data-chart></div>
+  <section class="panel" data-receipt></section>
+</article>
+<div class="drag-overlay" data-overlay hidden><p>${t('files.dragging')}</p></div>`;
+  return layout({ i18n, title: `${t('files.title')} · ${t('site.name')}`, description: t('files.purpose'), path: '/files/', body, modules: ['/site/pages/workbench.js'] });
+}

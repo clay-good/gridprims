@@ -14,7 +14,7 @@ import { limitsRecord } from '../core/contract/limits.mjs';
 import { createI18n } from './lib/i18n.mjs';
 import { toolPath } from './ui/tool-page.mjs';
 import { tokensCss } from './styles/tokens.mjs';
-import { calculatorPage, changelogPage, homePage, limitsPage, notFoundPage, settingsPage } from './templates/pages.mjs';
+import { calculatorPage, changelogPage, filesPage, homePage, limitsPage, notFoundPage, settingsPage } from './templates/pages.mjs';
 import changelog from '../data/curated/changelog.mjs';
 import { THEME_SCRIPT } from './templates/layout.mjs';
 import { walk } from '../verify/lib/walk.mjs';
@@ -23,7 +23,7 @@ import strings from './strings/en-US.mjs';
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 /** Folders the browser imports from, copied as-is: the same files the tests run. */
-const SHARED = ['core', 'parsers', 'site/lib', 'site/ui', 'site/pages', 'site/strings', 'site/styles/site.css'];
+const SHARED = ['core', 'parsers', 'site/lib', 'site/ui', 'site/pages', 'site/strings', 'site/samples', 'site/styles/site.css'];
 
 /** @param {string} s */
 export const sha256 = (s) => createHash('sha256').update(s).digest('hex');
@@ -61,6 +61,7 @@ export function build(opts = {}) {
   writeFileSync(join(outDir, 'limits/limits.json'), JSON.stringify(limitsRecord(TOOLS), null, 2) + '\n');
   write('/changelog/', changelogPage({ entries: changelog, i18n }));
   write('/settings/', settingsPage({ i18n }));
+  write('/files/', filesPage({ i18n }));
   write('/', homePage({ tools: TOOLS, i18n }));
   write('/404.html', notFoundPage({ i18n }));
 

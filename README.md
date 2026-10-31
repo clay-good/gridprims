@@ -25,6 +25,7 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | Green Button ESPI 4.0 XML (plain or zipped): `uom` and multiplier scaling, delivered and received channels kept apart, local time from the file | Built; checked against an Apache-licensed OpenESPI sample whose receipt was computed independently. The parsing worker and receipt UI are next |
 | Honesty gates: result sentences at grade 8 or below (own Flesch-Kincaid, checked on 21 hand-scored sentences), no accuracy or endorsement claims in prose, and result snapshots that fail a changed answer without a version bump; public changelog at `/changelog/` | Built and tested |
 | Privacy and security: the Worker with a strict CSP (own origin only, the one inline script by hash) and security headers, no cookies; a third-party request audit of every page; a sentinel egress test; a settings page that lists and erases everything stored on the device | Built and tested in Node and browsers; not deployed yet |
+| File workbench at `/files/`: opens on a labeled sample, parses a dropped or chosen file in a worker with progress and cancel, shows the peak, total, load factor, chart, and monthly peaks from the shared core, and an editable receipt that re-runs the read; refusals say what to do; a file is kept only with consent | Built and tested in browsers |
 | SVG charts: peak-preserving downsampling, ticks inside the data, summary and table view, colors from tokens | Built and tested |
 | Overpass fonts, data snapshots, deploy, problem reports | Not started |
 

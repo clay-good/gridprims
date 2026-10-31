@@ -5,6 +5,9 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
+/** Unit symbols are never translated (site/translation-ready), so they may sit in markup. */
+const UNIT_SYMBOLS = /\b(kWh|MWh|GWh|kW|MW|Wh|MMBtu|Btu|kVA|kVAR)\b/g;
+
 const TEXT_ATTRS = /\b(aria-label|title|alt|placeholder)\s*=\s*"([^"]*)"/g;
 
 /**
@@ -63,7 +66,7 @@ export function checkLiteralCopy(dir, label) {
         if (/[A-Za-z]{2,}/.test(value) && !value.includes('\u0000')) errors.push(`${label}/${f}:${line}: literal ${attr} "${value}"; put it in site/strings/en-US.mjs and use t()`);
       }
       const visible = text.replace(/<[^>]*>/g, ' ').replace(/&[#\w]+;/g, ' ');
-      for (const m of visible.matchAll(/[A-Za-z][A-Za-z' ]*[A-Za-z]/g)) {
+      for (const m of visible.replace(UNIT_SYMBOLS, ' ').matchAll(/[A-Za-z][A-Za-z' ]*[A-Za-z]/g)) {
         errors.push(`${label}/${f}:${line}: literal text "${m[0].trim()}"; put it in site/strings/en-US.mjs and use t()`);
       }
     }

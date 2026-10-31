@@ -16,8 +16,10 @@ function storedKeys() {
   return keys.sort();
 }
 
-function render() {
+async function render() {
   const keys = storedKeys();
+  // Kept files live in IndexedDB; list each database by name.
+  if (globalThis.indexedDB?.databases) for (const db of await indexedDB.databases()) if (db.name) keys.push(`${db.name} (IndexedDB)`);
   list.replaceChildren(...keys.map((k) => Object.assign(document.createElement('li'), { textContent: k })));
   root.querySelector('[data-empty]').hidden = keys.length > 0;
 }
@@ -40,7 +42,7 @@ root.querySelector('[data-erase-yes]').addEventListener('click', async () => {
   await eraseAll();
   root.querySelector('[data-confirm]').hidden = true;
   root.querySelector('[data-erased]').textContent = t('settings.erased');
-  render();
+  await render();
 });
-render();
+await render();
 document.documentElement.dataset.ready = 'true';
