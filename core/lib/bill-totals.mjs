@@ -69,8 +69,10 @@ function seasonOn(day, seasons) {
  * Price one billing period from its total kWh.
  * @param {{start: string, end: string, kwh: number, tou?: Record<string, number>}} period
  *   tou is the kWh in each time-of-use period, as the bill prints them, for a tariff whose seasons list periods
- * @param {{fixedMonthly?: number, fixedDaily?: number, minimumMonthly?: number, seasons: Array<{name: string, from: string, tiers?: Array<{upTo?: number, upToDaily?: number, rate: number}>, periods?: Array<{name: string, rate: number}>}>}} tariff
+ * @param {{fixedMonthly?: number, fixedDaily?: number, minimumMonthly?: number, seasons: Array<{name: string, from: string, tiers?: Array<{upTo?: number, upToDaily?: number, rate: number}>, periods?: Array<{name: string, rate: number}>}>, charges?: Array<{label: string, perKwh?: number, monthly?: number}>, credits?: Array<{label: string, atLeastKwh: number, atMostKwh?: number, amount: number}>}} tariff
  *   fixedDaily is a fixed charge billed per day, for the days in the period
+ *   charges are other named charges, per kWh or per month (a Texas TDU's delivery charges, a CCA's generation rate, the PCIA)
+ *   credits are usage credits, such as an EFL's "$30 credit at 1,000 kWh or more" (atLeastKwh, atMostKwh, amount in $)
  *   a tier's upTo is its monthly allowance in kWh, or upToDaily its allowance per day; the last tier has none
  * @param {{prorate?: boolean}} [opts] proration splits kWh and tier allowances by days when the period crosses a season
  * @returns {{totalCents: number, lines: Array<{label: string, kwh?: number, rate?: number, cents: number, days?: number}>, method: string | null, excluded: string[]}}
@@ -136,6 +138,18 @@ export function priceTotals(period, tariff, { prorate = true } = {}) {
       total += m;
     });
   });
+  // Named charges billed on every kWh or every month, and usage credits, each on its own line.
+  for (const c of tariff.charges ?? []) {
+    const m = c.perKwh !== undefined ? (micro(c.perKwh) * BigInt(Math.round(kwh * 1000))) / 1000n : micro(c.monthly ?? 0);
+    lines.push({ label: c.label, ...(c.perKwh !== undefined ? { kwh, rate: c.perKwh } : {}), cents: Number(cents(m)) });
+    total += m;
+  }
+  for (const c of tariff.credits ?? []) {
+    if (kwh < c.atLeastKwh || (c.atMostKwh !== undefined && kwh > c.atMostKwh)) continue;
+    const m = -micro(c.amount);
+    lines.push({ label: c.label, cents: Number(cents(m)) });
+    total += m;
+  }
   if (tariff.minimumMonthly && total < micro(tariff.minimumMonthly)) {
     const top = micro(tariff.minimumMonthly) - total;
     lines.push({ label: 'minimum bill', cents: Number(cents(top)) });

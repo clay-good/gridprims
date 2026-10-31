@@ -73,6 +73,15 @@ for (const kind of ['chrome', 'firefox']) {
       })()`);
       await browser.evaluate(setPeriods('2026-03-01 to 2026-03-30, 800 kWh'));
       await waitFor(browser, `${answer} === '$115.00'`);
+      // A Texas plan from its EFL plus delivery: 9.5 cents, $9.95 base, $4.39 and 5.4 cents delivery, at 1,000 kWh.
+      await browser.evaluate(`(() => {
+        const r = document.querySelector('[data-picker-retail]'); r.open = true;
+        for (const [n, v] of [['energy', '9.5'], ['base', '9.95'], ['tduMonthly', '4.39'], ['tduKwh', '5.4']]) r.querySelector('[name=' + n + ']').value = v;
+        r.querySelector('[name=tduKwh]').dispatchEvent(new Event('input', { bubbles: true }));
+      })()`);
+      await browser.evaluate(setPeriods('2026-07-01 to 2026-07-31, 1,000 kWh'));
+      await waitFor(browser, `${answer} === '$163.34'`);
+      assert.deepEqual(await browser.evaluate("[...document.querySelectorAll('[data-tariff-picker] a')].map((a) => a.href).filter((h) => !h.startsWith(location.origin))"), ['https://www.powertochoose.org/'], 'the only provider-related element is a link to Power to Choose');
       await browser.evaluate(setPeriods('2026-03-01 to 2026-03-30, 800 kWh\n2026-03-26 to 2026-04-28, 700 kWh'));
       await waitFor(browser, "document.querySelector('[data-answer] .sign').dataset.state === 'invalid'");
       assert.match(await browser.evaluate("document.querySelector('#in-periods-error').textContent"), /Lines 1 and 2 overlap by 5 days\. Which dates are correct\?/);

@@ -30,6 +30,21 @@ export function tariffPicker({ t }) {
       <div class="field"><label for="manual-rate2">${t('bill.manual.rate2')}</label><input id="manual-rate2" name="rate2" class="mono" inputmode="decimal" autocomplete="off"></div>
     </div>
   </details>
+  <details data-picker-retail>
+    <summary>${t('bill.retail.title')}</summary>
+    <p class="unit-hint">${t('bill.retail.intro')} <a href="https://www.powertochoose.org/">${t('bill.retail.powerToChoose')}</a></p>
+    <div class="picker-row">
+      ${[['energy', 'bill.retail.energy'], ['base', 'bill.retail.base'], ['tduMonthly', 'bill.retail.tduMonthly'], ['tduKwh', 'bill.retail.tduKwh'], ['creditKwh', 'bill.retail.creditKwh'], ['credit', 'bill.retail.credit']].map(([name, label]) => html`<div class="field"><label for="retail-${name}">${t(label)}</label><input id="retail-${name}" name="${name}" class="mono" inputmode="decimal" autocomplete="off"></div>`)}
+    </div>
+  </details>
+  <details data-picker-cca>
+    <summary>${t('bill.cca.title')}</summary>
+    <p class="unit-hint">${t('bill.cca.intro')}</p>
+    <div class="picker-row">
+      <div class="field"><label for="cca-generation">${t('bill.cca.generation')}</label><input id="cca-generation" name="generation" class="mono" inputmode="decimal" autocomplete="off"></div>
+      <div class="field"><label for="cca-pcia">${t('bill.cca.pcia')}</label><input id="cca-pcia" name="pcia" class="mono" inputmode="decimal" autocomplete="off"></div>
+    </div>
+  </details>
   <p class="strip">${t('bill.picker.privacy')}</p>
 </section>`;
 }

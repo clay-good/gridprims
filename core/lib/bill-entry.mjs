@@ -97,6 +97,13 @@ export function parseTariff(text) {
       });
     } else errors.push(`${at} needs tiers or time-of-use periods.`);
   });
+  for (const [i, c] of (t.charges ?? []).entries()) {
+    if (typeof c?.label !== 'string' || (c.perKwh === undefined) === (c.monthly === undefined)) errors.push(`Charge ${i + 1} needs a label and either perKwh ($/kWh) or monthly ($).`);
+    else if (c.perKwh !== undefined && !rateOk(c.perKwh)) errors.push(`Charge ${i + 1}: perKwh must be in $/kWh, such as 0.054.`);
+  }
+  for (const [i, c] of (t.credits ?? []).entries()) {
+    if (typeof c?.label !== 'string' || !(c.atLeastKwh >= 0) || !(c.amount >= 0)) errors.push(`Credit ${i + 1} needs a label, atLeastKwh, and an amount in $.`);
+  }
   const tou = t.seasons.some((s) => s.periods);
   if (tou && !t.seasons.every((s) => s.periods)) errors.push('Either every season lists time-of-use periods or none does.');
   return { tariff: errors.length ? null : t, errors };
