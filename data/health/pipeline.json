@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-31T02:15:08.739Z",
+  "generatedAt": "2026-10-31T02:16:37.976Z",
   "workflows": [
     {
       "id": "refresh-eia-861",
       "intervalHours": 24,
       "thresholdHours": 72,
-      "lastSuccess": "2026-10-31T02:14:33.828Z",
-      "lastRun": "2026-10-31T02:14:33.828Z",
+      "lastSuccess": "2026-10-31T02:16:37.976Z",
+      "lastRun": "2026-10-31T02:16:37.976Z",
       "enabled": true
     },
     {
@@ -29,7 +29,7 @@
   "datasets": [
     {
       "id": "eia-861",
-      "lastCheck": "2026-10-31T02:14:33.828Z",
+      "lastCheck": "2026-10-31T02:16:37.976Z",
       "lastRefresh": null,
       "version": "2026-10",
       "posture": "mirror",
@@ -103,6 +103,23 @@
     "lastHeartbeat": null
   },
   "runs": [
+    {
+      "workflow": "refresh-eia-861",
+      "started": "2026-10-31T02:16:37.142Z",
+      "finished": "2026-10-31T02:16:37.976Z",
+      "durationMs": 834,
+      "ok": true,
+      "datasets": [
+        {
+          "id": "eia-861",
+          "checked": true,
+          "refreshed": false,
+          "version": "2026-10",
+          "posture": "mirror"
+        }
+      ],
+      "notes": []
+    },
     {
       "workflow": "canary",
       "started": "2026-10-31T02:15:08.739Z",
