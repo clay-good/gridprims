@@ -32,6 +32,13 @@ export function reliabilityRows(year = 2025) {
   ];
 }
 
+/** Delivery-only rows: three Texas wires utilities, as the Delivery_Companies sheet lists them. */
+export function deliveryRows(year = 2025) {
+  const n = (k) => [k * 10, k * 100, k];
+  const row = (id, name) => [year, id, name, 'C', 'Delivery', 'O', 'TX', 'Investor Owned', 'ERCO', ...n(5), ...n(4), ...n(3), 0, 0, 0, ...n(12)];
+  return [row(3278, 'AEP Texas Central Company'), row(8901, 'CenterPoint Energy'), row(44372, 'Oncor Electric Delivery Company LLC')];
+}
+
 /** Service territory rows: a utility in two counties of one state and one in another. */
 export function territoryRows(year = 2025) {
   return [[year, 1015, 'Austin Energy', '', 'TX', 'Travis'], [year, 1015, 'Austin Energy', '', 'TX', 'Williamson'], [year, 84, 'A & N Electric Coop', 'Y', 'VA', 'Accomack']];
@@ -39,13 +46,14 @@ export function territoryRows(year = 2025) {
 
 const workbook = (sheetName, all) => writeXlsx({ [sheetName]: all, Territories: [] });
 
-/** @param {{year?: number, rows?: any[][], header?: string[], reliability?: any[][], territory?: any[][], territoryHeader?: string[], omit?: string[]}} [o] */
+/** @param {{year?: number, rows?: any[][], header?: string[], reliability?: any[][], delivery?: any[][], territory?: any[][], territoryHeader?: string[], omit?: string[]}} [o] */
 export function eia861Zip(o = {}) {
   const year = o.year ?? 2025;
   const titles = [['Utility Characteristics', ...Array(8).fill(null), 'RESIDENTIAL', null, null, 'COMMERCIAL', null, null, 'INDUSTRIAL', null, null, 'TRANSPORTATION', null, null, 'TOTAL', null, null],
     ['', ...Array(8).fill(null), ...Array(5).fill(['Revenues', 'Sales', 'Customers']).flat()]];
   const files = [
     { name: `Sales_Ult_Cust_${year}.xlsx`, data: workbook('States', [...titles, o.header ?? EXPECTED_HEADER, ...(o.rows ?? sampleRows(year)), ['To calculate a state or the US total, sum Parts (A,B,C & D) for Revenue.']]) },
+    { name: `Delivery_Companies_${year}.xlsx`, data: workbook('Delivery Companies', [...titles, EXPECTED_HEADER, ...(o.delivery ?? deliveryRows(year)), ['This data should not be added to the data in sales to ultimate customers, since it is already included by the power marketers on Part D']]) },
     { name: `Reliability_${year}.xlsx`, data: workbook('Reliability_States', [['Utility Characteristics', ...Array(4).fill(null), 'IEEE Standard'], [null, ...Array(4).fill(null), 'With MED'], RELIABILITY_HEADER, ...(o.reliability ?? reliabilityRows(year)), ['MED = major event days']]) },
     { name: `Service_Territory_${year}.xlsx`, data: workbook('Counties_States', [o.territoryHeader ?? TERRITORY_HEADER, ...(o.territory ?? territoryRows(year))]) },
     { name: `Frame_${year}.xlsx`, data: 'x' },

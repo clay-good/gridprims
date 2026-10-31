@@ -97,22 +97,24 @@ test('the committed real snapshot matches its manifest, and no file is over 20 M
     assert.ok(bytes.length <= 20 * 1024 * 1024);
   }
   assert.equal(m.raw[0].sha256, entry.vintages[2025].sha256);
-  assert.deepEqual(m.tables.map((x) => [x.name, x.rows]), [['sales', 2869], ['reliability', 976], ['service_territory', 11803]]);
+  assert.deepEqual(m.tables.map((x) => [x.name, x.rows]), [['sales', 2869], ['delivery', 7], ['reliability', 976], ['service_territory', 11803]]);
+  const delivery = readShard(readFileSync(join(ROOT, 'data/eia-861/2026-10/delivery/TX.bin'))).rows();
+  assert.deepEqual(delivery, JSON.parse(readFileSync(join(ROOT, 'verify/fixtures/data/eia-861/delivery.json'), 'utf8')).rows, 'the not-additive quirk fixture holds');
 });
 
-test('one release yields three tables, each with its own shards, download, and key', async () => {
+test('one release yields four tables, each with its own shards, download, and key', async () => {
   const out = mkdtempSync(join(tmpdir(), 'gridprims-data-'));
   const r = await run({ outDir: out });
   assert.equal(r.ok, true, r.failures?.join('\n'));
   assert.deepEqual(r.manifest.tables.map((x) => [x.name, x.rows, x.shards.map((s) => s.state).join(' ')]), [
-    ['sales', 5, 'MS TX VA'], ['reliability', 3, 'MS TX VA'], ['service_territory', 3, 'TX VA']]);
-  assert.deepEqual(r.manifest.raw[0].entries, ['Sales_Ult_Cust_2025.xlsx', 'Reliability_2025.xlsx', 'Service_Territory_2025.xlsx']);
+    ['sales', 5, 'MS TX VA'], ['delivery', 3, 'TX'], ['reliability', 3, 'MS TX VA'], ['service_territory', 3, 'TX VA']]);
+  assert.deepEqual(r.manifest.raw[0].entries, ['Sales_Ult_Cust_2025.xlsx', 'Delivery_Companies_2025.xlsx', 'Reliability_2025.xlsx', 'Service_Territory_2025.xlsx']);
   const dir = join(out, 'eia-861/2026-10');
   const [oncor] = readShard(readFileSync(join(dir, 'reliability/TX.bin'))).rows();
   assert.equal(oncor.ieee_with_med_saidi, null, 'EIA\'s "." is not reported, never zero');
   assert.equal(oncor.ieee_recorded_automatically, null);
   assert.deepEqual([oncor.other_with_med_saidi, oncor.other_without_med_caidi, oncor.other_customers, oncor.other_momentary_definition], [232.05, 92.458333, 4084817, 'F']);
-  const unit = r.manifest.tables[1].columns.find((c) => c.name === 'ieee_without_med_saifi').unit;
+  const unit = r.manifest.tables.find((t) => t.name === 'reliability').columns.find((c) => c.name === 'ieee_without_med_saifi').unit;
   assert.equal(unit, 'interruptions per year');
   const tx = readShard(readFileSync(join(dir, 'service_territory/TX.bin'))).rows();
   assert.deepEqual(tx.map((x) => [x.utility_id, x.county, x.short_form]), [[1015, 'Travis', null], [1015, 'Williamson', null]]);

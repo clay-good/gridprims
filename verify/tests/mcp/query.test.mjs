@@ -59,5 +59,5 @@ test('a table argument reads that table; an unknown one lists the tables', async
   const counties = (await q({ dataset: 'eia-861', table: 'service_territory', filter: { state: 'TX', county: 'Travis' }, limit: 50 })).result.structuredContent;
   assert.ok(counties.rows.some((x) => x.utility_name === 'Austin Energy'));
   const bad = (await q({ dataset: 'eia-861', table: 'outages' })).result;
-  assert.match(bad.content[0].text, /No table outages\. Tables: sales, reliability, service_territory\./);
+  assert.match(bad.content[0].text, /No table outages\. Tables: sales, delivery, reliability, service_territory\./);
 });

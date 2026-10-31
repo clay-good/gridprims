@@ -1,24 +1,337 @@
 {
   "source": "U.S. Energy Information Administration, Electric Power Annual 2025, Excel tables at https://www.eia.gov/electricity/annual/xls/, retrieved 2026-10-31 (files last modified 2026-10-19)",
   "tables": {
-    "epa_01_01": { "title": "Table 1.1. Total Electric Power Industry Summary Statistics, 2025 and 2024", "sha256": "596998227d11af2480e1168b4bbcef356aaf28e466391bfbf904a2a935498297" },
-    "epa_02_02": { "title": "Table 2.2. Sales and Direct Use of Electricity to Ultimate Customers by Sector, by Provider, 2015 through 2025", "sha256": "cf22a0213aa81aa593d784d20063123012c4c970faf5ff5c0ea05a7c718d5557" },
-    "epa_04_02_a": { "title": "Table 4.2.A. Existing Net Summer Capacity by Energy Source and Producer Type, 2015 through 2025", "sha256": "f208eaa5343bf8b6a3b540a377f55ab8d98ad53a9c8a5731d08e61d5520adbee" },
-    "epa_11_01": { "title": "Table 11.1 Reliability Metrics of U.S. Distribution System", "sha256": "6c1690b4498158beb01cb6b181d2d019fff9e1fe74a8b5eab5ee3efcc7922252" }
+    "epa_01_01": {
+      "title": "Table 1.1. Total Electric Power Industry Summary Statistics, 2025 and 2024",
+      "sha256": "596998227d11af2480e1168b4bbcef356aaf28e466391bfbf904a2a935498297"
+    },
+    "epa_02_02": {
+      "title": "Table 2.2. Sales and Direct Use of Electricity to Ultimate Customers by Sector, by Provider, 2015 through 2025",
+      "sha256": "cf22a0213aa81aa593d784d20063123012c4c970faf5ff5c0ea05a7c718d5557"
+    },
+    "epa_04_02_a": {
+      "title": "Table 4.2.A. Existing Net Summer Capacity by Energy Source and Producer Type, 2015 through 2025",
+      "sha256": "f208eaa5343bf8b6a3b540a377f55ab8d98ad53a9c8a5731d08e61d5520adbee"
+    },
+    "epa_11_01": {
+      "title": "Table 11.1 Reliability Metrics of U.S. Distribution System",
+      "sha256": "6c1690b4498158beb01cb6b181d2d019fff9e1fe74a8b5eab5ee3efcc7922252"
+    },
+    "epa_02_10": {
+      "title": "Table 2.10. Average Price of Electricity to Ultimate Customers by End-Use Sector, by State, 2025 and 2024",
+      "sha256": "aa9615b7b340b8c5dc60a7b5a1d8d74a070478502e5607c3783bb5a380c282b1"
+    }
   },
   "values": {
-    "netGenerationThousandMWh": { "table": "epa_01_01", "row": "All Energy Sources, Utility Scale Facilities, Year 2025", "value": 4425029 },
-    "retailSalesMWh": { "table": "epa_02_02", "row": "Total Electric Industry, 2025, Total", "value": 4079909354 },
-    "residentialSalesMWh": { "table": "epa_02_02", "row": "Total Electric Industry, 2025, Residential", "value": 1519150969 },
-    "netSummerCapacityMW": { "table": "epa_04_02_a", "row": "Total (All Sectors), 2025, Utility Total", "value": 1283803.8 },
+    "netGenerationThousandMWh": {
+      "table": "epa_01_01",
+      "row": "All Energy Sources, Utility Scale Facilities, Year 2025",
+      "value": 4425029
+    },
+    "retailSalesMWh": {
+      "table": "epa_02_02",
+      "row": "Total Electric Industry, 2025, Total",
+      "value": 4079909354
+    },
+    "residentialSalesMWh": {
+      "table": "epa_02_02",
+      "row": "Total Electric Industry, 2025, Residential",
+      "value": 1519150969
+    },
+    "netSummerCapacityMW": {
+      "table": "epa_04_02_a",
+      "row": "Total (All Sectors), 2025, Utility Total",
+      "value": 1283803.8
+    },
     "reliability": {
       "table": "epa_11_01",
       "row": "2025",
-      "ieeeWithMed": { "saidi": 269.2, "saifi": 1.34, "caidi": 201 },
-      "ieeeWithoutMed": { "saidi": 125.3, "saifi": 1.08, "caidi": 116 },
-      "ieeeLossOfSupplyRemoved": { "saidi": 246.8, "saifi": 1.226, "caidi": 201.2 },
-      "anyMethodWithMed": { "saidi": 262.6, "saifi": 1.338, "caidi": 196.3 },
-      "anyMethodWithoutMed": { "saidi": 120.8, "saifi": 1.053, "caidi": 114.7 }
+      "ieeeWithMed": {
+        "saidi": 269.2,
+        "saifi": 1.34,
+        "caidi": 201
+      },
+      "ieeeWithoutMed": {
+        "saidi": 125.3,
+        "saifi": 1.08,
+        "caidi": 116
+      },
+      "ieeeLossOfSupplyRemoved": {
+        "saidi": 246.8,
+        "saifi": 1.226,
+        "caidi": 201.2
+      },
+      "anyMethodWithMed": {
+        "saidi": 262.6,
+        "saifi": 1.338,
+        "caidi": 196.3
+      },
+      "anyMethodWithoutMed": {
+        "saidi": 120.8,
+        "saifi": 1.053,
+        "caidi": 114.7
+      }
+    },
+    "averagePriceCentsPerKwhByState": {
+      "table": "epa_02_10",
+      "row": "each state, Year 2025",
+      "values": {
+        "AL": {
+          "residential": 16.09,
+          "commercial": 14.6,
+          "industrial": 7.73
+        },
+        "AK": {
+          "residential": 26.11,
+          "commercial": 22.35,
+          "industrial": 19.86
+        },
+        "AZ": {
+          "residential": 15.26,
+          "commercial": 12.45,
+          "industrial": 8.05
+        },
+        "AR": {
+          "residential": 12.87,
+          "commercial": 10.76,
+          "industrial": 6.69
+        },
+        "CA": {
+          "residential": 31.35,
+          "commercial": 26.16,
+          "industrial": 20.96
+        },
+        "CO": {
+          "residential": 15.69,
+          "commercial": 12.37,
+          "industrial": 9.02
+        },
+        "CT": {
+          "residential": 29.31,
+          "commercial": 22.92,
+          "industrial": 18.43
+        },
+        "DE": {
+          "residential": 17.15,
+          "commercial": 12.68,
+          "industrial": 9.62
+        },
+        "DC": {
+          "residential": 21.92,
+          "commercial": 20.43,
+          "industrial": 14.82
+        },
+        "FL": {
+          "residential": 15.21,
+          "commercial": 11.53,
+          "industrial": 8.91
+        },
+        "GA": {
+          "residential": 14.74,
+          "commercial": 11.53,
+          "industrial": 7.88
+        },
+        "HI": {
+          "residential": 40.4,
+          "commercial": 36.31,
+          "industrial": 31.45
+        },
+        "ID": {
+          "residential": 11.83,
+          "commercial": 9.29,
+          "industrial": 7.88
+        },
+        "IL": {
+          "residential": 17.67,
+          "commercial": 13.1,
+          "industrial": 9.63
+        },
+        "IN": {
+          "residential": 15.96,
+          "commercial": 13.7,
+          "industrial": 8.66
+        },
+        "IA": {
+          "residential": 13.62,
+          "commercial": 10.84,
+          "industrial": 7.15
+        },
+        "KS": {
+          "residential": 14.44,
+          "commercial": 11.19,
+          "industrial": 8.04
+        },
+        "KY": {
+          "residential": 13.13,
+          "commercial": 11.75,
+          "industrial": 6.78
+        },
+        "LA": {
+          "residential": 12.52,
+          "commercial": 11.19,
+          "industrial": 6.18
+        },
+        "ME": {
+          "residential": 27.69,
+          "commercial": 20.86,
+          "industrial": 14.88
+        },
+        "MD": {
+          "residential": 19.53,
+          "commercial": 14.72,
+          "industrial": 12.52
+        },
+        "MA": {
+          "residential": 30.41,
+          "commercial": 23.1,
+          "industrial": 19.04
+        },
+        "MI": {
+          "residential": 20.03,
+          "commercial": 14.48,
+          "industrial": 8.51
+        },
+        "MN": {
+          "residential": 15.83,
+          "commercial": 12.35,
+          "industrial": 9.31
+        },
+        "MS": {
+          "residential": 14.03,
+          "commercial": 13.2,
+          "industrial": 7.28
+        },
+        "MO": {
+          "residential": 13.3,
+          "commercial": 10.46,
+          "industrial": 8.25
+        },
+        "MT": {
+          "residential": 12.99,
+          "commercial": 11.88,
+          "industrial": 7.03
+        },
+        "NE": {
+          "residential": 12.05,
+          "commercial": 8.5,
+          "industrial": 8.05
+        },
+        "NV": {
+          "residential": 13.26,
+          "commercial": 9.21,
+          "industrial": 8.09
+        },
+        "NH": {
+          "residential": 24.53,
+          "commercial": 20.11,
+          "industrial": 16.82
+        },
+        "NJ": {
+          "residential": 22.48,
+          "commercial": 16.53,
+          "industrial": 13.79
+        },
+        "NM": {
+          "residential": 14.85,
+          "commercial": 11.01,
+          "industrial": 5.85
+        },
+        "NY": {
+          "residential": 26.39,
+          "commercial": 20.97,
+          "industrial": 9.87
+        },
+        "NC": {
+          "residential": 14,
+          "commercial": 10.22,
+          "industrial": 7.79
+        },
+        "ND": {
+          "residential": 11.82,
+          "commercial": 7.36,
+          "industrial": 7.59
+        },
+        "OH": {
+          "residential": 16.9,
+          "commercial": 11.58,
+          "industrial": 8.39
+        },
+        "OK": {
+          "residential": 13.21,
+          "commercial": 9.09,
+          "industrial": 6.14
+        },
+        "OR": {
+          "residential": 15.46,
+          "commercial": 9.8,
+          "industrial": 8.2
+        },
+        "PA": {
+          "residential": 19.29,
+          "commercial": 12.42,
+          "industrial": 9.34
+        },
+        "RI": {
+          "residential": 29.48,
+          "commercial": 23.4,
+          "industrial": 21.4
+        },
+        "SC": {
+          "residential": 15.12,
+          "commercial": 11.18,
+          "industrial": 7.26
+        },
+        "SD": {
+          "residential": 13.32,
+          "commercial": 10.61,
+          "industrial": 8.65
+        },
+        "TN": {
+          "residential": 13.22,
+          "commercial": 12.87,
+          "industrial": 6.59
+        },
+        "TX": {
+          "residential": 15.4,
+          "commercial": 8.56,
+          "industrial": 6.35
+        },
+        "UT": {
+          "residential": 13.02,
+          "commercial": 10.06,
+          "industrial": 8.45
+        },
+        "VT": {
+          "residential": 22.79,
+          "commercial": 19.78,
+          "industrial": 12.23
+        },
+        "VA": {
+          "residential": 15.28,
+          "commercial": 9.95,
+          "industrial": 9.49
+        },
+        "WA": {
+          "residential": 13.17,
+          "commercial": 10.97,
+          "industrial": 7
+        },
+        "WV": {
+          "residential": 15.39,
+          "commercial": 11.73,
+          "industrial": 8.11
+        },
+        "WI": {
+          "residential": 18.08,
+          "commercial": 13.06,
+          "industrial": 8.94
+        },
+        "WY": {
+          "residential": 13.37,
+          "commercial": 9.53,
+          "industrial": 8.65
+        }
+      }
     }
   }
 }

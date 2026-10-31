@@ -81,6 +81,7 @@ test('20 sampled plants match pyarrow\'s reading of EIA\'s tables within 0.1%', 
 test('no plant page carries a coordinate, and every page counted in the build exists', async () => {
   const out = mkdtempSync(join(tmpdir(), 'gridprims-plants-'));
   await build({ outDir: out });
+  assert.match(readFileSync(join(out, 'plants/3/index.html'), 'utf8'), /<dd><a href="\/utilities\/195\/">Alabama Power Co<\/a><\/dd>/, 'the operator links to its utility page');
   const ids = readdirSync(join(out, 'plants'));
   assert.equal(ids.length, all.plants.length);
   for (const id of ids) {

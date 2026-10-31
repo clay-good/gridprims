@@ -1,6 +1,7 @@
 // EIA-861, Annual Electric Power Industry Report: utility sales, revenue, and
-// customers by state and sector; reliability (SAIDI, SAIFI, CAIDI); and the
-// counties each utility serves. Three tables from one release zip.
+// customers by state and sector; Texas wires utilities' delivery-only figures;
+// reliability (SAIDI, SAIFI, CAIDI); and the counties each utility serves.
+// Four tables from one release zip.
 
 export default {
   id: 'eia-861',
@@ -47,6 +48,20 @@ export default {
         { step: 'normalize', module: 'eia-861-sales' },
         { step: 'quirk', name: 'withheld-respondents', note: 'Utility number 88888 ("Withheld") appears once per withheld respondent group; its rows are kept and keyed by a sequence number.', fixture: 'verify/fixtures/data/eia-861/withheld.json' },
         { step: 'validate', key: ['utility_id', 'part', 'service_type', 'state', 'ba_code', 'seq'], rows: { min: 2600, max: 3200, maxDropPct: 5, maxRisePct: 25, from: 'vintages 2023 (2,822 rows), 2024 (2,815), and 2025 (2,869); largest yearly change +1.9%' } },
+        { step: 'partition', by: 'state' },
+        { step: 'write-shards' },
+        { step: 'write-csv-gz' },
+      ],
+    },
+    {
+      name: 'delivery',
+      title: 'Delivery-only revenue, sales, and customers of Texas wires utilities',
+      recipe: [
+        { step: 'unzip', entry: 'Delivery_Companies_{year}.xlsx' },
+        { step: 'read-xlsx', sheet: 'Delivery Companies', headerRows: 3 },
+        { step: 'normalize', module: 'eia-861-sales' },
+        { step: 'quirk', name: 'not-additive', note: 'EIA: "This data should not be added to the data in sales to ultimate customers, since it is already included by the power marketers on Part D." It is its own table and never enters state totals.', fixture: 'verify/fixtures/data/eia-861/delivery.json' },
+        { step: 'validate', key: ['utility_id', 'part', 'service_type', 'state', 'ba_code', 'seq'], rows: { min: 5, max: 15, maxDropPct: 30, maxRisePct: 50, from: 'vintages 2023 (6 rows), 2024 (7), and 2025 (7)' } },
         { step: 'partition', by: 'state' },
         { step: 'write-shards' },
         { step: 'write-csv-gz' },

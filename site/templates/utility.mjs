@@ -1,0 +1,88 @@
+// One page per electric utility (add-public-grid-data: utility pages): what it
+// sells and charges, how reliable it is, what it operates, and its peak.
+// Average price appears only for bundled service; delivery-only and
+// energy-only revenue per kWh is labeled as not a full price.
+
+import { html } from '../lib/html.mjs';
+import { layout } from './layout.mjs';
+import { sourceStamp } from '../ui/source-stamp.mjs';
+import { tableView } from '../lib/chart.mjs';
+import { SECTORS } from '../entities/utilities.mjs';
+import { plantPath } from './plant.mjs';
+
+export const utilityPath = (id) => `/utilities/${id}/`;
+
+const whole = (x) => Math.round(x).toLocaleString('en-US');
+const cents = (x) => x.toFixed(2);
+const mw = (x) => x.toLocaleString('en-US', { maximumFractionDigits: 1 });
+const dollars = (thousand) => `$${whole(thousand * 1000)}`;
+
+/** "20% above the state average", or "within 1%" when the two round together. */
+export function comparison(price, average, { t }, sector, state) {
+  const pct = Math.round(((price - average) / average) * 100);
+  const key = pct > 0 ? 'utility.compare.above' : pct < 0 ? 'utility.compare.below' : 'utility.compare.same';
+  return t(key, { pct: Math.abs(pct), sector: t(`utility.sectorPlural.${sector}`), average: cents(average), state });
+}
+
+/**
+ * @param {{utility: any, sources: any, i18n: any, plantHasPage?: (id: number) => boolean}} p
+ */
+export function utilityPage({ utility: u, sources, i18n, plantHasPage = () => false }) {
+  const { t, has } = i18n;
+  const fuel = (code) => (has(`fuel.${code}`) ? t(`fuel.${code}`) : code);
+  const k = (kind) => u.kinds[kind];
+  const bundled = k('bundled');
+  const res = bundled && bundled.res.sales > 0 ? { revenue: bundled.res.revenue, sales: bundled.res.sales, price: u.prices.bundled.res } : null;
+  const fuels = [...new Set([...Object.keys(u.fuelCapacity), ...Object.keys(u.fuelNet)])].sort((a, b) => (u.fuelCapacity[b] ?? 0) - (u.fuelCapacity[a] ?? 0));
+  const owned = u.plants.filter((p) => plantHasPage(p.id));
+  const sectorRows = (kind) => SECTORS.filter((s) => k(kind)[s].sales > 0 || k(kind)[s].customers > 0).map((s) => [t(`utility.sector.${s}`), whole(k(kind)[s].customers), whole(k(kind)[s].sales), dollars(k(kind)[s].revenue), u.prices[kind][s] === null ? '' : cents(u.prices[kind][s])]);
+  const priceHeader = (kind) => t(kind === 'bundled' ? 'utility.col.price' : `utility.col.perKwh.${kind}`);
+
+  const body = html`<p class="cell-section">${t('utility.kicker', { id: u.id })}</p>
+<h1>${u.name}</h1>
+<dl class="facts">
+  <div><dt>${t('utility.ownership')}</dt><dd>${u.ownership ?? t('plant.unknown')}</dd></div>
+  <div><dt>${t('utility.states')}</dt><dd>${u.states.join(', ')}</dd></div>
+  <div><dt>${t('utility.customers', { year: u.year })}</dt><dd class="mono">${whole(u.customers)}</dd></div>
+  <div><dt>${t('utility.sales', { year: u.year })}</dt><dd class="mono">${whole(u.totalSales)} MWh</dd></div>
+  <div><dt>${t('utility.revenue', { year: u.year })}</dt><dd class="mono">${dollars(u.totalRevenue)}</dd></div>
+</dl>
+${sourceStamp(sources.eia861, sources.eia861.tables[0], i18n)}
+
+<section><h2>${t('utility.charges')}</h2>
+${['bundled', 'delivery', 'energy'].filter(k).map((kind) => html`<h3>${t(`utility.kind.${kind}`)}</h3>
+${kind === 'bundled' ? '' : html`<p class="warning-chip">${t(`utility.notFullPrice.${kind}`)}</p>`}
+${tableView([t('utility.col.sector'), t('utility.col.customers'), t('utility.col.sales'), t('utility.col.revenue'), priceHeader(kind)], sectorRows(kind), t(`utility.kind.${kind}`))}`)}
+${res && u.stateAverage?.res ? html`<p data-compare>${comparison(res.price, u.stateAverage.res, i18n, 'res', u.homeState)}</p>` : ''}
+${res ? html`<details class="panel"><summary>${t('utility.howWeGotThis')}</summary>
+  <p class="mono" data-division>${t('utility.division', { revenue: dollars(res.revenue), kwh: whole(res.sales * 1000), cents: cents(res.price) })}</p>
+  <p>${t('utility.priceMethod')}</p></details>` : ''}
+</section>
+
+<section><h2>${t('utility.peak')}</h2>
+${u.peak ? html`<p data-peak>${t('utility.peakValue', { mw: whole(u.peak.mw), year: u.peak.year })}</p>`
+    : html`<p data-peak>${t('utility.peakNone')}</p>${u.baPeak ? html`<p>${t('utility.baPeak', { name: u.baPeak.name, mw: whole(u.baPeak.mw), year: u.baPeak.year })}</p>` : ''}`}
+${sources.ferc714 ? sourceStamp(sources.ferc714, sources.ferc714.tables[0], i18n) : ''}
+</section>
+
+<section><h2>${t('utility.reliability')}</h2>
+${u.reliability.length ? tableView([t('utility.col.state'), t('utility.col.standard'), t('utility.col.saidiWith'), t('utility.col.saifiWith'), t('utility.col.saidiWithout'), t('utility.col.saifiWithout')],
+    u.reliability.map((r) => [r.state, t(r.ieee ? 'utility.standard.ieee' : 'utility.standard.other'), r.withMed.saidi ?? '', r.withMed.saifi ?? '', r.withoutMed.saidi ?? '', r.withoutMed.saifi ?? '']), t('utility.reliability'))
+    : html`<p data-reliability>${t('utility.reliabilityNone', { year: u.year })}</p>`}
+<p>${t('utility.reliabilityMethod')}</p>
+</section>
+
+<section><h2>${t('utility.generation')}</h2>
+${fuels.length ? html`${tableView([t('utility.col.fuel'), t('utility.col.capacity'), t('utility.col.netGeneration', { year: u.year })],
+    fuels.map((f) => [fuel(f), u.fuelCapacity[f] ? `${mw(u.fuelCapacity[f])} MW` : '', u.fuelNet[f] === undefined ? '' : `${whole(u.fuelNet[f])} MWh`]), t('utility.generation'))}
+<p>${t('utility.generationScope')}</p>
+${owned.length ? html`<h3>${t('utility.plants')}</h3><ul class="tool-list">${owned.map((p) => html`<li><a href="${plantPath(p.id)}">${p.name}</a> · ${p.state} · ${mw(p.nameplateMw)} MW</li>`)}</ul>` : ''}`
+    : html`<p data-generation>${t(Object.keys(u.kinds).every((x) => x === 'delivery') ? 'utility.deliversOnly' : 'utility.buysAll')}</p>`}
+</section>
+
+<section><h2>${t('utility.rates')}</h2>
+<p data-rates>${u.rates ? t('utility.ratesCount', { count: u.rates.count, newest: u.rates.newest ? i18n.date(u.rates.newest) : t('plant.unknown') }) : t('utility.ratesNone')}</p>
+${sources.urdb && u.rates ? sourceStamp(sources.urdb, sources.urdb.tables[0], i18n) : ''}
+</section>`;
+  return layout({ i18n, title: `${u.name} · ${t('site.name')}`, description: t('utility.description', { name: u.name, states: u.states.join(', ') }), path: utilityPath(u.id), body, section: 'bills' });
+}
