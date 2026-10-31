@@ -67,6 +67,11 @@ for (const kind of ['chrome', 'firefox']) {
     const browser = await launch(kind);
     try {
       await browser.goto(server.url + '/');
+      // No saved choice: light unless the device asks for dark.
+      if (!(await browser.evaluate(`matchMedia('(prefers-color-scheme: dark)').matches`))) {
+        assert.equal(await browser.evaluate('document.documentElement.dataset.theme ?? null'), null);
+        assert.equal(await browser.evaluate(`getComputedStyle(document.body).backgroundColor`), 'rgb(243, 245, 242)');
+      }
       await browser.evaluate(`localStorage.setItem('gridprims-theme', 'light')`);
       await browser.goto(server.url + '/');
       assert.equal(await browser.evaluate('document.documentElement.dataset.theme'), 'light');

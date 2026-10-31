@@ -8,6 +8,8 @@ import { checkPlatformApis } from './gates/platform-apis.mjs';
 import { checkOwnImplementations } from './gates/own-implementations.mjs';
 import { checkFileCount } from './gates/file-count.mjs';
 import { checkManifests } from './gates/manifests.mjs';
+import { checkStyle } from './gates/style.mjs';
+import { checkCopy } from './gates/copy.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -17,6 +19,8 @@ const gates = [
   ['own implementations', () => checkOwnImplementations(root)],
   ['deployable file count', () => checkFileCount(join(root, 'dist'))],
   ['manifests and worked examples', () => checkManifests(root)],
+  ['style tokens and contrast', () => checkStyle(root)],
+  ['no literal copy in templates', () => checkCopy(root)],
 ];
 
 let failed = 0;

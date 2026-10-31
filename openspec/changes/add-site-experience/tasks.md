@@ -6,7 +6,7 @@
 
 ## 2. Strings and locales (phase 0)
 
-- [ ] 2.1 Create per-locale string files, the message formatter, and the literal-copy lint; verify the lint fails on a fixture template with literal text
+- [x] 2.1 Create per-locale string files, the message formatter, and the literal-copy lint; verify the lint fails on a fixture template with literal text
 - [ ] 2.2 Add the pseudo-locale and run the layout sweep at 320 and 1280 px; verify no overflow on every route template
 
 ## 3. Home and catalog (phase 1)

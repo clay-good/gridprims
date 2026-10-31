@@ -16,3 +16,4 @@ Each module here replaces what would usually be a package. Each has its own test
 | `verify/lib/static-server.mjs` | static file servers | Serves a folder on 127.0.0.1 with content types, plus in-memory routes | Test-only; no range requests or compression |
 | `site/lib/html.mjs` | template engines | Tagged-template HTML that escapes every interpolated value unless it is already markup; arrays join; `raw()` for markup this repository wrote | No partials or layouts beyond plain functions |
 | `site/lib/i18n.mjs` | message-format libraries | Message lookup by id, `{name}` placeholders, plural forms through `Intl.PluralRules`, dates through `Intl.DateTimeFormat` | No nested select forms yet |
+| `verify/lib/contrast.mjs` | color-contrast libraries | WCAG 2.2 relative luminance and contrast ratio for opaque `#rrggbb` colors | No alpha blending; translucent colors must be resolved first |

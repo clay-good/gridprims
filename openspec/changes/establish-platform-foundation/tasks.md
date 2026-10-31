@@ -70,7 +70,7 @@
 
 - [ ] 8.1 Golden-vector runner with tolerances and stored third-party reference outputs; verify a drifted fixture fails
 - [ ] 8.2 "How we got this" panel and the claims gate; verify an untested accuracy claim fails the build
-- [ ] 8.3 Shell, DESIGN.md tokens, components, light and night themes, command bar; verify "12 MWh to MMBtu" opens the reference unit converter (D10) filled in, the saved-theme and no-preference scenarios, and the contrast lint against the DESIGN.md ratios
+- [x] 8.3 Shell, DESIGN.md tokens, components, light and night themes, command bar; verify "12 MWh to MMBtu" opens the reference unit converter (D10) filled in, the saved-theme and no-preference scenarios, and the contrast lint against the DESIGN.md ratios
 - [ ] 8.4 PWA with offline tools; verify the load workbench parses a file in airplane mode after one visit
 - [ ] 8.5 Budgets on the reference profile, accessibility checks (including the screen-reader pacing and popover scenarios), and 320 px sweep through the own browser driver; verify CI fails on an oversized fixture page
 - [ ] 8.6 Deploy script using Cloudflare's direct-upload API with `fetch` and `crypto`; verify a staging deploy and a digest match
