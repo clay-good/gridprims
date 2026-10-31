@@ -67,8 +67,9 @@ function seasonOn(day, seasons) {
 
 /**
  * Price one billing period from its total kWh.
- * @param {{start: string, end: string, kwh: number}} period
- * @param {{fixedMonthly?: number, fixedDaily?: number, minimumMonthly?: number, seasons: Array<{name: string, from: string, tiers: Array<{upTo?: number, upToDaily?: number, rate: number}>}>}} tariff
+ * @param {{start: string, end: string, kwh: number, tou?: Record<string, number>}} period
+ *   tou is the kWh in each time-of-use period, as the bill prints them, for a tariff whose seasons list periods
+ * @param {{fixedMonthly?: number, fixedDaily?: number, minimumMonthly?: number, seasons: Array<{name: string, from: string, tiers?: Array<{upTo?: number, upToDaily?: number, rate: number}>, periods?: Array<{name: string, rate: number}>}>}} tariff
  *   fixedDaily is a fixed charge billed per day, for the days in the period
  *   a tier's upTo is its monthly allowance in kWh, or upToDaily its allowance per day; the last tier has none
  * @param {{prorate?: boolean}} [opts] proration splits kWh and tier allowances by days when the period crosses a season
@@ -102,9 +103,25 @@ export function priceTotals(period, tariff, { prorate = true } = {}) {
     lines.push({ label: 'fixed', days, cents: Number(cents(m)) });
     total += m;
   }
+  // Time-of-use kWh as printed: each period's kWh split by days across seasons, priced at that season's rate.
+  if (tariff.seasons.some((s) => s.periods)) {
+    if (!period.tou) throw new Error('this tariff is priced by time-of-use period: enter the kWh in each period');
+    for (const [name, k] of Object.entries(period.tou)) {
+      let rest = k;
+      runs.forEach((r, i) => {
+        const p = r.season.periods.find((x) => x.name === name);
+        if (!p) throw new Error(`${r.season.name} has no ${name}`);
+        const used = i === runs.length - 1 ? rest : Math.round(k * (r.days / days));
+        rest -= used;
+        const m = (micro(p.rate) * BigInt(Math.round(used * 1000))) / 1000n;
+        lines.push({ label: `${r.season.name} ${name}`, kwh: used, rate: p.rate, cents: Number(cents(m)), ...(crosses ? { days: r.days } : {}) });
+        total += m;
+      });
+    }
+  }
   // kWh and each tier's allowance split in proportion to days; the kWh split is rounded to whole kWh.
   let left = kwh;
-  runs.forEach((r, i) => {
+  if (!tariff.seasons.some((s) => s.periods)) runs.forEach((r, i) => {
     const share = r.days / days;
     const runKwh = i === runs.length - 1 ? left : Math.round(kwh * share);
     left -= runKwh;

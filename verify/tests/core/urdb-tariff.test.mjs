@@ -43,7 +43,7 @@ test('21 residential rates classify as read by hand', () => {
   for (const [label, who, service, totals, tou, demand] of HAND) {
     const c = classify(rate(label));
     assert.deepEqual({ service: c.service, totals: c.totals, tou: c.tou, demand: c.demand, residential: c.residential }, { service, totals, tou, demand, residential: true }, who);
-    assert.equal(toTariff(rate(label)) === null, !totals, who);
+    assert.equal(toTariff(rate(label))?.tou ?? null, totals ? false : c.touByPeriod ? true : null, who);
     if (!totals) assert.ok(c.reasons.length, `${who} says why totals cannot price it`);
   }
 });
@@ -60,14 +60,14 @@ test('conditions come from the rate name: low income, elderly or disabled, EV, s
 
 test('tiers: URDB max is cumulative, the engine wants each tier\'s own allowance, and adj is added to the rate', () => {
   const { tariff, notes } = toTariff(rate('5963ede55457a385144c9f92'));
-  assert.deepEqual(tariff, { fixedMonthly: 11.83, seasons: [{ name: 'period 1', from: '01-01', tiers: [{ rate: 0.118961, upTo: 2000 }, { rate: 0.118501, upTo: 13000 }, { rate: 0.117941 }] }] });
+  assert.deepEqual(tariff, { fixedMonthly: 11.83, seasons: [{ name: 'all year', from: '01-01', tiers: [{ rate: 0.118961, upTo: 2000 }, { rate: 0.118501, upTo: 13000 }, { rate: 0.117941 }] }] });
   assert.match(notes[0], /adjustment/);
 });
 
 test('seasons come from the months, and December running into January makes one season', () => {
   // Delaware Coop: period 0 October to May, period 1 June to September.
   const { tariff } = toTariff(rate('539f6a0aec4f024411ec8acb'));
-  assert.deepEqual(tariff.seasons.map((s) => [s.from, s.tiers.length]), [['06-01', 1], ['10-01', 3]]);
+  assert.deepEqual(tariff.seasons.map((s) => [s.name, s.from, s.tiers.length]), [['October to May', '10-01', 3], ['June to September', '06-01', 1]]);
   const winter = priceTotals({ start: '2026-01-01', end: '2026-01-31', kwh: 1500 }, tariff);
   // $7.95 + 700 × 11.9148¢ + 500 × 10.3748¢ + 300 × 9.3748¢ = $7.95 + $83.40 + $51.87 + $28.12
   assert.equal(winter.totalCents, 795 + 8340 + 5187 + 2812);
@@ -77,11 +77,37 @@ test('seasons come from the months, and December running into January makes one 
 
 test('daily allowances: Seattle\'s 10 kWh a day in summer gives a 30-day period 300 kWh in the first tier', () => {
   const { tariff } = toTariff(rate('59f2314d5457a3ff610d792e'));
-  assert.deepEqual(tariff.seasons[0], { name: 'period 1', from: '04-01', tiers: [{ rate: 0.027901, upToDaily: 10 }, { rate: 0.051724 }] });
+  assert.deepEqual(tariff.seasons[1], { name: 'April to September', from: '04-01', tiers: [{ rate: 0.027901, upToDaily: 10 }, { rate: 0.051724 }] });
   const r = priceTotals({ start: '2026-06-01', end: '2026-06-30', kwh: 500 }, tariff);
   assert.deepEqual(r.lines.filter((l) => l.kwh).map((l) => l.kwh), [300, 200]);
   // $2.00 + 300 × 2.7901¢ + 200 × 5.1724¢ = $2.00 + $8.37 + $10.34
   assert.equal(r.totalCents, 200 + 837 + 1034);
+});
+
+test('kWh by time-of-use period: Penelec NY prices 300 peak and 500 off-peak kWh at its two rates, with the hours named', () => {
+  const t = toTariff(rate('5978fc0e5457a3fc3123732c'));
+  assert.equal(t.tou, true);
+  assert.deepEqual(t.tariff.seasons, [{ name: 'all year', from: '01-01', periods: [
+    { name: 'period 1', rate: 0.068912, hours: 'weekdays 8 am to 8 pm' },
+    { name: 'period 2', rate: 0.022752, hours: 'weekdays 8 pm to 8 am, weekends all day' },
+  ] }]);
+  const r = priceTotals({ start: '2026-03-01', end: '2026-03-30', kwh: 800, tou: { 'period 1': 300, 'period 2': 500 } }, t.tariff);
+  // 300 × 6.8912¢ + 500 × 2.2752¢ = $20.67 + $11.38, above the $9.18 minimum.
+  assert.equal(r.totalCents, 2067 + 1138);
+  assert.throws(() => priceTotals({ start: '2026-03-01', end: '2026-03-30', kwh: 800 }, t.tariff), /time-of-use period/);
+  // A TOU rate with tiered periods cannot be priced from kWh by period alone.
+  assert.equal(toTariff(rate('5a94ceaa5457a3f552a199a0')), null);
+});
+
+test('a time-of-use period crossing a season splits each period\'s kWh by days', () => {
+  const tariff = { seasons: [
+    { name: 'winter', from: '10-01', periods: [{ name: 'peak', rate: 0.20 }, { name: 'off-peak', rate: 0.10 }] },
+    { name: 'summer', from: '06-01', periods: [{ name: 'peak', rate: 0.30 }, { name: 'off-peak', rate: 0.10 }] },
+  ] };
+  const r = priceTotals({ start: '2026-05-17', end: '2026-06-15', kwh: 900, tou: { peak: 300, 'off-peak': 600 } }, tariff);
+  // 15 winter days and 15 summer: peak 150 at 20¢ and 150 at 30¢, off-peak 300 and 300 at 10¢.
+  assert.deepEqual(r.lines.map((l) => [l.label, l.kwh, l.cents]), [['winter peak', 150, 3000], ['summer peak', 150, 4500], ['winter off-peak', 300, 3000], ['summer off-peak', 300, 3000]]);
+  assert.match(r.method, /15 days at winter rates, 15 days at summer rates/);
 });
 
 test('across the snapshot: every residential rate classifies, and every one totals can price converts and prices', () => {
@@ -91,7 +117,9 @@ test('across the snapshot: every residential rate classifies, and every one tota
     const t = toTariff(r);
     if (!t) continue;
     priced++;
-    const { totalCents } = priceTotals({ start: '2026-03-01', end: '2026-03-30', kwh: 900 }, t.tariff);
+    const tou = t.tou ? Object.fromEntries(t.tariff.seasons[0].periods.map((p) => [p.name, 100])) : undefined;
+    // Within one season: the season's own periods.
+    const { totalCents } = priceTotals({ start: '2026-03-01', end: '2026-03-30', kwh: 900, tou }, t.tariff.seasons.length === 1 || !t.tou ? t.tariff : { ...t.tariff, seasons: [t.tariff.seasons[0]] });
     assert.ok(Number.isFinite(totalCents), r.label);
   }
   assert.ok(priced / res.length > 0.6, `${priced} of ${res.length} price from totals`);
