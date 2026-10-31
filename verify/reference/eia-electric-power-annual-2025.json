@@ -1,0 +1,24 @@
+{
+  "source": "U.S. Energy Information Administration, Electric Power Annual 2025, Excel tables at https://www.eia.gov/electricity/annual/xls/, retrieved 2026-10-31 (files last modified 2026-10-19)",
+  "tables": {
+    "epa_01_01": { "title": "Table 1.1. Total Electric Power Industry Summary Statistics, 2025 and 2024", "sha256": "596998227d11af2480e1168b4bbcef356aaf28e466391bfbf904a2a935498297" },
+    "epa_02_02": { "title": "Table 2.2. Sales and Direct Use of Electricity to Ultimate Customers by Sector, by Provider, 2015 through 2025", "sha256": "cf22a0213aa81aa593d784d20063123012c4c970faf5ff5c0ea05a7c718d5557" },
+    "epa_04_02_a": { "title": "Table 4.2.A. Existing Net Summer Capacity by Energy Source and Producer Type, 2015 through 2025", "sha256": "f208eaa5343bf8b6a3b540a377f55ab8d98ad53a9c8a5731d08e61d5520adbee" },
+    "epa_11_01": { "title": "Table 11.1 Reliability Metrics of U.S. Distribution System", "sha256": "6c1690b4498158beb01cb6b181d2d019fff9e1fe74a8b5eab5ee3efcc7922252" }
+  },
+  "values": {
+    "netGenerationThousandMWh": { "table": "epa_01_01", "row": "All Energy Sources, Utility Scale Facilities, Year 2025", "value": 4425029 },
+    "retailSalesMWh": { "table": "epa_02_02", "row": "Total Electric Industry, 2025, Total", "value": 4079909354 },
+    "residentialSalesMWh": { "table": "epa_02_02", "row": "Total Electric Industry, 2025, Residential", "value": 1519150969 },
+    "netSummerCapacityMW": { "table": "epa_04_02_a", "row": "Total (All Sectors), 2025, Utility Total", "value": 1283803.8 },
+    "reliability": {
+      "table": "epa_11_01",
+      "row": "2025",
+      "ieeeWithMed": { "saidi": 269.2, "saifi": 1.34, "caidi": 201 },
+      "ieeeWithoutMed": { "saidi": 125.3, "saifi": 1.08, "caidi": 116 },
+      "ieeeLossOfSupplyRemoved": { "saidi": 246.8, "saifi": 1.226, "caidi": 201.2 },
+      "anyMethodWithMed": { "saidi": 262.6, "saifi": 1.338, "caidi": 196.3 },
+      "anyMethodWithoutMed": { "saidi": 120.8, "saifi": 1.053, "caidi": 114.7 }
+    }
+  }
+}

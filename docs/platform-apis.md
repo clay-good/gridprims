@@ -18,7 +18,8 @@ What gridprims relies on from Node.js and the browser, and nothing else (`platfo
 | `node:path` | 0.x | Stable | Path handling |
 | `node:url` | 0.x | Stable | `fileURLToPath`, `pathToFileURL` |
 | `node:crypto` | 0.x | Stable | SHA-256 checksums |
-| `node:zlib` | 0.x | Stable | gzip and raw inflate (`.xlsx`) |
+| `node:zlib` | 0.x | Stable | gzip and raw inflate (`.xlsx`); gzip and Brotli Parquet pages |
+| `node:zlib` `zstdDecompressSync` | 23.8 and 22.15 | Experimental | Zstandard Parquet pages (PUDL's files use Snappy, which `parsers/parquet.mjs` decodes itself); used only by the pipeline and tests, never in a browser |
 | `node:test` | 18.0 (stable 20.0) | Stable | Test runner |
 | `node:assert` | 0.x | Stable | Test assertions |
 | `node:os` | 0.x | Stable | Temporary directories in tests |
