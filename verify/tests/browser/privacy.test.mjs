@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { browserPages } from '../../browser/pages.mjs';
-import { findBrowser, launch } from '../../lib/browser.mjs';
+import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { foreign, leaks } from '../../lib/requests.mjs';
 import { tempDir } from '../../lib/temp.mjs';
@@ -79,7 +79,7 @@ for (const kind of ['chrome', 'firefox']) {
     const b64 = Buffer.from(rows.join('\n')).toString('base64');
     try {
       await browser.goto(`${server.url}/files/`);
-      await browser.evaluate('new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r() : setTimeout(f, 20); f(); })');
+      await waitFor(browser, "document.documentElement.dataset.ready === 'true' && Number(document.documentElement.dataset.loads) >= 1");
       const loads = Number(await browser.evaluate('document.documentElement.dataset.loads'));
       await browser.evaluate(`(() => {
         const bytes = Uint8Array.from(atob('${b64}'), (c) => c.charCodeAt(0));
@@ -89,11 +89,11 @@ for (const kind of ['chrome', 'firefox']) {
         input.files = dt.files;
         input.dispatchEvent(new Event('change', { bubbles: true }));
       })()`);
-      await browser.evaluate(`new Promise((r) => { const f = () => Number(document.documentElement.dataset.loads) > ${loads} ? r() : setTimeout(f, 20); f(); })`);
+      await waitFor(browser, `Number(document.documentElement.dataset.loads) > ${loads}`, 60_000);
       log.length = 0;
       browser.requests.length = 0;
       await browser.evaluate("document.querySelector('[data-make-report]').click()");
-      await browser.evaluate("new Promise((r) => { const f = () => document.documentElement.dataset.report ? r() : setTimeout(f, 20); f(); })");
+      await waitFor(browser, 'document.documentElement.dataset.report === "1"');
       const text = await browser.evaluate("document.querySelector('[data-report-view]').textContent");
       assert.match(text, /Load and bill report/);
       assert.match(text, /gridprims gives screening estimates, not utility studies\./);
