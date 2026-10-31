@@ -15,6 +15,8 @@ node pipeline/run.mjs eia-861 --year 2025 --input f8612025.zip  # the same from 
 | `workflows.mjs` | Every scheduled workflow with its interval and staleness threshold |
 | `lib/health.mjs` | The health record at `data/health/pipeline.json`, published at `/health/pipeline.json` |
 | `lib/github.mjs` | Re-enabling disabled workflows and opening issues through the host's API |
+| `get-data.mjs` | Downloads dataset files from gridprims.com and keeps each only if it matches the digest committed in the clone |
+| `build-data.mjs` | Rebuilds every dataset from the publisher's own file and reports any checksum that differs |
 | `run.mjs` | Runs a dataset's recipe; when a validator fails, nothing is written and the previous version stays live |
 | `registry/<id>.mjs` | One entry per dataset: publisher, captured terms, redistribution basis, attribution, cadence, CEII screen, owning change, pinned raw checksums, and the recipe as data |
 | `normalize/` | One normalizer per table |

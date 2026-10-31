@@ -120,3 +120,7 @@ Checked against the published schemas on 2026-10-30 (committed under `verify/ref
 | Legacy `initialize` with an unknown version | The newest legacy version we support, as the legacy versions require of servers |
 | A request with no `_meta` version | Served, so legacy clients keep working after `initialize` |
 | Unknown tool or resource | `-32602` |
+
+## 10. Reproducing a snapshot from the publisher
+
+`node pipeline/build-data.mjs` rebuilds every served dataset from the publisher's own file and compares checksums with the committed manifest. On 2026-10-31 it rebuilt EIA-861 (version 2026-10) live from `eia.gov`: the raw file's SHA-256 matched the pinned `f59f6c73…a396`, and all 51 shards and the CSV download matched byte for byte. `node pipeline/get-data.mjs` fetches the same files from gridprims.com and accepts each only if it matches the digest committed in the clone.
