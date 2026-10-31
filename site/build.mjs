@@ -14,7 +14,7 @@ import { limitsRecord } from '../core/contract/limits.mjs';
 import { createI18n } from './lib/i18n.mjs';
 import { toolPath } from './ui/tool-page.mjs';
 import { tokensCss } from './styles/tokens.mjs';
-import { calculatorPage, changelogPage, homePage, limitsPage, notFoundPage } from './templates/pages.mjs';
+import { calculatorPage, changelogPage, homePage, limitsPage, notFoundPage, settingsPage } from './templates/pages.mjs';
 import changelog from '../data/curated/changelog.mjs';
 import { THEME_SCRIPT } from './templates/layout.mjs';
 import { walk } from '../verify/lib/walk.mjs';
@@ -60,6 +60,7 @@ export function build(opts = {}) {
   write('/limits/', limitsPage({ tools: TOOLS, i18n }));
   writeFileSync(join(outDir, 'limits/limits.json'), JSON.stringify(limitsRecord(TOOLS), null, 2) + '\n');
   write('/changelog/', changelogPage({ entries: changelog, i18n }));
+  write('/settings/', settingsPage({ i18n }));
   write('/', homePage({ tools: TOOLS, i18n }));
   write('/404.html', notFoundPage({ i18n }));
 

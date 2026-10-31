@@ -41,10 +41,10 @@
 
 ## 5. Privacy and security
 
-- [ ] 5.1 Configure CSP and security headers in the Worker; verify the header smoke test passes on every route template
-- [ ] 5.2 Build the sentinel egress test; verify it fails on a deliberately leaking fixture
-- [ ] 5.3 Build the third-party request audit; verify it fails on a fixture page that loads an external font
-- [ ] 5.4 Build the settings screen with "Erase all local data"; verify storage is empty after erase except the app shell cache
+- [x] 5.1 Configure CSP and security headers in the Worker; verify the header smoke test passes on every route template
+- [x] 5.2 Build the sentinel egress test; verify it fails on a deliberately leaking fixture
+- [x] 5.3 Build the third-party request audit; verify it fails on a fixture page that loads an external font
+- [x] 5.4 Build the settings screen with "Erase all local data"; verify storage is empty after erase except the app shell cache
 - [ ] 5.5 Publish digests and a zero-package SBOM per release; verify a rebuild of a tag reproduces the digests
 
 ## 6. File intake

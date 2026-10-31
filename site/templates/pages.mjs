@@ -119,3 +119,21 @@ export function changelogPage({ entries, i18n }) {
 </table></div>`;
   return layout({ i18n, title: `${t('changelog.title')} · ${t('site.name')}`, description: t('changelog.intro'), path: '/changelog/', body });
 }
+
+/** The settings page: what this device holds, and erasing it (platform/privacy-and-security). */
+export function settingsPage({ i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('settings.title')}</h1><p class="purpose">${t('settings.intro')}</p>
+<section class="panel" data-settings>
+  <h2>${t('settings.stored')}</h2>
+  <ul class="mono" data-stored></ul>
+  <p data-empty hidden>${t('settings.none')}</p>
+  <p><button class="button" type="button" data-erase>${t('settings.erase')}</button></p>
+  <div data-confirm hidden>
+    <p>${t('settings.confirmText')}</p>
+    <p class="answer-actions"><button class="button" type="button" data-erase-yes>${t('settings.confirm')}</button><button class="button" type="button" data-erase-no>${t('settings.cancel')}</button></p>
+  </div>
+  <p role="status" data-erased></p>
+</section>`;
+  return layout({ i18n, title: `${t('settings.title')} · ${t('site.name')}`, description: t('settings.intro'), path: '/settings/', body, modules: ['/site/pages/settings.js'] });
+}

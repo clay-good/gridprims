@@ -14,11 +14,17 @@ export const TYPES = {
 
 /**
  * @param {string} root folder to serve
- * @param {{routes?: Record<string, {body: Uint8Array | string, type?: string}>, headers?: Record<string, string>, port?: number}} [opts]
+ * @param {{routes?: Record<string, {body: Uint8Array | string, type?: string}>, headers?: Record<string, string>, port?: number, onRequest?: (r: {method: string, url: string, headers: object, body: string}) => void}} [opts]
  * @returns {Promise<{url: string, close: () => Promise<void>}>}
  */
 export async function serve(root, opts = {}) {
   const server = createServer(async (req, res) => {
+    if (opts.onRequest) {
+      // Record everything the browser sent, for the egress test.
+      const chunks = [];
+      for await (const c of req) chunks.push(c);
+      opts.onRequest({ method: req.method, url: req.url, headers: req.headers, body: Buffer.concat(chunks).toString('utf8') });
+    }
     const path = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     const route = opts.routes?.[path];
     const headers = { 'cache-control': 'no-store', ...opts.headers };
