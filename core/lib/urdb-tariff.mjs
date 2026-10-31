@@ -34,7 +34,7 @@ export function classify(r) {
   const tou = weekday.some((m, i) => new Set(m).size > 1 || (weekend[i] && new Set([...m, ...weekend[i]]).size > 1));
   // A demand structure whose every rate is zero charges nothing.
   const demand = [r.demand_rate_structure, r.flat_demand_structure, r.coincident_rate_structure]
-    .some((s) => json(s)?.flat().some((p) => Object.values(p).flat().some((t) => (t?.rate ?? 0) + (t?.adj ?? 0) !== 0)));
+    .some((s) => json(s)?.flat().some((p) => Object.values(p).flat().some((t) => Number(t?.rate ?? 0) + Number(t?.adj ?? 0) !== 0)));
   const reasons = [];
   if (!strux.length) reasons.push('no energy charges listed');
   if (tou) reasons.push('time-of-use energy, which totals can only estimate');
@@ -90,7 +90,8 @@ export function toTariff(r) {
   let adj = false;
   const rateOf = (t) => {
     if (t.adj) adj = true;
-    return Number(((t.rate ?? 0) + (t.adj ?? 0)).toFixed(6));
+    // URDB stores a few rates as text ("8.18").
+    return Number((Number(t.rate ?? 0) + Number(t.adj ?? 0)).toFixed(6));
   };
   const tierList = (period) => {
     let below = 0;
@@ -98,8 +99,8 @@ export function toTariff(r) {
       // URDB's max is the tier's upper kWh, counted from zero; the engine wants each tier's own allowance.
       // "kWh daily" tiers are allowances per day of the period.
       const key = t.unit === 'kWh daily' ? 'upToDaily' : 'upTo';
-      const tier = { rate: rateOf(t), ...(t.max !== undefined ? { [key]: Number((t.max - below).toFixed(6)) } : {}) };
-      if (t.max !== undefined) below = t.max;
+      const tier = { rate: rateOf(t), ...(t.max !== undefined ? { [key]: Number((Number(t.max) - below).toFixed(6)) } : {}) };
+      if (t.max !== undefined) below = Number(t.max);
       return tier;
     });
   };

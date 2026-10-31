@@ -1,0 +1,1599 @@
+{
+ "source": "data/urdb/2026-10/rates.csv.gz, the published URDB snapshot",
+ "sha256": "75b7da10040734e6dfa9ce87ae333f977551532ab498f854e53dec32473eb807",
+ "rates": [
+  {
+   "label": "539f6aadec4f024411ec932d",
+   "why": "fixed $/day",
+   "name": "Residential",
+   "expect": {
+    "fixed": [
+     1.5,
+     "day"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": [
+     "kW",
+     false,
+     2
+    ],
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6ddcec4f024411ecbb0b",
+   "why": "fixed $/day",
+   "name": "Residential",
+   "expect": {
+    "fixed": [
+     0.9,
+     "day"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      2
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539fcae9ec4f024d2f54009a",
+   "why": "fixed $/day",
+   "name": "Schedule 1/61: Residential/Farm Single-Phase",
+   "expect": {
+    "fixed": [
+     1.285,
+     "day"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "53e13fd95257a3d57c2871e2",
+   "why": "fixed $/day",
+   "name": "Residential L-1-A Standard Service Rate",
+   "expect": {
+    "fixed": [
+     0.75,
+     "day"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      3,
+      3
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "5925fc3d5457a3ea28de90e1",
+   "why": "fixed $/day",
+   "name": "Residential Rate 10",
+   "expect": {
+    "fixed": [
+     0.822,
+     "day"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      2
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a8fec4f024411ec9149",
+   "why": "minimum $/year",
+   "name": "Annual Electric Thermal Storage/Dual Fuel Service - Rate 18",
+   "expect": {
+    "fixed": [
+     2.0,
+     "month"
+    ],
+    "minimum": [
+     48.0,
+     "year"
+    ],
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6b35ec4f024411ec9a15",
+   "why": "minimum $/year",
+   "name": "Schedule 40 (Agricultural Pumping Service) - Over 300 kW",
+   "expect": {
+    "fixed": null,
+    "minimum": [
+     1457.0,
+     "year"
+    ],
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": 0.56,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6bcdec4f024411eca139",
+   "why": "minimum $/year",
+   "name": "Seasonal General Service-Commercial",
+   "expect": {
+    "fixed": null,
+    "minimum": [
+     150.0,
+     "year"
+    ],
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "63b48fbaa24bf41d5409d770",
+   "why": "minimum $/day",
+   "name": "E-6 -Residential Time of Use Baseline Region X; Closed Rate",
+   "expect": {
+    "fixed": [
+     0.25298,
+     "day"
+    ],
+    "minimum": [
+     0.3481,
+     "day"
+    ],
+    "energy": {
+     "periods": 5,
+     "tiers": [
+      2,
+      2,
+      2,
+      2,
+      2
+     ],
+     "units": [
+      "kWh daily"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "66cc9e270d535cf5c3058518",
+   "why": "minimum $/day",
+   "name": "Domestic Service: D - Baseline Region 5",
+   "expect": {
+    "fixed": [
+     0.031,
+     "day"
+    ],
+    "minimum": [
+     0.346,
+     "day"
+    ],
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      3,
+      3
+     ],
+     "units": [
+      "kWh daily"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a45ec4f024411ec8d39",
+   "why": "time-of-use demand in kVA",
+   "name": "Industrial/Commercial Generators Rate",
+   "expect": {
+    "fixed": [
+     26.75,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": [
+     "kVA",
+     false,
+     1
+    ],
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6aacec4f024411ec92b7",
+   "why": "time-of-use demand in kVA",
+   "name": "Residential",
+   "expect": {
+    "fixed": [
+     22.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": [
+     "kVA",
+     false,
+     1
+    ],
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6adaec4f024411ec94c3",
+   "why": "time-of-use demand in kVA",
+   "name": "Schedule Large Power- Rate 0013",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": [
+     "kVA",
+     false,
+     1
+    ],
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6ebeec4f024411ecc5f3",
+   "why": "daily demand",
+   "name": "Commercial Primary Rate (EH C)",
+   "expect": {
+    "fixed": [
+     19.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      3
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kVA",
+     true,
+     1
+    ],
+    "ratchet": true,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f71d7ec4f024411eceafb",
+   "why": "daily demand",
+   "name": "Large Power (Time-of-use Service)",
+   "expect": {
+    "fixed": [
+     275.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      1,
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": [
+     "kW",
+     true,
+     3
+    ],
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": 1.25,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539fc29aec4f024c27d8b30f",
+   "why": "daily demand",
+   "name": "Small Power Producers and Co-Generators Energy and Capacity",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     true,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a0bec4f024411ec8b69",
+   "why": "demand in horsepower",
+   "name": "irrigation rates",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": null,
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "energy tiers in kWh/hp",
+     "monthly demand charge in hp"
+    ]
+   }
+  },
+  {
+   "label": "539f6a34ec4f024411ec8cc7",
+   "why": "demand in horsepower",
+   "name": "Electric Current for Irrigation",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": null,
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "energy tiers in kWh/hp"
+    ]
+   }
+  },
+  {
+   "label": "539f6a80ec4f024411ec90a3",
+   "why": "demand in horsepower",
+   "name": "Irrigation Service (Rate I-S)",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "monthly demand charge in hp"
+    ]
+   }
+  },
+  {
+   "label": "539f6a0aec4f024411ec8afb",
+   "why": "tiers in kWh per kW",
+   "name": "SCHEDULE 16 - LARGE POWER - ABOVE 7,500 kW",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      2,
+      2
+     ],
+     "units": [
+      "kWh/kW"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     2
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a0bec4f024411ec8b09",
+   "why": "tiers in kWh per kW",
+   "name": "Medium Commercial",
+   "expect": {
+    "fixed": [
+     97.59,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      3
+     ],
+     "units": [
+      "kWh/kW"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a0bec4f024411ec8b0d",
+   "why": "tiers in kWh per kW",
+   "name": "Rate 107- Industrial Secondary: Governmental, Outside Corporate Limits 2014",
+   "expect": {
+    "fixed": [
+     105.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      1,
+      1
+     ],
+     "units": [
+      "kWh/kW"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a80ec4f024411ec90c1",
+   "why": "tiers in kWh per day",
+   "name": "Residential Service",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      1,
+      2
+     ],
+     "units": [
+      "kWh",
+      "kWh daily"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6accec4f024411ec944f",
+   "why": "tiers in kWh per day",
+   "name": "General Service without Demand Three Phase Commercial",
+   "expect": {
+    "fixed": [
+     27.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      3
+     ],
+     "units": [
+      "kWh daily"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a0aec4f024411ec8ad3",
+   "why": "tiers in kWh per kVA or hp",
+   "name": "Irrigation and Grain-Drying Service I-4 (15, 16)- Four Control Days - With No Capacitor",
+   "expect": {
+    "fixed": [
+     26.75,
+     "month"
+    ],
+    "minimum": null,
+    "energy": null,
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "energy tiers in kWh/hp"
+    ]
+   }
+  },
+  {
+   "label": "539f6a72ec4f024411ec8ff5",
+   "why": "tiers in kWh per kVA or hp",
+   "name": "Irrigation: Rotating Pivots Service - Three-Phase",
+   "expect": {
+    "fixed": [
+     37.08333333,
+     "month"
+    ],
+    "minimum": null,
+    "energy": null,
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "energy tiers in kWh/hp"
+    ]
+   }
+  },
+  {
+   "label": "539f6a8eec4f024411ec90f7",
+   "why": "tiers in kWh per kVA or hp",
+   "name": "Irrigation Single Phase No control",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": null,
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "energy tiers in kWh/hp",
+     "monthly demand charge in hp"
+    ]
+   }
+  },
+  {
+   "label": "539f6a55ec4f024411ec8e67",
+   "why": "coincident demand",
+   "name": "Large Load Voluntary Load Control",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "coincident demand charge"
+    ]
+   }
+  },
+  {
+   "label": "539f6a7fec4f024411ec902b",
+   "why": "coincident demand",
+   "name": "Commercial Time-of-Peak",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "coincident demand charge"
+    ]
+   }
+  },
+  {
+   "label": "539f6a9dec4f024411ec91dd",
+   "why": "coincident demand",
+   "name": "THREE-PHASE INTERRUPTIBLE REGULAR SERVICE",
+   "expect": {
+    "fixed": [
+     62.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      3
+     ],
+     "units": [
+      "kWh/kW"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "coincident demand charge"
+    ]
+   }
+  },
+  {
+   "label": "539f6a45ec4f024411ec8d19",
+   "why": "ratchet",
+   "name": "M System- Irrigation Service - Standard",
+   "expect": {
+    "fixed": [
+     16.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      3
+     ],
+     "units": [
+      "kWh/kW"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": true,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a7fec4f024411ec9019",
+   "why": "ratchet",
+   "name": "Large Industrial Class(Three Phase)",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      3
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": true,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a80ec4f024411ec9089",
+   "why": "ratchet",
+   "name": "Schedule B",
+   "expect": {
+    "fixed": [
+     25.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": true,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a9eec4f024411ec920b",
+   "why": "ratchet",
+   "name": "Large Industrial Service (Distribution Only 34,500 Volts)",
+   "expect": {
+    "fixed": [
+     682.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": null,
+    "demand": [
+     "kW",
+     false,
+     2
+    ],
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": true,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": 0.25,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6b16ec4f024411ec983d",
+   "why": "demand window stated",
+   "name": "SCHEDULE IPS-I-3: INDUSTRIAL POWER SERVICE - INTERRUPTIBLE",
+   "expect": {
+    "fixed": [
+     350.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      1,
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     30.0,
+     true
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6b72ec4f024411ec9c9d",
+   "why": "demand window stated",
+   "name": "Medium Commercial Service",
+   "expect": {
+    "fixed": [
+     85.59,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      3,
+      3
+     ],
+     "units": [
+      "kWh/kW"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     30.0,
+     true
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6bf9ec4f024411eca39b",
+   "why": "demand window stated",
+   "name": "General Service- Single-Phase(Large)",
+   "expect": {
+    "fixed": [
+     63.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": true,
+    "window": [
+     30.0,
+     true
+    ],
+    "kvar": 0.6,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a23ec4f024411ec8ba1",
+   "why": "reactive power charge",
+   "name": "Large Power Rate",
+   "expect": {
+    "fixed": [
+     40.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 3,
+     "tiers": [
+      1,
+      1,
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": 0.25,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a23ec4f024411ec8bd3",
+   "why": "reactive power charge",
+   "name": "Large General Service",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     2
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": 0.32,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a23ec4f024411ec8bf1",
+   "why": "reactive power charge",
+   "name": "Large General Service Single Phase",
+   "expect": {
+    "fixed": [
+     177.08,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      1,
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": [
+     "kW",
+     false,
+     2
+    ],
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": 0.27,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a0aec4f024411ec8ac3",
+   "why": "sell rates",
+   "name": "Gs-1 General Service Three Phase",
+   "expect": {
+    "fixed": [
+     12.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "export (sell) rates"
+    ]
+   }
+  },
+  {
+   "label": "539f6a23ec4f024411ec8b99",
+   "why": "sell rates",
+   "name": "General Service Non-Demand",
+   "expect": {
+    "fixed": null,
+    "minimum": null,
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      1,
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "export (sell) rates"
+    ]
+   }
+  },
+  {
+   "label": "58f637615457a3f14e156660",
+   "why": "fuel adjustments",
+   "name": "Small General Service (SGS-G)",
+   "expect": {
+    "fixed": [
+     13.39,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": [
+     "monthly fuel adjustments"
+    ]
+   }
+  },
+  {
+   "label": "539f6a55ec4f024411ec8e49",
+   "why": "units not stated",
+   "name": "Medium Commercial",
+   "expect": {
+    "fixed": [
+     30.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6c97ec4f024411ecab4b",
+   "why": "units not stated",
+   "name": "Coincident Peak Rate- 98-3",
+   "expect": {
+    "fixed": [
+     360.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 4,
+     "tiers": [
+      1,
+      1,
+      1,
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     2
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6a0aec4f024411ec8aa3",
+   "why": "plain",
+   "name": "MKEC - Interruptible Industrial Service",
+   "expect": {
+    "fixed": [
+     100.62,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6ae9ec4f024411ec95c3",
+   "why": "plain",
+   "name": "BESH- Residential Single Family Without Electric Space Heat Delivery Class(Unbundled)",
+   "expect": {
+    "fixed": [
+     19.11,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": [
+     "kW",
+     false,
+     1
+    ],
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6bbdec4f024411eca0bd",
+   "why": "plain",
+   "name": "Ms-1 Street and Area Lighting Service  Overhead 104 W LED",
+   "expect": {
+    "fixed": [
+     15.0,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6c97ec4f024411ecab8b",
+   "why": "plain",
+   "name": "Commercial/Industrial I ELECTRIC HEAT",
+   "expect": {
+    "fixed": [
+     7.71,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 2,
+     "tiers": [
+      3,
+      2
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  },
+  {
+   "label": "539f6d7dec4f024411ecb6a1",
+   "why": "plain",
+   "name": "Residential (KW10)",
+   "expect": {
+    "fixed": [
+     10.7,
+     "month"
+    ],
+    "minimum": null,
+    "energy": {
+     "periods": 1,
+     "tiers": [
+      1
+     ],
+     "units": [
+      "kWh"
+     ]
+    },
+    "demand": null,
+    "flatDemand": null,
+    "ratchet": false,
+    "window": [
+     15,
+     false
+    ],
+    "kvar": null,
+    "unmodeled": []
+   }
+  }
+ ]
+}
