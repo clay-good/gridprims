@@ -52,6 +52,14 @@ One file per dataset: `pipeline/registry/<dataset-id>.mjs` (default export). Reg
 
 A dataset's `recipe` holds the steps every table shares (today, `fetch`), and `tables` lists each table with its own `name`, `title`, and steps (it needs at least `unzip`, `normalize`, `validate`, and `partition`). One release zip can yield several tables: EIA-861 yields `sales`, `reliability`, and `service_territory`. Every table is read and validated before any file is written, so one failing table fails the whole release and the previous version stays live. Each table's row bounds are compared against the same table in the version being replaced.
 
+| Step option | Meaning |
+|---|---|
+| `unzip.entry` with `*` | Matches any run of characters within a file name, so a file the publisher renames between years (EIA-923's `_Final_Revision`) still matches; more than one match fails |
+| `read-xlsx.sheets` | Reads several sheets and hands the normalizer their rows by sheet name (EIA-860's operable, proposed, and retired generators) |
+| `partition.by` | A row with no value in that column fails the release instead of landing in a `null` shard |
+| `releaseWatch.nextYearFrom` | Look for next year's file only from this month and day of the year after (EIA-923 grows a year-to-date file all year) |
+| `releaseWatch.finalOnly` | A found file without the final workbook is waited on, not a failure |
+
 ## 4. Build output
 
 | Path | What |
@@ -128,4 +136,4 @@ Checked against the published schemas on 2026-10-30 (committed under `verify/ref
 
 ## 10. Reproducing a snapshot from the publisher
 
-`node pipeline/build-data.mjs` rebuilds every served dataset from the publisher's own file and compares checksums with the committed manifest. On 2026-10-31 it rebuilt EIA-861 (version 2026-10) live from `eia.gov`: the raw file's SHA-256 matched the pinned `f59f6c73…a396`, and all 51 shards and the CSV download matched byte for byte. On 2026-10-30, with three EIA-861 tables and EIA-860's plants and generators, both datasets rebuilt from EIA's pinned files (EIA-860 `2b27929d…08ba`) with every shard and download matching. `node pipeline/get-data.mjs` fetches the same files from gridprims.com and accepts each only if it matches the digest committed in the clone.
+`node pipeline/build-data.mjs` rebuilds every served dataset from the publisher's own file and compares checksums with the committed manifest. On 2026-10-31 it rebuilt EIA-861 (version 2026-10) live from `eia.gov`: the raw file's SHA-256 matched the pinned `f59f6c73…a396`, and all 51 shards and the CSV download matched byte for byte. On 2026-10-30, with three EIA-861 tables and EIA-860's plants and generators, both datasets rebuilt from EIA's pinned files (EIA-860 `2b27929d…08ba`) with every shard and download matching; EIA-923 (`1bff7092…84de`) rebuilt the same way the same day. `node pipeline/get-data.mjs` fetches the same files from gridprims.com and accepts each only if it matches the digest committed in the clone.

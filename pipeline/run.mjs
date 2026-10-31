@@ -26,6 +26,20 @@ export function toCsv(rows, schema) {
 }
 
 /**
+ * The one zip entry an unzip step names; `*` matches any run of characters
+ * within a name, so a file EIA renames between years ("_Final_Revision") still matches.
+ * @param {string} pattern with {year} already filled in
+ * @param {Array<{name: string}>} entries
+ * @returns {{entry?: any, problem?: string}}
+ */
+export function findEntry(pattern, entries) {
+  const re = new RegExp(`^${pattern.split('*').map((p) => p.replace(/[.+?^${}()|[\]\\]/g, '\\$&')).join('[^/]*')}$`);
+  const hits = entries.filter((e) => re.test(e.name));
+  if (hits.length > 1) return { problem: `${pattern} matches ${hits.length} files: ${hits.map((e) => e.name).join(', ')}` };
+  return hits.length ? { entry: hits[0] } : { problem: `${pattern} is not in the download` };
+}
+
+/**
  * Check rows against the recipe's validate step and the previous version.
  * @returns {string[]} failures
  */
@@ -81,9 +95,10 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const ready = [];
   for (const tb of entry.tables) {
     const step = (name) => tb.recipe.find((s) => s.step === name);
-    const entryName = step('unzip').entry.replace('{year}', String(year));
-    const zipEntry = zip.find((e) => e.name === entryName);
-    if (!zipEntry) { failures.push(`${tb.name}: ${entryName} is not in the download`); continue; }
+    const found = findEntry(step('unzip').entry.replace('{year}', String(year)), zip);
+    if (found.problem) { failures.push(`${tb.name}: ${found.problem}`); continue; }
+    const zipEntry = found.entry;
+    const entryName = zipEntry.name;
     const read = step('read-xlsx');
     const bytes = await readZipEntry(raw, zipEntry);
     // One sheet hands the normalizer its rows; a list of sheets hands it rows by sheet name.

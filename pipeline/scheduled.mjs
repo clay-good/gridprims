@@ -68,7 +68,7 @@ export async function scheduledRun(workflowId, o = {}) {
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const r = await scheduledRun(process.argv[2]);
-  for (const d of r.datasets) console.log(`${d.failure ? 'FAIL' : 'ok  '} ${d.id}: ${d.failure ?? (d.refreshed ? `refreshed to ${d.version} (${d.found})` : 'no new release')}`);
+  for (const d of r.datasets) console.log(`${d.failure ? 'FAIL' : 'ok  '} ${d.id}: ${d.failure ?? (d.refreshed ? `refreshed to ${d.version} (${d.found})` : d.waiting ?? 'no new release')}`);
   for (const e of r.enabledEvents) console.log(`re-enabled workflow ${e}`);
   for (const n of r.notes) console.log(`note: ${n}`);
 }

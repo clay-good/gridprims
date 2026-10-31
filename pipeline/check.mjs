@@ -7,7 +7,8 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
-import { ROOT, runRecipe } from './run.mjs';
+import { ROOT, findEntry, runRecipe } from './run.mjs';
+import { readZipDirectory } from '../parsers/xlsx.mjs';
 import { compareTerms, postureInForce } from './lib/terms.mjs';
 
 /** The release a HEAD request describes, or null when the URL has nothing. */
@@ -47,7 +48,9 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
   try {
     // A new data year beats a revision of the served one.
     let target = null;
-    const next = await tryYear(servedYear + 1);
+    // A publisher that grows next year's file all year posts it final the year after; look only from then.
+    const nextFrom = entry.releaseWatch.nextYearFrom ? `${servedYear + 2}-${entry.releaseWatch.nextYearFrom}` : null;
+    const next = !nextFrom || today >= nextFrom ? await tryYear(servedYear + 1) : null;
     if (next) target = { year: servedYear + 1, upstream: next, why: `new data year ${servedYear + 1}` };
     else {
       const now = await tryYear(servedYear);
@@ -61,6 +64,10 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
     const res = await f(target.upstream.url);
     if (!res.ok) return { id: dataset, checked: true, refreshed: false, failure: `download ${target.upstream.url}: HTTP ${res.status}` };
     const input = new Uint8Array(await res.arrayBuffer());
+    if (entry.releaseWatch.finalOnly) {
+      const pattern = entry.tables[0].recipe.find((st) => st.step === 'unzip').entry.replace('{year}', String(target.year));
+      if (findEntry(pattern, readZipDirectory(input)).problem) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, posture, terms: termsRow, waiting: `the ${target.year} file is not final yet` };
+    }
     const vintage = { url: target.upstream.url, asOf: asOfOf(target.upstream.lastModified, today), sha256: null };
     const r = await runRecipe({ dataset, year: target.year, input, retrieved: today, outDir, entry, vintage, upstream: target.upstream });
     if (!r.ok) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: r.failures.join('; ') };
