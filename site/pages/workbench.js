@@ -66,6 +66,8 @@ async function load(bytes, name, { sample = false, kept = false, choices } = {})
   current = { bytes, name, sample, kept, choices: ch, result: m.result, index: current?.name === name ? current.index : 0 };
   if (current.index >= m.result.series.length) current.index = 0;
   render();
+  // Count finished reads, so anything waiting on a re-read can tell a new result from the last one.
+  document.documentElement.dataset.loads = String(Number(document.documentElement.dataset.loads ?? 0) + 1);
   document.documentElement.dataset.ready = 'true';
 }
 

@@ -28,6 +28,7 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | File workbench at `/files/`: opens on a labeled sample, parses a dropped or chosen file in a worker with progress and cancel, shows the peak, total, load factor, chart, and monthly peaks from the shared core, and an editable receipt that re-runs the read; refusals say what to do; a file is kept only with consent | Built and tested in browsers |
 | Offline and installable: a build-versioned service worker precaches the app shell; after one visit the workbench parses files and calculators answer with no network | Built and tested in browsers |
 | Performance budgets on the reference profile (Chrome, 4x CPU slowdown, throttled network): a year of 15-minute rows parses in about 650 ms (budget 1 s); the tool page answers in under 1 s with 23 KB of compressed JavaScript (budgets 1.5 s and 150 KB) | Measured and gated in CI |
+| One source, every surface: page, command bar, MCP, and the generated [`docs/tools.md`](docs/tools.md) read labels, units, and citations from the manifest; the workbench and the MCP server agree on the peak and its time for the same file | Tested |
 | SVG charts: peak-preserving downsampling, ticks inside the data, summary and table view, colors from tokens | Built and tested |
 | Overpass fonts, data snapshots, deploy, problem reports | Not started |
 

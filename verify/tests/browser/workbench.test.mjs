@@ -8,7 +8,7 @@ import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
-import { findBrowser, launch } from '../../lib/browser.mjs';
+import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { DIR } from '../../fixtures/intake/make.mjs';
 import { foreign } from '../../lib/requests.mjs';
@@ -31,6 +31,13 @@ const choose = (name, b64, type = 'text/csv') => `(() => {
 })()`;
 const fixture = (f) => readFileSync(join(DIR, f)).toString('base64');
 
+/** Run a page action and wait until the workbench finishes the read it starts. */
+async function andRead(browser, action) {
+  const n = await browser.evaluate('Number(document.documentElement.dataset.loads ?? 0)');
+  await browser.evaluate(action);
+  await waitFor(browser, `Number(document.documentElement.dataset.loads ?? 0) > ${n}`);
+}
+
 for (const kind of ['chrome', 'firefox']) {
   const skip = !findBrowser(kind) && `${kind} is not installed`;
 
@@ -44,8 +51,7 @@ for (const kind of ['chrome', 'firefox']) {
       assert.match(await browser.evaluate(text('[data-sentence]')), /^Your peak was 166 kW on Jun 10, 2026 at 2:30 pm\.$/);
       assert.equal(await browser.evaluate(`document.querySelector('[data-progress]').hidden`), true);
 
-      await browser.evaluate(choose('iso-timestamp.csv', fixture('iso-timestamp.csv')));
-      await browser.evaluate(settle(800));
+      await andRead(browser, choose('iso-timestamp.csv', fixture('iso-timestamp.csv')));
       assert.equal(await browser.evaluate(`document.querySelector('[data-strip]')`), null, 'no sample strip on the user\'s file');
       assert.match(await browser.evaluate(text('[data-receipt]')), /iso-timestamp\.csv/);
       assert.match(await browser.evaluate(text('[data-receipt]')), /Read on this device\. Nothing was uploaded\./);
@@ -55,8 +61,7 @@ for (const kind of ['chrome', 'firefox']) {
       // Change the time zone on the receipt: every time shown moves with it.
       const zone = await browser.evaluate(`document.querySelector('[data-choice=zone]').value`);
       const other = zone === 'America/New_York' ? 'America/Los_Angeles' : 'America/New_York';
-      await browser.evaluate(`(() => { const s = document.querySelector('[data-choice=zone]'); s.value = '${other}'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
-      await browser.evaluate(settle(800));
+      await andRead(browser, `(() => { const s = document.querySelector('[data-choice=zone]'); s.value = '${other}'; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
       assert.equal(await browser.evaluate(`document.querySelector('[data-choice=zone]').value`), other);
       // The file's wall-clock times are read in the new zone, so the instant of the peak moves by the zone difference.
       const shift = (await browser.evaluate(peakMs)) - before;
@@ -64,8 +69,7 @@ for (const kind of ['chrome', 'firefox']) {
       assert.equal(shift, (offsetMinutes(zone, jan) - offsetMinutes(other, jan)) * 60_000, 'the peak instant moved by the zone difference');
 
       // Interval-ending stamps are detected and can be switched.
-      await browser.evaluate(choose('hour-ending-1-24.csv', fixture('hour-ending-1-24.csv')));
-      await browser.evaluate(settle(800));
+      await andRead(browser, choose('hour-ending-1-24.csv', fixture('hour-ending-1-24.csv')));
       assert.match(await browser.evaluate(text('[data-receipt]')), /timestamps mark the end of each interval \(hour numbers 1 to 24\)/);
       assert.equal(await browser.evaluate(`document.querySelector('[data-choice=stampsMark]').value`), 'end');
 
@@ -92,8 +96,7 @@ for (const kind of ['chrome', 'firefox']) {
       assert.match(await browser.evaluate(text('[data-overlay]')), /Nothing leaves this tab/);
       await browser.evaluate(`dispatchEvent(new DragEvent('dragleave', { bubbles: true }))`);
 
-      await browser.evaluate(choose('iso-timestamp.csv', fixture('iso-timestamp.csv')));
-      await browser.evaluate(settle(800));
+      await andRead(browser, choose('iso-timestamp.csv', fixture('iso-timestamp.csv')));
       await browser.goto(`${server.url}/files/`);
       await browser.evaluate(ready);
       assert.match(await browser.evaluate(text('[data-strip]')), /Sample file/, 'a reload without consent shows the sample');
@@ -109,8 +112,7 @@ for (const kind of ['chrome', 'firefox']) {
     try {
       await browser.goto(`${server.url}/files/`);
       await browser.evaluate(ready);
-      await browser.evaluate(choose('iso-timestamp.csv', fixture('iso-timestamp.csv')));
-      await browser.evaluate(settle(800));
+      await andRead(browser, choose('iso-timestamp.csv', fixture('iso-timestamp.csv')));
       await browser.evaluate(`(() => { const k = document.querySelector('[data-keep]'); k.checked = true; k.dispatchEvent(new Event('change', { bubbles: true })); })()`);
       await browser.evaluate(settle(300));
       await browser.goto(`${server.url}/files/`);

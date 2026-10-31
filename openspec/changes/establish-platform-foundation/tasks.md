@@ -20,13 +20,13 @@
 
 - [x] 3.1 Write `docs/decisions-day-one.md` fixing the artifacts everything else generates from, and review it before any other task: the manifest file format and location with every field's type and cardinality and the archetype enumeration; the dataset registry and refresh-recipe format with its step vocabulary; the build output layout (what lands in the deploy root versus `data/`, and how the deploy manifest is derived); the test layout and the one command a contributor runs; the CI workflow inventory with each workflow's trigger and interval; the report endpoint's payload and storage schema; nothing further for the reference machine, which is the throttled reference profile in `platform/app-shell` everywhere, including the parse budget; and the report proof-of-work difficulty (target about 300 ms on a mid-range phone). Verify every later phase-0 task cites this file rather than inventing its own shape
 - [x] 3.2 Define the manifest schema from that decision record; verify it accepts a sample manifest and rejects each missing required field
-- [ ] 3.3 Generate tool pages, command-bar entries, MCP descriptions and schemas, and docs from manifests; verify snapshot tests show identical labels, units, and citations everywhere
+- [x] 3.3 Generate tool pages, command-bar entries, MCP descriptions and schemas, and docs from manifests; verify snapshot tests show identical labels, units, and citations everywhere
 - [x] 3.4 Implement fragment-encoded share state; verify a copied link reproduces inputs and result in a fresh browser profile
 - [x] 3.5 Implement tool versioning and the public changelog; verify a fixture result change without a version bump fails CI
-- [ ] 3.6 Implement shared-quantity computation and the cross-tool agreement check; verify the peak-agrees-everywhere and receipt-change scenarios across web and MCP
+- [x] 3.6 Implement shared-quantity computation and the cross-tool agreement check; verify the peak-agrees-everywhere and receipt-change scenarios across web and MCP
 - [ ] 3.7 Implement declared rounding and the significant-figures rule; verify the coarse-rate and copied-card scenarios
 - [x] 3.8 Build the reference tool `calc.energy-units.convert` end to end (manifest, conversion core, golden vectors from the cited constants, page, command-bar entry, MCP parity, validation level with its evidence); verify the 12 MWh conversion, the unit-and-source display, and identical results on web and MCP
-- [ ] 3.9 Verify every phase-0 tool-contract requirement has a test: worked state on first paint, refusals as answers, the screening label, handoffs carrying no user data, and the share-state round trip
+- [x] 3.9 Verify every phase-0 tool-contract requirement has a test: worked state on first paint, refusals as answers, the screening label, handoffs carrying no user data, and the share-state round trip
 
 ## 4. Own implementations
 
@@ -34,7 +34,7 @@
 - [x] 4.2 Streaming XML parser that refuses DTDs and entities; verify an XXE fixture is refused as a whole file with no request made
 - [x] 4.3 `.xlsx` reader (ZIP directory, raw inflate via `DecompressionStream` and `zlib`, shared strings, cached values); verify against 10 utility workbook fixtures in browser and Node
 - [x] 4.4 Time-zone and DST helper on `Intl`; verify the DST fixture suite in Chrome, Firefox, Safari, and Node
-- [ ] 4.5 Static site generator with escaped templates; verify a 20,000-page fixture builds in under 10 minutes on a CI runner of the pinned image and that unescaped input fails a test
+- [x] 4.5 Static site generator with escaped templates; verify a 20,000-page fixture builds in under 10 minutes on a CI runner of the pinned image and that unescaped input fails a test
 - [x] 4.6 SVG chart components per DESIGN.md's Charts section; verify peak-preserving downsampling and table views
 - [x] 4.7 Flesch-Kincaid readability module with a syllable exceptions list, used by the result-sentence gate; verify against 20 hand-scored sentences within 0.5 grade
 - [x] 4.8 Browser driver over CDP (Chrome) and WebDriver BiDi (Firefox) with `safaridriver`; verify it loads a page, records requests, and resizes to 320 px in each browser
@@ -75,7 +75,7 @@
 - [ ] 8.5 Budgets on the reference profile, accessibility checks (including the screen-reader pacing and popover scenarios), and 320 px sweep through the own browser driver; verify CI fails on an oversized fixture page
 - [ ] 8.6 Deploy script using Cloudflare's direct-upload API with `fetch` and `crypto`; verify a staging deploy and a digest match
 - [ ] 8.7 Build the grid pulse from the latest daily values with its hidden state when no snapshot exists; verify the weekly-snapshot and no-snapshot scenarios
-- [ ] 8.8 Implement validation levels in the manifest, the evidence gate, the work-zone strip for levels 0 and 1, and the level in MCP results; verify the level-shown, claimed-level-exceeds-evidence, level-0, copied-result, and agent-result scenarios
+- [x] 8.8 Implement validation levels in the manifest, the evidence gate, the work-zone strip for levels 0 and 1, and the level in MCP results; verify the level-shown, claimed-level-exceeds-evidence, level-0, copied-result, and agent-result scenarios
 
 ## 9. Problem reports
 
