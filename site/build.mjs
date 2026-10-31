@@ -39,6 +39,8 @@ export function build(opts = {}) {
   mkdirSync(outDir, { recursive: true });
   for (const p of SHARED) cpSync(join(ROOT, p), join(outDir, p), { recursive: true, filter: (src) => !src.endsWith('README.md') });
   writeFileSync(join(outDir, 'site/styles/tokens.css'), tokensCss());
+  // Built dataset versions ship with the site (foundation design D5, D16); curated records feed the build only.
+  cpSync(join(ROOT, 'data'), join(outDir, 'data'), { recursive: true, filter: (src) => !src.endsWith('README.md') && !src.includes(`${'/'}curated`) });
 
   const i18n = createI18n(strings, 'en-US');
   const pages = [];
@@ -78,8 +80,9 @@ export function build(opts = {}) {
     icons: [{ src: '/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }],
   }, null, 2) + '\n');
 
-  // The service worker precaches every deployed file and is versioned by their checksums.
-  const shell = walk(outDir).filter((f) => !f.startsWith('_'));
+  // The service worker precaches the app shell and is versioned by the checksums of what it caches.
+  // Dataset shards are cached as they are visited, not precached, so the shell stays small as data grows.
+  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/'));
   const version = sha256(shell.map((f) => `${f}:${sha256(readFileSync(join(outDir, f)))}`).join('\n')).slice(0, 12);
   const urls = shell.map((f) => `/${f.replace(/(^|\/)index\.html$/, '$1')}`);
   writeFileSync(join(outDir, 'sw.js'), serviceWorkerSource({ version, files: urls }));

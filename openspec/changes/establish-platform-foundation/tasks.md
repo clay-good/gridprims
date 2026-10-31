@@ -5,13 +5,13 @@
 - [x] 1.3 Add the platform-API gate and `docs/platform-apis.md` (API, version introduced, stability); verify it fails on a fixture that uses an experimental Node API
 - [x] 1.4 Pin Node 24.12+ and run CI on Node 24 and 26; verify a clean clone builds and tests with no install step
 - [x] 1.5 Start `docs/own-implementations.md` with a build check that every general-purpose module has an entry; verify the check fails on an unlisted module rather than relying on a review
-- [ ] 1.6 Commit the phase-0 fixture subset: EIA-861 (the one dataset phase 0 builds) plus synthetic fixtures for every other shape, and record that the full three-state, three-balancing-authority subset in D11 is a phase-1 exit item; verify every phase-0 worked example runs offline from a fresh clone
+- [x] 1.6 Commit the phase-0 fixture subset: EIA-861 (the one dataset phase 0 builds) plus synthetic fixtures for every other shape, and record that the full three-state, three-balancing-authority subset in D11 is a phase-1 exit item; verify every phase-0 worked example runs offline from a fresh clone
 - [x] 1.7 Add the deployable file-count gate (80,000); verify it fails on a fixture build over the limit
 
 ## 2. Measure before committing the risky numbers
 
 - [x] 2.1 Spike the delimited-text parser in a worker and measure a real year of 15-minute data on the reference profile before the 1 s budget becomes a CI gate; verify the measured figure is recorded in `docs/decisions-day-one.md` and the budget set from it
-- [ ] 2.2 Build one real EIA-861 shard end to end and freeze the packed binary column format from what that dataset actually needs (mixed types, nullability); verify the format document names the cases the fixture exercised
+- [x] 2.2 Build one real EIA-861 shard end to end and freeze the packed binary column format from what that dataset actually needs (mixed types, nullability); verify the format document names the cases the fixture exercised
 - [ ] 2.3 Run the EIA-861 and EIA-923 recipes against the last three published vintages and set the row-count bounds from the observed deltas; verify the recorded bounds and the vintages they came from
 - [ ] 2.4 Fetch the live agent-protocol specification and its published schema, record one real handshake from a client, and amend `agent/mcp-server` where the live spec differs from what `docs/research/04` assumed; verify the recorded handshake and any amendment
 - [ ] 2.5 Set each launch dataset's posture by hand in the registry and run the license matcher as an advisory check beside it; verify the matcher agrees with every hand-set posture before it is made authoritative
@@ -58,10 +58,10 @@
 
 ## 7. Data snapshots
 
-- [ ] 7.1 Define the dataset registry and validator; verify a fixture without a redistribution basis fails
-- [ ] 7.2 Build fetch → validate → normalize → snapshot for EIA-861 with `fetch`, `zlib`, and the `.xlsx` reader; verify checksums and row counts match the raw file
-- [ ] 7.3 Write CSV.gz downloads and binary column shards with JSON manifests, no file over 20 MiB; verify re-running with unchanged input reproduces checksums
-- [ ] 7.4 Write the CEII screen checklist; verify the build fails for an infrastructure dataset without one
+- [x] 7.1 Define the dataset registry and validator; verify a fixture without a redistribution basis fails
+- [x] 7.2 Build fetch → validate → normalize → snapshot for EIA-861 with `fetch`, `zlib`, and the `.xlsx` reader; verify checksums and row counts match the raw file
+- [x] 7.3 Write CSV.gz downloads and binary column shards with JSON manifests, no file over 20 MiB; verify re-running with unchanged input reproduces checksums
+- [x] 7.4 Write the CEII screen checklist; verify the build fails for an infrastructure dataset without one
 - [ ] 7.5 Implement source stamps and staleness notes; verify a fixture past its cadence shows the note
 - [ ] 7.6 Implement per-table licenses and upstream notice files in manifests; verify the mixed-inputs and incompatible share-alike scenarios
 - [ ] 7.7 Enforce the at-most-monthly permanent-version rule; verify the two-versions-in-one-month scenario
@@ -86,7 +86,7 @@
 ## 10. Data operations and automation
 
 - [ ] 10.1 Scheduled per-dataset check-and-refresh workflows that publish end to end with no approval step; verify the new EIA-923 month and cadence scenarios against fixture pages
-- [ ] 10.2 Machine-readable refresh recipes in the registry and their validator; verify the missing-recipe and quirk-encoded scenarios
+- [x] 10.2 Machine-readable refresh recipes in the registry and their validator; verify the missing-recipe and quirk-encoded scenarios
 - [ ] 10.3 Row-count and schema validators that keep the previous version live, publish the failure, and open an issue; verify the truncated-download and one-dataset-fails scenarios
 - [ ] 10.4 Post-deploy smoke test with rollback; verify the header-regression scenario on staging
 - [ ] 10.5 Weekly outbound link check publishing to the ledger; verify the moved-handoff scenario

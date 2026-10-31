@@ -1,0 +1,543 @@
+{
+  "dataset": "eia-861",
+  "version": "2026-10",
+  "title": "Annual Electric Power Industry Report (Form EIA-861)",
+  "publisher": "U.S. Energy Information Administration",
+  "sourceUrl": "https://www.eia.gov/electricity/data/eia861/",
+  "terms": {
+    "url": "https://www.eia.gov/about/copyrights_reuse.php",
+    "section": "Public domain and use of EIA content",
+    "text": "U.S. government publications are in the public domain and are not subject to copyright protection. You may use and/or distribute any of our data, files, databases, reports, graphs, charts, and other information products that are on our website or that you receive through our email distribution service. However, if you use or reproduce any of our information products, you should use an acknowledgment, which includes the publication date, such as: \"Source: U.S. Energy Information Administration (Oct 2008).\"",
+    "captured": "2026-10-31"
+  },
+  "redistributionBasis": {
+    "kind": "public domain",
+    "note": "U.S. federal government work (17 U.S.C. 105)"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "us-federal-public-domain",
+    "reason": "recognized us-federal-public-domain",
+    "agrees": true
+  },
+  "license": "Public domain (U.S. federal government work); gridprims tables CC BY 4.0",
+  "attribution": "Source: U.S. Energy Information Administration, Form EIA-861 (Oct 2026).",
+  "asOf": "2026-10-07",
+  "retrieved": "2026-10-31",
+  "cadence": {
+    "every": "annual",
+    "nextRelease": {
+      "date": "2027-08-31",
+      "posted": false,
+      "note": "EIA posts an early release each August; the date is inferred, not posted"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://www.eia.gov/electricity/data/eia861/zip/f8612025.zip",
+      "name": "f8612025.zip",
+      "bytes": 4756816,
+      "sha256": "f59f6c732bf685fe0a1591b32227f5ce572dc0dfd26bb5caaeed128ac4e3a396",
+      "entry": "Sales_Ult_Cust_2025.xlsx"
+    }
+  ],
+  "tables": [
+    {
+      "name": "sales",
+      "dataPeriod": "2025",
+      "rows": 2869,
+      "columns": [
+        {
+          "name": "data_year",
+          "type": "f64"
+        },
+        {
+          "name": "utility_id",
+          "type": "f64"
+        },
+        {
+          "name": "utility_name",
+          "type": "str"
+        },
+        {
+          "name": "part",
+          "type": "str"
+        },
+        {
+          "name": "service_type",
+          "type": "str"
+        },
+        {
+          "name": "data_type",
+          "type": "str"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "ownership",
+          "type": "str"
+        },
+        {
+          "name": "ba_code",
+          "type": "str"
+        },
+        {
+          "name": "res_revenue",
+          "type": "f64",
+          "unit": "thousand USD"
+        },
+        {
+          "name": "res_sales",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "res_customers",
+          "type": "f64",
+          "unit": "count"
+        },
+        {
+          "name": "com_revenue",
+          "type": "f64",
+          "unit": "thousand USD"
+        },
+        {
+          "name": "com_sales",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "com_customers",
+          "type": "f64",
+          "unit": "count"
+        },
+        {
+          "name": "ind_revenue",
+          "type": "f64",
+          "unit": "thousand USD"
+        },
+        {
+          "name": "ind_sales",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "ind_customers",
+          "type": "f64",
+          "unit": "count"
+        },
+        {
+          "name": "trn_revenue",
+          "type": "f64",
+          "unit": "thousand USD"
+        },
+        {
+          "name": "trn_sales",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "trn_customers",
+          "type": "f64",
+          "unit": "count"
+        },
+        {
+          "name": "tot_revenue",
+          "type": "f64",
+          "unit": "thousand USD"
+        },
+        {
+          "name": "tot_sales",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "tot_customers",
+          "type": "f64",
+          "unit": "count"
+        },
+        {
+          "name": "seq",
+          "type": "f64"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "sales/AK.bin",
+          "state": "AK",
+          "rows": 13,
+          "bytes": 5144,
+          "sha256": "08519d40f5c4a0014a6952d6fd28b8a7d7fb93564f1633d8cea4d384db714a84"
+        },
+        {
+          "path": "sales/AL.bin",
+          "state": "AL",
+          "rows": 48,
+          "bytes": 12096,
+          "sha256": "e6daf484093ffd63747d2f19d2aeda5d06bcef01d475701f24a97c8f41100167"
+        },
+        {
+          "path": "sales/AR.bin",
+          "state": "AR",
+          "rows": 35,
+          "bytes": 9552,
+          "sha256": "9fb83355c6c4343e2b244e7182b36f62747be2837397d5187476b23f1ab998ef"
+        },
+        {
+          "path": "sales/AZ.bin",
+          "state": "AZ",
+          "rows": 62,
+          "bytes": 14216,
+          "sha256": "6f065b7d887e55fb2e4e540826cf093f8a2220f4fd054139cfeda19cbedca052"
+        },
+        {
+          "path": "sales/CA.bin",
+          "state": "CA",
+          "rows": 130,
+          "bytes": 27632,
+          "sha256": "218a0ee38a8bf0c0276c81583e25e71dbc697c38056f3014e34ef17ec92ac9e7"
+        },
+        {
+          "path": "sales/CO.bin",
+          "state": "CO",
+          "rows": 56,
+          "bytes": 13504,
+          "sha256": "1104ad73b5eae120377d56e3c1e733e511d5892461cd2e7a980d35963994373c"
+        },
+        {
+          "path": "sales/CT.bin",
+          "state": "CT",
+          "rows": 43,
+          "bytes": 11000,
+          "sha256": "86912473bd04b567b5e6a8f0f51a3298ee1518ce0bc4863689c3056f9f0eef59"
+        },
+        {
+          "path": "sales/DC.bin",
+          "state": "DC",
+          "rows": 54,
+          "bytes": 13136,
+          "sha256": "26f3ba261184b6d31c85bada2d178d056ead253807dc87583cb180b284178567"
+        },
+        {
+          "path": "sales/DE.bin",
+          "state": "DE",
+          "rows": 55,
+          "bytes": 13384,
+          "sha256": "ab759f295f2361030c1035a98ea0564de99e1c9a536f3293fd340bd1732ae8f2"
+        },
+        {
+          "path": "sales/FL.bin",
+          "state": "FL",
+          "rows": 74,
+          "bytes": 16608,
+          "sha256": "7d6589735587bab600a3850d55dd5e2073caa94015748160075f035df4388134"
+        },
+        {
+          "path": "sales/GA.bin",
+          "state": "GA",
+          "rows": 63,
+          "bytes": 15288,
+          "sha256": "1c10c43ca28592cd308efd667a999fbe02a75b545c7d100a4a0d8dc7fe78122c"
+        },
+        {
+          "path": "sales/HI.bin",
+          "state": "HI",
+          "rows": 18,
+          "bytes": 5904,
+          "sha256": "cdb534d3764e90bafbc33eca2f8c7230ff60930eeeaf965b8628864557377eed"
+        },
+        {
+          "path": "sales/IA.bin",
+          "state": "IA",
+          "rows": 29,
+          "bytes": 8336,
+          "sha256": "1d18e6074634b468987de7a276af1d862207973aee2d6333c3780374228ad025"
+        },
+        {
+          "path": "sales/ID.bin",
+          "state": "ID",
+          "rows": 19,
+          "bytes": 6224,
+          "sha256": "73b2cf0f2a1779c29b6cc7e97ea8b66955bb72e4aee1293cc35ef6db5cb3b242"
+        },
+        {
+          "path": "sales/IL.bin",
+          "state": "IL",
+          "rows": 124,
+          "bytes": 26648,
+          "sha256": "b962a7d78fd35556941c1b6b109478607f2590e9c28eb60331e79591858ef805"
+        },
+        {
+          "path": "sales/IN.bin",
+          "state": "IN",
+          "rows": 50,
+          "bytes": 12488,
+          "sha256": "826ad29a2b664d99ab25835ff492cec615e7feb16a7939fbcb78e4182c1014b1"
+        },
+        {
+          "path": "sales/KS.bin",
+          "state": "KS",
+          "rows": 27,
+          "bytes": 7928,
+          "sha256": "12b2ea8d26ea4047c14881dd70eb4a874db0d6d070fd34d7eaf637e2db18c904"
+        },
+        {
+          "path": "sales/KY.bin",
+          "state": "KY",
+          "rows": 51,
+          "bytes": 12728,
+          "sha256": "f10df131bee39ec4f26bbc1a37055e004f9185fca96202ff39afb66216033166"
+        },
+        {
+          "path": "sales/LA.bin",
+          "state": "LA",
+          "rows": 25,
+          "bytes": 7520,
+          "sha256": "77a70dbdcb59503efe2ae8ea49e252a0425d0c858592321ddafce4feba9618a3"
+        },
+        {
+          "path": "sales/MA.bin",
+          "state": "MA",
+          "rows": 94,
+          "bytes": 21096,
+          "sha256": "f6b5a5bbcf1c9ec81ee3e03b4b3ce63bc5969d336040f0ab06b29e073c06eec2"
+        },
+        {
+          "path": "sales/MD.bin",
+          "state": "MD",
+          "rows": 93,
+          "bytes": 20896,
+          "sha256": "f62e7441a40e36ce79fdd89e30c0bab1e000e9dd93397911ba9b99640b73d7e6"
+        },
+        {
+          "path": "sales/ME.bin",
+          "state": "ME",
+          "rows": 55,
+          "bytes": 13128,
+          "sha256": "4c45abff3e8bf2a50e551c29564a2c362b83de1328b2a48976b0eddb04cf99c4"
+        },
+        {
+          "path": "sales/MI.bin",
+          "state": "MI",
+          "rows": 52,
+          "bytes": 12696,
+          "sha256": "9e8f8b924152f77af30f48a730891fa4d11237a242ecacab8c567d948741faf5"
+        },
+        {
+          "path": "sales/MN.bin",
+          "state": "MN",
+          "rows": 51,
+          "bytes": 12784,
+          "sha256": "94f8bbe14ac76eb5413a8b1ae3d0eeaf6af05dbbffc0cf7d0a56f13abbae2880"
+        },
+        {
+          "path": "sales/MO.bin",
+          "state": "MO",
+          "rows": 54,
+          "bytes": 13232,
+          "sha256": "7383dd563f5b5ffecfb2831307aad36f543e85d494b6a5a0ee5a791749d536ff"
+        },
+        {
+          "path": "sales/MS.bin",
+          "state": "MS",
+          "rows": 43,
+          "bytes": 11176,
+          "sha256": "312bc90b394d1168994817af0e4f0ce7b29af26e16a4e4609e909d6beee8ffc1"
+        },
+        {
+          "path": "sales/MT.bin",
+          "state": "MT",
+          "rows": 23,
+          "bytes": 7072,
+          "sha256": "e8d3941e7c4e2b6f8af908cb225a732157f9ccb741602e9009643b17cbfad005"
+        },
+        {
+          "path": "sales/NC.bin",
+          "state": "NC",
+          "rows": 63,
+          "bytes": 15192,
+          "sha256": "1ad68d7b03692f88f4e269dff51f8c710435f01da40a25967130e43a2acb3c15"
+        },
+        {
+          "path": "sales/ND.bin",
+          "state": "ND",
+          "rows": 22,
+          "bytes": 6912,
+          "sha256": "d9d1e52e430f2d8cd52c7ed37962554af37d16450521dca383aae53b39a49d4c"
+        },
+        {
+          "path": "sales/NE.bin",
+          "state": "NE",
+          "rows": 30,
+          "bytes": 8552,
+          "sha256": "b91b7b9f79fefdb8fe15c4701fdb6c8b49933a882263338846bacd5650ea99b4"
+        },
+        {
+          "path": "sales/NH.bin",
+          "state": "NH",
+          "rows": 43,
+          "bytes": 11008,
+          "sha256": "15b5685d867f8a77889d616fdbb7f3789379cbf46a476e23b7d1d9f60ccb1b8f"
+        },
+        {
+          "path": "sales/NJ.bin",
+          "state": "NJ",
+          "rows": 111,
+          "bytes": 24248,
+          "sha256": "e6f4d32cd45b4830999b9191d7d0894e7f4d165b137bcde6c4054c9a2a37726d"
+        },
+        {
+          "path": "sales/NM.bin",
+          "state": "NM",
+          "rows": 38,
+          "bytes": 9936,
+          "sha256": "deeb848fbb2a38d19dea68f3987c68c7c391a983b99779d3ca4d7a8f85531443"
+        },
+        {
+          "path": "sales/NV.bin",
+          "state": "NV",
+          "rows": 28,
+          "bytes": 8016,
+          "sha256": "1bb13c03c023ea05814a63cd4c046f1926535490e84b98b96ec489b016816421"
+        },
+        {
+          "path": "sales/NY.bin",
+          "state": "NY",
+          "rows": 123,
+          "bytes": 26616,
+          "sha256": "ffc51809568b4033e75d67c2f69bda69f175399977f43dc03f201a9f9fa4a456"
+        },
+        {
+          "path": "sales/OH.bin",
+          "state": "OH",
+          "rows": 137,
+          "bytes": 29576,
+          "sha256": "190a3566e0d0e81ee404216ce53a3fdd2830916b7c797a61ac47932ba7ab15dd"
+        },
+        {
+          "path": "sales/OK.bin",
+          "state": "OK",
+          "rows": 41,
+          "bytes": 10800,
+          "sha256": "05e38a8f19c8e9d1038c8b800868258ae2309c013ef9ec4b01f9a41c8a2e3986"
+        },
+        {
+          "path": "sales/OR.bin",
+          "state": "OR",
+          "rows": 47,
+          "bytes": 11768,
+          "sha256": "ce85366fb5b2531a28ca5bd14c41e705f0f64157527c0c4fddcd738f1f0e8c0b"
+        },
+        {
+          "path": "sales/PA.bin",
+          "state": "PA",
+          "rows": 141,
+          "bytes": 30344,
+          "sha256": "80dc307c1f40fdd232cbc5f837c600dad56915f5b72e19c76df4b77328eb5857"
+        },
+        {
+          "path": "sales/RI.bin",
+          "state": "RI",
+          "rows": 38,
+          "bytes": 10048,
+          "sha256": "d9c0b7001ae3febac23bee36b2acf148a6bbe51a920fe26a7c8a180ac053f8d4"
+        },
+        {
+          "path": "sales/SC.bin",
+          "state": "SC",
+          "rows": 39,
+          "bytes": 10216,
+          "sha256": "a283c30f5d43914514980ae34b24fbc69f674242593ec0a00e4fdd8d8bc4228a"
+        },
+        {
+          "path": "sales/SD.bin",
+          "state": "SD",
+          "rows": 25,
+          "bytes": 7576,
+          "sha256": "47f6021e1afbd736081cb58ebcc49b2c30df730e0226880c6b618741ca4f64b9"
+        },
+        {
+          "path": "sales/TN.bin",
+          "state": "TN",
+          "rows": 91,
+          "bytes": 20640,
+          "sha256": "986cc518cb8e8ac5e2a901c2990f69a499b1611be0b2bc28d6e3dc4e3fa85e0c"
+        },
+        {
+          "path": "sales/TX.bin",
+          "state": "TX",
+          "rows": 195,
+          "bytes": 41016,
+          "sha256": "7b54b3a4cdc44498be4ee0db49b548c17d32d925ce8492a2e89d96fb5a6fe155"
+        },
+        {
+          "path": "sales/UT.bin",
+          "state": "UT",
+          "rows": 26,
+          "bytes": 7680,
+          "sha256": "73399b62734075fdeadbf1286d3beae2bf6c88695c547fe59f07a15e2bf38550"
+        },
+        {
+          "path": "sales/VA.bin",
+          "state": "VA",
+          "rows": 34,
+          "bytes": 9256,
+          "sha256": "661a556af7ef3f34cf581ae7a3509afedf05c911d02daf0bddfa0139f886df25"
+        },
+        {
+          "path": "sales/VT.bin",
+          "state": "VT",
+          "rows": 10,
+          "bytes": 4504,
+          "sha256": "316c374c4da066b5b42995c75cf641d41d0899dac8b7b9b5a8d6322f72e3fdbd"
+        },
+        {
+          "path": "sales/WA.bin",
+          "state": "WA",
+          "rows": 52,
+          "bytes": 12976,
+          "sha256": "221e648959035f2fff660c0f413370161131341a7740b7ce1dc3397634e8950d"
+        },
+        {
+          "path": "sales/WI.bin",
+          "state": "WI",
+          "rows": 69,
+          "bytes": 16280,
+          "sha256": "670e5a1225b8cdccca7644e08f63219b5ca6d4290e9d8afe176ca0dd5377b3f2"
+        },
+        {
+          "path": "sales/WV.bin",
+          "state": "WV",
+          "rows": 8,
+          "bytes": 4016,
+          "sha256": "441928487e3be9a75a719d62aeaa1afe1b0674a944ff9c7d8d9592a374646d5d"
+        },
+        {
+          "path": "sales/WY.bin",
+          "state": "WY",
+          "rows": 17,
+          "bytes": 5896,
+          "sha256": "9e7b6ff9d26dd4bb7d6873ceadc868fffdcd4e37f80098ac680363c217a8142a"
+        }
+      ],
+      "download": {
+        "path": "sales.csv.gz",
+        "bytes": 123959,
+        "sha256": "27528c0c491ba2b269fb39aefad8edfae1589bc8cbb248e5bfdfbd243958c709",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC BY 4.0 (gridprims table) over public-domain EIA data",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Form EIA-861 (Oct 2026).",
+          "note": "Modified by gridprims: reshaped into one row per respondent and state; \".\" placeholders read as missing."
+        }
+      ]
+    }
+  ]
+}

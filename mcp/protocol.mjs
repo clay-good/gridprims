@@ -6,6 +6,7 @@ import { TOOL_SURFACE, SERVER_INSTRUCTIONS } from './surface.mjs';
 import { createHandlers, fail } from './handlers.mjs';
 import { TOOLS } from '../core/tools/index.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
+import { catalog } from './data.mjs';
 
 export const MODERN = '2026-07-28';
 export const LEGACY = ['2025-11-25', '2025-06-18'];
@@ -35,7 +36,7 @@ const RESOURCES = [
 ];
 const resourceBody = (uri) => {
   if (uri === 'gridprims://limits') return limitsRecord(TOOLS);
-  if (uri === 'gridprims://datasets') return { datasets: [] };
+  if (uri === 'gridprims://datasets') return { datasets: catalog() };
   return null;
 };
 

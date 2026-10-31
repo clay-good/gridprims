@@ -11,6 +11,7 @@ import { intakeFile } from '../core/intake/index.mjs';
 import { loadStats } from '../core/lib/load-stats.mjs';
 import { readFileSync } from 'node:fs';
 import { basename } from 'node:path';
+import { query } from './data.mjs';
 
 export const SITE = 'https://gridprims.com';
 const toolPath = (id) => `/tools/${id.split('.').join('/')}/`;
@@ -91,7 +92,7 @@ function page(entry, handle, index, offset) {
 }
 
 /**
- * @param {{allowDirs: string[], zone?: string}} ctx
+ * @param {{allowDirs: string[], zone?: string, dataDir?: string}} ctx
  */
 export function createHandlers(ctx) {
   const handles = createHandleStore();
@@ -161,8 +162,16 @@ export function createHandlers(ctx) {
       return ok(series === undefined ? value.view : { ...value.view, intervals: page(value, id, series, 0) });
     },
 
-    gridprims_query_data({ dataset }) {
-      return fail(`No dataset named ${JSON.stringify(String(dataset))} is in this clone. No public datasets are built yet; the gridprims://datasets resource lists what exists.`);
+    gridprims_query_data({ dataset, filter, limit = 100 }) {
+      const r = query({ dataset: String(dataset), filter: filter ?? {}, limit }, ctx.dataDir);
+      if (!r) return fail(`No dataset named ${JSON.stringify(String(dataset))} is in this clone. The gridprims://datasets resource lists what exists; for full data run node pipeline/get-data.mjs or node pipeline/build-data.mjs.`);
+      if (r.error) return fail(r.error);
+      const m = r.manifest;
+      return ok({
+        dataset: { id: m.dataset, version: m.version, title: m.title, publisher: m.publisher, asOf: m.asOf, retrieved: m.retrieved, license: m.license, posture: m.posture, attribution: m.attribution, dataPeriod: r.table.dataPeriod },
+        columns: r.table.columns.map(({ name, type, unit }) => ({ name, type, ...(unit ? { unit } : {}) })),
+        rows: r.rows, matched: r.matched, ...(r.matched > r.rows.length ? { truncated: true } : {}),
+      });
     },
 
     gridprims_prepare_report({ tool, message, inputs, includeInputs }) {

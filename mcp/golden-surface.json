@@ -445,7 +445,7 @@
         },
         "filter": {
           "type": "object",
-          "description": "Column values to match exactly."
+          "description": "Column values to match exactly, such as {\"state\": \"TX\", \"utility_id\": 44372}. Filtering on the partition column (state) reads only that shard."
         },
         "limit": {
           "type": "integer",
@@ -460,14 +460,23 @@
         "dataset": {
           "type": "object"
         },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
         "rows": {
           "type": "array",
           "items": {
             "type": "object"
           }
         },
-        "nextCursor": {
-          "type": "string"
+        "matched": {
+          "type": "integer"
+        },
+        "truncated": {
+          "type": "boolean"
         }
       }
     },

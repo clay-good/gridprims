@@ -31,7 +31,8 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | One source, every surface: page, command bar, MCP, and the generated [`docs/tools.md`](docs/tools.md) read labels, units, and citations from the manifest; the workbench and the MCP server agree on the peak and its time for the same file | Tested |
 | SVG charts: peak-preserving downsampling, ticks inside the data, summary and table view, colors from tokens | Built and tested |
 | Problem reports: a dialog that previews the exact payload (inputs only when ticked, never file contents), a Worker route with schema limits, honeypot, proof of work, and the host's rate limit, D1 storage, and retention cleanup (180 days after closing, 365 at most); agent-prepared reports open for a person to review | Built and tested against the real Worker locally; not deployed |
-| Overpass fonts, data snapshots, deploy | Not started |
+| Data pipeline: dataset registry with captured terms, posture matcher, CEII screen, and recipes as data; EIA-861 2025 snapshotted from EIA's own file into column shards and a gzip CSV with checksums; validators keep the previous version live on failure; the MCP server queries the same shards | Built and tested; scheduled refresh in CI is next |
+| Overpass fonts, deploy, scheduled automation | Not started |
 
 The plan is in [`openspec/changes/`](openspec/changes/): 22 changes, built in the phase order in [`plan-launch-and-value-proof`](openspec/changes/plan-launch-and-value-proof/). The shapes everything generates from are in [`docs/decisions-day-one.md`](docs/decisions-day-one.md).
 
@@ -79,7 +80,7 @@ Point your MCP client at that command. See [`mcp/README.md`](mcp/README.md).
 | `pipeline/` | Dataset fetch, validate, normalize, and snapshot scripts that CI runs on schedule |
 | `site/` | Templates, styles, and page modules for gridprims.com |
 | `mcp/` | The local-only stdio MCP server |
-| `data/` | Built dataset shards and manifests; `data/curated/` for hand-kept records |
+| `data/` | Built dataset versions (EIA-861 today); `data/curated/` for hand-kept records |
 | `worker/` | The Cloudflare Worker: static assets with security headers (problem reports and the watchdog to come) |
 | `verify/` | Gates, tests, golden vectors, and stored reference outputs |
 | `docs/` | Research briefs, decisions, platform APIs, own implementations |
