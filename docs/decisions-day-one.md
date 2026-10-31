@@ -71,6 +71,10 @@ A dataset's `recipe` holds the steps every table shares (today, `fetch`), and `t
 | `read-parquet.files` | Reads the named Parquet files of a vintage (`vintage.files`, each with its URL and pin) and hands the normalizer one reader per file, read a row group at a time; PUDL's Form 714 build reads 19.5 million hourly rows in about 3 s |
 | no `releaseWatch` | The dataset is pinned to a release (PUDL); a new release is a hand-made bump after the cross-checks pass, and the daily watch skips it |
 
+### Cross-source joins
+
+`pipeline/joins.mjs` holds each join as data: two served tables and their keys, each key an id or a name. Every join keys on an id, and a name may only narrow one (a county name within a state, compared without accents, case, punctuation, or "County"). Counties EIA-861 still names by former areas map to their successors from the Census Bureau's county-changes record. `node pipeline/joins.mjs` writes `data/joins/report.json`: per join, the versions read, how many keys matched, and up to 20 unmatched keys on each side. The scheduled refresh rewrites it, and a test fails when it is stale.
+
 ## 4. Build output
 
 | Path | What |

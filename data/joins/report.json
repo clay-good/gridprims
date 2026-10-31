@@ -1,0 +1,1386 @@
+{
+ "joins": [
+  {
+   "id": "plants-eia860-eia923",
+   "title": "EIA-860 plants with EIA-923 generation",
+   "keys": [
+    {
+     "left": "plant_id",
+     "right": "plant_id",
+     "kind": "id"
+    }
+   ],
+   "left": {
+    "dataset": "eia-860",
+    "table": "plants",
+    "version": "2026-10",
+    "keys": 17349,
+    "unmatched": 3342,
+    "sample": [
+     {
+      "key": "1002",
+      "name": "Connersville"
+     },
+     {
+      "key": "10048",
+      "name": "Central Utilities Plant LAX"
+     },
+     {
+      "key": "1006",
+      "name": "Miami Wabash"
+     },
+     {
+      "key": "10075",
+      "name": "Taconite Harbor Energy Center"
+     },
+     {
+      "key": "1008",
+      "name": "R Gallagher"
+     },
+     {
+      "key": "10090",
+      "name": "Commerce Refuse To Energy"
+     },
+     {
+      "key": "1010",
+      "name": "Wabash River"
+     },
+     {
+      "key": "1011",
+      "name": "Broadway (IN)"
+     },
+     {
+      "key": "10121",
+      "name": "High Shoals Hydro (GA)"
+     },
+     {
+      "key": "1013",
+      "name": "Northeast (IN)"
+     },
+     {
+      "key": "10184",
+      "name": "Central Utility Plant"
+     },
+     {
+      "key": "10187",
+      "name": "Engineered Carbons Echo Cogeneration"
+     },
+     {
+      "key": "10199",
+      "name": "West Ford Flat Power Plant"
+     },
+     {
+      "key": "10203",
+      "name": "Valero Refinery Corpus Christi East"
+     },
+     {
+      "key": "10205",
+      "name": "Mosaic Co Greenbay"
+     },
+     {
+      "key": "10211",
+      "name": "2 AC Station"
+     },
+     {
+      "key": "10288",
+      "name": "Big Valley Power LLC"
+     },
+     {
+      "key": "10320",
+      "name": "Enka"
+     },
+     {
+      "key": "10382",
+      "name": "Lumberton"
+     },
+     {
+      "key": "10388",
+      "name": "GRS Newby I"
+     }
+    ]
+   },
+   "right": {
+    "dataset": "eia-923",
+    "table": "generation",
+    "version": "2026-10",
+    "keys": 14043,
+    "unmatched": 36,
+    "sample": [
+     {
+      "key": "10300",
+      "name": "Desert View Power"
+     },
+     {
+      "key": "50359",
+      "name": "Sloss Industries Corp"
+     },
+     {
+      "key": "50632",
+      "name": "Covanta Stanislaus Energy"
+     },
+     {
+      "key": "55243",
+      "name": "Astoria Gas Turbines"
+     },
+     {
+      "key": "58156",
+      "name": "SUNY Old Westbury College"
+     },
+     {
+      "key": "8809",
+      "name": "Bent Mountain"
+     },
+     {
+      "key": "8812",
+      "name": "1st Energy"
+     },
+     {
+      "key": "8816",
+      "name": "Davant Transfer"
+     },
+     {
+      "key": "8823",
+      "name": "Barber's Point Tank Farm"
+     },
+     {
+      "key": "8824",
+      "name": "IMT Transfer NY"
+     },
+     {
+      "key": "8827",
+      "name": "IMT Transfer"
+     },
+     {
+      "key": "8828",
+      "name": "Martin Gas Storage Facility"
+     },
+     {
+      "key": "8829",
+      "name": "US United Bulk Terminal"
+     },
+     {
+      "key": "8831",
+      "name": "Bay Gas"
+     },
+     {
+      "key": "8832",
+      "name": "Petal Gas"
+     },
+     {
+      "key": "8834",
+      "name": "GRT Terminal"
+     },
+     {
+      "key": "8835",
+      "name": "Cora Transfer"
+     },
+     {
+      "key": "8837",
+      "name": "Calvert City"
+     },
+     {
+      "key": "8838",
+      "name": "Cook - TVA"
+     },
+     {
+      "key": "8841",
+      "name": "DTE-BRSC Shared Storage"
+     }
+    ]
+   },
+   "matched": 14007
+  },
+  {
+   "id": "plants-eia860-egrid",
+   "title": "EIA-860 plants with eGRID plant emissions",
+   "keys": [
+    {
+     "left": "plant_id",
+     "right": "plant_id",
+     "kind": "id"
+    }
+   ],
+   "left": {
+    "dataset": "eia-860",
+    "table": "plants",
+    "version": "2026-10",
+    "keys": 17349,
+    "unmatched": 4910,
+    "sample": [
+     {
+      "key": "1002",
+      "name": "Connersville"
+     },
+     {
+      "key": "10048",
+      "name": "Central Utilities Plant LAX"
+     },
+     {
+      "key": "1006",
+      "name": "Miami Wabash"
+     },
+     {
+      "key": "1008",
+      "name": "R Gallagher"
+     },
+     {
+      "key": "10090",
+      "name": "Commerce Refuse To Energy"
+     },
+     {
+      "key": "1010",
+      "name": "Wabash River"
+     },
+     {
+      "key": "1011",
+      "name": "Broadway (IN)"
+     },
+     {
+      "key": "1013",
+      "name": "Northeast (IN)"
+     },
+     {
+      "key": "10187",
+      "name": "Engineered Carbons Echo Cogeneration"
+     },
+     {
+      "key": "10199",
+      "name": "West Ford Flat Power Plant"
+     },
+     {
+      "key": "10203",
+      "name": "Valero Refinery Corpus Christi East"
+     },
+     {
+      "key": "10205",
+      "name": "Mosaic Co Greenbay"
+     },
+     {
+      "key": "10211",
+      "name": "2 AC Station"
+     },
+     {
+      "key": "10320",
+      "name": "Enka"
+     },
+     {
+      "key": "10350",
+      "name": "Greenleaf 1"
+     },
+     {
+      "key": "10388",
+      "name": "GRS Newby I"
+     },
+     {
+      "key": "10392",
+      "name": "GRS American Canyon"
+     },
+     {
+      "key": "1043",
+      "name": "Frank E Ratts"
+     },
+     {
+      "key": "1046",
+      "name": "Dubuque"
+     },
+     {
+      "key": "10469",
+      "name": "Bear Canyon Power Plant"
+     }
+    ]
+   },
+   "right": {
+    "dataset": "egrid",
+    "table": "plants",
+    "version": "2026-10",
+    "keys": 12612,
+    "unmatched": 173,
+    "sample": [
+     {
+      "key": "10051",
+      "name": "Lockville Hydropower"
+     },
+     {
+      "key": "10059",
+      "name": "General Electric Great Falls Upper Hydro"
+     },
+     {
+      "key": "10062",
+      "name": "Miami Dade County Resource Recovery Fac"
+     },
+     {
+      "key": "10120",
+      "name": "Pinova Inc."
+     },
+     {
+      "key": "10149",
+      "name": "Decorative Panels Intl"
+     },
+     {
+      "key": "10300",
+      "name": "Desert View Power"
+     },
+     {
+      "key": "1038",
+      "name": "Rensselaer City Light Plant"
+     },
+     {
+      "key": "10464",
+      "name": "Black River Generation, LLC"
+     },
+     {
+      "key": "10477",
+      "name": "Wisconsin Rapids Pulp Mill"
+     },
+     {
+      "key": "10619",
+      "name": "Allegany Station No. 133"
+     },
+     {
+      "key": "10623",
+      "name": "Civic Center"
+     },
+     {
+      "key": "10678",
+      "name": "AES Warrior Run"
+     },
+     {
+      "key": "1588",
+      "name": "Mystic"
+     },
+     {
+      "key": "1846",
+      "name": "Newberry"
+     },
+     {
+      "key": "1971",
+      "name": "Elk River City of"
+     },
+     {
+      "key": "2297",
+      "name": "Plainview Muncipal Power"
+     },
+     {
+      "key": "2866",
+      "name": "W H Sammis"
+     },
+     {
+      "key": "302",
+      "name": "Cabrillo Power I Encina Power Station"
+     },
+     {
+      "key": "330",
+      "name": "El Segundo"
+     },
+     {
+      "key": "356",
+      "name": "AES Redondo Beach"
+     }
+    ]
+   },
+   "matched": 12439
+  },
+  {
+   "id": "generators-eia860-eia860m",
+   "title": "EIA-860 operable generators with their EIA-860M status",
+   "keys": [
+    {
+     "left": "plant_id",
+     "right": "plant_id",
+     "kind": "id"
+    },
+    {
+     "left": "generator_id",
+     "right": "generator_id",
+     "kind": "id"
+    }
+   ],
+   "left": {
+    "dataset": "eia-860",
+    "table": "generators",
+    "version": "2026-10",
+    "keys": 27918,
+    "unmatched": 4,
+    "sample": [
+     {
+      "key": "2305|5",
+      "name": "Stuart (NE)"
+     },
+     {
+      "key": "55278|PEG",
+      "name": "Beaver Creek Gas Plant"
+     },
+     {
+      "key": "62398|CM058",
+      "name": "Albert Einstein College of Medicine"
+     },
+     {
+      "key": "66466|43580",
+      "name": "Blue Skies Solar, LLC"
+     }
+    ]
+   },
+   "right": {
+    "dataset": "eia-860m",
+    "table": "generators",
+    "version": "2026-10",
+    "keys": 39908,
+    "unmatched": 11994,
+    "sample": [
+     {
+      "key": "10002|GEN1",
+      "name": "ACE Cogeneration Facility"
+     },
+     {
+      "key": "10003|VBPT",
+      "name": "Colorado Energy Nations Company"
+     },
+     {
+      "key": "10004|TG1",
+      "name": "Mosaic South Pierce Operations"
+     },
+     {
+      "key": "10008|CG-1",
+      "name": "Baptist Medical Center"
+     },
+     {
+      "key": "10008|CG-3",
+      "name": "Baptist Medical Center"
+     },
+     {
+      "key": "10008|CG-4",
+      "name": "Baptist Medical Center"
+     },
+     {
+      "key": "10008|TG-1",
+      "name": "Baptist Medical Center"
+     },
+     {
+      "key": "10012|1",
+      "name": "Covanta Warren Energy"
+     },
+     {
+      "key": "10018|GEN1",
+      "name": "Desert Peak Power Plant"
+     },
+     {
+      "key": "10020|GEN1",
+      "name": "Cutrale Citrus Juices USA I"
+     },
+     {
+      "key": "10020|GEN2",
+      "name": "Cutrale Citrus Juices USA I"
+     },
+     {
+      "key": "10021|GEN1",
+      "name": "The Bellevue"
+     },
+     {
+      "key": "10025|11TG",
+      "name": "RED-Rochester, LLC"
+     },
+     {
+      "key": "10025|13TG",
+      "name": "RED-Rochester, LLC"
+     },
+     {
+      "key": "10025|14TG",
+      "name": "RED-Rochester, LLC"
+     },
+     {
+      "key": "10025|15TG",
+      "name": "RED-Rochester, LLC"
+     },
+     {
+      "key": "10025|16TG",
+      "name": "RED-Rochester, LLC"
+     },
+     {
+      "key": "10025|22TG",
+      "name": "RED-Rochester, LLC"
+     },
+     {
+      "key": "10026|EG1",
+      "name": "Encina Water Pollution Control"
+     },
+     {
+      "key": "10026|EG2",
+      "name": "Encina Water Pollution Control"
+     }
+    ]
+   },
+   "matched": 27914
+  },
+  {
+   "id": "utilities-eia861-eia860",
+   "title": "EIA-861 utilities with the plants they operate in EIA-860",
+   "keys": [
+    {
+     "left": "utility_id",
+     "right": "utility_id",
+     "kind": "id"
+    }
+   ],
+   "left": {
+    "dataset": "eia-861",
+    "table": "sales",
+    "version": "2026-10",
+    "keys": 1529,
+    "unmatched": 1233,
+    "sample": [
+     {
+      "key": "10009",
+      "name": "Karnes Electric Coop Inc"
+     },
+     {
+      "key": "10012",
+      "name": "Kay Electric Coop"
+     },
+     {
+      "key": "10019",
+      "name": "FreeState Electric Coop"
+     },
+     {
+      "key": "10066",
+      "name": "K C Electric Association"
+     },
+     {
+      "key": "1009",
+      "name": "City of Austin - (MN)"
+     },
+     {
+      "key": "10144",
+      "name": "Kennebunk Light & Power Dist"
+     },
+     {
+      "key": "10170",
+      "name": "Kiamichi Electric Coop, Inc"
+     },
+     {
+      "key": "10226",
+      "name": "Utility Board of the City of Key West, F"
+     },
+     {
+      "key": "10331",
+      "name": "Kingsport Power Co"
+     },
+     {
+      "key": "10345",
+      "name": "City of Kinston - (NC)"
+     },
+     {
+      "key": "10370",
+      "name": "City of Kirkwood - (MO)"
+     },
+     {
+      "key": "10378",
+      "name": "Kit Carson Electric Coop, Inc"
+     },
+     {
+      "key": "10393",
+      "name": "PUD No 1 of Klickitat County"
+     },
+     {
+      "key": "10421",
+      "name": "Knoxville Utilities Board"
+     },
+     {
+      "key": "10448",
+      "name": "Kosciusko County Rural E M C"
+     },
+     {
+      "key": "10454",
+      "name": "Kootenai Electric Cooperative"
+     },
+     {
+      "key": "1050",
+      "name": "City of Azusa"
+     },
+     {
+      "key": "10508",
+      "name": "Village of L'Anse - (MI)"
+     },
+     {
+      "key": "10579",
+      "name": "City of LaFollette"
+     },
+     {
+      "key": "10585",
+      "name": "City of La Grange - (GA)"
+     }
+    ]
+   },
+   "right": {
+    "dataset": "eia-860",
+    "table": "plants",
+    "version": "2026-10",
+    "keys": 6945,
+    "unmatched": 6649,
+    "sample": [
+     {
+      "key": "10004",
+      "name": "King County Dept-Natural Res - (WA)"
+     },
+     {
+      "key": "10035",
+      "name": "Kansas Municipal Energy Agency - (KS)"
+     },
+     {
+      "key": "10046",
+      "name": "Kas Brothers Windfarm LLC"
+     },
+     {
+      "key": "1005",
+      "name": "Avalon Hydropower LLC"
+     },
+     {
+      "key": "10077",
+      "name": "Kaweah Delta Hospital"
+     },
+     {
+      "key": "10152",
+      "name": "City of Kennett - (MO)"
+     },
+     {
+      "key": "10162",
+      "name": "Kent County - (MI)"
+     },
+     {
+      "key": "10179",
+      "name": "Kenyon Municipal Utilities - (MN)"
+     },
+     {
+      "key": "10203",
+      "name": "Kern River Cogeneration Co"
+     },
+     {
+      "key": "10260",
+      "name": "City of Kimball - (NE)"
+     },
+     {
+      "key": "10273",
+      "name": "Kimberly-Clark Corp"
+     },
+     {
+      "key": "10320",
+      "name": "City of Kingfisher - (OK)"
+     },
+     {
+      "key": "10321",
+      "name": "City of Kingman - (KS)"
+     },
+     {
+      "key": "10337",
+      "name": "KES Kingsburg LP"
+     },
+     {
+      "key": "10339",
+      "name": "Kings Bay Naval Base"
+     },
+     {
+      "key": "10349",
+      "name": "KIAC Partners"
+     },
+     {
+      "key": "10362",
+      "name": "Kiowa Power Partners LLC"
+     },
+     {
+      "key": "10363",
+      "name": "Koyle Hydro Inc"
+     },
+     {
+      "key": "10525",
+      "name": "La Farge Municipal Electric Co - (WI)"
+     },
+     {
+      "key": "10538",
+      "name": "City of La Plata - (MO)"
+     }
+    ]
+   },
+   "matched": 296
+  },
+  {
+   "id": "utilities-eia861-ferc714",
+   "title": "EIA-861 utilities with a 2025 FERC Form 714 peak (PUDL crosswalk)",
+   "keys": [
+    {
+     "left": "utility_id",
+     "right": "utility_id_eia",
+     "kind": "id"
+    }
+   ],
+   "left": {
+    "dataset": "eia-861",
+    "table": "sales",
+    "version": "2026-10",
+    "keys": 1529,
+    "unmatched": 1514,
+    "sample": [
+     {
+      "key": "10000",
+      "name": "Evergy Metro"
+     },
+     {
+      "key": "10005",
+      "name": "Evergy Kansas South, Inc"
+     },
+     {
+      "key": "10009",
+      "name": "Karnes Electric Coop Inc"
+     },
+     {
+      "key": "10012",
+      "name": "Kay Electric Coop"
+     },
+     {
+      "key": "10019",
+      "name": "FreeState Electric Coop"
+     },
+     {
+      "key": "10056",
+      "name": "City of Kaukauna (WI)"
+     },
+     {
+      "key": "10066",
+      "name": "K C Electric Association"
+     },
+     {
+      "key": "10071",
+      "name": "Kauai Island Utility Cooperative"
+     },
+     {
+      "key": "1009",
+      "name": "City of Austin - (MN)"
+     },
+     {
+      "key": "10144",
+      "name": "Kennebunk Light & Power Dist"
+     },
+     {
+      "key": "1015",
+      "name": "Austin Energy"
+     },
+     {
+      "key": "10170",
+      "name": "Kiamichi Electric Coop, Inc"
+     },
+     {
+      "key": "10171",
+      "name": "Kentucky Utilities Co"
+     },
+     {
+      "key": "10210",
+      "name": "Ketchikan Public Utilities"
+     },
+     {
+      "key": "10226",
+      "name": "Utility Board of the City of Key West, F"
+     },
+     {
+      "key": "10325",
+      "name": "Kings River Conservation Dist"
+     },
+     {
+      "key": "10331",
+      "name": "Kingsport Power Co"
+     },
+     {
+      "key": "10345",
+      "name": "City of Kinston - (NC)"
+     },
+     {
+      "key": "10370",
+      "name": "City of Kirkwood - (MO)"
+     },
+     {
+      "key": "10376",
+      "name": "Kissimmee Utility Authority"
+     }
+    ]
+   },
+   "right": {
+    "dataset": "pudl-ferc714",
+    "table": "annual_peaks",
+    "version": "2026-10",
+    "keys": 36,
+    "unmatched": 21,
+    "sample": [
+     {
+      "key": "12397",
+      "name": "Metroplitan Water District of Southern California"
+     },
+     {
+      "key": "12658",
+      "name": "Minnkota Power Cooperative, Inc."
+     },
+     {
+      "key": "12667",
+      "name": "Minnesota Municipal Power Agency"
+     },
+     {
+      "key": "13100",
+      "name": "Municipal Electric Authority of Georgia"
+     },
+     {
+      "key": "13670",
+      "name": "Northeast Texas Electric Cooperative"
+     },
+     {
+      "key": "13994",
+      "name": "Oglethorpe Power Company"
+     },
+     {
+      "key": "14077",
+      "name": "Oklahoma Municipal Power Authority"
+     },
+     {
+      "key": "15143",
+      "name": "Platte River Power Authority"
+     },
+     {
+      "key": "16687",
+      "name": "Southern Power Company"
+     },
+     {
+      "key": "17858",
+      "name": "Square Butte Electric Coop"
+     },
+     {
+      "key": "17867",
+      "name": "City of St Cloud"
+     },
+     {
+      "key": "20858",
+      "name": "Wisconsin Public Power Inc."
+     },
+     {
+      "key": "20910",
+      "name": "Wolverine Power Supply Cooperative In.c"
+     },
+     {
+      "key": "30151",
+      "name": "Tri-State G & T Assn., Inc."
+     },
+     {
+      "key": "39347",
+      "name": "East Texas Electric Cooperative"
+     },
+     {
+      "key": "40211",
+      "name": "Wabash Valley Power Association, Inc."
+     },
+     {
+      "key": "40218",
+      "name": "Central Electric Power Cooperative Inc."
+     },
+     {
+      "key": "6567",
+      "name": "Florida  Municipal Power Agency"
+     },
+     {
+      "key": "7004",
+      "name": "Buckeye Power, Inc."
+     },
+     {
+      "key": "7349",
+      "name": "Golden Spread Electric Cooperative, Inc."
+     }
+    ]
+   },
+   "matched": 15
+  },
+  {
+   "id": "rates-urdb-eia861",
+   "title": "URDB rates with their EIA-861 utility",
+   "keys": [
+    {
+     "left": "utility_id",
+     "right": "utility_id",
+     "kind": "id"
+    }
+   ],
+   "left": {
+    "dataset": "urdb",
+    "table": "rates",
+    "version": "2026-10",
+    "keys": 2826,
+    "unmatched": 1668,
+    "sample": [
+     {
+      "key": "1000",
+      "name": "City of Augusta, Arkansas (Utility Company)"
+     },
+     {
+      "key": "1002",
+      "name": "City of Aurelia, Iowa (Utility Company)"
+     },
+     {
+      "key": "10025",
+      "name": "City of Kaplan, Louisiana (Utility Company)"
+     },
+     {
+      "key": "10037",
+      "name": "City of Kasota, Minnesota (Utility Company)"
+     },
+     {
+      "key": "1004",
+      "name": "City of Aurora, South Dakota (Utility Company)"
+     },
+     {
+      "key": "10040",
+      "name": "City of Kasson, Minnesota (Utility Company)"
+     },
+     {
+      "key": "10057",
+      "name": "City of Lamar, Missouri (Utility Company)"
+     },
+     {
+      "key": "10063",
+      "name": "Kaysville City Corporation (Utility Company)"
+     },
+     {
+      "key": "10065",
+      "name": "KBR Rural Public Power District"
+     },
+     {
+      "key": "10089",
+      "name": "Keewatin Public Utilities"
+     },
+     {
+      "key": "10152",
+      "name": "City of Kennett, Missouri (Utility Company)"
+     },
+     {
+      "key": "10153",
+      "name": "KEM Electric Coop Inc"
+     },
+     {
+      "key": "10172",
+      "name": "City of Marathon, Iowa (Utility Company)"
+     },
+     {
+      "key": "10179",
+      "name": "Kenyon Municipal Utilities"
+     },
+     {
+      "key": "10181",
+      "name": "Keosauqua Municipal Light & Pwr"
+     },
+     {
+      "key": "10229",
+      "name": "City of Hickman, Nebraska (Utility Company)"
+     },
+     {
+      "key": "1024",
+      "name": "City of Ava, Missouri (Utility Company)"
+     },
+     {
+      "key": "10243",
+      "name": "City of Kiel, Wisconsin (Utility Company)"
+     },
+     {
+      "key": "10260",
+      "name": "City of Kimball, Nebraska (Utility Company)"
+     },
+     {
+      "key": "10265",
+      "name": "City of Kimballton, Iowa (Utility Company)"
+     }
+    ]
+   },
+   "right": {
+    "dataset": "eia-861",
+    "table": "sales",
+    "version": "2026-10",
+    "keys": 1530,
+    "unmatched": 372,
+    "sample": [
+     {
+      "key": "10005",
+      "name": "Evergy Kansas South, Inc"
+     },
+     {
+      "key": "10325",
+      "name": "Kings River Conservation Dist"
+     },
+     {
+      "key": "10768",
+      "name": "Laurens Electric Coop, Inc"
+     },
+     {
+      "key": "10960",
+      "name": "City of Lewisburg - (TN)"
+     },
+     {
+      "key": "113",
+      "name": "Agway Energy Services, LLC"
+     },
+     {
+      "key": "1149",
+      "name": "Baldwin County El Member Corp"
+     },
+     {
+      "key": "11519",
+      "name": "Magnolia Electric Power Assn"
+     },
+     {
+      "key": "12087",
+      "name": "McKenzie Electric Coop Inc"
+     },
+     {
+      "key": "12642",
+      "name": "Maquoketa Valley Rrl Elec Coop"
+     },
+     {
+      "key": "12917",
+      "name": "Morgan Stanley Capital Grp Inc"
+     },
+     {
+      "key": "1307",
+      "name": "Basin Electric Power Coop"
+     },
+     {
+      "key": "13196",
+      "name": "Northern Plains Electric Coop"
+     },
+     {
+      "key": "13332",
+      "name": "Navarro County Elec Coop, Inc"
+     },
+     {
+      "key": "13374",
+      "name": "Constellation NewEnergy, Inc"
+     },
+     {
+      "key": "13412",
+      "name": "City of New Albany - (MS)"
+     },
+     {
+      "key": "13524",
+      "name": "Newberry Electric Coop, Inc"
+     },
+     {
+      "key": "13694",
+      "name": "North Central Elec Coop, Inc - (ND)"
+     },
+     {
+      "key": "14078",
+      "name": "City of Okolona"
+     },
+     {
+      "key": "14175",
+      "name": "Tri-County Electric Coop, Inc (SC)"
+     },
+     {
+      "key": "14349",
+      "name": "Avangrid Power, LLC"
+     }
+    ]
+   },
+   "matched": 1158
+  },
+  {
+   "id": "zips-egrid-census",
+   "title": "EPA Power Profiler ZIPs with Census ZCTAs",
+   "keys": [
+    {
+     "left": "zip",
+     "right": "zcta",
+     "kind": "id"
+    }
+   ],
+   "left": {
+    "dataset": "egrid",
+    "table": "zip_subregions",
+    "version": "2026-10",
+    "keys": 41588,
+    "unmatched": 7815,
+    "sample": [
+     {
+      "key": "00001",
+      "name": null
+     },
+     {
+      "key": "00002",
+      "name": null
+     },
+     {
+      "key": "00003",
+      "name": null
+     },
+     {
+      "key": "00004",
+      "name": null
+     },
+     {
+      "key": "00005",
+      "name": null
+     },
+     {
+      "key": "00006",
+      "name": null
+     },
+     {
+      "key": "00007",
+      "name": null
+     },
+     {
+      "key": "00008",
+      "name": null
+     },
+     {
+      "key": "00009",
+      "name": null
+     },
+     {
+      "key": "00010",
+      "name": null
+     },
+     {
+      "key": "00011",
+      "name": null
+     },
+     {
+      "key": "00012",
+      "name": null
+     },
+     {
+      "key": "00013",
+      "name": null
+     },
+     {
+      "key": "00014",
+      "name": null
+     },
+     {
+      "key": "00015",
+      "name": null
+     },
+     {
+      "key": "00016",
+      "name": null
+     },
+     {
+      "key": "00017",
+      "name": null
+     },
+     {
+      "key": "00018",
+      "name": null
+     },
+     {
+      "key": "00019",
+      "name": null
+     },
+     {
+      "key": "00020",
+      "name": null
+     }
+    ]
+   },
+   "right": {
+    "dataset": "census-zcta-county",
+    "table": "zcta_counties",
+    "version": "2026-10",
+    "keys": 33791,
+    "unmatched": 18,
+    "sample": [
+     {
+      "key": "00802",
+      "name": null
+     },
+     {
+      "key": "00820",
+      "name": null
+     },
+     {
+      "key": "00830",
+      "name": null
+     },
+     {
+      "key": "00840",
+      "name": null
+     },
+     {
+      "key": "00850",
+      "name": null
+     },
+     {
+      "key": "00851",
+      "name": null
+     },
+     {
+      "key": "27268",
+      "name": null
+     },
+     {
+      "key": "96799",
+      "name": null
+     },
+     {
+      "key": "96910",
+      "name": null
+     },
+     {
+      "key": "96913",
+      "name": null
+     },
+     {
+      "key": "96915",
+      "name": null
+     },
+     {
+      "key": "96916",
+      "name": null
+     },
+     {
+      "key": "96917",
+      "name": null
+     },
+     {
+      "key": "96928",
+      "name": null
+     },
+     {
+      "key": "96929",
+      "name": null
+     },
+     {
+      "key": "96950",
+      "name": null
+     },
+     {
+      "key": "96951",
+      "name": null
+     },
+     {
+      "key": "96952",
+      "name": null
+     }
+    ]
+   },
+   "matched": 33773
+  },
+  {
+   "id": "counties-eia861-census",
+   "title": "EIA-861 service territory counties with Census county FIPS codes",
+   "keys": [
+    {
+     "left": "state",
+     "right": "state",
+     "kind": "id"
+    },
+    {
+     "left": "county",
+     "right": "county_name",
+     "kind": "name"
+    }
+   ],
+   "left": {
+    "dataset": "eia-861",
+    "table": "service_territory",
+    "version": "2026-10",
+    "keys": 3139,
+    "unmatched": 1,
+    "sample": [
+     {
+      "key": "AK|Not Applicable",
+      "name": "City of Elfin Cove - (AK)"
+     }
+    ]
+   },
+   "right": {
+    "dataset": "census-zcta-county",
+    "table": "zcta_counties",
+    "version": "2026-10",
+    "keys": 3232,
+    "unmatched": 92,
+    "sample": [
+     {
+      "key": "AS|Eastern District",
+      "name": null
+     },
+     {
+      "key": "AS|Manu'a District",
+      "name": null
+     },
+     {
+      "key": "AS|Swains Island",
+      "name": null
+     },
+     {
+      "key": "AS|Western District",
+      "name": null
+     },
+     {
+      "key": "GU|Guam",
+      "name": null
+     },
+     {
+      "key": "MP|Rota Municipality",
+      "name": null
+     },
+     {
+      "key": "MP|Saipan Municipality",
+      "name": null
+     },
+     {
+      "key": "MP|Tinian Municipality",
+      "name": null
+     },
+     {
+      "key": "PR|Adjuntas Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Aguada Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Aguadilla Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Aguas Buenas Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Aibonito Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Arecibo Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Arroyo Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Añasco Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Barceloneta Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Barranquitas Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Bayamón Municipio",
+      "name": null
+     },
+     {
+      "key": "PR|Cabo Rojo Municipio",
+      "name": null
+     }
+    ]
+   },
+   "matched": 3138
+  }
+ ]
+}

@@ -33,6 +33,8 @@ jobs:
         run: node pipeline/scheduled.mjs refresh-data
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Rebuild the cross-source join report
+        run: node pipeline/joins.mjs
       - name: Gates on the result
         run: node verify/check.mjs
       - name: Record that every tool's evidence passed

@@ -4,7 +4,7 @@
 - [x] 1.1 Add EIA-860, 861 (its sales, customers, revenue, reliability, and service-territory files only; the net metering and distributed generation files belong to `add-program-fact-pages`), and 923 fetch, validate, normalize, snapshot; verify row counts match EIA's published totals and PUDL within documented differences
 - [ ] 1.2 Derive EIA-930 daily and monthly rollups from the hourly snapshot in `add-hourly-carbon`; verify one month's rollup equals the sum of its hourly values
 - [x] 1.3 Add eGRID and its ZIP-to-subregion table, URDB (partitioned by state; this change owns it), LBNL Queued Up, FERC Form 714 annual peaks via PUDL with the respondent crosswalk, EIA-860M, and the Census ZCTA-to-county file; verify registry entries carry license and credit text and 10 sampled Form 714 peaks match PUDL
-- [ ] 1.4 Build cross-source joins with an unmatched-rows report; verify no row is matched by name alone
+- [x] 1.4 Build cross-source joins with an unmatched-rows report; verify no row is matched by name alone
 
 ## 2. Utility pages
 
