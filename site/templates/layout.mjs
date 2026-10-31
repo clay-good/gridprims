@@ -23,9 +23,6 @@ export const THEME_SCRIPT = "document.documentElement.dataset.js='1';try{var t=l
 /** The trust page set every footer links (site/trust-pages). */
 export const TRUST_PAGES = [['about', '/about/'], ['methods', '/methods/'], ['privacy', '/privacy/'], ['accessibility', '/accessibility/'], ['corrections', '/corrections/'], ['changelog', '/changelog/'], ['license', '/license/'], ['sources', '/sources/'], ['review', '/review-status/'], ['limits', '/limits/'], ['terms', '/terms/'], ['continuity', '/continuity/'], ['developers', '/developers/'], ['security', '/security/'], ['settings', '/settings/'], ['report', '/report/']];
 
-/** The family of sites that share gridprims' ethos (PRODUCT.md, Brand Commitments). */
-export const SISTERS = ['sophiewell.com', 'geoprims.com', 'roughlogic.com', 'enklayve.com', 'vaulytica.com', 'encryptalotta.com'];
-
 export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null, structured = [], crumbs = null, feed = null, card = null }) {
   const { t } = i18n;
   const summary = fit(description, DESCRIPTION_MAX);
@@ -91,9 +88,8 @@ ${body}
     <nav aria-label="${t('footer.trust')}"><ul>
       ${TRUST_PAGES.map(([id, href]) => html`<li><a href="${href}"${id === 'report' ? raw(' data-report') : ''}>${id === 'report' ? t('report.title') : t(`nav.${id}`)}</a></li>`)}
     </ul></nav>
-    <nav aria-label="${t('footer.sisters')}"><ul>${SISTERS.map((d) => html`<li><a href="https://${d}">${d}</a></li>`)}</ul></nav>
     <p>${t('footer.privacy')}</p>
-    <p>${t('footer.license')}</p>
+    <p><span class="wordmark-foot">${t('site.name')}</span> · ${t('footer.license')}</p>
   </div>
 </footer>
 <dialog class="report" data-report-dialog aria-labelledby="report-title">

@@ -71,7 +71,7 @@ export function renderAnswer(manifest, result, i18n, { isExample, reviewed = fal
   }
   const reasons = stripReasons(manifest, result, isExample, i18n, reviewed);
   return html`${sign}
-    <p class="stamp mono"><span class="${level >= 2 ? 'ok' : 'diamond'}">${level >= 2 ? GLYPHS.check : GLYPHS.diamond}</span>
+    <p class="stamp"><span class="${level >= 2 ? 'ok' : 'diamond'}">${level >= 2 ? GLYPHS.check : GLYPHS.diamond}</span>
       ${t('validation.stamp', { level: t(`validation.${level}`), evidence })}
       <a href="${LIMITS_PATH}#${manifest.id}">${t('validation.limitsLink')}</a></p>
     ${reasons.length ? html`<p class="strip" data-strip>${GLYPHS.diamond} ${reasons.join(' · ')} <a href="${REPORT_URL}" data-report>${t('strip.report')}</a></p>` : ''}`;

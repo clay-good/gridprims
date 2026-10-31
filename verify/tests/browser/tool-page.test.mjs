@@ -6,6 +6,10 @@ import assert from 'node:assert/strict';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { sharedSite } from '../../lib/shared-site.mjs';
+import { LIGHT, NIGHT } from '../../../site/styles/tokens.mjs';
+
+/** A token's hex as the browser reports it, so the themes cannot drift from tokens.mjs. */
+const rgb = (hex) => `rgb(${[1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(', ')})`;
 
 const out = await sharedSite();
 const PATH = '/tools/calc/energy-units/convert/';
@@ -67,14 +71,14 @@ for (const kind of ['chrome', 'firefox']) {
       // No saved choice: light unless the device asks for dark.
       if (!(await browser.evaluate(`matchMedia('(prefers-color-scheme: dark)').matches`))) {
         assert.equal(await browser.evaluate('document.documentElement.dataset.theme ?? null'), null);
-        assert.equal(await browser.evaluate(`getComputedStyle(document.body).backgroundColor`), 'rgb(243, 245, 242)');
+        assert.equal(await browser.evaluate(`getComputedStyle(document.body).backgroundColor`), rgb(LIGHT.bg));
       }
       await browser.evaluate(`localStorage.setItem('gridprims-theme', 'light')`);
       await browser.goto(server.url + '/');
       assert.equal(await browser.evaluate('document.documentElement.dataset.theme'), 'light');
       await browser.evaluate(`document.querySelector('[data-theme-toggle]').click()`);
       assert.equal(await browser.evaluate(`localStorage.getItem('gridprims-theme')`), 'dark');
-      assert.equal(await browser.evaluate(`getComputedStyle(document.body).backgroundColor`), 'rgb(17, 22, 19)');
+      assert.equal(await browser.evaluate(`getComputedStyle(document.body).backgroundColor`), rgb(NIGHT.bg));
     } finally {
       await browser.close();
       await server.close();

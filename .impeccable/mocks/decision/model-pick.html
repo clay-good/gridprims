@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>gridprims — Nameplate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--shell:#1A1D1C;--plate:#2A2E2D;--type:#C8CCC9;--dim:#878D8A;--orange:#E8491D;--work:#F0F1EF;--up:#3E4341;--down:#121414}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:var(--shell);color:var(--type);font-family:Archivo,system-ui,sans-serif;font-feature-settings:"tnum" 1}
+.legend,nav a,.stampline,th,.chip,.k{font-family:'Archivo Narrow',Archivo,sans-serif;text-transform:uppercase;letter-spacing:.16em}
+header{height:54px;display:flex;align-items:center;gap:36px;padding:0 28px;border-bottom:1px solid var(--up);background:var(--plate)}
+.mark{font-size:16px;font-weight:700;letter-spacing:-.01em;color:#fff}
+nav{display:flex;gap:26px;margin-right:auto}
+nav a{font-size:11.5px;font-weight:600;color:var(--dim);text-decoration:none}
+nav a.on{color:#fff;box-shadow:inset 0 -2px 0 var(--orange);padding-bottom:4px}
+.theme{display:flex;border:1px solid var(--up);border-radius:2px;overflow:hidden}
+.theme button{font-family:'Archivo Narrow';text-transform:uppercase;letter-spacing:.14em;font-size:10px;font-weight:600;padding:5px 10px;background:transparent;color:var(--dim);border:0;cursor:pointer}
+.theme button.on{background:var(--type);color:var(--shell)}
+.wrap{display:grid;grid-template-columns:946px 1fr;gap:20px;padding:20px 28px}
+.plate{background:var(--plate);border:1px solid var(--up);border-top-color:#4A504D;border-bottom-color:var(--down);border-radius:2px}
+.legend{font-size:9.5px;font-weight:600;color:var(--dim)}
+.stampline{border-top:1px solid var(--down);box-shadow:inset 0 1px 0 #383D3B;padding:7px 14px;font-size:9px;font-weight:600;color:var(--dim)}
+.stampline b{color:var(--type);font-weight:700}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.cell{padding:14px 14px 10px}
+.cell .v{font-size:40px;font-weight:700;letter-spacing:-.025em;color:#fff;line-height:1.05;margin-top:9px}
+.cell .v s{text-decoration:none;font-size:17px;font-weight:500;color:var(--dim)}
+.cell.lead .v{font-size:52px;color:var(--orange)}
+.curve{margin-top:20px}
+.ch{display:flex;align-items:baseline;padding:13px 16px 0}
+.ch .legend{margin-right:auto}
+.ch span{font-size:11px;color:var(--dim)}
+.bars{display:flex;align-items:flex-end;gap:3px;height:126px;padding:12px 16px 0;border-bottom:1px solid var(--up)}
+.bars i{flex:1;background:#5B625F;display:block;position:relative}
+.bars i.pk{background:var(--orange)}
+.bars i.pk::after{content:"412.4 kW";position:absolute;top:-15px;left:-14px;font-family:'Archivo Narrow';font-size:9px;letter-spacing:.12em;color:var(--orange);white-space:nowrap}
+.axis{display:flex;justify-content:space-between;padding:6px 16px 10px;font-family:'Archivo Narrow';font-size:9px;letter-spacing:.14em;color:var(--dim)}
+.work{margin-top:20px;background:var(--work);color:#1A1D1C;border:1px solid var(--up);border-radius:2px}
+.work .wh{display:flex;align-items:baseline;padding:11px 16px;border-bottom:1px solid #D4D7D3}
+.work .wh .legend{color:#5C6360;margin-right:auto}
+.work .wh span{font-size:11px;color:#5C6360}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{font-size:9px;font-weight:700;color:#5C6360;text-align:right;padding:8px 16px 7px;border-bottom:1px solid #D4D7D3}
+th:first-child{text-align:left}
+td{padding:7px 16px;border-bottom:1px solid #E2E4E1;text-align:right;font-variant-numeric:tabular-nums}
+td:first-child{text-align:left;font-weight:500}
+tr:last-child td{border-bottom:0}
+tr.tot td{font-weight:700;background:#E6E8E4}
+aside{display:flex;flex-direction:column;gap:20px}
+.pad{padding:14px 16px 16px}
+label{display:block;font-family:'Archivo Narrow';text-transform:uppercase;letter-spacing:.16em;font-size:9.5px;font-weight:600;color:var(--dim);margin-bottom:7px}
+.zrow{display:flex;gap:7px}
+input{flex:1;font-family:Archivo;font-size:18px;font-weight:600;letter-spacing:.06em;padding:8px 10px;background:#1E2120;color:#fff;border:1px solid var(--up);border-radius:2px}
+button.go{font-family:'Archivo Narrow';text-transform:uppercase;letter-spacing:.14em;font-size:10px;font-weight:700;padding:0 14px;background:var(--orange);color:#fff;border:0;border-radius:2px;cursor:pointer}
+.zout{margin-top:14px;padding-top:12px;border-top:1px solid var(--up)}
+.zout b{display:block;font-size:20px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.zout p{font-size:11.5px;color:var(--dim);margin-top:3px}
+dl.kv{margin-top:12px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:12px}
+dl.kv dt{color:var(--dim)}
+dl.kv dd{text-align:right;font-weight:600;font-variant-numeric:tabular-nums;color:#fff}
+.drop{border-style:dashed;border-color:#4A504D}
+.drop h3{font-size:13px;font-weight:600;color:#fff;margin-bottom:5px}
+.drop p{font-size:11.5px;color:var(--dim);line-height:1.45}
+button.alt{margin-top:12px;font-family:'Archivo Narrow';text-transform:uppercase;letter-spacing:.14em;font-size:10px;font-weight:700;padding:8px 13px;background:transparent;color:var(--type);border:1px solid #4A504D;border-radius:2px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:9.5px;font-weight:700;color:var(--shell);background:var(--type);padding:5px 9px;border-radius:2px;margin-top:4px}
+.chip i{width:6px;height:6px;background:var(--orange);display:block}
+</style></head>
+<body>
+<header>
+  <div class="mark">gridprims</div>
+  <nav><a href="#" class="on">Bills</a><a href="#">Data</a><a href="#">Carbon</a><a href="#">Grid</a><a href="#">Learn</a></nav>
+  <div class="theme"><button>Light</button><button class="on">Dark</button></div>
+</header>
+
+<div class="wrap">
+  <main>
+    <div class="row">
+      <section class="plate">
+        <div class="cell lead"><div class="legend">Peak demand</div><div class="v">412.4<s> kW</s></div></div>
+        <div class="stampline">Basis · <b>sample-office-15min.csv</b> · 2,976 intervals</div>
+      </section>
+      <section class="plate">
+        <div class="cell"><div class="legend">Load factor</div><div class="v">38<s>%</s></div></div>
+        <div class="stampline">Basis · <b>Jun 1–14, 2026</b> · computed local</div>
+      </section>
+      <section class="plate">
+        <div class="cell"><div class="legend">Energy</div><div class="v">53,118<s> kWh</s></div></div>
+        <div class="stampline">Basis · <b>EIA-861 2026-10-07</b></div>
+      </section>
+      <section class="plate">
+        <div class="cell"><div class="legend">Bill · Austin Energy Comm.</div><div class="v">$6,418.72</div></div>
+        <div class="stampline">Basis · <b>URDB 2026-10-30</b> · Cross-checked</div>
+      </section>
+    </div>
+
+    <section class="plate curve">
+      <div class="ch"><div class="legend">Load curve · Jun 8, 2026 · 15-min intervals</div><span>Peak 15:15 CDT</span></div>
+      <div class="bars">
+        <i style="height:20.5%"></i><i style="height:19.5%"></i><i style="height:19.1%"></i><i style="height:18.6%"></i>
+        <i style="height:19.1%"></i><i style="height:22.3%"></i><i style="height:33.0%"></i><i style="height:50.7%"></i>
+        <i style="height:66.5%"></i><i style="height:76.7%"></i><i style="height:82.8%"></i><i style="height:86.5%"></i>
+        <i style="height:90.2%"></i><i style="height:84.7%"></i><i style="height:92.1%"></i><i class="pk" style="height:95.8%"></i>
+        <i style="height:92.6%"></i><i style="height:81.9%"></i><i style="height:66.0%"></i><i style="height:47.9%"></i>
+        <i style="height:34.9%"></i><i style="height:27.4%"></i><i style="height:23.7%"></i><i style="height:21.4%"></i>
+      </div>
+      <div class="axis"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+      <div class="stampline">Basis · <b>Meter file, 15-min</b> · parsed on device · no upload</div>
+    </section>
+
+    <section class="work">
+      <div class="wh"><div class="legend">Bill breakdown · Austin Energy Commercial, Secondary &lt; 300 kW</div><span>Jun 1–14, 2026</span></div>
+      <table>
+        <thead><tr><th>Charge</th><th>Units</th><th>Quantity</th><th>Rate</th><th>Amount</th></tr></thead>
+        <tbody>
+          <tr><td>Customer charge</td><td>month</td><td>0.46</td><td>$27.65</td><td>$12.72</td></tr>
+          <tr><td>Demand charge</td><td>kW</td><td>412.4</td><td>$10.84</td><td>$4,470.42</td></tr>
+          <tr><td>Energy charge</td><td>kWh</td><td>53,118</td><td>$0.02741</td><td>$1,456.97</td></tr>
+          <tr><td>Power supply adjustment</td><td>kWh</td><td>53,118</td><td>$0.00733</td><td>$389.36</td></tr>
+          <tr><td>Community benefit charge</td><td>kWh</td><td>53,118</td><td>$0.00167</td><td>$88.71</td></tr>
+          <tr class="tot"><td>Total</td><td></td><td></td><td></td><td>$6,418.72</td></tr>
+        </tbody>
+      </table>
+      <div class="stampline" style="box-shadow:inset 0 1px 0 #fff;border-top-color:#D4D7D3;color:#5C6360">Basis · <b style="color:#1A1D1C">URDB 2026-10-30</b> · EIA-861 2026-10-07 · Cross-checked</div>
+    </section>
+  </main>
+
+  <aside>
+    <section class="plate">
+      <div class="pad">
+        <label for="z">Service ZIP code</label>
+        <div class="zrow"><input id="z" value="78701" inputmode="numeric" maxlength="5"><button class="go">Look up</button></div>
+        <div class="zout">
+          <b>Austin Energy · ERCOT</b>
+          <p>Municipal utility · Balancing authority ERCO</p>
+          <dl class="kv">
+            <dt>Residential</dt><dd>$0.1121 / kWh</dd>
+            <dt>Commercial demand</dt><dd>$10.84 / kW</dd>
+            <dt>Rates on file</dt><dd>14</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="stampline">Basis · <b>EIA-861 2026-10-07</b> · ZIP to utility</div>
+    </section>
+
+    <section class="plate drop">
+      <div class="pad">
+        <h3>Drop an interval file</h3>
+        <p>CSV, XLSX or Green Button XML. Parsed in this browser tab — the meter file never leaves the device.</p>
+        <button class="alt">Choose file</button>
+      </div>
+    </section>
+
+    <section class="plate">
+      <div class="pad">
+        <label>Provenance</label>
+        <dl class="kv">
+          <dt>URDB snapshot</dt><dd>2026-10-30</dd>
+          <dt>EIA-861</dt><dd>2026-10-07</dd>
+          <dt>eGRID subregion</dt><dd>ERCT</dd>
+        </dl>
+        <div style="margin-top:12px"><span class="chip"><i></i>Cross-checked</span></div>
+      </div>
+      <div class="stampline">Basis · <b>3 sources</b> · verified 2026-10-31</div>
+    </section>
+  </aside>
+</div>
+</body></html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>gridprims — zone sheets</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:1440px;height:900px;overflow:hidden}
+body{background:#101010;color:#E6E6E6;font:400 14px/1.5 "Archivo Narrow",sans-serif;-webkit-font-smoothing:antialiased}
+.leg{font:600 11px/1 "Archivo Narrow",sans-serif;letter-spacing:.18em;text-transform:uppercase}
+.q{font:400 13px/1 "Roboto Mono",monospace;font-variant-numeric:tabular-nums}
+/* --- chrome --- */
+.bar{height:60px;display:flex;align-items:center;gap:34px;padding:0 28px;background:#1C1C1C;border-bottom:1px solid #3A3A3A}
+.wm{font:600 18px/1 "Archivo Narrow",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#FAFAFA}
+.bar nav{display:flex;gap:22px}
+.bar nav a{color:#8A8A8A;text-decoration:none;font:600 11px/1 "Archivo Narrow",sans-serif;letter-spacing:.18em;text-transform:uppercase}
+.bar nav a[aria-current]{color:#FAFAFA;box-shadow:inset 0 -1px 0 #E0338C}
+.cal{margin-left:auto;display:flex;align-items:center;gap:10px;color:#777}
+.ramp{display:flex}
+.ramp i{width:17px;height:11px;display:block}
+select{font:600 11px/1 "Archivo Narrow",sans-serif;letter-spacing:.18em;text-transform:uppercase;
+  color:#E6E6E6;background:#262626;border:1px solid #4E4E4E;border-radius:0;padding:7px 9px;appearance:none}
+/* --- layout --- */
+.wrap{display:flex;height:840px}
+.sheet{width:952px;padding:26px 28px;border-right:1px solid #3A3A3A}
+.side{width:488px;padding:26px 28px;display:flex;flex-direction:column;gap:18px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3A3A3A;padding-bottom:12px}
+.hd .q{color:#ADADAD}
+/* --- quantities --- */
+.quants{display:flex;margin:22px 0 26px}
+.quants div{flex:1;border-left:1px solid #3A3A3A;padding:0 0 0 16px}
+.quants div:first-child{border-left:0;padding-left:0}
+.quants span{display:block;color:#777;margin-bottom:9px}
+.quants b{font:400 29px/1 "Roboto Mono",monospace;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#E6E6E6}
+.quants .sel span{color:#E0338C}
+.quants .sel b{color:#E0338C}
+/* --- hatch fields --- */
+.plot{position:relative;height:300px;border-bottom:1px solid #8A8A8A;display:flex;align-items:flex-end;gap:3px}
+.plot i{flex:1;display:block;position:relative;border-top:1px solid #8A8A8A}
+.h1{background:repeating-linear-gradient(135deg,#636363 0 1px,#161616 1px 9px)}
+.h2{background:repeating-linear-gradient(135deg,#8A8A8A 0 1px,#161616 1px 6px)}
+.h3{background:repeating-linear-gradient(135deg,#ADADAD 0 1px,#1C1C1C 1px 4px)}
+.h4{background:repeating-linear-gradient(135deg,#E6E6E6 0 1px,#262626 1px 3px)}
+.sel-b{background:repeating-linear-gradient(135deg,#E0338C 0 1.5px,#2A1420 1.5px 3px);border-top-color:#E0338C}
+.cf{background:repeating-linear-gradient(135deg,#ADADAD 0 1px,transparent 1px 4px),
+  repeating-linear-gradient(45deg,#ADADAD 0 1px,transparent 1px 4px),#1C1C1C}
+.ex{background:repeating-linear-gradient(135deg,#3A3A3A 0 1px,#101010 1px 12px);border-top-color:#4E4E4E}
+.ex::after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:1px;background:#E6E6E6}
+.mk{position:absolute;left:41.5%;top:-6px;padding-left:9px;border-left:1px solid #E0338C;height:40px;color:#E0338C}
+.mk b{display:block;font:400 15px/1.2 "Roboto Mono",monospace;letter-spacing:-.02em}
+.axis{display:flex;justify-content:space-between;color:#777;margin-top:10px}
+.key{display:flex;gap:26px;margin-top:22px;padding-top:16px;border-top:1px solid #262626;align-items:center;flex-wrap:wrap}
+.key span{display:flex;align-items:center;gap:9px;color:#8A8A8A}
+.key u{width:26px;height:13px;display:block;text-decoration:none}
+/* --- cleared light zones (prose only here) --- */
+.zone{background:#E6E6E6;color:#101010;padding:20px 22px}
+.zone.hi{background:#FAFAFA}
+.zone p{margin:9px 0 0;font-size:14.5px;line-height:1.52;max-width:46ch}
+.zone .leg{color:#3A3A3A}
+.zip{display:flex;margin:14px 0 14px}
+.zip input{font:400 19px/1 "Roboto Mono",monospace;width:106px;padding:10px 12px;color:#101010;
+  background:#FFF;border:1px solid #8A8A8A;border-radius:0}
+.zip button{font:600 11px/1 "Archivo Narrow",sans-serif;letter-spacing:.18em;text-transform:uppercase;
+  padding:0 16px;color:#FAFAFA;background:#101010;border:1px solid #101010;cursor:pointer}
+.ret{font:400 22px/1 "Roboto Mono",monospace;letter-spacing:-.02em;margin:0}
+.prov{display:flex;flex-direction:column;gap:7px;color:#3A3A3A;margin-top:14px}
+.chip{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:12px;
+  padding:5px 10px;background:#101010;color:#FAFAFA}
+.chip i{width:7px;height:7px;background:#E0338C;display:block}
+</style></head>
+<body>
+
+<header class="bar">
+  <span class="wm">gridprims</span>
+  <nav><a href="#" aria-current="page">Bills</a><a href="#">Data</a><a href="#">Carbon</a><a href="#">Grid</a><a href="#">Learn</a></nav>
+  <div class="cal">
+    <span class="leg">Zone calibration</span>
+    <span class="ramp"><i style="background:#101010"></i><i style="background:#1C1C1C"></i><i style="background:#262626"></i><i style="background:#3A3A3A"></i><i style="background:#4E4E4E"></i><i style="background:#636363"></i><i style="background:#777777"></i><i style="background:#8A8A8A"></i><i style="background:#ADADAD"></i><i style="background:#E6E6E6"></i><i style="background:#FAFAFA"></i></span>
+    <select aria-label="Theme"><option>Theme dark</option><option>Theme light</option><option>Theme system</option></select>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="sheet">
+    <div class="hd">
+      <span class="leg">Exposure record — meter file loaded</span>
+      <span class="q">sample-office-15min.csv &nbsp;·&nbsp; 2,976 intervals &nbsp;·&nbsp; Jun 1–14, 2026</span>
+    </div>
+
+    <div class="quants leg">
+      <div class="sel"><span>Peak demand — selected</span><b>412.4 kW</b></div>
+      <div><span>Load factor</span><b>38%</b></div>
+      <div><span>Energy</span><b>53,118 kWh</b></div>
+      <div><span>Bill · Austin Energy Comm.</span><b>$6,418.72</b></div>
+    </div>
+
+    <div class="plot" aria-label="Stepped load curve as hatch density">
+      <i class="h1" style="height:29%"></i><i class="h1" style="height:28%"></i><i class="h1" style="height:26%"></i><i class="h1" style="height:26%"></i><i class="h1" style="height:27%"></i><i class="h1" style="height:32%"></i>
+      <i class="ex" style="height:41%"></i><i class="ex" style="height:52%"></i><i class="h2" style="height:64%"></i><i class="h3" style="height:74%"></i><i class="h3" style="height:82%"></i><i class="h3" style="height:88%"></i>
+      <i class="h4" style="height:93%"></i><i class="h4" style="height:96%"></i><i class="h4" style="height:98%"></i><i class="sel-b" style="height:100%"></i><i class="h4" style="height:99%"></i><i class="h4" style="height:97%"></i>
+      <i class="h4" style="height:94%"></i><i class="h4" style="height:89%"></i><i class="h3" style="height:84%"></i><i class="h3" style="height:78%"></i><i class="cf" style="height:71%"></i><i class="h2" style="height:64%"></i>
+      <i class="h2" style="height:56%"></i><i class="h2" style="height:49%"></i><i class="h2" style="height:44%"></i><i class="h2" style="height:40%"></i><i class="h1" style="height:36%"></i><i class="h1" style="height:34%"></i>
+      <i class="h1" style="height:32%"></i><i class="h1" style="height:31%"></i><i class="h1" style="height:30%"></i><i class="h1" style="height:29%"></i><i class="h1" style="height:29%"></i><i class="h1" style="height:29%"></i>
+      <div class="mk"><b>412.4 kW</b><span class="leg">Jun 11 · 15:45</span></div>
+    </div>
+    <div class="axis q"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+
+    <div class="key leg">
+      <span><u class="h1"></u>0–150 kW</span>
+      <span><u class="h2"></u>150–270 kW</span>
+      <span><u class="h3"></u>270–360 kW</span>
+      <span><u class="h4"></u>360–412 kW</span>
+      <span><u class="ex" style="position:relative"></u>2 intervals excluded · meter fault</span>
+      <span><u class="cf"></u>Conflict · ratchet vs. 15-min demand</span>
+    </div>
+  </section>
+
+  <aside class="side">
+    <div class="zone">
+      <span class="leg">Drop a meter file</span>
+      <p><strong>A meter file never leaves this device.</strong> CSV, XLSX, or Green Button XML is parsed in this tab; the intervals, the demand math, and the bill are all computed locally. Nothing is uploaded.</p>
+    </div>
+
+    <div class="zone hi">
+      <span class="leg">Second door — no file needed</span>
+      <form class="zip" onsubmit="return false"><input value="78701" aria-label="ZIP code" inputmode="numeric"><button type="submit">Look up</button></form>
+      <p class="ret">Austin Energy · ERCOT</p>
+      <p>Returns the serving utility, its balancing authority, and every published rate we hold for that territory.</p>
+      <div class="prov leg">
+        <span>URDB snapshot 2026-10-30</span>
+        <span>EIA-861 2026-10-07</span>
+      </div>
+      <span class="chip leg"><i></i>Cross-checked</span>
+    </div>
+  </aside>
+</div>
+</body></html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>gridprims — workbench</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:1440px;height:900px;overflow:hidden}
+body{background:#F6F7F9;color:#0F172A;font:400 14px/1.5 Inter,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+a{color:inherit;text-decoration:none}
+.num{font-variant-numeric:tabular-nums}
+/* --- top bar --- */
+.top{height:56px;display:flex;align-items:center;gap:32px;padding:0 20px;background:#FFF;border-bottom:1px solid #E5E7EB}
+.wm{font-weight:600;font-size:15px;letter-spacing:-.01em}
+.top nav{display:flex;gap:4px}
+.top nav a{padding:6px 10px;border-radius:6px;color:#4B5565;font-weight:500;font-size:13px}
+.top nav a[aria-current]{background:#F6F7F9;color:#0F172A}
+.top .right{margin-left:auto;display:flex;align-items:center;gap:8px}
+select,.btn{font:500 13px/1 Inter,sans-serif;color:#0F172A;background:#FFF;border:1px solid #E5E7EB;
+  border-radius:6px;padding:8px 10px;appearance:none;cursor:pointer}
+.btn.pri{background:#2563EB;border-color:#2563EB;color:#FFF}
+/* --- shell --- */
+.shell{display:flex;height:844px}
+.rail{width:232px;background:#FFF;border-right:1px solid #E5E7EB;padding:16px 12px}
+.rail h3{margin:16px 0 6px;padding:0 8px;font-size:11px;font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;color:#8B95A5}
+.rail h3:first-child{margin-top:0}
+.rail a{display:flex;justify-content:space-between;padding:7px 8px;border-radius:6px;color:#4B5565;font-size:13.5px}
+.rail a[aria-current]{background:#EFF4FE;color:#2563EB;font-weight:500}
+.rail a span{color:#8B95A5;font-size:12px}
+main{flex:1;padding:24px}
+.crumb{display:flex;gap:7px;color:#8B95A5;font-size:12.5px;margin-bottom:6px}
+.crumb b{color:#4B5565;font-weight:500}
+.hdr{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.hdr h1{margin:0;font-size:20px;font-weight:600;letter-spacing:-.015em}
+.hdr .meta{color:#4B5565;font-size:13px}
+.hdr .acts{margin-left:auto;display:flex;gap:8px}
+.ok{display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border:1px solid #E5E7EB;
+  border-radius:999px;font-size:12px;font-weight:500;color:#4B5565}
+.ok i{width:6px;height:6px;border-radius:50%;background:#2563EB;display:block}
+/* --- cards --- */
+.card{background:#FFF;border:1px solid #E5E7EB;border-radius:6px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px}
+.stats .card{padding:16px}
+.stats dt{font-size:12.5px;color:#4B5565;margin-bottom:8px}
+.stats dd{margin:0;font-size:26px;font-weight:600;letter-spacing:-.02em}
+.stats dd small{font-size:14px;font-weight:500;color:#8B95A5;letter-spacing:0}
+.stats p{margin:6px 0 0;font-size:12px;color:#8B95A5}
+/* --- mid row --- */
+.mid{display:flex;gap:16px;margin-bottom:16px}
+.chart{flex:1;padding:16px 20px 12px}
+.ph{display:flex;align-items:center;margin-bottom:14px}
+.ph h2{margin:0;font-size:14px;font-weight:600}
+.ph .tabs{margin-left:auto;display:flex;border:1px solid #E5E7EB;border-radius:6px;overflow:hidden}
+.ph .tabs button{border:0;background:#FFF;padding:6px 12px;font:500 12.5px/1 Inter,sans-serif;color:#4B5565;cursor:pointer}
+.ph .tabs button[aria-selected=true]{background:#F6F7F9;color:#0F172A}
+.plot{position:relative;height:186px}
+.plot svg{display:block;width:100%;height:186px}
+.mk{position:absolute;left:49.5%;top:0;padding-left:8px;border-left:1px solid #2563EB;height:40px;color:#2563EB}
+.mk b{display:block;font-size:13px;font-weight:600}
+.mk span{font-size:11.5px;color:#8B95A5}
+.axis{display:flex;justify-content:space-between;color:#8B95A5;font-size:11.5px;margin-top:8px}
+.side{width:316px;display:flex;flex-direction:column;gap:16px}
+.side .card{padding:16px}
+.drop{border-style:dashed;text-align:left}
+.drop h2,.side h2{margin:0 0 6px;font-size:13.5px;font-weight:600}
+.side p{margin:0;font-size:12.5px;color:#4B5565;line-height:1.5}
+.zip{display:flex;gap:8px;margin:12px 0 10px}
+.zip input{flex:1;font:400 14px/1 Inter,sans-serif;padding:9px 10px;border:1px solid #E5E7EB;border-radius:6px;color:#0F172A}
+.ret{font-size:15px;font-weight:600;letter-spacing:-.01em;color:#0F172A!important}
+.prov{display:flex;gap:16px;margin-top:10px;font-size:11.5px;color:#8B95A5}
+/* --- table --- */
+table{width:100%;border-collapse:collapse}
+caption{text-align:left;font-size:14px;font-weight:600;padding:16px 20px 12px}
+th,td{padding:9px 20px;text-align:right;font-size:13px;border-top:1px solid #E5E7EB}
+th{font-size:11.5px;font-weight:500;color:#4B5565;background:#F6F7F9;cursor:pointer;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th.on{color:#0F172A;font-weight:600}
+td.flag{color:#4B5565}
+</style></head>
+<body>
+
+<header class="top">
+  <span class="wm">gridprims</span>
+  <nav><a href="#" aria-current="page">Bills</a><a href="#">Data</a><a href="#">Carbon</a><a href="#">Grid</a><a href="#">Learn</a></nav>
+  <div class="right">
+    <select aria-label="Theme"><option>Theme: System</option><option>Theme: Light</option><option>Theme: Dark</option></select>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail">
+    <h3>Workbench</h3>
+    <a href="#" aria-current="page">Meter files<span>1</span></a>
+    <a href="#">Rate library<span>4,812</span></a>
+    <a href="#">Tariff compare</a>
+    <a href="#">Demand ratchets</a>
+    <h3>Reference</h3>
+    <a href="#">Utilities<span>3,247</span></a>
+    <a href="#">Balancing authorities<span>66</span></a>
+    <a href="#">Emissions factors</a>
+    <h3>Learn</h3>
+    <a href="#">How a demand charge works</a>
+    <a href="#">Reading interval data</a>
+  </nav>
+
+  <main>
+    <div class="crumb"><span>Workbench</span><span>/</span><span>Meter files</span><span>/</span><b>sample-office-15min.csv</b></div>
+    <div class="hdr">
+      <h1>sample-office-15min.csv</h1>
+      <span class="meta">2,976 intervals · Jun 1–14, 2026</span>
+      <span class="ok"><i></i>Cross-checked</span>
+      <div class="acts"><button class="btn">Export CSV</button><button class="btn pri">Change rate</button></div>
+    </div>
+
+    <dl class="stats">
+      <div class="card"><dt>Peak demand</dt><dd>412.4 <small>kW</small></dd><p>Jun 11 · 15:45, 15-min</p></div>
+      <div class="card"><dt>Load factor</dt><dd>38<small>%</small></dd><p>Avg 177.4 kW of 412.4 kW</p></div>
+      <div class="card"><dt>Energy</dt><dd>53,118 <small>kWh</small></dd><p>14-day billed period</p></div>
+      <div class="card"><dt>Bill</dt><dd>$6,418.72</dd><p>Austin Energy Commercial</p></div>
+    </dl>
+
+    <div class="mid">
+      <section class="card chart">
+        <div class="ph"><h2>Load curve</h2>
+          <div class="tabs" role="tablist"><button role="tab" aria-selected="true">Day</button><button role="tab" aria-selected="false">Week</button><button role="tab" aria-selected="false">Period</button></div>
+        </div>
+        <div class="plot">
+          <svg viewBox="0 0 48 420" preserveAspectRatio="none" aria-label="Stepped load curve, kW">
+            <line x1="0" y1="8" x2="48" y2="8" stroke="#E5E7EB" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <line x1="0" y1="243" x2="48" y2="243" stroke="#E5E7EB" stroke-width="1" vector-effect="non-scaling-stroke" stroke-dasharray="3 3"/>
+            <polyline fill="none" stroke="#2563EB" stroke-width="1.75" vector-effect="non-scaling-stroke" points="0,300 1,300 1,302 2,302 2,305 3,305 3,308 4,308 4,310 5,310 5,312 6,312 6,313 7,313 7,314 8,314 8,312 9,312 9,308 10,308 10,295 11,295 11,260 12,260 12,215 13,215 13,170 14,170 14,130 15,130 15,100 16,100 16,75 17,75 17,60 18,60 18,48 19,48 19,40 20,40 20,32 21,32 21,25 22,25 22,18 23,18 23,12 24,12 24,8 25,8 25,10 26,10 26,15 27,15 27,22 28,22 28,30 29,30 29,42 30,42 30,55 31,55 31,70 32,70 32,88 33,88 33,110 34,110 34,135 35,135 35,162 36,162 36,190 37,190 37,215 38,215 38,235 39,235 39,252 40,252 40,265 41,265 41,275 42,275 42,282 43,282 43,288 44,288 44,292 45,292 45,296 46,296 46,298 47,298 47,300 48,300"/>
+          </svg>
+          <div class="mk"><b>412.4 kW</b><span>Peak</span></div>
+        </div>
+        <div class="axis"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+      </section>
+
+      <div class="side">
+        <section class="card drop">
+          <h2>Drop a meter file</h2>
+          <p>CSV, XLSX, or Green Button XML. A meter file never leaves this device — parsing and the bill run in this tab.</p>
+        </section>
+        <section class="card">
+          <h2>Find your utility and rate</h2>
+          <form class="zip" onsubmit="return false"><input value="78701" aria-label="ZIP code" inputmode="numeric"><button class="btn" type="submit">Look up</button></form>
+          <p class="ret">Austin Energy · ERCOT</p>
+          <div class="prov"><span>URDB snapshot 2026-10-30</span><span>EIA-861 2026-10-07</span></div>
+        </section>
+      </div>
+    </div>
+
+    <section class="card">
+      <table>
+        <caption>Top demand intervals</caption>
+        <thead><tr>
+          <th>Interval start</th><th class="on">Demand, kW &darr;</th><th>Energy, kWh</th><th>Rate period</th><th>Contribution to bill</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>2026-06-11 15:45</td><td>412.4</td><td>103.1</td><td class="flag">Summer on-peak</td><td>$4,124.00</td></tr>
+          <tr><td>2026-06-11 16:00</td><td>409.8</td><td>102.5</td><td class="flag">Summer on-peak</td><td>—</td></tr>
+          <tr><td>2026-06-04 15:30</td><td>398.2</td><td>99.6</td><td class="flag">Summer on-peak</td><td>—</td></tr>
+          <tr><td>2026-06-12 14:15</td><td>391.7</td><td>97.9</td><td class="flag">Summer on-peak</td><td>—</td></tr>
+          <tr><td>2026-06-09 16:30</td><td>384.0</td><td>96.0</td><td class="flag">Summer mid-peak</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>
+</body></html>

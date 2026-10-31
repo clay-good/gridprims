@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>gridprims — Public Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#11161F;--ground:#F3F4F6;--panel:#FFFFFF;--amber:#FFB000;--amber-dim:#C98A00;--red:#D93A1F;--line:#D6D9DE;--mute:#5C6472}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:var(--ground);font-family:'Public Sans',system-ui,sans-serif;color:var(--ink);font-feature-settings:"tnum" 1,"lnum" 1}
+.rail{height:56px;background:var(--ink);display:flex;align-items:center;padding:0 32px;gap:40px}
+.mark{font-size:17px;font-weight:900;letter-spacing:-.02em;color:#fff}
+nav{display:flex;gap:28px;margin-right:auto}
+nav a{font-size:13px;font-weight:600;color:#C3C8D1;text-decoration:none}
+nav a.on{color:#fff;box-shadow:inset 0 -2px 0 var(--amber);padding-bottom:3px}
+.theme{display:flex;border:1px solid #333B48}
+.theme button{font:inherit;font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 11px;background:transparent;color:#99A1AE;border:0;cursor:pointer}
+.theme button.on{background:#fff;color:var(--ink)}
+.energized{height:2px;background:var(--amber-dim);position:relative}
+.energized i{position:absolute;left:31%;width:138px;top:0;bottom:0;background:var(--amber)}
+.wrap{display:grid;grid-template-columns:960px 1fr;gap:24px;padding:24px 32px}
+.panel{background:var(--panel);border:1px solid var(--line)}
+.ph{display:flex;align-items:baseline;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line)}
+.ph h2{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.ph span{font-size:12px;color:var(--mute);font-weight:500}
+.ph .r{margin-left:auto;font-size:12px;color:var(--mute)}
+.result{position:relative}
+.stamp{position:absolute;top:-1px;right:20px;background:var(--amber);color:var(--ink);font-size:10px;font-weight:900;letter-spacing:.12em;padding:5px 10px}
+.answer{padding:26px 20px 20px;display:flex;align-items:flex-end;gap:18px}
+.answer b{font-size:88px;line-height:.86;font-weight:900;letter-spacing:-.04em}
+.answer u{text-decoration:none;font-size:26px;font-weight:700;color:var(--mute);padding-bottom:9px}
+.answer em{font-style:normal;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding-bottom:13px;margin-left:auto}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.metrics div{padding:14px 20px;border-left:1px solid var(--line)}
+.metrics div:first-child{border-left:0}
+.metrics dt{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.metrics dd{font-size:27px;font-weight:700;letter-spacing:-.02em;margin-top:4px}
+.metrics dd small{font-size:14px;font-weight:600;color:var(--mute)}
+.curve{padding:14px 20px 10px}
+svg{display:block}
+.axis{display:flex;justify-content:space-between;font-size:10px;font-weight:600;color:var(--mute);padding:4px 2px 0;letter-spacing:.04em}
+.drop{margin-top:24px;background:var(--panel);border:1px dashed #A7ADB8;padding:18px 20px;display:flex;align-items:center;gap:16px}
+.drop h3{font-size:14px;font-weight:700}
+.drop p{font-size:12px;color:var(--mute);margin-top:3px}
+.drop .btn{margin-left:auto}
+.btn{font:inherit;font-size:12px;font-weight:700;padding:9px 16px;background:var(--ink);color:#fff;border:0;cursor:pointer;letter-spacing:.02em}
+.btn.alt{background:#fff;color:var(--ink);border:1px solid var(--ink)}
+aside{display:flex;flex-direction:column;gap:24px}
+.zip{padding:16px 20px 20px}
+.zip label{display:block;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.zrow{display:flex;gap:8px}
+.zip input{flex:1;font:inherit;font-size:19px;font-weight:700;padding:9px 11px;border:1px solid #A7ADB8;background:#fff;letter-spacing:.04em}
+.zout{margin-top:16px;border-top:2px solid var(--amber);padding-top:12px}
+.zout b{display:block;font-size:22px;font-weight:800;letter-spacing:-.01em}
+.zout span{font-size:12px;color:var(--mute);font-weight:600}
+.zout dl{margin-top:12px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:12px}
+.zout dt{color:var(--mute);font-weight:600}
+.zout dd{font-weight:700;text-align:right}
+.prov{padding:14px 20px 18px}
+.prov li{display:flex;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:12px;list-style:none}
+.prov li:last-child{border-bottom:0}
+.prov .k{font-weight:700}
+.prov .v{margin-left:auto;color:var(--mute);font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:7px;margin-top:14px;background:var(--ink);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 11px}
+.chip i{width:7px;height:7px;background:var(--amber);display:block}
+.err{font-size:11px;color:var(--red);font-weight:700;margin-top:10px}
+</style></head>
+<body>
+<header class="rail">
+  <div class="mark">gridprims</div>
+  <nav><a href="#" class="on">Bills</a><a href="#">Data</a><a href="#">Carbon</a><a href="#">Grid</a><a href="#">Learn</a></nav>
+  <div class="theme"><button class="on">LIGHT</button><button>DARK</button></div>
+</header>
+<div class="energized"><i></i></div>
+
+<div class="wrap">
+  <main>
+    <section class="panel result">
+      <div class="ph"><h2>Meter file</h2><span>sample-office-15min.csv — 2,976 intervals, Jun 1–14, 2026</span><span class="r">Computed in 41 ms</span></div>
+      <div class="stamp">EXAMPLE VALUES</div>
+      <div class="answer"><b>412.4</b><u>kW</u><em>Peak demand · Jun 8, 15:15 CDT</em></div>
+      <dl class="metrics">
+        <div><dt>Load factor</dt><dd>38<small>%</small></dd></div>
+        <div><dt>Energy</dt><dd>53,118<small> kWh</small></dd></div>
+        <div><dt>Bill · Austin Energy Commercial</dt><dd>$6,418.72</dd></div>
+      </dl>
+      <div class="curve">
+        <svg width="880" height="150" viewBox="0 0 880 150" role="img" aria-label="Stepped load curve for June 8, 2026">
+          <line x1="20" y1="140" x2="860" y2="140" stroke="#D6D9DE"/>
+          <line x1="20" y1="17.4" x2="860" y2="17.4" stroke="#C98A00" stroke-dasharray="3 3"/>
+          <polyline fill="none" stroke="#11161F" stroke-width="2" points="20.0,113.8 55.0,113.8 55.0,115.0 90.0,115.0 90.0,115.6 125.0,115.6 125.0,116.2 160.0,116.2 160.0,115.6 195.0,115.6 195.0,111.4 230.0,111.4 230.0,97.7 265.0,97.7 265.0,75.1 300.0,75.1 300.0,54.9 335.0,54.9 335.0,41.8 370.0,41.8 370.0,34.0 405.0,34.0 405.0,29.3 440.0,29.3 440.0,24.5 475.0,24.5 475.0,31.6 510.0,31.6 510.0,22.1 545.0,22.1 545.0,17.4 580.0,17.4 580.0,21.5 615.0,21.5 615.0,35.2 650.0,35.2 650.0,55.5 685.0,55.5 685.0,78.7 720.0,78.7 720.0,95.3 755.0,95.3 755.0,104.9 790.0,104.9 790.0,109.6 825.0,109.6 825.0,112.6 860.0,112.6"/>
+          <rect x="545" y="17.4" width="35" height="4" fill="#FFB000"/>
+          <rect x="545" y="21.4" width="2" height="118.6" fill="#FFB000"/>
+          <text x="586" y="15" font-family="Public Sans" font-size="11" font-weight="800" fill="#11161F">412.4 kW PEAK</text>
+        </svg>
+        <div class="axis"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+      </div>
+    </section>
+    <section class="drop">
+      <div>
+        <h3>Drop your own interval file — CSV, XLSX, Green Button XML</h3>
+        <p>Parsed in this browser tab. The meter file never leaves the device, and nothing is uploaded.</p>
+      </div>
+      <button class="btn alt">Choose file</button>
+    </section>
+  </main>
+
+  <aside>
+    <section class="panel">
+      <div class="ph"><h2>Rate lookup</h2></div>
+      <div class="zip">
+        <label for="z">Service ZIP code</label>
+        <div class="zrow"><input id="z" value="78701" inputmode="numeric" maxlength="5"><button class="btn">Look up</button></div>
+        <div class="zout">
+          <b>Austin Energy · ERCOT</b>
+          <span>Municipal utility · Balancing authority ERCO</span>
+          <dl>
+            <dt>Residential rate</dt><dd>$0.1121 / kWh</dd>
+            <dt>Commercial demand</dt><dd>$10.84 / kW</dd>
+            <dt>Rates on file</dt><dd>14</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="ph"><h2>Provenance</h2></div>
+      <div class="prov">
+        <ul>
+          <li><span class="k">URDB snapshot</span><span class="v">2026-10-30</span></li>
+          <li><span class="k">EIA-861 service territory</span><span class="v">2026-10-07</span></li>
+          <li><span class="k">EPA eGRID subregion</span><span class="v">ERCT · 2026-04-18</span></li>
+        </ul>
+        <div class="chip"><i></i>Cross-checked</div>
+        <div class="err">1 rate withheld — tariff sheet unresolved</div>
+      </div>
+    </section>
+  </aside>
+</div>
+</body></html>

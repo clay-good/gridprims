@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>gridprims — plate section</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:1440px;height:900px;overflow:hidden}
+body{background:#F5F4F6;color:#16181A;font:400 17px/1.45 Archivo,sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.field{position:absolute;z-index:0}
+.f-warm{top:72px;right:0;width:392px;height:318px;background:#FAF6F5}
+.f-green{left:0;bottom:0;width:512px;height:246px;background:#EEF3EF}
+.mono{font:500 11px/1 "Roboto Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
+/* --- top bar --- */
+.bar{position:sticky;top:0;z-index:5;height:72px;display:flex;align-items:center;gap:40px;
+  padding:0 56px;background:#F5F4F6;border-bottom:1px solid #C9C7C4}
+.wm{font:400 23px/1 Archivo,sans-serif;letter-spacing:-.02em}
+.bar nav{display:flex;gap:28px;margin-left:8px}
+.bar nav a{color:#16181A;text-decoration:none;opacity:.62}
+.bar nav a[aria-current]{opacity:1;border-bottom:1px solid #16181A;padding-bottom:3px}
+.tok{margin-left:auto;display:flex;gap:24px;align-items:center;opacity:.62}
+select{font:500 11px/1 "Roboto Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#16181A;
+  background:transparent;border:1px solid #C9C7C4;border-radius:0;padding:7px 9px;appearance:none}
+/* --- grid --- */
+main{position:relative;z-index:1;padding:40px 56px;display:grid;grid-template-columns:repeat(12,1fr);
+  column-gap:40px;row-gap:34px;align-content:start}
+.panel{position:relative;border-top:1px solid #C9C7C4;padding-top:18px}
+.ch{position:absolute;width:9px;height:9px;z-index:3}
+.ch::before,.ch::after{content:"";position:absolute;background:#C9C7C4}
+.ch::before{left:4px;top:0;width:1px;height:9px}
+.ch::after{top:4px;left:0;height:1px;width:9px}
+.tl{left:-5px;top:-6px}.tr{right:-5px;top:-6px}.bl{left:-5px;bottom:-5px}.br{right:-5px;bottom:-5px}
+.lab{display:block;opacity:.55;margin-bottom:12px}
+/* --- figures --- */
+.disp{font:400 88px/.92 Archivo,sans-serif;letter-spacing:-.02em;margin:6px 0 0}
+.disp small{font-size:26px;letter-spacing:0;opacity:.6}
+.file{margin:0;max-width:30ch}
+.file b{font-weight:500}
+.rows{display:grid;row-gap:0}
+.rows div{display:flex;justify-content:space-between;align-items:baseline;
+  padding:13px 0;border-bottom:1px solid #C9C7C4}
+.rows div:first-child{border-top:1px solid #C9C7C4}
+.rows span{opacity:.55}
+.rows b{font-weight:400;font-size:27px;letter-spacing:-.01em}
+/* --- curve --- */
+.curve{position:relative;height:190px;margin-top:4px}
+.curve svg{display:block;width:100%;height:190px}
+.axis{display:flex;justify-content:space-between;opacity:.5;margin-top:10px}
+.peak{position:absolute;left:49.5%;top:-2px;padding-left:9px;border-left:1px solid #16181A;height:48px}
+.peak em{font-style:normal;display:block;font:400 15px/1.2 Archivo,sans-serif;letter-spacing:-.01em}
+/* --- doors --- */
+.drop{border:1px dashed #C9C7C4;border-top-style:solid;padding:26px 24px 24px}
+.drop p{margin:10px 0 0;max-width:42ch}
+.door{position:relative}
+.zip{display:flex;gap:0;margin:14px 0 16px}
+.zip input{font:400 20px/1 "Roboto Mono",monospace;letter-spacing:.04em;width:112px;padding:11px 12px;
+  color:#16181A;background:transparent;border:1px solid #C9C7C4;border-radius:0}
+.zip button{font:500 11px/1 "Roboto Mono",monospace;letter-spacing:.14em;text-transform:uppercase;
+  padding:0 18px;color:#16181A;background:transparent;border:1px solid #C9C7C4;border-left:0;cursor:pointer}
+.ret{font-size:24px;letter-spacing:-.01em;margin:0}
+.chip{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:6px 11px;border:1px solid #C9C7C4}
+.chip i{width:7px;height:7px;background:#DCDDF3;border:1px solid #16181A}
+.seal{position:absolute;right:-56px;bottom:-34px;width:112px;height:112px;border-radius:50%;
+  background:#DCDDF3;border:1px solid #16181A;display:grid;place-content:center;text-align:center;z-index:4}
+.seal span{display:block;font:500 9px/1.7 "Roboto Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
+.c1{grid-column:1/6}.c2{grid-column:6/13}.c3{grid-column:1/13}.c4{grid-column:1/8}.c5{grid-column:8/13}
+</style></head>
+<body>
+<div class="field f-warm"></div><div class="field f-green"></div>
+
+<header class="bar">
+  <span class="wm">gridprims</span>
+  <nav class="mono">
+    <a href="#" aria-current="page">Bills</a><a href="#">Data</a><a href="#">Carbon</a><a href="#">Grid</a><a href="#">Learn</a>
+  </nav>
+  <div class="tok mono"><span>URDB snapshot 2026-10-30</span><span>EIA-861 2026-10-07</span>
+    <select aria-label="Theme"><option>Theme light</option><option>Theme dark</option><option>Theme system</option></select>
+  </div>
+</header>
+
+<main>
+  <section class="panel c1">
+    <span class="ch tl"></span><span class="ch tr"></span><span class="ch bl"></span><span class="ch br"></span>
+    <span class="lab mono">Plate I — meter file, loaded</span>
+    <p class="file"><b>sample-office-15min.csv</b> — 2,976 intervals, Jun 1–14, 2026</p>
+    <p class="disp">412.4 <small>kW</small></p>
+    <span class="lab mono" style="margin:14px 0 0">Peak demand, 15-minute</span>
+  </section>
+
+  <section class="panel c2">
+    <span class="ch tl"></span><span class="ch tr"></span><span class="ch bl"></span><span class="ch br"></span>
+    <span class="lab mono">Plate II — derived quantities</span>
+    <div class="rows mono" style="letter-spacing:.14em">
+      <div><span>Load factor</span><b style="letter-spacing:-.01em">38%</b></div>
+      <div><span>Energy, billed period</span><b style="letter-spacing:-.01em">53,118 kWh</b></div>
+      <div><span>Bill · Austin Energy Commercial</span><b style="letter-spacing:-.01em">$6,418.72</b></div>
+    </div>
+  </section>
+
+  <section class="panel c3">
+    <span class="ch tl"></span><span class="ch tr"></span><span class="ch bl"></span><span class="ch br"></span>
+    <span class="lab mono">Plate III — stepped load curve, 15-minute intervals, kW</span>
+    <div class="curve">
+      <svg viewBox="0 0 48 420" preserveAspectRatio="none" aria-label="Stepped load curve">
+        <line x1="0" y1="8" x2="48" y2="8" stroke="#C9C7C4" stroke-width="1" vector-effect="non-scaling-stroke" stroke-dasharray="2 4"/>
+        <polyline fill="none" stroke="#16181A" stroke-width="1.5" vector-effect="non-scaling-stroke" points="0,300 1,300 1,302 2,302 2,305 3,305 3,308 4,308 4,310 5,310 5,312 6,312 6,313 7,313 7,314 8,314 8,312 9,312 9,308 10,308 10,295 11,295 11,260 12,260 12,215 13,215 13,170 14,170 14,130 15,130 15,100 16,100 16,75 17,75 17,60 18,60 18,48 19,48 19,40 20,40 20,32 21,32 21,25 22,25 22,18 23,18 23,12 24,12 24,8 25,8 25,10 26,10 26,15 27,15 27,22 28,22 28,30 29,30 29,42 30,42 30,55 31,55 31,70 32,70 32,88 33,88 33,110 34,110 34,135 35,135 35,162 36,162 36,190 37,190 37,215 38,215 38,235 39,235 39,252 40,252 40,265 41,265 41,275 42,275 42,282 43,282 43,288 44,288 44,292 45,292 45,296 46,296 46,298 47,298 47,300 48,300"/>
+      </svg>
+      <div class="peak"><em>412.4 kW</em><span class="mono" style="opacity:.6">Jun 11 · 15:45</span></div>
+    </div>
+    <div class="axis mono"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+  </section>
+
+  <section class="panel c4 drop">
+    <span class="ch tl"></span><span class="ch tr"></span><span class="ch bl"></span><span class="ch br"></span>
+    <span class="lab mono">Drop a meter file — CSV, XLSX, Green Button XML</span>
+    <p>A meter file never leaves this device. Parsing, demand math, and the bill all run in this tab; nothing is uploaded.</p>
+  </section>
+
+  <section class="panel c5 door">
+    <span class="ch tl"></span><span class="ch tr"></span><span class="ch bl"></span><span class="ch br"></span>
+    <span class="lab mono">Second door — no file needed</span>
+    <form class="zip" onsubmit="return false"><input value="78701" aria-label="ZIP code" inputmode="numeric"><button type="submit">Look up</button></form>
+    <p class="ret">Austin Energy · ERCOT</p>
+    <span class="chip mono"><i></i>Cross-checked</span>
+    <div class="seal"><span>Source<br>URDB<br>2026-10-30<br>EIA-861</span></div>
+  </section>
+</main>
+</body></html>

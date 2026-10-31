@@ -585,7 +585,6 @@ export default {
   'changelog.credit': 'Reported by {name}.',
   'changelog.security': 'Security fix.',
   'footer.trust': 'About gridprims',
-  'footer.sisters': 'Sister sites',
   'nav.about': 'About',
   'nav.methods': 'Methods',
   'nav.accessibility': 'Accessibility',
