@@ -1,0 +1,58 @@
+export default {
+  id: 'calc.power-factor.correct',
+  version: '0.1.0',
+  title: 'Power factor correction',
+  purpose: 'How much capacitor correction raises your power factor to a target, and what the low power factor costs on your tariff.',
+  archetype: 'calculator',
+  firstScreen: ['kw', 'measured', 'value', 'pfTarget'],
+  inputs: [
+    { name: 'kw', label: 'Real power', type: 'number', unit: 'kW', range: { min: 0.001, max: 1e7 }, precision: 'exact', example: 500 },
+    { name: 'measured', label: 'Measured as', type: 'enum', options: [{ value: 'pf', label: 'Power factor' }, { value: 'kvar', label: 'Reactive power (kVAR)' }, { value: 'kva', label: 'Apparent power (kVA)' }], example: 'pf' },
+    { name: 'value', label: 'Measured value', type: 'number', unit: 'power factor, kVAR, or kVA', range: { min: 0, max: 1e7 }, precision: 'exact', example: 0.78 },
+    { name: 'pfTarget', label: 'Target power factor', type: 'number', unit: 'power factor', range: { min: 0.01, max: 1 }, precision: 'exact', example: 0.95 },
+    { name: 'volts', label: 'Service voltage', type: 'number', unit: 'V', range: { min: 1, max: 1e6 }, precision: 'exact', example: 480 },
+    { name: 'phases', label: 'Service', type: 'enum', options: [{ value: 'three', label: 'Three-phase' }, { value: 'single', label: 'Single-phase' }], example: 'three' },
+    { name: 'demandRate', label: 'Demand charge (0 if none)', type: 'number', unit: '$/kW-month', range: { min: 0, max: 1e4 }, precision: 'exact', example: 18 },
+    { name: 'tariffPf', label: 'Tariff\'s power-factor threshold (0 if none)', type: 'number', unit: 'power factor', range: { min: 0, max: 1 }, precision: 'exact', example: 0.9 },
+  ],
+  outputs: [
+    { name: 'kvar', label: 'Correction needed', unit: 'kVAR', rounding: { decimals: 1, fixed: true } },
+    { name: 'kvaBefore', label: 'Apparent power now', unit: 'kVA', rounding: { decimals: 1, fixed: true } },
+    { name: 'kvaAfter', label: 'Apparent power after', unit: 'kVA', rounding: { decimals: 1, fixed: true } },
+    { name: 'ampsSaved', label: 'Current reduced by', unit: 'A', rounding: { decimals: 1, fixed: true } },
+    { name: 'monthlySaving', label: 'Power-factor charge removed', unit: '$/month', rounding: { decimals: 2, fixed: true } },
+  ],
+  commandForms: ['{kw} kW at {value} to {pfTarget}'],
+  method: 'Correction in kVAR is kW × (tan(arccos(PF now)) − tan(arccos(PF target))); apparent power is kW ÷ PF; line current is kVA × 1,000 ÷ (√3 × V) for three-phase service. On a tariff that bills demand scaled to a power-factor threshold, billing kW is kW × threshold ÷ PF when PF is lower.',
+  assumptions: [
+    'The power factor entered (or computed from kVAR or kVA) is the one the utility bills on; a bill or the meter shows it.',
+    'Correction is sized for the kW entered, usually the demand-setting load.',
+  ],
+  citations: [
+    { source: 'U.S. Department of Energy, Energy Efficiency and Renewable Energy, "Reducing Power Factor Cost"', edition: 'Motor Challenge fact sheet', locator: 'Power triangle example: 100 kW and 100 kVAR, corrected to 0.95 with a 67 kVAR capacitor', url: 'https://www.energy.gov/sites/prod/files/2014/04/f15/mc60405.pdf' },
+    { source: 'Washington State University Energy Program and the Northwest Energy Efficiency Alliance, "Energy Efficiency Factsheet: Reducing Power Factor Cost" (published by Clark Public Utilities)', edition: 'Factsheet', locator: 'Figure 4: a 100 kW load at 0.70 corrected to 0.95 with a 69 kVAR capacitor', url: 'https://www.clarkpublicutilities.com/wp-content/uploads/2016/05/ReducePowerFactor-4-page.pdf' },
+  ],
+  datasets: [],
+  examples: [
+    { id: '500kw-078', title: '500 kW at 0.78, corrected to 0.95', inputs: { kw: 500, measured: 'pf', value: 0.78, pfTarget: 0.95, volts: 480, phases: 'three', demandRate: 18, tariffPf: 0.9 }, expect: { kvar: { value: 236.8, tolerance: { abs: 0.05 }, display: '236.8' }, kvaBefore: { value: 641.0, tolerance: { abs: 0.05 }, display: '641.0' }, kvaAfter: { value: 526.3, tolerance: { abs: 0.05 }, display: '526.3' }, monthlySaving: { value: 1384.62, tolerance: { abs: 0.01 }, display: '1,384.62' } }, source: 'calc/power-factor-correction spec, scenarios "Correcting 0.78 to 0.95" and "Billing-demand adjustment removed"' },
+    { id: 'doe-100kw', title: 'DOE example: 100 kW and 100 kVAR, to 0.95', inputs: { kw: 100, measured: 'kvar', value: 100, pfTarget: 0.95, volts: 480, phases: 'three', demandRate: 0, tariffPf: 0 }, expect: { kvar: { value: 67, tolerance: { abs: 1 }, display: '67.1' } }, source: 'DOE "Reducing Power Factor Cost": a 67 kVAR capacitor' },
+    { id: 'wsu-070', title: 'WSU and NEEA example: 100 kW at 0.70, to 0.95', inputs: { kw: 100, measured: 'pf', value: 0.7, pfTarget: 0.95, volts: 480, phases: 'three', demandRate: 0, tariffPf: 0 }, expect: { kvar: { value: 69, tolerance: { abs: 1 }, display: '69.2' } }, source: 'WSU and NEEA factsheet, Figure 4: a 69 kVAR capacitor' },
+  ],
+  related: [],
+  handoffs: [],
+  stability: 'experimental',
+  validation: {
+    level: 2,
+    evidence: [
+      { kind: 'own-examples', summary: 'The spec\'s 236.8 kVAR, 641.0 and 526.3 kVA, and $1,384.62 penalty cases pass, and a target below the current power factor returns no correction.' },
+      { kind: 'published-example', path: 'verify/reference/pf-correction-examples.json', summary: 'Two published worked examples (DOE and WSU/NEEA) are reproduced within 1 kVAR.' },
+    ],
+  },
+  toRaise: 'Three recorded installations where the sized bank and the bill change were checked against a utility\'s bills would raise it to field-verified.',
+  screeningLabel: 'Screening estimate: a capacitor bank\'s size, steps, and placement, and any harmonic or resonance risk, are an electrical engineer\'s decision.',
+  limitations: [
+    'The power factor is entered or derived from one kW and kVAR or kVA pair; a file with reactive readings gives a better basis.',
+    'Only a tariff rule that scales billing demand to a power-factor threshold is priced here; kVA billing and per-kVAR charges are priced in the workbench\'s bill.',
+    'Harmonics, resonance, and switching transients are not assessed.',
+  ],
+};

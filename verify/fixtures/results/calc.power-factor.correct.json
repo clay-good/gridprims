@@ -1,0 +1,218 @@
+{
+  "toolId": "calc.power-factor.correct",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "500kw-078",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.power-factor.correct",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "kvar": {
+            "value": 236.8,
+            "unit": "kVAR",
+            "display": "236.8"
+          },
+          "kvaBefore": {
+            "value": 641,
+            "unit": "kVA",
+            "display": "641.0"
+          },
+          "kvaAfter": {
+            "value": 526.3,
+            "unit": "kVA",
+            "display": "526.3"
+          },
+          "ampsSaved": {
+            "value": 138,
+            "unit": "A",
+            "display": "138.0"
+          },
+          "monthlySaving": {
+            "value": 1384.62,
+            "unit": "$/month",
+            "display": "1,384.62"
+          }
+        },
+        "sentence": "Raising 500 kW from 0.78 to 0.95 takes about 236.8 kVAR of correction.",
+        "notes": [],
+        "work": {
+          "method": "Correction in kVAR is kW × (tan(arccos(PF now)) − tan(arccos(PF target))); apparent power is kW ÷ PF; line current is kVA × 1,000 ÷ (√3 × V) for three-phase service. On a tariff that bills demand scaled to a power-factor threshold, billing kW is kW × threshold ÷ PF when PF is lower.",
+          "steps": [
+            "Power factor now: 0.78, as entered.",
+            "Correction: 500 kW × (tan(arccos 0.78) − tan(arccos 0.95)) = 500 × (0.8023 − 0.3287) = 236.8 kVAR.",
+            "Apparent power: 641 kVA now, 526.3 kVA after; current falls by 138 A at 480 V three-phase.",
+            "Tariff: billing demand is 500 kW × 0.9 ÷ 0.78 = 576.9 kW, a power-factor penalty of 76.9 kW, or $1,384.62 a month at $18.00/kW. Correcting to 0.95 removes it.",
+            "The saving is the tariff's power-factor effect only; it leaves out the cost of the equipment and its installation, and any reduction in losses.",
+            "Choose the bank's size, steps, and placement with an electrical engineer, who also checks for harmonics and resonance; no public-domain list of standard bank ratings is cited here, so size up to the next rating your supplier offers."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The power factor entered (or computed from kVAR or kVA) is the one the utility bills on; a bill or the meter shows it.",
+            "Correction is sized for the kW entered, usually the demand-setting load."
+          ],
+          "citations": [
+            {
+              "source": "U.S. Department of Energy, Energy Efficiency and Renewable Energy, \"Reducing Power Factor Cost\"",
+              "edition": "Motor Challenge fact sheet",
+              "locator": "Power triangle example: 100 kW and 100 kVAR, corrected to 0.95 with a 67 kVAR capacitor",
+              "url": "https://www.energy.gov/sites/prod/files/2014/04/f15/mc60405.pdf"
+            },
+            {
+              "source": "Washington State University Energy Program and the Northwest Energy Efficiency Alliance, \"Energy Efficiency Factsheet: Reducing Power Factor Cost\" (published by Clark Public Utilities)",
+              "edition": "Factsheet",
+              "locator": "Figure 4: a 100 kW load at 0.70 corrected to 0.95 with a 69 kVAR capacitor",
+              "url": "https://www.clarkpublicutilities.com/wp-content/uploads/2016/05/ReducePowerFactor-4-page.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
+        "screeningLabel": "Screening estimate: a capacitor bank's size, steps, and placement, and any harmonic or resonance risk, are an electrical engineer's decision."
+      }
+    },
+    {
+      "example": "doe-100kw",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.power-factor.correct",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "kvar": {
+            "value": 67.1,
+            "unit": "kVAR",
+            "display": "67.1"
+          },
+          "kvaBefore": {
+            "value": 141.4,
+            "unit": "kVA",
+            "display": "141.4"
+          },
+          "kvaAfter": {
+            "value": 105.3,
+            "unit": "kVA",
+            "display": "105.3"
+          },
+          "ampsSaved": {
+            "value": 43.5,
+            "unit": "A",
+            "display": "43.5"
+          },
+          "monthlySaving": {
+            "value": 0,
+            "unit": "$/month",
+            "display": "0.00"
+          }
+        },
+        "sentence": "Raising 100 kW from 0.707 to 0.95 takes about 67.1 kVAR of correction.",
+        "notes": [],
+        "work": {
+          "method": "Correction in kVAR is kW × (tan(arccos(PF now)) − tan(arccos(PF target))); apparent power is kW ÷ PF; line current is kVA × 1,000 ÷ (√3 × V) for three-phase service. On a tariff that bills demand scaled to a power-factor threshold, billing kW is kW × threshold ÷ PF when PF is lower.",
+          "steps": [
+            "Power factor now: 100 kW ÷ √(100² + 100²) = 0.707.",
+            "Correction: 100 kW × (tan(arccos 0.707) − tan(arccos 0.95)) = 100 × (1.0000 − 0.3287) = 67.1 kVAR.",
+            "Apparent power: 141.4 kVA now, 105.3 kVA after; current falls by 43.5 A at 480 V three-phase.",
+            "Choose the bank's size, steps, and placement with an electrical engineer, who also checks for harmonics and resonance; no public-domain list of standard bank ratings is cited here, so size up to the next rating your supplier offers."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The power factor entered (or computed from kVAR or kVA) is the one the utility bills on; a bill or the meter shows it.",
+            "Correction is sized for the kW entered, usually the demand-setting load."
+          ],
+          "citations": [
+            {
+              "source": "U.S. Department of Energy, Energy Efficiency and Renewable Energy, \"Reducing Power Factor Cost\"",
+              "edition": "Motor Challenge fact sheet",
+              "locator": "Power triangle example: 100 kW and 100 kVAR, corrected to 0.95 with a 67 kVAR capacitor",
+              "url": "https://www.energy.gov/sites/prod/files/2014/04/f15/mc60405.pdf"
+            },
+            {
+              "source": "Washington State University Energy Program and the Northwest Energy Efficiency Alliance, \"Energy Efficiency Factsheet: Reducing Power Factor Cost\" (published by Clark Public Utilities)",
+              "edition": "Factsheet",
+              "locator": "Figure 4: a 100 kW load at 0.70 corrected to 0.95 with a 69 kVAR capacitor",
+              "url": "https://www.clarkpublicutilities.com/wp-content/uploads/2016/05/ReducePowerFactor-4-page.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
+        "screeningLabel": "Screening estimate: a capacitor bank's size, steps, and placement, and any harmonic or resonance risk, are an electrical engineer's decision."
+      }
+    },
+    {
+      "example": "wsu-070",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.power-factor.correct",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "kvar": {
+            "value": 69.2,
+            "unit": "kVAR",
+            "display": "69.2"
+          },
+          "kvaBefore": {
+            "value": 142.9,
+            "unit": "kVA",
+            "display": "142.9"
+          },
+          "kvaAfter": {
+            "value": 105.3,
+            "unit": "kVA",
+            "display": "105.3"
+          },
+          "ampsSaved": {
+            "value": 45.2,
+            "unit": "A",
+            "display": "45.2"
+          },
+          "monthlySaving": {
+            "value": 0,
+            "unit": "$/month",
+            "display": "0.00"
+          }
+        },
+        "sentence": "Raising 100 kW from 0.7 to 0.95 takes about 69.2 kVAR of correction.",
+        "notes": [],
+        "work": {
+          "method": "Correction in kVAR is kW × (tan(arccos(PF now)) − tan(arccos(PF target))); apparent power is kW ÷ PF; line current is kVA × 1,000 ÷ (√3 × V) for three-phase service. On a tariff that bills demand scaled to a power-factor threshold, billing kW is kW × threshold ÷ PF when PF is lower.",
+          "steps": [
+            "Power factor now: 0.7, as entered.",
+            "Correction: 100 kW × (tan(arccos 0.7) − tan(arccos 0.95)) = 100 × (1.0202 − 0.3287) = 69.2 kVAR.",
+            "Apparent power: 142.9 kVA now, 105.3 kVA after; current falls by 45.2 A at 480 V three-phase.",
+            "Choose the bank's size, steps, and placement with an electrical engineer, who also checks for harmonics and resonance; no public-domain list of standard bank ratings is cited here, so size up to the next rating your supplier offers."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The power factor entered (or computed from kVAR or kVA) is the one the utility bills on; a bill or the meter shows it.",
+            "Correction is sized for the kW entered, usually the demand-setting load."
+          ],
+          "citations": [
+            {
+              "source": "U.S. Department of Energy, Energy Efficiency and Renewable Energy, \"Reducing Power Factor Cost\"",
+              "edition": "Motor Challenge fact sheet",
+              "locator": "Power triangle example: 100 kW and 100 kVAR, corrected to 0.95 with a 67 kVAR capacitor",
+              "url": "https://www.energy.gov/sites/prod/files/2014/04/f15/mc60405.pdf"
+            },
+            {
+              "source": "Washington State University Energy Program and the Northwest Energy Efficiency Alliance, \"Energy Efficiency Factsheet: Reducing Power Factor Cost\" (published by Clark Public Utilities)",
+              "edition": "Factsheet",
+              "locator": "Figure 4: a 100 kW load at 0.70 corrected to 0.95 with a 69 kVAR capacitor",
+              "url": "https://www.clarkpublicutilities.com/wp-content/uploads/2016/05/ReducePowerFactor-4-page.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
+        "screeningLabel": "Screening estimate: a capacitor bank's size, steps, and placement, and any harmonic or resonance risk, are an electrical engineer's decision."
+      }
+    }
+  ]
+}

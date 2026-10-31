@@ -66,6 +66,44 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 - This is location-based accounting; contracts for clean power (market-based accounting) are not reflected.
 - Rates are eGRID2023's; a newer edition will change them.
 
+## Power factor correction (`calc.power-factor.correct`)
+
+How much capacitor correction raises your power factor to a target, and what the low power factor costs on your tariff.
+
+Version 0.1.0 · experimental · validation level 2, cross-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Real power | `kw` | kW | 0.001 to 10000000 | 500 |
+| Measured as | `measured` | choice | `pf`, `kvar`, `kva` | pf |
+| Measured value | `value` | power factor, kVAR, or kVA | 0 to 10000000 | 0.78 |
+| Target power factor | `pfTarget` | power factor | 0.01 to 1 | 0.95 |
+| Service voltage | `volts` | V | 1 to 1000000 | 480 |
+| Service | `phases` | choice | `three`, `single` | three |
+| Demand charge (0 if none) | `demandRate` | $/kW-month | 0 to 10000 | 18 |
+| Tariff's power-factor threshold (0 if none) | `tariffPf` | power factor | 0 to 1 | 0.9 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Correction needed | `kvar` | kVAR | 1 decimals |
+| Apparent power now | `kvaBefore` | kVA | 1 decimals |
+| Apparent power after | `kvaAfter` | kVA | 1 decimals |
+| Current reduced by | `ampsSaved` | A | 1 decimals |
+| Power-factor charge removed | `monthlySaving` | $/month | 2 decimals |
+
+**Method.** Correction in kVAR is kW × (tan(arccos(PF now)) − tan(arccos(PF target))); apparent power is kW ÷ PF; line current is kVA × 1,000 ÷ (√3 × V) for three-phase service. On a tariff that bills demand scaled to a power-factor threshold, billing kW is kW × threshold ÷ PF when PF is lower.
+
+**Sources.**
+
+- U.S. Department of Energy, Energy Efficiency and Renewable Energy, "Reducing Power Factor Cost", Motor Challenge fact sheet, Power triangle example: 100 kW and 100 kVAR, corrected to 0.95 with a 67 kVAR capacitor (https://www.energy.gov/sites/prod/files/2014/04/f15/mc60405.pdf)
+- Washington State University Energy Program and the Northwest Energy Efficiency Alliance, "Energy Efficiency Factsheet: Reducing Power Factor Cost" (published by Clark Public Utilities), Factsheet, Figure 4: a 100 kW load at 0.70 corrected to 0.95 with a 69 kVAR capacitor (https://www.clarkpublicutilities.com/wp-content/uploads/2016/05/ReducePowerFactor-4-page.pdf)
+
+**Known limits.**
+
+- The power factor is entered or derived from one kW and kVAR or kVA pair; a file with reactive readings gives a better basis.
+- Only a tariff rule that scales billing demand to a power-factor threshold is priced here; kVA billing and per-kVAR charges are priced in the workbench's bill.
+- Harmonics, resonance, and switching transients are not assessed.
+
 ## Bill check (`household.bill-totals.check`)
 
 Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.

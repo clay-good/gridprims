@@ -1,0 +1,27 @@
+{
+ "examples": [
+  {
+   "source": "U.S. DOE EERE, \"Reducing Power Factor Cost\" (Motor Challenge fact sheet)",
+   "url": "https://www.energy.gov/sites/prod/files/2014/04/f15/mc60405.pdf",
+   "sha256": "a9be4a8a763a8dd01d569db5f51cc99299c1ff23729131d141e693cea84e950d",
+   "retrieved": "2026-10-31",
+   "quote": "The reactive power required by the load is 100 kW. By installing a 67-kW capacitor, the apparent power is reduced from 142 to 105 kVA, resulting in a 26% reduction in current. Power factor is improved to 0.95.",
+   "note": "The sheet writes kW for kVAR in that sentence; its power triangle shows 100 kW real power and 100 kVAR reactive power.",
+   "kw": 100,
+   "kvarBefore": 100,
+   "pfTarget": 0.95,
+   "publishedKvar": 67
+  },
+  {
+   "source": "WSU Energy Program and NEEA, \"Energy Efficiency Factsheet: Reducing Power Factor Cost\", published by Clark Public Utilities",
+   "url": "https://www.clarkpublicutilities.com/wp-content/uploads/2016/05/ReducePowerFactor-4-page.pdf",
+   "sha256": "9a4e85b54df52bc9c8a9544a1ab08e7ee9d59e2e6403dbbf28e18cf41f028cfe",
+   "retrieved": "2026-10-31",
+   "quote": "In Figure 4 the power triangle shows an initial 0.70 power factor for a 100 kW (real power) inductive load. The reactive power required by the load is 102 kVAR. By installing a 69-kVAR capacitor, the apparent power necessary is reduced from 143 to 105 kVA ... Power factor is improved to 0.95.",
+   "kw": 100,
+   "pfBefore": 0.7,
+   "pfTarget": 0.95,
+   "publishedKvar": 69
+  }
+ ]
+}
