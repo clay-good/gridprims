@@ -2,7 +2,7 @@
 // format from content, not the name, then read it into canonical series and
 // a receipt. Runs in a worker or in Node; reads only the bytes it is given.
 
-import { decodeText, detectDelimiter, parseDelimited } from '../../parsers/delimited.mjs';
+import { createDelimitedParser, decodeText, detectDelimiter } from '../../parsers/delimited.mjs';
 import { readXlsx, readZipDirectory, readZipEntry, XlsxError } from '../../parsers/xlsx.mjs';
 import { XmlRefusal, XmlSyntaxError } from '../../parsers/xml.mjs';
 import { readEspi } from './espi.mjs';
@@ -52,8 +52,9 @@ const REFUSALS = {
  * @param {Uint8Array} bytes
  * @param {{name?: string}} file
  * @param {import('./tabular.mjs').Choices} choices
+ * @param {{onProgress?: (fraction: number) => void}} [opts] progress through the text, 0 to 1, while parsing
  */
-export async function intakeFile(bytes, file, choices) {
+export async function intakeFile(bytes, file, choices, opts = {}) {
   const t0 = performance.now();
   const meta = { name: file.name ?? '', size: bytes.length };
   if (bytes.length > MAX_BYTES) return { ok: false, format: 'too-large', message: `This file is ${bytes.length.toLocaleString('en-US')} bytes; the limit is ${MAX_BYTES.toLocaleString('en-US')}.`, learnUrl: GET_YOUR_DATA_URL };
@@ -61,7 +62,15 @@ export async function intakeFile(bytes, file, choices) {
   let result;
   if (format === 'delimited') {
     const { text, encoding } = decodeText(bytes);
-    const { rows, delimiter } = parseDelimited(text);
+    const { delimiter } = detectDelimiter(text);
+    const rows = [];
+    const parser = createDelimitedParser({ delimiter, onRow: (r) => rows.push(r) });
+    const CHUNK = 1 << 20;
+    for (let i = 0; i < text.length; i += CHUNK) {
+      parser.push(text.slice(i, i + CHUNK));
+      opts.onProgress?.(Math.min(1, (i + CHUNK) / text.length));
+    }
+    parser.end();
     result = readTable(rows, choices, { ...meta, format, encoding, delimiter: delimiter === '\t' ? 'tab' : delimiter });
   } else if (format === 'xlsx') {
     try {

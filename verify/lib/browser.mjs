@@ -86,6 +86,22 @@ function within(promise, ms, what) {
 
 const COMMAND_MS = 30_000;
 
+/**
+ * Stop a browser and remove its profile. Waits for the process to exit
+ * (forcing it after 3 s), because a browser still writing its profile makes
+ * the removal fail.
+ */
+async function shutdown(child, profile) {
+  if (child.exitCode === null && child.signalCode === null) {
+    const exited = new Promise((r) => child.once('exit', r));
+    child.kill();
+    const timer = setTimeout(() => child.kill('SIGKILL'), 3000);
+    await exited;
+    clearTimeout(timer);
+  }
+  rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
+}
+
 /** A JSON-over-WebSocket client with numbered commands and event listeners. */
 class Socket {
   /** @param {string} url */
@@ -188,8 +204,7 @@ async function launchChrome(exe, profile) {
     async close() {
       try { await Promise.race([sock.send('Browser.close'), new Promise((r) => setTimeout(r, 2000))]); } catch { /* closing */ }
       sock.close();
-      child.kill();
-      rmSync(profile, { recursive: true, force: true });
+      await shutdown(child, profile);
     },
   };
 }
@@ -249,8 +264,7 @@ async function launchFirefox(exe, profile) {
     async close() {
       try { await Promise.race([sock.send('browser.close', {}), new Promise((r) => setTimeout(r, 2000))]); } catch { /* closing */ }
       sock.close();
-      child.kill();
-      rmSync(profile, { recursive: true, force: true });
+      await shutdown(child, profile);
     },
   };
 }
