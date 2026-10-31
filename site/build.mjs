@@ -17,7 +17,8 @@ import { createI18n, pseudoMessages } from './lib/i18n.mjs';
 import { toolPath } from './ui/tool-page.mjs';
 import { tokensCss } from './styles/tokens.mjs';
 import { serviceWorkerSource } from './sw.mjs';
-import { calculatorPage, changelogPage, datasetPage, developersPage, filesPage, homePage, limitsPage, notFoundPage, privacyPage, reportPage, sectionPage, settingsPage } from './templates/pages.mjs';
+import { securityTxt } from './security-txt.mjs';
+import { calculatorPage, changelogPage, datasetPage, developersPage, filesPage, homePage, limitsPage, notFoundPage, privacyPage, reportPage, sectionPage, securityPage, settingsPage } from './templates/pages.mjs';
 import changelog from '../data/curated/changelog.mjs';
 import { THEME_SCRIPT } from './templates/layout.mjs';
 import { walk } from '../verify/lib/walk.mjs';
@@ -82,6 +83,7 @@ export async function build(opts = {}) {
   write('/files/', filesPage({ i18n }));
   write('/privacy/', privacyPage({ i18n }));
   write('/developers/', developersPage({ i18n }));
+  write('/security/', securityPage({ i18n }));
   for (const id of existsSync(join(ROOT, 'data')) ? readdirSync(join(ROOT, 'data')) : []) {
     const cur = join(ROOT, 'data', id, 'current.json');
     if (!existsSync(cur)) continue;
@@ -99,6 +101,11 @@ export async function build(opts = {}) {
   for (const id of ['bills', 'data', 'carbon', 'grid', 'learn']) write(`/${id}/`, sectionPage({ id, tools: TOOLS, datasets, i18n }));
 
   writeFileSync(join(outDir, '_redirects'), redirectsFile(redirects));
+  // The build's date is the commit's, never the wall clock (platform/privacy-and-security, supply-chain integrity).
+  let buildDate = '2026-10-31T00:00:00Z';
+  try { buildDate = execFileSync('git', ['log', '-1', '--format=%cI'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || buildDate; } catch { /* not a git checkout */ }
+  mkdirSync(join(outDir, '.well-known'), { recursive: true });
+  writeFileSync(join(outDir, '.well-known/security.txt'), securityTxt(buildDate));
 
   // The inline theme script's hash, for the Worker's CSP (task 5.1).
   writeFileSync(join(outDir, '_csp-hashes.json'), JSON.stringify({ 'script-src': [`sha256-${createHash('sha256').update(THEME_SCRIPT).digest('base64')}`] }, null, 2) + '\n');

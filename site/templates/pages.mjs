@@ -181,7 +181,7 @@ export function changelogPage({ entries, i18n }) {
   const body = html`<h1>${t('changelog.title')}</h1><p class="purpose">${t('changelog.intro')}</p>
 <div class="table-wrap"><table>
   <thead><tr><th scope="col">${t('changelog.col.date')}</th><th scope="col">${t('changelog.col.tool')}</th><th scope="col">${t('changelog.col.version')}</th><th scope="col">${t('changelog.col.reason')}</th></tr></thead>
-  <tbody>${entries.map((e) => html`<tr><td class="mono">${e.date}</td><td><a href="${toolPath(e.toolId)}">${e.toolId}</a></td><td class="mono">${e.version}</td><td>${e.reason}${e.sample ? html` ${t('changelog.sample', { old: e.sample.old, new: e.sample.new })}` : ''}</td></tr>`)}</tbody>
+  <tbody>${entries.map((e) => html`<tr><td class="mono">${e.date}</td><td>${e.toolId ? html`<a href="${toolPath(e.toolId)}">${e.toolId}</a>` : ''}</td><td class="mono">${e.version}</td><td>${e.kind === 'security' ? html`${t('changelog.security')} ` : ''}${e.reason}${e.sample ? html` ${t('changelog.sample', { old: e.sample.old, new: e.sample.new })}` : ''}${e.credit ? html` ${t('changelog.credit', { name: e.credit })}` : ''}</td></tr>`)}</tbody>
 </table></div>`;
   return layout({ i18n, title: `${t('changelog.title')} · ${t('site.name')}`, description: t('changelog.intro'), path: '/changelog/', body });
 }
@@ -307,4 +307,16 @@ export function developersPage({ i18n }) {
 ${snippets().map((s) => html`<h2>${s.client}</h2><p class="mono">${s.file}</p><pre class="mono report-preview" data-snippet="${s.client}">${s.text}</pre>`)}
 <p>${t('dev.tools')}</p>`;
   return layout({ i18n, title: `${t('dev.title')} · ${t('site.name')}`, description: t('dev.intro'), path: '/developers/', body });
+}
+
+/** The disclosure policy (trust/security-disclosure). */
+export function securityPage({ i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('security.title')}</h1><p class="purpose">${t('security.intro')}</p>
+<p><a class="button" href="/report/" data-report>${t('security.report')}</a></p>
+<h2>${t('security.scope')}</h2><p>${t('security.inScope')}</p><p>${t('security.outScope')}</p>
+<h2>${t('security.harbor')}</h2><p>${t('security.harborBody')}</p><p>${t('security.rules')}</p>
+<h2>${t('security.times')}</h2><p>${t('security.timesBody')}</p>
+<p>${t('security.notLegal')}</p>`;
+  return layout({ i18n, title: `${t('security.title')} · ${t('site.name')}`, description: t('security.intro'), path: '/security/', body });
 }

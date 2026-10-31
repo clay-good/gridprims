@@ -42,6 +42,7 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | Grid pulse in the top rail: the 14 latest daily peaks with "as of", hidden until an EIA-930 snapshot exists | Built and tested; hidden today |
 | Limits page (`/limits/`, with JSON and the MCP resource from one record): honest summary first, every tool's stability, level, review, evidence date, and path to a higher level, the cited cannot-do list, known problems from the health record, and the unverified-claim register | Built and tested, including print in Chrome |
 | Site shell and URLs: six sections (Home, Bills, Data, Carbon, Grid, Learn) with landing pages listing only what exists, a keyboard menu below 768 px, a record of every published URL with redirects under a 1,500-rule budget, a 404 that suggests close matches on the device, and a pseudo-locale sweep proving layouts survive 35% longer text | Built and tested |
+| Security disclosure: `/.well-known/security.txt` per RFC 9116 with an expiry generated eleven months after the commit's date and guarded in CI, a disclosure policy with scope, safe harbor, and 5-day and 90-day targets, and credited security fixes in the changelog | Built and tested |
 | Overpass fonts | Not started |
 
 The plan is in [`openspec/changes/`](openspec/changes/): 22 changes, built in the phase order in [`plan-launch-and-value-proof`](openspec/changes/plan-launch-and-value-proof/). The shapes everything generates from are in [`docs/decisions-day-one.md`](docs/decisions-day-one.md).

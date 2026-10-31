@@ -1,9 +1,9 @@
 ## 1. Security disclosure (phase 0)
 
-- [ ] 1.1 Publish `/.well-known/security.txt` with the RFC 9116 fields and the right content type; verify the fields-present scenario against the deployed URL
-- [ ] 1.2 Generate the expiry as eleven months from the build date with a CI guard; verify the expiry-regenerated and generator-broken scenarios
-- [ ] 1.3 Write the disclosure policy page with scope, safe harbor, and the 5-day and 90-day targets; verify the out-of-scope scenario wording
-- [ ] 1.4 Add security fixes to the changelog flow with optional reporter credit; verify the reporter-credit scenario
+- [x] 1.1 Publish `/.well-known/security.txt` with the RFC 9116 fields and the right content type; verify the fields-present scenario against the deployed URL
+- [x] 1.2 Generate the expiry as eleven months from the build date with a CI guard; verify the expiry-regenerated and generator-broken scenarios
+- [x] 1.3 Write the disclosure policy page with scope, safe harbor, and the 5-day and 90-day targets; verify the out-of-scope scenario wording
+- [x] 1.4 Add security fixes to the changelog flow with optional reporter credit; verify the reporter-credit scenario
 
 ## 2. Curated contributions (phase 0, before the first curated dataset)
 

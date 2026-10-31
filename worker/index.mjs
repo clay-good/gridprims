@@ -46,6 +46,12 @@ export default {
       const notFound = await env.ASSETS.fetch(new Request(new URL('/404.html', url), request));
       return withHeaders(notFound, 404);
     }
+    // RFC 9116 asks for plain text in UTF-8, whatever the host would infer.
+    if (url.pathname === '/.well-known/security.txt') {
+      const out = await withHeaders(res);
+      out.headers.set('content-type', 'text/plain; charset=utf-8');
+      return out;
+    }
     return withHeaders(res);
   },
 
