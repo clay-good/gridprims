@@ -24,15 +24,18 @@ export async function buildData(o = {}) {
     if (!existsSync(cur)) continue;
     const { version } = JSON.parse(readFileSync(cur, 'utf8'));
     const committed = JSON.parse(readFileSync(join(dataDir, id, version, 'manifest.json'), 'utf8'));
-    const year = Number(committed.tables[0].dataPeriod);
+    const year = Number(committed.tables[0].dataPeriod.slice(-4)); // "2025", or the last year of "2006-2025"
     const entry = (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${id}.mjs`)).href)).default;
+    const get = async (r) => new Uint8Array(await (await (o.fetch ?? fetch)(r.release ?? r.url)).arrayBuffer());
+    // A release of several files (PUDL) is fetched file by file and passed by name.
+    const several = committed.raw.some((r) => r.file);
     let input = o.inputs?.[id];
-    if (!input) {
-      const res = await (o.fetch ?? fetch)(committed.raw[0].release ?? committed.raw[0].url);
-      input = new Uint8Array(await res.arrayBuffer());
-    }
+    if (!input) input = several ? Object.fromEntries(await Promise.all(committed.raw.map(async (r) => [r.file, await get(r)]))) : await get(committed.raw[0]);
+    const vintage = several
+      ? { release: committed.release, asOf: committed.asOf, files: Object.fromEntries(committed.raw.map((r) => [r.file, { url: r.url, sha256: null }])) }
+      : { url: committed.raw[0].url, asOf: committed.asOf, sha256: null };
     const out = mkdtempSync(join(tmpdir(), 'gridprims-rebuild-'));
-    const r = await runRecipe({ dataset: id, year, input, retrieved: committed.retrieved, outDir: out, entry, vintage: { url: committed.raw[0].url, asOf: committed.asOf, sha256: null } });
+    const r = await runRecipe({ dataset: id, year, input, retrieved: committed.retrieved, outDir: out, entry, vintage });
     if (!r.ok) { report.push({ id, ok: false, failures: r.failures }); continue; }
     const want = sums(committed);
     const got = sums(r.manifest);

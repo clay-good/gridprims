@@ -59,6 +59,8 @@ A dataset's `recipe` holds the steps every table shares (today, `fetch`), and `t
 | `partition.by` | A row with no value in that column fails the release instead of landing in a `null` shard |
 | `releaseWatch.nextYearFrom` | Look for next year's file only from this month and day of the year after (EIA-923 grows a year-to-date file all year) |
 | `releaseWatch.finalOnly` | A found file without the final workbook is waited on, not a failure |
+| `read-parquet.files` | Reads the named Parquet files of a vintage (`vintage.files`, each with its URL and pin) and hands the normalizer one reader per file, read a row group at a time; PUDL's Form 714 build reads 19.5 million hourly rows in about 3 s |
+| no `releaseWatch` | The dataset is pinned to a release (PUDL); a new release is a hand-made bump after the cross-checks pass, and the daily watch skips it |
 
 ## 4. Build output
 
@@ -136,4 +138,4 @@ Checked against the published schemas on 2026-10-30 (committed under `verify/ref
 
 ## 10. Reproducing a snapshot from the publisher
 
-`node pipeline/build-data.mjs` rebuilds every served dataset from the publisher's own file and compares checksums with the committed manifest. On 2026-10-31 it rebuilt EIA-861 (version 2026-10) live from `eia.gov`: the raw file's SHA-256 matched the pinned `f59f6c73…a396`, and all 51 shards and the CSV download matched byte for byte. On 2026-10-30, with three EIA-861 tables and EIA-860's plants and generators, both datasets rebuilt from EIA's pinned files (EIA-860 `2b27929d…08ba`) with every shard and download matching; EIA-923 (`1bff7092…84de`) rebuilt the same way the same day. `node pipeline/get-data.mjs` fetches the same files from gridprims.com and accepts each only if it matches the digest committed in the clone.
+`node pipeline/build-data.mjs` rebuilds every served dataset from the publisher's own file and compares checksums with the committed manifest. On 2026-10-31 it rebuilt EIA-861 (version 2026-10) live from `eia.gov`: the raw file's SHA-256 matched the pinned `f59f6c73…a396`, and all 51 shards and the CSV download matched byte for byte. On 2026-10-30, with three EIA-861 tables and EIA-860's plants and generators, both datasets rebuilt from EIA's pinned files (EIA-860 `2b27929d…08ba`) with every shard and download matching; EIA-923 (`1bff7092…84de`) rebuilt the same way the same day, and so did the Form 714 peaks from PUDL v2026.10.0's two Parquet files. `node pipeline/get-data.mjs` fetches the same files from gridprims.com and accepts each only if it matches the digest committed in the clone.

@@ -27,7 +27,9 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
   const entry = given ?? (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${dataset}.mjs`)).href)).default;
   const cur = join(outDir, dataset, 'current.json');
   const manifest = existsSync(cur) ? JSON.parse(readFileSync(join(outDir, dataset, JSON.parse(readFileSync(cur, 'utf8')).version, 'manifest.json'), 'utf8')) : null;
-  const servedYear = manifest ? Number(manifest.tables[0].dataPeriod) : Math.max(...Object.keys(entry.vintages).map(Number));
+  // A dataset pinned to a release (PUDL) has no release watch: a new release is a hand-made bump.
+  if (!entry.releaseWatch) return { id: dataset, checked: false, refreshed: false, version: manifest?.version, waiting: 'pinned to a release; a new one is bumped by hand' };
+  const servedYear = manifest ? Number(manifest.tables[0].dataPeriod.slice(-4)) : Math.max(...Object.keys(entry.vintages).map(Number));
   const tryYear = async (year) => {
     for (const t of entry.releaseWatch.urls) {
       const found = await head(t.replace('{year}', String(year)), f);

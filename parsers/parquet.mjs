@@ -260,14 +260,20 @@ export function readParquet(bytes) {
   const rowGroups = meta[4] ?? [];
   const numRows = Number(meta[3]);
 
-  /** Every value of one column, nulls included, in row order. */
-  function column(name) {
+  /**
+   * Every value of one column, nulls included, in row order.
+   * @param {string} name
+   * @param {{rowGroup?: number, raw?: boolean}} [opts] rowGroup reads one group only, so a large file
+   *   is aggregated a group at a time; raw keeps dates as days and timestamps as numbers in their
+   *   unit since 1970, skipping a string per value
+   */
+  function column(name, opts = {}) {
     const ci = columns.findIndex((c) => c.name === name);
     if (ci < 0) throw new ParquetError(`No column ${name}. Columns: ${columns.map((c) => c.name).join(', ')}.`, 'column');
     const col = columns[ci];
-    const convert = logical(col);
+    const convert = opts.raw ? (col.type === 2 ? (v) => Number(v) : col.type === 6 || col.type === 7 ? (v) => text(v) : (v) => v) : logical(col);
     const out = [];
-    for (const rg of rowGroups) {
+    for (const rg of opts.rowGroup === undefined ? rowGroups : [rowGroups[opts.rowGroup]]) {
       const cm = rg[1][ci][3];
       const codec = cm[4];
       if (!CODECS[codec]) throw new ParquetError(`Column ${name} is compressed with ${CODEC_NAMES[codec] ?? `codec ${codec}`}, which this reader does not support.`, 'codec');
@@ -286,7 +292,7 @@ export function readParquet(bytes) {
         const kind = ph[1];
         if (kind === 2) {
           const page = inflate(bytes.subarray(start, start + size));
-          dict = plain(page, 0, col.type, ph[7][1], col.typeLength);
+          dict = plain(page, 0, col.type, ph[7][1], col.typeLength).map(convert); // each entry converted once
           continue;
         }
         if (kind !== 0 && kind !== 3) continue; // index pages
@@ -320,8 +326,9 @@ export function readParquet(bytes) {
         }
         const present = defs ? defs.reduce((k, d) => k + d, 0) : count;
         const vals = values(page, at, page.length, encoding, col, present, dict);
+        const ready = encoding === 2 || encoding === 8 ? (v) => v : convert;
         let k = 0;
-        for (let i = 0; i < count; i++) out.push(!defs || defs[i] ? convert(vals[k++]) : null);
+        for (let i = 0; i < count; i++) out.push(!defs || defs[i] ? ready(vals[k++]) : null);
         seen += count;
       }
     }
@@ -334,5 +341,5 @@ export function readParquet(bytes) {
     return Array.from({ length: numRows }, (_, i) => Object.fromEntries(names.map((nm, k) => [nm, cols[k][i]])));
   }
 
-  return { columns: columns.map(({ name, type, optional }) => ({ name, type, optional })), numRows, column, rows, createdBy: meta[6] ? text(meta[6]) : null };
+  return { columns: columns.map(({ name, type, optional }) => ({ name, type, optional })), numRows, rowGroups: rowGroups.length, column, rows, createdBy: meta[6] ? text(meta[6]) : null };
 }

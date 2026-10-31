@@ -1,0 +1,284 @@
+{
+  "dataset": "pudl-ferc714",
+  "version": "2026-10",
+  "title": "Annual peak demand by planning area (FERC Form 714, through PUDL)",
+  "publisher": "Catalyst Cooperative (PUDL), from FERC Form 714",
+  "sourceUrl": "https://catalyst.coop/pudl/",
+  "terms": {
+    "url": "https://github.com/catalyst-cooperative/pudl/blob/main/README.rst#licensing",
+    "section": "Licensing",
+    "text": "In general, our code, data, and other work are permissively licensed for use by anybody, for any purpose, so long as you give us credit for the work we've done. The PUDL software is released under the MIT License. The PUDL data and documentation are published under the Creative Commons Attribution License v4.0 (CC-BY-4.0).",
+    "captured": "2026-10-31",
+    "license": "CC-BY-4.0"
+  },
+  "redistributionBasis": {
+    "kind": "named license",
+    "note": "CC BY 4.0; the underlying FERC Form 714 filings are U.S. federal government records"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "CC-BY-4.0",
+    "reason": "recognized CC-BY-4.0",
+    "agrees": true
+  },
+  "license": "named license (CC BY 4.0; the underlying FERC Form 714 filings are U.S. federal government records)",
+  "attribution": "Catalyst Cooperative, Public Utility Data Liberation (PUDL) v2026.10.0, CC BY 4.0, from FERC Form 714.",
+  "asOf": "2026-10-14",
+  "retrieved": "2026-10-31",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "cadence": {
+    "every": "quarterly",
+    "nextRelease": {
+      "date": "2027-01-31",
+      "posted": false,
+      "note": "PUDL cuts a stable release about each quarter; the date is inferred, not posted"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://s3.us-west-2.amazonaws.com/pudl.catalyst.coop/v2026.10.0/out_ferc714__hourly_planning_area_demand.parquet",
+      "name": "out_ferc714__hourly_planning_area_demand.parquet",
+      "bytes": 161007265,
+      "sha256": "fc08777639d9c05de84849cea1f04653cf7ff528719920f7a4d8bb044de1cb15",
+      "file": "hourly"
+    },
+    {
+      "url": "https://s3.us-west-2.amazonaws.com/pudl.catalyst.coop/v2026.10.0/out_ferc714__summarized_demand.parquet",
+      "name": "out_ferc714__summarized_demand.parquet",
+      "bytes": 91529,
+      "sha256": "8e516ccfc410d3f24408a02e7bdec0aa2126610ca080aba15a15b850b30f0bf3",
+      "file": "respondents"
+    }
+  ],
+  "release": "v2026.10.0",
+  "tables": [
+    {
+      "name": "annual_peaks",
+      "title": "Annual peak demand per FERC Form 714 respondent, with the EIA ids it maps to",
+      "dataPeriod": "2006-2025",
+      "rows": 2231,
+      "columns": [
+        {
+          "name": "year",
+          "type": "f64"
+        },
+        {
+          "name": "respondent_id_ferc714",
+          "type": "f64"
+        },
+        {
+          "name": "respondent_name",
+          "type": "str"
+        },
+        {
+          "name": "respondent_type",
+          "type": "str"
+        },
+        {
+          "name": "utility_id_eia",
+          "type": "f64"
+        },
+        {
+          "name": "balancing_authority_code_eia",
+          "type": "str"
+        },
+        {
+          "name": "eia_code",
+          "type": "f64"
+        },
+        {
+          "name": "peak_mw",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "peak_hour_utc",
+          "type": "str"
+        },
+        {
+          "name": "timezone",
+          "type": "str"
+        },
+        {
+          "name": "reported_max_mw",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "hours_reported",
+          "type": "f64",
+          "unit": "hours"
+        },
+        {
+          "name": "hours_flagged",
+          "type": "f64",
+          "unit": "hours"
+        },
+        {
+          "name": "demand_annual_mwh",
+          "type": "f64",
+          "unit": "MWh"
+        }
+      ],
+      "partition": "year",
+      "shards": [
+        {
+          "path": "annual_peaks/2006.bin",
+          "state": 2006,
+          "rows": 175,
+          "bytes": 30496,
+          "sha256": "6181867021f72f073ea7022dab6d268e1ddfe2fe605957ba7c6fd227b2c3123d"
+        },
+        {
+          "path": "annual_peaks/2007.bin",
+          "state": 2007,
+          "rows": 157,
+          "bytes": 27680,
+          "sha256": "9be7f10437c9524c2139f4a2b0b16d2df2d21a1cec12f90d4fc7c3b7b9b9e76a"
+        },
+        {
+          "path": "annual_peaks/2008.bin",
+          "state": 2008,
+          "rows": 151,
+          "bytes": 26456,
+          "sha256": "9421d52a8cf58db56ce2f2dc0e03ddbd5a664e4635f59a3aeb5b22e508e49bb3"
+        },
+        {
+          "path": "annual_peaks/2009.bin",
+          "state": 2009,
+          "rows": 126,
+          "bytes": 21904,
+          "sha256": "9b0c6921b8cbe6897d0627bad2599209798f7910eb9c89bd2ab9693c9ad08283"
+        },
+        {
+          "path": "annual_peaks/2010.bin",
+          "state": 2010,
+          "rows": 126,
+          "bytes": 21632,
+          "sha256": "780aec0d00e3f97bb86975c7e89e571c39ec27d18c109f1366055d944267e031"
+        },
+        {
+          "path": "annual_peaks/2011.bin",
+          "state": 2011,
+          "rows": 121,
+          "bytes": 20808,
+          "sha256": "aa6215c927452dc6755f71cc9687f03813795b162d4363397af1648a2c2adf6d"
+        },
+        {
+          "path": "annual_peaks/2012.bin",
+          "state": 2012,
+          "rows": 121,
+          "bytes": 20880,
+          "sha256": "137dd9434b619d007270cda76b1b52ae5b77dd85ab98aa15dc99f089c2ce5a7b"
+        },
+        {
+          "path": "annual_peaks/2013.bin",
+          "state": 2013,
+          "rows": 121,
+          "bytes": 20696,
+          "sha256": "9bfcc8cb383191b5da4c7fd35e4dfd9a4219b773e1eb0dd8360d121d7ea9dca9"
+        },
+        {
+          "path": "annual_peaks/2014.bin",
+          "state": 2014,
+          "rows": 101,
+          "bytes": 16904,
+          "sha256": "4966d7c2e520f1e6e3d25753512cea4b499c907e674ece773b1020ef2a8823af"
+        },
+        {
+          "path": "annual_peaks/2015.bin",
+          "state": 2015,
+          "rows": 99,
+          "bytes": 16416,
+          "sha256": "d48f63e40516d1d6e9f35d2b562330fd56467ea4666e027ac1be166e622e8cb6"
+        },
+        {
+          "path": "annual_peaks/2016.bin",
+          "state": 2016,
+          "rows": 99,
+          "bytes": 16696,
+          "sha256": "dcc6b76fdfae5d710edd46184e0bf532fe6516a3aff249c7e8663cfc4ce16d46"
+        },
+        {
+          "path": "annual_peaks/2017.bin",
+          "state": 2017,
+          "rows": 98,
+          "bytes": 16224,
+          "sha256": "a5c9bfcfdb5e62079f2d405f86e30c7c80b4d4c2f5860e7fe07702614ca48b05"
+        },
+        {
+          "path": "annual_peaks/2018.bin",
+          "state": 2018,
+          "rows": 97,
+          "bytes": 16016,
+          "sha256": "348a4dc1ffe81c9cb99215ec798b46f1f6f2b544d53a7380b31f82e7ea928233"
+        },
+        {
+          "path": "annual_peaks/2019.bin",
+          "state": 2019,
+          "rows": 95,
+          "bytes": 15768,
+          "sha256": "db32fb8805459adb135d0fe926230b0ce339e627b1015627de6f6b63a2e424d7"
+        },
+        {
+          "path": "annual_peaks/2020.bin",
+          "state": 2020,
+          "rows": 95,
+          "bytes": 15816,
+          "sha256": "d618b7544d1b673665e0c213d26eb7d02c653d2cd5943dc00555317925ac14f3"
+        },
+        {
+          "path": "annual_peaks/2021.bin",
+          "state": 2021,
+          "rows": 91,
+          "bytes": 15016,
+          "sha256": "22b7260e19555aa6c8980409ed8891717efce7bebb16609c1fcb0ab871b3db51"
+        },
+        {
+          "path": "annual_peaks/2022.bin",
+          "state": 2022,
+          "rows": 91,
+          "bytes": 14816,
+          "sha256": "d09b84323d370f0f588f1dfde9be8b76995ec1f846e1b928843e70ec595a93c6"
+        },
+        {
+          "path": "annual_peaks/2023.bin",
+          "state": 2023,
+          "rows": 89,
+          "bytes": 14704,
+          "sha256": "4d1270dc7e9a2cbb9ce4bb29ed485d8929a9c785fd6b7f9719a1f5d2dc46568f"
+        },
+        {
+          "path": "annual_peaks/2024.bin",
+          "state": 2024,
+          "rows": 89,
+          "bytes": 14632,
+          "sha256": "cf58241b780776523a0e43b317805e265f05bb8643262c818ce0ed318e19aa9b"
+        },
+        {
+          "path": "annual_peaks/2025.bin",
+          "state": 2025,
+          "rows": 89,
+          "bytes": 14568,
+          "sha256": "578a6ae96a60f11f49e66c6b73818272034c4dda365559eff00171641e04a180"
+        }
+      ],
+      "download": {
+        "path": "annual_peaks.csv.gz",
+        "bytes": 59262,
+        "sha256": "716388d571a8e1fe669093b42ab495d00a37e6831578b4de3808f29731605136",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "Catalyst Cooperative (PUDL), from FERC Form 714",
+          "attribution": "Catalyst Cooperative, Public Utility Data Liberation (PUDL) v2026.10.0, CC BY 4.0, from FERC Form 714.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}

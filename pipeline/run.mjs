@@ -1,6 +1,7 @@
 // Run a dataset's refresh recipe (platform/data-operations): fetch, validate,
 // normalize, and snapshot. The same script runs on a laptop and in scheduled CI.
 //   node pipeline/run.mjs eia-861 --year 2025 [--input path.zip] [--retrieved YYYY-MM-DD] [--out data]
+//   node pipeline/run.mjs pudl-ferc714 --year 2025 --input hourly=a.parquet --input respondents=b.parquet
 // When a validator fails, nothing is written and the previous version stays live.
 
 import { createHash } from 'node:crypto';
@@ -10,6 +11,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { gzipSync } from 'node:zlib';
 import { readXlsx, readZipDirectory, readZipEntry } from '../parsers/xlsx.mjs';
+import { readParquet } from '../parsers/parquet.mjs';
 import { writeShard } from './lib/shard-writer.mjs';
 import { postureOf, validateEntry } from './lib/registry.mjs';
 import { tableLicense } from './lib/licenses.mjs';
@@ -76,43 +78,57 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const vintage = found ?? entry.vintages[year];
   if (!vintage) return { ok: false, failures: [`${dataset}: no vintage ${year} in the registry`] };
 
-  let raw = input;
-  if (!raw) {
-    const res = await fetch(vintage.url);
-    if (!res.ok) return { ok: false, failures: [`fetch ${vintage.url}: HTTP ${res.status}`] };
-    raw = new Uint8Array(await res.arrayBuffer());
+  // One raw file, or several named files for a release that ships them apart (PUDL's Parquet tables).
+  const named = vintage.files ? Object.entries(vintage.files) : [['', { url: vintage.url, sha256: vintage.sha256 }]];
+  const raws = {};
+  for (const [name, file] of named) {
+    let bytes = name ? input?.[name] : input;
+    if (!bytes) {
+      const res = await fetch(file.url);
+      if (!res.ok) return { ok: false, failures: [`fetch ${file.url}: HTTP ${res.status}`] };
+      bytes = new Uint8Array(await res.arrayBuffer());
+    }
+    const sum = sha256(bytes);
+    if (verifyPin && file.sha256 && file.sha256 !== sum) return { ok: false, failures: [`raw file${name ? ` ${name}` : ''} SHA-256 ${sum} differs from the registry's ${file.sha256}`] };
+    raws[name] = { bytes, sha256: sum, url: file.url };
   }
-  const rawSha = sha256(raw);
-  if (verifyPin && vintage.sha256 && vintage.sha256 !== rawSha) return { ok: false, failures: [`raw file SHA-256 ${rawSha} differs from the registry's ${vintage.sha256}`] };
+  const raw = raws['']?.bytes;
 
   const datasetDir = join(outDir, dataset);
   const currentPath = join(datasetDir, 'current.json');
   const previous = existsSync(currentPath) ? JSON.parse(readFileSync(join(datasetDir, JSON.parse(readFileSync(currentPath, 'utf8')).version, 'manifest.json'), 'utf8')) : null;
 
   // Read, normalize, and validate every table before writing any file.
-  const zip = readZipDirectory(raw);
+  const zip = raw ? readZipDirectory(raw) : [];
   const failures = [];
   const ready = [];
   for (const tb of entry.tables) {
     const step = (name) => tb.recipe.find((s) => s.step === name);
-    const found = findEntry(step('unzip').entry.replace('{year}', String(year)), zip);
-    if (found.problem) { failures.push(`${tb.name}: ${found.problem}`); continue; }
-    const zipEntry = found.entry;
-    const entryName = zipEntry.name;
-    const read = step('read-xlsx');
-    const bytes = await readZipEntry(raw, zipEntry);
-    // One sheet hands the normalizer its rows; a list of sheets hands it rows by sheet name.
-    const sheets = read.sheets ? Object.fromEntries(await Promise.all(read.sheets.map(async (sheet) => [sheet, (await readXlsx(bytes, { sheet })).rows]))) : (await readXlsx(bytes, { sheet: read.sheet })).rows;
+    let input;
+    let read = {};
+    let entryName = null;
+    if (step('read-parquet')) {
+      // Parquet files hand the normalizer a reader per file, so it can aggregate a row group at a time.
+      input = Object.fromEntries(step('read-parquet').files.map((f) => [f, readParquet(raws[f].bytes)]));
+    } else {
+      const found = findEntry(step('unzip').entry.replace('{year}', String(year)), zip);
+      if (found.problem) { failures.push(`${tb.name}: ${found.problem}`); continue; }
+      entryName = found.entry.name;
+      read = step('read-xlsx');
+      const bytes = await readZipEntry(raw, found.entry);
+      // One sheet hands the normalizer its rows; a list of sheets hands it rows by sheet name.
+      input = read.sheets ? Object.fromEntries(await Promise.all(read.sheets.map(async (sheet) => [sheet, (await readXlsx(bytes, { sheet })).rows]))) : (await readXlsx(bytes, { sheet: read.sheet })).rows;
+    }
     const normalizer = await import(pathToFileURL(join(ROOT, 'pipeline/normalize', `${step('normalize').module}.mjs`)).href);
-    const { rows, problems } = normalizer.normalize(sheets, read.headerRows);
+    const { rows, problems, dataPeriod } = normalizer.normalize(input, read.headerRows);
     if (problems.length) { failures.push(...problems.map((p) => `${tb.name}: schema: ${p}`)); continue; }
-    const prevRows = previous?.tables.find((t) => t.name === tb.name && t.dataPeriod === String(year))?.rows;
+    const prevRows = previous?.tables.find((t) => t.name === tb.name && t.dataPeriod === (dataPeriod ?? String(year)))?.rows;
     const bad = validateRows(rows, step('validate'), prevRows);
     const by = step('partition').by;
     const unplaced = rows.filter((r) => r[by] === null || r[by] === undefined).length;
     if (unplaced) bad.push(`${unplaced} rows have no ${by} to partition by`);
     if (bad.length) { failures.push(...bad.map((f) => `${tb.name}: ${f}`)); continue; }
-    ready.push({ tb, rows, schema: normalizer.SCHEMA, by, entryName });
+    ready.push({ tb, rows, schema: normalizer.SCHEMA, by, entryName, dataPeriod: dataPeriod ?? String(year) });
   }
   if (failures.length) return { ok: false, failures };
 
@@ -120,11 +136,11 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const version = retrieved.slice(0, 7);
   const dir = join(datasetDir, version);
   const asOfMonth = `${MONTHS[Number(vintage.asOf.slice(5, 7)) - 1]} ${vintage.asOf.slice(0, 4)}`;
-  const attribution = entry.attribution.replace('{asOfMonth}', asOfMonth);
+  const attribution = entry.attribution.replace('{asOfMonth}', asOfMonth).replace('{release}', vintage.release ?? '');
   const lic = tableLicense([{ id: dataset, publisher: entry.publisher, license: entry.inputLicense ?? 'public-domain', attribution }]);
   if (!lic.ok) return { ok: false, failures: [lic.error] };
   const tables = [];
-  for (const { tb, rows, schema, by } of ready) {
+  for (const { tb, rows, schema, by, dataPeriod } of ready) {
     const table = tb.name;
     mkdirSync(join(dir, table), { recursive: true });
     const parts = [...new Set(rows.map((r) => r[by]))].sort();
@@ -140,7 +156,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     const tooBig = [...shards.map((s) => [s.path, s.bytes]), [`${table}.csv.gz`, csv.length]].filter(([, b]) => b > MAX_FILE_BYTES);
     if (tooBig.length) return { ok: false, failures: tooBig.map(([p, b]) => `${p} is ${b} bytes, over the 20 MiB limit`) };
     tables.push({
-      name: table, title: tb.title, dataPeriod: String(year), rows: rows.length, columns: schema, partition: by,
+      name: table, title: tb.title, dataPeriod, rows: rows.length, columns: schema, partition: by,
       shards, download: { path: `${table}.csv.gz`, bytes: csv.length, sha256: sha256(csv), format: 'text/csv; gzip' },
       license: lic.license, credits: lic.credits, notices: lic.notices,
     });
@@ -153,7 +169,11 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     license: `${entry.redistributionBasis.kind}${entry.redistributionBasis.note ? ` (${entry.redistributionBasis.note})` : ''}`, attribution,
     // When this version was generated: the retrieval day, so a re-run of the same input reproduces it exactly.
     asOf: vintage.asOf, retrieved, generatedAt: `${retrieved}T00:00:00Z`, cadence: entry.cadence,
-    raw: [{ url: vintage.url, name: vintage.url.split('/').pop(), bytes: raw.length, sha256: rawSha, entries: ready.map((r) => r.entryName), ...(upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) }],
+    raw: named.map(([name]) => {
+      const r = raws[name];
+      return { url: r.url, name: r.url.split('/').pop(), bytes: r.bytes.length, sha256: r.sha256, ...(name ? { file: name } : { entries: ready.map((x) => x.entryName) }), ...(!name && upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) };
+    }),
+    ...(vintage.release ? { release: vintage.release } : {}),
     tables,
   };
   writeFileSync(join(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
@@ -162,10 +182,13 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
-  const { positionals, values } = parseArgs({ allowPositionals: true, options: { year: { type: 'string' }, input: { type: 'string' }, retrieved: { type: 'string' }, out: { type: 'string' }, 'verify-pin': { type: 'boolean' } } });
+  const { positionals, values } = parseArgs({ allowPositionals: true, options: { year: { type: 'string' }, input: { type: 'string', multiple: true }, retrieved: { type: 'string' }, out: { type: 'string' }, 'verify-pin': { type: 'boolean' } } });
+  // --input path, or --input name=path once per file for a dataset whose release is several files.
+  const inputs = (values.input ?? []).map((v) => (/^[a-z_]+=/.test(v) ? v.split(/=(.*)/s).slice(0, 2) : ['', v]));
+  const input = !inputs.length ? undefined : inputs[0][0] ? Object.fromEntries(inputs.map(([k, p]) => [k, new Uint8Array(readFileSync(p))])) : new Uint8Array(readFileSync(inputs[0][1]));
   const r = await runRecipe({
     dataset: positionals[0], year: Number(values.year), retrieved: values.retrieved ?? new Date().toISOString().slice(0, 10),
-    input: values.input ? new Uint8Array(readFileSync(values.input)) : undefined, outDir: values.out, verifyPin: values['verify-pin'],
+    input, outDir: values.out, verifyPin: values['verify-pin'],
   });
   if (!r.ok) {
     console.error(`FAIL ${positionals[0]}: the previous version stays live.`);

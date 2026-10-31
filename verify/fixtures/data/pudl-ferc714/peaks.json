@@ -1,0 +1,53 @@
+{
+ "source": "PUDL v2026.10.0, 2025: Chattanooga (every hour flagged, so no peak), Metropolitan Water District (958 flagged hours), Southwest Power Pool (3 flagged hours above the accepted peak)",
+ "rows": [
+  {
+   "year": 2025,
+   "respondent_id_ferc714": 55,
+   "respondent_name": "Electric Power Board of Chattanooga",
+   "respondent_type": "utility",
+   "utility_id_eia": 3408,
+   "balancing_authority_code_eia": null,
+   "eia_code": 3408,
+   "peak_mw": null,
+   "peak_hour_utc": null,
+   "timezone": "America/New_York",
+   "reported_max_mw": 549,
+   "hours_reported": 24,
+   "hours_flagged": 24,
+   "demand_annual_mwh": null
+  },
+  {
+   "year": 2025,
+   "respondent_id_ferc714": 91,
+   "respondent_name": "Metroplitan Water District of Southern California",
+   "respondent_type": "utility",
+   "utility_id_eia": 12397,
+   "balancing_authority_code_eia": null,
+   "eia_code": 12397,
+   "peak_mw": 261.876,
+   "peak_hour_utc": "2025-01-05T16:00:00Z",
+   "timezone": "America/Los_Angeles",
+   "reported_max_mw": 297.9596591807,
+   "hours_reported": 8759,
+   "hours_flagged": 958,
+   "demand_annual_mwh": 1576014.7280634153
+  },
+  {
+   "year": 2025,
+   "respondent_id_ferc714": 146,
+   "respondent_name": "Southwest Power Pool",
+   "respondent_type": "balancing_authority",
+   "utility_id_eia": null,
+   "balancing_authority_code_eia": "SWPP",
+   "eia_code": 59504,
+   "peak_mw": 59048.93,
+   "peak_hour_utc": "2025-07-29T23:00:00Z",
+   "timezone": "America/Chicago",
+   "reported_max_mw": 60662.09,
+   "hours_reported": 8760,
+   "hours_flagged": 3,
+   "demand_annual_mwh": 320413535.9055142
+  }
+ ]
+}

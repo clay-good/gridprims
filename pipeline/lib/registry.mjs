@@ -3,7 +3,7 @@
 // and the redistribution posture derived from its recorded terms.
 
 /** Recipe steps the pipeline knows how to run (docs/decisions-day-one.md §3). */
-export const STEPS = ['fetch', 'unzip', 'read-xlsx', 'read-csv', 'normalize', 'quirk', 'validate', 'partition', 'write-shards', 'write-csv-gz'];
+export const STEPS = ['fetch', 'unzip', 'read-xlsx', 'read-csv', 'read-parquet', 'normalize', 'quirk', 'validate', 'partition', 'write-shards', 'write-csv-gz'];
 
 /** Licenses the matcher recognizes, by identifier or the publisher's own words. Anything else is unrecognized. */
 export const RECOGNIZED = [
@@ -33,8 +33,8 @@ export function matchPosture(terms) {
 }
 
 const REQUIRED = ['id', 'title', 'publisher', 'sourceUrl', 'terms', 'redistributionBasis', 'attribution', 'cadence', 'recipe', 'tables', 'ceii', 'owner'];
-/** Steps every table recipe needs, in this order. */
-const TABLE_STEPS = ['unzip', 'normalize', 'validate', 'partition'];
+/** Steps every table recipe needs: a read (a workbook from the zip, or Parquet files), then these. */
+const TABLE_STEPS = ['normalize', 'validate', 'partition'];
 
 const checkSteps = (steps, where, fail) => {
   steps.forEach((s, i) => { if (!STEPS.includes(s?.step)) fail(`${where}[${i}].step`, `must be one of ${STEPS.join(', ')}`); });
@@ -69,6 +69,9 @@ export function validateEntry(e) {
       if (!Array.isArray(t?.recipe)) { fail(`${where}.recipe`, 'must be a list of steps'); return; }
       checkSteps(t.recipe, `${where}.recipe`, fail);
       for (const need of TABLE_STEPS) if (!t.recipe.some((s) => s.step === need)) fail(`${where}.recipe`, `has no ${need} step`);
+      const has = (step) => t.recipe.some((s) => s.step === step);
+      if (!(has('unzip') && has('read-xlsx')) && !has('read-parquet')) fail(`${where}.recipe`, 'has no read: unzip and read-xlsx, or read-parquet');
+      t.recipe.filter((s) => s.step === 'read-parquet').forEach((s) => (s.files ?? []).forEach((f) => { if (!Object.values(e.vintages ?? {}).every((v) => v.files?.[f])) fail(`${where}.recipe read-parquet`, `names file "${f}", which a vintage does not list`); }));
     });
   } else if (e.tables !== undefined) fail('tables', 'must be a list of tables');
   // CEII screen (18 CFR 388.113): infrastructure datasets need a completed checklist.
