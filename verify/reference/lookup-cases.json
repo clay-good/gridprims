@@ -1,0 +1,785 @@
+{
+ "source": "Census 2020 ZCTA-to-county file, EIA-861 2025 Service_Territory, and EPA Power Profiler v14.3 Zip-subregion, read with the Python standard library by verify/tools/lookup-cases.py",
+ "files": {
+  "census": "3ed41278d637dc249e0323306f68be8a6c234e3090f4de88ef328dee71aeaaaf",
+  "eia861": "f59f6c732bf685fe0a1591b32227f5ce572dc0dfd26bb5caaeed128ac4e3a396",
+  "powerProfiler": "457b0191916debb12802138a1ffbfc39953eca83b035aeaeeffca2b38076fe01"
+ },
+ "cases": [
+  {
+   "zip": "02535",
+   "kind": "single-utility",
+   "counties": [
+    "25007"
+   ],
+   "utilities": [
+    54913
+   ],
+   "subregions": [
+    "NEWE"
+   ]
+  },
+  {
+   "zip": "06068",
+   "kind": "single-utility",
+   "counties": [
+    "09005"
+   ],
+   "utilities": [
+    4176
+   ],
+   "subregions": [
+    "NEWE"
+   ]
+  },
+  {
+   "zip": "10282",
+   "kind": "single-utility",
+   "counties": [
+    "36061"
+   ],
+   "utilities": [
+    4226
+   ],
+   "subregions": [
+    "NYCW"
+   ]
+  },
+  {
+   "zip": "19026",
+   "kind": "single-utility",
+   "counties": [
+    "42045"
+   ],
+   "utilities": [
+    14940
+   ],
+   "subregions": [
+    "RFCE"
+   ]
+  },
+  {
+   "zip": "23056",
+   "kind": "single-utility",
+   "counties": [
+    "51115"
+   ],
+   "utilities": [
+    19876
+   ],
+   "subregions": [
+    "SRVC"
+   ]
+  },
+  {
+   "zip": "25421",
+   "kind": "single-utility",
+   "counties": [
+    "54003"
+   ],
+   "utilities": [
+    15263
+   ],
+   "subregions": [
+    "RFCW"
+   ]
+  },
+  {
+   "zip": "31411",
+   "kind": "single-utility",
+   "counties": [
+    "13051"
+   ],
+   "utilities": [
+    2903
+   ],
+   "subregions": [
+    "SRSO"
+   ]
+  },
+  {
+   "zip": "47715",
+   "kind": "single-utility",
+   "counties": [
+    "18163"
+   ],
+   "utilities": [
+    17633
+   ],
+   "subregions": [
+    "RFCW"
+   ]
+  },
+  {
+   "zip": "68135",
+   "kind": "single-utility",
+   "counties": [
+    "31055"
+   ],
+   "utilities": [
+    14127
+   ],
+   "subregions": [
+    "MROW"
+   ]
+  },
+  {
+   "zip": "89430",
+   "kind": "single-utility",
+   "counties": [
+    "32019"
+   ],
+   "utilities": [
+    17166
+   ],
+   "subregions": [
+    "NWPP"
+   ]
+  },
+  {
+   "zip": "01001",
+   "kind": "overlapping",
+   "counties": [
+    "25013"
+   ],
+   "utilities": [
+    3447,
+    3477,
+    8774,
+    11804,
+    16438,
+    20481,
+    54913
+   ],
+   "subregions": [
+    "NEWE"
+   ]
+  },
+  {
+   "zip": "11746",
+   "kind": "overlapping",
+   "counties": [
+    "36103"
+   ],
+   "utilities": [
+    6369,
+    7630,
+    11171
+   ],
+   "subregions": [
+    "NYLI"
+   ]
+  },
+  {
+   "zip": "18503",
+   "kind": "overlapping",
+   "counties": [
+    "42069"
+   ],
+   "utilities": [
+    1823,
+    14124,
+    14715,
+    40289
+   ],
+   "subregions": [
+    "RFCE"
+   ]
+  },
+  {
+   "zip": "30329",
+   "kind": "overlapping",
+   "counties": [
+    "13089"
+   ],
+   "utilities": [
+    7140,
+    13646,
+    17832,
+    20065
+   ],
+   "subregions": [
+    "SRSO"
+   ]
+  },
+  {
+   "zip": "41607",
+   "kind": "overlapping",
+   "counties": [
+    "21071"
+   ],
+   "utilities": [
+    1708,
+    22053
+   ],
+   "subregions": [
+    "RFCW",
+    "SRTV"
+   ]
+  },
+  {
+   "zip": "50559",
+   "kind": "overlapping",
+   "counties": [
+    "19109"
+   ],
+   "utilities": [
+    309,
+    1172,
+    2600,
+    6258,
+    8319,
+    9417,
+    9425,
+    12341,
+    12450,
+    15291,
+    20364,
+    20604
+   ],
+   "subregions": [
+    "MROW"
+   ]
+  },
+  {
+   "zip": "60628",
+   "kind": "overlapping",
+   "counties": [
+    "17031"
+   ],
+   "utilities": [
+    4110,
+    19528,
+    20824
+   ],
+   "subregions": [
+    "RFCW"
+   ]
+  },
+  {
+   "zip": "71295",
+   "kind": "overlapping",
+   "counties": [
+    "22041"
+   ],
+   "utilities": [
+    4153,
+    11241,
+    13783
+   ],
+   "subregions": [
+    "SRMV"
+   ]
+  },
+  {
+   "zip": "80111",
+   "kind": "overlapping",
+   "counties": [
+    "08005"
+   ],
+   "utilities": [
+    9336,
+    12860,
+    13058,
+    15466
+   ],
+   "subregions": [
+    "RMPA"
+   ]
+  },
+  {
+   "zip": "92342",
+   "kind": "overlapping",
+   "counties": [
+    "06071"
+   ],
+   "utilities": [
+    3990,
+    4003,
+    13149,
+    14328,
+    17609,
+    17612,
+    27000,
+    55962,
+    56224,
+    58123,
+    58789
+   ],
+   "subregions": [
+    "CAMX"
+   ]
+  },
+  {
+   "zip": "00601",
+   "kind": "multi-county",
+   "counties": [
+    "72001",
+    "72141"
+   ],
+   "utilities": [],
+   "subregions": [
+    "PRMS"
+   ]
+  },
+  {
+   "zip": "21640",
+   "kind": "multi-county",
+   "counties": [
+    "24011",
+    "24035"
+   ],
+   "utilities": [
+    3503,
+    5027
+   ],
+   "subregions": [
+    "RFCE"
+   ]
+  },
+  {
+   "zip": "30092",
+   "kind": "multi-county",
+   "counties": [
+    "13121",
+    "13135"
+   ],
+   "utilities": [
+    2487,
+    3916,
+    3939,
+    4432,
+    5582,
+    6130,
+    7090,
+    7140,
+    9601,
+    10800,
+    13646,
+    14396,
+    16865,
+    20065
+   ],
+   "subregions": [
+    "SRSO"
+   ]
+  },
+  {
+   "zip": "38449",
+   "kind": "multi-county",
+   "counties": [
+    "47055",
+    "47103"
+   ],
+   "utilities": [
+    5399,
+    6234,
+    15507
+   ],
+   "subregions": [
+    "SRTV"
+   ]
+  },
+  {
+   "zip": "45810",
+   "kind": "multi-county",
+   "counties": [
+    "39003",
+    "39063",
+    "39065"
+   ],
+   "utilities": [
+    282,
+    4922,
+    8034,
+    11203,
+    12515,
+    13693,
+    14006,
+    14599,
+    19501,
+    36189
+   ],
+   "subregions": [
+    "RFCW"
+   ]
+  },
+  {
+   "zip": "51358",
+   "kind": "multi-county",
+   "counties": [
+    "19041",
+    "19147"
+   ],
+   "utilities": [
+    7443,
+    9417,
+    9425,
+    12341,
+    17260,
+    17783,
+    20364,
+    27000
+   ],
+   "subregions": [
+    "MROW"
+   ]
+  },
+  {
+   "zip": "57576",
+   "kind": "multi-county",
+   "counties": [
+    "46075",
+    "46085"
+   ],
+   "utilities": [
+    16286,
+    20368,
+    27000
+   ],
+   "subregions": [
+    "MROW"
+   ]
+  },
+  {
+   "zip": "64437",
+   "kind": "multi-county",
+   "counties": [
+    "29005",
+    "29087"
+   ],
+   "utilities": [
+    942,
+    12698,
+    22646,
+    40382
+   ],
+   "subregions": [
+    "SPNO"
+   ]
+  },
+  {
+   "zip": "71282",
+   "kind": "multi-county",
+   "counties": [
+    "22065",
+    "22107"
+   ],
+   "utilities": [
+    4153,
+    11241,
+    13783
+   ],
+   "subregions": [
+    "SRMV"
+   ]
+  },
+  {
+   "zip": "78545",
+   "kind": "multi-county",
+   "counties": [
+    "48427",
+    "48505"
+   ],
+   "utilities": [
+    3278,
+    11501,
+    12268
+   ],
+   "subregions": [
+    "ERCT"
+   ]
+  },
+  {
+   "zip": "00604",
+   "kind": "no-zcta",
+   "counties": [],
+   "utilities": [],
+   "subregions": [
+    "PRMS"
+   ]
+  },
+  {
+   "zip": "11390",
+   "kind": "no-zcta",
+   "counties": [],
+   "utilities": [],
+   "subregions": [
+    "NYCW"
+   ]
+  },
+  {
+   "zip": "20374",
+   "kind": "no-zcta",
+   "counties": [],
+   "utilities": [],
+   "subregions": [
+    "RFCE"
+   ]
+  },
+  {
+   "zip": "27811",
+   "kind": "no-zcta",
+   "counties": [],
+   "utilities": [],
+   "subregions": [
+    "SRVC"
+   ]
+  },
+  {
+   "zip": "33687",
+   "kind": "no-zcta",
+   "counties": [],
+   "utilities": [],
+   "subregions": [
+    "FRCC"
+   ]
+  },
+  {
+   "zip": "43236",
+   "kind": "no-zcta",
+   "counties": [],
+   "utilities": [],
+   "subregions": [
+    "RFCW"
+   ]
+  },
+  {
+   "zip": "55171",
+   "kind": "no-zcta",
+   "counties": [],
+   "utilities": [],
+   "subregions": [
+    "MROW"
+   ]
+  },
+  {
+   "zip": "72033",
+   "kind": "no-zcta",
+   "counties": [],
+   "utilities": [],
+   "subregions": [
+    "SRMV"
+   ]
+  },
+  {
+   "zip": "80037",
+   "kind": "no-zcta",
+   "counties": [],
+   "utilities": [],
+   "subregions": [
+    "RMPA"
+   ]
+  },
+  {
+   "zip": "92051",
+   "kind": "no-zcta",
+   "counties": [],
+   "utilities": [],
+   "subregions": [
+    "CAMX"
+   ]
+  },
+  {
+   "zip": "07401",
+   "kind": "multi-subregion",
+   "counties": [
+    "34003"
+   ],
+   "utilities": [
+    14472,
+    15477,
+    16213
+   ],
+   "subregions": [
+    "NYUP",
+    "RFCE"
+   ]
+  },
+  {
+   "zip": "17223",
+   "kind": "multi-subregion",
+   "counties": [
+    "42057"
+   ],
+   "utilities": [
+    13205,
+    40221,
+    40222,
+    66101
+   ],
+   "subregions": [
+    "RFCE",
+    "RFCW"
+   ]
+  },
+  {
+   "zip": "28906",
+   "kind": "multi-subregion",
+   "counties": [
+    "37039",
+    "37043"
+   ],
+   "utilities": [
+    1891,
+    5416,
+    19154,
+    40441
+   ],
+   "subregions": [
+    "SRTV",
+    "SRVC"
+   ]
+  },
+  {
+   "zip": "38069",
+   "kind": "multi-subregion",
+   "counties": [
+    "47047",
+    "47075",
+    "47167"
+   ],
+   "utilities": [
+    814,
+    1936,
+    2411,
+    4437,
+    7174,
+    17694,
+    40166,
+    40236
+   ],
+   "subregions": [
+    "SRMV",
+    "SRTV"
+   ]
+  },
+  {
+   "zip": "41519",
+   "kind": "multi-subregion",
+   "counties": [
+    "21195"
+   ],
+   "utilities": [
+    22053
+   ],
+   "subregions": [
+    "RFCW",
+    "SRTV"
+   ]
+  },
+  {
+   "zip": "54170",
+   "kind": "multi-subregion",
+   "counties": [
+    "55087",
+    "55115",
+    "55135"
+   ],
+   "utilities": [
+    108,
+    1572,
+    3293,
+    3814,
+    7665,
+    10056,
+    13467,
+    13964,
+    17011,
+    20847,
+    20856,
+    20860
+   ],
+   "subregions": [
+    "MROE",
+    "RFCW"
+   ]
+  },
+  {
+   "zip": "64153",
+   "kind": "multi-subregion",
+   "counties": [
+    "29165"
+   ],
+   "utilities": [
+    10000,
+    12698,
+    15138,
+    22646
+   ],
+   "subregions": [
+    "SPNO",
+    "SRMW"
+   ]
+  },
+  {
+   "zip": "70560",
+   "kind": "multi-subregion",
+   "counties": [
+    "22045",
+    "22055",
+    "22099",
+    "22113"
+   ],
+   "utilities": [
+    59,
+    3265,
+    5945,
+    7760,
+    9096,
+    9682,
+    10025,
+    11241,
+    17565,
+    17684,
+    17889
+   ],
+   "subregions": [
+    "SPSO",
+    "SRMV"
+   ]
+  },
+  {
+   "zip": "74434",
+   "kind": "multi-subregion",
+   "counties": [
+    "40021",
+    "40101",
+    "40145"
+   ],
+   "utilities": [
+    4296,
+    5598,
+    10599,
+    13734,
+    14063,
+    14289,
+    15474,
+    18433,
+    20163
+   ],
+   "subregions": [
+    "SPSO",
+    "SRMW"
+   ]
+  },
+  {
+   "zip": "78947",
+   "kind": "multi-subregion",
+   "counties": [
+    "48287"
+   ],
+   "utilities": [
+    1273,
+    1892,
+    6183,
+    7184,
+    10969
+   ],
+   "subregions": [
+    "ERCT",
+    "SRMV"
+   ]
+  }
+ ]
+}
