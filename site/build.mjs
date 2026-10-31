@@ -262,7 +262,19 @@ export async function build(opts = {}) {
     kwh: Float64Array.from(sampleRows, (r) => Number(r[1])), intervalMinutes: 15,
   };
   const st = loadStats(sampleSeries, 'America/Chicago');
+  // The peak day, hour by hour, for the curve the plate sits beside.
+  const peakDay = new Date(st.peakStartMs).toISOString().slice(0, 10);
+  const hours = Array.from({ length: 24 }, () => ({ kwh: 0, n: 0 }));
+  for (let i = 0; i < sampleSeries.startMs.length; i++) {
+    const d = new Date(sampleSeries.startMs[i]);
+    if (d.toISOString().slice(0, 10) !== peakDay) continue;
+    const h = hours[d.getUTCHours()];
+    h.kwh += sampleSeries.kwh[i];
+    h.n++;
+  }
+  const curve = hours.map((h, hour) => ({ hour, kw: h.n ? (h.kwh / h.n) * 4 : 0 }));
   const proof = {
+    curve, peakDay, peakHour: new Date(st.peakStartMs).getUTCHours(),
     peakKw: st.peakKw, totalKwh: st.totalKwh, loadFactor: st.loadFactor, intervals: st.intervals,
     peakStartMs: st.peakStartMs, fromMs: sampleSeries.startMs[0], toMs: sampleSeries.startMs[sampleSeries.startMs.length - 1],
     file: 'sample-office-15min.csv',

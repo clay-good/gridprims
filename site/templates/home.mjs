@@ -64,6 +64,12 @@ function startDoors({ t }) {
 function proofPlate(p, { t, date }) {
   const n = (x, d = 0) => x.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
   const figure = (label, value, unit) => html`<div class="figure"><p class="legend">${label}</p><p class="figure-value">${value}<span class="figure-unit">${unit}</span></p></div>`;
+  const top = Math.max(...p.curve.map((c) => c.kw)) || 1;
+  const x = (h) => 4 + (h / 23) * 92;
+  const y = (kw) => 92 - (kw / top) * 80;
+  // A stepped line: demand holds across each hour rather than sloping between them.
+  const steps = p.curve.flatMap((c, i) => [`${x(i)},${y(c.kw)}`, `${x(Math.min(23, i + 1))},${y(c.kw)}`]).join(' ');
+  const hour = (h) => `${((h + 11) % 12) + 1} ${h < 12 ? 'am' : 'pm'}`;
   return html`<section class="proof" aria-labelledby="proof-title">
   <h2 id="proof-title" class="proof-title">${t('home.proof.title')}</h2>
   <div class="answer"><div class="sign">
@@ -72,6 +78,18 @@ function proofPlate(p, { t, date }) {
     <p class="sentence">${t('home.proof.sentence', { when: date(new Date(p.peakStartMs).toISOString().slice(0, 10)) })}</p>
     <span class="source-tab">${t('home.proof.basis', { file: p.file, intervals: n(p.intervals), from: date(new Date(p.fromMs).toISOString().slice(0, 10)), to: date(new Date(p.toMs).toISOString().slice(0, 10)) })}</span>
   </div></div>
+  <figure class="chart proof-chart">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="${t('home.proof.curveAlt', { day: date(p.peakDay), peak: n(p.peakKw, 1) })}">
+      <polyline class="series series-measured" points="${steps}"></polyline>
+      <line class="peak-mark" x1="${x(p.peakHour)}" y1="8" x2="${x(p.peakHour)}" y2="92"></line>
+    </svg>
+    <figcaption>${t('home.proof.curveCaption', { day: date(p.peakDay), when: hour(p.peakHour), peak: n(p.peakKw, 1) })}</figcaption>
+  </figure>
+  <details class="panel proof-table"><summary>${t('home.proof.curveTable')}</summary>
+    <table><caption>${t('home.proof.curveCaptionShort', { day: date(p.peakDay) })}</caption>
+    <thead><tr><th scope="col">${t('home.proof.hour')}</th><th scope="col" class="num">${t('home.proof.demand')}</th></tr></thead>
+    <tbody>${p.curve.map((c) => html`<tr><th scope="row">${hour(c.hour)}</th><td class="num">${n(c.kw, 1)}</td></tr>`)}</tbody></table>
+  </details>
   <div class="figures">
     ${figure(t('home.proof.energy'), n(p.totalKwh), 'kWh')}
     ${figure(t('home.proof.loadFactor'), n(p.loadFactor * 100, 1), '%')}
