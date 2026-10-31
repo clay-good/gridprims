@@ -64,6 +64,8 @@ function showOnChart(ms, kw) {
   $('[data-chart]').scrollIntoView({ block: 'nearest' });
 }
 bill = setupBill({ i18n, view: () => current?.view ?? null, when, showOnChart });
+// The home page's "Cheapest plan on my data" opens here, at the plan finder.
+if (location.hash === '#plans') $('[data-bill]').scrollIntoView({ block: 'start' });
 
 async function load(bytes, name, { sample = false, kept = false, choices } = {}) {
   $('[data-error]').hidden = true;

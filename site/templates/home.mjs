@@ -18,7 +18,7 @@ export const STATES_PATH = '/states/';
 function cell({ href, name, question, needs, asOf, stable, section }, { t, date }) {
   return html`<li class="tool-cell" data-section="${section}" data-needs="${needs}" data-stability="${stable ? 'stable' : 'experimental'}">
   ${stable ? '' : html`<p class="work-zone">${t('catalog.preview')}</p>`}<a href="${href}">${name}</a><p class="question">${question}</p>
-  <p class="unit-hint">${t('section.needs', { what: t(`section.needs.${needs}`) })}${asOf ? html` · ${t('home.asOf', { date: date(asOf) })}` : ''}</p></li>`;
+  <p class="unit-hint">${t('section.needs', { what: t(`section.needs.${needs}`) })}${asOf ? html`<span class="as-of"> · ${t('home.asOf', { date: date(asOf) })}</span>` : ''}</p></li>`;
 }
 
 /** The cells of a lane whose tool or page exists. @param {{tools: any[], exists: (path: string) => boolean, asOf: (ids: string[]) => string | null}} ctx */
@@ -51,7 +51,7 @@ ${lane('work')}
 }
 
 /** Tools built as pages rather than manifests (the lookup and the workbench), with their sections. */
-const PAGE_TOOLS = [['find-utility', 'bills'], ['workbench', 'bills']];
+const PAGE_TOOLS = [['find-utility', 'bills'], ['workbench', 'bills'], ['cheapest-plan', 'bills']];
 
 /** The tool catalog: every published tool, filterable by section, what you need, and stability. */
 export function catalogPage({ tools, i18n, exists, asOf }) {

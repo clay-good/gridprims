@@ -35,6 +35,8 @@ export default {
   'home.allTools': 'Every tool, in one list',
   'home.cell.find-utility': 'Find my utility',
   'home.cell.find-utility.question': 'Which utilities serve my ZIP code, and which grid region am I in?',
+  'home.cell.cheapest-plan': 'Cheapest plan on my data',
+  'home.cell.cheapest-plan.question': 'Which of my utility\'s plans would have cost the least for how I used power?',
   'home.cell.workbench': 'Load and bill workbench',
   'home.cell.workbench.question': 'What is my peak demand and load factor in this meter file?',
   'home.cell.entity-data': 'Utility and plant data',

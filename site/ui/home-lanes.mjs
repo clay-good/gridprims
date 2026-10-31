@@ -11,7 +11,7 @@ export const LANES = {
   home: [
     { id: 'bill-check', tool: 'household.bill-totals.check', needs: 'bill' },
     { id: 'use-high', tool: 'household.usage-benchmark.compare', needs: 'bill' },
-    { id: 'cheapest-plan', tool: 'bills.cheapest-plan', needs: 'file' },
+    { id: 'cheapest-plan', path: '/files/#plans', needs: 'file', data: ['urdb'] },
     { id: 'find-utility', path: '/lookup/', needs: 'zip', data: ['census-zcta-county', 'eia-861', 'egrid'] },
     { id: 'cleanest-hours', tool: 'carbon.cleanest-hours', needs: 'zip' },
   ],

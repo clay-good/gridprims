@@ -143,13 +143,14 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
 .tool-list { list-style: none; padding: 0; display: grid; gap: var(--s3); }
 .tool-cell { background: var(--panel); border-left: 4px solid var(--guide); border-radius: var(--r-field); padding: var(--s4); }
 .tool-cell a { font-weight: 700; font-size: 1.25rem; }
-/* On phones a home lane is a list of names and what each needs, so both lanes and up to five cells each fit the first screen. */
+/* On phones a home lane is two columns of names and what each needs, so both lanes and up to five cells each fit the first screen. */
 @media (max-width: 767px) {
-  .lane .tool-cell { padding: var(--s2) var(--s3); }
-  .lane .tool-cell .question { display: none; }
-  .lane .tool-cell .work-zone { display: inline-block; padding: 0 var(--s2); margin: 0 var(--s2) 0 0; font-size: .75rem; }
-  .lane .tool-cell a { font-size: 1.125rem; }
-  .lane .tool-cell .unit-hint { margin: var(--s1) 0 0; }
+  .lane .tool-list { grid-template-columns: 1fr 1fr; gap: var(--s2); }
+  .lane .tool-cell { padding: var(--s2); }
+  .lane .tool-cell .question, .lane .tool-cell .as-of { display: none; }
+  .lane .tool-cell .work-zone { display: inline-block; padding: 0 var(--s1); margin: 0 var(--s1) 0 0; font-size: .75rem; }
+  .lane .tool-cell a { font-size: 1rem; }
+  .lane .tool-cell .unit-hint { margin: var(--s1) 0 0; font-size: .75rem; }
 }
 
 footer { border-top: 1px solid var(--line); padding: var(--s5) 0; color: var(--muted); font-size: .875rem; }

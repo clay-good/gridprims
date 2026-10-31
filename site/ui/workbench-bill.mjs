@@ -17,7 +17,7 @@ const rateText = (r, unit) => (unit === 'kWh' ? `$${formatNumber(r, { decimals: 
 
 /** The empty panel the page script fills. @param {{t: Function}} i18n */
 export function billPanel({ t }) {
-  return html`<section class="panel picker" data-bill aria-labelledby="bill-title">
+  return html`<section class="panel picker" id="plans" data-bill aria-labelledby="bill-title">
   <h2 id="bill-title">${t('bill.title')}</h2>
   <p>${t('bill.intro')}</p>
   <form class="picker-row" data-bill-zip novalidate>

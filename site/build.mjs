@@ -213,7 +213,7 @@ export async function build(opts = {}) {
   // The states index, the catalog, and last the home page, which shows only cells whose page exists.
   if (regions) write(STATES_PATH, statesIndexPage({ i18n }));
   const datasetDate = (ids) => ids.map((id) => datasets.find((d) => d.dataset === id)?.asOf).filter(Boolean).sort().at(-1) ?? null;
-  const exists = (p) => pages.includes(p);
+  const exists = (p) => pages.includes(p.replace(/#.*$/, ''));
   write(CATALOG_PATH, catalogPage({ tools: TOOLS, i18n, exists, asOf: datasetDate }));
   write('/', homePage({ tools: TOOLS, i18n, exists, asOf: datasetDate }));
   // The simplicity budget: six sections at most, five cells a lane at most.
