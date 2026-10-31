@@ -1,13 +1,13 @@
 ## 1. Shell and URLs (phase 0)
 
-- [ ] 1.1 Implement the top rail, section landing pages, and the menu below 768 px; verify `aria-current` and the keyboard path in the browser driver
-- [ ] 1.2 Implement the design D2 URL scheme, the generated `_redirects` file, and the 1,500-rule budget; verify the renamed-utility, redirect-budget, and published-URL checks against synthetic fixtures in phase 0, and the removed-page scenario once content minimums exist in phase 1
-- [ ] 1.3 Implement the 404 page with on-device suggestions; verify the `/utility/oncor/` scenario and that no request carries the path
+- [x] 1.1 Implement the top rail, section landing pages, and the menu below 768 px; verify `aria-current` and the keyboard path in the browser driver
+- [x] 1.2 Implement the design D2 URL scheme, the generated `_redirects` file, and the 1,500-rule budget; verify the renamed-utility, redirect-budget, and published-URL checks against synthetic fixtures in phase 0, and the removed-page scenario once content minimums exist in phase 1
+- [x] 1.3 Implement the 404 page with on-device suggestions; verify the `/utility/oncor/` scenario and that no request carries the path
 
 ## 2. Strings and locales (phase 0)
 
 - [x] 2.1 Create per-locale string files, the message formatter, and the literal-copy lint; verify the lint fails on a fixture template with literal text
-- [ ] 2.2 Add the pseudo-locale and run the layout sweep at 320 and 1280 px; verify no overflow on every route template
+- [x] 2.2 Add the pseudo-locale and run the layout sweep at 320 and 1280 px; verify no overflow on every route template
 
 ## 3. Home and catalog (phase 1)
 
