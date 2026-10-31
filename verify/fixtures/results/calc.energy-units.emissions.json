@@ -1,0 +1,92 @@
+{
+  "toolId": "calc.energy-units.emissions",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "erct-1000",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.energy-units.emissions",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "co2": {
+            "value": 332.87,
+            "unit": "metric tons",
+            "display": "332.87"
+          },
+          "co2e": {
+            "value": 334.14,
+            "unit": "metric tons",
+            "display": "334.14"
+          },
+          "ch4": {
+            "value": 0.0195,
+            "unit": "metric tons",
+            "display": "0.0195"
+          },
+          "n2o": {
+            "value": 0.0027,
+            "unit": "metric tons",
+            "display": "0.0027"
+          }
+        },
+        "sentence": "1,000 MWh in ERCT is about 332.87 metric tons of CO₂. With other gases, it is 334.14 tons of CO₂e (eGRID2023).",
+        "notes": [],
+        "work": {
+          "method": "Multiply the energy by the subregion's eGRID2023 total output emission rate for each gas (lb/MWh), convert pounds to metric tons (0.45359237 kg/lb), and add CH₄ and N₂O to CO₂ with the 100-year global warming potentials eGRID uses (AR5: 28 and 265).",
+          "steps": [
+            "eGRID2023 total output emission rates for ERCT: 733.862 lb/MWh CO₂, 0.043 lb/MWh CH₄, 0.006 lb/MWh N₂O.",
+            "CO₂: 1,000 MWh × 733.862 lb/MWh × 0.45359237 kg/lb ÷ 1,000 = 332.87 metric tons.",
+            "CO₂e: CO₂ + 28 × CH₄ + 265 × N₂O = 334.14 metric tons (AR5 100-year GWPs, as eGRID uses).",
+            "These are annual average rates for every hour of the year. With interval data, hourly rates give a better answer, because the grid's mix changes hour by hour."
+          ],
+          "constants": [
+            {
+              "text": "1 lb = 0.45359237 kg",
+              "source": "NIST SP 811, exact by definition",
+              "exact": true
+            },
+            {
+              "text": "733.862 lb CO₂/MWh (ERCT)",
+              "source": "EPA eGRID2023, subregion total output emission rate",
+              "exact": false,
+              "year": 2023
+            }
+          ],
+          "assumptions": [
+            "The subregion's average rate over the whole year applies to every MWh, whenever it was used (location-based accounting).",
+            "Total output rates include all generation in the subregion; they are not marginal or hourly rates."
+          ],
+          "citations": [
+            {
+              "source": "EPA, Emissions & Generation Resource Integrated Database (eGRID2023)",
+              "edition": "eGRID2023, served snapshot 2026-10",
+              "locator": "Subregion file: total output emission rates (lb/MWh) for CO₂, CH₄, N₂O, and CO₂e",
+              "url": "https://www.epa.gov/egrid"
+            },
+            {
+              "source": "EPA, eGRID2023 Technical Guide",
+              "edition": "January 2025",
+              "locator": "CO₂ equivalent emissions, PDF page 23: GWPs from AR5 without climate-carbon feedbacks (CH₄ 28, N₂O 265)",
+              "url": "https://www.epa.gov/egrid/egrid-technical-guide"
+            },
+            {
+              "source": "NIST Special Publication 811",
+              "edition": "2008",
+              "locator": "Appendix B.8, pound (avoirdupois) to kilogram",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "egrid"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance."
+      }
+    }
+  ]
+}

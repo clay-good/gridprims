@@ -34,6 +34,38 @@ Version 0.2.0 · stable · validation level 2, cross-checked
 - The coal figure is EIA's estimate for coal burned in power plants, not for home or industrial coal.
 - Volumes and weights of fuels are not converted to each other except through their energy.
 
+## Emissions from electricity use (`calc.energy-units.emissions`)
+
+Estimate the CO₂ and other greenhouse gases from a year of electricity use at your eGRID subregion's average rates.
+
+Version 0.1.0 · experimental · validation level 2, cross-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Electricity used | `mwh` | MWh | 0 to 1000000000 | 1000 |
+| eGRID subregion | `subregion` | choice | `AKGD`, `AKMS`, `AZNM`, `CAMX`, `ERCT`, `FRCC`, `HIMS`, `HIOA`, `MROE`, `MROW`, `NEWE`, `NWPP`, `NYCW`, `NYLI`, `NYUP`, `PRMS`, `RFCE`, `RFCM`, `RFCW`, `RMPA`, `SPNO`, `SPSO`, `SRMV`, `SRMW`, `SRSO`, `SRTV`, `SRVC` | ERCT |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| CO₂ | `co2` | metric tons | 2 decimals |
+| CO₂ equivalent | `co2e` | metric tons | 2 decimals |
+| Methane (CH₄) | `ch4` | metric tons | 4 decimals |
+| Nitrous oxide (N₂O) | `n2o` | metric tons | 4 decimals |
+
+**Method.** Multiply the energy by the subregion's eGRID2023 total output emission rate for each gas (lb/MWh), convert pounds to metric tons (0.45359237 kg/lb), and add CH₄ and N₂O to CO₂ with the 100-year global warming potentials eGRID uses (AR5: 28 and 265).
+
+**Sources.**
+
+- EPA, Emissions & Generation Resource Integrated Database (eGRID2023), eGRID2023, served snapshot 2026-10, Subregion file: total output emission rates (lb/MWh) for CO₂, CH₄, N₂O, and CO₂e (https://www.epa.gov/egrid)
+- EPA, eGRID2023 Technical Guide, January 2025, CO₂ equivalent emissions, PDF page 23: GWPs from AR5 without climate-carbon feedbacks (CH₄ 28, N₂O 265) (https://www.epa.gov/egrid/egrid-technical-guide)
+- NIST Special Publication 811, 2008, Appendix B.8, pound (avoirdupois) to kilogram (https://www.nist.gov/pml/special-publication-811)
+
+**Known limits.**
+
+- Average annual rates miss the hour-by-hour changes in the grid's mix; use hourly data when you have it.
+- This is location-based accounting; contracts for clean power (market-based accounting) are not reflected.
+- Rates are eGRID2023's; a newer edition will change them.
+
 ## Bill check (`household.bill-totals.check`)
 
 Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.

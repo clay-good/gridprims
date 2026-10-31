@@ -1,0 +1,174 @@
+{
+ "source": "EPA eGRID2023 subregion total output emission rates (lb/MWh), from the served eGRID snapshot 2026-10; GWPs from the eGRID2023 Technical Guide (https://www.epa.gov/system/files/documents/2025-01/egrid2023_technical_guide.pdf, retrieved 2026-10-31), PDF page 23: \"Based on the fifth IPCC assessment report (2014) (AR5 without climate-carbon feedbacks), the GWP of CO2 is 1, CH4 is 28 and N2O is 265.\"",
+ "guideSha256": "12164c665217f1b4d00ac6a8115a3806710dab79993d02959cdf7f7f66abd841",
+ "gwp": {
+  "co2": 1,
+  "ch4": 28,
+  "n2o": 265
+ },
+ "tolerance": 0.001,
+ "subregions": {
+  "AKGD": {
+   "co2": 899.633,
+   "ch4": 0.086,
+   "n2o": 0.012,
+   "publishedCo2e": 905.109
+  },
+  "AKMS": {
+   "co2": 520.483,
+   "ch4": 0.026,
+   "n2o": 0.004,
+   "publishedCo2e": 522.4
+  },
+  "AZNM": {
+   "co2": 703.703,
+   "ch4": 0.039,
+   "n2o": 0.005,
+   "publishedCo2e": 706.189
+  },
+  "CAMX": {
+   "co2": 428.464,
+   "ch4": 0.025,
+   "n2o": 0.003,
+   "publishedCo2e": 429.983
+  },
+  "ERCT": {
+   "co2": 733.862,
+   "ch4": 0.043,
+   "n2o": 0.006,
+   "publishedCo2e": 736.629
+  },
+  "FRCC": {
+   "co2": 782.262,
+   "ch4": 0.041,
+   "n2o": 0.005,
+   "publishedCo2e": 784.785
+  },
+  "HIMS": {
+   "co2": 1123.371,
+   "ch4": 0.146,
+   "n2o": 0.022,
+   "publishedCo2e": 1133.294
+  },
+  "HIOA": {
+   "co2": 1489.548,
+   "ch4": 0.134,
+   "n2o": 0.021,
+   "publishedCo2e": 1498.947
+  },
+  "MROE": {
+   "co2": 1397.313,
+   "ch4": 0.116,
+   "n2o": 0.017,
+   "publishedCo2e": 1404.963
+  },
+  "MROW": {
+   "co2": 920.13,
+   "ch4": 0.097,
+   "n2o": 0.014,
+   "publishedCo2e": 926.552
+  },
+  "NEWE": {
+   "co2": 539.275,
+   "ch4": 0.063,
+   "n2o": 0.008,
+   "publishedCo2e": 543.178
+  },
+  "NWPP": {
+   "co2": 631.735,
+   "ch4": 0.054,
+   "n2o": 0.008,
+   "publishedCo2e": 635.267
+  },
+  "NYCW": {
+   "co2": 864.469,
+   "ch4": 0.022,
+   "n2o": 0.002,
+   "publishedCo2e": 865.744
+  },
+  "NYLI": {
+   "co2": 1180.672,
+   "ch4": 0.14,
+   "n2o": 0.018,
+   "publishedCo2e": 1189.333
+  },
+  "NYUP": {
+   "co2": 242.089,
+   "ch4": 0.011,
+   "n2o": 0.001,
+   "publishedCo2e": 242.776
+  },
+  "PRMS": {
+   "co2": 1543.073,
+   "ch4": 0.077,
+   "n2o": 0.012,
+   "publishedCo2e": 1548.53
+  },
+  "RFCE": {
+   "co2": 596.904,
+   "ch4": 0.036,
+   "n2o": 0.005,
+   "publishedCo2e": 599.17
+  },
+  "RFCM": {
+   "co2": 970.617,
+   "ch4": 0.082,
+   "n2o": 0.012,
+   "publishedCo2e": 975.978
+  },
+  "RFCW": {
+   "co2": 911.424,
+   "ch4": 0.071,
+   "n2o": 0.01,
+   "publishedCo2e": 916.054
+  },
+  "RMPA": {
+   "co2": 1036.601,
+   "ch4": 0.09,
+   "n2o": 0.013,
+   "publishedCo2e": 1042.539
+  },
+  "SPNO": {
+   "co2": 861.999,
+   "ch4": 0.087,
+   "n2o": 0.012,
+   "publishedCo2e": 867.74
+  },
+  "SPSO": {
+   "co2": 872.042,
+   "ch4": 0.054,
+   "n2o": 0.008,
+   "publishedCo2e": 875.567
+  },
+  "SRMV": {
+   "co2": 739.72,
+   "ch4": 0.032,
+   "n2o": 0.004,
+   "publishedCo2e": 741.741
+  },
+  "SRMW": {
+   "co2": 1239.839,
+   "ch4": 0.132,
+   "n2o": 0.019,
+   "publishedCo2e": 1248.582
+  },
+  "SRSO": {
+   "co2": 842.329,
+   "ch4": 0.056,
+   "n2o": 0.008,
+   "publishedCo2e": 846.007
+  },
+  "SRTV": {
+   "co2": 898.079,
+   "ch4": 0.079,
+   "n2o": 0.011,
+   "publishedCo2e": 903.306
+  },
+  "SRVC": {
+   "co2": 593.419,
+   "ch4": 0.045,
+   "n2o": 0.006,
+   "publishedCo2e": 596.326
+  }
+ }
+}
