@@ -1,0 +1,15 @@
+{
+  "source": "Lawrence Berkeley National Laboratory and GridTracker, Queued Up Data File, 2026 edition (LBNL_Ix_Queue_Data_File_thru2025.xlsx, SHA-256 794582d3281c6a305e9615fcfec3fae9dc85be2165216d33760b677e976a08b6), tab \"08. Active Capacity by Type\", year 2025, configuration standalone, copied 2026-10-31",
+  "license": "CC-BY-4.0",
+  "unit": "GW",
+  "standalone2025": [
+    { "type": "Solar", "gw": 396.614722610686, "rows": ["Solar"] },
+    { "type": "Storage", "gw": 391.45130315521, "rows": ["Battery", "Other Storage"] },
+    { "type": "Wind (offshore)", "gw": 23.42679, "rows": ["Offshore Wind"] },
+    { "type": "Wind", "gw": 177.763790399141, "rows": ["Wind"] },
+    { "type": "Gas", "gw": 240.023853, "rows": ["Gas"] },
+    { "type": "Nuclear", "gw": 10.393, "rows": ["Nuclear"] },
+    { "type": "Coal", "gw": 3.6989, "rows": ["Coal"] },
+    { "type": "Other", "gw": 41.298708, "rows": ["Other", "Hydro", "Geothermal", "Hydrogen", "Diesel", "Oil"] }
+  ]
+}

@@ -1,0 +1,569 @@
+{
+  "dataset": "lbnl-queued-up",
+  "version": "2026-10",
+  "title": "Queued Up: Interconnection Queue Data File (Lawrence Berkeley National Laboratory)",
+  "publisher": "Lawrence Berkeley National Laboratory and GridTracker",
+  "sourceUrl": "https://emp.lbl.gov/queues",
+  "terms": {
+    "url": "https://emp.lbl.gov/queues",
+    "section": "Copyright Notice",
+    "text": "The Queued Up data file is licensed CC BY 4.0. You may use, share, or adapt the dataset as long as you attribute it to Lawrence Berkeley National Laboratory and GridTracker. Queued Up Data File. Copyright (c) 2026, The Regents of the University of California, through Lawrence Berkeley National Laboratory (subject to receipt of any required approvals from the U.S. Dept. of Energy) & GridTracker. CC BY 4.0.",
+    "captured": "2026-10-31",
+    "license": "CC-BY-4.0"
+  },
+  "redistributionBasis": {
+    "kind": "named license",
+    "note": "CC BY 4.0, copyright The Regents of the University of California (LBNL) and GridTracker"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "CC-BY-4.0",
+    "reason": "recognized CC-BY-4.0",
+    "agrees": true
+  },
+  "license": "named license (CC BY 4.0, copyright The Regents of the University of California (LBNL) and GridTracker)",
+  "attribution": "Lawrence Berkeley National Laboratory and GridTracker. Queued Up Data File, 2026 edition (data through the end of 2025), CC BY 4.0, retrieved May 2026.",
+  "asOf": "2026-05-07",
+  "retrieved": "2026-10-31",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "cadence": {
+    "every": "annual",
+    "nextRelease": {
+      "date": "2027-06-30",
+      "posted": false,
+      "note": "LBNL publishes each edition in spring or early summer; the date is inferred, not posted"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://emp.lbl.gov/sites/default/files/2026-05/LBNL_Ix_Queue_Data_File_thru2025.xlsx",
+      "name": "LBNL_Ix_Queue_Data_File_thru2025.xlsx",
+      "bytes": 15571236,
+      "sha256": "794582d3281c6a305e9615fcfec3fae9dc85be2165216d33760b677e976a08b6"
+    }
+  ],
+  "tables": [
+    {
+      "name": "requests",
+      "title": "Interconnection requests with status, dates, county, type, and capacity",
+      "dataPeriod": "2025",
+      "rows": 38201,
+      "columns": [
+        {
+          "name": "q_id",
+          "type": "str"
+        },
+        {
+          "name": "entity",
+          "type": "str"
+        },
+        {
+          "name": "seq",
+          "type": "f64"
+        },
+        {
+          "name": "q_status",
+          "type": "str"
+        },
+        {
+          "name": "ia_phase_raw",
+          "type": "str"
+        },
+        {
+          "name": "ia_phase",
+          "type": "str"
+        },
+        {
+          "name": "county",
+          "type": "str"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "region",
+          "type": "str"
+        },
+        {
+          "name": "project_name",
+          "type": "str"
+        },
+        {
+          "name": "utility",
+          "type": "str"
+        },
+        {
+          "name": "developer",
+          "type": "str"
+        },
+        {
+          "name": "cluster",
+          "type": "str"
+        },
+        {
+          "name": "service",
+          "type": "str"
+        },
+        {
+          "name": "project_type",
+          "type": "str"
+        },
+        {
+          "name": "type_1",
+          "type": "str"
+        },
+        {
+          "name": "type_2",
+          "type": "str"
+        },
+        {
+          "name": "type_3",
+          "type": "str"
+        },
+        {
+          "name": "type_clean",
+          "type": "str"
+        },
+        {
+          "name": "fips_code",
+          "type": "str"
+        },
+        {
+          "name": "q_date",
+          "type": "str"
+        },
+        {
+          "name": "prop_date",
+          "type": "str"
+        },
+        {
+          "name": "on_date",
+          "type": "str"
+        },
+        {
+          "name": "wd_date",
+          "type": "str"
+        },
+        {
+          "name": "ia_date",
+          "type": "str"
+        },
+        {
+          "name": "mw_1",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "mw_2",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "mw_3",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "q_year",
+          "type": "f64"
+        },
+        {
+          "name": "prop_year",
+          "type": "f64"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "requests/AL.bin",
+          "state": "AL",
+          "rows": 528,
+          "bytes": 94040,
+          "sha256": "7f2eb500bbb7b9d342110e053163cd92715df20460df5c2240c69b91e82da45f"
+        },
+        {
+          "path": "requests/AR.bin",
+          "state": "AR",
+          "rows": 496,
+          "bytes": 88424,
+          "sha256": "0aeffb64645a998592ceef164cbaab5d6219c04c47b353a5d527d2514ca50f41"
+        },
+        {
+          "path": "requests/AZ.bin",
+          "state": "AZ",
+          "rows": 1049,
+          "bytes": 176336,
+          "sha256": "5f08d5b6771dbbcbdf6bfaad90ab816254419039733214033e4f1ed92c4620c8"
+        },
+        {
+          "path": "requests/CA.bin",
+          "state": "CA",
+          "rows": 2831,
+          "bytes": 527656,
+          "sha256": "2c244f812141dc803fc62bd4883d61ce7030f92d5fd931d63b5a670c65e1dea6"
+        },
+        {
+          "path": "requests/CO.bin",
+          "state": "CO",
+          "rows": 601,
+          "bytes": 125840,
+          "sha256": "035fec5b6b7c9379f421011ce8713677249c2b52b7475b2235557fc2347a6558"
+        },
+        {
+          "path": "requests/CT.bin",
+          "state": "CT",
+          "rows": 228,
+          "bytes": 46688,
+          "sha256": "bf63b2137ba367fd36a9ae198a92ca6f0b207ffd27ddf8284cbb9bb12c896075"
+        },
+        {
+          "path": "requests/DC.bin",
+          "state": "DC",
+          "rows": 3,
+          "bytes": 3984,
+          "sha256": "ea6610f26908ada70d20c2bf973ecd8aa8616f0f75c1d432667cb56c70eda3eb"
+        },
+        {
+          "path": "requests/DE.bin",
+          "state": "DE",
+          "rows": 151,
+          "bytes": 32448,
+          "sha256": "38b3c06aa2cb3a38ae707899dd5c76307ac71e24ed8dd9e7d2e7999f51f43e5b"
+        },
+        {
+          "path": "requests/FL.bin",
+          "state": "FL",
+          "rows": 908,
+          "bytes": 153920,
+          "sha256": "b0ef4f7f66ad52ca63b18b7353e8a6fa3b5ff12fab0be1f9eebcaecaa785f70a"
+        },
+        {
+          "path": "requests/GA.bin",
+          "state": "GA",
+          "rows": 810,
+          "bytes": 146848,
+          "sha256": "bbcd899d7d9302e1551d62a917561fe0e70346251e9a32052e48385d75f7025e"
+        },
+        {
+          "path": "requests/IA.bin",
+          "state": "IA",
+          "rows": 507,
+          "bytes": 96152,
+          "sha256": "1ba48db530620b6e159e4ca0c5ed7e872d8044fc6738e80c0fc43330a6539570"
+        },
+        {
+          "path": "requests/ID.bin",
+          "state": "ID",
+          "rows": 861,
+          "bytes": 150552,
+          "sha256": "5c29e8a78f92f9b2eb1f35d6ad5798346f75f43d83ff656e54cb4ffb30cad813"
+        },
+        {
+          "path": "requests/IL.bin",
+          "state": "IL",
+          "rows": 1225,
+          "bytes": 223160,
+          "sha256": "dcbe555fae9bbe86f7ba50e63380ae14a2c8e0ce60b51e34c12c5b65af65ed90"
+        },
+        {
+          "path": "requests/IN.bin",
+          "state": "IN",
+          "rows": 948,
+          "bytes": 172504,
+          "sha256": "d8b6ab10f1eaf2da9dc6cb376a24cb6ec83a75c3229344877999366f30696554"
+        },
+        {
+          "path": "requests/KS.bin",
+          "state": "KS",
+          "rows": 587,
+          "bytes": 109064,
+          "sha256": "92a08692417ee74bda3c771e04d55435139e3bf5296fc4c08d8a7111ceaa124f"
+        },
+        {
+          "path": "requests/KY.bin",
+          "state": "KY",
+          "rows": 487,
+          "bytes": 93032,
+          "sha256": "c5386a7b87114dc1860b10855f9f164ea1d86c646b38f7161bc4ff4e63d5a8b7"
+        },
+        {
+          "path": "requests/LA.bin",
+          "state": "LA",
+          "rows": 466,
+          "bytes": 85504,
+          "sha256": "cbc9468f20736dcce9819697581be0202c201bf42756e67bf76c6cf94585ea94"
+        },
+        {
+          "path": "requests/MA.bin",
+          "state": "MA",
+          "rows": 465,
+          "bytes": 91968,
+          "sha256": "ed768373b46cc0782004ed6923a66f1744ea5348e1629473ada17e1a13c1a697"
+        },
+        {
+          "path": "requests/MB.bin",
+          "state": "MB",
+          "rows": 1,
+          "bytes": 3136,
+          "sha256": "d017d56596808299e4f79c6ff6a280d9e283040abbae75ebb0dceacbd5ac1cb3"
+        },
+        {
+          "path": "requests/MD.bin",
+          "state": "MD",
+          "rows": 560,
+          "bytes": 107992,
+          "sha256": "f6ecf94d1cefd2349e24853d1afd0aadf3ad8ff49fc409c5ba25104de841235f"
+        },
+        {
+          "path": "requests/ME.bin",
+          "state": "ME",
+          "rows": 284,
+          "bytes": 57760,
+          "sha256": "d89a7b90910f501cebd55c5e802a1c50cad029598d93ddd6dd3324f50ee9402c"
+        },
+        {
+          "path": "requests/MI.bin",
+          "state": "MI",
+          "rows": 780,
+          "bytes": 142568,
+          "sha256": "ec44e83d014aa72713773ba431f75feda05594d61f9a0c0cc351477f805db3bd"
+        },
+        {
+          "path": "requests/MN.bin",
+          "state": "MN",
+          "rows": 747,
+          "bytes": 140120,
+          "sha256": "5003712db3ec0df03a254cfcb01dc2c0e2f65215abb5944677c9f36ec2c14f8b"
+        },
+        {
+          "path": "requests/MO.bin",
+          "state": "MO",
+          "rows": 401,
+          "bytes": 77416,
+          "sha256": "7dc8f0a4fdd9c2972188dacd3b2839cebff8c8b919a3632b00fc5b1f1e764c53"
+        },
+        {
+          "path": "requests/MS.bin",
+          "state": "MS",
+          "rows": 441,
+          "bytes": 80224,
+          "sha256": "dadc082b9bb22f6d664e8ac394d9ad1e56efcd3f7dae36d8b5059fd8912eec68"
+        },
+        {
+          "path": "requests/MT.bin",
+          "state": "MT",
+          "rows": 533,
+          "bytes": 103840,
+          "sha256": "954e0d2304f05ca98154c0805ad39a3629d3fa9b23c2cf8e18e8da168637044b"
+        },
+        {
+          "path": "requests/MX.bin",
+          "state": "MX",
+          "rows": 19,
+          "bytes": 7264,
+          "sha256": "49c5f985a24459ce556e42ca2bada4d17c03dd624c8b38e0c12c89525763f601"
+        },
+        {
+          "path": "requests/NC.bin",
+          "state": "NC",
+          "rows": 603,
+          "bytes": 109576,
+          "sha256": "a1c473b4c9cf6ccf6d0ce8380a39c85e7aceca74d67486e195f2f9cd4e745c44"
+        },
+        {
+          "path": "requests/ND.bin",
+          "state": "ND",
+          "rows": 410,
+          "bytes": 79496,
+          "sha256": "6fab8d66cb2012447c3a3397a21f8f0dcdc82b578e23463d1b433d48a8970ab8"
+        },
+        {
+          "path": "requests/NE.bin",
+          "state": "NE",
+          "rows": 388,
+          "bytes": 73752,
+          "sha256": "9948d13b4773a381318f6235fdc27b4070b4ee47dc62cb315e35b128d97f44fb"
+        },
+        {
+          "path": "requests/NH.bin",
+          "state": "NH",
+          "rows": 105,
+          "bytes": 23960,
+          "sha256": "aa496afb285ce55d5bd266bf089c0fc54718eefa3f96da5105685104a47ea876"
+        },
+        {
+          "path": "requests/NJ.bin",
+          "state": "NJ",
+          "rows": 1195,
+          "bytes": 223224,
+          "sha256": "2f150ec5d89a5e74252951c31b3df8486ac14f7628718a34c772b9c2c98af725"
+        },
+        {
+          "path": "requests/NM.bin",
+          "state": "NM",
+          "rows": 632,
+          "bytes": 124248,
+          "sha256": "48d83990adb992a197dd52c96c2e7899e4c9dd742319b1d795e78773f51b3f81"
+        },
+        {
+          "path": "requests/NV.bin",
+          "state": "NV",
+          "rows": 645,
+          "bytes": 116008,
+          "sha256": "1649f48f3e1a15b6eb5feafa7fe166668b98ef4196a03dff307b683152918254"
+        },
+        {
+          "path": "requests/NY.bin",
+          "state": "NY",
+          "rows": 1882,
+          "bytes": 366560,
+          "sha256": "e04b7ca7ad7cd239d73586ce8050c382f6a822b32c3db103f7eb4931509e014b"
+        },
+        {
+          "path": "requests/OH.bin",
+          "state": "OH",
+          "rows": 919,
+          "bytes": 171984,
+          "sha256": "791d0e1d2fc779a02c359cf3f9bcc1dfd79cadecb9c8f62f022e698e646a4b1f"
+        },
+        {
+          "path": "requests/OK.bin",
+          "state": "OK",
+          "rows": 803,
+          "bytes": 146072,
+          "sha256": "4f36b986c779b9f8a3a8122d125d4a0c6a41e12b4370880a4b6e0991077be20b"
+        },
+        {
+          "path": "requests/ON.bin",
+          "state": "ON",
+          "rows": 2,
+          "bytes": 3240,
+          "sha256": "fc10b359daaa36e2aa945a7b8aa5a56c6c736aba85e847cba89f8cdfcbca7d25"
+        },
+        {
+          "path": "requests/OR.bin",
+          "state": "OR",
+          "rows": 1489,
+          "bytes": 263480,
+          "sha256": "32eaf9bd94544ec19f1b6411dd0f6c5afc748d5fb89bc84e31a7fb41e3a4d1d8"
+        },
+        {
+          "path": "requests/PA.bin",
+          "state": "PA",
+          "rows": 1875,
+          "bytes": 341008,
+          "sha256": "ec7abdf6fc6ab2ba50bd7cad4c4c1844875679b955bcd2c230629cb5d9c9b6e7"
+        },
+        {
+          "path": "requests/RI.bin",
+          "state": "RI",
+          "rows": 112,
+          "bytes": 25136,
+          "sha256": "5f4b37abdf2045025f710330a41fab7016253916ee8eb056d9bfff9830b0c6c0"
+        },
+        {
+          "path": "requests/SC.bin",
+          "state": "SC",
+          "rows": 714,
+          "bytes": 119448,
+          "sha256": "ae35aecf78dd89e3f635a903860693349bdf17e609b5dc34fc02939b3436438c"
+        },
+        {
+          "path": "requests/SD.bin",
+          "state": "SD",
+          "rows": 355,
+          "bytes": 70016,
+          "sha256": "ce57bebce53d7143de835b0f27b17ea0a32de6407f5bf5a4b79f2fe477a224ae"
+        },
+        {
+          "path": "requests/TN.bin",
+          "state": "TN",
+          "rows": 327,
+          "bytes": 58304,
+          "sha256": "5f59025f03c69793ba1251902fbe0f6076951ace270b03b1a57b9d76a99065e8"
+        },
+        {
+          "path": "requests/TX.bin",
+          "state": "TX",
+          "rows": 3442,
+          "bytes": 702328,
+          "sha256": "4eb79f6c2d75676aafa5ef233ed31e30c0e1d8936739a7daf8631f1e386dcec8"
+        },
+        {
+          "path": "requests/UT.bin",
+          "state": "UT",
+          "rows": 894,
+          "bytes": 159632,
+          "sha256": "164f5a8a9b922a8d83616431a9f191cb753d98369f10c55cb75b949c025718f1"
+        },
+        {
+          "path": "requests/VA.bin",
+          "state": "VA",
+          "rows": 1343,
+          "bytes": 246456,
+          "sha256": "6d83b00988f0d0fc196427ef5febf88884e09801911284ad5374f9954826a637"
+        },
+        {
+          "path": "requests/VT.bin",
+          "state": "VT",
+          "rows": 79,
+          "bytes": 18704,
+          "sha256": "ffe666789f6a9f06ca4c9c3a235acdb4123945faeafc502314a111604586beda"
+        },
+        {
+          "path": "requests/WA.bin",
+          "state": "WA",
+          "rows": 777,
+          "bytes": 143664,
+          "sha256": "b94fbdf1f622f4b133e586c0e4b05bed02cf7c4a98a9508fc4613a8f2b72d32a"
+        },
+        {
+          "path": "requests/WI.bin",
+          "state": "WI",
+          "rows": 420,
+          "bytes": 80832,
+          "sha256": "842bb0554c42f93cccdd224d5d4477ea56505c3ac1efdaed01f13cd68d53d5e2"
+        },
+        {
+          "path": "requests/WV.bin",
+          "state": "WV",
+          "rows": 238,
+          "bytes": 49304,
+          "sha256": "82eb748ac1cc38465db611dbe2ddee51ccd5a320201385b42fd7b83a90e78cb3"
+        },
+        {
+          "path": "requests/WY.bin",
+          "state": "WY",
+          "rows": 400,
+          "bytes": 76912,
+          "sha256": "c133e3baaf0f454ecf5e306e62721c4e28ba33aa12f48e42c1415811c5730b6c"
+        },
+        {
+          "path": "requests/no_state.bin",
+          "state": "no_state",
+          "rows": 1235,
+          "bytes": 249864,
+          "sha256": "e32f316309852552ec023657500f8b47a8373998d5d25e0a9565907331b62519"
+        }
+      ],
+      "download": {
+        "path": "requests.csv.gz",
+        "bytes": 909304,
+        "sha256": "ebdd270bb3f319c9595204138ff4114f287b8710a89ad1ac8a66ae29267259a2",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "Lawrence Berkeley National Laboratory and GridTracker",
+          "attribution": "Lawrence Berkeley National Laboratory and GridTracker. Queued Up Data File, 2026 edition (data through the end of 2025), CC BY 4.0, retrieved May 2026.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": [],
+      "unmatched": 1235
+    }
+  ]
+}
