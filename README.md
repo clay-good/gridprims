@@ -1,14 +1,27 @@
 # gridprims
 
-**The US power grid's math and public data, free in one browser tab.**
+**The US power grid's math, files, and public data, free in one browser tab.**
 
-### 👉 [gridprims.com](https://gridprims.com)
+### [gridprims.com](https://gridprims.com)
 
-- **Check your electric bill** line by line, and see what you should have paid.
+## For energy professionals
+
+Built for utility engineers, energy managers, solar and storage developers, siting teams, commission staff, ratepayer advocates, and reporters.
+
+- **Interval data in seconds.** Drop a meter export (CSV, Excel, or Green Button) and get peaks, load factor, and monthly demand. Every parsing choice is shown and can be edited.
+- **Line-by-line bills on any tariff.** Price a load on any OpenEI rate, with time-of-use, tiers, demand windows, ratchets, and power factor. Then rank every rate in the same class.
+- **One cited page per entity.** Every utility, power plant, state, and eGRID subregion, built from EIA, EPA, FERC, and LBNL data. Each page names its source and how current it is.
+- **Interconnection queues** by state and county, by type, with time in queue and withdrawal rates.
+- **Clean data downloads.** Versioned tables with checksums, licenses, and a citation to copy.
+
+## For homes
+
+- **Check your electric bill** and see what you should have paid.
 - **Find the cheapest rate plan** for how your home actually uses power.
-- **Drop in a meter file** and get your peaks, costs, and emissions in seconds.
+- **See if your use is high** compared with the average home at your utility and in your state.
 - **Find your utility** from a ZIP code.
-- **Look up any utility, power plant, state, or grid region** on one cited, dated page.
+
+## Private by design
 
 Your files never leave your device. No accounts, ads, or tracking. It works offline after your first visit.
 
