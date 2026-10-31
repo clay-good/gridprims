@@ -96,9 +96,19 @@ Every step is `node <our script>` or `git`; actions are GitHub's own, pinned by 
 
 **Proof of work.** SHA-256 over `nonce + ":" + canonical payload` with 18 leading zero bits, about 262,000 hashes on average, which targets about 300 ms on a mid-range phone with `crypto.subtle`. Re-measured on the reference profile when the dialog is built (task 9.3).
 
-## 8. Reference machine
+## 8. Reference machine and measured budgets
 
-The throttled reference profile in `platform/app-shell` everywhere, including the parse budget. No separate reference machine.
+The throttled reference profile in `platform/app-shell` everywhere, including the parse budget: Chrome with 4x CPU slowdown, 150 ms round trips, 1.6 Mbps down, 750 kbps up (`verify/lib/reference-profile.mjs`). No separate reference machine. CI prints each run's figures as `BUDGET` lines.
+
+Measured on CI (`ubuntu-24.04`, headless Chrome), 2026-10-31:
+
+| Measure | Budget | First run | After fix |
+|---|---|---|---|
+| Parse 35,040 rows of 15-minute CSV in the worker | 1,000 ms | 1,245–1,276 ms (over) | 633–661 ms, after resolving local time once per wall-clock hour |
+| Tool page first answer (largest contentful paint) | 1,500 ms | 744–932 ms | 844–920 ms |
+| Tool page JavaScript, compressed | 150 KB | 22.6 KB in 15 files | 22.7 KB |
+
+The 1 s parse budget stays as set: the measured figure clears it with about 35% headroom.
 
 ## 9. MCP protocol choices
 

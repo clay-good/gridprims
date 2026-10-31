@@ -219,6 +219,23 @@ async function launchChrome(exe, profile) {
 const asJson = (expression) => `(async () => { const v = await (${expression}); return v === undefined ? '"__undefined__"' : JSON.stringify(v); })()`;
 const fromJson = (text) => { const v = JSON.parse(text); return v === '__undefined__' ? undefined : v; };
 
+/**
+ * Wait until a page expression is truthy, polling every 50 ms, and return its value.
+ * Tests use this instead of fixed sleeps, so a slow runner waits longer instead of failing.
+ * @param {{evaluate: (e: string) => Promise<any>}} browser
+ * @param {string} expression
+ * @param {number} [ms]
+ */
+export async function waitFor(browser, expression, ms = 10_000) {
+  const end = Date.now() + ms;
+  for (;;) {
+    const v = await browser.evaluate(expression);
+    if (v) return v;
+    if (Date.now() > end) throw new Error(`timed out after ${ms} ms waiting for: ${expression}`);
+    await new Promise((r) => setTimeout(r, 50));
+  }
+}
+
 /** Preferences that keep a test profile quiet: no updates, telemetry, or first-run pages. */
 const FIREFOX_PREFS = {
   'app.update.disabledForTesting': true,

@@ -7,7 +7,7 @@ import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
-import { findBrowser, launch } from '../../lib/browser.mjs';
+import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
@@ -98,12 +98,11 @@ for (const kind of ['chrome', 'firefox']) {
         if (i.id !== 'command-input') throw new Error('slash did not focus the command bar');
         i.value = '12 MWh to MMBtu';
         i.dispatchEvent(new Event('input', { bubbles: true }));
-        await new Promise((r) => setTimeout(r, 300));
       })()`);
-      assert.match(await browser.evaluate(`document.querySelector('#command-option-0').textContent`), /Energy unit converter = 40\.95 MMBtu/);
+      const preview = await waitFor(browser, `(document.querySelector('#command-option-0 .hint')?.textContent ?? '') && document.querySelector('#command-option-0').textContent`);
+      assert.match(preview, /Energy unit converter = 40\.95 MMBtu/);
       await browser.evaluate(`document.querySelector('#command-input').dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }))`);
-      await browser.evaluate('new Promise((r) => setTimeout(r, 500))');
-      await browser.evaluate(ready);
+      await waitFor(browser, `location.pathname === '${PATH}' && document.documentElement.dataset.ready`);
       assert.equal(await browser.evaluate('location.pathname'), PATH);
       assert.equal(await browser.evaluate(text('[data-answer] .sentence')), '12 MWh is 40.95 MMBtu.');
       assert.equal(await browser.evaluate(`document.querySelector('#in-value').value`), '12');

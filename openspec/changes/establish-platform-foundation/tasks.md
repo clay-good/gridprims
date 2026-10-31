@@ -10,7 +10,7 @@
 
 ## 2. Measure before committing the risky numbers
 
-- [ ] 2.1 Spike the delimited-text parser in a worker and measure a real year of 15-minute data on the reference profile before the 1 s budget becomes a CI gate; verify the measured figure is recorded in `docs/decisions-day-one.md` and the budget set from it
+- [x] 2.1 Spike the delimited-text parser in a worker and measure a real year of 15-minute data on the reference profile before the 1 s budget becomes a CI gate; verify the measured figure is recorded in `docs/decisions-day-one.md` and the budget set from it
 - [ ] 2.2 Build one real EIA-861 shard end to end and freeze the packed binary column format from what that dataset actually needs (mixed types, nullability); verify the format document names the cases the fixture exercised
 - [ ] 2.3 Run the EIA-861 and EIA-923 recipes against the last three published vintages and set the row-count bounds from the observed deltas; verify the recorded bounds and the vintages they came from
 - [ ] 2.4 Fetch the live agent-protocol specification and its published schema, record one real handshake from a client, and amend `agent/mcp-server` where the live spec differs from what `docs/research/04` assumed; verify the recorded handshake and any amendment
@@ -50,7 +50,7 @@
 ## 6. File intake
 
 - [x] 6.1 Own the synthetic fixture library: at least 20 real-shaped exports seeded from `docs/research/03` and `09` §1 (Green Button XML and CSV, Smart Meter Texas CSV, major utility CSV and Excel shapes, interval-ending stamps), and implement format detection and routing; verify every fixture routes and parses to its expected receipt, including the interval-ending scenario
-- [ ] 6.2 Implement worker parsing with progress and cancel; verify 35,040 rows parse in under 1 s on the reference profile
+- [x] 6.2 Implement worker parsing with progress and cancel; verify 35,040 rows parse in under 1 s on the reference profile
 - [x] 6.3 Implement the editable parse receipt; verify changing the time zone recomputes every result in a fixture
 - [x] 6.4 Handle DST, gaps, duplicates, multiple meters, negative values; verify the spring-forward, conflicting-duplicate, mixed-unit, two-meter, partial-year, fall-back, and gap scenarios
 - [x] 6.5 Implement the unsupported-file message and the keep-this-file consent path; verify the unsupported-file and reload-forgets-the-file scenarios
