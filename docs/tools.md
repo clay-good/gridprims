@@ -176,7 +176,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 The levelized cost of energy from capital cost, operating costs, and capacity factor, with each term's share shown.
 
-Version 0.1.0 · experimental · validation level 1, self-checked
+Version 0.2.0 · experimental · validation level 2, cross-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|

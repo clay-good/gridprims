@@ -1,0 +1,135 @@
+{
+ "source": "NLR Annual Technology Baseline 2025 (CC BY 4.0), as published in PUDL v2026.10.0 by Catalyst Cooperative (CC BY 4.0); report year 2025, projection year 2025, Moderate scenario, R&D financial case, no tax credits, 30-year cost recovery",
+ "files": {
+  "core_nrelatb__yearly_projected_cost_performance": "0d19be53c5cd7d6af2e701794f890b2f9a785fd3eaec21a436471b9e23c39e3e",
+  "core_nrelatb__yearly_projected_financial_cases_by_scenario": "9e6798f6b62729e0d05c4f17482a6c2e26899a18abd6420287917a8102f0cd1b"
+ },
+ "cases": [
+  {
+   "technology": "UtilityPV",
+   "detail": [
+    "Class1",
+    "Tracking PV"
+   ],
+   "fcr": 0.05388236788186963,
+   "capexPerKw": 1465.4923031520602,
+   "fomPerKwYear": 23.91164491305845,
+   "capacityFactor": 0.3154886351612703,
+   "vomPerMwh": 0,
+   "fuelPerMwh": 0,
+   "publishedLcoe": 37.224216910612
+  },
+  {
+   "technology": "CommPV",
+   "detail": [
+    "Class1",
+    "Rooftop PV"
+   ],
+   "fcr": 0.055534219782883656,
+   "capexPerKw": 1662.1269545316156,
+   "fomPerKwYear": 17.143656650859583,
+   "capacityFactor": 0.1906810382144511,
+   "vomPerMwh": 0,
+   "fuelPerMwh": 0,
+   "publishedLcoe": 65.523715848312
+  },
+  {
+   "technology": "ResPV",
+   "detail": [
+    "Class1",
+    "Rooftop PV"
+   ],
+   "fcr": 0.055534219782883656,
+   "capexPerKw": 3044.857698765075,
+   "fomPerKwYear": 28.912988272504588,
+   "capacityFactor": 0.18209089234912024,
+   "vomPerMwh": 0,
+   "fuelPerMwh": 0,
+   "publishedLcoe": 124.13314015352653
+  },
+  {
+   "technology": "LandbasedWind",
+   "detail": [
+    "Class1",
+    "Wind Turbine Technology 1"
+   ],
+   "fcr": 0.05461785457715933,
+   "capexPerKw": 1871.7323387889708,
+   "fomPerKwYear": 40.73743,
+   "capacityFactor": 0.498079105694444,
+   "vomPerMwh": 0,
+   "fuelPerMwh": 0,
+   "publishedLcoe": 32.76685013526583
+  },
+  {
+   "technology": "OffShoreWind",
+   "detail": [
+    "Class1",
+    "Fixed-Bottom"
+   ],
+   "fcr": 0.05555968717214646,
+   "capexPerKw": 5972.212963012032,
+   "fomPerKwYear": 87.16297088838132,
+   "capacityFactor": 0.4823,
+   "vomPerMwh": 0,
+   "fuelPerMwh": 0,
+   "publishedLcoe": 99.16743468529498
+  },
+  {
+   "technology": "Geothermal",
+   "detail": [
+    "DeepEGSBinary",
+    "Deep EGS / Binary"
+   ],
+   "fcr": 0.05535262935213938,
+   "capexPerKw": 14080.70582973673,
+   "fomPerKwYear": 207.39510967221216,
+   "capacityFactor": 0.8,
+   "vomPerMwh": 0,
+   "fuelPerMwh": 0,
+   "publishedLcoe": 140.81038819665193
+  },
+  {
+   "technology": "Hydropower",
+   "detail": [
+    "NPD1",
+    "NPD 1"
+   ],
+   "fcr": 0.05534443230402649,
+   "capexPerKw": 3834.053393974444,
+   "fomPerKwYear": 98.0,
+   "capacityFactor": 0.33,
+   "vomPerMwh": 0,
+   "fuelPerMwh": 0,
+   "publishedLcoe": 107.30369050534166
+  },
+  {
+   "technology": "Biopower",
+   "detail": [
+    "Dedicated",
+    "Biopower"
+   ],
+   "fcr": 0.06025232677309681,
+   "capexPerKw": 5484.17701424607,
+   "fomPerKwYear": 174.62390670553938,
+   "capacityFactor": 0.6,
+   "vomPerMwh": 5.587949465500486,
+   "fuelPerMwh": 77.65485099194338,
+   "publishedLcoe": 179.33456838921705
+  },
+  {
+   "technology": "CSP",
+   "detail": [
+    "Class2",
+    "CSP"
+   ],
+   "fcr": 0.05616030438879452,
+   "capexPerKw": 7150.9561387470785,
+   "fomPerKwYear": 71.86523042285714,
+   "capacityFactor": 0.666,
+   "vomPerMwh": 3.835825422857143,
+   "fuelPerMwh": 0,
+   "publishedLcoe": 84.98977112297709
+  }
+ ]
+}

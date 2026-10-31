@@ -1,13 +1,13 @@
 {
   "toolId": "calc.cost.lcoe",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "results": [
     {
       "example": "spec-41",
       "result": {
         "status": "ok",
         "toolId": "calc.cost.lcoe",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "lcoe": {
             "value": 41.1,
@@ -52,8 +52,8 @@
         },
         "datasets": [],
         "stability": "experimental",
-        "validationLevel": 1,
-        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance."
       }
     }
   ]

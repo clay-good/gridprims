@@ -25,3 +25,13 @@ test('LCOE: FCR 0.07, $1,000/kW, $20/kW-year, 25% capacity factor is $41.10/MWh 
   assert.equal(r2.outputs.capital.display, '36.53');
   assert.equal(r2.outputs.lcoe.display, '45.66');
 });
+
+test('the LCOE tool reproduces NLR ATB 2025\'s published LCOE from each case\'s own inputs within 1%', async () => {
+  const { readFileSync } = await import('node:fs');
+  const ref = JSON.parse(readFileSync(new URL('../../reference/atb-2025-lcoe-cases.json', import.meta.url), 'utf8'));
+  assert.ok(ref.cases.length >= 5);
+  for (const c of ref.cases) {
+    const r = run('calc.cost.lcoe', { fcr: c.fcr, capex: c.capexPerKw, fom: c.fomPerKwYear, cf: c.capacityFactor * 100, vom: c.vomPerMwh, fuel: c.fuelPerMwh });
+    assert.ok(Math.abs(r.outputs.lcoe.value / c.publishedLcoe - 1) < 0.01, `${c.technology}: ${r.outputs.lcoe.value} against ${c.publishedLcoe}`);
+  }
+});

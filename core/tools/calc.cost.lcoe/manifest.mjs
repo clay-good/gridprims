@@ -1,6 +1,6 @@
 export default {
   id: 'calc.cost.lcoe',
-  version: '0.1.0',
+  version: '0.2.0',
   title: 'Levelized cost of energy',
   purpose: 'The levelized cost of energy from capital cost, operating costs, and capacity factor, with each term\'s share shown.',
   archetype: 'calculator',
@@ -33,8 +33,14 @@ export default {
   related: ['calc.storage.basics'],
   handoffs: [{ label: 'NLR Annual Technology Baseline', url: 'https://atb.nlr.gov/' }],
   stability: 'experimental',
-  validation: { level: 1, evidence: [{ kind: 'own-examples', summary: 'The spec\'s $41.10/MWh case passes, with each term shown.' }] },
-  toRaise: 'Reproducing an ATB technology\'s published LCOE from its published inputs within 1% would raise it to cross-checked.',
+  validation: {
+    level: 2,
+    evidence: [
+      { kind: 'own-examples', summary: 'The spec\'s $41.10/MWh case passes, with each term shown.' },
+      { kind: 'published-example', path: 'verify/reference/atb-2025-lcoe-cases.json', summary: 'NLR ATB 2025\'s published LCOE for nine technologies (utility, commercial, and residential PV, land-based and offshore wind, geothermal, hydropower, biopower, and CSP) is reproduced from each case\'s own inputs within 1%.' },
+    ],
+  },
+  toRaise: 'Three recorded project cases where the LCOE was checked against a developer\'s or utility\'s own figure would raise it to field-verified.',
   limitations: [
     'A simple LCOE: no degradation, construction period, or tax detail beyond what the fixed charge rate carries.',
     'No defaults are offered; read the ATB for costs and capacity factors by technology.',
