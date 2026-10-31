@@ -45,6 +45,16 @@
       ]
     }
   ],
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": false,
+    "columnsChecked": 36,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Generation and fuel totals by plant, prime mover, and fuel; no location beyond the state, and no network data."
+  },
   "tables": [
     {
       "name": "generation",

@@ -17,6 +17,7 @@ import { writeShard } from './lib/shard-writer.mjs';
 import { readShard } from '../core/lib/shard.mjs';
 import { postureOf, validateEntry } from './lib/registry.mjs';
 import { tableLicense } from './lib/licenses.mjs';
+import { ceiiScreen } from './lib/ceii.mjs';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const MAX_FILE_BYTES = 20 * 1024 * 1024;
@@ -201,6 +202,9 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     ready.push({ tb, rows, schema: normalizer.SCHEMA, by, unmatched, entryName, dataPeriod: dataPeriod ?? String(year) });
   }
   if (failures.length) return { ok: false, failures };
+  // The CEII screen runs before anything is written; a release that fails it never ships.
+  const screen = ceiiScreen(entry, ready.map((r) => ({ name: r.tb.name, columns: r.schema })), retrieved);
+  if (!screen.passed) return { ok: false, failures: [...screen.flagged.map((c) => `CEII screen: column ${c} looks like location or network detail`), ...screen.unconfirmed.map((k) => `CEII screen: ${k} is not confirmed`)] };
 
   // Permanent versions are cut at most monthly: the version is the retrieval month.
   const version = retrieved.slice(0, 7);
@@ -263,6 +267,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     }),
     ...(vintage.release ? { release: vintage.release } : {}),
     ...(base ? { previousVersion: base } : {}),
+    ceiiScreen: screen,
     tables,
   };
   writeFileSync(join(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');

@@ -43,6 +43,24 @@
       "sha256": "794582d3281c6a305e9615fcfec3fae9dc85be2165216d33760b677e976a08b6"
     }
   ],
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": true,
+    "checklist": {
+      "publicSourceOnly": true,
+      "noPlanningModels": true,
+      "noSubstationPoints": true,
+      "noOneLineDiagrams": true,
+      "noBusImpedances": true,
+      "noNdaData": true
+    },
+    "columnsChecked": 30,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Proposed and built projects by county, size, type, and status as LBNL publishes them. Point-of-interconnection substation names are left out of our table."
+  },
   "tables": [
     {
       "name": "requests",

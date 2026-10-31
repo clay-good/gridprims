@@ -42,6 +42,16 @@
       "sha256": "3ed41278d637dc249e0323306f68be8a6c234e3090f4de88ef328dee71aeaaaf"
     }
   ],
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": false,
+    "columnsChecked": 8,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Census statistical areas and their land overlap; no facility or network data."
+  },
   "tables": [
     {
       "name": "zcta_counties",

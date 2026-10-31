@@ -268,6 +268,7 @@ ${takedown ? html`<p class="warning-chip">${t('data.takedownApplied', { date: da
   <blockquote class="mono">${m.terms.text}</blockquote>
   <p><a href="${m.terms.url}">${t('data.termsLink')}</a></p>
   <h3>${t('data.attribution')}</h3><p>${m.attribution}</p>
+  ${m.ceiiScreen ? html`<h3>${t('data.ceii')}</h3><p data-ceii>${t(m.ceiiScreen.infrastructure ? 'data.ceiiInfrastructure' : 'data.ceiiNot', { date: date(m.ceiiScreen.screened), columns: m.ceiiScreen.columnsChecked, rule: m.ceiiScreen.rule })}</p>` : ''}
   <p>${t('data.takedown')}</p>
 </section>
 ${publishes ? html`<section><h2>${t('data.download')}</h2>

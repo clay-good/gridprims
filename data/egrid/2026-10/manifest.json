@@ -51,6 +51,24 @@
     }
   ],
   "release": "eGRID2023 (revision 2)",
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": true,
+    "checklist": {
+      "publicSourceOnly": true,
+      "noPlanningModels": true,
+      "noSubstationPoints": true,
+      "noOneLineDiagrams": true,
+      "noBusImpedances": true,
+      "noNdaData": true
+    },
+    "columnsChecked": 54,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Plant emissions, generation, and capacity EPA publishes; subregion rates; ZIP-to-subregion lookup. Latitude and longitude are left out of our tables."
+  },
   "tables": [
     {
       "name": "plants",

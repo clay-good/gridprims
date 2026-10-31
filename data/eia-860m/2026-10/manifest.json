@@ -42,6 +42,24 @@
       "sha256": "bcef74e1af991680731aeecfda967f5950db4ce739bb584edd8b8774c7e6da17"
     }
   ],
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": true,
+    "checklist": {
+      "publicSourceOnly": true,
+      "noPlanningModels": true,
+      "noSubstationPoints": true,
+      "noOneLineDiagrams": true,
+      "noBusImpedances": true,
+      "noNdaData": true
+    },
+    "columnsChecked": 28,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Generator characteristics and status EIA publishes monthly for plants of 1 MW or more. Coordinates and map links are left out of our table."
+  },
   "tables": [
     {
       "name": "generators",

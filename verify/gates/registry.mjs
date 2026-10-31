@@ -7,6 +7,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { validateEntry } from '../../pipeline/lib/registry.mjs';
+import { ceiiScreen } from '../../pipeline/lib/ceii.mjs';
 
 /** @param {string} root */
 export async function checkRegistry(root) {
@@ -33,6 +34,11 @@ export async function checkRegistry(root) {
     if (!existsSync(current)) continue;
     const { version } = JSON.parse(readFileSync(current, 'utf8'));
     const m = JSON.parse(readFileSync(join(root, 'data', e.id, version, 'manifest.json'), 'utf8'));
+    // The CEII screen record each served version carries must pass and match a fresh screen of the registry entry.
+    const fresh = ceiiScreen(e, m.tables, m.retrieved);
+    if (!m.ceiiScreen) errors.push(`${e.id} ${version}: no CEII screen record; re-run the recipe`);
+    else if (!m.ceiiScreen.passed) errors.push(`${e.id} ${version}: the CEII screen did not pass (${[...m.ceiiScreen.flagged, ...m.ceiiScreen.unconfirmed].join(', ')})`);
+    else if (JSON.stringify(m.ceiiScreen) !== JSON.stringify(fresh)) errors.push(`${e.id} ${version}: the CEII screen record is stale against the registry entry; re-run the recipe`);
     for (const t of m.tables) {
       for (const file of [...t.shards, { path: t.download.path, sha256: t.download.sha256 }]) {
         const p = join(root, 'data', e.id, version, file.path);

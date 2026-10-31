@@ -48,6 +48,16 @@
       ]
     }
   ],
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": false,
+    "columnsChecked": 84,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Sales, revenue, customer counts, reliability indices, and served counties by utility and state; no facility, location, or network data."
+  },
   "tables": [
     {
       "name": "sales",

@@ -43,6 +43,16 @@
       "sha256": "419b2a89cb81e2f84f66c37b7ceea642d36ffd3bd1b3b0d7469f0455511f82de"
     }
   ],
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": false,
+    "columnsChecked": 46,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Published retail tariffs; no facility, location, or network data."
+  },
   "tables": [
     {
       "name": "rates",

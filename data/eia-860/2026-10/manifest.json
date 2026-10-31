@@ -46,6 +46,24 @@
       ]
     }
   ],
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": true,
+    "checklist": {
+      "publicSourceOnly": true,
+      "noPlanningModels": true,
+      "noSubstationPoints": true,
+      "noOneLineDiagrams": true,
+      "noBusImpedances": true,
+      "noNdaData": true
+    },
+    "columnsChecked": 40,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Plant and generator characteristics EIA publishes for every plant of 1 MW or more. Coordinates, street addresses, grid voltages, transmission owners, and pipeline names are left out of our tables."
+  },
   "tables": [
     {
       "name": "plants",
