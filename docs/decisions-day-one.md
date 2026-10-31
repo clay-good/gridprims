@@ -99,3 +99,14 @@ Every step is `node <our script>` or `git`; actions are GitHub's own, pinned by 
 ## 8. Reference machine
 
 The throttled reference profile in `platform/app-shell` everywhere, including the parse budget. No separate reference machine.
+
+## 9. MCP protocol choices
+
+Checked against the published schemas on 2026-10-30 (committed under `verify/reference/mcp/`): `server/discover` returns `supportedVersions`, `capabilities`, `ttlMs`, and `cacheScope`; every result carries `resultType`; server identity goes in `_meta["io.modelcontextprotocol/serverInfo"]`; error `-32022` carries `data.requested` and `data.supported`.
+
+| Case | Answer |
+|---|---|
+| A request whose `_meta` names an unsupported version | `-32022` listing `2026-07-28`, `2025-11-25`, `2025-06-18` |
+| Legacy `initialize` with an unknown version | The newest legacy version we support, as the legacy versions require of servers |
+| A request with no `_meta` version | Served, so legacy clients keep working after `initialize` |
+| Unknown tool or resource | `-32602` |

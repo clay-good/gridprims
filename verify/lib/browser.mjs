@@ -174,9 +174,9 @@ async function launchChrome(exe, profile) {
       await within(done, COMMAND_MS, `load of ${url}`);
     },
     async evaluate(expression) {
-      const r = await cmd('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true });
+      const r = await cmd('Runtime.evaluate', { expression: asJson(expression), awaitPromise: true, returnByValue: true });
       if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description ?? r.exceptionDetails.text);
-      return r.result.value;
+      return fromJson(r.result.value);
     },
     async setViewport(width, height) {
       await cmd('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
@@ -193,6 +193,14 @@ async function launchChrome(exe, profile) {
     },
   };
 }
+
+/**
+ * Results cross the protocol as JSON text, so shared and repeated objects in a
+ * result arrive whole in both engines (BiDi would send repeats as references).
+ * @param {string} expression
+ */
+const asJson = (expression) => `(async () => { const v = await (${expression}); return v === undefined ? '"__undefined__"' : JSON.stringify(v); })()`;
+const fromJson = (text) => { const v = JSON.parse(text); return v === '__undefined__' ? undefined : v; };
 
 /** Preferences that keep a test profile quiet: no updates, telemetry, or first-run pages. */
 const FIREFOX_PREFS = {
@@ -227,9 +235,9 @@ async function launchFirefox(exe, profile) {
       await sock.send('browsingContext.navigate', { context, url, wait: 'complete' });
     },
     async evaluate(expression) {
-      const r = await sock.send('script.evaluate', { expression, target: { context }, awaitPromise: true, resultOwnership: 'none', serializationOptions: { maxObjectDepth: 20 } });
+      const r = await sock.send('script.evaluate', { expression: asJson(expression), target: { context }, awaitPromise: true, resultOwnership: 'none' });
       if (r.type === 'exception') throw new Error(r.exceptionDetails.text);
-      return fromBidi(r.result);
+      return fromJson(fromBidi(r.result));
     },
     async setViewport(width, height) {
       await sock.send('browsingContext.setViewport', { context, viewport: { width, height } });

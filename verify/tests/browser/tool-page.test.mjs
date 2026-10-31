@@ -113,3 +113,30 @@ for (const kind of ['chrome', 'firefox']) {
     }
   });
 }
+
+for (const kind of ['chrome', 'firefox']) {
+  test(`${kind}: every worked example gives the same structured result in the page as through the MCP server`, { skip: !findBrowser(kind) && `${kind} is not installed`, timeout: 60_000 }, async () => {
+    const { createServer } = await import('../../../mcp/protocol.mjs');
+    const { TOOLS } = await import('../../../core/tools/index.mjs');
+    const mcp = createServer();
+    const cases = TOOLS.flatMap(({ manifest }) => manifest.examples.map((ex) => ({ tool: manifest.id, inputs: ex.inputs })));
+    const server = await serve(out);
+    const browser = await launch(kind);
+    try {
+      await browser.goto(server.url + '/');
+      const inPage = await browser.evaluate(`(async () => {
+        const { runTool } = await import('/core/contract/run.mjs');
+        const { getTool } = await import('/core/tools/index.mjs');
+        return ${JSON.stringify(cases)}.map((c) => { const t = getTool(c.tool); return runTool(t.manifest, t.impl, c.inputs); });
+      })()`);
+      let id = 0;
+      for (const [i, c] of cases.entries()) {
+        const r = await mcp.handle({ jsonrpc: '2.0', id: ++id, method: 'tools/call', params: { name: 'gridprims_run', arguments: c } });
+        assert.deepEqual(inPage[i], r.result.structuredContent, `${c.tool} ${JSON.stringify(c.inputs)}`);
+      }
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}

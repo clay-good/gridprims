@@ -17,3 +17,4 @@ Each module here replaces what would usually be a package. Each has its own test
 | `site/lib/html.mjs` | template engines | Tagged-template HTML that escapes every interpolated value unless it is already markup; arrays join; `raw()` for markup this repository wrote | No partials or layouts beyond plain functions |
 | `site/lib/i18n.mjs` | message-format libraries | Message lookup by id, `{name}` placeholders, plural forms through `Intl.PluralRules`, dates through `Intl.DateTimeFormat` | No nested select forms yet |
 | `verify/lib/contrast.mjs` | color-contrast libraries | WCAG 2.2 relative luminance and contrast ratio for opaque `#rrggbb` colors | No alpha blending; translucent colors must be resolved first |
+| `verify/lib/json-schema.mjs` | JSON Schema validators | Checks values against the keywords the published MCP schemas use, for conformance tests | Not a general validator: no `pattern`, `oneOf`, `if`, `$dynamicRef`, or formats |

@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { TOOLS } from '../core/tools/index.mjs';
 import { runTool } from '../core/contract/run.mjs';
 import { buildCommandIndex } from '../core/contract/command.mjs';
+import { limitsRecord } from '../core/contract/limits.mjs';
 import { createI18n } from './lib/i18n.mjs';
 import { toolPath } from './ui/tool-page.mjs';
 import { tokensCss } from './styles/tokens.mjs';
@@ -56,6 +57,7 @@ export function build(opts = {}) {
   }
   writeFileSync(join(outDir, 'command-index.json'), JSON.stringify(buildCommandIndex(TOOLS, toolPath)) + '\n');
   write('/limits/', limitsPage({ tools: TOOLS, i18n }));
+  writeFileSync(join(outDir, 'limits/limits.json'), JSON.stringify(limitsRecord(TOOLS), null, 2) + '\n');
   write('/', homePage({ tools: TOOLS, i18n }));
   write('/404.html', notFoundPage({ i18n }));
 

@@ -25,7 +25,7 @@
 - [ ] 3.5 Implement tool versioning and the public changelog; verify a fixture result change without a version bump fails CI
 - [ ] 3.6 Implement shared-quantity computation and the cross-tool agreement check; verify the peak-agrees-everywhere and receipt-change scenarios across web and MCP
 - [ ] 3.7 Implement declared rounding and the significant-figures rule; verify the coarse-rate and copied-card scenarios
-- [ ] 3.8 Build the reference tool `calc.energy-units.convert` end to end (manifest, conversion core, golden vectors from the cited constants, page, command-bar entry, MCP parity, validation level with its evidence); verify the 12 MWh conversion, the unit-and-source display, and identical results on web and MCP
+- [x] 3.8 Build the reference tool `calc.energy-units.convert` end to end (manifest, conversion core, golden vectors from the cited constants, page, command-bar entry, MCP parity, validation level with its evidence); verify the 12 MWh conversion, the unit-and-source display, and identical results on web and MCP
 - [ ] 3.9 Verify every phase-0 tool-contract requirement has a test: worked state on first paint, refusals as answers, the screening label, handoffs carrying no user data, and the share-state round trip
 
 ## 4. Own implementations

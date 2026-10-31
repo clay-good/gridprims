@@ -20,7 +20,12 @@ export function checkInputs(manifest, raw) {
     if (inp.type === 'file') continue;
     const given = raw?.[inp.name];
     if (given === undefined || given === null || given === '') {
-      errors.push({ field: inp.name, message: `Enter ${inp.label.toLowerCase()}, for example ${inp.example}.` });
+      errors.push({
+        field: inp.name,
+        message: inp.type === 'enum'
+          ? `Choose ${inp.label.toLowerCase()}: one of ${inp.options.map((o) => o.value).join(', ')}.`
+          : `Enter ${inp.label.toLowerCase()}, for example ${inp.example}.`,
+      });
       continue;
     }
     if (inp.type === 'number') {
@@ -111,6 +116,8 @@ export function runTool(manifest, impl, raw) {
       assumptions: manifest.assumptions,
       citations: manifest.citations,
     },
+    // Dataset versions and as-of dates join here once tools read snapshots (platform/data-snapshots).
+    datasets: manifest.datasets.map((id) => ({ id })),
     stability: manifest.stability,
     validationLevel: level.level,
     validationMeaning: level.meaning,

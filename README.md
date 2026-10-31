@@ -12,7 +12,7 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 |---|---|
 | Repository layout, zero-dependency gate, platform-API gate, own-implementations gate, file-count gate | Built and tested |
 | Tool manifest schema, validator, and the shared `runTool` entry point | Built and tested |
-| Reference tool `calc.energy-units.convert` (core and worked examples) | Built and tested; self-checked, experimental. No page or MCP surface yet |
+| Reference tool `calc.energy-units.convert` | Built end to end: manifest, core, worked examples, page, command bar, MCP. Self-checked, experimental |
 | Own parsers: delimited text (encoding, delimiter, quotes, chunks) and XML that refuses DTDs and entities | Built and tested |
 | Time-zone and DST helper on `Intl` (spring gap, fall repeat, transitions) | Built and tested in Node, Chrome, Firefox, and Safari |
 | `.xlsx` reader (own ZIP directory, `DecompressionStream` inflate, shared strings, date formats, cached values only) | Built and tested against 10 workbook shapes in Node, Chrome, Firefox, and Safari |
@@ -20,7 +20,8 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | Static site build: escaped templates, string files, DESIGN.md tokens in both themes, the converter page prerendered with its worked example and hydrated live, share links in the URL fragment, a generated limits page | Built and tested in Node, Chrome, and Firefox (first paint, live recompute, share links, no third-party requests, 320 px) |
 | Command bar: plain words such as "12 MWh to MMBtu" open the tool filled in, with a live answer preview; index and ranker generated from manifests in the shared core | Built and tested in Node and browsers |
 | Style lint (no literal colors; every DESIGN.md contrast pairing recomputed in both themes) and literal-copy lint (visitor text only from string files or manifests) | Built and tested; run by `npm run check` |
-| Overpass fonts, file intake, data snapshots, Worker, MCP server | Not started |
+| Local MCP server (`node mcp/server.mjs`): MCP `2026-07-28` plus legacy `2025-11-25` and `2025-06-18`, six meta-tools, `--allow-dir` file allowlist, no network | Search, describe, run, and report prep working; responses checked against the official schemas; every worked example matches the website in Node, Chrome, and Firefox, and passes with networking disabled |
+| Overpass fonts, file intake, data snapshots, Worker | Not started |
 
 The plan is in [`openspec/changes/`](openspec/changes/): 22 changes, built in the phase order in [`plan-launch-and-value-proof`](openspec/changes/plan-launch-and-value-proof/). The shapes everything generates from are in [`docs/decisions-day-one.md`](docs/decisions-day-one.md).
 
@@ -47,6 +48,17 @@ node -e "import('./core/tools/index.mjs').then(async ({ getTool }) => {
 })"
 # 12 MWh is 40.95 MMBtu.
 ```
+
+## Use it from an AI agent
+
+The MCP server runs the same tools locally over stdio and never touches the network:
+
+```sh
+node mcp/server.mjs                           # tools only
+node mcp/server.mjs --allow-dir ~/meter-data  # also let it read files in one folder
+```
+
+Point your MCP client at that command. See [`mcp/README.md`](mcp/README.md).
 
 ## Layout
 
