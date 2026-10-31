@@ -1,15 +1,15 @@
 // Shared test helpers: throwaway mini-repositories and a minimal valid manifest.
 
-import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
+import { tempDir } from '../lib/temp.mjs';
 
 /**
  * @param {Record<string, string | Buffer>} files relative path to contents; a path ending in "/" makes an empty directory
  * @returns {string} the fixture root
  */
 export function fixtureRepo(files) {
-  const root = mkdtempSync(join(tmpdir(), 'gridprims-fixture-'));
+  const root = tempDir('gridprims-fixture-');
   for (const [rel, body] of Object.entries(files)) {
     const abs = join(root, rel);
     if (rel.endsWith('/')) { mkdirSync(abs, { recursive: true }); continue; }

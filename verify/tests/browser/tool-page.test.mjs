@@ -3,14 +3,12 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync } from 'node:fs';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const PATH = '/tools/calc/energy-units/convert/';
 const ready = 'new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r(true) : setTimeout(f, 20); f(); })';

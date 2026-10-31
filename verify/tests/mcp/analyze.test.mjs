@@ -1,7 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, realpathSync, writeFileSync, copyFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { realpathSync, writeFileSync, copyFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createServer } from '../../../mcp/protocol.mjs';
 import { realAllowDirs } from '../../../mcp/files.mjs';
@@ -10,8 +9,9 @@ import { intakeFile } from '../../../core/intake/index.mjs';
 import { loadStats } from '../../../core/lib/load-stats.mjs';
 import { DIR, FIXTURES } from '../../fixtures/intake/make.mjs';
 import { modern } from './mcp-helpers.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const dir = realpathSync(mkdtempSync(join(tmpdir(), 'gridprims-mcp-files-')));
+const dir = realpathSync(tempDir('gridprims-mcp-files-'));
 for (const f of FIXTURES) copyFileSync(join(DIR, f.file), join(dir, f.file));
 const call = (s, id, args) => s.handle(modern(id, 'tools/call', { name: 'gridprims_analyze_file', arguments: args }));
 

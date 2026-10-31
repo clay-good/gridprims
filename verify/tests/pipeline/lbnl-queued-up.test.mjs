@@ -4,8 +4,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync, readdirSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { postureOf } from '../../../pipeline/lib/registry.mjs';
@@ -13,6 +12,7 @@ import { readShard } from '../../../core/lib/shard.mjs';
 import { EXPECTED_HEADER, excelDate } from '../../../pipeline/normalize/lbnl-queue.mjs';
 import { writeXlsx } from '../../lib/zip-writer.mjs';
 import entry from '../../../pipeline/registry/lbnl-queued-up.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const req = (f) => EXPECTED_HEADER.map((h) => (h in f ? f[h] : null));
 const base = { q_status: 'active', q_date: 43511, county: 'Coconino', state: 'AZ', fips_code: 4005, poi_name: 'Twin Arrows 69kV Substation', region: 'West', utility: 'Arizona Public Service', service: 'ERIS', project_type: 'Generation', type_1: 'Solar', type_clean: 'Solar', mw_1: 20, q_year: 2019 };
@@ -24,7 +24,7 @@ const sample = () => book([
   req({ ...base, q_id: 'W7', entity: 'MISO', state: 'IA', county: 'Story', fips_code: 19169, q_status: 'withdrawn', wd_date: 45000, type_clean: 'Wind', mw_1: 150.5 }),
 ]);
 const small = { ...entry, vintages: { 2025: { ...entry.vintages[2025], sha256: null } }, tables: entry.tables.map((t) => ({ ...t, recipe: t.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 3, max: 100 } } : s)) })) };
-const tmp = () => mkdtempSync(join(tmpdir(), 'gridprims-queue-'));
+const tmp = () => tempDir('gridprims-queue-');
 const run = (o) => runRecipe({ dataset: 'lbnl-queued-up', year: 2025, retrieved: '2026-10-31', entry: small, input: sample(), outDir: tmp(), ...o });
 const shard = (out, s) => readShard(readFileSync(join(out, 'lbnl-queued-up/2026-10/requests', `${s}.bin`))).rows();
 

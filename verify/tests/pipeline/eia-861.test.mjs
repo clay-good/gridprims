@@ -4,9 +4,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdtempSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { matchPosture, postureOf, validateEntry } from '../../../pipeline/lib/registry.mjs';
@@ -15,6 +14,7 @@ import { EXPECTED_HEADER } from '../../../pipeline/normalize/eia-861-sales.mjs';
 import entry from '../../../pipeline/registry/eia-861.mjs';
 import { eia861Zip, reliabilityRows, sampleRows, smallTables } from '../../fixtures/data/eia-861/workbook.mjs';
 import { EXPECTED_HEADER as TERRITORY_HEADER } from '../../../pipeline/normalize/eia-861-service-territory.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 /** The real recipe with row bounds that suit the small fixture. */
@@ -22,7 +22,7 @@ const small = { ...entry, vintages: { 2025: { ...entry.vintages[2025], sha256: n
 const run = (o) => runRecipe({ dataset: 'eia-861', year: 2025, retrieved: '2026-10-31', entry: small, input: eia861Zip(), ...o });
 
 test('the fixture runs end to end: shards, a CSV download, and a manifest with credits', async () => {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-data-'));
+  const out = tempDir('gridprims-data-');
   const r = await run({ outDir: out });
   assert.equal(r.ok, true, r.failures?.join('\n'));
   const dir = join(out, 'eia-861', '2026-10');
@@ -39,7 +39,7 @@ test('the fixture runs end to end: shards, a CSV download, and a manifest with c
 });
 
 test('missing values stay missing; blank text is null; the withheld quirk keeps every row', async () => {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-data-'));
+  const out = tempDir('gridprims-data-');
   await run({ outDir: out });
   const tx = readShard(readFileSync(join(out, 'eia-861/2026-10/sales/TX.bin'))).rows();
   const withheld = tx.filter((r) => r.utility_id === 88888);
@@ -56,13 +56,13 @@ test('the quirk fixture from the real 2025 file still holds', () => {
 });
 
 test('re-running with unchanged input reproduces every checksum', async () => {
-  const a = await run({ outDir: mkdtempSync(join(tmpdir(), 'gridprims-data-')) });
-  const b = await run({ outDir: mkdtempSync(join(tmpdir(), 'gridprims-data-')) });
+  const a = await run({ outDir: tempDir('gridprims-data-') });
+  const b = await run({ outDir: tempDir('gridprims-data-') });
   assert.deepEqual(a.manifest, b.manifest);
 });
 
 test('a truncated download fails its row bounds, writes nothing, and keeps the previous version', async () => {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-data-'));
+  const out = tempDir('gridprims-data-');
   assert.equal((await run({ outDir: out, input: eia861Zip({ rows: sampleRows(2025, 40) }) })).ok, true);
   const before = readFileSync(join(out, 'eia-861/current.json'), 'utf8');
   const bad = await run({ outDir: out, retrieved: '2026-11-30', input: eia861Zip({ rows: sampleRows(2025).slice(0, 3) }) });
@@ -75,13 +75,13 @@ test('a truncated download fails its row bounds, writes nothing, and keeps the p
 test('a changed header fails the schema check and names the column', async () => {
   const header = [...EXPECTED_HEADER];
   header[10] = 'Gigawatthours';
-  const r = await run({ outDir: mkdtempSync(join(tmpdir(), 'gridprims-data-')), input: eia861Zip({ header }) });
+  const r = await run({ outDir: tempDir('gridprims-data-'), input: eia861Zip({ header }) });
   assert.equal(r.ok, false);
   assert.match(r.failures[0], /schema: column 11 is "Gigawatthours", expected "Megawatthours"/);
 });
 
 test('a rebuild refuses a raw file that does not match the pinned checksum', async () => {
-  const r = await runRecipe({ dataset: 'eia-861', year: 2025, retrieved: '2026-10-31', input: eia861Zip(), outDir: mkdtempSync(join(tmpdir(), 'gridprims-data-')), verifyPin: true });
+  const r = await runRecipe({ dataset: 'eia-861', year: 2025, retrieved: '2026-10-31', input: eia861Zip(), outDir: tempDir('gridprims-data-'), verifyPin: true });
   assert.equal(r.ok, false);
   assert.match(r.failures[0], /raw file SHA-256 .* differs from the registry's/);
 });
@@ -103,7 +103,7 @@ test('the committed real snapshot matches its manifest, and no file is over 20 M
 });
 
 test('one release yields four tables, each with its own shards, download, and key', async () => {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-data-'));
+  const out = tempDir('gridprims-data-');
   const r = await run({ outDir: out });
   assert.equal(r.ok, true, r.failures?.join('\n'));
   assert.deepEqual(r.manifest.tables.map((x) => [x.name, x.rows, x.shards.map((s) => s.state).join(' ')]), [
@@ -122,7 +122,7 @@ test('one release yields four tables, each with its own shards, download, and ke
 });
 
 test('one table failing fails the whole release and writes nothing', async () => {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-data-'));
+  const out = tempDir('gridprims-data-');
   const missing = await run({ outDir: out, input: eia861Zip({ omit: ['Reliability'] }) });
   assert.equal(missing.ok, false);
   assert.deepEqual(missing.failures, ['reliability: Reliability_2025.xlsx is not in the download']);

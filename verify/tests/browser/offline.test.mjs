@@ -3,15 +3,15 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { findBrowser, launch } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { DIR } from '../../fixtures/intake/make.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const ready = 'new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r() : setTimeout(f, 20); f(); })';
 const controlled = `new Promise((r) => { const f = () => navigator.serviceWorker.controller ? r(true) : setTimeout(f, 50); f(); })`;

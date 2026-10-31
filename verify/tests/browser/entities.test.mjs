@@ -4,16 +4,16 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { entitySample } from '../../browser/pages.mjs';
 import { findBrowser, launch } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { applyReferenceProfile, BUDGETS, jsGzipBytes } from '../../lib/reference-profile.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const sample = entitySample(out);
 const routes = { '/verify/browser/a11y-audit.mjs': { body: readFileSync(join(import.meta.dirname, '../../browser/a11y-audit.mjs')), type: 'text/javascript' } };

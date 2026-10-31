@@ -3,9 +3,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
@@ -14,6 +13,7 @@ import { readShard } from '../../../core/lib/shard.mjs';
 import entry from '../../../pipeline/registry/egrid.mjs';
 import { COLUMNS as PLANT_COLUMNS, normalize as normalizePlants } from '../../../pipeline/normalize/egrid-plants.mjs';
 import { egridFiles, plants } from '../../fixtures/data/egrid/workbook.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const v = entry.vintages[2023];
 const small = {
@@ -21,7 +21,7 @@ const small = {
   vintages: { 2023: { ...v, files: Object.fromEntries(Object.entries(v.files).map(([k, f]) => [k, { ...f, sha256: null }])) } },
   tables: entry.tables.map((t) => ({ ...t, recipe: t.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 3, max: 100 } } : s)) })),
 };
-const tmp = () => mkdtempSync(join(tmpdir(), 'gridprims-egrid-'));
+const tmp = () => tempDir('gridprims-egrid-');
 const run = (o) => runRecipe({ dataset: 'egrid', year: 2023, retrieved: '2026-10-31', entry: small, input: egridFiles(), outDir: tmp(), ...o });
 const rows = (out, table, shard) => readShard(readFileSync(join(out, 'egrid/2026-10', table, `${shard}.bin`))).rows();
 

@@ -3,15 +3,15 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import worker from '../../../worker/index.mjs';
 import { checkHeaders } from '../../lib/smoke.mjs';
 import { TYPES } from '../../lib/static-server.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const ASSETS = {
   async fetch(r) {
@@ -22,7 +22,6 @@ const ASSETS = {
   },
 };
 const get = (path, method = 'GET') => worker.fetch(new Request(`https://gridprims.com${path}`, { method }), { ASSETS });
-
 
 test('every route template carries the required policy and no cookie', async () => {
   for (const path of ['/', '/limits/', '/changelog/', '/tools/calc/energy-units/convert/', '/404.html', '/site/styles/site.css', '/core/contract/run.mjs', '/command-index.json']) {

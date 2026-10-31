@@ -5,14 +5,14 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { fit, jsonLd, pageTitle, uniqueNames } from '../../../site/lib/meta.mjs';
 import { walk } from '../../lib/walk.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-meta-'));
+const out = tempDir('gridprims-meta-');
 await build({ outDir: out });
 const read = (p) => readFileSync(join(out, p), 'utf8');
 const ld = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));

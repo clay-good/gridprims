@@ -4,16 +4,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { mkdtempSync } from 'node:fs';
-import { tmpdir } from 'node:os';
 import { join, posix } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { assetHash, assetManifest, deploy, workerModules } from '../../../pipeline/deploy.mjs';
 import { rollback, smoke } from '../../../pipeline/smoke.mjs';
 import { importSpecifiers } from '../../lib/walk.mjs';
 import { serveWorker } from '../../lib/worker-server.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const dist = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const dist = tempDir('gridprims-dist-');
 await build({ outDir: dist });
 
 /** A stand-in Cloudflare API that records calls and keeps the hashes it already has. */

@@ -4,8 +4,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { DOC_PATH, toolsReference } from '../../../site/docs.mjs';
@@ -13,8 +12,9 @@ import { escapeHtml } from '../../../site/lib/html.mjs';
 import { toolPath } from '../../../site/ui/tool-page.mjs';
 import { createServer } from '../../../mcp/protocol.mjs';
 import { TOOLS } from '../../../core/tools/index.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const index = JSON.parse(readFileSync(join(out, 'command-index.json'), 'utf8'));
 const doc = readFileSync(DOC_PATH, 'utf8');
@@ -58,7 +58,7 @@ test('a manifest input unit change reaches every surface in the same build', asy
   const before = manifest.inputs[0].label;
   manifest.inputs[0].label = 'Amount (changed)';
   try {
-    const out2 = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+    const out2 = tempDir('gridprims-dist-');
     await build({ outDir: out2 });
     assert.ok(readFileSync(join(out2, toolPath(manifest.id), 'index.html'), 'utf8').includes('>Amount (changed)'));
     assert.ok(toolsReference().includes('| Amount (changed) |'));

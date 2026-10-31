@@ -2,8 +2,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { elevenMonthsAfter, securityTxt } from '../../../site/security-txt.mjs';
@@ -11,8 +10,9 @@ import { changelogPage } from '../../../site/templates/pages.mjs';
 import { createI18n } from '../../../site/lib/i18n.mjs';
 import strings from '../../../site/strings/en-US.mjs';
 import worker from '../../../worker/index.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const txt = readFileSync(join(out, '.well-known/security.txt'), 'utf8');
 

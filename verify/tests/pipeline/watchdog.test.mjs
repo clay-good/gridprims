@@ -2,13 +2,13 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { watchdog } from '../../../worker/watchdog.mjs';
 import worker from '../../../worker/index.mjs';
 import { scheduledRun } from '../../../pipeline/scheduled.mjs';
 import { recordRun } from '../../../pipeline/lib/health.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const NOW = Date.parse('2026-11-10T03:29:00Z');
 function fakeGitHub(states) {
@@ -49,7 +49,7 @@ test('the Worker runs the watchdog and the report cleanup independently on its s
 });
 
 test('the watchdog is watched: a stale heartbeat is reported by the next in-host run', async () => {
-  const root = mkdtempSync(join(tmpdir(), 'gridprims-root-'));
+  const root = tempDir('gridprims-root-');
   mkdirSync(join(root, 'data/health'), { recursive: true });
   recordRun(root, { workflow: 'heartbeat', started: '2026-11-01T03:29:00Z', finished: '2026-11-01T03:29:00Z', ok: true });
   const issues = [];

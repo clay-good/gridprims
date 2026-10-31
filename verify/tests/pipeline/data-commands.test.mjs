@@ -2,22 +2,22 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { cpSync, existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { getData } from '../../../pipeline/get-data.mjs';
 import { buildData } from '../../../pipeline/build-data.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { ROOT } from '../../../pipeline/run.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 /** A clone with the committed manifests but none of the data files, and a site serving the real files. */
 function setup() {
-  const clone = mkdtempSync(join(tmpdir(), 'gridprims-clone-'));
+  const clone = tempDir('gridprims-clone-');
   cpSync(join(ROOT, 'data/eia-861'), join(clone, 'eia-861'), { recursive: true });
   const m = JSON.parse(readFileSync(join(clone, 'eia-861/2026-10/manifest.json'), 'utf8'));
   for (const s of m.tables[0].shards) rmSync(join(clone, 'eia-861/2026-10', s.path));
   rmSync(join(clone, 'eia-861/2026-10', m.tables[0].download.path));
-  const site = mkdtempSync(join(tmpdir(), 'gridprims-site-'));
+  const site = tempDir('gridprims-site-');
   cpSync(join(ROOT, 'data'), join(site, 'data'), { recursive: true });
   return { clone, site, m };
 }
@@ -56,7 +56,7 @@ test('a tampered file is deleted and reported, even when the site also serves a 
 });
 
 test('build-data reports a dataset it cannot rebuild instead of passing it', async () => {
-  const fixture = mkdtempSync(join(tmpdir(), 'gridprims-bd-'));
+  const fixture = tempDir('gridprims-bd-');
   const { runRecipe } = await import('../../../pipeline/run.mjs');
   const { eia861Zip, smallTables } = await import('../../fixtures/data/eia-861/workbook.mjs');
   const entry = (await import('../../../pipeline/registry/eia-861.mjs')).default;

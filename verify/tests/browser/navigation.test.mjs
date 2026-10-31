@@ -3,8 +3,6 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync } from 'node:fs';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { browserPages } from '../../browser/pages.mjs';
@@ -12,10 +10,11 @@ import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { walk } from '../../lib/walk.mjs';
 import { foreign } from '../../lib/requests.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
-const pseudo = mkdtempSync(join(tmpdir(), 'gridprims-pseudo-'));
+const pseudo = tempDir('gridprims-pseudo-');
 await build({ outDir: pseudo, pseudo: true });
 const shell = 'new Promise((r) => { const f = () => document.documentElement.dataset.shellReady ? setTimeout(r, 100) : setTimeout(f, 20); f(); })';
 

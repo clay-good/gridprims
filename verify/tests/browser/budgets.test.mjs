@@ -4,15 +4,15 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { findBrowser, launch } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { applyReferenceProfile, BUDGETS, jsGzipBytes } from '../../lib/reference-profile.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const skip = !findBrowser('chrome') && 'chrome is not installed';
 const ready = 'new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r() : setTimeout(f, 20); f(); })';
@@ -66,7 +66,7 @@ test('reference profile: a year of 15-minute rows parses in the worker within 1 
 });
 
 test('the budget check fails and names the overage on an oversized page', () => {
-  const dir = mkdtempSync(join(tmpdir(), 'gridprims-big-'));
+  const dir = tempDir('gridprims-big-');
   let big = '';
   for (let i = 0; i < 60_000; i++) big += `export const v${i} = ${(i * 7919) % 104729};\n`;
   writeFileSync(join(dir, 'big.js'), big);

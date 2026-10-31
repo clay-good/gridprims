@@ -3,13 +3,13 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cpSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { cpSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT } from '../../../pipeline/run.mjs';
 import { ceiiScreen } from '../../../pipeline/lib/ceii.mjs';
 import { checkRegistry } from '../../gates/registry.mjs';
 import egrid from '../../../pipeline/registry/egrid.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 test('a column that names a location or network detail fails the screen; plain names pass', () => {
   const cols = (...names) => [{ name: 't', columns: names.map((name) => ({ name })) }];
@@ -33,7 +33,7 @@ test('every served version carries a passing record that matches a fresh screen,
 });
 
 test('the registry gate fails a version whose screen record is missing or stale', async () => {
-  const root = mkdtempSync(join(tmpdir(), 'gridprims-ceii-'));
+  const root = tempDir('gridprims-ceii-');
   for (const p of ['pipeline/registry', 'pipeline/lib', 'openspec/changes/add-public-grid-data', 'data/eia-923']) cpSync(join(ROOT, p), join(root, p), { recursive: true });
   cpSync(join(ROOT, 'pipeline/registry/eia-923.mjs'), join(root, 'pipeline/registry/eia-923.mjs'));
   const file = join(root, 'data/eia-923/2026-10/manifest.json');

@@ -3,20 +3,20 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync, readdirSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { readShard } from '../../../core/lib/shard.mjs';
 import entry from '../../../pipeline/registry/eia-861-history.mjs';
 import { eia861Zip, sampleRows } from '../../fixtures/data/eia-861/workbook.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const two = {
   ...entry,
   vintages: { 2025: { ...entry.vintages[2025], files: { 2024: { url: 'https://example.test/f8612024.zip', sha256: null }, 2025: { url: 'https://example.test/f8612025.zip', sha256: null } } } },
   tables: entry.tables.map((t) => ({ ...t, recipe: t.recipe.map((s) => (s.step === 'unzip' ? { ...s, files: ['2024', '2025'] } : s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 3, max: 100 } } : s)) })),
 };
-const tmp = () => mkdtempSync(join(tmpdir(), 'gridprims-861h-'));
+const tmp = () => tempDir('gridprims-861h-');
 const run = (o) => runRecipe({ dataset: 'eia-861-history', year: 2025, retrieved: '2026-10-31', entry: two, input: { 2024: eia861Zip({ year: 2024 }), 2025: eia861Zip() }, outDir: tmp(), ...o });
 
 test('the same sheet from each year\'s zip stacks into one table keyed by year', async () => {

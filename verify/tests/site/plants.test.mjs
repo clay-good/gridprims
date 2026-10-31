@@ -5,8 +5,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, readdirSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT } from '../../../pipeline/run.mjs';
 import { build } from '../../../site/build.mjs';
@@ -15,6 +14,7 @@ import { plantPage } from '../../../site/templates/plant.mjs';
 import { createI18n } from '../../../site/lib/i18n.mjs';
 import strings from '../../../site/strings/en-US.mjs';
 import { capacityFactor, hoursInService } from '../../../core/lib/plant-math.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const i18n = createI18n(strings, 'en-US');
 const all = plantPages(join(ROOT, 'data'));
@@ -79,7 +79,7 @@ test('20 sampled plants match pyarrow\'s reading of EIA\'s tables within 0.1%', 
 });
 
 test('no plant page carries a coordinate, and every page counted in the build exists', async () => {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-plants-'));
+  const out = tempDir('gridprims-plants-');
   await build({ outDir: out });
   assert.match(readFileSync(join(out, 'plants/3/index.html'), 'utf8'), /<dd><a href="\/utilities\/195\/">Alabama Power Co<\/a><\/dd>/, 'the operator links to its utility page');
   const ids = readdirSync(join(out, 'plants'));

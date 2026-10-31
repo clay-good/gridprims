@@ -5,14 +5,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { serveWorker } from '../../lib/worker-server.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-library-'));
+const out = tempDir('gridprims-library-');
 await build({ outDir: out });
 const read = (p) => readFileSync(join(out, p), 'utf8');
 const text = (h) => h.replace(/<[^>]+>/g, ' ').replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ');

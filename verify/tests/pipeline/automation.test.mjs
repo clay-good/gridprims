@@ -3,8 +3,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { scheduledRun } from '../../../pipeline/scheduled.mjs';
 import { linkCheck, outboundLinks } from '../../../pipeline/link-check.mjs';
@@ -14,6 +13,7 @@ import { checkWorkflows } from '../../gates/workflows.mjs';
 import entry from '../../../pipeline/registry/eia-861.mjs';
 import { eia861Zip, sampleRows, smallTables } from '../../fixtures/data/eia-861/workbook.mjs';
 import { fixtureRepo } from '../helpers.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const small = { ...entry, tables: smallTables(entry) };
 
@@ -35,7 +35,7 @@ function fakeHost(disabled = []) {
 }
 /** A throwaway root holding data/ and the health record. */
 function root() {
-  const r = mkdtempSync(join(tmpdir(), 'gridprims-root-'));
+  const r = tempDir('gridprims-root-');
   mkdirSync(join(r, 'data/health'), { recursive: true });
   return r;
 }
@@ -166,7 +166,6 @@ jobs:
 test('the repository\'s own workflows pass the policy, and only the canary floats', () => {
   assert.deepEqual(checkWorkflows(join(import.meta.dirname, '../../..')), []);
 });
-
 
 test('CI policy: a scheduled workflow at the top of the hour or without a queueing concurrency group fails', () => {
   const bad = fixtureRepo({ '.github/workflows/r.yml': `on:

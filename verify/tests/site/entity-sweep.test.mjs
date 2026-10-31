@@ -4,16 +4,16 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build, ENTITY_FAMILIES } from '../../../site/build.mjs';
 import { entitySample, ENTITY_SWEEP } from '../../browser/pages.mjs';
 import { walk } from '../../lib/walk.mjs';
 import { BUDGETS } from '../../lib/reference-profile.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-sweep-'));
+const out = tempDir('gridprims-sweep-');
 await build({ outDir: out });
 const sample = entitySample(out);
 

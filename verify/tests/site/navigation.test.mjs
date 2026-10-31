@@ -3,16 +3,16 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { checkUrls, pagesOf } from '../../gates/urls.mjs';
 import { redirectFor, redirectsFile } from '../../../site/lib/redirects.mjs';
 import { pseudoLocalize } from '../../../site/lib/i18n.mjs';
 import { suggest } from '../../../site/pages/not-found.js';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
 

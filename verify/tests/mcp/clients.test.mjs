@@ -4,8 +4,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { mkdtempSync, readFileSync, realpathSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync, realpathSync } from 'node:fs';
 import { join } from 'node:path';
 import { CLONE, DATA_DIR, readmeSection, snippets } from '../../../mcp/clients.mjs';
 import { developersPage } from '../../../site/templates/pages.mjs';
@@ -13,6 +12,7 @@ import { createI18n } from '../../../site/lib/i18n.mjs';
 import { escapeHtml } from '../../../site/lib/html.mjs';
 import strings from '../../../site/strings/en-US.mjs';
 import { ROOT, modern } from './mcp-helpers.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 test('the README carries exactly the generated snippets', () => {
   const readme = readFileSync(join(ROOT, 'README.md'), 'utf8');
@@ -39,7 +39,7 @@ function commandOf(s, clone, dir) {
 
 for (const s of snippets()) {
   test(`${s.client}: the snippet's command launches a server that answers`, { timeout: 20_000 }, async () => {
-    const dir = realpathSync(mkdtempSync(join(tmpdir(), 'gridprims-allowed-')));
+    const dir = realpathSync(tempDir('gridprims-allowed-'));
     const { command, args } = commandOf(s, ROOT, dir);
     assert.equal(command, 'node');
     const child = spawn(process.execPath, args, { stdio: ['pipe', 'pipe', 'pipe'] });

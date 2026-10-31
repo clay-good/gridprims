@@ -3,17 +3,17 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, writeFileSync, readdirSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { mkdirSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { html } from '../../../site/lib/html.mjs';
 import { layout } from '../../../site/templates/layout.mjs';
 import { createI18n } from '../../../site/lib/i18n.mjs';
 import strings from '../../../site/strings/en-US.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 test('20,000 fixture pages render and write in under 10 minutes', { timeout: 600_000 }, () => {
   const i18n = createI18n(strings, 'en-US');
-  const dir = mkdtempSync(join(tmpdir(), 'gridprims-scale-'));
+  const dir = tempDir('gridprims-scale-');
   const t0 = performance.now();
   for (let i = 0; i < 20_000; i++) {
     const name = `Fixture Utility <${i}> & Co`;

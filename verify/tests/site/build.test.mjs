@@ -1,8 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { escapeHtml } from '../../../site/lib/html.mjs';
@@ -10,8 +9,9 @@ import { TOOLS } from '../../../core/tools/index.mjs';
 import { toolPath } from '../../../site/ui/tool-page.mjs';
 import { decodeState, encodeState, isExampleState } from '../../../site/ui/share-state.mjs';
 import { checkFileCount } from '../../gates/file-count.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 const result = await build({ outDir: out });
 const page = (p) => readFileSync(join(out, p.endsWith('/') ? `${p}index.html` : p), 'utf8');
 
@@ -63,7 +63,7 @@ test('handoffs carry no inputs', () => {
 test('the deploy manifest lists every file with its checksum, and a rebuild reproduces it', async () => {
   const m = JSON.parse(page('/_manifest.json'));
   for (const { path, sha256 } of m) assert.equal(createHash('sha256').update(readFileSync(join(out, path))).digest('hex'), sha256, path);
-  const again = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+  const again = tempDir('gridprims-dist-');
   await build({ outDir: again });
   assert.equal(readFileSync(join(again, '_manifest.json'), 'utf8'), page('/_manifest.json'));
 });

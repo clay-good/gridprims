@@ -2,11 +2,11 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, realpathSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { realpathSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createServer } from '../../../mcp/protocol.mjs';
 import { modern } from './mcp-helpers.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const call = (id, name, args, meta = {}) => {
   const m = modern(id, 'tools/call', { name, arguments: args });
@@ -54,7 +54,7 @@ test('cancel a long request: the work stops within 100 ms and no result is sent'
 });
 
 test('a real file read can be canceled mid-parse', async () => {
-  const dir = realpathSync(mkdtempSync(join(tmpdir(), 'gridprims-big-')));
+  const dir = realpathSync(tempDir('gridprims-big-'));
   const lines = ['Interval Start,kWh'];
   const t0 = Date.parse('2020-01-01T00:00:00Z');
   for (let i = 0; i < 200_000; i++) lines.push(`${new Date(t0 + i * 900_000).toISOString().slice(0, 16).replace('T', ' ')},${i % 7}`);

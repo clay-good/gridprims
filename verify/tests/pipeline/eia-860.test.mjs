@@ -4,9 +4,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { validateEntry } from '../../../pipeline/lib/registry.mjs';
@@ -15,10 +14,11 @@ import { EXPECTED_HEADER } from '../../../pipeline/normalize/eia-860-plants.mjs'
 import { EXPECTED_HEADERS as EXPECTED_GEN } from '../../../pipeline/normalize/eia-860-generators.mjs';
 import entry from '../../../pipeline/registry/eia-860.mjs';
 import { eia860Zip, generatorRows, smallTables } from '../../fixtures/data/eia-860/workbook.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 const small = { ...entry, vintages: { 2025: { ...entry.vintages[2025], sha256: null } }, tables: smallTables(entry) };
-const run = (o) => runRecipe({ dataset: 'eia-860', year: 2025, retrieved: '2026-10-31', entry: small, input: eia860Zip(), outDir: mkdtempSync(join(tmpdir(), 'gridprims-860-')), ...o });
+const run = (o) => runRecipe({ dataset: 'eia-860', year: 2025, retrieved: '2026-10-31', entry: small, input: eia860Zip(), outDir: tempDir('gridprims-860-'), ...o });
 
 test('plants and generators build from one release, partitioned by state', async () => {
   const r = await run();
@@ -30,7 +30,7 @@ test('plants and generators build from one release, partitioned by state', async
 test('generators keep each sheet\'s dates in their own columns, and EIA\'s blanks become null', async () => {
   const r = await run();
   const dir = r.manifest.tables[1].shards.find((s) => s.state === 'TX').path;
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-860-'));
+  const out = tempDir('gridprims-860-');
   const again = await run({ outDir: out });
   const tx = readShard(readFileSync(join(out, 'eia-860/2026-10', dir))).rows();
   assert.deepEqual(again.manifest, { ...r.manifest }, 'a re-run reproduces the manifest');
@@ -46,7 +46,7 @@ test('generators keep each sheet\'s dates in their own columns, and EIA\'s blank
 });
 
 test('no coordinate, street address, city, ZIP, or grid voltage reaches a shard or download', async () => {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-860-'));
+  const out = tempDir('gridprims-860-');
   const r = await run({ outDir: out });
   const names = r.manifest.tables.flatMap((t) => t.columns.map((c) => c.name));
   for (const banned of ['latitude', 'longitude', 'street_address', 'city', 'zip', 'grid_voltage']) assert.ok(!names.some((n) => n.includes(banned)), banned);
@@ -59,7 +59,7 @@ test('no coordinate, street address, city, ZIP, or grid voltage reaches a shard 
 test('a generator with no state, a repeated generator, or a renamed column fails the release and writes nothing', async () => {
   const g = generatorRows();
   g.Operable[0][4] = ' ';
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-860-'));
+  const out = tempDir('gridprims-860-');
   const noState = await run({ outDir: out, input: eia860Zip({ generators: g }) });
   assert.deepEqual(noState.failures, ['generators: 1 rows have no state to partition by']);
   const twice = generatorRows();
@@ -90,7 +90,7 @@ test('registry: EIA-860 passes the CEII screen as infrastructure, owned by add-p
 });
 
 test('a new version\'s changelog counts added, removed, and changed rows by key, with the largest capacity changes', async () => {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-860-'));
+  const out = tempDir('gridprims-860-');
   const first = await run({ outDir: out });
   assert.deepEqual(first.manifest.tables.map((t) => t.changes), [{ first: true }, { first: true }]);
   // A revised release: one generator uprated, one gone, one new.

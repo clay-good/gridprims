@@ -4,13 +4,13 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { readShard } from '../../../core/lib/shard.mjs';
 import { EXPECTED_HEADER } from '../../../pipeline/normalize/census-zcta-county.mjs';
 import entry from '../../../pipeline/registry/census-zcta-county.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const row = (zcta, zland, county, name, part) => ['1', zcta, zcta ? `ZCTA5 ${zcta}` : '', zland, '0', 'G6350', 'B5', 'S', '2', county, name, '9', '0', 'G4020', 'H1', 'A', part, '0'].join('|');
 /** Census writes a UTF-8 byte-order mark, a header, and CRLF-free lines with a trailing newline. */
@@ -24,7 +24,7 @@ const sample = () => file([
   row('00601', '166659789', '72001', 'Adjuntas Municipio', '166659789'),
 ]);
 const small = { ...entry, vintages: { 2020: { ...entry.vintages[2020], sha256: null } }, tables: entry.tables.map((t) => ({ ...t, recipe: t.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 3, max: 100 } } : s)) })) };
-const tmp = () => mkdtempSync(join(tmpdir(), 'gridprims-zcta-'));
+const tmp = () => tempDir('gridprims-zcta-');
 const run = (o) => runRecipe({ dataset: 'census-zcta-county', year: 2020, retrieved: '2026-10-31', entry: small, input: sample(), outDir: tmp(), ...o });
 
 test('land overlap only: blank ZCTAs and water-only rows are dropped; leading zeros survive', async () => {

@@ -1,15 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, realpathSync, symlinkSync, truncateSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { mkdirSync, realpathSync, symlinkSync, truncateSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { checkPath, MAX_FILE_BYTES, realAllowDirs } from '../../../mcp/files.mjs';
 import { createServer } from '../../../mcp/protocol.mjs';
 import { TOOLS } from '../../../core/tools/index.mjs';
 import { modern, startServer } from './mcp-helpers.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const base = realpathSync(mkdtempSync(join(tmpdir(), 'gridprims-allow-')));
+const base = realpathSync(tempDir('gridprims-allow-'));
 const allowed = join(base, 'allowed');
 const outside = join(base, 'outside');
 mkdirSync(join(allowed, 'sub'), { recursive: true });

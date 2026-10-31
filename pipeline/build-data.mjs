@@ -3,7 +3,7 @@
 // "Data commands are separate and verified").
 //   node pipeline/build-data.mjs
 
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -37,6 +37,7 @@ export async function buildData(o = {}) {
       : { url: committed.raw[0].url, asOf: committed.asOf, sha256: null };
     const out = mkdtempSync(join(tmpdir(), 'gridprims-rebuild-'));
     const r = await runRecipe({ dataset: id, year, input, retrieved: committed.retrieved, outDir: out, joinDir: dataDir, entry, vintage });
+    rmSync(out, { recursive: true, force: true }); // only the manifest's checksums are compared
     if (!r.ok) { report.push({ id, ok: false, failures: r.failures }); continue; }
     const want = sums(committed);
     const got = sums(r.manifest);

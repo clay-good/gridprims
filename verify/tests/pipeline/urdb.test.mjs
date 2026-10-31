@@ -3,9 +3,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { checkDataset } from '../../../pipeline/check.mjs';
@@ -14,6 +13,7 @@ import { urdbDate } from '../../../pipeline/normalize/urdb-rates.mjs';
 import entry from '../../../pipeline/registry/urdb.mjs';
 import eia861 from '../../../pipeline/registry/eia-861.mjs';
 import { eia861Zip, smallTables } from '../../fixtures/data/eia-861/workbook.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const sched = (p) => Array.from({ length: 12 }, () => Array(24).fill(p));
 const rate = (id, eiaId, f = {}) => ({ _id: { $oid: id }, eiaId, utilityName: `Utility ${eiaId}`, rateName: `Rate ${id}`, sector: 'Residential', approved: true,
@@ -30,7 +30,7 @@ const bulk = (rates) => gzipSync(JSON.stringify(rates ?? [
 
 /** A data folder with the EIA-861 fixture served, so the join has something to read. */
 async function withEia861() {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-urdb-'));
+  const out = tempDir('gridprims-urdb-');
   const r = await runRecipe({ dataset: 'eia-861', year: 2025, retrieved: '2026-10-31', outDir: out, input: eia861Zip(),
     entry: { ...eia861, vintages: { 2025: { ...eia861.vintages[2025], sha256: null } }, tables: smallTables(eia861) } });
   assert.equal(r.ok, true, r.failures?.join('\n'));
@@ -71,7 +71,7 @@ test('the table credits OpenEI and EIA, whose states it uses', async () => {
 });
 
 test('without EIA-861 built, the join fails and nothing is written', async () => {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-urdb-'));
+  const out = tempDir('gridprims-urdb-');
   const r = await run(out);
   assert.match(r.failures[0], /^rates: join needs eia-861, which is not built in /);
   assert.ok(!existsSync(join(out, 'urdb')));

@@ -3,8 +3,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { checkDataset } from '../../../pipeline/check.mjs';
@@ -13,9 +12,10 @@ import { readShard } from '../../../core/lib/shard.mjs';
 import { isBlankFrameRow } from '../../../pipeline/normalize/eia-923-generation.mjs';
 import entry from '../../../pipeline/registry/eia-923.mjs';
 import { eia923Zip, sampleRows, smallTables } from '../../fixtures/data/eia-923/workbook.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const small = { ...entry, vintages: { 2025: { ...entry.vintages[2025], sha256: null } }, tables: smallTables(entry) };
-const tmp = () => mkdtempSync(join(tmpdir(), 'gridprims-923-'));
+const tmp = () => tempDir('gridprims-923-');
 const run = (o) => runRecipe({ dataset: 'eia-923', year: 2025, retrieved: '2026-10-31', entry: small, input: eia923Zip(), outDir: tmp(), ...o });
 const shard = (out, st) => readShard(readFileSync(join(out, 'eia-923/2026-10/generation', `${st}.bin`))).rows();
 

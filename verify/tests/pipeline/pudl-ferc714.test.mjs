@@ -4,14 +4,14 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { checkDataset } from '../../../pipeline/check.mjs';
 import { validateEntry } from '../../../pipeline/lib/registry.mjs';
 import { readShard } from '../../../core/lib/shard.mjs';
 import entry from '../../../pipeline/registry/pudl-ferc714.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const FIX = join(ROOT, 'verify/fixtures/data/pudl-ferc714');
 const files = () => ({ hourly: new Uint8Array(readFileSync(join(FIX, 'hourly.parquet'))), respondents: new Uint8Array(readFileSync(join(FIX, 'respondents.parquet'))) });
@@ -21,7 +21,7 @@ const small = {
   vintages: { 2025: { ...v, files: Object.fromEntries(Object.entries(v.files).map(([k, f]) => [k, { ...f, sha256: null }])) } },
   tables: entry.tables.map((t) => ({ ...t, recipe: t.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 3, max: 100 } } : s)) })),
 };
-const tmp = () => mkdtempSync(join(tmpdir(), 'gridprims-714-'));
+const tmp = () => tempDir('gridprims-714-');
 const run = (o) => runRecipe({ dataset: 'pudl-ferc714', year: 2025, retrieved: '2026-10-31', entry: small, input: files(), outDir: tmp(), ...o });
 
 test('two Parquet files build one table of peaks, partitioned by year, credited to PUDL', async () => {

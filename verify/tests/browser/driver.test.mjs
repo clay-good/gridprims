@@ -3,13 +3,13 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { findBrowser, fromBidi, launch } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const dir = mkdtempSync(join(tmpdir(), 'gridprims-driver-'));
+const dir = tempDir('gridprims-driver-');
 writeFileSync(join(dir, 'index.html'), '<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="/a.css"><script type="module" src="/b.mjs"></script><p>hello</p>');
 writeFileSync(join(dir, 'a.css'), 'p { color: green }');
 writeFileSync(join(dir, 'b.mjs'), 'globalThis.loaded = 42; await fetch("/c.json");');

@@ -4,15 +4,15 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { URLS_PER_FILE, sitemaps } from '../../../site/lib/sitemap.mjs';
 import { pagesOf } from '../../gates/urls.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const a = mkdtempSync(join(tmpdir(), 'gridprims-sitemap-a-'));
-const b = mkdtempSync(join(tmpdir(), 'gridprims-sitemap-b-'));
+const a = tempDir('gridprims-sitemap-a-');
+const b = tempDir('gridprims-sitemap-b-');
 await build({ outDir: a });
 await build({ outDir: b });
 const read = (dir, p) => readFileSync(join(dir, p), 'utf8');

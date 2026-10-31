@@ -3,14 +3,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { mcpFiles, release } from '../../../pipeline/release.mjs';
 import { readZipDirectory } from '../../../parsers/xlsx.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const tmp = () => mkdtempSync(join(tmpdir(), 'gridprims-rel-'));
+const tmp = () => tempDir('gridprims-rel-');
 const CREATED = '2026-10-31T12:00:00Z';
 
 test('a rebuild of the same commit reproduces every digest, the MCP archive, and the SBOM byte for byte', async () => {

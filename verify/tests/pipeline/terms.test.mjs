@@ -3,8 +3,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { compareTerms, pageText, postureInForce, safer } from '../../../pipeline/lib/terms.mjs';
 import { scheduledRun } from '../../../pipeline/scheduled.mjs';
@@ -15,6 +14,7 @@ import strings from '../../../site/strings/en-US.mjs';
 import entry from '../../../pipeline/registry/eia-861.mjs';
 import { eia861Zip, smallTables } from '../../fixtures/data/eia-861/workbook.mjs';
 import { ROOT } from '../../../pipeline/run.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const termsHtml = (text) => `<html><body><h1>Copyrights and Reuse</h1><h2>Public domain and use of EIA content</h2><p>${text.replace(/"/g, '&quot;')}</p><h2>Protected materials</h2><p>Reproduction of protected items requires the written permission of the copyright owners.</p></body></html>`;
 const i18n = createI18n(strings, 'en-US');
@@ -51,7 +51,7 @@ test('the page shows the posture in force: link hides every value and download, 
 });
 
 test('a refresh attaches the raw file to a release, records the link, and captures the terms', async () => {
-  const root = mkdtempSync(join(tmpdir(), 'gridprims-root-'));
+  const root = tempDir('gridprims-root-');
   mkdirSync(join(root, 'data/health'), { recursive: true });
   const URL25 = 'https://www.eia.gov/electricity/data/eia861/zip/f8612025.zip';
   const site = {

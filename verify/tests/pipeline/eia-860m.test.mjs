@@ -3,9 +3,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { checkDataset } from '../../../pipeline/check.mjs';
@@ -14,13 +13,14 @@ import { readShard } from '../../../core/lib/shard.mjs';
 import { EXPECTED_HEADERS } from '../../../pipeline/normalize/eia-860m-generators.mjs';
 import entry from '../../../pipeline/registry/eia-860m.mjs';
 import { eia860mXlsx } from '../../fixtures/data/eia-860m/workbook.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const small = {
   ...entry,
   vintages: { '2026-09': { ...entry.vintages['2026-09'], sha256: null } },
   tables: entry.tables.map((t) => ({ ...t, recipe: t.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 3, max: 100 } } : s)) })),
 };
-const tmp = () => mkdtempSync(join(tmpdir(), 'gridprims-860m-'));
+const tmp = () => tempDir('gridprims-860m-');
 const run = (o) => runRecipe({ dataset: 'eia-860m', year: '2026-09', retrieved: '2026-10-31', entry: small, input: eia860mXlsx(), outDir: tmp(), ...o });
 
 test('the workbook is read without a zip; each generator keeps its sheet as its category', async () => {

@@ -2,8 +2,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, writeFileSync, cpSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync, writeFileSync, cpSync } from 'node:fs';
 import { join } from 'node:path';
 import { limitsRecord, FRESH_RUN_DAYS } from '../../../core/contract/limits.mjs';
 import { cannotDo, claims } from '../../../core/contract/limits-inputs.mjs';
@@ -15,6 +14,7 @@ import { build } from '../../../site/build.mjs';
 import { createServer } from '../../../mcp/protocol.mjs';
 import { checkClaims } from '../../gates/claims.mjs';
 import { ROOT } from '../../../pipeline/run.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
 const i18n = createI18n(strings, 'en-US');
 const NOW = Date.parse('2026-10-31T00:00:00Z');
@@ -80,7 +80,7 @@ test('a late dataset and a stalled automation are listed with their dates', () =
 test('the unverified-claim register is listed, and a manifest citing a claim with no entry fails the build', async () => {
   assert.match(page(record()), /id="claim-smart-meter-texas-columns"/);
   assert.deepEqual(await checkClaims(ROOT), []);
-  const root = mkdtempSync(join(tmpdir(), 'gridprims-claims-'));
+  const root = tempDir('gridprims-claims-');
   cpSync(join(ROOT, 'site'), join(root, 'site'), { recursive: true });
   cpSync(join(ROOT, 'core'), join(root, 'core'), { recursive: true });
   cpSync(join(ROOT, 'data/curated'), join(root, 'data/curated'), { recursive: true });
@@ -90,7 +90,7 @@ test('the unverified-claim register is listed, and a manifest citing a claim wit
 });
 
 test('the page, its JSON, and the agent resource are one record', async () => {
-  const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+  const out = tempDir('gridprims-dist-');
   await build({ outDir: out });
   const json = JSON.parse(readFileSync(join(out, 'limits/limits.json'), 'utf8'));
   const res = await createServer().handle({ jsonrpc: '2.0', id: 1, method: 'resources/read', params: { uri: 'gridprims://limits', _meta: { 'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientCapabilities': {} } } });

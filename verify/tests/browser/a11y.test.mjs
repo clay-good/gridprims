@@ -4,15 +4,15 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { browserPages } from '../../browser/pages.mjs';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const pages = browserPages(out);
 const WIDTHS = [320, 360, 768, 1024, 1280];

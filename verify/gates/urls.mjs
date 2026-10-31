@@ -3,7 +3,7 @@
 // count stays within the 1,500 budget, with the largest groups named.
 // GRIDPRIMS_RECORD=1 adds new pages to data/curated/published-urls.json.
 
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -43,6 +43,7 @@ export async function checkSiteUrls(root, opts = {}) {
   const out = mkdtempSync(join(tmpdir(), 'gridprims-urls-'));
   await build({ outDir: out });
   const pages = pagesOf(out);
+  rmSync(out, { recursive: true, force: true }); // a built site is about 300 MB
   const file = join(root, 'data/curated/published-urls.json');
   let published = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : [];
   if (opts.record) {

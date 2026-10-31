@@ -4,8 +4,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
@@ -13,8 +12,9 @@ import { serveWorker } from '../../lib/worker-server.mjs';
 import { createServer } from '../../../mcp/protocol.mjs';
 import { DIR } from '../../fixtures/intake/make.mjs';
 import convert from '../../../core/tools/calc.energy-units.convert/manifest.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const preview = `JSON.parse(document.querySelector('[data-report-preview]').textContent)`;
 

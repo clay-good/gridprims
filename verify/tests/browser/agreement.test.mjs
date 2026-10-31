@@ -4,16 +4,16 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, realpathSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { readFileSync, realpathSync } from 'node:fs';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { createServer } from '../../../mcp/protocol.mjs';
 import { DIR } from '../../fixtures/intake/make.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 
-const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+const out = tempDir('gridprims-dist-');
 await build({ outDir: out });
 const FILES = ['smart-meter-texas.csv', 'conflicting-duplicate.csv', 'dst-fall-back.csv'];
 const ZONE = 'America/Chicago';
