@@ -47,7 +47,7 @@
     "rule": "18 CFR 388.113",
     "screened": "2026-10-31",
     "infrastructure": false,
-    "columnsChecked": 46,
+    "columnsChecked": 49,
     "flagged": [],
     "unconfirmed": [],
     "passed": true,
@@ -206,6 +206,21 @@
           "unit": "fraction"
         },
         {
+          "name": "lookback_range",
+          "type": "f64",
+          "unit": "months"
+        },
+        {
+          "name": "demand_window",
+          "type": "f64",
+          "unit": "minutes"
+        },
+        {
+          "name": "reactive_power_charge",
+          "type": "f64",
+          "unit": "$ per kVAR"
+        },
+        {
           "name": "energy_rate_structure",
           "type": "str",
           "unit": "JSON"
@@ -277,371 +292,371 @@
           "path": "rates/AK.bin",
           "state": "AK",
           "rows": 350,
-          "bytes": 175760,
-          "sha256": "0f66b80f5d1b1fe0f15d3252f67ffc08fd412b24e6ec0ac8a1a38abf5eae51a2"
+          "bytes": 184472,
+          "sha256": "77f0e3ca6f4916be761dc4fa1e1cd107ac25196b8ed565967d5323c0b48fc46a"
         },
         {
           "path": "rates/AL.bin",
           "state": "AL",
           "rows": 624,
-          "bytes": 369008,
-          "sha256": "f70fcf5f83cb1cd70fa2fac3ee321a1add9ef98f8d03baea50ef88b8221a0b23"
+          "bytes": 384296,
+          "sha256": "fe91c6c4fcda5b0230b04edf3eac9cc835fff6fbd8ccfb20166bc352b8c23ad8"
         },
         {
           "path": "rates/AR.bin",
           "state": "AR",
           "rows": 481,
-          "bytes": 355808,
-          "sha256": "e51e58a2f9201b8b53d57ab8fc31c98a79bfb42ad763f18223bab7d367c40a07"
+          "bytes": 367672,
+          "sha256": "099cbbad9a2fa025115d6c6bee5c5802afc640b42344a9b1d3980a8382f39891"
         },
         {
           "path": "rates/AZ.bin",
           "state": "AZ",
           "rows": 905,
-          "bytes": 782616,
-          "sha256": "23a2f63a9b52bfb5fb0c0913ef113971cd09f3b99400abec894cbfc66aa754c6"
+          "bytes": 804648,
+          "sha256": "a3d0558dc518c40deda57d38268a10688043d87a889a85d295a0123ab06819ee"
         },
         {
           "path": "rates/CA.bin",
           "state": "CA",
           "rows": 1540,
-          "bytes": 1455464,
-          "sha256": "d8874d2f5d527973cdf3863cef271a301f00120d6daa32aa308cd08979df6bf3"
+          "bytes": 1492744,
+          "sha256": "8fcd0a6f69e24e51e8f096f63d2694f3e380c9b82f29f00d5bbe83965bee2637"
         },
         {
           "path": "rates/CO.bin",
           "state": "CO",
           "rows": 944,
-          "bytes": 623008,
-          "sha256": "729f8e45f82c31948f3d68e99f041ec199728d427210c515d570391a510e4758"
+          "bytes": 645976,
+          "sha256": "6e62de3487eb68ef0c80f8e3961bf3b0847fc518d69931db789651c82dbd63ba"
         },
         {
           "path": "rates/CT.bin",
           "state": "CT",
           "rows": 158,
-          "bytes": 107488,
-          "sha256": "a2603043f1385170036bf30b99eebfb46ae504a2080ea837fb5418b958c3ce13"
+          "bytes": 111592,
+          "sha256": "631b842389146ca973ba5393797aad4e726a135e002181e15debd52dde2d2842"
         },
         {
           "path": "rates/DC.bin",
           "state": "DC",
           "rows": 54,
-          "bytes": 58864,
-          "sha256": "240d16592c2d18422668dda892935e50c1fa4fdfa9d81cb7ec93acabb4d3cf04"
+          "bytes": 60472,
+          "sha256": "671346d11453a661440c383a53fa68377273dbbc64a30d3e5fcb8a2634c077ee"
         },
         {
           "path": "rates/DE.bin",
           "state": "DE",
           "rows": 112,
-          "bytes": 97776,
-          "sha256": "2697b8d2cf0512ed17dfc82c4c60fc4f7a6a927ef925b38fd6dfcd6aa63b7da1"
+          "bytes": 100776,
+          "sha256": "7787d170683f253571a3c206d93eac499d72436decae3ed85452e9640741d3a9"
         },
         {
           "path": "rates/FL.bin",
           "state": "FL",
           "rows": 736,
-          "bytes": 514224,
-          "sha256": "985b258d853c7c6bcc6ca98a7358757843933144db60b54d5a23fcfaaaee2f7e"
+          "bytes": 532200,
+          "sha256": "16b4b62edd817e34f13672936b5f2d5c18ca080b2a2791c16add21309e6f0340"
         },
         {
           "path": "rates/GA.bin",
           "state": "GA",
           "rows": 915,
-          "bytes": 600816,
-          "sha256": "4a84326e916c3b183e44e23ddf7d4a109834b07ead325959ad0882dca0c17eb8"
+          "bytes": 623088,
+          "sha256": "2a9ac7f34fe68407fea5c854711ec2e43fa5d2c5b48905e4bc809738177ee690"
         },
         {
           "path": "rates/HI.bin",
           "state": "HI",
           "rows": 120,
-          "bytes": 113544,
-          "sha256": "0e7576ffc8df9adb31816eca7a15e0e9377b6b93f27667839d2220c3670efe8a"
+          "bytes": 116728,
+          "sha256": "40fa371d0fb162855537b1294ff58950df349cb55eae13d4f4421df2f73e777b"
         },
         {
           "path": "rates/IA.bin",
           "state": "IA",
           "rows": 1308,
-          "bytes": 730040,
-          "sha256": "ed7d58b9306de7e03ff8cfb7f0da74558a5157f04309babb7e7aaf5a8b6dd08e"
+          "bytes": 761744,
+          "sha256": "8139a56f5bcb028513392dc8c487c44c019a81abcc024349a19a1fc7f23ce56b"
         },
         {
           "path": "rates/ID.bin",
           "state": "ID",
           "rows": 695,
-          "bytes": 454512,
-          "sha256": "9b31a4bc0c5cfe4a57c3993364fd79b5dff533c36e7b465c0f5283f840bc22a2"
+          "bytes": 471504,
+          "sha256": "5648c0ede0197e372d933a3ddb7206b9c47185ffe41a32bc54623fa604ca8fba"
         },
         {
           "path": "rates/IL.bin",
           "state": "IL",
           "rows": 797,
-          "bytes": 492032,
-          "sha256": "027db3f3f79d50d71cb3e624d7e73bbc4cda595c1e96f1ddf3b9d5082f4ffe2f"
+          "bytes": 511472,
+          "sha256": "f14155456f44e037b387c0fbce0e2efccc9bcabd01e793d6a3b615fcb4db3813"
         },
         {
           "path": "rates/IN.bin",
           "state": "IN",
           "rows": 1252,
-          "bytes": 775816,
-          "sha256": "c09172b2ecbdb6bd499b5372ba489327670718a7af24d3905c6d308087b5524c"
+          "bytes": 806176,
+          "sha256": "13056c3dfd78a8e9347618374477cf18e9a0e8e3233ae8041d267d77020c7407"
         },
         {
           "path": "rates/KS.bin",
           "state": "KS",
           "rows": 1181,
-          "bytes": 711656,
-          "sha256": "fb2a6ef669b6a684d394e7cab6f2f966c67df544b893b79ee26c22ce69547a26"
+          "bytes": 740312,
+          "sha256": "d16206fa32a112d266c4ed1210c879de29cabdfab14e27edfb7f7d38d6242550"
         },
         {
           "path": "rates/KY.bin",
           "state": "KY",
           "rows": 711,
-          "bytes": 414592,
-          "sha256": "cf261c97895aae6b0a4b7132db844e573b3e8ab64ef0bcfbf4f8d9d61ef8678b"
+          "bytes": 431968,
+          "sha256": "dac20320bc67bd5e337d660d2fd3c89a39640e1bde6dec955e9915b303ff065d"
         },
         {
           "path": "rates/LA.bin",
           "state": "LA",
           "rows": 374,
-          "bytes": 289224,
-          "sha256": "09c5cf33bf41cd8e508ba305fce0fdd57b432fbe9f1c66748c92aa958859b76d"
+          "bytes": 298512,
+          "sha256": "1f7cfc9acb972fdf49a641d61fc5490212df57821240df8f2ebb39b9910f9ba0"
         },
         {
           "path": "rates/MA.bin",
           "state": "MA",
           "rows": 555,
-          "bytes": 407632,
-          "sha256": "4af074e28144d3615d9c05a065f9b7c79b2e5657889aaae3b028b84d937d8253"
+          "bytes": 421272,
+          "sha256": "f340652c10d05ce1c42f7adf07b75b5b370d85f1a787ea197b07dd5af37ceb88"
         },
         {
           "path": "rates/MD.bin",
           "state": "MD",
           "rows": 254,
-          "bytes": 219736,
-          "sha256": "62c69e58d251643947e306da611cb4e35a5ecd4aa822f39eabf0c3e746824bd1"
+          "bytes": 226144,
+          "sha256": "fba4442417370301967244e7e25f1e6178b4c2e608c2976228d1e71012a8cfec"
         },
         {
           "path": "rates/ME.bin",
           "state": "ME",
           "rows": 104,
-          "bytes": 99632,
-          "sha256": "f4e358c08ed72be22f8614ba13932fac3aaf12a272fb4c20b9597cdc1e790012"
+          "bytes": 102432,
+          "sha256": "45f3dab61d8971b9c9638aa5c53467e0f4f47d11e3af13f562b61cc032dedde7"
         },
         {
           "path": "rates/MI.bin",
           "state": "MI",
           "rows": 1151,
-          "bytes": 676072,
-          "sha256": "801588688567b39525581c279913649bf01c28e73e5acb846ee358decbd1b0e8"
+          "bytes": 704008,
+          "sha256": "82ea9d911c7da0b3bee1e99965c042ebaf9372e3ae05ed7b887de0824b2efd5c"
         },
         {
           "path": "rates/MN.bin",
           "state": "MN",
           "rows": 1703,
-          "bytes": 987464,
-          "sha256": "3e5c0ecad273cdfaad47b37ee8d6098bebbc38d88e0fc66aebf3348e7d6bba5d"
+          "bytes": 1028656,
+          "sha256": "54285312d8df866fdcbb6ae927ec9ff20197fad845303b0c17a82a3ec71f9874"
         },
         {
           "path": "rates/MO.bin",
           "state": "MO",
           "rows": 957,
-          "bytes": 616216,
-          "sha256": "292764f98cac2ebe51a18ee6596d052b96ddefeddeff45e6c5dbe2b93434f537"
+          "bytes": 639496,
+          "sha256": "cf69ee0e802f7b79192d7645002fa8cc812fd789b4a1d8fa395c1901749a43bf"
         },
         {
           "path": "rates/MS.bin",
           "state": "MS",
           "rows": 457,
-          "bytes": 293928,
-          "sha256": "cf8a5b849908cd5c507d9b339909cec0079e0039db2957aca276abeb5fa13532"
+          "bytes": 305216,
+          "sha256": "14106035504e7ecf2c504c7f0b795180e9659e6cb978c1050dcd52d211b5a6dd"
         },
         {
           "path": "rates/MT.bin",
           "state": "MT",
           "rows": 675,
-          "bytes": 370072,
-          "sha256": "3803c5d43da60841640d3600ca684bcda033739ceef967eb2ea998e1ceb71f5c"
+          "bytes": 386584,
+          "sha256": "eab0fbc677ab74047be71456509d498498637a52ba09bc26ddef51d8dfa49d18"
         },
         {
           "path": "rates/NC.bin",
           "state": "NC",
           "rows": 1720,
-          "bytes": 1273992,
-          "sha256": "2216ed86786cc7904a3fcc07141bc6d609bfd0a4ce35e9e902fdcb22064531e2"
+          "bytes": 1315592,
+          "sha256": "5f7d9aba2228507065c4783f9f7bb3ae0aa2f889886fc8260c7d424175b3a900"
         },
         {
           "path": "rates/ND.bin",
           "state": "ND",
           "rows": 544,
-          "bytes": 372704,
-          "sha256": "a93fbc198f112a52700d3f3a06173391c53a03083a25af7ea2fc935875cd20e7"
+          "bytes": 386072,
+          "sha256": "eece3a20a110ab39af92131b83679d142da6ac405ce25fbed6ad0471fe7777d6"
         },
         {
           "path": "rates/NE.bin",
           "state": "NE",
           "rows": 1695,
-          "bytes": 957488,
-          "sha256": "52ad657b156572978f5e7933630899790ab309661ea4dd2043e6a41b1eb4b459"
+          "bytes": 998488,
+          "sha256": "3127e682c28d29923e7fc15c207911ac7cad87dfdcad912daf6b3f91c000bd77"
         },
         {
           "path": "rates/NH.bin",
           "state": "NH",
           "rows": 148,
-          "bytes": 97704,
-          "sha256": "61ff7fb7eedbf567fdbe699cbfdcae3716911130387e49b7824f9b7b326c9a7d"
+          "bytes": 101568,
+          "sha256": "9b6d8323c64c2d6de51b89237a291103191d4ffb5bf9888ea23ec06a68b1e3b1"
         },
         {
           "path": "rates/NJ.bin",
           "state": "NJ",
           "rows": 185,
-          "bytes": 135464,
-          "sha256": "de4681f20e3b2594b5eee14f3ef2e301285e3a9345bb9cda70866858f2559567"
+          "bytes": 140216,
+          "sha256": "5fb24a6e84f176ed50a1c56a13ffa6137f01164f800891427737fd9362334e17"
         },
         {
           "path": "rates/NM.bin",
           "state": "NM",
           "rows": 609,
-          "bytes": 432936,
-          "sha256": "7c72d2567e72fe488e139bf0f2647f7dc6cb9c08264391b8306a277e727fd162"
+          "bytes": 447864,
+          "sha256": "6410404998fb5c40c2d5fc5276fd2cf46ddb4c8b0c4b9733d7f1323f25367848"
         },
         {
           "path": "rates/NV.bin",
           "state": "NV",
           "rows": 540,
-          "bytes": 493872,
-          "sha256": "ccf3467694fa66c736ab9ec936209bce5837d172dbe3d17effc51c75e1c06694"
+          "bytes": 507144,
+          "sha256": "f4325c018b4be327a6b26dabc919edad2ff79101b68aae5c077bcc78b48bd9c9"
         },
         {
           "path": "rates/NY.bin",
           "state": "NY",
           "rows": 813,
-          "bytes": 483032,
-          "sha256": "2acd7e17d3cf8b0669c424feb0be7666bccded92808bb4c9176547ca944e7752"
+          "bytes": 502856,
+          "sha256": "0cc2e90e60f3eabb041324d96352b6a29f3cf7b2c65a04d58e0795c3c56c278f"
         },
         {
           "path": "rates/OH.bin",
           "state": "OH",
           "rows": 946,
-          "bytes": 591504,
-          "sha256": "52ce520f9c2b6398cb24e9427c3f67db805eec5401862d8089fa70450050fa7d"
+          "bytes": 614520,
+          "sha256": "271e8a98394b454d0c29c399e30bf1215487444572a09919f845e705fb518cd7"
         },
         {
           "path": "rates/OK.bin",
           "state": "OK",
           "rows": 898,
-          "bytes": 589792,
-          "sha256": "68e4b96d3341155c3d24ffc9b61a7a69f06ea6c91cf1a00e2000dd5d02db07e5"
+          "bytes": 611664,
+          "sha256": "4d90b5c43626be151fd6973899811fde892854e5542c6b9a3dcf30d8ddbe70ab"
         },
         {
           "path": "rates/OR.bin",
           "state": "OR",
           "rows": 849,
-          "bytes": 581592,
-          "sha256": "44362e531b6c1c4f01fba668422444221198ee851fac6499ebc1ce77f22dd062"
+          "bytes": 602280,
+          "sha256": "f931449c562701bed869eb67f34194e1f78f6b9dc7b2cff8ba57c5927bb31452"
         },
         {
           "path": "rates/PA.bin",
           "state": "PA",
           "rows": 420,
-          "bytes": 257144,
-          "sha256": "5486ee9ea7e055c9cae313f0ec3da30f5a670a1e957ac2404778a4ebfb382dbc"
+          "bytes": 267536,
+          "sha256": "b5b5bae7fec72f6fe22ef373aea3fce4ca64503212133d5b48393f9584ad4f6b"
         },
         {
           "path": "rates/RI.bin",
           "state": "RI",
           "rows": 32,
-          "bytes": 25544,
-          "sha256": "3935882476697665c786ddb04c2bfa5f2910822a3928b5be61cdea00bd7d023c"
+          "bytes": 26616,
+          "sha256": "87abedbc2c9d574429e396ea409535200484287736941eb69f57da9aa65ac088"
         },
         {
           "path": "rates/SC.bin",
           "state": "SC",
           "rows": 512,
-          "bytes": 444872,
-          "sha256": "d7dbe359e1857c854b7603ff48dcddd6c3709378c35aeb2ce891e12acec5ccce"
+          "bytes": 457480,
+          "sha256": "00fd6402ae86f866cad6b775e37bfb299cf96b39ef052696d1e84c6b53ade04c"
         },
         {
           "path": "rates/SD.bin",
           "state": "SD",
           "rows": 936,
-          "bytes": 579912,
-          "sha256": "1714291b4297a8e3dcbe9dec7625eb6a1ec841a38513c8a5a57e9c374bd76f7b"
+          "bytes": 602688,
+          "sha256": "e69cfa36888718b96a75865af53ea8e098abb4377e2ddbb3c7b0af082e0eb78d"
         },
         {
           "path": "rates/TN.bin",
           "state": "TN",
           "rows": 909,
-          "bytes": 569576,
-          "sha256": "1b8297cd788dfd63559dedf059d169e9d38b77d79222ad23f907a566fb593e08"
+          "bytes": 591704,
+          "sha256": "0e14b4e6d760b5b2e40e16819bc4d9edfdd87a13888e31274d57d04b1ef763da"
         },
         {
           "path": "rates/TX.bin",
           "state": "TX",
           "rows": 1807,
-          "bytes": 1075208,
-          "sha256": "f16a80eff7eb2091728d5253f05f0cf6012fafefc950eef2ad4c7c46155c4996"
+          "bytes": 1118896,
+          "sha256": "95fba90898122ac086a1f562bdfce8e0c4699639b504593c2b36cf579201c243"
         },
         {
           "path": "rates/UT.bin",
           "state": "UT",
           "rows": 601,
-          "bytes": 431648,
-          "sha256": "756ee1297155e19a45613c92fb0fd0177081fec3806ab503f5d1891042290c92"
+          "bytes": 446384,
+          "sha256": "e43a6999b360110d1c07810d17fa2ed198c23726e9f75b0fc8a6e6f685403112"
         },
         {
           "path": "rates/VA.bin",
           "state": "VA",
           "rows": 515,
-          "bytes": 407352,
-          "sha256": "c1bbf89fab1e2a9d6bfab7c19b6b9c7ff3d44d0510aeb91c8c2d833ba3a59665"
+          "bytes": 420024,
+          "sha256": "8c5eec02e96de1ac8882fd1b9f7d3ae8b69bc2a7cd221dab96a5a8e7318efc5a"
         },
         {
           "path": "rates/VT.bin",
           "state": "VT",
           "rows": 238,
-          "bytes": 152168,
-          "sha256": "9e4e4deafb44bb06e7c269047fdceade5774bd13786bc115ebbee7a2e0b22d83"
+          "bytes": 158192,
+          "sha256": "36f2218b2c56fd04eefc2cd75e35bdfea461305ee17e008ffd46ad675e6ecab3"
         },
         {
           "path": "rates/WA.bin",
           "state": "WA",
           "rows": 1094,
-          "bytes": 712576,
-          "sha256": "de98e1094d1e53dc57a00a14e59a16e7d003009907dfdb03403b74f265a9fe9f"
+          "bytes": 739144,
+          "sha256": "6c5fc1a5db7bbb456cfff931781c1cb5ccc7d956aa10b87e9569da9c3f909d51"
         },
         {
           "path": "rates/WI.bin",
           "state": "WI",
           "rows": 2031,
-          "bytes": 1104000,
-          "sha256": "a9d76567beeace45b6a53084d3f8d84280bbfec70593b56d9f530f69a141ba63"
+          "bytes": 1153056,
+          "sha256": "d43f857c9506928722ecf70d6ccf60a1954760e10ba966a052254438bffb66f7"
         },
         {
           "path": "rates/WV.bin",
           "state": "WV",
           "rows": 190,
-          "bytes": 194672,
-          "sha256": "86024564e651591e237f5f07b6d0b6ce6915756d1b9c0e9c0d4e67ec8b06fa6e"
+          "bytes": 199544,
+          "sha256": "734427043a36b4cf398e909f0ff0ec57c368118f06acd9aab739c717298e238e"
         },
         {
           "path": "rates/WY.bin",
           "state": "WY",
           "rows": 713,
-          "bytes": 510456,
-          "sha256": "1da50069d4dcdc14f9a3f1b9f7bce6b3340a16d8a59ad9cb1399e648bed5d2c0"
+          "bytes": 527880,
+          "sha256": "393ad18a5271473c291645913487fd1aa867bb338cc9f81aa261277e7ad170a3"
         },
         {
           "path": "rates/unmatched.bin",
           "state": "unmatched",
           "rows": 707,
-          "bytes": 546512,
-          "sha256": "5684131f18a952d771181db334783032b8c8eb4a333423ecbb61fa4340423b1e"
+          "bytes": 563792,
+          "sha256": "b9cb7c9b30c69805e0ac82b190c2d0f61ae5a466ec7e31221278bd4c8248a7f9"
         }
       ],
       "download": {
         "path": "rates.csv.gz",
-        "bytes": 5506308,
-        "sha256": "92d6c43e90d36d6a3f90088bd81df8011dcbee1caebb5ab2fdcf9bf33de46e0f",
+        "bytes": 5511480,
+        "sha256": "75b7da10040734e6dfa9ce87ae333f977551532ab498f854e53dec32473eb807",
         "format": "text/csv; gzip"
       },
       "license": "CC-BY-4.0",

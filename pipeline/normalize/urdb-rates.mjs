@@ -24,6 +24,7 @@ const NUMBER_FIELDS = [
   ['fixed_charge', 'fixedChargeFirstMeter', '$ per fixed_charge_units'], ['min_charge', 'minCharge', '$ per min_charge_units'],
   ['demand_min_kw', 'demandMin', 'kW'], ['demand_max_kw', 'demandMax', 'kW'], ['energy_min_kwh', 'energyMin', 'kWh'], ['energy_max_kwh', 'energyMax', 'kWh'],
   ['service_min_v', 'serviceMin', 'V'], ['service_max_v', 'serviceMax', 'V'], ['lookback_percent', 'lookbackPercent', 'fraction'],
+  ['lookback_range', 'lookbackRange', 'months'], ['demand_window', 'demandWindow', 'minutes'], ['reactive_power_charge', 'demandReactPwrCharge', '$ per kVAR'],
 ];
 
 export const SCHEMA = [
