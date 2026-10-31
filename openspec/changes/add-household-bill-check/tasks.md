@@ -24,4 +24,4 @@
 ## 4. Surfaces
 
 - [x] 4.1 Run worked examples through the MCP server; verify identical structured results
-- [ ] 4.2 DESIGN.md gates on a 360 px phone first, then desktop, both themes, keyboard; verify CI green
+- [x] 4.2 DESIGN.md gates on a 360 px phone first, then desktop, both themes, keyboard; verify CI green
