@@ -176,3 +176,46 @@ test('three bases: every event, without planned work, and without major event da
   assert.ok(r[2].indices.minutesPerCustomer < r[0].indices.minutesPerCustomer, 'dropping the storm day lowers the minutes');
   assert.notEqual(r[0].label, r[2].label);
 });
+
+test('a feeder breakdown hides a row covering 60 customers and says why', async () => {
+  const { breakdown } = await import('../../../core/lib/reliability.mjs');
+  const sustained = [
+    ev(600, 120, 0, 12, { feeder: 'F-12' }), ev(400, 90, 1, 12, { feeder: 'F-12' }),
+    ev(150, 60, 2, 12, { feeder: 'F-07' }),
+    ev(60, 240, 3, 12, { feeder: 'F-31' }),
+  ];
+  const b = breakdown(sustained, 'feeder', { customersServed: 10_000 });
+  assert.deepEqual(b.rows.map((r) => r.key), ['F-12', 'F-07'], 'the small feeder is not a row');
+  assert.equal(b.rows[0].events, 2);
+  assert.equal(b.rows[0].customers, 1000);
+  assert.equal(b.suppressed, 1);
+  assert.equal(b.suppressedEvents, 1);
+  assert.match(b.note, /^1 feeders are not shown: each covers fewer than 100 customers, which is close to naming them\.$/);
+  assert.equal(b.shareable, false, 'a breakdown never travels in a link or a copied card');
+});
+
+test('a cause breakdown ranks by customer minutes, and an unlabeled row groups under null', async () => {
+  const { breakdown } = await import('../../../core/lib/reliability.mjs');
+  const b = breakdown([ev(500, 60, 0, 12, { cause: 'tree' }), ev(900, 300, 1, 12, { cause: 'equipment' }), ev(200, 30, 2)], 'cause', { customersServed: 10_000 });
+  assert.deepEqual(b.rows.map((r) => r.key), ['equipment', 'tree', null]);
+  assert.equal(b.rows[0].minutesPerCustomer, 27);
+});
+
+test('major event days: the flagged days are listed and the indices are reported on both bases', () => {
+  // A quiet year with one storm day: 400 customers out for 6 hours on day 40.
+  const daily = [...Array(120)].map((_, i) => ({ day: `2025-${String(i).padStart(3, '0')}`, minutesPerCustomer: 0.4 + (i % 7) * 0.05 }));
+  daily[40].minutesPerCustomer = 14.4;
+  const t = threshold(daily, { calendarDays: 365 });
+  assert.equal(t.status, 'ok');
+  const days = flagged(daily, t.value);
+  assert.deepEqual(days.map((d) => d.day), ['2025-040'], 'the storm day alone is flagged');
+  assert.ok(t.value < 14.4 && t.value > 0.7, `threshold ${t.value} sits between the quiet days and the storm`);
+  // The same log on both bases: dropping the flagged day lowers the minutes but never the other way.
+  const sustained = [ev(100, 60, 0), ev(400, 360, 40)];
+  const r = bases(sustained, { customersServed: 10_000, periodMinutes: 525_600, medDays: new Set(['2025-02-10']), zone: ZONE });
+  const all = r.find((b) => b.id === 'all');
+  const without = r.find((b) => b.id === 'without-major');
+  assert.ok(without.indices.minutesPerCustomer <= all.indices.minutesPerCustomer);
+  assert.equal(without.excluded, 1);
+  assert.match(without.label, /major event days/i);
+});

@@ -226,3 +226,40 @@ export function bases(sustained, o) {
     { id: 'without-major', label: 'Without major event days', events: sustained.filter((e) => !medDays.has(dayOf(e))), excluded: onMed.length, note: `${onMed.length} interruptions on ${medDays.size} major event days left out.` },
   ].map((b) => ({ ...b, indices: indices(b.events, o) }));
 }
+
+/** Below this many customers a breakdown row names too few people to show. */
+export const MIN_GROUP_CUSTOMERS = 100;
+
+/**
+ * Interruptions grouped by feeder, device, or cause. A row covering fewer than
+ * 100 customers is suppressed rather than shown: on a small feeder the row is
+ * close to naming the households on it. The suppressed rows are counted, never
+ * silently dropped.
+ * @param {Array<any>} sustained
+ * @param {'feeder' | 'device' | 'cause'} by
+ * @param {{customersServed: number, min?: number}} o
+ */
+export function breakdown(sustained, by, { customersServed, min = MIN_GROUP_CUSTOMERS }) {
+  const groups = new Map();
+  for (const e of sustained) {
+    const k = e[by] ?? null;
+    const g = groups.get(k) ?? groups.set(k, { key: k, events: 0, customers: 0, customerMinutes: 0 }).get(k);
+    g.events++;
+    g.customers += e.customers;
+    g.customerMinutes += customerMinutesOf(e);
+  }
+  const all = [...groups.values()].map((g) => ({ ...g, minutesPerCustomer: round(g.customerMinutes / customersServed, 1) }));
+  const shown = all.filter((g) => g.customers >= min).sort((a, b) => b.customerMinutes - a.customerMinutes);
+  const suppressed = all.filter((g) => g.customers < min);
+  return {
+    by,
+    rows: shown,
+    suppressed: suppressed.length,
+    suppressedEvents: suppressed.reduce((n, g) => n + g.events, 0),
+    note: suppressed.length
+      ? `${suppressed.length} ${by === 'cause' ? 'causes' : `${by}s`} are not shown: each covers fewer than ${min} customers, which is close to naming them.`
+      : null,
+    /** A breakdown never travels: not in a link, a copied card, or a report, unless the person asks. */
+    shareable: false,
+  };
+}
