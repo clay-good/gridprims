@@ -32,7 +32,7 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
   if (!entry.releaseWatch) return { id: dataset, checked: false, refreshed: false, version: manifest?.version, waiting: 'pinned to a release; a new one is bumped by hand' };
   // Periods are data years (2025), or months ("2026-09") for a monthly dataset such as EIA-860M.
   const monthly = entry.releaseWatch.period === 'month';
-  const servedYear = manifest
+  const servedYear = entry.releaseWatch.period === 'rolling' ? null : manifest
     ? (monthly ? manifest.tables[0].dataPeriod : Number(manifest.tables[0].dataPeriod.slice(-4)))
     : (monthly ? Object.keys(entry.vintages).sort().at(-1) : Math.max(...Object.keys(entry.vintages).map(Number)));
   const after = (p) => {
@@ -57,6 +57,9 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
   } catch { terms = null; }
   const posture = postureInForce(entry, terms);
   const termsRow = terms ? { checked: today, changed: terms.changed, posture, ...(terms.excerpt ? { excerpt: terms.excerpt } : {}), ...(entry.takedown ? { takedown: entry.takedown } : {}) } : undefined;
+  // A file at one address that the publisher rewrites in place (URDB, daily) is taken at most once a
+  // month: the period is the retrieval month.
+  if (entry.releaseWatch.period === 'rolling') return { ...(await checkRolling({ dataset, entry, outDir, f, today, manifest })), posture, terms: termsRow };
 
   try {
     // A new data year beats a revision of the served one.
@@ -87,6 +90,26 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
     // Re-running on unchanged input reproduces the same files, so this is a refresh only when something changed.
     const same = manifest && manifest.version === r.version && JSON.stringify(manifest.tables) === JSON.stringify(r.manifest.tables);
     return { id: dataset, checked: true, refreshed: !same, version: r.version, posture, terms: termsRow, found: target.why, raw: same ? undefined : { name: r.manifest.raw[0].name, bytes: input, version: r.version } };
+  } catch (e) {
+    return { id: dataset, checked: false, refreshed: false, version: manifest?.version, failure: `check failed: ${e.message}` };
+  }
+}
+
+/** The once-a-month refresh of a file rewritten in place. */
+async function checkRolling({ dataset, entry, outDir, f, today, manifest }) {
+  const month = today.slice(0, 7);
+  if (manifest?.tables[0].dataPeriod === month) return { id: dataset, checked: true, refreshed: false, version: manifest.version, waiting: `already taken this month (${month})` };
+  try {
+    const url = entry.releaseWatch.urls[0];
+    const found = await head(url, f);
+    if (!found) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: `${url} did not answer` };
+    const res = await f(url);
+    if (!res.ok) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: `download ${url}: HTTP ${res.status}` };
+    const input = new Uint8Array(await res.arrayBuffer());
+    const vintage = { url, asOf: asOfOf(found.lastModified, today), sha256: null };
+    const r = await runRecipe({ dataset, year: month, input, retrieved: today, outDir, entry, vintage, upstream: found });
+    if (!r.ok) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: r.failures.join('; ') };
+    return { id: dataset, checked: true, refreshed: true, version: r.version, found: `monthly refresh ${month}`, raw: { name: r.manifest.raw[0].name, bytes: input, version: r.version } };
   } catch (e) {
     return { id: dataset, checked: false, refreshed: false, version: manifest?.version, failure: `check failed: ${e.message}` };
   }

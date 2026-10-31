@@ -1,0 +1,31 @@
+{
+ "source": "URDB bulk file of 2026-10-30 placed with EIA-861 2025: one rate of a two-state utility, and one rate whose utility is not in EIA-861",
+ "rows": [
+  {
+   "label": "539f6a0aec4f024411ec8ac9",
+   "state": "AL",
+   "utility_id": 17252,
+   "utility_states": 2,
+   "utility_name": "Singing River Elec Pwr Assn (Mississippi)",
+   "rate_name": "Commercial Large General Service"
+  },
+  {
+   "label": "539f6a0aec4f024411ec8ac9",
+   "state": "MS",
+   "utility_id": 17252,
+   "utility_states": 2,
+   "utility_name": "Singing River Elec Pwr Assn (Mississippi)",
+   "rate_name": "Commercial Large General Service"
+  }
+ ],
+ "unmatched": [
+  {
+   "label": "539f6a23ec4f024411ec8ba1",
+   "state": null,
+   "utility_id": 8298,
+   "utility_states": 0,
+   "utility_name": "Hawkeye Tri-County El Coop Inc",
+   "rate_name": "Large Power Rate"
+  }
+ ]
+}

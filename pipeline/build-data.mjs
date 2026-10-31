@@ -36,7 +36,7 @@ export async function buildData(o = {}) {
       ? { release: committed.release, asOf: committed.asOf, files: Object.fromEntries(committed.raw.map((r) => [r.file, { url: r.url, sha256: null }])) }
       : { url: committed.raw[0].url, asOf: committed.asOf, sha256: null };
     const out = mkdtempSync(join(tmpdir(), 'gridprims-rebuild-'));
-    const r = await runRecipe({ dataset: id, year, input, retrieved: committed.retrieved, outDir: out, entry, vintage });
+    const r = await runRecipe({ dataset: id, year, input, retrieved: committed.retrieved, outDir: out, joinDir: dataDir, entry, vintage });
     if (!r.ok) { report.push({ id, ok: false, failures: r.failures }); continue; }
     const want = sums(committed);
     const got = sums(r.manifest);

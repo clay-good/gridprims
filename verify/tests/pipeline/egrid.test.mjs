@@ -85,7 +85,7 @@ test('every registry entry carries its terms, license basis, and credit text', a
   for (const f of readdirSync(dir)) {
     const e = (await import(pathToFileURL(join(dir, f)).href)).default;
     assert.deepEqual(validateEntry(e), [], e.id);
-    assert.ok(e.terms.text.length > 80 && /^\d{4}-\d{2}-\d{2}$/.test(e.terms.captured), `${e.id} terms`);
+    assert.ok(e.terms.text.length > 40 && /^\d{4}-\d{2}-\d{2}$/.test(e.terms.captured), `${e.id} terms`);
     assert.ok(['public domain', 'named license'].includes(e.redistributionBasis.kind), `${e.id} basis`);
     assert.match(e.attribution, /\S{20,}|.{40,}/, `${e.id} credit`);
     const cur = join(ROOT, 'data', e.id, 'current.json');

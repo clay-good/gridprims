@@ -25,11 +25,11 @@ const assets = (health) => ({ fetch: async () => Response.json(health) });
 const row = (id, lastSuccess, thresholdHours) => ({ id, lastSuccess, thresholdHours });
 
 test('all schedules disabled: the watchdog re-enables them and starts the stale ones', async () => {
-  const gh = fakeGitHub({ 'refresh-eia.yml': 'disabled_inactivity', 'link-check.yml': 'disabled_inactivity', 'ci.yml': 'active' });
-  const health = { workflows: [row('refresh-eia', '2026-11-01T09:17:00Z', 72), row('link-check', '2026-11-04T07:23:00Z', 504)] };
+  const gh = fakeGitHub({ 'refresh-data.yml': 'disabled_inactivity', 'link-check.yml': 'disabled_inactivity', 'ci.yml': 'active' });
+  const health = { workflows: [row('refresh-data', '2026-11-01T09:17:00Z', 72), row('link-check', '2026-11-04T07:23:00Z', 504)] };
   const r = await watchdog({ GITHUB_ACTIONS_TOKEN: 't', GITHUB_REPO: 'clay-good/gridprims', ASSETS: assets(health) }, { fetch: gh, now: () => NOW });
-  assert.deepEqual(r.reenabled, ['refresh-eia.yml', 'link-check.yml']);
-  assert.deepEqual(r.dispatched, ['refresh-eia.yml', 'heartbeat.yml'], 'the 9-day-old daily refresh is restarted; the weekly link check is within its threshold');
+  assert.deepEqual(r.reenabled, ['refresh-data.yml', 'link-check.yml']);
+  assert.deepEqual(r.dispatched, ['refresh-data.yml', 'heartbeat.yml'], 'the 9-day-old daily refresh is restarted; the weekly link check is within its threshold');
   assert.ok(gh.calls.includes('PUT /actions/workflows/1/enable'));
   assert.ok(gh.calls.some((c) => c.startsWith('POST /actions/workflows/heartbeat.yml/dispatches') && c.includes('"at":"2026-11-10T03:29:00.000Z"')));
 });

@@ -2,7 +2,7 @@
 // disabled, check each of this workflow's datasets and refresh what changed,
 // open an issue for each failure, and republish the health record. The same
 // script runs on a laptop; only the credentials differ.
-//   node pipeline/scheduled.mjs refresh-eia
+//   node pipeline/scheduled.mjs refresh-data
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -41,7 +41,7 @@ export async function scheduledRun(workflowId, o = {}) {
   }
 
   const datasets = [];
-  for (const id of w.datasets) {
+  for (const id of o.datasets ?? w.datasets) { // tests may limit a run to some datasets
     // Each dataset stands alone: one failing never stops the others.
     const r = await checkDataset({ dataset: id, entry: o.entries?.[id], outDir: o.outDir, fetch: o.fetch, today: started.slice(0, 10) });
     // Raw publisher files go to a release, never into git (foundation design D16).

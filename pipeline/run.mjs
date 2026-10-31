@@ -9,11 +9,12 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
-import { gzipSync } from 'node:zlib';
+import { gunzipSync, gzipSync } from 'node:zlib';
 import { readXlsx, readZipDirectory, readZipEntry } from '../parsers/xlsx.mjs';
 import { readParquet } from '../parsers/parquet.mjs';
 import { decodeText, parseDelimited } from '../parsers/delimited.mjs';
 import { writeShard } from './lib/shard-writer.mjs';
+import { readShard } from '../core/lib/shard.mjs';
 import { postureOf, validateEntry } from './lib/registry.mjs';
 import { tableLicense } from './lib/licenses.mjs';
 
@@ -66,13 +67,14 @@ export function validateRows(rows, step, previousRows) {
 
 /**
  * Run one dataset's recipe for one data year.
- * @param {{dataset: string, year: number, input?: Uint8Array, retrieved: string, outDir?: string, entry?: any, vintage?: {url: string, asOf: string, sha256?: string | null}, verifyPin?: boolean, upstream?: {lastModified?: string, bytes?: number}}} o
+ * @param {{dataset: string, year: number | string, input?: Uint8Array | Record<string, Uint8Array>, retrieved: string, outDir?: string, joinDir?: string, entry?: any, vintage?: {url: string, asOf: string, sha256?: string | null}, verifyPin?: boolean, upstream?: {lastModified?: string, bytes?: number}}} o
  *   vintage: a release the registry does not list yet (the release watch found it);
  *   verifyPin: refuse a raw file whose checksum differs from the registry's pin (rebuilds of a past version)
  *   entry replaces the registry entry (tests use it to run a recipe on a small fixture)
+ *   joinDir is where a join step reads the served version of another dataset (default: outDir)
  * @returns {Promise<{ok: true, version: string, manifest: any} | {ok: false, failures: string[]}>}
  */
-export async function runRecipe({ dataset, year, input, retrieved, outDir = join(ROOT, 'data'), entry: given, vintage: found, verifyPin = false, upstream }) {
+export async function runRecipe({ dataset, year, input, retrieved, outDir = join(ROOT, 'data'), joinDir = outDir, entry: given, vintage: found, verifyPin = false, upstream }) {
   const entry = given ?? (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${dataset}.mjs`)).href)).default;
   const entryErrors = validateEntry(entry);
   if (entryErrors.length) return { ok: false, failures: entryErrors };
@@ -103,12 +105,17 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const zip = raw && entry.tables.some((t) => t.recipe.some((st) => st.step === 'unzip')) ? readZipDirectory(raw) : [];
   const failures = [];
   const ready = [];
+  const joinedFrom = {};
   for (const tb of entry.tables) {
     const step = (name) => tb.recipe.find((s) => s.step === name);
     let input;
     let read = {};
     let entryName = null;
-    if (step('read-csv')) {
+    if (step('read-json')) {
+      // One JSON document, gzipped or not (OpenEI's URDB bulk file).
+      const bytes = step('read-json').file ? raws[step('read-json').file].bytes : raw;
+      input = JSON.parse(new TextDecoder().decode(bytes[0] === 0x1f && bytes[1] === 0x8b ? gunzipSync(bytes) : bytes));
+    } else if (step('read-csv')) {
       // A delimited text file (Census's pipe-delimited relationship files): rows of strings, the header first.
       const csv = step('read-csv');
       input = parseDelimited(decodeText(csv.file ? raws[csv.file].bytes : raw).text, { delimiter: csv.delimiter }).rows;
@@ -129,17 +136,32 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
       // One sheet hands the normalizer its rows; a list of sheets hands it rows by sheet name.
       input = read.sheets ? Object.fromEntries(await Promise.all(read.sheets.map(async (sheet) => [sheet, (await readXlsx(bytes, { sheet })).rows]))) : (await readXlsx(bytes, { sheet: read.sheet })).rows;
     }
+    // A join reads named columns of another dataset's served table, and the manifest records which version.
+    const joins = {};
+    for (const j of tb.recipe.filter((s) => s.step === 'join')) {
+      const cur = join(joinDir, j.dataset, 'current.json');
+      if (!existsSync(cur)) { failures.push(`${tb.name}: join needs ${j.dataset}, which is not built in ${joinDir}`); continue; }
+      const { version } = JSON.parse(readFileSync(cur, 'utf8'));
+      const m = JSON.parse(readFileSync(join(joinDir, j.dataset, version, 'manifest.json'), 'utf8'));
+      const t = m.tables.find((x) => x.name === j.table);
+      if (!t) { failures.push(`${tb.name}: join needs table ${j.table} of ${j.dataset}`); continue; }
+      joins[`${j.dataset}/${j.table}`] = t.shards.flatMap((sh) => readShard(readFileSync(join(joinDir, j.dataset, version, sh.path))).rows().map((r) => Object.fromEntries(j.columns.map((c) => [c, r[c]]))));
+      (joinedFrom[tb.name] ??= []).push({ dataset: j.dataset, table: j.table, version });
+    }
+    if (failures.length) continue;
     const normalizer = await import(pathToFileURL(join(ROOT, 'pipeline/normalize', `${step('normalize').module}.mjs`)).href);
-    const { rows, problems, dataPeriod } = normalizer.normalize(input, read.headerRows);
+    const { rows, problems, dataPeriod } = normalizer.normalize(input, read.headerRows, { joins, retrieved });
     if (problems.length) { failures.push(...problems.map((p) => `${tb.name}: schema: ${p}`)); continue; }
     const prevRows = previous?.tables.find((t) => t.name === tb.name && t.dataPeriod === (dataPeriod ?? String(year)))?.rows;
     const bad = validateRows(rows, step('validate'), prevRows);
     const by = step('partition').by;
+    const unmatched = step('partition').unmatched ?? null;
     // partition by null: one national shard, for small tables or ones a later join splits by state.
-    const unplaced = by === null ? 0 : rows.filter((r) => r[by] === null || r[by] === undefined).length;
+    // An `unmatched` shard name keeps rows a join could not place instead of failing on them.
+    const unplaced = by === null || unmatched ? 0 : rows.filter((r) => r[by] === null || r[by] === undefined).length;
     if (unplaced) bad.push(`${unplaced} rows have no ${by} to partition by`);
     if (bad.length) { failures.push(...bad.map((f) => `${tb.name}: ${f}`)); continue; }
-    ready.push({ tb, rows, schema: normalizer.SCHEMA, by, entryName, dataPeriod: dataPeriod ?? String(year) });
+    ready.push({ tb, rows, schema: normalizer.SCHEMA, by, unmatched, entryName, dataPeriod: dataPeriod ?? String(year) });
   }
   if (failures.length) return { ok: false, failures };
 
@@ -148,15 +170,24 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const dir = join(datasetDir, version);
   const asOfMonth = `${MONTHS[Number(vintage.asOf.slice(5, 7)) - 1]} ${vintage.asOf.slice(0, 4)}`;
   const attribution = entry.attribution.replace('{asOfMonth}', asOfMonth).replace('{release}', vintage.release ?? '');
-  const lic = tableLicense([{ id: dataset, publisher: entry.publisher, license: entry.inputLicense ?? 'public-domain', attribution }]);
-  if (!lic.ok) return { ok: false, failures: [lic.error] };
+  const self = { id: dataset, publisher: entry.publisher, license: entry.inputLicense ?? 'public-domain', attribution };
   const tables = [];
-  for (const { tb, rows, schema, by, dataPeriod } of ready) {
+  for (const { tb, rows, schema, by, unmatched, dataPeriod } of ready) {
     const table = tb.name;
+    // A joined dataset is an input too: its credit travels with the table.
+    const joinedInputs = [];
+    for (const j of joinedFrom[table] ?? []) {
+      const je = (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${j.dataset}.mjs`)).href)).default;
+      const jm = JSON.parse(readFileSync(join(joinDir, j.dataset, j.version, 'manifest.json'), 'utf8'));
+      if (!joinedInputs.some((x) => x.id === j.dataset)) joinedInputs.push({ id: j.dataset, publisher: je.publisher, license: je.inputLicense ?? 'public-domain', attribution: jm.attribution });
+    }
+    const lic = tableLicense([self, ...joinedInputs]);
+    if (!lic.ok) return { ok: false, failures: [lic.error] };
     mkdirSync(join(dir, table), { recursive: true });
-    const parts = by === null ? ['US'] : [...new Set(rows.map((r) => r[by]))].sort();
+    const placed = (r) => (r[by] === null || r[by] === undefined ? unmatched : r[by]);
+    const parts = by === null ? ['US'] : [...new Set(rows.map(placed))].sort();
     const shards = parts.map((st) => {
-      const part = by === null ? rows : rows.filter((r) => r[by] === st);
+      const part = by === null ? rows : rows.filter((r) => placed(r) === st);
       const bytes = writeShard(part, schema, { dataset, version, table, state: st });
       const path = `${table}/${st}.bin`;
       writeFileSync(join(dir, path), bytes);
@@ -170,6 +201,8 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
       name: table, title: tb.title, dataPeriod, rows: rows.length, columns: schema, partition: by,
       shards, download: { path: `${table}.csv.gz`, bytes: csv.length, sha256: sha256(csv), format: 'text/csv; gzip' },
       license: lic.license, credits: lic.credits, notices: lic.notices,
+      ...(joinedFrom[table] ? { joinedFrom: joinedFrom[table] } : {}),
+      ...(unmatched ? { unmatched: rows.filter((r) => placed(r) === unmatched).length } : {}),
     });
   }
 

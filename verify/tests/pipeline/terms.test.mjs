@@ -62,7 +62,7 @@ test('a refresh attaches the raw file to a release, records the link, and captur
   const uploads = [];
   const host = { available: true, async reenableInactive() { return []; }, async openIssue() {}, async publishRawAsset(a) { uploads.push(a); return `https://github.com/clay-good/gridprims/releases/download/${a.tag}/${a.name}`; } };
   const small = { ...entry, vintages: { 2025: { url: URL25, asOf: '2026-10-07', sha256: null } }, tables: smallTables(entry) };
-  await scheduledRun('refresh-eia', { root, outDir: join(root, 'data'), host, fetch: fetchFake, entries: { 'eia-861': small }, now: () => new Date('2026-10-31T09:17:00Z') });
+  await scheduledRun('refresh-data', { root, outDir: join(root, 'data'), host, fetch: fetchFake, entries: { 'eia-861': small }, now: () => new Date('2026-10-31T09:17:00Z') });
   assert.deepEqual(uploads.map((u) => [u.tag, u.name]), [['data-eia-861-2026-10', 'f8612025.zip']]);
   const m = JSON.parse(readFileSync(join(root, 'data/eia-861/2026-10/manifest.json'), 'utf8'));
   assert.equal(m.raw[0].release, 'https://github.com/clay-good/gridprims/releases/download/data-eia-861-2026-10/f8612025.zip');

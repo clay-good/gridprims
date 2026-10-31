@@ -57,6 +57,10 @@ A dataset's `recipe` holds the steps every table shares (today, `fetch`), and `t
 | `unzip.entry` with `*` | Matches any run of characters within a file name, so a file the publisher renames between years (EIA-923's `_Final_Revision`) still matches; more than one match fails |
 | `read-xlsx.sheets` | Reads several sheets and hands the normalizer their rows by sheet name (EIA-860's operable, proposed, and retired generators) |
 | `read-xlsx` with no `unzip` | The download is the workbook itself (EIA-860M) |
+| `read-json` | Reads one JSON document, gunzipped when it starts with gzip's magic bytes (URDB's bulk file) |
+| `join` | Reads named columns of another dataset's served table (URDB takes each utility's states from EIA-861); the table's manifest records the joined versions in `joinedFrom`, and the joined publisher's credit travels with the table |
+| `partition.unmatched` | Rows a join could not place go to a shard of that name instead of failing (URDB's 707 rates of utilities not in EIA-861) |
+| `releaseWatch.period: 'rolling'` | One address rewritten in place (URDB, daily) is taken at most once a month; the period is the retrieval month |
 | `read-csv.delimiter` | Reads a delimited text file (the Census relationship file is pipe-delimited with a byte-order mark) and hands the normalizer rows of strings, the header first |
 | `read-xlsx.file` | Reads one named file of a multi-file vintage (eGRID's data workbook, or Power Profiler's ZIP lookup) |
 | `partition.by: null` | One national shard (`US.bin`) for a small table, or one a later join splits by state (the ZIP lookup, split once ZCTAs give each ZIP its state) |
@@ -91,7 +95,7 @@ Tests live in `verify/tests/`, mirroring the folder they test, so nothing under 
 |---|---|---|---|
 | `ci.yml` | push, pull request | on change | n/a |
 | `safari.yml` | push touching browser-run code, and weekly Thursday 06:53 UTC | weekly | 504 hours |
-| `refresh-eia.yml` | schedule | daily 09:17 UTC | 72 hours |
+| `refresh-data.yml` | schedule | daily 09:17 UTC | 72 hours |
 | `link-check.yml` | schedule | weekly, Tuesday 07:23 UTC | 504 hours |
 | `canary.yml` | schedule (floating runner label) | weekly, Wednesday 05:41 UTC | 504 hours |
 | `smoke.yml` | after deploy | with each deploy (task 8.6) | — |
@@ -143,4 +147,4 @@ Checked against the published schemas on 2026-10-30 (committed under `verify/ref
 
 ## 10. Reproducing a snapshot from the publisher
 
-`node pipeline/build-data.mjs` rebuilds every served dataset from the publisher's own file and compares checksums with the committed manifest. On 2026-10-31 it rebuilt EIA-861 (version 2026-10) live from `eia.gov`: the raw file's SHA-256 matched the pinned `f59f6c73…a396`, and all 51 shards and the CSV download matched byte for byte. On 2026-10-30, with three EIA-861 tables and EIA-860's plants and generators, both datasets rebuilt from EIA's pinned files (EIA-860 `2b27929d…08ba`) with every shard and download matching; EIA-923 (`1bff7092…84de`) rebuilt the same way the same day, and so did the Form 714 peaks from PUDL v2026.10.0's two Parquet files EIA-860M for September 2026 (`bcef74e1…da17`), eGRID2023 revision 2 with its ZIP lookup, and the Census 2020 ZCTA-to-county file. The rebuild also compares each table's data period. `node pipeline/get-data.mjs` fetches the same files from gridprims.com and accepts each only if it matches the digest committed in the clone.
+`node pipeline/build-data.mjs` rebuilds every served dataset from the publisher's own file and compares checksums with the committed manifest. On 2026-10-31 it rebuilt EIA-861 (version 2026-10) live from `eia.gov`: the raw file's SHA-256 matched the pinned `f59f6c73…a396`, and all 51 shards and the CSV download matched byte for byte. On 2026-10-30, with three EIA-861 tables and EIA-860's plants and generators, both datasets rebuilt from EIA's pinned files (EIA-860 `2b27929d…08ba`) with every shard and download matching; EIA-923 (`1bff7092…84de`) rebuilt the same way the same day, and so did the Form 714 peaks from PUDL v2026.10.0's two Parquet files EIA-860M for September 2026 (`bcef74e1…da17`), eGRID2023 revision 2 with its ZIP lookup, the Census 2020 ZCTA-to-county file, and URDB of 2026-10-30 (joined against the committed EIA-861). The rebuild also compares each table's data period. `node pipeline/get-data.mjs` fetches the same files from gridprims.com and accepts each only if it matches the digest committed in the clone.

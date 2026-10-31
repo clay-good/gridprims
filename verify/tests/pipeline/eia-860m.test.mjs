@@ -83,7 +83,7 @@ test('release watch: the next month\'s file refreshes; December rolls to January
 test('registry: EIA-860M passes the CEII screen and is on the daily watch', async () => {
   assert.deepEqual(validateEntry(entry), []);
   const { WORKFLOWS } = await import('../../../pipeline/workflows.mjs');
-  assert.ok(WORKFLOWS.find((w) => w.id === 'refresh-eia').datasets.includes('eia-860m'));
+  assert.ok(WORKFLOWS.find((w) => w.id === 'refresh-data').datasets.includes('eia-860m'));
   const m = JSON.parse(readFileSync(join(ROOT, 'data/eia-860m/2026-10/manifest.json'), 'utf8'));
   assert.deepEqual([m.tables[0].rows, m.tables[0].dataPeriod, m.raw[0].sha256], [39908, '2026-09', entry.vintages['2026-09'].sha256]);
 });

@@ -70,11 +70,11 @@ test('sections not yet populated say so and name what will populate them', () =>
 
 test('a late dataset and a stalled automation are listed with their dates', () => {
   const datasets = [{ dataset: 'egrid', title: 'eGRID', asOf: '2024-01-30', cadence: { every: 'annual' } }];
-  const health = { workflows: [{ id: 'refresh-eia', lastSuccess: '2026-10-01T09:17:00Z', thresholdHours: 72 }], datasets: [] };
+  const health = { workflows: [{ id: 'refresh-data', lastSuccess: '2026-10-01T09:17:00Z', thresholdHours: 72 }], datasets: [] };
   const L = record({ datasets, health });
   assert.equal(L.problems.lateDatasets[0].id, 'egrid');
   assert.match(page(L, { workflows: [], datasets: [] }), /eGRID was due Jan 30, 2025 \(judged from its usual schedule\); 639 days late\./);
-  assert.deepEqual(L.problems.automation.stalled.map((w) => w.id), ['refresh-eia']);
+  assert.deepEqual(L.problems.automation.stalled.map((w) => w.id), ['refresh-data']);
 });
 
 test('the unverified-claim register is listed, and a manifest citing a claim with no entry fails the build', async () => {

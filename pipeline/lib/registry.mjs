@@ -3,7 +3,7 @@
 // and the redistribution posture derived from its recorded terms.
 
 /** Recipe steps the pipeline knows how to run (docs/decisions-day-one.md §3). */
-export const STEPS = ['fetch', 'unzip', 'read-xlsx', 'read-csv', 'read-parquet', 'normalize', 'quirk', 'validate', 'partition', 'write-shards', 'write-csv-gz'];
+export const STEPS = ['fetch', 'unzip', 'read-xlsx', 'read-csv', 'read-parquet', 'read-json', 'join', 'normalize', 'quirk', 'validate', 'partition', 'write-shards', 'write-csv-gz'];
 
 /** Licenses the matcher recognizes, by identifier or the publisher's own words. Anything else is unrecognized. */
 export const RECOGNIZED = [
@@ -70,7 +70,8 @@ export function validateEntry(e) {
       checkSteps(t.recipe, `${where}.recipe`, fail);
       for (const need of TABLE_STEPS) if (!t.recipe.some((s) => s.step === need)) fail(`${where}.recipe`, `has no ${need} step`);
       const has = (step) => t.recipe.some((s) => s.step === step);
-      if (!has('read-xlsx') && !has('read-parquet') && !has('read-csv')) fail(`${where}.recipe`, 'has no read: read-xlsx (after unzip when the download is a zip), read-csv, or read-parquet');
+      if (!['read-xlsx', 'read-parquet', 'read-csv', 'read-json'].some(has)) fail(`${where}.recipe`, 'has no read: read-xlsx (after unzip when the download is a zip), read-csv, read-json, or read-parquet');
+      t.recipe.filter((s) => s.step === 'join').forEach((s) => { if (!s.dataset || !s.table || !Array.isArray(s.columns)) fail(`${where}.recipe join`, 'needs a dataset, a table, and the columns it reads'); });
       t.recipe.filter((s) => s.step === 'read-parquet' || (s.step === 'read-xlsx' && s.file)).forEach((s) => (s.files ?? [s.file]).forEach((f) => { if (!Object.values(e.vintages ?? {}).every((v) => v.files?.[f])) fail(`${where}.recipe ${s.step}`, `names file "${f}", which a vintage does not list`); }));
     });
   } else if (e.tables !== undefined) fail('tables', 'must be a list of tables');
