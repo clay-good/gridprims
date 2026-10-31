@@ -1,0 +1,201 @@
+{
+  "toolId": "electrify.backup-power.size",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "spec-list",
+      "result": {
+        "status": "ok",
+        "toolId": "electrify.backup-power.size",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "usableKwh": {
+            "value": 5.7,
+            "unit": "kWh",
+            "display": "5.7"
+          },
+          "nameplateKwh": {
+            "value": 7.1,
+            "unit": "kWh",
+            "display": "7.1"
+          },
+          "generatorKw": {
+            "value": 5,
+            "unit": "kW",
+            "display": "5.0"
+          },
+          "dailyKwh": {
+            "value": 9.6,
+            "unit": "kWh",
+            "display": "9.6"
+          },
+          "peakKw": {
+            "value": 2,
+            "unit": "kW",
+            "display": "2.0"
+          }
+        },
+        "sentence": "For 12 hours, get a battery of about 7.1 kWh (5.7 kWh you can use). Or get a generator of at least 5.0 kW.",
+        "notes": [],
+        "work": {
+          "method": "Battery usable kWh = critical energy over the outage, starting at the hour with the most critical load; nameplate = usable ÷ usable share. Generator kW = peak critical kW − the largest motor's running kW + its starting kW.",
+          "steps": [
+            "Daily critical energy: refrigerator 0.2 kW × 24 h = 4.8 kWh; well pump 1.5 kW × 2 h = 3 kWh; lights 0.3 kW × 6 h = 1.8 kWh; total 9.6 kWh.",
+            "Critical load by hour: 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.63, 0.63, 0.63, 0.63, 0.63, 0.63 kW (midnight to 11 pm). A load with no start time is spread over the day.",
+            "Battery: the outage starts at 18:00, the hour with the most critical load, and lasts 12 hours: 5.7 kWh usable ÷ 80% usable window = 7.13 kWh nameplate.",
+            "Generator: 2 kW − 1.5 kW running + 4.5 kW starting = 5 kW. A load with no start time counts at its full kW, since it could run at any moment.",
+            "Generator ratings are usually stated at 0.8 power factor. Check motor starting against the generator's own motor-starting data; no starting multiplier is assumed."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Loads with no start time are spread evenly over the day for the battery, and counted at full kW for the generator.",
+            "No inverter losses, battery aging, or temperature derating."
+          ],
+          "citations": [
+            {
+              "source": "NREL REopt, resilience analysis",
+              "edition": "REopt web tool",
+              "locator": "Critical load and outage duration inputs",
+              "url": "https://reopt.nrel.gov/tool"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A first-pass size to take to an installer, not a design."
+      }
+    },
+    {
+      "example": "spec-12h",
+      "result": {
+        "status": "ok",
+        "toolId": "electrify.backup-power.size",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "usableKwh": {
+            "value": 60,
+            "unit": "kWh",
+            "display": "60.0"
+          },
+          "nameplateKwh": {
+            "value": 75,
+            "unit": "kWh",
+            "display": "75.0"
+          },
+          "generatorKw": {
+            "value": 5,
+            "unit": "kW",
+            "display": "5.0"
+          },
+          "dailyKwh": {
+            "value": 120,
+            "unit": "kWh",
+            "display": "120.0"
+          },
+          "peakKw": {
+            "value": 5,
+            "unit": "kW",
+            "display": "5.0"
+          }
+        },
+        "sentence": "For 12 hours, get a battery of about 75.0 kWh (60.0 kWh you can use). Or get a generator of at least 5.0 kW.",
+        "notes": [],
+        "work": {
+          "method": "Battery usable kWh = critical energy over the outage, starting at the hour with the most critical load; nameplate = usable ÷ usable share. Generator kW = peak critical kW − the largest motor's running kW + its starting kW.",
+          "steps": [
+            "Daily critical energy: critical panel 5 kW × 24 h = 120 kWh; total 120 kWh.",
+            "Critical load by hour: 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 kW (midnight to 11 pm). A load with no start time is spread over the day.",
+            "Battery: the outage starts at 0:00, the hour with the most critical load, and lasts 12 hours: 60 kWh usable ÷ 80% usable window = 75 kWh nameplate.",
+            "Generator: 5 kW peak critical load. A load with no start time counts at its full kW, since it could run at any moment.",
+            "Generator ratings are usually stated at 0.8 power factor. Check motor starting against the generator's own motor-starting data; no starting multiplier is assumed."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Loads with no start time are spread evenly over the day for the battery, and counted at full kW for the generator.",
+            "No inverter losses, battery aging, or temperature derating."
+          ],
+          "citations": [
+            {
+              "source": "NREL REopt, resilience analysis",
+              "edition": "REopt web tool",
+              "locator": "Critical load and outage duration inputs",
+              "url": "https://reopt.nrel.gov/tool"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A first-pass size to take to an installer, not a design."
+      }
+    },
+    {
+      "example": "spec-motor",
+      "result": {
+        "status": "ok",
+        "toolId": "electrify.backup-power.size",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "usableKwh": {
+            "value": 10.3,
+            "unit": "kWh",
+            "display": "10.3"
+          },
+          "nameplateKwh": {
+            "value": 12.8,
+            "unit": "kWh",
+            "display": "12.8"
+          },
+          "generatorKw": {
+            "value": 7,
+            "unit": "kW",
+            "display": "7.0"
+          },
+          "dailyKwh": {
+            "value": 61.5,
+            "unit": "kWh",
+            "display": "61.5"
+          },
+          "peakKw": {
+            "value": 4,
+            "unit": "kW",
+            "display": "4.0"
+          }
+        },
+        "sentence": "For 4 hours, get a battery of about 12.8 kWh (10.3 kWh you can use). Or get a generator of at least 7.0 kW.",
+        "notes": [],
+        "work": {
+          "method": "Battery usable kWh = critical energy over the outage, starting at the hour with the most critical load; nameplate = usable ÷ usable share. Generator kW = peak critical kW − the largest motor's running kW + its starting kW.",
+          "steps": [
+            "Daily critical energy: well pump 1.5 kW × 1 h = 1.5 kWh; house loads 2.5 kW × 24 h = 60 kWh; total 61.5 kWh.",
+            "Critical load by hour: 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56, 2.56 kW (midnight to 11 pm). A load with no start time is spread over the day.",
+            "Battery: the outage starts at 0:00, the hour with the most critical load, and lasts 4 hours: 10.25 kWh usable ÷ 80% usable window = 12.81 kWh nameplate.",
+            "Generator: 4 kW − 1.5 kW running + 4.5 kW starting = 7 kW. A load with no start time counts at its full kW, since it could run at any moment.",
+            "Generator ratings are usually stated at 0.8 power factor. Check motor starting against the generator's own motor-starting data; no starting multiplier is assumed."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Loads with no start time are spread evenly over the day for the battery, and counted at full kW for the generator.",
+            "No inverter losses, battery aging, or temperature derating."
+          ],
+          "citations": [
+            {
+              "source": "NREL REopt, resilience analysis",
+              "edition": "REopt web tool",
+              "locator": "Critical load and outage duration inputs",
+              "url": "https://reopt.nrel.gov/tool"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A first-pass size to take to an installer, not a design."
+      }
+    }
+  ]
+}

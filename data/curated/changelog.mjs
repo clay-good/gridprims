@@ -11,6 +11,7 @@
  * @type {Array<{date: string, toolId: string | null, version: string, reason: string, kind?: 'security', credit?: string, sample?: {inputs: object, old: string, new: string}}>}
  */
 export default [
+  { date: '2026-10-31', toolId: 'electrify.backup-power.size', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'electrify.service-headroom.check', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'ratepayer.revenue-requirement.explain', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'calc.line-rating.ampacity', version: '0.1.0', reason: 'First release.' },

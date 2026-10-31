@@ -332,6 +332,39 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 - Not a code compliance decision; conductor sizing and full load calculations are out of scope.
 - Sites with solar, wind, a battery, or peak shaving cannot use the 30-day option.
 
+## Backup power size (`electrify.backup-power.size`)
+
+A first-pass battery and generator size for the loads you need through an outage.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Critical loads | `loads` |  |  | refrigerator, 0.2 kW, 24 h well pump, 1.5 kW, 2 h lights, 0.3 kW, 6 h, from 18:00 |
+| Outage to ride through | `hours` | hours | 0.25 to 336 | 12 |
+| Largest motor, running (0 to skip) | `motorRunKw` | kW | 0 to 10000 | 1.5 |
+| Largest motor, starting (0 to skip) | `motorStartKw` | kW | 0 to 10000 | 4.5 |
+| Usable share of the battery | `usable` | % | 1 to 100 | 80 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Battery, usable | `usableKwh` | kWh | 1 decimals |
+| Battery, nameplate | `nameplateKwh` | kWh | 1 decimals |
+| Generator | `generatorKw` | kW | 1 decimals |
+| Daily critical energy | `dailyKwh` | kWh | 1 decimals |
+| Critical load that can run at once | `peakKw` | kW | 1 decimals |
+
+**Method.** Battery usable kWh = critical energy over the outage, starting at the hour with the most critical load; nameplate = usable ÷ usable share. Generator kW = peak critical kW − the largest motor's running kW + its starting kW.
+
+**Sources.**
+
+- NREL REopt, resilience analysis, REopt web tool, Critical load and outage duration inputs (https://reopt.nrel.gov/tool)
+
+**Known limits.**
+
+- County outage history is not yet included: enter the outage length you want to ride through.
+- No inverter losses, battery aging, or temperature derating.
+
 ## Bill check (`household.bill-totals.check`)
 
 Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.

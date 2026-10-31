@@ -1,0 +1,46 @@
+export default {
+  id: 'electrify.backup-power.size',
+  version: '0.1.0',
+  title: 'Backup power size',
+  purpose: 'A first-pass battery and generator size for the loads you need through an outage.',
+  archetype: 'calculator',
+  firstScreen: ['loads', 'hours', 'motorRunKw', 'motorStartKw'],
+  inputs: [
+    { name: 'loads', label: 'Critical loads', type: 'text', multiline: true, example: 'refrigerator, 0.2 kW, 24 h\nwell pump, 1.5 kW, 2 h\nlights, 0.3 kW, 6 h, from 18:00', hint: 'One load a line: its name, running kW, and hours a day, and optionally when it starts, as "lights, 0.3 kW, 6 h, from 18:00".' },
+    { name: 'hours', label: 'Outage to ride through', type: 'number', unit: 'hours', range: { min: 0.25, max: 336 }, precision: 'exact', example: 12 },
+    { name: 'motorRunKw', label: 'Largest motor, running (0 to skip)', type: 'number', unit: 'kW', range: { min: 0, max: 10000 }, precision: 'exact', example: 1.5 },
+    { name: 'motorStartKw', label: 'Largest motor, starting (0 to skip)', type: 'number', unit: 'kW', range: { min: 0, max: 10000 }, precision: 'exact', example: 4.5, hint: 'From the motor nameplate or the manufacturer; no starting multiplier is assumed.' },
+    { name: 'usable', label: 'Usable share of the battery', type: 'number', unit: '%', range: { min: 1, max: 100 }, precision: 'exact', example: 80 },
+  ],
+  outputs: [
+    { name: 'usableKwh', label: 'Battery, usable', unit: 'kWh', rounding: { decimals: 1, fixed: true } },
+    { name: 'nameplateKwh', label: 'Battery, nameplate', unit: 'kWh', rounding: { decimals: 1, fixed: true } },
+    { name: 'generatorKw', label: 'Generator', unit: 'kW', rounding: { decimals: 1, fixed: true } },
+    { name: 'dailyKwh', label: 'Daily critical energy', unit: 'kWh', rounding: { decimals: 1, fixed: true } },
+    { name: 'peakKw', label: 'Critical load that can run at once', unit: 'kW', rounding: { decimals: 1, fixed: true } },
+  ],
+  method: 'Battery usable kWh = critical energy over the outage, starting at the hour with the most critical load; nameplate = usable ÷ usable share. Generator kW = peak critical kW − the largest motor\'s running kW + its starting kW.',
+  assumptions: [
+    'Loads with no start time are spread evenly over the day for the battery, and counted at full kW for the generator.',
+    'No inverter losses, battery aging, or temperature derating.',
+  ],
+  citations: [
+    { source: 'NREL REopt, resilience analysis', edition: 'REopt web tool', locator: 'Critical load and outage duration inputs', url: 'https://reopt.nrel.gov/tool' },
+  ],
+  datasets: [],
+  examples: [
+    { id: 'spec-list', title: 'A refrigerator, a well pump, and lights through a 12-hour outage', inputs: { loads: 'refrigerator, 0.2 kW, 24 h\nwell pump, 1.5 kW, 2 h\nlights, 0.3 kW, 6 h, from 18:00', hours: 12, usable: 80, motorRunKw: 1.5, motorStartKw: 4.5 }, expect: { dailyKwh: { value: 9.6, tolerance: { abs: 1e-9 }, display: '9.6' }, peakKw: { value: 2, tolerance: { abs: 1e-9 }, display: '2.0' }, generatorKw: { value: 5, tolerance: { abs: 1e-9 }, display: '5.0' }, usableKwh: { value: 5.7, tolerance: { abs: 1e-9 }, display: '5.7' }, nameplateKwh: { value: 7.125, tolerance: { abs: 1e-9 }, display: '7.1' } }, source: 'electrify/backup-power spec, scenario "Load list": 4.8 + 3.0 + 1.8 kWh; the battery starts at 6 pm: 6 h × 0.625 kW + 6 h × 0.325 kW = 5.7 kWh' },
+    { id: 'spec-12h', title: 'A constant 5 kW through 12 hours', inputs: { loads: 'critical panel, 5 kW, 24 h', hours: 12, usable: 80, motorRunKw: 0, motorStartKw: 0 }, expect: { usableKwh: { value: 60, tolerance: { abs: 1e-9 }, display: '60.0' }, nameplateKwh: { value: 75, tolerance: { abs: 1e-9 }, display: '75.0' } }, source: 'electrify/backup-power spec, scenario "12-hour target"' },
+    { id: 'spec-motor', title: 'A 4.0 kW peak with a well pump that starts at 4.5 kW', inputs: { loads: 'well pump, 1.5 kW, 1 h\nhouse loads, 2.5 kW, 24 h', hours: 4, usable: 80, motorRunKw: 1.5, motorStartKw: 4.5 }, expect: { peakKw: { value: 4, tolerance: { abs: 1e-9 }, display: '4.0' }, generatorKw: { value: 7, tolerance: { abs: 1e-9 }, display: '7.0' } }, source: 'electrify/backup-power spec, scenario "Motor start": 4.0 − 1.5 + 4.5' },
+  ],
+  related: ['electrify.service-headroom.check'],
+  handoffs: [{ label: 'Solar-plus-storage design for resilience (NREL REopt)', url: 'https://reopt.nrel.gov/tool' }],
+  stability: 'experimental',
+  validation: { level: 1, evidence: [{ kind: 'own-examples', summary: 'The spec\'s 9.6 kWh load list, 60 kWh usable and 75 kWh nameplate at 12 hours, and 7.0 kW generator with motor start pass, each hand-computed.' }] },
+  toRaise: 'Matching REopt\'s resilience results for the same critical load and outage would raise it to cross-checked.',
+  screeningLabel: 'A first-pass size to take to an installer, not a design.',
+  limitations: [
+    'County outage history is not yet included: enter the outage length you want to ride through.',
+    'No inverter losses, battery aging, or temperature derating.',
+  ],
+};
