@@ -1,6 +1,9 @@
 // The tool manifest schema (docs/decisions-day-one.md §1). Every surface is
 // generated from a manifest that passes this validator.
 
+/** The most inputs a tool's first screen may show (site/home-and-navigation, "Simplicity budget"). */
+export const FIRST_SCREEN_MAX = 5;
+
 export const ARCHETYPES = ['calculator', 'file-workbench', 'entity-page', 'explorer'];
 export const STABILITIES = ['experimental', 'stable'];
 export const INPUT_TYPES = ['number', 'enum', 'text', 'file'];
@@ -94,6 +97,13 @@ export function validateManifest(m, opts = {}) {
       else if (!inp.options.some((o) => o.value === inp.example)) fail(`${at}.example`, 'is not one of the options');
     }
   });
+  // The simplicity budget (site/home-and-navigation): a tool names the inputs on its first screen, at most five;
+  // the rest sit behind one "More options" control.
+  if (!Array.isArray(m.firstScreen) || !m.firstScreen.length) fail('firstScreen', 'must list the inputs shown on the first screen');
+  else {
+    if (m.firstScreen.length > FIRST_SCREEN_MAX) fail('firstScreen', `lists ${m.firstScreen.length} inputs; at most ${FIRST_SCREEN_MAX} fit on the first screen, so put the rest behind "More options"`);
+    for (const n of m.firstScreen) if (!inputNames.has(n)) fail('firstScreen', `names "${n}", which is not a declared input`);
+  }
 
   const outputs = list('outputs', 1);
   const outputNames = new Set();

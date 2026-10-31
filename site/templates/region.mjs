@@ -6,6 +6,7 @@ import { layout } from './layout.mjs';
 import { sourceStamp } from '../ui/source-stamp.mjs';
 import { tableView } from '../lib/chart.mjs';
 import { utilityPath } from './utility.mjs';
+import { plantPath } from './plant.mjs';
 import { pageTitle } from '../lib/meta.mjs';
 
 export const statePath = (code) => `/states/${code.toLowerCase()}/`;
@@ -18,7 +19,7 @@ const GROUPS = ['investor', 'cooperative', 'public', 'marketer', 'other'];
 const QUEUE = ['solar', 'wind', 'storage', 'gas', 'hybrid', 'other'];
 
 /** @param {{state: any, sources: any, i18n: any}} p */
-export function statePage({ state: s, sources, i18n }) {
+export function statePage({ state: s, sources, i18n, plants = [] }) {
   const { t, has } = i18n;
   const fuel = (code) => (has(`fuel.${code}`) ? t(`fuel.${code}`) : code);
   const byValue = (o) => Object.entries(o).filter(([, v]) => v).sort((a, b) => b[1] - a[1]);
@@ -55,7 +56,11 @@ ${sources.queue ? sourceStamp(sources.queue, sources.queue.tables[0], i18n) : ''
 ${tableView([t('state.col.utility'), t('utility.ownership'), t('utility.col.customers'), t('utility.col.sales')],
     s.utilities.map((u) => [u.page ? html`<a href="${utilityPath(u.id)}">${u.name}</a>` : u.name, u.ownership ?? '', whole(u.customers), whole(u.sales)]), t('state.utilities'))}
 <p>${t('state.utilitiesNote')}</p>
-</section>`;
+</section>
+${plants.length ? html`<section><h2>${t('state.plants', { count: plants.length.toLocaleString('en-US') })}</h2>
+${tableView([t('state.col.plant'), t('queue.col.county'), t('plant.nameplate'), t('plant.operator')],
+    [...plants].sort((a, b) => b.nameplateMw - a.nameplateMw || a.name.localeCompare(b.name)).map((p) => [html`<a href="${plantPath(p.id)}">${p.name}</a>`, p.county ?? '', `${mw(p.nameplateMw)} MW`, p.utilityName ?? '']), t('state.plantsCaption', { name: s.name }))}
+</section>` : ''}`;
   return layout({ i18n, title: pageTitle(t('state.title', { name: s.name })), description: t('state.description', { name: s.name }), path: statePath(s.code), body, section: 'grid' });
 }
 

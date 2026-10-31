@@ -14,6 +14,7 @@ The shapes every later phase-0 task generates from (foundation task 3.1). When a
 | `version` | string | 1 | semver; bumped when any output changes for the same input (task 3.5) |
 | `title`, `purpose` | string | 1 | purpose is one plain sentence |
 | `archetype` | enum | 1 | `calculator`, `file-workbench`, `entity-page`, `explorer` (DESIGN.md) |
+| `firstScreen` | string[] | 1–5 | the inputs on the first screen; any others sit behind one "More options" control (simplicity budget) |
 | `inputs` | object | 1+ | `name`, `label`, `type` (`number`, `enum`, `text`, `file`), `example`; numbers add `unit`, `canonicalUnit`, `range {min,max}`, `precision` (`exact` or `measured`); enums add `options [{value,label}]` |
 | `outputs` | object | 1+ | `name`, `label`, `unit` (or `unitless: true`), `rounding {sigFigs}` or `{decimals}` |
 | `method` | string | 1 | plain words |

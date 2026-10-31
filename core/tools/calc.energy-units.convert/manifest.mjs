@@ -8,6 +8,7 @@ export default {
   title: 'Energy unit converter',
   purpose: 'Convert energy between kWh, MWh, Btu, therms, joules, and common fuels, with every constant and its source shown.',
   archetype: 'calculator',
+  firstScreen: ['value', 'from', 'to'],
   inputs: [
     { name: 'value', label: 'Amount', type: 'number', unitFrom: 'from', range: { min: -1e15, max: 1e15 }, precision: 'exact', example: 12 },
     { name: 'from', label: 'From', type: 'enum', options, example: 'MWh' },

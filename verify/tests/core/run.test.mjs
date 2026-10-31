@@ -8,6 +8,7 @@ import { sample } from '../helpers.mjs';
 const charge = {
   ...sample(),
   id: 'calc.sample.transmission-charge',
+  firstScreen: ['rate', 'demand'],
   inputs: [
     { name: 'rate', label: 'Rate', type: 'number', unit: '$/kW-month', range: { min: 0, max: 1000 }, precision: 'measured', example: '4.00' },
     { name: 'demand', label: 'Billed demand', type: 'number', unit: 'kW-month', range: { min: 0, max: 1e6 }, precision: 'exact', example: 11_100 },

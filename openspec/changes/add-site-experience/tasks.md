@@ -11,9 +11,9 @@
 
 ## 3. Home and catalog (phase 1)
 
-- [ ] 3.1 Build the home page with two lanes of tool cells generated from manifests; verify the 360 × 640 first-viewport and no-JavaScript scenarios
-- [ ] 3.2 Build the tool catalog with filters; verify the bill-totals filter scenario and that unbuilt tools appear nowhere
-- [ ] 3.3 Enforce the simplicity budget in the build and the replace-not-add rule; verify the budget-exceeded, nothing-interrupts-arrival, and new-tool-promoted scenarios
+- [x] 3.1 Build the home page with two lanes of tool cells generated from manifests; verify the 360 × 640 first-viewport and no-JavaScript scenarios
+- [x] 3.2 Build the tool catalog with filters; verify the bill-totals filter scenario and that unbuilt tools appear nowhere
+- [x] 3.3 Enforce the simplicity budget in the build and the replace-not-add rule; verify the budget-exceeded, nothing-interrupts-arrival, and new-tool-promoted scenarios
 
 ## 4. Discoverability (phase 1)
 

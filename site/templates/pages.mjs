@@ -53,7 +53,9 @@ export function calculatorPage({ manifest, example, result, i18n, reviewed = fal
     <p class="skip" aria-live="polite" data-announce></p>
   </section>
   <form class="inputs" data-inputs aria-label="${t('tool.inputs')}" novalidate>
-    ${manifest.inputs.filter((i) => i.type !== 'file').map((i) => field(i, example.inputs[i.name] ?? i.example, i18n))}
+    ${manifest.inputs.filter((i) => i.type !== 'file' && manifest.firstScreen.includes(i.name)).map((i) => field(i, example.inputs[i.name] ?? i.example, i18n))}
+    ${manifest.inputs.some((i) => i.type !== 'file' && !manifest.firstScreen.includes(i.name)) ? html`<details class="more-options"><summary>${t('tool.moreOptions')}</summary>
+    ${manifest.inputs.filter((i) => i.type !== 'file' && !manifest.firstScreen.includes(i.name)).map((i) => field(i, example.inputs[i.name] ?? i.example, i18n))}</details>` : ''}
   </form>
   <details class="panel" data-work-panel>
     <summary><h2 class="summary-heading">${t('work.title')}</h2></summary>
@@ -129,17 +131,6 @@ ${L.problems.postureLimited.map((d) => html`<p>${t('limits.postureLine', { id: d
 }
 
 /** @param {{tools: any[], i18n: any}} p */
-export function homePage({ tools, i18n }) {
-  const { t } = i18n;
-  const body = html`
-<h1>${t('home.title')}</h1>
-<p class="purpose">${t('site.tagline')}</p>
-<p class="strip">${t('home.preview')}</p>
-<h2>${t('home.tools')}</h2>
-<ul class="tool-list">${tools.map(({ manifest: m }) => html`<li class="tool-cell"><a href="${toolPath(m.id)}">${m.title}</a><p>${m.purpose}</p></li>`)}</ul>`;
-  return layout({ i18n, title: t('home.pageTitle'), description: t('site.tagline'), path: '/', body, section: 'home' });
-}
-
 /**
  * The 404 page (site/home-and-navigation, "Helpful 404"): without script it
  * lists the sections and every tool; with script it suggests up to five close

@@ -27,6 +27,7 @@ export function sample() {
     title: 'Doubler',
     purpose: 'Doubles a number.',
     archetype: 'calculator',
+    firstScreen: ['x'],
     inputs: [{ name: 'x', label: 'Number', type: 'number', unit: 'kWh', range: { min: 0, max: 100 }, precision: 'exact', example: 2 }],
     outputs: [{ name: 'y', label: 'Double', unit: 'kWh', rounding: { sigFigs: 3 } }],
     method: 'Multiply by two.',
