@@ -61,3 +61,17 @@ test('offsets, validity, and ISO display', () => {
   assert.equal(formatLocalIso(NY, Date.UTC(2026, 10, 1, 5, 30)), '2026-11-01T01:30:00-04:00');
   assert.equal(formatLocalIso(NY, Date.UTC(2026, 10, 1, 6, 30)), '2026-11-01T01:30:00-05:00');
 });
+
+test('the per-hour converter agrees with the exact one on every 15-minute wall time of 2026', async () => {
+  const { createLocalToUtc } = await import('../../../parsers/time.mjs');
+  for (const zone of [NY, 'America/Chicago', 'America/Denver', 'America/Phoenix', 'America/Los_Angeles', 'America/Anchorage', 'Pacific/Honolulu']) {
+    const fast = createLocalToUtc(zone);
+    // Every wall time on the two transition days, and a sample of ordinary ones.
+    for (const [month, day] of [[3, 8], [11, 1], [1, 15], [7, 4]]) {
+      for (let h = 0; h < 24; h++) for (const minute of [0, 15, 30, 45]) {
+        const f = { year: 2026, month, day, hour: h, minute };
+        assert.deepEqual(fast(f), localToUtc(zone, f), `${zone} ${month}/${day} ${h}:${minute}`);
+      }
+    }
+  }
+});

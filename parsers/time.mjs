@@ -124,3 +124,24 @@ export function formatLocalIso(zone, utcMs) {
   const a = Math.abs(l.offsetMinutes);
   return `${l.year}-${p2(l.month)}-${p2(l.day)}T${p2(l.hour)}:${p2(l.minute)}:${p2(l.second)}${sign}${p2(Math.floor(a / 60))}:${p2(a % 60)}`;
 }
+
+/**
+ * A wall-time-to-UTC converter for one zone that resolves each wall-clock hour
+ * once. Exact wherever offsets change only on whole hours (every US zone);
+ * a year of 15-minute rows costs about 8,760 lookups instead of 35,040.
+ * @param {string} zone
+ * @returns {(f: LocalFields) => ReturnType<typeof localToUtc>}
+ */
+export function createLocalToUtc(zone) {
+  /** @type {Map<number, ReturnType<typeof localToUtc>>} */
+  const hours = new Map();
+  return (f) => {
+    const hourKey = Date.UTC(f.year, f.month - 1, f.day, f.hour);
+    let r = hours.get(hourKey);
+    if (!r) hours.set(hourKey, (r = localToUtc(zone, { year: f.year, month: f.month, day: f.day, hour: f.hour, minute: 0 })));
+    const within = ((f.minute ?? 0) * 60 + (f.second ?? 0)) * 1000;
+    if (r.status === 'ok') return { status: 'ok', utcMs: r.utcMs + within };
+    if (r.status === 'repeat') return { status: 'repeat', earlier: r.earlier + within, later: r.later + within };
+    return r;
+  };
+}

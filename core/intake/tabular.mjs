@@ -4,7 +4,7 @@
 // silently: every repair is counted on the receipt.
 
 import { readDate, readDateTime, readNumber, readTime } from './values.mjs';
-import { localToUtc } from '../../parsers/time.mjs';
+import { createLocalToUtc } from '../../parsers/time.mjs';
 import { serialToFields } from '../../parsers/xlsx.mjs';
 import { assembleSeries, DUPLICATE_RULE } from './series.mjs';
 
@@ -220,6 +220,7 @@ export function readTable(rows, choices, file = {}) {
 
   // Wall time to UTC in the chosen zone, keeping both fall-back hours and refusing spring-gap times.
   const zone = choices.zone;
+  const localToUtc = createLocalToUtc(zone);
   const seen = new Map();
   let repeatedKept = 0;
   const readings = [];
@@ -227,7 +228,7 @@ export function readTable(rows, choices, file = {}) {
     let w = r.wall;
     if (stampsMark === 'end') w = fromNaive(naive(w) - intervalMinutes * 60_000);
     else if (w.hour === 24) w = fromNaive(naive(w));
-    const u = localToUtc(zone, w);
+    const u = localToUtc(w);
     if (u.status === 'gap') { skip('a time that does not exist on the spring-forward day'); continue; }
     let ms;
     if (u.status === 'repeat') {
