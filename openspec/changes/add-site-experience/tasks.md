@@ -24,9 +24,9 @@
 
 ## 5. Limits page (phase 0, before any tool ships)
 
-- [ ] 5.1 Generate the limits page and its JSON from manifests, CI results, the registry, the corrections log, the curated cannot-do list, and the unverified-claim register; verify the reached-from-a-result, first-screen (at 320 px), phase-0-page, section-not-yet-populated, launch-reality, stale-evidence, three-axes, minimum-contents, cited-reason, asked-for-something-on-the-list, late-dataset, unverified-dependency, path-to-field-verified, no-invented-accuracy, unsupported-endorsement, pending-labels, agent-reads-the-limits, and capability-added scenarios
-- [ ] 5.2 Maintain the curated cannot-do list and the unverified-claim register as checked records; verify a shipped page citing an unverified claim with no register entry fails the build
-- [ ] 5.3 Run DESIGN.md gates on the limits page (both themes, 320 px sweep, keyboard pass, print); verify CI green
+- [x] 5.1 Generate the limits page and its JSON from manifests, CI results, the registry, the corrections log, the curated cannot-do list, and the unverified-claim register; verify the reached-from-a-result, first-screen (at 320 px), phase-0-page, section-not-yet-populated, launch-reality, stale-evidence, three-axes, minimum-contents, cited-reason, asked-for-something-on-the-list, late-dataset, unverified-dependency, path-to-field-verified, no-invented-accuracy, unsupported-endorsement, pending-labels, agent-reads-the-limits, and capability-added scenarios
+- [x] 5.2 Maintain the curated cannot-do list and the unverified-claim register as checked records; verify a shipped page citing an unverified claim with no register entry fails the build
+- [x] 5.3 Run DESIGN.md gates on the limits page (both themes, 320 px sweep, keyboard pass, print); verify CI green
 
 ## 6. Trust pages (phase 0 templates, phase 1 content)
 

@@ -40,6 +40,7 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | Release integrity: a version tag rebuilds and publishes SHA-256 digests of every deployed file, a deterministic MCP archive, and an SPDX SBOM listing zero third-party packages; every date comes from the tagged commit | Built and tested; first tag not cut yet |
 | Accessibility gates on every page in both themes: an own audit (labels, names, headings, landmarks, 24 px targets, ids), no sideways scroll at 320, 360, 768, 1024, and 1280 px, keyboard reachability, and one screen-reader announcement 500 ms after typing settles | Passing in browsers; glossary popovers and print get their checks with the Learn guides |
 | Grid pulse in the top rail: the 14 latest daily peaks with "as of", hidden until an EIA-930 snapshot exists | Built and tested; hidden today |
+| Limits page (`/limits/`, with JSON and the MCP resource from one record): honest summary first, every tool's stability, level, review, evidence date, and path to a higher level, the cited cannot-do list, known problems from the health record, and the unverified-claim register | Built and tested, including print in Chrome |
 | Overpass fonts | Not started |
 
 The plan is in [`openspec/changes/`](openspec/changes/): 22 changes, built in the phase order in [`plan-launch-and-value-proof`](openspec/changes/plan-launch-and-value-proof/). The shapes everything generates from are in [`docs/decisions-day-one.md`](docs/decisions-day-one.md).
