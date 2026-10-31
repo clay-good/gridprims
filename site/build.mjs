@@ -18,7 +18,10 @@ import { toolPath } from './ui/tool-page.mjs';
 import { tokensCss } from './styles/tokens.mjs';
 import { serviceWorkerSource } from './sw.mjs';
 import { securityTxt } from './security-txt.mjs';
-import { calculatorPage, changelogPage, datasetPage, developersPage, filesPage, homePage, limitsPage, notFoundPage, privacyPage, reportPage, sectionPage, securityPage, settingsPage } from './templates/pages.mjs';
+import { aboutPage, accessibilityPage, calculatorPage, changelogPage, continuityPage, correctionsPage, datasetPage, developersPage, filesPage, homePage, licensePage, limitsPage, methodsIndexPage, methodsPage, notFoundPage, privacyPage, reportPage, reviewPage, sectionPage, securityPage, settingsPage, sourcesPage, termsPage } from './templates/pages.mjs';
+import corrections from '../data/curated/corrections.mjs';
+import { MAINTAINER, ORIGIN } from './config.mjs';
+import { tableRows } from '../verify/lib/walk.mjs';
 import changelog from '../data/curated/changelog.mjs';
 import { THEME_SCRIPT } from './templates/layout.mjs';
 import { walk } from '../verify/lib/walk.mjs';
@@ -52,6 +55,9 @@ export async function build(opts = {}) {
 
   const i18n = createI18n(opts.pseudo ? pseudoMessages(strings) : strings, 'en-US');
   const pages = [];
+  // The build's date is the commit's, never the wall clock (platform/privacy-and-security, supply-chain integrity).
+  let buildDate = '2026-10-31T00:00:00Z';
+  try { buildDate = execFileSync('git', ['log', '-1', '--format=%cI'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || buildDate; } catch { /* not a git checkout */ }
   const healthFile = join(ROOT, 'data/health/pipeline.json');
   const health = existsSync(healthFile) ? JSON.parse(readFileSync(healthFile, 'utf8')) : null;
   const write = (path, html) => {
@@ -84,6 +90,22 @@ export async function build(opts = {}) {
   write('/privacy/', privacyPage({ i18n }));
   write('/developers/', developersPage({ i18n }));
   write('/security/', securityPage({ i18n }));
+  // The trust page set (site/trust-pages).
+  const signoffs = [...tableRows(readFileSync(join(ROOT, 'docs/review-signoffs.md'), 'utf8')).keys()].map((tool) => ({ tool }));
+  const passed = new Map((health?.tools ?? []).map((x) => [x.id, x.evidencePassed]));
+  write('/about/', aboutPage({ i18n, maintainer: MAINTAINER }));
+  write('/methods/', methodsIndexPage({ tools: TOOLS, i18n }));
+  for (const { manifest } of TOOLS) write(`/methods/${manifest.id}/`, methodsPage({ manifest, i18n, passed: passed.get(manifest.id) }));
+  write('/accessibility/', accessibilityPage({ i18n }));
+  write('/corrections/', correctionsPage({ entries: corrections, i18n }));
+  const first = TOOLS[0];
+  const firstResult = first && runTool(first.manifest, first.impl, first.manifest.examples[0].inputs);
+  const example = first && { sentence: firstResult.sentence, title: first.manifest.title, version: first.manifest.version, url: `${ORIGIN}${toolPath(first.manifest.id)}#${new URLSearchParams(first.manifest.examples[0].inputs)}` };
+  write('/license/', licensePage({ i18n, datasets, example, buildDay: buildDate.slice(0, 10) }));
+  write('/sources/', sourcesPage({ tools: TOOLS, datasets, i18n }));
+  write('/review-status/', reviewPage({ tools: TOOLS, signoffs, i18n }));
+  write('/terms/', termsPage({ i18n }));
+  write('/continuity/', continuityPage({ i18n, datasets, node: readFileSync(join(ROOT, '.node-version'), 'utf8').trim() }));
   for (const id of existsSync(join(ROOT, 'data')) ? readdirSync(join(ROOT, 'data')) : []) {
     const cur = join(ROOT, 'data', id, 'current.json');
     if (!existsSync(cur)) continue;
@@ -101,9 +123,6 @@ export async function build(opts = {}) {
   for (const id of ['bills', 'data', 'carbon', 'grid', 'learn']) write(`/${id}/`, sectionPage({ id, tools: TOOLS, datasets, i18n }));
 
   writeFileSync(join(outDir, '_redirects'), redirectsFile(redirects));
-  // The build's date is the commit's, never the wall clock (platform/privacy-and-security, supply-chain integrity).
-  let buildDate = '2026-10-31T00:00:00Z';
-  try { buildDate = execFileSync('git', ['log', '-1', '--format=%cI'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || buildDate; } catch { /* not a git checkout */ }
   mkdirSync(join(outDir, '.well-known'), { recursive: true });
   writeFileSync(join(outDir, '.well-known/security.txt'), securityTxt(buildDate));
 

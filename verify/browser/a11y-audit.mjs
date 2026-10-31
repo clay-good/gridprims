@@ -28,7 +28,7 @@ export function audit() {
     if (!visible(el) || el.closest('[aria-hidden=true]')) continue;
     if (!name(el)) problems.push(`${where(el)} has no accessible name`);
     // Target size: 24 by 24 at least, except links inside running text (WCAG 2.2, 2.5.8 inline exception).
-    const inline = el.tagName === 'A' && el.closest('p, li, td, dd, figcaption, blockquote') && !el.classList.contains('button') && !el.classList.contains('handoff');
+    const inline = el.tagName === 'A' && el.closest('p, li, td, th, dd, figcaption, blockquote') && !el.classList.contains('button') && !el.classList.contains('handoff');
     const r = el.getBoundingClientRect();
     if (!inline && (r.width < 24 || r.height < 24)) problems.push(`${where(el)} target is ${Math.round(r.width)}×${Math.round(r.height)}, under 24×24`);
   }

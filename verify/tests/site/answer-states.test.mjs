@@ -22,17 +22,20 @@ test('a level 0 answer carries the unvalidated strip beside it, with the limits 
   assert.match(card, /Report a problem/);
 });
 
-test('a level 2 answer shows the check glyph and no level strip', () => {
+test('a level 2 answer shows the check glyph; its strip says only "Review pending" until a sign-off exists', () => {
   const m = withLevel(2);
   const card = String(renderAnswer(m, runTool(m, impl, { x: 2 }), i18n, { isExample: false }));
   assert.match(card, /class="ok"/);
-  assert.doesNotMatch(card, /data-strip/);
+  assert.match(card, /data-strip>[\s\S]*Review pending/);
+  assert.doesNotMatch(card, /Self-checked only|Unvalidated/);
+  const reviewed = String(renderAnswer(m, runTool(m, impl, { x: 2 }), i18n, { isExample: false, reviewed: true }));
+  assert.doesNotMatch(reviewed, /data-strip/, 'a reviewed, cross-checked, non-example answer needs no strip');
 });
 
 test('the screening label sits in the same strip as the answer, strongest reason first', () => {
   const m = withLevel(1, { screeningLabel: 'Screening estimate. Your utility\'s study is the final word.' });
   const card = String(renderAnswer(m, runTool(m, impl, { x: 2 }), i18n, { isExample: true }));
-  assert.match(card, /data-strip>[\s\S]*Screening estimate\. Your utility&#39;s study is the final word\. · Self-checked only[\s\S]* · Example values/);
+  assert.match(card, /data-strip>[\s\S]*Screening estimate\. Your utility&#39;s study is the final word\. · Self-checked only[\s\S]* · Example values · Review pending/);
   assert.equal(card.match(/data-strip/g).length, 1, 'one strip per answer');
 });
 

@@ -38,7 +38,7 @@ function update({ pushState = true } = {}) {
   const result = runTool(manifest, impl, values);
   const isExample = isExampleState(manifest, values);
   last = result;
-  answer.innerHTML = String(renderAnswer(manifest, result, i18n, { isExample }));
+  answer.innerHTML = String(renderAnswer(manifest, result, i18n, { isExample, reviewed: root.dataset.reviewed === 'yes' }));
   work.innerHTML = String(renderWork(manifest, result, i18n));
   showErrors(result.status === 'invalid' ? result.errors : []);
   if (pushState) history.replaceState(null, '', isExample ? location.pathname : encodeState(manifest, values));

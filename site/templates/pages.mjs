@@ -9,6 +9,7 @@ import { sourceStamp } from '../ui/source-stamp.mjs';
 import { lateness } from '../../core/lib/lateness.mjs';
 import { CLONE, DATA_DIR, snippets } from '../../mcp/clients.mjs';
 import { SECTIONS, sectionOf } from '../ui/sections.mjs';
+import { ORIGIN } from '../config.mjs';
 
 /** One input control, labeled from the manifest. */
 function field(inp, value, i18n) {
@@ -29,10 +30,10 @@ function field(inp, value, i18n) {
  * A calculator page, prerendered with its first worked example.
  * @param {{manifest: any, example: any, result: any, i18n: any}} p
  */
-export function calculatorPage({ manifest, example, result, i18n }) {
+export function calculatorPage({ manifest, example, result, i18n, reviewed = false }) {
   const { t } = i18n;
   const body = html`
-<article data-tool="${manifest.id}" data-tool-version="${manifest.version}">
+<article data-tool="${manifest.id}" data-tool-version="${manifest.version}" data-reviewed="${reviewed ? 'yes' : 'no'}">
   <div class="tool-head">
     <h1>${manifest.title}</h1>
     <span class="chip">${t(`tool.stability.${manifest.stability}`)}</span>
@@ -41,7 +42,7 @@ export function calculatorPage({ manifest, example, result, i18n }) {
   <p class="purpose">${manifest.purpose}</p>
   <noscript><p class="panel">${t('tool.needsJs')}</p></noscript>
   <section class="answer" aria-label="${t('answer.label')}">
-    <div data-answer>${renderAnswer(manifest, result, i18n, { isExample: true })}</div>
+    <div data-answer>${renderAnswer(manifest, result, i18n, { isExample: true, reviewed })}</div>
     <div class="answer-actions">
       <button class="button" type="button" data-copy>${t('answer.copy')}</button>
       <button class="button" type="button" data-share>${t('answer.share')}</button>
@@ -319,4 +320,110 @@ export function securityPage({ i18n }) {
 <h2>${t('security.times')}</h2><p>${t('security.timesBody')}</p>
 <p>${t('security.notLegal')}</p>`;
   return layout({ i18n, title: `${t('security.title')} · ${t('site.name')}`, description: t('security.intro'), path: '/security/', body });
+}
+
+/** A short page of paragraphs, for the trust pages that are mostly prose. */
+const prose = (paras) => paras.map((p) => (typeof p === 'string' ? html`<p>${p}</p>` : p));
+
+/** @param {{i18n: any, maintainer: string}} p */
+export function aboutPage({ i18n, maintainer }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('about.title')}</h1><p class="purpose">${t('about.what')}</p>
+<h2>${t('about.who')}</h2><p>${t('about.whoBody', { maintainer })}</p>
+<h2>${t('about.money')}</h2><p>${t('about.moneyBody')}</p>
+<h2>${t('about.costs')}</h2><p>${t('about.costsBody')}</p><p>${t('about.users')}</p>`;
+  return layout({ i18n, title: `${t('about.title')} · ${t('site.name')}`, description: t('about.what'), path: '/about/', body });
+}
+
+/** The methods index and one generated methods page per tool. */
+export function methodsIndexPage({ tools, i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('methods.title')}</h1><p class="purpose">${t('methods.intro')}</p>
+<ul>${tools.map(({ manifest: m }) => html`<li><a href="/methods/${m.id}/">${m.title}</a></li>`)}</ul>`;
+  return layout({ i18n, title: `${t('methods.title')} · ${t('site.name')}`, description: t('methods.intro'), path: '/methods/', body });
+}
+
+/** @param {{manifest: any, i18n: any, passed?: string | null}} p */
+export function methodsPage({ manifest: m, i18n, passed }) {
+  const { t, date } = i18n;
+  const tol = (e) => Object.values(e.expect).map((x) => (x.tolerance.abs !== undefined ? `±${x.tolerance.abs}` : `±${x.tolerance.rel * 100}%`)).join(', ');
+  const body = html`<h1>${t('methods.title')}: ${m.title}</h1><p class="purpose mono">${m.id} · ${t('tool.version', { version: m.version })}</p>
+<h2>${t('work.method')}</h2><p>${m.method}</p>
+<h2>${t('work.assumptions')}</h2><ul>${m.assumptions.map((a) => html`<li>${a}</li>`)}</ul>
+<h2>${t('work.citations')}</h2><ul class="mono">${m.citations.map((c) => html`<li>${c.url ? html`<a href="${c.url}">${c.source}</a>` : c.source}, ${c.edition}, ${c.locator}</li>`)}</ul>
+<h2>${t('methods.examples')}</h2>
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col">${t('methods.col.example')}</th><th scope="col">${t('methods.col.source')}</th><th scope="col">${t('methods.col.tolerance')}</th><th scope="col">${t('methods.col.result')}</th></tr></thead>
+  <tbody>${m.examples.map((e) => html`<tr><th scope="row">${e.title}</th><td>${e.source}</td><td class="mono">${tol(e)}</td><td>${passed ? t('methods.passed', { date: date(passed.slice(0, 10)) }) : t('methods.notRun')}</td></tr>`)}</tbody>
+</table></div>
+<h2>${t('methods.differences')}</h2><p>${t('methods.differencesNone')}</p>
+<h2>${t('methods.cite')}</h2><pre class="mono report-preview">${t('cite.tool', { title: m.title, version: m.version, url: `${ORIGIN}${toolPath(m.id)}` })}</pre>`;
+  return layout({ i18n, title: `${t('methods.title')}: ${m.title} · ${t('site.name')}`, description: m.purpose, path: `/methods/${m.id}/`, body });
+}
+
+export function accessibilityPage({ i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('a11y.title')}</h1><p class="purpose">${t('a11y.target')}</p>
+<h2>${t('a11y.checks')}</h2><p>${t('a11y.checksBody')}</p>
+<h2>${t('a11y.known')}</h2><ul><li>${t('a11y.known1')}</li><li>${t('a11y.known2')}</li><li>${t('a11y.known3')}</li></ul>
+<p>${t('a11y.report')} <a href="/report/" data-report>${t('report.title')}</a></p>`;
+  return layout({ i18n, title: `${t('a11y.title')} · ${t('site.name')}`, description: t('a11y.target'), path: '/accessibility/', body });
+}
+
+/** @param {{entries: any[], i18n: any}} p */
+export function correctionsPage({ entries, i18n }) {
+  const { t, date } = i18n;
+  const body = html`<h1>${t('corrections.title')}</h1>
+<h2>${t('corrections.policy')}</h2>${prose([t('corrections.policyBody'), t('corrections.tiers')])}
+<h2>${t('corrections.log')}</h2>
+${entries.length ? html`<ul>${entries.map((e) => html`<li><span class="mono">${date(e.date)}</span> · ${t(`corrections.tier.${e.tier}`)} · ${t('corrections.line', { subject: e.subject, cause: e.cause })}${e.sample ? html` ${t('corrections.sample', e.sample)}` : ''}</li>`)}</ul>` : html`<p>${t('corrections.none')}</p>`}`;
+  return layout({ i18n, title: `${t('corrections.title')} · ${t('site.name')}`, description: t('corrections.policyBody'), path: '/corrections/', body });
+}
+
+/** @param {{i18n: any, datasets: any[]}} p */
+export function licensePage({ i18n, datasets, example, buildDay }) {
+  const { t } = i18n;
+  const d = datasets[0];
+  const body = html`<h1>${t('license.title')}</h1>${prose([t('license.code'), t('license.text'), t('license.upstream')])}
+<h2>${t('license.cite')}</h2>
+<h3>${t('license.citePage')}</h3><pre class="mono report-preview">${t('cite.page', { title: t('limits.title'), url: `${ORIGIN}/limits/`, date: buildDay })}</pre>
+<h3>${t('license.citeResult')}</h3><pre class="mono report-preview">${example ? t('cite.result', example) : ''}</pre>
+${d ? html`<h3>${t('license.citeData')}</h3><pre class="mono report-preview">${t('cite.data', { title: d.title, version: d.version, asOf: d.asOf, attribution: d.attribution, url: `${ORIGIN}/data/${d.dataset}/` })}</pre>` : ''}`;
+  return layout({ i18n, title: `${t('license.title')} · ${t('site.name')}`, description: t('license.text'), path: '/license/', body });
+}
+
+/** @param {{tools: any[], datasets: any[], i18n: any}} p */
+export function sourcesPage({ tools, datasets, i18n }) {
+  const { t } = i18n;
+  const standards = [...new Map(tools.flatMap(({ manifest: m }) => m.citations).map((c) => [c.source, c])).values()];
+  const body = html`<h1>${t('sources.title')}</h1><p class="purpose">${t('sources.intro')}</p>
+<h2>${t('sources.data')}</h2><ul>${datasets.map((d) => html`<li><a href="/data/${d.dataset}/">${d.publisher}: ${d.title}</a>. ${d.attribution}</li>`)}</ul>
+<h2>${t('sources.standards')}</h2><ul>${standards.map((c) => html`<li>${c.url ? html`<a href="${c.url}">${c.source}</a>` : c.source}, ${c.edition}</li>`)}</ul>`;
+  return layout({ i18n, title: `${t('sources.title')} · ${t('site.name')}`, description: t('sources.intro'), path: '/sources/', body });
+}
+
+/** @param {{tools: any[], signoffs: any[], i18n: any}} p */
+export function reviewPage({ tools, signoffs, i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('review.title')}</h1><p class="purpose">${t('review.intro')}</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">${t('review.col.tool')}</th><th scope="col">${t('review.col.status')}</th></tr></thead>
+<tbody>${tools.map(({ manifest: m }) => html`<tr><th scope="row"><a href="${toolPath(m.id)}">${m.title}</a></th><td>${signoffs.some((x) => x.tool === m.id) ? t('limits.review.signed off') : t('strip.reviewPending')}</td></tr>`)}</tbody></table></div>`;
+  return layout({ i18n, title: `${t('review.title')} · ${t('site.name')}`, description: t('review.intro'), path: '/review-status/', body });
+}
+
+export function termsPage({ i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('terms.title')}</h1>${prose([t('terms.free'), t('terms.screening'), t('terms.yours'), t('terms.liability'), t('terms.data'), t('terms.care')])}
+<p><a href="/limits/#cannot">${t('terms.limits')}</a></p><p>${t('terms.report')} <a href="/report/" data-report>${t('report.title')}</a></p>`;
+  return layout({ i18n, title: `${t('terms.title')} · ${t('site.name')}`, description: t('terms.screening'), path: '/terms/', body });
+}
+
+/** @param {{i18n: any, datasets: any[], node: string}} p */
+export function continuityPage({ i18n, datasets, node }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('continuity.title')}</h1><p class="purpose">${t('continuity.intro')}</p>
+<h2>${t('continuity.steps')}</h2><ol><li>${t('continuity.step1', { node })}</li><li>${t('continuity.step2')}</li><li>${t('continuity.step3')}</li><li>${t('continuity.step4')}</li></ol>
+<h2>${t('continuity.upstreams')}</h2><ul class="mono">${datasets.map((d) => html`<li>${d.dataset}: <a href="${d.raw[0].url}">${d.raw[0].url}</a> (${t('data.sha')} ${d.raw[0].sha256})</li>`)}</ul>
+<h2>${t('continuity.archives')}</h2><p>${t('continuity.archivesBody')}</p><p>${t('continuity.licenses')}</p>`;
+  return layout({ i18n, title: `${t('continuity.title')} · ${t('site.name')}`, description: t('continuity.intro'), path: '/continuity/', body });
 }

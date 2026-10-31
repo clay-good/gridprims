@@ -23,14 +23,16 @@ export function sourceTab(manifest) {
  * @param {{validationLevel?: number}} result
  * @param {boolean} isExample
  * @param {{t: (id: string, p?: any) => string}} i18n
+ * @param {boolean} [reviewed] whether docs/review-signoffs.md has a row for this tool
  */
-export function stripReasons(manifest, result, isExample, i18n) {
+export function stripReasons(manifest, result, isExample, i18n, reviewed = false) {
   const reasons = [];
   if (manifest.screeningLabel) reasons.push(manifest.screeningLabel);
   const level = result.validationLevel ?? manifest.validation.level;
   if (level === 0) reasons.push(i18n.t('strip.unvalidated'));
   if (level === 1) reasons.push(i18n.t('strip.selfChecked'));
   if (isExample) reasons.push(i18n.t('answer.example'));
+  if (!reviewed) reasons.push(i18n.t('strip.reviewPending'));
   return reasons;
 }
 
@@ -39,9 +41,9 @@ export function stripReasons(manifest, result, isExample, i18n) {
  * @param {any} manifest
  * @param {any} result a runTool result
  * @param {{t: Function}} i18n
- * @param {{isExample: boolean}} opts
+ * @param {{isExample: boolean, reviewed?: boolean}} opts
  */
-export function renderAnswer(manifest, result, i18n, { isExample }) {
+export function renderAnswer(manifest, result, i18n, { isExample, reviewed = false }) {
   const { t } = i18n;
   const level = manifest.validation.level;
   const evidence = manifest.validation.evidence.map((e) => e.summary).join(' ');
@@ -67,7 +69,7 @@ export function renderAnswer(manifest, result, i18n, { isExample }) {
       <p class="sentence">${GLYPHS.octagon} ${t('answer.invalid')}</p>
     </div>`;
   }
-  const reasons = stripReasons(manifest, result, isExample, i18n);
+  const reasons = stripReasons(manifest, result, isExample, i18n, reviewed);
   return html`${sign}
     <p class="stamp mono"><span class="${level >= 2 ? 'ok' : 'diamond'}">${level >= 2 ? GLYPHS.check : GLYPHS.diamond}</span>
       ${t('validation.stamp', { level: t(`validation.${level}`), evidence })}

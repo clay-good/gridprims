@@ -30,6 +30,6 @@
 
 ## 6. Trust pages (phase 0 templates, phase 1 content)
 
-- [ ] 6.1 Generate Methods, Changelog, Sources, Review status, and Corrections from manifests and records; verify the worked-example status and wrong-tariff scenarios
-- [ ] 6.2 Write About, Privacy, Accessibility, License and how to cite, Terms and disclaimer, and Developers; verify every claim on About traces to an invoice or record, the copied citation scenario, and the linked-everywhere, plain-language, and disclaimer-points-at-the-limits scenarios
-- [ ] 6.3 Run DESIGN.md gates (both themes, 320 px, keyboard, print) on every trust page; verify CI green
+- [x] 6.1 Generate Methods, Changelog, Sources, Review status, and Corrections from manifests and records; verify the worked-example status and wrong-tariff scenarios
+- [x] 6.2 Write About, Privacy, Accessibility, License and how to cite, Terms and disclaimer, and Developers; verify every claim on About traces to an invoice or record, the copied citation scenario, and the linked-everywhere, plain-language, and disclaimer-points-at-the-limits scenarios
+- [x] 6.3 Run DESIGN.md gates (both themes, 320 px, keyboard, print) on every trust page; verify CI green

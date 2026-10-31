@@ -1,0 +1,73 @@
+// The trust page set (site-experience tasks 6.1, 6.2).
+
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtempSync, readFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { build } from '../../../site/build.mjs';
+import { methodsPage } from '../../../site/templates/pages.mjs';
+import { TRUST_PAGES, SISTERS } from '../../../site/templates/layout.mjs';
+import { createI18n } from '../../../site/lib/i18n.mjs';
+import strings from '../../../site/strings/en-US.mjs';
+import { TOOLS } from '../../../core/tools/index.mjs';
+import { pagesOf } from '../../gates/urls.mjs';
+import { fleschKincaid } from '../../../core/lib/readability.mjs';
+
+const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
+await build({ outDir: out });
+const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
+
+test('every page\'s footer links the whole trust set and the sister sites', () => {
+  for (const p of pagesOf(out)) {
+    const html = page(p);
+    for (const [, href] of TRUST_PAGES) assert.ok(html.includes(`href="${href}"`), `${p} lacks ${href}`);
+    for (const d of SISTERS) assert.ok(html.includes(`href="https://${d}"`), `${p} lacks ${d}`);
+  }
+  for (const [id, href] of TRUST_PAGES) if (id !== 'report') assert.ok(pagesOf(out).includes(href), `${href} is not built`);
+});
+
+test('the terms say: as is, screening only, your decision, no liability, publishers\' data, and how to report, in plain short sentences', () => {
+  const html = page('/terms/');
+  for (const re of [/provided as is, with no warranty of any kind/, /not engineering, legal, tax, financial, or safety advice/, /not a utility study, a bill, or a utility’s decision/, /You are responsible for the decisions/, /we accept no liability/, /Data belongs to its publishers/, /never a reason to publish a number we cannot support/, /href="\/limits\/#cannot"/, /report form/]) assert.match(html, re);
+  for (const k of ['terms.free', 'terms.screening', 'terms.yours', 'terms.liability', 'terms.data', 'terms.care']) {
+    assert.ok(fleschKincaid(strings[k]).grade <= 12, `${k} reads at grade ${fleschKincaid(strings[k]).grade.toFixed(1)}`);
+  }
+});
+
+test('About names the maintainer and the funding, lists planned costs honestly, and invents no users or endorsements', () => {
+  const html = page('/about/');
+  assert.match(html, /built and run by Clay Good/);
+  assert.match(html, /no advertising, sponsorship, affiliate fees, or payments for leads, and has no funders/);
+  assert.match(html, /not deployed yet, so there is no hosting invoice.*\$5 a month/s);
+  assert.doesNotMatch(html, /trusted by|used by \d|partners include/i);
+});
+
+test('the methods page shows each worked example with its source, tolerance, and last CI result', () => {
+  const i18n = createI18n(strings, 'en-US');
+  const { manifest } = TOOLS[0];
+  const html = String(methodsPage({ manifest, i18n, passed: '2026-11-02T09:20:00Z' }));
+  assert.match(html, /12 MWh to MMBtu<\/th><td>calc\/energy-units-and-emissions spec[^<]*<\/td><td class="mono">±0\.0001<\/td><td>Passed on Nov 2, 2026<\/td>/);
+  assert.match(String(methodsPage({ manifest, i18n, passed: null })), /Not yet run in CI/);
+});
+
+test('the license page gives copyable citations for a page, a result, and a dataset version', () => {
+  const html = page('/license/');
+  assert.match(html, /MIT/);
+  assert.match(html, /CC BY 4\.0/);
+  assert.match(html, /Limits\. gridprims\. https:\/\/gridprims\.com\/limits\/ \(accessed \d{4}-\d{2}-\d{2}\)\./);
+  assert.match(html, /&quot;12 MWh is 40\.95 MMBtu\.&quot; Energy unit converter, version \d+\.\d+\.\d+\. gridprims\./);
+  assert.match(html, /Annual Electric Power Industry Report \(Form EIA-861\), version 2026-10 \(as of 2026-10-07\)\. Source: U\.S\. Energy Information Administration, Form EIA-861 \(Oct 2026\)\./);
+});
+
+test('review status comes only from records: every tool reads "Review pending" and the strip says so', () => {
+  assert.match(page('/review-status/'), /Energy unit converter<\/a><\/th><td>Review pending<\/td>/);
+  assert.match(page('/tools/calc/energy-units/convert/'), /data-strip>[\s\S]*Review pending/);
+});
+
+test('sources credit every publisher; continuity gives the revival steps and upstreams; corrections and accessibility say what they must', () => {
+  assert.match(page('/sources/'), /U\.S\. Energy Information Administration: Annual Electric Power Industry Report[\s\S]*NIST Special Publication 811/);
+  assert.match(page('/continuity/'), /Install Node\.js 24\.12\.0 or later[\s\S]*https:\/\/www\.eia\.gov\/electricity\/data\/eia861\/zip\/f8612025\.zip/);
+  assert.match(page('/corrections/'), /a note of concern[\s\S]*a withdrawal[\s\S]*No corrections yet\./);
+  assert.match(page('/accessibility/'), /WCAG 2\.2 at level AA[\s\S]*Known issues[\s\S]*Glossary pop-ups/);
+});
