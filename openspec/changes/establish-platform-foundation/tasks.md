@@ -49,10 +49,10 @@
 
 ## 6. File intake
 
-- [ ] 6.1 Own the synthetic fixture library: at least 20 real-shaped exports seeded from `docs/research/03` and `09` §1 (Green Button XML and CSV, Smart Meter Texas CSV, major utility CSV and Excel shapes, interval-ending stamps), and implement format detection and routing; verify every fixture routes and parses to its expected receipt, including the interval-ending scenario
+- [x] 6.1 Own the synthetic fixture library: at least 20 real-shaped exports seeded from `docs/research/03` and `09` §1 (Green Button XML and CSV, Smart Meter Texas CSV, major utility CSV and Excel shapes, interval-ending stamps), and implement format detection and routing; verify every fixture routes and parses to its expected receipt, including the interval-ending scenario
 - [ ] 6.2 Implement worker parsing with progress and cancel; verify 35,040 rows parse in under 1 s on the reference profile
 - [ ] 6.3 Implement the editable parse receipt; verify changing the time zone recomputes every result in a fixture
-- [ ] 6.4 Handle DST, gaps, duplicates, multiple meters, negative values; verify the spring-forward, conflicting-duplicate, mixed-unit, two-meter, partial-year, fall-back, and gap scenarios
+- [x] 6.4 Handle DST, gaps, duplicates, multiple meters, negative values; verify the spring-forward, conflicting-duplicate, mixed-unit, two-meter, partial-year, fall-back, and gap scenarios
 - [ ] 6.5 Implement the unsupported-file message and the keep-this-file consent path; verify the unsupported-file and reload-forgets-the-file scenarios
 - [ ] 6.6 Read Green Button `uom`, `powerOfTenMultiplier`, `flowDirection`, `intervalLength`, and `LocalTimeParameters` per ESPI; verify the multiplier and export-channel scenarios on synthetic fixtures plus any OpenESPI sample or test file that carries an explicit Apache-2.0 header, recorded per file with its header (files without an open header are not committed, per `docs/research/08`)
 
