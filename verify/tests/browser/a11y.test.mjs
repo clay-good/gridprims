@@ -8,13 +8,13 @@ import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
-import { walk } from '../../lib/walk.mjs';
+import { browserPages } from '../../browser/pages.mjs';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
 await build({ outDir: out });
-const pages = walk(out).filter((f) => f.endsWith('.html')).map((f) => `/${f.replace(/index\.html$/, '')}`);
+const pages = browserPages(out);
 const WIDTHS = [320, 360, 768, 1024, 1280];
 // The audit is test code, not part of the site, so the test server adds it as a route.
 const routes = { '/verify/browser/a11y-audit.mjs': { body: readFileSync(join(import.meta.dirname, '../../browser/a11y-audit.mjs')), type: 'text/javascript' } };

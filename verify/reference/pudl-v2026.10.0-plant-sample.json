@@ -1,0 +1,110 @@
+{
+ "source": "PUDL v2026.10.0 copies of EIA-923 (generation_fuel and generation_fuel_nuclear) and EIA-860 (scd_generators, existing), report year 2025, computed with pyarrow by verify/tools/pudl-plant-sample.py",
+ "files": {
+  "core_eia923__monthly_generation_fuel": "90edf783d3071eaa098f41d17ddf6355254533c4acba99d44996762cbdcdb5f1",
+  "core_eia923__monthly_generation_fuel_nuclear": "14435ecbfd332bcf4fd7c61703749b3e1729425c8f7dc57cda951808b27d3f32",
+  "core_eia860__scd_generators": "a86a898c42408c8eb17a742b6f70bdc65bdb9c99c8fdeac00a473f4e81eff621"
+ },
+ "plants": [
+  {
+   "plant_id": 3470,
+   "net_generation_mwh": 15578684.884,
+   "nameplate_mw": 4008.4
+  },
+  {
+   "plant_id": 6115,
+   "net_generation_mwh": 10910165.0,
+   "nameplate_mw": 1242.0
+  },
+  {
+   "plant_id": 2780,
+   "net_generation_mwh": 257406.87,
+   "nameplate_mw": 165.6
+  },
+  {
+   "plant_id": 3797,
+   "net_generation_mwh": 2070102.998,
+   "nameplate_mw": 446.6
+  },
+  {
+   "plant_id": 7805,
+   "net_generation_mwh": 9853136.001,
+   "nameplate_mw": 2244.8
+  },
+  {
+   "plant_id": 6167,
+   "net_generation_mwh": -1083343.0,
+   "nameplate_mw": 2862.0
+  },
+  {
+   "plant_id": 55391,
+   "net_generation_mwh": 496408.0,
+   "nameplate_mw": 561.0
+  },
+  {
+   "plant_id": 6101,
+   "net_generation_mwh": 2092005.005,
+   "nameplate_mw": 362.1
+  },
+  {
+   "plant_id": 628,
+   "net_generation_mwh": 15307405.012,
+   "nameplate_mw": 3449.0
+  },
+  {
+   "plant_id": 6013,
+   "net_generation_mwh": 0,
+   "nameplate_mw": 109.7
+  },
+  {
+   "plant_id": 56127,
+   "net_generation_mwh": 88240.0,
+   "nameplate_mw": 10.0
+  },
+  {
+   "plant_id": 65400,
+   "net_generation_mwh": 124657.0,
+   "nameplate_mw": 13.3
+  },
+  {
+   "plant_id": 58696,
+   "net_generation_mwh": 20168.0,
+   "nameplate_mw": 1.5
+  },
+  {
+   "plant_id": 2442,
+   "net_generation_mwh": 8239232.994,
+   "nameplate_mw": 1636.2
+  },
+  {
+   "plant_id": 3251,
+   "net_generation_mwh": 6721389.0,
+   "nameplate_mw": 768.6
+  },
+  {
+   "plant_id": 8023,
+   "net_generation_mwh": 5956445.001,
+   "nameplate_mw": 1112.0
+  },
+  {
+   "plant_id": 60747,
+   "net_generation_mwh": 4677.0,
+   "nameplate_mw": 3.1
+  },
+  {
+   "plant_id": 63798,
+   "net_generation_mwh": null,
+   "nameplate_mw": 0
+  },
+  {
+   "plant_id": 1,
+   "net_generation_mwh": 3681.0,
+   "nameplate_mw": 3.7
+  },
+  {
+   "plant_id": 57053,
+   "net_generation_mwh": 0,
+   "nameplate_mw": 0.8
+  }
+ ]
+}

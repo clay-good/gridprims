@@ -7,6 +7,7 @@ import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
+import { browserPages } from '../../browser/pages.mjs';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { walk } from '../../lib/walk.mjs';
@@ -67,7 +68,7 @@ for (const kind of ['chrome', 'firefox']) {
     const browser = await launch(kind);
     const failures = [];
     try {
-      for (const p of walk(pseudo).filter((f) => f.endsWith('.html')).map((f) => `/${f.replace(/index\.html$/, '')}`)) {
+      for (const p of browserPages(pseudo)) {
         for (const w of [320, 1280]) {
           await browser.setViewport(w, 800);
           await browser.goto(server.url + p);

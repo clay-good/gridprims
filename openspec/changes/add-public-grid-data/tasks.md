@@ -13,8 +13,8 @@
 
 ## 3. Plant pages
 
-- [ ] 3.1 Render plant pages with generators, generation, prorated capacity factor, emissions; verify the 25.0%, mid-year start, pumped storage, and retirement scenarios
-- [ ] 3.2 Confirm no coordinates appear in page HTML or downloads used by pages; verify with a page-source scan
+- [x] 3.1 Render plant pages with generators, generation, prorated capacity factor, emissions; verify the 25.0%, mid-year start, pumped storage, and retirement scenarios
+- [x] 3.2 Confirm no coordinates appear in page HTML or downloads used by pages; verify with a page-source scan
 
 ## 4. Region pages
 

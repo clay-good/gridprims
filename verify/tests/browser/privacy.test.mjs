@@ -7,14 +7,14 @@ import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
-import { walk } from '../../lib/walk.mjs';
+import { browserPages } from '../../browser/pages.mjs';
 import { findBrowser, launch } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
 import { foreign, leaks } from '../../lib/requests.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
 await build({ outDir: out });
-const pages = walk(out).filter((f) => f.endsWith('.html')).map((f) => `/${f.replace(/index\.html$/, '')}`);
+const pages = browserPages(out);
 const SENTINEL = '918273.645';
 
 // A deliberately leaking page and a page that loads an external font, to prove the checks can fail.
