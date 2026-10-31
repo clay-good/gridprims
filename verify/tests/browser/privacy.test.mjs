@@ -85,7 +85,7 @@ for (const kind of ['chrome', 'firefox']) {
       await browser.evaluate(`document.querySelector('[data-erase-yes]').click()`);
       await browser.evaluate('new Promise((r) => setTimeout(r, 300))');
       assert.equal(await browser.evaluate('localStorage.length + sessionStorage.length'), 0);
-      assert.deepEqual(await browser.evaluate('caches.keys()'), []);
+      assert.deepEqual((await browser.evaluate('caches.keys()')).filter((k) => !k.startsWith('gridprims-shell-')), [], 'only the app shell cache is kept');
       assert.equal(await browser.evaluate(`document.querySelector('[data-empty]').hidden`), false);
     } finally {
       await browser.close();

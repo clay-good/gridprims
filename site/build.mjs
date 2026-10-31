@@ -14,6 +14,7 @@ import { limitsRecord } from '../core/contract/limits.mjs';
 import { createI18n } from './lib/i18n.mjs';
 import { toolPath } from './ui/tool-page.mjs';
 import { tokensCss } from './styles/tokens.mjs';
+import { serviceWorkerSource } from './sw.mjs';
 import { calculatorPage, changelogPage, filesPage, homePage, limitsPage, notFoundPage, settingsPage } from './templates/pages.mjs';
 import changelog from '../data/curated/changelog.mjs';
 import { THEME_SCRIPT } from './templates/layout.mjs';
@@ -67,6 +68,19 @@ export function build(opts = {}) {
 
   // The inline theme script's hash, for the Worker's CSP (task 5.1).
   writeFileSync(join(outDir, '_csp-hashes.json'), JSON.stringify({ 'script-src': [`sha256-${createHash('sha256').update(THEME_SCRIPT).digest('base64')}`] }, null, 2) + '\n');
+
+  cpSync(join(ROOT, 'site/icon.svg'), join(outDir, 'icon.svg'));
+  writeFileSync(join(outDir, 'manifest.webmanifest'), JSON.stringify({
+    name: strings['site.name'], short_name: strings['site.name'], description: strings['site.tagline'],
+    start_url: '/', scope: '/', display: 'standalone', background_color: '#f3f5f2', theme_color: '#00704a',
+    icons: [{ src: '/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }],
+  }, null, 2) + '\n');
+
+  // The service worker precaches every deployed file and is versioned by their checksums.
+  const shell = walk(outDir).filter((f) => !f.startsWith('_'));
+  const version = sha256(shell.map((f) => `${f}:${sha256(readFileSync(join(outDir, f)))}`).join('\n')).slice(0, 12);
+  const urls = shell.map((f) => `/${f.replace(/(^|\/)index\.html$/, '$1')}`);
+  writeFileSync(join(outDir, 'sw.js'), serviceWorkerSource({ version, files: urls }));
 
   const files = walk(outDir).filter((f) => f !== '_manifest.json');
   const manifest = files.map((f) => ({ path: f, sha256: sha256(readFileSync(join(outDir, f))) }));

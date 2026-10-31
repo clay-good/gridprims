@@ -101,4 +101,7 @@ addEventListener('keydown', (e) => {
     input?.focus();
   }
 });
+// Offline after the first visit: the service worker caches the app shell.
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => { /* offline use is a bonus, never a requirement */ });
+
 document.documentElement.dataset.shellReady = 'true';
