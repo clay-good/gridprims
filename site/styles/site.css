@@ -23,6 +23,14 @@ h2 { font-size: 1.25rem; font-weight: 700; }
 .rail .wrap { display: flex; align-items: center; gap: var(--s4); min-height: 56px; flex-wrap: wrap; }
 .wordmark { color: var(--legend-white); font-weight: 800; font-size: 1.25rem; text-decoration: none; }
 .rail nav ul { display: flex; gap: var(--s3); list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+.menu-button { display: none; background: transparent; color: var(--legend-white); border: 1px solid var(--legend-white); border-radius: var(--r-field); font: 600 .875rem/1 inherit; padding: var(--s2) var(--s3); min-height: 44px; cursor: pointer; }
+/* Below 768 px the sections fold into a menu; without script the list simply stays open. */
+@media (max-width: 767px) {
+  [data-js] .menu-button { display: inline-block; }
+  [data-js] .rail nav ul { display: none; }
+  [data-js] .rail nav.open ul { display: flex; flex-direction: column; width: 100%; padding-bottom: var(--s2); }
+  [data-js] .rail nav.open { flex-basis: 100%; order: 3; }
+}
 .rail nav a { color: var(--legend-white); font-weight: 600; font-size: .875rem; text-decoration: none; padding: var(--s2) var(--s1); display: inline-block; min-height: 24px; }
 .rail nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
 .rail a:focus-visible, .rail button:focus-visible { outline-color: var(--legend-white); }
@@ -164,8 +172,10 @@ caption { text-align: left; color: var(--muted); font-size: .875rem; padding: va
 @media (max-width: 480px) { .receipt div { grid-template-columns: 1fr; gap: var(--s1); } }
 .receipt dt { color: var(--muted); }
 .receipt dd { margin: 0; }
+/* Grid cells may shrink below their content, so a long option or file name wraps instead of widening the page. */
+.receipt div > * { min-width: 0; }
 .receipt-choice { display: flex; flex-direction: column; gap: var(--s1); }
-.receipt-choice select { min-height: 44px; max-width: 100%; border: 1px solid var(--field-border); border-radius: var(--r-field); background: var(--panel); color: var(--ink); padding: 0 var(--s2); }
+.receipt-choice select { min-height: 44px; width: 100%; max-width: 100%; border: 1px solid var(--field-border); border-radius: var(--r-field); background: var(--panel); color: var(--ink); padding: 0 var(--s2); }
 .receipt-privacy { color: var(--ok); font-weight: 600; display: flex; gap: var(--s2); align-items: center; }
 
 /* Report dialog */
@@ -187,3 +197,5 @@ blockquote { border-left: 4px solid var(--line); margin: var(--s3) 0; padding: v
 /* Grid pulse: hidden below 768 px (DESIGN.md Layout) and absent until a snapshot exists. */
 .pulse { display: none; margin: 0 0 0 auto; align-items: center; gap: var(--s2); color: var(--legend-white); font-size: .75rem; }
 @media (min-width: 768px) { .pulse { display: flex; } .pulse + .theme-toggle { margin-left: var(--s3); } }
+
+.cell-section { color: var(--muted); font-size: .875rem; font-weight: 600; margin: 0 0 var(--s1); }

@@ -13,14 +13,16 @@ import { buildCommandIndex } from '../core/contract/command.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
 import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
 import { execFileSync } from 'node:child_process';
-import { createI18n } from './lib/i18n.mjs';
+import { createI18n, pseudoMessages } from './lib/i18n.mjs';
 import { toolPath } from './ui/tool-page.mjs';
 import { tokensCss } from './styles/tokens.mjs';
 import { serviceWorkerSource } from './sw.mjs';
-import { calculatorPage, changelogPage, datasetPage, developersPage, filesPage, homePage, limitsPage, notFoundPage, privacyPage, reportPage, settingsPage } from './templates/pages.mjs';
+import { calculatorPage, changelogPage, datasetPage, developersPage, filesPage, homePage, limitsPage, notFoundPage, privacyPage, reportPage, sectionPage, settingsPage } from './templates/pages.mjs';
 import changelog from '../data/curated/changelog.mjs';
 import { THEME_SCRIPT } from './templates/layout.mjs';
 import { walk } from '../verify/lib/walk.mjs';
+import { redirectsFile } from './lib/redirects.mjs';
+import redirects from '../data/curated/redirects.mjs';
 import { readdirSync, existsSync } from 'node:fs';
 import strings from './strings/en-US.mjs';
 
@@ -33,7 +35,7 @@ const SHARED = ['core', 'parsers', 'site/lib', 'site/ui', 'site/pages', 'site/st
 export const sha256 = (s) => createHash('sha256').update(s).digest('hex');
 
 /**
- * @param {{outDir?: string}} [opts]
+ * @param {{outDir?: string, pseudo?: boolean}} [opts] pseudo renders every string in the pseudo-locale for the layout sweep
  * @returns {{outDir: string, pages: string[], files: number}}
  */
 export async function build(opts = {}) {
@@ -42,10 +44,12 @@ export async function build(opts = {}) {
   mkdirSync(outDir, { recursive: true });
   for (const p of SHARED) cpSync(join(ROOT, p), join(outDir, p), { recursive: true, filter: (src) => !src.endsWith('README.md') });
   writeFileSync(join(outDir, 'site/styles/tokens.css'), tokensCss());
+  // In the pseudo-locale the browser modules read pseudo strings too, so nothing re-renders in English.
+  if (opts.pseudo) writeFileSync(join(outDir, 'site/strings/en-US.mjs'), `export default ${JSON.stringify(pseudoMessages(strings), null, 2)};\n`);
   // Built dataset versions ship with the site (foundation design D5, D16); curated records feed the build only.
   cpSync(join(ROOT, 'data'), join(outDir, 'data'), { recursive: true, filter: (src) => !src.endsWith('README.md') && !src.includes(`${'/'}curated`) && !src.includes(`${'/'}health`) });
 
-  const i18n = createI18n(strings, 'en-US');
+  const i18n = createI18n(opts.pseudo ? pseudoMessages(strings) : strings, 'en-US');
   const pages = [];
   const healthFile = join(ROOT, 'data/health/pipeline.json');
   const health = existsSync(healthFile) ? JSON.parse(readFileSync(healthFile, 'utf8')) : null;
@@ -91,7 +95,10 @@ export async function build(opts = {}) {
   }
   write('/report/', reportPage({ i18n }));
   write('/', homePage({ tools: TOOLS, i18n }));
-  write('/404.html', notFoundPage({ i18n }));
+  write('/404.html', notFoundPage({ tools: TOOLS, i18n }));
+  for (const id of ['bills', 'data', 'carbon', 'grid', 'learn']) write(`/${id}/`, sectionPage({ id, tools: TOOLS, datasets, i18n }));
+
+  writeFileSync(join(outDir, '_redirects'), redirectsFile(redirects));
 
   // The inline theme script's hash, for the Worker's CSP (task 5.1).
   writeFileSync(join(outDir, '_csp-hashes.json'), JSON.stringify({ 'script-src': [`sha256-${createHash('sha256').update(THEME_SCRIPT).digest('base64')}`] }, null, 2) + '\n');

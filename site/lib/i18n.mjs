@@ -28,3 +28,26 @@ export function createI18n(messages, locale) {
   const date = (iso) => dates.format(new Date(`${iso}T00:00:00Z`));
   return { t, date, locale, has: (id) => id in messages };
 }
+
+const ACCENTS = { a: 'á', e: 'é', i: 'í', o: 'ö', u: 'ü', A: 'Å', E: 'É', I: 'Î', O: 'Ø', U: 'Û', c: 'ç', n: 'ñ', y: 'ý' };
+
+/**
+ * A pseudo-locale string (site/translation-ready, "Layout tolerates longer
+ * text"): accented and about 35% longer, with {placeholders} left intact, so a
+ * layout that breaks under translation breaks here first.
+ * @param {string} text
+ */
+export function pseudoLocalize(text) {
+  const parts = text.split(/(\{\w+\})/);
+  const body = parts.map((p) => (/^\{\w+\}$/.test(p) ? p : p.replace(/[aeiouAEIOUcny]/g, (c) => ACCENTS[c]))).join('');
+  const letters = text.replace(/\{\w+\}/g, '').length;
+  const pad = Math.ceil(letters * 0.35);
+  const filler = [];
+  for (let n = 0; n < pad; n += 6) filler.push('ẋẋẋẋẋ');
+  return pad ? `${body} ${filler.join(' ')}` : body;
+}
+
+/** A whole message table in the pseudo-locale, plural forms included. */
+export function pseudoMessages(messages) {
+  return Object.fromEntries(Object.entries(messages).map(([k, v]) => [k, typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([f, x]) => [f, pseudoLocalize(x)])) : pseudoLocalize(v)]));
+}

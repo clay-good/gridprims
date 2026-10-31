@@ -26,7 +26,8 @@ export function assetHash(bytes, path) {
 
 /** The asset manifest for a deploy root: every public file (internal files start with "_"). */
 export function assetManifest(dist) {
-  const files = walk(dist).filter((f) => !f.split('/').some((p) => p.startsWith('_')));
+  // Internal files start with "_"; _redirects is the one Cloudflare reads.
+  const files = walk(dist).filter((f) => f === '_redirects' || !f.split('/').some((p) => p.startsWith('_')));
   if (files.length > MAX_FILES) throw new Error(`${files.length} files, over the ${MAX_FILES} budget`);
   const manifest = {};
   for (const f of files) {

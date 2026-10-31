@@ -8,6 +8,7 @@ import { VALIDATION_LEVELS } from '../../core/contract/manifest.mjs';
 import { sourceStamp } from '../ui/source-stamp.mjs';
 import { lateness } from '../../core/lib/lateness.mjs';
 import { CLONE, DATA_DIR, snippets } from '../../mcp/clients.mjs';
+import { SECTIONS, sectionOf } from '../ui/sections.mjs';
 
 /** One input control, labeled from the manifest. */
 function field(inp, value, i18n) {
@@ -61,7 +62,7 @@ export function calculatorPage({ manifest, example, result, i18n }) {
   </section>
   ${manifest.handoffs.length ? html`<section><h2>${t('tool.handoffs')}</h2>${manifest.handoffs.map((h) => html`<p><a class="handoff" href="${h.url}">${h.label} ${raw('&rarr;')}</a></p>`)}</section>` : ''}
 </article>`;
-  return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js'] });
+  return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js'], section: sectionOf(manifest.id) });
 }
 
 /**
@@ -136,12 +137,42 @@ export function homePage({ tools, i18n }) {
   return layout({ i18n, title: `${t('site.name')} · ${t('site.tagline')}`, description: t('site.tagline'), path: '/', body, section: 'home' });
 }
 
-/** @param {{i18n: any}} p */
-export function notFoundPage({ i18n }) {
+/**
+ * The 404 page (site/home-and-navigation, "Helpful 404"): without script it
+ * lists the sections and every tool; with script it suggests up to five close
+ * matches computed on the device, sending the requested path nowhere.
+ * @param {{tools: any[], i18n: any}} p
+ */
+export function notFoundPage({ tools = [], i18n }) {
   const { t } = i18n;
   const body = html`<h1>${t('notFound.title')}</h1><p>${t('notFound.body')}</p>
-<ul><li><a href="/">${t('nav.home')}</a></li><li><a href="/limits/">${t('nav.limits')}</a></li></ul>`;
-  return layout({ i18n, title: `${t('notFound.title')} · ${t('site.name')}`, description: t('notFound.body'), path: '/404.html', body });
+<section data-suggest hidden><h2>${t('notFound.suggest')}</h2><ul data-suggestions></ul></section>
+<h2>${t('notFound.sections')}</h2>
+<ul>${SECTIONS.map((x) => html`<li><a href="${x.path}">${t(`nav.${x.id}`)}</a></li>`)}</ul>
+<h2>${t('notFound.catalog')}</h2>
+<ul>${tools.map(({ manifest: m }) => html`<li><a href="${toolPath(m.id)}">${m.title}</a></li>`)}</ul>`;
+  return layout({ i18n, title: `${t('notFound.title')} · ${t('site.name')}`, description: t('notFound.body'), path: '/404.html', body, modules: ['/site/pages/not-found.js'] });
+}
+
+/** A tool cell (DESIGN.md "Tool cell"): section, name, the question it answers, and what you need. */
+function toolCell({ href, section, name, question, needs }, { t }) {
+  return html`<li class="tool-cell"><p class="cell-section">${t(`nav.${section}`)}</p><a href="${href}">${name}</a><p>${question}</p><p class="unit-hint">${t('section.needs', { what: t(`section.needs.${needs}`) })}</p></li>`;
+}
+
+/**
+ * A section landing page: only tools and pages that exist, never "coming soon".
+ * @param {{id: string, tools: any[], datasets: any[], i18n: any}} p
+ */
+export function sectionPage({ id, tools, datasets = [], i18n }) {
+  const { t } = i18n;
+  const cells = tools.filter(({ manifest: m }) => sectionOf(m.id) === id).map(({ manifest: m }) => ({ href: toolPath(m.id), section: id, name: m.title, question: m.purpose, needs: m.inputs.some((x) => x.type === 'file') ? 'file' : 'none' }));
+  if (id === 'bills') cells.unshift({ href: '/files/', section: 'bills', name: t('section.workbench'), question: t('section.workbench.what'), needs: 'file' });
+  const body = html`<h1>${t(`section.${id}`)}</h1><p class="purpose">${t(`section.${id}.intro`)}</p>
+${cells.length || (id === 'data' && datasets.length) ? '' : html`<p>${t('section.empty')}</p>`}
+${cells.length ? html`<ul class="tool-list">${cells.map((c) => toolCell(c, i18n))}</ul>` : ''}
+${id === 'data' && datasets.length ? html`<ul class="tool-list">${datasets.map((d) => html`<li class="tool-cell"><p class="cell-section">${d.publisher}</p><a href="/data/${d.dataset}/">${d.title}</a><p>${t('data.stamp', { publisher: d.publisher, title: d.title, period: d.tables[0].dataPeriod, asOf: i18n.date(d.asOf), retrieved: i18n.date(d.retrieved), license: d.tables[0].license })}</p></li>`)}</ul>` : ''}`;
+  const path = SECTIONS.find((x) => x.id === id).path;
+  return layout({ i18n, title: `${t(`section.${id}`)} · ${t('site.name')}`, description: t(`section.${id}.intro`), path, body, section: id });
 }
 
 /** @param {{entries: any[], i18n: any}} p */
@@ -196,7 +227,7 @@ export function filesPage({ i18n }) {
   <section class="panel" data-receipt></section>
 </article>
 <div class="drag-overlay" data-overlay hidden><p>${t('files.dragging')}</p></div>`;
-  return layout({ i18n, title: `${t('files.title')} · ${t('site.name')}`, description: t('files.purpose'), path: '/files/', body, modules: ['/site/pages/workbench.js'] });
+  return layout({ i18n, title: `${t('files.title')} · ${t('site.name')}`, description: t('files.purpose'), path: '/files/', body, modules: ['/site/pages/workbench.js'], section: 'bills' });
 }
 
 /** The privacy page (platform/problem-reports, "Retention"; platform/privacy-and-security). */
@@ -244,7 +275,7 @@ ${m.tables.map((tb) => html`<section><h2>${t('data.columns')}</h2><div class="ta
   <thead><tr><th scope="col">${t('data.col.name')}</th><th scope="col">${t('data.col.type')}</th><th scope="col">${t('data.col.unit')}</th></tr></thead>
   <tbody>${tb.columns.map((c) => html`<tr><th scope="row" class="mono">${c.name}</th><td class="mono">${c.type}</td><td>${c.unit ?? ''}</td></tr>`)}</tbody>
 </table></div></section>`)}`;
-  return layout({ i18n, title: `${m.title} · ${t('site.name')}`, description: `${m.title}, ${m.publisher}`, path: `/data/${m.dataset}/`, body });
+  return layout({ i18n, title: `${m.title} · ${t('site.name')}`, description: `${m.title}, ${m.publisher}`, path: `/data/${m.dataset}/`, body, section: 'data' });
 }
 
 /**

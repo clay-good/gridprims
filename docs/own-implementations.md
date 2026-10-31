@@ -35,3 +35,4 @@ Each module here replaces what would usually be a package. Each has its own test
 | `verify/lib/smoke.mjs` | uptime and header checkers | The required-header check and the route list the local Worker test and the post-deploy smoke test share | Status and headers only, not page content |
 | `pipeline/lib/terms.mjs` | terms-monitoring tools | Checks that a publisher's recorded terms text still appears on its page, lowers the posture when it does not, and applies takedowns | Exact-text containment after whitespace and quote normalization |
 | `verify/lib/reference-vectors.mjs` | test-vector harnesses | Runs stored third-party vectors and checks agreement to every figure the source prints | Single-output tools today |
+| `site/lib/redirects.mjs` | redirect matchers | Matches paths against `_redirects` rules with `:placeholder` and `*` segments, and writes the file | No query-string or status-code variants beyond 301 |

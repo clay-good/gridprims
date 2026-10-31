@@ -17,6 +17,7 @@ import { checkRegistry } from './gates/registry.mjs';
 import { checkWorkflows } from './gates/workflows.mjs';
 import { checkRepoSize } from './gates/repo-size.mjs';
 import { checkSecrets } from './gates/secrets.mjs';
+import { checkSiteUrls } from './gates/urls.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -35,6 +36,7 @@ const gates = [
   ['CI uses only our scripts and pinned first-party actions', () => checkWorkflows(root)],
   ['repository size', () => checkRepoSize(root)],
   ['no secrets in outputs or tracked files', () => checkSecrets(root)],
+  ['published URLs resolve or redirect', () => checkSiteUrls(root, { record: Boolean(process.env.GRIDPRIMS_RECORD) })],
 ];
 
 let failed = 0;
