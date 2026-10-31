@@ -1,0 +1,69 @@
+{
+  "toolId": "calc.storage.basics",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "partial-power",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.storage.basics",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "durationDispatch": {
+            "value": 5.33,
+            "unit": "h",
+            "display": "5.33"
+          },
+          "cRate": {
+            "value": 0.1875,
+            "unit": "",
+            "display": "0.1875"
+          },
+          "durationRated": {
+            "value": 4,
+            "unit": "h",
+            "display": "4.00"
+          },
+          "usable": {
+            "value": 360,
+            "unit": "MWh",
+            "display": "360.0"
+          },
+          "charging": {
+            "value": 423.5,
+            "unit": "MWh",
+            "display": "423.5"
+          }
+        },
+        "sentence": "At 75 MW, this battery runs 5.33 hours; it delivers 360.0 MWh and needs 423.5 MWh to recharge.",
+        "notes": [],
+        "work": {
+          "method": "Duration is energy ÷ power; C-rate is power ÷ energy. Depth of discharge limits the energy delivered, and round-trip efficiency is a loss taken on charging, so charging energy is delivered energy ÷ efficiency. The same convention holds in the workbench's battery screen.",
+          "steps": [
+            "Duration at rated power: 400 MWh ÷ 100 MW = 4 h.",
+            "Duration at 75 MW: 400 ÷ 75 = 5.33 h; C-rate 75 ÷ 400 = 0.1875.",
+            "Usable delivered energy: 400 MWh × 90% depth of discharge = 360 MWh.",
+            "Charging energy: 360 MWh ÷ 85% round-trip efficiency = 423.5 MWh, with the losses taken on charging."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Rated energy is the battery's nameplate energy at its rated power; real duration falls at high power and low temperature.",
+            "Depth of discharge and round-trip efficiency are the values entered; degradation is not modeled."
+          ],
+          "citations": [
+            {
+              "source": "NLR, Annual Technology Baseline (ATB): Utility-Scale Battery Storage",
+              "edition": "2025",
+              "locator": "Definitions of power, energy, duration, and round-trip efficiency",
+              "url": "https://atb.nlr.gov/"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+      }
+    }
+  ]
+}

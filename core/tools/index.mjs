@@ -9,6 +9,10 @@ import powerFactorCorrect from './calc.power-factor.correct/manifest.mjs';
 import * as powerFactorCorrectImpl from './calc.power-factor.correct/tool.mjs';
 import transformerSize from './calc.transformer.size/manifest.mjs';
 import * as transformerSizeImpl from './calc.transformer.size/tool.mjs';
+import storageBasics from './calc.storage.basics/manifest.mjs';
+import * as storageBasicsImpl from './calc.storage.basics/tool.mjs';
+import costLcoe from './calc.cost.lcoe/manifest.mjs';
+import * as costLcoeImpl from './calc.cost.lcoe/tool.mjs';
 import billTotalsCheck from './household.bill-totals.check/manifest.mjs';
 import * as billTotalsCheckImpl from './household.bill-totals.check/tool.mjs';
 import usageBenchmark from './household.usage-benchmark.compare/manifest.mjs';
@@ -19,6 +23,8 @@ export const TOOLS = [
   { manifest: energyUnitsEmissions, impl: energyUnitsEmissionsImpl },
   { manifest: powerFactorCorrect, impl: powerFactorCorrectImpl },
   { manifest: transformerSize, impl: transformerSizeImpl },
+  { manifest: storageBasics, impl: storageBasicsImpl },
+  { manifest: costLcoe, impl: costLcoeImpl },
   { manifest: billTotalsCheck, impl: billTotalsCheckImpl },
   { manifest: usageBenchmark, impl: usageBenchmarkImpl },
 ];

@@ -1,0 +1,60 @@
+{
+  "toolId": "calc.cost.lcoe",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "spec-41",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.cost.lcoe",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "lcoe": {
+            "value": 41.1,
+            "unit": "$/MWh",
+            "display": "41.10"
+          },
+          "capital": {
+            "value": 31.96,
+            "unit": "$/MWh",
+            "display": "31.96"
+          },
+          "fixed": {
+            "value": 9.13,
+            "unit": "$/MWh",
+            "display": "9.13"
+          }
+        },
+        "sentence": "The levelized cost of energy is $41.10 per MWh.",
+        "notes": [],
+        "work": {
+          "method": "LCOE = (fixed charge rate × capital cost + fixed O&M) ÷ (capacity factor × 8.76 MWh per kW-year) + variable O&M + fuel cost, as NLR's Annual Technology Baseline defines it.",
+          "steps": [
+            "Energy per kW of capacity: 25% × 8.76 MWh per kW-year = 2.19 MWh per kW-year.",
+            "Capital: 0.07 fixed charge rate × $1,000/kW ÷ 2.19 = $31.96/MWh.",
+            "Fixed O&M: $20/kW-year ÷ 2.19 = $9.13/MWh.",
+            "Variable O&M $0.00/MWh and fuel $0.00/MWh are added as they are.",
+            "LCOE: $31.96 + $9.13 + $0.00 + $0.00 = $41.10/MWh."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The fixed charge rate carries the financing, taxes, and project life; it is entered, not computed.",
+            "Costs are in the same year's dollars; no default is offered, so every input is yours."
+          ],
+          "citations": [
+            {
+              "source": "NLR, Annual Technology Baseline (ATB): Levelized Cost of Energy",
+              "edition": "2025",
+              "locator": "LCOE equation: (FCR × CAPEX + FOM) ÷ (CF × 8,760) + VOM + fuel",
+              "url": "https://atb.nlr.gov/"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet."
+      }
+    }
+  ]
+}

@@ -139,6 +139,71 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 - Does not compute permissible overload time, hot-spot or top-oil temperature, or loss of life.
 - Assumes a balanced three-phase load; unbalanced loads need each phase checked.
 
+## Battery duration and usable energy (`calc.storage.basics`)
+
+How long a battery runs at a given power, its C-rate, and how much energy it delivers and needs to recharge.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Rated power | `powerMw` | MW | 0.000001 to 1000000 | 100 |
+| Rated energy | `energyMwh` | MWh | 0.000001 to 10000000 | 400 |
+| Dispatch power | `dispatchMw` | MW | 0.000001 to 1000000 | 75 |
+| Depth of discharge | `dod` | % | 1 to 100 | 90 |
+| Round-trip efficiency | `roundTrip` | % | 1 to 100 | 85 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Duration at dispatch power | `durationDispatch` | h | 2 decimals |
+| C-rate at dispatch power | `cRate` |  | 4 significant figures |
+| Duration at rated power | `durationRated` | h | 2 decimals |
+| Usable delivered energy | `usable` | MWh | 1 decimals |
+| Charging energy needed | `charging` | MWh | 1 decimals |
+
+**Method.** Duration is energy ÷ power; C-rate is power ÷ energy. Depth of discharge limits the energy delivered, and round-trip efficiency is a loss taken on charging, so charging energy is delivered energy ÷ efficiency. The same convention holds in the workbench's battery screen.
+
+**Sources.**
+
+- NLR, Annual Technology Baseline (ATB): Utility-Scale Battery Storage, 2025, Definitions of power, energy, duration, and round-trip efficiency (https://atb.nlr.gov/)
+
+**Known limits.**
+
+- Real duration depends on power level, temperature, and age; these are nameplate figures.
+- Auxiliary loads and standby losses are not modeled.
+
+## Levelized cost of energy (`calc.cost.lcoe`)
+
+The levelized cost of energy from capital cost, operating costs, and capacity factor, with each term's share shown.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Fixed charge rate | `fcr` | per year | 0 to 1 | 0.07 |
+| Capital cost | `capex` | $/kW | 0 to 1000000 | 1000 |
+| Fixed O&M | `fom` | $/kW-year | 0 to 100000 | 20 |
+| Capacity factor | `cf` | % | 0.01 to 100 | 25 |
+| Variable O&M | `vom` | $/MWh | 0 to 100000 | 0 |
+| Fuel cost | `fuel` | $/MWh | 0 to 100000 | 0 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Levelized cost of energy | `lcoe` | $/MWh | 2 decimals |
+| Capital share | `capital` | $/MWh | 2 decimals |
+| Fixed O&M share | `fixed` | $/MWh | 2 decimals |
+
+**Method.** LCOE = (fixed charge rate × capital cost + fixed O&M) ÷ (capacity factor × 8.76 MWh per kW-year) + variable O&M + fuel cost, as NLR's Annual Technology Baseline defines it.
+
+**Sources.**
+
+- NLR, Annual Technology Baseline (ATB): Levelized Cost of Energy, 2025, LCOE equation: (FCR × CAPEX + FOM) ÷ (CF × 8,760) + VOM + fuel (https://atb.nlr.gov/)
+
+**Known limits.**
+
+- A simple LCOE: no degradation, construction period, or tax detail beyond what the fixed charge rate carries.
+- No defaults are offered; read the ATB for costs and capacity factors by technology.
+
 ## Bill check (`household.bill-totals.check`)
 
 Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.
