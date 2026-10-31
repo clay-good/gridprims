@@ -14,7 +14,7 @@ export const THEME_SCRIPT = "try{var t=localStorage.getItem('gridprims-theme');i
  */
 export function layout({ i18n, title, description, path, body, modules = [], section }) {
   const { t } = i18n;
-  const nav = [['home', '/'], ['files', '/files/'], ['limits', '/limits/']];
+  const nav = [['home', '/'], ['files', '/files/'], ['data', '/data/eia-861/'], ['limits', '/limits/']];
   return html`<!doctype html>
 <html lang="${i18n.locale.split('-')[0]}">
 <head>

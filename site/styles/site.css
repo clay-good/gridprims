@@ -173,3 +173,9 @@ dialog.report textarea { width: 100%; border: 1px solid var(--field-border); bor
 .report-preview { background: var(--raise); padding: var(--s3); border-radius: var(--r-field); overflow-x: auto; white-space: pre-wrap; max-height: 16rem; }
 .field-block { display: block; font-weight: 600; margin-bottom: var(--s1); }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Source stamp and warning chip */
+.source-stamp { color: var(--muted); }
+.warning-chip { display: inline-flex; align-items: center; gap: var(--s1); background: var(--warning); color: var(--legend-black); border-radius: var(--r-pill); padding: 4px 10px; font-weight: 600; font-family: Overpass, system-ui, sans-serif; }
+.warning-chip[hidden] { display: none; }
+blockquote { border-left: 4px solid var(--line); margin: var(--s3) 0; padding: var(--s2) var(--s4); }

@@ -12,6 +12,7 @@ import { gzipSync } from 'node:zlib';
 import { readXlsx, readZipDirectory, readZipEntry } from '../parsers/xlsx.mjs';
 import { writeShard } from './lib/shard-writer.mjs';
 import { postureOf, validateEntry } from './lib/registry.mjs';
+import { tableLicense } from './lib/licenses.mjs';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const MAX_FILE_BYTES = 20 * 1024 * 1024;
@@ -92,7 +93,8 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const states = [...new Set(rows.map((r) => r[step('partition').by]))].sort();
   const asOfMonth = `${MONTHS[Number(vintage.asOf.slice(5, 7)) - 1]} ${vintage.asOf.slice(0, 4)}`;
   const attribution = entry.attribution.replace('{asOfMonth}', asOfMonth);
-  const credit = { publisher: entry.publisher, attribution, note: 'Modified by gridprims: reshaped into one row per respondent and state; "." placeholders read as missing.' };
+  const lic = tableLicense([{ id: dataset, publisher: entry.publisher, license: entry.inputLicense ?? 'public-domain', attribution }]);
+  if (!lic.ok) return { ok: false, failures: [lic.error] };
   const shards = states.map((st) => {
     const part = rows.filter((r) => r.state === st);
     const bytes = writeShard(part, normalizer.SCHEMA, { dataset, version, table, state: st });
@@ -109,13 +111,13 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const manifest = {
     dataset, version, title: entry.title, publisher: entry.publisher, sourceUrl: entry.sourceUrl,
     terms: entry.terms, redistributionBasis: entry.redistributionBasis, posture, postureAdvisory: { ...advisory, agrees },
-    license: 'Public domain (U.S. federal government work); gridprims tables CC BY 4.0', attribution,
+    license: `${entry.redistributionBasis.kind}${entry.redistributionBasis.note ? ` (${entry.redistributionBasis.note})` : ''}`, attribution,
     asOf: vintage.asOf, retrieved, cadence: entry.cadence,
     raw: [{ url: vintage.url, name: vintage.url.split('/').pop(), bytes: raw.length, sha256: rawSha, entry: entryName }],
     tables: [{
       name: table, dataPeriod: String(year), rows: rows.length, columns: normalizer.SCHEMA, partition: step('partition').by,
       shards, download: { path: `${table}.csv.gz`, bytes: csv.length, sha256: sha256(csv), format: 'text/csv; gzip' },
-      license: 'CC BY 4.0 (gridprims table) over public-domain EIA data', credits: [credit],
+      license: lic.license, credits: lic.credits, notices: lic.notices,
     }],
   };
   writeFileSync(join(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');

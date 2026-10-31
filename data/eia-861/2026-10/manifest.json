@@ -21,7 +21,7 @@
     "reason": "recognized us-federal-public-domain",
     "agrees": true
   },
-  "license": "Public domain (U.S. federal government work); gridprims tables CC BY 4.0",
+  "license": "public domain (U.S. federal government work (17 U.S.C. 105))",
   "attribution": "Source: U.S. Energy Information Administration, Form EIA-861 (Oct 2026).",
   "asOf": "2026-10-07",
   "retrieved": "2026-10-31",
@@ -530,14 +530,15 @@
         "sha256": "27528c0c491ba2b269fb39aefad8edfae1589bc8cbb248e5bfdfbd243958c709",
         "format": "text/csv; gzip"
       },
-      "license": "CC BY 4.0 (gridprims table) over public-domain EIA data",
+      "license": "CC-BY-4.0",
       "credits": [
         {
           "publisher": "U.S. Energy Information Administration",
           "attribution": "Source: U.S. Energy Information Administration, Form EIA-861 (Oct 2026).",
-          "note": "Modified by gridprims: reshaped into one row per respondent and state; \".\" placeholders read as missing."
+          "note": "Modified by gridprims."
         }
-      ]
+      ],
+      "notices": []
     }
   ]
 }

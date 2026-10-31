@@ -5,6 +5,8 @@ import { html, raw } from '../lib/html.mjs';
 import { layout } from './layout.mjs';
 import { renderAnswer, renderWork, toolPath } from '../ui/tool-page.mjs';
 import { VALIDATION_LEVELS } from '../../core/contract/manifest.mjs';
+import { sourceStamp } from '../ui/source-stamp.mjs';
+import { lateness } from '../../core/lib/lateness.mjs';
 
 /** One input control, labeled from the manifest. */
 function field(inp, value, i18n) {
@@ -179,4 +181,32 @@ export function reportPage({ i18n }) {
   const { t } = i18n;
   const body = html`<h1>${t('report.title')}</h1><p class="purpose">${t('report.intro')}</p><div data-report-page></div>`;
   return layout({ i18n, title: `${t('report.title')} · ${t('site.name')}`, description: t('report.intro'), path: '/report/', body });
+}
+
+/** A dataset page, generated from its version manifest (platform/data-snapshots). */
+export function datasetPage({ manifest: m, i18n }) {
+  const { t, date } = i18n;
+  const late = lateness(m);
+  const body = html`<h1>${m.title}</h1>
+<p class="purpose">${m.publisher}</p>
+${m.tables.map((tb) => sourceStamp(m, tb, i18n))}
+<p>${late.posted ? t('data.duePosted', { due: date(late.due) }) : t('data.dueInferred', { due: date(late.due) })}</p>
+<section class="panel"><h2>${t('data.posture')}</h2>
+  <p><strong>${t(`data.posture.${m.posture}`)}</strong></p>
+  <p>${t('data.terms', { date: date(m.terms.captured) })}</p>
+  <blockquote class="mono">${m.terms.text}</blockquote>
+  <p><a href="${m.terms.url}">${t('data.termsLink')}</a></p>
+  <h3>${t('data.attribution')}</h3><p>${m.attribution}</p>
+  <p>${t('data.takedown')}</p>
+</section>
+<section><h2>${t('data.download')}</h2>
+  <ul>${m.tables.map((tb) => html`<li><a href="/data/${m.dataset}/${m.version}/${tb.download.path}" download>${t('data.downloadLine', { table: tb.name, rows: tb.rows.toLocaleString('en-US'), size: tb.download.bytes.toLocaleString('en-US') })}</a><br><span class="mono">${t('data.sha')} ${tb.download.sha256}</span></li>`)}</ul>
+  <h3>${t('data.raw')}</h3>
+  <ul>${m.raw.map((r) => html`<li class="mono"><a href="${r.url}">${t('data.rawLine', { name: r.name, size: r.bytes.toLocaleString('en-US'), sha: r.sha256 })}</a></li>`)}</ul>
+</section>
+${m.tables.map((tb) => html`<section><h2>${t('data.columns')}</h2><div class="table-wrap"><table>
+  <thead><tr><th scope="col">${t('data.col.name')}</th><th scope="col">${t('data.col.type')}</th><th scope="col">${t('data.col.unit')}</th></tr></thead>
+  <tbody>${tb.columns.map((c) => html`<tr><th scope="row" class="mono">${c.name}</th><td class="mono">${c.type}</td><td>${c.unit ?? ''}</td></tr>`)}</tbody>
+</table></div></section>`)}`;
+  return layout({ i18n, title: `${m.title} · ${t('site.name')}`, description: `${m.title}, ${m.publisher}`, path: `/data/${m.dataset}/`, body });
 }

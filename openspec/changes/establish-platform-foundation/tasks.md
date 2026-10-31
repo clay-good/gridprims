@@ -62,9 +62,9 @@
 - [x] 7.2 Build fetch → validate → normalize → snapshot for EIA-861 with `fetch`, `zlib`, and the `.xlsx` reader; verify checksums and row counts match the raw file
 - [x] 7.3 Write CSV.gz downloads and binary column shards with JSON manifests, no file over 20 MiB; verify re-running with unchanged input reproduces checksums
 - [x] 7.4 Write the CEII screen checklist; verify the build fails for an infrastructure dataset without one
-- [ ] 7.5 Implement source stamps and staleness notes; verify a fixture past its cadence shows the note
-- [ ] 7.6 Implement per-table licenses and upstream notice files in manifests; verify the mixed-inputs and incompatible share-alike scenarios
-- [ ] 7.7 Enforce the at-most-monthly permanent-version rule; verify the two-versions-in-one-month scenario
+- [x] 7.5 Implement source stamps and staleness notes; verify a fixture past its cadence shows the note
+- [x] 7.6 Implement per-table licenses and upstream notice files in manifests; verify the mixed-inputs and incompatible share-alike scenarios
+- [x] 7.7 Enforce the at-most-monthly permanent-version rule; verify the two-versions-in-one-month scenario
 
 ## 8. Citations, verification, app shell
 

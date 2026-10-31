@@ -15,10 +15,11 @@ import { createI18n } from './lib/i18n.mjs';
 import { toolPath } from './ui/tool-page.mjs';
 import { tokensCss } from './styles/tokens.mjs';
 import { serviceWorkerSource } from './sw.mjs';
-import { calculatorPage, changelogPage, filesPage, homePage, limitsPage, notFoundPage, privacyPage, reportPage, settingsPage } from './templates/pages.mjs';
+import { calculatorPage, changelogPage, datasetPage, filesPage, homePage, limitsPage, notFoundPage, privacyPage, reportPage, settingsPage } from './templates/pages.mjs';
 import changelog from '../data/curated/changelog.mjs';
 import { THEME_SCRIPT } from './templates/layout.mjs';
 import { walk } from '../verify/lib/walk.mjs';
+import { readdirSync, existsSync } from 'node:fs';
 import strings from './strings/en-US.mjs';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -66,6 +67,12 @@ export function build(opts = {}) {
   write('/settings/', settingsPage({ i18n }));
   write('/files/', filesPage({ i18n }));
   write('/privacy/', privacyPage({ i18n }));
+  for (const id of existsSync(join(ROOT, 'data')) ? readdirSync(join(ROOT, 'data')) : []) {
+    const cur = join(ROOT, 'data', id, 'current.json');
+    if (!existsSync(cur)) continue;
+    const { version } = JSON.parse(readFileSync(cur, 'utf8'));
+    write(`/data/${id}/`, datasetPage({ manifest: JSON.parse(readFileSync(join(ROOT, 'data', id, version, 'manifest.json'), 'utf8')), i18n }));
+  }
   write('/report/', reportPage({ i18n }));
   write('/', homePage({ tools: TOOLS, i18n }));
   write('/404.html', notFoundPage({ i18n }));

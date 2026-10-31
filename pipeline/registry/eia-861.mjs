@@ -15,6 +15,7 @@ export default {
     captured: '2026-10-31',
   },
   redistributionBasis: { kind: 'public domain', note: 'U.S. federal government work (17 U.S.C. 105)' },
+  inputLicense: 'public-domain',
   posture: 'mirror', // set by hand while the matcher is young; the matcher's verdict is recorded beside it
   factual: true,
   // EIA asks for an acknowledgment that includes the publication date; {asOfMonth} is filled from the vintage.

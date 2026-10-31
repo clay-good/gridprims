@@ -93,3 +93,26 @@ for (const kind of ['chrome', 'firefox']) {
     }
   });
 }
+
+for (const kind of ['chrome', 'firefox']) {
+  test(`${kind}: a dataset past its cadence shows the staleness note, computed on the device`, { skip: !findBrowser(kind) && `${kind} is not installed`, timeout: 60_000 }, async () => {
+    const server = await serve(out);
+    const browser = await launch(kind);
+    try {
+      await browser.goto(`${server.url}/data/eia-861/`);
+      await browser.evaluate('new Promise((r) => { const f = () => document.documentElement.dataset.shellReady ? r() : setTimeout(f, 20); f(); })');
+      const chip = `document.querySelector('[data-late-from]')`;
+      const lateFrom = await browser.evaluate(`${chip}.dataset.lateFrom`);
+      assert.equal(lateFrom, '2027-11-06', 'as of 2026-10-07, annual, not posted: due 2027-10-07, late from 2027-11-06');
+      assert.equal(await browser.evaluate(`${chip}.hidden`), true, 'not late today');
+      // Move the device clock past the due date: the same page now shows the note.
+      await browser.evaluate(`(async () => { const real = Date; globalThis.Date = class extends real { constructor(...a) { super(...(a.length ? a : [real.parse('2027-12-01T00:00:00Z')])); } static now() { return real.parse('2027-12-01T00:00:00Z'); } }; await import('/site/pages/shell.js?again'); })()`);
+      assert.equal(await browser.evaluate(`${chip}.hidden`), false);
+      assert.match(await browser.evaluate(`${chip}.textContent`), /May be out of date\. The next release was due by Oct 7, 2027\. Last checked for an update: Oct 31, 2026\./);
+      assert.deepEqual(foreign(browser.requests, server.url), [], 'no publisher request from a data page');
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}

@@ -29,6 +29,7 @@ test('the fixture runs end to end: shards, a CSV download, and a manifest with c
   assert.equal(t.rows, 5);
   assert.match(r.manifest.attribution, /Form EIA-861 \(Oct 2026\)/, 'EIA asks for the publication date');
   assert.match(t.credits[0].note, /Modified by gridprims/);
+  assert.equal(t.license, 'CC-BY-4.0');
   for (const s of t.shards) assert.equal(sha(readFileSync(join(dir, s.path))), s.sha256);
   const csv = gunzipSync(readFileSync(join(dir, 'sales.csv.gz'))).toString();
   assert.equal(csv.split('\n')[0].split(',')[0], 'data_year');

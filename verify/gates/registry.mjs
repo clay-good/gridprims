@@ -18,6 +18,17 @@ export async function checkRegistry(root) {
     errors.push(...validateEntry(e));
     if (`${e.id}.mjs` !== f) errors.push(`pipeline/registry/${f}: id ${e.id} does not match the file name`);
     if (e.owner && !existsSync(join(root, 'openspec/changes', e.owner))) errors.push(`${e.id}: owner ${e.owner} is not a change in openspec/changes`);
+    // Permanent versions are cut at most monthly: one version folder per YYYY-MM, matching its manifest.
+    const versionDirs = existsSync(join(root, 'data', e.id)) ? readdirSync(join(root, 'data', e.id), { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name) : [];
+    const months = new Map();
+    for (const v of versionDirs) {
+      if (!/^\d{4}-\d{2}$/.test(v)) { errors.push(`${e.id}: version folder ${v} is not a YYYY-MM month`); continue; }
+      const mv = JSON.parse(readFileSync(join(root, 'data', e.id, v, 'manifest.json'), 'utf8'));
+      const month = mv.retrieved?.slice(0, 7);
+      if (mv.version !== v) errors.push(`${e.id}: folder ${v} holds manifest version ${mv.version}`);
+      if (months.has(month)) errors.push(`${e.id}: versions ${months.get(month)} and ${v} were both cut in ${month}; permanent versions are cut at most monthly`);
+      months.set(month, v);
+    }
     const current = join(root, 'data', e.id, 'current.json');
     if (!existsSync(current)) continue;
     const { version } = JSON.parse(readFileSync(current, 'utf8'));

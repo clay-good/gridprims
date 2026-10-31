@@ -28,3 +28,5 @@ Each module here replaces what would usually be a package. Each has its own test
 | `core/lib/shard.mjs` | Parquet and Arrow readers | Reads gridprims column shards (`docs/formats/column-shard.md`): float64 and dictionary-coded text with nulls | Two column types only |
 | `pipeline/lib/shard-writer.mjs` | Parquet and Arrow writers | Writes the same format deterministically | Whole shard built in memory |
 | `pipeline/lib/registry.mjs` | data-catalog tools | Registry entry rules, recipe step vocabulary, the CEII checklist, and the license matcher that derives mirror, derive, or link | The matcher recognizes only the listed licenses; anything else downgrades |
+| `core/lib/lateness.mjs` | release-calendar logic | The one lateness rule: due on the posted date or the cadence, late 30 days after | Cadences: daily, weekly, monthly, quarterly, annual |
+| `pipeline/lib/licenses.mjs` | license-compliance tools | Chooses each output table's license from its inputs, refuses share-alike and publisher-terms mixes, and carries credits and notices | Knows public domain, CC BY 4.0, CC BY-SA 4.0, ODbL, and publisher terms |

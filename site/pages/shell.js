@@ -102,6 +102,11 @@ addEventListener('keydown', (e) => {
     input?.focus();
   }
 });
+// Staleness is computed here, on the device, at view time: a stalled pipeline
+// cannot hide it by not rebuilding the page.
+const today = new Date().toISOString().slice(0, 10);
+for (const chip of document.querySelectorAll('[data-late-from]')) chip.hidden = today < chip.dataset.lateFrom;
+
 // Offline after the first visit: the service worker caches the app shell.
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => { /* offline use is a bonus, never a requirement */ });
 
