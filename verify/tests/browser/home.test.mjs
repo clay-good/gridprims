@@ -14,7 +14,7 @@ const settled = `new Promise((r) => { const f = () => document.documentElement.d
 for (const kind of ['chrome', 'firefox']) {
   const skip = !findBrowser(kind) && `${kind} is not installed`;
 
-  test(`${kind}: at 360 × 640 the first viewport shows the command bar and both lanes with a cell each`, { skip, timeout: 60_000 }, async () => {
+  test(`${kind}: at 360 × 640 the first viewport shows the command bar and both ways to start`, { skip, timeout: 60_000 }, async () => {
     const server = await serve(out);
     const browser = await launch(kind);
     try {
@@ -24,9 +24,9 @@ for (const kind of ['chrome', 'firefox']) {
       const tops = await browser.evaluate(`(() => {
         const top = (el) => el ? el.getBoundingClientRect().top + window.scrollY : null;
         return { command: top(document.querySelector('#command-input')),
-          home: top(document.querySelector('[data-lane=home] .tool-cell a')), work: top(document.querySelector('[data-lane=work] .tool-cell a')), height: window.innerHeight };
+          file: top(document.querySelector('.door a.button')), zip: top(document.querySelector('#home-zip')), height: window.innerHeight };
       })()`);
-      for (const k of ['command', 'home', 'work']) assert.ok(tops[k] !== null && tops[k] < tops.height, `${k} at ${tops[k]} px, past the ${tops.height} px viewport`);
+      for (const k of ['command', 'file', 'zip']) assert.ok(tops[k] !== null && tops[k] < tops.height, `${k} at ${tops[k]} px, past the ${tops.height} px viewport`);
     } finally {
       await browser.close();
       await server.close();

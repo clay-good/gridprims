@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-31T00:00:00.000Z",
+  "title": "Design System: gridprims.com",
+  "extensions": {
+    "colorMeta": {
+      "guide": {
+        "role": "primary",
+        "displayName": "Plate Graphite",
+        "canonical": "oklch(26.4% 0.007 164.4)",
+        "note": "The machined plate field: the top rail, the answer plate, the drag overlay. Inherited name; no longer any kind of guide-sign green. Theme-invariant.",
+        "tonalRamp": ["oklch(15.0% 0.007 164.4)", "oklch(26.4% 0.007 164.4)", "oklch(37.9% 0.007 164.4)", "oklch(49.3% 0.007 164.4)", "oklch(60.7% 0.007 164.4)", "oklch(72.1% 0.007 164.4)", "oklch(83.6% 0.007 164.4)", "oklch(95.0% 0.007 164.4)"]
+      },
+      "signal": {
+        "role": "primary",
+        "displayName": "Signal Orange",
+        "canonical": "oklch(53.7% 0.179 35.5)",
+        "note": "The one accent: the measured value on a plate, the live section in the rail, the primary action. Night value #ff7043.",
+        "tonalRamp": ["oklch(15.0% 0.179 35.5)", "oklch(26.4% 0.179 35.5)", "oklch(37.9% 0.179 35.5)", "oklch(49.3% 0.179 35.5)", "oklch(60.7% 0.179 35.5)", "oklch(72.1% 0.179 35.5)", "oklch(83.6% 0.179 35.5)", "oklch(95.0% 0.179 35.5)"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(21.6% 0.004 229.0)",
+        "note": "Body text on work surfaces. Night value #e9ebe8.",
+        "tonalRamp": ["oklch(15.0% 0.004 229.0)", "oklch(26.4% 0.004 229.0)", "oklch(37.9% 0.004 229.0)", "oklch(49.3% 0.004 229.0)", "oklch(60.7% 0.004 229.0)", "oklch(72.1% 0.004 229.0)", "oklch(83.6% 0.004 229.0)", "oklch(95.0% 0.004 229.0)"]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Work Surface",
+        "canonical": "oklch(92.8% 0.005 134.9)",
+        "note": "The page ground. Steps up to panel (#ffffff) and raise (#f2f4f1). Night value #141615.",
+        "tonalRamp": ["oklch(15.0% 0.005 134.9)", "oklch(26.4% 0.005 134.9)", "oklch(37.9% 0.005 134.9)", "oklch(49.3% 0.005 134.9)", "oklch(60.7% 0.005 134.9)", "oklch(72.1% 0.005 134.9)", "oklch(83.6% 0.005 134.9)", "oklch(95.0% 0.005 134.9)"]
+      },
+      "field-border": {
+        "role": "neutral",
+        "displayName": "Field Stroke",
+        "canonical": "oklch(54.2% 0.011 150.6)",
+        "note": "Interactive stroke; clears 3:1 on every surface in both themes. Night value #767d78.",
+        "tonalRamp": ["oklch(15.0% 0.011 150.6)", "oklch(26.4% 0.011 150.6)", "oklch(37.9% 0.011 150.6)", "oklch(49.3% 0.011 150.6)", "oklch(60.7% 0.011 150.6)", "oklch(72.1% 0.011 150.6)", "oklch(83.6% 0.011 150.6)", "oklch(95.0% 0.011 150.6)"]
+      },
+      "work-zone": {
+        "role": "tertiary",
+        "displayName": "Work-Zone Orange",
+        "canonical": "oklch(71.5% 0.164 59.8)",
+        "note": "Status, fixed meaning: screening estimate, example values, sample file, draft method, review pending, validation level 0 or 1. Diamond glyph plus a word. Theme-invariant field with a black legend; work-zone-text is the text-safe variant.",
+        "tonalRamp": ["oklch(15.0% 0.164 59.8)", "oklch(26.4% 0.164 59.8)", "oklch(37.9% 0.164 59.8)", "oklch(49.3% 0.164 59.8)", "oklch(60.7% 0.164 59.8)", "oklch(72.1% 0.164 59.8)", "oklch(83.6% 0.164 59.8)", "oklch(95.0% 0.164 59.8)"]
+      },
+      "warning": {
+        "role": "tertiary",
+        "displayName": "Warning Amber",
+        "canonical": "oklch(85.7% 0.177 90.8)",
+        "note": "Status, fixed meaning: stale or needs re-checking. Diamond glyph plus a word, on the one pill in the system.",
+        "tonalRamp": ["oklch(15.0% 0.177 90.8)", "oklch(26.4% 0.177 90.8)", "oklch(37.9% 0.177 90.8)", "oklch(49.3% 0.177 90.8)", "oklch(60.7% 0.177 90.8)", "oklch(72.1% 0.177 90.8)", "oklch(83.6% 0.177 90.8)", "oklch(95.0% 0.177 90.8)"]
+      },
+      "stop": {
+        "role": "tertiary",
+        "displayName": "Stop Red",
+        "canonical": "oklch(46.9% 0.175 29.6)",
+        "note": "Status, fixed meaning: refusal or error. Octagon glyph plus what is missing. Night value #ff8d80.",
+        "tonalRamp": ["oklch(15.0% 0.175 29.6)", "oklch(26.4% 0.175 29.6)", "oklch(37.9% 0.175 29.6)", "oklch(49.3% 0.175 29.6)", "oklch(60.7% 0.175 29.6)", "oklch(72.1% 0.175 29.6)", "oklch(83.6% 0.175 29.6)", "oklch(95.0% 0.175 29.6)"]
+      },
+      "ok": {
+        "role": "tertiary",
+        "displayName": "Checked Green",
+        "canonical": "oklch(48.9% 0.108 153.2)",
+        "note": "Status, fixed meaning: checked. Check glyph plus the evidence line. Never the answer itself. Night value #5fd394.",
+        "tonalRamp": ["oklch(15.0% 0.108 153.2)", "oklch(26.4% 0.108 153.2)", "oklch(37.9% 0.108 153.2)", "oklch(49.3% 0.108 153.2)", "oklch(60.7% 0.108 153.2)", "oklch(72.1% 0.108 153.2)", "oklch(83.6% 0.108 153.2)", "oklch(95.0% 0.108 153.2)"]
+      },
+      "service": {
+        "role": "secondary",
+        "displayName": "Service Blue",
+        "canonical": "oklch(42.9% 0.122 255.8)",
+        "note": "Handoffs to other tools and sites, and the dashed comparison series. Arrow glyph plus destination. Night value #8fb6f2.",
+        "tonalRamp": ["oklch(15.0% 0.122 255.8)", "oklch(26.4% 0.122 255.8)", "oklch(37.9% 0.122 255.8)", "oklch(49.3% 0.122 255.8)", "oklch(60.7% 0.122 255.8)", "oklch(72.1% 0.122 255.8)", "oklch(83.6% 0.122 255.8)", "oklch(95.0% 0.122 255.8)"]
+      },
+      "learn-text": {
+        "role": "secondary",
+        "displayName": "Learn Brown",
+        "canonical": "oklch(42.1% 0.072 59.2)",
+        "note": "Glossary terms and guides. Rectangle glyph. Night value #d8a87c.",
+        "tonalRamp": ["oklch(15.0% 0.072 59.2)", "oklch(26.4% 0.072 59.2)", "oklch(37.9% 0.072 59.2)", "oklch(49.3% 0.072 59.2)", "oklch(60.7% 0.072 59.2)", "oklch(72.1% 0.072 59.2)", "oklch(83.6% 0.072 59.2)", "oklch(95.0% 0.072 59.2)"]
+      },
+      "heat-0": {
+        "role": "neutral",
+        "displayName": "Heat Ramp",
+        "canonical": "#dfe3e6",
+        "note": "The one sequential ramp, six steps, light theme lightest-is-near-zero. Night inverts the order so the deep floor stays the low end.",
+        "tonalRamp": ["#dfe3e6", "#b9c3cc", "#90a2b1", "#688296", "#41637c", "#1c4461"]
+      }
+    },
+    "typographyMeta": {
+      "plate-number": { "displayName": "Plate Number", "purpose": "The measured value on a plate, in signal orange. Steps to plate-number-wide (4.25rem) at 768px and collapses to plate-number-inline (1.5rem) below 720px. The only type above 2rem." },
+      "plate-unit": { "displayName": "Plate Unit", "purpose": "The unit beside the number, baseline aligned, never inside it. Currency leads instead of trails." },
+      "display": { "displayName": "Display", "purpose": "h1, the page title." },
+      "tagline": { "displayName": "Tagline", "purpose": "The home page's one heading; 1rem below 720px." },
+      "headline": { "displayName": "Headline", "purpose": "h2, section heads." },
+      "title": { "displayName": "Title", "purpose": "Tool cell names and the rail wordmark." },
+      "subhead": { "displayName": "Subhead", "purpose": "h3 and a panel's inline summary heading." },
+      "body": { "displayName": "Body", "purpose": "Sentences. Prose 72ch, plate sentence 62ch, validation stamp 88ch." },
+      "body-small": { "displayName": "Body Small", "purpose": "Tool cell questions, field hints and errors, captions." },
+      "note": { "displayName": "Note", "purpose": "Validation stamp, screening strip, footer, rail navigation." },
+      "control": { "displayName": "Control", "purpose": "Buttons and handoffs." },
+      "data": { "displayName": "Data", "purpose": "Roboto Mono for every number outside a plate, inputs, the command bar, receipts, citations. Always tabular-nums slashed-zero." },
+      "legend": { "displayName": "Engraved Legend", "purpose": "The world's native label form: uppercase at wide tracking below body size, in muted (or legend-white at 0.72 on a plate). Only labels may use it." },
+      "band": { "displayName": "Basis Band", "purpose": "The rating basis stamped along a plate's lower edge; 0.625rem on phones." },
+      "stamp": { "displayName": "Cell Stamp", "purpose": "The PREVIEW mark on a tool cell." }
+    },
+    "shadows": [
+      { "name": "plate", "value": "0 1px 2px var(--shadow)", "purpose": "The answer plate, under its light top hairline and dark bottom hairline. The whole of content elevation." },
+      { "name": "overlay", "value": "0 8px 24px var(--shadow)", "purpose": "Only the two layers that actually leave the page: the command-bar results list and the report dialog." },
+      { "name": "focus-ring", "value": "outline: 3px solid var(--focus); outline-offset: 2px", "purpose": "Every interactive element; switches to legend-white on the rail and on plates. Clears 7:1 against bg in both themes." }
+    ],
+    "motion": [
+      { "name": "fast", "value": "150ms", "purpose": "Token in tokens.mjs." },
+      { "name": "med", "value": "220ms", "purpose": "Token in tokens.mjs." },
+      { "name": "slow", "value": "400ms", "purpose": "Token in tokens.mjs." },
+      { "name": "ease", "value": "cubic-bezier(.2,.7,.2,1)", "purpose": "Token in tokens.mjs." },
+      { "name": "component-state", "value": "120ms ease-out", "purpose": "What the shipped component rules actually transition (background-color, border-color, color). Drift from the motion tokens, recorded as built. prefers-reduced-motion removes all of it." }
+    ],
+    "breakpoints": [
+      { "name": "receipt", "value": "480px" },
+      { "name": "phone-screen", "value": "720px" },
+      { "name": "rail", "value": "768px" },
+      { "name": "proof-grid", "value": "900px" },
+      { "name": "container", "value": "1200px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Answer Plate",
+      "kind": "custom",
+      "refersTo": "plate",
+      "description": "The signature component: the measured value engraved on a machined plate with its rating basis stamped along the lower edge.",
+      "html": "<div class=\"ds-plate\"><p class=\"ds-plate-label\">Peak demand</p><p class=\"ds-plate-number\">166.1<span class=\"ds-plate-unit\">kW</span></p><p class=\"ds-plate-sentence\">That is the highest 15-minute demand in our sample office file, set on Jun 10, 2026.</p><span class=\"ds-plate-band\">Basis · sample-office-15min.csv · 1,344 intervals · Jun 1, 2026 to Jun 14, 2026</span></div>",
+      "css": ".ds-plate { background: var(--guide, #222624); color: var(--legend-white, #fff); border-radius: var(--r-sign, 10px); padding: 24px 24px 0; position: relative; overflow: hidden; border-top: 1px solid var(--guide-hover, #2e3330); border-bottom: 1px solid var(--guide-active, #151816); box-shadow: 0 1px 2px var(--shadow, rgba(12,14,13,.16)); font-family: Archivo, system-ui, sans-serif; max-width: 42rem; } .ds-plate-label { font-size: .6875rem; font-weight: 600; letter-spacing: .085em; text-transform: uppercase; opacity: .72; margin: 0 0 12px; } .ds-plate-number { font-size: 3.25rem; font-weight: 700; line-height: .95; letter-spacing: -.035em; font-variant-numeric: tabular-nums slashed-zero; margin: 0; color: var(--signal, #c0380f); } .ds-plate-unit { font-size: .9375rem; font-weight: 500; margin-left: 8px; color: var(--legend-white, #fff); opacity: .72; letter-spacing: 0; } .ds-plate-sentence { margin: 16px 0 24px; max-width: 62ch; opacity: .92; line-height: 1.55; } .ds-plate-band { display: block; margin: 0 -24px; padding: 12px 24px; background: var(--guide-active, #151816); font-size: .6875rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; border-top: 1px solid var(--guide-hover, #2e3330); }"
+    },
+    {
+      "name": "Validation Stamp",
+      "kind": "custom",
+      "refersTo": "validation-stamp",
+      "description": "The how-well-checked line directly under a plate. Never absent, never collapsed.",
+      "html": "<p class=\"ds-stamp\"><span class=\"ds-stamp-ok\"><svg class=\"ds-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M2.5 8.5 6.5 12 13.5 4\"/></svg></span> Cross-checked · our own worked examples and a published utility study, passed Oct 2026. <a href=\"#\">What this tool cannot do</a></p>",
+      "css": ".ds-stamp { margin: 12px 0 16px; font-size: .8125rem; line-height: 1.5; color: var(--muted, #565b57); max-width: 88ch; font-family: Archivo, system-ui, sans-serif; } .ds-stamp-ok { color: var(--ok, #196b3c); font-weight: 600; } .ds-glyph { width: 16px; height: 16px; vertical-align: -2px; margin-right: 4px; } .ds-stamp a { color: inherit; text-decoration-color: var(--field-border, #6c726d); text-underline-offset: 3px; } .ds-stamp a:hover { color: var(--signal-text, #a93009); text-decoration-color: var(--signal, #c0380f); }"
+    },
+    {
+      "name": "Screening Strip",
+      "kind": "custom",
+      "refersTo": "screening-strip",
+      "description": "The one honesty line per answer: reasons joined strongest-first, stamped flat rather than drawn as a hazard bar.",
+      "html": "<p class=\"ds-strip\"><svg class=\"ds-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M8 1.5 14.5 8 8 14.5 1.5 8Z\"/></svg> Screening estimate · Example values · Review pending <a href=\"#\">Report a problem</a></p>",
+      "css": ".ds-strip { background: var(--panel, #fff); color: var(--ink, #17191a); padding: 12px 16px; border: 1px solid var(--work-zone, #f08a1c); border-radius: var(--r-field, 6px); font-size: .8125rem; font-weight: 500; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-family: Archivo, system-ui, sans-serif; margin: 0; } .ds-strip .ds-glyph { width: 16px; height: 16px; flex: none; color: var(--work-zone-text, #8c4000); } .ds-strip a { color: inherit; text-underline-offset: 3px; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one signal-orange control in a view: the action that opens the work.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Open this file in the workbench</button>",
+      "css": ".ds-btn-primary { min-height: 44px; padding: 12px 18px; border-radius: var(--r-field, 6px); font: 600 .8125rem/1 Archivo, system-ui, sans-serif; cursor: pointer; background: var(--signal-field, #b8350e); color: var(--legend-white, #fff); border: 1px solid var(--signal-field, #b8350e); transition: background-color .12s ease-out, border-color .12s ease-out; } .ds-btn-primary:hover { background: var(--signal, #c0380f); border-color: var(--signal, #c0380f); } .ds-btn-primary:focus-visible { outline: 3px solid var(--focus, #18406f); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "The default control: a white field with a machined stroke, stepping one surface darker on hover and press.",
+      "html": "<button class=\"ds-btn\" type=\"button\">Copy result</button>",
+      "css": ".ds-btn { min-height: 44px; padding: 12px 18px; border-radius: var(--r-field, 6px); font: 600 .8125rem/1 Archivo, system-ui, sans-serif; cursor: pointer; background: var(--panel, #fff); color: var(--ink, #17191a); border: 1px solid var(--field-border, #6c726d); transition: background-color .12s ease-out, border-color .12s ease-out; } .ds-btn:hover { background: var(--panel-hover, #f0f2ee); border-color: var(--ink, #17191a); } .ds-btn:active { background: var(--panel-active, #e4e7e2); } .ds-btn:focus-visible { outline: 3px solid var(--focus, #18406f); outline-offset: 2px; }"
+    },
+    {
+      "name": "Handoff",
+      "kind": "button",
+      "refersTo": "handoff",
+      "description": "Go deeper somewhere else. Arrow glyph plus destination; the one non-primary control that borrows orange, and only on hover.",
+      "html": "<a class=\"ds-handoff\" href=\"#\"><svg class=\"ds-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M2 8h11M9 4l4 4-4 4\"/></svg> Full storage design at REopt</a>",
+      "css": ".ds-handoff { display: inline-flex; gap: 8px; align-items: center; background: var(--panel, #fff); color: var(--ink, #17191a); border: 1px solid var(--field-border, #6c726d); border-radius: var(--r-field, 6px); padding: 10px 14px; font: 600 .8125rem/1.2 Archivo, system-ui, sans-serif; text-decoration: none; min-height: 44px; transition: border-color .12s ease-out, color .12s ease-out; } .ds-handoff .ds-glyph { width: 16px; height: 16px; flex: none; } .ds-handoff:hover { border-color: var(--signal, #c0380f); color: var(--signal-text, #a93009); } .ds-handoff:focus-visible { outline: 3px solid var(--focus, #18406f); outline-offset: 2px; }"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "An engraved legend over a mono input. Numbers are typed and read in the same tabular face they are answered in.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-kwh\">Monthly energy</label><input id=\"ds-kwh\" type=\"text\" value=\"16,074\" inputmode=\"decimal\"><p class=\"ds-field-hint\">kWh</p></div>",
+      "css": ".ds-field { max-width: 18rem; font-family: Archivo, system-ui, sans-serif; } .ds-field label { display: block; font-size: .6875rem; font-weight: 600; letter-spacing: .085em; text-transform: uppercase; color: var(--muted, #565b57); margin-bottom: 4px; } .ds-field input { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--field-border, #6c726d); border-radius: var(--r-field, 6px); background: var(--panel, #fff); color: var(--ink, #17191a); font-family: \"Roboto Mono\", ui-monospace, Menlo, monospace; font-size: .875rem; font-variant-numeric: tabular-nums slashed-zero; caret-color: var(--signal, #c0380f); } .ds-field input:focus-visible { outline: 3px solid var(--focus, #18406f); outline-offset: 2px; } .ds-field input[aria-invalid=\"true\"] { border-color: var(--stop, #ad2318); } .ds-field-hint { color: var(--muted, #565b57); font-size: .875rem; margin: 4px 0 0; }"
+    },
+    {
+      "name": "Top Rail",
+      "kind": "nav",
+      "refersTo": "top-rail",
+      "description": "The machined shell across the top. The current section is the rail's only orange.",
+      "html": "<header class=\"ds-rail\"><a class=\"ds-wordmark\" href=\"#\">gridprims</a><nav><ul><li><a href=\"#\" aria-current=\"page\">Home</a></li><li><a href=\"#\">Bills</a></li><li><a href=\"#\">Data</a></li><li><a href=\"#\">Carbon</a></li><li><a href=\"#\">Grid</a></li><li><a href=\"#\">Learn</a></li></ul></nav><button class=\"ds-theme\" type=\"button\">Light</button></header>",
+      "css": ".ds-rail { background: var(--guide, #222624); color: var(--legend-white, #fff); min-height: 56px; border-bottom: 1px solid var(--guide-active, #151816); display: flex; align-items: center; gap: 16px; padding: 0 16px; flex-wrap: wrap; font-family: Archivo, system-ui, sans-serif; } .ds-wordmark { color: inherit; font-weight: 700; font-size: 1.0625rem; letter-spacing: -.02em; text-decoration: none; } .ds-rail ul { display: flex; gap: 12px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; } .ds-rail nav a { color: inherit; font-weight: 500; font-size: .8125rem; letter-spacing: .01em; text-decoration: none; padding: 12px 8px; display: inline-block; border-bottom: 2px solid transparent; opacity: .82; } .ds-rail nav a:hover { opacity: 1; } .ds-rail nav a[aria-current=\"page\"] { opacity: 1; border-bottom-color: var(--signal, #c0380f); font-weight: 600; } .ds-rail a:focus-visible, .ds-rail button:focus-visible { outline: 3px solid var(--legend-white, #fff); outline-offset: 2px; } .ds-theme { margin-left: auto; background: transparent; color: inherit; border: 1px solid var(--guide-hover, #2e3330); border-radius: var(--r-field, 6px); font: 600 .75rem/1 inherit; letter-spacing: .06em; text-transform: uppercase; padding: 8px 12px; min-height: 36px; cursor: pointer; } .ds-theme:hover { border-color: var(--legend-white, #fff); }"
+    },
+    {
+      "name": "Tool Cell (ruled row)",
+      "kind": "card",
+      "refersTo": "tool-cell",
+      "description": "A lane is a machined index: ruled rows, not a grid of boxes. The PREVIEW mark is stamped on the cell, never written above the name.",
+      "html": "<ul class=\"ds-lane\"><li class=\"ds-cell\"><p class=\"ds-cell-stamp\">Preview</p><a href=\"#\">Bill check</a><p class=\"ds-cell-question\">Price your bills from the kWh printed on them, line by line.</p><p class=\"ds-cell-needs\">You need: bill totals</p></li><li class=\"ds-cell\"><a href=\"#\">Find my utility</a><p class=\"ds-cell-question\">Which utilities serve my ZIP code, and which grid region am I in?</p><p class=\"ds-cell-needs\">You need: a ZIP code · data as of Oct 7, 2026</p></li></ul>",
+      "css": ".ds-lane { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; border-top: 1px solid var(--line, #d2d6d1); font-family: Archivo, system-ui, sans-serif; } .ds-cell { border-bottom: 1px solid var(--line, #d2d6d1); padding: 12px; display: grid; gap: 4px 16px; align-items: baseline; grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr) minmax(8rem, auto); } .ds-cell:hover { background: var(--panel-hover, #f0f2ee); } .ds-cell a { font-weight: 700; font-size: 1.0625rem; letter-spacing: -.01em; text-decoration: none; color: var(--ink, #17191a); } .ds-cell a:hover { color: var(--signal-text, #a93009); } .ds-cell-question { grid-column: 2; margin: 0; color: var(--muted, #565b57); font-size: .875rem; } .ds-cell-needs { grid-column: 3; margin: 0; text-align: right; white-space: nowrap; font-size: .75rem; color: var(--muted, #565b57); } .ds-cell-stamp { grid-column: 1; grid-row: 2; justify-self: start; margin: 4px 0 0; padding: 2px 6px; border-radius: var(--r-field, 6px); background: var(--raise, #f2f4f1); color: var(--work-zone-text, #8c4000); border: 1px solid var(--line, #d2d6d1); font-size: .625rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Warning Chip",
+      "kind": "chip",
+      "refersTo": "warning-chip",
+      "description": "The only pill in the system: something once good that now needs re-checking.",
+      "html": "<span class=\"ds-warning-chip\"><svg class=\"ds-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M8 1.5 14.5 8 8 14.5 1.5 8Z\"/></svg> Needs a fresh run</span>",
+      "css": ".ds-warning-chip { display: inline-flex; align-items: center; gap: 4px; background: var(--warning, #ffcd00); color: var(--legend-black, #131313); border-radius: var(--r-pill, 999px); padding: 4px 10px; font: 600 .8125rem/1.2 Archivo, system-ui, sans-serif; } .ds-warning-chip .ds-glyph { width: 16px; height: 16px; flex: none; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Nameplate",
+    "overview": "Every number arrives the way an equipment rating does: engraved on a machined plate, with its rating basis stamped along the lower edge of that same plate, permanent and checkable. The plate is not a decoration applied to a result; it is the only form a measured number is allowed to take here.\n\nThe world is a machined dark shell carrying light work surfaces. The rail and the plates are cut from the same near-black field (guide); the page body and its panels are the pale metal the dense numbers actually live on. One orange (signal) owns the measured value, the live section in the rail, and the primary action, and owns nothing else: on a full home page it is three marks. Type is self-hosted: Archivo for display and UI, Roboto Mono for data and measurement, with tabular lining figures and a slashed zero wherever digits have to line up. Small labels are engraved legends, uppercase at wide tracking in sizes well under the body size.\n\nDepth is machining, not lighting. A plate is a 1px light edge on top, a 1px dark edge underneath, and a 1px/2px shadow; nothing else is raised. There are no bevels, no gradients, no glass, no glow, and no tinted greys anywhere in the shipped CSS. Status has four reserved colours with fixed meanings, and each one is carried by a glyph and a word, never by hue alone.",
+    "keyCharacteristics": [
+      "A measured number is always orange, always tabular, always on a dark plate, always above its basis band.",
+      "One signal orange; everything else is machined neutral.",
+      "Engraved legends: uppercase, 0.6875rem, 0.085em tracking, in muted.",
+      "Flat by construction: hairline edges, one 1px/2px plate shadow, one overlay shadow, nothing else.",
+      "Status reads without colour: glyph plus word, every time.",
+      "Both themes are first-class; night is the same machining in a dark room, never a glowing dashboard."
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "signal paints the measured value, the live section in the rail, and the primary action. Nothing else. If a third orange mark appears in a viewport, one of them is wrong.", "section": "colors" },
+      { "name": "The Full-Strength Rule", "body": "A colour commits at full strength or not at all. The rail is a saturated field, never a tinted grey; data is never tinted for decoration; there are no alpha-blended brand washes. The only opacity in the system is the legible dimming of secondary legends on a plate (0.72-0.92).", "section": "colors" },
+      { "name": "The Glyph-and-Word Rule", "body": "Colour never carries meaning alone. Every status mark pairs a reserved colour with one of the five in-house glyphs and a word: diamond for estimate or stale, octagon for error, check for passed, arrow for handoff, rectangle for info.", "section": "colors" },
+      { "name": "The Token-Only Rule", "body": "No component rule contains a literal colour. verify/gates/style.mjs fails the build on any hex or colour function in a hand-written stylesheet, and recomputes every contrast pairing in both themes.", "section": "colors" },
+      { "name": "The Engraved Legend Rule", "body": "Small labels are uppercase at wide tracking in a size below the body size, in muted (or white at 0.72 on a plate). This is the world's native label form, and it is the only thing that may be set in it: a sentence, a value, or a navigation item never takes legend styling.", "section": "typography" },
+      { "name": "The Tabular Rule", "body": "Any digit that might line up with another digit is set with tabular-nums slashed-zero - plate numbers, table cells, receipts, inputs, axes. A number that shifts when it updates is a bug.", "section": "typography" },
+      { "name": "The Unit-Beside Rule", "body": "The unit sits beside the number at plate-unit or label size, baseline aligned, never inside the number and never the same size as it. Currency is the one inversion: $ leads at unit size.", "section": "typography" },
+      { "name": "The Basis Band Rule", "body": "A plate never ships without the band stamped along its lower edge: source, interval count, date range, as-of, validation. At every width, in every rendition, including the one-line phone plate. A measured number without its basis is the one thing this world refuses.", "section": "layout" },
+      { "name": "The Ruled Index Rule", "body": "Repeating navigational rows are ruled, not boxed. A card border around every item in a list is wrong here; one hairline between items is right.", "section": "layout" },
+      { "name": "The Two-Hairline Rule", "body": "A raised surface is a light 1px top edge and a dark 1px bottom edge in its own colour family, and at most a 1px/2px shadow. If a surface needs more than that to read as raised, it is not raised; it is a different surface.", "section": "elevation" },
+      { "name": "The Detached-Only Rule", "body": "The 0 8px 24px shadow is reserved for layers that actually leave the page - the command results and the dialog. Nothing anchored in the document flow gets it.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do put every measured number on a plate, in signal, with its unit beside it and its basis band stamped along the lower edge - at every width.",
+      "Do keep orange to three marks: the measured value, the live section, the primary action.",
+      "Do pair every status colour with its glyph and its word, using the five in-house glyph shapes.",
+      "Do set small labels as engraved legends (uppercase, 0.6875rem, 0.085em, muted) and nothing else in that style.",
+      "Do take every colour, space, and radius from site/styles/tokens.mjs; the style gate fails on a literal colour.",
+      "Do build raised surfaces from a light top hairline, a dark bottom hairline, and at most a 1px/2px shadow.",
+      "Do rule repeating rows instead of boxing them.",
+      "Do check both themes, 320px, keyboard-only, and forced-colors before shipping a surface."
+    ],
+    "donts": [
+      "Don't use a bevel, gradient, glass, backdrop blur, glow, or a second content elevation. The 0 8px 24px shadow belongs to detached overlays only.",
+      "Don't tint a grey to suggest a brand, or tint data for decoration. Colour commits at full strength or not at all.",
+      "Don't spend signal on a heading, a border, an icon, or a chart series that is measured truth; measured series are graphite.",
+      "Don't use work-zone for errors or warning for estimates; the four status meanings are fixed.",
+      "Don't ship a plate, a rendition of a plate, or a copied result without its basis and its validation level.",
+      "Don't introduce a type size outside the ramp, a radius between 6px and 10px, or a spacing value off the s1-s8 scale.",
+      "Don't request a font weight outside Archivo's 400-700 or Roboto Mono's 400-500; font-synthesis-weight: none means it will silently render at the nearest shipped weight.",
+      "Don't load a font, icon set, or stylesheet from a CDN. Everything is self-hosted.",
+      "Don't reintroduce the retired highway-sign world: green fields, Overpass, federal sign colours, shields, or reflective-gradient effects.",
+      "Don't put more than one answer plate in a viewport."
+    ]
+  }
+}

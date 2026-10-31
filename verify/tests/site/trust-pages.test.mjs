@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { methodsPage } from '../../../site/templates/pages.mjs';
-import { TRUST_PAGES } from '../../../site/templates/layout.mjs';
+import { TRUST_PAGES, FOOTER_PAGES } from '../../../site/templates/layout.mjs';
 import { createI18n } from '../../../site/lib/i18n.mjs';
 import strings from '../../../site/strings/en-US.mjs';
 import { TOOLS } from '../../../core/tools/index.mjs';
@@ -20,7 +20,7 @@ const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
 test('every page\'s footer links the whole trust set, and nothing outside gridprims', () => {
   for (const p of pagesOf(out)) {
     const html = page(p);
-    for (const [, href] of TRUST_PAGES) assert.ok(html.includes(`href="${href}"`), `${p} lacks ${href}`);
+    for (const [, href] of FOOTER_PAGES) assert.ok(html.includes(`href="${href}"`), `${p} lacks ${href}`);
     // The footer is about gridprims alone; a handoff elsewhere on the page is a different thing.
     const footer = html.slice(html.indexOf('<footer'));
     for (const d of ['sophiewell.com', 'geoprims.com', 'roughlogic.com', 'enklayve.com', 'vaulytica.com', 'encryptalotta.com']) assert.ok(!footer.includes(d), `${p}'s footer still links ${d}`);

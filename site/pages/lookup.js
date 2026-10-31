@@ -8,6 +8,8 @@ import strings from '../strings/en-US.mjs';
 
 const { t } = createI18n(strings, 'en-US');
 const zipForm = document.querySelector('[data-lookup-zip]');
+// Arriving from the home page's ZIP door: fill the field and run it.
+const fromUrl = new URLSearchParams(location.search).get('zip');
 const countyForm = document.querySelector('[data-lookup-county]');
 const out = document.querySelector('[data-lookup-result]');
 const zipError = document.querySelector('[data-zip-error]');
@@ -94,5 +96,10 @@ countyForm.addEventListener('submit', async (e) => {
   const r = await withPages(lookupCounty(st, fips, await shard(st)));
   render(r, t('lookup.resultCounty', { county: r.counties[0].name, state: st }));
 });
+
+if (fromUrl) {
+  zipForm.elements.namedItem('zip').value = fromUrl;
+  zipForm.requestSubmit();
+}
 
 document.documentElement.dataset.ready = '1';

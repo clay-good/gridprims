@@ -10,6 +10,7 @@ import { toolPath } from '../ui/tool-page.mjs';
 import { SECTIONS, sectionOf } from '../ui/sections.mjs';
 import { STATE_NAMES } from '../entities/regions.mjs';
 import { statePath } from './region.mjs';
+import { LOOKUP_PATH } from './lookup.mjs';
 
 export const CATALOG_PATH = '/tools/';
 export const STATES_PATH = '/states/';
@@ -35,12 +36,36 @@ export function laneCells(lane, { tools, exists, asOf }, { t }) {
   }).filter(Boolean);
 }
 
+/** The two things a visitor can give this site, said plainly, before anything else. */
+function startDoors({ t }) {
+  return html`<section class="doors" aria-labelledby="start-title">
+  <h2 id="start-title" class="start-title">${t('home.start.title')}</h2>
+  <div class="door">
+    <h3>${t('home.start.file')}</h3>
+    <p>${t('home.start.fileWhat')}</p>
+    <p><a class="button primary" href="/files/">${t('home.start.fileAction')}</a></p>
+    <p class="unit-hint">${t('home.start.filePrivacy')}</p>
+  </div>
+  <div class="door">
+    <h3>${t('home.start.zip')}</h3>
+    <p>${t('home.start.zipWhat')}</p>
+    <form class="door-form" action="${LOOKUP_PATH}" method="get">
+      <label class="legend" for="home-zip">${t('home.start.zipLabel')}</label>
+      <input id="home-zip" name="zip" class="mono" inputmode="numeric" autocomplete="postal-code" maxlength="10" placeholder="78701">
+      <button class="button" type="submit">${t('home.start.zipAction')}</button>
+    </form>
+    <p class="unit-hint">${t('home.start.zipNote')}</p>
+  </div>
+  <p class="door-third">${t('home.start.bills')} <a href="/tools/household/bill-totals/check/">${t('home.start.billsAction')}</a></p>
+</section>`;
+}
+
 /** The worked plate: the shipped sample, already read, so the page proves the product before it lists it. */
 function proofPlate(p, { t, date }) {
   const n = (x, d = 0) => x.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
   const figure = (label, value, unit) => html`<div class="figure"><p class="legend">${label}</p><p class="figure-value">${value}<span class="figure-unit">${unit}</span></p></div>`;
   return html`<section class="proof" aria-labelledby="proof-title">
-  <h2 id="proof-title" class="legend">${t('home.proof.title')}</h2>
+  <h2 id="proof-title" class="proof-title">${t('home.proof.title')}</h2>
   <div class="answer"><div class="sign">
     <p class="label">${t('home.proof.peak')}</p>
     <p class="number">${n(p.peakKw, 1)}<span class="unit">kW</span></p>
@@ -65,6 +90,7 @@ export function homePage({ tools, i18n, exists, asOf, proof = null }) {
   };
   // The rail already carries the wordmark, so the heading is the tagline: both lanes fit a 360 × 640 first screen.
   const body = html`<h1 class="home-title">${t('site.tagline')}</h1>
+${startDoors(i18n)}
 ${proof ? proofPlate(proof, i18n) : ''}
 ${lane('home')}
 ${lane('work')}

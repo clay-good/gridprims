@@ -20,7 +20,10 @@ export const THEME_SCRIPT = "document.documentElement.dataset.js='1';try{var t=l
  *   structured?: object[], crumbs?: Array<[string, string]>,
  * }} p
  */
-/** The trust page set every footer links (site/trust-pages). */
+/** The few the footer itself carries: what a visitor needs while reading a number. */
+export const FOOTER_PAGES = [['about', '/about/'], ['privacy', '/privacy/'], ['limits', '/limits/'], ['sources', '/sources/'], ['terms', '/terms/'], ['report', '/report/']];
+
+/** The trust page set, linked in full from /about/ (site/trust-pages). */
 export const TRUST_PAGES = [['about', '/about/'], ['methods', '/methods/'], ['privacy', '/privacy/'], ['accessibility', '/accessibility/'], ['corrections', '/corrections/'], ['changelog', '/changelog/'], ['license', '/license/'], ['sources', '/sources/'], ['review', '/review-status/'], ['limits', '/limits/'], ['terms', '/terms/'], ['continuity', '/continuity/'], ['developers', '/developers/'], ['security', '/security/'], ['settings', '/settings/'], ['report', '/report/']];
 
 export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null, structured = [], crumbs = null, feed = null, card = null }) {
@@ -86,7 +89,7 @@ ${body}
 <footer>
   <div class="wrap">
     <nav aria-label="${t('footer.trust')}"><ul>
-      ${TRUST_PAGES.map(([id, href]) => html`<li><a href="${href}"${id === 'report' ? raw(' data-report') : ''}>${id === 'report' ? t('report.title') : t(`nav.${id}`)}</a></li>`)}
+      ${FOOTER_PAGES.map(([id, href]) => html`<li><a href="${href}"${id === 'report' ? raw(' data-report') : ''}>${id === 'report' ? t('report.title') : t(`nav.${id}`)}</a></li>`)}
     </ul></nav>
     <p>${t('footer.privacy')}</p>
     <p><span class="wordmark-foot">${t('site.name')}</span> · ${t('footer.license')}</p>

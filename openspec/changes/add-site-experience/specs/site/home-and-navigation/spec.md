@@ -5,11 +5,12 @@ Gets every visitor, a household on a phone or a professional at a desk, from the
 ## ADDED Requirements
 
 ### Requirement: Command-first home with two doors
-The home page SHALL show, in its first viewport at 360 × 640 px and wider, the command bar and two labeled lanes of tool cells: "For your home" (check my bill, is my use high, cheapest plan on my data, find my utility, cleanest hours to use power) and "For your work" (load and bill workbench, utility and plant data, hourly emissions, data library, agent server for developers).
+The home page SHALL show, in its first viewport at 360 × 640 px and wider, the command bar and both ways to start: dropping a meter file and entering a ZIP code, each saying plainly what it takes and what it gives back. Below them it SHALL show a worked example computed from the shipped sample file, and two labeled lanes of tool cells: "For your home" (check my bill, is my use high, cheapest plan on my data, find my utility, cleanest hours to use power) and "For your work" (load and bill workbench, utility and plant data, hourly emissions, data library, agent server for developers).
 
-#### Scenario: Phone first viewport
+#### Scenario: Phone first screen
+
 - **WHEN** the home page loads at 360 × 640 px
-- **THEN** the command bar and the first cell of each lane are visible without scrolling, and nothing scrolls sideways
+- **THEN** the command bar and both ways to start are visible without scrolling, and nothing scrolls sideways
 
 #### Scenario: Works without JavaScript
 - **WHEN** the home page loads with JavaScript disabled

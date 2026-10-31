@@ -2,7 +2,7 @@
 // surface is generated from the manifest").
 
 import { html, raw } from '../lib/html.mjs';
-import { layout } from './layout.mjs';
+import { layout, TRUST_PAGES } from './layout.mjs';
 import { renderAnswer, renderWork, toolPath } from '../ui/tool-page.mjs';
 import { VALIDATION_LEVELS } from '../../core/contract/manifest.mjs';
 import { sourceStamp } from '../ui/source-stamp.mjs';
@@ -386,7 +386,9 @@ export function aboutPage({ i18n, maintainer }) {
   const body = html`<h1>${t('about.title')}</h1><p class="purpose">${t('about.what')}</p>
 <h2>${t('about.who')}</h2><p>${t('about.whoBody', { maintainer })}</p>
 <h2>${t('about.money')}</h2><p>${t('about.moneyBody')}</p>
-<h2>${t('about.costs')}</h2><p>${t('about.costsBody')}</p><p>${t('about.users')}</p>`;
+<h2>${t('about.costs')}</h2><p>${t('about.costsBody')}</p><p>${t('about.users')}</p>
+<h2>${t('about.pages')}</h2>
+<ul class="trust-index">${TRUST_PAGES.filter(([id]) => id !== 'report').map(([id, href]) => html`<li><a href="${href}">${t(`nav.${id}`)}</a></li>`)}</ul>`;
   return layout({ i18n, title: `${t('about.title')} · ${t('site.name')}`, description: t('about.what'), path: '/about/', body });
 }
 
