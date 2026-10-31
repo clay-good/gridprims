@@ -54,7 +54,7 @@ ${[breadcrumbs, ...structured].map((o) => html`<script type="application/ld+json
 <script>${raw(THEME_SCRIPT)}</script>
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#00704a">
+<meta name="theme-color" content="#222624">
 <link rel="stylesheet" href="/site/styles/tokens.css">
 <link rel="stylesheet" href="/site/styles/site.css">
 ${modules.map((m) => html`<script type="module" src="${m}"></script>`)}

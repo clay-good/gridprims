@@ -321,7 +321,7 @@ export async function build(opts = {}) {
   cpSync(join(ROOT, 'site/icon.svg'), join(outDir, 'icon.svg'));
   writeFileSync(join(outDir, 'manifest.webmanifest'), JSON.stringify({
     name: strings['site.name'], short_name: strings['site.name'], description: strings['site.tagline'],
-    start_url: '/', scope: '/', display: 'standalone', background_color: '#f3f5f2', theme_color: '#00704a',
+    start_url: '/', scope: '/', display: 'standalone', background_color: '#e9ebe8', theme_color: '#222624',
     icons: [{ src: '/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }],
   }, null, 2) + '\n');
 
