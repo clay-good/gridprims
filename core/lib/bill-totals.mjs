@@ -68,8 +68,9 @@ function seasonOn(day, seasons) {
 /**
  * Price one billing period from its total kWh.
  * @param {{start: string, end: string, kwh: number}} period
- * @param {{fixedMonthly?: number, minimumMonthly?: number, seasons: Array<{name: string, from: string, tiers: Array<{upTo?: number, rate: number}>}>}} tariff
- *   a tier's upTo is its monthly allowance in kWh; the last tier has none
+ * @param {{fixedMonthly?: number, fixedDaily?: number, minimumMonthly?: number, seasons: Array<{name: string, from: string, tiers: Array<{upTo?: number, upToDaily?: number, rate: number}>}>}} tariff
+ *   fixedDaily is a fixed charge billed per day, for the days in the period
+ *   a tier's upTo is its monthly allowance in kWh, or upToDaily its allowance per day; the last tier has none
  * @param {{prorate?: boolean}} [opts] proration splits kWh and tier allowances by days when the period crosses a season
  * @returns {{totalCents: number, lines: Array<{label: string, kwh?: number, rate?: number, cents: number, days?: number}>, method: string | null, excluded: string[]}}
  */
@@ -96,6 +97,11 @@ export function priceTotals(period, tariff, { prorate = true } = {}) {
     lines.push({ label: 'fixed', cents: Number(cents(m)) });
     total += m;
   }
+  if (tariff.fixedDaily) {
+    const m = micro(tariff.fixedDaily) * BigInt(days);
+    lines.push({ label: 'fixed', days, cents: Number(cents(m)) });
+    total += m;
+  }
   // kWh and each tier's allowance split in proportion to days; the kWh split is rounded to whole kWh.
   let left = kwh;
   runs.forEach((r, i) => {
@@ -105,7 +111,7 @@ export function priceTotals(period, tariff, { prorate = true } = {}) {
     let rest = runKwh;
     r.season.tiers.forEach((t, k) => {
       if (rest <= 0) return;
-      const cap = t.upTo === undefined ? Infinity : t.upTo * share;
+      const cap = t.upToDaily !== undefined ? t.upToDaily * r.days : t.upTo === undefined ? Infinity : t.upTo * share;
       const used = Math.min(rest, cap);
       rest -= used;
       const m = (micro(t.rate) * BigInt(Math.round(used * 1000))) / 1000n;

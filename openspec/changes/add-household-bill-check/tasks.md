@@ -1,7 +1,7 @@
 ## 1. Data
 
 - [ ] 1.1 Derive typical residential hourly shapes by county from NLR ResStock baseline (CC BY 4.0) with heating-fuel variants, packed into state shards; register with credit and the pinned release; verify each shape sums to 1.0 per month within 0.0001 and no request names a county
-- [ ] 1.2 Add residential tariff filters (sector, delivery versus bundled, conditions) over the URDB snapshot; verify 20 sampled tariffs classify correctly by hand
+- [x] 1.2 Add residential tariff filters (sector, delivery versus bundled, conditions) over the URDB snapshot; verify 20 sampled tariffs classify correctly by hand
 - [ ] 1.3 Add TDU delivery tariffs for Texas competitive areas from PUCT-approved tariffs, versioned by effective date, and a CCA-served ZIP flag from public CCA service-area lists; verify against each TDU's published rate sheets for two effective dates
 - [ ] 1.4 Add discount-program modifiers (CARE, FERA, medical baseline) from tariff text; verify the CARE scenario
 
