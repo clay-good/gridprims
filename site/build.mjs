@@ -41,7 +41,7 @@ export function build(opts = {}) {
   for (const p of SHARED) cpSync(join(ROOT, p), join(outDir, p), { recursive: true, filter: (src) => !src.endsWith('README.md') });
   writeFileSync(join(outDir, 'site/styles/tokens.css'), tokensCss());
   // Built dataset versions ship with the site (foundation design D5, D16); curated records feed the build only.
-  cpSync(join(ROOT, 'data'), join(outDir, 'data'), { recursive: true, filter: (src) => !src.endsWith('README.md') && !src.includes(`${'/'}curated`) });
+  cpSync(join(ROOT, 'data'), join(outDir, 'data'), { recursive: true, filter: (src) => !src.endsWith('README.md') && !src.includes(`${'/'}curated`) && !src.includes(`${'/'}health`) });
 
   const i18n = createI18n(strings, 'en-US');
   const pages = [];
@@ -61,7 +61,10 @@ export function build(opts = {}) {
     write(toolPath(manifest.id), calculatorPage({ manifest, example, result, i18n }));
   }
   writeFileSync(join(outDir, 'command-index.json'), JSON.stringify(buildCommandIndex(TOOLS, toolPath)) + '\n');
-  write('/limits/', limitsPage({ tools: TOOLS, i18n }));
+  const healthFile = join(ROOT, 'data/health/pipeline.json');
+  const health = existsSync(healthFile) ? JSON.parse(readFileSync(healthFile, 'utf8')) : null;
+  write('/limits/', limitsPage({ tools: TOOLS, i18n, health }));
+  if (health) { mkdirSync(join(outDir, 'health'), { recursive: true }); cpSync(healthFile, join(outDir, 'health/pipeline.json')); }
   writeFileSync(join(outDir, 'limits/limits.json'), JSON.stringify(limitsRecord(TOOLS), null, 2) + '\n');
   write('/changelog/', changelogPage({ entries: changelog, i18n }));
   write('/settings/', settingsPage({ i18n }));

@@ -23,6 +23,10 @@ export default {
   cadence: { every: 'annual', nextRelease: { date: '2027-08-31', posted: false, note: 'EIA posts an early release each August; the date is inferred, not posted' } },
   ceii: { infrastructure: false, note: 'Sales, revenue, and customer counts by utility and state; no facility, location, or network data.' },
   owner: 'establish-platform-foundation',
+  // Where a release appears: EIA posts the newest year under zip/ and moves older years to archive/zip/.
+  releaseWatch: {
+    urls: ['https://www.eia.gov/electricity/data/eia861/zip/f861{year}.zip', 'https://www.eia.gov/electricity/data/eia861/archive/zip/f861{year}.zip'],
+  },
   vintages: {
     2025: { url: 'https://www.eia.gov/electricity/data/eia861/zip/f8612025.zip', asOf: '2026-10-07', sha256: 'f59f6c732bf685fe0a1591b32227f5ce572dc0dfd26bb5caaeed128ac4e3a396' },
   },

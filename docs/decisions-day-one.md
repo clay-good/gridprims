@@ -71,12 +71,12 @@ Tests live in `verify/tests/`, mirroring the folder they test, so nothing under 
 | Workflow | Trigger | Interval | Staleness threshold |
 |---|---|---|---|
 | `ci.yml` | push, pull request | on change | n/a |
-| `refresh-<dataset>.yml` | schedule | per recipe cadence, at least daily check, off the hour | 4 days for daily |
-| `link-check.yml` | schedule | weekly, Tuesday 07:23 UTC | 9 days |
-| `smoke.yml` | after deploy, and daily 05:41 UTC | daily | 4 days |
-| `self-heal.yml` | schedule | daily 06:17 UTC | 4 days |
+| `refresh-eia-861.yml` | schedule | daily 09:17 UTC | 72 hours |
+| `link-check.yml` | schedule | weekly, Tuesday 07:23 UTC | 504 hours |
+| `canary.yml` | schedule (floating runner label) | weekly, Wednesday 05:41 UTC | 504 hours |
+| `smoke.yml` | after deploy | with each deploy (task 8.6) | — |
 
-Every step is `node <our script>` or `git`; actions are GitHub's own, pinned by full commit SHA.
+Thresholds are three times the interval with a 48-hour floor, declared in `pipeline/workflows.mjs` and shipped in the health record. Self-heal is the first step of every scheduled run rather than its own workflow, so the host disabling one workflow is repaired by any other. Every step is `node <our script>` or `git`; actions are GitHub's own, pinned by full commit SHA, and the repository's Actions policy (set 2026-10-31) allows only GitHub-owned actions and requires SHA pinning.
 
 ## 7. Problem report endpoint
 

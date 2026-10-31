@@ -179,3 +179,5 @@ dialog.report textarea { width: 100%; border: 1px solid var(--field-border); bor
 .warning-chip { display: inline-flex; align-items: center; gap: var(--s1); background: var(--warning); color: var(--legend-black); border-radius: var(--r-pill); padding: 4px 10px; font-weight: 600; font-family: Overpass, system-ui, sans-serif; }
 .warning-chip[hidden] { display: none; }
 blockquote { border-left: 4px solid var(--line); margin: var(--s3) 0; padding: var(--s2) var(--s4); }
+
+[data-health-row].stalled { color: var(--warning-text); font-weight: 700; }

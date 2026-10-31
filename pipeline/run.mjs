@@ -49,15 +49,17 @@ export function validateRows(rows, step, previousRows) {
 
 /**
  * Run one dataset's recipe for one data year.
- * @param {{dataset: string, year: number, input?: Uint8Array, retrieved: string, outDir?: string, entry?: any}} o
+ * @param {{dataset: string, year: number, input?: Uint8Array, retrieved: string, outDir?: string, entry?: any, vintage?: {url: string, asOf: string, sha256?: string | null}, verifyPin?: boolean, upstream?: {lastModified?: string, bytes?: number}}} o
+ *   vintage: a release the registry does not list yet (the release watch found it);
+ *   verifyPin: refuse a raw file whose checksum differs from the registry's pin (rebuilds of a past version)
  *   entry replaces the registry entry (tests use it to run a recipe on a small fixture)
  * @returns {Promise<{ok: true, version: string, manifest: any} | {ok: false, failures: string[]}>}
  */
-export async function runRecipe({ dataset, year, input, retrieved, outDir = join(ROOT, 'data'), entry: given }) {
+export async function runRecipe({ dataset, year, input, retrieved, outDir = join(ROOT, 'data'), entry: given, vintage: found, verifyPin = false, upstream }) {
   const entry = given ?? (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${dataset}.mjs`)).href)).default;
   const entryErrors = validateEntry(entry);
   if (entryErrors.length) return { ok: false, failures: entryErrors };
-  const vintage = entry.vintages[year];
+  const vintage = found ?? entry.vintages[year];
   if (!vintage) return { ok: false, failures: [`${dataset}: no vintage ${year} in the registry`] };
   const step = (name) => entry.recipe.find((s) => s.step === name);
 
@@ -68,7 +70,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     raw = new Uint8Array(await res.arrayBuffer());
   }
   const rawSha = sha256(raw);
-  if (vintage.sha256 && vintage.sha256 !== rawSha) return { ok: false, failures: [`raw file SHA-256 ${rawSha} differs from the registry's ${vintage.sha256}`] };
+  if (verifyPin && vintage.sha256 && vintage.sha256 !== rawSha) return { ok: false, failures: [`raw file SHA-256 ${rawSha} differs from the registry's ${vintage.sha256}`] };
 
   const entryName = step('unzip').entry.replace('{year}', String(year));
   const zipEntry = readZipDirectory(raw).find((e) => e.name === entryName);
@@ -113,7 +115,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     terms: entry.terms, redistributionBasis: entry.redistributionBasis, posture, postureAdvisory: { ...advisory, agrees },
     license: `${entry.redistributionBasis.kind}${entry.redistributionBasis.note ? ` (${entry.redistributionBasis.note})` : ''}`, attribution,
     asOf: vintage.asOf, retrieved, cadence: entry.cadence,
-    raw: [{ url: vintage.url, name: vintage.url.split('/').pop(), bytes: raw.length, sha256: rawSha, entry: entryName }],
+    raw: [{ url: vintage.url, name: vintage.url.split('/').pop(), bytes: raw.length, sha256: rawSha, entry: entryName, ...(upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) }],
     tables: [{
       name: table, dataPeriod: String(year), rows: rows.length, columns: normalizer.SCHEMA, partition: step('partition').by,
       shards, download: { path: `${table}.csv.gz`, bytes: csv.length, sha256: sha256(csv), format: 'text/csv; gzip' },
@@ -126,10 +128,10 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
-  const { positionals, values } = parseArgs({ allowPositionals: true, options: { year: { type: 'string' }, input: { type: 'string' }, retrieved: { type: 'string' }, out: { type: 'string' } } });
+  const { positionals, values } = parseArgs({ allowPositionals: true, options: { year: { type: 'string' }, input: { type: 'string' }, retrieved: { type: 'string' }, out: { type: 'string' }, 'verify-pin': { type: 'boolean' } } });
   const r = await runRecipe({
     dataset: positionals[0], year: Number(values.year), retrieved: values.retrieved ?? new Date().toISOString().slice(0, 10),
-    input: values.input ? new Uint8Array(readFileSync(values.input)) : undefined, outDir: values.out,
+    input: values.input ? new Uint8Array(readFileSync(values.input)) : undefined, outDir: values.out, verifyPin: values['verify-pin'],
   });
   if (!r.ok) {
     console.error(`FAIL ${positionals[0]}: the previous version stays live.`);

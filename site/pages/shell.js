@@ -107,6 +107,14 @@ addEventListener('keydown', (e) => {
 const today = new Date().toISOString().slice(0, 10);
 for (const chip of document.querySelectorAll('[data-late-from]')) chip.hidden = today < chip.dataset.lateFrom;
 
+// A scheduled job is stalled when its last success is older than its threshold, by this device's clock.
+for (const cell of document.querySelectorAll('[data-health-row]')) {
+  const last = Date.parse(cell.dataset.lastSuccess);
+  const stalled = !Number.isFinite(last) || Date.now() - last > Number(cell.dataset.thresholdHours) * 3_600_000;
+  cell.textContent = stalled ? cell.dataset.stalled : cell.dataset.ok;
+  cell.classList.toggle('stalled', stalled);
+}
+
 // Offline after the first visit: the service worker caches the app shell.
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => { /* offline use is a bonus, never a requirement */ });
 

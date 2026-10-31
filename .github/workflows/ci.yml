@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Assert the Node floor
-        run: node -e "const [a,b]=process.versions.node.split('.').map(Number); if (a<24||(a===24&&b<12)) { console.error('Node '+process.versions.node+' is below the 24.12 floor'); process.exit(1) }"
+        run: node verify/node-floor.mjs
       - name: Tests
         run: npm test
       - name: Gates

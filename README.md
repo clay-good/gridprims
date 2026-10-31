@@ -33,7 +33,8 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | Problem reports: a dialog that previews the exact payload (inputs only when ticked, never file contents), a Worker route with schema limits, honeypot, proof of work, and the host's rate limit, D1 storage, and retention cleanup (180 days after closing, 365 at most); agent-prepared reports open for a person to review | Built and tested against the real Worker locally; not deployed |
 | Data pipeline: dataset registry with captured terms, posture matcher, CEII screen, and recipes as data; EIA-861 2025 snapshotted from EIA's own file into column shards and a gzip CSV with checksums; validators keep the previous version live on failure; the MCP server queries the same shards | Built and tested; scheduled refresh in CI is next |
 | Data provenance: a page per dataset at `/data/<id>/` with its source stamp, posture and captured terms, credit, downloads and checksums; one lateness rule computed on the visitor's device; each table's license chosen from its inputs; at most one permanent version a month | Built and tested |
-| Overpass fonts, deploy, scheduled automation | Not started |
+| Unattended automation: a daily EIA-861 release watch that refreshes in the same run with no approval, a weekly link check, a weekly canary on the floating runner, self-healing of host-disabled schedules, issues opened on failure, and a public health record at `/health/pipeline.json` shown on the limits page with staleness judged on the device; CI may use only GitHub's own SHA-pinned actions, enforced by gate and by repository policy | Running on schedule |
+| Overpass fonts, deploy, Worker watchdog | Not started |
 
 The plan is in [`openspec/changes/`](openspec/changes/): 22 changes, built in the phase order in [`plan-launch-and-value-proof`](openspec/changes/plan-launch-and-value-proof/). The shapes everything generates from are in [`docs/decisions-day-one.md`](docs/decisions-day-one.md).
 

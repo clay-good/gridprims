@@ -1,0 +1,40 @@
+# Weekly outbound link check (platform/data-operations). Records broken and
+# moved links on the health record and in an issue; blocks nothing.
+name: link-check
+
+on:
+  schedule:
+    - cron: '23 7 * * 2'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: link-check
+  cancel-in-progress: false
+
+jobs:
+  links:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+      - name: Assert the Node floor
+        run: node verify/node-floor.mjs
+      - name: Check links
+        run: node pipeline/link-check.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Publish
+        run: |
+          git config user.name "gridprims pipeline"
+          git config user.email "pipeline@gridprims.com"
+          git add data/health
+          git diff --cached --quiet || git commit -m "chore(data): weekly link check"
+          git pull --rebase && git push

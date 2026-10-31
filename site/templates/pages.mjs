@@ -67,7 +67,7 @@ export function calculatorPage({ manifest, example, result, i18n }) {
  * carries the validation table and the level definitions.
  * @param {{tools: any[], i18n: any}} p
  */
-export function limitsPage({ tools, i18n }) {
+export function limitsPage({ tools, i18n, health }) {
   const { t } = i18n;
   const body = html`
 <h1>${t('limits.title')}</h1>
@@ -87,7 +87,8 @@ export function limitsPage({ tools, i18n }) {
 <h2>${t('limits.levels')}</h2>
 <dl>${VALIDATION_LEVELS.map((l) => html`<dt>${l.level} · ${t(`validation.${l.level}`)}</dt><dd>${l.meaning}</dd>`)}</dl>
 <h2>${t('limits.cannot')}</h2>
-<p>${t('limits.cannotPending')}</p>`;
+<p>${t('limits.cannotPending')}</p>
+${health ? healthSection(health, i18n) : ''}`;
   return layout({ i18n, title: `${t('limits.title')} · ${t('site.name')}`, description: t('limits.intro'), path: '/limits/', body, section: 'limits' });
 }
 
@@ -209,4 +210,25 @@ ${m.tables.map((tb) => html`<section><h2>${t('data.columns')}</h2><div class="ta
   <tbody>${tb.columns.map((c) => html`<tr><th scope="row" class="mono">${c.name}</th><td class="mono">${c.type}</td><td>${c.unit ?? ''}</td></tr>`)}</tbody>
 </table></div></section>`)}`;
   return layout({ i18n, title: `${m.title} · ${t('site.name')}`, description: `${m.title}, ${m.publisher}`, path: `/data/${m.dataset}/`, body });
+}
+
+/**
+ * The pipeline's health on the limits page (platform/automation): each
+ * workflow's last success, with "stalled" judged on the visitor's device.
+ */
+function healthSection(h, i18n) {
+  const { t, date } = i18n;
+  return html`<h2 id="pipeline">${t('health.title')}</h2>
+<p>${t('health.intro')}</p>
+${h.datasets.filter((d) => d.failure).map((d) => html`<p class="warning-chip">${t('health.failing', { dataset: d.id, since: date(d.failure.since.slice(0, 10)), reason: d.failure.reason })}</p>`)}
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col">${t('health.col.workflow')}</th><th scope="col">${t('health.col.every')}</th><th scope="col">${t('health.col.last')}</th><th scope="col">${t('health.col.state')}</th></tr></thead>
+  <tbody>${h.workflows.map((w) => html`<tr>
+    <th scope="row" class="mono">${w.id}</th>
+    <td>${t('health.hours', { count: w.intervalHours })}</td>
+    <td class="mono">${w.lastSuccess ? w.lastSuccess.slice(0, 16).replace('T', ' ') + ' UTC' : t('health.never')}</td>
+    <td data-health-row data-last-success="${w.lastSuccess ?? ''}" data-threshold-hours="${w.thresholdHours}" data-ok="${t('health.ok')}" data-stalled="${t('health.stalled', { hours: w.thresholdHours })}"></td>
+  </tr>`)}</tbody>
+</table></div>
+<p><a href="/health/pipeline.json">${t('health.record')}</a></p>`;
 }

@@ -14,6 +14,8 @@ import { checkVersions } from './gates/versions.mjs';
 import { checkClaims } from './gates/claims.mjs';
 import { checkSentences } from './gates/sentences.mjs';
 import { checkRegistry } from './gates/registry.mjs';
+import { checkWorkflows } from './gates/workflows.mjs';
+import { checkRepoSize } from './gates/repo-size.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -29,6 +31,8 @@ const gates = [
   ['no unproven claims', () => checkClaims(root)],
   ['result sentences at grade 8 or below', () => checkSentences(root)],
   ['dataset registry and snapshots', () => checkRegistry(root)],
+  ['CI uses only our scripts and pinned first-party actions', () => checkWorkflows(root)],
+  ['repository size', () => checkRepoSize(root)],
 ];
 
 let failed = 0;

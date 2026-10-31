@@ -3,7 +3,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
@@ -110,6 +110,31 @@ for (const kind of ['chrome', 'firefox']) {
       assert.equal(await browser.evaluate(`${chip}.hidden`), false);
       assert.match(await browser.evaluate(`${chip}.textContent`), /May be out of date\. The next release was due by Oct 7, 2027\. Last checked for an update: Oct 31, 2026\./);
       assert.deepEqual(foreign(browser.requests, server.url), [], 'no publisher request from a data page');
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}
+
+for (const kind of ['chrome', 'firefox']) {
+  test(`${kind}: the limits page judges each scheduled job's staleness on the device`, { skip: !findBrowser(kind) && `${kind} is not installed`, timeout: 60_000 }, async () => {
+    const server = await serve(out);
+    const browser = await launch(kind);
+    try {
+      await browser.goto(`${server.url}/limits/`);
+      await browser.evaluate('new Promise((r) => { const f = () => document.documentElement.dataset.shellReady ? r() : setTimeout(f, 20); f(); })');
+      const rows = await browser.evaluate(`[...document.querySelectorAll('[data-health-row]')].map((c) => [c.dataset.lastSuccess, c.dataset.thresholdHours, c.textContent])`);
+      const health = JSON.parse(readFileSync(join(out, 'health/pipeline.json'), 'utf8'));
+      assert.equal(rows.length, health.workflows.length);
+      for (const [last, hours, text] of rows) {
+        const stalled = !last || Date.now() - Date.parse(last) > Number(hours) * 3_600_000;
+        assert.match(text, stalled ? /^Stalled/ : /^On schedule$/);
+      }
+      // A month with no run: the same page, a later clock, every job reads stalled.
+      await browser.evaluate(`(async () => { const real = Date; globalThis.Date = class extends real { static now() { return real.now() + 40 * 86400000; } }; await import('/site/pages/shell.js?later'); })()`);
+      const later = await browser.evaluate(`[...document.querySelectorAll('[data-health-row]')].map((c) => c.textContent)`);
+      assert.ok(later.every((x) => x.startsWith('Stalled')), later.join(' | '));
     } finally {
       await browser.close();
       await server.close();

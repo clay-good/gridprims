@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-10-31T02:15:08.739Z",
+  "workflows": [
+    {
+      "id": "refresh-eia-861",
+      "intervalHours": 24,
+      "thresholdHours": 72,
+      "lastSuccess": "2026-10-31T02:14:33.828Z",
+      "lastRun": "2026-10-31T02:14:33.828Z",
+      "enabled": true
+    },
+    {
+      "id": "link-check",
+      "intervalHours": 168,
+      "thresholdHours": 504,
+      "lastSuccess": "2026-10-31T02:14:34.930Z",
+      "lastRun": "2026-10-31T02:14:34.930Z",
+      "enabled": true
+    },
+    {
+      "id": "canary",
+      "intervalHours": 168,
+      "thresholdHours": 504,
+      "lastSuccess": "2026-10-31T02:15:08.739Z",
+      "lastRun": "2026-10-31T02:15:08.739Z",
+      "enabled": true
+    }
+  ],
+  "datasets": [
+    {
+      "id": "eia-861",
+      "lastCheck": "2026-10-31T02:14:33.828Z",
+      "lastRefresh": null,
+      "version": "2026-10",
+      "posture": "mirror",
+      "failure": null
+    }
+  ],
+  "links": [
+    {
+      "url": "https://www.nist.gov/pml/special-publication-811",
+      "state": "ok",
+      "status": 200,
+      "usedBy": [
+        "calc.energy-units.convert citation"
+      ]
+    },
+    {
+      "url": "https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm",
+      "state": "ok",
+      "status": 200,
+      "usedBy": [
+        "calc.energy-units.convert citation"
+      ]
+    },
+    {
+      "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/mer_A_FULL.pdf",
+      "state": "ok",
+      "status": 200,
+      "usedBy": [
+        "calc.energy-units.convert citation"
+      ]
+    },
+    {
+      "url": "https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php",
+      "state": "ok",
+      "status": 200,
+      "usedBy": [
+        "calc.energy-units.convert citation",
+        "calc.energy-units.convert handoff"
+      ]
+    },
+    {
+      "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php",
+      "state": "ok",
+      "status": 200,
+      "usedBy": [
+        "calc.energy-units.convert citation"
+      ]
+    },
+    {
+      "url": "https://www.eia.gov/electricity/data/eia861/",
+      "state": "ok",
+      "status": 200,
+      "usedBy": [
+        "eia-861 source"
+      ]
+    },
+    {
+      "url": "https://www.eia.gov/about/copyrights_reuse.php",
+      "state": "ok",
+      "status": 200,
+      "usedBy": [
+        "eia-861 terms"
+      ]
+    }
+  ],
+  "deposits": {
+    "last": null,
+    "restoreTest": null
+  },
+  "watchdog": {
+    "lastHeartbeat": null
+  },
+  "runs": [
+    {
+      "workflow": "canary",
+      "started": "2026-10-31T02:15:08.739Z",
+      "finished": "2026-10-31T02:15:08.739Z",
+      "durationMs": 0,
+      "ok": true,
+      "datasets": [],
+      "notes": []
+    },
+    {
+      "workflow": "link-check",
+      "started": "2026-10-31T02:14:33.942Z",
+      "finished": "2026-10-31T02:14:34.930Z",
+      "durationMs": 988,
+      "ok": true,
+      "datasets": [],
+      "notes": []
+    },
+    {
+      "workflow": "refresh-eia-861",
+      "started": "2026-10-31T02:14:33.358Z",
+      "finished": "2026-10-31T02:14:33.828Z",
+      "durationMs": 470,
+      "ok": true,
+      "datasets": [
+        {
+          "id": "eia-861",
+          "checked": true,
+          "refreshed": false,
+          "version": "2026-10",
+          "posture": "mirror"
+        }
+      ],
+      "notes": [
+        "no host token: self-heal and issues skipped (local run)"
+      ]
+    }
+  ]
+}

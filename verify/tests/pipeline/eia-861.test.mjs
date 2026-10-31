@@ -78,8 +78,8 @@ test('a changed header fails the schema check and names the column', async () =>
   assert.match(r.failures[0], /schema: column 11 is "Gigawatthours", expected "Megawatthours"/);
 });
 
-test('a raw file that does not match the pinned checksum is refused', async () => {
-  const r = await runRecipe({ dataset: 'eia-861', year: 2025, retrieved: '2026-10-31', input: eia861Zip(), outDir: mkdtempSync(join(tmpdir(), 'gridprims-data-')) });
+test('a rebuild refuses a raw file that does not match the pinned checksum', async () => {
+  const r = await runRecipe({ dataset: 'eia-861', year: 2025, retrieved: '2026-10-31', input: eia861Zip(), outDir: mkdtempSync(join(tmpdir(), 'gridprims-data-')), verifyPin: true });
   assert.equal(r.ok, false);
   assert.match(r.failures[0], /raw file SHA-256 .* differs from the registry's/);
 });
