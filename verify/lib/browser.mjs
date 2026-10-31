@@ -105,6 +105,7 @@ class Socket {
  *   goto: (url: string) => Promise<void>,
  *   evaluate: (expression: string) => Promise<any>,
  *   setViewport: (width: number, height: number) => Promise<void>,
+ *   screenshot: () => Promise<Buffer>,
  *   close: () => Promise<void>,
  * }} Browser
  */
@@ -160,6 +161,10 @@ async function launchChrome(exe, profile) {
     async setViewport(width, height) {
       await cmd('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
     },
+    async screenshot() {
+      const { data } = await cmd('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true });
+      return Buffer.from(data, 'base64');
+    },
     async close() {
       try { await Promise.race([sock.send('Browser.close'), new Promise((r) => setTimeout(r, 2000))]); } catch { /* closing */ }
       sock.close();
@@ -208,6 +213,10 @@ async function launchFirefox(exe, profile) {
     },
     async setViewport(width, height) {
       await sock.send('browsingContext.setViewport', { context, viewport: { width, height } });
+    },
+    async screenshot() {
+      const { data } = await sock.send('browsingContext.captureScreenshot', { context, origin: 'document' });
+      return Buffer.from(data, 'base64');
     },
     async close() {
       try { await Promise.race([sock.send('browser.close', {}), new Promise((r) => setTimeout(r, 2000))]); } catch { /* closing */ }

@@ -14,7 +14,7 @@ export const TYPES = {
 
 /**
  * @param {string} root folder to serve
- * @param {{routes?: Record<string, {body: Uint8Array | string, type?: string}>, headers?: Record<string, string>}} [opts]
+ * @param {{routes?: Record<string, {body: Uint8Array | string, type?: string}>, headers?: Record<string, string>, port?: number}} [opts]
  * @returns {Promise<{url: string, close: () => Promise<void>}>}
  */
 export async function serve(root, opts = {}) {
@@ -40,7 +40,7 @@ export async function serve(root, opts = {}) {
       res.end('not found');
     }
   });
-  await new Promise((r) => server.listen(0, '127.0.0.1', r));
+  await new Promise((r) => server.listen(opts.port ?? 0, '127.0.0.1', r));
   const { port } = /** @type {{port: number}} */ (server.address());
   return { url: `http://127.0.0.1:${port}`, close: () => new Promise((r) => server.close(() => r())) };
 }
