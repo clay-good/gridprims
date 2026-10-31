@@ -133,3 +133,16 @@ footer ul { list-style: none; padding: 0; display: flex; gap: var(--s3); flex-wr
   .rail, .command, .theme-toggle, .answer-actions { display: none; }
   a[href^="http"]::after { content: " (" attr(href) ")"; }
 }
+
+/* Charts (DESIGN.md Charts): series colors by role, references muted and dashed. */
+.chart { margin: var(--s4) 0; }
+.chart svg { width: 100%; height: auto; display: block; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-field); }
+.chart figcaption { color: var(--muted); font-size: .875rem; margin-top: var(--s2); }
+.chart-grid line { stroke: var(--line); stroke-width: 1; }
+.chart-axis text { fill: var(--muted); font: 500 11px "Overpass Mono", ui-monospace, Menlo, Consolas, monospace; }
+.series { fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.series-measured { stroke: var(--series-measured); }
+.series-whatif { stroke: var(--series-whatif); }
+.chart-highlight circle { fill: var(--series-measured); stroke: var(--panel); stroke-width: 2; }
+.chart-highlight text { fill: var(--ink); font: 600 12px Overpass, system-ui, sans-serif; }
+caption { text-align: left; color: var(--muted); font-size: .875rem; padding: var(--s2) 0; }
