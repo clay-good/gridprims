@@ -5,7 +5,8 @@
 // When a validator fails, nothing is written and the previous version stays live.
 
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { createReadStream, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { Readable } from 'node:stream';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -92,6 +93,33 @@ export function validateRows(rows, step, previousRows) {
 }
 
 /**
+ * The lines of a raw file, from its bytes or streamed from its path or URL. A
+ * streamed file's SHA-256 and size are recorded once it has been read to the end.
+ */
+async function* linesOf(r) {
+  const decoder = new TextDecoder();
+  if (!r.stream) {
+    yield* decoder.decode(r.bytes).split(/\r?\n/);
+    return;
+  }
+  const hash = createHash('sha256');
+  let size = 0;
+  let rest = '';
+  const source = r.path ? createReadStream(r.path) : Readable.fromWeb((await fetch(r.url)).body);
+  for await (const chunk of source) {
+    hash.update(chunk);
+    size += chunk.length;
+    const parts = (rest + decoder.decode(chunk, { stream: true })).split(/\r?\n/);
+    rest = parts.pop();
+    yield* parts;
+  }
+  rest += decoder.decode();
+  if (rest) yield rest;
+  r.sha256 = hash.digest('hex');
+  r.size = size;
+}
+
+/**
  * Run one dataset's recipe for one data year.
  * @param {{dataset: string, year: number | string, input?: Uint8Array | Record<string, Uint8Array>, retrieved: string, outDir?: string, joinDir?: string, entry?: any, vintage?: {url: string, asOf: string, sha256?: string | null}, verifyPin?: boolean, upstream?: {lastModified?: string, bytes?: number}}} o
  *   vintage: a release the registry does not list yet (the release watch found it);
@@ -111,6 +139,12 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const named = vintage.files ? Object.entries(vintage.files) : [['', { url: vintage.url, sha256: vintage.sha256 }]];
   const raws = {};
   for (const [name, file] of named) {
+    // A file too large to hold in memory (EAGLE-I's yearly CSVs) is read line by line, and hashed as it is read.
+    // The input may name a local copy by path; otherwise it is fetched.
+    if (file.stream) {
+      raws[name] = { stream: true, url: file.url, name: file.name, path: typeof input?.[name] === 'string' ? input[name] : null, pinned: file.sha256, sha256: null, size: 0 };
+      continue;
+    }
     let bytes = name ? input?.[name] : input;
     if (!bytes) {
       const res = await fetch(file.url);
@@ -119,7 +153,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     }
     const sum = sha256(bytes);
     if (verifyPin && file.sha256 && file.sha256 !== sum) return { ok: false, failures: [`raw file${name ? ` ${name}` : ''} SHA-256 ${sum} differs from the registry's ${file.sha256}`] };
-    raws[name] = { bytes, sha256: sum, url: file.url };
+    raws[name] = { bytes, sha256: sum, url: file.url, name: file.name, size: bytes.length };
   }
   const raw = raws['']?.bytes;
 
@@ -141,6 +175,9 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
       // One JSON document, gzipped or not (OpenEI's URDB bulk file).
       const bytes = step('read-json').file ? raws[step('read-json').file].bytes : raw;
       input = JSON.parse(new TextDecoder().decode(bytes[0] === 0x1f && bytes[1] === 0x8b ? gunzipSync(bytes) : bytes));
+    } else if (step('read-lines')) {
+      // Text files a line at a time: the normalizer gets, for each file, a function returning its lines.
+      input = Object.fromEntries(step('read-lines').files.map((f) => [f, () => linesOf(raws[f])]));
     } else if (step('read-csv')) {
       // A delimited text file (Census's pipe-delimited relationship files): rows of strings, the header first.
       const csv = step('read-csv');
@@ -188,7 +225,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     }
     if (failures.length) continue;
     const normalizer = await import(pathToFileURL(join(ROOT, 'pipeline/normalize', `${step('normalize').module}.mjs`)).href);
-    const { rows, problems, dataPeriod } = normalizer.normalize(input, read.headerRows, { joins, retrieved });
+    const { rows, problems, dataPeriod } = await normalizer.normalize(input, read.headerRows, { joins, retrieved });
     if (problems.length) { failures.push(...problems.map((p) => `${tb.name}: schema: ${p}`)); continue; }
     const prevRows = previous?.tables.find((t) => t.name === tb.name && t.dataPeriod === (dataPeriod ?? String(year)))?.rows;
     const bad = validateRows(rows, step('validate'), prevRows);
@@ -200,6 +237,10 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     if (unplaced) bad.push(`${unplaced} rows have no ${by} to partition by`);
     if (bad.length) { failures.push(...bad.map((f) => `${tb.name}: ${f}`)); continue; }
     ready.push({ tb, rows, schema: normalizer.SCHEMA, by, unmatched, entryName, dataPeriod: dataPeriod ?? String(year) });
+  }
+  for (const [name, r] of Object.entries(raws).filter(([, x]) => x.stream)) {
+    if (!r.sha256) failures.push(`raw file ${name} was never read to the end, so its SHA-256 is unknown`);
+    else if (verifyPin && r.pinned && r.pinned !== r.sha256) failures.push(`raw file ${name} SHA-256 ${r.sha256} differs from the registry's ${r.pinned}`);
   }
   if (failures.length) return { ok: false, failures };
   // The CEII screen runs before anything is written; a release that fails it never ships.
@@ -263,7 +304,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     asOf: vintage.asOf, retrieved, generatedAt: `${retrieved}T00:00:00Z`, cadence: entry.cadence,
     raw: named.map(([name]) => {
       const r = raws[name];
-      return { url: r.url, name: r.url.split('/').pop(), bytes: r.bytes.length, sha256: r.sha256, ...(name ? { file: name } : ready.some((x) => x.entryName) ? { entries: ready.map((x) => x.entryName) } : {}), ...(!name && upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) };
+      return { url: r.url, name: r.name ?? r.url.split('/').pop(), bytes: r.size, sha256: r.sha256, ...(name ? { file: name } : ready.some((x) => x.entryName) ? { entries: ready.map((x) => x.entryName) } : {}), ...(!name && upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) };
     }),
     ...(vintage.release ? { release: vintage.release } : {}),
     ...(base ? { previousVersion: base } : {}),

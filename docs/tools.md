@@ -362,7 +362,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 **Known limits.**
 
-- County outage history is not yet included: enter the outage length you want to ride through.
+- County outage history means some customers in the county were out, not this address; durations are a typical guide, not a worst case.
 - No inverter losses, battery aging, or temperature derating.
 
 ## Bill check (`household.bill-totals.check`)

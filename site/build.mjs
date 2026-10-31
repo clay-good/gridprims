@@ -31,6 +31,7 @@ import { statePage, statePath, subregionPage, subregionPath } from './templates/
 import { lookupData } from './entities/lookup.mjs';
 import { rateRecords, tariffData } from './entities/tariffs.mjs';
 import { served } from './entities/plants.mjs';
+import { countyHistory } from '../core/lib/backup-power.mjs';
 import { LOOKUP_PATH, lookupPage } from './templates/lookup.mjs';
 import { CATALOG_PATH, catalogPage, homePage, STATES_PATH, statesIndexPage } from './templates/home.mjs';
 import { checkSimplicity } from './ui/home-lanes.mjs';
@@ -208,6 +209,24 @@ export async function build(opts = {}) {
     mkdirSync(join(outDir, 'bills'), { recursive: true });
     writeFileSync(join(outDir, 'bills/ferc1.json'), JSON.stringify({ release: ferc1.manifest.release ?? ferc1.manifest.version, asOf: ferc1.manifest.asOf, utilities: byEia }));
   }
+  // County outage history from EAGLE-I, one file per state, for the backup power size.
+  const outages = served(join(ROOT, 'data'), 'eaglei', 'events');
+  if (outages) {
+    const cov = served(join(ROOT, 'data'), 'eaglei', 'coverage').rows;
+    const customers = Object.fromEntries(served(join(ROOT, 'data'), 'eaglei', 'counties').rows.map((r) => [r.fips, r.customers]));
+    const [from, to] = outages.table.dataPeriod.split('-').map(Number);
+    const byState = new Map();
+    for (const e of outages.rows) {
+      const st = byState.get(e.state) ?? byState.set(e.state, new Map()).get(e.state);
+      (st.get(e.fips) ?? st.set(e.fips, []).get(e.fips)).push(e);
+    }
+    mkdirSync(join(outDir, 'outages'), { recursive: true });
+    for (const [st, counties] of byState) {
+      const coverage = Object.fromEntries(cov.filter((c) => c.state === st).map((c) => [c.year, c.max_pct_covered]));
+      const summary = Object.fromEntries([...counties].map(([fips, events]) => [fips, { customers: customers[fips], ...countyHistory(events, coverage, { from, to }) }]));
+      writeFileSync(join(outDir, `outages/${st}.json`), JSON.stringify({ release: outages.manifest.release, asOf: outages.manifest.asOf, from, to, coverage, counties: summary }));
+    }
+  }
   // ERCOT's published 4CP intervals, for the workbench's coincident-peak panel.
   mkdirSync(join(outDir, 'bills'), { recursive: true });
   writeFileSync(join(outDir, 'bills/ercot-4cp.json'), readFileSync(join(ROOT, 'data/curated/ercot-4cp.json')));
@@ -295,7 +314,7 @@ export async function build(opts = {}) {
   // Dataset shards are cached as they are visited, not precached, so the shell stays small as data grows.
   // Entity pages (thousands of plants) are cached as visited too, not precached.
   // So are the lookup's state shards (2.4 MB in all) and the bill tools' rate files (about 50 MB): a visitor needs only their own utility's.
-  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('bills/tariffs/') && !f.startsWith('bills/rates/') && !f.startsWith('site/cards/'));
+  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('bills/tariffs/') && !f.startsWith('bills/rates/') && !f.startsWith('outages/') && !f.startsWith('site/cards/'));
   const version = sha256(shell.map((f) => `${f}:${sha256(readFileSync(join(outDir, f)))}`).join('\n')).slice(0, 12);
   const urls = shell.map((f) => `/${f.replace(/(^|\/)index\.html$/, '$1')}`);
   writeFileSync(join(outDir, 'sw.js'), serviceWorkerSource({ version, files: urls }));

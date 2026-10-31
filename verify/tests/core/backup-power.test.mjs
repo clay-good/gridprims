@@ -71,3 +71,14 @@ test('durations use nearest-rank percentiles', () => {
   assert.equal(nearestRank(hours, 90), 9);
   assert.deepEqual(eventSummary(hours.map((h) => ({ hours: h }))), { count: 10, p50: 5, p90: 9, longest: 10 });
 });
+
+test('county history: a year under 50% coverage is dropped and named; a year with no published figure is kept and named', async () => {
+  const { countyHistory } = await import('../../../core/lib/backup-power.mjs');
+  const events = [{ year: 2017, hours: 30 }, { year: 2018, hours: 1 }, { year: 2019, hours: 2 }, { year: 2019, hours: 12 }, { year: 2024, hours: 4 }];
+  const h = countyHistory(events, { 2018: 45, 2019: 80 }, { from: 2017, to: 2024 });
+  assert.deepEqual(h.dropped, [{ year: 2018, pct: 45 }]);
+  assert.deepEqual(h.unpublished, [2017, 2020, 2021, 2022, 2023, 2024]);
+  assert.equal(h.count, 4);
+  assert.equal(h.longest, 30);
+  assert.equal(h.p50, 4);
+});

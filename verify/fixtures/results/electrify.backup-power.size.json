@@ -60,7 +60,11 @@
             }
           ]
         },
-        "datasets": [],
+        "datasets": [
+          {
+            "id": "eaglei"
+          }
+        ],
         "stability": "experimental",
         "validationLevel": 1,
         "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
@@ -125,7 +129,11 @@
             }
           ]
         },
-        "datasets": [],
+        "datasets": [
+          {
+            "id": "eaglei"
+          }
+        ],
         "stability": "experimental",
         "validationLevel": 1,
         "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
@@ -190,7 +198,11 @@
             }
           ]
         },
-        "datasets": [],
+        "datasets": [
+          {
+            "id": "eaglei"
+          }
+        ],
         "stability": "experimental",
         "validationLevel": 1,
         "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",

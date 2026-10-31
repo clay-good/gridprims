@@ -5,7 +5,7 @@
 - [x] 1.3 EV fleet inputs, unmanaged and managed charging, 125% continuous-load headroom check; verify the not-enough-time, numbers, midnight-DST, and managed-peak scenarios
 - [ ] 1.4 Added-load alignment, typical county shapes, and combined results; verify the hourly-on-15-minute and winter-peak scenarios
 - [ ] 1.5 Register EAGLE-I v4 county data and the county end-use load shapes (ResStock and ComStock, pinned release) with credit, both in state shards, and derive outage events; verify the registry entries carry publisher, license, and as-of rule, and that events match an independent script for 3 counties
-- [ ] 1.6 Backup power sizing and REopt resilience handoff; verify the 9.6 kWh, 75 kWh, 7.0 kW, and short-event scenarios, coverage exclusion, and the county-proxy label
+- [x] 1.6 Backup power sizing and REopt resilience handoff; verify the 9.6 kWh, 75 kWh, 7.0 kW, and short-event scenarios, coverage exclusion, and the county-proxy label
 
 ## 2. Surfaces
 

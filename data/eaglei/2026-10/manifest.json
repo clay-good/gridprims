@@ -1,0 +1,1033 @@
+{
+  "dataset": "eaglei",
+  "version": "2026-10",
+  "title": "County outage events from EAGLE-I (ORNL)",
+  "publisher": "Oak Ridge National Laboratory (EAGLE-I)",
+  "sourceUrl": "https://doi.org/10.6084/m9.figshare.24237376.v4",
+  "terms": {
+    "url": "https://figshare.com/articles/dataset/The_Environment_for_Analysis_of_Geo-Located_Energy_Information_s_Recorded_Electricity_Outages_2014-2022/24237376",
+    "section": "License",
+    "text": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Brelsford, Christa; Tennille, Sarah; Myers, Aaron; et al. (2023). The Environment for Analysis of Geo-Located Energy Information's Recorded Electricity Outages 2014-2025. figshare. Dataset. https://doi.org/10.6084/m9.figshare.24237376.v4",
+    "captured": "2026-10-31",
+    "license": "CC-BY-4.0"
+  },
+  "redistributionBasis": {
+    "kind": "named license",
+    "note": "CC BY 4.0"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "CC-BY-4.0",
+    "reason": "recognized CC-BY-4.0",
+    "agrees": true
+  },
+  "license": "named license (CC BY 4.0)",
+  "attribution": "Brelsford et al., EAGLE-I Recorded Electricity Outages 2014-2025, Oak Ridge National Laboratory, figshare version 4, CC BY 4.0.",
+  "asOf": "2026-02-25",
+  "retrieved": "2026-10-31",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "cadence": {
+    "every": "annual",
+    "nextRelease": {
+      "date": "2027-03-01",
+      "posted": false,
+      "note": "Version 4, adding 2025, was posted February 25, 2026; the next year is inferred, not posted"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://ndownloader.figshare.com/files/42547717",
+      "name": "eaglei_outages_2014.csv",
+      "bytes": 78056250,
+      "sha256": "f292a9f99066ac686df69767c535b218e70b4d4e748840ec620eda3340f914c9",
+      "file": "y2014"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/42547822",
+      "name": "eaglei_outages_2015.csv",
+      "bytes": 598963737,
+      "sha256": "49de89b3427d564efbd9c80183caf4e9777966f7e319d4b30d682c1c0d064505",
+      "file": "y2015"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/42547825",
+      "name": "eaglei_outages_2016.csv",
+      "bytes": 619779314,
+      "sha256": "2c1b364a3b06aee56326174c4644750ea86ba9be4585c5e40eeb7835431bfc9c",
+      "file": "y2016"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/42547828",
+      "name": "eaglei_outages_2017.csv",
+      "bytes": 698796929,
+      "sha256": "47479c4fd645ec69685447f90baa51f08a85e776cedf612279b3e41c13147c8d",
+      "file": "y2017"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/42547879",
+      "name": "eaglei_outages_2018.csv",
+      "bytes": 999210542,
+      "sha256": "85e0a864aa272e75892e181f1da4754ed78f7bf0bef75a279d8ab381baa7db70",
+      "file": "y2018"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/42547885",
+      "name": "eaglei_outages_2019.csv",
+      "bytes": 1102778792,
+      "sha256": "4cc277a138b326bd0e1f203558539a9422b40dacdf439e3d5b58ee71d7462d27",
+      "file": "y2019"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/42547894",
+      "name": "eaglei_outages_2020.csv",
+      "bytes": 1170699724,
+      "sha256": "2a20b62e5245b1b9d4fcedc1bdbaf691bb1e17f75094975c8c6cb854f52e721a",
+      "file": "y2020"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/42547891",
+      "name": "eaglei_outages_2021.csv",
+      "bytes": 1141058232,
+      "sha256": "e3e7ac40a40d92d92488501881ab381b8931833e486941424ac55ea20ffde319",
+      "file": "y2021"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/42547897",
+      "name": "eaglei_outages_2022.csv",
+      "bytes": 1187596176,
+      "sha256": "ff8b58ae30fcbaf290f820bcd4f1420e536994bc9f0a87bb80991130478461b0",
+      "file": "y2022"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/44574907",
+      "name": "eaglei_outages_2023.csv",
+      "bytes": 1199752423,
+      "sha256": "c028f42dae8522ecfb787ad0b6461cfc809bb04856eef20cb389e486d5657f7e",
+      "file": "y2023"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/53581661",
+      "name": "eaglei_outages_2024.csv",
+      "bytes": 1444846424,
+      "sha256": "d5d75ea4ef3943446aaf0623e9b451cb4e7796d20cc379de9cf497106ebab2e6",
+      "file": "y2024"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/62164877",
+      "name": "eaglei_outages_2025.csv",
+      "bytes": 1402347695,
+      "sha256": "4148a4a3b26e58024403cef98ccb324d1656f476613d6afff4451e33faf468c9",
+      "file": "y2025"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/42547708",
+      "name": "MCC.csv",
+      "bytes": 40584,
+      "sha256": "d7fbe0d60ea71273f68bd744408059491fbc7f85b6254882d17783d7762bf65e",
+      "file": "mcc"
+    },
+    {
+      "url": "https://ndownloader.figshare.com/files/42547714",
+      "name": "coverage_history.csv",
+      "bytes": 11965,
+      "sha256": "a5f102ee31d7c8ea5676679ec8a89a1e786bbe482d48f85c9a058a388a593267",
+      "file": "coverage"
+    }
+  ],
+  "release": "version 4",
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": false,
+    "columnsChecked": 13,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "County totals of customers out over time; no facility, feeder, or network detail."
+  },
+  "tables": [
+    {
+      "name": "events",
+      "title": "County outage events: runs of 15-minute intervals with at least 1% of modeled customers out",
+      "dataPeriod": "2014-2025",
+      "rows": 1080949,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "fips",
+          "type": "str",
+          "unit": "county FIPS code"
+        },
+        {
+          "name": "start",
+          "type": "str",
+          "unit": "UTC, YYYY-MM-DDTHH:MM"
+        },
+        {
+          "name": "year",
+          "type": "f64"
+        },
+        {
+          "name": "hours",
+          "type": "f64",
+          "unit": "hours"
+        },
+        {
+          "name": "peak_pct_out",
+          "type": "f64",
+          "unit": "% of modeled customers"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "events/AK.bin",
+          "state": "AK",
+          "rows": 2552,
+          "bytes": 139040,
+          "sha256": "5729457d5e79bdb2aeea11a49c45e5d9ff9fc855711c33f92fdb2a35e350b4e2"
+        },
+        {
+          "path": "events/AL.bin",
+          "state": "AL",
+          "rows": 26987,
+          "bytes": 1405728,
+          "sha256": "9f72d0efa740a3df926a0133b031b8ca7173564a18f96e1919a7e1e91c005486"
+        },
+        {
+          "path": "events/AR.bin",
+          "state": "AR",
+          "rows": 32448,
+          "bytes": 1686112,
+          "sha256": "74d6f513212382875563259acb43a7cb5444e41f834d9848535a98552a21e5a8"
+        },
+        {
+          "path": "events/AZ.bin",
+          "state": "AZ",
+          "rows": 2968,
+          "bytes": 162480,
+          "sha256": "ef8c2399d46d73caa3e174b704e8ce9ae37b251a05463808bf73865aa2c046ff"
+        },
+        {
+          "path": "events/CA.bin",
+          "state": "CA",
+          "rows": 24556,
+          "bytes": 1269632,
+          "sha256": "987c1e7aadf19d11303cf44de25c27a48e91fb9650be5ca1aa6e9b2e93ac1ac1"
+        },
+        {
+          "path": "events/CO.bin",
+          "state": "CO",
+          "rows": 10164,
+          "bytes": 543576,
+          "sha256": "fd0443b353d125d4cd3807418c3cc975de85beaee168577f178388744da1a260"
+        },
+        {
+          "path": "events/CT.bin",
+          "state": "CT",
+          "rows": 1879,
+          "bytes": 101896,
+          "sha256": "0ab5916f7a78058b507d3cc01f05b058040c057e59c5a4f24a6a70f3717d3d20"
+        },
+        {
+          "path": "events/DC.bin",
+          "state": "DC",
+          "rows": 127,
+          "bytes": 7752,
+          "sha256": "a48e5e8416ceb174904351fa51f33c42998e3530f9d85ee65664e064d04e2ec2"
+        },
+        {
+          "path": "events/DE.bin",
+          "state": "DE",
+          "rows": 841,
+          "bytes": 46760,
+          "sha256": "593bad18affcfc0f0e4f05756855e23cc1b94f9ef01ffefdccf8bbffe801f0f8"
+        },
+        {
+          "path": "events/FL.bin",
+          "state": "FL",
+          "rows": 28068,
+          "bytes": 1486600,
+          "sha256": "f383ae7e3c4df597ad442312b16d4005d400fea0db87daa5ef5a7cfedbac0387"
+        },
+        {
+          "path": "events/GA.bin",
+          "state": "GA",
+          "rows": 56452,
+          "bytes": 2862896,
+          "sha256": "82666bcfe43f0ccfcdff28e2389f0f1cdb68928597e7c70fa60db2118d4eb3ea"
+        },
+        {
+          "path": "events/HI.bin",
+          "state": "HI",
+          "rows": 1437,
+          "bytes": 79624,
+          "sha256": "32711a792b9794f2f71fc55ce2c7dc6820c0cd5be966a52ec744be70c55a9fb6"
+        },
+        {
+          "path": "events/IA.bin",
+          "state": "IA",
+          "rows": 20830,
+          "bytes": 1085496,
+          "sha256": "572f09e2b55ef14b6b8adfb3d87c8c21aa91429ba727b7826897f42274e5e0bc"
+        },
+        {
+          "path": "events/ID.bin",
+          "state": "ID",
+          "rows": 14489,
+          "bytes": 775608,
+          "sha256": "27fc7e1687bf5d4b9f663949ce8e833f0f71da3b754a0ae6c316a7e46a8fc9a3"
+        },
+        {
+          "path": "events/IL.bin",
+          "state": "IL",
+          "rows": 21705,
+          "bytes": 1122640,
+          "sha256": "4e8de26c4b20d6a7c45521b1112b5473d77fc304569a8e96a56fda7570837bd6"
+        },
+        {
+          "path": "events/IN.bin",
+          "state": "IN",
+          "rows": 21986,
+          "bytes": 1142760,
+          "sha256": "938a0599717e6ca297f89cb864f6f9ae5a9433e560bd4f048243c8e0a33c76b4"
+        },
+        {
+          "path": "events/KS.bin",
+          "state": "KS",
+          "rows": 17187,
+          "bytes": 898712,
+          "sha256": "b9ff75d009d8e5abe2a22b36c48cf4465cccd4f39d6eb8c293cc7adc00bee8ff"
+        },
+        {
+          "path": "events/KY.bin",
+          "state": "KY",
+          "rows": 41806,
+          "bytes": 2143024,
+          "sha256": "2faf11bf50b6e110b2a3d11fbae7a1e9023d85ed1cac4f46ff537b34169f97b8"
+        },
+        {
+          "path": "events/LA.bin",
+          "state": "LA",
+          "rows": 43383,
+          "bytes": 2230800,
+          "sha256": "b8ad8e84106036724cff13dcf36f5a1e1efc54dbbfbe8380acac9778a3be188e"
+        },
+        {
+          "path": "events/MA.bin",
+          "state": "MA",
+          "rows": 3975,
+          "bytes": 215744,
+          "sha256": "177d6dbccc3db098c36e70ad7793962acc27bb6c9da6d9d8db44f57ab581e143"
+        },
+        {
+          "path": "events/MD.bin",
+          "state": "MD",
+          "rows": 6765,
+          "bytes": 362056,
+          "sha256": "bfc5436d6b813d5cfed847fa6032f996ac21f37c8e58c35fc10f4488e8351b9e"
+        },
+        {
+          "path": "events/ME.bin",
+          "state": "ME",
+          "rows": 10204,
+          "bytes": 543552,
+          "sha256": "da0a4f42e4aca6aead11bb548562a5be8fad686bd96ca65ffa137b40856781d7"
+        },
+        {
+          "path": "events/MI.bin",
+          "state": "MI",
+          "rows": 32901,
+          "bytes": 1684616,
+          "sha256": "3481d24dc92ce3c7133ab0d37098792ca3b91e57b74d177324db42de9afc3bc4"
+        },
+        {
+          "path": "events/MN.bin",
+          "state": "MN",
+          "rows": 11809,
+          "bytes": 622880,
+          "sha256": "39ec840e05370abe39f77f5149c5be3a24a2897742db933d3168e9b4d2d5db11"
+        },
+        {
+          "path": "events/MO.bin",
+          "state": "MO",
+          "rows": 32339,
+          "bytes": 1664352,
+          "sha256": "9c1c9fcfcd03663d9005ab565fd31fd8ad79c382f7490c9616795fdac3ad3948"
+        },
+        {
+          "path": "events/MS.bin",
+          "state": "MS",
+          "rows": 36039,
+          "bytes": 1860856,
+          "sha256": "cff44e9638eb7d47278300abd4634764bb4ed9e4851c65738cceb942a057f9c0"
+        },
+        {
+          "path": "events/MT.bin",
+          "state": "MT",
+          "rows": 6513,
+          "bytes": 350400,
+          "sha256": "addc44b2caf592ef057285054cad35db0c7ef1cd701d779bbd4bee7788207fb8"
+        },
+        {
+          "path": "events/NC.bin",
+          "state": "NC",
+          "rows": 82745,
+          "bytes": 4234760,
+          "sha256": "01fa2244051df308f942cb1d63c4afdd00bd3322b96eb52fcc27e00637442515"
+        },
+        {
+          "path": "events/ND.bin",
+          "state": "ND",
+          "rows": 4185,
+          "bytes": 221936,
+          "sha256": "3fb14225518cd76a24ba1a85f95082dcdbccbfa12823abfdf318f422ded86b0b"
+        },
+        {
+          "path": "events/NE.bin",
+          "state": "NE",
+          "rows": 4887,
+          "bytes": 258056,
+          "sha256": "3b443d4463950e43d9941ed8ebd5e7f689be7ed80fd4bd1025107de66d6bcc02"
+        },
+        {
+          "path": "events/NH.bin",
+          "state": "NH",
+          "rows": 4089,
+          "bytes": 218528,
+          "sha256": "e27c992a85ec9d459b7bab7dd35ad4e79b2f5af53973f43070472cc0a238f7d5"
+        },
+        {
+          "path": "events/NJ.bin",
+          "state": "NJ",
+          "rows": 10333,
+          "bytes": 553240,
+          "sha256": "59cb8d6b40eaa8a49f41a140695195269284c06369a41b8fe7dc0372b3df3a88"
+        },
+        {
+          "path": "events/NM.bin",
+          "state": "NM",
+          "rows": 6029,
+          "bytes": 324992,
+          "sha256": "b1b0a0463d309df5e13c19357a4d5e33fa5e7f601d60bfeed2d85a389fb071f7"
+        },
+        {
+          "path": "events/NV.bin",
+          "state": "NV",
+          "rows": 4041,
+          "bytes": 219936,
+          "sha256": "16a9f84cd58fbd08c330d0698d1cf4455935c8e2c5fae27aafe66a5a2b74c01e"
+        },
+        {
+          "path": "events/NY.bin",
+          "state": "NY",
+          "rows": 24826,
+          "bytes": 1293768,
+          "sha256": "be5389f94949619d8c58eb2d962fcb3e99161bc436a92969201e2e065fe5648b"
+        },
+        {
+          "path": "events/OH.bin",
+          "state": "OH",
+          "rows": 31120,
+          "bytes": 1609168,
+          "sha256": "bcd647e386248e6ac334c62f1c0600a9d3486dc8f2b79800015d806367cbd434"
+        },
+        {
+          "path": "events/OK.bin",
+          "state": "OK",
+          "rows": 28012,
+          "bytes": 1452712,
+          "sha256": "5df22483e9030eb36ed2c57b435b1dc0e2b46ff3090f7eebed75525f397dc123"
+        },
+        {
+          "path": "events/OR.bin",
+          "state": "OR",
+          "rows": 7722,
+          "bytes": 415424,
+          "sha256": "09a7ca92d9a6d61fdb2ac8602a312830efc56e297b79f27ed34df5dc21bf64e7"
+        },
+        {
+          "path": "events/PA.bin",
+          "state": "PA",
+          "rows": 29180,
+          "bytes": 1518792,
+          "sha256": "a0a5c3246f9fde902d4ee6fb2eb41c5ed7776d5703ae485e7eb14976654a03ea"
+        },
+        {
+          "path": "events/PR.bin",
+          "state": "PR",
+          "rows": 18697,
+          "bytes": 985872,
+          "sha256": "ad32755153f771b1901fbf79e463a7fedb9d119028d7778baf4399b2f3f767ba"
+        },
+        {
+          "path": "events/RI.bin",
+          "state": "RI",
+          "rows": 1256,
+          "bytes": 68888,
+          "sha256": "d81bf08e6a511aede36065944820f8dffaffe2168ba23e023eb8f7d41dfd5059"
+        },
+        {
+          "path": "events/SC.bin",
+          "state": "SC",
+          "rows": 15381,
+          "bytes": 806024,
+          "sha256": "b551690c6cfe37326f679c0a647d2af39b761f7e4edb784016cbdaa0e5720249"
+        },
+        {
+          "path": "events/SD.bin",
+          "state": "SD",
+          "rows": 7062,
+          "bytes": 372688,
+          "sha256": "eb5f753fe2252beb92718b557afff808a531aaad25ee52ab8fe467f14e45b308"
+        },
+        {
+          "path": "events/TN.bin",
+          "state": "TN",
+          "rows": 24895,
+          "bytes": 1299312,
+          "sha256": "1034fc4bffe1914dc703d72ccc5a6b455060de8db4e2470cef42824d7316346e"
+        },
+        {
+          "path": "events/TX.bin",
+          "state": "TX",
+          "rows": 123054,
+          "bytes": 6050624,
+          "sha256": "2947152f88e0f213de4b56e71ad061b1fb3d0a9d2fe9bd9514adb86f929e2099"
+        },
+        {
+          "path": "events/UT.bin",
+          "state": "UT",
+          "rows": 6106,
+          "bytes": 325616,
+          "sha256": "3d5ba7c23ba82b091994d4a2927f590814e3c017a43901911e8dd8afeec6cdea"
+        },
+        {
+          "path": "events/VA.bin",
+          "state": "VA",
+          "rows": 62567,
+          "bytes": 3171360,
+          "sha256": "e9f526a38d67567cded994f85c12f7552545d25c1f9862906029fab29025ca6d"
+        },
+        {
+          "path": "events/VT.bin",
+          "state": "VT",
+          "rows": 7005,
+          "bytes": 376128,
+          "sha256": "83ac9c9c6d05c945953de07ab39adb9074f9aaff8c4632b7223c5d26e1938681"
+        },
+        {
+          "path": "events/WA.bin",
+          "state": "WA",
+          "rows": 8932,
+          "bytes": 476984,
+          "sha256": "7b816e813d719cbc0855632abd616570fab002124bbc0698e7b0b2d7095bc054"
+        },
+        {
+          "path": "events/WI.bin",
+          "state": "WI",
+          "rows": 15463,
+          "bytes": 804912,
+          "sha256": "5eed79c43dc6c1f8601a0c03707f9dc04b4a2a6386c3e969934c622646c03f5a"
+        },
+        {
+          "path": "events/WV.bin",
+          "state": "WV",
+          "rows": 38714,
+          "bytes": 1999400,
+          "sha256": "0bc45f9bdcb25ce5e22a1d82f84dcb3adacd069aa966294e8f72cc3c78829014"
+        },
+        {
+          "path": "events/WY.bin",
+          "state": "WY",
+          "rows": 4238,
+          "bytes": 227112,
+          "sha256": "42648bf4541dbb541960f9099ba0a793e93e903681bf80f9d6318fe9eceacaf9"
+        }
+      ],
+      "download": {
+        "path": "events.csv.gz",
+        "bytes": 8816362,
+        "sha256": "ec0cb37dda36906d61f89170f55c864d180be53984e21ab95911df41d0513b38",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "Oak Ridge National Laboratory (EAGLE-I)",
+          "attribution": "Brelsford et al., EAGLE-I Recorded Electricity Outages 2014-2025, Oak Ridge National Laboratory, figshare version 4, CC BY 4.0.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "counties",
+      "title": "Modeled electric customers per county, 2022",
+      "dataPeriod": "2022",
+      "rows": 3207,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "fips",
+          "type": "str",
+          "unit": "county FIPS code"
+        },
+        {
+          "name": "customers",
+          "type": "f64",
+          "unit": "modeled customers, 2022"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "counties/AK.bin",
+          "state": "AK",
+          "rows": 26,
+          "bytes": 1080,
+          "sha256": "f706256758e14660f437565754bd43d247f7e9eff60b058e373f8e42493479fa"
+        },
+        {
+          "path": "counties/AL.bin",
+          "state": "AL",
+          "rows": 67,
+          "bytes": 2072,
+          "sha256": "a1e15dbb54734de4e113b680031ef4a3942dfc3c3f252f7b973ca4b7a1c7d908"
+        },
+        {
+          "path": "counties/AR.bin",
+          "state": "AR",
+          "rows": 75,
+          "bytes": 2264,
+          "sha256": "c01494c7124a6a4a6643138d9a5a523015a59b3c112be9ea7bb2e18f408cb335"
+        },
+        {
+          "path": "counties/AZ.bin",
+          "state": "AZ",
+          "rows": 15,
+          "bytes": 824,
+          "sha256": "014ac0b5c6ac38f8009f31b9c87b64b9a3fc1e4cf456439c29a9090fa8a79c16"
+        },
+        {
+          "path": "counties/CA.bin",
+          "state": "CA",
+          "rows": 57,
+          "bytes": 1832,
+          "sha256": "1978f46b1498c2e7df7d75ef61ebd10a94de868456edfc014d57ed93240d83ac"
+        },
+        {
+          "path": "counties/CO.bin",
+          "state": "CO",
+          "rows": 64,
+          "bytes": 1992,
+          "sha256": "c365c72be7445c9d2b8566c7fef9f1b1374b5d62408c8f6158e20b3c106d1191"
+        },
+        {
+          "path": "counties/CT.bin",
+          "state": "CT",
+          "rows": 8,
+          "bytes": 640,
+          "sha256": "cbfbca09fd706c69ab28bf49fecf5667ce1290132e54934d6368861610accd9f"
+        },
+        {
+          "path": "counties/DC.bin",
+          "state": "DC",
+          "rows": 1,
+          "bytes": 480,
+          "sha256": "8ff2415e840e1a742f057bef1140dbc1931bd625bd00f2a784fe6fbd1550f994"
+        },
+        {
+          "path": "counties/DE.bin",
+          "state": "DE",
+          "rows": 3,
+          "bytes": 528,
+          "sha256": "9653c73197f5015a65536c76147398ae1f1821c42675aad61a40f893665942ac"
+        },
+        {
+          "path": "counties/FL.bin",
+          "state": "FL",
+          "rows": 67,
+          "bytes": 2072,
+          "sha256": "aa7b0cc8eaa916efadd1e8486586796b26558b0c11f43bac1eeb370310da0243"
+        },
+        {
+          "path": "counties/GA.bin",
+          "state": "GA",
+          "rows": 159,
+          "bytes": 4280,
+          "sha256": "120c3ff8d4a27a13b5e82deb322e0c57bdfc76172fac9f69e64fa2bb99a1f947"
+        },
+        {
+          "path": "counties/HI.bin",
+          "state": "HI",
+          "rows": 5,
+          "bytes": 576,
+          "sha256": "3bc650ba4bea95d24e56b686734ae021fe1f75fd6486a97e98836bb22f79bb05"
+        },
+        {
+          "path": "counties/IA.bin",
+          "state": "IA",
+          "rows": 99,
+          "bytes": 2840,
+          "sha256": "c6447be62cba10ebd55c6fa4b03f0b50d5c9870059f61c5787e9caae5933e5ef"
+        },
+        {
+          "path": "counties/ID.bin",
+          "state": "ID",
+          "rows": 44,
+          "bytes": 1512,
+          "sha256": "5903081f6d7ca67266dcf27766b52ef11b605537c6a707e43ed05c1f9dfc39c1"
+        },
+        {
+          "path": "counties/IL.bin",
+          "state": "IL",
+          "rows": 102,
+          "bytes": 2904,
+          "sha256": "f6365ea6ae9d202afda722ff9e840c93cfd28e04059979a388095784825d3ba9"
+        },
+        {
+          "path": "counties/IN.bin",
+          "state": "IN",
+          "rows": 92,
+          "bytes": 2664,
+          "sha256": "3947e904b7a7542a0591679d0be34af959a5e4ca0fd2760431daa725eb6de843"
+        },
+        {
+          "path": "counties/KS.bin",
+          "state": "KS",
+          "rows": 105,
+          "bytes": 2984,
+          "sha256": "26da1645d03389147dad355f6593fddf1c050b5c5796527b45eee510b81e3621"
+        },
+        {
+          "path": "counties/KY.bin",
+          "state": "KY",
+          "rows": 120,
+          "bytes": 3336,
+          "sha256": "1de95eaec1c14cec38cd8cf8fbc7dfce2613fd931228a97b8e4589231271517d"
+        },
+        {
+          "path": "counties/LA.bin",
+          "state": "LA",
+          "rows": 64,
+          "bytes": 1992,
+          "sha256": "5d4acc40c7997968aa78ad05ed8994d64ecf2a996bf8f5eced84a6b4d1baa867"
+        },
+        {
+          "path": "counties/MA.bin",
+          "state": "MA",
+          "rows": 14,
+          "bytes": 792,
+          "sha256": "36a94412984b99a7072eef587954a3799ee04d50cfe145c86ae85ef8e21b4bd4"
+        },
+        {
+          "path": "counties/MD.bin",
+          "state": "MD",
+          "rows": 24,
+          "bytes": 1032,
+          "sha256": "74460971a18edcde000bbe2b5ff33c39a61c7ff8b3e6b093afcbfb1cd6996c40"
+        },
+        {
+          "path": "counties/ME.bin",
+          "state": "ME",
+          "rows": 16,
+          "bytes": 840,
+          "sha256": "8ac4e34ad632e47ab026f55cc0dd742219dbb477c79f66008584fa68476026da"
+        },
+        {
+          "path": "counties/MI.bin",
+          "state": "MI",
+          "rows": 83,
+          "bytes": 2456,
+          "sha256": "783e5b96670f7ad146f98aca4dc22ae2ead2b1d837a3d11e5aa6e01bec85f903"
+        },
+        {
+          "path": "counties/MN.bin",
+          "state": "MN",
+          "rows": 87,
+          "bytes": 2552,
+          "sha256": "f51e2189453c14d49457665bdcc10d3a1de324fe5984a3594ae6cc63fdceee73"
+        },
+        {
+          "path": "counties/MO.bin",
+          "state": "MO",
+          "rows": 115,
+          "bytes": 3224,
+          "sha256": "e54630c6f1bab4c20485f6edf1b4ff54367783d6cc8fa28db68cb16ecfae1264"
+        },
+        {
+          "path": "counties/MS.bin",
+          "state": "MS",
+          "rows": 82,
+          "bytes": 2424,
+          "sha256": "1c35ae8c301968412aecf94ce8e83a29f6a3f9dd17bf94be43caa1000dd91497"
+        },
+        {
+          "path": "counties/MT.bin",
+          "state": "MT",
+          "rows": 56,
+          "bytes": 1800,
+          "sha256": "131da5803217fa2afccd890cd4b007f820a23e51e34d93e49119ea30a0783756"
+        },
+        {
+          "path": "counties/NC.bin",
+          "state": "NC",
+          "rows": 94,
+          "bytes": 2712,
+          "sha256": "5911fb834fa123ec47902e597caf678ed326f7af99e56c0f3fc8e5fe12f0d139"
+        },
+        {
+          "path": "counties/ND.bin",
+          "state": "ND",
+          "rows": 53,
+          "bytes": 1736,
+          "sha256": "2961eb49d60ea85aa25737eccd7de577355432faab6f9875694b34a87e1f36fe"
+        },
+        {
+          "path": "counties/NE.bin",
+          "state": "NE",
+          "rows": 93,
+          "bytes": 2696,
+          "sha256": "6555059493bc676f49999d9d3a4e289dc29a16c1e00fc9222fc06eea5949bfc1"
+        },
+        {
+          "path": "counties/NH.bin",
+          "state": "NH",
+          "rows": 10,
+          "bytes": 688,
+          "sha256": "b90ca3106b2ba4b940752fa2073fba459e7425c506034c0ff29c59c677541f6f"
+        },
+        {
+          "path": "counties/NJ.bin",
+          "state": "NJ",
+          "rows": 21,
+          "bytes": 968,
+          "sha256": "cca8c0a70742ac59b82aaa7497061757d267e320f65ab0131a758bd2fab62950"
+        },
+        {
+          "path": "counties/NM.bin",
+          "state": "NM",
+          "rows": 33,
+          "bytes": 1256,
+          "sha256": "d35b967437c3af248b1103f6959e8a5c7bd3cdfecb5a25dffcdbb53b58518976"
+        },
+        {
+          "path": "counties/NV.bin",
+          "state": "NV",
+          "rows": 16,
+          "bytes": 840,
+          "sha256": "aaa38c0a873030ac9c3c5961bcd5fc64b485eade58c4c5127bb4370c8ca7bbe6"
+        },
+        {
+          "path": "counties/NY.bin",
+          "state": "NY",
+          "rows": 62,
+          "bytes": 1944,
+          "sha256": "ba1363d6dd40a3a703e0255909e53484270d9ee02ff0f2d2fafd2ae14e063e6d"
+        },
+        {
+          "path": "counties/OH.bin",
+          "state": "OH",
+          "rows": 88,
+          "bytes": 2568,
+          "sha256": "dc0d4134ca2f0a2bc44ddde5425114a3e65bdf0b4bade439ae73fd6f99357044"
+        },
+        {
+          "path": "counties/OK.bin",
+          "state": "OK",
+          "rows": 77,
+          "bytes": 2312,
+          "sha256": "2241a4baeeb00cc640a4887fc8be1a254746a0f5fc2e4ff764f609788650e2fc"
+        },
+        {
+          "path": "counties/OR.bin",
+          "state": "OR",
+          "rows": 36,
+          "bytes": 1320,
+          "sha256": "fea38e5777e8143edc9e4a7a3fcbab414318f551bf22dca8e6ab9e40b1c35b16"
+        },
+        {
+          "path": "counties/PA.bin",
+          "state": "PA",
+          "rows": 67,
+          "bytes": 2072,
+          "sha256": "9695b2cc6e03c1a8acc544b2159024a16c616088c71fb7817a3ab76e96058eac"
+        },
+        {
+          "path": "counties/PR.bin",
+          "state": "PR",
+          "rows": 78,
+          "bytes": 2328,
+          "sha256": "0b4d77a285b0e7d0573001a367e6d164ffc8872f8c5789e53420805b9f66a89a"
+        },
+        {
+          "path": "counties/RI.bin",
+          "state": "RI",
+          "rows": 5,
+          "bytes": 576,
+          "sha256": "3dd564a05ca30103739c4bc830db7a6a9c7627da5b52d6befa5d502a25e5e845"
+        },
+        {
+          "path": "counties/SC.bin",
+          "state": "SC",
+          "rows": 46,
+          "bytes": 1560,
+          "sha256": "a5659cd260ed8a6aacb090a1145f5b23a73ed1e7923f8d2085889685057813a4"
+        },
+        {
+          "path": "counties/SD.bin",
+          "state": "SD",
+          "rows": 66,
+          "bytes": 2040,
+          "sha256": "3d80b92cac7d2a85d2be442ea04d4c7b868a5c38a9f71be3533147377ebbfebc"
+        },
+        {
+          "path": "counties/TN.bin",
+          "state": "TN",
+          "rows": 95,
+          "bytes": 2744,
+          "sha256": "839ffdd18a6b1b304bda8e8ef550ef77931bc85c6faa88212a99a4e5dcac87e3"
+        },
+        {
+          "path": "counties/TX.bin",
+          "state": "TX",
+          "rows": 254,
+          "bytes": 6560,
+          "sha256": "4e5c4680e67b01dde1d2a13ac370ec22939b25b1f197be7654adb32c17e14672"
+        },
+        {
+          "path": "counties/UT.bin",
+          "state": "UT",
+          "rows": 29,
+          "bytes": 1160,
+          "sha256": "d2c6460126353aaf4601c02592250fb24f798e0725664dc550369d66009f91ac"
+        },
+        {
+          "path": "counties/VA.bin",
+          "state": "VA",
+          "rows": 132,
+          "bytes": 3624,
+          "sha256": "729a82c817f5b1e9676db6169f3e06fbbd1c5d0b8f5321bcb1a65943f930e464"
+        },
+        {
+          "path": "counties/VT.bin",
+          "state": "VT",
+          "rows": 14,
+          "bytes": 792,
+          "sha256": "c0454115fcfa183a2c546d9e92c6066cac0127cc2cf81148238798a895ea8222"
+        },
+        {
+          "path": "counties/WA.bin",
+          "state": "WA",
+          "rows": 39,
+          "bytes": 1400,
+          "sha256": "e89ace8d00218c26458d51fcbd17fc55e457369c88ccdfeb09aa7dbd80a17d6b"
+        },
+        {
+          "path": "counties/WI.bin",
+          "state": "WI",
+          "rows": 72,
+          "bytes": 2184,
+          "sha256": "cbcadd40bf3275b8d788047edc60a84b34862d288907b5d7ebbaa0ef13f510fd"
+        },
+        {
+          "path": "counties/WV.bin",
+          "state": "WV",
+          "rows": 55,
+          "bytes": 1784,
+          "sha256": "52b0bb5a2bbad3b3cc095130266b1d272e9c51979e9bdd5b121822302b34a4b8"
+        },
+        {
+          "path": "counties/WY.bin",
+          "state": "WY",
+          "rows": 22,
+          "bytes": 984,
+          "sha256": "dfa565d0c87d76f9f3476e1374952b6840e403ccb06703b86cc92a827c09d102"
+        }
+      ],
+      "download": {
+        "path": "counties.csv.gz",
+        "bytes": 16583,
+        "sha256": "f7666ca0cb52adc501e3d8a2adf1b6f51fddd1b809b34caf725c4fa70f7ed2c0",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "Oak Ridge National Laboratory (EAGLE-I)",
+          "attribution": "Brelsford et al., EAGLE-I Recorded Electricity Outages 2014-2025, Oak Ridge National Laboratory, figshare version 4, CC BY 4.0.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "coverage",
+      "title": "Share of each state's customers EAGLE-I covered, by year",
+      "dataPeriod": "2018-2022",
+      "rows": 280,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "year",
+          "type": "f64"
+        },
+        {
+          "name": "min_pct_covered",
+          "type": "f64",
+          "unit": "%"
+        },
+        {
+          "name": "max_pct_covered",
+          "type": "f64",
+          "unit": "%"
+        }
+      ],
+      "partition": null,
+      "shards": [
+        {
+          "path": "coverage/US.bin",
+          "state": "US",
+          "rows": 280,
+          "bytes": 8616,
+          "sha256": "ffdaf77d0e3ae2220e267bbc857025761d1548a1ae494c059c63b3ec2ae7108f"
+        }
+      ],
+      "download": {
+        "path": "coverage.csv.gz",
+        "bytes": 1255,
+        "sha256": "c73a07d3f854f3e2428172f38a3e965ce6fc6aae9b34b3fc6ac9c750f12ba109",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "Oak Ridge National Laboratory (EAGLE-I)",
+          "attribution": "Brelsford et al., EAGLE-I Recorded Electricity Outages 2014-2025, Oak Ridge National Laboratory, figshare version 4, CC BY 4.0.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}

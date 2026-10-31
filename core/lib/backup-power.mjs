@@ -106,3 +106,22 @@ export function eventSummary(events) {
   const h = events.map((e) => e.hours);
   return { count: h.length, p50: nearestRank(h, 50), p90: nearestRank(h, 90), longest: h.length ? Math.max(...h) : null };
 }
+
+/**
+ * One county's outage history: the event summary over the years used. A year
+ * is dropped when its state's published EAGLE-I coverage is below 50%; a year
+ * with no published coverage figure is kept and named.
+ * @param {Array<{year: number, hours: number}>} events this county's events, 2014 to 2025
+ * @param {Record<number, number>} coverage the state's highest covered share by year, in percent
+ * @param {{from: number, to: number}} span the data's years
+ */
+export function countyHistory(events, coverage, { from, to }) {
+  const years = [];
+  const dropped = [];
+  const unpublished = [];
+  for (let y = from; y <= to; y++) {
+    if (coverage[y] === undefined) { unpublished.push(y); years.push(y); } else if (coverage[y] < 50) dropped.push({ year: y, pct: coverage[y] }); else years.push(y);
+  }
+  const used = events.filter((e) => years.includes(e.year));
+  return { ...eventSummary(used), years, dropped, unpublished };
+}
