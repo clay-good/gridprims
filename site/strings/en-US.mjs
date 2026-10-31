@@ -241,7 +241,7 @@ export default {
   'data.sha': 'SHA-256',
   'data.raw': 'Publisher’s original file',
   'data.rawLine': '{name}, {size} bytes, SHA-256 {sha}',
-  'data.columns': 'Columns',
+  'data.columns': 'Columns: {table}',
   'data.col.name': 'Column',
   'data.col.type': 'Type',
   'data.col.unit': 'Unit',

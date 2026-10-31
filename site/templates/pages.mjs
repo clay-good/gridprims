@@ -255,7 +255,7 @@ export function datasetPage({ manifest: m, i18n, posture = m.posture, termsRow, 
   const publishes = posture !== 'link';
   const body = html`<h1>${m.title}</h1>
 <p class="purpose">${m.publisher}</p>
-${m.tables.map((tb) => sourceStamp(m, tb, i18n))}
+${sourceStamp(m, m.tables[0], i18n)}
 <p class="mono">${t('data.age', { date: date(m.generatedAt.slice(0, 10)) })} <span data-age-from="${m.generatedAt}" data-age-one="${t('data.ageDays', { count: 1 })}" data-age-other="${t('data.ageDays', { count: 2 }).replace('2', '{count}')}"></span></p>
 ${takedown ? html`<p class="warning-chip">${t('data.takedownApplied', { date: date(takedown.date) })}</p>` : termsRow?.changed ? html`<p class="warning-chip">${t('data.termsChanged', { date: date(termsRow.checked) })}</p>` : ''}
 <p>${late.posted ? t('data.duePosted', { due: date(late.due) }) : t('data.dueInferred', { due: date(late.due) })}</p>
@@ -272,7 +272,7 @@ ${publishes ? html`<section><h2>${t('data.download')}</h2>
   <h3>${t('data.raw')}</h3>
   <ul>${m.raw.map((r) => html`<li class="mono"><a href="${r.release ?? r.url}">${t('data.rawLine', { name: r.name, size: r.bytes.toLocaleString('en-US'), sha: r.sha256 })}</a></li>`)}</ul>
 </section>` : ''}
-${m.tables.map((tb) => html`<section><h2>${t('data.columns')}</h2><div class="table-wrap"><table>
+${m.tables.map((tb) => html`<section><h2>${t('data.columns', { table: tb.title ?? tb.name })}</h2><div class="table-wrap"><table>
   <thead><tr><th scope="col">${t('data.col.name')}</th><th scope="col">${t('data.col.type')}</th><th scope="col">${t('data.col.unit')}</th></tr></thead>
   <tbody>${tb.columns.map((c) => html`<tr><th scope="row" class="mono">${c.name}</th><td class="mono">${c.type}</td><td>${c.unit ?? ''}</td></tr>`)}</tbody>
 </table></div></section>`)}`;

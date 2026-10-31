@@ -13,7 +13,7 @@ import { datasetPage } from '../../../site/templates/pages.mjs';
 import { createI18n } from '../../../site/lib/i18n.mjs';
 import strings from '../../../site/strings/en-US.mjs';
 import entry from '../../../pipeline/registry/eia-861.mjs';
-import { eia861Zip } from '../../fixtures/data/eia-861/workbook.mjs';
+import { eia861Zip, smallTables } from '../../fixtures/data/eia-861/workbook.mjs';
 import { ROOT } from '../../../pipeline/run.mjs';
 
 const termsHtml = (text) => `<html><body><h1>Copyrights and Reuse</h1><h2>Public domain and use of EIA content</h2><p>${text.replace(/"/g, '&quot;')}</p><h2>Protected materials</h2><p>Reproduction of protected items requires the written permission of the copyright owners.</p></body></html>`;
@@ -61,7 +61,7 @@ test('a refresh attaches the raw file to a release, records the link, and captur
   const fetchFake = async (url, init = {}) => (site[url] ? (init.method === 'HEAD' ? new Response(null, { headers: { 'content-length': '1', 'last-modified': 'Wed, 07 Oct 2026 13:48:05 GMT' } }) : site[url]()) : new Response('', { status: 404 }));
   const uploads = [];
   const host = { available: true, async reenableInactive() { return []; }, async openIssue() {}, async publishRawAsset(a) { uploads.push(a); return `https://github.com/clay-good/gridprims/releases/download/${a.tag}/${a.name}`; } };
-  const small = { ...entry, vintages: { 2025: { url: URL25, asOf: '2026-10-07', sha256: null } }, recipe: entry.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 3, max: 100 } } : s)) };
+  const small = { ...entry, vintages: { 2025: { url: URL25, asOf: '2026-10-07', sha256: null } }, tables: smallTables(entry) };
   await scheduledRun('refresh-eia-861', { root, outDir: join(root, 'data'), host, fetch: fetchFake, entries: { 'eia-861': small }, now: () => new Date('2026-10-31T09:17:00Z') });
   assert.deepEqual(uploads.map((u) => [u.tag, u.name]), [['data-eia-861-2026-10', 'f8612025.zip']]);
   const m = JSON.parse(readFileSync(join(root, 'data/eia-861/2026-10/manifest.json'), 'utf8'));

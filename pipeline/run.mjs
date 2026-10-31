@@ -61,7 +61,6 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   if (entryErrors.length) return { ok: false, failures: entryErrors };
   const vintage = found ?? entry.vintages[year];
   if (!vintage) return { ok: false, failures: [`${dataset}: no vintage ${year} in the registry`] };
-  const step = (name) => entry.recipe.find((s) => s.step === name);
 
   let raw = input;
   if (!raw) {
@@ -72,42 +71,60 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const rawSha = sha256(raw);
   if (verifyPin && vintage.sha256 && vintage.sha256 !== rawSha) return { ok: false, failures: [`raw file SHA-256 ${rawSha} differs from the registry's ${vintage.sha256}`] };
 
-  const entryName = step('unzip').entry.replace('{year}', String(year));
-  const zipEntry = readZipDirectory(raw).find((e) => e.name === entryName);
-  if (!zipEntry) return { ok: false, failures: [`${entryName} is not in the download`] };
-  const wb = await readXlsx(await readZipEntry(raw, zipEntry), { sheet: step('read-xlsx').sheet });
-  const normalizer = await import(pathToFileURL(join(ROOT, 'pipeline/normalize', `${step('normalize').module}.mjs`)).href);
-  const { rows, problems } = normalizer.normalize(wb.rows, step('read-xlsx').headerRows);
-  if (problems.length) return { ok: false, failures: problems.map((p) => `schema: ${p}`) };
-
   const datasetDir = join(outDir, dataset);
   const currentPath = join(datasetDir, 'current.json');
   const previous = existsSync(currentPath) ? JSON.parse(readFileSync(join(datasetDir, JSON.parse(readFileSync(currentPath, 'utf8')).version, 'manifest.json'), 'utf8')) : null;
-  const table = step('write-shards').table;
-  const prevRows = previous?.tables.find((t) => t.name === table && t.dataPeriod === String(year))?.rows;
-  const failures = validateRows(rows, step('validate'), prevRows);
+
+  // Read, normalize, and validate every table before writing any file.
+  const zip = readZipDirectory(raw);
+  const failures = [];
+  const ready = [];
+  for (const tb of entry.tables) {
+    const step = (name) => tb.recipe.find((s) => s.step === name);
+    const entryName = step('unzip').entry.replace('{year}', String(year));
+    const zipEntry = zip.find((e) => e.name === entryName);
+    if (!zipEntry) { failures.push(`${tb.name}: ${entryName} is not in the download`); continue; }
+    const read = step('read-xlsx');
+    const wb = await readXlsx(await readZipEntry(raw, zipEntry), { sheet: read.sheet });
+    const normalizer = await import(pathToFileURL(join(ROOT, 'pipeline/normalize', `${step('normalize').module}.mjs`)).href);
+    const { rows, problems } = normalizer.normalize(wb.rows, read.headerRows);
+    if (problems.length) { failures.push(...problems.map((p) => `${tb.name}: schema: ${p}`)); continue; }
+    const prevRows = previous?.tables.find((t) => t.name === tb.name && t.dataPeriod === String(year))?.rows;
+    const bad = validateRows(rows, step('validate'), prevRows);
+    if (bad.length) { failures.push(...bad.map((f) => `${tb.name}: ${f}`)); continue; }
+    ready.push({ tb, rows, schema: normalizer.SCHEMA, by: step('partition').by, entryName });
+  }
   if (failures.length) return { ok: false, failures };
 
   // Permanent versions are cut at most monthly: the version is the retrieval month.
   const version = retrieved.slice(0, 7);
   const dir = join(datasetDir, version);
-  mkdirSync(join(dir, table), { recursive: true });
-  const states = [...new Set(rows.map((r) => r[step('partition').by]))].sort();
   const asOfMonth = `${MONTHS[Number(vintage.asOf.slice(5, 7)) - 1]} ${vintage.asOf.slice(0, 4)}`;
   const attribution = entry.attribution.replace('{asOfMonth}', asOfMonth);
   const lic = tableLicense([{ id: dataset, publisher: entry.publisher, license: entry.inputLicense ?? 'public-domain', attribution }]);
   if (!lic.ok) return { ok: false, failures: [lic.error] };
-  const shards = states.map((st) => {
-    const part = rows.filter((r) => r.state === st);
-    const bytes = writeShard(part, normalizer.SCHEMA, { dataset, version, table, state: st });
-    const path = `${table}/${st}.bin`;
-    writeFileSync(join(dir, path), bytes);
-    return { path, state: st, rows: part.length, bytes: bytes.length, sha256: sha256(bytes) };
-  });
-  const csv = gzipSync(toCsv(rows, normalizer.SCHEMA), { level: 9 });
-  writeFileSync(join(dir, `${table}.csv.gz`), csv);
-  const tooBig = [...shards.map((s) => [s.path, s.bytes]), [`${table}.csv.gz`, csv.length]].filter(([, b]) => b > MAX_FILE_BYTES);
-  if (tooBig.length) return { ok: false, failures: tooBig.map(([p, b]) => `${p} is ${b} bytes, over the 20 MiB limit`) };
+  const tables = [];
+  for (const { tb, rows, schema, by } of ready) {
+    const table = tb.name;
+    mkdirSync(join(dir, table), { recursive: true });
+    const parts = [...new Set(rows.map((r) => r[by]))].sort();
+    const shards = parts.map((st) => {
+      const part = rows.filter((r) => r[by] === st);
+      const bytes = writeShard(part, schema, { dataset, version, table, state: st });
+      const path = `${table}/${st}.bin`;
+      writeFileSync(join(dir, path), bytes);
+      return { path, state: st, rows: part.length, bytes: bytes.length, sha256: sha256(bytes) };
+    });
+    const csv = gzipSync(toCsv(rows, schema), { level: 9 });
+    writeFileSync(join(dir, `${table}.csv.gz`), csv);
+    const tooBig = [...shards.map((s) => [s.path, s.bytes]), [`${table}.csv.gz`, csv.length]].filter(([, b]) => b > MAX_FILE_BYTES);
+    if (tooBig.length) return { ok: false, failures: tooBig.map(([p, b]) => `${p} is ${b} bytes, over the 20 MiB limit`) };
+    tables.push({
+      name: table, title: tb.title, dataPeriod: String(year), rows: rows.length, columns: schema, partition: by,
+      shards, download: { path: `${table}.csv.gz`, bytes: csv.length, sha256: sha256(csv), format: 'text/csv; gzip' },
+      license: lic.license, credits: lic.credits, notices: lic.notices,
+    });
+  }
 
   const { posture, advisory, agrees } = postureOf(entry);
   const manifest = {
@@ -116,12 +133,8 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     license: `${entry.redistributionBasis.kind}${entry.redistributionBasis.note ? ` (${entry.redistributionBasis.note})` : ''}`, attribution,
     // When this version was generated: the retrieval day, so a re-run of the same input reproduces it exactly.
     asOf: vintage.asOf, retrieved, generatedAt: `${retrieved}T00:00:00Z`, cadence: entry.cadence,
-    raw: [{ url: vintage.url, name: vintage.url.split('/').pop(), bytes: raw.length, sha256: rawSha, entry: entryName, ...(upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) }],
-    tables: [{
-      name: table, dataPeriod: String(year), rows: rows.length, columns: normalizer.SCHEMA, partition: step('partition').by,
-      shards, download: { path: `${table}.csv.gz`, bytes: csv.length, sha256: sha256(csv), format: 'text/csv; gzip' },
-      license: lic.license, credits: lic.credits, notices: lic.notices,
-    }],
+    raw: [{ url: vintage.url, name: vintage.url.split('/').pop(), bytes: raw.length, sha256: rawSha, entries: ready.map((r) => r.entryName), ...(upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) }],
+    tables,
   };
   writeFileSync(join(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
   writeFileSync(currentPath, JSON.stringify({ dataset, version }, null, 2) + '\n');

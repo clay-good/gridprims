@@ -1,4 +1,5 @@
-// The EIA-861 pipeline (foundation tasks 1.6, 2.2, 2.3, 7.1 to 7.4, 10.2, 10.3, 10.11).
+// The EIA-861 pipeline (foundation tasks 1.6, 2.2, 2.3, 7.1 to 7.4, 10.2, 10.3, 10.11;
+// public grid data tasks 1.0 and 1.1: reliability and service territory).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -12,11 +13,12 @@ import { matchPosture, postureOf, validateEntry } from '../../../pipeline/lib/re
 import { readShard } from '../../../core/lib/shard.mjs';
 import { EXPECTED_HEADER } from '../../../pipeline/normalize/eia-861-sales.mjs';
 import entry from '../../../pipeline/registry/eia-861.mjs';
-import { eia861Zip, sampleRows } from '../../fixtures/data/eia-861/workbook.mjs';
+import { eia861Zip, reliabilityRows, sampleRows, smallTables } from '../../fixtures/data/eia-861/workbook.mjs';
+import { EXPECTED_HEADER as TERRITORY_HEADER } from '../../../pipeline/normalize/eia-861-service-territory.mjs';
 
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 /** The real recipe with row bounds that suit the small fixture. */
-const small = { ...entry, vintages: { 2025: { ...entry.vintages[2025], sha256: null }, 2026: { ...entry.vintages[2025], sha256: null } }, recipe: entry.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 3, max: 100 } } : s)) };
+const small = { ...entry, vintages: { 2025: { ...entry.vintages[2025], sha256: null }, 2026: { ...entry.vintages[2025], sha256: null } }, tables: smallTables(entry) };
 const run = (o) => runRecipe({ dataset: 'eia-861', year: 2025, retrieved: '2026-10-31', entry: small, input: eia861Zip(), ...o });
 
 test('the fixture runs end to end: shards, a CSV download, and a manifest with credits', async () => {
@@ -95,6 +97,42 @@ test('the committed real snapshot matches its manifest, and no file is over 20 M
     assert.ok(bytes.length <= 20 * 1024 * 1024);
   }
   assert.equal(m.raw[0].sha256, entry.vintages[2025].sha256);
+  assert.deepEqual(m.tables.map((x) => [x.name, x.rows]), [['sales', 2869], ['reliability', 976], ['service_territory', 11803]]);
+});
+
+test('one release yields three tables, each with its own shards, download, and key', async () => {
+  const out = mkdtempSync(join(tmpdir(), 'gridprims-data-'));
+  const r = await run({ outDir: out });
+  assert.equal(r.ok, true, r.failures?.join('\n'));
+  assert.deepEqual(r.manifest.tables.map((x) => [x.name, x.rows, x.shards.map((s) => s.state).join(' ')]), [
+    ['sales', 5, 'MS TX VA'], ['reliability', 3, 'MS TX VA'], ['service_territory', 3, 'TX VA']]);
+  assert.deepEqual(r.manifest.raw[0].entries, ['Sales_Ult_Cust_2025.xlsx', 'Reliability_2025.xlsx', 'Service_Territory_2025.xlsx']);
+  const dir = join(out, 'eia-861/2026-10');
+  const [oncor] = readShard(readFileSync(join(dir, 'reliability/TX.bin'))).rows();
+  assert.equal(oncor.ieee_with_med_saidi, null, 'EIA\'s "." is not reported, never zero');
+  assert.equal(oncor.ieee_recorded_automatically, null);
+  assert.deepEqual([oncor.other_with_med_saidi, oncor.other_without_med_caidi, oncor.other_customers, oncor.other_momentary_definition], [232.05, 92.458333, 4084817, 'F']);
+  const unit = r.manifest.tables[1].columns.find((c) => c.name === 'ieee_without_med_saifi').unit;
+  assert.equal(unit, 'interruptions per year');
+  const tx = readShard(readFileSync(join(dir, 'service_territory/TX.bin'))).rows();
+  assert.deepEqual(tx.map((x) => [x.utility_id, x.county, x.short_form]), [[1015, 'Travis', null], [1015, 'Williamson', null]]);
+  assert.ok(existsSync(join(dir, 'reliability.csv.gz')) && existsSync(join(dir, 'service_territory.csv.gz')));
+});
+
+test('one table failing fails the whole release and writes nothing', async () => {
+  const out = mkdtempSync(join(tmpdir(), 'gridprims-data-'));
+  const missing = await run({ outDir: out, input: eia861Zip({ omit: ['Reliability'] }) });
+  assert.equal(missing.ok, false);
+  assert.deepEqual(missing.failures, ['reliability: Reliability_2025.xlsx is not in the download']);
+  assert.ok(!existsSync(join(out, 'eia-861')));
+  const twice = reliabilityRows();
+  const dup = await run({ outDir: out, input: eia861Zip({ reliability: [...twice, twice[0], twice[1]] }) });
+  assert.match(dup.failures.join('\n'), /^reliability: duplicate key 55\|MS$/m);
+  const header = [...TERRITORY_HEADER];
+  header[5] = 'County Name';
+  const renamed = await run({ outDir: out, input: eia861Zip({ territoryHeader: header }) });
+  assert.match(renamed.failures.join('\n'), /service_territory: schema: column 6 is "County Name", expected "County"/);
+  assert.ok(!existsSync(join(out, 'eia-861')));
 });
 
 test('registry: a dataset without a redistribution basis fails, naming it', () => {
@@ -109,6 +147,17 @@ test('registry: a dataset without a recipe, or a quirk without a fixture, fails'
   const quirk = { ...entry, recipe: [...entry.recipe, { step: 'quirk', name: 'hour-ending', note: 'EIA-930 stamps hour ending' }] };
   assert.match(validateEntry(quirk).join('\n'), /quirk "hour-ending" has no fixture/);
   assert.match(validateEntry({ ...entry, recipe: [{ step: 'download-and-pray' }] }).join('\n'), /recipe\[0\]\.step must be one of/);
+});
+
+test('registry: every table needs a unique name and its own unzip, normalize, validate, and partition steps', () => {
+  const [sales, reliability] = entry.tables;
+  const noValidate = { ...reliability, recipe: reliability.recipe.filter((s) => s.step !== 'validate') };
+  const errors = validateEntry({ ...entry, tables: [sales, noValidate, { ...sales }] }).join('\n');
+  assert.match(errors, /tables\[1\]\.recipe has no validate step/);
+  assert.match(errors, /tables\[2\]\.name repeats sales/);
+  assert.match(validateEntry({ ...entry, tables: [] }).join('\n'), /tables has no tables/);
+  const { tables, ...noTables } = entry;
+  assert.match(validateEntry(noTables).join('\n'), /tables is missing/);
 });
 
 test('CEII: an infrastructure dataset without a completed screen fails', () => {

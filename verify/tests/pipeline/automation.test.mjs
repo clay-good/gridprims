@@ -12,10 +12,10 @@ import { readHealth } from '../../../pipeline/lib/health.mjs';
 import { stalled, WORKFLOWS } from '../../../pipeline/workflows.mjs';
 import { checkWorkflows } from '../../gates/workflows.mjs';
 import entry from '../../../pipeline/registry/eia-861.mjs';
-import { eia861Zip, sampleRows } from '../../fixtures/data/eia-861/workbook.mjs';
+import { eia861Zip, sampleRows, smallTables } from '../../fixtures/data/eia-861/workbook.mjs';
 import { fixtureRepo } from '../helpers.mjs';
 
-const small = { ...entry, recipe: entry.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 3, max: 100 } } : s)) };
+const small = { ...entry, tables: smallTables(entry) };
 
 /** A stand-in EIA site: files by URL, answering HEAD and GET. */
 function fakeEia(files) {

@@ -162,13 +162,14 @@ export function createHandlers(ctx) {
       return ok(series === undefined ? value.view : { ...value.view, intervals: page(value, id, series, 0) });
     },
 
-    gridprims_query_data({ dataset, filter, limit = 100 }) {
-      const r = query({ dataset: String(dataset), filter: filter ?? {}, limit }, ctx.dataDir);
+    gridprims_query_data({ dataset, table, filter, limit = 100 }) {
+      const r = query({ dataset: String(dataset), table, filter: filter ?? {}, limit }, ctx.dataDir);
       if (!r) return fail(`No dataset named ${JSON.stringify(String(dataset))} is in this clone. The gridprims://datasets resource lists what exists; for full data run node pipeline/get-data.mjs or node pipeline/build-data.mjs.`);
       if (r.error) return fail(r.error);
       const m = r.manifest;
       return ok({
         dataset: { id: m.dataset, version: m.version, title: m.title, publisher: m.publisher, asOf: m.asOf, retrieved: m.retrieved, license: m.license, posture: m.posture, attribution: m.attribution, dataPeriod: r.table.dataPeriod },
+        table: r.table.name,
         columns: r.table.columns.map(({ name, type, unit }) => ({ name, type, ...(unit ? { unit } : {}) })),
         rows: r.rows, matched: r.matched, ...(r.matched > r.rows.length ? { truncated: true } : {}),
       });

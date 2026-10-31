@@ -58,9 +58,9 @@ test('a tampered file is deleted and reported, even when the site also serves a 
 test('build-data reports a dataset it cannot rebuild instead of passing it', async () => {
   const fixture = mkdtempSync(join(tmpdir(), 'gridprims-bd-'));
   const { runRecipe } = await import('../../../pipeline/run.mjs');
-  const { eia861Zip } = await import('../../fixtures/data/eia-861/workbook.mjs');
+  const { eia861Zip, smallTables } = await import('../../fixtures/data/eia-861/workbook.mjs');
   const entry = (await import('../../../pipeline/registry/eia-861.mjs')).default;
-  const small = { ...entry, recipe: entry.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 3, max: 100 } } : s)) };
+  const small = { ...entry, tables: smallTables(entry) };
   const zip = eia861Zip();
   await runRecipe({ dataset: 'eia-861', year: 2025, retrieved: '2026-10-31', input: zip, outDir: fixture, entry: small, vintage: { url: entry.vintages[2025].url, asOf: '2026-10-07', sha256: null } });
   // The registry's real row bounds reject the tiny fixture, so the rebuild fails and is reported.

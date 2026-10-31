@@ -49,3 +49,15 @@ test('the dataset catalog resource lists EIA-861 with its version, posture, and 
   assert.equal(e.posture, 'mirror');
   assert.ok(e.tables[0].columns.some((c) => c.name === 'res_sales' && c.unit === 'MWh'));
 });
+
+test('a table argument reads that table; an unknown one lists the tables', async () => {
+  const r = (await q({ dataset: 'eia-861', table: 'reliability', filter: { state: 'TX', utility_id: 44372 } })).result.structuredContent;
+  assert.equal(r.table, 'reliability');
+  assert.equal(r.matched, 1);
+  assert.equal(r.rows[0].other_with_med_saidi, 232.05);
+  assert.ok(r.columns.some((c) => c.name === 'ieee_with_med_saidi' && c.unit === 'minutes per year'));
+  const counties = (await q({ dataset: 'eia-861', table: 'service_territory', filter: { state: 'TX', county: 'Travis' }, limit: 50 })).result.structuredContent;
+  assert.ok(counties.rows.some((x) => x.utility_name === 'Austin Energy'));
+  const bad = (await q({ dataset: 'eia-861', table: 'outages' })).result;
+  assert.match(bad.content[0].text, /No table outages\. Tables: sales, reliability, service_territory\./);
+});

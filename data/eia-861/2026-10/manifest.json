@@ -40,12 +40,17 @@
       "name": "f8612025.zip",
       "bytes": 4756816,
       "sha256": "f59f6c732bf685fe0a1591b32227f5ce572dc0dfd26bb5caaeed128ac4e3a396",
-      "entry": "Sales_Ult_Cust_2025.xlsx"
+      "entries": [
+        "Sales_Ult_Cust_2025.xlsx",
+        "Reliability_2025.xlsx",
+        "Service_Territory_2025.xlsx"
+      ]
     }
   ],
   "tables": [
     {
       "name": "sales",
+      "title": "Sales, revenue, and customers by utility, state, and sector",
       "dataPeriod": "2025",
       "rows": 2869,
       "columns": [
@@ -529,6 +534,927 @@
         "path": "sales.csv.gz",
         "bytes": 123959,
         "sha256": "27528c0c491ba2b269fb39aefad8edfae1589bc8cbb248e5bfdfbd243958c709",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Form EIA-861 (Oct 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "reliability",
+      "title": "Outage duration and frequency (SAIDI, SAIFI, CAIDI) by utility and state",
+      "dataPeriod": "2025",
+      "rows": 976,
+      "columns": [
+        {
+          "name": "data_year",
+          "type": "f64"
+        },
+        {
+          "name": "utility_id",
+          "type": "f64"
+        },
+        {
+          "name": "utility_name",
+          "type": "str"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "ownership",
+          "type": "str"
+        },
+        {
+          "name": "ieee_with_med_saidi",
+          "type": "f64",
+          "unit": "minutes per year"
+        },
+        {
+          "name": "ieee_with_med_saifi",
+          "type": "f64",
+          "unit": "interruptions per year"
+        },
+        {
+          "name": "ieee_with_med_caidi",
+          "type": "f64",
+          "unit": "minutes per interruption"
+        },
+        {
+          "name": "ieee_without_med_saidi",
+          "type": "f64",
+          "unit": "minutes per year"
+        },
+        {
+          "name": "ieee_without_med_saifi",
+          "type": "f64",
+          "unit": "interruptions per year"
+        },
+        {
+          "name": "ieee_without_med_caidi",
+          "type": "f64",
+          "unit": "minutes per interruption"
+        },
+        {
+          "name": "ieee_with_med_minus_los_saidi",
+          "type": "f64",
+          "unit": "minutes per year"
+        },
+        {
+          "name": "ieee_with_med_minus_los_saifi",
+          "type": "f64",
+          "unit": "interruptions per year"
+        },
+        {
+          "name": "ieee_with_med_minus_los_caidi",
+          "type": "f64",
+          "unit": "minutes per interruption"
+        },
+        {
+          "name": "ieee_customers",
+          "type": "f64",
+          "unit": "count"
+        },
+        {
+          "name": "ieee_highest_voltage",
+          "type": "f64",
+          "unit": "kV"
+        },
+        {
+          "name": "ieee_recorded_automatically",
+          "type": "str"
+        },
+        {
+          "name": "other_with_med_saidi",
+          "type": "f64",
+          "unit": "minutes per year"
+        },
+        {
+          "name": "other_with_med_saifi",
+          "type": "f64",
+          "unit": "interruptions per year"
+        },
+        {
+          "name": "other_with_med_caidi",
+          "type": "f64",
+          "unit": "minutes per interruption"
+        },
+        {
+          "name": "other_without_med_saidi",
+          "type": "f64",
+          "unit": "minutes per year"
+        },
+        {
+          "name": "other_without_med_saifi",
+          "type": "f64",
+          "unit": "interruptions per year"
+        },
+        {
+          "name": "other_without_med_caidi",
+          "type": "f64",
+          "unit": "minutes per interruption"
+        },
+        {
+          "name": "other_customers",
+          "type": "f64",
+          "unit": "count"
+        },
+        {
+          "name": "other_inactive_accounts_included",
+          "type": "str"
+        },
+        {
+          "name": "other_momentary_definition",
+          "type": "str"
+        },
+        {
+          "name": "other_highest_voltage",
+          "type": "f64",
+          "unit": "kV"
+        },
+        {
+          "name": "other_recorded_automatically",
+          "type": "str"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "reliability/AK.bin",
+          "state": "AK",
+          "rows": 7,
+          "bytes": 4872,
+          "sha256": "06f7707228942be9c808b660466e96b331ff9c4aa6a69e597a2a08a6bef82399"
+        },
+        {
+          "path": "reliability/AL.bin",
+          "state": "AL",
+          "rows": 18,
+          "bytes": 7352,
+          "sha256": "8c327dbb149903aa015db344f207a204c0b96db2e8fff62483d82b5743fbdc5d"
+        },
+        {
+          "path": "reliability/AR.bin",
+          "state": "AR",
+          "rows": 18,
+          "bytes": 7368,
+          "sha256": "bc357ed54118ffdccecec1ac3e17e2b64c3337b2dea29af4337a0316217382a8"
+        },
+        {
+          "path": "reliability/AZ.bin",
+          "state": "AZ",
+          "rows": 13,
+          "bytes": 6304,
+          "sha256": "98c8e3b71e67b80ead962031a33695c4334b735001f5ff5b26d7678c4277a027"
+        },
+        {
+          "path": "reliability/CA.bin",
+          "state": "CA",
+          "rows": 28,
+          "bytes": 9576,
+          "sha256": "e6e4db927433d0b786226149040242b1cd5bc8db0aa8374aa42951afa79216a5"
+        },
+        {
+          "path": "reliability/CO.bin",
+          "state": "CO",
+          "rows": 26,
+          "bytes": 9144,
+          "sha256": "0e64b70ce7292d787d48f5fcf57aab0679cc67ab34a7a5b8ac7917b207151aa9"
+        },
+        {
+          "path": "reliability/CT.bin",
+          "state": "CT",
+          "rows": 6,
+          "bytes": 4592,
+          "sha256": "845957f128fbb1d6b9934249f7a86f9bf0785ce84783dccbb252619fe1420821"
+        },
+        {
+          "path": "reliability/DC.bin",
+          "state": "DC",
+          "rows": 1,
+          "bytes": 3432,
+          "sha256": "348e5a19c552e96027890cb284fea9b90207011254c2efa7113ec13ada39d7ce"
+        },
+        {
+          "path": "reliability/DE.bin",
+          "state": "DE",
+          "rows": 4,
+          "bytes": 4128,
+          "sha256": "ffb6fcb5e0b424123e26279f74ddab4ff48fc7c3f844a586376b579b6aab2b0b"
+        },
+        {
+          "path": "reliability/FL.bin",
+          "state": "FL",
+          "rows": 35,
+          "bytes": 11232,
+          "sha256": "708c9b004af7ad8a8569826273b119dd3a82c90d254a51361639e5970506415a"
+        },
+        {
+          "path": "reliability/GA.bin",
+          "state": "GA",
+          "rows": 36,
+          "bytes": 11520,
+          "sha256": "3b9bbec1e2d103f3f66168993b3d65b8fbe1218d426ed85e62239ba43b4e8740"
+        },
+        {
+          "path": "reliability/HI.bin",
+          "state": "HI",
+          "rows": 4,
+          "bytes": 4128,
+          "sha256": "d5e2f30027a54c2026e289b3cbb38e2747f1e37f98c0796745d8c3d4ca8ec280"
+        },
+        {
+          "path": "reliability/IA.bin",
+          "state": "IA",
+          "rows": 19,
+          "bytes": 7608,
+          "sha256": "be8cf5104f5738e3db5f5319c740a6a49c5b31c660a2523fc718b0cd0d02ef2c"
+        },
+        {
+          "path": "reliability/ID.bin",
+          "state": "ID",
+          "rows": 10,
+          "bytes": 5488,
+          "sha256": "5d436a75c3f9e4828aa1381b3fb0f47d1295096ceff695cc51a4de11ffd5e52d"
+        },
+        {
+          "path": "reliability/IL.bin",
+          "state": "IL",
+          "rows": 19,
+          "bytes": 7600,
+          "sha256": "0d8aac702c648cec7d023da15c74fa17804e0166b434e9a89540b5207a16c460"
+        },
+        {
+          "path": "reliability/IN.bin",
+          "state": "IN",
+          "rows": 39,
+          "bytes": 12080,
+          "sha256": "fc442c15b7c3b5cbcc8f68824dfc5313f271c410ce56e3ef124eecb79363a5c6"
+        },
+        {
+          "path": "reliability/KS.bin",
+          "state": "KS",
+          "rows": 16,
+          "bytes": 6888,
+          "sha256": "5516fd921e55e99d179182087464886cb08d4e23d5ebbe1279bf09440c94b6e7"
+        },
+        {
+          "path": "reliability/KY.bin",
+          "state": "KY",
+          "rows": 33,
+          "bytes": 10784,
+          "sha256": "997133bd9079e14d4a5d4d125e36b421d7216dc5369b66eb68fd5d0e91e37fa1"
+        },
+        {
+          "path": "reliability/LA.bin",
+          "state": "LA",
+          "rows": 15,
+          "bytes": 6728,
+          "sha256": "aed9d6af63df13ae5181e187dca393d067eae1a7eaac7f7ede48a3214df302c2"
+        },
+        {
+          "path": "reliability/MA.bin",
+          "state": "MA",
+          "rows": 18,
+          "bytes": 7296,
+          "sha256": "98409c4ce86aebcd97955d3fbf5dda156f6761660c907276b988c207cb84bdee"
+        },
+        {
+          "path": "reliability/MD.bin",
+          "state": "MD",
+          "rows": 8,
+          "bytes": 5048,
+          "sha256": "4ec22951aa24c1f5a9f28bdc5f4a33399b7c37055319ebbdd11d76af30b2148f"
+        },
+        {
+          "path": "reliability/ME.bin",
+          "state": "ME",
+          "rows": 3,
+          "bytes": 3920,
+          "sha256": "4c493bbc1a9dc81c19f73f5b3450749fb6e8f5a391879c4ee665022f056e6230"
+        },
+        {
+          "path": "reliability/MI.bin",
+          "state": "MI",
+          "rows": 24,
+          "bytes": 8712,
+          "sha256": "0f2f336cf2d3268be34596f338082d60b81d3ef4d0a420bb02692298cb395d33"
+        },
+        {
+          "path": "reliability/MN.bin",
+          "state": "MN",
+          "rows": 43,
+          "bytes": 13016,
+          "sha256": "73fd929f336bdcf6b2e3d5a6d2df5e88636c2b789775cec5b2512bfecd7b09b0"
+        },
+        {
+          "path": "reliability/MO.bin",
+          "state": "MO",
+          "rows": 34,
+          "bytes": 10984,
+          "sha256": "cb667a75a24e3db0c138a61e32dc2a0a375f7f2e72a26c9875e7715656a5e34b"
+        },
+        {
+          "path": "reliability/MS.bin",
+          "state": "MS",
+          "rows": 20,
+          "bytes": 7824,
+          "sha256": "86104557f46bd9c0f22e84a5c8efdf9d03c4a17a86a0e29b98fe7b11c9bb7edd"
+        },
+        {
+          "path": "reliability/MT.bin",
+          "state": "MT",
+          "rows": 9,
+          "bytes": 5312,
+          "sha256": "ab5b7370b7c74e1f8e0ce66f21f35a2ee079d03ffd94e60338b7837f1d913b2f"
+        },
+        {
+          "path": "reliability/NC.bin",
+          "state": "NC",
+          "rows": 44,
+          "bytes": 13288,
+          "sha256": "f2f989716b1a55e21ffda1a786f2bc5c8dcf6434339fcbb4d8adc935ef332e49"
+        },
+        {
+          "path": "reliability/ND.bin",
+          "state": "ND",
+          "rows": 12,
+          "bytes": 5960,
+          "sha256": "13d74cd7719a28722167e7452ca37e9e15123443c0fea9c818e96f0dcad48c8b"
+        },
+        {
+          "path": "reliability/NE.bin",
+          "state": "NE",
+          "rows": 16,
+          "bytes": 6928,
+          "sha256": "4d2a4e7ce503a479f806a50144c92a7e10f27984b4b3c7aeff75bb030d706bf3"
+        },
+        {
+          "path": "reliability/NH.bin",
+          "state": "NH",
+          "rows": 4,
+          "bytes": 4136,
+          "sha256": "2c28fad44d614a99d379c6f3e04f76ac21f435559b3824a33133c6175fb90956"
+        },
+        {
+          "path": "reliability/NJ.bin",
+          "state": "NJ",
+          "rows": 4,
+          "bytes": 4112,
+          "sha256": "a5b0a11b585031e4f561c0cc0e207b899f09058f72f48d5fde0858ced45b691e"
+        },
+        {
+          "path": "reliability/NM.bin",
+          "state": "NM",
+          "rows": 14,
+          "bytes": 6496,
+          "sha256": "ae0cdd86167be62be541a7f226b96830e7be2f801005f97213d8e36f1e28d221"
+        },
+        {
+          "path": "reliability/NV.bin",
+          "state": "NV",
+          "rows": 5,
+          "bytes": 4416,
+          "sha256": "dfc13a6d26b17659ea3048cd27385d055b59fa5086f4ca1fde88021ba6a0168f"
+        },
+        {
+          "path": "reliability/NY.bin",
+          "state": "NY",
+          "rows": 11,
+          "bytes": 5792,
+          "sha256": "ca80b6c1ee7c3206d369ec1b1c154f11d4829426ea201bb8dbd9694ab6981083"
+        },
+        {
+          "path": "reliability/OH.bin",
+          "state": "OH",
+          "rows": 31,
+          "bytes": 10288,
+          "sha256": "3056db56aafb5d1866223d958e81407a259356c4b35687830ddf9d07a828bdd1"
+        },
+        {
+          "path": "reliability/OK.bin",
+          "state": "OK",
+          "rows": 28,
+          "bytes": 9688,
+          "sha256": "496c896391b586fea891aad024d698c15f26393f953030fd90288965de109086"
+        },
+        {
+          "path": "reliability/OR.bin",
+          "state": "OR",
+          "rows": 18,
+          "bytes": 7344,
+          "sha256": "f29c4eb996c06a44972f70b200b344cab70c2836ae4e64de11f07b702cb5e356"
+        },
+        {
+          "path": "reliability/PA.bin",
+          "state": "PA",
+          "rows": 9,
+          "bytes": 5288,
+          "sha256": "764178a57ffed3c9f96dabd8fbafced3c164b9b18ca2bc41391f62308f521ee6"
+        },
+        {
+          "path": "reliability/RI.bin",
+          "state": "RI",
+          "rows": 1,
+          "bytes": 3440,
+          "sha256": "4103e48fe1c2cc37c8b2dc2205332c34ee96c10d310e478bd789847e88054882"
+        },
+        {
+          "path": "reliability/SC.bin",
+          "state": "SC",
+          "rows": 27,
+          "bytes": 9456,
+          "sha256": "02a937cb9036ab0f1aa1734a55b7af1430c7559bbe17dac98068162e4340dd48"
+        },
+        {
+          "path": "reliability/SD.bin",
+          "state": "SD",
+          "rows": 14,
+          "bytes": 6456,
+          "sha256": "e16609e57e0288ac9787f906b3eb2aed05ebca01dbb1fbc91c8d61f9da6c92e9"
+        },
+        {
+          "path": "reliability/TN.bin",
+          "state": "TN",
+          "rows": 48,
+          "bytes": 14024,
+          "sha256": "d2074a1bd9406818f86f1da30acafca9b04993074889be2aa3f8efec792ec40d"
+        },
+        {
+          "path": "reliability/TX.bin",
+          "state": "TX",
+          "rows": 72,
+          "bytes": 19640,
+          "sha256": "f7c2fbeaa58f3ac52c674d16c9d036d7a33ffccc935f245228b6bd642dc8b690"
+        },
+        {
+          "path": "reliability/UT.bin",
+          "state": "UT",
+          "rows": 13,
+          "bytes": 6256,
+          "sha256": "6eaa48bf0698770af679474b077ff64e00a0437e095d8a7f9e449637d389b361"
+        },
+        {
+          "path": "reliability/VA.bin",
+          "state": "VA",
+          "rows": 18,
+          "bytes": 7360,
+          "sha256": "b1c552857eaee0b86391f519fe18d370f20fb417774148b7064dc1c3054f2cbf"
+        },
+        {
+          "path": "reliability/VT.bin",
+          "state": "VT",
+          "rows": 3,
+          "bytes": 3960,
+          "sha256": "cccb85972278282263864dbc62c34eeea3a9f685f15774f851ce1ccb95201224"
+        },
+        {
+          "path": "reliability/WA.bin",
+          "state": "WA",
+          "rows": 29,
+          "bytes": 9872,
+          "sha256": "247a79a4cdabded18187d69c903eeefb6711552cafb89e955df578a3b2a684b4"
+        },
+        {
+          "path": "reliability/WI.bin",
+          "state": "WI",
+          "rows": 37,
+          "bytes": 11592,
+          "sha256": "8aa09490f86060e080c5fe00b3b71e0f1f7256a06153b7813caaf7762fe514ae"
+        },
+        {
+          "path": "reliability/WV.bin",
+          "state": "WV",
+          "rows": 4,
+          "bytes": 4096,
+          "sha256": "42bfb633c1818bc4b95a1d1a358d91432daf4502077028c671dc1f4b9fbd562e"
+        },
+        {
+          "path": "reliability/WY.bin",
+          "state": "WY",
+          "rows": 8,
+          "bytes": 5032,
+          "sha256": "e3c2122d7a3e6af3d87f5874361839d8b3f130fa6d18290ec15f46a77a4537b5"
+        }
+      ],
+      "download": {
+        "path": "reliability.csv.gz",
+        "bytes": 44617,
+        "sha256": "ef79529e1ae7143f543ac27ef1bdafafcf0455befc11e3ed68d819ae4c3cb4f2",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Form EIA-861 (Oct 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "service_territory",
+      "title": "Counties each utility serves, by state",
+      "dataPeriod": "2025",
+      "rows": 11803,
+      "columns": [
+        {
+          "name": "data_year",
+          "type": "f64"
+        },
+        {
+          "name": "utility_id",
+          "type": "f64"
+        },
+        {
+          "name": "utility_name",
+          "type": "str"
+        },
+        {
+          "name": "short_form",
+          "type": "str"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "county",
+          "type": "str"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "service_territory/AK.bin",
+          "state": "AK",
+          "rows": 84,
+          "bytes": 5680,
+          "sha256": "ba87faa5ae90d4d4e14af2c66b1673dc2994f32286a0d10aece682b8d4adfedc"
+        },
+        {
+          "path": "service_territory/AL.bin",
+          "state": "AL",
+          "rows": 213,
+          "bytes": 9840,
+          "sha256": "991cfccb61c45e6a008f9f9ebaa849f0cd2c4144395fe0ea7fed987f2c09a2dd"
+        },
+        {
+          "path": "service_territory/AR.bin",
+          "state": "AR",
+          "rows": 221,
+          "bytes": 9600,
+          "sha256": "ccb31cfd0c23a6bae2b46ae789a1a3928e03580bf4352954c3cf2227eab4f5c0"
+        },
+        {
+          "path": "service_territory/AZ.bin",
+          "state": "AZ",
+          "rows": 91,
+          "bytes": 5024,
+          "sha256": "29f56d8060ec517acfe8814975f93d4a6b3147083c49d2dc9b14f94dcf9d79c0"
+        },
+        {
+          "path": "service_territory/CA.bin",
+          "state": "CA",
+          "rows": 184,
+          "bytes": 8936,
+          "sha256": "56db0f1d720df8aed5cab9d87d08677cebec5da46c8194575cd2bb62b4f69fcf"
+        },
+        {
+          "path": "service_territory/CO.bin",
+          "state": "CO",
+          "rows": 265,
+          "bytes": 11456,
+          "sha256": "9e9207596f27d6e266c8c00c331392a34ed78893c3ebda12605a6468d7ea7da2"
+        },
+        {
+          "path": "service_territory/CT.bin",
+          "state": "CT",
+          "rows": 19,
+          "bytes": 1728,
+          "sha256": "7d1530a4da38e089688a458ae80e3984f8cca70480f0793b83738f72431d6b27"
+        },
+        {
+          "path": "service_territory/DC.bin",
+          "state": "DC",
+          "rows": 1,
+          "bytes": 752,
+          "sha256": "76c1306ab9881b64281264881b5c27b4981f023286c9e24dedf34edea4d34ef1"
+        },
+        {
+          "path": "service_territory/DE.bin",
+          "state": "DE",
+          "rows": 16,
+          "bytes": 1496,
+          "sha256": "230b0442a5b54ab9d7656ece4710c1fd8a1e2bb72d4d2a333507edc446be28f4"
+        },
+        {
+          "path": "service_territory/FL.bin",
+          "state": "FL",
+          "rows": 205,
+          "bytes": 9440,
+          "sha256": "4aafb7b881acfb7800a53d2c772931e433e548d9ea4846df1b1f886e3d43f4b2"
+        },
+        {
+          "path": "service_territory/GA.bin",
+          "state": "GA",
+          "rows": 572,
+          "bytes": 23288,
+          "sha256": "0f37a55f4d6976065318009aae1160a7da23bdb4f39522f548f695490fc7bb5e"
+        },
+        {
+          "path": "service_territory/HI.bin",
+          "state": "HI",
+          "rows": 5,
+          "bytes": 1000,
+          "sha256": "80f6b7adcc6a2bb1eaee5589862edc2404a7f71239f8581882d1e7068ab35b36"
+        },
+        {
+          "path": "service_territory/IA.bin",
+          "state": "IA",
+          "rows": 601,
+          "bytes": 25928,
+          "sha256": "a23bf3cbc50ca7cb608820250961e57f70d06655754de145a236b23804a138f2"
+        },
+        {
+          "path": "service_territory/ID.bin",
+          "state": "ID",
+          "rows": 119,
+          "bytes": 5816,
+          "sha256": "52e905a3c3e22ee227d27e9300729f2764524b5a81aa80fe57f47d313429971b"
+        },
+        {
+          "path": "service_territory/IL.bin",
+          "state": "IL",
+          "rows": 357,
+          "bytes": 15120,
+          "sha256": "175586cb598b4986fc2aa96fcc3c87c148e0f6c6a99dd4818c8a1e454ae83056"
+        },
+        {
+          "path": "service_territory/IN.bin",
+          "state": "IN",
+          "rows": 455,
+          "bytes": 19408,
+          "sha256": "8890d0fe04cd4f5d528a66b3ebdc82f96614510c5f5635ae1c3e17f975627620"
+        },
+        {
+          "path": "service_territory/KS.bin",
+          "state": "KS",
+          "rows": 460,
+          "bytes": 20400,
+          "sha256": "5ade4a52e6e2206eed7af4be28cee2d7fcca8a0d6f385c5cd1179590e085fcd5"
+        },
+        {
+          "path": "service_territory/KY.bin",
+          "state": "KY",
+          "rows": 376,
+          "bytes": 15544,
+          "sha256": "410a1c1b15813d689c6890a8c162a0d0bfc68602071513fa1ca63f6fb999b7f1"
+        },
+        {
+          "path": "service_territory/LA.bin",
+          "state": "LA",
+          "rows": 182,
+          "bytes": 8336,
+          "sha256": "697b0270bc281f17b577a7111f711491db06e7a97ba9e2623bacedb3439a793a"
+        },
+        {
+          "path": "service_territory/MA.bin",
+          "state": "MA",
+          "rows": 71,
+          "bytes": 4360,
+          "sha256": "aaa2fcf1918a6e6e88a8758dea523458b3ee6d673aff12c0eb1186f12e95a6f5"
+        },
+        {
+          "path": "service_territory/MD.bin",
+          "state": "MD",
+          "rows": 47,
+          "bytes": 2808,
+          "sha256": "1ecfdb822b031444de6f219dc62b6d44df983908060ee9efaa7ff1872fc4b7c3"
+        },
+        {
+          "path": "service_territory/ME.bin",
+          "state": "ME",
+          "rows": 29,
+          "bytes": 2040,
+          "sha256": "167ed968c198a3087d2eea2fc2887856bddaa133c0734e40ee63224c70b86a1c"
+        },
+        {
+          "path": "service_territory/MI.bin",
+          "state": "MI",
+          "rows": 278,
+          "bytes": 12040,
+          "sha256": "95e84814d2a608358bd74812e658bf4cf5be7e57148ecc73a7ed827294058554"
+        },
+        {
+          "path": "service_territory/MN.bin",
+          "state": "MN",
+          "rows": 504,
+          "bytes": 22464,
+          "sha256": "be85dff0d1526d2eb10fd04ef0e626070d15ed0396a9224ad0161c7b97229722"
+        },
+        {
+          "path": "service_territory/MO.bin",
+          "state": "MO",
+          "rows": 492,
+          "bytes": 21216,
+          "sha256": "bb1200fa776dd3fd8f0d28b861f22c95f585a1b0efb0700c38432e740c36ea0f"
+        },
+        {
+          "path": "service_territory/MS.bin",
+          "state": "MS",
+          "rows": 236,
+          "bytes": 10496,
+          "sha256": "0144ba717513e6f7e23db0e950465e77bd7ca6df9f36f5afe0b9c2dc335fdefb"
+        },
+        {
+          "path": "service_territory/MT.bin",
+          "state": "MT",
+          "rows": 214,
+          "bytes": 9248,
+          "sha256": "ecef605b2c060a062661f94064059c6bb49e5df06df0029722f0ce8074a7fab4"
+        },
+        {
+          "path": "service_territory/NC.bin",
+          "state": "NC",
+          "rows": 395,
+          "bytes": 17440,
+          "sha256": "b055e390a063c0e5dcf1c382853fb41f28946690001e9b9d5f7126afbe9b5a77"
+        },
+        {
+          "path": "service_territory/ND.bin",
+          "state": "ND",
+          "rows": 237,
+          "bytes": 9888,
+          "sha256": "32d142e0fb418b5749fb7d8a19ceef23783721e4832a91cd83857937152772a8"
+        },
+        {
+          "path": "service_territory/NE.bin",
+          "state": "NE",
+          "rows": 407,
+          "bytes": 18712,
+          "sha256": "d7089da394aff3934a58a0b5ce32101c58b766a9572ad4917ca6268eb610ef45"
+        },
+        {
+          "path": "service_territory/NH.bin",
+          "state": "NH",
+          "rows": 32,
+          "bytes": 2064,
+          "sha256": "ea65d1f593f69baad77bd92c66eb82586b09f5115339f0c55254970396ba49f6"
+        },
+        {
+          "path": "service_territory/NJ.bin",
+          "state": "NJ",
+          "rows": 49,
+          "bytes": 2896,
+          "sha256": "cf8b8a67237863b2fd1a53f6bcd1b90cef3e408654a917fb8c20dd147938a697"
+        },
+        {
+          "path": "service_territory/NM.bin",
+          "state": "NM",
+          "rows": 121,
+          "bytes": 5904,
+          "sha256": "5961a759804ba2b26957a285daff22f3ab86efab410d1c142201876d70dc6004"
+        },
+        {
+          "path": "service_territory/NV.bin",
+          "state": "NV",
+          "rows": 39,
+          "bytes": 2656,
+          "sha256": "41bfcb9f02b264bfedea38e068f11a16314af67469b0a2474dd6b0e051dd531e"
+        },
+        {
+          "path": "service_territory/NY.bin",
+          "state": "NY",
+          "rows": 177,
+          "bytes": 8848,
+          "sha256": "02b12ce19a2e4a606e78fcd53e00fd93a239bcb839a98ac5c68c661c2bb114e0"
+        },
+        {
+          "path": "service_territory/OH.bin",
+          "state": "OH",
+          "rows": 434,
+          "bytes": 18768,
+          "sha256": "5013fba49d01baff663f25f3b4e0fec57b02935fbe862d13efaf808e3f5e1498"
+        },
+        {
+          "path": "service_territory/OK.bin",
+          "state": "OK",
+          "rows": 352,
+          "bytes": 15416,
+          "sha256": "7e321d88ca0102c071ee0076a6d182013e9dc4d72ba6738fceff01ffedb3912c"
+        },
+        {
+          "path": "service_territory/OR.bin",
+          "state": "OR",
+          "rows": 157,
+          "bytes": 7336,
+          "sha256": "54b163bfd8c141f0c142bdeb4e95c99817ef80a11f14bc04cc647d08f328ad12"
+        },
+        {
+          "path": "service_territory/PA.bin",
+          "state": "PA",
+          "rows": 214,
+          "bytes": 9936,
+          "sha256": "2743938b4276f1e9b4db878f171c66392a538b29edb0c507d8b8e72216b05e20"
+        },
+        {
+          "path": "service_territory/RI.bin",
+          "state": "RI",
+          "rows": 7,
+          "bytes": 1064,
+          "sha256": "52e7ada6d75752cf6b1e08d35675bcd42533e87dbb1503449561337c6b879032"
+        },
+        {
+          "path": "service_territory/SC.bin",
+          "state": "SC",
+          "rows": 179,
+          "bytes": 8272,
+          "sha256": "586643186c178d89700237920fa4b2e783fb0f4be4ea67ca52e8536abda166c6"
+        },
+        {
+          "path": "service_territory/SD.bin",
+          "state": "SD",
+          "rows": 318,
+          "bytes": 13520,
+          "sha256": "dbb5f9f4d0a7e1719b0f1535f15707b3d0ab1c7179248a90b62ec88536a22da2"
+        },
+        {
+          "path": "service_territory/TN.bin",
+          "state": "TN",
+          "rows": 262,
+          "bytes": 12288,
+          "sha256": "9a8a55d2c144917cef9700561d5d4a66c718ecf940e9d5c46b4f3e34895037c1"
+        },
+        {
+          "path": "service_territory/TX.bin",
+          "state": "TX",
+          "rows": 978,
+          "bytes": 38792,
+          "sha256": "5067d9b66ae42f20a5d1db626163284f138348d6403f9956060826719c11ecd4"
+        },
+        {
+          "path": "service_territory/UT.bin",
+          "state": "UT",
+          "rows": 93,
+          "bytes": 5336,
+          "sha256": "1c799a5d32e8708d83b2ffa41631e3319b58acb790fd9189a904c87174a153cc"
+        },
+        {
+          "path": "service_territory/VA.bin",
+          "state": "VA",
+          "rows": 285,
+          "bytes": 12408,
+          "sha256": "f020c92d848022ea4bb44398a69a821eb0e79b6f61a49faf12a0778a5e4706e6"
+        },
+        {
+          "path": "service_territory/VT.bin",
+          "state": "VT",
+          "rows": 44,
+          "bytes": 2752,
+          "sha256": "ee8102f5b8858dbcc36508afc7eed7a275afbea59d426fffe2d09a6aa5438e94"
+        },
+        {
+          "path": "service_territory/WA.bin",
+          "state": "WA",
+          "rows": 171,
+          "bytes": 8360,
+          "sha256": "f1fa8c4256ccf9518ff60eea1de5c403aa00822b87fc84073cb84e853588873c"
+        },
+        {
+          "path": "service_territory/WI.bin",
+          "state": "WI",
+          "rows": 370,
+          "bytes": 16504,
+          "sha256": "5a36c7e946a3d723cd8be4b821e959ab05658ed05718bb8f56992eacf36008b2"
+        },
+        {
+          "path": "service_territory/WV.bin",
+          "state": "WV",
+          "rows": 83,
+          "bytes": 4168,
+          "sha256": "0d105a112d43c79e579a9e23912876458f23f2fac811f61cbb1e34307fe17515"
+        },
+        {
+          "path": "service_territory/WY.bin",
+          "state": "WY",
+          "rows": 102,
+          "bytes": 5176,
+          "sha256": "bae4d28b02f8147e84e3658a9cd656e287b9df8a1cdd3adbc7d818030e68640a"
+        }
+      ],
+      "download": {
+        "path": "service_territory.csv.gz",
+        "bytes": 98706,
+        "sha256": "a3c2f957f83c909b5972faa16b9550dc7b269e8630b4d866df318602c948e4f7",
         "format": "text/csv; gzip"
       },
       "license": "CC-BY-4.0",

@@ -492,6 +492,10 @@
                   "type": "string",
                   "description": "A dataset id from the gridprims://datasets resource."
                 },
+                "table": {
+                  "type": "string",
+                  "description": "A table of that dataset, such as reliability. Default: its first table. The gridprims://datasets resource lists each dataset's tables."
+                },
                 "filter": {
                   "type": "object",
                   "description": "Column values to match exactly, such as {\"state\": \"TX\", \"utility_id\": 44372}. Filtering on the partition column (state) reads only that shard."
@@ -508,6 +512,9 @@
               "properties": {
                 "dataset": {
                   "type": "object"
+                },
+                "table": {
+                  "type": "string"
                 },
                 "columns": {
                   "type": "array",

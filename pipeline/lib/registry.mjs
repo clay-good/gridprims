@@ -32,7 +32,14 @@ export function matchPosture(terms) {
   return terms.factual ? { posture: 'derive', license: null, reason: 'terms absent or unrecognized; values are facts we may compute over' } : { posture: 'link', license: null, reason: 'terms absent or unrecognized' };
 }
 
-const REQUIRED = ['id', 'title', 'publisher', 'sourceUrl', 'terms', 'redistributionBasis', 'attribution', 'cadence', 'recipe', 'ceii', 'owner'];
+const REQUIRED = ['id', 'title', 'publisher', 'sourceUrl', 'terms', 'redistributionBasis', 'attribution', 'cadence', 'recipe', 'tables', 'ceii', 'owner'];
+/** Steps every table recipe needs, in this order. */
+const TABLE_STEPS = ['unzip', 'normalize', 'validate', 'partition'];
+
+const checkSteps = (steps, where, fail) => {
+  steps.forEach((s, i) => { if (!STEPS.includes(s?.step)) fail(`${where}[${i}].step`, `must be one of ${STEPS.join(', ')}`); });
+  steps.filter((s) => s.step === 'quirk').forEach((s) => { if (!s.fixture) fail(`${where} quirk`, `"${s.name}" has no fixture pinning it`); });
+};
 
 /**
  * Check one registry entry. Returns errors naming the dataset and the field.
@@ -49,10 +56,21 @@ export function validateEntry(e) {
   if (e.cadence && !['daily', 'weekly', 'monthly', 'quarterly', 'annual'].includes(e.cadence.every)) fail('cadence.every', 'must be daily, weekly, monthly, quarterly, or annual');
   if (Array.isArray(e.recipe)) {
     if (!e.recipe.length) fail('recipe', 'has no steps');
-    e.recipe.forEach((s, i) => { if (!STEPS.includes(s?.step)) fail(`recipe[${i}].step`, `must be one of ${STEPS.join(', ')}`); });
-    if (!e.recipe.some((s) => s.step === 'validate')) fail('recipe', 'has no validate step');
-    e.recipe.filter((s) => s.step === 'quirk').forEach((s) => { if (!s.fixture) fail('recipe quirk', `"${s.name}" has no fixture pinning it`); });
+    checkSteps(e.recipe, 'recipe', fail);
   } else if (e.recipe !== undefined) fail('recipe', 'must be a list of steps');
+  if (Array.isArray(e.tables)) {
+    if (!e.tables.length) fail('tables', 'has no tables');
+    const names = new Set();
+    e.tables.forEach((t, i) => {
+      const where = `tables[${i}]`;
+      if (!/^[a-z][a-z0-9_]*$/.test(t?.name ?? '')) fail(`${where}.name`, 'must be lowercase letters, digits, and underscores');
+      else if (names.has(t.name)) fail(`${where}.name`, `repeats ${t.name}`);
+      names.add(t?.name);
+      if (!Array.isArray(t?.recipe)) { fail(`${where}.recipe`, 'must be a list of steps'); return; }
+      checkSteps(t.recipe, `${where}.recipe`, fail);
+      for (const need of TABLE_STEPS) if (!t.recipe.some((s) => s.step === need)) fail(`${where}.recipe`, `has no ${need} step`);
+    });
+  } else if (e.tables !== undefined) fail('tables', 'must be a list of tables');
   // CEII screen (18 CFR 388.113): infrastructure datasets need a completed checklist.
   if (e.ceii) {
     if (typeof e.ceii.infrastructure !== 'boolean') fail('ceii.infrastructure', 'must say whether the dataset describes grid infrastructure');

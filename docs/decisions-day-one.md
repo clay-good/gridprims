@@ -50,6 +50,8 @@ The shapes every later phase-0 task generates from (foundation task 3.1). When a
 
 One file per dataset: `pipeline/registry/<dataset-id>.mjs` (default export). Registry fields are the ones `platform/data-snapshots` lists. The recipe is an ordered list of steps from a closed vocabulary: `fetch`, `unzip`, `gunzip`, `read-xlsx`, `read-csv`, `normalize` (names a module in `pipeline/normalize/`), `validate` (names validators and bounds), `partition`, `write-shards`, `write-csv-gz`. Quirks are steps with a fixture, never prose.
 
+A dataset's `recipe` holds the steps every table shares (today, `fetch`), and `tables` lists each table with its own `name`, `title`, and steps (it needs at least `unzip`, `normalize`, `validate`, and `partition`). One release zip can yield several tables: EIA-861 yields `sales`, `reliability`, and `service_territory`. Every table is read and validated before any file is written, so one failing table fails the whole release and the previous version stays live. Each table's row bounds are compared against the same table in the version being replaced.
+
 ## 4. Build output
 
 | Path | What |

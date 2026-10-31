@@ -129,11 +129,12 @@ export const TOOL_SURFACE = [
       required: ['dataset'],
       properties: {
         dataset: { type: 'string', description: 'A dataset id from the gridprims://datasets resource.' },
+        table: { type: 'string', description: 'A table of that dataset, such as reliability. Default: its first table. The gridprims://datasets resource lists each dataset\'s tables.' },
         filter: { type: 'object', description: 'Column values to match exactly, such as {"state": "TX", "utility_id": 44372}. Filtering on the partition column (state) reads only that shard.' },
         limit: { type: 'integer', minimum: 1, maximum: 500 },
       },
     },
-    outputSchema: { type: 'object', properties: { dataset: OBJ, columns: { type: 'array', items: OBJ }, rows: { type: 'array', items: OBJ }, matched: { type: 'integer' }, truncated: { type: 'boolean' } } },
+    outputSchema: { type: 'object', properties: { dataset: OBJ, table: STR, columns: { type: 'array', items: OBJ }, rows: { type: 'array', items: OBJ }, matched: { type: 'integer' }, truncated: { type: 'boolean' } } },
   },
   {
     name: 'gridprims_prepare_report',

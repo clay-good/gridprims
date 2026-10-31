@@ -1,5 +1,6 @@
 // EIA-861, Annual Electric Power Industry Report: utility sales, revenue, and
-// customers by state and sector. The one dataset phase 0 builds (task 1.6).
+// customers by state and sector; reliability (SAIDI, SAIFI, CAIDI); and the
+// counties each utility serves. Three tables from one release zip.
 
 export default {
   id: 'eia-861',
@@ -21,8 +22,8 @@ export default {
   // EIA asks for an acknowledgment that includes the publication date; {asOfMonth} is filled from the vintage.
   attribution: 'Source: U.S. Energy Information Administration, Form EIA-861 ({asOfMonth}).',
   cadence: { every: 'annual', nextRelease: { date: '2027-08-31', posted: false, note: 'EIA posts an early release each August; the date is inferred, not posted' } },
-  ceii: { infrastructure: false, note: 'Sales, revenue, and customer counts by utility and state; no facility, location, or network data.' },
-  owner: 'establish-platform-foundation',
+  ceii: { infrastructure: false, note: 'Sales, revenue, customer counts, reliability indices, and served counties by utility and state; no facility, location, or network data.' },
+  owner: 'add-public-grid-data',
   // Where a release appears: EIA posts the newest year under zip/ and moves older years to archive/zip/.
   releaseWatch: {
     urls: ['https://www.eia.gov/electricity/data/eia861/zip/f861{year}.zip', 'https://www.eia.gov/electricity/data/eia861/archive/zip/f861{year}.zip'],
@@ -30,15 +31,52 @@ export default {
   vintages: {
     2025: { url: 'https://www.eia.gov/electricity/data/eia861/zip/f8612025.zip', asOf: '2026-10-07', sha256: 'f59f6c732bf685fe0a1591b32227f5ce572dc0dfd26bb5caaeed128ac4e3a396' },
   },
+  // Steps every table shares, run once per release.
   recipe: [
     { step: 'fetch', url: '{vintage.url}' },
-    { step: 'unzip', entry: 'Sales_Ult_Cust_{year}.xlsx' },
-    { step: 'read-xlsx', sheet: 'States', headerRows: 3 },
-    { step: 'normalize', module: 'eia-861-sales' },
-    { step: 'quirk', name: 'withheld-respondents', note: 'Utility number 88888 ("Withheld") appears once per withheld respondent group; its rows are kept and keyed by a sequence number.', fixture: 'verify/fixtures/data/eia-861/withheld.json' },
-    { step: 'validate', key: ['utility_id', 'part', 'service_type', 'state', 'ba_code', 'seq'], rows: { min: 2600, max: 3200, maxDropPct: 5, maxRisePct: 25, from: 'vintages 2023 (2,822 rows), 2024 (2,815), and 2025 (2,869); largest yearly change +1.9%' } },
-    { step: 'partition', by: 'state' },
-    { step: 'write-shards', table: 'sales' },
-    { step: 'write-csv-gz', table: 'sales' },
+  ],
+  // Each table's own steps, run on the fetched zip. One table failing fails the
+  // whole release: a dataset version is all or nothing.
+  tables: [
+    {
+      name: 'sales',
+      title: 'Sales, revenue, and customers by utility, state, and sector',
+      recipe: [
+        { step: 'unzip', entry: 'Sales_Ult_Cust_{year}.xlsx' },
+        { step: 'read-xlsx', sheet: 'States', headerRows: 3 },
+        { step: 'normalize', module: 'eia-861-sales' },
+        { step: 'quirk', name: 'withheld-respondents', note: 'Utility number 88888 ("Withheld") appears once per withheld respondent group; its rows are kept and keyed by a sequence number.', fixture: 'verify/fixtures/data/eia-861/withheld.json' },
+        { step: 'validate', key: ['utility_id', 'part', 'service_type', 'state', 'ba_code', 'seq'], rows: { min: 2600, max: 3200, maxDropPct: 5, maxRisePct: 25, from: 'vintages 2023 (2,822 rows), 2024 (2,815), and 2025 (2,869); largest yearly change +1.9%' } },
+        { step: 'partition', by: 'state' },
+        { step: 'write-shards' },
+        { step: 'write-csv-gz' },
+      ],
+    },
+    {
+      name: 'reliability',
+      title: 'Outage duration and frequency (SAIDI, SAIFI, CAIDI) by utility and state',
+      recipe: [
+        { step: 'unzip', entry: 'Reliability_{year}.xlsx' },
+        { step: 'read-xlsx', sheet: 'Reliability_States', headerRows: 3 },
+        { step: 'normalize', module: 'eia-861-reliability' },
+        { step: 'validate', key: ['utility_id', 'state'], rows: { min: 850, max: 1100, maxDropPct: 5, maxRisePct: 25, from: 'vintages 2023 (967 rows), 2024 (971), and 2025 (976); largest yearly change +0.5%' } },
+        { step: 'partition', by: 'state' },
+        { step: 'write-shards' },
+        { step: 'write-csv-gz' },
+      ],
+    },
+    {
+      name: 'service_territory',
+      title: 'Counties each utility serves, by state',
+      recipe: [
+        { step: 'unzip', entry: 'Service_Territory_{year}.xlsx' },
+        { step: 'read-xlsx', sheet: 'Counties_States', headerRows: 1 },
+        { step: 'normalize', module: 'eia-861-service-territory' },
+        { step: 'validate', key: ['utility_id', 'state', 'county'], rows: { min: 10500, max: 13000, maxDropPct: 5, maxRisePct: 25, from: 'vintages 2023 (11,782 rows), 2024 (11,776), and 2025 (11,803); largest yearly change +0.2%' } },
+        { step: 'partition', by: 'state' },
+        { step: 'write-shards' },
+        { step: 'write-csv-gz' },
+      ],
+    },
   ],
 };
