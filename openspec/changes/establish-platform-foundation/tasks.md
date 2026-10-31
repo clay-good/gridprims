@@ -32,12 +32,12 @@
 
 - [x] 4.1 Delimited-text parser with encoding, delimiter, and quote detection; verify against the fixture library
 - [x] 4.2 Streaming XML parser that refuses DTDs and entities; verify an XXE fixture is refused as a whole file with no request made
-- [ ] 4.3 `.xlsx` reader (ZIP directory, raw inflate via `DecompressionStream` and `zlib`, shared strings, cached values); verify against 10 utility workbook fixtures in browser and Node
-- [ ] 4.4 Time-zone and DST helper on `Intl`; verify the DST fixture suite in Chrome, Firefox, Safari, and Node
+- [x] 4.3 `.xlsx` reader (ZIP directory, raw inflate via `DecompressionStream` and `zlib`, shared strings, cached values); verify against 10 utility workbook fixtures in browser and Node
+- [x] 4.4 Time-zone and DST helper on `Intl`; verify the DST fixture suite in Chrome, Firefox, Safari, and Node
 - [ ] 4.5 Static site generator with escaped templates; verify a 20,000-page fixture builds in under 10 minutes on a CI runner of the pinned image and that unescaped input fails a test
 - [ ] 4.6 SVG chart components per DESIGN.md's Charts section; verify peak-preserving downsampling and table views
 - [ ] 4.7 Flesch-Kincaid readability module with a syllable exceptions list, used by the result-sentence gate; verify against 20 hand-scored sentences within 0.5 grade
-- [ ] 4.8 Browser driver over CDP (Chrome) and WebDriver BiDi (Firefox) with `safaridriver`; verify it loads a page, records requests, and resizes to 320 px in each browser
+- [x] 4.8 Browser driver over CDP (Chrome) and WebDriver BiDi (Firefox) with `safaridriver`; verify it loads a page, records requests, and resizes to 320 px in each browser
 
 ## 5. Privacy and security
 

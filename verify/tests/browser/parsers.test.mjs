@@ -45,7 +45,11 @@ test('the parser suite passes in Safari', { skip: process.platform !== 'darwin' 
   const server = await serve(root, { routes });
   try {
     const r = await runInSafari(`${server.url}/verify/browser/blank.html`, `const done = arguments[0]; ${suite}.then(done, (e) => done(['threw ' + e.message]));`);
-    if (r === null) return t.skip('Safari automation is not enabled');
+    if (r === null) {
+      // On CI the job enables automation first, so a missing session is a failure, not a skip.
+      assert.ok(!process.env.CI, 'Safari automation is not enabled on the CI runner');
+      return t.skip('Safari automation is not enabled');
+    }
     assert.deepEqual(r, []);
   } finally {
     await server.close();

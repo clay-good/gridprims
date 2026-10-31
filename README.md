@@ -14,8 +14,9 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | Tool manifest schema, validator, and the shared `runTool` entry point | Built and tested |
 | Reference tool `calc.energy-units.convert` (core and worked examples) | Built and tested; self-checked, experimental. No page or MCP surface yet |
 | Own parsers: delimited text (encoding, delimiter, quotes, chunks) and XML that refuses DTDs and entities | Built and tested |
-| Time-zone and DST helper on `Intl` (spring gap, fall repeat, transitions) | Built and tested in Node; browser runs wait on the browser driver |
-| `.xlsx` reader (own ZIP directory, `DecompressionStream` inflate, shared strings, date formats, cached values only) | Built and tested in Node against 10 workbook shapes; browser run waits on the browser driver |
+| Time-zone and DST helper on `Intl` (spring gap, fall repeat, transitions) | Built and tested in Node, Chrome, Firefox, and Safari |
+| `.xlsx` reader (own ZIP directory, `DecompressionStream` inflate, shared strings, date formats, cached values only) | Built and tested against 10 workbook shapes in Node, Chrome, Firefox, and Safari |
+| Own browser driver (Chrome over CDP, Firefox over WebDriver BiDi, Safari through `safaridriver`) | Built; runs in CI on Linux and macOS |
 | File intake, data snapshots, site shell, Worker, MCP server | Not started |
 
 The plan is in [`openspec/changes/`](openspec/changes/): 22 changes, built in the phase order in [`plan-launch-and-value-proof`](openspec/changes/plan-launch-and-value-proof/). The shapes everything generates from are in [`docs/decisions-day-one.md`](docs/decisions-day-one.md).
@@ -25,9 +26,11 @@ The plan is in [`openspec/changes/`](openspec/changes/): 22 changes, built in th
 Needs only Node.js 24.12 or later. There is no install step.
 
 ```sh
-npm test          # unit, worked-example, and gate tests (node:test)
+npm test          # unit, worked-example, gate, and browser tests (node:test)
 npm run check     # every repository gate against the working tree
 ```
+
+Browser tests run in each installed engine and skip the ones that are missing. Set `GRIDPRIMS_CHROME` or `GRIDPRIMS_FIREFOX` to a browser's path to override the search, and `GRIDPRIMS_SAFARI_TESTS=1` on a Mac after `sudo safaridriver --enable` to include Safari.
 
 Run a tool from the shared core:
 
