@@ -5,6 +5,7 @@
 import { createI18n } from '../lib/i18n.mjs';
 import { renderAnswer, renderChart, renderReceipt, viewOf, when } from '../ui/workbench.mjs';
 import { setupBill } from './workbench-bill.js';
+import { renderInsights } from '../ui/workbench-insights.mjs';
 import { formatNumber } from '../../core/lib/precision.mjs';
 import strings from '../strings/en-US.mjs';
 
@@ -52,8 +53,26 @@ function render() {
   $('[data-chart]').innerHTML = String(renderChart(v, i18n));
   $('[data-keep]').checked = Boolean(current.kept);
   $('[data-keep]').disabled = current.sample;
+  renderInsightsPanel();
   bill?.refresh();
 }
+
+/** "What this file says", with the demand window the user picked. */
+function renderInsightsPanel() {
+  const v = current.view;
+  $('[data-insights]').innerHTML = String(renderInsights(v, i18n, { when, window: current.window, aggregate: v.aggregate }));
+  $('[data-insights]').dataset.rendered = String(Number($('[data-insights]').dataset.rendered ?? 0) + 1);
+}
+$('[data-insights]').addEventListener('change', (e) => {
+  if (!e.target.closest('[data-window]') || !current) return;
+  const f = new FormData(e.target.form);
+  current.window = { minutes: Number(f.get('minutes')), mode: f.get('mode') };
+  renderInsightsPanel();
+});
+$('[data-insights]').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-show-ms]');
+  if (b) showOnChart(Number(b.dataset.showMs), Number(b.dataset.showKw));
+});
 
 /** Move the chart's highlight to an interval, such as the one that set a demand charge. */
 function showOnChart(ms, kw) {

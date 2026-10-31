@@ -6,6 +6,7 @@ import { html, raw } from '../lib/html.mjs';
 import { GLYPHS } from './glyphs.mjs';
 import { formatNumber } from '../../core/lib/precision.mjs';
 import { intervalKw, loadStats } from '../../core/lib/load-stats.mjs';
+import { aggregate } from '../../core/lib/load-insights.mjs';
 import { lineChart, tableView } from '../lib/chart.mjs';
 
 export const ZONES = ['America/New_York', 'America/Chicago', 'America/Denver', 'America/Phoenix', 'America/Los_Angeles', 'America/Anchorage', 'Pacific/Honolulu', 'America/Puerto_Rico'];
@@ -23,10 +24,21 @@ export function when(ms, zone) {
 }
 const day = (ms, zone) => new Intl.DateTimeFormat('en-US', { timeZone: zone, month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(ms));
 
-/** Everything the page shows for one series of a parsed result. */
+/** The delivered series of each meter, when a file has more than one meter. */
+export const meterSeries = (result) => {
+  const delivered = result.series.filter((s) => s.channel !== 'received');
+  return new Set(delivered.map((s) => s.meter)).size > 1 ? delivered : [];
+};
+
+/** Everything the page shows for one series of a parsed result; index -1 is all meters added together. */
 export function viewOf(result, index) {
-  const s = result.series[index] ?? result.series[0];
   const zone = result.receipt.time.zone;
+  const meters = meterSeries(result);
+  if (index === -1 && meters.length) {
+    const agg = aggregate(meters);
+    return { result, series: agg.series, index, zone, stats: loadStats(agg.series, zone), aggregate: agg };
+  }
+  const s = result.series[index] ?? result.series[0];
   return { result, series: s, index, zone, stats: loadStats(s, zone) };
 }
 
@@ -76,7 +88,7 @@ export function renderReceipt(v, { t }) {
     <div><dt>${t('receipt.stamps')}</dt><dd>${select('stampsMark', tm.stampsReason, [['start', t('receipt.stamps.start')], ['end', t('receipt.stamps.end')]], tm.stampsMark)}</dd></div>
     <div><dt>${t('receipt.quantity')}</dt><dd>${select('quantity', rc.values.assumption ?? rc.values.unitsRead.join(', '), [['auto', t('receipt.quantity.auto')], ['energy', t('receipt.quantity.energy')], ['demand', t('receipt.quantity.demand')]], rc.choices.quantity)}</dd></div>
     <div><dt>${t('receipt.zone')}</dt><dd>${select('zone', tm.zoneFromFile ? t('receipt.zoneFromFile') : '', zones.map((z) => [z, z]), tm.zone)}</dd></div>
-    ${v.result.series.length > 1 ? html`<div><dt>${t('receipt.series')}</dt><dd>${select('series', '', v.result.series.map((s, i) => [String(i), `${s.meter || '—'} · ${s.channel}`]), String(v.index))}</dd></div>` : ''}
+    ${v.result.series.length > 1 ? html`<div><dt>${t('receipt.series')}</dt><dd>${select('series', '', [...v.result.series.map((s, i) => [String(i), `${s.meter || '—'} · ${s.channel}`]), ...(meterSeries(v.result).length ? [['-1', t('receipt.aggregate')]] : [])], String(v.index))}</dd></div>` : ''}
     <div><dt>${t('receipt.range')}</dt><dd>${day(tm.firstMs, tm.zone)} – ${day(tm.lastMs, tm.zone)} · ${t('receipt.months', { count: tm.months })}</dd></div>
     <div><dt>${t('receipt.gaps')}</dt><dd>${q.gaps.length ? q.gaps.map((g) => t('receipt.gapLine', { hours: num(g.intervals * tm.intervalMinutes / 60), start: when(g.startMs, tm.zone) })).join('; ') : t('receipt.gapsNone')}</dd></div>
     <div><dt>${t('receipt.duplicates')}</dt><dd>${t('receipt.duplicatesLine', { identical: q.duplicates.identical, conflicting: q.duplicates.conflicting, rule: q.duplicates.rule })}</dd></div>

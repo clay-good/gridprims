@@ -10,6 +10,8 @@ export const LIGHT = {
   warning: '#ffcd00', 'warning-text': '#7a5b00', stop: '#b3261e', ok: '#17693c', focus: '#1d4f91',
   'legend-white': '#ffffff', 'legend-black': '#111111',
   'series-measured': '#00704a', 'series-whatif': '#eb6834',
+  // The sequential ramp for heatmaps (DESIGN.md): lightest means near zero.
+  'heat-0': '#cde2fb', 'heat-1': '#a7c0de', 'heat-2': '#809dc1', 'heat-3': '#5a7ba5', 'heat-4': '#335888', 'heat-5': '#0d366b',
   shadow: 'rgba(0,0,0,.18)',
 };
 
@@ -20,6 +22,8 @@ export const NIGHT = {
   'guide-text': '#5fd39a', service: '#8db4ff', 'learn-text': '#d9a77c', 'work-zone-text': '#ffa45c',
   'warning-text': '#ffd84d', stop: '#ff8a80', ok: '#5fd394', focus: '#ffcd00',
   'series-measured': '#22a06b', 'series-whatif': '#e0612a',
+  // At night the ramp keeps its hue with a #184f95 floor, rising to the light end.
+  'heat-0': '#184f95', 'heat-1': '#3c6ca9', 'heat-2': '#608abe', 'heat-3': '#85a7d2', 'heat-4': '#a9c5e7', 'heat-5': '#cde2fb',
   shadow: 'rgba(0,0,0,.5)',
 };
 

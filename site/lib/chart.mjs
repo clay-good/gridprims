@@ -52,7 +52,7 @@ export function niceTicks(min, max, target = 5) {
 }
 
 /**
- * @typedef {{label: string, x: ArrayLike<number>, y: ArrayLike<number>, role?: 'measured' | 'whatif'}} ChartSeries
+ * @typedef {{label: string, x: ArrayLike<number>, y: ArrayLike<number>, role?: 'measured' | 'whatif' | 'compare'}} ChartSeries
  * @typedef {{
  *   title: string, summary: string, yUnit: string, series: ChartSeries[],
  *   width?: number, height?: number, xTick: (x: number) => string, yTick?: (y: number) => string,
@@ -94,6 +94,31 @@ export function lineChart(c) {
     </g>
     ${drawn.map((s) => html`<path class="series series-${s.role ?? 'measured'}" d="${path(s)}"><title>${s.label}</title></path>`)}
     ${h ? html`<g class="chart-highlight"><circle cx="${sx(h.x).toFixed(1)}" cy="${sy(h.y).toFixed(1)}" r="5"/><text x="${Math.min(sx(h.x) + 8, W - pad.r - 4).toFixed(1)}" y="${Math.max(sy(h.y) - 8, pad.t + 10).toFixed(1)}" text-anchor="${sx(h.x) > W * 0.7 ? 'end' : 'start'}">${h.label}</text></g>` : ''}
+  </svg>
+  <figcaption>${c.summary}</figcaption>
+</figure>`;
+}
+
+/**
+ * A day-by-hour heatmap on the sequential ramp, with a labeled scale (DESIGN.md: SVG up to 10,000 cells).
+ * @param {{title: string, summary: string, unit: string, rows: Array<{day: string, kw: Array<number | null>}>, rowLabel: (day: string) => string}} c
+ */
+export function heatmapChart(c) {
+  const values = c.rows.flatMap((r) => r.kw).filter((v) => v !== null);
+  const max = Math.max(...values, 0) || 1;
+  const step = (v) => Math.min(5, Math.floor((v / max) * 6));
+  const cell = 6;
+  const rowH = Math.max(2, Math.min(8, Math.floor(520 / Math.max(1, c.rows.length))));
+  const W = 40 + 24 * cell * 3;
+  const H = 18 + c.rows.length * rowH + 28;
+  const every = Math.ceil(c.rows.length / 12);
+  return html`<figure class="chart heatmap">
+  <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${c.title}. ${c.summary}">
+    <g class="chart-axis">${[0, 6, 12, 18].map((h) => html`<text x="${40 + h * cell * 3}" y="12">${h === 0 ? 'midnight' : h === 12 ? 'noon' : h < 12 ? `${h} am` : `${h - 12} pm`}</text>`)}
+      ${c.rows.map((r, i) => (i % every ? '' : html`<text x="36" y="${18 + i * rowH + rowH}" text-anchor="end">${c.rowLabel(r.day)}</text>`))}</g>
+    ${c.rows.map((r, i) => r.kw.map((v, h) => (v === null ? '' : html`<rect class="heat-${step(v)}" x="${40 + h * cell * 3}" y="${18 + i * rowH}" width="${cell * 3}" height="${rowH}"/>`)))}
+    <g class="chart-axis">${[0, 1, 2, 3, 4, 5].map((k) => html`<rect class="heat-${k}" x="${40 + k * 36}" y="${H - 18}" width="36" height="8"/>`)}
+      <text x="40" y="${H - 2}">0</text><text x="${40 + 6 * 36}" y="${H - 2}" text-anchor="end">${new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(max)} ${c.unit}</text></g>
   </svg>
   <figcaption>${c.summary}</figcaption>
 </figure>`;

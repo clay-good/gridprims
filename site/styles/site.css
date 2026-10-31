@@ -174,6 +174,10 @@ footer ul { list-style: none; padding: 0; display: flex; gap: var(--s3); flex-wr
 .series { fill: none; stroke-width: 2; vector-effect: non-scaling-stroke; }
 .series-measured { stroke: var(--series-measured); }
 .series-whatif { stroke: var(--series-whatif); }
+.series-compare { stroke: var(--service); stroke-dasharray: 6 4; }
+.heatmap svg { height: auto; }
+.heat-0 { fill: var(--heat-0); } .heat-1 { fill: var(--heat-1); } .heat-2 { fill: var(--heat-2); }
+.heat-3 { fill: var(--heat-3); } .heat-4 { fill: var(--heat-4); } .heat-5 { fill: var(--heat-5); }
 .chart-highlight circle { fill: var(--series-measured); stroke: var(--panel); stroke-width: 2; }
 .chart-highlight text { fill: var(--ink); font: 600 12px Overpass, system-ui, sans-serif; }
 caption { text-align: left; color: var(--muted); font-size: .875rem; padding: var(--s2) 0; }

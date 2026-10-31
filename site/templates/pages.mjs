@@ -240,6 +240,7 @@ export function filesPage({ i18n }) {
   <section class="answer" aria-live="polite" data-answer></section>
   <p><label><input type="checkbox" data-keep> ${t('files.keep')}</label> <span class="unit-hint">${t('files.keepNote')}</span></p>
   <div data-chart></div>
+  <section class="panel" data-insights></section>
   ${billPanel(i18n)}
   <section class="panel" data-receipt></section>
 </article>

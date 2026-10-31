@@ -7,10 +7,10 @@
 
 ## 2. Interval insights
 
-- [ ] 2.1 Implement core metrics and monthly peaks; verify energy totals match fixtures within 0.01%
-- [ ] 2.2 Implement load duration curve, heatmap, weekday/weekend profile, and peak-preserving downsampling; verify the max interval is drawn at its true value
-- [ ] 2.3 Implement flags (needle peak, after-hours share, weekly spikes, baseload step); verify one fixture triggers each flag and a flat fixture triggers none
-- [ ] 2.4 Implement the data-quality report and multi-meter aggregate; verify the diversity-benefit scenario
+- [x] 2.1 Implement core metrics and monthly peaks; verify energy totals match fixtures within 0.01%
+- [x] 2.2 Implement load duration curve, heatmap, weekday/weekend profile, and peak-preserving downsampling; verify the max interval is drawn at its true value
+- [x] 2.3 Implement flags (needle peak, after-hours share, weekly spikes, baseload step); verify one fixture triggers each flag and a flat fixture triggers none
+- [x] 2.4 Implement the data-quality report and multi-meter aggregate; verify the diversity-benefit scenario
 
 ## 3. Bill explainer
 
