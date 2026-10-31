@@ -3,7 +3,7 @@
 - [x] 1.1 Create the layout from design D17 with a README in each top-level directory; verify `ls` shows every directory and README
 - [x] 1.2 Add the dependency gate (no dependency fields, no `node_modules`, only listed font files) and record each shipped font's license and SHA-256 (Overpass and Overpass Mono are dual-licensed SIL OFL 1.1 and LGPL 2.1; `RedHatOfficial/Overpass`); verify it fails on a fixture that adds a package and on a font file with no license record
 - [x] 1.3 Add the platform-API gate and `docs/platform-apis.md` (API, version introduced, stability); verify it fails on a fixture that uses an experimental Node API
-- [ ] 1.4 Pin Node 24.12+ and run CI on Node 24 and 26; verify a clean clone builds and tests with no install step
+- [x] 1.4 Pin Node 24.12+ and run CI on Node 24 and 26; verify a clean clone builds and tests with no install step
 - [x] 1.5 Start `docs/own-implementations.md` with a build check that every general-purpose module has an entry; verify the check fails on an unlisted module rather than relying on a review
 - [ ] 1.6 Commit the phase-0 fixture subset: EIA-861 (the one dataset phase 0 builds) plus synthetic fixtures for every other shape, and record that the full three-state, three-balancing-authority subset in D11 is a phase-1 exit item; verify every phase-0 worked example runs offline from a fresh clone
 - [x] 1.7 Add the deployable file-count gate (80,000); verify it fails on a fixture build over the limit
@@ -30,8 +30,8 @@
 
 ## 4. Own implementations
 
-- [ ] 4.1 Delimited-text parser with encoding, delimiter, and quote detection; verify against the fixture library
-- [ ] 4.2 Streaming XML parser that refuses DTDs and entities; verify an XXE fixture is refused as a whole file with no request made
+- [x] 4.1 Delimited-text parser with encoding, delimiter, and quote detection; verify against the fixture library
+- [x] 4.2 Streaming XML parser that refuses DTDs and entities; verify an XXE fixture is refused as a whole file with no request made
 - [ ] 4.3 `.xlsx` reader (ZIP directory, raw inflate via `DecompressionStream` and `zlib`, shared strings, cached values); verify against 10 utility workbook fixtures in browser and Node
 - [ ] 4.4 Time-zone and DST helper on `Intl`; verify the DST fixture suite in Chrome, Firefox, Safari, and Node
 - [ ] 4.5 Static site generator with escaped templates; verify a 20,000-page fixture builds in under 10 minutes on a CI runner of the pinned image and that unescaped input fails a test

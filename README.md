@@ -13,7 +13,9 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | Repository layout, zero-dependency gate, platform-API gate, own-implementations gate, file-count gate | Built and tested |
 | Tool manifest schema, validator, and the shared `runTool` entry point | Built and tested |
 | Reference tool `calc.energy-units.convert` (core and worked examples) | Built and tested; self-checked, experimental. No page or MCP surface yet |
-| Parsers, file intake, data snapshots, site shell, Worker, MCP server | Not started |
+| Own parsers: delimited text (encoding, delimiter, quotes, chunks) and XML that refuses DTDs and entities | Built and tested |
+| Time-zone and DST helper on `Intl` (spring gap, fall repeat, transitions) | Built and tested in Node; browser runs wait on the browser driver |
+| `.xlsx` reader, file intake, data snapshots, site shell, Worker, MCP server | Not started |
 
 The plan is in [`openspec/changes/`](openspec/changes/): 22 changes, built in the phase order in [`plan-launch-and-value-proof`](openspec/changes/plan-launch-and-value-proof/). The shapes everything generates from are in [`docs/decisions-day-one.md`](docs/decisions-day-one.md).
 
@@ -42,7 +44,7 @@ node -e "import('./core/tools/index.mjs').then(async ({ getTool }) => {
 | Path | What |
 |---|---|
 | `core/` | Tool functions and manifests, shared by the website and the MCP server |
-| `parsers/` | Own CSV, XML, `.xlsx`, and time-zone parsers |
+| `parsers/` | Own delimited-text, XML, and time-zone parsers (`.xlsx` next) |
 | `pipeline/` | Dataset fetch, validate, normalize, and snapshot scripts that CI runs on schedule |
 | `site/` | Templates, styles, and page modules for gridprims.com |
 | `mcp/` | The local-only stdio MCP server |
