@@ -102,3 +102,28 @@ test('handles expire after 60 minutes unused', () => {
   now += IDLE_MS + 1;
   assert.equal(store.get(id), undefined);
 });
+
+test('the analyzer fixtures through the server match the website\'s numbers: total, peak and its time, load factor, and monthly peaks', async () => {
+  const { FIXTURES: BILL } = await import('../../fixtures/bill/analyzer.mjs');
+  const billDir = join(import.meta.dirname, '../../fixtures/bill/files');
+  const s = createServer({ allowDirs: realAllowDirs([realpathSync(billDir)]) });
+  let id = 100;
+  for (const f of BILL) {
+    const r = (await call(s, ++id, { path: f.file, zone: f.zone })).result;
+    assert.equal(r.isError, false, `${f.file}: ${r.content[0].text}`);
+    const site = await intakeFile(new Uint8Array((await import('node:fs')).readFileSync(join(billDir, f.file))), { name: f.file }, { zone: f.zone, zoneSet: true, stampsMark: 'auto', quantity: 'auto' });
+    // The server reports to four decimals, as its schema documents.
+    const r4 = (x) => (x === null ? null : Math.round(x * 1e4) / 1e4);
+    for (const [i, series] of site.series.entries()) {
+      const st = loadStats(series, f.zone);
+      const got = r.structuredContent.series[i];
+      assert.equal(got.channel, series.channel, f.file);
+      assert.equal(got.intervals, st.intervals, f.file);
+      assert.equal(got.totalKwh, r4(st.totalKwh), f.file);
+      assert.equal(got.peakKw, r4(st.peakKw), f.file);
+      assert.equal(got.loadFactor, r4(st.loadFactor), f.file);
+      assert.equal(got.peakStartUtc, new Date(st.peakStartMs).toISOString(), f.file);
+      assert.deepEqual(got.monthly.map((m) => [m.month, m.peakKw, m.peakStartUtc]), st.monthly.map((m) => [m.month, r4(m.peakKw), new Date(m.peakStartMs).toISOString()]), f.file);
+    }
+  }
+});
