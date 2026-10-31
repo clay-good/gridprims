@@ -28,6 +28,8 @@ export function renderInsights(v, { t }, { when, window: w, aggregate }) {
   const p = profiles(s, v.zone);
   const heat = heatmap(s, v.zone);
   return html`<h2>${t('insights.title')}</h2>
+  <p><button class="button" type="button" data-reopt-export>${t('reopt.export')}</button></p>
+  <div data-reopt-result aria-live="polite"></div>
   ${q.label ? html`<p class="strip" data-partial>${t('insights.partial', { label: q.label })}</p>` : ''}
   <dl class="receipt mono" data-metrics>
     <div><dt>${t('insights.loadFactor')}</dt><dd>${v.stats.loadFactor === null ? '–' : `${num(v.stats.loadFactor * 100)}%`}</dd></div>

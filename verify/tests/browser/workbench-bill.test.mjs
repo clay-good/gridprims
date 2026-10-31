@@ -56,6 +56,12 @@ for (const kind of ['chrome', 'firefox']) {
       assert.equal(ranked.length + listed, austin.filter((r) => r.sector === 'Commercial').length, 'every commercial rate is ranked or listed as not eligible');
       assert.ok(ranked.includes(austin[pick].id));
       assert.match(await browser.evaluate("document.querySelector('[data-compare-result]').textContent"), /Based on this file's past use\./);
+      // The comparison card: the top three rates, the period, the URDB date, and gridprims.com.
+      await browser.evaluate("document.querySelector('[data-copy-card=ranking]').click()");
+      await waitFor(browser, "document.querySelector('[data-bill]').dataset.card?.startsWith('What this load would have cost')");
+      const card = await browser.evaluate("document.querySelector('[data-bill]').dataset.card");
+      assert.match(card, /^What this load would have cost on Austin Energy's rates, 2026-06-01 to 2026-06-14:\n1\. /);
+      assert.match(card, /snapshot of 2026-10-30\.\ngridprims\.com · workbench /);
       await browser.evaluate("(() => { const f = document.querySelector('[data-shift]'); f.kw.value = '20'; f.from.value = '14'; f.to.value = '11'; f.requestSubmit(); })()");
       await waitFor(browser, "document.querySelector('[data-bill]').dataset.compared === '2'");
       assert.match(await browser.evaluate("document.querySelector('[data-compare-result] .strip').textContent"), /With 20 kW moved from 2 pm to 11 am for 4 hours, on weekdays\./);

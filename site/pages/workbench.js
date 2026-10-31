@@ -6,6 +6,9 @@ import { createI18n } from '../lib/i18n.mjs';
 import { renderAnswer, renderChart, renderReceipt, viewOf, when } from '../ui/workbench.mjs';
 import { setupBill } from './workbench-bill.js';
 import { renderInsights } from '../ui/workbench-insights.mjs';
+import { exportForReopt } from '../../core/lib/reopt-export.mjs';
+import { renderReport } from '../ui/workbench-report.mjs';
+import { WORKBENCH_VERSION } from './workbench-bill.js';
 import { formatNumber } from '../../core/lib/precision.mjs';
 import strings from '../strings/en-US.mjs';
 
@@ -72,7 +75,33 @@ $('[data-insights]').addEventListener('change', (e) => {
 $('[data-insights]').addEventListener('click', (e) => {
   const b = e.target.closest('[data-show-ms]');
   if (b) showOnChart(Number(b.dataset.showMs), Number(b.dataset.showKw));
+  if (e.target.closest('[data-reopt-export]')) reoptExport();
 });
+
+// The one-page report: made here from what is on the page, printed by the browser (its "Save as PDF" makes the file).
+$('[data-make-report]').addEventListener('click', () => {
+  const v = current?.view;
+  if (!v) return;
+  const view = $('[data-report-view]');
+  view.innerHTML = String(renderReport({ v, when: (ms) => when(ms, v.zone), version: WORKBENCH_VERSION, ...bill.state() }, i18n));
+  view.hidden = false;
+  view.scrollIntoView({ block: 'start' });
+  document.documentElement.dataset.report = String(Number(document.documentElement.dataset.report ?? 0) + 1);
+});
+$('[data-report-view]').addEventListener('click', (e) => { if (e.target.closest('[data-print-report]')) print(); });
+
+/** The REopt-ready load file and its notes, made here and offered as downloads. Filled values stay in the export. */
+function reoptExport() {
+  const v = current.view;
+  const box = $('[data-reopt-result]');
+  const r = exportForReopt(v.series, v.zone);
+  if (r.status !== 'ok') { box.replaceChildren(Object.assign(document.createElement('p'), { className: 'errors', textContent: r.reason })); return; }
+  const link = (text, name, body) => Object.assign(document.createElement('a'), { className: 'button', textContent: text, download: name, href: URL.createObjectURL(new Blob([body], { type: 'text/plain' })) });
+  const list = Object.assign(document.createElement('ul'), { className: 'unit-hint' });
+  list.append(...r.notes.map((n) => Object.assign(document.createElement('li'), { textContent: n })));
+  box.replaceChildren(link(i18n.t('reopt.csv', { rows: r.rows.toLocaleString('en-US') }), r.fileName, r.csv), document.createTextNode(' '), link(i18n.t('reopt.notes'), r.fileName.replace('.csv', '-notes.txt'), r.notes.join('\n') + '\n'), list);
+  box.dataset.rows = String(r.rows);
+}
 
 /** Move the chart's highlight to an interval, such as the one that set a demand charge. */
 function showOnChart(ms, kw) {

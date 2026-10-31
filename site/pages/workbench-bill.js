@@ -8,6 +8,10 @@ import { findPlans } from '../../core/lib/plan-finder.mjs';
 import { alignSolar, EXCLUDED, netLoad, payback, peakShave, readPvwatts, savings, UPPER_BOUND } from '../../core/lib/storage-screen.mjs';
 import { readNumber } from '../../core/lib/bill-totals.mjs';
 import { rateOption, renderBills, renderComparison, renderRanking, renderScreen } from '../ui/workbench-bill.mjs';
+import { billCard, rankingCard, screenCard } from '../../core/lib/result-cards.mjs';
+
+/** The workbench's version, printed on every result card. */
+export const WORKBENCH_VERSION = '0.1.0';
 import { getJson, utilitiesForZip } from './zip-utilities.js';
 
 /**
@@ -23,6 +27,10 @@ export function setupBill({ i18n, view, when, showOnChart }) {
   let rates = [];
   let asOf = null;
   let priced = null; // {rec, bills}
+  let utilityName = '';
+  const last = { ranking: null, screen: null };
+  /** The file's first and last local day, for the cards. */
+  const period = (v) => { const f = new Intl.DateTimeFormat('en-CA', { timeZone: v.zone }); return `${f.format(new Date(v.series.startMs[0]))} to ${f.format(new Date(v.series.startMs[v.series.startMs.length - 1]))}`; };
 
   function price() {
     const rec = rates[Number($('[data-bill-rate]').value)];
@@ -56,11 +64,13 @@ export function setupBill({ i18n, view, when, showOnChart }) {
       : compareRates(series, same, { zone: v.zone, currentId: priced.rec.id, received, holidays: $('[data-bill-holidays]').checked, asOf });
     const shifted = shift && t('compare.shifted', { amount: shift.kwhPerDay !== undefined ? t('compare.shift.amountPerDay', { kwh: shift.kwhPerDay }) : `${shift.kw} kW`, from: $('#shift-from').selectedOptions[0].dataset.label, to: $('#shift-to').selectedOptions[0].dataset.label, hours: shift.from[1] - shift.from[0], days: shift.days });
     $('[data-compare-result]').innerHTML = String(renderRanking(r, i18n, { shifted }));
+    last.ranking = r;
     panel.dataset.compared = String(Number(panel.dataset.compared ?? 0) + 1);
   }
 
   async function showUtility() {
     const u = utilities[Number($('[data-bill-utility]').value)];
+    utilityName = u?.name ?? '';
     $('[data-bill-rate-field]').hidden = true;
     $('[data-bill-holidays-field]').hidden = true;
     $('[data-bill-result]').replaceChildren();
@@ -112,7 +122,9 @@ export function setupBill({ i18n, view, when, showOnChart }) {
     }
     if (!solar && !shave) { out.replaceChildren(el('p', t('screen.nothing'))); return; }
     const saved = savings(v.series, after, priced.rec, { zone: v.zone });
-    out.innerHTML = String(renderScreen({ shave, solar, saved, back: payback(n('cost'), saved.total * (12 / Math.max(1, saved.months))), excluded: EXCLUDED, upperBound: UPPER_BOUND }, i18n));
+    const result = { shave, solar, saved, back: payback(n('cost'), saved.total * (12 / Math.max(1, saved.months))), excluded: EXCLUDED, upperBound: UPPER_BOUND };
+    out.innerHTML = String(renderScreen(result, i18n));
+    last.screen = { input: { ...(shave ? shave.assumptions : {}), solar: Boolean(solar) }, result };
     panel.dataset.screened = String(Number(panel.dataset.screened ?? 0) + 1);
   });
   $('[data-compare-run]').addEventListener('click', () => compare(null));
@@ -143,7 +155,24 @@ export function setupBill({ i18n, view, when, showOnChart }) {
     const b = e.target.closest('[data-show-ms]');
     if (b) showOnChart(Number(b.dataset.showMs), Number(b.dataset.showKw));
   });
+  // Result cards: plain text with the result, inputs, method, sources, and version, never the file's readings.
+  panel.addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-copy-card]');
+    const v = view();
+    if (!b || !v || !priced) return;
+    const ctx = { utility: utilityName, period: period(v), version: WORKBENCH_VERSION, urdbAsOf: asOf, rate: priced.rec.name };
+    const text = b.dataset.copyCard === 'bill' ? billCard(priced.rec, priced.bills, ctx)
+      : b.dataset.copyCard === 'ranking' ? rankingCard(last.ranking, ctx)
+        : screenCard(last.screen.input, last.screen.result, ctx);
+    panel.dataset.card = text;
+    await navigator.clipboard?.writeText(text).catch(() => {});
+    b.textContent = t('answer.copied');
+  });
   panel.dataset.ready = 'true';
   // A new file, or a new choice in the receipt, re-prices on the same rate.
-  return { refresh: () => { if (rates.length) price(); } };
+  return {
+    refresh: () => { if (rates.length) price(); },
+    /** What the report needs from this panel. */
+    state: () => ({ priced, ranking: last.ranking, screen: last.screen, urdbAsOf: asOf, period: view() ? period(view()) : '' }),
+  };
 }

@@ -44,9 +44,9 @@
 
 ## 7. Handoff and report
 
-- [ ] 7.1 Implement the REopt-ready export, calendar-year re-stitching, and notes file; verify the July-to-June scenario; verify 8,760, 17,520, and 35,040 rows for normal and leap years (December 31 dropped) against REopt's current documentation
-- [ ] 7.2 Implement result cards; verify the copied text contains no file contents
-- [ ] 7.3 Implement the on-device one-page report; verify the sentinel egress test passes
+- [x] 7.1 Implement the REopt-ready export, calendar-year re-stitching, and notes file; verify the July-to-June scenario; verify 8,760, 17,520, and 35,040 rows for normal and leap years (December 31 dropped) against REopt's current documentation
+- [x] 7.2 Implement result cards; verify the copied text contains no file contents
+- [x] 7.3 Implement the on-device one-page report; verify the sentinel egress test passes
 
 ## 8. Launch readiness
 

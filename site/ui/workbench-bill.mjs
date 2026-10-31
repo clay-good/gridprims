@@ -79,6 +79,7 @@ export function renderScreen(r, { t }) {
   ${r.back.years !== null && r.saved.months < 12 ? html`<p class="unit-hint">${t('screen.annualized', { months: r.saved.months })}</p>` : ''}
   <p data-payback>${r.back.years === null ? html`${r.back.prompt}${r.back.atbUrl ? html` <a href="${r.back.atbUrl}">${t('screen.atb')}</a>` : ''}` : t('screen.payback', { years: formatNumber(r.back.years, { decimals: 1, fixed: true }) })}</p>
   <p class="unit-hint" data-excluded>${t('screen.excluded', { list: r.excluded.join(', ') })}</p>
+  <p><button class="button" type="button" data-copy-card="screen">${t('cards.copyScreen')}</button></p>
   <p><a class="handoff" href="https://reopt.nlr.gov/tool">${t('screen.reopt')}</a></p>`;
 }
 
@@ -112,7 +113,8 @@ export function renderBills(rec, bills, { t }, { when, dataStart }) {
   ${[...bills.notes, ...rec.conversions].map((n) => html`<p class="unit-hint">${n}</p>`)}
   ${rec.unmodeled.length ? html`<p class="strip">${t('bill.unmodeled', { list: rec.unmodeled.join(', ') })}</p>` : ''}
   ${bills.months.map(month)}
-  <p class="unit-hint">${t('bill.months')}</p>`;
+  <p class="unit-hint">${t('bill.months')}</p>
+  <p><button class="button" type="button" data-copy-card="bill">${t('cards.copyBill')}</button></p>`;
 }
 
 /** The comparison with an actual bill, in plain words. @param {{diff: number, pct: number | null, causes: string[]}} c */
@@ -141,5 +143,6 @@ export function renderRanking(r, { t, date }, { shifted } = {}) {
   ${r.requires?.length ? html`<h4>${t('plans.requires')}</h4><table data-requires><tbody>${r.requires.map((p) => html`<tr data-rate-id="${p.rec.id}"><td>${p.rec.name}<br><span class="unit-hint">${t('plans.requiresWhat', { list: p.conditions.map((c) => t(`bill.condition.${c}`)).join(', ') })}</span></td><td class="num">${money(p.annual)}</td></tr>`)}</tbody></table>` : ''}
   ${r.notEligible.length ? html`<h4>${t('compare.notEligible')}</h4><ul>${r.notEligible.map((x) => html`<li>${x.rec.name}: ${x.reason}</li>`)}</ul>` : ''}
   <p class="unit-hint">${t('compare.data', { count: r.data.count, oldest: r.data.oldest ? date(r.data.oldest) : '–', newest: r.data.newest ? date(r.data.newest) : '–' })} ${r.data.note} <a href="${r.data.reportUrl}">${t('compare.report')}</a></p>
+  <p><button class="button" type="button" data-copy-card="ranking">${t('cards.copyRanking')}</button></p>
   ${r.data.stale ? html`<p class="warning-chip" data-compare-stale>${t('compare.stale')}${r.data.tariffPage ? html` <a href="${r.data.tariffPage}">${t('bill.picker.source')}</a>` : ''}</p>` : ''}`;
 }

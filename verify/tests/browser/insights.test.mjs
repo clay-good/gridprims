@@ -32,6 +32,10 @@ for (const kind of ['chrome', 'firefox']) {
       await browser.evaluate("(() => { const s = document.querySelector('#window-minutes'); s.value = '60'; s.dispatchEvent(new Event('change', { bubbles: true })); })()");
       await waitFor(browser, `document.querySelector('[data-insights]').dataset.rendered !== '${before}'`);
       assert.match(await browser.evaluate("document.querySelector('[data-window-result]').textContent"), /^Peak 60-minute block demand: [\d.,]+ kW, starting \w{3} \d+, 2026 at/);
+      // The sample covers two weeks, so the REopt export is refused with the reason.
+      await browser.evaluate("document.querySelector('[data-reopt-export]').click()");
+      await waitFor(browser, "document.querySelector('[data-reopt-result]').textContent.length > 0");
+      assert.match(await browser.evaluate("document.querySelector('[data-reopt-result]').textContent"), /^REopt needs a full year of load, and this file covers 1 month\./);
     } finally {
       await browser.close();
       await server.close();

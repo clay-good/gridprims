@@ -69,6 +69,44 @@ for (const kind of ['chrome', 'firefox']) {
     }
   });
 
+  test(`${kind}: sentinel egress: a one-page report made from a file full of sentinels sends nothing`, { skip, timeout: 90_000 }, async () => {
+    const log = [];
+    const server = await serve(out, { onRequest: (r) => log.push(r) });
+    const browser = await launch(kind);
+    // Two weeks of 15-minute readings, every one the sentinel, in a file named for it too.
+    const rows = ['Interval Start,kWh'];
+    for (let i = 0; i < 14 * 96; i++) { const d = new Date(Date.UTC(2026, 5, 1) + i * 900_000); rows.push(`${d.toISOString().slice(0, 16).replace('T', ' ')},${SENTINEL}`); }
+    const b64 = Buffer.from(rows.join('\n')).toString('base64');
+    try {
+      await browser.goto(`${server.url}/files/`);
+      await browser.evaluate('new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r() : setTimeout(f, 20); f(); })');
+      const loads = Number(await browser.evaluate('document.documentElement.dataset.loads'));
+      await browser.evaluate(`(() => {
+        const bytes = Uint8Array.from(atob('${b64}'), (c) => c.charCodeAt(0));
+        const dt = new DataTransfer();
+        dt.items.add(new File([bytes], 'meter-${SENTINEL}.csv', { type: 'text/csv' }));
+        const input = document.querySelector('[data-file]');
+        input.files = dt.files;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      })()`);
+      await browser.evaluate(`new Promise((r) => { const f = () => Number(document.documentElement.dataset.loads) > ${loads} ? r() : setTimeout(f, 20); f(); })`);
+      log.length = 0;
+      browser.requests.length = 0;
+      await browser.evaluate("document.querySelector('[data-make-report]').click()");
+      await browser.evaluate("new Promise((r) => { const f = () => document.documentElement.dataset.report ? r() : setTimeout(f, 20); f(); })");
+      const text = await browser.evaluate("document.querySelector('[data-report-view]').textContent");
+      assert.match(text, /Load and bill report/);
+      assert.match(text, /gridprims gives screening estimates, not utility studies\./);
+      for (const h of ['Load summary', 'Bill on your rate', 'Best alternative rate', 'Coincident-peak exposure', 'Battery and solar screen']) assert.ok(text.includes(h), h);
+      await browser.evaluate('new Promise((r) => setTimeout(r, 300))');
+      assert.deepEqual(leaks(log, SENTINEL), []);
+      assert.deepEqual(leaks(browser.requests.map((url) => ({ url })), SENTINEL), []);
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+
   test(`${kind}: a fresh visit stores nothing, and erase removes everything we wrote`, { skip, timeout: 60_000 }, async () => {
     const server = await serve(out);
     const browser = await launch(kind);
