@@ -18,7 +18,7 @@
 - [x] 3.2 Implement billing determinants (demand windows, ratchets with month-limited lookbacks, PF adjustment, minimums, holidays, export exclusion); verify the ratchet, lookback-incomplete, July 4, solar-export, and PF scenarios
 - [x] 3.3 Implement line-by-line bills with setting-interval links; verify the March scenario
 - [x] 3.4 Implement the actual-bill comparison; verify the riders scenario wording
-- [ ] 3.5 Run the 10-tariff cross-check against PySAM Utilityrate5 and REopt.jl; verify every monthly total within 0.5% or documented
+- [x] 3.5 Run the 10-tariff cross-check against PySAM Utilityrate5 and REopt.jl; verify every monthly total within 0.5% or documented
 
 ## 4. Tariff comparison
 

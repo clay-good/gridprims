@@ -1,0 +1,266 @@
+{
+ "engine": "NREL PySAM 7.1.1.post1 Utilityrate5, with PySAM.UtilityRateTools.URDBv8_to_ElectricityRates",
+ "load": {
+  "path": "verify/fixtures/bill/office-2018-hourly.csv",
+  "sha256": "5929af3e7e6a3c412fb41fe1f844e28f6d7ada881f7235035e4e5b06f622291c",
+  "year": 2018
+ },
+ "rates": {
+  "path": "data/urdb/2026-10/rates.csv.gz",
+  "sha256": "75b7da10040734e6dfa9ce87ae333f977551532ab498f854e53dec32473eb807"
+ },
+ "results": [
+  {
+   "label": "539f6a0aec4f024411ec8aa3",
+   "why": "flat energy and a monthly fixed charge",
+   "name": "MKEC - Interruptible Industrial Service",
+   "utility": "Prairie Land Electric Coop Inc",
+   "monthly": [
+    2949.5162,
+    2608.2391,
+    2828.5845,
+    2809.5743,
+    3063.9827,
+    2954.5404,
+    3042.4796,
+    2998.8653,
+    2700.4852,
+    2894.2462,
+    2838.5345,
+    2875.0322
+   ],
+   "annual": 34564.0802
+  },
+  {
+   "label": "539f6a0aec4f024411ec8ac1",
+   "why": "tiered energy",
+   "name": "Small General Service between 25KVA and 100kVA",
+   "utility": "East-Central Iowa Rural Elec Coop",
+   "monthly": [
+    3869.3223,
+    3425.3316,
+    3711.9939,
+    3687.2623,
+    4018.2394,
+    3875.8586,
+    3990.2646,
+    3933.5238,
+    3545.3409,
+    3797.4178,
+    3724.9386,
+    3772.4209
+   ],
+   "annual": 45351.9147
+  },
+  {
+   "label": "539f6a33ec4f024411ec8c45",
+   "why": "seasonal energy",
+   "name": "Rural Residential- Single Phase",
+   "utility": "City of Wellington, Kansas (Utility Company)",
+   "monthly": [
+    2360.3507,
+    2078.7957,
+    2260.5815,
+    2244.8981,
+    2924.9371,
+    2817.2833,
+    2903.7855,
+    2860.8839,
+    2567.3797,
+    2757.9744,
+    2268.7904,
+    2298.9011
+   ],
+   "annual": 30344.5614
+  },
+  {
+   "label": "539f6a23ec4f024411ec8be1",
+   "why": "time-of-use energy",
+   "name": "Rate Code 80 Single-Phase",
+   "utility": "Broad River Electric Coop, Inc (North Carolina)",
+   "monthly": [
+    5029.6712,
+    4337.5909,
+    4623.7916,
+    4507.638,
+    4930.969,
+    5490.4419,
+    5648.4233,
+    5502.6734,
+    4655.7311,
+    4840.2643,
+    4808.4956,
+    4819.8908
+   ],
+   "annual": 59195.5811
+  },
+  {
+   "label": "539f6abbec4f024411ec9349",
+   "why": "time-of-use energy with tiers",
+   "name": "Residential TOD",
+   "utility": "North Central Elec Coop, Inc",
+   "monthly": [
+    5323.7248,
+    4677.8012,
+    5073.3193,
+    5026.9755,
+    5503.381,
+    5489.1797,
+    5655.3548,
+    5562.4897,
+    4925.1653,
+    5212.5096,
+    5114.0055,
+    5162.6467
+   ],
+   "annual": 62726.5531
+  },
+  {
+   "label": "539f6a0aec4f024411ec8ac9",
+   "why": "monthly demand",
+   "name": "Commercial Large General Service",
+   "utility": "Singing River Elec Pwr Assn (Mississippi)",
+   "monthly": [
+    4265.9116,
+    3880.1746,
+    4001.2544,
+    4265.1644,
+    4694.8441,
+    4627.6741,
+    4702.8442,
+    4531.9001,
+    3968.342,
+    4132.6365,
+    4147.947,
+    4198.1382
+   ],
+   "annual": 51416.8312
+  },
+  {
+   "label": "539f6a0aec4f024411ec8aad",
+   "why": "tiered monthly demand",
+   "name": "Irrigation",
+   "utility": "Midstate Electric Coop, Inc",
+   "monthly": [
+    2034.1986,
+    1797.584,
+    1950.3541,
+    2249.4167,
+    2795.6783,
+    2735.1819,
+    2792.1809,
+    2711.0154,
+    2395.5276,
+    1995.8787,
+    1957.2527,
+    1982.5572
+   ],
+   "annual": 27396.8261
+  },
+  {
+   "label": "539f6a0aec4f024411ec8af3",
+   "why": "time-of-use demand",
+   "name": "Group 3 Industrial Secondary",
+   "utility": "City of Lodi, California (Utility Company)",
+   "monthly": [
+    5751.804,
+    5108.7243,
+    5474.357,
+    5537.1193,
+    8428.537,
+    8235.1395,
+    8404.4408,
+    8148.3502,
+    7101.7735,
+    6786.6075,
+    5545.1612,
+    5602.3485
+   ],
+   "annual": 80124.3628
+  },
+  {
+   "label": "539f6aadec4f024411ec932d",
+   "why": "a daily fixed charge",
+   "name": "Residential",
+   "utility": "United Electric Coop, Inc",
+   "monthly": [
+    4997.7796,
+    4508.8568,
+    4846.8028,
+    4992.3445,
+    5462.6507,
+    5331.6849,
+    5449.7764,
+    5310.1588,
+    4722.4088,
+    4909.5595,
+    4839.7386,
+    4893.1672
+   ],
+   "annual": 60264.9286
+  },
+  {
+   "label": "539f6a34ec4f024411ec8ced",
+   "why": "a minimum charge",
+   "name": "Rural Residents and Farm",
+   "utility": "City of Pella, Iowa (Utility Company)",
+   "monthly": [
+    4360.109,
+    3840.3151,
+    4175.9197,
+    4146.9657,
+    4534.451,
+    5182.779,
+    5341.8313,
+    5262.9478,
+    3980.8138,
+    4275.9281,
+    4191.0745,
+    4246.6635
+   ],
+   "annual": 53539.7985
+  },
+  {
+   "label": "539f6a0aec4f024411ec8afb",
+   "why": "energy tiers per kW of demand",
+   "name": "SCHEDULE 16 - LARGE POWER - ABOVE 7,500 kW",
+   "utility": "Norris Public Power District",
+   "monthly": [
+    3176.4205,
+    2939.0153,
+    2930.671,
+    3277.8968,
+    3634.3778,
+    4456.5598,
+    4484.9091,
+    4244.4755,
+    3625.7984,
+    3048.5476,
+    3108.6585,
+    3145.3372
+   ],
+   "annual": 42072.6675
+  },
+  {
+   "label": "539f6a45ec4f024411ec8d19",
+   "why": "a demand ratchet",
+   "name": "M System- Irrigation Service - Standard",
+   "utility": "Midwest Energy Inc",
+   "monthly": [
+    4873.8299,
+    4369.4241,
+    4695.0935,
+    4729.0817,
+    5189.4378,
+    5045.579,
+    5175.5527,
+    5111.091,
+    4670.0868,
+    4956.4645,
+    4874.1229,
+    4928.0662
+   ],
+   "annual": 58617.8301
+  }
+ ]
+}

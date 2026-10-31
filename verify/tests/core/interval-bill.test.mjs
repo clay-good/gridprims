@@ -141,3 +141,14 @@ test('riders missing: a computed total 6% below the actual bill names the unmode
   assert.match(c.causes[1], /riders or surcharges/);
   assert.doesNotMatch(c.causes.join(' '), /billing error|overcharg|wrong/i);
 });
+
+test('a 60-minute demand window over 15-minute data: the clock hour\'s average, not its highest quarter hour', () => {
+  const rec = fromManual({ energyRate: 0, demandRate: 10, demandWindowMinutes: 60 });
+  // In the 10 am hour of January 5: 120, 80, 60, and 40 kW average to 75 kW; every other quarter hour is 20 kW.
+  const tenAm = Date.parse('2026-01-05T10:00:00Z');
+  const quarter = { [tenAm]: 120, [tenAm + 900_000]: 80, [tenAm + 1_800_000]: 60, [tenAm + 2_700_000]: 40 };
+  const s = series(utc('2026-01-01T00:00:00'), 31 * 24 * 4, 15, (i, ms) => quarter[ms] ?? 20);
+  const [jan] = intervalBills(s, rec, { zone: 'UTC' }).months;
+  const d = line(jan, 'Monthly demand')[0];
+  assert.deepEqual([d.quantity, d.amount, d.setting.startMs], [75, 750, tenAm]);
+});
