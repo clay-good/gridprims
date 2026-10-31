@@ -91,12 +91,12 @@
 - [ ] 10.4 Post-deploy smoke test with rollback; verify the header-regression scenario on staging
 - [x] 10.5 Weekly outbound link check publishing to the ledger; verify the moved-handoff scenario
 - [x] 10.6 Write every workflow with only our own Node scripts and first-party actions pinned by SHA, with the lockfile committed and repository policy set; verify the marketplace-action and same-pipeline-on-a-laptop scenarios
-- [ ] 10.7 Implement the three schedule defenses (commit per run, in-run re-enable of inactivity-disabled workflows, and the off-host check); verify the disabled-workflow, all-disabled, and staleness-visible scenarios
+- [x] 10.7 Implement the three schedule defenses (commit per run, in-run re-enable of inactivity-disabled workflows, and the off-host check); verify the disabled-workflow, all-disabled, and staleness-visible scenarios
 - [ ] 10.8 Set credential scopes, forbid expiring credentials and the pull-request target trigger, and scan outputs for secrets; verify the fork-pull-request, expiring-token, and secret-scan scenarios
 - [ ] 10.9 Implement concurrency groups, off-the-hour schedules, idempotent re-runs, and changed-file-only deploys; verify the re-run, overlapping-schedule, and unchanged-files scenarios
 - [x] 10.10 Publish every run's actions to the ledger; verify the run-recorded scenario
 - [ ] 10.11 Implement the automatic redistribution posture and terms capture, with posture shown on every dataset page and download; verify the posture-derived, unclear-terms, derive-posture, posture-shown, terms-page-changes, and publisher-objects scenarios
 - [ ] 10.12 Implement the storage split (normalized plus manifests in git, raw inputs as release assets; archive deposits are added by `add-trust-and-continuity` in phase 1) and the repository-size and per-file gates; verify the large-raw-input, nothing-depends-on-an-artifact, oversized-file, and repository-budget scenarios
 - [ ] 10.13 Implement view-time staleness (generated-at in every manifest and the ledger, age computed on the device) and per-workflow staleness thresholds; verify the pipeline-dead-for-a-month, computed-age, daily-stall, and weekly-within-threshold scenarios
-- [ ] 10.14 Implement the watchdog handler on the existing Worker with its heartbeat, and the in-run self-heal step; verify the load-bearing, independent, best-effort, and watchdog-is-watched scenarios
+- [x] 10.14 Implement the watchdog handler on the existing Worker with its heartbeat, and the in-run self-heal step; verify the load-bearing, independent, best-effort, and watchdog-is-watched scenarios
 - [x] 10.15 Pin the runner label, assert the Node floor, and add the floating-label canary; verify the runner-image-changes and node-floor scenarios

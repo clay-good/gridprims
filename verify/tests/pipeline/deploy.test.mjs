@@ -36,6 +36,7 @@ function fakeCloudflare({ have = new Set(), token = { status: 'active' }, rateLi
       return new Response(JSON.stringify({ success: true, result: { jwt: 'completion-jwt' } }), { status: 201 });
     }
     if (path === '/accounts/a/workers/scripts/gridprims' && init.method === 'PUT') return json({ id: 'v2' });
+    if (path === '/accounts/a/workers/scripts/gridprims/schedules' && init.method === 'PUT') return json({ schedules: JSON.parse(init.body) });
     if (path === '/accounts/a/workers/scripts/gridprims/deployments' && init.method === 'GET') return json({ deployments: [{ versions: [{ version_id: 'v2' }] }, { versions: [{ version_id: 'v1' }] }] });
     if (path === '/accounts/a/workers/scripts/gridprims/deployments' && init.method === 'POST') return json({ id: 'd3' });
     return new Response(JSON.stringify({ success: false, errors: [{ message: `unexpected ${path}` }] }), { status: 404 });
@@ -66,6 +67,7 @@ test('a first deploy uploads every file, then deploys the Worker with the comple
   assert.equal(meta.main_module, 'worker/index.mjs');
   assert.equal(meta.assets.jwt, 'completion-jwt');
   assert.deepEqual(meta.bindings.map((b) => b.name), ['ASSETS', 'DB', 'REPORT_LIMITER']);
+  assert.deepEqual(JSON.parse(cf.calls.find((c) => c.path.endsWith('/schedules')).body), [{ cron: '29 3 * * *' }], 'the nightly watchdog and cleanup are scheduled');
 });
 
 test('unchanged files are not re-uploaded; a one-page change uploads one file', async () => {

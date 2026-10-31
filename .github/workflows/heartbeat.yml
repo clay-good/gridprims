@@ -1,0 +1,37 @@
+# Started nightly by the Worker's watchdog (foundation design D15), never by a
+# schedule here. Recording its run on the health record makes the watchdog
+# itself watched: if it stops, this row goes stale for everyone to see.
+name: heartbeat
+
+on:
+  workflow_dispatch:
+    inputs:
+      at:
+        description: When the watchdog ran
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: health-record-heartbeat
+  cancel-in-progress: false
+
+jobs:
+  beat:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+      - name: Record the heartbeat
+        run: node pipeline/record-run.mjs heartbeat
+      - name: Publish
+        run: |
+          git config user.name "gridprims pipeline"
+          git config user.email "pipeline@gridprims.com"
+          git add data/health
+          git diff --cached --quiet || git commit -m "chore(data): watchdog heartbeat"
+          git pull --rebase && git push

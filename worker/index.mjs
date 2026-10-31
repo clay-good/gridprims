@@ -1,11 +1,12 @@
 // The one Cloudflare Worker (foundation design D4, D9, D15): serves the static
-// site with security headers and stores problem reports. The watchdog
-// handler is added by task 10.14. It sets no cookies and computes
+// site with security headers, stores problem reports, and runs the nightly
+// watchdog that keeps the CI schedules alive. It sets no cookies and computes
 // nothing from what visitors send.
 
 import { securityHeaders } from './headers.mjs';
 import { THEME_SCRIPT } from '../site/templates/layout.mjs';
 import { cleanupReports, handleReport } from './reports.mjs';
+import { watchdog } from './watchdog.mjs';
 
 let headersPromise = null;
 
@@ -48,8 +49,9 @@ export default {
     return withHeaders(res);
   },
 
-  /** The nightly schedule: report retention (the watchdog joins it with task 10.14). */
+  /** The nightly schedule: report retention and the watchdog. Neither depends on the other. */
   async scheduled(event, env, ctx) {
     ctx.waitUntil(cleanupReports(env));
+    ctx.waitUntil(watchdog(env).catch(() => { /* a failed watchdog shows as a stale heartbeat */ }));
   },
 };

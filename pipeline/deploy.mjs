@@ -15,6 +15,7 @@ import { TYPES } from '../verify/lib/static-server.mjs';
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const API = 'https://api.cloudflare.com/client/v4';
 export const COMPATIBILITY_DATE = '2026-10-01';
+export const WORKER_CRON = '29 3 * * *';
 const MAX_FILE = 25 * 1024 * 1024;
 const MAX_FILES = 80_000;
 
@@ -118,6 +119,8 @@ export async function deploy(o) {
   form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
   for (const [name, src] of modules) form.append(name, new File([src], name, { type: 'application/javascript+module' }));
   const script = await cf.call('PUT', `/accounts/${o.account}/workers/scripts/${o.worker}`, { body: form });
+  // The nightly schedule: report retention and the watchdog (foundation design D15).
+  await cf.call('PUT', `/accounts/${o.account}/workers/scripts/${o.worker}/schedules`, { body: [{ cron: WORKER_CRON }] });
   return { files: Object.keys(manifest).length, uploaded, versionId: script?.deployment_id ?? script?.id };
 }
 

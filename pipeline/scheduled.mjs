@@ -6,10 +6,10 @@
 
 import { fileURLToPath } from 'node:url';
 import { checkDataset } from './check.mjs';
-import { recordRun } from './lib/health.mjs';
+import { readHealth, recordRun } from './lib/health.mjs';
 import { github } from './lib/github.mjs';
 import { ROOT } from './run.mjs';
-import { WORKFLOWS } from './workflows.mjs';
+import { stalled, WORKFLOWS } from './workflows.mjs';
 
 /**
  * @param {string} workflowId
@@ -29,6 +29,14 @@ export async function scheduledRun(workflowId, o = {}) {
   if (host.available) {
     try { enabledEvents = await host.reenableInactive(); } catch (e) { notes.push(`self-heal could not read workflow states: ${e.message}`); }
   } else notes.push('no host token: self-heal and issues skipped (local run)');
+
+  // The watchdog is itself watched: a stale heartbeat is reported by every in-host run.
+  const beat = WORKFLOWS.find((x) => x.id === 'heartbeat');
+  const lastBeat = readHealth(root).workflows.find((x) => x.id === 'heartbeat')?.lastSuccess;
+  if (lastBeat && stalled(beat, lastBeat, Date.parse(started))) {
+    notes.push(`the watchdog's heartbeat is stale (last ${lastBeat})`);
+    if (host.available) { try { await host.openIssue('Pipeline: the Worker watchdog heartbeat is stale', `The last heartbeat was ${lastBeat}. The Worker's scheduled handler may have stopped; in-host self-heal is still running.`); } catch { /* recorded in notes */ } }
+  }
 
   const datasets = [];
   for (const id of w.datasets) {

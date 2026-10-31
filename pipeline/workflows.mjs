@@ -10,6 +10,8 @@ export const WORKFLOWS = [
   { id: 'refresh-eia-861', file: 'refresh-eia-861.yml', intervalHours: 24, cron: '17 9 * * *', datasets: ['eia-861'] },
   { id: 'link-check', file: 'link-check.yml', intervalHours: 168, cron: '23 7 * * 2', datasets: [] },
   { id: 'canary', file: 'canary.yml', intervalHours: 168, cron: '41 5 * * 3', datasets: [] },
+  // Started by the Worker's nightly watchdog, not by a schedule here: its row shows whether the watchdog runs.
+  { id: 'heartbeat', file: 'heartbeat.yml', intervalHours: 24, cron: null, datasets: [] },
 ].map((w) => ({ ...w, thresholdHours: threshold(w.intervalHours) }));
 
 /** Whether a workflow's last success is older than its threshold. */
