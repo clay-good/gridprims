@@ -35,3 +35,21 @@ jobs:
         run: npm test
       - name: Gates
         run: npm run check
+
+  safari:
+    # Safari runs the smaller suite through the built-in safaridriver; enabling
+    # remote automation needs sudo, which the hosted macOS runner allows.
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26'
+      - name: Enable Safari automation
+        run: sudo safaridriver --enable
+      - name: Parser suite in Safari
+        run: node --test verify/tests/browser/parsers.test.mjs
+        env:
+          GRIDPRIMS_SAFARI_TESTS: '1'

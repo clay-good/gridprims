@@ -26,6 +26,7 @@ What gridprims relies on from Node.js and the browser, and nothing else (`platfo
 | `node:worker_threads` | 10.5 (stable 12) | Stable | Parsing off the main thread in Node |
 | `node:readline` | 0.x | Stable | MCP stdio framing |
 | `node:child_process` | 0.x | Stable | Launching the MCP server and browsers in tests |
+| `node:http` | 0.x | Stable | The local static server for end-to-end tests |
 | `node:sqlite` | 22.5 | Release candidate | Not required; listed so the gate refuses it |
 
 Globals relied on: `fetch` (stable 21), `WebSocket` (stable 22.4), `Intl` with full ICU, `structuredClone`, `DecompressionStream`.
