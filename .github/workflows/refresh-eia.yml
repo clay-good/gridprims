@@ -1,4 +1,4 @@
-# Daily release watch and refresh for EIA-861, EIA-860, and EIA-923 (platform/automation). Publishes
+# Daily release watch and refresh for EIA-861, EIA-860, EIA-923, and EIA-860M (platform/automation). Publishes
 # with no approval step: validators are the only gate. Every step is git, node,
 # or a script in this repository; actions are GitHub's own, pinned by SHA.
 name: refresh-eia

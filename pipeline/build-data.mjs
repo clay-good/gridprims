@@ -24,7 +24,8 @@ export async function buildData(o = {}) {
     if (!existsSync(cur)) continue;
     const { version } = JSON.parse(readFileSync(cur, 'utf8'));
     const committed = JSON.parse(readFileSync(join(dataDir, id, version, 'manifest.json'), 'utf8'));
-    const year = Number(committed.tables[0].dataPeriod.slice(-4)); // "2025", or the last year of "2006-2025"
+    const period = committed.tables[0].dataPeriod;
+    const year = /^\d{4}-\d{2}$/.test(period) ? period : Number(period.slice(-4)); // "2025", a month "2026-09", or the last year of "2006-2025"
     const entry = (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${id}.mjs`)).href)).default;
     const get = async (r) => new Uint8Array(await (await (o.fetch ?? fetch)(r.release ?? r.url)).arrayBuffer());
     // A release of several files (PUDL) is fetched file by file and passed by name.
@@ -40,6 +41,7 @@ export async function buildData(o = {}) {
     const want = sums(committed);
     const got = sums(r.manifest);
     const differs = [...new Set([...Object.keys(want), ...Object.keys(got)])].filter((p) => want[p] !== got[p]);
+    if (JSON.stringify(r.manifest.tables.map((t) => t.dataPeriod)) !== JSON.stringify(committed.tables.map((t) => t.dataPeriod))) differs.push('manifest data period');
     report.push({ id, ok: differs.length === 0, differs, rawSha256: r.manifest.raw[0].sha256, committedRawSha256: committed.raw[0].sha256 });
   }
   return report;

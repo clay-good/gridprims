@@ -99,7 +99,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   const previous = existsSync(currentPath) ? JSON.parse(readFileSync(join(datasetDir, JSON.parse(readFileSync(currentPath, 'utf8')).version, 'manifest.json'), 'utf8')) : null;
 
   // Read, normalize, and validate every table before writing any file.
-  const zip = raw ? readZipDirectory(raw) : [];
+  const zip = raw && entry.tables.some((t) => t.recipe.some((st) => st.step === 'unzip')) ? readZipDirectory(raw) : [];
   const failures = [];
   const ready = [];
   for (const tb of entry.tables) {
@@ -111,11 +111,15 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
       // Parquet files hand the normalizer a reader per file, so it can aggregate a row group at a time.
       input = Object.fromEntries(step('read-parquet').files.map((f) => [f, readParquet(raws[f].bytes)]));
     } else {
-      const found = findEntry(step('unzip').entry.replace('{year}', String(year)), zip);
-      if (found.problem) { failures.push(`${tb.name}: ${found.problem}`); continue; }
-      entryName = found.entry.name;
       read = step('read-xlsx');
-      const bytes = await readZipEntry(raw, found.entry);
+      // A workbook inside a zip (EIA-860, 861, 923), or the raw file is the workbook (EIA-860M).
+      let bytes = raw;
+      if (step('unzip')) {
+        const found = findEntry(step('unzip').entry.replace('{year}', String(year)), zip);
+        if (found.problem) { failures.push(`${tb.name}: ${found.problem}`); continue; }
+        entryName = found.entry.name;
+        bytes = await readZipEntry(raw, found.entry);
+      }
       // One sheet hands the normalizer its rows; a list of sheets hands it rows by sheet name.
       input = read.sheets ? Object.fromEntries(await Promise.all(read.sheets.map(async (sheet) => [sheet, (await readXlsx(bytes, { sheet })).rows]))) : (await readXlsx(bytes, { sheet: read.sheet })).rows;
     }
@@ -171,7 +175,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     asOf: vintage.asOf, retrieved, generatedAt: `${retrieved}T00:00:00Z`, cadence: entry.cadence,
     raw: named.map(([name]) => {
       const r = raws[name];
-      return { url: r.url, name: r.url.split('/').pop(), bytes: r.bytes.length, sha256: r.sha256, ...(name ? { file: name } : { entries: ready.map((x) => x.entryName) }), ...(!name && upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) };
+      return { url: r.url, name: r.url.split('/').pop(), bytes: r.bytes.length, sha256: r.sha256, ...(name ? { file: name } : ready.some((x) => x.entryName) ? { entries: ready.map((x) => x.entryName) } : {}), ...(!name && upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) };
     }),
     ...(vintage.release ? { release: vintage.release } : {}),
     tables,
@@ -187,7 +191,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const inputs = (values.input ?? []).map((v) => (/^[a-z_]+=/.test(v) ? v.split(/=(.*)/s).slice(0, 2) : ['', v]));
   const input = !inputs.length ? undefined : inputs[0][0] ? Object.fromEntries(inputs.map(([k, p]) => [k, new Uint8Array(readFileSync(p))])) : new Uint8Array(readFileSync(inputs[0][1]));
   const r = await runRecipe({
-    dataset: positionals[0], year: Number(values.year), retrieved: values.retrieved ?? new Date().toISOString().slice(0, 10),
+    // --year 2025, or --year 2026-09 for a monthly dataset.
+    dataset: positionals[0], year: /^\d{4}$/.test(values.year ?? '') ? Number(values.year) : values.year, retrieved: values.retrieved ?? new Date().toISOString().slice(0, 10),
     input, outDir: values.out, verifyPin: values['verify-pin'],
   });
   if (!r.ok) {

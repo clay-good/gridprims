@@ -1,0 +1,554 @@
+{
+  "dataset": "eia-860m",
+  "version": "2026-10",
+  "title": "Monthly Update to the Annual Electric Generator Report (Form EIA-860M)",
+  "publisher": "U.S. Energy Information Administration",
+  "sourceUrl": "https://www.eia.gov/electricity/data/eia860m/",
+  "terms": {
+    "url": "https://www.eia.gov/about/copyrights_reuse.php",
+    "section": "Public domain and use of EIA content",
+    "text": "U.S. government publications are in the public domain and are not subject to copyright protection. You may use and/or distribute any of our data, files, databases, reports, graphs, charts, and other information products that are on our website or that you receive through our email distribution service. However, if you use or reproduce any of our information products, you should use an acknowledgment, which includes the publication date, such as: \"Source: U.S. Energy Information Administration (Oct 2008).\"",
+    "captured": "2026-10-31"
+  },
+  "redistributionBasis": {
+    "kind": "public domain",
+    "note": "U.S. federal government work (17 U.S.C. 105)"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "us-federal-public-domain",
+    "reason": "recognized us-federal-public-domain",
+    "agrees": true
+  },
+  "license": "public domain (U.S. federal government work (17 U.S.C. 105))",
+  "attribution": "Source: U.S. Energy Information Administration, Form EIA-860M (Oct 2026).",
+  "asOf": "2026-10-23",
+  "retrieved": "2026-10-31",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "cadence": {
+    "every": "monthly",
+    "nextRelease": {
+      "date": "2026-11-24",
+      "posted": false,
+      "note": "EIA posts each month's inventory near the end of the following month; the date is inferred, not posted"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://www.eia.gov/electricity/data/eia860m/xls/september_generator2026.xlsx",
+      "name": "september_generator2026.xlsx",
+      "bytes": 14013970,
+      "sha256": "bcef74e1af991680731aeecfda967f5950db4ce739bb584edd8b8774c7e6da17"
+    }
+  ],
+  "tables": [
+    {
+      "name": "generators",
+      "title": "Generators by status as of the month: operating, planned, retired, canceled or postponed",
+      "dataPeriod": "2026-09",
+      "rows": 39908,
+      "columns": [
+        {
+          "name": "plant_id",
+          "type": "f64"
+        },
+        {
+          "name": "generator_id",
+          "type": "str"
+        },
+        {
+          "name": "category",
+          "type": "str"
+        },
+        {
+          "name": "utility_id",
+          "type": "f64"
+        },
+        {
+          "name": "utility_name",
+          "type": "str"
+        },
+        {
+          "name": "plant_name",
+          "type": "str"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "county",
+          "type": "str"
+        },
+        {
+          "name": "ba_code",
+          "type": "str"
+        },
+        {
+          "name": "sector_name",
+          "type": "str"
+        },
+        {
+          "name": "technology",
+          "type": "str"
+        },
+        {
+          "name": "energy_source",
+          "type": "str"
+        },
+        {
+          "name": "prime_mover",
+          "type": "str"
+        },
+        {
+          "name": "status",
+          "type": "str"
+        },
+        {
+          "name": "status_description",
+          "type": "str"
+        },
+        {
+          "name": "nameplate_mw",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "summer_mw",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "winter_mw",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "energy_capacity_mwh",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "dc_net_mw",
+          "type": "f64",
+          "unit": "MW"
+        },
+        {
+          "name": "operating_month",
+          "type": "f64"
+        },
+        {
+          "name": "operating_year",
+          "type": "f64"
+        },
+        {
+          "name": "planned_retirement_month",
+          "type": "f64"
+        },
+        {
+          "name": "planned_retirement_year",
+          "type": "f64"
+        },
+        {
+          "name": "planned_operation_month",
+          "type": "f64"
+        },
+        {
+          "name": "planned_operation_year",
+          "type": "f64"
+        },
+        {
+          "name": "retirement_month",
+          "type": "f64"
+        },
+        {
+          "name": "retirement_year",
+          "type": "f64"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "generators/AK.bin",
+          "state": "AK",
+          "rows": 810,
+          "bytes": 148872,
+          "sha256": "40a8aa9e6a69da99d383f26854602cfffd9a55850c99597e3ea8cbf5e6e71ba4"
+        },
+        {
+          "path": "generators/AL.bin",
+          "state": "AL",
+          "rows": 364,
+          "bytes": 71920,
+          "sha256": "d39d5e58dfecb5120cd3d2b4a3ef437c890fe97a4dfeb5ee0130caa4d24dc6dd"
+        },
+        {
+          "path": "generators/AR.bin",
+          "state": "AR",
+          "rows": 311,
+          "bytes": 65176,
+          "sha256": "7f10ee312e09b7f8ac84937c5be424666f0f23086902307925ac5d150a43f35b"
+        },
+        {
+          "path": "generators/AZ.bin",
+          "state": "AZ",
+          "rows": 645,
+          "bytes": 127696,
+          "sha256": "aae50a81c5e3dbbde819965c258dde4a3b0ac24b003152de70481af5d38baabc"
+        },
+        {
+          "path": "generators/CA.bin",
+          "state": "CA",
+          "rows": 4602,
+          "bytes": 901648,
+          "sha256": "344a7c762a7a401c503cf3f716752f2f8113279ab50bd07bda7d5304c6ee6cfc"
+        },
+        {
+          "path": "generators/CO.bin",
+          "state": "CO",
+          "rows": 691,
+          "bytes": 140760,
+          "sha256": "93ff8b7ae58859e3e493ca5e0d3b097149d23bd3dbd49fa584fa20b5694ed96e"
+        },
+        {
+          "path": "generators/CT.bin",
+          "state": "CT",
+          "rows": 421,
+          "bytes": 87472,
+          "sha256": "649b8b1dde1a41ae4f732630290b86e666500e68bed96cdb792c98eac188dbe8"
+        },
+        {
+          "path": "generators/DC.bin",
+          "state": "DC",
+          "rows": 45,
+          "bytes": 12152,
+          "sha256": "f7a43d19bad2cc30a1e5607680685cbc530c2c6733e0290a140edcd64eb82838"
+        },
+        {
+          "path": "generators/DE.bin",
+          "state": "DE",
+          "rows": 114,
+          "bytes": 26512,
+          "sha256": "0629e6c02546ac441533504c10f23f3f13b8c63da9a70b61e870163fe6926f79"
+        },
+        {
+          "path": "generators/FL.bin",
+          "state": "FL",
+          "rows": 1171,
+          "bytes": 222576,
+          "sha256": "b2d5bf7a071cad4ee0010d1028ef97db1478d762ef8da765c118019574582855"
+        },
+        {
+          "path": "generators/GA.bin",
+          "state": "GA",
+          "rows": 767,
+          "bytes": 151200,
+          "sha256": "7c83bbbfde5da68c7ba401c629a8c0701468f64d1245168d78a3554d7f88e8d0"
+        },
+        {
+          "path": "generators/HI.bin",
+          "state": "HI",
+          "rows": 314,
+          "bytes": 63096,
+          "sha256": "3fbda5ed8392f3376ad0f4a6985322a72078f55e82ccf23b2ee73f9d228c549e"
+        },
+        {
+          "path": "generators/IA.bin",
+          "state": "IA",
+          "rows": 951,
+          "bytes": 183288,
+          "sha256": "e11f67bc5b79d2a910c411b22543b48abb07bbadd99b43fabd600cbc606cf1e9"
+        },
+        {
+          "path": "generators/ID.bin",
+          "state": "ID",
+          "rows": 360,
+          "bytes": 73744,
+          "sha256": "f44589f6c46fa782c23a21839afa28c6e970e41e2306b4c77a78f57ca7fd0dcb"
+        },
+        {
+          "path": "generators/IL.bin",
+          "state": "IL",
+          "rows": 1752,
+          "bytes": 347920,
+          "sha256": "162055572adab06712404eb50aae92805922b30c407cc20735d5770f39914451"
+        },
+        {
+          "path": "generators/IN.bin",
+          "state": "IN",
+          "rows": 649,
+          "bytes": 129208,
+          "sha256": "5dc4bfc6c2c3a69d7dfdeeee595ee400eaebaca1ab7b34715d8e40e77312bb60"
+        },
+        {
+          "path": "generators/KS.bin",
+          "state": "KS",
+          "rows": 718,
+          "bytes": 137744,
+          "sha256": "99a072be02007d49ffab86cbdd1f4e33261e3dcec2165f04f1ed46cccff9688a"
+        },
+        {
+          "path": "generators/KY.bin",
+          "state": "KY",
+          "rows": 307,
+          "bytes": 61392,
+          "sha256": "4f8f3ca1aec503e30e7dce0aa48064c2beea9bf8b2b22664268a446c8b197add"
+        },
+        {
+          "path": "generators/LA.bin",
+          "state": "LA",
+          "rows": 450,
+          "bytes": 89280,
+          "sha256": "022b385d7d5801e49fb8df05cd241c695b63c172b916d42ce446361f289b1a2f"
+        },
+        {
+          "path": "generators/MA.bin",
+          "state": "MA",
+          "rows": 1238,
+          "bytes": 252440,
+          "sha256": "1777036d9c60efddf108eb4d789ac93abaddc4d236953e0f6bfe505cee4ddde7"
+        },
+        {
+          "path": "generators/MD.bin",
+          "state": "MD",
+          "rows": 495,
+          "bytes": 103184,
+          "sha256": "f6edd21f7d7453b31e597a3c54eff64e3e4fb1024aa32b17c0b9bc3d53c927cc"
+        },
+        {
+          "path": "generators/ME.bin",
+          "state": "ME",
+          "rows": 618,
+          "bytes": 125168,
+          "sha256": "8267559941ee6083ddd655c7f18d22d59f2a46b21fae9b2e18919d6b64a43815"
+        },
+        {
+          "path": "generators/MI.bin",
+          "state": "MI",
+          "rows": 1143,
+          "bytes": 217920,
+          "sha256": "3a39508bb4ea49840e6eb29285a543f69bf831a7ac69796a41a75ba83b2b4938"
+        },
+        {
+          "path": "generators/MN.bin",
+          "state": "MN",
+          "rows": 1618,
+          "bytes": 319608,
+          "sha256": "a1a94c4cf5cdde5fe16e7415e58ca4b57a6fbea63122fd7b1d271c6439271c68"
+        },
+        {
+          "path": "generators/MO.bin",
+          "state": "MO",
+          "rows": 617,
+          "bytes": 119320,
+          "sha256": "cc4539bb24d6f870b184da5b64ac01e22cf54ad8102d1fefd1e75cff0e4d1bd4"
+        },
+        {
+          "path": "generators/MS.bin",
+          "state": "MS",
+          "rows": 253,
+          "bytes": 52616,
+          "sha256": "f48d5acb47cca9bfdea5e1ad32ac81ad6e107db68bfd0379162bb5d83b6915ef"
+        },
+        {
+          "path": "generators/MT.bin",
+          "state": "MT",
+          "rows": 225,
+          "bytes": 47808,
+          "sha256": "6fa3b5bb52406016177f7be252565c7749d84d75ac1a177328a4e0f1034227cf"
+        },
+        {
+          "path": "generators/NC.bin",
+          "state": "NC",
+          "rows": 1616,
+          "bytes": 319768,
+          "sha256": "0f2253693bcaa5f9fd8ffbb1c2c525fda820dae7aa67de74df43d32a4f93f770"
+        },
+        {
+          "path": "generators/ND.bin",
+          "state": "ND",
+          "rows": 152,
+          "bytes": 33568,
+          "sha256": "561f58c93687dfbaa018e36bd13ba393e31c56e93ba453d29690c46b42e2add5"
+        },
+        {
+          "path": "generators/NE.bin",
+          "state": "NE",
+          "rows": 432,
+          "bytes": 85560,
+          "sha256": "739340ae09dc7303d3883c173ac728c3ef5fe3fe220ad1f71b4c041c55ab4953"
+        },
+        {
+          "path": "generators/NH.bin",
+          "state": "NH",
+          "rows": 174,
+          "bytes": 37152,
+          "sha256": "aeec1a9827f3acca2e83ab878fe311066d9681925c8f5f66bf9ed956664949c3"
+        },
+        {
+          "path": "generators/NJ.bin",
+          "state": "NJ",
+          "rows": 904,
+          "bytes": 183424,
+          "sha256": "b1f1d252e1183387ada3fc5f6109c338022d72ad32b877d92b8b49032e5de4a1"
+        },
+        {
+          "path": "generators/NM.bin",
+          "state": "NM",
+          "rows": 387,
+          "bytes": 81320,
+          "sha256": "bde4b2cd0bcf670178f58cc9b7ea5ab56be24e5212535fcf798a2fddad73cb43"
+        },
+        {
+          "path": "generators/NV.bin",
+          "state": "NV",
+          "rows": 452,
+          "bytes": 90000,
+          "sha256": "eda54b1ac1ba394add8f959f8300de1f375725886f7283c57d88fbf447f004dd"
+        },
+        {
+          "path": "generators/NY.bin",
+          "state": "NY",
+          "rows": 2553,
+          "bytes": 504048,
+          "sha256": "9b3b12e00563e2566ad4489e9f0c574c65de1527de3e6911acfb1dd15dbe19cb"
+        },
+        {
+          "path": "generators/OH.bin",
+          "state": "OH",
+          "rows": 814,
+          "bytes": 159704,
+          "sha256": "85944e8da0db8f4819d1b2a9c638103648da5a6bcb51f8828423eb066878f2aa"
+        },
+        {
+          "path": "generators/OK.bin",
+          "state": "OK",
+          "rows": 433,
+          "bytes": 87432,
+          "sha256": "a45ca33c1c205f6c7a70c00fa7f60b1d38a8dddbbc19f5128ae6f38c5edfa227"
+        },
+        {
+          "path": "generators/OR.bin",
+          "state": "OR",
+          "rows": 612,
+          "bytes": 123928,
+          "sha256": "ed5eebeb807c516898735d9ed3a7b8954dd81a33d0783cb43249f98f6febe744"
+        },
+        {
+          "path": "generators/PA.bin",
+          "state": "PA",
+          "rows": 1103,
+          "bytes": 216920,
+          "sha256": "69cb9444e139e6d75ef08b61a6ff55759fa5facb613cf9dda8596276255025d0"
+        },
+        {
+          "path": "generators/PR.bin",
+          "state": "PR",
+          "rows": 2,
+          "bytes": 3136,
+          "sha256": "70ca9d692f384f6c297153f04c1a6f5dae5ae64af153b9c0d439a552e7a8fba5"
+        },
+        {
+          "path": "generators/RI.bin",
+          "state": "RI",
+          "rows": 190,
+          "bytes": 42696,
+          "sha256": "038bd9a8a713b5dd313d0e1409ebea8c998feac73ff826d3a0ddab742cfe978f"
+        },
+        {
+          "path": "generators/SC.bin",
+          "state": "SC",
+          "rows": 593,
+          "bytes": 117912,
+          "sha256": "e99acac977ebd71fcf501b15e202a0675d8cfbcee0f29892237721b417be8b9d"
+        },
+        {
+          "path": "generators/SD.bin",
+          "state": "SD",
+          "rows": 137,
+          "bytes": 30176,
+          "sha256": "07100b7f99d821bb314bf24c1f923bd291702567bf1484be92e05af5e5cc05d3"
+        },
+        {
+          "path": "generators/TN.bin",
+          "state": "TN",
+          "rows": 425,
+          "bytes": 83568,
+          "sha256": "7ab2ec876aeed58c71fe26c785d6732ac3da52bb86162f64bf0dec71009420c6"
+        },
+        {
+          "path": "generators/TX.bin",
+          "state": "TX",
+          "rows": 3724,
+          "bytes": 721624,
+          "sha256": "3bfceed9e3657d514a3c1da75b79a860ca891b7489dc86cfa70dce267303ab2f"
+        },
+        {
+          "path": "generators/UT.bin",
+          "state": "UT",
+          "rows": 366,
+          "bytes": 75096,
+          "sha256": "e49254a66406f72b83d76a386fd8c316433145144cb6c612a57c5060da4690cc"
+        },
+        {
+          "path": "generators/VA.bin",
+          "state": "VA",
+          "rows": 1079,
+          "bytes": 207504,
+          "sha256": "6276816297a6fbe5a69f2a4c80340c4b4cfa3af5a083ba08c75099fc638b16e8"
+        },
+        {
+          "path": "generators/VT.bin",
+          "state": "VT",
+          "rows": 249,
+          "bytes": 51504,
+          "sha256": "48164e43104f473cdaef4e01826b6798660210ab19271bac363d43fe812c796a"
+        },
+        {
+          "path": "generators/WA.bin",
+          "state": "WA",
+          "rows": 561,
+          "bytes": 108904,
+          "sha256": "6b5e3a064c1b8f294c70a6d8ed14b9555a17bb2939ae23f786f4e10afacb9386"
+        },
+        {
+          "path": "generators/WI.bin",
+          "state": "WI",
+          "rows": 952,
+          "bytes": 181296,
+          "sha256": "9205c4d980edd9dda055337b446f7295ac9c76144a4649460578c08fa3d07b0b"
+        },
+        {
+          "path": "generators/WV.bin",
+          "state": "WV",
+          "rows": 165,
+          "bytes": 35752,
+          "sha256": "a4d30ea89c77458054671cfcfcc161e61035f22b7ffbca94ad66a5c4fc658265"
+        },
+        {
+          "path": "generators/WY.bin",
+          "state": "WY",
+          "rows": 184,
+          "bytes": 39448,
+          "sha256": "bd5fac0e1941da3c48703b71281bc5d26fb41761533f25a213c0548f419d947d"
+        }
+      ],
+      "download": {
+        "path": "generators.csv.gz",
+        "bytes": 977216,
+        "sha256": "4e0c0ec31dcc040a090a398e378506ec95600c8e6e34e3509e7a4f72793500d6",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Form EIA-860M (Oct 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}

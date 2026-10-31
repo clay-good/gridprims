@@ -33,7 +33,7 @@ export function matchPosture(terms) {
 }
 
 const REQUIRED = ['id', 'title', 'publisher', 'sourceUrl', 'terms', 'redistributionBasis', 'attribution', 'cadence', 'recipe', 'tables', 'ceii', 'owner'];
-/** Steps every table recipe needs: a read (a workbook from the zip, or Parquet files), then these. */
+/** Steps every table recipe needs: a read (a workbook, from a zip or not, or Parquet files), then these. */
 const TABLE_STEPS = ['normalize', 'validate', 'partition'];
 
 const checkSteps = (steps, where, fail) => {
@@ -70,7 +70,7 @@ export function validateEntry(e) {
       checkSteps(t.recipe, `${where}.recipe`, fail);
       for (const need of TABLE_STEPS) if (!t.recipe.some((s) => s.step === need)) fail(`${where}.recipe`, `has no ${need} step`);
       const has = (step) => t.recipe.some((s) => s.step === step);
-      if (!(has('unzip') && has('read-xlsx')) && !has('read-parquet')) fail(`${where}.recipe`, 'has no read: unzip and read-xlsx, or read-parquet');
+      if (!has('read-xlsx') && !has('read-parquet')) fail(`${where}.recipe`, 'has no read: read-xlsx (after unzip when the download is a zip) or read-parquet');
       t.recipe.filter((s) => s.step === 'read-parquet').forEach((s) => (s.files ?? []).forEach((f) => { if (!Object.values(e.vintages ?? {}).every((v) => v.files?.[f])) fail(`${where}.recipe read-parquet`, `names file "${f}", which a vintage does not list`); }));
     });
   } else if (e.tables !== undefined) fail('tables', 'must be a list of tables');

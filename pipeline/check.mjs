@@ -17,6 +17,7 @@ async function head(url, f) {
   if (!res.ok) return null;
   return { url, bytes: Number(res.headers.get('content-length') ?? 0), lastModified: res.headers.get('last-modified') ?? null };
 }
+const MONTH_NAMES = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 const asOfOf = (lastModified, fallback) => (lastModified ? new Date(lastModified).toISOString().slice(0, 10) : fallback);
 
 /**
@@ -29,10 +30,20 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
   const manifest = existsSync(cur) ? JSON.parse(readFileSync(join(outDir, dataset, JSON.parse(readFileSync(cur, 'utf8')).version, 'manifest.json'), 'utf8')) : null;
   // A dataset pinned to a release (PUDL) has no release watch: a new release is a hand-made bump.
   if (!entry.releaseWatch) return { id: dataset, checked: false, refreshed: false, version: manifest?.version, waiting: 'pinned to a release; a new one is bumped by hand' };
-  const servedYear = manifest ? Number(manifest.tables[0].dataPeriod.slice(-4)) : Math.max(...Object.keys(entry.vintages).map(Number));
-  const tryYear = async (year) => {
+  // Periods are data years (2025), or months ("2026-09") for a monthly dataset such as EIA-860M.
+  const monthly = entry.releaseWatch.period === 'month';
+  const servedYear = manifest
+    ? (monthly ? manifest.tables[0].dataPeriod : Number(manifest.tables[0].dataPeriod.slice(-4)))
+    : (monthly ? Object.keys(entry.vintages).sort().at(-1) : Math.max(...Object.keys(entry.vintages).map(Number)));
+  const after = (p) => {
+    if (!monthly) return p + 1;
+    const [y, m] = p.split('-').map(Number);
+    return m === 12 ? `${y + 1}-01` : `${y}-${String(m + 1).padStart(2, '0')}`;
+  };
+  const urlOf = (t, p) => (monthly ? t.replace('{month}', MONTH_NAMES[Number(p.slice(5)) - 1]).replace('{year}', p.slice(0, 4)) : t.replace('{year}', String(p)));
+  const tryYear = async (period) => {
     for (const t of entry.releaseWatch.urls) {
-      const found = await head(t.replace('{year}', String(year)), f);
+      const found = await head(urlOf(t, period), f);
       if (found) return found;
     }
     return null;
@@ -52,8 +63,8 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
     let target = null;
     // A publisher that grows next year's file all year posts it final the year after; look only from then.
     const nextFrom = entry.releaseWatch.nextYearFrom ? `${servedYear + 2}-${entry.releaseWatch.nextYearFrom}` : null;
-    const next = !nextFrom || today >= nextFrom ? await tryYear(servedYear + 1) : null;
-    if (next) target = { year: servedYear + 1, upstream: next, why: `new data year ${servedYear + 1}` };
+    const next = !nextFrom || today >= nextFrom ? await tryYear(after(servedYear)) : null;
+    if (next) target = { year: after(servedYear), upstream: next, why: `new ${monthly ? 'month' : 'data year'} ${after(servedYear)}` };
     else {
       const now = await tryYear(servedYear);
       const known = manifest?.raw[0];
