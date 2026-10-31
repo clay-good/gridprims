@@ -3,7 +3,7 @@
 - [ ] 1.1 Extend the foundation's fixture library (foundation task 5.1) with bill, ratchet, holiday, export, and coincident-peak cases; verify each fixture's receipt and expected results match their stored files
 - [x] 1.2 Consume the URDB snapshot owned by `add-public-grid-data`, partitioned by state; verify the bill tools fetch only state shards
 - [x] 1.3 Snapshot ERCOT 4CP intervals for 2018–2025 from ERCOT's files, and add 2026 when ERCOT posts it (expected late November); verify 2018–2020 and 2022–2025 each have four interval-ending stamps matching ERCOT's published values, and that 2021 ships as dates only, flagged "times not published", until a primary source supplies them (`docs/research/06`)
-- [ ] 1.4 Record the Green Button field map in `docs/derivations/green-button.md` from the Apache-2.0 ESPI schema; verify every handled element names its schema type and enumeration, and that no requirement depends on buying the standard
+- [x] 1.4 Record the Green Button field map in `docs/derivations/green-button.md` from the Apache-2.0 ESPI schema; verify every handled element names its schema type and enumeration, and that no requirement depends on buying the standard
 
 ## 2. Interval insights
 

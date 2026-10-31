@@ -8,11 +8,11 @@ import { utcToLocal } from '../../parsers/time.mjs';
 import { assembleSeries, DUPLICATE_RULE } from './series.mjs';
 
 /** UnitSymbolKind codes we read as electricity (espi.xsd 4.0): 72 Wh is energy, 38 W is demand. */
-const ELECTRIC_UOM = { 72: { unit: 'Wh', quantity: 'energy', toKwh: 0.001 }, 38: { unit: 'W', quantity: 'demand', toKwh: 0.001 } };
+export const ELECTRIC_UOM = { 72: { unit: 'Wh', quantity: 'energy', toKwh: 0.001 }, 38: { unit: 'W', quantity: 'demand', toKwh: 0.001 } };
 /** Codes for other commodities, named so the receipt can say what it skipped. */
-const OTHER_UOM = { 119: 'cubic feet of gas', 120: 'compensated cubic feet of gas', 169: 'therms', 132: 'Btu', 80: 'money', 63: 'reactive power (VAr)', 73: 'reactive energy (VArh)', 61: 'apparent power (VA)', 71: 'apparent energy (VAh)' };
+export const OTHER_UOM = { 119: 'cubic feet of gas', 120: 'compensated cubic feet of gas', 169: 'therms', 132: 'Btu', 80: 'money', 63: 'reactive power (VAr)', 73: 'reactive energy (VArh)', 61: 'apparent power (VA)', 71: 'apparent energy (VAh)' };
 /** FlowDirectionKind (espi.xsd 4.0): 1 forward (delivered), 19 reverse (received), 4 net. */
-const FLOW = { 1: 'delivered', 19: 'received', 4: 'net' };
+export const FLOW = { 1: 'delivered', 19: 'received', 4: 'net' };
 /** US daylight-saving rules as ESPI DstRuleType bitfields: 2nd Sunday of March and 1st Sunday of November, 2:00 am. */
 const US_DST = { start: 0x360e2000, end: 0xb40e2000 };
 
