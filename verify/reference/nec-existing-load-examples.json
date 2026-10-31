@@ -1,0 +1,21 @@
+{
+  "about": "Published worked examples of the measured-demand method for existing loads (NEC 220.87 and its predecessors). Only the numbers are kept; the articles are cited, not copied. Both print whole amps, so a match means our exact result rounds to each printed figure.",
+  "examples": [
+    {
+      "id": "ecm-holt-2014",
+      "source": "Mike Holt, \"Code Q&A: Calculating feeder or service loads,\" EC&M, August 8, 2014 (2011 NEC)",
+      "url": "https://www.ecmweb.com/national-electrical-code/qa/article/20899437/code-qa-calculating-feeder-or-service-loads",
+      "inputs": { "maxKw": 23.66, "powerFactor": 1, "volts": 240, "phase": 1, "ratingA": 200, "newLoadA": 50 },
+      "published": { "demandA": 99, "existingA": 123, "totalA": 173, "spareA": 27 },
+      "note": "The article rounds 98.58 A up to 99 A, then prints 99 × 125% as 123 A (exactly 123.75 A). From the published inputs the exact figures are 98.58 A, 123.23 A, 173.23 A, and 26.77 A spare."
+    },
+    {
+      "id": "ecmag-miller-2011",
+      "source": "Charles R. Miller, \"Branch-circuit, feeder and service calculations, Part LX,\" Electrical Contractor, February 15, 2011",
+      "url": "https://www.ecmag.com/magazine/articles/article-detail/codes-standards-branch-circuit-feeder-and-service-calculations-part-lx",
+      "inputs": { "demandA": 743, "ratingA": 1200, "newLoadA": 251 },
+      "published": { "existingA": 929, "totalA": 1180, "spareA": 20 },
+      "note": "The article works in amps from a year of utility peak-demand data and gives no voltage; amps at 125% do not depend on the voltage chosen to express them in kW. Exactly: 928.75 A, 1,179.75 A, 20.25 A spare."
+    }
+  ]
+}

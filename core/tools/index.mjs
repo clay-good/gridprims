@@ -17,6 +17,8 @@ import lineAmpacity from './calc.line-rating.ampacity/manifest.mjs';
 import * as lineAmpacityImpl from './calc.line-rating.ampacity/tool.mjs';
 import revenueRequirement from './ratepayer.revenue-requirement.explain/manifest.mjs';
 import * as revenueRequirementImpl from './ratepayer.revenue-requirement.explain/tool.mjs';
+import serviceHeadroom from './electrify.service-headroom.check/manifest.mjs';
+import * as serviceHeadroomImpl from './electrify.service-headroom.check/tool.mjs';
 import billTotalsCheck from './household.bill-totals.check/manifest.mjs';
 import * as billTotalsCheckImpl from './household.bill-totals.check/tool.mjs';
 import usageBenchmark from './household.usage-benchmark.compare/manifest.mjs';
@@ -31,6 +33,7 @@ export const TOOLS = [
   { manifest: costLcoe, impl: costLcoeImpl },
   { manifest: lineAmpacity, impl: lineAmpacityImpl },
   { manifest: revenueRequirement, impl: revenueRequirementImpl },
+  { manifest: serviceHeadroom, impl: serviceHeadroomImpl },
   { manifest: billTotalsCheck, impl: billTotalsCheckImpl },
   { manifest: usageBenchmark, impl: usageBenchmarkImpl },
 ];

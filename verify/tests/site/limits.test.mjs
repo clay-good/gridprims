@@ -35,7 +35,7 @@ test('launch reality: no tool is field-verified, the page says so, and gives the
   assert.equal(L.counts['field-verified'], 0);
   const html = page(L);
   assert.match(html, /No tool here is field-verified/);
-  assert.match(html, /Tools by how well checked they are: Unvalidated 0, Self-checked 4, Cross-checked 6, Field-verified 0\./);
+  assert.match(html, /Tools by how well checked they are: Unvalidated 0, Self-checked 4, Cross-checked 7, Field-verified 0\./);
 });
 
 test('the three axes are separate columns, and a cross-checked tool with no sign-off reads "Review pending"', () => {
@@ -83,6 +83,7 @@ test('the unverified-claim register is listed, and a manifest citing a claim wit
   const root = tempDir('gridprims-claims-');
   cpSync(join(ROOT, 'site'), join(root, 'site'), { recursive: true });
   cpSync(join(ROOT, 'core'), join(root, 'core'), { recursive: true });
+  cpSync(join(ROOT, 'parsers'), join(root, 'parsers'), { recursive: true });
   cpSync(join(ROOT, 'data/curated'), join(root, 'data/curated'), { recursive: true });
   const mp = join(root, 'core/tools/calc.energy-units.convert/manifest.mjs');
   writeFileSync(mp, readFileSync(mp, 'utf8').replace("  toRaise:", "  claims: ['made-up-claim'],\n  toRaise:"));

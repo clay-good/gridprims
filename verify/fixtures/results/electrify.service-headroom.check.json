@@ -1,0 +1,174 @@
+{
+  "toolId": "electrify.service-headroom.check",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "spec-480v",
+      "result": {
+        "status": "ok",
+        "toolId": "electrify.service-headroom.check",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "headroomA": {
+            "value": 210.1,
+            "unit": "A",
+            "display": "210.1"
+          },
+          "headroomKva": {
+            "value": 174.7,
+            "unit": "kVA",
+            "display": "174.7"
+          },
+          "amps": {
+            "value": 189.9,
+            "unit": "A",
+            "display": "189.9"
+          },
+          "maxKw": {
+            "value": 120,
+            "unit": "kW",
+            "display": "120.0"
+          },
+          "kva": {
+            "value": 126.3,
+            "unit": "kVA",
+            "display": "126.3"
+          },
+          "kva125": {
+            "value": 157.9,
+            "unit": "kVA",
+            "display": "157.9"
+          },
+          "headroomA90": {
+            "value": 199.5,
+            "unit": "A",
+            "display": "199.5"
+          }
+        },
+        "sentence": "About 210.1 A (174.7 kVA) of this 400 A service is left by the measured-demand method in 2023 NEC 220.87.",
+        "notes": [],
+        "work": {
+          "method": "Existing load = maximum demand ÷ power factor × 125%, in amps at the service voltage (single-phase: kVA × 1,000 ÷ V; three-phase: kVA × 1,000 ÷ (√3 × V)); headroom = service rating − existing load.",
+          "steps": [
+            "Data period: the highest 15-minute demand from a recording of at least 30 days: 120.0 kW.",
+            "Demand in kVA: 120.0 kW ÷ power factor 0.95 = 126.3 kVA.",
+            "Times 125%: 126.3 × 1.25 = 157.9 kVA.",
+            "In amps: 157.9 kVA × 1,000 ÷ (√3 × 480 V) = 189.9 A.",
+            "Headroom: 400 A − 189.9 A = 210.1 A, or 174.7 kVA.",
+            "At power factor 0.90 instead, the headroom is 199.5 A.",
+            "Utility meter data is the total for the service and assumes the phases are balanced. The 30-day option is based on the highest-loaded phase, so per-phase recordings, when you have them, replace the meter total.",
+            "Method: 2023 NEC 220.87, paraphrased: the existing load is the maximum demand from a year of data, or from 30 days or more of 15-minute recording, taken at 125%. The authority having jurisdiction decides which edition applies and whether this method may be used."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The maximum demand is a 15-minute average, the way demand meters and interval files record it.",
+            "Utility meter data is the service total and assumes balanced phases."
+          ],
+          "citations": [
+            {
+              "source": "NFPA 70, National Electrical Code",
+              "edition": "2023",
+              "locator": "Section 220.87, Determining Existing Loads (cited and paraphrased; read it through NFPA's free access); see docs/derivations/service-headroom.md",
+              "url": "https://www.nfpa.org/freeaccess"
+            },
+            {
+              "source": "Mike Holt, Code Q&A: Calculating feeder or service loads, EC&M",
+              "edition": "August 8, 2014",
+              "locator": "Worked existing-load example, 200 A single-phase service",
+              "url": "https://www.ecmweb.com/national-electrical-code/qa/article/20899437/code-qa-calculating-feeder-or-service-loads"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
+        "screeningLabel": "A starting point for your electrician, not a load calculation for a permit: the inspector decides."
+      }
+    },
+    {
+      "example": "bills",
+      "result": {
+        "status": "ok",
+        "toolId": "electrify.service-headroom.check",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "headroomA": {
+            "value": 183.6,
+            "unit": "A",
+            "display": "183.6"
+          },
+          "headroomKva": {
+            "value": 66.2,
+            "unit": "kVA",
+            "display": "66.2"
+          },
+          "amps": {
+            "value": 416.4,
+            "unit": "A",
+            "display": "416.4"
+          },
+          "maxKw": {
+            "value": 120,
+            "unit": "kW",
+            "display": "120.0"
+          },
+          "kva": {
+            "value": 120,
+            "unit": "kVA",
+            "display": "120.0"
+          },
+          "kva125": {
+            "value": 150,
+            "unit": "kVA",
+            "display": "150.0"
+          },
+          "headroomA90": {
+            "value": 137.4,
+            "unit": "A",
+            "display": "137.4"
+          }
+        },
+        "sentence": "About 183.6 A (66.2 kVA) of this 600 A service is left by the measured-demand method in 2023 NEC 220.87.",
+        "notes": [],
+        "work": {
+          "method": "Existing load = maximum demand ÷ power factor × 125%, in amps at the service voltage (single-phase: kVA × 1,000 ÷ V; three-phase: kVA × 1,000 ÷ (√3 × V)); headroom = service rating − existing load.",
+          "steps": [
+            "Data period: the highest of 12 monthly maximum demands from demand-metered bills: 120.0 kW.",
+            "Demand in kVA: 120.0 kW ÷ power factor 1 = 120.0 kVA.",
+            "Times 125%: 120.0 × 1.25 = 150.0 kVA.",
+            "In amps: 150.0 kVA × 1,000 ÷ (√3 × 208 V) = 416.4 A.",
+            "Headroom: 600 A − 416.4 A = 183.6 A, or 66.2 kVA.",
+            "At power factor 0.90 instead, the headroom is 137.4 A.",
+            "Utility meter data is the total for the service and assumes the phases are balanced. The 30-day option is based on the highest-loaded phase, so per-phase recordings, when you have them, replace the meter total.",
+            "Method: 2023 NEC 220.87, paraphrased: the existing load is the maximum demand from a year of data, or from 30 days or more of 15-minute recording, taken at 125%. The authority having jurisdiction decides which edition applies and whether this method may be used."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The maximum demand is a 15-minute average, the way demand meters and interval files record it.",
+            "Utility meter data is the service total and assumes balanced phases."
+          ],
+          "citations": [
+            {
+              "source": "NFPA 70, National Electrical Code",
+              "edition": "2023",
+              "locator": "Section 220.87, Determining Existing Loads (cited and paraphrased; read it through NFPA's free access); see docs/derivations/service-headroom.md",
+              "url": "https://www.nfpa.org/freeaccess"
+            },
+            {
+              "source": "Mike Holt, Code Q&A: Calculating feeder or service loads, EC&M",
+              "edition": "August 8, 2014",
+              "locator": "Worked existing-load example, 200 A single-phase service",
+              "url": "https://www.ecmweb.com/national-electrical-code/qa/article/20899437/code-qa-calculating-feeder-or-service-loads"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
+        "screeningLabel": "A starting point for your electrician, not a load calculation for a permit: the inspector decides."
+      }
+    }
+  ]
+}

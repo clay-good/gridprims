@@ -293,6 +293,45 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 - A simplified cost-of-service formula: no deferred taxes, tax credits, or riders.
 - Figures from FERC Form 1 are total-company and may cover more than one state or service.
 
+## Service headroom (`electrify.service-headroom.check`)
+
+How much room is left on an existing electric service, from the demand the meter already measured.
+
+Version 0.1.0 · experimental · validation level 2, cross-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Maximum demand | `demand` | kW |  | 120 |
+| Service voltage | `volts` | V | 100 to 35000 | 480 |
+| Phase | `phase` | choice | `1`, `3` | 3 |
+| Service rating | `ratingA` | A | 1 to 10000 | 400 |
+| NEC edition adopted locally | `edition` | choice | `2023`, `2026` | 2023 |
+| Where the demand comes from | `basis` | choice | `recording`, `bills` | recording |
+| Power factor | `powerFactor` | fraction | 0.01 to 1 | 0.95 |
+| Solar, wind, a battery, or peak shaving on this service | `generation` | choice | `no`, `yes` | no |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Headroom | `headroomA` | A | 1 decimals |
+| Headroom | `headroomKva` | kVA | 1 decimals |
+| Demand × 125% | `amps` | A | 1 decimals |
+| Maximum demand | `maxKw` | kW | 1 decimals |
+| Maximum demand | `kva` | kVA | 1 decimals |
+| Demand × 125% | `kva125` | kVA | 1 decimals |
+| Headroom at power factor 0.90 | `headroomA90` | A | 1 decimals |
+
+**Method.** Existing load = maximum demand ÷ power factor × 125%, in amps at the service voltage (single-phase: kVA × 1,000 ÷ V; three-phase: kVA × 1,000 ÷ (√3 × V)); headroom = service rating − existing load.
+
+**Sources.**
+
+- NFPA 70, National Electrical Code, 2023, Section 220.87, Determining Existing Loads (cited and paraphrased; read it through NFPA's free access); see docs/derivations/service-headroom.md (https://www.nfpa.org/freeaccess)
+- Mike Holt, Code Q&A: Calculating feeder or service loads, EC&M, August 8, 2014, Worked existing-load example, 200 A single-phase service (https://www.ecmweb.com/national-electrical-code/qa/article/20899437/code-qa-calculating-feeder-or-service-loads)
+
+**Known limits.**
+
+- Not a code compliance decision; conductor sizing and full load calculations are out of scope.
+- Sites with solar, wind, a battery, or peak shaving cannot use the 30-day option.
+
 ## Bill check (`household.bill-totals.check`)
 
 Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.
