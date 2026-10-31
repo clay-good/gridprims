@@ -4,25 +4,18 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
-import { gzipSync } from 'node:zlib';
+import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { findBrowser, launch } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
-import { applyReferenceProfile, BUDGETS } from '../../lib/reference-profile.mjs';
+import { applyReferenceProfile, BUDGETS, jsGzipBytes } from '../../lib/reference-profile.mjs';
 
 const out = mkdtempSync(join(tmpdir(), 'gridprims-dist-'));
 await build({ outDir: out });
 const skip = !findBrowser('chrome') && 'chrome is not installed';
 const ready = 'new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r() : setTimeout(f, 20); f(); })';
-
-/** Compressed bytes of every script a page loaded. */
-export function jsGzipBytes(requests, origin, dist) {
-  const scripts = [...new Set(requests.filter((u) => u.startsWith(origin) && /\.(m?js)$/.test(new URL(u).pathname)).map((u) => new URL(u).pathname))];
-  return { files: scripts.length, bytes: scripts.reduce((n, p) => n + gzipSync(readFileSync(join(dist, p))).length, 0) };
-}
 
 test('reference profile: the tool page answers within 1.5 s with at most 150 KB of compressed JavaScript', { skip, timeout: 120_000 }, async () => {
   const server = await serve(out);

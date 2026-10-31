@@ -31,3 +31,15 @@ export function browserPages(out) {
   const isEntity = (p) => ENTITY_FAMILIES.some((d) => p.startsWith(`/${d}`));
   return [...all.filter((p) => !isEntity(p)), ...ENTITY_SAMPLE.filter((p) => all.includes(p))];
 }
+
+/** How many of each family the 200-page entity sweep visits (public grid data task 7.2). */
+export const ENTITY_SWEEP = { plants: 120, utilities: 50, states: 15, subregions: 10, queue: 5 };
+
+/** A fixed spread of 200 entity pages: every Nth page of each family, in a stable order. */
+export function entitySample(out) {
+  const all = walk(out).filter((f) => f.endsWith('index.html')).map((f) => `/${f.replace(/index\.html$/, '')}`).sort();
+  return Object.entries(ENTITY_SWEEP).flatMap(([family, n]) => {
+    const pages = all.filter((p) => p.startsWith(`/${family}/`) && p !== `/${family}/`);
+    return Array.from({ length: Math.min(n, pages.length) }, (_, i) => pages[Math.floor((i * pages.length) / n)]);
+  });
+}
