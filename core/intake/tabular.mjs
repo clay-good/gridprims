@@ -6,6 +6,7 @@
 import { readDate, readDateTime, readNumber, readTime } from './values.mjs';
 import { localToUtc } from '../../parsers/time.mjs';
 import { serialToFields } from '../../parsers/xlsx.mjs';
+import { assembleSeries, DUPLICATE_RULE } from './series.mjs';
 
 /**
  * @typedef {{year: number, month: number, day: number, hour: number, minute: number, second: number}} Wall
@@ -260,33 +261,7 @@ export function readTable(rows, choices, file = {}) {
   for (const g of groups.values()) {
     const u = units.get(g.vcol);
     const quantity = quantityChoice ?? u.quantity;
-    g.items.sort((a, b) => a.ms - b.ms || a.line - b.line);
-    const ms = [];
-    const vals = [];
-    for (const it of g.items) {
-      const last = ms.length - 1;
-      if (last >= 0 && ms[last] === it.ms) {
-        if (vals[last] === it.value) duplicates.identical++;
-        else {
-          duplicates.conflicting++;
-          if (duplicates.examples.length < 5) duplicates.examples.push({ meter: g.meter, startMs: it.ms, values: [vals[last], it.value] });
-          vals[last] = Math.max(vals[last], it.value); // rule: keep the higher reading, so demand is never understated
-        }
-        continue;
-      }
-      ms.push(it.ms);
-      vals.push(it.value);
-    }
-    const step = intervalMinutes * 60_000;
-    for (let i = 1; i < ms.length; i++) {
-      const missing = Math.round((ms[i] - ms[i - 1]) / step) - 1;
-      if (missing > 0) gaps.push({ meter: g.meter, channel: g.channel, startMs: ms[i - 1] + step, endMs: ms[i], intervals: missing });
-    }
-    const factor = quantity === 'demand' ? intervalMinutes / 60 : u.toKwh;
-    series.push({
-      meter: g.meter, channel: g.channel, intervalMinutes, unitRead: u.unit, quantity,
-      startMs: Float64Array.from(ms), kwh: Float64Array.from(vals, (v) => v * factor),
-    });
+    series.push(assembleSeries(g.items, { meter: g.meter, channel: g.channel, intervalMinutes, unitRead: u.unit, quantity, toKwh: u.toKwh }, duplicates, gaps));
   }
   series.sort((a, b) => a.meter.localeCompare(b.meter) || a.channel.localeCompare(b.channel));
 
@@ -321,7 +296,7 @@ export function readTable(rows, choices, file = {}) {
       meters: series.map((s) => ({ meter: s.meter, channel: s.channel, intervals: s.startMs.length, unitRead: s.unitRead })),
       quality: {
         gaps,
-        duplicates: { identical: duplicates.identical, conflicting: duplicates.conflicting, rule: 'When two readings share a time, the higher one is kept.', examples: duplicates.examples },
+        duplicates: { identical: duplicates.identical, conflicting: duplicates.conflicting, rule: DUPLICATE_RULE, examples: duplicates.examples },
         dst: { repeatedKept },
       },
       choices: { zone, stampsMark, quantity: quantityChoice ?? 'auto' },

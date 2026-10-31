@@ -54,7 +54,7 @@
 - [ ] 6.3 Implement the editable parse receipt; verify changing the time zone recomputes every result in a fixture
 - [x] 6.4 Handle DST, gaps, duplicates, multiple meters, negative values; verify the spring-forward, conflicting-duplicate, mixed-unit, two-meter, partial-year, fall-back, and gap scenarios
 - [ ] 6.5 Implement the unsupported-file message and the keep-this-file consent path; verify the unsupported-file and reload-forgets-the-file scenarios
-- [ ] 6.6 Read Green Button `uom`, `powerOfTenMultiplier`, `flowDirection`, `intervalLength`, and `LocalTimeParameters` per ESPI; verify the multiplier and export-channel scenarios on synthetic fixtures plus any OpenESPI sample or test file that carries an explicit Apache-2.0 header, recorded per file with its header (files without an open header are not committed, per `docs/research/08`)
+- [x] 6.6 Read Green Button `uom`, `powerOfTenMultiplier`, `flowDirection`, `intervalLength`, and `LocalTimeParameters` per ESPI; verify the multiplier and export-channel scenarios on synthetic fixtures plus any OpenESPI sample or test file that carries an explicit Apache-2.0 header, recorded per file with its header (files without an open header are not committed, per `docs/research/08`)
 
 ## 7. Data snapshots
 

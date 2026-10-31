@@ -3,7 +3,9 @@
 // a receipt. Runs in a worker or in Node; reads only the bytes it is given.
 
 import { decodeText, detectDelimiter, parseDelimited } from '../../parsers/delimited.mjs';
-import { readXlsx, readZipDirectory, XlsxError } from '../../parsers/xlsx.mjs';
+import { readXlsx, readZipDirectory, readZipEntry, XlsxError } from '../../parsers/xlsx.mjs';
+import { XmlRefusal, XmlSyntaxError } from '../../parsers/xml.mjs';
+import { readEspi } from './espi.mjs';
 import { readTable } from './tabular.mjs';
 
 export const MAX_BYTES = 200_000_000;
@@ -39,8 +41,7 @@ export function detectFormat(bytes) {
 const REFUSALS = {
   pdf: 'This is a PDF. PDF bills are not read yet. Most utilities let you download your usage as a Green Button or CSV file instead.',
   ole: 'This looks like an older .xls file or a password-protected workbook. Open it and save it as .xlsx without a password, or download a CSV from your utility.',
-  zip: 'This is a ZIP archive that is not an Excel workbook. If it holds a Green Button export, unzip it and drop the .xml file inside.',
-  'espi-xml': 'This is a Green Button XML file. Reading Green Button XML is being built; download the CSV version from your utility for now.',
+  zip: 'This is a ZIP archive that holds neither an Excel workbook nor a Green Button export.',
   xml: 'This is an XML file, but not a Green Button export.',
   empty: 'This file is empty.',
   unknown: 'We could not tell what kind of file this is. We read Green Button XML or CSV, utility CSV files, and Excel workbooks.',
@@ -68,6 +69,21 @@ export async function intakeFile(bytes, file, choices) {
       result = readTable(wb.rows, { ...choices, date1904: wb.date1904 }, { ...meta, format, sheet: wb.sheet, sheets: wb.sheets });
     } catch (e) {
       if (e instanceof XlsxError) return { ok: false, format, message: e.message, learnUrl: GET_YOUR_DATA_URL };
+      throw e;
+    }
+  } else if (format === 'espi-xml' || format === 'zip') {
+    let xmlBytes = bytes;
+    if (format === 'zip') {
+      // Some portals hand out Green Button exports zipped; read the first XML file inside.
+      const entry = readZipDirectory(bytes).find((e) => /\.xml$/i.test(e.name) && !e.name.startsWith('__MACOSX/'));
+      if (!entry) return { ok: false, format, message: REFUSALS.zip, learnUrl: GET_YOUR_DATA_URL };
+      xmlBytes = await readZipEntry(bytes, entry);
+      if (detectFormat(xmlBytes) !== 'espi-xml') return { ok: false, format, message: REFUSALS.zip, learnUrl: GET_YOUR_DATA_URL };
+    }
+    try {
+      result = readEspi(decodeText(xmlBytes).text, choices, { ...meta, format: 'espi-xml' });
+    } catch (e) {
+      if (e instanceof XmlRefusal || e instanceof XmlSyntaxError) return { ok: false, format, message: e instanceof XmlRefusal ? e.message : `This Green Button file is damaged: ${e.message}. Please download a fresh export.`, learnUrl: GET_YOUR_DATA_URL };
       throw e;
     }
   } else {

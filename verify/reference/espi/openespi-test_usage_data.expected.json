@@ -1,0 +1,16 @@
+{
+  "source": "Computed with Python xml.etree from the ESPI 4.0 field definitions, independent of gridprims code, 2026-10-30",
+  "uom": 72,
+  "powerOfTenMultiplier": 0,
+  "flowDirection": 1,
+  "intervalLengthSeconds": 900,
+  "tzOffsetSeconds": -18000,
+  "dstStartRule": "360E2000",
+  "dstEndRule": "B40E2000",
+  "readings": 1340,
+  "firstStartUtcSeconds": 1330578000,
+  "lastStartUtcSeconds": 1331783100,
+  "totalKwh": 1391.666,
+  "maxIntervalKwh": 1.66,
+  "usagePointTitle": "Front Electric Meter"
+}
