@@ -50,6 +50,7 @@ export default {
       { kind: 'published-example', path: 'verify/reference/nist-sp811-b8-energy.json', summary: 'Btu, watt-hour, kilowatt-hour, therm, and quad conversions agree with NIST SP 811 Appendix B.8 to every figure NIST prints. Fuel conversions reproduce EIA\'s published averages, which have no independent source.' },
     ],
   },
+  toRaise: 'Three recorded real-world cases where a utility, a regulator, or a practitioner made the same conversion (for example a gas bill\'s therm-to-kWh line) would raise it to field-verified.',
   limitations: [
     'Fuel results use national averages; the gas or oil you buy can differ by a few percent.',
     'The coal figure is EIA\'s estimate for coal burned in power plants, not for home or industrial coal.',

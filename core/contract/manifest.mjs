@@ -165,5 +165,7 @@ export function validateManifest(m, opts = {}) {
   }
   if (m.screeningLabel !== undefined && typeof m.screeningLabel !== 'string') fail('screeningLabel', 'must be a string');
   if (m.sharedRoutines !== undefined && !Array.isArray(m.sharedRoutines)) fail('sharedRoutines', 'must be a list');
+  if (m.claims !== undefined && !Array.isArray(m.claims)) fail('claims', 'must be a list of unverified-claim ids');
+  if (m.toRaise !== undefined && typeof m.toRaise !== 'string') fail('toRaise', 'must say what evidence would raise the validation level');
   return errors;
 }

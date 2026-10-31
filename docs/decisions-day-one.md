@@ -28,6 +28,8 @@ The shapes every later phase-0 task generates from (foundation task 3.1). When a
 | `validation` | object | 1 | `level` 0–3 and `evidence [{kind, summary, path?}]` |
 | `limitations` | string | 1+ | |
 | `commandForms` | string | 0+ | plain-word phrasings for the command bar, such as `{value} {from} to {to}`; each placeholder names a number or enum input, and enum options may list `aliases` |
+| `toRaise` | string | 0–1 | what evidence would raise the validation level, shown on the limits page |
+| `claims` | string | 0+ | ids from the unverified-claim register (`data/curated/claims.mjs`) the tool relies on |
 | `screeningLabel` | string | 0–1 | required when the output could pass for a study, a bill, or a utility decision |
 
 **Evidence kinds.** `own-examples` (supports level 1), `reference-output` (a committed file under `verify/reference/`, level 2), `published-example` (a cited published worked example with a committed file, level 2), `field-case` (level 3, at least 3). A level above what the evidence supports fails the build.

@@ -65,32 +65,62 @@ export function calculatorPage({ manifest, example, result, i18n }) {
 }
 
 /**
- * The limits page, generated from every manifest (site/limitations). Phase 0
- * carries the validation table and the level definitions.
- * @param {{tools: any[], i18n: any}} p
+ * The limits page (site/limitations), rendered from the limits record, which
+ * is also published as JSON and served to agents by the MCP server.
+ * @param {{limits: any, i18n: any, health?: any}} p
  */
-export function limitsPage({ tools, i18n, health }) {
-  const { t } = i18n;
+export function limitsPage({ limits: L, i18n, health }) {
+  const { t, date } = i18n;
+  const counts = L.levels.map((l) => `${t(`validation.${l.level}`)} ${L.counts[l.name]}`).join(', ');
   const body = html`
 <h1>${t('limits.title')}</h1>
-<p class="purpose">${t('limits.intro')}</p>
-<p class="strip">${t('limits.launch')}</p>
-<h2>${t('limits.validationTable')}</h2>
-<div class="table-wrap"><table>
-  <thead><tr><th scope="col">${t('limits.col.tool')}</th><th scope="col">${t('limits.col.stability')}</th><th scope="col">${t('limits.col.level')}</th><th scope="col">${t('limits.col.evidence')}</th><th scope="col">${t('limits.col.limitations')}</th></tr></thead>
-  <tbody>${tools.map(({ manifest: m }) => html`<tr id="${m.id}">
+<p class="strip">${t('limits.summary')} <a href="/report/" data-report>${t('limits.summaryReport')}</a></p>
+<p>${t('limits.counts', { counts })} ${t('limits.launch')}</p>
+<p class="mono">${L.generatedAt ? t('limits.generated', { date: date(L.generatedAt.slice(0, 10)), commit: L.describes ?? '' }) : ''} <a href="/limits/limits.json">${t('limits.json')}</a></p>
+
+<h2>${t('limits.toolsTitle')}</h2>
+<p>${t('limits.axes')}</p>
+${L.tools.length ? html`<div class="table-wrap"><table>
+  <thead><tr><th scope="col">${t('limits.col.tool')}</th><th scope="col">${t('limits.col.stability')}</th><th scope="col">${t('limits.col.level')}</th><th scope="col">${t('limits.col.review')}</th><th scope="col">${t('limits.col.evidence')}</th><th scope="col">${t('limits.col.raise')}</th><th scope="col">${t('limits.col.limitations')}</th></tr></thead>
+  <tbody>${L.tools.map((m) => html`<tr id="${m.id}">
     <th scope="row"><a href="${toolPath(m.id)}">${m.title}</a><br><span class="mono">${m.id}</span></th>
     <td>${t(`tool.stability.${m.stability}`)}</td>
-    <td>${m.validation.level} · ${t(`validation.${m.validation.level}`)}</td>
-    <td>${m.validation.evidence.map((e) => e.summary).join(' ')}</td>
+    <td>${m.validationLevel} · ${t(`validation.${m.validationLevel}`)}</td>
+    <td>${t(`limits.review.${m.review}`)}</td>
+    <td>${m.evidence.map((e) => e.summary).join(' ')}${m.evidencePassed ? html` <span class="mono">${t('limits.evidencePassed', { date: date(m.evidencePassed.slice(0, 10)) })}</span>` : ''}${m.needsFreshRun ? html` <span class="warning-chip">${t('limits.freshRun')}</span>` : ''}</td>
+    <td>${m.toRaise ?? ''}</td>
     <td><ul>${m.limitations.map((l) => html`<li>${l}</li>`)}</ul></td>
   </tr>`)}</tbody>
+</table></div>` : html`<p>${t('limits.noTools')}</p>`}
+
+<h2 id="cannot">${t('limits.cannot')}</h2>
+<p>${t('limits.cannotIntro')}</p>
+${L.cannotDo.map((c) => html`<section class="panel" id="${c.id}">
+  <h3>${c.title}</h3>
+  ${c.detail ? html`<p>${c.detail}</p>` : ''}
+  <p>${c.reason}</p>
+  ${c.verified ? '' : html`<p class="warning-chip">${t('limits.unverifiedNote', { note: c.note ?? '' })}</p>`}
+  <ul class="mono">${c.sources.map((x) => html`<li>${x}</li>`)}</ul>
+</section>`)}
+
+<h2>${t('limits.problems')}</h2>
+${health ? healthSection(health, i18n) : ''}
+<h3>${t('limits.lateDatasets')}</h3>
+${L.problems.lateDatasets.length ? html`<ul>${L.problems.lateDatasets.map((d) => html`<li>${t('limits.lateLine', { title: d.title, due: date(d.due), posted: d.posted ? t('limits.posted') : t('limits.inferred'), days: d.daysLate })}</li>`)}</ul>` : html`<p>${t('limits.lateNone')}</p>`}
+${L.problems.failingDatasets.length ? '' : html`<p>${t('limits.failingNone')}</p>`}
+${L.problems.postureLimited.map((d) => html`<p>${t('limits.postureLine', { id: d.id, posture: d.posture, changed: d.termsChanged ? t('limits.postureChanged') : '' })}</p>`)}
+<p><strong>${t('limits.notPopulated')}:</strong> ${L.problems.corrections.note}</p>
+<p><strong>${t('limits.notPopulated')}:</strong> ${L.problems.referenceEngineGaps.note}</p>
+
+<h2 id="claims">${t('limits.claims')}</h2>
+<p>${t('limits.claimsIntro')}</p>
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col">${t('limits.col.claim')}</th><th scope="col">${t('limits.col.usedBy')}</th><th scope="col">${t('limits.col.confirm')}</th></tr></thead>
+  <tbody>${L.unverifiedClaims.map((c) => html`<tr id="claim-${c.id}"><td>${c.claim}<br><span class="mono">${c.brief}</span></td><td>${c.usedBy.join(', ')}</td><td>${c.wouldConfirm}</td></tr>`)}</tbody>
 </table></div>
+
 <h2>${t('limits.levels')}</h2>
-<dl>${VALIDATION_LEVELS.map((l) => html`<dt>${l.level} · ${t(`validation.${l.level}`)}</dt><dd>${l.meaning}</dd>`)}</dl>
-<h2>${t('limits.cannot')}</h2>
-<p>${t('limits.cannotPending')}</p>
-${health ? healthSection(health, i18n) : ''}`;
+<dl>${L.levels.map((l) => html`<dt>${l.level} · ${t(`validation.${l.level}`)}</dt><dd>${l.meaning}</dd>`)}</dl>`;
   return layout({ i18n, title: `${t('limits.title')} · ${t('site.name')}`, description: t('limits.intro'), path: '/limits/', body, section: 'limits' });
 }
 
@@ -223,7 +253,7 @@ ${m.tables.map((tb) => html`<section><h2>${t('data.columns')}</h2><div class="ta
  */
 function healthSection(h, i18n) {
   const { t, date } = i18n;
-  return html`<h2 id="pipeline">${t('health.title')}</h2>
+  return html`<h3 id="pipeline">${t('health.title')}</h3>
 <p>${t('health.intro')}</p>
 ${h.datasets.filter((d) => d.failure).map((d) => html`<p class="warning-chip">${t('health.failing', { dataset: d.id, since: date(d.failure.since.slice(0, 10)), reason: d.failure.reason })}</p>`)}
 <div class="table-wrap"><table>

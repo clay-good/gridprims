@@ -11,6 +11,8 @@ import { TOOLS } from '../core/tools/index.mjs';
 import { runTool } from '../core/contract/run.mjs';
 import { buildCommandIndex } from '../core/contract/command.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
+import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
+import { execFileSync } from 'node:child_process';
 import { createI18n } from './lib/i18n.mjs';
 import { toolPath } from './ui/tool-page.mjs';
 import { tokensCss } from './styles/tokens.mjs';
@@ -63,9 +65,14 @@ export async function build(opts = {}) {
     write(toolPath(manifest.id), calculatorPage({ manifest, example, result, i18n }));
   }
   writeFileSync(join(outDir, 'command-index.json'), JSON.stringify(buildCommandIndex(TOOLS, toolPath)) + '\n');
-  write('/limits/', limitsPage({ tools: TOOLS, i18n, health }));
+  // The limits record: one object for the page, its JSON copy, and the MCP resource.
+  const datasets = existsSync(join(ROOT, 'data')) ? readdirSync(join(ROOT, 'data')).filter((id) => existsSync(join(ROOT, 'data', id, 'current.json'))).map((id) => JSON.parse(readFileSync(join(ROOT, 'data', id, JSON.parse(readFileSync(join(ROOT, 'data', id, 'current.json'), 'utf8')).version, 'manifest.json'), 'utf8'))) : [];
+  let describes = null;
+  try { describes = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(); } catch { describes = null; }
+  const limits = limitsRecord({ tools: TOOLS, cannotDo, claims, health, datasets, generatedAt: health?.generatedAt ?? null, describes, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') });
+  write('/limits/', limitsPage({ limits, i18n, health }));
   if (health) { mkdirSync(join(outDir, 'health'), { recursive: true }); cpSync(healthFile, join(outDir, 'health/pipeline.json')); }
-  writeFileSync(join(outDir, 'limits/limits.json'), JSON.stringify(limitsRecord(TOOLS), null, 2) + '\n');
+  writeFileSync(join(outDir, 'limits/limits.json'), JSON.stringify(limits, null, 2) + '\n');
   write('/changelog/', changelogPage({ entries: changelog, i18n }));
   write('/settings/', settingsPage({ i18n }));
   write('/files/', filesPage({ i18n }));

@@ -94,3 +94,40 @@ for (const kind of ['chrome', 'firefox']) {
     }
   });
 }
+
+for (const kind of ['chrome', 'firefox']) {
+  test(`${kind}: at 320 px the limits page's first screen states the summary and the invitation to report`, { skip: !findBrowser(kind) && `${kind} is not installed`, timeout: 60_000 }, async () => {
+    const server = await serve(out, { routes });
+    const browser = await launch(kind);
+    try {
+      await browser.setViewport(320, 640);
+      await browser.goto(`${server.url}/limits/`);
+      await browser.evaluate(settled);
+      const box = await browser.evaluate(`(() => { const s = document.querySelector('main .strip'); const r = s.getBoundingClientRect(); return { bottom: r.bottom, text: s.textContent }; })()`);
+      assert.ok(box.bottom <= 640, `the summary ends ${Math.round(box.bottom)} px down, below the first screen`);
+      assert.match(box.text, /screening estimates.*problem reports.*Tell us when a number looks wrong/s);
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}
+
+test('chrome: pages print without the rail or controls, keeping the answer and the strip', { skip: !findBrowser('chrome') && 'chrome is not installed (print emulation needs the DevTools Protocol)', timeout: 60_000 }, async () => {
+  const server = await serve(out, { routes });
+  const browser = await launch('chrome');
+  try {
+    for (const p of ['/limits/', '/tools/calc/energy-units/convert/']) {
+      await browser.goto(server.url + p);
+      await browser.evaluate(settled);
+      await browser.cdp('Emulation.setEmulatedMedia', { media: 'print' });
+      const shown = await browser.evaluate(`({ rail: getComputedStyle(document.querySelector('.rail')).display, command: getComputedStyle(document.querySelector('.command')).display, strip: getComputedStyle(document.querySelector('.strip')).display, over: document.documentElement.scrollWidth - window.innerWidth })`);
+      assert.deepEqual([shown.rail, shown.command], ['none', 'none'], p);
+      assert.notEqual(shown.strip, 'none', p);
+      await browser.cdp('Emulation.setEmulatedMedia', { media: '' });
+    }
+  } finally {
+    await browser.close();
+    await server.close();
+  }
+});

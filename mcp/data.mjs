@@ -6,6 +6,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readShard } from '../core/lib/shard.mjs';
+import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
 
 export const DATA_DIR = fileURLToPath(new URL('../data', import.meta.url));
 
@@ -51,4 +52,12 @@ export function query({ dataset, table, filter = {}, limit = 100 }, dir = DATA_D
     }
   }
   return { manifest: m, table: t, rows, matched };
+}
+
+/** The limits record's inputs as the MCP server sees them: curated lists, the health record, and dataset manifests. */
+export function limitsInputs(dir = DATA_DIR) {
+  const healthFile = join(dir, 'health/pipeline.json');
+  const health = existsSync(healthFile) ? JSON.parse(readFileSync(healthFile, 'utf8')) : null;
+  const datasets = catalog(dir).map((d) => JSON.parse(readFileSync(join(dir, d.id, d.version, 'manifest.json'), 'utf8')));
+  return { cannotDo, claims, health, datasets, generatedAt: health?.generatedAt ?? null, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') };
 }

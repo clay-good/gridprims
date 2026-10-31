@@ -34,6 +34,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Gates on the result
         run: node verify/check.mjs
+      - name: Record that every tool's evidence passed
+        run: node pipeline/record-evidence.mjs
       - name: Publish
         run: |
           git config user.name "gridprims pipeline"
