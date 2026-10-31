@@ -79,3 +79,32 @@ for (const kind of ['chrome', 'firefox']) {
     }
   });
 }
+
+for (const kind of ['chrome', 'firefox']) {
+  test(`${kind}: typing "12 MWh to MMBtu" and Enter opens the converter filled in`, { skip: !findBrowser(kind) && `${kind} is not installed`, timeout: 60_000 }, async () => {
+    const server = await serve(out);
+    const browser = await launch(kind);
+    try {
+      await browser.goto(server.url + '/limits/');
+      await browser.evaluate('new Promise((r) => { const f = () => document.documentElement.dataset.shellReady ? r() : setTimeout(f, 20); f(); })');
+      await browser.evaluate(`(async () => {
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: '/', bubbles: true }));
+        const i = document.activeElement;
+        if (i.id !== 'command-input') throw new Error('slash did not focus the command bar');
+        i.value = '12 MWh to MMBtu';
+        i.dispatchEvent(new Event('input', { bubbles: true }));
+        await new Promise((r) => setTimeout(r, 300));
+      })()`);
+      assert.match(await browser.evaluate(`document.querySelector('#command-option-0').textContent`), /Energy unit converter = 40\.95 MMBtu/);
+      await browser.evaluate(`document.querySelector('#command-input').dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }))`);
+      await browser.evaluate('new Promise((r) => setTimeout(r, 500))');
+      await browser.evaluate(ready);
+      assert.equal(await browser.evaluate('location.pathname'), PATH);
+      assert.equal(await browser.evaluate(text('[data-answer] .sentence')), '12 MWh is 40.95 MMBtu.');
+      assert.equal(await browser.evaluate(`document.querySelector('#in-value').value`), '12');
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}

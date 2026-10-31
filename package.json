@@ -8,7 +8,7 @@
     "node": ">=24.12.0"
   },
   "scripts": {
-    "test": "node --test \"verify/tests/**/*.test.mjs\"",
+    "test": "node --test --test-force-exit \"verify/tests/**/*.test.mjs\"",
     "check": "node verify/check.mjs",
     "build": "node site/build.mjs",
     "serve": "node verify/serve.mjs"

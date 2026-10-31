@@ -154,6 +154,15 @@ export function validateManifest(m, opts = {}) {
     if (m.stability === 'stable' && v.level < 2) fail('stability', `is stable at validation level ${v.level}; stable requires level 2 (cross-checked)`);
   }
 
+  if (m.commandForms !== undefined) {
+    if (!Array.isArray(m.commandForms)) fail('commandForms', 'must be a list');
+    else m.commandForms.forEach((f, i) => {
+      for (const [, name] of String(f).matchAll(/\{(\w+)\}/g)) {
+        const inp = inputs.find((x) => x?.name === name);
+        if (!inp || !['number', 'enum'].includes(inp.type)) fail(`commandForms[${i}]`, `names {${name}}, which is not a number or enum input`);
+      }
+    });
+  }
   if (m.screeningLabel !== undefined && typeof m.screeningLabel !== 'string') fail('screeningLabel', 'must be a string');
   if (m.sharedRoutines !== undefined && !Array.isArray(m.sharedRoutines)) fail('sharedRoutines', 'must be a list');
   return errors;

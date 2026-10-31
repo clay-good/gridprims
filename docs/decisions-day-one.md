@@ -27,6 +27,7 @@ The shapes every later phase-0 task generates from (foundation task 3.1). When a
 | `stability` | enum | 1 | `experimental` or `stable`; `stable` needs validation level 2+ |
 | `validation` | object | 1 | `level` 0–3 and `evidence [{kind, summary, path?}]` |
 | `limitations` | string | 1+ | |
+| `commandForms` | string | 0+ | plain-word phrasings for the command bar, such as `{value} {from} to {to}`; each placeholder names a number or enum input, and enum options may list `aliases` |
 | `screeningLabel` | string | 0–1 | required when the output could pass for a study, a bill, or a utility decision |
 
 **Evidence kinds.** `own-examples` (supports level 1), `reference-output` (a committed file under `verify/reference/`, level 2), `published-example` (a cited published worked example with a committed file, level 2), `field-case` (level 3, at least 3). A level above what the evidence supports fails the build.
@@ -60,7 +61,7 @@ The deployable file-count gate (`verify/gates/file-count.mjs`) counts `dist/` an
 
 | Command | Runs |
 |---|---|
-| `npm test` (or `node --test "verify/tests/**/*.test.mjs"`) | Unit, golden-vector, and gate tests with `node:test` |
+| `npm test` (or `node --test --test-force-exit "verify/tests/**/*.test.mjs"`) | Unit, golden-vector, and gate tests with `node:test` |
 | `npm run check` (or `node verify/check.mjs`) | Every repository gate against the working tree |
 
 Tests live in `verify/tests/`, mirroring the folder they test, so nothing under `site/` or `core/` ships a test file. Gate fixtures live in `verify/fixtures/gates/`. No install step: `npm` only reads the scripts.

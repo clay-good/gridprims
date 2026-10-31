@@ -1,6 +1,6 @@
 import { UNITS } from './units.mjs';
 
-const options = UNITS.map((u) => ({ value: u.id, label: u.label, unit: u.unit }));
+const options = UNITS.map((u) => ({ value: u.id, label: u.label, unit: u.unit, ...(u.one ? { one: u.one } : {}), ...(u.aliases ? { aliases: u.aliases } : {}) }));
 
 export default {
   id: 'calc.energy-units.convert',
@@ -16,6 +16,7 @@ export default {
   outputs: [
     { name: 'value', label: 'Converted amount', unitFrom: 'to', rounding: { sigFigs: 4 } },
   ],
+  commandForms: ['{value} {from} to {to}', '{value} {from} in {to}', '{value} {from} = {to}', '{from} to {to}'],
   method: 'Convert the amount to joules with its unit\'s definition, then from joules to the target unit. Fuels use EIA\'s published average heat content in Btu.',
   assumptions: [
     'Btu means the International Table Btu, 1,055.05585262 joules.',

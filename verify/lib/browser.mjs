@@ -66,6 +66,26 @@ function waitForLine(child, re, ms) {
   });
 }
 
+/** Every browser process this module started, killed on exit so a timed-out test never leaves one holding the event loop. */
+const children = new Set();
+process.on('exit', () => { for (const c of children) c.kill('SIGKILL'); });
+
+/** @param {import('node:child_process').ChildProcess} child */
+function track(child) {
+  children.add(child);
+  child.once('exit', () => children.delete(child));
+  return child;
+}
+
+/** Reject after ms with a message naming what was being waited for. */
+function within(promise, ms, what) {
+  let timer;
+  return Promise.race([promise, new Promise((_, rej) => { timer = setTimeout(() => rej(new Error(`timed out after ${ms} ms: ${what}`)), ms); })])
+    .finally(() => clearTimeout(timer));
+}
+
+const COMMAND_MS = 30_000;
+
 /** A JSON-over-WebSocket client with numbered commands and event listeners. */
 class Socket {
   /** @param {string} url */
@@ -92,7 +112,7 @@ class Socket {
   send(method, params = {}, extra = {}) {
     const id = this.next++;
     this.ws.send(JSON.stringify({ id, method, params, ...extra }));
-    return new Promise((resolve, reject) => this.pending.set(id, { resolve, reject }));
+    return within(new Promise((resolve, reject) => this.pending.set(id, { resolve, reject })), COMMAND_MS, method);
   }
   on(fn) { this.listeners.push(fn); }
   close() { try { this.ws.close(); } catch { /* already closed */ } }
@@ -124,11 +144,11 @@ export async function launch(kind) {
 
 /** @returns {Promise<Browser>} */
 async function launchChrome(exe, profile) {
-  const child = spawn(exe, [
+  const child = track(spawn(exe, [
     '--headless=new', '--remote-debugging-port=0', `--user-data-dir=${profile}`,
     '--no-first-run', '--no-default-browser-check', '--disable-background-networking',
     '--disable-component-update', '--disable-sync', '--no-sandbox', 'about:blank',
-  ], { stdio: ['ignore', 'ignore', 'pipe'] });
+  ], { stdio: ['ignore', 'ignore', 'pipe'] }));
   const [, wsUrl] = await waitForLine(child, /DevTools listening on (ws:\/\/\S+)/, 20_000);
   const sock = await Socket.open(wsUrl);
   const { targetId } = await sock.send('Target.createTarget', { url: 'about:blank' });
@@ -151,7 +171,7 @@ async function launchChrome(exe, profile) {
       const done = new Promise((r) => { loaded = r; });
       const res = await cmd('Page.navigate', { url });
       if (res.errorText) throw new Error(`navigation failed: ${res.errorText}`);
-      await done;
+      await within(done, COMMAND_MS, `load of ${url}`);
     },
     async evaluate(expression) {
       const r = await cmd('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true });
@@ -189,7 +209,7 @@ const FIREFOX_PREFS = {
 /** @returns {Promise<Browser>} */
 async function launchFirefox(exe, profile) {
   writeFileSync(join(profile, 'user.js'), Object.entries(FIREFOX_PREFS).map(([k, v]) => `user_pref(${JSON.stringify(k)}, ${JSON.stringify(v)});`).join('\n'));
-  const child = spawn(exe, ['--headless', '--remote-debugging-port=0', '--no-remote', '--profile', profile, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] });
+  const child = track(spawn(exe, ['--headless', '--remote-debugging-port=0', '--no-remote', '--profile', profile, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] }));
   const [, wsBase] = await waitForLine(child, /WebDriver BiDi listening on (ws:\/\/\S+)/, 30_000);
   const sock = await Socket.open(`${wsBase.replace(/\/$/, '')}/session`);
   await sock.send('session.new', { capabilities: {} });
@@ -252,7 +272,7 @@ export async function runInSafari(url, asyncScript) {
   const exe = findBrowser('safari');
   if (!exe) return null;
   const port = 45_000 + Math.floor(Math.random() * 10_000);
-  const child = spawn(exe, ['-p', String(port)], { stdio: 'ignore' });
+  const child = track(spawn(exe, ['-p', String(port)], { stdio: 'ignore' }));
   const base = `http://127.0.0.1:${port}`;
   const call = async (method, path, body) => {
     const res = await fetch(base + path, { method, headers: { 'content-type': 'application/json' }, body: body && JSON.stringify(body) });
