@@ -52,7 +52,7 @@ export function setupBill({ i18n, view, when, showOnChart }) {
     const r = priced.rec.sector === 'Residential'
       ? findPlans(series, same, { zone: v.zone, currentId: priced.rec.id, received, have, asOf })
       : compareRates(series, same, { zone: v.zone, currentId: priced.rec.id, received, holidays: $('[data-bill-holidays]').checked, asOf });
-    const shifted = shift && t('compare.shifted', { kw: shift.kw, from: $('#shift-from').selectedOptions[0].dataset.label, to: $('#shift-to').selectedOptions[0].dataset.label, hours: shift.from[1] - shift.from[0], days: shift.days });
+    const shifted = shift && t('compare.shifted', { amount: shift.kwhPerDay !== undefined ? t('compare.shift.amountPerDay', { kwh: shift.kwhPerDay }) : `${shift.kw} kW`, from: $('#shift-from').selectedOptions[0].dataset.label, to: $('#shift-to').selectedOptions[0].dataset.label, hours: shift.from[1] - shift.from[0], days: shift.days });
     $('[data-compare-result]').innerHTML = String(renderRanking(r, i18n, { shifted }));
     panel.dataset.compared = String(Number(panel.dataset.compared ?? 0) + 1);
   }
@@ -96,7 +96,8 @@ export function setupBill({ i18n, view, when, showOnChart }) {
     if (!(kw > 0)) return;
     const from = Number(f.get('from'));
     const to = Number(f.get('to'));
-    compare({ kw, from: [from, from + hours], to: [to, to + hours], days: f.get('days') });
+    const amount = f.get('unit') === 'kWh a day' ? { kwhPerDay: kw } : { kw };
+    compare({ ...amount, from: [from, from + hours], to: [to, to + hours], days: f.get('days') });
   });
   $('[data-bill-holidays]').addEventListener('change', price);
   // An actual bill's total, typed into a month: the difference and its likely causes.

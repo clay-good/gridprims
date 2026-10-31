@@ -110,9 +110,10 @@ export function compareRates(series, records, opts) {
 }
 
 /**
- * Move a constant kW from one daily window to another, conserving each day's energy: a load-shift what-if.
+ * Move load from one daily window to another, conserving each day's energy: a load-shift what-if. The amount
+ * is a constant kW over the window, or kWh a day spread evenly over it (as EV charging is described).
  * @param {{startMs: Float64Array, kwh: Float64Array, intervalMinutes: number}} series
- * @param {{kw: number, from: [number, number], to: [number, number], days: 'weekdays' | 'every day', zone: string}} shift hours, local, end exclusive
+ * @param {{kw?: number, kwhPerDay?: number, from: [number, number], to: [number, number], days: 'weekdays' | 'every day', zone: string}} shift hours, local, end exclusive
  */
 export function shiftLoad(series, shift) {
   const out = Float64Array.from(series.kwh);
@@ -131,8 +132,9 @@ export function shiftLoad(series, shift) {
   for (const d of byDay.values()) {
     if (!d.from.length || !d.to.length) continue;
     let moved = 0;
+    const each = shift.kwhPerDay !== undefined ? shift.kwhPerDay / d.from.length : shift.kw * hours;
     for (const i of d.from) {
-      const take = Math.min(out[i], shift.kw * hours);
+      const take = Math.min(out[i], each);
       out[i] -= take;
       moved += take;
     }

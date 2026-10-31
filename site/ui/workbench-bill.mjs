@@ -38,6 +38,7 @@ export function billPanel({ t }) {
     <p><button class="button" type="button" data-compare-run></button></p>
     <form class="picker-row" data-shift novalidate>
       <div class="field"><label for="shift-kw">${t('compare.shift.kw')}</label><input id="shift-kw" name="kw" class="mono" inputmode="decimal" autocomplete="off"></div>
+      <div class="field"><label for="shift-unit">${t('compare.shift.unit')}</label><select id="shift-unit" name="unit"><option value="kW">kW</option><option value="kWh a day">${t('compare.shift.perDay')}</option></select></div>
       ${['from', 'to'].map((w) => html`<div class="field"><label for="shift-${w}">${t(`compare.shift.${w}`)}</label><select id="shift-${w}" name="${w}">${Array.from({ length: 24 }, (_, h) => html`<option value="${h}" data-label="${hourText(h)}">${t('compare.shift.hourRange', { from: hourText(h), to: hourText(h + 1) })}</option>`)}</select></div>`)}
       <div class="field"><label for="shift-hours">${t('compare.shift.hours')}</label><input id="shift-hours" name="hours" class="mono" inputmode="numeric" autocomplete="off" value="4"></div>
       <div class="field"><label for="shift-days">${t('compare.shift.days')}</label><select id="shift-days" name="days"><option value="weekdays">${t('compare.shift.weekdays')}</option><option value="every day">${t('compare.shift.everyDay')}</option></select></div>

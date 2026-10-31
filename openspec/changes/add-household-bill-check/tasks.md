@@ -19,7 +19,7 @@
 - [x] 3.2 Plan finder ranking with conditions and URDB metadata; verify the $128 and EV scenarios
 - [ ] 3.3 Totals-based TOU estimate and its error report; verify the published estimate error on three fixtures
 - [ ] 3.4 Texas EFL and CCA entry with supply-plus-delivery pricing; verify the $163.34 and CCA scenarios
-- [ ] 3.5 Shift what-if; verify the EV-shift scenario
+- [x] 3.5 Shift what-if; verify the EV-shift scenario
 
 ## 4. Surfaces
 

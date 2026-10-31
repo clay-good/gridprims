@@ -1,0 +1,16 @@
+{
+  "source": "Computed by hand for household bill check task 3.5 (shift what-if, scenario 'Move EV charging'); see the work for each figure.",
+  "load": "2025, hourly in UTC: 1 kW every hour, plus 10 kWh of EV charging spread over 6 pm to 9 pm every day (34 kWh a day, 12,410 kWh a year). 2025 has 261 weekdays and 104 weekend days.",
+  "shift": { "kwhPerDay": 10, "from": [18, 21], "to": [0, 5], "days": "every day" },
+  "plans": [
+    { "id": "tou-evening", "name": "Time-of-use, 4 pm to 9 pm weekdays", "peakHours": [16, 21], "weekdaysOnly": true, "peak": 0.30, "off": 0.10,
+      "before": 2024.00, "beforeWork": "weekday 15 kWh × $0.30 + 19 kWh × $0.10 = $6.40; weekend 34 × $0.10 = $3.40; 261 × $6.40 + 104 × $3.40",
+      "after": 1502.00, "afterWork": "weekday 5 × $0.30 + 29 × $0.10 = $4.40; 261 × $4.40 + 104 × $3.40" },
+    { "id": "tou-overnight", "name": "Time-of-use, midnight to 5 am every day", "peakHours": [5, 24], "weekdaysOnly": false, "peak": 0.15, "off": 0.05,
+      "before": 1679.00, "beforeWork": "5 kWh × $0.05 + 29 kWh × $0.15 = $4.60 a day × 365",
+      "after": 1314.00, "afterWork": "15 kWh × $0.05 + 19 kWh × $0.15 = $3.60 a day × 365" },
+    { "id": "flat", "name": "Flat", "flat": 0.13, "before": 1613.30, "beforeWork": "12,410 kWh × $0.13", "after": 1613.30, "afterWork": "the same energy" }
+  ],
+  "rankingBefore": ["flat", "tou-overnight", "tou-evening"],
+  "rankingAfter": ["tou-overnight", "tou-evening", "flat"]
+}

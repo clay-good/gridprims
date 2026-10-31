@@ -33,3 +33,28 @@ test('an EV plan sits under "Requires an EV" with its cost on this use until "I 
   assert.deepEqual(withEv.ranked.map((p) => p.rec.id), ['ev', 'r1']);
   assert.deepEqual(withEv.requires, []);
 });
+
+test('moving 10 kWh a day of EV charging from 6–9 pm to midnight–5 am updates every plan to the hand-computed values and re-sorts', async () => {
+  const { readFileSync } = await import('node:fs');
+  const { shiftLoad } = await import('../../../core/lib/rate-compare.mjs');
+  const fx = JSON.parse(readFileSync(new URL('../../fixtures/bill/ev-shift.json', import.meta.url), 'utf8'));
+  const start = Date.parse('2025-01-01T00:00:00Z');
+  const startMs = Float64Array.from({ length: 8760 }, (_, i) => start + i * 3_600_000);
+  const load = { startMs, kwh: Float64Array.from(startMs, (ms) => { const h = new Date(ms).getUTCHours(); return 1 + (h >= 18 && h < 21 ? 10 / 3 : 0); }), intervalMinutes: 60 };
+  const schedule = (p) => Array.from({ length: 12 }, () => Array.from({ length: 24 }, (_, h) => (h >= p.peakHours[0] && h < p.peakHours[1] ? 1 : 0)));
+  const plans = fx.plans.map((p) => {
+    if (p.flat) return plan(p.id, p.name, p.flat);
+    const r = plan(p.id, p.name, p.off);
+    r.energy = { periods: [{ tiers: [{ rate: p.off, basis: 'kWh' }] }, { tiers: [{ rate: p.peak, basis: 'kWh' }] }], weekday: schedule(p), weekend: p.weekdaysOnly ? schedule({ peakHours: [0, 0] }) : schedule(p) };
+    return r;
+  });
+  const moved = shiftLoad(load, { ...fx.shift, zone: 'UTC' });
+  const before = findPlans(load, plans, { zone: 'UTC', currentId: 'flat', asOf: '2026-10-30' });
+  const after = findPlans(moved, plans, { zone: 'UTC', currentId: 'flat', asOf: '2026-10-30' });
+  for (const p of fx.plans) {
+    assert.ok(Math.abs(before.ranked.find((x) => x.rec.id === p.id).annual - p.before) <= 0.01, `${p.id} before`);
+    assert.ok(Math.abs(after.ranked.find((x) => x.rec.id === p.id).annual - p.after) <= 0.01, `${p.id} after`);
+  }
+  assert.deepEqual(before.ranked.map((x) => x.rec.id), fx.rankingBefore);
+  assert.deepEqual(after.ranked.map((x) => x.rec.id), fx.rankingAfter);
+});
