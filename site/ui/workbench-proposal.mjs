@@ -7,8 +7,8 @@ import { html } from '../lib/html.mjs';
 const money = (x) => `$${Math.abs(x).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const signed = (x) => `${x >= 0 ? '+' : '−'}${money(x)}`;
 
-/** The empty panel. @param {{t: Function}} i18n */
-export function proposalPanel({ t }) {
+/** The empty panel, with the curated regulators to choose from. @param {{t: Function}} i18n @param {any[]} regulators */
+export function proposalPanel({ t }, regulators) {
   return html`<section class="panel picker" data-proposal hidden aria-labelledby="proposal-title">
   <h2 id="proposal-title">${t('proposal.title')}</h2>
   <p>${t('proposal.intro')}</p>
@@ -19,6 +19,7 @@ export function proposalPanel({ t }) {
     <h3>${t('draft.title')}</h3>
     <p class="unit-hint">${t('draft.intro')}</p>
     <div class="picker-row">
+      <div class="field"><label for="draft-state">${t('draft.state')}</label><select id="draft-state" name="state"><option value="">${t('draft.stateNone')}</option>${regulators.map((r) => html`<option value="${r.state}" data-name="${r.name}" data-home="${r.home}" data-docket="${r.docket ?? ''}" data-comment="${r.comment ?? ''}">${r.stateName}</option>`)}</select></div>
       <div class="field"><label for="draft-regulator">${t('draft.regulator')}</label><input id="draft-regulator" name="regulator" autocomplete="off"></div>
       <div class="field"><label for="draft-docket">${t('draft.docket')}</label><input id="draft-docket" name="docket" class="mono" autocomplete="off"></div>
       <div class="field"><label for="draft-type">${t('draft.customerType')}</label><select id="draft-type" name="customerType">${['residential', 'small business', 'commercial', 'industrial'].map((c) => html`<option value="${c}">${t(`draft.type.${c}`)}</option>`)}</select></div>

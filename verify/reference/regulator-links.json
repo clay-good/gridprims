@@ -1,0 +1,570 @@
+{
+  "checked": "2026-10-31",
+  "links": {
+    "https://apps.apsc.arkansas.gov/olsv2/docket_search.asp": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://apps.apsc.arkansas.gov/olsv2/publiccomment.asp": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://apps.cpuc.ca.gov/apex/f?p=401:1": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://apps.psc.nd.gov/cases/pscasesearch": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://apps.psc.wi.gov/pages/CMS.htm": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://apps.psc.wi.gov/pages/publicComment.htm": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://apps.puc.state.or.us/DocketPublicComment": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://apps.puc.state.or.us/edocketsSearch/eDocketsSearch/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://apsc.arkansas.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://ctsportal.psc.ms.gov/portal/document-search": {
+      "status": 200,
+      "state": "ok",
+      "note": "checked with curl; Node could not connect (UNABLE_TO_VERIFY_LEAF_SIGNATURE)"
+    },
+    "https://dcpsc.org/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://delafile.delaware.gov/AdvancedSearch/AdvancedSearchDocket.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://delafile.delaware.gov/Complaints/AddPublicComments.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://depsc.delaware.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://dis.puc.state.oh.us/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://dis.puc.state.oh.us/PublicCommentEfiling.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://dms.psc.sc.gov/Web/Dockets": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://dms.wyo.gov/external/publicusers.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://documents.dps.ny.gov/public/common/search.html": {
+      "status": 200,
+      "state": "ok",
+      "note": "checked with curl; Node could not connect (ECONNRESET)"
+    },
+    "https://dps.ny.gov/": {
+      "status": 403,
+      "state": "blocked"
+    },
+    "https://dps.ny.gov/how-post-comments-and-receive-updates-psc-cases": {
+      "status": 403,
+      "state": "blocked"
+    },
+    "https://e360.prc.nm.gov/portal/public/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://edocket.azcc.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://edocket.dcpsc.org/public/public_comments": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://edocket.dcpsc.org/public/search": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://eeaonline.eea.state.ma.us/DPU/Fileroom/dockets/bynumber": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://efiling.azcc.gov/online-services/utilities-public-comment-external": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://efiling.web.commerce.state.mn.us/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://efs.iowa.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://epuc.vermont.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://epuc.vermont.gov/?q=node/63": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://hpuc.my.site.com/cdms/s/search": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://icc.illinois.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://icc.illinois.gov/consumers/make-a-public-comment": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://icc.illinois.gov/docket": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://interchange.puc.texas.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://iuc.iowa.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://iuc.iowa.gov/customer-assistance/how-do-i-file-comment-objection-or-letter-support-open-docket": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://kcc-connect.kcc.ks.gov/s/custom-search": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://kcc-connect.kcc.ks.gov/s/public-comments": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://lpsc.louisiana.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://lpscpubvalence.lpsc.louisiana.gov/portal/lpsc-web-portal": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://mi-psc.my.site.com/s/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://mn.gov/puc/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://mn.gov/puc/get-involved/public-comments/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://mpuc-cms.maine.gov/CQM.Public.WebUI/Comments/CaseNumberSearch.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://mpuc-cms.maine.gov/CQM.Public.WebUI/Common/AdvanceSearch.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://ncuc.gov/contactus.html": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://oklahoma.gov/occ.html": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://oklahoma.gov/occ/court-dockets/electronic-case-filing.html": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://oklahoma.gov/occ/divisions/public-utility/case-public-comments.html": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://portal.ct.gov/PURA/Consumer-Services/File-a-Public-Comment/File-a-Public-Comment": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://portal.ct.gov/PURA/Docket/Docket-and-Document-Information": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://portal.ct.gov/pura": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.alabama.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.ga.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.ga.gov/facts-advanced-search/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.ga.gov/public-comments/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.ky.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.ky.gov/Case/SearchCases/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.ky.gov/Case/SearchCasesPublicComments": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.maryland.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.maryland.gov/online-services/file-a-public-comment/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.mo.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.mo.gov/General/Submit_Comments": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.mt.gov/": {
+      "status": 200,
+      "state": "ok",
+      "note": "checked with curl; Node could not connect (UNABLE_TO_VERIFY_LEAF_SIGNATURE)"
+    },
+    "https://psc.mt.gov/Documents-Proceedings/Public-Participation": {
+      "status": 200,
+      "state": "ok",
+      "note": "checked with curl; Node could not connect (UNABLE_TO_VERIFY_LEAF_SIGNATURE)"
+    },
+    "https://psc.nebraska.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.sc.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.utah.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.utah.gov/electric/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.wi.gov/Pages/Home.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.wyo.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://psc.wyo.gov/about-us/contact-us": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://publicaccess.bpu.state.nj.us/": {
+      "status": 200,
+      "state": "ok",
+      "note": "checked with curl; Node could not connect (TypeError)"
+    },
+    "https://puc.colorado.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puc.colorado.gov/participate": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puc.hawaii.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puc.hawaii.gov/all-puc-faq/what-are-different-ways-to-get-involved-in-puc-proceedings-2/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puc.idaho.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puc.idaho.gov/Form/CaseComment": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puc.idaho.gov/case": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puc.sd.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puc.sd.gov/Dockets/Electric/default.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puc.sd.gov/contact/guidelines.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puc.vermont.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://puco.ohio.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://rca.alaska.gov/": {
+      "status": 403,
+      "state": "blocked"
+    },
+    "https://rca.alaska.gov/RCAWeb/RCALibrary/RCALibrary.aspx": {
+      "status": 403,
+      "state": "blocked"
+    },
+    "https://rca.alaska.gov/RCAWeb/WhatsNew/PublicNoticesComments.aspx": {
+      "status": 403,
+      "state": "blocked"
+    },
+    "https://reddi.mt.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://ripuc.ri.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://ripuc.ri.gov/events-and-actions/commission-dockets": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://starw1.ncuc.gov/NCUC/page/Dockets/portal.aspx": {
+      "status": 403,
+      "state": "blocked"
+    },
+    "https://tpucdockets.tn.gov/indexes/TPUCActiveDocketIndex.htm": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://webpscxb.pscmaryland.com/DMS/home": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.azcc.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.cpuc.ca.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.cpuc.ca.gov/about-cpuc/divisions/news-and-public-information-office/public-advisors-office/providing-public-comments-at-the-cpuc": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.dora.state.co.us/pls/efi/EFI.homepage": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.efis.psc.mo.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.floridapsc.com/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.floridapsc.com/customer-comment": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.floridapsc.com/dockets": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.in.gov/iurc/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.in.gov/iurc/docketed-cases/find-a-docketed-case/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.kcc.ks.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.maine.gov/mpuc/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.mass.gov/orgs/department-of-public-utilities": {
+      "status": 403,
+      "state": "blocked"
+    },
+    "https://www.michigan.gov/mpsc": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.michigan.gov/mpsc/consumer/get-involved": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.ncuc.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.nj.gov/bpu/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.oregon.gov/puc/Pages/default.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.prc.nm.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.prc.nm.gov/get-involved/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.psc.ms.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.psc.nd.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.psc.state.wv.us/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.psc.state.wv.us/WebDocket/default.htm": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.psc.state.wv.us/scripts/onlinecomments/default.cfm": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.pscpublicaccess.alabama.gov/pscpublicaccess/page/psc-searches/portal.aspx": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.puc.nh.gov/": {
+      "status": 403,
+      "state": "blocked"
+    },
+    "https://www.puc.nh.gov/VirtualFileRoom/": {
+      "status": 403,
+      "state": "blocked"
+    },
+    "https://www.puc.nh.gov/public-participation/filing-public-comments": {
+      "status": 403,
+      "state": "blocked"
+    },
+    "https://www.puc.nv.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.puc.nv.gov/consumers/consumer-participation-in-pucn-proceedings/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.puc.nv.gov/dockets/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.puc.pa.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.puc.pa.gov/general/onlineforms/pdf/Obj-Com_Proposed_Rate_Increase.pdf": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.puc.pa.gov/search/document-search/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.puc.texas.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.scc.virginia.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.scc.virginia.gov/case-information/submit-public-comments/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.scc.virginia.gov/docketsearch": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.tn.gov/tpuc.html": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.tn.gov/tpuc/agency/public-participation-/tpuc-online-public-comment-form.html": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.utc.wa.gov/": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.utc.wa.gov/consumers/submit-comment/public-comment-form": {
+      "status": 200,
+      "state": "ok"
+    },
+    "https://www.utc.wa.gov/documents-and-proceedings/dockets": {
+      "status": 200,
+      "state": "ok"
+    }
+  }
+}

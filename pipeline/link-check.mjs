@@ -1,13 +1,17 @@
 // The weekly outbound link check (platform/data-operations, "Outbound link
 // checks"): every link in manifests, registry entries, and dataset terms is
-// fetched; broken and moved links go to the health record and an issue, and
-// nothing is blocked.
+// fetched, and so is every curated regulator link; broken, moved, and blocked
+// links go to the health record and an issue, and nothing is blocked. A 403
+// or 429 is "blocked": some state sites refuse automated checks, so a person
+// checks those by hand.
 //   node pipeline/link-check.mjs
 
+import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { TOOLS } from '../core/tools/index.mjs';
+import REGULATORS from '../data/curated/regulators.mjs';
 import { recordRun } from './lib/health.mjs';
 import { github } from './lib/github.mjs';
 import { ROOT } from './run.mjs';
@@ -26,6 +30,7 @@ export async function outboundLinks(root = ROOT) {
     add(e.sourceUrl, `${e.id} source`);
     add(e.terms.url, `${e.id} terms`);
   }
+  for (const r of REGULATORS) for (const k of ['home', 'docket', 'comment']) add(r[k], `${r.state} regulator ${k}`);
   return links;
 }
 
@@ -46,8 +51,16 @@ export async function linkCheck(o = {}) {
       const res = await f(url, { method: 'GET', redirect: 'follow', headers: { 'user-agent': 'gridprims-link-check (+https://gridprims.com)' } });
       status = res.status;
       finalUrl = res.url || url;
-    } catch { status = 0; }
-    const state = status === 0 || status >= 400 ? 'broken' : finalUrl.replace(/\/$/, '') !== url.replace(/\/$/, '') ? 'moved' : 'ok';
+    } catch {
+      // Some state servers leave out an intermediate certificate or drop Node's TLS handshake; browsers and curl manage.
+      if (!o.fetch) {
+        const curl = spawnSync('curl', ['-s', '-o', '/dev/null', '-L', '--max-time', '30', '-w', '%{http_code}\\n%{url_effective}', url], { encoding: 'utf8' });
+        const [code, effective] = (curl.stdout ?? '').split('\n');
+        status = Number(code) || 0;
+        if (effective) finalUrl = effective;
+      } else status = 0;
+    }
+    const state = status === 403 || status === 429 ? 'blocked' : status === 0 || status >= 400 ? 'broken' : finalUrl.replace(/\/$/, '') !== url.replace(/\/$/, '') ? 'moved' : 'ok';
     results.push({ url, state, status, ...(state === 'moved' ? { finalUrl } : {}), usedBy });
   }
   const bad = results.filter((r) => r.state !== 'ok');

@@ -39,6 +39,26 @@ export function setupProposal({ i18n, view, priced, utility, period, version }) 
     panel.dataset.compared = String(Number(panel.dataset.compared ?? 0) + 1);
   });
 
+  // A state fills in its regulator's name and links; the person can still type their own.
+  const stateSelect = draftForm.querySelector('[name=state]');
+  const regulator = draftForm.querySelector('[name=regulator]');
+  stateSelect.addEventListener('change', () => {
+    const o = stateSelect.selectedOptions[0];
+    if (o?.dataset.name && (!regulator.value || regulator.value === regulator.dataset.filled)) regulator.value = regulator.dataset.filled = o.dataset.name;
+  });
+  /** Links to the chosen regulator's own pages, where the person submits. */
+  const regulatorLinks = () => {
+    const o = stateSelect.selectedOptions[0];
+    if (!o?.dataset.home) return [];
+    const link = (href, text) => Object.assign(document.createElement('a'), { href, textContent: text, rel: 'noopener', target: '_blank' });
+    const p = Object.assign(document.createElement('p'), { className: 'unit-hint' });
+    p.dataset.regulatorLinks = '';
+    const parts = [link(o.dataset.comment || o.dataset.home, o.dataset.comment ? t('draft.howToComment', { name: o.dataset.name }) : t('draft.regulatorSite', { name: o.dataset.name }))];
+    if (o.dataset.docket) parts.push(document.createTextNode(' · '), link(o.dataset.docket, t('draft.docketSearch')));
+    p.append(...parts);
+    return [p];
+  };
+
   draftForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!last) return;
@@ -55,7 +75,7 @@ export function setupProposal({ i18n, view, priced, utility, period, version }) 
       const page = `<!doctype html><meta charset="utf-8"><title>${t('draft.title')}</title><pre style="white-space:pre-wrap;font:12pt/1.5 Georgia,serif">${text.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c])}</pre><script>print()</script>`;
       open(URL.createObjectURL(new Blob([page], { type: 'text/html' })));
     });
-    box.replaceChildren(area, copy, document.createTextNode(' '), printBtn, Object.assign(document.createElement('p'), { className: 'unit-hint', textContent: t('draft.yours') }));
+    box.replaceChildren(area, copy, document.createTextNode(' '), printBtn, ...regulatorLinks(), Object.assign(document.createElement('p'), { className: 'unit-hint', textContent: t('draft.yours') }));
     panel.dataset.draft = text;
   });
 

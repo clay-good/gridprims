@@ -64,12 +64,15 @@ for (const kind of ['chrome', 'firefox']) {
       await waitFor(browser, "document.querySelector('[data-proposal]').dataset.compared === '1'");
       assert.match(await browser.evaluate("document.querySelector('[data-differences]').textContent"), /^Fixed charge: \$[\d.,]+ → \$[\d.,]+ per month$/);
       assert.match(await browser.evaluate("document.querySelector('[data-proposal-diff]').textContent"), /^\+\$10\.00$/, 'the sample covers one month');
-      await browser.evaluate("(() => { const f = document.querySelector('[data-draft-form]'); f.regulator.value = 'Public Utility Commission of Texas'; f.docket.value = '55555'; f.requestSubmit(); })()");
+      await browser.evaluate("(() => { const f = document.querySelector('[data-draft-form]'); f.state.value = 'TX'; f.state.dispatchEvent(new Event('change')); f.docket.value = '55555'; f.requestSubmit(); })()");
       await waitFor(browser, "document.querySelector('[data-proposal]').dataset.draft");
       const draft = await browser.evaluate("document.querySelector('[data-proposal]').dataset.draft");
       assert.match(draft, /^To the Public Utility Commission of Texas, regarding docket 55555:/);
       assert.match(draft, /\[Your own views go here\.\]/);
       assert.doesNotMatch(draft, /sample-office-15min/);
+      // The only actions are copy, print, and links to the regulator's own pages.
+      assert.equal(await browser.evaluate("document.querySelectorAll('[data-draft-result] button').length"), 2);
+      assert.match(await browser.evaluate("document.querySelector('[data-regulator-links] a').href"), /^https:\/\/[^/]*puc\.texas\.gov\//);
       // The comparison card: the top three rates, the period, the URDB date, and gridprims.com.
       await browser.evaluate("document.querySelector('[data-copy-card=ranking]').click()");
       await waitFor(browser, "document.querySelector('[data-bill]').dataset.card?.startsWith('What this load would have cost')");

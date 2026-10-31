@@ -130,7 +130,7 @@ test('link check: a moved handoff is recorded with its new target and every page
   const moved = 'https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php';
   assert.ok(links.has(moved));
   const f = async (url) => {
-    const res = new Response('ok', { status: url.includes('nist.gov') ? 404 : 200 });
+    const res = new Response('ok', { status: url.includes('nist.gov') ? 404 : url.includes('ripuc.ri.gov') ? 403 : 200 });
     Object.defineProperty(res, 'url', { value: url === moved ? 'https://www.eia.gov/energyexplained/units-and-calculators/' : url });
     return res;
   };
@@ -141,6 +141,9 @@ test('link check: a moved handoff is recorded with its new target and every page
   assert.equal(m.finalUrl, 'https://www.eia.gov/energyexplained/units-and-calculators/');
   assert.deepEqual(m.usedBy, ['calc.energy-units.convert citation', 'calc.energy-units.convert handoff']);
   assert.equal(results.find((x) => x.url.includes('nist.gov')).state, 'broken');
+  const ri = results.find((x) => x.url === 'https://ripuc.ri.gov/');
+  assert.equal(ri.state, 'blocked', 'a site that refuses automated checks is blocked, not broken');
+  assert.deepEqual(ri.usedBy, ['RI regulator home']);
   assert.equal(host.issues.length, 1);
   assert.deepEqual(readHealth(r).links, results);
 });

@@ -21,6 +21,7 @@ import { WORKBENCH_CAPABILITIES } from '../ui/workbench-review.mjs';
 import { ratingTablePanel } from '../ui/line-rating-table.mjs';
 import { conductorPicker } from '../ui/conductor-picker.mjs';
 import { ferc1Picker } from '../ui/ferc1-picker.mjs';
+import REGULATORS from '../../data/curated/regulators.mjs';
 
 /** Sections a tool's page adds below its inputs, with the script that runs them. */
 const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'] };
@@ -254,7 +255,7 @@ export function filesPage({ i18n, reviewed = new Set() }) {
   <section class="panel report-view" data-report-view hidden aria-labelledby="report-view-title"></section>
   <section class="panel" data-insights></section>
   ${billPanel(i18n, reviewed)}
-  ${proposalPanel(i18n)}
+  ${proposalPanel(i18n, REGULATORS)}
   ${cpPanel(i18n, reviewed)}
   <section class="panel" data-receipt></section>
 </article>
