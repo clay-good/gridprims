@@ -3,8 +3,9 @@
 // the lookup shards a ZIP needs and the chosen utility's rate file.
 
 import { compareActual, intervalBills } from '../../core/lib/interval-bill.mjs';
+import { compareRates, shiftLoad } from '../../core/lib/rate-compare.mjs';
 import { readNumber } from '../../core/lib/bill-totals.mjs';
-import { rateOption, renderBills, renderComparison } from '../ui/workbench-bill.mjs';
+import { rateOption, renderBills, renderComparison, renderRanking } from '../ui/workbench-bill.mjs';
 import { getJson, utilitiesForZip } from './zip-utilities.js';
 
 /**
@@ -18,6 +19,7 @@ export function setupBill({ i18n, view, when, showOnChart }) {
   const el = (tag, text, attrs = {}) => Object.assign(document.createElement(tag), { textContent: text ?? '' }, attrs);
   let utilities = [];
   let rates = [];
+  let asOf = null;
   let priced = null; // {rec, bills}
 
   function price() {
@@ -30,6 +32,23 @@ export function setupBill({ i18n, view, when, showOnChart }) {
     $('[data-bill-result]').innerHTML = String(renderBills(rec, bills, i18n, { when: (ms) => when(ms, v.zone), dataStart }));
     priced = { rec, bills };
     panel.dataset.priced = rec.id;
+    const same = rates.filter((r) => r.sector === rec.sector);
+    $('[data-compare-run]').textContent = t('compare.run', { count: same.length, sector: (rec.sector ?? '').toLowerCase() });
+    $('[data-compare-field]').hidden = same.length < 2;
+    $('[data-compare-result]').replaceChildren();
+  }
+
+  /** Every rate of the current rate's class on the loaded file, optionally with a load shift applied. */
+  function compare(shift) {
+    const v = view();
+    if (!v || !priced) return;
+    const same = rates.filter((r) => r.sector === priced.rec.sector);
+    const received = v.result.series.find((s) => s.meter === v.series.meter && s.channel === 'received' && s !== v.series);
+    const series = shift ? shiftLoad(v.series, { ...shift, zone: v.zone }) : v.series;
+    const r = compareRates(series, same, { zone: v.zone, currentId: priced.rec.id, received, holidays: $('[data-bill-holidays]').checked, asOf });
+    const shifted = shift && t('compare.shifted', { kw: shift.kw, from: $('#shift-from').selectedOptions[0].dataset.label, to: $('#shift-to').selectedOptions[0].dataset.label, hours: shift.from[1] - shift.from[0], days: shift.days });
+    $('[data-compare-result]').innerHTML = String(renderRanking(r, i18n, { shifted }));
+    panel.dataset.compared = String(Number(panel.dataset.compared ?? 0) + 1);
   }
 
   async function showUtility() {
@@ -38,7 +57,7 @@ export function setupBill({ i18n, view, when, showOnChart }) {
     $('[data-bill-holidays-field]').hidden = true;
     $('[data-bill-result]').replaceChildren();
     if (!u) return;
-    rates = await getJson(`/bills/rates/${u.id}.json`).catch(() => []);
+    ({ rates = [], asOf = null } = await getJson(`/bills/rates/${u.id}.json`).catch(() => ({})));
     if (!rates.length) { $('[data-bill-result]').append(el('p', t('bill.none', { utility: u.name }))); return; }
     $('[data-bill-rate]').replaceChildren(...rates.map((r, i) => el('option', rateOption(r, i18n), { value: String(i) })));
     $('[data-bill-rate-field]').hidden = false;
@@ -61,6 +80,17 @@ export function setupBill({ i18n, view, when, showOnChart }) {
   });
   $('[data-bill-utility]').addEventListener('change', showUtility);
   $('[data-bill-rate]').addEventListener('change', price);
+  $('[data-compare-run]').addEventListener('click', () => compare(null));
+  $('[data-shift]').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const kw = readNumber(String(f.get('kw')));
+    const hours = Math.max(1, Math.min(12, Math.round(Number(f.get('hours')) || 1)));
+    if (!(kw > 0)) return;
+    const from = Number(f.get('from'));
+    const to = Number(f.get('to'));
+    compare({ kw, from: [from, from + hours], to: [to, to + hours], days: f.get('days') });
+  });
   $('[data-bill-holidays]').addEventListener('change', price);
   // An actual bill's total, typed into a month: the difference and its likely causes.
   $('[data-bill-result]').addEventListener('input', (e) => {

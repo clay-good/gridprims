@@ -39,6 +39,12 @@ export function fromUrdb(r) {
     serviceType: r.service_type, source: r.source_reference, effective: r.effective_date, end: r.end_date, lastRevised: r.last_revised,
     fixed: null, minimum: null, energy: null, demand: null, flatDemand: null, ratchet: null,
     demandWindowMinutes: 15, demandWindowStated: false, reactivePowerCharge: null, unmodeled, conversions,
+    // Who the rate is for, as URDB states it: monthly peak demand, monthly energy, and service voltage limits.
+    eligibility: {
+      demandMinKw: r.demand_min_kw ?? null, demandMaxKw: r.demand_max_kw ?? null,
+      energyMinKwh: r.energy_min_kwh ?? null, energyMaxKwh: r.energy_max_kwh ?? null,
+      serviceMinV: r.service_min_v ?? null, serviceMaxV: r.service_max_v ?? null, voltage: r.voltage_category ?? null,
+    },
   };
 
   if (r.fixed_charge) {
@@ -153,5 +159,6 @@ export function fromManual(f) {
     ratchet: null,
     demandWindowMinutes: f.demandWindowMinutes ?? 15, demandWindowStated: f.demandWindowMinutes !== undefined, reactivePowerCharge: null,
     unmodeled: [], conversions: [],
+    eligibility: { demandMinKw: null, demandMaxKw: null, energyMinKwh: null, energyMaxKwh: null, serviceMinV: null, serviceMaxV: null, voltage: null },
   };
 }

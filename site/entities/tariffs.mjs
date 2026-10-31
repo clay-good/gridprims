@@ -46,5 +46,5 @@ export function rateRecords(dataDir) {
     list.push(fromUrdb(r));
   }
   for (const list of byUtility.values()) list.sort((a, b) => (b.effective ?? '').localeCompare(a.effective ?? '') || a.name.localeCompare(b.name));
-  return byUtility;
+  return { byUtility, asOf: urdb.manifest.asOf };
 }

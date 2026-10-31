@@ -197,7 +197,7 @@ export async function build(opts = {}) {
   const records = rateRecords(join(ROOT, 'data'));
   if (records) {
     mkdirSync(join(outDir, 'bills/rates'), { recursive: true });
-    for (const [id, list] of records) writeFileSync(join(outDir, `bills/rates/${id}.json`), JSON.stringify(list));
+    for (const [id, list] of records.byUtility) writeFileSync(join(outDir, `bills/rates/${id}.json`), JSON.stringify({ asOf: records.asOf, rates: list }));
   }
   for (const utility of utilities?.utilities ?? []) if (utility.page) write(utilityPath(utility.id), utilityPage({ utility, sources: utilities.sources, i18n, titleName: utilityNames.get(utility.id), plantHasPage: (id) => plantIds.has(id) }));
   write('/report/', reportPage({ i18n }));

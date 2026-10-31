@@ -22,10 +22,10 @@
 
 ## 4. Tariff comparison
 
-- [ ] 4.1 Implement eligibility filtering and ranking; verify the ineligible-rate scenario
-- [ ] 4.2 Implement component breakdown and the one-sentence driver; verify the TOU scenario
-- [ ] 4.3 Implement the load-shift what-if; verify the chiller scenario updates all rates
-- [ ] 4.4 Implement rate-coverage and staleness notes; verify the 24-month warning
+- [x] 4.1 Implement eligibility filtering and ranking; verify the ineligible-rate scenario
+- [x] 4.2 Implement component breakdown and the one-sentence driver; verify the TOU scenario
+- [x] 4.3 Implement the load-shift what-if; verify the chiller scenario updates all rates
+- [x] 4.4 Implement rate-coverage and staleness notes; verify the 24-month warning
 
 ## 5. Coincident peak
 

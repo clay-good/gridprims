@@ -9,6 +9,7 @@ import { formatNumber } from '../../core/lib/precision.mjs';
 
 const money = (x) => `$${x.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const qty = (x) => formatNumber(x, { decimals: 2 });
+export const hourText = (h) => (h % 24 === 0 ? 'midnight' : h === 12 ? 'noon' : h < 12 ? `${h} am` : `${h - 12} pm`);
 const rateText = (r, unit) => (unit === 'kWh' ? `$${formatNumber(r, { decimals: 5 })}/kWh` : unit === 'kW' || unit === 'kVA' ? `$${formatNumber(r, { decimals: 2 })}/${unit}` : money(r));
 
 /** The empty panel the page script fills. @param {{t: Function}} i18n */
@@ -26,6 +27,18 @@ export function billPanel({ t }) {
   <div class="field" data-bill-rate-field hidden><label for="bill-rate">${t('bill.rate')}</label><select id="bill-rate" data-bill-rate></select></div>
   <p data-bill-holidays-field hidden><label><input type="checkbox" data-bill-holidays> ${t('bill.holidays')}</label></p>
   <div data-bill-result aria-live="polite"></div>
+  <div data-compare-field hidden>
+    <h3>${t('compare.title')}</h3>
+    <p><button class="button" type="button" data-compare-run></button></p>
+    <form class="picker-row" data-shift novalidate>
+      <div class="field"><label for="shift-kw">${t('compare.shift.kw')}</label><input id="shift-kw" name="kw" class="mono" inputmode="decimal" autocomplete="off"></div>
+      ${['from', 'to'].map((w) => html`<div class="field"><label for="shift-${w}">${t(`compare.shift.${w}`)}</label><select id="shift-${w}" name="${w}">${Array.from({ length: 24 }, (_, h) => html`<option value="${h}" data-label="${hourText(h)}">${t('compare.shift.hourRange', { from: hourText(h), to: hourText(h + 1) })}</option>`)}</select></div>`)}
+      <div class="field"><label for="shift-hours">${t('compare.shift.hours')}</label><input id="shift-hours" name="hours" class="mono" inputmode="numeric" autocomplete="off" value="4"></div>
+      <div class="field"><label for="shift-days">${t('compare.shift.days')}</label><select id="shift-days" name="days"><option value="weekdays">${t('compare.shift.weekdays')}</option><option value="every day">${t('compare.shift.everyDay')}</option></select></div>
+      <button class="button" type="submit">${t('compare.shift.run')}</button>
+    </form>
+    <div data-compare-result aria-live="polite"></div>
+  </div>
   <p class="strip">${t('bill.privacy')}</p>
 </section>`;
 }
@@ -68,4 +81,23 @@ export function renderComparison(c, computed, actual, { t }) {
   const sign = c.diff > 0 ? '+' : c.diff < 0 ? '−' : '';
   return html`<p>${t('bill.compare', { actual: money(actual), computed: money(computed), diff: `${sign}${money(Math.abs(c.diff))}`, pct: c.pct === null ? '' : ` (${sign}${Math.abs(c.pct)}%)` })}</p>
   ${c.diff !== 0 ? html`<p>${t('bill.causes')}</p><ul>${c.causes.map((x) => html`<li>${x}</li>`)}</ul>` : ''}`;
+}
+
+/**
+ * The ranking of a utility's rates on the loaded file.
+ * @param {ReturnType<typeof import('../../core/lib/rate-compare.mjs').compareRates>} r
+ * @param {{t: Function, date: Function}} i18n
+ * @param {{shifted?: string}} [opts] a description of the load shift applied, if any
+ */
+export function renderRanking(r, { t, date }, { shifted } = {}) {
+  const pct = (x) => `${x > 0 ? '+' : x < 0 ? '−' : ''}${Math.abs(x)}%`;
+  const diff = (x) => `${x > 0 ? '+' : x < 0 ? '−' : ''}${money(Math.abs(x))}`;
+  return html`${shifted ? html`<p class="strip">${shifted}</p>` : ''}
+  <p>${t('compare.pastUse')}</p>
+  <table data-ranking><thead><tr><th scope="col">${t('compare.col.rate')}</th><th scope="col" class="num">${t('compare.col.year')}</th><th scope="col" class="num">${t('compare.col.diff')}</th></tr></thead>
+  <tbody>${r.ranked.map((p) => html`<tr data-rate-id="${p.rec.id}" data-current="${p === r.current ? 'yes' : 'no'}"><td>${p.rec.name}${p === r.current ? html` <span class="chip">${t('compare.current')}</span>` : ''}${p.sentence ? html`<br><span class="unit-hint">${p.sentence}</span>` : ''}${p.unmodeled.length ? html`<br><span class="unit-hint">${t('compare.excludes', { list: p.unmodeled.join(', ') })}</span>` : ''}${p.outsideLimits ? html`<br><span class="unit-hint">${t('compare.outside', { reason: p.outsideLimits })}</span>` : ''}</td>
+    <td class="num">${money(p.annual)}</td><td class="num">${p.diff === undefined ? '' : `${diff(p.diff)} (${pct(p.pct)})`}</td></tr>`)}</tbody></table>
+  ${r.notEligible.length ? html`<h4>${t('compare.notEligible')}</h4><ul>${r.notEligible.map((x) => html`<li>${x.rec.name}: ${x.reason}</li>`)}</ul>` : ''}
+  <p class="unit-hint">${t('compare.data', { count: r.data.count, oldest: r.data.oldest ? date(r.data.oldest) : '–', newest: r.data.newest ? date(r.data.newest) : '–' })} ${r.data.note} <a href="${r.data.reportUrl}">${t('compare.report')}</a></p>
+  ${r.data.stale ? html`<p class="warning-chip" data-compare-stale>${t('compare.stale')}${r.data.tariffPage ? html` <a href="${r.data.tariffPage}">${t('bill.picker.source')}</a>` : ''}</p>` : ''}`;
 }

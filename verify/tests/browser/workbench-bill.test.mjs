@@ -12,8 +12,9 @@ import { serve } from '../../lib/static-server.mjs';
 import { sharedSite } from '../../lib/shared-site.mjs';
 
 const out = await sharedSite();
-const austin = JSON.parse(readFileSync(join(out, 'bills/rates/1015.json'), 'utf8'));
-const pick = austin.findIndex((r) => r.flatDemand && r.sector === 'Commercial' && !r.unmodeled.length);
+const austin = JSON.parse(readFileSync(join(out, 'bills/rates/1015.json'), 'utf8')).rates;
+// A rate the sample office (a peak well under 300 kW) is eligible for, with a monthly demand charge.
+const pick = austin.findIndex((r) => /^Commercial - Secondary Voltage 10kW-300kW - Inside/.test(r.name));
 
 for (const kind of ['chrome', 'firefox']) {
   const skip = !findBrowser(kind) && `${kind} is not installed`;
@@ -47,6 +48,17 @@ for (const kind of ['chrome', 'firefox']) {
       const said = await browser.evaluate(`document.querySelector('[data-compare="${first}"]').textContent`);
       assert.match(said, /\(\+6%\)/);
       assert.match(said, /A difference is not a billing error\./);
+      // Every commercial rate on the file, ranked, then again with 20 kW shifted from 2 pm to 11 am on weekdays.
+      await browser.evaluate("document.querySelector('[data-compare-run]').click()");
+      await waitFor(browser, "document.querySelector('[data-bill]').dataset.compared === '1'");
+      const ranked = await browser.evaluate("[...document.querySelectorAll('[data-ranking] tbody tr')].map((r) => r.dataset.rateId)");
+      const listed = await browser.evaluate("document.querySelectorAll('[data-compare-result] li').length");
+      assert.equal(ranked.length + listed, austin.filter((r) => r.sector === 'Commercial').length, 'every commercial rate is ranked or listed as not eligible');
+      assert.ok(ranked.includes(austin[pick].id));
+      assert.match(await browser.evaluate("document.querySelector('[data-compare-result]').textContent"), /Based on this file's past use\./);
+      await browser.evaluate("(() => { const f = document.querySelector('[data-shift]'); f.kw.value = '20'; f.from.value = '14'; f.to.value = '11'; f.requestSubmit(); })()");
+      await waitFor(browser, "document.querySelector('[data-bill]').dataset.compared === '2'");
+      assert.match(await browser.evaluate("document.querySelector('[data-compare-result] .strip').textContent"), /With 20 kW moved from 2 pm to 11 am for 4 hours, on weekdays\./);
       await browser.evaluate("document.querySelector('[data-line=demand] [data-show-ms]').click()");
       await waitFor(browser, `document.querySelector('[data-chart]').dataset.highlight === '${ms}'`);
       // The first utility listed is shown on arrival, then the chosen one: no other utility's rates are fetched.
