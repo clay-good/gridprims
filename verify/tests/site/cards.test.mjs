@@ -7,15 +7,13 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT } from '../../../pipeline/run.mjs';
-import { build } from '../../../site/build.mjs';
 import { CARDS } from '../../../site/templates/layout.mjs';
 import { cardSvg } from '../../tools/social-cards.mjs';
 import strings from '../../../site/strings/en-US.mjs';
 import { walk } from '../../lib/walk.mjs';
-import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-cards-');
-await build({ outDir: out });
+const out = await sharedSite();
 const read = (p) => readFileSync(join(out, p), 'utf8');
 
 test('each section card is a 1200 x 630 PNG of at most 100 KB, beside its SVG source', () => {

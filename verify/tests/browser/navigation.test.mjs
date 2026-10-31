@@ -11,9 +11,9 @@ import { serve } from '../../lib/static-server.mjs';
 import { walk } from '../../lib/walk.mjs';
 import { foreign } from '../../lib/requests.mjs';
 import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-dist-');
-await build({ outDir: out });
+const out = await sharedSite();
 const pseudo = tempDir('gridprims-pseudo-');
 await build({ outDir: pseudo, pseudo: true });
 const shell = 'new Promise((r) => { const f = () => document.documentElement.dataset.shellReady ? setTimeout(r, 100) : setTimeout(f, 20); f(); })';

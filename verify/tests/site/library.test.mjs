@@ -8,12 +8,10 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { join } from 'node:path';
-import { build } from '../../../site/build.mjs';
 import { serveWorker } from '../../lib/worker-server.mjs';
-import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-library-');
-await build({ outDir: out });
+const out = await sharedSite();
 const read = (p) => readFileSync(join(out, p), 'utf8');
 const text = (h) => h.replace(/<[^>]+>/g, ' ').replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ');
 const sha = (b) => createHash('sha256').update(b).digest('hex');

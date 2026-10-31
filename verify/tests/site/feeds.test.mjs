@@ -5,14 +5,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { build } from '../../../site/build.mjs';
 import { ROOT } from '../../../pipeline/run.mjs';
 import { atomFeed, releaseEntry } from '../../../site/lib/atom.mjs';
 import { checkAtom } from '../../lib/atom-check.mjs';
-import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-feeds-');
-await build({ outDir: out });
+const out = await sharedSite();
 const read = (p) => readFileSync(join(out, p), 'utf8');
 
 test('each feed is valid Atom', () => {

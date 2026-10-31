@@ -13,9 +13,9 @@ import { toolPath } from '../../../site/ui/tool-page.mjs';
 import { createServer } from '../../../mcp/protocol.mjs';
 import { TOOLS } from '../../../core/tools/index.mjs';
 import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-dist-');
-await build({ outDir: out });
+const out = await sharedSite();
 const index = JSON.parse(readFileSync(join(out, 'command-index.json'), 'utf8'));
 const doc = readFileSync(DOC_PATH, 'utf8');
 

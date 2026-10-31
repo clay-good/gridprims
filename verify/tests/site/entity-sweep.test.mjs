@@ -11,10 +11,9 @@ import { build, ENTITY_FAMILIES } from '../../../site/build.mjs';
 import { entitySample, ENTITY_SWEEP } from '../../browser/pages.mjs';
 import { walk } from '../../lib/walk.mjs';
 import { BUDGETS } from '../../lib/reference-profile.mjs';
-import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-sweep-');
-await build({ outDir: out });
+const out = await sharedSite();
 const sample = entitySample(out);
 
 test('the sweep visits 200 entity pages across every family', () => {

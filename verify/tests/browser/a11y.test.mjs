@@ -6,14 +6,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { build } from '../../../site/build.mjs';
 import { browserPages } from '../../browser/pages.mjs';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
-import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-dist-');
-await build({ outDir: out });
+const out = await sharedSite();
 const pages = browserPages(out);
 const WIDTHS = [320, 360, 768, 1024, 1280];
 // The audit is test code, not part of the site, so the test server adds it as a route.

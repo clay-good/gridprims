@@ -5,16 +5,14 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { build } from '../../../site/build.mjs';
 import { LANES, checkSimplicity } from '../../../site/ui/home-lanes.mjs';
 import { SECTIONS } from '../../../site/ui/sections.mjs';
 import { TOOLS } from '../../../core/tools/index.mjs';
 import { validateManifest } from '../../../core/contract/manifest.mjs';
 import { walk } from '../../lib/walk.mjs';
-import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-home-');
-await build({ outDir: out });
+const out = await sharedSite();
 const read = (p) => readFileSync(join(out, p), 'utf8');
 const main = (h) => h.slice(h.indexOf('<main'), h.indexOf('</main>'));
 

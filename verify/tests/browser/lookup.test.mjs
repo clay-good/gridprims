@@ -4,13 +4,11 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { build } from '../../../site/build.mjs';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
-import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-dist-');
-await build({ outDir: out });
+const out = await sharedSite();
 
 const submitZip = (zip) => `(() => { const i = document.querySelector('#lookup-zip'); i.value = '${zip}'; document.querySelector('[data-lookup-zip]').requestSubmit(); })()`;
 

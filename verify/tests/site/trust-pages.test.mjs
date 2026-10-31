@@ -4,7 +4,6 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { build } from '../../../site/build.mjs';
 import { methodsPage } from '../../../site/templates/pages.mjs';
 import { TRUST_PAGES, SISTERS } from '../../../site/templates/layout.mjs';
 import { createI18n } from '../../../site/lib/i18n.mjs';
@@ -13,10 +12,9 @@ import { TOOLS } from '../../../core/tools/index.mjs';
 import { pagesOf } from '../../gates/urls.mjs';
 import { ROOT } from '../../../pipeline/run.mjs';
 import { fleschKincaid } from '../../../core/lib/readability.mjs';
-import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-dist-');
-await build({ outDir: out });
+const out = await sharedSite();
 const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
 
 test('every page\'s footer links the whole trust set and the sister sites', () => {

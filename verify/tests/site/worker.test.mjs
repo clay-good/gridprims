@@ -5,14 +5,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { build } from '../../../site/build.mjs';
 import worker from '../../../worker/index.mjs';
 import { checkHeaders } from '../../lib/smoke.mjs';
 import { TYPES } from '../../lib/static-server.mjs';
-import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-dist-');
-await build({ outDir: out });
+const out = await sharedSite();
 const ASSETS = {
   async fetch(r) {
     const path = new URL(typeof r === 'string' ? r : r.url).pathname;

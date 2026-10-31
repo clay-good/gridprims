@@ -3,13 +3,11 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { build } from '../../../site/build.mjs';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
-import { tempDir } from '../../lib/temp.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-dist-');
-await build({ outDir: out });
+const out = await sharedSite();
 const PATH = '/tools/calc/energy-units/convert/';
 const ready = 'new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r(true) : setTimeout(f, 20); f(); })';
 const text = (sel) => `document.querySelector(${JSON.stringify(sel)}).textContent.trim().replace(/\\s+/g, ' ')`;

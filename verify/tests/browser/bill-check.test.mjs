@@ -8,15 +8,13 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { build } from '../../../site/build.mjs';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
-import { tempDir } from '../../lib/temp.mjs';
 import { runTool } from '../../../core/contract/run.mjs';
 import { getTool } from '../../../core/tools/index.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
 
-const out = tempDir('gridprims-dist-');
-await build({ outDir: out });
+const out = await sharedSite();
 const PAGE = '/tools/household/bill-totals/check/';
 const austin = JSON.parse(readFileSync(join(out, 'bills/tariffs/TX.json'), 'utf8'))[1015];
 
