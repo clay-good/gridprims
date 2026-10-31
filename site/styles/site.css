@@ -118,6 +118,10 @@ a.button { display: inline-flex; align-items: center; text-decoration: none; }
 details.panel > summary { cursor: pointer; font-weight: 700; min-height: 24px; }
 .summary-heading { display: inline; font-size: 1rem; margin: 0; }
 .panel h3 { font-size: 1rem; margin: var(--s4) 0 var(--s2); }
+/* Form controls in a panel (the lookup's ZIP and county forms) stack and never outgrow it, whatever the option text. */
+form.panel label { display: block; margin-top: var(--s2); }
+form.panel input, form.panel select { display: block; width: 100%; max-width: 100%; min-width: 0; min-height: 44px; border: 1px solid var(--field-border); border-radius: var(--r-field); background: var(--panel); color: var(--ink); padding: 0 var(--s2); }
+form.panel .button { margin-top: var(--s3); }
 .panel > h2:first-child { margin-top: 0; }
 .panel ol, .panel ul { padding-left: var(--s5); }
 .handoff {
