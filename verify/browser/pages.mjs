@@ -17,6 +17,10 @@ export const ENTITY_SAMPLE = [
   '/utilities/108/', // a cooperative that operates no plants
   '/utilities/55/', // no reliability report
   '/utilities/113/', // energy only
+  '/states/tx/', // the most utilities and queue types
+  '/states/dc/', // the smallest
+  '/subregions/erct/', // every rate reported
+  '/subregions/hims/', // a small island system
 ];
 
 /** @param {string} out a built site */

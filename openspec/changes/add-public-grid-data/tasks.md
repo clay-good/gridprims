@@ -9,7 +9,7 @@
 ## 2. Utility pages
 
 - [ ] 2.1 Render utility pages with facts, bundled versus delivery-only price, annual peak, reliability, trends, and fragment-preset links; verify the 12.50-cent, 20%-above, Oncor, no-Form-714, no-plants, and EIA price-table scenarios
-- [ ] 2.2 Apply the content minimum; verify the thin-record scenario
+- [x] 2.2 Apply the content minimum; verify the thin-record scenario
 
 ## 3. Plant pages
 
