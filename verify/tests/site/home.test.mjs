@@ -46,8 +46,8 @@ test('the catalog lists every published tool with what it needs, and filters on 
   assert.match(html, /data-needs="zip"[\s\S]*Find my utility|Find my utility[\s\S]*data-needs/);
   assert.match(html, /<select name="needs" data-filter="needs">[\s\S]*<option value="bill">bill totals<\/option>/);
   assert.match(html, /<script type="module" src="\/site\/pages\/catalog\.js">/);
-  // The bill check needs bill totals, as its home-lane cell says.
-  assert.equal([...html.matchAll(/data-needs="bill"/g)].length, 1);
+  // The bill check and the usage benchmark need bill totals, as their home-lane cells say.
+  assert.equal([...html.matchAll(/data-needs="bill"/g)].length, 2);
   assert.match(html, /<p data-catalog-empty hidden>No published tool matches these filters\.<\/p>/);
 });
 

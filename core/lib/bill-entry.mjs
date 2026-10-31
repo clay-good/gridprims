@@ -1,4 +1,4 @@
-// The written form of billing periods and tariffs that household.bill-totals.check
+// The written form of billing periods and tariffs the household tools
 // reads, one period a line, so the page, the command bar, and an agent all
 // send the same thing:
 //
@@ -9,7 +9,7 @@
 // A month (2026-04) stands for its first to last day. "confirmed" accepts a
 // period the entry checks would otherwise ask about.
 
-import { readNumber } from '../../lib/bill-totals.mjs';
+import { checkPeriods, readNumber } from './bill-totals.mjs';
 
 export const MAX_PERIODS = 24;
 const ISO = /^\d{4}-\d{2}-\d{2}$/;
@@ -100,4 +100,19 @@ export function parseTariff(text) {
   const tou = t.seasons.some((s) => s.periods);
   if (tou && !t.seasons.every((s) => s.periods)) errors.push('Either every season lists time-of-use periods or none does.');
   return { tariff: errors.length ? null : t, errors };
+}
+
+export const kwhText = (k) => `${k.toLocaleString('en-US', { maximumFractionDigits: 3 })} kWh`;
+
+/** What the entry checks ask before anything is priced; a confirmed period passes the long and typo checks. */
+export function entryQuestions(periods) {
+  const asks = [];
+  for (const f of checkPeriods(periods)) {
+    const lines = f.periods.map((i) => `line ${i + 1}`).join(' and ');
+    if (f.kind === 'overlap') asks.push(`Lines ${f.periods.map((i) => i + 1).join(' and ')} overlap by ${f.days} day${f.days === 1 ? '' : 's'}. Which dates are correct?`);
+    if (f.kind === 'duplicate') asks.push(`${lines[0].toUpperCase()}${lines.slice(1)} are the same period. Remove the duplicate.`);
+    if (f.kind === 'long' && !periods[f.periods[0]].confirmed) asks.push(`Line ${f.periods[0] + 1} spans ${f.days} days, longer than a billing period usually runs. Check the dates, or add "confirmed" to the line.`);
+    if (f.kind === 'typo' && !periods[f.periods[0]].confirmed) asks.push(`Line ${f.periods[0] + 1} has ${kwhText(periods[f.periods[0]].kwh)}${f.suggestion ? `; was ${kwhText(f.suggestion)} meant` : ', far above a household month'}? Fix the number, or add "confirmed" to the line.`);
+  }
+  return asks;
 }

@@ -10,7 +10,7 @@ export const LANE_MAX = 5;
 export const LANES = {
   home: [
     { id: 'bill-check', tool: 'household.bill-totals.check', needs: 'bill' },
-    { id: 'use-high', tool: 'bills.use-high', needs: 'file' },
+    { id: 'use-high', tool: 'household.usage-benchmark.compare', needs: 'bill' },
     { id: 'cheapest-plan', tool: 'bills.cheapest-plan', needs: 'file' },
     { id: 'find-utility', path: '/lookup/', needs: 'zip', data: ['census-zcta-county', 'eia-861', 'egrid'] },
     { id: 'cleanest-hours', tool: 'carbon.cleanest-hours', needs: 'zip' },

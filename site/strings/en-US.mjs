@@ -712,4 +712,9 @@ export default {
   'bill.condition.net-metering': 'net metering or solar',
   'bill.condition.seasonal-or-farm': 'seasonal or farm',
   'tool.tariffJson': 'The tariff as the tool reads it',
+  'usage.picker.title': 'Your utility\'s average home',
+  'usage.picker.privacy': 'Your ZIP code never leaves this device. The page downloads the figures for your whole state and searches them here.',
+  'usage.picker.chosen': '{utility}: {kwh} kWh a year for the average home; {state}: {stateKwh} kWh. From EIA-861, {year}.',
+  'usage.picker.none': 'EIA-861 lists no residential customers for {utility}. Enter the averages by hand.',
+  'usage.picker.noUtility': 'No utility is listed for that ZIP code. Enter the averages by hand.',
 };

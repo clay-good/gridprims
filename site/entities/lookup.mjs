@@ -7,6 +7,7 @@
 
 import { served } from './plants.mjs';
 import { COUNTY_SUCCESSORS, countyKey } from '../../pipeline/joins.mjs';
+import { residentialAverages } from '../../core/lib/usage-benchmark.mjs';
 
 /** @param {string} dataDir */
 export function lookupData(dataDir) {
@@ -40,8 +41,10 @@ export function lookupData(dataDir) {
     if (r.ba_code) e.bas.add(r.ba_code);
   }
 
+  // Average residential use per customer, for the usage benchmark.
+  const averages = residentialAverages([...sales.rows, ...(delivery?.rows ?? [])]);
   const shards = new Map();
-  const shard = (st) => shards.get(st) ?? shards.set(st, { state: st, zctas: {}, counties: {}, utilities: {}, subregions: {} }).get(st);
+  const shard = (st) => shards.get(st) ?? shards.set(st, { state: st, resKwh: averages.state(st), resYear: sales.rows[0]?.data_year ?? null, zctas: {}, counties: {}, utilities: {}, subregions: {} }).get(st);
   for (const r of zcta.rows) (shard(r.state).zctas[r.zcta] ??= []).push([r.county_fips, r.share_of_zcta_land]);
   for (const r of territory.rows) {
     for (const f of countyFips(r.state, r.county)) {
@@ -49,7 +52,7 @@ export function lookupData(dataDir) {
       const c = (s.counties[f] ??= { name: names.get(f) ?? r.county, utilities: [] });
       if (!c.utilities.includes(r.utility_id)) c.utilities.push(r.utility_id);
       const u = inState.get(`${r.state}|${r.utility_id}`);
-      s.utilities[r.utility_id] ??= { name: u?.name ?? r.utility_name, ownership: u?.ownership ?? null, customers: u?.customers ?? 0, kinds: [...(u?.kinds ?? [])].sort(), bas: [...(u?.bas ?? [])].sort() };
+      s.utilities[r.utility_id] ??= { name: u?.name ?? r.utility_name, ownership: u?.ownership ?? null, customers: u?.customers ?? 0, kinds: [...(u?.kinds ?? [])].sort(), bas: [...(u?.bas ?? [])].sort(), resKwh: averages.utility(r.state, r.utility_id) };
     }
   }
 
@@ -69,6 +72,7 @@ export function lookupData(dataDir) {
     zip3: Object.fromEntries(Object.entries(zip3).sort()),
     shards: new Map([...shards].sort()),
     versions: { zcta: zcta.manifest.version, eia861: sales.manifest.version, egrid: zips?.manifest.version ?? null },
+    dataYear: sales.rows[0]?.data_year ?? null,
     sources: { zcta: zcta.manifest, eia861: sales.manifest, egrid: zips?.manifest ?? null },
   };
 }

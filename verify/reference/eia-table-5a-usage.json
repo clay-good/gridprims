@@ -1,0 +1,275 @@
+{
+  "source": "U.S. Energy Information Administration, Electric Sales, Revenue, and Average Price, Table 5A, https://www.eia.gov/electricity/sales_revenue_price/xls/table_5A.xlsx, retrieved 2026-10-31",
+  "title": "2024 Average Monthly Bill- Residential",
+  "dataYear": 2024,
+  "sha256": "478478245637761d1cd54fe216658a57d743173af76edeb785fef2efa698e605",
+  "method": "EIA-861 residential sales x 1,000 / residential customers / 12, delivery-only rows left out of state totals",
+  "states": {
+    "AK": {
+      "customers": 298397,
+      "averageMonthlyKwh": 578.2548
+    },
+    "AL": {
+      "customers": 2398172,
+      "averageMonthlyKwh": 1143.1996
+    },
+    "AR": {
+      "customers": 1476944,
+      "averageMonthlyKwh": 1048.3718
+    },
+    "AZ": {
+      "customers": 3134733,
+      "averageMonthlyKwh": 1074.9169
+    },
+    "CA": {
+      "customers": 14217180,
+      "averageMonthlyKwh": 503.2089
+    },
+    "CO": {
+      "customers": 2557732,
+      "averageMonthlyKwh": 674.22
+    },
+    "CT": {
+      "customers": 1552746,
+      "averageMonthlyKwh": 694.5707
+    },
+    "DC": {
+      "customers": 318780,
+      "averageMonthlyKwh": 639.366
+    },
+    "DE": {
+      "customers": 473508,
+      "averageMonthlyKwh": 910.6699
+    },
+    "FL": {
+      "customers": 10443373,
+      "averageMonthlyKwh": 1104.135
+    },
+    "GA": {
+      "customers": 4815501,
+      "averageMonthlyKwh": 1074.0134
+    },
+    "HI": {
+      "customers": 446512,
+      "averageMonthlyKwh": 494.8717
+    },
+    "IA": {
+      "customers": 1448818,
+      "averageMonthlyKwh": 832.2215
+    },
+    "ID": {
+      "customers": 868141,
+      "averageMonthlyKwh": 943.8049
+    },
+    "IL": {
+      "customers": 5392477,
+      "averageMonthlyKwh": 693.1063
+    },
+    "IN": {
+      "customers": 3056216,
+      "averageMonthlyKwh": 901.1318
+    },
+    "KS": {
+      "customers": 1317095,
+      "averageMonthlyKwh": 875.6638
+    },
+    "KY": {
+      "customers": 2077215,
+      "averageMonthlyKwh": 1046.5017
+    },
+    "LA": {
+      "customers": 2147745,
+      "averageMonthlyKwh": 1201.8357
+    },
+    "MA": {
+      "customers": 2924535,
+      "averageMonthlyKwh": 569.6813
+    },
+    "MD": {
+      "customers": 2451753,
+      "averageMonthlyKwh": 928.8373
+    },
+    "ME": {
+      "customers": 742549,
+      "averageMonthlyKwh": 550.075
+    },
+    "MI": {
+      "customers": 4516367,
+      "averageMonthlyKwh": 618.2132
+    },
+    "MN": {
+      "customers": 2581180,
+      "averageMonthlyKwh": 712.2956
+    },
+    "MO": {
+      "customers": 2933914,
+      "averageMonthlyKwh": 1000.566
+    },
+    "MS": {
+      "customers": 1340459,
+      "averageMonthlyKwh": 1155.8977
+    },
+    "MT": {
+      "customers": 557432,
+      "averageMonthlyKwh": 852.1579
+    },
+    "NC": {
+      "customers": 5067762,
+      "averageMonthlyKwh": 1015.3223
+    },
+    "ND": {
+      "customers": 397839,
+      "averageMonthlyKwh": 1028.6311
+    },
+    "NE": {
+      "customers": 905415,
+      "averageMonthlyKwh": 956.3767
+    },
+    "NH": {
+      "customers": 652608,
+      "averageMonthlyKwh": 618.9835
+    },
+    "NJ": {
+      "customers": 3735638,
+      "averageMonthlyKwh": 662.3804
+    },
+    "NM": {
+      "customers": 936098,
+      "averageMonthlyKwh": 654.1
+    },
+    "NV": {
+      "customers": 1311755,
+      "averageMonthlyKwh": 929.5113
+    },
+    "NY": {
+      "customers": 7420214,
+      "averageMonthlyKwh": 571.158
+    },
+    "OH": {
+      "customers": 5142108,
+      "averageMonthlyKwh": 845.541
+    },
+    "OK": {
+      "customers": 1878818,
+      "averageMonthlyKwh": 1079.0596
+    },
+    "OR": {
+      "customers": 1868012,
+      "averageMonthlyKwh": 881.8531
+    },
+    "PA": {
+      "customers": 5534580,
+      "averageMonthlyKwh": 817.1737
+    },
+    "RI": {
+      "customers": 457383,
+      "averageMonthlyKwh": 566.8721
+    },
+    "SC": {
+      "customers": 2581882,
+      "averageMonthlyKwh": 1050.4229
+    },
+    "SD": {
+      "customers": 433548,
+      "averageMonthlyKwh": 993.7514
+    },
+    "TN": {
+      "customers": 3166103,
+      "averageMonthlyKwh": 1153.5607
+    },
+    "TX": {
+      "customers": 12547863,
+      "averageMonthlyKwh": 1096.1478
+    },
+    "UT": {
+      "customers": 1272861,
+      "averageMonthlyKwh": 774.1908
+    },
+    "VA": {
+      "customers": 3654481,
+      "averageMonthlyKwh": 1032.3587
+    },
+    "VT": {
+      "customers": 323960,
+      "averageMonthlyKwh": 573.6704
+    },
+    "WA": {
+      "customers": 3368978,
+      "averageMonthlyKwh": 955.4521
+    },
+    "WI": {
+      "customers": 2843874,
+      "averageMonthlyKwh": 645.1458
+    },
+    "WV": {
+      "customers": 866456,
+      "averageMonthlyKwh": 1026.6441
+    },
+    "WY": {
+      "customers": 286475,
+      "averageMonthlyKwh": 863.3828
+    }
+  },
+  "utilities": [
+    {
+      "state": "TX",
+      "utilityId": 1015,
+      "utility": "Austin Energy",
+      "dataYear": 2025,
+      "rows": [
+        {
+          "part": "A",
+          "service_type": "Bundled",
+          "res_sales_mwh": 5234369,
+          "res_customers": 522446
+        }
+      ],
+      "work": "5,234,369 MWh x 1,000 / 522,446 customers = 10018.97 kWh a year",
+      "averageKwhPerYear": 10019,
+      "home14400": {
+        "annualKwh": 14400,
+        "percentFromAverage": 43.7
+      }
+    },
+    {
+      "state": "TX",
+      "utilityId": 44372,
+      "utility": "Oncor Electric Delivery Company LLC",
+      "dataYear": 2025,
+      "rows": [
+        {
+          "part": "C",
+          "service_type": "Delivery",
+          "res_sales_mwh": 47049703,
+          "res_customers": 3545814
+        }
+      ],
+      "work": "47,049,703 MWh x 1,000 / 3,545,814 customers = 13269.08 kWh a year",
+      "averageKwhPerYear": 13269,
+      "home14400": {
+        "annualKwh": 14400,
+        "percentFromAverage": 8.5
+      }
+    },
+    {
+      "state": "VT",
+      "utilityId": 7601,
+      "utility": "Green Mountain Power Corp",
+      "dataYear": 2025,
+      "rows": [
+        {
+          "part": "A",
+          "service_type": "Bundled",
+          "res_sales_mwh": 1641614,
+          "res_customers": 227727
+        }
+      ],
+      "work": "1,641,614 MWh x 1,000 / 227,727 customers = 7208.69 kWh a year",
+      "averageKwhPerYear": 7209,
+      "home14400": {
+        "annualKwh": 14400,
+        "percentFromAverage": 99.8
+      }
+    }
+  ]
+}

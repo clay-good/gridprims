@@ -66,3 +66,36 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 - Time-of-use energy is priced only from the kWh in each period as the bill prints them; a tiered time-of-use rate cannot be priced from totals.
 - Demand charges need meter data and are not priced here.
 - Export credits for net-metered months are not modeled; such a month prices only the charges that do not depend on kWh.
+
+## Is my use high? (`household.usage-benchmark.compare`)
+
+Compare a year of your electricity use with the average home of your utility and your state, and see your seasonal swing.
+
+Version 0.1.0 · experimental · validation level 2, cross-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Billing periods | `periods` |  |  | 2025-01, 1,200 kWh 2025-02, 1,200 kWh 2025-03, 1,200 kWh 2025-04, 1,200 kWh 2025-05, 1,200 kWh 2025-06, 1,200 kWh 2025-07, 1,200 kWh 2025-08, 1,200 kWh 2025-09, 1,200 kWh 2025-10, 1,200 kWh 2025-11, 1,200 kWh 2025-12, 1,200 kWh |
+| Utility average home | `utilityAverage` | kWh a year | 1 to 1000000 | 12000 |
+| State average home | `stateAverage` | kWh a year | 1 to 1000000 | 12000 |
+| Data year of the averages | `dataYear` | year | 1990 to 2100 | 2025 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Compared with the utility average | `vsUtility` | % | 1 decimals |
+| Compared with the state average | `vsState` | % | 1 decimals |
+| A year of use | `annualKwh` | kWh | 0 decimals |
+| Highest period over lowest, per day | `ratio` | × | 1 decimals |
+
+**Method.** Sum the latest 12 periods, or scale fewer to 365 days by the days they cover. Compare with EIA-861's average residential use per customer (residential sales ÷ residential customers) for the utility and the state, as a percent difference. Then compare the highest and lowest periods by kWh per day.
+
+**Sources.**
+
+- EIA, Annual Electric Power Industry Report (Form EIA-861), 2025, Sales to Ultimate Customers: residential sales (MWh) and customers (https://www.eia.gov/electricity/data/eia861/)
+- EIA, Electric Sales, Revenue, and Average Price, 2024, Table 5A, average monthly residential consumption by state (https://www.eia.gov/electricity/sales_revenue_price/)
+
+**Known limits.**
+
+- An average includes homes of every size, age, and heating type; a large or all-electric home can be well above it and use energy well.
+- EIA-861 publishes no distribution of use, so this shows no percentile, rank, or "homes like yours".
+- The averages are for the latest EIA-861 year, which may differ from the year of your bills.

@@ -1,0 +1,145 @@
+{
+  "toolId": "household.usage-benchmark.compare",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "above-utility",
+      "result": {
+        "status": "ok",
+        "toolId": "household.usage-benchmark.compare",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "vsUtility": {
+            "value": 20,
+            "unit": "%",
+            "display": "20"
+          },
+          "vsState": {
+            "value": 20,
+            "unit": "%",
+            "display": "20"
+          },
+          "annualKwh": {
+            "value": 14400,
+            "unit": "kWh",
+            "display": "14,400"
+          },
+          "ratio": {
+            "value": 1.1,
+            "unit": "×",
+            "display": "1.1"
+          }
+        },
+        "sentence": "This home's 14,400 kWh a year is 20% more than the utility's average home and 20% more than the state's (EIA-861, 2025).",
+        "notes": [],
+        "work": {
+          "method": "Sum the latest 12 periods, or scale fewer to 365 days by the days they cover. Compare with EIA-861's average residential use per customer (residential sales ÷ residential customers) for the utility and the state, as a percent difference. Then compare the highest and lowest periods by kWh per day.",
+          "steps": [
+            "A year of use: 14,400 kWh, the sum of the latest 12 periods (365 days).",
+            "The utility's average home: 12,000 kWh a year (residential sales ÷ residential customers, EIA-861, 2025). 14,400 kWh ÷ 12,000 kWh − 1 = 20%.",
+            "The state's average home: 12,000 kWh a year (EIA-861, 2025). 14,400 kWh ÷ 12,000 kWh − 1 = 20%.",
+            "These are averages across homes of every size and heating type. EIA-861 publishes no distribution, so there is no percentile or rank.",
+            "Highest period: February 1, 2025 to February 28, 2025, 42.9 kWh a day. Lowest: January 1, 2025 to January 31, 2025, 38.7 kWh a day. The highest is 1.1× the lowest."
+          ],
+          "constants": [],
+          "assumptions": [
+            "State averages leave out delivery-only rows, whose customers EIA also counts under the company that sells them energy; this is how EIA's Table 5A counts them.",
+            "A partial year is scaled by days, so a year with a hot summer and a mild winter in the missing months reads high or low."
+          ],
+          "citations": [
+            {
+              "source": "EIA, Annual Electric Power Industry Report (Form EIA-861)",
+              "edition": "2025",
+              "locator": "Sales to Ultimate Customers: residential sales (MWh) and customers",
+              "url": "https://www.eia.gov/electricity/data/eia861/"
+            },
+            {
+              "source": "EIA, Electric Sales, Revenue, and Average Price",
+              "edition": "2024",
+              "locator": "Table 5A, average monthly residential consumption by state",
+              "url": "https://www.eia.gov/electricity/sales_revenue_price/"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "eia-861"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance."
+      }
+    },
+    {
+      "example": "partial-year",
+      "result": {
+        "status": "ok",
+        "toolId": "household.usage-benchmark.compare",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "vsUtility": {
+            "value": 13.8,
+            "unit": "%",
+            "display": "13.8"
+          },
+          "vsState": {
+            "value": 13.8,
+            "unit": "%",
+            "display": "13.8"
+          },
+          "annualKwh": {
+            "value": 13651,
+            "unit": "kWh",
+            "display": "13,651"
+          },
+          "ratio": {
+            "value": 2.6,
+            "unit": "×",
+            "display": "2.6"
+          }
+        },
+        "sentence": "From 213 days, we estimate 13,651 kWh a year. That is 13.8% more than the utility's average home and 13.8% more than the state's (EIA-861, 2025).",
+        "notes": [],
+        "work": {
+          "method": "Sum the latest 12 periods, or scale fewer to 365 days by the days they cover. Compare with EIA-861's average residential use per customer (residential sales ÷ residential customers) for the utility and the state, as a percent difference. Then compare the highest and lowest periods by kWh per day.",
+          "steps": [
+            "A year of use: 13,651 kWh, estimated from 213 days: 7,966 kWh × 365 ÷ 213.",
+            "The utility's average home: 12,000 kWh a year (residential sales ÷ residential customers, EIA-861, 2025). 13,651 kWh ÷ 12,000 kWh − 1 = 13.8%.",
+            "The state's average home: 12,000 kWh a year (EIA-861, 2025). 13,651 kWh ÷ 12,000 kWh − 1 = 13.8%.",
+            "These are averages across homes of every size and heating type. EIA-861 publishes no distribution, so there is no percentile or rank.",
+            "Highest period: January 1, 2026 to January 31, 2026, 62 kWh a day. Lowest: May 1, 2026 to May 31, 2026, 24 kWh a day. The highest is 2.6× the lowest.",
+            "A swing above 1.5× often has a cause worth checking: electric heating, air conditioning, a pool or spa pump, electric vehicle charging. These are things to check, not a diagnosis."
+          ],
+          "constants": [],
+          "assumptions": [
+            "State averages leave out delivery-only rows, whose customers EIA also counts under the company that sells them energy; this is how EIA's Table 5A counts them.",
+            "A partial year is scaled by days, so a year with a hot summer and a mild winter in the missing months reads high or low."
+          ],
+          "citations": [
+            {
+              "source": "EIA, Annual Electric Power Industry Report (Form EIA-861)",
+              "edition": "2025",
+              "locator": "Sales to Ultimate Customers: residential sales (MWh) and customers",
+              "url": "https://www.eia.gov/electricity/data/eia861/"
+            },
+            {
+              "source": "EIA, Electric Sales, Revenue, and Average Price",
+              "edition": "2024",
+              "locator": "Table 5A, average monthly residential consumption by state",
+              "url": "https://www.eia.gov/electricity/sales_revenue_price/"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "eia-861"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance."
+      }
+    }
+  ]
+}

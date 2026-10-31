@@ -1,28 +1,14 @@
 // household.bill-totals.check: price billing periods from the totals on the
 // bill, check the entries first, and compare with what was paid.
 
-import { checkPeriods, comparePaid, daysIn, effectivePrice, priceTotals } from '../../lib/bill-totals.mjs';
-import { parsePeriods, parseTariff } from './entry.mjs';
+import { comparePaid, daysIn, effectivePrice, priceTotals } from '../../lib/bill-totals.mjs';
+import { entryQuestions, kwhText, parsePeriods, parseTariff } from '../../lib/bill-entry.mjs';
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const longDate = (iso) => `${MONTHS[+iso.slice(5, 7) - 1]} ${+iso.slice(8, 10)}`;
 const span = (p) => `${longDate(p.start)}${p.start.slice(0, 4) === p.end.slice(0, 4) ? '' : `, ${p.start.slice(0, 4)}`} to ${longDate(p.end)}, ${p.end.slice(0, 4)}`;
 const dollars = (c) => `${c < 0 ? '-' : ''}$${(Math.abs(c) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-const kwhText = (k) => `${k.toLocaleString('en-US', { maximumFractionDigits: 3 })} kWh`;
 const centsText = (rate) => `${(rate * 100).toLocaleString('en-US', { maximumFractionDigits: 4 })}¢`;
-
-/** What the entry checks ask before anything is priced; a confirmed period passes the long and typo checks. */
-function questions(periods) {
-  const asks = [];
-  for (const f of checkPeriods(periods)) {
-    const lines = f.periods.map((i) => `line ${i + 1}`).join(' and ');
-    if (f.kind === 'overlap') asks.push(`Lines ${f.periods.map((i) => i + 1).join(' and ')} overlap by ${f.days} day${f.days === 1 ? '' : 's'}. Which dates are correct?`);
-    if (f.kind === 'duplicate') asks.push(`${lines[0].toUpperCase()}${lines.slice(1)} are the same period. Remove the duplicate.`);
-    if (f.kind === 'long' && !periods[f.periods[0]].confirmed) asks.push(`Line ${f.periods[0] + 1} spans ${f.days} days, longer than a billing period usually runs. Check the dates, or add "confirmed" to the line.`);
-    if (f.kind === 'typo' && !periods[f.periods[0]].confirmed) asks.push(`Line ${f.periods[0] + 1} has ${kwhText(periods[f.periods[0]].kwh)}${f.suggestion ? `; was ${kwhText(f.suggestion)} meant` : ', far above a household month'}? Fix the number, or add "confirmed" to the line.`);
-  }
-  return asks;
-}
 
 /**
  * @param {{periods: string, tariff: string, prorate: 'yes' | 'no'}} v
@@ -34,7 +20,7 @@ export function compute({ periods: periodText, tariff: tariffText, prorate }) {
   if (errors.length) return { status: 'invalid', errors };
   const { periods } = parsed;
   const tariff = t.tariff;
-  const asks = questions(periods);
+  const asks = entryQuestions(periods);
   if (asks.length) return { status: 'invalid', errors: asks.map((message) => ({ field: 'periods', message })) };
   const tou = tariff.seasons[0].periods;
   if (tou) {

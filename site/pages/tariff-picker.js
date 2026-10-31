@@ -2,7 +2,7 @@
 // rates or from a tariff entered by hand. Requests go only for the ZIP
 // prefix table and the state shards a ZIP needs; the ZIP stays here.
 
-import { lookupZip, parseZip, statesFor } from '../../core/lib/zip-lookup.mjs';
+import { getJson as get, utilitiesForZip } from './zip-utilities.js';
 import { createI18n } from '../lib/i18n.mjs';
 import strings from '../strings/en-US.mjs';
 
@@ -18,8 +18,6 @@ const rateSelect = picker.querySelector('[data-picker-rate]');
 const note = picker.querySelector('[data-picker-note]');
 const manual = picker.querySelector('[data-picker-manual]');
 
-const cache = new Map();
-const get = (path) => cache.get(path) ?? cache.set(path, fetch(path).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`${r.status}`))))).get(path);
 const el = (tag, text, attrs = {}) => Object.assign(document.createElement(tag), { textContent: text ?? '' }, attrs);
 const cents = (rate) => `${(rate * 100).toLocaleString('en-US', { maximumFractionDigits: 3 })}¢`;
 let utilities = [];
@@ -79,18 +77,17 @@ async function showUtility() {
 
 zipForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const parsed = parseZip(new FormData(zipForm).get('zip'));
   utilityField.hidden = true;
   rateField.hidden = true;
   note.replaceChildren();
+  const found = await utilitiesForZip(new FormData(zipForm).get('zip'));
+  const { parsed } = found;
   if (!parsed.ok) {
     zipError.textContent = parsed.reason === 'four-digits' ? t('lookup.error.four', { suggestion: parsed.suggestion }) : t(`lookup.error.${parsed.reason}`);
     return;
   }
   zipError.textContent = '';
-  const states = statesFor(parsed.zip, await get('/lookup/zip3.json'));
-  const shards = Object.fromEntries(await Promise.all(states.map(async (st) => [st, await get(`/lookup/${st}.json`)])));
-  utilities = states.length ? lookupZip(parsed.zip, shards).utilities : [];
+  utilities = found.utilities;
   if (!utilities.length) { note.append(el('p', t('bill.picker.noUtility'))); manual.open = true; return; }
   utilitySelect.replaceChildren(...utilities.map((u, i) => el('option', `${u.name} · ${u.state}`, { value: String(i) })));
   utilityField.hidden = false;

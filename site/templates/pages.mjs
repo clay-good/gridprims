@@ -13,6 +13,11 @@ import { ORIGIN } from '../config.mjs';
 import { datasetLd, libraryList, libraryParts } from './library.mjs';
 import { pageTitle } from '../lib/meta.mjs';
 import { tariffPicker } from '../ui/tariff-picker.mjs';
+import { averagePicker } from '../ui/average-picker.mjs';
+
+/** Pickers that fill a tool's inputs from public data: the section they render and the script that runs it. */
+const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'] };
+const pickersOf = (manifest) => [...new Set(manifest.inputs.map((i) => i.picker).filter(Boolean))].map((p) => PICKERS[p]);
 
 /** One input control, labeled from the manifest. */
 function field(inp, value, i18n) {
@@ -32,7 +37,7 @@ function field(inp, value, i18n) {
     <p class="error" id="${errId}" hidden></p></div>`;
   }
   // A tariff filled in by the picker: shown, and editable, behind a disclosure.
-  if (inp.picker) {
+  if (inp.picker === 'urdb-tariff') {
     return html`<details class="field wide"><summary>${i18n.t('tool.tariffJson')}</summary>
     <label for="${id}">${inp.label}</label>
     <textarea id="${id}" name="${inp.name}" class="mono" rows="4" autocomplete="off" spellcheck="false" aria-describedby="${errId}">${value}</textarea>
@@ -67,7 +72,7 @@ export function calculatorPage({ manifest, example, result, i18n, reviewed = fal
     </div>
     <p class="skip" aria-live="polite" data-announce></p>
   </section>
-  ${manifest.inputs.some((i) => i.picker === 'urdb-tariff') ? tariffPicker(i18n) : ''}
+  ${pickersOf(manifest).map(([render]) => render(i18n))}
   <form class="inputs" data-inputs aria-label="${t('tool.inputs')}" novalidate>
     ${manifest.inputs.filter((i) => i.type !== 'file' && manifest.firstScreen.includes(i.name)).map((i) => field(i, example.inputs[i.name] ?? i.example, i18n))}
     ${manifest.inputs.some((i) => i.type !== 'file' && !manifest.firstScreen.includes(i.name)) ? html`<details class="more-options"><summary>${t('tool.moreOptions')}</summary>
@@ -83,7 +88,7 @@ export function calculatorPage({ manifest, example, result, i18n, reviewed = fal
   </section>
   ${manifest.handoffs.length ? html`<section><h2>${t('tool.handoffs')}</h2>${manifest.handoffs.map((h) => html`<p><a class="handoff" href="${h.url}">${h.label} ${raw('&rarr;')}</a></p>`)}</section>` : ''}
 </article>`;
-  return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js', ...(manifest.inputs.some((i) => i.picker === 'urdb-tariff') ? ['/site/pages/tariff-picker.js'] : [])], section: sectionOf(manifest.id) });
+  return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js', ...pickersOf(manifest).map(([, script]) => script)], section: sectionOf(manifest.id) });
 }
 
 /**

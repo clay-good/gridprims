@@ -84,3 +84,30 @@ for (const kind of ['chrome', 'firefox']) {
     }
   });
 }
+
+for (const kind of ['chrome', 'firefox']) {
+  const skip = !findBrowser(kind) && `${kind} is not installed`;
+
+  test(`${kind}: on "Is my use high?", ZIP 78701 and Austin Energy fill EIA-861's averages, and 14,400 kWh compares with them`, { skip, timeout: 60_000 }, async () => {
+    const server = await serve(out);
+    const browser = await launch(kind);
+    try {
+      await browser.goto(`${server.url}/tools/household/usage-benchmark/compare/`);
+      await waitFor(browser, "document.documentElement.dataset.ready && document.querySelector('[data-average-picker]').dataset.ready");
+      await browser.evaluate("(() => { document.querySelector('#averages-zip').value = '78701'; document.querySelector('[data-average-picker] [data-picker-zip]').requestSubmit(); })()");
+      await waitFor(browser, "!document.querySelector('[data-average-picker] [data-picker-utility-field]').hidden");
+      await browser.evaluate("(() => { const s = document.querySelector('#averages-utility'); s.value = [...s.options].find((o) => o.textContent === 'Austin Energy · TX').value; s.dispatchEvent(new Event('change')); })()");
+      await waitFor(browser, "document.documentElement.dataset.averagesChosen === '1015'");
+      const tx = JSON.parse(readFileSync(join(out, 'lookup/TX.json'), 'utf8'));
+      assert.equal(await browser.evaluate("document.querySelector('#in-utilityAverage').value"), String(tx.utilities[1015].resKwh));
+      assert.equal(await browser.evaluate("document.querySelector('#in-stateAverage').value"), String(tx.resKwh));
+      await browser.evaluate(setPeriods('2025-01-01 to 2025-12-31, 14,400 kWh, confirmed'));
+      const pct = Math.round((14400 / tx.utilities[1015].resKwh - 1) * 1000) / 10;
+      await waitFor(browser, `document.querySelector('[data-output=vsUtility]')?.textContent === ${JSON.stringify(`${pct}%`)}`);
+      assert.match(await browser.evaluate("document.querySelector('[data-answer] .sentence').textContent"), /\(EIA-861, 2025\)/);
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}

@@ -15,7 +15,7 @@
 
 ## 3. Benchmark and plan finder
 
-- [ ] 3.1 Benchmark with annualization and the pattern checklist; verify the 20%, 213-day, and 2.6× scenarios
+- [x] 3.1 Benchmark with annualization and the pattern checklist; verify the 20%, 213-day, and 2.6× scenarios
 - [ ] 3.2 Plan finder ranking with conditions and URDB metadata; verify the $128 and EV scenarios
 - [ ] 3.3 Totals-based TOU estimate and its error report; verify the published estimate error on three fixtures
 - [ ] 3.4 Texas EFL and CCA entry with supply-plus-delivery pricing; verify the $163.34 and CCA scenarios
@@ -23,5 +23,5 @@
 
 ## 4. Surfaces
 
-- [ ] 4.1 Run worked examples through the MCP server; verify identical structured results
+- [x] 4.1 Run worked examples through the MCP server; verify identical structured results
 - [ ] 4.2 DESIGN.md gates on a 360 px phone first, then desktop, both themes, keyboard; verify CI green
