@@ -1,0 +1,510 @@
+{
+ "publisher": "Electric Reliability Council of Texas (ERCOT)",
+ "terms": {
+  "url": "https://www.ercot.com/help/terms",
+  "section": "§5",
+  "text": "The publicly available contents of this website may be used, reproduced, and redistributed ... raw data may be used, reproduced, and redistributed in compilations, charts, and analyses without maintaining such notices.",
+  "retained": true
+ },
+ "timeLabel": "Each stamp is the end of a 15-minute interval in Central Prevailing Time, as ERCOT settles; the file headers give a date and time only.",
+ "asOf": "2025-11-24",
+ "notYetPosted": [
+  2026
+ ],
+ "years": {
+  "2018": {
+   "intervals": [
+    {
+     "date": "2018-06-27",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2018-07-19",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2018-08-23",
+     "ends": "16:45",
+     "minutes": 15
+    },
+    {
+     "date": "2018-09-19",
+     "ends": "16:30",
+     "minutes": 15
+    }
+   ],
+   "examples": [
+    {
+     "entity": "AEP TEXAS CENTRAL COMPANY (TDSP)",
+     "loadsMw": [
+      4769.369336,
+      5003.823904,
+      5042.19848,
+      4228.777992
+     ],
+     "averageMw": 4761.042428,
+     "loadRatioShare": 0.0686336
+    },
+    {
+     "entity": "ONCOR ELECTRIC DELIVERY COMPANY LLC (TDSP)",
+     "loadsMw": [
+      25581.443152,
+      27467.461488,
+      25016.84316,
+      23777.6568
+     ],
+     "averageMw": 25460.85115,
+     "loadRatioShare": 0.3670352
+    },
+    {
+     "entity": "Total",
+     "loadsMw": [
+      69254.617196,
+      73538.700008,
+      69990.013076,
+      64692.523772
+     ],
+     "averageMw": 69368.963513,
+     "loadRatioShare": 1
+    }
+   ],
+   "source": {
+    "report": "ERCOT Four Coincident Peak Calculations (NP9-83-M)",
+    "url": "https://www.ercot.com/files/docs/2022/01/13/1996-2020_FourCoincidentPeakCalculations.zip",
+    "file": "ERCOTFourCoincidentPeakLoadCalculation2018.xlsx",
+    "posted": "2018-11-29",
+    "sha256": "1b07527afd661e339801291c2e3d562824f681fcc62690c13ecb97e079d90dbd"
+   }
+  },
+  "2019": {
+   "intervals": [
+    {
+     "date": "2019-06-19",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2019-07-30",
+     "ends": "16:30",
+     "minutes": 15
+    },
+    {
+     "date": "2019-08-12",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2019-09-06",
+     "ends": "16:45",
+     "minutes": 15
+    }
+   ],
+   "examples": [
+    {
+     "entity": "AEP TEXAS CENTRAL COMPANY (TDSP)",
+     "loadsMw": [
+      5084.274062,
+      5052.686554,
+      5275.781788,
+      4664.9409479999995
+     ],
+     "averageMw": 5019.420838,
+     "loadRatioShare": 0.0707151
+    },
+    {
+     "entity": "ONCOR ELECTRIC DELIVERY COMPANY LLC (TDSP)",
+     "loadsMw": [
+      23696.056578,
+      25869.839398,
+      26994.220556,
+      24903.991948
+     ],
+     "averageMw": 25366.02712,
+     "loadRatioShare": 0.3573643
+    },
+    {
+     "entity": "Total",
+     "loadsMw": [
+      68369.76626,
+      71254.449754,
+      75006.083625,
+      69293.189982
+     ],
+     "averageMw": 70980.872405,
+     "loadRatioShare": 1
+    }
+   ],
+   "source": {
+    "report": "ERCOT Four Coincident Peak Calculations (NP9-83-M)",
+    "url": "https://www.ercot.com/files/docs/2022/01/13/1996-2020_FourCoincidentPeakCalculations.zip",
+    "file": "ERCOTFourCoincidentPeakLoadCalculation2019.xlsx",
+    "posted": "2020-01-30",
+    "sha256": "550b1dfb776252b19b2e7ac1af3287ed983f9961c43ab722c6f1dcaad8ce37ae",
+    "note": "Revised per PUCT Docket 50333"
+   }
+  },
+  "2020": {
+   "intervals": [
+    {
+     "date": "2020-06-08",
+     "ends": "17:45",
+     "minutes": 15
+    },
+    {
+     "date": "2020-07-13",
+     "ends": "16:45",
+     "minutes": 15
+    },
+    {
+     "date": "2020-08-13",
+     "ends": "16:45",
+     "minutes": 15
+    },
+    {
+     "date": "2020-09-01",
+     "ends": "14:30",
+     "minutes": 15
+    }
+   ],
+   "examples": [
+    {
+     "entity": "AEP TEXAS CENTRAL COMPANY (TDSP)",
+     "loadsMw": [
+      4844.08742,
+      5051.084372,
+      4928.862316,
+      5101.358452
+     ],
+     "averageMw": 4981.34814,
+     "loadRatioShare": 0.0706691
+    },
+    {
+     "entity": "ONCOR ELECTRIC DELIVERY COMPANY LLC (TDSP)",
+     "loadsMw": [
+      24448.129804,
+      26738.94804,
+      27051.892408,
+      21483.071156
+     ],
+     "averageMw": 24930.510352,
+     "loadRatioShare": 0.3536828
+    },
+    {
+     "entity": "Total",
+     "loadsMw": [
+      68195.624664,
+      74392.192584,
+      74420.38824,
+      64945.1053
+     ],
+     "averageMw": 70488.327697,
+     "loadRatioShare": 1
+    }
+   ],
+   "source": {
+    "report": "ERCOT Four Coincident Peak Calculations (NP9-83-M)",
+    "url": "https://www.ercot.com/files/docs/2022/01/13/1996-2020_FourCoincidentPeakCalculations.zip",
+    "file": "ERCOTFourCoincidentPeakLoadCalculation2020.xlsx",
+    "posted": "2020-11-18",
+    "sha256": "493f0aa5e2e6f10b708ab1ba1893d54560ed41f5d5139bd4e245df9e2c90fea0"
+   }
+  },
+  "2021": {
+   "intervals": [
+    {
+     "date": "2021-06-23",
+     "ends": null,
+     "minutes": 15
+    },
+    {
+     "date": "2021-07-26",
+     "ends": null,
+     "minutes": 15
+    },
+    {
+     "date": "2021-08-24",
+     "ends": null,
+     "minutes": 15
+    },
+    {
+     "date": "2021-09-01",
+     "ends": null,
+     "minutes": 15
+    }
+   ],
+   "datesOnly": true,
+   "flag": "date only, interval time not published",
+   "source": {
+    "report": "Trade press citing PUCT Project 51878, item 52; ERCOT no longer serves the 2021 file",
+    "url": "http://www.energychoicematters.com/stories/20211130d.html",
+    "posted": "2021-11-30"
+   }
+  },
+  "2022": {
+   "intervals": [
+    {
+     "date": "2022-06-23",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2022-07-20",
+     "ends": "16:45",
+     "minutes": 15
+    },
+    {
+     "date": "2022-08-02",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2022-09-20",
+     "ends": "17:00",
+     "minutes": 15
+    }
+   ],
+   "examples": [
+    {
+     "entity": "AEP TEXAS CENTRAL COMPANY (TDSP)",
+     "loadsMw": [
+      5290.120076,
+      5392.196936,
+      5442.477076,
+      4785.04936
+     ],
+     "averageMw": 5227.460862,
+     "loadRatioShare": 0.0681423
+    },
+    {
+     "entity": "ONCOR ELECTRIC DELIVERY COMPANY LLC (TDSP)",
+     "loadsMw": [
+      27352.280184,
+      29223.621568,
+      28201.891212,
+      25704.858676
+     ],
+     "averageMw": 27620.66291,
+     "loadRatioShare": 0.3600479
+    },
+    {
+     "entity": "Total",
+     "loadsMw": [
+      76803.458296,
+      80233.2293,
+      78669.138308,
+      71149.605628
+     ],
+     "averageMw": 76713.857883,
+     "loadRatioShare": 1
+    }
+   ],
+   "source": {
+    "report": "ERCOT Four Coincident Peak Calculations (NP9-83-M)",
+    "docId": "879528147",
+    "url": "https://www.ercot.com/misdownload/servlets/mirDownload?doclookupId=879528147",
+    "posted": "2022-11-28",
+    "sha256": "d4d213c3f8fdf69008f1505730af40261f49ec16051687864c7eabdb1f5b05db"
+   }
+  },
+  "2023": {
+   "intervals": [
+    {
+     "date": "2023-06-27",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2023-07-31",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2023-08-10",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2023-09-08",
+     "ends": "16:45",
+     "minutes": 15
+    }
+   ],
+   "examples": [
+    {
+     "entity": "AEP TEXAS CENTRAL COMPANY (TDSP)",
+     "loadsMw": [
+      5546.380192,
+      5522.618796,
+      5681.513616,
+      5592.543608
+     ],
+     "averageMw": 5585.764053,
+     "loadRatioShare": 0.0668499
+    },
+    {
+     "entity": "ONCOR ELECTRIC DELIVERY COMPANY LLC (TDSP)",
+     "loadsMw": [
+      28551.006504,
+      29401.169228,
+      30469.632708,
+      29927.569864
+     ],
+     "averageMw": 29587.344576000003,
+     "loadRatioShare": 0.3540984
+    },
+    {
+     "entity": "Total",
+     "loadsMw": [
+      81017.598256,
+      83032.608668,
+      85636.884588,
+      84540.292176
+     ],
+     "averageMw": 83556.845922,
+     "loadRatioShare": 1
+    }
+   ],
+   "source": {
+    "report": "ERCOT Four Coincident Peak Calculations (NP9-83-M)",
+    "docId": "961277079",
+    "url": "https://www.ercot.com/misdownload/servlets/mirDownload?doclookupId=961277079",
+    "posted": "2023-11-27",
+    "sha256": "bf16df45fd6b2ad724f68e328a79b29575aab900af90fdc38a1770ca7cd2a5eb"
+   }
+  },
+  "2024": {
+   "intervals": [
+    {
+     "date": "2024-06-30",
+     "ends": "17:45",
+     "minutes": 15
+    },
+    {
+     "date": "2024-07-01",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2024-08-20",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2024-09-20",
+     "ends": "16:00",
+     "minutes": 15
+    }
+   ],
+   "examples": [
+    {
+     "entity": "AEP TEXAS CENTRAL COMPANY (TDSP)",
+     "loadsMw": [
+      4987.82426,
+      5299.403344,
+      5671.662136,
+      4999.300988
+     ],
+     "averageMw": 5239.547681999999,
+     "loadRatioShare": 0.0646517
+    },
+    {
+     "entity": "ONCOR ELECTRIC DELIVERY COMPANY LLC (TDSP)",
+     "loadsMw": [
+      28805.53272,
+      28824.180516,
+      30162.580912,
+      27843.149332
+     ],
+     "averageMw": 28908.86087,
+     "loadRatioShare": 0.3567117
+    },
+    {
+     "entity": "Total",
+     "loadsMw": [
+      79749.848496,
+      81184.39216,
+      85357.561732,
+      77878.823836
+     ],
+     "averageMw": 81042.656556,
+     "loadRatioShare": 1
+    }
+   ],
+   "source": {
+    "report": "ERCOT Four Coincident Peak Calculations (NP9-83-M)",
+    "docId": "1055377059",
+    "url": "https://www.ercot.com/misdownload/servlets/mirDownload?doclookupId=1055377059",
+    "posted": "2024-11-25",
+    "sha256": "5440d07ecfee0168f85bb175a54c743b4399b11a64f10e367778e34c5f68701e"
+   }
+  },
+  "2025": {
+   "intervals": [
+    {
+     "date": "2025-06-19",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2025-07-30",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2025-08-18",
+     "ends": "17:00",
+     "minutes": 15
+    },
+    {
+     "date": "2025-09-04",
+     "ends": "17:30",
+     "minutes": 15
+    }
+   ],
+   "examples": [
+    {
+     "entity": "AEP TEXAS CENTRAL COMPANY (TDSP)",
+     "loadsMw": [
+      5014.427404,
+      5284.955888,
+      5559.352396,
+      5340.08218
+     ],
+     "averageMw": 5299.7044670000005,
+     "loadRatioShare": 0.0655419
+    },
+    {
+     "entity": "ONCOR ELECTRIC DELIVERY COMPANY LLC (TDSP)",
+     "loadsMw": [
+      27203.36324,
+      29484.433404,
+      29873.028608,
+      28148.041888
+     ],
+     "averageMw": 28677.216785000004,
+     "loadRatioShare": 0.3546537
+    },
+    {
+     "entity": "Total",
+     "loadsMw": [
+      77485.834736,
+      81908.321348,
+      83968.463332,
+      80076.465112
+     ],
+     "averageMw": 80859.771132,
+     "loadRatioShare": 1
+    }
+   ],
+   "source": {
+    "report": "ERCOT Four Coincident Peak Calculations (NP9-83-M)",
+    "docId": "1164129560",
+    "url": "https://www.ercot.com/misdownload/servlets/mirDownload?doclookupId=1164129560",
+    "posted": "2025-11-24",
+    "sha256": "676a85beafa2071eeb5da33569e4e1d1da93c22cd2cd4c40fdfd00abe2d96a19"
+   }
+  }
+ }
+}

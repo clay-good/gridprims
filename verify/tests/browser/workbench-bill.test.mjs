@@ -31,6 +31,7 @@ for (const kind of ['chrome', 'firefox']) {
       await waitFor(browser, "!document.querySelector('[data-bill-rate-field]').hidden");
       await browser.evaluate("(() => { const s = document.querySelector('#bill-utility'); s.value = [...s.options].find((o) => o.textContent === 'Austin Energy · TX').value; s.dispatchEvent(new Event('change')); })()");
       await waitFor(browser, `document.querySelectorAll('#bill-rate option').length === ${austin.length}`);
+      assert.equal(await browser.evaluate("document.querySelector('#cp-program').value"), 'ercot-4cp', 'Austin Energy is in ERCOT');
       await browser.evaluate(`(() => { const s = document.querySelector('#bill-rate'); s.value = '${pick}'; s.dispatchEvent(new Event('change')); })()`);
       await waitFor(browser, `document.querySelector('[data-bill]').dataset.priced === ${JSON.stringify(austin[pick].id)}`);
       const months = await browser.evaluate("document.querySelectorAll('[data-bill-month]').length");

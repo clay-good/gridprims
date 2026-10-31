@@ -15,6 +15,7 @@ import { pageTitle } from '../lib/meta.mjs';
 import { tariffPicker } from '../ui/tariff-picker.mjs';
 import { averagePicker } from '../ui/average-picker.mjs';
 import { billPanel } from '../ui/workbench-bill.mjs';
+import { cpPanel } from '../ui/workbench-cp.mjs';
 
 /** Pickers that fill a tool's inputs from public data: the section they render and the script that runs it. */
 const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'] };
@@ -244,6 +245,7 @@ export function filesPage({ i18n }) {
   <section class="panel report-view" data-report-view hidden aria-labelledby="report-view-title"></section>
   <section class="panel" data-insights></section>
   ${billPanel(i18n)}
+  ${cpPanel(i18n)}
   <section class="panel" data-receipt></section>
 </article>
 <div class="drag-overlay" data-overlay hidden><p>${t('files.dragging')}</p></div>`;

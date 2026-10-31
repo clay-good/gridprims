@@ -15,10 +15,10 @@ export const WORKBENCH_VERSION = '0.1.0';
 import { getJson, utilitiesForZip } from './zip-utilities.js';
 
 /**
- * @param {{i18n: any, view: () => any, when: (ms: number, zone: string) => string, showOnChart: (ms: number, kw: number) => void}} p
+ * @param {{i18n: any, view: () => any, when: (ms: number, zone: string) => string, showOnChart: (ms: number, kw: number) => void, onUtility?: (u: any) => void}} p
  *   view returns the workbench's current view of the loaded series, or null
  */
-export function setupBill({ i18n, view, when, showOnChart }) {
+export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {} }) {
   const { t } = i18n;
   const panel = document.querySelector('[data-bill]');
   const $ = (sel) => panel.querySelector(sel);
@@ -71,6 +71,7 @@ export function setupBill({ i18n, view, when, showOnChart }) {
   async function showUtility() {
     const u = utilities[Number($('[data-bill-utility]').value)];
     utilityName = u?.name ?? '';
+    if (u) onUtility(u);
     $('[data-bill-rate-field]').hidden = true;
     $('[data-bill-holidays-field]').hidden = true;
     $('[data-bill-result]').replaceChildren();

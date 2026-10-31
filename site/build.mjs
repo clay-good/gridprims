@@ -193,6 +193,9 @@ export async function build(opts = {}) {
     mkdirSync(join(outDir, 'bills/tariffs'), { recursive: true });
     for (const [st, s] of tariffs.shards) writeFileSync(join(outDir, `bills/tariffs/${st}.json`), JSON.stringify(s));
   }
+  // ERCOT's published 4CP intervals, for the workbench's coincident-peak panel.
+  mkdirSync(join(outDir, 'bills'), { recursive: true });
+  writeFileSync(join(outDir, 'bills/ercot-4cp.json'), readFileSync(join(ROOT, 'data/curated/ercot-4cp.json')));
   // The workbench's bill on a meter file: each utility's rates as tariff records, fetched only for the chosen utility.
   const records = rateRecords(join(ROOT, 'data'));
   if (records) {

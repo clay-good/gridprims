@@ -2,7 +2,7 @@
 
 - [ ] 1.1 Extend the foundation's fixture library (foundation task 5.1) with bill, ratchet, holiday, export, and coincident-peak cases; verify each fixture's receipt and expected results match their stored files
 - [x] 1.2 Consume the URDB snapshot owned by `add-public-grid-data`, partitioned by state; verify the bill tools fetch only state shards
-- [ ] 1.3 Snapshot ERCOT 4CP intervals for 2018–2025 from ERCOT's files, and add 2026 when ERCOT posts it (expected late November); verify 2018–2020 and 2022–2025 each have four interval-ending stamps matching ERCOT's published values, and that 2021 ships as dates only, flagged "times not published", until a primary source supplies them (`docs/research/06`)
+- [x] 1.3 Snapshot ERCOT 4CP intervals for 2018–2025 from ERCOT's files, and add 2026 when ERCOT posts it (expected late November); verify 2018–2020 and 2022–2025 each have four interval-ending stamps matching ERCOT's published values, and that 2021 ships as dates only, flagged "times not published", until a primary source supplies them (`docs/research/06`)
 - [ ] 1.4 Record the Green Button field map in `docs/derivations/green-button.md` from the Apache-2.0 ESPI schema; verify every handled element names its schema type and enumeration, and that no requirement depends on buying the standard
 
 ## 2. Interval insights
@@ -29,10 +29,10 @@
 
 ## 5. Coincident peak
 
-- [ ] 5.1 Implement versioned program definitions (D5) for ERCOT, PJM, NYISO, ISO-NE with method fields and hour-label conventions; verify the older-year, method-change, and hour-label scenarios
-- [ ] 5.2 Implement exposure, tag, cost (including PJM $/MW-day capacity and NSPL), and reduction savings; verify the 925 kW 4CP, PJM capacity, and eligibility-note scenarios
-- [ ] 5.3 Implement user-entered peaks with operator links; verify the PJM scenario
-- [ ] 5.4 Implement interval alignment and coarse-data labels; verify the hourly-file scenario
+- [x] 5.1 Implement versioned program definitions (D5) for ERCOT, PJM, NYISO, ISO-NE with method fields and hour-label conventions; verify the older-year, method-change, and hour-label scenarios
+- [x] 5.2 Implement exposure, tag, cost (including PJM $/MW-day capacity and NSPL), and reduction savings; verify the 925 kW 4CP, PJM capacity, and eligibility-note scenarios
+- [x] 5.3 Implement user-entered peaks with operator links; verify the PJM scenario
+- [x] 5.4 Implement interval alignment and coarse-data labels; verify the hourly-file scenario
 
 ## 6. Storage and solar screen
 

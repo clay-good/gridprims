@@ -9,6 +9,8 @@ import { renderInsights } from '../ui/workbench-insights.mjs';
 import { exportForReopt } from '../../core/lib/reopt-export.mjs';
 import { renderReport } from '../ui/workbench-report.mjs';
 import { WORKBENCH_VERSION } from './workbench-bill.js';
+import { setupCp } from './workbench-cp.js';
+import { preselect } from '../../core/lib/coincident-peak.mjs';
 import { formatNumber } from '../../core/lib/precision.mjs';
 import strings from '../strings/en-US.mjs';
 
@@ -47,6 +49,7 @@ function parse(bytes, name, choices) {
 }
 
 let bill = null;
+let cp = null;
 
 function render() {
   const v = viewOf(current.result, current.index);
@@ -58,6 +61,7 @@ function render() {
   $('[data-keep]').disabled = current.sample;
   renderInsightsPanel();
   bill?.refresh();
+  cp?.refresh();
 }
 
 /** "What this file says", with the demand window the user picked. */
@@ -83,7 +87,7 @@ $('[data-make-report]').addEventListener('click', () => {
   const v = current?.view;
   if (!v) return;
   const view = $('[data-report-view]');
-  view.innerHTML = String(renderReport({ v, when: (ms) => when(ms, v.zone), version: WORKBENCH_VERSION, ...bill.state() }, i18n));
+  view.innerHTML = String(renderReport({ v, when: (ms) => when(ms, v.zone), version: WORKBENCH_VERSION, ...bill.state(), cp: cp.state() }, i18n));
   view.hidden = false;
   view.scrollIntoView({ block: 'start' });
   document.documentElement.dataset.report = String(Number(document.documentElement.dataset.report ?? 0) + 1);
@@ -111,7 +115,9 @@ function showOnChart(ms, kw) {
   $('[data-chart]').dataset.highlight = String(ms);
   $('[data-chart]').scrollIntoView({ block: 'nearest' });
 }
-bill = setupBill({ i18n, view: () => current?.view ?? null, when, showOnChart });
+// The utility picked for the bill sets the coincident-peak program: ERCOT 4CP for a utility in ERCOT.
+bill = setupBill({ i18n, view: () => current?.view ?? null, when, showOnChart, onUtility: (u) => cp?.preselect(preselect(u.bas ?? [])) });
+cp = setupCp({ i18n, view: () => current?.view ?? null, when });
 // The home page's "Cheapest plan on my data" opens here, at the plan finder.
 if (location.hash === '#plans') $('[data-bill]').scrollIntoView({ block: 'start' });
 

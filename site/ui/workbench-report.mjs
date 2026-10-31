@@ -36,7 +36,9 @@ export function renderReport(p, { t }) {
       ${source(urdb)}` : html`<p>${t('report.notRun')}</p>`}</section>
   <section><h3>${t('report.alternative')}</h3>
     ${best ? html`<p>${best === p.ranking.current ? t('report.currentBest') : t('report.bestLine', { rate: best.rec.name, total: money(best.annual), diff: money(Math.abs(best.diff ?? 0)) })} ${t('compare.pastUse')}</p>${source(urdb)}` : html`<p>${t('report.notRun')}</p>`}</section>
-  <section><h3>${t('report.cp')}</h3><p>${t('report.cpNotYet')}</p></section>
+  <section><h3>${t('report.cp')}</h3>${p.cp?.e?.status === 'ok' && p.cp.e.averageKw !== null
+    ? html`<p>${t('report.cpLine', { name: p.cp.p.name, kw: num(p.cp.e.averageKw) })}${p.cp.cost?.annual ? ` ${t('cp.cost', { annual: money(p.cp.cost.annual), applies: p.cp.cost.applies })}` : ''}</p>${p.cp.e.approximate ? html`<p class="unit-hint">${p.cp.e.approximate}</p>` : ''}${source(p.cp.p.source)}`
+    : html`<p>${t('report.notRun')}</p>`}</section>
   <section><h3>${t('report.screen')}</h3>
     ${p.screen ? html`<p>${t('report.screenLine', { total: money(p.screen.result.saved.total), demand: money(p.screen.result.saved.demand), energy: money(p.screen.result.saved.energy) })}${p.screen.result.back.years !== null ? ` ${t('screen.payback', { years: formatNumber(p.screen.result.back.years, { decimals: 1, fixed: true }) })}` : ''}</p>
       <p class="unit-hint">${p.screen.result.upperBound} ${t('screen.excluded', { list: p.screen.result.excluded.join(', ') })}</p>${source(urdb)}` : html`<p>${t('report.notRun')}</p>`}</section>
