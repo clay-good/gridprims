@@ -11,6 +11,7 @@ export const WORKBENCH_CAPABILITIES = [
   ['load.tariff-comparison', 'compare.title', 'data-compare-field'],
   ['load.storage-screen', 'screen.title', 'data-screen-field'],
   ['load.coincident-peak', 'cp.title', 'data-cp'],
+  ['electrify.service-headroom', 'headroom.title', 'data-headroom'],
 ];
 
 /** The chip beside a capability's heading: "Review pending" or "Reviewed". */

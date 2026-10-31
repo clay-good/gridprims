@@ -22,6 +22,7 @@ import { ratingTablePanel } from '../ui/line-rating-table.mjs';
 import { conductorPicker } from '../ui/conductor-picker.mjs';
 import { ferc1Picker } from '../ui/ferc1-picker.mjs';
 import REGULATORS from '../../data/curated/regulators.mjs';
+import { headroomPanel } from '../ui/workbench-headroom.mjs';
 
 /** Sections a tool's page adds below its inputs, with the script that runs them. */
 const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'] };
@@ -257,6 +258,7 @@ export function filesPage({ i18n, reviewed = new Set() }) {
   ${billPanel(i18n, reviewed)}
   ${proposalPanel(i18n, REGULATORS)}
   ${cpPanel(i18n, reviewed)}
+  ${headroomPanel(i18n, reviewed)}
   <section class="panel" data-receipt></section>
 </article>
 <div class="drag-overlay" data-overlay hidden><p>${t('files.dragging')}</p></div>`;

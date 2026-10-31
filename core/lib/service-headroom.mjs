@@ -127,3 +127,36 @@ export function generationRule(period, hasGeneration) {
     ? { allowed: false, reason: 'The cited section does not allow the 30-day option when the service has solar, wind, or any peak shaving. Ask the authority having jurisdiction how to size the service.' }
     : { allowed: true, note: 'This site has generation or peak shaving, which lowers the demand the meter sees. The cited section limits only the 30-day option, but the inspector may still ask for a calculated load.' };
 }
+
+const n1 = (x) => x.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+/**
+ * The headroom with every step written out, for the tool page, the workbench,
+ * and the printed report alike.
+ * @param {{maxKw: number, period: '12-month' | '30-day', powerFactor: number, volts: number, phase: 1 | 3, ratingA: number, hasGeneration: boolean, edition: string, source?: string}} p
+ */
+export function headroomReport(p) {
+  const ed = EDITIONS[p.edition];
+  const cite = `${ed.edition} ${ed.section}`;
+  const rule = generationRule(p.period, p.hasGeneration);
+  if (!rule.allowed) return { status: 'refused', reason: `${rule.reason} (${cite}.)` };
+  const { maxKw, phase, volts } = p;
+  const h = headroom(p);
+  const at90 = headroom({ ...p, powerFactor: 0.9 });
+  const toAmps = phase === 3 ? `× 1,000 ÷ (√3 × ${volts} V)` : `× 1,000 ÷ ${volts} V`;
+  const steps = [
+    `Data period: ${p.source ?? (p.period === '12-month' ? 'the highest of 12 monthly maximum demands from demand-metered bills' : 'the highest 15-minute demand from a recording of at least 30 days')}: ${n1(maxKw)} kW.`,
+    `Demand in kVA: ${n1(maxKw)} kW ÷ power factor ${p.powerFactor} = ${n1(h.kva)} kVA.`,
+    `Times 125%: ${n1(h.kva)} × 1.25 = ${n1(h.kva125)} kVA.`,
+    `In amps: ${n1(h.kva125)} kVA ${toAmps} = ${n1(h.amps)} A.`,
+    `Headroom: ${p.ratingA} A − ${n1(h.amps)} A = ${n1(h.headroomA)} A, or ${n1(h.headroomKva)} kVA.`,
+    `At power factor 0.90 instead, the headroom is ${n1(at90.headroomA)} A.`,
+    ...(phase === 3 ? [BALANCED] : []),
+    ...(rule.note ? [rule.note] : []),
+    `Method: ${cite}${ed.unverified ? ' (the section number for this edition is from a secondary source and not yet checked against the adopted code)' : ''}, paraphrased: the existing load is the maximum demand from a year of data, or from 30 days or more of 15-minute recording, taken at 125%. ${INSPECTOR}`,
+  ];
+  return { status: 'ok', h, at90, maxKw, cite, steps };
+}
+
+export const BALANCED = 'Utility meter data is the total for the service and assumes the phases are balanced. The 30-day option is based on the highest-loaded phase, so per-phase recordings, when you have them, replace the meter total.';
+export const INSPECTOR = 'The authority having jurisdiction decides which edition applies and whether this method may be used.';
