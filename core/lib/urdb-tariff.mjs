@@ -9,7 +9,7 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 const json = (s) => (s ? JSON.parse(s) : null);
 
 // Who a rate is for, as its name states it: a household that does not meet the condition cannot take it.
-const CONDITIONS = [
+export const CONDITIONS = [
   ['low-income', /low[- ]income|income[- ]qualified|\bCARE\b|\bFERA\b|assistance/i],
   ['elderly-or-disabled', /elderly|senior|disabled|disability|medical/i],
   ['electric-vehicle', /electric vehicle|\bEV\b|\bPEV\b/i],
@@ -41,10 +41,13 @@ export function classify(r) {
   if (demand) reasons.push('a demand charge, which needs meter data');
   if (r.fixed_charge !== null && !['$/month', '$/day'].includes(r.fixed_charge_units)) reasons.push(`a fixed charge in ${r.fixed_charge_units ?? 'unstated units'}`);
   if (strux.flat().some((p) => p.energyRateTiers?.some((t) => t.unit && !['kWh', 'kWh daily'].includes(t.unit)))) reasons.push('tiers in units other than kWh');
-  const conditions = CONDITIONS.filter(([, re]) => re.test(r.rate_name ?? '')).map(([name]) => name);
+  const conditions = conditionsOf(r.rate_name);
   const touByPeriod = tou && reasons.length === 1 && strux.every((p) => p.energyRateTiers?.length === 1);
   return { service, residential: r.sector === 'Residential', conditions, tou, touByPeriod, demand, totals: reasons.length === 0, reasons };
 }
+
+/** Who a rate is for, from its name. @param {string | null | undefined} name */
+export const conditionsOf = (name) => CONDITIONS.filter(([, re]) => re.test(name ?? '')).map(([c]) => c);
 
 const clock = (h) => (h === 0 || h === 24 ? 'midnight' : h === 12 ? 'noon' : h < 12 ? `${h} am` : `${h - 12} pm`);
 

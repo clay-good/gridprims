@@ -4,6 +4,7 @@
 
 import { compareActual, intervalBills } from '../../core/lib/interval-bill.mjs';
 import { compareRates, shiftLoad } from '../../core/lib/rate-compare.mjs';
+import { findPlans } from '../../core/lib/plan-finder.mjs';
 import { readNumber } from '../../core/lib/bill-totals.mjs';
 import { rateOption, renderBills, renderComparison, renderRanking } from '../ui/workbench-bill.mjs';
 import { getJson, utilitiesForZip } from './zip-utilities.js';
@@ -35,6 +36,7 @@ export function setupBill({ i18n, view, when, showOnChart }) {
     const same = rates.filter((r) => r.sector === rec.sector);
     $('[data-compare-run]').textContent = t('compare.run', { count: same.length, sector: (rec.sector ?? '').toLowerCase() });
     $('[data-compare-field]').hidden = same.length < 2;
+    $('[data-conditions]').hidden = rec.sector !== 'Residential';
     $('[data-compare-result]').replaceChildren();
   }
 
@@ -45,7 +47,11 @@ export function setupBill({ i18n, view, when, showOnChart }) {
     const same = rates.filter((r) => r.sector === priced.rec.sector);
     const received = v.result.series.find((s) => s.meter === v.series.meter && s.channel === 'received' && s !== v.series);
     const series = shift ? shiftLoad(v.series, { ...shift, zone: v.zone }) : v.series;
-    const r = compareRates(series, same, { zone: v.zone, currentId: priced.rec.id, received, holidays: $('[data-bill-holidays]').checked, asOf });
+    // Household plans: plans with a condition stay under "Requires" until the household checks it.
+    const have = [...panel.querySelectorAll('[data-conditions] input:checked')].map((i) => i.value);
+    const r = priced.rec.sector === 'Residential'
+      ? findPlans(series, same, { zone: v.zone, currentId: priced.rec.id, received, have, asOf })
+      : compareRates(series, same, { zone: v.zone, currentId: priced.rec.id, received, holidays: $('[data-bill-holidays]').checked, asOf });
     const shifted = shift && t('compare.shifted', { kw: shift.kw, from: $('#shift-from').selectedOptions[0].dataset.label, to: $('#shift-to').selectedOptions[0].dataset.label, hours: shift.from[1] - shift.from[0], days: shift.days });
     $('[data-compare-result]').innerHTML = String(renderRanking(r, i18n, { shifted }));
     panel.dataset.compared = String(Number(panel.dataset.compared ?? 0) + 1);
@@ -81,6 +87,7 @@ export function setupBill({ i18n, view, when, showOnChart }) {
   $('[data-bill-utility]').addEventListener('change', showUtility);
   $('[data-bill-rate]').addEventListener('change', price);
   $('[data-compare-run]').addEventListener('click', () => compare(null));
+  $('[data-conditions]').addEventListener('change', () => { if ($('[data-compare-result]').childElementCount) compare(null); });
   $('[data-shift]').addEventListener('submit', (e) => {
     e.preventDefault();
     const f = new FormData(e.target);

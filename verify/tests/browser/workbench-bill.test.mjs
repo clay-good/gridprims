@@ -5,7 +5,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
 import { serve } from '../../lib/static-server.mjs';
@@ -64,6 +64,55 @@ for (const kind of ['chrome', 'firefox']) {
       // The first utility listed is shown on arrival, then the chosen one: no other utility's rates are fetched.
       const fetched = [...new Set(log.map((u) => new URL(u, server.url).pathname).filter((p) => p.startsWith('/bills/rates/')))].sort();
       assert.deepEqual(fetched, ['/bills/rates/1015.json', '/bills/rates/44372.json']);
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}
+
+// A utility with an EV plan among its residential rates, a ZIP it serves, and its name in the lookup.
+const evUtility = (() => {
+  const shards = readdirSync(join(out, 'lookup')).filter((f) => /^[A-Z]{2}\.json$/.test(f)).map((f) => JSON.parse(readFileSync(join(out, 'lookup', f), 'utf8')));
+  for (const f of readdirSync(join(out, 'bills/rates')).sort()) {
+    const id = Number(f.replace('.json', ''));
+    const res = JSON.parse(readFileSync(join(out, 'bills/rates', f), 'utf8')).rates.filter((r) => r.sector === 'Residential');
+    const ev = res.find((r) => /electric vehicle/i.test(r.name) && !r.unmodeled.length);
+    const plain = res.find((r) => /^Residential( Service)?$/i.test(r.name) && !r.unmodeled.length);
+    if (!ev || !plain) continue;
+    for (const sh of shards) {
+      if (!sh.utilities[id]) continue;
+      const zip = Object.entries(sh.zctas).find(([, cs]) => cs.length === 1 && sh.counties[cs[0][0]]?.utilities.includes(id))?.[0];
+      if (zip) return { id, ev, plain, zip, option: `${sh.utilities[id].name} · ${sh.state}` };
+    }
+  }
+  return null;
+})();
+
+for (const kind of ['chrome', 'firefox']) {
+  const skip = (!findBrowser(kind) && `${kind} is not installed`) || (!evUtility && 'no utility with an EV plan');
+
+  test(`${kind}: household plans: an EV plan waits under "Requires" until "I have an electric vehicle" is checked`, { skip, timeout: 90_000 }, async () => {
+    const server = await serve(out);
+    const browser = await launch(kind);
+    try {
+      await browser.goto(`${server.url}/files/`);
+      await waitFor(browser, "document.documentElement.dataset.ready === 'true' && document.querySelector('[data-bill]').dataset.ready");
+      await browser.evaluate(`(() => { document.querySelector('#bill-zip').value = '${evUtility.zip}'; document.querySelector('[data-bill-zip]').requestSubmit(); })()`);
+      await waitFor(browser, `[...document.querySelectorAll('#bill-utility option')].some((o) => o.textContent === ${JSON.stringify(evUtility.option)})`);
+      await browser.evaluate(`(() => { const s = document.querySelector('#bill-utility'); s.value = [...s.options].find((o) => o.textContent === ${JSON.stringify(evUtility.option)}).value; s.dispatchEvent(new Event('change')); })()`);
+      await waitFor(browser, `[...document.querySelectorAll('#bill-rate option')].some((o) => o.textContent.startsWith(${JSON.stringify(evUtility.plain.name)}))`);
+      await browser.evaluate(`(() => { const s = document.querySelector('#bill-rate'); s.value = [...s.options].find((o) => o.textContent.startsWith(${JSON.stringify(evUtility.plain.name + ' · ')})).value; s.dispatchEvent(new Event('change')); })()`);
+      await waitFor(browser, `document.querySelector('[data-bill]').dataset.priced === ${JSON.stringify(evUtility.plain.id)}`);
+      assert.equal(await browser.evaluate("document.querySelector('[data-conditions]').hidden"), false);
+      const runs = Number(await browser.evaluate("document.querySelector('[data-bill]').dataset.compared ?? 0"));
+      await browser.evaluate("document.querySelector('[data-compare-run]').click()");
+      await waitFor(browser, `document.querySelector('[data-bill]').dataset.compared === '${runs + 1}'`);
+      assert.ok(await browser.evaluate(`!!document.querySelector('[data-requires] [data-rate-id="${evUtility.ev.id}"]')`), 'the EV plan is under Requires');
+      assert.match(await browser.evaluate("document.querySelector('[data-compare-result]').textContent"), /Based on your past 12 months of use\./);
+      await browser.evaluate("(() => { const b = document.querySelector('[data-conditions] input[value=electric-vehicle]'); b.checked = true; b.dispatchEvent(new Event('change', { bubbles: true })); })()");
+      await waitFor(browser, `document.querySelector('[data-bill]').dataset.compared === '${runs + 2}'`);
+      assert.ok(await browser.evaluate(`!!document.querySelector('[data-ranking] [data-rate-id="${evUtility.ev.id}"]')`), 'now ranked');
     } finally {
       await browser.close();
       await server.close();
