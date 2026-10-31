@@ -11,7 +11,7 @@
 - [x] 2.2 Wire `search`, `describe`, `run` to the shared core and ranker; verify every worked example matches the website core byte for byte
 - [x] 2.3 Implement `analyze_file` with handles and receipts; verify the re-use scenario
 - [ ] 2.4 Implement `query_data` over the shard format; verify lookups match entity pages
-- [ ] 2.5 Implement `prepare_report`; verify no network request and a correct prefilled link
+- [x] 2.5 Implement `prepare_report`; verify no network request and a correct prefilled link
 
 ## 3. Security
 

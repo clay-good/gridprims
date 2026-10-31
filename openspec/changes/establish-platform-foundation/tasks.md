@@ -79,9 +79,9 @@
 
 ## 9. Problem reports
 
-- [ ] 9.1 Worker route with D1, honeypot, proof-of-work, rate limiting, and size limits; verify the flood and honeypot scenarios and that no third-party script loads
-- [ ] 9.2 Retention cleanup and privacy-page disclosure; verify a fixture report closed 181 days ago is deleted
-- [ ] 9.3 Build the report dialog with its payload preview, the returned id, and the drag-time privacy message; verify the default-payload, submitted-report, and drag-message scenarios
+- [x] 9.1 Worker route with D1, honeypot, proof-of-work, rate limiting, and size limits; verify the flood and honeypot scenarios and that no third-party script loads
+- [x] 9.2 Retention cleanup and privacy-page disclosure; verify a fixture report closed 181 days ago is deleted
+- [x] 9.3 Build the report dialog with its payload preview, the returned id, and the drag-time privacy message; verify the default-payload, submitted-report, and drag-message scenarios
 
 ## 10. Data operations and automation
 

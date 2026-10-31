@@ -30,7 +30,8 @@ Phase 0 (the platform foundation) is being built. Nothing is deployed yet.
 | Performance budgets on the reference profile (Chrome, 4x CPU slowdown, throttled network): a year of 15-minute rows parses in about 650 ms (budget 1 s); the tool page answers in under 1 s with 23 KB of compressed JavaScript (budgets 1.5 s and 150 KB) | Measured and gated in CI |
 | One source, every surface: page, command bar, MCP, and the generated [`docs/tools.md`](docs/tools.md) read labels, units, and citations from the manifest; the workbench and the MCP server agree on the peak and its time for the same file | Tested |
 | SVG charts: peak-preserving downsampling, ticks inside the data, summary and table view, colors from tokens | Built and tested |
-| Overpass fonts, data snapshots, deploy, problem reports | Not started |
+| Problem reports: a dialog that previews the exact payload (inputs only when ticked, never file contents), a Worker route with schema limits, honeypot, proof of work, and the host's rate limit, D1 storage, and retention cleanup (180 days after closing, 365 at most); agent-prepared reports open for a person to review | Built and tested against the real Worker locally; not deployed |
+| Overpass fonts, data snapshots, deploy | Not started |
 
 The plan is in [`openspec/changes/`](openspec/changes/): 22 changes, built in the phase order in [`plan-launch-and-value-proof`](openspec/changes/plan-launch-and-value-proof/). The shapes everything generates from are in [`docs/decisions-day-one.md`](docs/decisions-day-one.md).
 

@@ -28,7 +28,7 @@ function field(inp, value, i18n) {
 export function calculatorPage({ manifest, example, result, i18n }) {
   const { t } = i18n;
   const body = html`
-<article data-tool="${manifest.id}">
+<article data-tool="${manifest.id}" data-tool-version="${manifest.version}">
   <div class="tool-head">
     <h1>${manifest.title}</h1>
     <span class="chip">${t(`tool.stability.${manifest.stability}`)}</span>
@@ -162,4 +162,21 @@ export function filesPage({ i18n }) {
 </article>
 <div class="drag-overlay" data-overlay hidden><p>${t('files.dragging')}</p></div>`;
   return layout({ i18n, title: `${t('files.title')} · ${t('site.name')}`, description: t('files.purpose'), path: '/files/', body, modules: ['/site/pages/workbench.js'] });
+}
+
+/** The privacy page (platform/problem-reports, "Retention"; platform/privacy-and-security). */
+export function privacyPage({ i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('privacy.title')}</h1><p class="purpose">${t('privacy.intro')}</p>
+<h2>${t('privacy.storage')}</h2><p>${t('privacy.storageBody')}</p>
+<h2>${t('privacy.reports')}</h2><p>${t('privacy.reportsBody')}</p><p>${t('privacy.retention')}</p><p>${t('privacy.deletion')}</p>
+<h2>${t('privacy.counts')}</h2><p>${t('privacy.countsBody')}</p>`;
+  return layout({ i18n, title: `${t('privacy.title')} · ${t('site.name')}`, description: t('privacy.intro'), path: '/privacy/', body });
+}
+
+/** The report page: the dialog opens on arrival, with a payload an agent prepared if the address carries one. */
+export function reportPage({ i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('report.title')}</h1><p class="purpose">${t('report.intro')}</p><div data-report-page></div>`;
+  return layout({ i18n, title: `${t('report.title')} · ${t('site.name')}`, description: t('report.intro'), path: '/report/', body });
 }

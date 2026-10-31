@@ -5,7 +5,7 @@
 import { html } from '../lib/html.mjs';
 import { GLYPHS } from './glyphs.mjs';
 
-export const REPORT_URL = 'https://github.com/clay-good/gridprims/issues/new';
+export const REPORT_URL = '/report/';
 export const LIMITS_PATH = '/limits/';
 
 /** @param {string} id e.g. calc.energy-units.convert */
@@ -72,7 +72,7 @@ export function renderAnswer(manifest, result, i18n, { isExample }) {
     <p class="stamp mono"><span class="${level >= 2 ? 'ok' : 'diamond'}">${level >= 2 ? GLYPHS.check : GLYPHS.diamond}</span>
       ${t('validation.stamp', { level: t(`validation.${level}`), evidence })}
       <a href="${LIMITS_PATH}#${manifest.id}">${t('validation.limitsLink')}</a></p>
-    ${reasons.length ? html`<p class="strip" data-strip>${GLYPHS.diamond} ${reasons.join(' · ')} <a href="${REPORT_URL}">${t('strip.report')}</a></p>` : ''}`;
+    ${reasons.length ? html`<p class="strip" data-strip>${GLYPHS.diamond} ${reasons.join(' · ')} <a href="${REPORT_URL}" data-report>${t('strip.report')}</a></p>` : ''}`;
 }
 
 /**

@@ -94,7 +94,7 @@ Every step is `node <our script>` or `git`; actions are GitHub's own, pinned by 
 
 **Storage (D1).** Table `reports (id TEXT PRIMARY KEY, received_at TEXT, closed_at TEXT, payload TEXT)`. Rate-limit counters live in the Rate Limiting binding, never in this table.
 
-**Proof of work.** SHA-256 over `nonce + ":" + canonical payload` with 18 leading zero bits, about 262,000 hashes on average, which targets about 300 ms on a mid-range phone with `crypto.subtle`. Re-measured on the reference profile when the dialog is built (task 9.3).
+**Proof of work.** SHA-256 over `nonce + ":" + challenge`, where the challenge is the SHA-256 of the canonical payload (`core/contract/report.mjs`), so the cost does not grow with the message. 16 leading zero bits, about 65,000 hashes on average. Revised from 18 bits when the dialog was built (task 9.3): one `crypto.subtle` call per hash was far too slow, so the browser uses our synchronous SHA-256 (`core/lib/sha256.mjs`), about 1.1 million short hashes a second in Node on the build machine, which puts 16 bits near 60 ms there and an estimated 250 ms at the reference profile's 4x slowdown. The server checks one hash.
 
 ## 8. Reference machine and measured budgets
 

@@ -1,10 +1,11 @@
 // The one Cloudflare Worker (foundation design D4, D9, D15): serves the static
-// site with security headers. The problem-report route and the watchdog
-// handler are added by tasks 9.1 and 10.14. It sets no cookies and computes
+// site with security headers and stores problem reports. The watchdog
+// handler is added by task 10.14. It sets no cookies and computes
 // nothing from what visitors send.
 
 import { securityHeaders } from './headers.mjs';
 import { THEME_SCRIPT } from '../site/templates/layout.mjs';
+import { cleanupReports, handleReport } from './reports.mjs';
 
 let headersPromise = null;
 
@@ -32,6 +33,7 @@ export default {
    */
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname === '/api/reports') return withHeaders(await handleReport(request, env));
     if (url.pathname.startsWith('/api/')) {
       return withHeaders(new Response(JSON.stringify({ error: 'Not found' }), { status: 404, headers: { 'content-type': 'application/json' } }));
     }
@@ -44,5 +46,10 @@ export default {
       return withHeaders(notFound, 404);
     }
     return withHeaders(res);
+  },
+
+  /** The nightly schedule: report retention (the watchdog joins it with task 10.14). */
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(cleanupReports(env));
   },
 };

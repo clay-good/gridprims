@@ -54,11 +54,28 @@ ${body}
 </main>
 <footer>
   <div class="wrap">
-    <ul><li><a href="/limits/">${t('nav.limits')}</a></li><li><a href="/changelog/">${t('nav.changelog')}</a></li><li><a href="/settings/">${t('nav.settings')}</a></li></ul>
+    <ul><li><a href="/limits/">${t('nav.limits')}</a></li><li><a href="/changelog/">${t('nav.changelog')}</a></li><li><a href="/settings/">${t('nav.settings')}</a></li><li><a href="/privacy/">${t('nav.privacy')}</a></li><li><a href="/report/" data-report>${t('report.title')}</a></li></ul>
     <p>${t('footer.privacy')}</p>
     <p>${t('footer.license')}</p>
   </div>
 </footer>
+<dialog class="report" data-report-dialog aria-labelledby="report-title">
+  <h2 id="report-title">${t('report.title')}</h2>
+  <p>${t('report.intro')}</p>
+  <p class="strip" data-report-agent hidden>${t('report.fromAgent')}</p>
+  <label class="field-block" for="report-message">${t('report.message')}</label>
+  <textarea id="report-message" rows="4" maxlength="4000" data-report-message></textarea>
+  <p data-report-attach-row hidden><label><input type="checkbox" data-report-attach> ${t('report.attach')}</label> <span class="unit-hint">${t('report.attachNote')}</span></p>
+  <p class="hp" aria-hidden="true"><label>${t('report.honeypot')} <input type="text" name="website" tabindex="-1" autocomplete="off" data-report-hp></label></p>
+  <h3>${t('report.preview')}</h3>
+  <pre class="mono report-preview" data-report-preview></pre>
+  <p class="answer-actions">
+    <button class="button" type="button" data-report-send>${t('report.send')}</button>
+    <button class="button" type="button" data-report-copy>${t('report.copy')}</button>
+    <button class="button" type="button" data-report-close>${t('report.close')}</button>
+  </p>
+  <p role="status" data-report-status></p>
+</dialog>
 <script type="module" src="/site/pages/shell.js"></script>
 </body>
 </html>

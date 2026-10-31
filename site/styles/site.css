@@ -165,3 +165,11 @@ caption { text-align: left; color: var(--muted); font-size: .875rem; padding: va
 .receipt-choice { display: flex; flex-direction: column; gap: var(--s1); }
 .receipt-choice select { min-height: 44px; max-width: 100%; border: 1px solid var(--field-border); border-radius: var(--r-field); background: var(--panel); color: var(--ink); padding: 0 var(--s2); }
 .receipt-privacy { color: var(--ok); font-weight: 600; display: flex; gap: var(--s2); align-items: center; }
+
+/* Report dialog */
+dialog.report { max-width: min(40rem, calc(100vw - 2 * var(--s4))); border: 1px solid var(--line); border-radius: var(--r-field); background: var(--panel); color: var(--ink); box-shadow: 0 8px 24px var(--shadow); padding: var(--s5); }
+dialog.report::backdrop { background: color-mix(in srgb, var(--ink) 40%, transparent); }
+dialog.report textarea { width: 100%; border: 1px solid var(--field-border); border-radius: var(--r-field); background: var(--panel); color: var(--ink); padding: var(--s2); font: inherit; }
+.report-preview { background: var(--raise); padding: var(--s3); border-radius: var(--r-field); overflow-x: auto; white-space: pre-wrap; max-height: 16rem; }
+.field-block { display: block; font-weight: 600; margin-bottom: var(--s1); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }

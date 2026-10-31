@@ -3,6 +3,7 @@
 import { createI18n } from '../lib/i18n.mjs';
 import { searchCommands } from '../../core/contract/command.mjs';
 import strings from '../strings/en-US.mjs';
+import './report.js';
 
 const { t } = createI18n(strings, 'en-US');
 

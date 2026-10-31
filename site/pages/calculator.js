@@ -75,4 +75,11 @@ root.querySelector('[data-share]').addEventListener('click', async (e) => {
   e.currentTarget.textContent = i18n.t('answer.copied');
 });
 
+// What "Attach my inputs and result" adds to a problem report.
+globalThis.gridprimsReportAttachment = () => {
+  const values = readForm();
+  const r = runTool(manifest, impl, values);
+  return { inputs: values, outputs: r.outputs ?? null, status: r.status };
+};
+
 document.documentElement.dataset.ready = 'true';
