@@ -25,7 +25,7 @@
 
 - [x] 5.1 Build state shards, the ZIP-prefix table, and the on-device ZIP lookup with subregions; verify the request-privacy, four-digit, two-state, and two-subregion scenarios
 - [ ] 5.2 Capture LBNL Queued Up's terms from the publisher's own page each refresh and let the posture decide what ships; verify the terms-not-a-recognized-license and recognized-license scenarios
-- [ ] 5.3 Build the queue explorer with credit, summaries, and handoff; verify the county view and credit scenarios
+- [x] 5.3 Build the queue explorer with credit, summaries, and handoff; verify the county view and credit scenarios
 
 ## 6. Data library
 

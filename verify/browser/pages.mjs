@@ -21,6 +21,8 @@ export const ENTITY_SAMPLE = [
   '/states/dc/', // the smallest
   '/subregions/erct/', // every rate reported
   '/subregions/hims/', // a small island system
+  '/queue/', // the national summary
+  '/queue/tx/', // the most counties and project rows
 ];
 
 /** @param {string} out a built site */
