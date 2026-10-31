@@ -82,3 +82,15 @@ test('state average prices match EIA\'s Table 2.10 within 0.01 cents in every st
     }
   }
 });
+
+test('trends chart price and customers for every year held, with summaries and a table', () => {
+  const al = byId.get(195);
+  assert.deepEqual(al.trend.map((y) => y.year), [2021, 2022, 2023, 2024, 2025]);
+  assert.equal(al.trend.at(-1).bundled, al.prices.bundled.res, 'the latest trend year is the page\'s own price');
+  const html = text(page(195));
+  assert.match(html, /Trends, 2021 to 2025/);
+  assert.match(html, /From 2021 to 2025, the residential figure went from 14\.04 to 17\.91 cents per kWh\./);
+  assert.match(html, /From 2021 to 2025, customers went from 1,510,098 to 1,557,733\./);
+  assert.match(text(page(44372)), /Residential delivery revenue per kWh \(cents\)/, 'a wires utility\'s trend is its delivery revenue');
+  assert.ok(all.utilities.filter((u) => u.page && u.trend.length >= 5).length > 1400);
+});

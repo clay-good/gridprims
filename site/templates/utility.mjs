@@ -6,7 +6,7 @@
 import { html } from '../lib/html.mjs';
 import { layout } from './layout.mjs';
 import { sourceStamp } from '../ui/source-stamp.mjs';
-import { tableView } from '../lib/chart.mjs';
+import { lineChart, tableView } from '../lib/chart.mjs';
 import { SECTORS } from '../entities/utilities.mjs';
 import { plantPath } from './plant.mjs';
 
@@ -22,6 +22,35 @@ export function comparison(price, average, { t }, sector, state) {
   const pct = Math.round(((price - average) / average) * 100);
   const key = pct > 0 ? 'utility.compare.above' : pct < 0 ? 'utility.compare.below' : 'utility.compare.same';
   return t(key, { pct: Math.abs(pct), sector: t(`utility.sectorPlural.${sector}`), average: cents(average), state });
+}
+
+/** Price and customers for every year held, each chart with its summary and table. */
+function trendSection(u, sources, i18n) {
+  const { t } = i18n;
+  const years = u.trend;
+  if (years.length < 2) return '';
+  const kind = years.some((y) => y.bundled !== null) ? 'bundled' : years.some((y) => y.delivery !== null) ? 'delivery' : null;
+  const first = years[0].year;
+  const last = years.at(-1).year;
+  const priced = kind ? years.filter((y) => y[kind] !== null) : [];
+  const price = priced.length >= 2 ? lineChart({
+    title: t(`utility.trend.price.${kind}`), yUnit: '¢/kWh', xTick: (x) => String(Math.round(x)), width: 640, height: 220,
+    summary: t('utility.trend.priceSummary', { from: priced[0].year, to: priced.at(-1).year, start: cents(priced[0][kind]), end: cents(priced.at(-1)[kind]) }),
+    series: [{ label: t(`utility.trend.price.${kind}`), x: priced.map((y) => y.year), y: priced.map((y) => y[kind]) }],
+  }) : '';
+  const customers = lineChart({
+    title: t('utility.trend.customers'), yUnit: t('utility.col.customers'), xTick: (x) => String(Math.round(x)), width: 640, height: 220,
+    summary: t('utility.trend.customersSummary', { from: first, to: last, start: whole(years[0].customers), end: whole(years.at(-1).customers) }),
+    series: [{ label: t('utility.trend.customers'), x: years.map((y) => y.year), y: years.map((y) => y.customers) }],
+  });
+  return html`<section><h2>${t('utility.trend', { from: first, to: last })}</h2>
+${price}${customers}
+<details class="panel"><summary>${t('utility.trend.table')}</summary>
+${tableView([t('utility.col.year'), kind ? t(`utility.trend.price.${kind}`) : '', t('utility.col.customers')].filter(Boolean),
+    years.map((y) => [y.year, ...(kind ? [y[kind] === null ? '' : cents(y[kind])] : []), whole(y.customers)]), t('utility.trend.table'))}
+</details>
+${sources.history ? sourceStamp(sources.history, sources.history.tables[0], i18n) : ''}
+</section>`;
 }
 
 /**
@@ -58,6 +87,8 @@ ${res ? html`<details class="panel"><summary>${t('utility.howWeGotThis')}</summa
   <p class="mono" data-division>${t('utility.division', { revenue: dollars(res.revenue), kwh: whole(res.sales * 1000), cents: cents(res.price) })}</p>
   <p>${t('utility.priceMethod')}</p></details>` : ''}
 </section>
+
+${trendSection(u, sources, i18n)}
 
 <section><h2>${t('utility.peak')}</h2>
 ${u.peak ? html`<p data-peak>${t('utility.peakValue', { mw: whole(u.peak.mw), year: u.peak.year })}</p>`

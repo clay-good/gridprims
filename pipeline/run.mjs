@@ -127,14 +127,26 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
       // A workbook inside a zip (EIA-860, 861, 923), or the raw file is the workbook (EIA-860M), or one
       // named file of several (eGRID's data workbook and its ZIP lookup).
       let bytes = read.file ? raws[read.file].bytes : raw;
-      if (step('unzip')) {
+      // The same workbook from each of several zips (EIA-861's history: one zip a year), by file name.
+      if (step('unzip')?.files) {
+        input = {};
+        const names = [];
+        for (const f of step('unzip').files) {
+          const found = findEntry(step('unzip').entry.replace('{file}', f).replace('{year}', f), readZipDirectory(raws[f].bytes));
+          if (found.problem) { failures.push(`${tb.name}: ${f}: ${found.problem}`); continue; }
+          names.push(found.entry.name);
+          input[f] = (await readXlsx(await readZipEntry(raws[f].bytes, found.entry), { sheet: read.sheet })).rows;
+        }
+        entryName = names.join(', ');
+        if (names.length !== step('unzip').files.length) continue;
+      } else if (step('unzip')) {
         const found = findEntry(step('unzip').entry.replace('{year}', String(year)), zip);
         if (found.problem) { failures.push(`${tb.name}: ${found.problem}`); continue; }
         entryName = found.entry.name;
         bytes = await readZipEntry(raw, found.entry);
       }
       // One sheet hands the normalizer its rows; a list of sheets hands it rows by sheet name.
-      input = read.sheets ? Object.fromEntries(await Promise.all(read.sheets.map(async (sheet) => [sheet, (await readXlsx(bytes, { sheet })).rows]))) : (await readXlsx(bytes, { sheet: read.sheet })).rows;
+      if (!step('unzip')?.files) input = read.sheets ? Object.fromEntries(await Promise.all(read.sheets.map(async (sheet) => [sheet, (await readXlsx(bytes, { sheet })).rows]))) : (await readXlsx(bytes, { sheet: read.sheet })).rows;
     }
     // A join reads named columns of another dataset's served table, and the manifest records which version.
     const joins = {};
@@ -228,7 +240,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const { positionals, values } = parseArgs({ allowPositionals: true, options: { year: { type: 'string' }, input: { type: 'string', multiple: true }, retrieved: { type: 'string' }, out: { type: 'string' }, 'verify-pin': { type: 'boolean' } } });
   // --input path, or --input name=path once per file for a dataset whose release is several files.
-  const inputs = (values.input ?? []).map((v) => (/^[a-z_]+=/.test(v) ? v.split(/=(.*)/s).slice(0, 2) : ['', v]));
+  const inputs = (values.input ?? []).map((v) => (/^[\w-]+=/.test(v) ? v.split(/=(.*)/s).slice(0, 2) : ['', v]));
   const input = !inputs.length ? undefined : inputs[0][0] ? Object.fromEntries(inputs.map(([k, p]) => [k, new Uint8Array(readFileSync(p))])) : new Uint8Array(readFileSync(inputs[0][1]));
   const r = await runRecipe({
     // --year 2025, or --year 2026-09 for a monthly dataset.

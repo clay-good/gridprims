@@ -50,6 +50,18 @@ export function utilityPages(dataDir) {
   const urdb = served(dataDir, 'urdb', 'rates');
   const year = Number(sales.table.dataPeriod);
   const averages = stateAverages(sales.rows);
+  // Five years of the same sheets, for trends.
+  const history = served(dataDir, 'eia-861-history', 'sales');
+  const historyDelivery = served(dataDir, 'eia-861-history', 'delivery');
+  const trendRows = new Map();
+  for (const r of [...(history?.rows ?? []), ...(historyDelivery?.rows ?? [])]) {
+    if (r.utility_id === 88888) continue;
+    const t = trendRows.get(r.utility_id) ?? trendRows.set(r.utility_id, new Map()).get(r.utility_id);
+    const y = t.get(r.data_year) ?? t.set(r.data_year, { customers: 0, bundled: { revenue: 0, sales: 0 }, delivery: { revenue: 0, sales: 0 } }).get(r.data_year);
+    y.customers += r.tot_customers ?? 0;
+    const kind = KIND[r.service_type];
+    if (kind === 'bundled' || kind === 'delivery') { y[kind].revenue += r.res_revenue ?? 0; y[kind].sales += r.res_sales ?? 0; }
+  }
 
   const group = (rows, key) => {
     const m = new Map();
@@ -114,8 +126,12 @@ export function utilityPages(dataDir) {
       peak: peak && { mw: peak.peak_mw, year: peak.year, hourUtc: peak.peak_hour_utc, timezone: peak.timezone },
       baPeak: baPeak && { mw: baPeak.peak_mw, year: baPeak.year, name: baPeak.respondent_name, code: baPeak.balancing_authority_code_eia },
       rates: rates ? { count: rates.labels.size, newest: rates.newest } : null,
+      // Residential price (full service, or delivery revenue per kWh for a wires utility) and customers, by year.
+      trend: [...(trendRows.get(id) ?? new Map())].sort((a, b) => a[0] - b[0]).map(([y, v]) => ({
+        year: y, customers: v.customers, bundled: centsPerKwh(v.bundled.revenue, v.bundled.sales), delivery: centsPerKwh(v.delivery.revenue, v.delivery.sales),
+      })),
     });
   }
   utilities.sort((a, b) => a.id - b.id);
-  return { utilities, year, averages, sources: { eia861: sales.manifest, eia860: plants?.manifest ?? null, eia923: gen923?.manifest ?? null, ferc714: peaks?.manifest ?? null, urdb: urdb?.manifest ?? null } };
+  return { utilities, year, averages, sources: { eia861: sales.manifest, history: history?.manifest ?? null, eia860: plants?.manifest ?? null, eia923: gen923?.manifest ?? null, ferc714: peaks?.manifest ?? null, urdb: urdb?.manifest ?? null } };
 }
