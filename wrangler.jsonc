@@ -23,6 +23,11 @@
   "ratelimits": [
     { "name": "REPORT_LIMITER", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } }
   ],
+  // The site's own names, as custom domains on the zone in this account.
+  "routes": [
+    { "pattern": "gridprims.com", "custom_domain": true },
+    { "pattern": "www.gridprims.com", "custom_domain": true }
+  ],
   "triggers": { "crons": ["29 3 * * *"] },
   "observability": { "enabled": true }
 }
