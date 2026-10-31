@@ -11,7 +11,7 @@
 - [x] 2.2 Annual emissions with eGRID rates; verify against eGRID's published examples
 - [ ] 2.3 Battery basics and LCOE; verify the 5.33 h scenario and an LCOE recomputed from a published public example
 - [x] 2.4 Power-factor correction sizing and tariff cost; verify the 236.8 kVAR, 576.9 kW penalty, target-below-current, and no-reactive-data scenarios, plus two published examples within 1 kVAR
-- [ ] 2.5 Transformer sizing and loading with a cited standard-rating list; verify the 498.8 kVA, 86.7% loading, over-rating, and round-trip scenarios
+- [x] 2.5 Transformer sizing and loading with a cited standard-rating list; verify the 498.8 kVA, 86.7% loading, over-rating, and round-trip scenarios
 
 ## 3. Surfaces
 

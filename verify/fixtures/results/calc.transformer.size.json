@@ -1,0 +1,201 @@
+{
+  "toolId": "calc.transformer.size",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "amps-480-3ph",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.transformer.size",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "kva": {
+            "value": 498.8,
+            "unit": "kVA",
+            "display": "498.8"
+          },
+          "loading": {
+            "value": 99.8,
+            "unit": "%",
+            "display": "99.8"
+          },
+          "headroom": {
+            "value": 1.2,
+            "unit": "kVA",
+            "display": "1.2"
+          },
+          "amps": {
+            "value": 600,
+            "unit": "A",
+            "display": "600.0"
+          }
+        },
+        "sentence": "The load needs 498.8 kVA, which is 99.8% of a 500 kVA transformer.",
+        "notes": [],
+        "work": {
+          "method": "Apparent power is √3 × V line-to-line × A ÷ 1,000 for three-phase service and V × A ÷ 1,000 for single-phase, or kW ÷ power factor. Loading is kVA ÷ rating, and headroom is rating − kVA.",
+          "steps": [
+            "Load: √3 × 480 V × 600 A ÷ 1,000 = 498.8 kVA (three-phase).",
+            "Current at 480 V three-phase: 600 A.",
+            "Loading on a 500 kVA transformer: 498.8 ÷ 500 = 99.8%, with 1.2 kVA of headroom.",
+            "This tool names no standard size: the standard distribution transformer ratings are in IEEE C57.12.00, a paid standard we neither buy nor quote, so enter the rating you are considering. It also does not compute overload time, hot-spot or top-oil temperature, or loss of life; those come from the loading guide and the owner's practice."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Three-phase voltage is line-to-line, and the load is balanced across phases.",
+            "A load given in kW uses the power factor entered."
+          ],
+          "citations": [
+            {
+              "source": "NIST Special Publication 811",
+              "edition": "2008",
+              "locator": "Section 8: apparent power (volt ampere) and its relation to voltage and current",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            },
+            {
+              "source": "IEEE C57.91, Guide for Loading Mineral-Oil-Immersed Transformers, and IEEE C57.96 for dry-type transformers",
+              "edition": "named only; not quoted or applied",
+              "locator": "Overload duration, hot-spot temperature, and loss of life",
+              "paywalled": true
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Screening estimate: the utility or an engineer sizes the transformer for real."
+      }
+    },
+    {
+      "example": "kw-peak",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.transformer.size",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "kva": {
+            "value": 433.7,
+            "unit": "kVA",
+            "display": "433.7"
+          },
+          "loading": {
+            "value": 86.7,
+            "unit": "%",
+            "display": "86.7"
+          },
+          "headroom": {
+            "value": 66.3,
+            "unit": "kVA",
+            "display": "66.3"
+          },
+          "amps": {
+            "value": 521.6,
+            "unit": "A",
+            "display": "521.6"
+          }
+        },
+        "sentence": "The load needs 433.7 kVA, which is 86.7% of a 500 kVA transformer.",
+        "notes": [],
+        "work": {
+          "method": "Apparent power is √3 × V line-to-line × A ÷ 1,000 for three-phase service and V × A ÷ 1,000 for single-phase, or kW ÷ power factor. Loading is kVA ÷ rating, and headroom is rating − kVA.",
+          "steps": [
+            "Load: 412 kW ÷ 0.95 power factor = 433.7 kVA. The power factor is an assumption; a bill or meter shows it.",
+            "Current at 480 V three-phase: 521.6 A.",
+            "Loading on a 500 kVA transformer: 433.7 ÷ 500 = 86.7%, with 66.3 kVA of headroom.",
+            "This tool names no standard size: the standard distribution transformer ratings are in IEEE C57.12.00, a paid standard we neither buy nor quote, so enter the rating you are considering. It also does not compute overload time, hot-spot or top-oil temperature, or loss of life; those come from the loading guide and the owner's practice."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Three-phase voltage is line-to-line, and the load is balanced across phases.",
+            "A load given in kW uses the power factor entered."
+          ],
+          "citations": [
+            {
+              "source": "NIST Special Publication 811",
+              "edition": "2008",
+              "locator": "Section 8: apparent power (volt ampere) and its relation to voltage and current",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            },
+            {
+              "source": "IEEE C57.91, Guide for Loading Mineral-Oil-Immersed Transformers, and IEEE C57.96 for dry-type transformers",
+              "edition": "named only; not quoted or applied",
+              "locator": "Overload duration, hot-spot temperature, and loss of life",
+              "paywalled": true
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Screening estimate: the utility or an engineer sizes the transformer for real."
+      }
+    },
+    {
+      "example": "single-240",
+      "result": {
+        "status": "ok",
+        "toolId": "calc.transformer.size",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "kva": {
+            "value": 48,
+            "unit": "kVA",
+            "display": "48.0"
+          },
+          "loading": {
+            "value": 96,
+            "unit": "%",
+            "display": "96.0"
+          },
+          "headroom": {
+            "value": 2,
+            "unit": "kVA",
+            "display": "2.0"
+          },
+          "amps": {
+            "value": 200,
+            "unit": "A",
+            "display": "200.0"
+          }
+        },
+        "sentence": "The load needs 48.0 kVA, which is 96.0% of a 50 kVA transformer.",
+        "notes": [],
+        "work": {
+          "method": "Apparent power is √3 × V line-to-line × A ÷ 1,000 for three-phase service and V × A ÷ 1,000 for single-phase, or kW ÷ power factor. Loading is kVA ÷ rating, and headroom is rating − kVA.",
+          "steps": [
+            "Load: 240 V × 200 A ÷ 1,000 = 48 kVA (single-phase).",
+            "Current at 240 V single-phase: 200 A.",
+            "Loading on a 50 kVA transformer: 48 ÷ 50 = 96%, with 2 kVA of headroom.",
+            "This tool names no standard size: the standard distribution transformer ratings are in IEEE C57.12.00, a paid standard we neither buy nor quote, so enter the rating you are considering. It also does not compute overload time, hot-spot or top-oil temperature, or loss of life; those come from the loading guide and the owner's practice."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Three-phase voltage is line-to-line, and the load is balanced across phases.",
+            "A load given in kW uses the power factor entered."
+          ],
+          "citations": [
+            {
+              "source": "NIST Special Publication 811",
+              "edition": "2008",
+              "locator": "Section 8: apparent power (volt ampere) and its relation to voltage and current",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            },
+            {
+              "source": "IEEE C57.91, Guide for Loading Mineral-Oil-Immersed Transformers, and IEEE C57.96 for dry-type transformers",
+              "edition": "named only; not quoted or applied",
+              "locator": "Overload duration, hot-spot temperature, and loss of life",
+              "paywalled": true
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Screening estimate: the utility or an engineer sizes the transformer for real."
+      }
+    }
+  ]
+}

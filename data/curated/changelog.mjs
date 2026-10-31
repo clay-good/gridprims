@@ -11,6 +11,7 @@
  * @type {Array<{date: string, toolId: string | null, version: string, reason: string, kind?: 'security', credit?: string, sample?: {inputs: object, old: string, new: string}}>}
  */
 export default [
+  { date: '2026-10-31', toolId: 'calc.transformer.size', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'calc.power-factor.correct', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'calc.energy-units.emissions', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'household.usage-benchmark.compare', version: '0.1.0', reason: 'First release.' },

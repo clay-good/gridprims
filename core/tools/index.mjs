@@ -7,6 +7,8 @@ import energyUnitsEmissions from './calc.energy-units.emissions/manifest.mjs';
 import * as energyUnitsEmissionsImpl from './calc.energy-units.emissions/tool.mjs';
 import powerFactorCorrect from './calc.power-factor.correct/manifest.mjs';
 import * as powerFactorCorrectImpl from './calc.power-factor.correct/tool.mjs';
+import transformerSize from './calc.transformer.size/manifest.mjs';
+import * as transformerSizeImpl from './calc.transformer.size/tool.mjs';
 import billTotalsCheck from './household.bill-totals.check/manifest.mjs';
 import * as billTotalsCheckImpl from './household.bill-totals.check/tool.mjs';
 import usageBenchmark from './household.usage-benchmark.compare/manifest.mjs';
@@ -16,6 +18,7 @@ export const TOOLS = [
   { manifest: energyUnitsConvert, impl: energyUnitsConvertImpl },
   { manifest: energyUnitsEmissions, impl: energyUnitsEmissionsImpl },
   { manifest: powerFactorCorrect, impl: powerFactorCorrectImpl },
+  { manifest: transformerSize, impl: transformerSizeImpl },
   { manifest: billTotalsCheck, impl: billTotalsCheckImpl },
   { manifest: usageBenchmark, impl: usageBenchmarkImpl },
 ];

@@ -104,6 +104,41 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 - Only a tariff rule that scales billing demand to a power-factor threshold is priced here; kVA billing and per-kVAR charges are priced in the workbench's bill.
 - Harmonics, resonance, and switching transients are not assessed.
 
+## Transformer sizing and loading (`calc.transformer.size`)
+
+How many kVA a load needs, and how heavily a transformer of the rating you are considering would carry it.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Load given as | `loadAs` | choice | `amps`, `kva`, `kw` | amps |
+| Load | `load` | A, kVA, or kW | 0 to 10000000 | 600 |
+| Service | `phases` | choice | `three`, `single` | three |
+| Voltage (line-to-line for three-phase) | `volts` | V | 1 to 1000000 | 480 |
+| Transformer rating you are considering | `rating` | kVA | 0.001 to 10000000 | 500 |
+| Power factor (for a load in kW) | `pf` | power factor | 0 to 1 | 0.95 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Apparent power needed | `kva` | kVA | 1 decimals |
+| Loading | `loading` | % | 1 decimals |
+| Headroom | `headroom` | kVA | 1 decimals |
+| Current | `amps` | A | 1 decimals |
+
+**Method.** Apparent power is √3 × V line-to-line × A ÷ 1,000 for three-phase service and V × A ÷ 1,000 for single-phase, or kW ÷ power factor. Loading is kVA ÷ rating, and headroom is rating − kVA.
+
+**Sources.**
+
+- NIST Special Publication 811, 2008, Section 8: apparent power (volt ampere) and its relation to voltage and current (https://www.nist.gov/pml/special-publication-811)
+- IEEE C57.91, Guide for Loading Mineral-Oil-Immersed Transformers, and IEEE C57.96 for dry-type transformers, named only; not quoted or applied, Overload duration, hot-spot temperature, and loss of life
+
+**Known limits.**
+
+- Names no standard rating; the standard list is in a paid IEEE standard.
+- Does not compute permissible overload time, hot-spot or top-oil temperature, or loss of life.
+- Assumes a balanced three-phase load; unbalanced loads need each phase checked.
+
 ## Bill check (`household.bill-totals.check`)
 
 Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.
