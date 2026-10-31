@@ -3,7 +3,9 @@
 // user ticks "Keep this file on this device".
 
 import { createI18n } from '../lib/i18n.mjs';
-import { renderAnswer, renderChart, renderReceipt, viewOf } from '../ui/workbench.mjs';
+import { renderAnswer, renderChart, renderReceipt, viewOf, when } from '../ui/workbench.mjs';
+import { setupBill } from './workbench-bill.js';
+import { formatNumber } from '../../core/lib/precision.mjs';
 import strings from '../strings/en-US.mjs';
 
 const i18n = createI18n(strings, 'en-US');
@@ -40,14 +42,28 @@ function parse(bytes, name, choices) {
   });
 }
 
+let bill = null;
+
 function render() {
   const v = viewOf(current.result, current.index);
+  current.view = v;
   $('[data-answer]').innerHTML = String(renderAnswer(v, i18n, { sample: current.sample }));
   $('[data-receipt]').innerHTML = String(renderReceipt(v, i18n));
   $('[data-chart]').innerHTML = String(renderChart(v, i18n));
   $('[data-keep]').checked = Boolean(current.kept);
   $('[data-keep]').disabled = current.sample;
+  bill?.refresh();
 }
+
+/** Move the chart's highlight to an interval, such as the one that set a demand charge. */
+function showOnChart(ms, kw) {
+  const v = current?.view;
+  if (!v) return;
+  $('[data-chart]').innerHTML = String(renderChart(v, i18n, { highlight: { x: ms, y: kw, label: `${formatNumber(kw, { sigFigs: 3 })} kW` } }));
+  $('[data-chart]').dataset.highlight = String(ms);
+  $('[data-chart]').scrollIntoView({ block: 'nearest' });
+}
+bill = setupBill({ i18n, view: () => current?.view ?? null, when, showOnChart });
 
 async function load(bytes, name, { sample = false, kept = false, choices } = {}) {
   $('[data-error]').hidden = true;

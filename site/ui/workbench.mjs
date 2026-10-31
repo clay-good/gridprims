@@ -86,11 +86,11 @@ export function renderReceipt(v, { t }) {
 }
 
 /**
- * The demand chart with the peak labeled, and the monthly table.
+ * The demand chart with the peak labeled (or another interval, such as the one that set a demand charge), and the monthly table.
  * @param {ReturnType<typeof viewOf>} v
  * @param {{t: Function}} i18n
  */
-export function renderChart(v, { t }) {
+export function renderChart(v, { t }, { highlight } = {}) {
   const st = v.stats;
   const s = v.series;
   const kw = intervalKw(s);
@@ -99,7 +99,7 @@ export function renderChart(v, { t }) {
   return html`${lineChart({
     title: t('files.chartTitle'), summary, yUnit: 'kW', xTick: tick,
     series: [{ label: t('files.peakLabel'), x: s.startMs, y: kw }],
-    highlight: { x: st.peakStartMs, y: st.peakKw, label: `${num(st.peakKw)} kW` },
+    highlight: highlight ?? { x: st.peakStartMs, y: st.peakKw, label: `${num(st.peakKw)} kW` },
   })}
   <details class="panel"><summary>${t('files.monthly')}</summary>
   ${tableView([t('files.col.month'), t('files.col.peak'), t('files.col.when'), t('files.col.kwh')],

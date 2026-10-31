@@ -1,0 +1,51 @@
+// The workbench's bill on a meter file in real browsers (load and bill
+// analyzer task 3.3): the sample file priced on an Austin Energy commercial
+// rate, month by month, with each demand line naming the interval that set it
+// and showing it on the chart; only the rate files of the utilities shown are fetched.
+
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { findBrowser, launch, waitFor } from '../../lib/browser.mjs';
+import { serve } from '../../lib/static-server.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
+
+const out = await sharedSite();
+const austin = JSON.parse(readFileSync(join(out, 'bills/rates/1015.json'), 'utf8'));
+const pick = austin.findIndex((r) => r.flatDemand && r.sector === 'Commercial' && !r.unmodeled.length);
+
+for (const kind of ['chrome', 'firefox']) {
+  const skip = !findBrowser(kind) && `${kind} is not installed`;
+
+  test(`${kind}: the sample file on an Austin Energy demand rate: monthly bills, the demand line's setting interval, shown on the chart`, { skip, timeout: 90_000 }, async () => {
+    const log = [];
+    const server = await serve(out, { onRequest: (r) => log.push(r.url) });
+    const browser = await launch(kind);
+    try {
+      await browser.goto(`${server.url}/files/`);
+      await waitFor(browser, "document.documentElement.dataset.ready === 'true' && document.querySelector('[data-bill]').dataset.ready");
+      log.length = 0;
+      await browser.evaluate("(() => { document.querySelector('#bill-zip').value = '78701'; document.querySelector('[data-bill-zip]').requestSubmit(); })()");
+      await waitFor(browser, "!document.querySelector('[data-bill-rate-field]').hidden");
+      await browser.evaluate("(() => { const s = document.querySelector('#bill-utility'); s.value = [...s.options].find((o) => o.textContent === 'Austin Energy · TX').value; s.dispatchEvent(new Event('change')); })()");
+      await waitFor(browser, `document.querySelectorAll('#bill-rate option').length === ${austin.length}`);
+      await browser.evaluate(`(() => { const s = document.querySelector('#bill-rate'); s.value = '${pick}'; s.dispatchEvent(new Event('change')); })()`);
+      await waitFor(browser, `document.querySelector('[data-bill]').dataset.priced === ${JSON.stringify(austin[pick].id)}`);
+      const months = await browser.evaluate("document.querySelectorAll('[data-bill-month]').length");
+      assert.ok(months >= 1);
+      assert.match(await browser.evaluate("document.querySelector('[data-bill-total]').textContent"), /^\$[\d,]+\.\d\d$/);
+      assert.match(await browser.evaluate("document.querySelector('[data-bill-result]').textContent"), new RegExp(`URDB rate ${austin[pick].id}`));
+      const ms = await browser.evaluate("document.querySelector('[data-line=demand] [data-show-ms]').dataset.showMs");
+      assert.match(await browser.evaluate("document.querySelector('[data-line=demand] [data-show-ms]').textContent"), /^Set by \w{3} \d+, \d{4} at \d+:\d\d (am|pm), [\d.,]+ kW: show on the chart$/);
+      await browser.evaluate("document.querySelector('[data-line=demand] [data-show-ms]').click()");
+      await waitFor(browser, `document.querySelector('[data-chart]').dataset.highlight === '${ms}'`);
+      // The first utility listed is shown on arrival, then the chosen one: no other utility's rates are fetched.
+      const fetched = [...new Set(log.map((u) => new URL(u, server.url).pathname).filter((p) => p.startsWith('/bills/rates/')))].sort();
+      assert.deepEqual(fetched, ['/bills/rates/1015.json', '/bills/rates/44372.json']);
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}

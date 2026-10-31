@@ -114,6 +114,9 @@ a.button { display: inline-flex; align-items: center; text-decoration: none; }
 .field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: var(--stop); }
 .field textarea { min-height: 7rem; resize: vertical; }
 .field.wide { grid-column: 1 / -1; }
+.button.link { min-height: 44px; border: 0; background: none; padding: 0; color: inherit; text-decoration: underline; font: inherit; font-size: .875rem; text-align: left; cursor: pointer; }
+.bill-month { margin: var(--s2) 0; }
+.bill-month table { margin-top: var(--s2); }
 .picker-row { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); align-items: end; }
 
 /* Regulatory panels: work, sources, limits */

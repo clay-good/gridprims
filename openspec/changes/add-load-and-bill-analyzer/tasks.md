@@ -16,7 +16,7 @@
 
 - [x] 3.1 Normalize URDB records and the manual form into the tariff record (D2), converting $/day, $/year, kVA, and daily-demand units; verify 50 sampled URDB rates normalize with unmodeled items listed and the daily fixed charge scenario
 - [x] 3.2 Implement billing determinants (demand windows, ratchets with month-limited lookbacks, PF adjustment, minimums, holidays, export exclusion); verify the ratchet, lookback-incomplete, July 4, solar-export, and PF scenarios
-- [ ] 3.3 Implement line-by-line bills with setting-interval links; verify the March scenario
+- [x] 3.3 Implement line-by-line bills with setting-interval links; verify the March scenario
 - [ ] 3.4 Implement the actual-bill comparison; verify the riders scenario wording
 - [ ] 3.5 Run the 10-tariff cross-check against PySAM Utilityrate5 and REopt.jl; verify every monthly total within 0.5% or documented
 

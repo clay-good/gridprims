@@ -29,7 +29,7 @@ import { robotsTxt, sitemaps } from './lib/sitemap.mjs';
 import { atomFeed, releaseEntry } from './lib/atom.mjs';
 import { statePage, statePath, subregionPage, subregionPath } from './templates/region.mjs';
 import { lookupData } from './entities/lookup.mjs';
-import { tariffData } from './entities/tariffs.mjs';
+import { rateRecords, tariffData } from './entities/tariffs.mjs';
 import { LOOKUP_PATH, lookupPage } from './templates/lookup.mjs';
 import { CATALOG_PATH, catalogPage, homePage, STATES_PATH, statesIndexPage } from './templates/home.mjs';
 import { checkSimplicity } from './ui/home-lanes.mjs';
@@ -193,6 +193,12 @@ export async function build(opts = {}) {
     mkdirSync(join(outDir, 'bills/tariffs'), { recursive: true });
     for (const [st, s] of tariffs.shards) writeFileSync(join(outDir, `bills/tariffs/${st}.json`), JSON.stringify(s));
   }
+  // The workbench's bill on a meter file: each utility's rates as tariff records, fetched only for the chosen utility.
+  const records = rateRecords(join(ROOT, 'data'));
+  if (records) {
+    mkdirSync(join(outDir, 'bills/rates'), { recursive: true });
+    for (const [id, list] of records) writeFileSync(join(outDir, `bills/rates/${id}.json`), JSON.stringify(list));
+  }
   for (const utility of utilities?.utilities ?? []) if (utility.page) write(utilityPath(utility.id), utilityPage({ utility, sources: utilities.sources, i18n, titleName: utilityNames.get(utility.id), plantHasPage: (id) => plantIds.has(id) }));
   write('/report/', reportPage({ i18n }));
   write('/404.html', notFoundPage({ tools: TOOLS, i18n }));
@@ -270,8 +276,8 @@ export async function build(opts = {}) {
   // The service worker precaches the app shell and is versioned by the checksums of what it caches.
   // Dataset shards are cached as they are visited, not precached, so the shell stays small as data grows.
   // Entity pages (thousands of plants) are cached as visited too, not precached.
-  // So are the lookup's state shards (2.4 MB in all) and the bill check's tariff shards (3.7 MB): a visitor needs only their own state's.
-  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('bills/tariffs/') && !f.startsWith('site/cards/'));
+  // So are the lookup's state shards (2.4 MB in all) and the bill tools' rate files (about 50 MB): a visitor needs only their own utility's.
+  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('bills/tariffs/') && !f.startsWith('bills/rates/') && !f.startsWith('site/cards/'));
   const version = sha256(shell.map((f) => `${f}:${sha256(readFileSync(join(outDir, f)))}`).join('\n')).slice(0, 12);
   const urls = shell.map((f) => `/${f.replace(/(^|\/)index\.html$/, '$1')}`);
   writeFileSync(join(outDir, 'sw.js'), serviceWorkerSource({ version, files: urls }));
