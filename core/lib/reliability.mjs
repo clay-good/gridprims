@@ -263,3 +263,37 @@ export function breakdown(sustained, by, { customersServed, min = MIN_GROUP_CUST
     shareable: false,
   };
 }
+
+/**
+ * The lines Form EIA-861 Schedule 3 Part B collects, with the instruction text
+ * each one carries. The form takes only these two indices, each on two bases;
+ * it collects no average-per-interrupted-customer or momentary figure.
+ */
+export const FORM_LINES = [
+  { line: 1, index: 'minutesPerCustomer', basis: 'all', label: 'SAIDI, including major event days', instruction: 'Sum of customer minutes interrupted over the year, divided by the total number of customers served.' },
+  { line: 2, index: 'minutesPerCustomer', basis: 'without-major', label: 'SAIDI, excluding major event days', instruction: 'The same figure with major event days removed, determined in accordance with the IEEE 1366 standard.' },
+  { line: 3, index: 'perCustomer', basis: 'all', label: 'SAIFI, including major event days', instruction: 'Sum of the total number of customers interrupted over the year, divided by the total number of customers served.' },
+  { line: 4, index: 'perCustomer', basis: 'without-major', label: 'SAIFI, excluding major event days', instruction: 'The same figure with major event days removed, determined in accordance with the IEEE 1366 standard.' },
+];
+
+export const FILER_NOTE = 'You are responsible for what you file. These figures come from the log you gave us, on the basis shown beside each line; check them against your own records before you transcribe them.';
+
+/**
+ * A sheet for transcribing into the federal form: each line, its instruction,
+ * the figure, and the basis it was computed on. Copy and print only; gridprims
+ * submits nothing anywhere.
+ * @param {Array<{id: string, indices: any}>} byBasis from bases()
+ */
+export function formSheet(byBasis) {
+  const of = (id) => byBasis.find((b) => b.id === id);
+  const rows = FORM_LINES.map((l) => {
+    const b = of(l.basis);
+    return {
+      ...l,
+      value: b ? b.indices[l.index] : null,
+      basisLabel: b ? b.label : null,
+      missing: b ? null : `No ${l.basis === 'without-major' ? 'major-event-day' : l.basis} basis was computed, so this line is blank rather than guessed.`,
+    };
+  });
+  return { schedule: 'Form EIA-861, Schedule 3, Part B', rows, note: FILER_NOTE, actions: ['copy', 'print'], submits: false };
+}

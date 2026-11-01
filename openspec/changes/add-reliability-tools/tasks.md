@@ -11,7 +11,7 @@
 - [x] 2.3 Implement the momentary index and its not-logged message; verify the no-momentaries scenario
 - [x] 2.4 Mark per-customer indices unavailable with their data requirement; verify nothing is estimated from event counts
 - [x] 2.5 Implement the three reporting bases; verify the three-bases scenario
-- [ ] 2.6 Build the federal form sheet with instruction text and the filer-responsibility note; verify copy and print are the only actions
+- [x] 2.6 Build the federal form sheet with instruction text and the filer-responsibility note; verify copy and print are the only actions
 - [x] 2.7 Implement feeder and cause breakdowns with URL exclusion and small-group suppression; verify the small-feeder scenario and that no breakdown appears in a fragment or copied card
 
 ## 3. Major event days

@@ -219,3 +219,33 @@ test('major event days: the flagged days are listed and the indices are reported
   assert.equal(without.excluded, 1);
   assert.match(without.label, /major event days/i);
 });
+
+test('the form sheet carries each line, its instruction, the figure and the basis, and submits nothing', async () => {
+  const { formSheet, FORM_LINES } = await import('../../../core/lib/reliability.mjs');
+  const sustained = [ev(100, 60, 0), ev(5000, 300, 2)];
+  const b = bases(sustained, { customersServed: 10_000, periodMinutes: 525_600, medDays: new Set(['2025-01-03']), zone: ZONE });
+  const sheet = formSheet(b);
+  assert.equal(sheet.schedule, 'Form EIA-861, Schedule 3, Part B');
+  assert.deepEqual(sheet.rows.map((r) => r.line), [1, 2, 3, 4]);
+  // Only the two indices the form collects, each on both bases.
+  assert.deepEqual([...new Set(sheet.rows.map((r) => r.index))], ['minutesPerCustomer', 'perCustomer']);
+  for (const r of sheet.rows) {
+    assert.ok(typeof r.value === 'number', `line ${r.line} has a figure`);
+    assert.ok(r.instruction.length > 20, `line ${r.line} carries the form's own words`);
+    assert.ok(r.basisLabel, `line ${r.line} says which basis it used`);
+  }
+  // Dropping the storm day lowers the minutes, so the two bases are not the same number.
+  assert.ok(sheet.rows[1].value < sheet.rows[0].value);
+  assert.match(sheet.note, /^You are responsible for what you file\./);
+  assert.deepEqual(sheet.actions, ['copy', 'print']);
+  assert.equal(sheet.submits, false);
+  assert.equal(FORM_LINES.length, 4, 'the form collects no average-per-interrupted-customer or momentary line');
+});
+
+test('a basis that was never computed leaves its form line blank rather than guessed', async () => {
+  const { formSheet } = await import('../../../core/lib/reliability.mjs');
+  const only = bases([ev(100, 60, 0)], { customersServed: 1000, periodMinutes: 525_600, zone: ZONE }).filter((b) => b.id === 'all');
+  const sheet = formSheet(only);
+  assert.equal(sheet.rows[1].value, null);
+  assert.match(sheet.rows[1].missing, /blank rather than guessed/);
+});
