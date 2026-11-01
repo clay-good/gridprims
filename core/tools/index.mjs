@@ -39,6 +39,8 @@ import midspanClearance from './lines.midspan-clearance.check/manifest.mjs';
 import * as midspanClearanceImpl from './lines.midspan-clearance.check/tool.mjs';
 import attachmentHeight from './lines.attachment-height.find/manifest.mjs';
 import * as attachmentHeightImpl from './lines.attachment-height.find/tool.mjs';
+import minLoadScreen from './interconnect.minimum-load.screen/manifest.mjs';
+import * as minLoadScreenImpl from './interconnect.minimum-load.screen/tool.mjs';
 
 export const TOOLS = [
   { manifest: energyUnitsConvert, impl: energyUnitsConvertImpl },
@@ -60,6 +62,7 @@ export const TOOLS = [
   { manifest: largeLoadContext, impl: largeLoadContextImpl },
   { manifest: midspanClearance, impl: midspanClearanceImpl },
   { manifest: attachmentHeight, impl: attachmentHeightImpl },
+  { manifest: minLoadScreen, impl: minLoadScreenImpl },
 ];
 
 /** @param {string} id */

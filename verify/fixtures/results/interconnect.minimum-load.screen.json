@@ -1,0 +1,300 @@
+{
+  "toolId": "interconnect.minimum-load.screen",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "over",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.minimum-load.screen",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "peakRatio": {
+            "value": 25,
+            "unit": "%",
+            "display": "25.0"
+          },
+          "flipShare": {
+            "value": 25,
+            "unit": "%",
+            "display": "25.0"
+          }
+        },
+        "sentence": "The project is 25.0% of peak, so the 15% screen is not met. The minimum-load screen is met if minimum load is above 25.0% of peak and not met below it, so it turns on data the utility holds.",
+        "notes": [],
+        "work": {
+          "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
+          "steps": [
+            "15%-of-peak screen: 500 kW ÷ 2,000 kW = 25.0%; the rule requires no more than 15%: not met.",
+            "Minimum daytime load (10 a.m. to 4 p.m.) is unknown, so the screen is computed across the 15% to 40% of peak that utilities assume: 300 kW to 800 kW.",
+            "At 15% (300 kW): not met. At 40% (800 kW): met. The rule requires generation less than 100% of minimum load.",
+            "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The generation you enter includes every generator already on the line section and yours.",
+            "The line section is bounded by automatic sectionalizing devices, as the rule says."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; screens carried forward through Order No. 2023",
+              "locator": "pro forma SGIP §§ 2.2.1.2 (15% of line section annual peak), 2.4.4.1 and 2.4.4.1.1 (less than 100% of minimum load; daytime or absolute)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A self-check of two screens, not an interconnection application or a utility study. The utility runs the screens and has the final word."
+      }
+    },
+    {
+      "example": "under",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.minimum-load.screen",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "peakRatio": {
+            "value": 12.5,
+            "unit": "%",
+            "display": "12.5"
+          },
+          "flipShare": {
+            "value": 12.5,
+            "unit": "%",
+            "display": "12.5"
+          }
+        },
+        "sentence": "The project is 12.5% of peak, so the 15% screen is met. The minimum-load screen is met across the whole 15% to 40% band, so the assumption does not change the answer.",
+        "notes": [],
+        "work": {
+          "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
+          "steps": [
+            "15%-of-peak screen: 250 kW ÷ 2,000 kW = 12.5%; the rule requires no more than 15%: met.",
+            "Minimum daytime load (10 a.m. to 4 p.m.) is unknown, so the screen is computed across the 15% to 40% of peak that utilities assume: 300 kW to 800 kW.",
+            "At 15% (300 kW): met. At 40% (800 kW): met. The rule requires generation less than 100% of minimum load.",
+            "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The generation you enter includes every generator already on the line section and yours.",
+            "The line section is bounded by automatic sectionalizing devices, as the rule says."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; screens carried forward through Order No. 2023",
+              "locator": "pro forma SGIP §§ 2.2.1.2 (15% of line section annual peak), 2.4.4.1 and 2.4.4.1.1 (less than 100% of minimum load; daytime or absolute)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A self-check of two screens, not an interconnection application or a utility study. The utility runs the screens and has the final word."
+      }
+    },
+    {
+      "example": "flips",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.minimum-load.screen",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "peakRatio": {
+            "value": 25,
+            "unit": "%",
+            "display": "25.0"
+          },
+          "flipShare": {
+            "value": 25,
+            "unit": "%",
+            "display": "25.0"
+          }
+        },
+        "sentence": "The project is 25.0% of peak, so the 15% screen is not met. The minimum-load screen is met if minimum load is above 25.0% of peak and not met below it, so it turns on data the utility holds.",
+        "notes": [],
+        "work": {
+          "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
+          "steps": [
+            "15%-of-peak screen: 500 kW ÷ 2,000 kW = 25.0%; the rule requires no more than 15%: not met.",
+            "Minimum daytime load (10 a.m. to 4 p.m.) is unknown, so the screen is computed across the 15% to 40% of peak that utilities assume: 300 kW to 800 kW.",
+            "At 15% (300 kW): not met. At 40% (800 kW): met. The rule requires generation less than 100% of minimum load.",
+            "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The generation you enter includes every generator already on the line section and yours.",
+            "The line section is bounded by automatic sectionalizing devices, as the rule says."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; screens carried forward through Order No. 2023",
+              "locator": "pro forma SGIP §§ 2.2.1.2 (15% of line section annual peak), 2.4.4.1 and 2.4.4.1.1 (less than 100% of minimum load; daytime or absolute)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A self-check of two screens, not an interconnection application or a utility study. The utility runs the screens and has the final word."
+      }
+    },
+    {
+      "example": "settled",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.minimum-load.screen",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "peakRatio": {
+            "value": 3,
+            "unit": "%",
+            "display": "3.0"
+          },
+          "flipShare": {
+            "value": 3,
+            "unit": "%",
+            "display": "3.0"
+          }
+        },
+        "sentence": "The project is 3.0% of peak, so the 15% screen is met. The minimum-load screen is met across the whole 15% to 40% band, so the assumption does not change the answer.",
+        "notes": [],
+        "work": {
+          "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
+          "steps": [
+            "15%-of-peak screen: 60 kW ÷ 2,000 kW = 3.0%; the rule requires no more than 15%: met.",
+            "Minimum daytime load (10 a.m. to 4 p.m.) is unknown, so the screen is computed across the 15% to 40% of peak that utilities assume: 300 kW to 800 kW.",
+            "At 15% (300 kW): met. At 40% (800 kW): met. The rule requires generation less than 100% of minimum load.",
+            "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The generation you enter includes every generator already on the line section and yours.",
+            "The line section is bounded by automatic sectionalizing devices, as the rule says."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; screens carried forward through Order No. 2023",
+              "locator": "pro forma SGIP §§ 2.2.1.2 (15% of line section annual peak), 2.4.4.1 and 2.4.4.1.1 (less than 100% of minimum load; daytime or absolute)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A self-check of two screens, not an interconnection application or a utility study. The utility runs the screens and has the final word."
+      }
+    },
+    {
+      "example": "utility",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.minimum-load.screen",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "peakRatio": {
+            "value": 25,
+            "unit": "%",
+            "display": "25.0"
+          },
+          "minLoadRatio": {
+            "value": 83.3,
+            "unit": "%",
+            "display": "83.3"
+          }
+        },
+        "sentence": "The project is 25.0% of peak, so the 15% screen is not met. On the utility's minimum load, the minimum-load screen is met.",
+        "notes": [],
+        "work": {
+          "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
+          "steps": [
+            "15%-of-peak screen: 500 kW ÷ 2,000 kW = 25.0%; the rule requires no more than 15%: not met.",
+            "Minimum-load screen on a pre-application report: 500 kW is 83.3% of 600 kW; the rule requires less than 100%: met.",
+            "For comparison only, the band would give not met at 15% and met at 40% of peak.",
+            "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The generation you enter includes every generator already on the line section and yours.",
+            "The line section is bounded by automatic sectionalizing devices, as the rule says."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; screens carried forward through Order No. 2023",
+              "locator": "pro forma SGIP §§ 2.2.1.2 (15% of line section annual peak), 2.4.4.1 and 2.4.4.1.1 (less than 100% of minimum load; daytime or absolute)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A self-check of two screens, not an interconnection application or a utility study. The utility runs the screens and has the final word."
+      }
+    },
+    {
+      "example": "at-threshold",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.minimum-load.screen",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "peakRatio": {
+            "value": 25,
+            "unit": "%",
+            "display": "25.0"
+          },
+          "minLoadRatio": {
+            "value": 100,
+            "unit": "%",
+            "display": "100.0"
+          }
+        },
+        "sentence": "The project is 25.0% of peak, so the 15% screen is not met. On the utility's minimum load, the minimum-load screen is not met. Equal is not less, so the rule is not met.",
+        "notes": [],
+        "work": {
+          "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
+          "steps": [
+            "15%-of-peak screen: 500 kW ÷ 2,000 kW = 25.0%; the rule requires no more than 15%: not met.",
+            "Minimum-load screen on a pre-application report: 500 kW is 100.0% of 500 kW; the rule requires less than 100%: not met.",
+            "For comparison only, the band would give not met at 15% and met at 40% of peak.",
+            "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The generation you enter includes every generator already on the line section and yours.",
+            "The line section is bounded by automatic sectionalizing devices, as the rule says."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; screens carried forward through Order No. 2023",
+              "locator": "pro forma SGIP §§ 2.2.1.2 (15% of line section annual peak), 2.4.4.1 and 2.4.4.1.1 (less than 100% of minimum load; daytime or absolute)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A self-check of two screens, not an interconnection application or a utility study. The utility runs the screens and has the final word."
+      }
+    }
+  ]
+}

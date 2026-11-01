@@ -686,3 +686,36 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 - One new line per pole; crossarms, framing, and linked spans are not modeled.
 - Moves are limited to two, our own limit for readable plans, not a regulatory test.
 - The answer is only as good as the measured heights and the rules you enter.
+
+## Load-ratio screens for a generator (`interconnect.minimum-load.screen`)
+
+Whether a solar or other small generator passes the 15%-of-peak screen, and the minimum-load screen across the range of minimum load utilities assume, unless you have the utility's own value.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Line section annual peak load | `peakKw` | kW | 0 to 1000000 | 2000 |
+| Generation on the line section, including yours | `aggregateKw` | kW | 0 to 1000000 | 500 |
+| Your project | `technology` | choice | `solar-fixed`, `solar-tracking`, `storage`, `other` | solar-fixed |
+| Minimum load from the utility | `minLoadKw` | kW | 0 to 1000000 | 0 |
+| Where the minimum load came from | `minLoadSource` | choice | `report`, `published`, `other` | report |
+| The utility marked it | `measured` | choice | `unknown`, `measured`, `estimated` | unknown |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Generation as a share of peak | `peakRatio` | % | 1 decimals |
+| Generation as a share of the utility's minimum load | `minLoadRatio` | % | 1 decimals |
+| Minimum load, as a share of peak, at which the answer flips | `flipShare` | % | 1 decimals |
+
+**Method.** The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.
+
+**Sources.**
+
+- FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240, December 5, 2013; screens carried forward through Order No. 2023, pro forma SGIP §§ 2.2.1.2 (15% of line section annual peak), 2.4.4.1 and 2.4.4.1.1 (less than 100% of minimum load; daytime or absolute) (https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures)
+
+**Known limits.**
+
+- Federal procedures only; states set their own numbers, and some use minimum load where the federal rule uses peak.
+- The other screens, such as fault current, need the utility's circuit model and are not answered here.
+- Peak load and minimum load come only from the utility; gridprims never estimates or holds them.

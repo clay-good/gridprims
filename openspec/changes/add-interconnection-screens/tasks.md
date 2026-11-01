@@ -25,11 +25,11 @@
 
 ## 4. Minimum-load range
 
-- [ ] 4.1 Implement the peak-ratio screen; verify the over-threshold scenario
-- [ ] 4.2 Implement the band computation with the flip point, the rule's own comparison direction, and the daytime-only restriction; verify the flips-inside-the-band, settled-both-ways, exactly-at-the-threshold, and storage-project scenarios
+- [x] 4.1 Implement the peak-ratio screen; verify the over-threshold scenario
+- [x] 4.2 Implement the band computation with the flip point, the rule's own comparison direction, and the daytime-only restriction; verify the flips-inside-the-band, settled-both-ways, exactly-at-the-threshold, and storage-project scenarios (the federal rule's comparisons; state rules come with the curated thresholds, section 1)
 - [ ] 4.3 Show the band's provenance, per-utility assumptions, and confirmed state fallbacks by technology; verify the per-utility-assumption, codified-fallback, and unconfirmed-fallback-withheld scenarios
-- [ ] 4.4 Implement the utility-provided override (including the published-feeder-value path and the measured-or-estimated flag) and the no-peak-load path; verify all three scenarios
-- [ ] 4.5 Run the six hand-computed fixtures; verify every ratio and result matches
+- [x] 4.4 Implement the utility-provided override (including the published-feeder-value path and the measured-or-estimated flag) and the no-peak-load path; verify all three scenarios (utility value with its source and measured-or-estimated flag; no peak load refuses)
+- [x] 4.5 Run the six hand-computed fixtures; verify every ratio and result matches (six hand-computed cases in interconnect.minimum-load.screen; the codified-state-fallback case waits on section 1)
 
 ## 5. Feeder data and equipment
 
