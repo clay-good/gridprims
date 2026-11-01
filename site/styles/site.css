@@ -359,6 +359,13 @@ blockquote { border-left: 1px solid var(--field-border); margin: var(--s3) 0; pa
 .proof .proof-table { margin: var(--s3) 0 0; padding: var(--s3); }
 .proof .proof-table table { margin-top: var(--s2); }
 
+/* The three supporting figures beside the plate. Written here, before the phone
+   block, because an edit anchored elsewhere has silently lost these twice. */
+.proof .figure { border-top: 1px solid var(--line); padding-top: var(--s2); }
+.proof .figure .legend { margin: 0 0 var(--s1); }
+.proof .figure-value { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums slashed-zero; }
+.proof .figure-unit { font-size: .8125rem; font-weight: 500; color: var(--muted); margin-left: var(--s2); letter-spacing: 0; }
+
 /* The phone first screen (site/home-and-navigation): the proof keeps one real
    number, and both lanes still start above the fold. Last in the file so these
    win over the base rules they narrow. */
