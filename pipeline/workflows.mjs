@@ -9,6 +9,7 @@ const threshold = (hours) => Math.max(3 * hours, 48);
 export const WORKFLOWS = [
   { id: 'refresh-data', file: 'refresh-data.yml', intervalHours: 24, cron: '17 9 * * *', datasets: ['eia-861', 'eia-860', 'eia-923', 'eia-860m', 'urdb', 'eia-930', 'ghcn-daily', 'eia-861-net-metering', 'nlr-sharing-the-sun'] },
   { id: 'link-check', file: 'link-check.yml', intervalHours: 168, cron: '23 7 * * 2', datasets: [] },
+  { id: 'value-log', file: 'value-log.yml', intervalHours: 744, cron: '7 6 1 * *', datasets: [] },
   { id: 'canary', file: 'canary.yml', intervalHours: 168, cron: '41 5 * * 3', datasets: [] },
   // Started by the Worker's nightly watchdog, not by a schedule here: its row shows whether the watchdog runs.
   { id: 'heartbeat', file: 'heartbeat.yml', intervalHours: 24, cron: null, datasets: [] },
