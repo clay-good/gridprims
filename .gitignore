@@ -2,3 +2,7 @@ node_modules/
 dist/
 .DS_Store
 release/
+
+# Wrangler keeps local CLI state and caches here; the deploy reads its account from
+# CLOUDFLARE_ACCOUNT_ID instead (pipeline/deploy.mjs), so none of it belongs in git.
+.wrangler/
