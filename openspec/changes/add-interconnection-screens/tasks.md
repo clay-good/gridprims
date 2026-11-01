@@ -14,11 +14,11 @@
 
 ## 3. Screens
 
-- [ ] 3.1 Render every screen in rule order with thresholds and citations; verify the screen-list and screens-that-do-not-exist scenarios
-- [ ] 3.2 Implement the who-can-answer labels; verify every screen carries one and the utility-only scenario links the data paths
-- [ ] 3.3 Evaluate the locally answerable screens; verify the service-transformer backfeed scenario and the arithmetic shown
-- [ ] 3.4 Block verdicts on model-dependent screens; verify the fault-current scenario produces no pass or fail
-- [ ] 3.5 Implement the status summary without likelihood language; verify the mixed-result scenario in a snapshot test
+- [x] 3.1 Render every screen in rule order with thresholds and citations; verify the screen-list and screens-that-do-not-exist scenarios (federal Initial Review screens, plus the screens it does not have)
+- [x] 3.2 Implement the who-can-answer labels; verify every screen carries one and the utility-only scenario links the data paths (the feeder-data-paths page the utility-only screens should link waits on section 5)
+- [ ] 3.3 Evaluate the locally answerable screens; verify the service-transformer backfeed scenario and the arithmetic shown (line configuration, shared secondary, and center-tap imbalance are evaluated; the transformer backfeed check is a state screen and waits on the state records)
+- [x] 3.4 Block verdicts on model-dependent screens; verify the fault-current scenario produces no pass or fail
+- [x] 3.5 Implement the status summary without likelihood language; verify the mixed-result scenario in a snapshot test
 - [ ] 3.6 Build the state comparison view from the curated records; verify the different-load-ratio-test and hosting-capacity-is-the-screen scenarios
 - [ ] 3.7 Implement the storage minimum-load distinction; verify the solar-plus-storage scenario
 - [ ] 3.8 Add last-checked dates and the review chip, and register the threshold dataset as downloadable under CC BY 4.0; verify the stale-jurisdiction and comparison-downloadable scenarios

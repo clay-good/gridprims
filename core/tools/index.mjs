@@ -43,6 +43,8 @@ import minLoadScreen from './interconnect.minimum-load.screen/manifest.mjs';
 import * as minLoadScreenImpl from './interconnect.minimum-load.screen/tool.mjs';
 import processRoute from './interconnect.process.route/manifest.mjs';
 import * as processRouteImpl from './interconnect.process.route/tool.mjs';
+import fastTrack from './interconnect.fast-track.screens/manifest.mjs';
+import * as fastTrackImpl from './interconnect.fast-track.screens/tool.mjs';
 
 export const TOOLS = [
   { manifest: energyUnitsConvert, impl: energyUnitsConvertImpl },
@@ -66,6 +68,7 @@ export const TOOLS = [
   { manifest: attachmentHeight, impl: attachmentHeightImpl },
   { manifest: minLoadScreen, impl: minLoadScreenImpl },
   { manifest: processRoute, impl: processRouteImpl },
+  { manifest: fastTrack, impl: fastTrackImpl },
 ];
 
 /** @param {string} id */

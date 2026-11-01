@@ -750,3 +750,34 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 - Federal procedures only; most retail interconnections follow a state version with its own limits.
 - Eligibility is not a pass: the utility still runs the screens.
 - Fees other than the pre-application report vary by utility and are not shown.
+
+## The Fast Track screens, one by one (`interconnect.fast-track.screens`)
+
+Every screen the utility runs on a small generator under the federal Fast Track, what each tests and at what threshold, who can answer it, and a result for the ones you can settle yourself.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| The utility line | `lineConfig` | choice | `4w`, `3w`, `unknown` | 4w |
+| Your connection | `connection` | choice | `1ph-ln`, `1ph-ll`, `3ph`, `3ph-grounded` | 1ph-ln |
+| Generation on a shared single-phase secondary | `sharedKw` | kW | 0 to 100000 | 15 |
+| Imbalance your system adds on a 240 V center-tap service | `imbalanceKva` | kVA | 0 to 100000 | 15 |
+| Service transformer nameplate rating | `transformerKva` | kVA | 0 to 100000 | 100 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Screens met | `met` |  | 0 decimals |
+| Screens not met | `notMet` |  | 0 decimals |
+| Screens still open | `open` |  | 0 decimals |
+
+**Method.** The ten Initial Review screens of SGIP § 2.2.1, in the rule's order, each with its threshold and who can answer it. Three are settled from your entries: line configuration and grounding (§ 2.2.1.6), at most 20 kW on a shared single-phase secondary (§ 2.2.1.7), and an imbalance of at most 20% of the service transformer rating on a 240 V center-tap service (§ 2.2.1.8). The rest need the utility's data or circuit model and stay open.
+
+**Sources.**
+
+- FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240, December 5, 2013; screens carried forward through Order No. 2023, pro forma SGIP § 2.2.1 (Initial Review screens 2.2.1.1 to 2.2.1.10) and § 2.4.4 (supplemental review) (https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures)
+
+**Known limits.**
+
+- Fault current, interrupting capability, and transient stability need the utility's circuit model and are never answered here.
+- Federal procedures only; states number and set their screens differently.

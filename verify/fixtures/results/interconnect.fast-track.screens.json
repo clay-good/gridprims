@@ -1,0 +1,128 @@
+{
+  "toolId": "interconnect.fast-track.screens",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "mixed",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.fast-track.screens",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "met": {
+            "value": 3,
+            "unit": "",
+            "display": "3"
+          },
+          "notMet": {
+            "value": 0,
+            "unit": "",
+            "display": "0"
+          },
+          "open": {
+            "value": 7,
+            "unit": "",
+            "display": "7"
+          }
+        },
+        "sentence": "3 screens are met, 0 not met, and 7 still open. The utility runs every screen and decides.",
+        "notes": [],
+        "work": {
+          "method": "The ten Initial Review screens of SGIP § 2.2.1, in the rule's order, each with its threshold and who can answer it. Three are settled from your entries: line configuration and grounding (§ 2.2.1.6), at most 20 kW on a shared single-phase secondary (§ 2.2.1.7), and an imbalance of at most 20% of the service transformer rating on a 240 V center-tap service (§ 2.2.1.8). The rest need the utility's data or circuit model and stay open.",
+          "steps": [
+            "§ 2.2.1.1, The point of interconnection is on the utility's tariffed distribution system: yes or no. Answered by only the utility (where the utility's distribution system ends). Open.",
+            "§ 2.2.1.2, Generation on the line section: at most 15% of the line section's annual peak load, as last measured at the substation. Answered by only the utility (the line section's annual peak load and the generation already on it). Open. The load-ratio screens tool works it out once you have the peak load from the utility.",
+            "§ 2.2.1.3, Load side of a spot network protector: inverter-based, and at most 5% of the spot network's maximum load or 50 kW, whichever is smaller. Answered by only the utility (whether you are on a spot network, and its maximum load). Open.",
+            "§ 2.2.1.4, Fault current contribution: at most 10% of the circuit's maximum fault current at the nearest primary-level point. Answered by only the utility, from its circuit model (the circuit's fault current). Open.",
+            "§ 2.2.1.5, Interrupting capability: no protective device or customer equipment above 87.5% of its short-circuit interrupting rating, and none already above it. Answered by only the utility, from its circuit model (protective device ratings, which the utility does not publish). Open.",
+            "§ 2.2.1.6, Line configuration and grounding: on a three-phase three-wire line, a three-phase or single-phase phase-to-phase connection; on a three-phase four-wire line, an effectively grounded three-phase or single-phase line-to-neutral connection. Answered by you and your installer (the line type and your connection). A four-wire line with a single-phase line-to-neutral connection: met.",
+            "§ 2.2.1.7, Shared single-phase secondary: at most 20 kW of generation on the shared secondary. Answered by you and your installer (the generation on the shared secondary). 15 kW against at most 20 kW: met.",
+            "§ 2.2.1.8, Imbalance on a 240 V center-tap service: the addition creates an imbalance of at most 20% of the service transformer's nameplate rating. Answered by you and your installer (the imbalance and the transformer rating). 15 kVA against 20% of 100 kVA = 20 kVA: met.",
+            "§ 2.2.1.9, Transient stability: at most 10 MW on the transmission side of the substation transformer where transient stability limits are known. Answered by only the utility, from its circuit model (the transmission system's stability limits). Open.",
+            "§ 2.2.1.10, No utility construction: no construction of facilities on the utility's own system is needed. Answered by only the utility (the utility's design). Open.",
+            "The federal procedures have no starting-voltage-drop screen and no screen called a penetration test: those are California Rule 21 (Screens C, M, and N), Massachusetts (Screen 7), New York (Screens 3, E, and G), and Hawaii (Screen 5).",
+            "If you elect supplemental review after failing a screen, the utility runs the minimum load, voltage and power quality, and safety and reliability screens (§ 2.4.4)."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The project follows the federal procedures; state rules number and set their screens differently."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; screens carried forward through Order No. 2023",
+              "locator": "pro forma SGIP § 2.2.1 (Initial Review screens 2.2.1.1 to 2.2.1.10) and § 2.4.4 (supplemental review)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A self-check, not an application or a study. The utility runs every screen and decides; open screens are not a prediction either way."
+      }
+    },
+    {
+      "example": "not-met",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.fast-track.screens",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "met": {
+            "value": 1,
+            "unit": "",
+            "display": "1"
+          },
+          "notMet": {
+            "value": 2,
+            "unit": "",
+            "display": "2"
+          },
+          "open": {
+            "value": 7,
+            "unit": "",
+            "display": "7"
+          }
+        },
+        "sentence": "1 screen is met, 2 not met, and 7 still open. The utility runs every screen and decides.",
+        "notes": [],
+        "work": {
+          "method": "The ten Initial Review screens of SGIP § 2.2.1, in the rule's order, each with its threshold and who can answer it. Three are settled from your entries: line configuration and grounding (§ 2.2.1.6), at most 20 kW on a shared single-phase secondary (§ 2.2.1.7), and an imbalance of at most 20% of the service transformer rating on a 240 V center-tap service (§ 2.2.1.8). The rest need the utility's data or circuit model and stay open.",
+          "steps": [
+            "§ 2.2.1.1, The point of interconnection is on the utility's tariffed distribution system: yes or no. Answered by only the utility (where the utility's distribution system ends). Open.",
+            "§ 2.2.1.2, Generation on the line section: at most 15% of the line section's annual peak load, as last measured at the substation. Answered by only the utility (the line section's annual peak load and the generation already on it). Open. The load-ratio screens tool works it out once you have the peak load from the utility.",
+            "§ 2.2.1.3, Load side of a spot network protector: inverter-based, and at most 5% of the spot network's maximum load or 50 kW, whichever is smaller. Answered by only the utility (whether you are on a spot network, and its maximum load). Open.",
+            "§ 2.2.1.4, Fault current contribution: at most 10% of the circuit's maximum fault current at the nearest primary-level point. Answered by only the utility, from its circuit model (the circuit's fault current). Open.",
+            "§ 2.2.1.5, Interrupting capability: no protective device or customer equipment above 87.5% of its short-circuit interrupting rating, and none already above it. Answered by only the utility, from its circuit model (protective device ratings, which the utility does not publish). Open.",
+            "§ 2.2.1.6, Line configuration and grounding: on a three-phase three-wire line, a three-phase or single-phase phase-to-phase connection; on a three-phase four-wire line, an effectively grounded three-phase or single-phase line-to-neutral connection. Answered by you and your installer (the line type and your connection). A four-wire line with a single-phase phase-to-phase connection: not met.",
+            "§ 2.2.1.7, Shared single-phase secondary: at most 20 kW of generation on the shared secondary. Answered by you and your installer (the generation on the shared secondary). 25 kW against at most 20 kW: not met.",
+            "§ 2.2.1.8, Imbalance on a 240 V center-tap service: the addition creates an imbalance of at most 20% of the service transformer's nameplate rating. Answered by you and your installer (the imbalance and the transformer rating). 10 kVA against 20% of 100 kVA = 20 kVA: met.",
+            "§ 2.2.1.9, Transient stability: at most 10 MW on the transmission side of the substation transformer where transient stability limits are known. Answered by only the utility, from its circuit model (the transmission system's stability limits). Open.",
+            "§ 2.2.1.10, No utility construction: no construction of facilities on the utility's own system is needed. Answered by only the utility (the utility's design). Open.",
+            "The federal procedures have no starting-voltage-drop screen and no screen called a penetration test: those are California Rule 21 (Screens C, M, and N), Massachusetts (Screen 7), New York (Screens 3, E, and G), and Hawaii (Screen 5).",
+            "If you elect supplemental review after failing a screen, the utility runs the minimum load, voltage and power quality, and safety and reliability screens (§ 2.4.4)."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The project follows the federal procedures; state rules number and set their screens differently."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; screens carried forward through Order No. 2023",
+              "locator": "pro forma SGIP § 2.2.1 (Initial Review screens 2.2.1.1 to 2.2.1.10) and § 2.4.4 (supplemental review)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A self-check, not an application or a study. The utility runs every screen and decides; open screens are not a prediction either way."
+      }
+    }
+  ]
+}
