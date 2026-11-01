@@ -1,0 +1,158 @@
+{
+  "toolId": "interconnect.process.route",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "fast-track",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.process.route",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "ceilingKw": {
+            "value": 3000,
+            "unit": "kW",
+            "display": "3,000"
+          },
+          "preAppFee": {
+            "value": 300,
+            "unit": "$",
+            "display": "300"
+          }
+        },
+        "sentence": "This project is eligible for Fast Track, up to 3,000 kW.",
+        "notes": [],
+        "work": {
+          "method": "Above 20 MW: the large generator procedures. A listed inverter-based system of 10 kW or less: the 10 kW Inverter Process (§ 1.1.1). Above 69 kV: not eligible for Fast Track. A synchronous or induction machine: Fast Track up to 2 MW. A listed inverter-based system: Fast Track up to the § 2.1 ceiling for its voltage, higher on a mainline within 2.5 electrical circuit miles of the substation. Anything else goes to the § 3 study process.",
+          "steps": [
+            "At 5 kV to under 15 kV, a certified inverter-based system is eligible up to 3,000 kW on a mainline within 2.5 electrical circuit miles of the substation (§ 2.1).",
+            "Eligibility is not a pass: the utility still runs the Fast Track screens, and a project that fails them can go to supplemental review or the study process (§ 2.1).",
+            "Initial review of the screens: 15 business days from a complete application (§ 2.2).",
+            "Agreement after passing, or failing but still interconnectable: 5 business days (§§ 2.2.2 to 2.2.3).",
+            "Customer options meeting after an indeterminate failure: 10 business days (§ 2.2.4).",
+            "Supplemental review, if you elect and pay for it: 30 business days from the deposit (§ 2.4).",
+            "A pre-application report for one point of interconnection costs $300 and is due in 20 business days (§ 1.2). It holds the line-section data the screens use.",
+            "Utilities may post their own schedules that supersede these. gridprims does not file, submit, or track an application: you file with the utility."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The project connects under procedures that follow FERC's pro forma; many utilities use a state version instead."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; carried forward through Order No. 2023",
+              "locator": "pro forma SGIP §§ 1.1.1, 1.2 (pre-application report), 2.1 (Fast Track eligibility table), 2.2 and 2.4 (review deadlines)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Not an application: you file with the utility, which decides the process. Utilities and states may use their own procedures."
+      }
+    },
+    {
+      "example": "above",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.process.route",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "ceilingKw": {
+            "value": 3000,
+            "unit": "kW",
+            "display": "3,000"
+          },
+          "preAppFee": {
+            "value": 300,
+            "unit": "$",
+            "display": "300"
+          }
+        },
+        "sentence": "Fast Track does not apply; this project goes to the study process.",
+        "notes": [],
+        "work": {
+          "method": "Above 20 MW: the large generator procedures. A listed inverter-based system of 10 kW or less: the 10 kW Inverter Process (§ 1.1.1). Above 69 kV: not eligible for Fast Track. A synchronous or induction machine: Fast Track up to 2 MW. A listed inverter-based system: Fast Track up to the § 2.1 ceiling for its voltage, higher on a mainline within 2.5 electrical circuit miles of the substation. Anything else goes to the § 3 study process.",
+          "steps": [
+            "At 5 kV to under 15 kV, the Fast Track ceiling is 3,000 kW even on a mainline (§ 2.1).",
+            "The study process: Scoping meeting, then feasibility, system impact, and facilities studies (§ 3), each with its own deadline.",
+            "A pre-application report for one point of interconnection costs $300 and is due in 20 business days (§ 1.2). It holds the line-section data the screens use.",
+            "Utilities may post their own schedules that supersede these. gridprims does not file, submit, or track an application: you file with the utility."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The project connects under procedures that follow FERC's pro forma; many utilities use a state version instead."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; carried forward through Order No. 2023",
+              "locator": "pro forma SGIP §§ 1.1.1, 1.2 (pre-application report), 2.1 (Fast Track eligibility table), 2.2 and 2.4 (review deadlines)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Not an application: you file with the utility, which decides the process. Utilities and states may use their own procedures."
+      }
+    },
+    {
+      "example": "rotating",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.process.route",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "ceilingKw": {
+            "value": 2000,
+            "unit": "kW",
+            "display": "2,000"
+          },
+          "preAppFee": {
+            "value": 300,
+            "unit": "$",
+            "display": "300"
+          }
+        },
+        "sentence": "This project is eligible for Fast Track, up to 2,000 kW.",
+        "notes": [],
+        "work": {
+          "method": "Above 20 MW: the large generator procedures. A listed inverter-based system of 10 kW or less: the 10 kW Inverter Process (§ 1.1.1). Above 69 kV: not eligible for Fast Track. A synchronous or induction machine: Fast Track up to 2 MW. A listed inverter-based system: Fast Track up to the § 2.1 ceiling for its voltage, higher on a mainline within 2.5 electrical circuit miles of the substation. Anything else goes to the § 3 study process.",
+          "steps": [
+            "A synchronous or induction machine of 2 MW or less is eligible for Fast Track (§ 2.1).",
+            "Eligibility is not a pass: the utility still runs the Fast Track screens, and a project that fails them can go to supplemental review or the study process (§ 2.1).",
+            "Initial review of the screens: 15 business days from a complete application (§ 2.2).",
+            "Agreement after passing, or failing but still interconnectable: 5 business days (§§ 2.2.2 to 2.2.3).",
+            "Customer options meeting after an indeterminate failure: 10 business days (§ 2.2.4).",
+            "Supplemental review, if you elect and pay for it: 30 business days from the deposit (§ 2.4).",
+            "A pre-application report for one point of interconnection costs $300 and is due in 20 business days (§ 1.2). It holds the line-section data the screens use.",
+            "Utilities may post their own schedules that supersede these. gridprims does not file, submit, or track an application: you file with the utility."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The project connects under procedures that follow FERC's pro forma; many utilities use a state version instead."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; carried forward through Order No. 2023",
+              "locator": "pro forma SGIP §§ 1.1.1, 1.2 (pre-application report), 2.1 (Fast Track eligibility table), 2.2 and 2.4 (review deadlines)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Not an application: you file with the utility, which decides the process. Utilities and states may use their own procedures."
+      }
+    }
+  ]
+}

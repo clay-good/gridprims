@@ -7,10 +7,10 @@
 
 ## 2. Process router
 
-- [ ] 2.1 Implement routing from size, voltage, technology, export, and jurisdiction; verify the fast-track-eligible and above-the-ceiling scenarios
-- [ ] 2.2 Show deadlines and fees from rule text with vintages; verify the timeline scenario and that every value carries a citation
-- [ ] 2.3 Implement jurisdiction coverage and the reference-only fallback; verify the unsupported-state scenario
-- [ ] 2.4 Add the not-an-application statement and portal links; verify the next-step scenario
+- [x] 2.1 Implement routing from size, voltage, technology, export, and jurisdiction; verify the fast-track-eligible and above-the-ceiling scenarios (federal procedures)
+- [x] 2.2 Show deadlines and fees from rule text with vintages; verify the timeline scenario and that every value carries a citation (federal deadlines and the pre-application report, cited by section; state schedules come with section 1)
+- [x] 2.3 Implement jurisdiction coverage and the reference-only fallback; verify the unsupported-state scenario (no state is held yet, so every state shows the federal reference with its commission)
+- [x] 2.4 Add the not-an-application statement and portal links; verify the next-step scenario (no utility portals are recorded yet, so the result says to file with the utility)
 
 ## 3. Screens
 

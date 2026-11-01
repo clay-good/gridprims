@@ -719,3 +719,34 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 - Federal procedures only; states set their own numbers, and some use minimum load where the federal rule uses peak.
 - The other screens, such as fault current, need the utility's circuit model and are not answered here.
 - Peak load and minimum load come only from the utility; gridprims never estimates or holds them.
+
+## Which interconnection process applies (`interconnect.process.route`)
+
+Which federal process a generator or storage project goes through to connect to the grid, why, and the deadlines and pre-application report the procedures set.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Nameplate capacity | `kw` | kW | 0.1 to 1000000 | 1000 |
+| Line voltage at the point of interconnection | `kv` | kV | 0.1 to 800 | 12.47 |
+| Technology | `technology` | choice | `inverter-certified`, `inverter-other`, `rotating` | inverter-certified |
+| On a mainline within 2.5 circuit miles of the substation | `mainline` | choice | `yes`, `no`, `unknown` | yes |
+| Rules | `jurisdiction` |  |  | federal |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Fast Track ceiling for this project | `ceilingKw` | kW | 0 decimals |
+| Pre-application report fee | `preAppFee` | $ | 0 decimals |
+
+**Method.** Above 20 MW: the large generator procedures. A listed inverter-based system of 10 kW or less: the 10 kW Inverter Process (§ 1.1.1). Above 69 kV: not eligible for Fast Track. A synchronous or induction machine: Fast Track up to 2 MW. A listed inverter-based system: Fast Track up to the § 2.1 ceiling for its voltage, higher on a mainline within 2.5 electrical circuit miles of the substation. Anything else goes to the § 3 study process.
+
+**Sources.**
+
+- FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240, December 5, 2013; carried forward through Order No. 2023, pro forma SGIP §§ 1.1.1, 1.2 (pre-application report), 2.1 (Fast Track eligibility table), 2.2 and 2.4 (review deadlines) (https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures)
+
+**Known limits.**
+
+- Federal procedures only; most retail interconnections follow a state version with its own limits.
+- Eligibility is not a pass: the utility still runs the screens.
+- Fees other than the pre-application report vary by utility and are not shown.

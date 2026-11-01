@@ -41,6 +41,8 @@ import attachmentHeight from './lines.attachment-height.find/manifest.mjs';
 import * as attachmentHeightImpl from './lines.attachment-height.find/tool.mjs';
 import minLoadScreen from './interconnect.minimum-load.screen/manifest.mjs';
 import * as minLoadScreenImpl from './interconnect.minimum-load.screen/tool.mjs';
+import processRoute from './interconnect.process.route/manifest.mjs';
+import * as processRouteImpl from './interconnect.process.route/tool.mjs';
 
 export const TOOLS = [
   { manifest: energyUnitsConvert, impl: energyUnitsConvertImpl },
@@ -63,6 +65,7 @@ export const TOOLS = [
   { manifest: midspanClearance, impl: midspanClearanceImpl },
   { manifest: attachmentHeight, impl: attachmentHeightImpl },
   { manifest: minLoadScreen, impl: minLoadScreenImpl },
+  { manifest: processRoute, impl: processRouteImpl },
 ];
 
 /** @param {string} id */
