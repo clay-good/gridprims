@@ -353,7 +353,6 @@ export async function build(opts = {}) {
   write('/report/', reportPage({ i18n }));
   write('/404.html', notFoundPage({ tools: TOOLS, i18n }));
   const entries = new Map(await Promise.all(datasets.map(async (d) => [d.dataset, (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${d.dataset}.mjs`)).href)).default])));
-  for (const id of ['bills', 'data', 'carbon', 'grid', 'learn']) write(`/${id}/`, sectionPage({ id, tools: TOOLS, datasets, entries, i18n }));
   write(QF_PATH, qualifyingFacilityPage({ checklist: qfChecklist, i18n }));
   // The continuity ledger, as a page and as JSON, generated with the build's own date so pages age it on the device.
   const ledger = buildLedger({ datasets: await ledgerDatasets(ROOT), health, replies: ledgerReplies, generatedAt: health?.generatedAt ?? buildDate, contact: `${ORIGIN}/report/` });
@@ -372,6 +371,8 @@ export async function build(opts = {}) {
   if (regions) write(STATES_PATH, statesIndexPage({ i18n }));
   const datasetDate = (ids) => ids.map((id) => datasets.find((d) => d.dataset === id)?.asOf).filter(Boolean).sort().at(-1) ?? null;
   const exists = (p) => pages.includes(p.replace(/#.*$/, ''));
+  // Section pages come after every page they may link, so a cell shows only once its page exists.
+  for (const id of ['bills', 'data', 'carbon', 'grid', 'learn']) write(`/${id}/`, sectionPage({ id, tools: TOOLS, datasets, entries, i18n, exists, asOf: datasetDate }));
   write(CATALOG_PATH, catalogPage({ tools: TOOLS, i18n, exists, asOf: datasetDate }));
   // The home page proves the product with the shipped sample, read here at build time so the
   // figures are real and the page needs no script to show them.

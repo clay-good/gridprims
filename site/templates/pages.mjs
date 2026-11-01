@@ -9,6 +9,7 @@ import { sourceStamp } from '../ui/source-stamp.mjs';
 import { lateness } from '../../core/lib/lateness.mjs';
 import { CLONE, DATA_DIR, snippets } from '../../mcp/clients.mjs';
 import { SECTIONS, sectionOf } from '../ui/sections.mjs';
+import { PAGE_CELLS } from '../ui/home-lanes.mjs';
 import { ORIGIN } from '../config.mjs';
 import { datasetLd, libraryList, libraryParts } from './library.mjs';
 import { pageTitle } from '../lib/meta.mjs';
@@ -205,11 +206,14 @@ function toolCell({ href, section, name, question, needs }, { t }) {
  * A section landing page: only tools and pages that exist, never "coming soon".
  * @param {{id: string, tools: any[], datasets: any[], i18n: any}} p
  */
-export function sectionPage({ id, tools, datasets = [], entries = new Map(), i18n }) {
+export function sectionPage({ id, tools, datasets = [], entries = new Map(), i18n, exists = () => true, asOf = () => null }) {
   const { t } = i18n;
   const cells = tools.filter(({ manifest: m }) => sectionOf(m.id) === id).map(({ manifest: m }) => ({ href: toolPath(m.id), section: id, name: m.title, question: m.purpose, needs: m.inputs.some((x) => x.type === 'file') ? 'file' : 'none' }));
   if (id === 'bills') cells.unshift({ href: '/files/', section: 'bills', name: t('section.workbench'), question: t('section.workbench.what'), needs: 'file' });
-  if (id === 'learn') cells.push({ href: '/learn/glossary/', section: 'learn', name: t('glossary.title'), question: t('glossary.description'), needs: 'none' }, { href: '/learn/qualifying-facility/', section: 'learn', name: t('qf.title'), question: t('qf.description'), needs: 'none' });
+  // The pages that are not tools, each only once it exists, so nothing we build is reachable by address alone.
+  cells.unshift(...(PAGE_CELLS[id] ?? []).filter((c) => exists(c.path)).map((c) => ({
+    href: c.path, section: id, name: t(`home.cell.${c.id}`), question: t(`home.cell.${c.id}.question`), needs: c.needs, asOf: c.data ? asOf(c.data) : null,
+  })));
   const body = html`<h1>${t(`section.${id}`)}</h1><p class="purpose">${t(`section.${id}.intro`)}</p>
 ${cells.length || (id === 'data' && datasets.length) ? '' : html`<p>${t('section.empty')}</p>`}
 ${cells.length ? html`<ul class="tool-list">${cells.map((c) => toolCell(c, i18n))}</ul>` : ''}

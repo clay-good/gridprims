@@ -24,6 +24,31 @@ export const LANES = {
   ],
 };
 
+/**
+ * Pages that are not tools but belong on a section page (site/home-and-navigation, "Growth replaces, it
+ * does not accumulate"): the entity families, the scenario model, the terms table, and the Learn pages. A
+ * cell shows only once its page exists. The home page stays free of cells; these are the way in from a
+ * section, so nothing we build is reachable only by its address.
+ */
+export const PAGE_CELLS = {
+  grid: [
+    { id: 'scenario', path: '/scenario/', needs: 'none', data: ['eia-930', 'eia-923'] },
+    { id: 'entity-data', path: '/states/', needs: 'none', data: ['eia-861', 'eia-860', 'eia-923'] },
+    { id: 'queue', path: '/queue/', needs: 'none', data: ['lbnl-queued-up'] },
+    { id: 'large-load-terms', path: '/large-load/terms/', needs: 'none' },
+  ],
+  data: [
+    { id: 'ledger', path: '/ledger/', needs: 'none' },
+    { id: 'checks', path: '/ledger/checks/', needs: 'none' },
+  ],
+  learn: [
+    { id: 'glossary', path: '/learn/glossary/', needs: 'none' },
+    { id: 'qualifying-facility', path: '/learn/qualifying-facility/', needs: 'none' },
+  ],
+  bills: [],
+  carbon: [],
+};
+
 /** The most sections the top rail may show. */
 export const SECTION_MAX = 6;
 
