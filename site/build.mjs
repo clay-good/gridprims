@@ -216,6 +216,12 @@ export async function build(opts = {}) {
     for (const [st, s] of lookup.shards) writeFileSync(join(outDir, `lookup/${st}.json`), JSON.stringify(s));
     writeFileSync(join(outDir, 'lookup/pages.json'), JSON.stringify([...withPage].sort((a, b) => a - b)));
     write(LOOKUP_PATH, lookupPage({ i18n, sources: lookup.sources }));
+    // The weather station picker finds the served GHCN-Daily version here; its shards are named by state only.
+    if (lookup.sources.weather) {
+      mkdirSync(join(outDir, 'weather'), { recursive: true });
+      const w = lookup.sources.weather;
+      writeFileSync(join(outDir, 'weather/meta.json'), JSON.stringify({ dataset: w.dataset, version: w.version, release: w.release ?? null, asOf: w.asOf, attribution: w.attribution }));
+    }
   }
   // The bill check's tariff picker: each state's URDB residential rates, fetched only for the chosen utility's state.
   const tariffs = tariffData(join(ROOT, 'data'));
@@ -373,7 +379,7 @@ export async function build(opts = {}) {
   // Dataset shards are cached as they are visited, not precached, so the shell stays small as data grows.
   // Entity pages (thousands of plants) are cached as visited too, not precached.
   // So are the lookup's state shards (2.4 MB in all) and the bill tools' rate files (about 50 MB): a visitor needs only their own utility's.
-  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('bills/tariffs/') && !f.startsWith('bills/rates/') && !f.startsWith('outages/') && !f.startsWith('carbon/') && !f.startsWith('site/cards/'));
+  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('bills/tariffs/') && !f.startsWith('bills/rates/') && !f.startsWith('outages/') && !f.startsWith('carbon/') && !f.startsWith('weather/') && !f.startsWith('site/cards/'));
   const version = sha256(shell.map((f) => `${f}:${sha256(readFileSync(join(outDir, f)))}`).join('\n')).slice(0, 12);
   const urls = shell.map((f) => `/${f.replace(/(^|\/)index\.html$/, '$1')}`);
   writeFileSync(join(outDir, 'sw.js'), serviceWorkerSource({ version, files: urls }));

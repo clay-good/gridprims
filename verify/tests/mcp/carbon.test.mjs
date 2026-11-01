@@ -50,3 +50,14 @@ test('a region-year of hourly grid data reads one shard, and emissions from it e
   assert.deepEqual(fromMcp, fromSite);
   assert.ok(fromSite.t > 0 && fromSite.excluded.hours < load.size);
 });
+
+test('every weather worked example gives the website\'s numbers through the server', async () => {
+  const { manifest, impl } = getTool('weather.change.explain');
+  const s = createServer();
+  let id = 0;
+  for (const ex of manifest.examples) {
+    const r = await s.handle(modern(++id, 'tools/call', { name: 'gridprims_run', arguments: { tool: manifest.id, inputs: ex.inputs } }));
+    assert.equal(r.result.isError, false, ex.id);
+    assert.deepEqual(r.result.structuredContent, runTool(manifest, impl, ex.inputs), ex.id);
+  }
+});

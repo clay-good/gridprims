@@ -496,3 +496,40 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 - Typical hours come from the latest three complete years; a region adding solar or retiring coal changes them.
 - Average intensity, not marginal: the generators that actually respond to a shift can be cleaner or dirtier.
 - EIA computes hourly CO₂ from generation by fuel times annual average emission factors.
+
+## Was it the weather? (`weather.change.explain`)
+
+How much of a change in your electricity use was the weather, from 12 to 24 bills and the nearest weather station.
+
+Version 0.1.0 · experimental · validation level 2, cross-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Billing periods | `periods` |  |  | 2025-11-01 to 2025-11-30, 812 kWh |
+| Daily temperatures | `weather` |  |  | station USW00023183 PHOENIX AIRPORT 2025-11-01 68.4 |
+| A change in the home | `change` |  |  | none |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Total change | `total` | kWh | 0 decimals |
+| Weather part | `weather` | kWh | 0 decimals |
+| Use part | `use` | kWh | 0 decimals |
+| Baseline fit part | `fit` | kWh | 0 decimals |
+| Use change, weather-normalized | `usePct` | % | 1 decimals |
+| Model band | `band` | ± % | 1 decimals |
+| Use in a normal-weather year | `normalKwh` | kWh | 0 decimals |
+
+**Method.** The bills before the latest year are fitted with the CalTRACK billing-period model: use per day against heating and cooling degree days, four candidates (flat, heating, cooling, both) over balance points 30 to 90 °F, negative coefficients rejected, the best adjusted R² kept. The latest year's change is split three ways that always sum to it: the weather part (the model on this year's weather less the model on the baseline's), the use part (this year's actual use less the model on its weather), and the baseline fit part (the model's own miss on the baseline).
+
+**Sources.**
+
+- CalTRACK Methods, version 2.0, CC0, Billing methods: candidate models, balance-point search, sufficiency, and CV(RMSE) (https://docs.caltrack.org/en/latest/methods.html)
+- Recurve, OpenDSM data sufficiency and disqualification guidelines, 2025, Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6 (https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines)
+- NOAA NCEI, Global Historical Climatology Network - Daily, Menne et al. (2012), version 3.35, served snapshot 2026-11, Daily maximum and minimum temperature (TMAX, TMIN) (https://doi.org/10.7289/V5D21VHZ)
+- NOAA NCEI, U.S. Climate Normals 1991–2020, daily normals, version 1.0.1, Daily heating and cooling degree-day normals (DLY-HTDD, DLY-CLDD) (https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals)
+
+**Known limits.**
+
+- Bills give a looser answer than interval data; a change under 5%, or inside the model's band, is not a finding.
+- The use part is what the weather does not explain; this tool never says what caused it.
+- The station is the nearest first-order NOAA station, which may differ from your home in elevation or exposure.

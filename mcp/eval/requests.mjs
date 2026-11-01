@@ -7,7 +7,9 @@
 // Paths in `expect` are dot paths into the structured result. `{fixture:x}` in
 // an argument names a file in verify/fixtures/intake/files.
 
-export const FAMILIES = ['calc', 'household', 'ratepayer', 'electrify', 'reliability', 'load', 'data', 'report', 'catalog'];
+export const FAMILIES = ['calc', 'household', 'ratepayer', 'electrify', 'reliability', 'carbon', 'weather', 'load', 'data', 'report', 'catalog'];
+
+import { billsText, weatherText } from '../../core/tools/weather.change.explain/examples.mjs';
 
 export default [
   { id: 'calc-mwh-mmbtu', family: 'calc', request: 'How many MMBtu is 12 MWh?', tool: 'gridprims_run', arguments: { tool: 'calc.energy-units.convert', inputs: { value: 12, from: 'MWh', to: 'MMBtu' } }, expect: { 'outputs.value.display': '40.95', 'outputs.value.unit': 'MMBtu', validationLevel: 2 } },
@@ -28,6 +30,7 @@ export default [
   { id: 'reliability-indices', family: 'reliability', request: 'Our co-op logged 18,000 customer interruptions totaling 2,400,000 customer minutes last year against 12,000 customers served. What are our reliability indices?', tool: 'gridprims_run', arguments: { tool: 'reliability.outage-log.indices', inputs: { events: '2025-03-14 18:40, 18000, 133.3333333333333', customersServed: 12000, from: '2025-01-01', to: '2025-12-31', threshold: 5 } }, expect: { 'outputs.perCustomer.display': '1.5', 'outputs.minutesPerCustomer.display': '200.0', 'outputs.availability.display': '99.9619' } },
   { id: 'carbon-shift', family: 'carbon', request: 'If I move 200 kWh a day of EV charging from evening hours at 1,000 lb of CO2 per MWh to midday at 700, how much CO2 do I avoid in a year?', tool: 'gridprims_run', arguments: { tool: 'carbon.load-shift.estimate', inputs: { kwhPerDay: 200, currentLbPerMwh: 1000, proposedLbPerMwh: 700, days: 365 } }, expect: { 'outputs.changeLb.display': '21,900', 'outputs.changeT.display': '9.9' } },
   { id: 'carbon-hours', family: 'carbon', request: 'What was ERCOT\'s hourly CO2 intensity in early 2026, according to EIA?', tool: 'gridprims_query_data', arguments: { dataset: 'eia-930', table: 'hourly', filter: { ba: 'ERCO', year: 2026 }, limit: 24 }, expect: { 'dataset.publisher': 'U.S. Energy Information Administration', 'rows.0.ba': 'ERCO' } },
+  { id: 'weather-split', family: 'weather', request: 'My bills went up about 1,100 kWh this year and the winter was colder. How much of that was the weather?', tool: 'gridprims_run', arguments: { tool: 'weather.change.explain', inputs: { periods: billsText(6), weather: weatherText(6), change: 'none' } }, expect: { 'outputs.weather.display': '1,109' } },
   { id: 'load-peak', family: 'load', request: 'What was the peak demand in this Smart Meter Texas export, and when?', tool: 'gridprims_analyze_file', arguments: { path: '{fixture:smart-meter-texas.csv}', zone: 'America/Chicago' }, expect: { 'receipt.time.intervalMinutes': 15, 'series.0.channel': 'delivered', 'series.1.channel': 'received' } },
   { id: 'load-dst', family: 'load', request: 'Does this file handle the November daylight-saving hour correctly?', tool: 'gridprims_analyze_file', arguments: { path: '{fixture:dst-fall-back.csv}', zone: 'America/Chicago' }, expect: { 'receipt.quality.repeatedIntervalsKept': 4, 'series.0.intervals': 100 } },
   { id: 'data-vermont', family: 'data', request: 'Which utilities sold power in Vermont in 2025, according to EIA?', tool: 'gridprims_query_data', arguments: { dataset: 'eia-861', filter: { state: 'VT' }, limit: 500 }, expect: { 'dataset.publisher': 'U.S. Energy Information Administration', 'dataset.dataPeriod': '2025' } },

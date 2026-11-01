@@ -19,6 +19,7 @@ Built for utility engineers, energy managers, solar and storage developers, siti
 
 - **Check your electric bill** and see what you should have paid.
 - **Find the cheapest rate plan** for how your home actually uses power.
+- **See how much of a change was the weather.** Compare this year's bills with last year's, and see how much of the change came from a colder winter or a hotter summer, from the nearest NOAA station.
 - **See if your use is high** compared with the average home at your utility and in your state.
 - **Find your utility** from a ZIP code.
 

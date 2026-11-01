@@ -35,7 +35,7 @@ test('launch reality: no tool is field-verified, the page says so, and gives the
   assert.equal(L.counts['field-verified'], 0);
   const html = page(L);
   assert.match(html, /No tool here is field-verified/);
-  assert.match(html, /Tools by how well checked they are: Unvalidated 0, Self-checked 7, Cross-checked 7, Field-verified 0\./);
+  assert.match(html, /Tools by how well checked they are: Unvalidated 0, Self-checked 7, Cross-checked 8, Field-verified 0\./);
 });
 
 test('the three axes are separate columns, and a cross-checked tool with no sign-off reads "Review pending"', () => {

@@ -1,0 +1,326 @@
+{
+  "toolId": "weather.change.explain",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "colder-winter",
+      "result": {
+        "status": "ok",
+        "toolId": "weather.change.explain",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "total": {
+            "value": 1109,
+            "unit": "kWh",
+            "display": "1,109"
+          },
+          "weather": {
+            "value": 1109,
+            "unit": "kWh",
+            "display": "1,109"
+          },
+          "use": {
+            "value": 0,
+            "unit": "kWh",
+            "display": "0"
+          },
+          "fit": {
+            "value": 0,
+            "unit": "kWh",
+            "display": "0"
+          },
+          "usePct": {
+            "value": 0,
+            "unit": "%",
+            "display": "0.0"
+          },
+          "band": {
+            "value": 10,
+            "unit": "± %",
+            "display": "10.0"
+          }
+        },
+        "sentence": "About 1,109 kWh of the 1,109 kWh change was the weather; the rest is too small to tell from the model's own error.",
+        "notes": [],
+        "work": {
+          "method": "The bills before the latest year are fitted with the CalTRACK billing-period model: use per day against heating and cooling degree days, four candidates (flat, heating, cooling, both) over balance points 30 to 90 °F, negative coefficients rejected, the best adjusted R² kept. The latest year's change is split three ways that always sum to it: the weather part (the model on this year's weather less the model on the baseline's), the use part (this year's actual use less the model on its weather), and the baseline fit part (the model's own miss on the baseline).",
+          "steps": [
+            "Billing periods: 24, from 2024-11-01 to 2026-10-31, labeled as bills, not interval data. Interval data from your utility gives a tighter answer.",
+            "Weather: daily mean temperatures at A smooth seasonal curve (EXAMPLE).",
+            "12 billing periods, at least the 11 a baseline needs.",
+            "Every billing period has temperatures for at least 90% of its days.",
+            "flat (no weather term): adjusted R² 0.000: adjusted R² 0.000, below the selected 1.000.",
+            "heating only: adjusted R² 1.000, heating from 60 °F.",
+            "cooling only: rejected: a negative cooling coefficient at every balance point, which is physically implausible.",
+            "heating and cooling: adjusted R² 1.000, heating from 60 °F, cooling from 60 °F: adjusted R² 1.000, below the selected 1.000.",
+            "The heating only model fits best: adjusted R² 1.000, the highest of the candidates that survived.",
+            "Fit: CV(RMSE) 0.00, normalized mean bias error -0.0%; the model tracks the meter closely.",
+            "Weather part = the model on the latest year's weather − the model on the baseline's weather = 12,329 kWh − 11,220 kWh = +1,109 kWh.",
+            "Use part = the latest year's actual use − the model on its weather = 12,329 kWh − 12,329 kWh = +0 kWh.",
+            "Baseline fit part = the model on the baseline's weather − the baseline's actual use = 11,220 kWh − 11,220 kWh = −0 kWh: the model's own miss on the bills it was fitted to.",
+            "+1,109 kWh + +0 kWh + −0 kWh = +1,109 kWh, the total change.",
+            "The model's band on the use change is ±10.0%; a well-fitted meter supports roughly 10% to 20% accuracy on an annual normalized change, and nothing below 5% is a finding."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Each bill's days take the station's daily mean temperature, the mean of the day's maximum and minimum.",
+            "Billing periods over 35 days are left out, and a baseline needs at least 11 bills.",
+            "The normal year is NOAA's published 1991–2020 daily degree-day normals at the published base nearest the model's balance point."
+          ],
+          "citations": [
+            {
+              "source": "CalTRACK Methods, version 2.0",
+              "edition": "CC0",
+              "locator": "Billing methods: candidate models, balance-point search, sufficiency, and CV(RMSE)",
+              "url": "https://docs.caltrack.org/en/latest/methods.html"
+            },
+            {
+              "source": "Recurve, OpenDSM data sufficiency and disqualification guidelines",
+              "edition": "2025",
+              "locator": "Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6",
+              "url": "https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines"
+            },
+            {
+              "source": "NOAA NCEI, Global Historical Climatology Network - Daily, Menne et al. (2012)",
+              "edition": "version 3.35, served snapshot 2026-11",
+              "locator": "Daily maximum and minimum temperature (TMAX, TMIN)",
+              "url": "https://doi.org/10.7289/V5D21VHZ"
+            },
+            {
+              "source": "NOAA NCEI, U.S. Climate Normals 1991–2020",
+              "edition": "daily normals, version 1.0.1",
+              "locator": "Daily heating and cooling degree-day normals (DLY-HTDD, DLY-CLDD)",
+              "url": "https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "ghcn-daily"
+          },
+          {
+            "id": "census-zcta-points"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
+        "screeningLabel": "A screening split of your use, not a measurement-and-verification study."
+      }
+    },
+    {
+      "example": "something-else",
+      "result": {
+        "status": "ok",
+        "toolId": "weather.change.explain",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "total": {
+            "value": 2569,
+            "unit": "kWh",
+            "display": "2,569"
+          },
+          "weather": {
+            "value": 1109,
+            "unit": "kWh",
+            "display": "1,109"
+          },
+          "use": {
+            "value": 1460,
+            "unit": "kWh",
+            "display": "1,460"
+          },
+          "fit": {
+            "value": 0,
+            "unit": "kWh",
+            "display": "0"
+          },
+          "usePct": {
+            "value": 11.8,
+            "unit": "%",
+            "display": "11.8"
+          },
+          "band": {
+            "value": 10,
+            "unit": "± %",
+            "display": "10.0"
+          }
+        },
+        "sentence": "About 1,109 kWh of the 2,569 kWh change was the weather, and about 1,460 kWh was something else.",
+        "notes": [],
+        "work": {
+          "method": "The bills before the latest year are fitted with the CalTRACK billing-period model: use per day against heating and cooling degree days, four candidates (flat, heating, cooling, both) over balance points 30 to 90 °F, negative coefficients rejected, the best adjusted R² kept. The latest year's change is split three ways that always sum to it: the weather part (the model on this year's weather less the model on the baseline's), the use part (this year's actual use less the model on its weather), and the baseline fit part (the model's own miss on the baseline).",
+          "steps": [
+            "Billing periods: 24, from 2024-11-01 to 2026-10-31, labeled as bills, not interval data. Interval data from your utility gives a tighter answer.",
+            "Weather: daily mean temperatures at A smooth seasonal curve (EXAMPLE).",
+            "12 billing periods, at least the 11 a baseline needs.",
+            "Every billing period has temperatures for at least 90% of its days.",
+            "flat (no weather term): adjusted R² 0.000: adjusted R² 0.000, below the selected 1.000.",
+            "heating only: adjusted R² 1.000, heating from 60 °F.",
+            "cooling only: rejected: a negative cooling coefficient at every balance point, which is physically implausible.",
+            "heating and cooling: adjusted R² 1.000, heating from 60 °F, cooling from 60 °F: adjusted R² 1.000, below the selected 1.000.",
+            "The heating only model fits best: adjusted R² 1.000, the highest of the candidates that survived.",
+            "Fit: CV(RMSE) 0.00, normalized mean bias error -0.0%; the model tracks the meter closely.",
+            "Weather part = the model on the latest year's weather − the model on the baseline's weather = 12,329 kWh − 11,220 kWh = +1,109 kWh.",
+            "Use part = the latest year's actual use − the model on its weather = 13,789 kWh − 12,329 kWh = +1,460 kWh.",
+            "Baseline fit part = the model on the baseline's weather − the baseline's actual use = 11,220 kWh − 11,220 kWh = −0 kWh: the model's own miss on the bills it was fitted to.",
+            "+1,109 kWh + +1,460 kWh + −0 kWh = +2,569 kWh, the total change.",
+            "The model's band on the use change is ±10.0%; a well-fitted meter supports roughly 10% to 20% accuracy on an annual normalized change, and nothing below 5% is a finding.",
+            "Things to check, most common first: Added equipment, such as a space heater, a second refrigerator, or a dehumidifier; A new appliance or an electric vehicle; More people at home, or more hours at home; Longer operating hours; A failing thermostat or heating element; A pool or spa pump; A change in rate or in the billing period's length. These are things to look at, not a diagnosis."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Each bill's days take the station's daily mean temperature, the mean of the day's maximum and minimum.",
+            "Billing periods over 35 days are left out, and a baseline needs at least 11 bills.",
+            "The normal year is NOAA's published 1991–2020 daily degree-day normals at the published base nearest the model's balance point."
+          ],
+          "citations": [
+            {
+              "source": "CalTRACK Methods, version 2.0",
+              "edition": "CC0",
+              "locator": "Billing methods: candidate models, balance-point search, sufficiency, and CV(RMSE)",
+              "url": "https://docs.caltrack.org/en/latest/methods.html"
+            },
+            {
+              "source": "Recurve, OpenDSM data sufficiency and disqualification guidelines",
+              "edition": "2025",
+              "locator": "Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6",
+              "url": "https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines"
+            },
+            {
+              "source": "NOAA NCEI, Global Historical Climatology Network - Daily, Menne et al. (2012)",
+              "edition": "version 3.35, served snapshot 2026-11",
+              "locator": "Daily maximum and minimum temperature (TMAX, TMIN)",
+              "url": "https://doi.org/10.7289/V5D21VHZ"
+            },
+            {
+              "source": "NOAA NCEI, U.S. Climate Normals 1991–2020",
+              "edition": "daily normals, version 1.0.1",
+              "locator": "Daily heating and cooling degree-day normals (DLY-HTDD, DLY-CLDD)",
+              "url": "https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "ghcn-daily"
+          },
+          {
+            "id": "census-zcta-points"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
+        "screeningLabel": "A screening split of your use, not a measurement-and-verification study."
+      }
+    },
+    {
+      "example": "same-weather",
+      "result": {
+        "status": "ok",
+        "toolId": "weather.change.explain",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "total": {
+            "value": 1460,
+            "unit": "kWh",
+            "display": "1,460"
+          },
+          "weather": {
+            "value": 0,
+            "unit": "kWh",
+            "display": "0"
+          },
+          "use": {
+            "value": 1460,
+            "unit": "kWh",
+            "display": "1,460"
+          },
+          "fit": {
+            "value": 0,
+            "unit": "kWh",
+            "display": "0"
+          },
+          "usePct": {
+            "value": 13,
+            "unit": "%",
+            "display": "13.0"
+          },
+          "band": {
+            "value": 10,
+            "unit": "± %",
+            "display": "10.0"
+          }
+        },
+        "sentence": "The weather was about the same; the change came from how much power was used: about 1,460 kWh more.",
+        "notes": [],
+        "work": {
+          "method": "The bills before the latest year are fitted with the CalTRACK billing-period model: use per day against heating and cooling degree days, four candidates (flat, heating, cooling, both) over balance points 30 to 90 °F, negative coefficients rejected, the best adjusted R² kept. The latest year's change is split three ways that always sum to it: the weather part (the model on this year's weather less the model on the baseline's), the use part (this year's actual use less the model on its weather), and the baseline fit part (the model's own miss on the baseline).",
+          "steps": [
+            "Billing periods: 24, from 2024-11-01 to 2026-10-31, labeled as bills, not interval data. Interval data from your utility gives a tighter answer.",
+            "Weather: daily mean temperatures at A smooth seasonal curve (EXAMPLE).",
+            "12 billing periods, at least the 11 a baseline needs.",
+            "Every billing period has temperatures for at least 90% of its days.",
+            "flat (no weather term): adjusted R² 0.000: adjusted R² 0.000, below the selected 1.000.",
+            "heating only: adjusted R² 1.000, heating from 60 °F.",
+            "cooling only: rejected: a negative cooling coefficient at every balance point, which is physically implausible.",
+            "heating and cooling: adjusted R² 1.000, heating from 60 °F, cooling from 60 °F: adjusted R² 1.000, below the selected 1.000.",
+            "The heating only model fits best: adjusted R² 1.000, the highest of the candidates that survived.",
+            "Fit: CV(RMSE) 0.00, normalized mean bias error -0.0%; the model tracks the meter closely.",
+            "Weather part = the model on the latest year's weather − the model on the baseline's weather = 11,220 kWh − 11,220 kWh = +0 kWh.",
+            "Use part = the latest year's actual use − the model on its weather = 12,680 kWh − 11,220 kWh = +1,460 kWh.",
+            "Baseline fit part = the model on the baseline's weather − the baseline's actual use = 11,220 kWh − 11,220 kWh = −0 kWh: the model's own miss on the bills it was fitted to.",
+            "+0 kWh + +1,460 kWh + −0 kWh = +1,460 kWh, the total change.",
+            "The model's band on the use change is ±10.0%; a well-fitted meter supports roughly 10% to 20% accuracy on an annual normalized change, and nothing below 5% is a finding.",
+            "Things to check, most common first: Added equipment, such as a space heater, a second refrigerator, or a dehumidifier; A new appliance or an electric vehicle; More people at home, or more hours at home; Longer operating hours; A failing thermostat or heating element; A pool or spa pump; A change in rate or in the billing period's length. These are things to look at, not a diagnosis."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Each bill's days take the station's daily mean temperature, the mean of the day's maximum and minimum.",
+            "Billing periods over 35 days are left out, and a baseline needs at least 11 bills.",
+            "The normal year is NOAA's published 1991–2020 daily degree-day normals at the published base nearest the model's balance point."
+          ],
+          "citations": [
+            {
+              "source": "CalTRACK Methods, version 2.0",
+              "edition": "CC0",
+              "locator": "Billing methods: candidate models, balance-point search, sufficiency, and CV(RMSE)",
+              "url": "https://docs.caltrack.org/en/latest/methods.html"
+            },
+            {
+              "source": "Recurve, OpenDSM data sufficiency and disqualification guidelines",
+              "edition": "2025",
+              "locator": "Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6",
+              "url": "https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines"
+            },
+            {
+              "source": "NOAA NCEI, Global Historical Climatology Network - Daily, Menne et al. (2012)",
+              "edition": "version 3.35, served snapshot 2026-11",
+              "locator": "Daily maximum and minimum temperature (TMAX, TMIN)",
+              "url": "https://doi.org/10.7289/V5D21VHZ"
+            },
+            {
+              "source": "NOAA NCEI, U.S. Climate Normals 1991–2020",
+              "edition": "daily normals, version 1.0.1",
+              "locator": "Daily heating and cooling degree-day normals (DLY-HTDD, DLY-CLDD)",
+              "url": "https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "ghcn-daily"
+          },
+          {
+            "id": "census-zcta-points"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
+        "screeningLabel": "A screening split of your use, not a measurement-and-verification study."
+      }
+    }
+  ]
+}

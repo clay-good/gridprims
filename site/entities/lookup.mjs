@@ -16,6 +16,8 @@ export function lookupData(dataDir) {
   const sales = served(dataDir, 'eia-861', 'sales');
   const delivery = served(dataDir, 'eia-861', 'delivery');
   const zips = served(dataDir, 'egrid', 'zip_subregions');
+  const points = served(dataDir, 'census-zcta-points', 'points');
+  const stations = served(dataDir, 'ghcn-daily', 'stations');
   if (!zcta || !territory || !sales) return null;
 
   // County FIPS by state and EIA-861's county name, as the joins compare them.
@@ -71,11 +73,30 @@ export function lookupData(dataDir) {
     for (const st of zip3[r.zip.slice(0, 3)] ?? []) shard(st).subregions[r.zip] = [r.subregion_1, r.subregion_2, r.subregion_3].filter(Boolean);
   }
   for (const s of shards.values()) for (const c of Object.values(s.counties)) c.utilities.sort((a, b) => a - b);
+  // Weather stations for the on-device nearest-station search: each ZCTA's internal point, and every station
+  // within about 120 miles of the state's ZCTAs, so a ZIP near a border (or in DC) finds the stations across it.
+  if (points && stations) {
+    const pt = new Map(points.rows.map((r) => [r.zcta, [Math.round(r.lat * 1000) / 1000, Math.round(r.lon * 1000) / 1000]]));
+    for (const s of shards.values()) {
+      s.points = {};
+      let box = null;
+      for (const z of Object.keys(s.zctas)) {
+        const p = pt.get(z);
+        if (!p) continue;
+        s.points[z] = p;
+        box = box ? [Math.min(box[0], p[0]), Math.max(box[1], p[0]), Math.min(box[2], p[1]), Math.max(box[3], p[1])] : [p[0], p[0], p[1], p[1]];
+      }
+      // 120 miles is about 1.75 degrees of latitude, and more degrees of longitude away from the equator.
+      const lonPad = box ? 1.75 / Math.cos((((box[0] + box[1]) / 2) * Math.PI) / 180) : 0;
+      s.stations = box ? stations.rows.filter((r) => r.lat >= box[0] - 1.75 && r.lat <= box[1] + 1.75 && r.lon >= box[2] - lonPad && r.lon <= box[3] + lonPad)
+        .map((r) => [r.station, r.name, r.state, r.lat, r.lon, r.elevation, r.first_year, r.last_year]) : [];
+    }
+  }
   return {
     zip3: Object.fromEntries(Object.entries(zip3).sort()),
     shards: new Map([...shards].sort()),
-    versions: { zcta: zcta.manifest.version, eia861: sales.manifest.version, egrid: zips?.manifest.version ?? null },
+    versions: { zcta: zcta.manifest.version, eia861: sales.manifest.version, egrid: zips?.manifest.version ?? null, weather: stations?.manifest.version ?? null },
     dataYear: sales.rows[0]?.data_year ?? null,
-    sources: { zcta: zcta.manifest, eia861: sales.manifest, egrid: zips?.manifest ?? null },
+    sources: { zcta: zcta.manifest, eia861: sales.manifest, egrid: zips?.manifest ?? null, weather: stations?.manifest ?? null, points: points?.manifest ?? null },
   };
 }
