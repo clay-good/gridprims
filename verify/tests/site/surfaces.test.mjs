@@ -6,6 +6,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { unmark } from '../../../site/lib/glossary-terms.mjs';
 import { build } from '../../../site/build.mjs';
 import { DOC_PATH, toolsReference } from '../../../site/docs.mjs';
 import { escapeHtml } from '../../../site/lib/html.mjs';
@@ -26,7 +27,7 @@ test('the committed tools reference matches the manifests', () => {
 test('labels, units, and citations are identical on every surface', async () => {
   const mcp = createServer();
   for (const { manifest: m } of TOOLS) {
-    const page = readFileSync(join(out, toolPath(m.id), 'index.html'), 'utf8');
+    const page = unmark(readFileSync(join(out, toolPath(m.id), 'index.html'), 'utf8'));
     const described = (await mcp.handle({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'gridprims_describe', arguments: { tool: m.id } } })).result.structuredContent;
     const entry = index.find((e) => e.id === m.id);
     assert.equal(entry.title, m.title);

@@ -1,9 +1,9 @@
 ## 1. Glossary
 
-- [ ] 1.1 Define the glossary record schema and register it as a dataset; verify a record missing a citation fails the check
-- [ ] 1.2 Implement the Flesch-Kincaid check with a syllable exceptions list; verify against 20 hand-scored sentences within 0.5 grade
-- [ ] 1.3 Write the launch entries and the first-use popover; verify the coverage gate and the first-use-only scenario
-- [ ] 1.4 Serve entries through `gridprims_search` and `gridprims_query_data`; verify the "what is 4CP" scenario
+- [x] 1.1 Define the glossary record schema and register it as a dataset; verify a record missing a citation fails the check
+- [x] 1.2 Implement the Flesch-Kincaid check with a syllable exceptions list; verify against 20 hand-scored sentences within 0.5 grade (core/lib/readability.mjs, already shipped with 21 hand-scored sentences)
+- [x] 1.3 Write the launch entries and the first-use popover; verify the coverage gate and the first-use-only scenario (37 entries on tool pages; guides join when they ship)
+- [x] 1.4 Serve entries through `gridprims_search` and `gridprims_query_data`; verify the "what is 4CP" scenario
 
 ## 2. Get your data
 

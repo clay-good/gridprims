@@ -30,6 +30,7 @@ export default {
   examples: [
     { id: 'spec-41', title: 'FCR 0.07, $1,000/kW, $20/kW-year, 25% capacity factor', inputs: { fcr: 0.07, capex: 1000, fom: 20, cf: 25, vom: 0, fuel: 0 }, expect: { lcoe: { value: 41.10, tolerance: { abs: 0.005 }, display: '41.10' }, capital: { value: 31.96, tolerance: { abs: 0.005 }, display: '31.96' }, fixed: { value: 9.13, tolerance: { abs: 0.005 }, display: '9.13' } }, source: 'calc/storage-and-cost spec, scenario "LCOE numbers": 90 ÷ 2.19' },
   ],
+  glossary: ['capacity-factor', 'kwh'],
   related: ['calc.storage.basics'],
   handoffs: [{ label: 'NLR Annual Technology Baseline', url: 'https://atb.nlr.gov/' }],
   stability: 'experimental',

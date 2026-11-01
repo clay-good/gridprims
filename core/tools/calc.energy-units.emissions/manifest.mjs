@@ -32,6 +32,7 @@ export default {
   examples: [
     { id: 'erct-1000', title: '1,000 MWh in ERCOT (ERCT)', inputs: { mwh: 1000, subregion: 'ERCT' }, expect: { co2: { value: (1000 * RATES.ERCT.co2 * 0.45359237) / 1000, tolerance: { abs: 0.005 }, display: ((1000 * RATES.ERCT.co2 * 0.45359237) / 1000).toFixed(2) } }, source: `${EDITION.name} ERCT CO₂ rate of ${RATES.ERCT.co2} lb/MWh × 0.45359237 kg/lb` },
   ],
+  glossary: ['emission-rate', 'egrid-subregion', 'kwh'],
   related: ['calc.energy-units.convert'],
   handoffs: [
     { label: 'EPA Power Profiler', url: 'https://www.epa.gov/egrid/power-profiler' },

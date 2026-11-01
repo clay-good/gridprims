@@ -33,6 +33,7 @@ export default {
     { id: 'spec-12h', title: 'A constant 5 kW through 12 hours', inputs: { loads: 'critical panel, 5 kW, 24 h', hours: 12, usable: 80, motorRunKw: 0, motorStartKw: 0 }, expect: { usableKwh: { value: 60, tolerance: { abs: 1e-9 }, display: '60.0' }, nameplateKwh: { value: 75, tolerance: { abs: 1e-9 }, display: '75.0' } }, source: 'electrify/backup-power spec, scenario "12-hour target"' },
     { id: 'spec-motor', title: 'A 4.0 kW peak with a well pump that starts at 4.5 kW', inputs: { loads: 'well pump, 1.5 kW, 1 h\nhouse loads, 2.5 kW, 24 h', hours: 4, usable: 80, motorRunKw: 1.5, motorStartKw: 4.5 }, expect: { peakKw: { value: 4, tolerance: { abs: 1e-9 }, display: '4.0' }, generatorKw: { value: 7, tolerance: { abs: 1e-9 }, display: '7.0' } }, source: 'electrify/backup-power spec, scenario "Motor start": 4.0 − 1.5 + 4.5' },
   ],
+  glossary: ['kw', 'kwh', 'saidi'],
   related: ['electrify.service-headroom.check'],
   handoffs: [{ label: 'Solar-plus-storage design for resilience (NREL REopt)', url: 'https://reopt.nlr.gov/tool' }],
   stability: 'experimental',

@@ -38,6 +38,7 @@ export default {
     { id: 'doe-100kw', title: 'DOE example: 100 kW and 100 kVAR, to 0.95', inputs: { kw: 100, measured: 'kvar', value: 100, pfTarget: 0.95, volts: 480, phases: 'three', demandRate: 0, tariffPf: 0 }, expect: { kvar: { value: 67, tolerance: { abs: 1 }, display: '67.1' } }, source: 'DOE "Reducing Power Factor Cost": a 67 kVAR capacitor' },
     { id: 'wsu-070', title: 'WSU and NEEA example: 100 kW at 0.70, to 0.95', inputs: { kw: 100, measured: 'pf', value: 0.7, pfTarget: 0.95, volts: 480, phases: 'three', demandRate: 0, tariffPf: 0 }, expect: { kvar: { value: 69, tolerance: { abs: 1 }, display: '69.2' } }, source: 'WSU and NEEA factsheet, Figure 4: a 69 kVAR capacitor' },
   ],
+  glossary: ['power-factor', 'demand-charge', 'kw'],
   related: [],
   handoffs: [],
   stability: 'experimental',

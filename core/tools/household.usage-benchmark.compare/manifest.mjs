@@ -33,6 +33,7 @@ export default {
     { id: 'above-utility', title: '14,400 kWh against a 12,000 kWh average', inputs: { periods: months(2025, Array(12).fill(1200)), utilityAverage: 12000, stateAverage: 12000, dataYear: 2025 }, expect: { vsUtility: { value: 20, tolerance: { abs: 0.05 }, display: '20' }, annualKwh: { value: 14400, tolerance: { abs: 0.5 }, display: '14,400' } }, source: 'household/usage-benchmark spec, scenario "Above utility average"' },
     { id: 'partial-year', title: 'Seven months covering 213 days', inputs: { periods: '2026-01, 1,922 kWh\n2026-02, 1,400 kWh\n2026-03, 1,000 kWh\n2026-04, 800 kWh\n2026-05, 744 kWh\n2026-06, 900 kWh\n2026-07-01 to 2026-08-01, 1,200 kWh', utilityAverage: 12000, stateAverage: 12000, dataYear: 2025 }, expect: { annualKwh: { value: 13651, tolerance: { abs: 0.5 }, display: '13,651' }, ratio: { value: 2.6, tolerance: { abs: 0.05 }, display: '2.6' } }, source: 'household/usage-benchmark spec, scenarios "Partial year" (213 days) and "Winter-heavy pattern" (62 and 24 kWh a day)' },
   ],
+  glossary: ['kwh'],
   related: ['household.bill-totals.check'],
   handoffs: [
     { label: 'EIA-861 data files', url: 'https://www.eia.gov/electricity/data/eia861/' },

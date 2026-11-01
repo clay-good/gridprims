@@ -32,6 +32,7 @@ export default {
     { id: 'co-op', title: 'A 300 MW data center at a utility peaking at 1,500 MW', inputs: { requestMw: 300, loadFactor: 80, peakMw: 1500, salesMwh: 7000000, residentialKwh: 12000 }, expect: { peakShare: { value: 20, tolerance: { abs: 1e-9 }, display: '20.0' }, energyMwh: { value: 2102400, tolerance: { abs: 1e-6 }, display: '2,102,400' }, salesShare: { value: 30.03, tolerance: { abs: 0.01 }, display: '30.0' }, homes: { value: 175200, tolerance: { abs: 1e-6 }, display: '175,200' } }, source: 'large-load/request-context spec, scenarios "Co-op request" and "Household equivalent": 300 ÷ 1,500 = 20.0%; 300 × 0.8 × 8,760 = 2,102,400 MWh; ÷ 7,000,000 = 30.0%; 2,102,400,000 kWh ÷ 12,000 = 175,200 homes' },
     { id: 'no-peak', title: 'A utility that files no Form 714', inputs: { requestMw: 50, loadFactor: 80, peakMw: 0, salesMwh: 1000000, residentialKwh: 10000 }, expect: { salesShare: { value: 35.04, tolerance: { abs: 1e-9 }, display: '35.0' } }, source: 'large-load/request-context spec, scenario "No Form 714 peak": 50 × 0.8 × 8,760 = 350,400 MWh ÷ 1,000,000 = 35.0%, and no share of peak' },
   ],
+  glossary: ['load-factor', 'kw', 'kwh'],
   related: ['grid.large-load.take-or-pay'],
   handoffs: [],
   stability: 'experimental',

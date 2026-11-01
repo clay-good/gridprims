@@ -39,6 +39,7 @@ export default {
     { id: 'therm-to-kwh', title: '1 therm to kWh', inputs: { value: 1, from: 'therm', to: 'kWh' }, expect: { value: { value: 29.3071, tolerance: { abs: 0.0001 }, display: '29.31' } }, source: '100,000 Btu (EIA) × 1,055.05585262 J (NIST) ÷ 3.6 MJ' },
     { id: 'coal-to-mmbtu', title: '1 short ton of coal to MMBtu', inputs: { value: 1, from: 'short-ton-coal', to: 'MMBtu' }, expect: { value: { value: 18.792, tolerance: { abs: 0.0001 }, display: '18.79' } }, source: 'EIA 2026 estimate, electric power sector' },
   ],
+  glossary: ['kwh', 'kw'],
   related: ['calc.energy-units.emissions'],
   handoffs: [
     { label: 'EIA energy conversion calculators', url: 'https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php' },

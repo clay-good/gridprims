@@ -320,3 +320,10 @@ blockquote { border-left: 1px solid var(--field-border); margin: var(--s3) 0; pa
 /* Home: the tagline as a modest heading, and lanes close enough that both start on a phone's first screen. */
 .home-title { max-width: 46rem; margin: var(--s7) auto var(--s3); text-align: center; font-size: 2rem; line-height: 1.18; letter-spacing: -0.025em; font-weight: 700; }
 .lane h2 { margin: var(--s6) 0 var(--s3); }
+
+/* Glossary terms (learn/glossary): the learn sign, a dotted underline, and a popover on hover or focus. */
+.glossary-term { position: relative; }
+.glossary-term > a { color: var(--learn-text); text-decoration: underline dotted; text-underline-offset: 3px; }
+.glossary-pop { display: none; position: absolute; left: 0; top: 100%; z-index: 5; width: min(18rem, 80vw); margin-top: var(--s1); padding: var(--s2); background: var(--panel); color: var(--ink); border: 1px solid var(--learn-text); border-radius: var(--r-field); font-size: 0.875rem; line-height: 1.4; }
+.glossary-term:hover .glossary-pop, .glossary-term:focus-within .glossary-pop { display: block; }
+@media print { .glossary-pop { display: none !important; } }

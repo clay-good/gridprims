@@ -37,7 +37,7 @@ export const TOOL_SURFACE = [
   {
     name: 'gridprims_search',
     title: 'Search gridprims',
-    description: 'Find gridprims tools (and, once data ships, utilities, plants, regions, datasets, and glossary terms) from plain words. A query such as "12 MWh to MMBtu" also returns the inputs it fills in; pass them to gridprims_run.',
+    description: 'Find gridprims tools and glossary terms from plain words. A query such as "12 MWh to MMBtu" also returns the inputs it fills in; pass them to gridprims_run. A query such as "what is 4CP" returns the glossary entry first, with its one-line definition and citation, in the words the website uses.',
     inputSchema: {
       type: 'object',
       additionalProperties: false,
@@ -51,7 +51,7 @@ export const TOOL_SURFACE = [
       type: 'object',
       required: ['results'],
       properties: {
-        results: { type: 'array', items: { type: 'object', required: ['kind', 'id', 'title'], properties: { kind: STR, id: STR, title: STR, url: STR, inputs: OBJ } } },
+        results: { type: 'array', items: { type: 'object', required: ['kind', 'id', 'title'], properties: { kind: STR, id: STR, title: STR, url: STR, inputs: OBJ, definition: STR, citation: OBJ } } },
       },
     },
   },
@@ -127,8 +127,8 @@ export const TOOL_SURFACE = [
       type: 'object',
       additionalProperties: false,
       properties: {
-        entity: { type: 'string', enum: ['plant', 'utility', 'state', 'subregion', 'zip', 'scenario'], description: 'Look up one entity as its page shows it, instead of filtering a dataset.' },
-        id: { type: 'string', minLength: 1, maxLength: 20, description: 'With entity: an EIA plant code or utility id, a state code such as TX, an eGRID subregion such as ERCT, a five-digit ZIP, or, for a scenario, a balancing authority code such as PACE.' },
+        entity: { type: 'string', enum: ['plant', 'utility', 'state', 'subregion', 'zip', 'scenario', 'term'], description: 'Look up one entity as its page shows it, instead of filtering a dataset.' },
+        id: { type: 'string', minLength: 1, maxLength: 60, description: 'With entity: an EIA plant code or utility id, a state code such as TX, an eGRID subregion such as ERCT, a five-digit ZIP, for a scenario a balancing authority code such as PACE, or for a term a glossary term such as 4CP.' },
         scenario: {
           type: 'object', additionalProperties: false,
           description: 'With entity "scenario": a change to dispatch against the recorded year. The result always carries the backtest error beside it.',

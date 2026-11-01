@@ -4,6 +4,7 @@
 import { TOOLS, getTool } from '../core/tools/index.mjs';
 import { runTool } from '../core/contract/run.mjs';
 import { buildCommandIndex, searchCommands } from '../core/contract/command.mjs';
+import GLOSSARY from '../data/curated/glossary.mjs';
 import { VALIDATION_LEVELS } from '../core/contract/manifest.mjs';
 import { checkPath } from './files.mjs';
 import { createHandleStore } from './handles.mjs';
@@ -15,7 +16,7 @@ import { entity, query } from './data.mjs';
 
 export const SITE = 'https://gridprims.com';
 const toolPath = (id) => `/tools/${id.split('.').join('/')}/`;
-const INDEX = buildCommandIndex(TOOLS, toolPath);
+const INDEX = buildCommandIndex(TOOLS, toolPath, GLOSSARY);
 
 /** A normal tool result: structured content plus the same JSON as text for older clients. */
 export const ok = (structured) => ({ content: [{ type: 'text', text: JSON.stringify(structured) }], structuredContent: structured, isError: false });
@@ -101,6 +102,7 @@ export function createHandlers(ctx) {
     gridprims_search({ query, limit = 8 }) {
       const results = searchCommands(String(query), INDEX, limit).map((r) => ({
         kind: r.kind, id: r.id, title: r.title, url: SITE + r.url, ...(r.values ? { inputs: r.values } : {}),
+        ...(r.kind === 'term' ? { definition: r.definition, citation: r.citation } : {}),
       }));
       return ok({ results });
     },
@@ -164,11 +166,11 @@ export function createHandlers(ctx) {
 
     async gridprims_query_data({ dataset, table, filter, limit = 100, offset = 0, entity: kind, id, scenario }) {
       if (kind !== undefined) {
-        if (id === undefined) return fail('With entity, give an id: a plant code, utility id, state code, subregion code, ZIP, or balancing authority code.');
+        if (id === undefined) return fail('With entity, give an id: a plant code, utility id, state code, subregion code, ZIP, balancing authority code, or glossary term.');
         if (scenario !== undefined && kind !== 'scenario') return fail('A scenario change goes with entity "scenario" and a balancing authority code.');
         const r = await entity(kind, id, ctx.dataDir, scenario);
         if (r.error) return fail(r.error);
-        const sources = r.versions
+        const sources = kind === 'term' ? [{ id: 'gridprims-glossary', publisher: 'gridprims', citation: r.entity.citation }] : r.versions
           ? Object.entries(r.versions).map(([dsId, version]) => ({ id: dsId, version, publisher: 'U.S. Energy Information Administration' }))
           : Object.values(r.sources).filter(Boolean).map((m) => ({ id: m.dataset, version: m.version, publisher: m.publisher, asOf: m.asOf, retrieved: m.retrieved, attribution: m.attribution }));
         return ok({ kind, entity: r.entity, url: SITE + r.url, sources });

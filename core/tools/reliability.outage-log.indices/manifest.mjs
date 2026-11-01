@@ -34,6 +34,7 @@ export default {
     { id: 'spec-annual', title: 'A year against 12,000 customers served', inputs: { events: '2025-03-14 18:40, 18000, 133.3333333333333', customersServed: 12000, from: '2025-01-01', to: '2025-12-31', threshold: 5 }, expect: { perCustomer: { value: 1.5, tolerance: { abs: 0.005 }, display: '1.5' }, minutesPerCustomer: { value: 200, tolerance: { abs: 0.05 }, display: '200.0' }, minutesPerInterrupted: { value: 133.33, tolerance: { abs: 0.005 }, display: '133.33' }, availability: { value: 99.9619, tolerance: { abs: 0.00005 }, display: '99.9619' } }, source: 'reliability/index-calculator spec, scenario "Annual indices": 18,000 customer interruptions and 2,400,000 customer minutes' },
     { id: 'momentary-split', title: 'A log holding one brief interruption', inputs: { events: '2025-03-14 18:40, 420, 95\n2025-09-08 09:15, 150, 4', customersServed: 12000, from: '2025-01-01', to: '2025-12-31', threshold: 5 }, expect: { sustainedEvents: { value: 1, tolerance: { abs: 0 }, display: '1' }, perCustomer: { value: 0.035, tolerance: { abs: 0.005 }, display: '0.04' } }, source: 'Own example: the 4-minute interruption is momentary and left out of the sustained indices' },
   ],
+  glossary: ['saidi', 'saifi'],
   related: [],
   handoffs: [{ label: 'Form EIA-861 instructions (EIA)', url: 'https://www.eia.gov/survey/form/eia_861/instructions.pdf' }],
   stability: 'experimental',

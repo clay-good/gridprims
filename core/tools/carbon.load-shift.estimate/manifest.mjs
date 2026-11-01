@@ -29,6 +29,7 @@ export default {
     { id: 'spec-ev', title: 'Moving 200 kWh a day of EV charging from evening to midday', inputs: { kwhPerDay: 200, currentLbPerMwh: 1000, proposedLbPerMwh: 700, days: 365 }, expect: { changeLb: { value: 21900, tolerance: { abs: 1e-6 }, display: '21,900' }, changeT: { value: 9.9337, tolerance: { abs: 0.0001 }, display: '9.9' } }, source: 'carbon/cleanest-hours spec, scenario "Move EV charging": 200 kWh × 0.300 lb/kWh × 365 = 21,900 lb' },
     { id: 'dirtier', title: 'A move into dirtier hours shows as more CO₂', inputs: { kwhPerDay: 10, currentLbPerMwh: 600, proposedLbPerMwh: 800, days: 365 }, expect: { changeLb: { value: -730, tolerance: { abs: 1e-6 }, display: '-730' } }, source: 'Hand-computed: 10 kWh × −0.2 lb/kWh × 365 = −730 lb' },
   ],
+  glossary: ['consumption-based-intensity', 'balancing-authority', 'kwh'],
   related: ['calc.energy-units.emissions'],
   handoffs: [{ label: 'Hourly emissions of your own meter file (the workbench)', url: 'https://gridprims.com/files/' }],
   stability: 'experimental',

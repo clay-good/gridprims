@@ -110,7 +110,7 @@ async function entities(dir) {
   return entityCache.get(dir);
 }
 
-export const ENTITY_KINDS = ['plant', 'utility', 'state', 'subregion', 'zip', 'scenario'];
+export const ENTITY_KINDS = ['plant', 'utility', 'state', 'subregion', 'zip', 'scenario', 'term'];
 
 /** The scenario model's inputs, assembled once per data folder; each region's hours are read when asked for. */
 const scenarioCache = new Map();
@@ -166,6 +166,12 @@ async function scenarioEntity(id, change, dir) {
  */
 export async function entity(kind, id, dir = DATA_DIR, change = undefined) {
   if (kind === 'scenario') return scenarioEntity(id, change, dir);
+  if (kind === 'term') {
+    const [{ default: glossary }, { askedTerm }] = await Promise.all([import('../data/curated/glossary.mjs'), import('../core/contract/command.mjs')]);
+    const key = askedTerm(String(id));
+    const found = glossary.find((g) => g.id === key || [g.term, ...g.aliases].some((n) => askedTerm(n) === key));
+    return found ? { entity: found, url: `/learn/glossary/#${found.id}`, sources: {}, versions: null } : { error: `No glossary entry for ${JSON.stringify(String(id))}. Search with gridprims_search, or see https://gridprims.com/learn/glossary/.` };
+  }
   const e = await entities(dir);
   const key = String(id).trim();
   if (kind === 'plant' || kind === 'utility') {

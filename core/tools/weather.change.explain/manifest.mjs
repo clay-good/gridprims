@@ -39,6 +39,7 @@ export default {
     { id: 'something-else', title: 'The same colder winter, and 4 kWh a day more for other reasons', inputs: { periods: billsText(6, { extra: 4 }), weather: weatherText(6), change: 'none' }, expect: { weather: { value: 1109, tolerance: { abs: 1 }, display: '1,109' }, use: { value: 1460, tolerance: { abs: 1 }, display: '1,460' } }, source: 'Built from stated numbers: 4 kWh a day × 365 days = 1,460 kWh of use not explained by weather' },
     { id: 'same-weather', title: 'The same weather both years, and 4 kWh a day more', inputs: { periods: billsText(0, { extra: 4 }), weather: weatherText(0), change: 'none' }, expect: { weather: { value: 0, tolerance: { abs: 1 }, display: '0' }, use: { value: 1460, tolerance: { abs: 1 }, display: '1,460' } }, source: 'Built from stated numbers: identical weather, so the whole 1,460 kWh change is use' },
   ],
+  glossary: ['kwh'],
   related: ['household.usage-benchmark.compare'],
   handoffs: [{ label: 'Get your meter data for a tighter answer', url: 'https://gridprims.com/files/' }],
   stability: 'experimental',

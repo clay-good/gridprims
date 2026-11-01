@@ -47,6 +47,7 @@ export default {
   examples: [
     { id: 'drake-like', title: 'A 1.108 in conductor at 40 °C in 2 ft/s wind', inputs: { units: 'us', diameter: 1.108, r1: 0.117, t1: 25, r2: 0.1396, t2: 75, maxTemp: 100, ambient: 40, wind: 2, windAngle: 90, emissivity: 0.8, absorptivity: 0.8, elevation: 0, latitude: 30, lineAzimuth: 90, date: '2025-06-10', solarHour: 11, kv: 230 }, expect: { amps: { value: 1026, tolerance: { abs: 0.5 }, display: '1,026' }, mva: { value: 408.7, tolerance: { abs: 0.05 }, display: '408.7' } }, source: 'This tool\'s own heat balance for these inputs; the method is checked against linerate\'s 50 stored cases' },
   ],
+  glossary: [],
   related: [],
   handoffs: [{ label: 'linerate (open IEEE 738 and CIGRE implementation)', url: 'https://github.com/statnett/linerate' }],
   stability: 'experimental',

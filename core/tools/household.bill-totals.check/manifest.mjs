@@ -35,6 +35,7 @@ export default {
     { id: 'season-split', title: 'A period crossing summer start', inputs: { periods: '2026-06-15 to 2026-07-14, 900 kWh', tariff: seasonal, prorate: 'yes' }, expect: { total: { value: 106.8, tolerance: { abs: 0.001 }, display: '106.80' } }, source: 'household/bill-totals spec, scenario "Period crosses summer start": 480 kWh at 10 cents and 420 at 14 cents' },
     { id: 'paid-more', title: 'Paid $131.40 against $115.00 computed', inputs: { periods: '2026-03-01 to 2026-03-30, 800 kWh, paid $131.40', tariff: tiered, prorate: 'yes' }, expect: { total: { value: 115, tolerance: { abs: 0.001 }, display: '115.00' }, difference: { value: 16.4, tolerance: { abs: 0.001 }, display: '16.40' }, differencePct: { value: 14.3, tolerance: { abs: 0.001 }, display: '14.3' } }, source: 'household/bill-totals spec, scenario "Paid more than computed"' },
   ],
+  glossary: ['fixed-charge', 'energy-charge', 'tier', 'rider', 'kwh'],
   related: [],
   handoffs: [
     { label: 'OpenEI Utility Rate Database', url: 'https://apps.openei.org/USURDB/' },

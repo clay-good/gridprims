@@ -31,6 +31,7 @@ export default {
   examples: [
     { id: 'partial-power', title: '100 MW / 400 MWh dispatching at 75 MW', inputs: { powerMw: 100, energyMwh: 400, dispatchMw: 75, dod: 90, roundTrip: 85 }, expect: { durationDispatch: { value: 5.33, tolerance: { abs: 0.005 }, display: '5.33' }, cRate: { value: 0.1875, tolerance: { abs: 0.00005 }, display: '0.1875' }, usable: { value: 360, tolerance: { abs: 0.05 }, display: '360.0' }, charging: { value: 423.5, tolerance: { abs: 0.05 }, display: '423.5' } }, source: 'calc/storage-and-cost spec, scenarios "Partial-power dispatch" and "Usable energy"' },
   ],
+  glossary: ['kw', 'kwh'],
   related: ['calc.cost.lcoe'],
   handoffs: [{ label: 'NLR Annual Technology Baseline', url: 'https://atb.nlr.gov/' }],
   stability: 'experimental',

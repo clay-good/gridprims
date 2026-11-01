@@ -67,22 +67,42 @@ export function parseCommand(query, manifest) {
 
 const words = (s) => s.toLowerCase().split(/[^a-z0-9³²₂]+/).filter((w) => w.length > 1);
 
+/** A term's names as a query would type them: lowercase, with spaces and hyphens alike. */
+const phrase = (s) => s.toLowerCase().replace(/[-\s]+/g, ' ').trim();
+
+/** A definitional query ("what is 4CP?", "define load factor") reduced to the term it asks about. */
+export const askedTerm = (q) => phrase(q.replace(/[?.!]+$/, '').replace(/^\s*(what\s+is|what's|whats|what\s+are|define|definition\s+of|meaning\s+of)\s+/i, '').replace(/^(a|an|the)\s+/i, ''));
+
 /**
- * The search index the command bar loads: one entry per tool (entities,
- * datasets, and Learn entries join it with phase 1 data).
+ * The search index the command bar loads: one entry per tool, then one per glossary term (entities and
+ * datasets join it with phase 1 data).
  * @param {Array<{manifest: any}>} tools
  * @param {(id: string) => string} pathOf
+ * @param {any[]} [glossary] entries from data/curated/glossary.mjs
  */
-export function buildCommandIndex(tools, pathOf) {
-  return tools.map(({ manifest: m }) => ({
-    kind: 'tool',
-    id: m.id,
-    title: m.title,
-    url: pathOf(m.id),
-    words: [...new Set([...words(m.title), ...words(m.purpose), ...m.id.split(/[.-]/)])],
-    commandForms: m.commandForms ?? [],
-    inputs: m.inputs.map(({ name, type, options }) => ({ name, type, ...(options ? { options } : {}) })),
-  }));
+export function buildCommandIndex(tools, pathOf, glossary = []) {
+  return [
+    ...tools.map(({ manifest: m }) => ({
+      kind: 'tool',
+      id: m.id,
+      title: m.title,
+      url: pathOf(m.id),
+      words: [...new Set([...words(m.title), ...words(m.purpose), ...m.id.split(/[.-]/)])],
+      commandForms: m.commandForms ?? [],
+      inputs: m.inputs.map(({ name, type, options }) => ({ name, type, ...(options ? { options } : {}) })),
+    })),
+    ...glossary.map((g) => ({
+      kind: 'term',
+      id: g.id,
+      title: g.term,
+      url: `/learn/glossary/#${g.id}`,
+      words: [...new Set([...words(g.term), ...g.aliases.flatMap(words)])],
+      names: [g.term, ...g.aliases].map(phrase),
+      definition: g.short,
+      citation: g.citation,
+      inputs: [],
+    })),
+  ];
 }
 
 /**
@@ -98,9 +118,11 @@ export function searchCommands(query, index, limit = 8) {
   if (!q) return [];
   const qWords = words(q);
   const scored = [];
+  const asked = askedTerm(q);
   for (const entry of index) {
-    const values = parseCommand(q, entry);
-    let score = values ? 1000 : 0;
+    const values = entry.kind === 'term' ? null : parseCommand(q, entry);
+    // A query that names a term, or asks what it is, puts that term first.
+    let score = values ? 1000 : entry.names?.includes(asked) ? 2000 : 0;
     const titleWords = new Set(words(entry.title));
     for (const w of qWords) {
       if (titleWords.has(w)) score += 2;

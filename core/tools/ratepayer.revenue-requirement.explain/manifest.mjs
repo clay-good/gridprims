@@ -38,6 +38,7 @@ export default {
   examples: [
     { id: 'spec', title: 'A $2 billion rate base at 10% equity return', inputs: { rateBase: 2000000000, roe: 10, equityRatio: 50, costOfDebt: 5, om: 400000000, depreciation: 150000000, otherTaxes: 50000000, taxRate: 25, residentialShare: 40, residentialCustomers: 500000 }, expect: { wacc: { value: 7.5, tolerance: { abs: 0.0005 }, display: '7.5' }, ret: { value: 150000000, tolerance: { abs: 1 }, display: '150,000,000' }, incomeTax: { value: 33333333.33, tolerance: { abs: 1 }, display: '33,333,333' }, perPoint: { value: 13333333.33, tolerance: { abs: 1 }, display: '13,333,333' }, perCustomerMonth: { value: 0.89, tolerance: { abs: 0.005 }, display: '0.89' } }, source: 'ratepayer/revenue-requirement spec, scenarios "Return on rate base" and "ROE sensitivity"' },
   ],
+  glossary: ['rate-case', 'fixed-charge', 'kwh'],
   related: [],
   handoffs: [{ label: 'FERC Form 1 data in PUDL (Catalyst Cooperative)', url: 'https://catalyst.coop/pudl/' }],
   stability: 'experimental',

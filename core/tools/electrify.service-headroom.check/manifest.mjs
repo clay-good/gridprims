@@ -40,6 +40,7 @@ export default {
     { id: 'spec-480v', title: '120 kW on a 480 V three-phase, 400 A service', inputs: { demand: '120', basis: 'recording', powerFactor: 0.95, volts: 480, phase: '3', ratingA: 400, generation: 'no', edition: '2023' }, expect: { kva: { value: 126.3158, tolerance: { abs: 0.05 }, display: '126.3' }, kva125: { value: 157.8947, tolerance: { abs: 0.05 }, display: '157.9' }, amps: { value: 189.92, tolerance: { abs: 0.05 }, display: '189.9' }, headroomA: { value: 210.08, tolerance: { abs: 0.05 }, display: '210.1' }, headroomKva: { value: 174.66, tolerance: { abs: 0.05 }, display: '174.7' } }, source: 'electrify/service-headroom spec, scenario "Three-phase service"' },
     { id: 'bills', title: 'Twelve demand-metered bills on a 208 V three-phase, 600 A service', inputs: { demand: months, basis: 'bills', powerFactor: 1, volts: 208, phase: '3', ratingA: 600, generation: 'no', edition: '2023' }, expect: { maxKw: { value: 120, tolerance: { abs: 0.05 }, display: '120.0' }, amps: { value: 416.37, tolerance: { abs: 0.05 }, display: '416.4' }, headroomA: { value: 183.63, tolerance: { abs: 0.05 }, display: '183.6' } }, source: 'Own example: 120 kW × 1.25 = 150 kVA; 150,000 ÷ (√3 × 208) = 416.4 A' },
   ],
+  glossary: ['kw', 'demand'],
   related: [],
   handoffs: [{ label: 'Conductor sizing and full load calculations (RoughLogic)', url: 'https://roughlogic.com/' }],
   stability: 'experimental',

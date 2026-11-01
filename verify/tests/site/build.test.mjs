@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { build } from '../../../site/build.mjs';
 import { escapeHtml } from '../../../site/lib/html.mjs';
+import { unmark } from '../../../site/lib/glossary-terms.mjs';
 import { TOOLS } from '../../../core/tools/index.mjs';
 import { toolPath } from '../../../site/ui/tool-page.mjs';
 import { decodeState, encodeState, isExampleState } from '../../../site/ui/share-state.mjs';
@@ -22,7 +23,8 @@ test('builds every calculator page, the limits page, home, and 404', () => {
 
 test('page and manifest agree: every label, unit, and citation appears exactly as the manifest states', () => {
   for (const { manifest } of TOOLS) {
-    const html = page(toolPath(manifest.id));
+    // A glossary term wraps a word without changing it, so the text is compared with the wrapping removed.
+    const html = unmark(page(toolPath(manifest.id)));
     for (const inp of manifest.inputs) assert.ok(html.includes(`>${escapeHtml(inp.label)}`), `input label ${inp.label}`);
     for (const o of manifest.inputs.flatMap((i) => i.options ?? [])) assert.ok(html.includes(`>${escapeHtml(o.label)}</option>`), `option ${o.label}`);
     for (const c of manifest.citations) {

@@ -25,6 +25,8 @@ import { outagePicker } from '../ui/outage-picker.mjs';
 import { cleanestPicker } from '../ui/cleanest-picker.mjs';
 import { weatherPicker } from '../ui/weather-picker.mjs';
 import { largeLoadPicker, termsPicker } from '../ui/large-load-picker.mjs';
+import { markFirstUse } from '../lib/glossary-terms.mjs';
+import GLOSSARY from '../../data/curated/glossary.mjs';
 import REGULATORS from '../../data/curated/regulators.mjs';
 import { headroomPanel } from '../ui/workbench-headroom.mjs';
 import { evPanel } from '../ui/workbench-ev.mjs';
@@ -73,7 +75,7 @@ function field(inp, value, i18n) {
  */
 export function calculatorPage({ manifest, example, result, i18n, reviewed = false }) {
   const { t } = i18n;
-  const body = html`
+  const page = html`
 <article data-tool="${manifest.id}" data-tool-version="${manifest.version}" data-reviewed="${reviewed ? 'yes' : 'no'}">
   <div class="tool-head">
     <h1>${manifest.title}</h1>
@@ -108,6 +110,9 @@ export function calculatorPage({ manifest, example, result, i18n, reviewed = fal
   </section>
   ${manifest.handoffs.length ? html`<section><h2>${t('tool.handoffs')}</h2>${manifest.handoffs.map((h) => html`<p><a class="handoff" href="${h.url}">${h.label} ${raw('&rarr;')}</a></p>`)}</section>` : ''}
 </article>`;
+  // Each term the tool lists becomes a glossary term where the page first uses it.
+  const terms = (manifest.glossary ?? []).map((id) => GLOSSARY.find((g) => g.id === id));
+  const body = raw(markFirstUse(String(page), terms).markup);
   return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js', ...pickersOf(manifest).map(([, script]) => script), ...(EXTRAS[manifest.id] ? [EXTRAS[manifest.id][1]] : [])], section: sectionOf(manifest.id) });
 }
 
@@ -204,7 +209,7 @@ export function sectionPage({ id, tools, datasets = [], entries = new Map(), i18
   const { t } = i18n;
   const cells = tools.filter(({ manifest: m }) => sectionOf(m.id) === id).map(({ manifest: m }) => ({ href: toolPath(m.id), section: id, name: m.title, question: m.purpose, needs: m.inputs.some((x) => x.type === 'file') ? 'file' : 'none' }));
   if (id === 'bills') cells.unshift({ href: '/files/', section: 'bills', name: t('section.workbench'), question: t('section.workbench.what'), needs: 'file' });
-  if (id === 'learn') cells.push({ href: '/learn/qualifying-facility/', section: 'learn', name: t('qf.title'), question: t('qf.description'), needs: 'none' });
+  if (id === 'learn') cells.push({ href: '/learn/glossary/', section: 'learn', name: t('glossary.title'), question: t('glossary.description'), needs: 'none' }, { href: '/learn/qualifying-facility/', section: 'learn', name: t('qf.title'), question: t('qf.description'), needs: 'none' });
   const body = html`<h1>${t(`section.${id}`)}</h1><p class="purpose">${t(`section.${id}.intro`)}</p>
 ${cells.length || (id === 'data' && datasets.length) ? '' : html`<p>${t('section.empty')}</p>`}
 ${cells.length ? html`<ul class="tool-list">${cells.map((c) => toolCell(c, i18n))}</ul>` : ''}

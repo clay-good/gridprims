@@ -35,6 +35,7 @@ export default {
     { id: 'kw-peak', title: 'A 412 kW peak at 0.95 on a 500 kVA transformer', inputs: { loadAs: 'kw', load: 412, phases: 'three', volts: 480, rating: 500, pf: 0.95 }, expect: { kva: { value: 433.7, tolerance: { abs: 0.05 }, display: '433.7' }, loading: { value: 86.7, tolerance: { abs: 0.05 }, display: '86.7' }, headroom: { value: 66.3, tolerance: { abs: 0.05 }, display: '66.3' } }, source: 'calc/transformer-sizing spec, scenario "Peak loading"' },
     { id: 'single-240', title: '200 A at 240 V single-phase', inputs: { loadAs: 'amps', load: 200, phases: 'single', volts: 240, rating: 50, pf: 0.95 }, expect: { kva: { value: 48, tolerance: { abs: 0.05 }, display: '48.0' } }, source: 'Hand computation: 240 × 200 ÷ 1,000' },
   ],
+  glossary: ['kw', 'power-factor'],
   related: ['calc.power-factor.correct'],
   handoffs: [],
   stability: 'experimental',

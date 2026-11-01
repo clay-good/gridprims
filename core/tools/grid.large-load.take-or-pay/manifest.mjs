@@ -42,6 +42,7 @@ export default {
     { id: 'exit-year-5', title: 'Leaving at the end of year 5 of a 14-year contract at GS-5\'s minimums', inputs: { contractMw: 100, components: 'transmission and distribution: 85% at $5/kW-month\ngeneration: 60% at $10/kW-month', ramp: '100', actual: '100', years: 14, ratchetPct: 0, exitRule: 'remaining term', exitYear: 5, reportYear: 1 }, expect: { exitFee: { value: 110700000, tolerance: { abs: 1e-6 }, display: '110,700,000' }, minimumTotal: { value: 172200000, tolerance: { abs: 1e-6 }, display: '172,200,000' } }, source: 'large-load/take-or-pay spec, scenario "Leave in year 5 of 14", at GS-5\'s 85% and 60% minimums with stated rates: each year 85,000 kW × $5 × 12 + 60,000 kW × $10 × 12 = $12,300,000; years 6 to 14 are 9 × $12,300,000 = $110,700,000' },
     { id: 'aep-exit-36', title: 'AEP Ohio\'s exit fee: 36 months of minimum bills', inputs: { contractMw: 100, components: 'demand: 57,500 kW + 100% above 75 MW, cap 85% at $10/kW-month', ramp: '100', actual: '100', years: 12, ratchetPct: 0, exitRule: '36 months', exitYear: 9, reportYear: 1 }, expect: { exitFee: { value: 29700000, tolerance: { abs: 1e-6 }, display: '29,700,000' } }, source: 'AEP Ohio data center tariff, exit fee of 36 months of minimums, with a stated $10/kW-month rate: 82,500 kW × $10 × 36 = $29,700,000' },
   ],
+  glossary: ['minimum-bill', 'ratchet', 'demand-charge', 'billing-demand', 'kw'],
   related: ['grid.large-load.context'],
   handoffs: [],
   stability: 'experimental',
