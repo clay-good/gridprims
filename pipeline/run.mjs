@@ -10,7 +10,7 @@ import { Readable } from 'node:stream';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
-import { gunzipSync, gzipSync } from 'node:zlib';
+import { createGunzip, gunzipSync, gzipSync } from 'node:zlib';
 import { readXlsx, readZipDirectory, readZipEntry } from '../parsers/xlsx.mjs';
 import { readParquet } from '../parsers/parquet.mjs';
 import { decodeText, parseDelimited } from '../parsers/delimited.mjs';
@@ -137,9 +137,11 @@ async function* linesOf(r) {
   let size = 0;
   let rest = '';
   const source = r.path ? createReadStream(r.path) : Readable.fromWeb((await fetch(r.url)).body);
-  for await (const chunk of source) {
-    hash.update(chunk);
-    size += chunk.length;
+  // A gzipped file (GHCN-Daily's per-station CSVs) is hashed as downloaded and read as text after inflating.
+  const gunzip = r.gzip ? createGunzip() : null;
+  const text = gunzip ? source.on('data', (c) => { hash.update(c); size += c.length; }).pipe(gunzip) : source;
+  for await (const chunk of text) {
+    if (!gunzip) { hash.update(chunk); size += chunk.length; }
     const parts = (rest + decoder.decode(chunk, { stream: true })).split(/\r?\n/);
     rest = parts.pop();
     yield* parts;
@@ -192,7 +194,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     // A file too large to hold in memory (EAGLE-I's yearly CSVs) is read line by line, and hashed as it is read.
     // The input may name a local copy by path; otherwise it is fetched.
     if (file.stream) {
-      raws[name] = { stream: true, url: file.url, name: file.name, path: typeof input?.[name] === 'string' ? input[name] : null, pinned: file.sha256, sha256: null, size: 0 };
+      raws[name] = { stream: true, gzip: file.gzip === true, url: file.url, name: file.name, path: typeof input?.[name] === 'string' ? input[name] : null, pinned: file.sha256, sha256: null, size: 0 };
       continue;
     }
     let bytes = name ? input?.[name] : input;
@@ -231,7 +233,15 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     } else if (step('read-csv')) {
       // A delimited text file (Census's pipe-delimited relationship files): rows of strings, the header first.
       const csv = step('read-csv');
-      input = parseDelimited(decodeText(csv.file ? raws[csv.file].bytes : raw).text, { delimiter: csv.delimiter }).rows;
+      let bytes = csv.file ? raws[csv.file].bytes : raw;
+      // A delimited file inside a zip (Census's Gazetteer files).
+      if (step('unzip')) {
+        const found = findEntry(step('unzip').entry.replace('{year}', String(year)), zip);
+        if (found.problem) { failures.push(`${tb.name}: ${found.problem}`); continue; }
+        entryName = found.entry.name;
+        bytes = await readZipEntry(raw, found.entry);
+      }
+      input = parseDelimited(decodeText(bytes).text, { delimiter: csv.delimiter }).rows;
     } else if (step('read-parquet')) {
       // Parquet files hand the normalizer a reader per file, so it can aggregate a row group at a time.
       input = Object.fromEntries(step('read-parquet').files.map((f) => [f, readParquet(raws[f].bytes)]));

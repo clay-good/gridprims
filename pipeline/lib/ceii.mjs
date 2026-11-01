@@ -16,11 +16,17 @@ const CHECKLIST = ['publicSourceOnly', 'noPlanningModels', 'noSubstationPoints',
 export function ceiiScreen(entry, tables, screened) {
   const infrastructure = Boolean(entry.ceii?.infrastructure);
   const checklist = infrastructure ? Object.fromEntries(CHECKLIST.map((k) => [k, entry.ceii.checklist?.[k] === true])) : null;
-  const flagged = tables.flatMap((t) => t.columns.filter((c) => c.name.toLowerCase().split(/[^a-z0-9]+/).some((w) => FORBIDDEN.includes(w))).map((c) => `${t.name}.${c.name}`));
+  const named = tables.flatMap((t) => t.columns.filter((c) => c.name.toLowerCase().split(/[^a-z0-9]+/).some((w) => FORBIDDEN.includes(w))).map((c) => `${t.name}.${c.name}`));
+  // A dataset that is not grid infrastructure may name location columns it publishes on purpose (weather
+  // stations at airports), with the reason; the record lists them, and an infrastructure dataset never can.
+  const allowed = !infrastructure ? new Set(entry.ceii?.locationColumns?.columns ?? []) : new Set();
+  const flagged = named.filter((c) => !allowed.has(c));
+  const allowedLocation = named.filter((c) => allowed.has(c));
   const unconfirmed = checklist ? Object.entries(checklist).filter(([, v]) => !v).map(([k]) => k) : [];
   return {
     rule: '18 CFR 388.113', screened, infrastructure, ...(checklist ? { checklist } : {}),
     columnsChecked: tables.reduce((n, t) => n + t.columns.length, 0), flagged, unconfirmed,
+    ...(allowedLocation.length ? { allowedLocation, allowedWhy: entry.ceii.locationColumns.why } : {}),
     passed: flagged.length === 0 && unconfirmed.length === 0,
     note: entry.ceii?.note ?? null,
   };

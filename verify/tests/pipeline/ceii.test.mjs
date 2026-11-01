@@ -43,3 +43,14 @@ test('the registry gate fails a version whose screen record is missing or stale'
   writeFileSync(file, JSON.stringify({ ...m, ceiiScreen: { ...m.ceiiScreen, columnsChecked: 1 } }));
   assert.match((await checkRegistry(root)).join('\n'), /eia-923 2026-10: the CEII screen record is stale/);
 });
+
+test('a dataset that is not infrastructure may publish named location columns with a reason; an infrastructure one may not', () => {
+  const tables = [{ name: 'stations', columns: [{ name: 'station' }, { name: 'lat' }, { name: 'lon' }] }];
+  const weather = { ceii: { infrastructure: false, locationColumns: { columns: ['stations.lat', 'stations.lon'], why: 'weather stations' } } };
+  const r = ceiiScreen(weather, tables, '2026-11-01');
+  assert.equal(r.passed, true);
+  assert.deepEqual(r.allowedLocation, ['stations.lat', 'stations.lon']);
+  const grid = { ceii: { infrastructure: true, checklist: { publicSourceOnly: true, noPlanningModels: true, noSubstationPoints: true, noOneLineDiagrams: true, noBusImpedances: true, noNdaData: true }, locationColumns: { columns: ['stations.lat'], why: 'no' } } };
+  assert.deepEqual(ceiiScreen(grid, tables, '2026-11-01').flagged, ['stations.lat', 'stations.lon']);
+  assert.deepEqual(ceiiScreen({ ceii: { infrastructure: false } }, tables, '2026-11-01').flagged, ['stations.lat', 'stations.lon']);
+});

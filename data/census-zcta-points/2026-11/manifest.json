@@ -1,0 +1,120 @@
+{
+  "dataset": "census-zcta-points",
+  "version": "2026-11",
+  "title": "2020 Gazetteer ZCTA internal points (U.S. Census Bureau)",
+  "publisher": "U.S. Census Bureau",
+  "sourceUrl": "https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.2020.html",
+  "terms": {
+    "url": "https://www.census.gov/about/policies/citation.html",
+    "section": "Public-Use Statement",
+    "text": "Proper citation ensures that Census Bureau statistical products and research can be discovered, reused, replicated for verification, and credited for recognition to measure usage and impact. Data users who create their own estimates using data from disseminated tables and other data should cite the Census Bureau as the source of the original data only. Conclusions drawn from any analysis of these data are the sole responsibility of the performing party.",
+    "captured": "2026-10-31"
+  },
+  "redistributionBasis": {
+    "kind": "public domain",
+    "note": "U.S. federal government work (17 U.S.C. 105); the Census page above states no license, so the matcher's advisory reads derive"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "derive",
+    "license": null,
+    "reason": "terms absent or unrecognized; values are facts we may compute over",
+    "agrees": false
+  },
+  "license": "public domain (U.S. federal government work (17 U.S.C. 105); the Census page above states no license, so the matcher's advisory reads derive)",
+  "attribution": "Source: U.S. Census Bureau, 2020 Gazetteer Files, ZIP Code Tabulation Areas.",
+  "asOf": "2021-01-22",
+  "retrieved": "2026-11-01",
+  "generatedAt": "2026-11-01T00:00:00Z",
+  "cadence": {
+    "every": "annual",
+    "nextRelease": {
+      "date": "2031-12-31",
+      "posted": false,
+      "note": "ZCTAs are redrawn for each decennial census; the 2030 file is not expected before late 2031"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2020_Gazetteer/2020_Gaz_zcta_national.zip",
+      "name": "2020_Gaz_zcta_national.zip",
+      "bytes": 998037,
+      "sha256": "335402fb16b41303a3760f8956d2af005bbd6919b8dc6f4a96048af0005957a6",
+      "entries": [
+        "2020_Gaz_zcta_national.txt"
+      ]
+    }
+  ],
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-11-01",
+    "infrastructure": false,
+    "columnsChecked": 4,
+    "flagged": [],
+    "unconfirmed": [],
+    "allowedLocation": [
+      "points.lat",
+      "points.lon"
+    ],
+    "allowedWhy": "The internal point Census publishes for each ZIP Code Tabulation Area, for the on-device nearest-station search; no grid facility is located.",
+    "passed": true,
+    "note": "Census statistical areas; no facility or network data."
+  },
+  "tables": [
+    {
+      "name": "points",
+      "title": "Each ZCTA's internal point and land area",
+      "dataPeriod": "2020",
+      "rows": 33144,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "zcta",
+          "type": "str"
+        },
+        {
+          "name": "lat",
+          "type": "f64",
+          "unit": "degrees north, internal point"
+        },
+        {
+          "name": "lon",
+          "type": "f64",
+          "unit": "degrees east, internal point"
+        },
+        {
+          "name": "land_m2",
+          "type": "f64",
+          "unit": "m²"
+        }
+      ],
+      "partition": null,
+      "shards": [
+        {
+          "path": "points/US.bin",
+          "state": "US",
+          "rows": 33144,
+          "bytes": 1193752,
+          "sha256": "94ea7eefe6cae042fe5b9f27acfd860fdd866e280ab60798adf60084a3a67aed"
+        }
+      ],
+      "download": {
+        "path": "points.csv.gz",
+        "bytes": 531346,
+        "sha256": "5fb73b311ca6e0e687d6f967783787c2658c3df6611bac368bec50306cee5aee",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Census Bureau",
+          "attribution": "Source: U.S. Census Bureau, 2020 Gazetteer Files, ZIP Code Tabulation Areas.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}
