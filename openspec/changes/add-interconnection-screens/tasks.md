@@ -38,7 +38,7 @@
 - [ ] 5.3 Build the hosting-capacity directory with terms, vintages, and per-feeder minimum-load availability, linking only; verify the viewer-only, utility-publishes-minimum-load, atlas-condition, and nothing-hosted scenarios
 - [ ] 5.4 Add the map caveats and freshness chips; verify the caveat and stale-entry scenarios
 - [ ] 5.5 Write the certification and settings reference with per-value citations; verify the certification-mismatch, setting-cited, and no-free-source scenarios
-- [ ] 5.6 Implement inverter sizing and the export-limiting explainer; verify the 1.25 ratio, benchmarks-deferred, limited-export, and busbar scenarios
+- [x] 5.6 Implement inverter sizing and the export-limiting explainer; verify the 1.25 ratio, benchmarks-deferred, limited-export, and busbar scenarios (EIA's inverter-loading-ratio range read from the primary, so the research's unverified tag is cleared; Texas § 25.211(g)(1) read from the rule as the export-tested provision)
 
 ## 6. Surfaces
 

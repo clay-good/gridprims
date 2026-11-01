@@ -1,0 +1,177 @@
+{
+  "toolId": "interconnect.inverter.size",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "ratio",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.inverter.size",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "ratio": {
+            "value": 1.25,
+            "unit": "",
+            "display": "1.25"
+          },
+          "screenedKw": {
+            "value": 120,
+            "unit": "kW",
+            "display": "120.00"
+          }
+        },
+        "sentence": "The ratio is 1.25. The screens generally see 120 kW, the inverter rating.",
+        "notes": [],
+        "work": {
+          "method": "The ratio is panel capacity in kW of direct current divided by inverter capacity in kW of alternating current, to 0.01. Above 1 the inverter clips the top of sunny days; below 1 it runs under its rating. The screens generally test the inverter's alternating-current rating; where a rule tests what the project exports instead, an export limit below that rating is the figure it sees, if the utility accepts how the limit is held.",
+          "steps": [
+            "150 kW of panels ÷ 120 kW of inverter = 1.25.",
+            "Above 1, the panels can make more than the inverter passes, so the inverter clips the top of sunny days. That trades a little summer energy for more output in the morning, the evening, and winter, and for a smaller inverter.",
+            "The screens generally see the 120 kW alternating-current rating, not the 150 kW of panels: the panels set how much energy you make, and the inverter sets how much can reach the grid at once.",
+            "gridprims ships no benchmark table of typical ratios. EIA reported individual-system inverter loading ratios usually between 1.13 and 1.30, and a capacity-weighted average of 1.25 at the end of 2016; for current distributions, read the published reports linked below.",
+            "Service, panel, busbar, and conductor questions are electrical-code matters, not interconnection ones, and are not covered here."
+          ],
+          "constants": [],
+          "assumptions": [
+            "One inverter rating for the whole project; a project with several inverters sums them.",
+            "Whether a limiting method qualifies is the utility's decision under its own rules."
+          ],
+          "citations": [
+            {
+              "source": "U.S. Energy Information Administration, Today in Energy, \"Solar plants typically install more panel capacity relative to their inverter capacity\"",
+              "edition": "May 25, 2018; figures as of end-2016",
+              "locator": "individual-system inverter loading ratios usually between 1.13 and 1.30; capacity-weighted average 1.25",
+              "url": "https://www.eia.gov/todayinenergy/detail.php?id=35372"
+            },
+            {
+              "source": "Public Utility Commission of Texas, 16 TAC § 25.211, Interconnection of On-Site Distributed Generation",
+              "edition": "effective January 5, 2017; read 2026-11-01",
+              "locator": "§ 25.211(g)(1): no pre-interconnection study fee for pre-certified units up to 500 kW that export not more than 15% of the total load on a single radial feeder",
+              "url": "https://ftp.puc.texas.gov/public/puct-info/agency/rulesnlaws/subrules/electric/25.211/25.211.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "An explanation of which figure a screen looks at, not a determination. The utility decides what it accepts."
+      }
+    },
+    {
+      "example": "limited",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.inverter.size",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "ratio": {
+            "value": 1.25,
+            "unit": "",
+            "display": "1.25"
+          },
+          "screenedKw": {
+            "value": 100,
+            "unit": "kW",
+            "display": "100.00"
+          }
+        },
+        "sentence": "The ratio is 1.25. The screens generally see 100 kW, the export limit, if the utility accepts how you hold it.",
+        "notes": [],
+        "work": {
+          "method": "The ratio is panel capacity in kW of direct current divided by inverter capacity in kW of alternating current, to 0.01. Above 1 the inverter clips the top of sunny days; below 1 it runs under its rating. The screens generally test the inverter's alternating-current rating; where a rule tests what the project exports instead, an export limit below that rating is the figure it sees, if the utility accepts how the limit is held.",
+          "steps": [
+            "625 kW of panels ÷ 500 kW of inverter = 1.25.",
+            "Above 1, the panels can make more than the inverter passes, so the inverter clips the top of sunny days. That trades a little summer energy for more output in the morning, the evening, and winter, and for a smaller inverter.",
+            "The screens generally see the 500 kW alternating-current rating, not the 625 kW of panels: the panels set how much energy you make, and the inverter sets how much can reach the grid at once.",
+            "gridprims ships no benchmark table of typical ratios. EIA reported individual-system inverter loading ratios usually between 1.13 and 1.30, and a capacity-weighted average of 1.25 at the end of 2016; for current distributions, read the published reports linked below.",
+            "With an export limit of 100 kW, a rule that tests what the project exports would see 100 kW rather than 500 kW: Texas, for example, keys its no-study-fee class to units that \"export not more than 15% of the total load on a single radial feeder\" (16 TAC § 25.211(g)(1)).",
+            "A rule that tests nameplate instead still sees the full inverter rating. The utility decides whether it accepts your limiting method, and some rules name which methods qualify.",
+            "With storage, how the limit is enforced matters: a limit held by programming or by an on-site limiting element is what some rules credit, so say which yours uses in the application.",
+            "Service, panel, busbar, and conductor questions are electrical-code matters, not interconnection ones, and are not covered here."
+          ],
+          "constants": [],
+          "assumptions": [
+            "One inverter rating for the whole project; a project with several inverters sums them.",
+            "Whether a limiting method qualifies is the utility's decision under its own rules."
+          ],
+          "citations": [
+            {
+              "source": "U.S. Energy Information Administration, Today in Energy, \"Solar plants typically install more panel capacity relative to their inverter capacity\"",
+              "edition": "May 25, 2018; figures as of end-2016",
+              "locator": "individual-system inverter loading ratios usually between 1.13 and 1.30; capacity-weighted average 1.25",
+              "url": "https://www.eia.gov/todayinenergy/detail.php?id=35372"
+            },
+            {
+              "source": "Public Utility Commission of Texas, 16 TAC § 25.211, Interconnection of On-Site Distributed Generation",
+              "edition": "effective January 5, 2017; read 2026-11-01",
+              "locator": "§ 25.211(g)(1): no pre-interconnection study fee for pre-certified units up to 500 kW that export not more than 15% of the total load on a single radial feeder",
+              "url": "https://ftp.puc.texas.gov/public/puct-info/agency/rulesnlaws/subrules/electric/25.211/25.211.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "An explanation of which figure a screen looks at, not a determination. The utility decides what it accepts."
+      }
+    },
+    {
+      "example": "undersized",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.inverter.size",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "ratio": {
+            "value": 0.75,
+            "unit": "",
+            "display": "0.75"
+          },
+          "screenedKw": {
+            "value": 120,
+            "unit": "kW",
+            "display": "120.00"
+          }
+        },
+        "sentence": "The ratio is 0.75. The screens generally see 120 kW, the inverter rating.",
+        "notes": [],
+        "work": {
+          "method": "The ratio is panel capacity in kW of direct current divided by inverter capacity in kW of alternating current, to 0.01. Above 1 the inverter clips the top of sunny days; below 1 it runs under its rating. The screens generally test the inverter's alternating-current rating; where a rule tests what the project exports instead, an export limit below that rating is the figure it sees, if the utility accepts how the limit is held.",
+          "steps": [
+            "90 kW of panels ÷ 120 kW of inverter = 0.75.",
+            "Below 1, the inverter is larger than the panels can fill, so nothing clips and the inverter runs below its rating most of the time.",
+            "The screens generally see the 120 kW alternating-current rating, not the 90 kW of panels: the panels set how much energy you make, and the inverter sets how much can reach the grid at once.",
+            "gridprims ships no benchmark table of typical ratios. EIA reported individual-system inverter loading ratios usually between 1.13 and 1.30, and a capacity-weighted average of 1.25 at the end of 2016; for current distributions, read the published reports linked below.",
+            "Service, panel, busbar, and conductor questions are electrical-code matters, not interconnection ones, and are not covered here."
+          ],
+          "constants": [],
+          "assumptions": [
+            "One inverter rating for the whole project; a project with several inverters sums them.",
+            "Whether a limiting method qualifies is the utility's decision under its own rules."
+          ],
+          "citations": [
+            {
+              "source": "U.S. Energy Information Administration, Today in Energy, \"Solar plants typically install more panel capacity relative to their inverter capacity\"",
+              "edition": "May 25, 2018; figures as of end-2016",
+              "locator": "individual-system inverter loading ratios usually between 1.13 and 1.30; capacity-weighted average 1.25",
+              "url": "https://www.eia.gov/todayinenergy/detail.php?id=35372"
+            },
+            {
+              "source": "Public Utility Commission of Texas, 16 TAC § 25.211, Interconnection of On-Site Distributed Generation",
+              "edition": "effective January 5, 2017; read 2026-11-01",
+              "locator": "§ 25.211(g)(1): no pre-interconnection study fee for pre-certified units up to 500 kW that export not more than 15% of the total load on a single radial feeder",
+              "url": "https://ftp.puc.texas.gov/public/puct-info/agency/rulesnlaws/subrules/electric/25.211/25.211.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "An explanation of which figure a screen looks at, not a determination. The utility decides what it accepts."
+      }
+    }
+  ]
+}

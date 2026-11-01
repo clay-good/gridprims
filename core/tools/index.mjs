@@ -45,6 +45,8 @@ import processRoute from './interconnect.process.route/manifest.mjs';
 import * as processRouteImpl from './interconnect.process.route/tool.mjs';
 import fastTrack from './interconnect.fast-track.screens/manifest.mjs';
 import * as fastTrackImpl from './interconnect.fast-track.screens/tool.mjs';
+import inverterSize from './interconnect.inverter.size/manifest.mjs';
+import * as inverterSizeImpl from './interconnect.inverter.size/tool.mjs';
 
 export const TOOLS = [
   { manifest: energyUnitsConvert, impl: energyUnitsConvertImpl },
@@ -69,6 +71,7 @@ export const TOOLS = [
   { manifest: minLoadScreen, impl: minLoadScreenImpl },
   { manifest: processRoute, impl: processRouteImpl },
   { manifest: fastTrack, impl: fastTrackImpl },
+  { manifest: inverterSize, impl: inverterSizeImpl },
 ];
 
 /** @param {string} id */

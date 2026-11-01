@@ -781,3 +781,34 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 - Fault current, interrupting capability, and transient stability need the utility's circuit model and are never answered here.
 - Federal procedures only; states number and set their screens differently.
+
+## Inverter sizing and export limits (`interconnect.inverter.size`)
+
+The ratio of your panels to your inverter, what a high or low ratio means for clipping, and which figure the interconnection screens look at when you limit export.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Panel capacity | `dcKw` | kW of direct current | 0 to 1000000 | 150 |
+| Inverter capacity | `acKw` | kW of alternating current | 0.1 to 1000000 | 120 |
+| Export limit | `exportKw` | kW | 0 to 1000000 | 0 |
+| The project includes storage | `storage` | choice | `no`, `yes` | no |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Panels to inverter | `ratio` |  | 2 decimals |
+| The figure the screens generally see | `screenedKw` | kW | 2 decimals |
+
+**Method.** The ratio is panel capacity in kW of direct current divided by inverter capacity in kW of alternating current, to 0.01. Above 1 the inverter clips the top of sunny days; below 1 it runs under its rating. The screens generally test the inverter's alternating-current rating; where a rule tests what the project exports instead, an export limit below that rating is the figure it sees, if the utility accepts how the limit is held.
+
+**Sources.**
+
+- U.S. Energy Information Administration, Today in Energy, "Solar plants typically install more panel capacity relative to their inverter capacity", May 25, 2018; figures as of end-2016, individual-system inverter loading ratios usually between 1.13 and 1.30; capacity-weighted average 1.25 (https://www.eia.gov/todayinenergy/detail.php?id=35372)
+- Public Utility Commission of Texas, 16 TAC § 25.211, Interconnection of On-Site Distributed Generation, effective January 5, 2017; read 2026-11-01, § 25.211(g)(1): no pre-interconnection study fee for pre-certified units up to 500 kW that export not more than 15% of the total load on a single radial feeder (https://ftp.puc.texas.gov/public/puct-info/agency/rulesnlaws/subrules/electric/25.211/25.211.pdf)
+
+**Known limits.**
+
+- Whether an export-limiting or power control method qualifies differs by rule and by utility.
+- No benchmark table of typical ratios is shipped: the published distributions move each year.
+- Service, panel, busbar, and conductor rules are electrical-code matters and are not covered.
