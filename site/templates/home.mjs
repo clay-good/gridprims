@@ -39,7 +39,7 @@ export function laneCells(lane, { tools, exists, asOf }, { t }) {
 /** The two things a visitor can give this site, said plainly, before anything else. */
 function startDoors({ t }) {
   return html`<section class="start" aria-labelledby="start-title">
-  <h2 id="start-title" class="start-title">${t('home.start.title')}</h2>
+  <p id="start-title" class="start-sub">${t('site.tagline')}</p>
   <div class="door">
     <h3>${t('home.start.file')}</h3>
     <p>${t('home.start.fileWhat')}</p>
@@ -100,7 +100,7 @@ export function homePage({ tools, i18n, exists, asOf, proof = null }) {
     return cells.length ? html`<section class="lane" data-lane="${id}"><h2>${t(`home.lane.${id}`)}</h2><ul class="tool-list">${cells.map((c) => cell(c, i18n))}</ul></section>` : '';
   };
   // The rail already carries the wordmark, so the heading is the tagline: both lanes fit a 360 × 640 first screen.
-  const body = html`<h1 class="home-title">${t('site.tagline')}</h1>
+  const body = html`<h1 class="home-title">${t('home.start.title')}</h1>
 ${startDoors(i18n)}
 ${proof ? proofPlate(proof, i18n) : ''}
 <p class="home-more"><a href="${CATALOG_PATH}">${t('home.allTools')}</a> · <a href="${LOOKUP_PATH}">${t('home.cell.find-utility')}</a></p>`;
