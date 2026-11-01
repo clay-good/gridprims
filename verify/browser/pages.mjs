@@ -5,7 +5,7 @@
 import { walk } from '../lib/walk.mjs';
 import { ENTITY_FAMILIES } from '../../site/build.mjs';
 
-/** Plant and utility pages that exercise every branch of their templates. */
+/** Entity pages that exercise every branch of their templates. */
 export const ENTITY_SAMPLE = [
   '/plants/3470/', // coal and gas, years differ between eGRID and EIA-923
   '/plants/6167/', // pumped storage: net consumer of energy
@@ -23,6 +23,9 @@ export const ENTITY_SAMPLE = [
   '/subregions/hims/', // a small island system
   '/queue/', // the national summary
   '/queue/tx/', // the most counties and project rows
+  '/scenario/', // the fit table
+  '/scenario/pace/', // a small fleet, coal and gas
+  '/scenario/miso/', // the largest fleet and download
 ];
 
 /** @param {string} out a built site */

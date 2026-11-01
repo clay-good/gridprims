@@ -33,10 +33,10 @@
 - [x] 4.3 Implement net-load and curtailment screening; verify the doubled-solar scenario
 - [x] 4.4 Implement the user-supplied outage sensitivity and the refusal of reliability figures; verify the reliability-number-refused scenario
 - [x] 4.5 Attach labels, omissions, error, derived shares, and links to every view; verify the label-and-links scenario
-- [ ] 4.6 Run hand-computed fixtures and the independent retirement cross-check; verify within 1% or documented
+- [x] 4.6 Run hand-computed fixtures and the independent retirement cross-check; verify within 1% or documented (SOCO agrees exactly; PACE is 1.7% apart because EIA's six-month files put 2025's first 7 UTC hours in the 2024 file, recorded in the reference)
 
 ## 5. Surfaces
 
 - [x] 5.1 Expose dispatch and screening through the MCP server with the backtest error in every structured result; verify an agent cannot receive a scenario result without its model error (as entity "scenario" of gridprims_query_data, keeping the six meta-tools of add-local-mcp-server D1)
 - [x] 5.2 Add the cannot-do entries (reliability figures, nodal prices, commitment, forecasts) to the limits page; verify each carries its reason and citation
-- [ ] 5.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green
+- [ ] 5.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green (the fit table and two region pages join the browser sample; the audit, widths, keyboard, and print pass in Firefox; the Chrome-only performance budget has not run here)

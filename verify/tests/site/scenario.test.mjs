@@ -107,3 +107,22 @@ test('the dispatch reproduces an independent Python rerun for 3 region-years: fu
     assert.ok(compared > 8700 && same / compared >= 0.99, `${ba}: the same marginal unit in ${same} of ${compared} hours`);
   }
 });
+
+test('a coal retirement\'s replacement by fuel agrees with the independent rerun on 2 region-years, or the difference is documented', { skip: !built && 'not built' }, async () => {
+  const { scenarioInputs, scenarioRegion } = await import('../../../site/entities/scenario.mjs');
+  const { scenarioRun } = await import('../../../core/lib/backtest.mjs');
+  const { expandUnit } = await import('../../../core/lib/fleet.mjs');
+  const ref = JSON.parse(readFileSync(join(ROOT, 'verify/reference/merit-order-2025.json'), 'utf8'));
+  const inp = scenarioInputs(join(ROOT, 'data'));
+  const cases = Object.entries(ref.regions).filter(([, w]) => w.retired);
+  assert.ok(cases.length >= 2);
+  for (const [ba, w] of cases) {
+    const r = scenarioRegion(inp, ba);
+    const s = scenarioRun({ units: r.fleet.units.map(expandUnit), rows: r.rows, base: r.run, bt: r.backtest, edits: [{ kind: 'retire', id: w.retired.id }] });
+    for (const c of ['coal', 'gas']) {
+      const theirs = w.retired.totals_mwh[c] - w.totals_mwh[c];
+      const gap = Math.abs(s.changes[c].change_mwh - theirs) / Math.abs(theirs);
+      assert.ok(gap <= 0.01 || (w.retired.expected && gap <= 0.02), `${ba} ${c}: ${(gap * 100).toFixed(2)}% apart${w.retired.expected ? '' : ', with no documented cause'}`);
+    }
+  }
+});

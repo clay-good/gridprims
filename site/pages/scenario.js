@@ -5,7 +5,7 @@
 
 import { getJson } from './zip-utilities.js';
 import { readShard } from '../../core/lib/shard.mjs';
-import { dispatch, scaleOf } from '../../core/lib/dispatch.mjs';
+import { belowFloor, dispatch, scaleOf } from '../../core/lib/dispatch.mjs';
 import { backtest, scenarioRun } from '../../core/lib/backtest.mjs';
 import { html } from '../lib/html.mjs';
 import { createI18n } from '../lib/i18n.mjs';
@@ -108,9 +108,7 @@ function run() {
   const co2 = t('scenario.co2', { t: signed(sc.co2_t - base.co2_t), pct: pct(base.co2_t ? (sc.co2_t - base.co2_t) / base.co2_t : 0), base: whole(base.co2_t), now: whole(sc.co2_t) });
   const added = addedRun ?? null;
   const addedMwh = added ? added.mwh : null;
-  // Net load against the floor: hours whose residual falls below it, and the energy that would not fit.
-  let below = 0; let over = 0;
-  if (f.floor !== null) for (let h = 0; h < rows.length; h++) { if (rows[h].demand === null) continue; if (sc.residual[h] < f.floor) { below++; over += f.floor - sc.residual[h]; } }
+  const { hours: below, mwh: over } = f.floor === null ? {} : belowFloor(sc, rows, f.floor);
   const card = scenarioCard({ region: fleet, cmp, edits: listed, co2, bt }, i18n);
   out.innerHTML = String(html`<h3>${t('scenario.edits')}</h3><ul data-scenario-edits>${listed.map((x) => html`<li>${x}</li>`)}</ul>
   <h3>${t('scenario.result')}</h3>${changeTable(cmp, i18n)}

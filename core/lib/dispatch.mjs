@@ -127,6 +127,20 @@ export function dispatch({ units, rows, scale = {}, extra }) {
 }
 
 /**
+ * Net-load screening: the reported hours whose residual falls below a minimum generation floor, and the energy
+ * between the residual and the floor that would need to be curtailed, exported, or stored.
+ * @param {{residual: Float32Array}} run @param {any[]} rows @param {number} floor MW
+ */
+export function belowFloor(run, rows, floor) {
+  let hours = 0; let mwh = 0;
+  for (let h = 0; h < rows.length; h++) {
+    if (rows[h].demand === null || rows[h].demand === undefined) continue;
+    if (run.residual[h] < floor) { hours++; mwh += floor - run.residual[h]; }
+  }
+  return { hours, mwh };
+}
+
+/**
  * The fleet with a scenario's edits applied, and the edits listed with their original values.
  * @param {any[]} units @param {Array<{kind: 'retire'|'add'|'capacity'|'cost', id?: string, unit?: any, value?: number}>} edits
  */

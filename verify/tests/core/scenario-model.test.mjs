@@ -6,8 +6,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { assembleFleet, fuelPrices, groupHeatRates, plantHeatRates } from '../../../core/lib/fleet.mjs';
-import { applyEdits, categoryChanges, dispatch, OMISSIONS } from '../../../core/lib/dispatch.mjs';
-import { againstBias, backtest, candidateCauses, recordedMarginal } from '../../../core/lib/backtest.mjs';
+import { applyEdits, belowFloor, categoryChanges, dispatch, OMISSIONS, scaleOf } from '../../../core/lib/dispatch.mjs';
+import { againstBias, backtest, candidateCauses, recordedMarginal, scenarioRun } from '../../../core/lib/backtest.mjs';
 
 const H = 3_600_000;
 const JAN = Date.parse('2025-01-15T00:00Z') / H;
@@ -204,4 +204,30 @@ test('a column blank for the first day and then reported is a category change; s
   const c = categoryChanges(rows);
   assert.deepEqual(c.changed, [{ column: 'gen_bat', from: JAN + 30 }]);
   assert.deepEqual(c.gaps, [{ column: 'gen_sun', hours: 1 }]);
+});
+
+test('retiring a 600 MW coal unit: gas replaces it hour by hour, and CO2 falls by the rates of each', () => {
+  // Need 1,000 MW in each of 2 hours. Coal 600 MW at $20 (1.0 t/MWh) runs first, then gas 800 MW at $30 (0.4 t/MWh) runs 400.
+  // Retiring coal: gas runs 800, and 200 MW is an unmet modeling residual. Coal -1,200 MWh, gas +800 MWh.
+  // CO2: before 2 x (600 x 1.0 + 400 x 0.4) = 1,520 t; after 2 x 800 x 0.4 = 640 t.
+  const units = [{ ...unit('coal', 600, 20, 'coal'), co2_t_per_mwh: 1 }, { ...unit('gas', 800, 30), co2_t_per_mwh: 0.4 }];
+  const rows = [hour(0, 1000, { gen_col: 600, gen_ng: 400 }), hour(1, 1000, { gen_col: 600, gen_ng: 400 })];
+  const base = dispatch({ units, rows });
+  const bt = backtest({ rows, run: base });
+  const s = scenarioRun({ units, rows, base, bt, edits: [{ kind: 'retire', id: 'coal' }] });
+  assert.deepEqual([s.changes.coal.change_mwh, s.changes.gas.change_mwh], [-1200, 800]);
+  assert.deepEqual([s.co2.base_t, s.co2.now_t], [1520, 640]);
+  assert.deepEqual(s.unmet, { base_hours: 0, now_hours: 2 });
+  // The backtest fits exactly here (bias 0), so both changes are findings.
+  assert.deepEqual([s.changes.coal.finding, s.changes.gas.finding], [true, true]);
+});
+
+test('doubled solar: net load falls below the floor and the energy above what the grid can take is counted', () => {
+  // Need before solar: 1,000 and 600 MW; solar 300 and 500 MW. Doubled: residuals 1,000 - 600 = 400 and 600 - 1,000 = -400.
+  // Floor 500 MW: both hours below it, by 100 and 900 MW: 1,000 MWh.
+  const rows = [hour(0, 1000, { gen_sun: 300 }), hour(1, 600, { gen_sun: 500 })];
+  const run = dispatch({ units: [unit('g', 2000, 30)], rows, scale: scaleOf({ solar: 2 }) });
+  assert.deepEqual([run.residual[0], run.residual[1]], [400, -400]);
+  assert.deepEqual(belowFloor(run, rows, 500), { hours: 2, mwh: 1000 });
+  assert.deepEqual(belowFloor(dispatch({ units: [unit('g', 2000, 30)], rows }), rows, 500), { hours: 1, mwh: 400 });
 });

@@ -4,9 +4,10 @@
 Reads EIA's own six-month BALANCE files (the Adjusted series, as the hourly
 snapshot does) and the fleet the site publishes, dispatches each hour in
 ascending variable cost in plain Python, and writes the coal, gas, and oil
-totals and each hour's marginal unit. It shares no code with core/lib.
+totals and each hour's marginal unit; with BA:UNIT, it also reruns the year
+with that unit retired. It shares no code with core/lib.
 
-    python3 -I verify/tools/merit-order-check.py OUT.json FLEET_DIR BALANCE.csv [BALANCE.csv ...] -- BA [BA ...]
+    python3 -I verify/tools/merit-order-check.py OUT.json FLEET_DIR BALANCE.csv [BALANCE.csv ...] -- BA[:UNIT] [BA[:UNIT] ...]
 
 FLEET_DIR holds <ba>/fleet.json from a built site (dist/scenario).
 """
@@ -94,7 +95,9 @@ def dispatch(units, rows):
 def main():
     out, fleet_dir = sys.argv[1], sys.argv[2]
     rest = sys.argv[3:]
-    paths, bas = rest[:rest.index('--')], rest[rest.index('--') + 1:]
+    paths, args = rest[:rest.index('--')], rest[rest.index('--') + 1:]
+    bas = [a.split(':')[0] for a in args]
+    retire = {a.split(':')[0]: a.split(':')[1] for a in args if ':' in a}
     data = hours(paths, bas)
     result = {'note': 'Independent merit-order rerun in plain Python from EIA\'s BALANCE files (Adjusted series) and the published fleet; see verify/tools/merit-order-check.py.', 'files': [p.split('/')[-1] for p in paths], 'regions': {}}
     for ba in bas:
@@ -110,6 +113,10 @@ def main():
             # Each hour from first_hour on: the marginal unit's place in ids, -1 for none, -2 for an hour not reported.
             'marginal': [index[marginal[h]] if marginal.get(h) is not None else (-1 if h in marginal else -2) for h in range(hs[0], hs[-1] + 1)],
         }
+        if ba in retire:
+            kept = [u for u in fleet['units'] if u['id'] != retire[ba]]
+            after, _ = dispatch(kept, data[ba])
+            result['regions'][ba]['retired'] = {'id': retire[ba], 'totals_mwh': {k: round(v, 1) for k, v in after.items()}}
     with open(out, 'w') as f:
         json.dump(result, f, separators=(',', ':'))
 
