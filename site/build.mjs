@@ -49,6 +49,10 @@ import { communitySolarData } from './entities/community-solar.mjs';
 import { communitySolarSection } from './ui/community-solar.mjs';
 import { QF_PATH, qualifyingFacilityPage } from './templates/qualifying-facility.mjs';
 import qfChecklist from '../data/curated/qf-checklist.mjs';
+import { buildLedger } from '../core/lib/ledger.mjs';
+import { ledgerDatasets } from './entities/ledger.mjs';
+import { LEDGER_PATH, ledgerPage } from './templates/ledger.mjs';
+import ledgerReplies from '../data/curated/ledger-replies.mjs';
 import regulators from '../data/curated/regulators.mjs';
 import { queueIndexPage, queuePath, queueStatePage } from './templates/queue.mjs';
 
@@ -139,6 +143,12 @@ export async function build(opts = {}) {
   writeFileSync(join(outDir, 'command-index.json'), JSON.stringify(buildCommandIndex(TOOLS, toolPath)) + '\n');
   // The limits record: one object for the page, its JSON copy, and the MCP resource.
   const datasets = existsSync(join(ROOT, 'data')) ? readdirSync(join(ROOT, 'data')).filter((id) => existsSync(join(ROOT, 'data', id, 'current.json'))).map((id) => JSON.parse(readFileSync(join(ROOT, 'data', id, JSON.parse(readFileSync(join(ROOT, 'data', id, 'current.json'), 'utf8')).version, 'manifest.json'), 'utf8'))) : [];
+  // Lateness is judged on the registry's cadence, which records what we know now (a decennial Census file,
+  // say), not the copy each served version's manifest kept when it was cut.
+  for (const m of datasets) {
+    const reg = join(ROOT, 'pipeline/registry', `${m.dataset}.mjs`);
+    if (existsSync(reg)) m.cadence = (await import(pathToFileURL(reg).href)).default.cadence ?? m.cadence;
+  }
   let describes = null;
   try { describes = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(); } catch { describes = null; }
   const limits = limitsRecord({ tools: TOOLS, cannotDo, claims, health, datasets, generatedAt: health?.generatedAt ?? null, describes, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') });
@@ -180,7 +190,7 @@ export async function build(opts = {}) {
     // Every version folder, newest first, with its manifest's checksum for the citation.
     const versions = readdirSync(join(ROOT, 'data', id), { withFileTypes: true }).filter((d) => d.isDirectory() && /^\d{4}-\d{2}$/.test(d.name)).map((d) => d.name).sort().reverse();
     const shas = Object.fromEntries(versions.map((v) => [v, sha256(readFileSync(join(ROOT, 'data', id, v, 'manifest.json')))]));
-    write(`/data/${id}/`, datasetPage({ manifest: JSON.parse(readFileSync(join(ROOT, 'data', id, version, 'manifest.json'), 'utf8')), i18n, posture, termsRow, takedown: entry.takedown, entry, shas,
+    write(`/data/${id}/`, datasetPage({ manifest: { ...JSON.parse(readFileSync(join(ROOT, 'data', id, version, 'manifest.json'), 'utf8')), cadence: entry.cadence }, i18n, posture, termsRow, takedown: entry.takedown, entry, shas,
       versions: versions.map((v) => JSON.parse(readFileSync(join(ROOT, 'data', id, v, 'manifest.json'), 'utf8'))) }));
     // Under the link posture no values are published, so none of the dataset's files deploy.
     if (posture === 'link') rmSync(join(outDir, 'data', id), { recursive: true, force: true });
@@ -301,6 +311,10 @@ export async function build(opts = {}) {
   const entries = new Map(await Promise.all(datasets.map(async (d) => [d.dataset, (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${d.dataset}.mjs`)).href)).default])));
   for (const id of ['bills', 'data', 'carbon', 'grid', 'learn']) write(`/${id}/`, sectionPage({ id, tools: TOOLS, datasets, entries, i18n }));
   write(QF_PATH, qualifyingFacilityPage({ checklist: qfChecklist, i18n }));
+  // The continuity ledger, as a page and as JSON, generated with the build's own date so pages age it on the device.
+  const ledger = buildLedger({ datasets: await ledgerDatasets(ROOT), health, replies: ledgerReplies, generatedAt: health?.generatedAt ?? buildDate, contact: `${ORIGIN}/report/` });
+  write(LEDGER_PATH, ledgerPage({ ledger, i18n }));
+  writeFileSync(join(outDir, 'ledger/ledger.json'), JSON.stringify(ledger, null, 2) + '\n');
 
   const duplicates = [...titles].filter(([, paths]) => paths.length > 1);
   if (duplicates.length || tooLong.length) {

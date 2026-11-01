@@ -25,7 +25,7 @@ export default {
     'No inverter losses, battery aging, or temperature derating.',
   ],
   citations: [
-    { source: 'NREL REopt, resilience analysis', edition: 'REopt web tool', locator: 'Critical load and outage duration inputs', url: 'https://reopt.nrel.gov/tool' },
+    { source: 'NREL REopt, resilience analysis', edition: 'REopt web tool', locator: 'Critical load and outage duration inputs', url: 'https://reopt.nlr.gov/tool' },
   ],
   datasets: ['eaglei'],
   examples: [
@@ -34,7 +34,7 @@ export default {
     { id: 'spec-motor', title: 'A 4.0 kW peak with a well pump that starts at 4.5 kW', inputs: { loads: 'well pump, 1.5 kW, 1 h\nhouse loads, 2.5 kW, 24 h', hours: 4, usable: 80, motorRunKw: 1.5, motorStartKw: 4.5 }, expect: { peakKw: { value: 4, tolerance: { abs: 1e-9 }, display: '4.0' }, generatorKw: { value: 7, tolerance: { abs: 1e-9 }, display: '7.0' } }, source: 'electrify/backup-power spec, scenario "Motor start": 4.0 − 1.5 + 4.5' },
   ],
   related: ['electrify.service-headroom.check'],
-  handoffs: [{ label: 'Solar-plus-storage design for resilience (NREL REopt)', url: 'https://reopt.nrel.gov/tool' }],
+  handoffs: [{ label: 'Solar-plus-storage design for resilience (NREL REopt)', url: 'https://reopt.nlr.gov/tool' }],
   stability: 'experimental',
   validation: { level: 1, evidence: [{ kind: 'own-examples', summary: 'The spec\'s 9.6 kWh load list, 60 kWh usable and 75 kWh nameplate at 12 hours, and 7.0 kW generator with motor start pass, each hand-computed.' }] },
   toRaise: 'Matching REopt\'s resilience results for the same critical load and outage would raise it to cross-checked.',

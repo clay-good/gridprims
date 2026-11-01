@@ -36,6 +36,8 @@ export function recordRun(root, run) {
       lastSuccess: mine && run.ok ? run.finished : prev.lastSuccess ?? null,
       lastRun: mine ? run.finished : prev.lastRun ?? null,
       enabled: prev.enabled ?? true,
+      // Each time the host disabled the schedule and the pipeline re-enabled it, kept for the ledger.
+      events: [...(prev.events ?? []), ...((run.enabledEvents ?? []).includes(w.id) ? [{ kind: 'disabled by the host; detected and re-enabled', at: run.finished }] : [])].slice(-20),
     };
   });
   for (const d of run.datasets ?? []) {
@@ -49,15 +51,16 @@ export function recordRun(root, run) {
       terms: d.terms ?? prev?.terms ?? null,
       // A failure keeps the date it first appeared until a run succeeds.
       failure: d.failure ? { reason: d.failure, since: prev?.failure?.since ?? run.finished, last: run.finished } : null,
+      // The publisher's posted release date as each check read it, a new entry only when its text changes.
+      releasePromises: d.releasePromise && d.releasePromise.text !== prev?.releasePromises?.at(-1)?.text
+        ? [...(prev?.releasePromises ?? []), { seen: run.finished.slice(0, 10), text: d.releasePromise.text, ...(d.releasePromise.archive ? { archive: d.releasePromise.archive } : {}) }]
+        : prev?.releasePromises ?? [],
     };
     h.datasets = [...h.datasets.filter((x) => x.id !== d.id), row].sort((a, b) => a.id.localeCompare(b.id));
     if (d.release) row.lastRelease = d.release;
   }
-  if (run.links) h.links = run.links;
-  for (const id of run.enabledEvents ?? []) {
-    const w = h.workflows.find((x) => x.id === id);
-    if (w) w.reenabledAt = run.finished;
-  }
+  // Each link keeps when it was checked and when it last worked, so a dead citation shows how long it has been gone.
+  if (run.links) h.links = run.links.map((l) => ({ ...l, checked: run.finished, lastOk: l.state === 'ok' ? run.finished : (h.links ?? []).find((x) => x.url === l.url)?.lastOk ?? null }));
   const durationMs = Date.parse(run.finished) - Date.parse(run.started);
   // Runs keep what happened, not the bytes of what was fetched.
   const summary = (run.datasets ?? []).map(({ raw, terms, ...d }) => ({ ...d, ...(terms ? { termsChanged: terms.changed } : {}) }));

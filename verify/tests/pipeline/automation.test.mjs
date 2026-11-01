@@ -100,7 +100,7 @@ test('self-heal re-enables workflows the host disabled, and the record says so',
   const run = await scheduledRun('refresh-data', { root: r, outDir: join(r, 'data'), datasets: ['eia-861'], host, fetch: fakeEia({}), now: at('2026-10-31T09:17:00Z'), entries: { 'eia-861': { ...small, vintages: { 2025: { url: URL25, asOf: '2026-10-07', sha256: null } } } } });
   assert.deepEqual(run.enabledEvents, ['link-check', 'canary']);
   const h = readHealth(r);
-  assert.equal(h.workflows.find((w) => w.id === 'canary').reenabledAt, '2026-10-31T09:17:00.000Z');
+  assert.deepEqual(h.workflows.find((w) => w.id === 'canary').events, [{ kind: 'disabled by the host; detected and re-enabled', at: '2026-10-31T09:17:00.000Z' }]);
 });
 
 test('every run is recorded with what it checked, refreshed, and how long it took', async () => {
@@ -145,7 +145,9 @@ test('link check: a moved handoff is recorded with its new target and every page
   assert.equal(ri.state, 'blocked', 'a site that refuses automated checks is blocked, not broken');
   assert.deepEqual(ri.usedBy, ['RI regulator home']);
   assert.equal(host.issues.length, 1);
-  assert.deepEqual(readHealth(r).links, results);
+  // The health record keeps each result, with when it was checked and when it last worked.
+  assert.deepEqual(readHealth(r).links.map(({ checked, lastOk, ...l }) => l), results);
+  assert.ok(readHealth(r).links.every((l) => l.checked && (l.state === 'ok' ? l.lastOk === l.checked : l.lastOk === null)));
 });
 
 test('CI policy: a marketplace action, an unpinned action, pull_request_target, event text in a shell line, and a floating runner all fail', () => {

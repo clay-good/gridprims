@@ -27,7 +27,7 @@
   "retrieved": "2026-11-01",
   "generatedAt": "2026-11-01T00:00:00Z",
   "cadence": {
-    "every": "annual",
+    "every": "decennial",
     "nextRelease": {
       "date": "2031-12-31",
       "posted": false,

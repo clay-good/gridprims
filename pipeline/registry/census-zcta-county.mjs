@@ -22,7 +22,7 @@ export default {
   factual: true,
   attribution: 'Source: U.S. Census Bureau, 2020 ZCTA to County Relationship File.',
   // A decennial file: the next one follows the 2030 census.
-  cadence: { every: 'annual', nextRelease: { date: '2031-12-31', posted: false, note: 'Relationship files follow each decennial census; the 2030 file is not expected before late 2031' } },
+  cadence: { every: 'decennial', nextRelease: { date: '2031-12-31', posted: false, note: 'Relationship files follow each decennial census; the 2030 file is not expected before late 2031' } },
   ceii: { infrastructure: false, note: 'Census statistical areas and their land overlap; no facility or network data.' },
   owner: 'add-public-grid-data',
   vintages: {

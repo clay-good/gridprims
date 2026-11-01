@@ -358,7 +358,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 **Sources.**
 
-- NREL REopt, resilience analysis, REopt web tool, Critical load and outage duration inputs (https://reopt.nrel.gov/tool)
+- NREL REopt, resilience analysis, REopt web tool, Critical load and outage duration inputs (https://reopt.nlr.gov/tool)
 
 **Known limits.**
 

@@ -3,13 +3,13 @@
 // the same run when one appears, and record the check either way.
 //   node pipeline/check.mjs eia-861 [--out data]
 
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { ROOT, findEntry, runRecipe } from './run.mjs';
 import { readZipDirectory } from '../parsers/xlsx.mjs';
-import { compareTerms, postureInForce } from './lib/terms.mjs';
+import { compareTerms, pageText, postureInForce } from './lib/terms.mjs';
 
 /** The release a HEAD request describes, or null when the URL has nothing. */
 async function head(url, f) {
@@ -24,7 +24,37 @@ const asOfOf = (lastModified, fallback) => (lastModified ? new Date(lastModified
  * @param {{dataset: string, entry?: any, outDir?: string, fetch?: typeof fetch, today?: string}} o
  * @returns {Promise<{id: string, checked: boolean, refreshed: boolean, version?: string, posture?: string, terms?: object, failure?: string, found?: string, raw?: {name: string, bytes: Uint8Array, version: string}}>}
  */
-export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 'data'), fetch: f = fetch, today = new Date().toISOString().slice(0, 10) }) {
+export async function checkDataset(o) {
+  const r = await checkRelease(o);
+  const entry = o.entry ?? (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${o.dataset}.mjs`)).href)).default;
+  if (entry.releaseCalendar) r.releasePromise = await capturePromise({ entry, fetch: o.fetch ?? fetch, today: o.today ?? new Date().toISOString().slice(0, 10), outDir: o.outDir ?? join(ROOT, 'data') });
+  return r;
+}
+
+/**
+ * The publisher's posted next-release date as its calendar page reads today (add-data-continuity-ledger
+ * 1.3): the text the entry's pattern finds, or null when the page no longer says, with the page's text kept
+ * under data/release-pages/ as the archived copy whenever the reading changes.
+ * @param {{entry: any, fetch: typeof fetch, today: string, outDir: string}} o
+ */
+export async function capturePromise({ entry, fetch: f, today, outDir }) {
+  const { url, pattern } = entry.releaseCalendar;
+  try {
+    const res = await f(url, { headers: { 'user-agent': 'gridprims-pipeline (+https://gridprims.com)' } });
+    if (!res.ok) return { text: null, error: `HTTP ${res.status}` };
+    const page = pageText(await res.text());
+    const text = new RegExp(pattern, 'i').exec(page)?.[0] ?? null;
+    const dir = join(outDir, 'release-pages', entry.id);
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(join(dir, `${today}.txt`), `${url}\n${today}\n\n${page}\n`);
+    return { text, archive: `https://gridprims.com/data/release-pages/${entry.id}/${today}.txt` };
+  } catch (e) {
+    return { text: null, error: e.message };
+  }
+}
+
+/** The release watch proper: a new data year or a revised file, refreshed in the same run. */
+async function checkRelease({ dataset, entry: given, outDir = join(ROOT, 'data'), fetch: f = fetch, today = new Date().toISOString().slice(0, 10) }) {
   const entry = given ?? (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${dataset}.mjs`)).href)).default;
   const cur = join(outDir, dataset, 'current.json');
   const manifest = existsSync(cur) ? JSON.parse(readFileSync(join(outDir, dataset, JSON.parse(readFileSync(cur, 'utf8')).version, 'manifest.json'), 'utf8')) : null;

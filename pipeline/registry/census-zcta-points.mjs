@@ -22,7 +22,7 @@ export default {
   posture: 'mirror', // set by hand on the statute, as for the ZCTA-to-county file
   factual: true,
   attribution: 'Source: U.S. Census Bureau, 2020 Gazetteer Files, ZIP Code Tabulation Areas.',
-  cadence: { every: 'annual', nextRelease: { date: '2031-12-31', posted: false, note: 'ZCTAs are redrawn for each decennial census; the 2030 file is not expected before late 2031' } },
+  cadence: { every: 'decennial', nextRelease: { date: '2031-12-31', posted: false, note: 'ZCTAs are redrawn for each decennial census; the 2030 file is not expected before late 2031' } },
   ceii: {
     infrastructure: false,
     note: 'Census statistical areas; no facility or network data.',

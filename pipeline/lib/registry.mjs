@@ -53,7 +53,7 @@ export function validateEntry(e) {
   if (!e) return errors;
   if (e.redistributionBasis !== undefined && !['public domain', 'named license', 'written permission'].includes(e.redistributionBasis?.kind)) fail('redistributionBasis', 'must be public domain, named license, or written permission; a dataset without one does not ship');
   if (e.terms && (typeof e.terms.url !== 'string' || typeof e.terms.text !== 'string')) fail('terms', 'needs the terms page url and the captured text');
-  if (e.cadence && !['daily', 'weekly', 'monthly', 'quarterly', 'annual'].includes(e.cadence.every)) fail('cadence.every', 'must be daily, weekly, monthly, quarterly, or annual');
+  if (e.cadence && !['daily', 'weekly', 'monthly', 'quarterly', 'annual', 'decennial'].includes(e.cadence.every)) fail('cadence.every', 'must be daily, weekly, monthly, quarterly, annual, or decennial');
   if (Array.isArray(e.recipe)) {
     if (!e.recipe.length) fail('recipe', 'has no steps');
     checkSteps(e.recipe, 'recipe', fail);

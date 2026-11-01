@@ -12,6 +12,7 @@ import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { TOOLS } from '../core/tools/index.mjs';
 import REGULATORS from '../data/curated/regulators.mjs';
+import QF from '../data/curated/qf-checklist.mjs';
 import { recordRun } from './lib/health.mjs';
 import { github } from './lib/github.mjs';
 import { ROOT } from './run.mjs';
@@ -29,8 +30,14 @@ export async function outboundLinks(root = ROOT) {
     const e = (await import(pathToFileURL(join(reg, f)).href)).default;
     add(e.sourceUrl, `${e.id} source`);
     add(e.terms.url, `${e.id} terms`);
+    if (e.releaseCalendar) add(e.releaseCalendar.url, `${e.id} release calendar`);
   }
   for (const r of REGULATORS) for (const k of ['home', 'docket', 'comment']) add(r[k], `${r.state} regulator ${k}`);
+  // Every other place the site cites a URL: the net metering pages' policy database, the qualifying-facility
+  // checklist, and each dataset's release calendar.
+  for (const r of REGULATORS) add(`https://programs.dsireusa.org/system/program?state=${r.state}`, `${r.state} net metering rules link`);
+  for (const g of QF.groups) for (const x of g.items) add(x.cite.url, `qualifying-facility checklist (${x.cite.section})`);
+  add(QF.form.url, 'qualifying-facility checklist form');
   return links;
 }
 

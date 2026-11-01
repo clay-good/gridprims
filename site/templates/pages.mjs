@@ -123,6 +123,7 @@ export function limitsPage({ limits: L, i18n, health }) {
 <p class="strip">${t('limits.summary')} <a href="/report/" data-report>${t('limits.summaryReport')}</a></p>
 <p>${t('limits.counts', { counts })} ${t('limits.launch')}</p>
 <p class="mono">${L.generatedAt ? t('limits.generated', { date: date(L.generatedAt.slice(0, 10)), commit: L.describes ?? '' }) : ''} <a href="/limits/limits.json">${t('limits.json')}</a></p>
+<p>${t('limits.ledger')} <a href="/ledger/">${t('ledger.title')}</a></p>
 
 <h2>${t('limits.toolsTitle')}</h2>
 <p>${t('limits.axes')}</p>
@@ -205,7 +206,7 @@ export function sectionPage({ id, tools, datasets = [], entries = new Map(), i18
   const body = html`<h1>${t(`section.${id}`)}</h1><p class="purpose">${t(`section.${id}.intro`)}</p>
 ${cells.length || (id === 'data' && datasets.length) ? '' : html`<p>${t('section.empty')}</p>`}
 ${cells.length ? html`<ul class="tool-list">${cells.map((c) => toolCell(c, i18n))}</ul>` : ''}
-${id === 'data' && datasets.length ? html`<h2>${t('library.title')}</h2>${libraryList({ datasets, entries, i18n })}` : ''}`;
+${id === 'data' && datasets.length ? html`<h2>${t('library.title')}</h2><p>${t('limits.ledger')} <a href="/ledger/">${t('ledger.title')}</a></p>${libraryList({ datasets, entries, i18n })}` : ''}`;
   const path = SECTIONS.find((x) => x.id === id).path;
   return layout({ i18n, title: `${t(`section.${id}`)} · ${t('site.name')}`, description: t(`section.${id}.intro`), path, body, section: id, feed: id === 'data' ? { title: t('feeds.data'), href: '/feeds/data.xml' } : null });
 }

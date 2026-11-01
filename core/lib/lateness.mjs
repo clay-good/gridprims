@@ -21,9 +21,10 @@ export function lateness(d, now = Date.now()) {
   const next = d.cadence.nextRelease;
   let due;
   if (next?.posted) due = at(next.date);
-  else if (d.cadence.every === 'annual') {
+  else if (d.cadence.every === 'annual' || d.cadence.every === 'decennial') {
+    // A decennial file (the Census's, after each census) is due ten years on.
     const a = new Date(at(d.asOf));
-    due = Date.UTC(a.getUTCFullYear() + 1, a.getUTCMonth(), a.getUTCDate());
+    due = Date.UTC(a.getUTCFullYear() + (d.cadence.every === 'decennial' ? 10 : 1), a.getUTCMonth(), a.getUTCDate());
   } else due = at(d.asOf) + (CADENCE_DAYS[d.cadence.every] ?? 365) * DAY;
   const lateFrom = due + GRACE_DAYS * DAY;
   return { due: isoOf(due), posted: Boolean(next?.posted), lateFrom: isoOf(lateFrom), late: now >= lateFrom, daysLate: Math.max(0, Math.floor((now - due) / DAY)) };

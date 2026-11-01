@@ -7,6 +7,14 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readShard } from '../core/lib/shard.mjs';
 import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
+import { buildLedger } from '../core/lib/ledger.mjs';
+import ourDatasets from '../data/curated/our-datasets.mjs';
+import ledgerReplies from '../data/curated/ledger-replies.mjs';
+
+// The registry's cadences, when this is a full clone; the MCP release archive carries no pipeline/, and then
+// each manifest's own cadence stands.
+const REGISTRY_DIR = fileURLToPath(new URL('../pipeline/registry', import.meta.url));
+const REGISTRY_CADENCE = new Map(existsSync(REGISTRY_DIR) ? await Promise.all(readdirSync(REGISTRY_DIR).filter((f) => f.endsWith('.mjs')).map(async (f) => { const e = (await import(new URL(`../pipeline/registry/${f}`, import.meta.url).href)).default; return [e.id, e.cadence]; })) : []);
 
 export const DATA_DIR = fileURLToPath(new URL('../data', import.meta.url));
 
@@ -61,7 +69,24 @@ export function limitsInputs(dir = DATA_DIR) {
   const healthFile = join(dir, 'health/pipeline.json');
   const health = existsSync(healthFile) ? JSON.parse(readFileSync(healthFile, 'utf8')) : null;
   const datasets = catalog(dir).map((d) => JSON.parse(readFileSync(join(dir, d.id, d.version, 'manifest.json'), 'utf8')));
+  // Lateness is judged on the registry's cadence, as on the website.
+  for (const m of datasets) { const c = REGISTRY_CADENCE.get(m.dataset); if (c) m.cadence = c; }
   return { cannotDo, claims, health, datasets, generatedAt: health?.generatedAt ?? null, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') };
+}
+
+/**
+ * The continuity ledger from the same records the website's is built from: each served dataset, gridprims'
+ * own, the health record when the clone has one, and the publishers' replies (add-data-continuity-ledger 1.9).
+ */
+export function ledgerRecord(dir = DATA_DIR) {
+  const health = existsSync(join(dir, 'health/pipeline.json')) ? JSON.parse(readFileSync(join(dir, 'health/pipeline.json'), 'utf8')) : null;
+  const manifests = catalog(dir).map((d) => JSON.parse(readFileSync(join(dir, d.id, d.version, 'manifest.json'), 'utf8')));
+  const datasets = manifests.map((m) => ({ id: m.dataset, title: m.title, publisher: m.publisher, sourceUrl: m.sourceUrl, cadence: REGISTRY_CADENCE.get(m.dataset) ?? m.cadence, asOf: m.asOf, vintage: m.release ?? m.tables[0]?.dataPeriod ?? m.version, archive: m.raw?.find((r) => r.release)?.release ?? null }));
+  for (const o of ourDatasets) {
+    const src = manifests.find((m) => m.dataset === o.from);
+    if (src) datasets.push({ ...o, publisher: 'gridprims', ours: true, asOf: src.retrieved, vintage: `from ${o.from} ${src.version}` });
+  }
+  return buildLedger({ datasets, health, replies: ledgerReplies, generatedAt: health?.generatedAt ?? new Date().toISOString(), contact: 'https://gridprims.com/report/' });
 }
 
 /**

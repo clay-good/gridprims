@@ -790,6 +790,13 @@
             "title": "Dataset catalog",
             "description": "Every public dataset in this clone with its publisher, license, and as-of date.",
             "mimeType": "application/json"
+          },
+          {
+            "uri": "gridprims://ledger",
+            "name": "ledger",
+            "title": "Data continuity ledger",
+            "description": "Whether each dataset is current, due, late, or discontinued, with the notice, the link check, and the pipeline's own health.",
+            "mimeType": "application/json"
           }
         ],
         "ttlMs": 86400000,

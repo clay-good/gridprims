@@ -6,7 +6,7 @@ import { TOOL_SURFACE, SERVER_INSTRUCTIONS } from './surface.mjs';
 import { createHandlers, fail } from './handlers.mjs';
 import { TOOLS } from '../core/tools/index.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
-import { catalog, limitsInputs } from './data.mjs';
+import { catalog, ledgerRecord, limitsInputs } from './data.mjs';
 
 export const MODERN = '2026-07-28';
 export const LEGACY = ['2025-11-25', '2025-06-18'];
@@ -33,10 +33,12 @@ const CAPABILITIES = { tools: { listChanged: false }, resources: { listChanged: 
 const RESOURCES = [
   { uri: 'gridprims://limits', name: 'limits', title: 'Limits record', description: 'Every tool\'s stability, validation level with its evidence, and known limits.', mimeType: 'application/json' },
   { uri: 'gridprims://datasets', name: 'datasets', title: 'Dataset catalog', description: 'Every public dataset in this clone with its publisher, license, and as-of date.', mimeType: 'application/json' },
+  { uri: 'gridprims://ledger', name: 'ledger', title: 'Data continuity ledger', description: 'Whether each dataset is current, due, late, or discontinued, with the notice, the link check, and the pipeline\'s own health.', mimeType: 'application/json' },
 ];
 const resourceBody = (uri) => {
   if (uri === 'gridprims://limits') return limitsRecord({ tools: TOOLS, ...limitsInputs() });
   if (uri === 'gridprims://datasets') return { datasets: catalog() };
+  if (uri === 'gridprims://ledger') return ledgerRecord();
   return null;
 };
 
