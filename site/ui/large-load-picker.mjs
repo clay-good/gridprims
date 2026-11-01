@@ -1,7 +1,8 @@
-// The large-load request card's utility picker (add-large-load-screen:
-// request-context): a ZIP finds the utility, and its Form 714 peak, the
-// energy over its wires, and its average home use fill the tool's inputs.
-// The ZIP never leaves the device.
+// The large-load pickers (add-large-load-screen): the request card's utility
+// picker, where a ZIP finds the utility and its Form 714 peak, the energy over
+// its wires, and its average home use fill the tool's inputs (the ZIP never
+// leaves the device); which terms-table entries apply to a utility; and the
+// take-or-pay calculator's tariff picker.
 
 import { html } from '../lib/html.mjs';
 
@@ -19,5 +20,24 @@ export function largeLoadPicker({ t }) {
     <select id="large-load-utility" data-picker-utility></select></div>
   <div data-picker-note aria-live="polite"></div>
   <p class="strip">${t('usage.picker.privacy')}</p>
+</section>`;
+}
+
+/**
+ * The entries that apply to a utility: its own tariffs, and every statewide rule whose scope covers it.
+ * @param {{entries: any[]}} data the terms table @param {{id: number, state: string, baCodes?: string[]}} u
+ */
+export function termsFor(data, u) {
+  const inRegion = (e) => !e.region || (e.region === 'ERCOT' && (u.baCodes ?? []).includes('ERCO'));
+  return data.entries.filter((e) => (e.type === 'tariff' ? e.eiaId === u.id : e.state === u.state && inRegion(e)));
+}
+
+/** The take-or-pay calculator's tariff picker: every entry with a prefill. @param {{t: Function}} i18n */
+export function termsPicker({ t }) {
+  return html`<section class="panel picker" data-terms-picker aria-labelledby="terms-picker-title">
+  <h2 id="terms-picker-title">${t('llterms.prefill.title')}</h2>
+  <div class="field"><label for="terms-picker-entry">${t('llterms.prefill.choose')}</label>
+    <select id="terms-picker-entry" data-terms-picker-entry><option value="">${t('llterms.prefill.none')}</option></select></div>
+  <div data-picker-note aria-live="polite"></div>
 </section>`;
 }

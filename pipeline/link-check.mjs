@@ -13,6 +13,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { TOOLS } from '../core/tools/index.mjs';
 import REGULATORS from '../data/curated/regulators.mjs';
 import QF from '../data/curated/qf-checklist.mjs';
+import LARGE_LOAD from '../data/curated/large-load-tariffs/_index.mjs';
 import { recordRun } from './lib/health.mjs';
 import { github } from './lib/github.mjs';
 import { ROOT } from './run.mjs';
@@ -38,6 +39,8 @@ export async function outboundLinks(root = ROOT) {
   for (const r of REGULATORS) add(`https://programs.dsireusa.org/system/program?state=${r.state}`, `${r.state} net metering rules link`);
   for (const g of QF.groups) for (const x of g.items) add(x.cite.url, `qualifying-facility checklist (${x.cite.section})`);
   add(QF.form.url, 'qualifying-facility checklist form');
+  // Large-load sources that served a capture; the unreachable ones are recorded as such on their records.
+  for (const r of LARGE_LOAD) for (const u of new Set(Object.values(r.fields).flatMap((f) => f.sources.filter((x) => !x.unreachable).map((x) => x.url)))) add(u, `large-load terms (${r.id})`);
   return links;
 }
 

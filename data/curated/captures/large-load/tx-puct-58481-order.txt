@@ -1,0 +1,4751 @@
+Source: https://interchange.puc.texas.gov/Documents/58481_218_1684654.PDF
+Retrieved: 2026-11-01
+Original: 2784834 bytes, SHA-256 65f81513cb1a8506a3bd42ccdcc73f2f7523863f4e6f1dfe434102dddbe14063
+Capture: pdftotext -layout
+----
+               PUBL~ 4
+
+
+                         ~* TEX>~
+                         Filing Receipt
+
+Filed Date - 2026-09-18 01:19:42 PM
+
+Control Number - 58481
+
+Item Number - 218
+                                       PROJECT NO. 58481
+
+ RULEMAKING TO IMPLEMENT                        §       PUBLIC UTILITY COMMISSION
+ LARGE LOAD                                     §
+ INTERCONNECTION STANDARDS                      §                     OF TEXAS
+ UNDER PURA §37.0561                            §
+
+
+
+                          ORDER ADOPTING NEW 16 TAC §25.194
+
+
+The Public Utility Commission ofTexas (commission) adopts new 16 Texas Administrative Code
+
+(TAC) §25.194, relating to Large Load Interconnection Standards, with changes to the proposed
+
+text as published in the March 27,2026 issue of the Texas Register (51 Tex-Reg 1942). The new
+
+rule implements Public Utility Regulatory Act (PURA) §37.0561 as enacted by Senate Bill (SB)
+
+6 during the Texas 89th Regular Legislative Session. The new rule requires a large load customer,
+
+before the large load customer can be included in an ERCOT interconnection study, to execute an
+
+intermediate agreement, provide certain disclosures, and post financial security in the amount
+
+$50,000 per megawatt (MW). The new rule also requires a large load customer to execute a
+
+standard large load agreement (SLLIA), update its disclosures, post financial security, and pay
+
+contribution in aid of construction (CIAC) for direct interconnection costs. Additionally, the new
+
+rule sets forth the consequences of withdrawing all or a portion of requested peak demand or
+
+contracted peak demand and the consequences for providing false or inaccurate information.
+
+Finally, the new rule sets forth the terms for the return of financial security to a large load customer
+
+that energizes. This section is adopted under Project Number 58481. The rule will be republished.
+
+
+
+The commission received written comments on the proposed section from Advanced Power
+
+Alliance and American Clean Power Association (APA and ACP); AEP Texas Inc. (AEP); Agentic
+
+Infrastructure (Agentic); BKV Corporation (BKV); Black Mountain Power, LLC (Black
+Project No. 58481                      Adoption Order                            Page 2 of 270
+
+
+Mountain); Brazos Electric Cooperative, Inc., Golden Spread Electric Cooperative, Inc., Rayburn
+
+Country Electric Cooperative, Inc., South Texas Electric Cooperative, Inc. (collectively, TSP
+
+Cooperatives); CCNG, Inc. (CCNG); CenterPoint Energy Houston Electric, LLC (CenterPoint);
+
+Cholla, Inc. (Cholla); Cipher Digital Inc. (Cipher); CloudHQ LLC (CloudHQ); Competitive Power
+
+Ventures, Inc. (CPV); Constellation Energy Generation, LLC (Constellation); Crow Holdings;
+
+Crusoe Technologies LLC (Crusoe); Data Center Coalition (DCO; DC Energy Texas, LLC (DC
+
+Energy); Electric Hydrogen Co. (EH2); Environmental Defense Fund (EDF); Eolian L.P. (Eolian);
+
+Eolic Development Partners (Eolic); ERCOT Steel Mills; Google LLC, Lancium LLC, and
+
+TotalEnergies Renewables USA (Google, Lancium, and TotalEnergies); Guadalupe Valley
+
+Electric Cooperative, Inc. (GVEC); HIF USA LLC (HIF); Hunt Energy Network, L.L.C. (HEN);
+
+Hut 8 Corp (Hut 8); Infinium Operations, LLC; Intersect Power, LLC (Intersect Power); Jason
+
+Buster; Landmark Development Services LLC and EcoPartner Alliance (Landmark and
+
+EcoPartner); Lower Colorado River Authority and LCRA Transmission Services Corporation
+
+(LCRA); Mission Power; Monarch Energy Development LLC (Monarch); NRG Energy, Inc.
+
+(NRG); Office of Public Utility Counsel (OPUC); Oncor Electric Delivery Company LLC
+
+(Oncor); Permian Basin Petroleum Association (PBPA); Priority Power Management LLC (PPM);
+
+Rowan Digital Infrastructure LLC (Rowan); Satoshi Energy (Satoshi); Schaper Energy Consulting
+
+LLC (Schaper Energy); Serena Power (Serena); Sierra Club, Lone Star Chapter (Sierra Club);
+
+Skybox Datacenters, LLC (Skybox); STACK Infrastructure (STACK); Steering Committees
+
+Served by Oncor and Texas Coalition for Affordable Power (OCSC and TCAP); Targa Resources
+
+LLC (Targa); Tesla, Inc. (Tesla); Texas Competitive Power Advocates (TCPA); Texas Electric
+
+Cooperatives, Inc. (TEC); Texas Energy Buyers Alliance (TEBA); Texas Industrial Energy
+
+Consumers (TIEC); Texas-New Mexico Power Company C[NMP); Texas Oil & Gas Association
+Project No. 58481                         Adoption Order                            Page 3 of 270
+
+
+(TXOGA); Texas Public Policy Foundation (TPPF); Texas Public Power Association (TpPA);
+
+City of Bryan; Thor Equities; Tract Holding Company I, LLC (Tract); Trammell Crow Company
+
+(TCC); Vistra Corporate Services Company (Vistra); Voltus; Wind Energy Transmission Texas,
+
+LLC (WETT), Cross Texas Transmission, LLC (CTT), Lone Star Transmission, LLC (Lone Start),
+
+and Sharyland Utilities, LLC (Sharyland) (Collectively, Joint TSPs); and Zachary Butler, Blind
+
+Mice Labs (Zachary Butler).
+
+
+General Comments
+
+
+Loads included in batch zero interconnection study
+
+Agentic, EH2, HIF, Monarch, Skybox, Targa, TEBA, and Tract recommended modifying the
+
+proposed rule to address a large load customer's eligibility for inclusion in Batch Zero as either
+
+firm load or studied load. Black Mountain Power, Targa, and Vistra recommended modifying the
+
+proposed rule to prioritize certain types of loads for inclusion in Batch Zero.
+
+
+Commission Response
+
+The commission declines to adopt commenters' recommendation to address a large load
+
+customer's eligibility for inclusion in the batch zero interconnection study as either firm load
+
+or studied load; and declines to adopt eommenters' recommendation to prioritize certain
+
+types of loads for inclusion in the batch zero interconnection study. Neither is necessary
+
+because Planning Guide Revision Request (PGRR) 145, which was approved by the
+
+commission on June 18, 2026, addresses eligibility and study requirements for batch zero
+
+load.
+Project No. 58481                        Adoption Order                             Page 4 of 270
+
+
+Chan~es to PGRR 145
+
+EH2, Eolic, Landmark and EcoPartner, and Monarch recommended modifying the proposed rule
+
+to direct ERCOT to make changes to PGRR 145.
+
+
+Commission Response
+
+The commission declines to adopt EH2, Eolic, Landmark and EcoPartner, and Monarch's
+
+recommendation to modify the adopted rule to direct ERCOT to make changes to PGRR
+
+145. PGRR 145 was approved by the commission on June 18, 2026; therefore, changes to
+
+PGRR 145 are moot. Additionally, PGRR 145 establishes the eligibility criteria for large load
+
+customers to be included in the batch zero interconnection study as either base load or
+
+studied load and the process for the batch zero interconnection study. The adopted rule does
+
+not address these issues.
+
+
+Loads studied in the Permian Basin Reliabilitv Plan (PBRP)
+
+PBPA requested the commission clarify how the proposed rule and batch process create a path for
+
+interconnection for all loads that supported the need for the PBRP, including those below 75 MW.
+
+PBPA recommended the proposed rule and batch process include appropriate safeguards to ensure
+
+transmission infrastructure is made available to serve oil and gas loads that formed the basis for
+
+the PBRP.
+
+
+Commission Response
+
+The commission declines to adopt PBPA's recommendation to clarify how the proposed rule
+
+and batch process create a path for interconnection for loads that were studied in the PBRP,
+
+including those below 75 MW. The interconnection path for loads below 75 MW is outside
+
+the scope of the adopted rule. The commission also declines to modify the adopted rule to
+Project No. 58481                        Adoption Order                              Page 5 of 270
+
+
+ensure transmission infrastructure is made available to serve oil and gas loads studied in the
+
+PBRP. Neither is necessary. PGRR 145 addresses eligibility for inclusion in the batch zero
+
+interconnection study. All other large load customers must comply with the adopted rule for
+
+inclusion in a future interconnection study. The standards in the adopted rule apply equally
+
+to alllarge load customers.
+
+
+Financial commitments for studied loads included in Batch Zero
+
+For batch zero loads that do not qualify as "base load"-i.e., projects that have not yet satisfied
+
+ERCOT Planning Guide Sections 9.4 and 9.5 through completion of required studies, execution
+
+of interconnection    agreements,    and demonstration of financial         commitment-Skybox
+
+recommended ensuring that any new financial requirements are calculated on a net basis, with full
+
+credit given to amounts already posted with or paid to the applicable distribution service provider
+
+(DSP) or transmission service provider ESP).
+
+
+Commission Response
+
+The commission declines to adopt Skybox's recommendation to ensure that any new
+
+financial requirements required of a studied load in the batch zero interconnection study be
+
+calculated on a net basis with full credit given to amounts already posted with or paid to the
+
+applicable DSP or TSP. Instead, the commission modifies the adopted rule to ensure that a
+
+letter of credit or guaranty serving as financial security is returned to a large load customer
+
+that is included in the batch zero interconnection study and cash collateral serving as
+
+financial security is returned or credited based on the large load customer's election and
+
+notice to the applicable DSP or TSP. The commission also modifies the adopted rule to
+
+require all loads eligible for inclusion in the batch zero interconnection study to execute a
+
+Standard Large Load Interconnection Agreement (SLLIA) with new obligations to post
+Project No. 58481                         Adoption Order                           Page 6 of 270
+
+
+financial security. This creates uniform treatment for large load customers that have not
+
+energized as of the effective date of the adopted rule and ensures that the circumstances
+
+allowing the DSP or TSP to draw down on the financial security contemplate payment for
+
+outstanding amounts owed as described in the adopted rule thus striking a balance between
+
+ensuring that large load customers are not posting double the financial security and
+
+protecting ratepayers against stranded infrastructure costs.
+
+
+If applicable
+
+Constellation and LCRA recommended modifying the phrase "interconnecting DSP or
+
+interconnecting TSP" throughout the rule to state "interconnecting DSP or, if applicable,
+
+interconnecting TSP" to avoid inference that the entity is discretionary.
+
+
+Commission Response
+
+The commission declines to adopt Constellation and LCRA's recommendation to modify the
+
+phrase "interconnecting DSP or interconnecting TSP" throughout the rule to state
+
+"interconnecting DSP or, if applicable, interconnecting TSP" because the division of
+
+responsibility is best addressed in a separate rulemaking to adopt a SLLIA.
+
+
+Non-refundable financial security
+
+Black Mountain Power, Skybox, TCC, and TEBA recommended modifying the proposed rule to
+
+revise the non-refundability of financial security.
+
+
+
+Specifically, Black Mountain Power recommended revising the proposed rule to tie financial
+
+exposure to meaningful milestones. Skybox recommended that refund and credit calculations
+
+should be applied after giving effect to first-dollar crediting of existing financial security and
+Project No. 58481                        Adoption Order                                Page 7 of 270
+
+
+CIAC; no portion of the required financial commitment should be subject to forfeiture for
+
+undelivered capacity or delay driven deferrals outside the customer's control; and DSPs and TSPs
+
+should retain the ability to require incremental financial commitments only to the extent necessary
+
+to cover actual interconnection related costs associated with delivered capacity.
+
+
+
+TCC recommended modifying the proposed rule to provide that the financial security balance must
+
+be refunded when the large load customer "reaches and sustains the contracted level of operation"
+
+because the 5-year period is excessive and inconsistent with industry practice.
+
+
+
+TEBA opposed the imposition of non-refundable security before any load studies occurred and
+
+before any transmission is confirmed to be available, or when it might materialize. TEBA
+
+recommended that non-refundability is appropriate when a developer has elected to move forward
+
+with inclusion in a transmission plan that incorporates their loads and should be limited to
+
+protecting other customers from paying for costs incurred by the utility on their behalf if the
+
+developer does not ultimately move forward. TEBA recommended that all financial security be
+
+refunded upon ellergization and the load transitions to minimum transmission charges. TEBA
+
+noted that the process is unclear for exercising corporate guarantee payments for projects that do
+
+not move forward in the process. To address this, TEBA recommended that the utility directly
+
+invoice a developer who leverages a parental guarantee iftheir project is cancelled.
+
+
+Commission Response
+
+The commission adopts Black Mountain Power, Skybox, and TEBA's recommendation to
+
+revise the non-refundability of financial security. Specifically, the commission modifies the
+
+adopted rule to allow return of all financial security after collection of outstanding amounts
+Project No. 58481                        Adoption Order                              Page 8 of 270
+
+
+owed if a large load customer withdraws its interconnection request before the
+
+interconnection study begins and authorizes the return of financial security after: (1)
+
+collection of outstanding amounts owed and (2) subtraction of 20% of the financial security
+
+associated with transmission capacity allocated if a large load customer withdraws its
+
+interconnection request after ERCOT has allocated transmission capacity. The commission
+
+also adopts TEBA's recommendation to allow the interconnecting DSP or TSP to invoice a
+
+large load customer if its project is cancelled. However, the commission modifies the adopted
+
+rule to allow the interconnecting DSP or TSP to invoice the large load customer for
+
+outstanding amounts owed regardless of what manner of financial security was posted.
+
+
+Limitations of financial security
+
+CenterPoint recommended that proposed §25.194(g) through (i), each of which requires the
+
+interconnecting utility to draw down on financial security in different circumstances, are in
+
+conflict. Once financial security is drawn down is under one ofthese subsections, it will no longer
+
+be available for use under any of the other subsections.
+
+
+Commission Response
+
+The commission agrees with CenterPoint that once financial security is drawn down it is no
+
+longer available for use under other circumstances. However, the commission disagrees that
+
+the adopted rule results in a conflict by requiring the interconnecting DSP or TSP to draw
+
+down on financial security in different circumstances because the identified circumstances
+
+are mutually exclusive.
+Project No. 58481                           Adoption Order                           Page 9 of 270
+
+
+Framework for flow of financial securitv obligations
+
+APA and ACP, BKV, CloudHQ, CPV, HEN, Infinium, Intersect Power, OCSC and TCAP, Oncor,
+
+Rowan, Schaper Energy, Tesla, and TPPA recommended modifying the framework for flow of
+
+financial security commitments and obligations.
+
+
+
+Specifically, APA and ACP recommended modifying the proposed rule to: (1) reduce the amount
+
+that is not refundable from 80% to no more than 10% with the remainder refun(led if the
+
+developer's withdrawal does not adversely affect other requests in the cluster; (2) allow the non-
+
+refundable portion to be held until the end ofthe study process and used only to fund underfunded
+
+upgrades or restudies; and (3) allow a one-time transfer mechanism such as the one used in the
+
+Southwest Power Pool's Consolidated Planning Process.
+
+
+
+BKV recommended a framework whereby: (1) intermediate-stage security is released when
+
+security is posted under an interconnection agreement, unless the customer elects to carry it
+
+forward for other financial obligations; (2) CIAC and equipment-related payments are fully
+
+creditable and not duplicative of other security requirements; (3) additional financial obligations
+
+are limited to incremental, project-specific costs not already secured or funded; and (4) to the
+
+extent multiple financial instruments are retained, expressly require transparent accounting and
+
+appropriate crediting across categories.
+
+
+
+CPV recommended applying the interconnection fee to financial security requirements after
+
+execution of the interconnection agreement. CPV also recommended requiring financial security
+
+only after the results of a feasibility study are available.
+Project No. 58481                        Adoption Order                             Page 10 of 270
+
+
+CloudHQ recommended modifying the proposed rule to require only one form of financial security
+
+at the interconnection agreement phase. HEN recommended aligning the financial obligations with
+
+expected system use and avoiding duplicative recovery for the same MW of demand.
+
+
+
+Infinium recommended the commission clarify whether financial obligations arising under the
+
+interconnection agreement are additive to, or inclusive of obligations arising under the
+
+intermediate agreement stage.
+
+
+
+Intersect Power and Schaper Energy generally recommended: (1) clarifying that all financial
+
+commitments are creditable on a dollar-for-dollar basis across stages and categories; (2) replacing
+
+the non-refundable interconnection fee with a creditable financial security construct, under which
+
+any security posted at the intermediate stage is maintained and applied on a dollar-for-dollar basis
+
+to actual project costs (including CIAC, equipment, and system upgrades), with any additional
+
+security limited to incremental, project-specific cost exposure; (3) confirming that CIAC and
+
+equipment-related payments are not duplicative of other security requirements; and (4)
+
+maintaining independent security for system upgrades only where stranded cost risk is project-
+
+specific and demonstrable.
+
+
+
+OCSC and TCAP recommended clarifying the particular flow of funds among the fee categories
+
+and the extent to which a large load customer will be refunded for financial security posted as part
+
+of the intermediate agreement if ERCOT does not award that customer the full amount of its
+
+requested peak demand and that customer thus decides to withdraw its requested peak demand.
+Project No. 58481                         Adoption Order                         Page 11 of 270
+
+
+OCSC and TCAP also recommended including all categories of fees under one subsection so that
+
+they are readily available and easier to review.
+
+
+
+Oncor recommended that the commission allow the required financial commitments in the
+
+interconnection agreement phase to overlap, not stack.
+
+
+
+Rowan recommended modifying the adopted rule to provide that upon execution of the
+
+interconnection agreement, the interconnecting DSP or TSP must credit financial security posted
+
+under the intermediate agreement to financial security and obligations arising from the
+
+interconnection agreement. If the security posted under the intermediate agreement exceeds the
+
+amount required under the interconnection agreement, the excess must be refunded within 60 days.
+
+
+
+Tesla recommended modifying the proposed rule to apply the deposit paid at the intermediate
+
+agreement stage to other project costs and financial postings as the customer moves through the
+
+interconnection process.
+
+
+
+TPPA recommended modifying the rule to base the intermediate financial security requirement on
+
+75% instead of 100% of requested peak demand and assess the remaining 25% during the
+
+interconnection phase.
+
+
+Commission Response
+
+The commission adopts commenters' recommendation to revise the framework for financial
+
+security. Accordingly, the commission modifies the adopted rule in a manner that allows
+
+financial security commitments and obligations to overlap rather than stack; clarifies the
+Project No. 58481                       Adoption Order                           Page 12 of 270
+
+
+flow through of various financial security requirements; and clarifies the circumstances
+
+under which financial security must be returned to a large load customer.
+
+
+
+Specifically, the adopted rule is modified to allow cash collateral posted as financial security
+
+under an intermediate agreement to be credited to the financial security requirements for
+
+significant equipment or services. A letter of credit or guaranty provided under an
+
+intermediate agreement must be returned.
+
+
+
+The commission also clarifies that, at the end of the batch study, an interconnecting DSP or
+
+TSP must return financial security to a large load customer that is allocated 0 MW of
+
+transmission capacity after collecting outstanding amounts owed. A large load customer that
+
+withdraws its interconnection request but was allocated transmission capacity may receive
+
+the balance of its financial security after the interconnecting DSP or TSP collects payment
+
+for outstanding amounts owed and subtracts 20% of the financial security associated with
+
+the allocated transmission capacity.
+
+
+
+The commission also modifies the adopted rule to remove the interconnection fee under the
+
+SLLIA. At the time the SLLIA is executed, the large load customer must post financial
+
+security in an amount that is the greater of $50,000 per MW of the contracted peak demand
+
+or the costs allocated to the large load customer for system upgrades as a result of an
+
+interconnection study. A large load customer may elect to apply cash collateral posted as
+
+financial security under an intermediate agreement as a credit towards the financial security
+
+requirements under a SLLIA.
+Project No. 58481                       Adoption Order                          Page 13 of 270
+
+
+The interconnecting DSP or TSP must invoice the large load customer for direct
+
+interconnection costs as those costs are incurred; and the interconnecting DSP or TSP must
+
+return 20% of financial security when the large load customer energizes and the remainder
+
+ratably in 20% increments as the large load customer meets the milestones identified in the
+
+customer's SLLIA for meeting its obligation to pay the large load minimum billing demand
+
+described in §25.193, relating to Distribution Service Provider Transmission Cost Recovery
+
+Factor (TCRF), for the set period of time described in §25.193.
+
+
+
+The commission determines that this framework best balances support for business
+
+development and the need to minimize the potential for stranded infrastructure costs.
+
+
+Tie pavment of#nancial security to development milestones
+
+Mission Power and PPM recommended modifying the proposed rule to increase financial security
+
+requirements as a project progresses through commercial development milestones. The City of
+
+Bryan stated that it supports a staged approach to financial commitments and a refundability
+
+framework tied to energization milestones.
+
+
+Commission Response
+
+The commission declines to adopt Mission Power and PPM's recommendation to modify the
+
+adopted rule to increase financial security requirements as a project progresses through
+
+commercial development milestones. Requiring financial security at the intermediate
+
+agreement stage ensures that a large load customer has access to the necessary capital to see
+
+a project through to energization. Additionally, the risk for stranded infrastructure costs is
+
+present when the large load customer is included in ERCOT's forecast for transmission
+
+planning, which going forward will be at the time that the SLLIA is executed.
+Project No. 58481                          Adoption Order                             Page 14 of 270
+
+
+Address cost causation and recoverv in Proiect No. 58484
+
+TPPA recommended addressing cost causation and recovery in Project No. 58484, Evaluation of
+
+Transmission Cost Recovery, but was supportive of the fees and financial security proposed
+
+throughout the rule if addressed here. Additionally, if the interconnection fee and financial security
+
+requirements in the proposed rule are retained, TPPA recommended that the commission clearly
+
+state that adoption of these provisions does not materially resolve or address the issues under
+
+consideration in Project No. 58484.
+
+
+Commission Response
+
+The commission agrees with TPPA that transmission cost recovery should be addressed in a
+
+separate rulemaking project. Therefore, the commission modifies the adopted rule to remove
+
+the requirement that an interconnecting DSP or TSP apply retained financial security as an
+
+offset to rate base and removes the prohibition for an interconnecting DSP or TSP to recover
+
+direct interconnection costs in regulated rates. The commission will address transmission
+
+cost recovery in Project No. 58000, Rulemaking to Update Wholesale and IOU Retail
+
+Transmission Cost Recovery in the ERCOT Region.
+
+
+Tie financial securitv to cost responsibility
+
+APA and ACP recommended tying the financial security amounts to a developer's identified cost
+
+responsibility, once established in Project No. 58484, Evaluation of Transmission Cost Recovery.
+
+This ensures that each interconnecting entity bears the direct consequences of its actual system
+
+impacts and incentivizes timely withdrawal by projects whose upgrades would impose
+
+disproportionate or uneconomic costs on the system. APA and ACP also recommended that
+
+financial security for interconnection facilities sand network upgrades should remain"at-risk" only
+
+to the extent necessary to cover actual underfunded upgrades or restudies caused directly by
+Project No. 58481                       Adoption Order                          Page 15 of 270
+
+
+developer withdrawals. If the load proceeds as expected, security should be refunded promptly
+
+once the load reaches commercial operation.
+
+
+Commission Response
+
+The commission declines to adopt APA and ACP's recommendation to address financial
+
+security amounts in Project No. 58484. PURA §37.0561(h) requires that the large load
+
+interconnection standards include uniform financial commitment requirements for the
+
+development of transmission infrastructure needed to serve a large load customer.
+
+Therefore, it is appropriate to address financial security amounts in the adopted rule, which
+
+also sets forth the requirements for a SLLIA. The commission disagrees that financial
+
+security should be returned once the load reaches commercial operation because the risk for
+
+stranded infrastructure remains even after commercial operation begins. Accordingly, the
+
+commission also modifies the adopted rule to specify that additional financial security
+
+relating to the large load minimum billing demand may be required.
+
+
+Allocate the cost of 765-kV STEP and associated projects to large loads
+
+TPPF recommended allocating the costs of the 765 kilovolt (765-kV) Strategic Transmission
+
+Expansion Plan (STEP) and associated projects to large loads. TPPF reasoned that loads above 75
+
+MW are the only reason systemwide demand may rise high enough over the next 10-15 years to
+
+justify the 765-kV lines.
+
+
+Commission Response
+
+The commission declines to adopt TPPF's recommendation to allocate the costs of the 765-
+
+kV STEP and associated projects because cost allocation for specific projects is outside the
+Project No. 58481                        Adoption Order                            Page 16 of 270
+
+
+scope of this rulemaking. The purpose of this rulemaking is to establish uniform,
+
+standardized interconnection standards for large load customers.
+
+
+Minimum transmission/minimum demand charR-e
+
+AEP, CCNG, Google, Lancium, & TotalEnergies, LCRA, Oncor, TCC, TEBA, and Thor
+
+recommended the commission modify the proposed rule to require a large load customer to pay a
+
+capacity-based charge.
+
+
+
+Additionally, CCNG recommended adding a new subsection requiring a large load customer to
+
+pay a minimum transmission charge of no less than 50 percent of the customer's contracted peak
+
+demand for a period of five years. CCNG reasoned that this approach is more equitable than
+
+requiring large load customers to pay financial security for system upgrades.
+
+
+
+Google, Lancium, and TotalEnergies recommended adding a new provision that requires a DSP to
+
+assess a transmission demand charge to large load customers for a period of five years based on a
+
+percentage of the customer's contracted peak demand. Google, Lancium, and TotalEnergies
+
+further recommended modifying proposed §25.194(f)(10) to replace the requirement that a large
+
+load customer post financial security for system upgrades with a statement that the interconnection
+
+agreement should state that the large load customer will pay the minimum transmission charge
+
+following energization.
+
+
+
+HEN recommended that any minimum demand or take-or-pay construct should be narrowly
+
+tailored to reflect actual reserved system capacity and applied only where necessary. HEN
+
+reasoned that broad application risks creating a "pay-for-readiness" model that requires large load
+Project No. 58481                         Adoption Order                              Page 17 of 270
+
+
+customers to pay for transmission capacity regardless of actual usage discouraging private
+
+investment and distorting efficient market outcomes.
+
+
+
+Oncor recommended requiring interconnection agreements to include a contractual commitment
+
+in which interconnecting large loads over 200 MW agree to pay rates proportional to the amount
+
+of capacity that they contract for, regardless ofusage, for at least 10 years after interconnection.
+
+
+
+If the proposed rule is modified to implement a minimum demand charge, OPUC recommended
+
+that the commission: (1) include cost recovery methods, including penalty fees, if the large load
+
+customer ceases operations before the end of ten or fifteen years; (2) consider the long asset life
+
+of transmission infrastructure and the depreciation value in calculating the minimum demand
+
+charge and payment period; (3) prohibit utilities from adding provisions to their tariffs or contracts
+
+that result in large load customers paying less costs than they would under any minimum demand
+
+charge rule; and (4) not presume load growth will continue at the same unprecedented rate long-
+
+term in determining the minimum demand charge structure.
+
+
+
+TCC recommended the commission establish a minimum demand charge in a contested case. Thor
+
+recommended replacing the interconnection fee with a minimum demand charge of no less than
+
+50% of contracted peak demand for five years.
+
+
+Commission Response
+
+The commission adopts commenters' recommendation to require a large load customer to
+
+pay transmission rates based on the demand that the large load customer places on the
+
+ERCOT system. However, the commission determines that the details of the charge should
+Project No. 58481                           Adoption Order                          Page 18 of 270
+
+
+be decided in Project No. 58000. Accordingly, the commission modifies the adopted rule to
+
+require the SLLIA include a term of acknowledgment and agreement that the large load
+
+customer will pay the large load minimum billing demand described in §25.193, relating to
+
+Distribution Service Provider Transmission Cost Recovery Factor (TCRF), for the set period
+
+of time described in §25.193. The commission also modifies the adopted rule to include the
+
+large load minimum billing demand in the list identifying what constitutes an outstanding
+
+amount owed and modifies the adopted rule to specify that a large load customer may be
+
+required to post additional financial security related to the large load minimum billing
+
+demand.
+
+
+ERCOT interconnection standards
+
+Google, Lancium, and TotalEnergies recommended adding a provision requiring ERCOT to: (1)
+
+establish a process that assigns a serial number for each complete large load that is representative
+
+of the load's position in the interconnection queue; and (2) adopt administrative protocols which
+
+create clear communication between the large load customer, the DSP, the TSP, and ERCOT.
+
+
+Commission Response
+
+The commission declines to adopt Google, Lancium, and TotalEnergies's recommendation
+
+to add a provision requiring ERCOT to establish a process that assigns a serial number to
+
+large load customers that identifies the customer's position in the interconnection queue.
+
+Because ERCOT is studying interconnection requests in batches, there is no positioning in
+
+the interconnection queue to identify.
+
+
+
+The   commission     also declines     to    adopt Google,     Lancium,     and   TotalEnergies's
+
+recommendation to add a provision requiring ERCOT to adopt administrative protocols
+Project No. 58481                       Adoption Order                            Page 19 of 270
+
+
+which create clear communication between the large load customer, the DSP, the TSP, and
+
+ERCOT. Instead, the commission modifies the adopted rule to specify certain timelines and
+
+to authorize the development of other timelines through ERCOT protocols, as appropriate.
+
+Specifically, the commission modifies the adopted rule to require the interconnecting DSP or
+
+TSP to provide information to the large load customer not later than five working days after
+
+receipt of communications from ERCOT about the large load customer's interconnection
+
+request.
+
+
+
+The commission also modifies the adopted rule to require the interconnecting DSP, the
+
+interconnecting TSP, or ERCOT to timely notify the large load customer of the transmission
+
+capacity allocated to the large load customer and to timely notify the interconnecting TSP
+
+when another TSP completes a project that is needed to interconnect a large load customer,
+
+as prescribed by ERCOT protocols. Finally, the commission modifies the adopted rule to
+
+permit ERCOT to fulfill the interconnecting DSP or the interconnecting TSP's obligations
+
+to communicate with the large load customer through a process developed in ERCOT
+
+protocols. This recognizes that ERCOT is developing software that will enable it to
+
+communicate information directly to large load customers in the future while still addressing
+
+the need for clear and timely notification in the interim.
+
+
+Loads brinRinq their own eeneration
+
+HEN recommended modifying the proposed rule to recognize that a large load may choose to self
+
+limit the maximum demand that it will place onto the grid, consistent with protocols that will be
+
+developed in the ERCOT process, by building generation to serve its load. Specifically, HEN
+
+recommended that the financial security requirements for large loads co-located with dispatchable
+Project No. 58481                        Adoption Order                            Page 20 of 270
+
+
+generation be based on expected net grid usage during system peak conditions, rather than gross
+
+on-site peak demand. HEN reasoned that large load customers that are expected to be net-zero or
+
+net exporters during peak conditions should not be required to post financial security as though
+
+they are grid dependent. Similarly, HEN recommended that interconnection fees also be assessed
+
+based on expected maximum net import from the ERCOT grid during peak conditions for large
+
+loads co-located with dispatchable generation.
+
+
+Commission Response
+
+The commission declines to adopt HEN's recommendation to modify the adopted rule to
+
+reduce the financial security requirements for a large load customer that builds generation
+
+to serve its load by basing the financial security requirements on the load's expected net grid
+
+usage during the system peak conditions instead of requested peak demand and contracted
+
+peak demand. The requested peak demand and contracted peak demand are based on the
+
+amount of load that the customer seeks to interconnect to the ERCOT system. The
+
+commission determines that the appropriate input is not an estimate of what amount of
+
+demand the load might be expected to place on the ERCOT system during peak conditions
+
+but the amount of demand that is used for transmission planning purposes. This approach
+
+better aligns with the goal of minimizing the potential for stranded infrastructure costs.
+
+
+For Iarze load customers that co-locate, credit financial obligations under a standard generation
+
+interconnection agreement (SGIA)
+
+BKV and Intersect Power recommended modifying the proposed rule to credit financial
+
+obligations under a standard generation interconnection agreement (SGIA) to the financial security
+
+requirements under the proposed rule for large load customers that co-locate with generation
+
+resources.
+Project No. 58481                         Adoption Order                              Page 21 of 270
+
+
+Specifically, BKV recommended that the commission clarify: (1) where interconnection facilities
+
+and upgrades have been funded or secured under an executed SGIA, those investments are credited
+
+toward any obligations to the extent they correspond to the same facilities or capacity; (2) financial
+
+obligations are limited to incremental facilities and system impacts attributable to the large load;
+
+and (3) no additional security or CIAC is required for facilities that do not give rise to new or
+
+increased system upgrade costs.
+
+
+Intersect Power recommended modifying the proposed rule to state that, where a large load
+
+customer is co-located with generation at the same point of interconnection and the applicable
+
+interconnection facilities and upgrades have been funded or secured under an executed standard
+
+generation interconnection agreement, such prior investments in shared or integrated infrastructure
+
+are credited toward any financial obligations under the rule to the extent they correspond to the
+
+same facilities or capacity, and that comparable investments and study-backed facilities developed
+
+under prior ERCOT interconnection processes, including the interim process, are afforded the
+
+same recognition where they reflect substantially equivalent scope and system impact.
+
+
+
+Second, Intersect Power recommended modifying the proposed rule to limit financial security and
+
+payment obligations to incremental facilities and upgrades, required as a result ofthe large load's
+
+incremental impact on the system, including changes to capacity or operational characteristics, and
+
+not to modifications that do not give rise to new or increased system upgrade costs or stranded cost
+
+risk, and that were not previously studied, assigned, or funded under the standard generation
+
+interconnection agreement or other governing agreement. Third, Intersect Power recommended
+
+modifying the proposed rule to preserve flexibility in payment structures, including as-incurred
+Project No. 58481                        Adoption Order                        Page 22 of 270
+
+
+billing with true-up mechanisms, to ensure that financial requirements track actual cost
+
+development and avoid over-collection.
+
+
+Commission Response
+
+The commission declines to adopt BKV and Intersect Power's recommendation to modify
+
+the adopted rule to state financial obligations under a SGIA must be credited to the financial
+
+security requirements under the rule for large load customers that co-locate with generation
+
+resources.
+
+
+
+PURA §35.004(d-1) requires the commission to establish a reasonable allowance for
+
+transmission-owning utility costs incurred to interconnect generation resource directly with
+
+the ERCOT transmission system at transmission voltage. PURA does not similarly require
+
+an allowance for large load customers. Moreover, a large load customer should not be able
+
+to co-locate with generation as a means to avoid contributing to transmission costs that may
+
+be incurred as a result of the need to be able to serve that customer from the ERCOT system
+
+in the event the generation resource is needed to supply power to the ERCOT system or is
+
+otherwise unable to supply power to the large load customer. Therefore, the commission
+
+determines that all large load customers should be required to meet the same standards for
+
+interconnection, which requires large load customers to post financial security to protect
+
+other ratepayers from stranded infrastructure costs that may be incurred to serve the large
+
+load customer; and requires large load customers to pay for their direct interconnection
+
+costs.
+Project No. 58481                        Adoption Order                             Page 23 of 270
+
+
+The commission declines to adopt BKV and Intersect Power's recommendation to limit
+
+financial security and payment obligations for co-located load to the incremental facilities
+
+and upgrades, required as a result ofthe large load's incrementalimpact on the system. Such
+
+a limitation does not properly account for the fact that ERCOT must be able to reliably serve
+
+the large load customer's additional demand on the system (even if co-located with
+
+generation).
+
+
+
+The commission declines to adopt BKV's recommendation to state no additional security or
+
+ClAC is required for facilities that do not give rise to new or increased system upgrade costs.
+
+CUC is required for direct interconnection costs, not for system upgrade costs.
+
+
+
+The commission adopts Intersect Power's recommendation to preserve flexibility in payment
+
+structures, including as-incurred billing with true-up mechanisms, to ensure that financial
+
+requirements track actual cost development and avoid over-collection. Accordingly, the
+
+commission modifies the adopted rule to require the interconnecting DSP or TSP to invoice
+
+the large load customer for direct interconnection costs before those costs are incurred
+
+instead of requiring payment of all direct interconnection costs at the time the SLLIA is
+
+executed.
+
+
+Uniformity across interconnecting utilitv types
+
+Landmark and EcoPartner recommended modifying the proposed rule to provide for consistent
+
+financial and timeline obligations and refundability terms across all interconnecting utility types.
+
+Landmark and EcoPartner reasoned that requirements and process clarity differ between non-opt-
+
+in-entities (NOIEs) and investor-owned utilities.
+Project No. 58481                          Adoption Order                        Page 24 of 270
+
+
+Commission Response
+
+The commission declines to adopt Landmark and EcoPartner's recommendation to modify
+
+the adopted rule to provide for consistent financial and timeline obligations and
+
+refundability terms across all interconnecting utility types because it is unnecessary. The
+
+adopted rule already requires all large load customers, regardless of whether they site in an
+
+investor-owned utility's service territory or a non-opt-in entity's territory in the ERCOT
+
+region, to meet the same standards for purposes of interconnection. The adopted rule neither
+
+requires nor allows for different standards based on the nature of the service territory for a
+
+large load customer that sites in the ERCOT region.
+
+
+Tie fees to costs and periodically update fee amounts
+
+EDF recommended modifying the proposed rule to include a recurring process for updating the
+
+dollar amounts for the fees required by the proposed rule, based on a future cost-of-service or
+
+similar study. EDF stated that the commission should ensure the initial fee amounts are based on
+
+actual large load interconnection costs.
+
+
+Commission Response
+
+The commission declines to adopt EDF's recommendation to modify the adopted rule to
+
+include a recurring process for updating the dollar amounts for the required fees, based on
+
+a future cost-of-service or similar study. As more data becomes available relating to study
+
+costs, the commission may amend the rule to update the study fee amount that is required.
+
+EDF's recommendation with respect to the interconnection fee is moot because the
+
+commission modifies the adopted rule to remove the interconnection fee. Financial security
+
+remains a requirement to protect against stranded infrastructure costs and is not a "fee."
+Project No. 58481                         Adoption Order                            Page 25 of 270
+
+
+Prioritize the interconnection requests of certain tvpes of load
+
+EDF, TCPA, and Voltus recommended modifying the proposed rule to prioritize the
+
+interconnection request of certain types of loads.
+
+
+
+Specifically, EDF commented that it would support a process whereby a large load customer may
+
+provisionally interconnect on an accelerated track if the customer agrees to be flexible and
+
+controllable and assumes the risk of curtailment during grid constraints. EDF also suggested a
+
+process whereby a large load customer may use off-site resources, such as energy source resources
+
+or generation, to address local nodal constraints. EDF reasoned these approaches would allow a
+
+large load customer to interconnect more quickly without undermining reliability or shifting risk
+
+to ratepayers.
+
+
+
+TCPA recommended modifying the proposed rule to direct ERCOT to give a faster preferential
+
+path to interconnection and energization for those large load customers that co-locate with
+
+generation. Additionally, TCPA recommended that the commission direct ERCOT to prioritize a
+
+forthcoming nodal protocol revision revise (NPRR) that will accomplish this goal.
+
+
+
+Voltus recommended modifying the proposed rule to allow a large load customer to bring their
+
+own capacity (i.e., electrically proximate or adjacent grid assets) as an alternative to backup
+
+generation facilities and to expedite interconnection for large load customers that implement a
+
+bring your own program.
+Project No. 58481                       Adoption Order                           Page 26 of 270
+
+
+Commission Response
+
+The commission declines to modify the adopted rule to prioritize the interconnection request
+
+of certain types of loads. The commission determines that such a process and prioritization
+
+must account for technical and operational characteristics that are best addressed in
+
+ERCOT protocols, which are vetted in a stakeholder process and ultimately subject to
+
+approval by the commission.
+
+
+Net metered loads subject to PURA 439.169
+
+TCPA recommended modifying the proposed rule to place loads that are subject to PURA §39.169
+
+in a distinct category from any other large load interconnection because the commission must
+
+review those and either approve, deny, or impose conditions on them prior to interconnection
+
+moving forward. Additionally, TCPA recommended that any financial security posted by a large
+
+load customer that is subject to PURA §39.169 be refunded if the net metering arrangement is not
+
+approved by the commission.
+
+
+Commission Response
+
+The commission declines to adopt TCPA's recommendation to modify the adopted rule to
+
+place loads that are subject to PURA §39.169 in a distinct category from any other large load
+
+interconnection. PURA §37.0561 does not exempt large load customers that are subject to
+
+PURA §39.169 from compliance with the requirements for large load interconnection
+
+standards that are set forth in PURA §37.0561; and the commission is not persuaded that
+
+the adopted rule should exempt those loads. PURA §39.169 governs net metering
+
+arrangements with an existing generation resource, not the large load customer's
+
+interconnection to the ERCOT system. Therefore, the applicability of PURA §39.169 is
+
+immaterial to the applicability of PURA §37.0561. Moreover, the commission determines
+Project No. 58481                       Adoption Order                          Page 27 of 270
+
+
+that whether a net metering arrangement is approved is independent of whether a large load
+
+customer may interconnect to the ERCOT system and therefore should not result in the
+
+return of financial security posted under PURA §37.0561. The purpose of financial security
+
+is to protect against stranded infrastructure costs and that protection is needed if the large
+
+load customer seeks to interconnect to the ERCOT system regardless of whether a net
+
+metering arrangement with an existing generation resource is approved by the commission.
+
+
+Withdrawal, milestones, and proportional risk allocation
+
+Intersect Power recommended modifying the proposed rule to: (1) limit forfeiture of financial
+
+security to demonstrated, non-recoverable costs and committed expenditures; (2) require prompt
+
+release of remaining financial security once such costs have been satisfied regardless of fixed
+
+milestone timing; (3) retain stronger forfeiture provisions only for discrete system upgrade
+
+security, where stranded cost risk is most acute; and (4) ensure that milestone timelines and
+
+associated consequences remain commercially reasonable and account for phased energization,
+
+supply chain constraints, and practical development considerations.
+
+
+Commission Response
+
+The commission declines to adopt Intersect Power's recommendation to: (1) limit forfeiture
+
+of financial security to demonstrated, non-recoverable costs and committed expenditures;
+
+(2) require prompt release of remaining financial security once such costs have been satisfied
+
+regardless of fixed milestone timing; (3) retain stronger forfeiture provisions only for
+
+discrete system upgrade security, where stranded cost risk is most acute; and (4) ensure that
+
+milestone timelines and associated consequences remain commercially reasonable and
+
+account for phased energization, supply chain constraints, and practical development
+
+considerations.
+Project No. 58481                           Adoption Order                         Page 28 of 270
+
+
+The financial security requirements are intended to minimize the potential for stranded
+
+infrastructure costs as required by PURA §37.0561(b) by incentivizing large load customers
+
+to right size the requested peak demand for their projects and provide a mechanism for
+
+utilities to recover stranded infrastructure costs from a large load customer. However, the
+
+commission modifies the adopted rule to allow greater flexibility in the phased energization
+
+schedule by increasing the amount of time by which a large load customer may miss a
+
+milestone in its phased energization schedule before transmission capacity is reallocated.
+
+This flexibility accounts for supply chain constraints, etc. while ensuring efficient use of
+
+transmission infrastructure and available capacity.
+
+
+Refi,nd mechanics
+
+Landmark and EcoPartner recommended the commission modify the proposed rule to clarify the
+
+mechanisms by which financial security is refunded and provide that financial security held for
+
+longer than a defined period is treated as interest-bearing. Additionally, Landmark and EcoPartner
+
+recommended the proposed rule address: (1) escrow account structure; (2) which costs may be
+
+drawn from financial security versus charged separately; and (3) the timeline for refund processing
+
+after withdrawal or project cancellation.
+
+
+Commission Response
+
+The commission declines to adopt Landmark and EcoPartner's specific recommendations to
+
+provide that financial security held for longer than a defined period is treated as interest-
+
+bearing and to address: (1) escrow account structure; (2) which costs may be drawn from
+
+financial security versus charged separately; and (3) the timeline for refund processing after
+
+withdrawal or project cancellation.
+Project No. 58481                        Adoption Order                             Page 29 of 270
+
+
+However, the commission modifies the adopted rule to specify that cash collateral posted as
+
+financial security must be held in a segregated, cash account bearing interest at a rate equal
+
+to at least the rate of the constant maturity one-month U.S. Treasury bill. The commission
+
+also modifies the adopted rule to specify that payment must be collected for outstanding
+
+amounts owed before financial security may be returned to a large load customer and that
+
+the interconnecting DSP or TSP may invoice the large load customer or draw down on
+
+financial security for outstanding amounts owed. If the large load customer fails to pay an
+
+invoice within 10 working days after receipt, the interconnecting DSP or TSP may draw
+
+down on financial security. The timeline for returning financial security associated with
+
+withdrawal or cancellation is best addressed in the rule adopting a SLLIA.
+
+
+Intermediate agreement and studv prozression
+
+BKV and Intersect Power recommended modifying the proposed rule to state the intermediate
+
+agreement is a threshold requirement limited to objective indicators of project readiness and, for
+
+co-located projects, is limited to load-side readiness and does not reopen or condition generation-
+
+side interconnection status; and utilities may not impose additional conditions that delay study
+
+initiation beyond those specified in the rule. BKV and Intersect Power also recommended
+
+modifying the proposed rule to state that study initiation and progression must be aligned with
+
+ERCOT-established processes, including modeling readiness and validation requirements, and for
+
+co-located load must build on existing modeling assumptions and prior study results, with any
+
+additional analysis limited to incremental load-related impacts. Finally, BKV and Intersect Power
+
+recommended modifying the proposed rule to state that entities that have fulfilled the requirements
+
+of SB 6 before batch study implementation shall be permitted to proceed without re-screening
+
+under the subsequently adopted eligibility criteria, and oo-located projects with existing or
+Project No. 58481                       Adoption Order                           Page 30 of 270
+
+
+approved grid-facing generation shall not be subject to revalidation, displacement, or re-
+
+underwriting ofpreviously completed studies.
+
+
+Commission Response
+
+The commission declines to adopt BKV and Intersect Power's recommendation to state the
+
+intermediate agreement is a threshold requirement limited to objective indicators of project
+
+readiness; and that for co-located projects, the intermediate agreement is limited to load-
+
+side readiness and does not reopen or condition generation-side interconnection status
+
+because it is unnecessary. Once the large load customer executes and funds the intermediate
+
+agreement as required by the adopted rule, the interconnecting DSP or TSP is required to
+
+contact ERCOT within 60 days to initiate the interconnection study, as prescribed by
+
+ERCOT protocols. This deadline ensures that once a large load customer complies with the
+
+adopted rule, the interconnecting DSP or TSP has an obligation to submit the necessary
+
+information to ERCOT for the large load customer's inclusion in the next interconnection
+
+study. The adopted rule only applies to large load customers and requires all large load
+
+customers to meet the same standards. The adopted rule does not apply to generation
+
+resources, including those that are co-located with a large load customer. Thus, it is not
+
+necessary to specify that the adopted rule does not reopen or condition generation-side
+
+interconnection study.
+
+
+
+The commission declines to adopt BKV and Intersect Power's recommendation to modify
+
+the adopted rule to state that utilities may not impose additional conditions that delay study
+
+initiation beyond those specified in the rule. There may be instances in which it is appropriate
+
+to impose additional conditions. For example, ERCOT may need to require a specific type
+Project No. 58481                       Adoption Order                            Page 31 of 270
+
+
+of study from the interconnecting TSP before the large load customer is included in the
+
+interconnection study.
+
+
+
+The commission declines to adopt BKV and Intersect Power's recommendation to modify
+
+the adopted rule to state that study initiation and progression must be aligned with ERCOT-
+
+established processes, including modeling readiness and validation requirements, and for co-
+
+located load must build on existing modeling assumptions and prior study results, with any
+
+additional analysis limited to incremental load-related impacts. The commission does not
+
+need to require, in this rule, that an interconnecting DSP or TSP comply with ERCOT
+
+protocols. Additionally, ERCOT is best positioned to determine from a reliability and
+
+technical perspective whether additional analysis is appropriate for co-located loads.
+
+
+
+The commission declines to adopt BKV and Interseet Power's recommendation to modify
+
+the adopted rule to state that entities that have fulfilled the requirements of SB 6 before batch
+
+study implementation is permitted to proceed without re-screening under the subsequently
+
+adopted eligibility criteria, and co-located projects with existing or approved grid-facing
+
+generation should not be subject to revalidation, displacement, or re-underwriting of
+
+previously completed studies. PGRR 145 established the criteria for these loads to be
+
+included in the batch zero interconnection study and a future ERCOT protocol revision will
+
+address any needed changes to criteria for inclusion in future interconnection studies. At the
+
+conclusion of the batch zero interconnection study, it is appropriate for those loads to comply
+
+with the adopted rule's requirements for a SLLIA because these loads have not yet energized,
+
+but are being allocated transmission capacity.
+Project No. 58481                        Adoption Order                       Page 32 of 270
+
+
+Ratemakine treatment
+
+Cholla recommended that ratemaking determinations for retained funds exceed the commission's
+
+statutory authority and depart from cost causation principles.
+
+
+Commission Response
+
+The commission disagrees with Cholla that ratemaking determinations for retained funds
+
+exceed the commission's statutory authorily and depart from cost causation principles.
+
+However, the commission removes ratemaking treatment from the adopted rule to address
+
+in Project No. 58000 and therefore does not address Cholla's arguments.
+
+
+
+PURA §37.0561 in conjunction with PURA §§14.001 and 14.002 give the commission broad
+
+authority to develop a framework for interconnecting large load customers. PURA
+
+§37.0561(i) contemplates that a portion of financial security may be retained after the
+
+financial security is applied to any outstanding amounts owed. PURA §37.0561(i)(2)-(3)
+
+states that financial security must be refunded, in whole or in par4 after the security is
+
+applied to outstanding amounts owed if the large load customer withdraws the customer's
+
+request for all or a portion of the requested capacity or if capacity subject to a financial
+
+commitment will be reallocated to one or more other customers.
+
+
+
+The framework set forth in the adopted rule fits within this statutory framework. If a large
+
+load customer withdraws its request for all or a portion of the requested capacity before the
+
+interconnection study begins, financial security must be returned, in whole. If a large load
+
+customer withdraws its request for all or a portion of the requested capacity after the
+
+interconnection study begins, a portion of the financial security must be returned after the
+Project No. 58481                        Adoption Order                            Page 33 of 270
+
+
+financial security is applied to any outstanding amounts owed. Specifically, the portion of
+
+financial security that is not associated with allocated transmission capacity must be
+
+returned and 80% of the financial security associated with allocated transmission capacity
+
+must be returned. The transmission capacity will then be reallocated in a future
+
+interconnection study. The transmission capacity cannot be reallocated to a large load
+
+customer in the same interconnection study because to do so would require a restudy of all
+
+the loads in the interconnection study. Therefore, it is appropriate to attach some level of
+
+consequence to a decision not to continue with the interconnection process when
+
+transmission capacity has been allocated and is therefore unavailable to others until a future
+
+interconnection study.
+
+
+Behind-the-meter power
+
+Landmark and EcoPartner recommended modifying the adopted rule to address specifications
+
+relating to curtailment and the contributions of behind-the-meter generation to grid reliability.
+
+Specifically, Landmark and EcoPartner recommended: (1) codifying a 30-minute curtailment
+
+capability requirement, noting that PGRR145 Section 9.2.5 requires breakers under remote
+
+transmission operator control, but does not specify a time window; (2) clarifying and formalizing
+
+the methods by which developers can demonstrate 30-minute curtailment capability; (3) explicitly
+
+defining what type of resources qualify to provide a percentage match between grid load and
+
+behind-the-meter (BTM) generation, if statute requires such a match, and including battery storage
+
+as a qualifying resource; and (4) acknowledging in the proposed rule that BTM generation
+
+contributes to grid reliability.
+Project No. 58481                        Adoption Order                             Page 34 of 270
+
+
+Commission Response
+
+The commission declines to adopt Landmark and EcoPartner's recommendation to modify
+
+the adopted rule to address specifications relating to curtailment and the contributions of
+
+behind-the-meter generation to grid reliability. Technical specifications, including those for
+
+curtailment, are best addressed in ERCOT protocols, which are vetted in a stakeholder
+
+process and ultimately subject to approval by the commission. Behind-the-meter
+
+generations' contributions to grid reliability are outside the scope of this rulemaking.
+
+
+Alignment with ERCOT planning process
+
+Intersect Power recommended modifying the proposed rule to state that satisfaction of the rule
+
+requirements constitute evidence of project maturity and commitment for ERCOT planning
+
+purposes. Second, Intersect Power recommended modifying the proposed rule to ensure that
+
+projects meeting ERCOT Planning Guide Section 9 milestones are not subject to duplicative
+
+screening or reclassification, and that projects which satisfied substantially equivalent study,
+
+agreement, and financial commitment milestones under prior ERCOT processes are treated
+
+consistently for planning and classification purposes. Third, Intersect Power recommended
+
+modifying the proposed rule to ensure that ERCOT Planning Guide Section 9 milestones clearly
+
+articulate criteria applicable to integrated project configurations such that prior investments and
+
+commitments under executed interconnection agreements required under ERCOT Planning Guide
+
+Section 9.5 are fully recognized, duplicative financial security is avoided, and cost responsibility
+
+remains aligned with actual cost incurrence, and that such recognition extends to projects
+
+developed under prior ERCOT interconnection processes, including the interim process, where
+
+comparable study completion, ERCOT review, and system impact determinations were achieved.
+Project No. 58481                       Adoption Order                           Page 35 of 270
+
+
+Commission Response
+
+The commission declines to adopt Intersect Power's recommendation to modify the adopted
+
+rule to state that satisfaction of the rule requirements constitute evidence of project maturity
+
+and commitment for ERCOT planning purposes because it is unnecessary. The adopted rule
+
+sets forth the requirements for a large load customer to be included in an interconnection
+
+study and allocated transmission capacity. Moreover, the purpose of the adopted rule is to
+
+standardize the criteria used for those two purposes so that large load customers that are
+
+similarly situated must meet the same criteria regardless of the utility involved.
+
+
+
+The commission declines to adopt Intersect Power's recommendation to modify the adopted
+
+rule such that projects meeting ERCOT Planning Guide Section 9 milestones are not subject
+
+to duplicative screening or reclassification, and that projects which satisfied substantially
+
+equivalent study, agreement, and financial commitment milestones under prior ERCOT
+
+processes are treated consistently for planning and classification purposes. The adopted rule
+
+does not require duplicative screening or reclassification. Rather, PGRR 145 establishes the
+
+requirements for inclusion in the batch zero interconnection study, recognizing that some
+
+large load customers may be in advanced stages of the interconnection process and therefore
+
+included as base load as opposed to studied load. The adopted rule appropriately requires
+
+that a large load customer included in the batch zero interconnection study execute and fund
+
+a SLLIA to secure the transmission capacity that is allocated to them at the conclusion of the
+
+batch zero interconnection study. This ensures that the loads that are driving the need for
+
+significant transmission investment in the state are appropriately securitizing costs and
+
+contributing to transmission cost recovery. It also ensures uniformity in the standards that
+Project No. 58481                        Adoption Order                            Page 36 of 270
+
+
+are applied to large load customers that have not yet energized as of the effective date of the
+
+adopted rule.
+
+
+
+The commission declines to adopt Intersect Power's recommendation to require changes to
+
+ERCOT Planning Guide Section 9. ERCOT Planning Guide Section 9 went through an
+
+extensive stakeholder process and was approved by the commission on June 18, 2026. The
+
+commission determines that ERCOT Planning Guide Section 9 appropriately resolves
+
+Intersect Power's recommendation to ensure that prior investments and commitments under
+
+executed interconnection agreements required under the pre-PGRR 145 ERCOT Planning
+
+Guide Section 9.5. However, the commission modifies the adopted rule to specify the
+
+conditions under which the interconnecting DSP or TSP may return financial security to a
+
+batch zero load to ensure that duplicative financial commitments are not required of a batch
+
+zero load.
+
+
+Larqe load customer and generation facility that share the same interconnection facilities
+
+TSP Cooperatives recommended clarifying the rule's applicability to a large load and a generation
+
+facility, which are not operating together as a private use network, will share the same
+
+interconnection facilities but will have separate metering and be separate transmission customers.
+
+Specifically, TSP cooperatives recommended that the rule should address how the transmission
+
+costs should be apportioned.
+
+
+Commission Response
+
+The commission declines to adopt TSP Cooperatives's recommendation to specify how
+
+transmission costs should be apportioned between a large load customer and a generation
+
+facility that are not operating together as a private use network but share the same
+Project No. 58481                        Adoption Order                         Page 37 of 270
+
+
+interconnection facilities because it is not necessary. The large load customer and the
+
+generation facility must each comply with the laws and rules applicable to their
+
+interconnection request.
+
+
+Require use ofa pro forma agreement
+
+AEP, CenterPoint, GVEC, and Oncor recommended modifying the proposed rule to require that
+
+the intermediate and interconnection agreements must be based on a commission-approved pro
+
+forma agreement.
+
+
+
+Google, Lancium, and TotalEnergies recommended making the intermediate agreement a standard
+
+form attachment to a full interconnection agreement, negotiated on the front end prior to batch
+
+submission, that defines the financial commitments and makes clear the exit provisions and
+
+refundability of securities throughout the batch process.
+
+
+Commission Response
+
+The commission agrees with commenters that recommended the commission adopt a
+
+standard interconnection agreement to promote uniformity across ERCOT. Accordingly,
+
+the commission modifies the adopted rule to replace "an interconnection agreement" with
+
+"a SLLIA" (standard large load interconnection agreement) and adds the following
+
+definition for SLLIA: "a commission-approved pro forma agreement that is executed by a
+
+large load customer, the interconnecting DSP, and, if different from the interconnecting
+
+DSP, the interconnecting TSP and that, at a minimum, complies with this section." The
+
+commission plans to adopt a pro forma SLLIA in a future rulemaking project.
+Project No. 58481                         Adoption Order                             Page 38 of 270
+
+
+The commission declines, at this time, to adopt commenters' recommendation to adopt a
+
+standard intermediate agreement because it is unnecessary. The requirements for an
+
+intermediate agreement and SLLIA are substantially similar such that, once adopted, the
+
+pro forma SLLIA may be modified to serve the purpose of an intermediate agreement.
+
+
+Expresshz assign roles and responsibilities
+
+GVEC, Joint TSPs, TEC, TPPA, and TSP Cooperatives recommended modifying the adopted rule
+
+to expressly assign, by rule, the roles and responsibilities identified in the intermediate agreement
+
+to the electric utility or electric utilities making the relevant upgrades or providing the relevant
+
+interconnection or services.
+
+
+
+GVEC specifically recommended that the DSP receive distribution-level CIAC, administer true
+
+ups for distribution-level facilities, provide retail delivery service, provide operational
+
+coordination, and billing oftransmission and distribution costs. GVEC recommended that the TSP
+
+must coordinate with ERCOT to initiate and monitor the interconnection study, remit ERCOT
+
+study costs on behalf of the large load customer, and receive and hold financial security posted by
+
+the large load customer for transmission equipment and upgrades. Additionally, the TSP should
+
+receive transmission-level CIAC, administer true ups for transmission-level facilities, and notify
+
+ERCOT of withdrawal, amendments, and non-utilized transmission capacity.
+
+
+
+TSP Cooperatives specifically recommended modifying proposed §25.194(d) to clarify which
+
+entities will perform which studies or direct ERCOT to adopt procedures to identi]* those
+
+responsibilities. Additionally, TSP Cooperatives recommended that each TSP should be required
+
+to interface directly with the large load customer, absent an agreement with the other TSP, to
+Project No. 58481                          Adoption Order                             Page 39 of 270
+
+
+collect financial security, contribution in aid of construction, or other financial commitment from
+
+the large load that is necessary to secure its expected costs.
+
+
+
+TPPA recommended modifying the proposed rule to specify: (1) which entity the large load
+
+customer must notify in the event of a withdrawal of all or a portion of its requested or contracted
+
+peak demand, and (2) which entity, whether the DSP or TSP, is responsible for notifying the large
+
+load customer of a failure to utilize capacity in accordance with its phased energization schedule.
+
+
+
+TEC recommended more broadly that the commission clarify which entity is to perform particular
+
+studies to avoid additional costs and duplicative work.
+
+
+
+Conversely, Oncor recommended that the proposed rule not dictate the specific split of
+
+responsibilities between DSPs and TSPs, but instead simply require that utilities in these multi-
+
+utility scenarios execute an agreement that allocates relevant critical interconnection
+
+responsibilities as the parties see fit. If its recommendation for a pro forma agreement is adopted,
+
+Oncor recommended modifying proposed §25.194(d) and proposed §25.194(f) to remove the
+
+statement that requires the parties to the intermediate and interconnection agreements to
+
+specifically identify each entity's responsibilities, including which entity will accept the study fee
+
+and financial security.
+
+
+Commission Response
+
+The commission declines to adopt GVEC, Joint TSPs, TEC, TPPA, and TSP Cooperatives'
+
+recommendation to modify the adopted rule to expressly assign, by rule, the roles and
+
+responsibilities of the interconnecting DSP and TSP. The commission determines that
+Project No. 58481                        Adoption Order                          Page 40 of 270
+
+
+assignment of roles and responsibilities is best addressed in the rulemaking project to adopt
+
+a SLLIA. The commission declines to adopt Oncor's recommendation to modify the adopted
+
+rule to remove the statement in §25.194(d) that requires the parties to the intermediate
+
+agreement to specifically identify each entity's responsibilities but does adopt the
+
+recommendation as it relates to §25.194(f) because the commission plans to adopt a pro
+
+forma large load interconnection agreement, which renders the language unnecessary for a
+
+SLLIA.
+
+Require attestation that the rule's requirements are met
+
+AEP recommended modifying the proposed rule to require large load customers to attest that they
+
+meet the requirements of the rule thereby ensuring that the large load customer acknowledges and
+
+accepts their obligations under the commission's large load interconnection standards. AEP noted
+
+that the attestation requirements proposed in §25.194(d)(4) and proposed §25.194(f)(4) should be
+
+expanded.
+
+Commission Response
+
+The commission adopts AEP's recommendation to modify the adopted rule to require large
+
+load customers to attest that they meet the requirements of the rule. Accordingly, the
+
+commission modifies the adopted rule to require that an intermediate agreement and SLLIA
+
+must be executed by an officer or official with binding authority over the large load customer
+
+and include an attestation that supports all disclosures required under the applicable
+
+agreement.
+Project No. 58481                        Adoption Order                             Page 41 of 270
+
+
+Unused funds
+
+CenterPoint recommended modifying the proposed rule to require that any funds not used to cover
+
+the cost ofthe interconnection be returned to the customer rather than used to offset rate base.
+
+
+Commission Response
+
+The commission declines to adopt CenterPoint's recommendation to modify the adopted rule
+
+to require that any funds not used to cover the cost of the interconnection be returned to the
+
+customer. In instances where a large load customer is allocated transmission capacity but
+
+withdraws its interconnection request, it is appropriate for the interconnecting DSP or TSP
+
+to retain some portion of financial security. At a time when ERCOT is experiencing
+
+significant growth, the magnitude of which is expected to require significant transmission
+
+infrastructure, it is appropriate to disincentivize loads from submitting an interconnection
+
+request for requested peak demand that is not needed by the large load customer. However,
+
+the commission modifies the adopted rule to remove the requirement to apply the unused
+
+funds as an offset to rate base. The appropriate treatment of unused funds will be addressed
+
+in Project No. 58000.
+
+
+Escrow account for refundable capital
+
+TEBA recommended that refundable funds be kept in an escrow account rather than held by the
+
+utility and released upon satisfaction of specific agreed-upon conditions and promptly returned to
+
+the depositing party.
+
+
+Commission Response
+
+The commission declines to adopt TEBA's recommendation that refundable funds be kept
+
+in an escrow account rather than held by the utility. However, the commission modifies the
+Project No. 58481                        Adoption Order                            Page 42 of 270
+
+
+adopted rule to specify that cash collateral posted as financial security must be held in a
+
+segregated, cash account bearing interest at a rate equal to at least the rate of the constant
+
+maturity one-month U.S. Treasury bill. The commission also modifies the adopted rule to
+
+more specifically describe the circumstances for returning financial security posted by a
+
+large load customer.
+
+
+Domestic industrial metal production facility
+
+Eolian recommended modifying the proposed rule to account for impacts to a domestic industrial
+
+metal production facility that is needed to address critical U.S. security issues and whether this
+
+facility will be able to locate in the ERCOT region under the proposed framework and ERCOT's
+
+batch study interconnection process.
+
+
+Commission Response
+
+The commission declines to adopt Eolian's recommendation to modify the adopted rule to
+
+account for impacts to a domestic industrial metal production facility. Exemptions based on
+
+customer type could result in preferential treatment based on the industry served and run
+
+contrary to the objective of standardizing the large load interconnection process.
+
+
+Thermal Performance, Roof Membrane Data, and Bienniel Spectral Monitoring
+
+Zach Bulter and EnerShield AI recommended the commission require facilities exceeding 75 MW
+
+to demonstrate ongoing roo f thermal performance monitoring, require roof membrane data in the
+
+spring water usage survey, establish biennial spectral monitoring for data centers, and direct the
+
+Texas Water Development Board (TWDB) to incorporate roof degradation as a variable in water
+
+demand projections. Zach Bulter and EnerShield AI also requested that the commission set this
+
+matter for public hearing under the commission's standing rules, designate EnerShield AI as a
+Project No. 58481                        Adoption Order                             Page 43 of 270
+
+
+party with standing to present testimony and respond to questions, and accept a research paper into
+
+the evidentiary record.
+
+
+Commission Response
+
+The commission declines to modify the rule in response to the comments of Zach Butler and
+
+EnerShield. The physical construction, monitoring, and passive energy use of the buildings
+
+themselves is beyond the noticed scope of this rulemaking, as is the spring water usage
+
+survey. The commission also declines to direct the Texas Water Development Board (TWDB)
+
+to incorporate roof degradation as a variable in water demand projections, because the
+
+commission does not have jurisdiction over the actions of TWBD.
+
+
+
+The commission also declines to set this matter for public hearing, as requested by Zach
+
+Butler and EnerShield, because setting a hearing would not accomplish the requested
+
+outcome. As described, the requested hearing contemplates named parties, sponsored
+
+testimony, and cross examination of witnesses. A public hearing in a rulemaking proceeding
+
+is not a contested case-style proceeding or an active exchange between named parties and
+
+commission staff. It is an opportunity for interested persons to offer oral comments on a
+
+proposed rule to be considered along with written comments.
+
+
+Proposed §25.194(a) -- Purpose and Scope
+
+Proposed §25.194(a) states the purpose of the rule is to set forth the standards and criteria for an
+
+electric utility, municipally owned utility, and electric cooperative to interconnect a large load
+
+customer to the ERCOT system. Additionally, nothing in the rule limits the authority of a
+
+municipally owned utility or an electric cooperative to impose electric service requirements for
+
+large loads on their systems in addition to the standards adopted under the rule.
+Project No. 58481                        Adoption Order                            Page 44 of 270
+
+
+Interconnections to the ERCOT transmission system versus a utilitv's distribution system
+
+CenterPoint recommended modifying proposed §25.194(a) to reflect that the rule applies to
+
+interconnections to the ERCOT transmission system and not to interconnections to distribution
+
+systems within ERCOT. CenterPoint recommended conforming changes to proposed §25.194(b).
+
+
+Commission Response
+
+The commission declines to adopt CenterPoint's recommendation to modify proposed
+
+§25.194(a) to reflect that the rule applies to interconnections to the ERCOT transmission
+
+system and not to interconnections to distribution systems within ERCOT. Limiting the
+
+rule's applicability to interconnections at transmission voltage would not appropriately
+
+capture all entities involved in large load interconnections. Further, it is the size of the load,
+
+and not whether such load is interconnected at transmission voltage, that causes
+
+transmission system impacts.
+
+
+Proposed §25.194(b) -- Applicability
+
+Proposed §25.194(b) specifies that the rule applies to a large load customer that seeks: (1) a new
+
+interconnection that is equal to or exceeds 75 megawatts (MW); (2) an expanded interconnection
+
+that equals or exceeds 75 MW for the first time; and (3) an expanded interconnection that exceeds
+
+75 MW by 75 MW or more.
+
+
+Replace "and" with "or"
+
+PPM recommended modifying proposed §25.194(b)(2) by replacing "and" with "or" to clarify the
+
+rule applies to a large load customer meeting any of the three conditions in proposed §25.194(b).
+Project No. 58481                         Adoption Order                             Page 45 of 270
+
+
+Commission Response
+
+The commission adopts PPM's recommendation to modify adopted §25.194(b)(1) by
+
+replacing "and" with "or" to clarify that the rule applies to a large load customer meeting
+
+any of the listed conditions in adopted §25.194(b).
+
+
+Laree load interconnection requests at a sinide site.
+
+Constellation recommended modifying proposed §25.194(b) to clarify that each subsection of
+
+applicability relates to large load interconnection requests at a single site to avoid any
+
+misinterpretation that a single large load customer entity that seeks various interconnection
+
+requests at separate sites (for distinct loads) totaling 75 MW or more could be subject to the rule.
+
+
+Commission Response
+
+The commission adopts Constellation's recommendation to clarify that each subsection of
+
+applicability relates to a large load interconnection request at a single site.
+
+
+Future action to lower the threshold of applicability
+
+Sierra Club recommended modifying proposed §25.194(b) to add a statement that the commission
+
+may, through future action, lower the threshold of applicability of this rule.
+
+
+Commission Response
+
+The commission declines to adopt Sierra Club's recommendation to add a statement that the
+
+commission may, through future action, lower the threshold of applicability of this rule
+
+because it is unnecessary. PURA §37.0561 authorizes the commission to use a lower threshold
+
+and nothing in the adopted rule limits the commission's ability to exercise that authority in
+
+the future.
+Project No. 58481                        Adoption Order                            Page 46 of 270
+
+
+Limit applicabilitv to incremental load additions at sites exceeding 75 MW for the first time
+
+ERCOT Steel Mills, PPM, and TXOGA, recommended modifying proposed §25.194(b) to limit
+
+the rule's applicability to incremental load additions at sites equaling or exceeding 75 MW for the
+
+first time.
+
+
+
+Specifically, ERCOT Steel Mills recommended modifying proposed §25.194(b)(2) to state the
+
+proposed rule applies to existing customers below 75 MW only when the customer adds at least
+
+75 MW of new load through an expansion.
+
+
+
+PPM recommended modifying proposed §25.194(b)(2) to read: "an expanded interconnection that
+
+would equal or exceed 75 MW within 10 years of the customer's initial energization." PPM
+
+reasoned that this change recognizes slow-growing nature of midstream oil and gas facilities while
+
+preventing gamesmanship, noting that midstream oil and gas facilities may have multiple meters
+
+or distributed equipment that collectively exceed 75 MW if components are netted as they are
+
+installed over time.
+
+
+
+TXOGA recommended modifying proposed §25.194(b)(2) to read "an expanded interconnection
+
+for a facility that started operation after June 1,2025. that equals or exceeds 75 MW for the first
+
+time."
+
+
+Commission Response
+
+The      commission    declines   to   adopt ERCOT       Steel Mills,   PPM,     and   TXOGA's
+
+recommendation to limit the adopted rule's applicability to incremental load additions at
+
+sites equaling or exceeding 75 MW for the first time. Consistent with PURA §37.0561(c), the
+Project No. 58481                       Adoption Order                               Page 47 of 270
+
+
+commission determines that an expansion exceeding 75 MW for the first time and an
+
+expansion by 75 MW or more significantly impacts transmission needs. Therefore, it is
+
+appropriate to subject these loads to the interconnection standards set forth in the adopted
+
+rule. The adopted rule strikes an appropriate balance of ensuring that interconnection
+
+requests significantly impacting transmission needs are required to comply with the adopted
+
+rule while not requiring compliance for incremental requests that do not significantly impact
+
+transmission needs in that the adopted rule does not require compliance for loads that
+
+expand by less than 75 MW unless the load is surpassing 75 MW for the first time.
+
+
+Clarify applicabilitv to expansions at sites alreadv exceeding 75MW
+
+ERCOT Steel Mills, GVEC, TEC, and Vistra recommended modifying proposed §25.194(b)(3) to
+
+clarify that the rule applies to an expanded interconnection that exceeds 75 MW and is expanding
+
+by 75 MW or more.
+
+
+Commission Response
+
+The commission adopts ERCOT Steel Mills, GVEC, TEC, and Vistra's recommendation to
+
+modify adopted §25.194(b)(1)(C) to clarify that the rule applies to an expanded
+
+interconnection that exceeds 75 MW and is expanding by 75 MW or more.
+
+
+Broaden applicability to incremental load additions
+
+OPUC and TSP Cooperatives recommended modifying proposed §25.194(b) to require all
+
+increases or expansions of large loads to meet the requirements of the rule if the load is greater
+
+than 75 MW to avoid unintended consequences of loads growing piecemeal or dividing end-user
+
+sites into less than 75 MW parcels to avoid the rules. Alternatively, OPUC recommended including
+
+some type of evaluation on transmission needs at each request for interconnection.
+Project No. 58481                        Adoption Order                             Page 48 of 270
+
+
+Commission Response
+
+The commission declines to adopt OPUC and TSP Cooperative's recommendation to modify
+
+adopted §25.194(b) to require all increases or expansions of large loads to meet the
+
+requirements of the rule if the load is greater than 75 MW. Consistent with PURA
+
+§37.0561(c),the adopted rule strikes an appropriate balance of ensuring that interconnection
+
+requests significantly impacting transmission needs are required to comply with the adopted
+
+rule's requirements while not requiring compliance for incremental requests that do not
+
+significantly impact transmission needs.
+
+
+Critical gas load not subiect to rule requirements
+
+Targa recommended modifying proposed §25.194(b) to add a provision stating that the rule does
+
+not apply to a large load customer that, prior to June 1,2026, whose large load would be considered
+
+a Critical Gas Load under 16 Texas Administrative Code §3.65(b), has executed an interconnection
+
+agreement with an interconnecting DSP or an interconnecting TSP, and has satisfied all CIAC and
+
+financial security requirements as stipulated in the previously executed interconnection agreement.
+
+
+Commission Response
+
+The commission declines to adopt Targa's recommendation to modify adopted §25.194(b) to
+
+exempt certain critical gas loads from the requirements of the adopted rule. Exemptions
+
+based on customer type could result in preferential treatment based on the industry served
+
+and run contrary to the objective of standardizing the large load interconnection process.
+
+
+Applicability to loads currentlv in the interconnection queue
+
+APA and ACP, BKV, Constellation, Crow, DCC, HIF, Hut 8, Intersect Power, Landmark and
+
+EcoPartner, Schaper Energy, TEC, Thor, TIEC, Tract, and TSP Cooperatives recommended
+Project No. 58481                        Adoption Order                            Page 49 of 270
+
+
+modifying proposed §25.194(b) to address the rule's applicability to large load customers that are
+
+in the interconnection queue (i.e., submitted an interconnection request and are not yet approved
+
+to energize).
+
+
+
+Specifically, TEC and TSP Cooperatives recommended clarifying which large load customers
+
+currently under development will be subject to the new rules and on what date; and whether the
+
+standards will apply to large load customers currently in the interconnection queue.
+
+
+Commission Response
+
+The commission agrees with commenters that recommended modifying the adopted rule to
+
+identify which large load customers currently in the interconnection queue are subject to the
+
+rule and on what terms. Accordingly, the commission modifies the adopted rule to clarify
+
+that the rule applies to a large load customer that has not energized as of the effective date
+
+of the adopted rule. The commission also modifies the adopted rule to add definitions for
+
+batch zero load and batch zero interconnection study; and adds a new subsection addressing
+
+treatment of batch zero load.
+
+
+
+Adopted §25.194(h)(3) requires a batch zero load to execute a SLLIA to reserve ERCOT's
+
+allocation of capacity as contracted peak demand and provides that a batch zero load that
+
+executed an interconnection agreement on or before June 1, 2025 must pay for direct
+
+interconnection costs in accordance with the previously executed interconnection agreement
+
+and is not subject to additional costs under adopted §25.194(f)(2)(C). All other financial
+
+commitments and obligations under adopted §25.194(f) apply to a batch zero load.
+Project No. 58481                         Adoption Order                            Page 50 of 270
+
+
+The commission further adds adopted §25.194(h)(1)(D), which provides that any previously
+
+posted financial security or cash payment may be credited on a dollar-for-dollar basis to a
+
+large load customer's financial commitments and obligations under adopted §25.194(f). The
+
+commission also modifies the adopted rule to specify the consequences if a batch zero load
+
+fails to execute a SLLIA in compliance with the rule and specifies the circumstances under
+
+which financial security may be returned to a batch zero load.
+
+
+
+Finally, the commission modifies the adopted rule to specify that allinformation provided or
+
+attested to by a large load customer under ERCOT Planning Guide Section 9, as of the
+
+effective date of this section, is subject to audit and verification by ERCOT and commission
+
+staff. A large load customer or its interconnecting TSP or interconnecting DSP that fails to
+
+comply with ERCOT or commission staffs audit process or that fails to produce responsive
+
+documentation supporting the completeness and accuracy of information provided under an
+
+intermediate agreement may be found in violation of commission rules and subject to
+
+enforcement action, including the imposition of administrative penalties or loss of
+
+transmission capacity allocated to the large load customer.
+
+
+Execution ofan agreement prior to effective date of'rule
+
+APA and ACP, Crow, DCC, Google, Lancium, and TotalEnergies, HIF, Hut 8, Landmark and
+
+EcoPartner, Thor, and TIEC recommended modifying proposed §25.194(b) such that the rule does
+
+not apply to, or otherwise exempts, large load customers that executed an interconnection
+
+agreement prior to the effective date ofthe rule provided the large load customer satisfied all CIAC
+
+and financial security obligations under that agreement.
+Project No. 58481                        Adoption Order                             Page 51 of 270
+
+
+Specifically, TIE recommended modifying proposed §25.194(b) to create an exception to the
+
+rule's applicability for large load customers who were fully studied under the requirements in place
+
+at the time and who executed an interconnection agreement prior to the effective date of the rule.
+
+TIEC reasoned that in many instances, the only reason a site has not been able to energize is
+
+because it is waiting for the completion of transmission facilities. TIEC further asserted that this
+
+is particularly true for many large loads included in the Permian Basin Reliability Plan, who may
+
+not be allowed to energize until upgrades are completed in 2030.
+
+
+
+Similarly, APA and ACP recommended explicit grandfathering treatment for projects with an
+
+executed interconnection agreement prior to adoption of the proposed rule. Landmark and
+
+EcoPartner recommended that a large load customer should be exempt from new costs or financial
+
+security requirements imposed by the proposed rule if the customer has executed an
+
+interconnection agreement prior to the effective date of the rule and has satisfied all CIAC and
+
+financial security obligations.
+
+
+
+Crow recommended adding language expressly stating the rule requirements do not apply to a
+
+large load customer that has executed an interconnection agreement, posted financial security,
+
+demonstrated site control, and demonstrated project advancement through other financial
+
+commitments, such as long lead equipment deposits. HIF recommended adding language expressly
+
+stating the intermediate agreement financial security in proposed §25.194(d)(10) and the
+
+interconnection agreement fee in proposed §25.194(f)(7) do not apply to a large load customer
+
+with an executed interconnection agreement, posted security, funded CIAC, and demonstration of
+
+site control, and that these financial obligations do not apply retroactively. Hut 8 recommended
+Project No. 58481                         Adoption Order                              Page 52 of 270
+
+
+that large load customer is not required to post further financial security or the interconnection fee
+
+in proposed §25.194(f)(7) if the customer has executed an interconnection agreement and funded
+
+CIAC on schedule, and if all studies are completed and confirmed by ERCOT.
+
+
+
+Google, Lancium, and TotalEnergies recommended modifying proposed §25.194(a) to state that
+
+any projects that have executed a signed agreement with the TSP prior to the effective date of the
+
+rule and have satisfied all CIAC and financial security payment obligations in accordance with the
+
+timelines specified in that agreement by the effective date of the rule should be exempt from
+
+additional costs or financial security required by the standards in the rule.
+
+
+
+Thor further recommended that the rule should not apply to a large load customer that has executed
+
+an intermediate agreement prior to the effective date o f the rule.
+
+
+Commission Response
+
+The commission declines to adopt commenters' recommendations to exempt from the
+
+adopted rule's requirements large load customers that executed an agreement, including an
+
+interconnection agreement, and satisfied financial obligations prior to the effective date of
+
+the adopted rule. Agreements executed prior to the adoption of this rule and the financial
+
+obligations under those agreements lack uniformity. Exempting a large load customer with
+
+an executed agreement, regardless of the form or terms of that agreement, would run
+
+contrary to the statutory objective of standardizing the large load interconnection process.
+
+Further, the Legislature expressly imposed an applicability limitation in one section of SB 6
+
+(Section 7, stating that PURA §35.004(c-1) applies only to an interconnection agreement
+
+entered into on or after the effective date of this Act), but declined to include a similar
+Project No. 58481                         Adoption Order                              Page 53 of 270
+
+
+provision limiting the applicability of PURA §37.0561. Therefore, stating that the rule does
+
+not apply to, or otherwise exempting, large load customers that executed agreements and
+
+satisfied financial obligations prior to the effective date of the adopted rule from the rule's
+
+requirements would be inconsistent with statute.
+
+
+
+However, the commission agrees the adopted rule should not require a large load customer
+
+to post financial security or pay costs a second time for obligations already satisfied.
+
+Accordingly, the commission modifies the adopted rule to add a new subsection addressing
+
+treatment of batch zero load, as described in the commission's response above to commenters
+
+that recommended the commission identify which large load customers currently in the
+
+interconnection queue are subject to the rule and on what terms.
+
+
+Request tor interconnection as of the effective date of'the rule
+
+BKV, Constellation, Intersect Power, Schaper Energy, and Tract recommended modifying
+
+proposed §25.194(b) such that the rule applies only to large load customers requesting a new or
+
+expanded interconnection as of the effective date of the rule. Constellation asserted that this
+
+approach is consistent with legislative intent and that applicability to all pending interconnection
+
+requests which have not energized or reached their peak requested demand as of the effective date
+
+of the rule would impose retroactive rulemaking on large load applicants which have been
+
+operating under the existing ERCOT Protocols and Planning Guide requirements for large load
+
+interconnection, including rules which pre-date Senate Bill (SB) 6.
+
+
+
+Intersect Power and Schaper Energy recommended including an explicit statement that the rule
+
+applies prospectively to large load interconnection requests initiated on or after the effective date,
+Project No. 58481                      Adoption Order                          Page 54 of 270
+
+
+and does not require re-evaluation of projects that are already subject to an executed
+
+interconnection agreement, including an SGIA governing a co-located configuration, where such
+
+agreements were executed and materially relied upon prior to the implementation of PGRR 115
+
+on December 15, 2025.
+
+
+Commission Response
+
+The commission declines to adopt BKV, Constellation, Intersect Power, Schaper Energy, and
+
+Tract's recommendation to modify adopted §25.194(b) such that the rule applies only to
+
+large load customers requesting a new or expanded interconnection as of the effective date
+
+of the rule. PURA §37.0561 directs the commission to establish interconnection standards
+
+applicable to large load customers "requesting" a new or expanded interconnection. The use
+
+of the present participle as a verb tense shows an ongoing or continuous action. The statute
+
+does not distinguish between a large load customer that submits an interconnection request
+
+before or after the effective date ofthe commission's rules. The Legislature's use of the term
+
+"requesting" encompasses an ongoing action and therefore includes large load customers
+
+that have initiated the interconnection process but not yet energized.
+
+
+
+The commission also declines to adopt Intersect Power and Schaper Energy's
+
+recommendation to include an explicit statement that the adopted rule should not require
+
+re-evaluation of projects that are already subject to an executed interconnection agreement
+
+because any determination ofwhether re-evaluation is necessary should be made by ERCOT
+
+based on reliability.
+Project No. 58481                         Adoption Order                           Page 55 of 270
+
+
+Request ibr interconnection as of June 20, 2025
+
+Cholla recommended that application to loads that submitted interconnection requests prior to June
+
+20,2025 is retroactive.
+
+
+Commission Response
+
+The commission declines to adopt Cholla's recommendation to limit the rule's applicability
+
+only to large load customers requesting a new or expanded interconnection as of June 20,
+
+2025. PURA §37.0561 directs the commission to establish interconnection standards
+
+applicable to large load customers "requesting" a new or expanded interconnection. The use
+
+of the present participle as a verb tense shows an ongoing or continuous action. The statute
+
+does not distinguish between large load customers based on when the large load customer
+
+submitted an interconnection request. Moreover, Legislature's use of the term "requesting"
+
+encompasses an ongoing action and therefore includes large load customers that have
+
+initiated the interconnection process but not yet energized.
+
+
+Applicability to large load customers included in 2026 Regional Transmission Plan (RTP)
+
+compliance plan
+
+LCRA recommended modifying the proposed rule to recognize agreements signed with large load
+
+customers that were in effect ahead ofthe 2026 RTP compliance plan date ofApril 1,2026. LCRA
+
+reasoned that projects LCRA reported in this category are in advanced stages of development and
+
+should not be subject to any activities that reset progress.
+
+
+Commission Response
+
+The commission declines to adopt LCRA's recommendation to modify the adopted rule to
+
+recognize agreements signed with large load customers that were in effect ahead of the 2026
+Project No. 58481                      Adoption Order                           Page 56 of 270
+
+
+RTP compliance plan date of April 1, 2026 for the same reasons addressed in responses to
+
+other commenters recommending applicability limitations. However, the commission agrees
+
+with LCRA that this subset of large load customers should not lose the benefit of obligations
+
+already satisfied. Accordingly, the commission modifies the adopted rule to add a subsection
+
+addressing the treatment of large load customers included in the 2026 RTP compliance plan.
+
+
+
+
+Specifically, the commission modifies the adopted rule to provide that an interconnecting
+
+DSP or TSP that executed an agreement with a large load customer under §25.370(g),
+
+relating to ERCOT Large Load Forecasting Criteria, must return any financial security that
+
+was previously posted by the large load customers and either return or credit any cash
+
+payment that was previously provided by the large load customer on a dollar-for-dollar basis
+
+to the large load customer's financial commitments and obligations under this section.
+
+Additionally, the commission modifies the adopted rule to provide that a large load customer
+
+that executed an agreement under §25.370(g) must withdraw its interconnection request or
+
+execute a superseding intermediate agreement or SLLIA, as applicable. For a large load
+
+customer that executed an agreement under §25.370(g) and is also a batch zero load, the
+
+large load customer must comply with the adopted rule's requirements for a batch zero load.
+
+
+Provide advance notice befbre new requirements for applicants in the interconnection queue
+
+Thor recommended the commission provide that large load customers already in the
+
+interconnection queue receive at least 12 months' advance notice before any new regulation or
+
+material modification affecting transient behavior, ramp rate constraints, or interconnection
+
+procedures take effect.
+Project No. 58481                         Adoption Order                          Page 57 of 270
+
+
+Commission Response
+
+The commission declines to adopt Thor's recommendation to add a provision requiring 12-
+
+month advance notice before any new regulation or material modification affecting transient
+
+behavior, ramp rate constraints, or interconnection procedures take effect for large load
+
+customers in the interconnection queue. Large load customers had more than 12 months of
+
+notice that regulatory changes to large load interconnection requirements were forthcoming.
+
+SB 6 took effect on June 1, 2025, more than 12 months prior to the adoption of §25.194.
+
+Moreover, commission staff has actively engaged with the public during that period of time,
+
+holding workshops and taking public comment on more than one discussion draft of the
+
+proposed rule. Further, it is not unusual for regulatory changes to affect existing contracts
+
+or pending projects. Contracts commonly address this possibility through change-in-law
+
+provisions that allocate the risks and responsibilities associated with future legal or
+
+regulatory changes.
+
+
+Proposed §25.194(c) -- Definitions
+
+Proposed §25.194 sets forth definitions that are specific to the proposed rule.
+
+
+Add definition for financial securitv· threshold
+
+Google, Lancium, and TotalEnergies recommended adding a definition for financial security
+
+threshold and defining the phrase to mean the maximum financial security required through the
+
+interconnection process shall not exceed $50,000 per MW.
+
+
+Commission Response
+
+The commission declines to adopt Google, Lancium, and TotalEnergies' recommendation to
+
+add a definition for financial security threshold to mean the maximum financial security
+Project No. 58481                          Adoption Order                               Page 58 of 270
+
+
+required through the interconnection process shall not exceed $50,000 per MW because it is
+
+unnecessary. The financial security requirements are detailed elsewhere in the adopted rule
+
+and substantive requirements should not be included in a definition.
+
+
+Add definition for required disclosures
+
+CenterPoint recommended adding a definition for required disclosures and including the
+
+requirements from proposed §25.194(d)(1) through (8). If its recommended change is adopted,
+
+CenterPoint also recommended striking proposed §25.194(d)(1) through (8) and proposed
+
+§25.198(f)(1) through (8) because those separate provisions would be redundant.
+
+
+Commission Response
+
+The commission declines to adopt CenterPoint's recommendation to add a definition for
+
+required disclosures. Instead, the commission adds the title "Required disclosures" as a
+
+paragraph before adopted §25.194(d)(1)(AHI) and adopted §25.194(f)(1)(AHI), which set
+
+forth the disclosures a large load customer must make to the interconnecting DSP or
+
+interconnecting TSP as part of a large load interconnection request. This approach provides
+
+greater clarity and notice of what information the large load customer must disclose.
+
+
+Proposed §25.194(c)(1) --Definition for backup generating facilities
+
+Proposed §25.194(c)(1) defines backup generating facilities as generation facilities or energy
+
+storage facilities that are not capable of operating, or are not configured to operate, in parallel with
+
+the ERCOT system and cannot export energy to the ERCOT system.
+Project No. 58481                         Adoption Order                              Page 59 of 270
+
+
+Threshold of on-site demand served
+
+CenterPoint recommended modifying proposed §25.194(c)(1) to define backup generating
+
+facilities as those that serve at least 50 percent of on-site demand consistent with the definition in
+
+PURA §37.0561(e).
+
+
+Commission Response
+
+The commission declines to adopt CenterPoint's recommendation to modify the adopted rule
+
+to define backup generating facilities as those that serve at least 50% of on-site demand.
+
+PURA §37.0561(e) defines "on-site backup generating facilities" as "generation that is not
+
+capable of exporting energy to the ERCOT system and that, in the aggregate, can serve at
+
+least 50% of on-site demand. The statute's 50% threshold applies to the narrower category
+
+of on-site backup generating facilities and is relevant to the statutory provisions directing
+
+ERCOT to establish thresholds and procedures under which large load customers may be
+
+directed to deploy on-site backup generating facilities or curtail load during an energy
+
+emergency. However, it is appropriate to distinguish between the broader category of
+
+backup generating facilities and the narrower category of on-site backup generating
+
+facilities. Accordingly, the commission modifies the adopted rule to add a definition for on-
+
+site backup generating facilities.
+
+
+Proposed §25.194(c)(2) -- Definition for competitively sensitive information
+
+Proposed §25.194(c)(2) defines competitively sensitive information to include exact site locations,
+
+such as parcel identifiers or property boundaries; commercial terms, such as pricing or internal
+
+development prioritization; proprietary architectural, operational, or compute-deployment
+
+strategies; and financing structures. The definition for competitively sensitive information
+
+excludes the identity of a large load customer; general site location, such as load zone; requested
+Project No. 58481                         Adoption Order                              Page 60 of 270
+
+
+or contracted peak demand; timing of energization; or whether an interconnection request is
+
+associated with the same applicant or affiliated entities.
+
+
+Alien with definition of proprietarv customer information
+
+CenterPoint recommended modifying proposed §25.194(c)(2) to align with the definition of
+
+"proprietary customer information" under §25.272, relating to Code of Conduct for Electric
+
+Utilities and Their Competitive Affiliates, by removing the statement ofwhat competitive sensitive
+
+information does not include and replacing it with a statement that competitive sensitive
+
+information is a subset of proprietary customer information.
+
+
+Commission Response
+
+The commission declines to adopt CenterPoint's recommendation to align the definition for
+
+competitively sensitive information with the definition for proprietary customer information
+
+under §25.272, relating to Code of Conduct for Electric Utilities and Their Competitive
+
+Affiliates. Instead, the commission removes the definition for competitively sensitive
+
+information to ensure that competitively sensitive information may be evaluated based on
+
+the specific information and consistent with applicable laws.
+
+
+Modifv the list of competitivelv sensitive information
+
+Constellation, DCC, DC Energy, Google, Lancium, and TotalEnergies, and Targa recommended
+
+modifying proposed §25.194(c)(2) by revising the list of information that is included in and the
+
+list of information that is excluded from the definition for competitively sensitive infonnation.
+
+
+
+Specifically, Constellation recommended: (i) specifying that load ramp information (ifdesignated
+
+as confidential by the interconnecting large load entity) is competitively sensitive information, (ii)
+Project No. 58481                          Adoption Order                               Page 61 of 270
+
+
+removing requested or contracted peak demand from the list of information that is not
+
+competitively sensitive, and (iii) modifying to reflect that it is the timing ofinitial energization that
+
+is not competitively sensitive information. Constellation also recommended adding a statement
+
+that for large load customers impacted by the requirements of PURA §39.169, the following
+
+information, if so determined by the commission, is not considered competitively sensitive:
+
+requested or contracted peak demand or load ramp.
+
+
+
+DC Energy and Targa recommended including rather than excluding, the specific identity of the
+
+large load, site location, peak demand, and anticipated energization date. Targa also recommended
+
+removing the list of information that is not competitively sensitive. Targa reasoned that the Texas
+
+Public Information Act, Chapter 552 of the Texas Government Code, excepts from disclosure
+
+commercial or financial information for which it is demonstrated based on specific factual
+
+evidence that disclosure would cause substantial competitive harm to the person from whom the
+
+information was obtained.
+
+
+
+DCC recommended striking "contracted peak demand" from the list of exclusions because this
+
+information reflects core business decisions and could be considered competitively sensitive.
+
+
+
+Google, Lancium, and TotalEnergies recommended removing from the list of competitively
+
+sensitive information: commercial terms, such as pricing or internal development prioritization,
+
+proprietary architectural, operational, or compute-deployment strategies. Google, Lancium, and
+
+TotalEnergies also recommended specifying that financing structure is competitively sensitive
+
+information as it relates to financial viability for creditworthiness.
+Project No. 58481                         Adoption Order                        Page 62 of 270
+
+
+Commission Response
+
+The commission declines to adopt Constellation, DCC, DC Energy, Google, Lancium, and
+
+TotalEnergies, and Targa's recommendation to revise the list of information that is included
+
+in and the list of information that is excluded from the definition for competitively sensitive
+
+information. Instead, the commission removes the definition for competitively sensitive
+
+information to ensure that competitively sensitive information may be evaluated on the
+
+specific information and consistent with applicable laws.
+
+
+Proposed §25.194(c)(3) --Definition for contracted peak demand
+
+Proposed §25.194(c)(3) defines contracted peak demand as the total non-coincident peak demand
+
+that a large load customer requests that an interconnecting DSP or an interconnecting TSP serve
+
+at a site as stated in the interconnection agreement.
+
+
+Calculation for co-located loads
+
+CCNG recommended modifying proposed §25.194(c)(3) to provide that contracted peak demand
+
+for co-located loads is calculated based on the net demand impact. CCNG reasoned that making
+
+this modification would more appropriately account for the reliability benefits of co-located
+
+generation. CCNG also recommended conforming changes to proposed §25.194(c)(10).
+
+
+Commission Response
+
+The commission declines to adopt CCNG's recommendation to modify the adopted rule to
+
+provide that contracted peak demand for co-located load is calculated based on the net
+
+demand impact because the transmission system must account for the load's maximum non-
+
+coincident peak demand in various transmission planning scenarios which may or may not
+
+include the generation resource. Moreover, in the event that the generation resource that is
+Project No. 58481                      Adoption Order                           Page 63 of 270
+
+
+co-located with the large load customer is not available to supply power to the large load
+
+customer, the large load customer could consume power from the ERCOT system up to its
+
+maximum non-coincident peak demand thus utilizing transmission infrastructure.
+
+
+Equivalent service extension or other aszreement and demand not requested to be served
+
+Constellation recommended modifying proposed §25.194(c)(3) to state that the contracted peak
+
+demand is the total non-coincident peak demand a large load customer requests service for as
+
+stated in an interconnection agreement and/or equivalent service extension or other agreement.
+
+Constellation also recommended adding a sentence that states any demand at the site for which a
+
+large load customer does not request to be served by an interconnecting DSP or TSP shall not be
+
+included in the definition of"contracted peak demand."
+
+
+Commission Response
+
+The commission declines to adopt Constellation's recommendations to modify the definition
+
+for contracted peak demand. PURA §37.0561 does not distinguish between large load
+
+customers based on whether they co-locate with generation and the commission is not
+
+persuaded that the adopted rule should distinguish between large load customers that co-
+
+locate and those that do not. The transmission system must account for the load's maximum
+
+non-coineident peak demand in various transmission planning scenarios which may or may
+
+not include the generation resource. Moreover, in the event that the generation resource that
+
+is co-located with the large load customer is not available to supply power to the large load
+
+customer, the large load customer could consume power from the ERCOT system up to its
+
+maximum non-coincident peak demand thus utilizing transmission infrastructure.
+Project No. 58481                          Adoption Order                               Page 64 of 270
+
+
+Replace amount requested with amount ultimatelv approved
+
+TPPA recommended modifying proposed §25.194(c)(3) to state that contracted peak demand may
+
+not always reflect the amount initially requested, but instead the amount ultimately approved by
+
+the interconnecting DSP, interconnecting TSP, and the large load customer at the time the
+
+interconnection agreement is executed.
+
+
+Commission Response
+
+The commission agrees with TPPA that the contracted peak demand may not always reflect
+
+the amount requested. Accordingly, the commission modifies the adopted rule to add "and
+
+is ultimately allocated by ERCOT, as stated in the SLLIA" to the definition of contracted
+
+peak demand.
+
+
+Proposed §25.194(c)(4) -- Dejinition for interconnecting distribution service provider (DSP)
+
+Proposed §25.194(c)(4) defines interconnecting DSP as the electric utility, municipally owned
+
+utility, or electric cooperative that is certificated to provide retail electric delivery service at the
+
+location in which the large load customer seeks to interconnect.
+
+
+Clarifv interconnecting DSP is certificated to provide retail electric deliverv service at the location
+
+of the consuminH fhcilitv
+
+TNMP recommended modifying proposed §25.194(c)(4) to state that the interconnecting DSP is
+
+the electric utility, municipally owned utility, or electric cooperative that is certificated to provide
+
+retail electric delivery service at the location in which the large load customer's consuming facility
+
+is located instead of the location in which the large load customer seeks to interconnect.
+Project No. 58481                        Adoption Order                            Page 65 of 270
+
+
+Commission Response
+
+The commission adopts TNMP's recommendation to modify the adopted rule to specify that
+
+the interconnecting DSP is one that provides retail electric delivery service at the location in
+
+which the "large load customer's consuming facility is located" rather than the location the
+
+large load customer "seeks to interconnect."
+
+
+Recognize not everv large load customer will take service from an interconnecting DSP
+
+Vistra recommended modifying proposed §25.194(c)(4) to recognize that not every large load
+
+customer will take service from an interconnecting DSP. As an example, Vistra cited self-service,
+
+self-generators, incidence of employment or tenancy, electric generation equipment lessor or
+
+operator arrangements, non-settled generators, connected island, and export only approaches to
+
+self-limiting new co-located generation facilities. Additionally, Vistra recommended that the
+
+proposed rule allow flexibility for a co-located generator to be a party to the intermediate and/or
+
+interconnection agreement. Vistra also recommended conforming changes to proposed
+
+§25.194(c)(6),(c)(8), (d), (d)(2)(A),(e)(1) through (4),(f), and (f)(2)(A).
+
+
+Commission Response
+
+The commission declines to adopt Vistra's recommendation to modify the adopted rule by
+
+recognizing that not every large load customer will take service from an interconnecting
+
+DSP. All large load customers that interconnect to the ERCOT system must take service
+
+from an interconnecting DSP.
+Project No. 58481                        Adoption Order                             Page 66 of 270
+
+
+Proposed §25.194(c)(5) - Definition for interconnecting transmission service provider (TSP)
+
+Proposed §25.194(c)(5) defines interconnecting TSP as the electric utility, municipally owned
+
+utility, or electric cooperative that owns and operates the facilities necessary to interconnect the
+
+large load customer to the ERCOT system.
+
+
+Clarifr interconnecting TSP owns and operates facilities necessary for transmission of electricitv
+
+TNMP recommended modifying proposed §25.194(c)(5) to state that the interconnecting TSP is
+
+the electric utility, municipally owned utility, or electric cooperative that owns and operates the
+
+facilities necessary for transmission of electricity within ERCOT instead ofthe facilities necessary
+
+to interconnect the large load customer to the ERCOT system. TNMP reasoned that this change
+
+hannonizes the new rule with PURA and existing commission rules, which require the customer
+
+be served by the retail electric utility certificated for the territory in which the customer's
+
+consuming facility is located.
+
+
+Commission Response
+
+The commission declines to adopt TNMP's recommendation to modify the adopted rule to
+
+state that the interconnecting TSP is the electric utility, municipally owned utility, or electric
+
+cooperative that owns and operates the facilities necessary for transmission of electricity
+
+within ERCOT instead of the facilities necessary to interconnect the large load customer to
+
+the ERCOT system. Instead, the commission modifies the definition for interconnecting TSP
+
+to state an interconnecting TSP is the electric utility, municipally owned utility, or electric
+
+cooperative that owns or operates the equipment or facilities necessary to transmit or
+
+distribute electricity to the large load customer. This approach aligns with the definition in
+
+§25.5, relating to Definitions, as recommended by TNMP, but also distinguishes between a
+Project No. 58481                       Adoption Order                           Page 67 of 270
+
+
+TSP involved in providing service to a large load customer from other TSPs in the ERCOT
+
+region.
+
+
+Recognize more than one entity may meet the definition for interconnecting TSP
+
+Constellation recommended modifying proposed §25.194(c)(5) to add that the interconnecting
+
+TSP may not be same entity as the applicable DSP and may not be the TSP providing generation
+
+and/or transmission service to the applicable DSP.
+
+
+Commission Response
+
+The commission declines to adopt Constellation's recommendation to add to the definition
+
+for interconnecting TSP that the interconnecting TSP may not be the same entity as the
+
+applicable DSP and may not be the TSP providing generation or transmission service to the
+
+applicable DSP because it is unnecessary. The adopted rule already distinguishes between
+
+and separately defines the interconnecting DSP and the interconnecting TSP.
+
+
+Larie load co-located with a eeneration resource
+
+Vistra recommended modifying proposed §25.194(c)(5) by specifying that for large load
+
+customers co-located with a generation resource, the interconnecting TSP is the TSP that
+
+interconnects the generation resource to the ERCOT system.
+
+
+Commission Response
+
+The commission declines to adopt Vistra's recommendation to modify the adopted rule to
+
+specify that for large load customers co-located with a generation resource, the
+
+interconnecting TSP is the TSP that interconnects the generation resource to the ERCOT
+
+system because this may not always be the case. The adopted rule appropriately recognizes
+
+this fact.
+Project No. 58481                        Adoption Order                            Page 68 of 270
+
+
+Proposed §25.194(c)(6) -- Definition for interconnection agreement
+
+Proposed §25.194(c)(6) defines interconnection agreement as an agreement that is executed by a
+
+large load customer, the interconnecting DSP, and, if different from the interconnecting DSP, the
+
+interconnecting TSP after completion of the interconnection study and that, at a minimum, satisfies
+
+proposed subsection (f) ofthe rule.
+
+
+Circumstances in which retail electric delivery service is not provided bv DSP
+
+Vistra recommended modifying proposed §25.194(c)(6) by adding a sentence stating that a large
+
+load customer that will not take retail electric delivery service from a DSP must execute an
+
+interconnection agreement with only the interconnecting TSR
+
+
+Commission Response
+
+The commission declines to adopt Vistra's recommendation to modify the proposed rule to
+
+add a sentence stating that a large load customer that will not take retail electric delivery
+
+service from a DSP must execute an interconnection agreement with only the interconnecting
+
+TSP. Consistent with the overall framework of PURA and existing commission rules in place
+
+since the deregulation of the ERCOT market, a DSP is the appropriate entity with the
+
+customer relationship and must necessarily be a party to the SLLIA. The commission
+
+declines to adopt a policy that departs from this longstanding framework.
+
+
+Proposed §25.194(c)(7) -- Definition for interconnection study
+
+Proposed §25.194(c)(7) defines interconnection study as the set of studies that are required by
+
+ERCOT before a large load customer may be interconnected.
+Project No. 58481                        Adoption Order                            Page 69 of 270
+
+
+Refkrenee ERCOT Protocols and PlanninR Guide
+
+Constellation and Vistra recommended modifying proposed §25.194(c)(7) to reference the
+
+ERCOT Protocols and Planning Guide. Vistra also recommended similar changes to proposed
+
+§25.194(f) and (g).
+
+
+Commission Response
+
+The commission agrees with Constellation and Vistra that the definition for interconnection
+
+study should reference the ERCOT protocols and modifies the adopted definition
+
+accordingly. The commission declines to reference the Planning Guide because it is
+
+unnecessary. The definition for ERCOT protocols in §25.5(47) includes the Planning Guide.
+
+
+Proposed §25.194(c)(8) -- Definition for intermediate agreement
+
+Proposed §25.194(c)(8) defines an intermediate agreement as an agreement that is executed by a
+
+large load customer, the interconnecting DSP, and, if different from the interconnecting DSP, the
+
+interconnecting TSP before the interconnection study is initiated and that, at a minimum, satisfies
+
+proposed subsection (d) of the rule.
+
+
+Circumstances in which retail electric delivery service is not provided bv DSP
+
+Vistra recommended modifying proposed §25.194(c)(6) by adding a sentence stating that a large
+
+load customer that will not take retail electric delivery service from a DSP must execute an
+
+intennediate agreement with only the interconnecting TSP.
+
+
+Commission Response
+
+The commission declines to adopt Vistra's recommendation to modify the proposed rule to
+
+add a sentence stating that a large load customer that will not take retail electric delivery
+
+service from a DSP must execute an intermediate agreement with only the interconnecting
+Project No. 58481                       Adoption Order                           Page 70 of 270
+
+
+TSP for the same reasons the commission declines to adopt Vistra's recommendation for this
+
+change to the definition for interconnection agreement.
+
+
+Proposed §25.194(c)(9) -- Definition for large load customer
+
+Proposed §25.194(c)(9) defines a large load customer as an entity requesting a new or expanded
+
+interconnection where the customer' s total expected non-coincident peak demand at a single site
+
+is equal to or exceeds 75 MW.
+
+
+Additional non-coincident peak demand
+
+ERCOT Steel Mills recommended modifying proposed §25.194(c)(9) to state that a large load
+
+customer is an entity requesting a new or expanded interconnection where the customer's total
+
+expected additional non-coincident peak demand at a single site is equal to or exceeds 75 MW.
+
+
+Commission Response
+
+The commission declines to adopt ERCOT Steel Mills' recommendation to modify the
+
+adopted rule to state that a large load customer is an entily requesting a new or expanded
+
+interconnection where the customer's total expected additional non-coincident peak demand
+
+at a single site is equal to or exceeds 75 MW. The commission determines that loads that
+
+exceed 75 MW significantly impact transmission needs and it is therefore appropriate for
+
+loads exceeding 75 MW for the first time to comply with the adopted rule regardless of the
+
+incremental amount of non-coincident peak demand that these loads are seeking to be
+
+served. Moreover, this disincentivizes gamesmanship.
+Project No. 58481                        Adoption Order                            Page 71 of 270
+
+
+Laree load customer is an Interconnecting Large Load Entity (ILLE)
+
+Constellation recommended modifying proposed §25.194(c)(9) to specify that a large load
+
+customer is the Interconnecting Large Load Entity (ILLE) as that term is defined in the ERCOT
+
+Protocols and Other Binding Documents.
+
+
+Commission Response
+
+The commission declines to adopt Constellation's recommendation to modify the adopted
+
+rule to specify that a large load customer is the ILLE as that term is defined in the ERCOT
+
+Protocols and Other Binding Documents because it is unnecessary to rely on the definition
+
+in the ERCOT protocols. The terms "large load customer" and "ILLE" are not technical in
+
+nature such that the commission's rules should rely on the definition used in ERCOT
+
+protocols. ERCOT protocols may cite back to the terminology and definition in commission
+
+rules.
+
+
+Replace site with ESI ID
+
+CenterPoint recommended modifying proposed §25.194(c)(9) by replacing "site" with "ESI ID."
+
+CenterPoint noted that a single premise may have more than one service delivery point that is
+
+nevertheless served by a shared or common transmission circuit, in which case all service delivery
+
+points on the premises that are served by a common transmission circuit under a single ESI ID
+
+should be counted as a single large load customer for study purposes. CenterPoint recommended
+
+similar modifications to proposed§25.194(b).
+
+
+Commission Response
+
+The commission declines to adopt CenterPoint's recommendation to modify adopted
+
+§25.194(c) by replacing "site" with "ESI ID." The commission determines that the demand
+Project No. 58481                        Adoption Order                          Page 72 of 270
+
+
+at a single site is the appropriate measurement of demand in recognition of the fact that large
+
+loads are able to establish campuses with multiple ESI IDs, which would allow them to avoid
+
+compliance with the adopted rule.
+
+
+Single site includes interconnection through the same Facilities Extension Agreement
+
+PPM recommended modifying proposed §25.194(c)(9) to clarify that a single site includes the load
+
+interconnected through the same Facilities Extension Agreement (FEA). PPM reasoned that some
+
+loads may have multiple meters or distributed equipment that collectively exceed 75 MW if
+
+components are netted as they are installed over time.
+
+
+Commission Response
+
+The commission declines to adopt PPM's recommendation to modify the adopted rule to
+
+clarify that a single site includes the load interconnected through the same FEA. The
+
+modification would establish the FEA, rather than the site, as the measure of the large load
+
+customer's total expected non-coincident peak demand. This could open the door to
+
+gamesmanship whereby a customer could add load incrementally under a separate
+
+agreement and avoid becoming subject to the rule's requirements, regardless of the total
+
+demand at the location.
+
+
+Proposed §25.194(c)(10) - Definition for requested peak demand
+
+Proposed §25.194(c)(10) defines requested peak demand as the total non-coincident peak demand
+
+that a large load customer requests, prior to executing an interconnection agreement, that an
+
+interconnecting DSP or an interconnecting TSP serve at a site.
+Project No. 58481                        Adoption Order                            Page 73 of 270
+
+
+Ciarifv how demand is measured for behind-the-meter. self-limiting. and co-located loads
+
+AEP recommended modifying proposed §25.194(c)(10) to clarify how demand is measured for
+
+behind-the-meter loads, self-limiting loads, and co-located loads. Specifically, AEP recommended
+
+modifying proposed §25.194(c)(10) by replacing non-coincident peak demand with gross demand
+
+to clarify that the definition for requested peak demand includes behind-the-meter load and peak
+
+demand for self-limiting loads should be determined based on the total gross demand that the large
+
+load customer can draw from the ERCOT system.
+
+
+Commission Response
+
+The commission declines to adopt AEP's recommendation to modify the adopted rule to
+
+replace non-coincident peak demand with gross demand. Non-coincident peak demand is a
+
+more precise and commonly used industry term.
+
+
+Proposed §25.194(d) -- Intermediate agreement
+
+Proposed §25.194(d) states that, before a large load interconnection request is submitted to
+
+ERCOT for study, the large load customer must execute an intermediate agreement with the
+
+interconnecting DSP and, if different from the interconnecting DSP, the interconnecting TSP. If
+
+the interconnecting DSP and the interconnecting TSP are different entities, the intermediate
+
+agreement must specifically identify each entity's responsibilities under this section, including
+
+which entity will accept the study fee and financial security from the large load customer. The
+
+intermediate agreement must meet the requirements ofthis rule.
+Project No. 58481                        Adoption Order                             Page 74 of 270
+
+
+Deadline to execute an intermediate afzreement
+
+Joint TSPs recommended modifying proposed §25.194(d) to define a timeline of60 days by which
+
+a large load customer, interconnecting DSP, and interconnecting TSP must enter an intermediate
+
+agreement after the large load customer requests execution of an intermediate agreement.
+
+
+Commission Response
+
+The commission declines to adopt Joint TSPs' recommendation to modify adopted
+
+§25.194(d) to define a timeline of 60 days by which a large load customer, interconnecting
+
+DSP, and interconnecting TSP must enter an intermediate agreement after the large load
+
+customer submits an interconnection request. Execution of an intermediate agreement
+
+should be based on compliance with providing the necessary information and financial
+
+commitments for an intermediate agreement rather than on a strict deadline that disregards
+
+whether the necessary information and financial commitments are provided by the large
+
+load customer.
+
+
+Permit utilities to enter independent discretionary service airreements
+
+Joint TSPs recommended modifying proposed §25.194(d) to permit utilities to enter into
+
+independent discretionary service agreements directly with the retail load for collecting financial
+
+security or CIAC for the facilities they are constructing or for any services being performed. Joint
+
+TSPs also recommended conforming changes to proposed §25.194(f), relating to interconnection
+
+agreement.
+
+
+Commission Response
+
+The commission declines to adopt Joint TSPs' recommendation to modify the adopted rule
+
+to permit utilities to enter into independent discretionary service agreements directly with
+Project No. 58481                         Adoption Order                            Page 75 of 270
+
+
+the retail load for collecting financial security or CIAC. The commission determines that a
+
+standardized pro forma agreement setting forth each entity's responsibilities is a better
+
+approach than varying independent discretionary service agreements across utilities.
+
+Adopted §25.194(f) requires the large load customer and interconnecting DSP or
+
+interconnecting TSP to execute a commission-approved pro forma agreement (a SLLIA).
+
+The commission plans to adopt a SLLIA in a future rulemaking project; therefore, it is
+
+unnecessary to detail the content and types of agreements in this rulemaking beyond the
+
+minimum requirements described in the adopted rule consistent with PURA §37.0561.
+
+
+Recognize right to provide retail electric deliverv service
+
+TNMP recommended modifying proposed §25.194(d) to eliminate the mandatory three-party
+
+intermediate agreement requirement or, at a minimum, strictly limit its purpose to administrative
+
+coordination, with no authority to violate retail service rights, retail obligations, or tariff
+
+responsibility by agreement. TNMP reasoned that, even if a TSP could collect fees from a retail
+
+customer under a TSP's tariff, this requirement represents a significant departure from established
+
+statutes, tariffregulations, and existing framework. Additionally, TNMP recommended modifying
+
+proposed §25.194(d) to state that the rule does not authorize any utility to provide retail electric
+
+delivery service outside its certificated territory or to impose or collect retail tariff charges
+
+(including CIAC) from a customer not served under that utility's commission-approved retail
+
+tarif£
+
+
+Commission Response
+
+The commission declines to adopt TNMP's recommendation to modify the adopted rule to
+
+explicitly recognize that DSPs, not TSPs, must serve retail customers because it is not
+
+necessary. The adopted rule does not contravene the framework under PURA and existing
+Project No. 58481                       Adoption Order                            Page 76 of 270
+
+
+commission rules. Moreover, the level of detail that TNMP proposed will be addressed in a
+
+separate rulemaking to adopt a SLLIA, which will set forth each entity's responsibilities.
+
+
+Identifv ownership and control ofdistribution infrastructure
+
+TEC recommended modifying proposed §25.194(d) to add a statement that the interconnecting
+
+DSP, if different from the interconnecting TSP, may retain ownership and control over any
+
+distribution assets necessary to interconnect the large load customer, excluding distribution
+
+equipment and transformers owned by a large load. TEC also recommended a conforming change
+
+to proposed §25.194(f).
+
+
+Commission Response
+
+The commission declines to adopt TEC's recommendation to modify the adopted rule to add
+
+a statement that the interconnecting DSP, if different from the interconnecting TSP, may
+
+retain ownership and control over any distribution assets necessary to interconnect the large
+
+load because it is not necessary. Nothing in the rule suggests that a DSP would not retain
+
+ownership and control over distribution assets necessary to interconnect the large load
+
+custonler.
+
+
+Add additional operational disclosure requirements
+
+EDF recommended the commission modify the rule to add additional operational disclosure
+
+requirements. Specifically, EDF recommended requiring: (1) the average amount of energy
+
+consumption used during a normal set of circumstances; (2) any factors or events that would cause
+
+the large load customer or flexible large load customer to increase or decrease the energy
+
+consumption or demand; (3) real or reactive power consumption changes and recovery time; (4)
+
+how long the customer remains connected to the grid during a given voltage and/or frequency
+Project No. 58481                        Adoption Order                             Page 77 of 270
+
+
+disturbance; (5) grid connection level; (6) request for firm or flexible load, and how much; and (7)
+
+the name and contact information of at least two individuals with decision-making authority for
+
+ERCOT to have a direct open line of communication in the event of an energy emergency alert or
+
+grid disturbance.
+
+
+Commission Response
+
+The commission declines to adopt EDF's recommendation to modify the adopted rule to add
+
+additional operational disclosure requirements. The purpose of the disclosure requirements
+
+is to demonstrate project viability and provide inputs for interconnection studies. However,
+
+the commission notes that ERCOT may still request the operational disclosures
+
+recommended by EDF.
+
+
+Require disclosure ofwhether applicant is end-use customer
+
+EDF recommended modifying proposed §25.194(d) to require disclosure ofwhether the large load
+
+customer is the end-use customer or a third-party developer, reasoning that this situational
+
+awareness would support the accuracy and reliability of large load forecasting.
+
+
+Commission Response
+
+The commission declines to adopt EDF's recommendation to modify the adopted rule to
+
+require disclosure of whether the large load customer is the end-use customer or a third-
+
+party developer because transmission planning does not differentiate based on who requests
+
+interconnection. Therefore, whether the large load customer is an end-use customer or a
+
+third-party developer is not a meaningful input to ERCOT's large load forecast.
+Project No. 58481                       Adoption Order                           Page 78 of 270
+
+
+Require disclosure ofwater usage
+
+OPUC and TPPA recommended modifying proposed §25.194(d) to require disclosures related to
+
+water. Specifically, OPUC recommended requiring a large load customer to disclose detailed
+
+information as to their anticipated water usage, the source of water supply, and whether such
+
+supply is sourced within Texas. Additionally, OPUC recommended that large load customers
+
+relying on Texas-based water supplies be required to identify and disclose contingency plans or
+
+alternative water sources in the event of drought conditions or other constraints limiting
+
+availability. OPUC recommended similar changes to proposed §25.194(f)(1). Similarly, TPPA
+
+recommended requiring disclosure about how the large load will procure water, including whether
+
+the large load's water needs will differ substantially year-to-year. TPPA recommended conforming
+
+changes to §25.194(f)(1).
+
+
+Commission response
+
+The commission agrees with OPUC and TPPA that a large load customer's access to water
+
+impacts a customer's interconnection and energization plans. Issues with a large load
+
+customer's water access could result in a customer materially changing, delaying, or
+
+withdrawing the interconnection request. Therefore, the commission modifies the adopted
+
+rule to require a large load customer to disclose to the interconnecting DSP or
+
+interconnecting TSP the anticipated volume of water needed, the type of water source that
+
+will be used, the entity that will supply water, the cooling technology that will be used, and
+
+any other related information prior to the execution of the intermediate agreement and prior
+
+to the execution of the SLLIA. Further, the commission modifies the adopted rule to specify
+
+under adopted §25.194(d)(1)(D) and §25.194(f)(1)(D), relating to disclosure of state and local
+
+regulatory milestones, that such milestones may include water permit approvals. The
+Project No. 58481                       Adoption Order                          Page 79 of 270
+
+
+commission declines to adopt OPUC's recommendation to modify the rule to require large
+
+load customers relying on Texas-based water supplies to disclose contingency plans in event
+
+of water supply constraints because the details of the required water disclosure are best
+
+addressed in a future rulemaking to adopt a SLLIA.
+
+
+Require disclosure ofand prioritize certain cooline technologies
+
+Jason Buster recommended the Commission modify the proposed rule to require disclosure of the
+
+large load project's primary cooling type and provide priority or preference to projects
+
+implementing non- per- and polyfluoroalkyl substances (non-PFAS) immersion cooling. Jason
+
+Buster further recommended the Commission share data or relevant findings with the Texas
+
+Commission on Environmental Quality (TCEQ) and consider working with TCEQ on rulemaking
+
+or guidance to prioritize or streamline approvals for non-PFAS immersion cooling technologies.
+
+
+Commission Response
+
+The commission adopts Jason Buster's recommendation to modify the adopted rule to
+
+require disclosure of the large load customer's primary cooling type. The commission
+
+declines to adopt Jason Buster's recommendation to modify the adopted rule to provide
+
+priority to large load customers implementing non-PFAS immersion cooling because
+
+preferential treatment based on this type of operating characteristic is beyond the scope of
+
+SB 6.
+
+
+Clarifv use ofdisclosed information
+
+EDF and Infinium recommended modifying proposed §25.194(d) to clarify how the disclosed
+
+information will be used. Specifically, EDF recommended clarifying how ERCOT will use
+
+disclosed information for transmission planning versus resource adequacy modeling. Infinium
+Project No. 58481                        Adoption Order                           Page 80 of 270
+
+
+recommended clarifying how additional studies, permitting, and operational information will be
+
+used by the interconnecting DSP or the interconnecting TSP in the screening and interconnection
+
+process. Infinium noted that providing the required disclosures is burdensome and that, without
+
+clear guidance, there is risk ofinconsistent application by DSPs and TSPs.
+
+
+Commission Response
+
+The commission declines to adopt EDF and Infinium's recommendations to modify the
+
+adopted rule to clarify how disclosed information will be used for transmission planning,
+
+resource adequacy modeling, and project screening. The purpose of the disclosure
+
+requirements is to demonstrate large load project viability and provide inputs for
+
+interconnection studies.
+
+
+Proposed §25.194(d)(1) - Site control
+
+Proposed §25.194(d)(1) requires a large load customer to demonstrate site control for the proposed
+
+load location.
+
+
+Allow updated documentation fbr site control to be provided
+
+Constellation recommended modifying proposed            §25.194(d) to add a statement that
+
+notwithstanding any other provisions of the rule, if a change in fact requires modification to the
+
+underlying site control documentation, a large load customer is permitted to provide updated
+
+documentation to the interconnecting DSP or TSP and such update will not delay or adversely
+
+impact the large load interconnection request.
+
+
+Commission Response
+
+The commission declines to adopt Constellation's recommendation to modify the adopted
+
+rule to add a statement that a large load customer is permitted to provide updated site control
+Project No. 58481                        Adoption Order                             Page 81 of 270
+
+
+documentation and such update will not delay or adversely impact the large load customer's
+
+interconnection request. Explicitly stating a large load customer may provide updated site
+
+control documentation is unnecessary, and whether changes in site control circumstances
+
+would delay or adversely impact an interconnection request depends on the nature and
+
+specific facts of the change.
+
+
+Information deemed to satisfy rule requirements
+
+Constellation recommended modifying proposed §25.194(d)(1) to add a statement that each form
+
+ofdocumentation listed will be deemed to satisfy requirements of the rule ifthe large load customer
+
+provides written confirmation to the TSP addressing each relevant issue.
+
+
+Commission Response
+
+The commission agrees with Constellation that it is appropriate to specify the format by
+
+which a large load customer can provide site control demonstration. The commission
+
+declines to adopt Constellation's recommendation to add a statement that each form of
+
+documentation listed will be deemed to satisfy requirements of the adopted rule if the large
+
+load customer provides written confirmation to the TSP addressing each relevant issue
+
+because written confirmation alone does not provide sufficient assurance of information
+
+accuracy and completeness. Instead, the commission modifies the adopted rule to require the
+
+intermediate agreement and SLLIA to include an attestation by the large load customer
+
+supporting all required disclosures, including site control demonstration.
+
+
+
+Further, the commission modifies the adopted rule to clarify that: (1) all information
+
+provided or attested to is subject to audit and verification; (2) a large load customer or its
+
+interconnecting TSP or interconnecting DSP that fails to comply with ERCOT or
+Project No. 58481                      Adoption Order                          Page 82 of 270
+
+
+commission staff's audit process or that fails to produce responsive documentation
+
+supporting the completeness or accuracy of information provided under an intermediate
+
+agreement or SLLIA may be found in violation of commission rules and subject to
+
+enforcement action, including the imposition of administrative penalties or loss of
+
+transmission capacity allocated to the large load customer; and (3) if a large load customer
+
+is determined to have provided false or inaccurate information, or if information cannot be
+
+verified, the customer may be deemed to have forfeited any financial security and may be
+
+subject to transmission capacity reallocation.
+
+
+Require developers to show contract with end-use customer
+
+OPUC recommended modifying proposed §25.194(d)(1) to require a large load customer that is a
+
+developer rather than the end-use customer to produce to the interconnecting utility and ERCOT
+
+proof of contracts with an end-use customer or demonstration of good faith efforts to procure
+
+contracts. OPUC recommended a similar change to proposed §25.194(f)(1).
+
+
+Commission Response
+
+The commission declines to adopt OPUC's recommendation to require a large load customer
+
+that is a developer rather than the end-use customer to produce proof of contracts with an
+
+end-use customer or demonstration of good faith efforts to procure contracts because there
+
+may be legitimate reasons a developer does not enter into a contract with an end-use
+
+customer before the intermediate agreement or SLLIA is executed.
+Project No. 58481                         Adoption Order                              Page 83 of 270
+
+
+Permit demonstration through an affliate
+
+Schaper Energy recommended modifying proposed §25.194(d)(1) to permit a large load customer
+
+to demonstrate site control through an affiliate. Schaper Energy also recommended a similar
+
+change to proposed §25.194(f)(1).
+
+
+Commission Response
+
+The commission adopts Schaper Energy's recommendation to permit a large load customer
+
+to demonstrate site control through an affiliate and modifies the adopted rule accordingly.
+
+The commission also modifies the adopted rule to include a definition for affiliate.
+
+
+Exclusivitv agreement with generator subiect to PURA 439.169
+
+Vistra recommended modifying proposed §25.194(d)(1) to add a new provision that allows a large
+
+load customer to demonstrate site control through the provision of a signed and executed
+
+exclusivity agreement with a generator subject to PURA §39.169 and Section 205 of this Chapter
+
+to enter into a net metering arrangement sufficient to accommodate the customer's planned
+
+facilities at the proposed location for a duration of at least five years from the date the large load
+
+customer is expected to reach the contracted peak demand.
+
+
+Commission Response
+
+The commission declines to adopt Vistra's recommendation to add a new provision that
+
+allows a large load customer to demonstrate site control through an exclusivity agreement
+
+with a generator to enter into a net metering arrangement. It is reasonable to expect that a
+
+large load customer that can produce an exclusivity agreement can also produce the legally
+
+binding property interests to demonstrate site control as required by the adopted rule.
+Project No. 58481                        Adoption Order                          Page 84 of 270
+
+
+Proposed §25.194(d)(1)CA) - Site control demonstrated through signed and executed lease
+
+agreement
+
+Proposed §25.194(d)(1)(A) states that a large load customer may demonstrate site control though
+
+provision of a signed and executed lease agreement for one or more parcels of land sufficient to
+
+accommodate the customer's planned facilities at the proposed load location for a duration of at
+
+least five years from the date the large load customer is expected to reach the contracted peak
+
+demand.
+
+
+Replace contracted peak demand with requested or planned peak demand
+
+Rowan recommended modifying proposed §25.194(d)(1)(A) by replacing "contracted peak
+
+demand" with "requested peak demand" because the contracted peak demand is not an available
+
+data point at the intermediate agreement stage.
+
+
+
+Similarly, Constellation recommended modifying proposed §25.194(d)(1)(A) by replacing
+
+"contracted peak demand" with "planned peak demand."
+
+
+Commission Response
+
+The commission adopts Rowan's recommendation to replace the reference to "contracted
+
+peak demand" with "requested peak demand" because the contracted peak demand is not
+
+an available data point at the intermediate agreement stage. This change also addresses
+
+Constellation's recommendation.
+
+
+Extend the timeline for the agreement to 15 Years
+
+TPPA recommended modifying proposed §25.194(d)(1)(A) to extend the requirement for the
+
+agreements from 5 years to 15 years from the date the large load customer is expected to reach
+Project No. 58481                          Adoption Order                               Page 85 of 270
+
+
+contracted peak demand, with options to renegotiate terms at the five-year mark. TPPA also
+
+recommended a conforming change to proposed §25.194(d)(1)(C).
+
+
+Commission Response
+
+The commission declines to adopt TPPA's recommendation to extend the requirement for
+
+the lease agreements to obligate the large load customer for a period of 15 years instead of 5
+
+years from the date that the large load customer is expected to reach contracted peak
+
+demand, with options to renegotiate terms at the five-year mark. Five years strikes an
+
+appropriate balance demonstrating project viability and allowing businesses to enter into
+
+contract terms of their choosing.
+
+
+Proposed §25.194(d)(2) - Substantially similar interconnection request
+
+Proposed §25.194(d)(2) requires a large load customer to disclose to the interconnecting DSP or
+
+the interconnecting TSP whether the customer is pursuing a substantially similar interconnection
+
+request for electric service, the approval of which would result in the customer materially
+
+changing, delaying, or withdrawing the interconnection. A material change or delay includes a
+
+delay of one or more years to the project's projected date to realize its requested or contracted peak
+
+demand, a 20% or greater change in the contracted peak demand, or a change in the location ofthe
+
+point of interconnection.
+
+
+Add end user that the customer has contracted to host
+
+Oncor recommended modifying proposed §25.194(d)(2) to require the large load customer to
+
+disclose whether the customer or the end user that the customer has contracted to host is pursuing
+
+a substantially similar interconnection request for electric service either directly or through a third-
+
+party developer. Oncor also recommended a conforming change to proposed §25.194(f)(2).
+Project No. 58481                         Adoption Order                             Page 86 of 270
+
+
+Commission Response
+
+The commission adopts Oncor's recommendation to modify the adopted rule to require the
+
+large load customer to disclose whether the customer or end-use customer the large load
+
+customer has contracted to host is pursuing a substantially similar request directly or
+
+through a third-party developer. Further, the commission modifies the adopted rule to
+
+require disclosure of whether an affiliate of the large load customer is pursuing a
+
+substantially similar request.
+
+
+Substantially similar means same amount of planned peak demand
+
+Constellation recommended modifying proposed §25.194(d)(2) to add a statement that
+
+substantially similar means a large load interconnection request for the same amount of planned
+
+peak demand, having the same load and ramp characteristics as an existing interconnection request,
+
+intended for the same end-use customer. Constellation also recommended a conforming change to
+
+proposed §25.194(f)(2).
+
+
+Commission Response
+
+The commission declines to adopt Constellation's recommendation to modify the adopted
+
+rule to further define "substantially similar." The relevant consideration is not whether two
+
+interconnection requests share the same specific characteristics, but whether approval of one
+
+request could result in the other being materially changed, delayed, or withdrawn.
+
+
+Facilities study
+
+Google, Lancium, and TotalEnergies recommended modifying proposed §25.194(d)(2) to require
+
+the TSP to conduct a facilities study prior to the batch process and include it as a criteria for the
+
+intermediate agreement.
+Project No. 58481                        Adoption Order                           Page 87 of 270
+
+
+Commission Response
+
+The commission declines to adopt Google, Lancium, and Tota]Energies recommendation to
+
+modify the adopted rule to require the TSP to conduct a facilities study prior to the batch
+
+process and include it as a criterion for the intermediate agreement because it is unnecessary.
+
+To the extent that ERCOT requires the TSP to conduct a facilities study prior to the batch
+
+process, that specific requirement is more appropriately addressed in ERCOT protocols,
+
+which relate to technical requirements.
+
+
+Proposed §25.194(d)(2*D) - ERCOT request of competitively sensitive information
+
+Proposed §25.194(d)(2)(D) authorizes ERCOT to request and requires a large load customer to
+
+provide any competitively sensitive information that ERCOT deems necessary to complete any
+
+analysis required as part ofthe interconnection process. ERCOT must treat disclosed competitively
+
+sensitive information as Protected Information under ERCOT protocols.
+
+
+Broaden the circumstances for ERCOT to request competitivelv sensitive information
+
+TPPA recommended modifying proposed §25.194(d)(2)(D) by moving it to its own separate
+
+provision and thereby clarifying that ERCOT may request competitively sensitive information at
+
+any point during the interconnection process and with respect to any relevant information, not
+
+solely information concerning substantially similar interconnection requests.
+
+
+Commission Response
+
+The commission adopts TPPA's recommendation to move the provision authorizing ERCOT
+
+to request competitively sensitive information to its own separate subsection and thereby
+
+clarify that ERCOT may request competitively sensitive information at any point during the
+
+interconnection process and with respect to any relevant information, not solely information
+Project No. 58481                         Adoption Order                       Page 88 of 270
+
+
+concerning substantially similar interconnection requests. Accordingly, for clarity and
+
+consistency with PURA §37.0561(k), the commission modifies the adopted rule to remove the
+
+language in proposed §25.194(d)(2)(D) and add adopted §25.194(j), detailing the procedure
+
+by which ERCOT and commission staff may request information (including competitively
+
+sensitive information) to conduct an audit, complete analysis, or verify any information
+
+attested to by the large load customer.
+
+
+Limit ERCOT's authoritv to access information
+
+Constellation, Google, Lancium, and TotalEnergies recommended modifying the proposed rule to
+
+limit ERCOT' s authority to access information.
+
+
+
+Specifically, Constellation recommended striking proposed §25.194(d)(2)(D) because it is not
+
+contemplated in PURA §37.0561 that ERCOT should have such broad discretion to solicit
+
+confidential information from large load customers. Instead, Constellation recommended
+
+modifying proposed §25.194(d)(2)(C) by adding "subject to appropriate confidentiality
+
+protections" to align with PURA §37.0561(d). Constellation also recommended conforming
+
+changes to proposed §25.194(f)(2)(D) and proposed §25.194(f)(2)(C).
+
+
+
+Similarly,   Google,   Lancium,    and    TotalEnergies    recommended   modifying   proposed
+
+§25.194(d)(2)(D) to remove the first sentence, which states ERCOT may request and the large
+
+load customer must provide any competitively sensitive information ERCOT deems necessary to
+
+complete any analysis required as part of the interconnection process.
+Project No. 58481                         Adoption Order                      Page 89 of 270
+
+
+Commission Response
+
+The commission declines to adopt Constellation, Google, Lancium, and Tota]Energies'
+
+recommendations to modify the adopted rule to remove ERCOT's authority to request
+
+competitively sensitive information from a large load customer. PURA §37.0561(k) explicitly
+
+states that ERCOT may access any information to ensure compliance with the standards for
+
+transmission planning analysis.
+
+
+
+However, for clarity and consistency with PURA §37.0561(k),the commission modifies the
+
+adopted rule to remove the language in proposed §25.194(d)(2)(D) and adds adopted
+
+§25.1940), detailing the procedure by which ERCOT and commission staff may request
+
+information (including competitively sensitive information) to conduct an audit, complete
+
+analysis, or verify information attested to by the large load customer.
+
+
+Reasonably necessarv standard
+
+Targa recommended modifying proposed §25.194(d)(2)(D) to require ERCOT to demonstrate that
+
+its request is reasonably necessary to complete any analysis required. Targa also recommended
+
+conforming changes throughout the rule.
+
+
+Commission Response
+
+The commission declines to adopt Targa's recommendation to modify the adopted rule to
+
+require ERCOT to demonstrate that its request is reasonably necessary to complete any
+
+analysis required. The adopted rule is consistent with PURA §37.0561(k), which states
+
+ERCOT may access any information to ensure compliance with the standards for
+
+transmission planning analysis.
+Project No. 58481                         Adoption Order                              Page 90 of 270
+
+
+Proposed §25.194(d)(3) -- Site-related studies and engineering services
+
+Proposed §25.194(d)(3) requires a large load customer to submit to the interconnecting DSP or the
+
+interconnecting TSP the large load customer's plans, expected timing, and progress for site-related
+
+studies and engineering services required for project development before energization (e.g.,
+
+geotechnical survey, water, wastewater, or gas). The submission must be accompanied by an
+
+attestation by an officer or official with binding authority over the large load customer stating that
+
+the information contained in the submission is complete and accurate at the time the attestation is
+
+signed. A large load customer must provide updates or progress reports to the interconnecting DSP
+
+or the interconnecting TSP when requested, but no more frequently than quarterly.
+
+
+Protected information and competitively sensitive information not subject to disclosure
+
+Constellation recommended modifying proposed §25.194(d)(3) to add a statement that all
+
+information subject to this subsection shall be considered Protected Information under the ERCOT
+
+Protocols and any competitively sensitive information shall not be subject to disclosure under
+
+Chapter 552, Government Code. Constellation also recommended a conforming change to
+
+proposed §25.194(d)(4).
+
+
+Commission Response
+
+The commission declines to adopt Constellation's recommendation to modify the provisions
+
+relating to site-related studies and engineering services to state that all information subject
+
+to these provisions shall be considered Protected Information under the ERCOT Protocols.
+
+The commission determines that the appropriate treatment of information as either
+
+Protected Information or as competitively sensitive information is best addressed on a case-
+
+by-case basis that considers the specific information and applicable laws. However, the
+
+commission adopts Constellation's recommendation to specify that ERCOT and commission
+Project No. 58481                       Adoption Order                          Page 91 of 270
+
+
+staff must treat disclosed competitively sensitive information as Protected Information under
+
+ERCOT protocols, and that this information is not subject to disclosure under Chapter 552,
+
+Government Code. This approach is consistent with PURA §37.0561(k) and is reflected in
+
+adopted §25.194(i)(3).
+
+
+Eliminate requirement for underlying documentation and relv solelv on attestation
+
+Targa recommended modifying proposed §25.194(d)(3) to eliminate the requirement for
+
+submission of underlying plans, studies, or permit applications and instead rely solely on the
+
+officer attestation. Targa also recommended removing the reporting requirements. Targa
+
+recommended similar changes to proposed §25.194(d)(4), (f)(3) and (f)(4).
+
+
+Commission Response
+
+The commission adopts Targa's recommendation to eliminate the requirement for
+
+submission of underlying plans, studies, or permit applications. However, the commission
+
+modifies the adopted rule to require disclosure of the plans, studies, or permit applications
+
+supported by an officer attestation and clarifies that the underlying plans, studies, or permit
+
+applications may be requested by ERCOT or commission staff to verify the completeness
+
+and accuracy of the information disclosed. Accordingly, the commission modifies the
+
+adopted rule to require the intermediate agreement and SLLIA to include an attestation by
+
+the large load customer supporting all required disclosures. Further, the commission
+
+modifies the adopted rule to clarify that all information provided or attested to is subject to
+
+audit and verification.
+
+
+
+The commission declines to adopt Targa's recommendation to modify the adopted rule to
+
+eliminate the requirement to provide updates or progress reports. It is appropriate for the
+Project No. 58481                      Adoption Order                        Page 92 of 270
+
+
+interconnecting DSP or TSP to request updates as needed because site-related, engineering,
+
+and regulatory approval information evolves throughout the development of a large load
+
+project, and changes may affect the interconnection request. Moreover, the interconnecting
+
+DSP or TSP must coordinate with ERCOT and commission staff to obtain information from
+
+the large load customer that is requested by ERCOT or commission staff for purposes of an
+
+audit. Therefore, the commission modifies the adopted rule to remove the limitation that
+
+requests are limited to a quarterly basis.
+
+
+Require ongoinz prozress reports
+
+OPUC recommended modifying proposed §25.193(d)(3) to require ongoing progress reports as a
+
+matter of due course rather than to require ongoing progress reports upon request. OPUC
+
+recommended similar changes to proposed §25.194(d)(4),(f)(3), and (f)(4).
+
+
+Commission Response
+
+The commission declines to adopt OPUC's recommendation to modify the adopted rule to
+
+require ongoing progress reports as a matter of due course, rather than upon request.
+
+Requiring reports regardless of whether the information is needed by the interconnecting
+
+DSP or TSP creates an unnecessary administrative burden.
+
+
+Strike subsection
+
+DCC recommended striking proposed §25.194(d)(3) because site-related studies and engineering
+
+services do not reliably indicate project commitment. DCC recommended similar changes to
+
+proposed §25.194(f)(3).
+Project No. 58481                        Adoption Order                            Page 93 of 270
+
+
+Commission Response
+
+The commission declines to adopt DCC's recommendation to modify the adopted rule to
+
+remove the requirement that a large load customer provide information regarding site-
+
+related studies and engineering services. Information about progress in these areas is useful
+
+to understanding the viability of a proposed project because these activities help identify and
+
+resolve issues that could affect the feasibility, scope, or timing of a project. Although the
+
+timing of such activities will vary among projects, that variability does not diminish the
+
+usefulness of the information to the point of justifying elimination of the requirement.
+
+
+Proposed §25.194(d)(4) - State and local regulatory approvals
+
+Proposed §25.194(d)(4) requires a large load customer to submit to the interconnecting DSP or the
+
+interconnecting TSP the large load customer's plans, expected timing, and current progress for
+
+obtaining non-ministerial discretionary approvals from state and local regulatory authorities
+
+required for development before energization (e.g., water, air, or backup generation permits). The
+
+submission must be accompanied by an attestation by an officer or official with binding authority
+
+over the large load customer attesting that the information contained in the submission is complete
+
+and accurate at the time the attestation is signed. A large load customer must provide updates or
+
+progress reports to the interconnecting DSP or the interconnecting TSP when requested, but no
+
+more frequently than quarterly.
+
+
+Replace reference to milestones with approvals
+
+Google, Lancium, and TotalEnergies recommended modifying proposed §25.194(d)(4) by
+
+replacing reference to approvals with milestones and specifying that the large load customer's
+
+plans must identify the project milestones, which include the listed information. Google, Lancium,
+
+and TotalEnergies also recommended a conforming change to proposed §25.194(f)(4).
+Project No. 58481                      Adoption Order                         Page 94 of 270
+
+
+Commission Response
+
+The commission declines to adopt Google, Lancium, and TotalEnergies' recommendation to
+
+modify the adopted rule to replace reference to approvals with milestones. However, the
+
+commission modifies the adopted rule to clarify that disclosure of project milestones and
+
+regulatory approvals is required; and to specify that the large load customer's plans must
+
+identify the project milestones, including expected timing and current progress for obtaining
+
+non-ministerial discretionary approvals from state and local regulatory authorities required
+
+for development before energization. The commission also modifies the adopted rule to
+
+specify that such approvals must include, as applicable, permits for water, wastewater, air,
+
+or backup generation; abatements for noise, light pollution, or traffic impacts; and
+
+agreements related to emergency response or site security.
+
+
+Strike subsection
+
+DCC recommended striking proposed §25.194(d)(4) because permitting progress does not reliably
+
+indicate project commitment. DCC recommended similar changes to proposed §25.194(f)(4).
+
+
+Commission Response
+
+The commission declines to adopt DCC's recommendation to modify the adopted rule to
+
+remove the requirement that a large load customer provide information regarding state and
+
+local regulatory approvals. Information regarding the status of regulatory approvals is
+
+useful to understanding the viability of a proposed project because such information may
+
+affect the feasibility, scope, or timing of the project. Although the timing and types of
+
+approvals required will vary among projects, that variability does not diminish the
+
+usefulness of the information to the point ofjustifying elimination of the requirement.
+Project No. 58481                        Adoption Order                             Page 95 of 270
+
+
+Proposed §25.194(d)(5) - Schedule for phased energization of contracted peak demand
+
+Proposed §25.194(d)(5) requires a large load customer to disclose to the interconnecting DSP or
+
+the interconnecting TSP the expected schedule, including the quarter and year, for phased
+
+energization of the contracted peak demand expressed in MW, power factor (PF), and megavolt-
+
+ampere reactive (MVAr) units.
+
+
+Insert load ramp
+
+Google, Lancium, and TotalEnergies recommended modifying proposed §25.194(d)(5) by
+
+inserting "load ramp" after "expected" and before "schedule." Google, Lancium, and
+
+TotalEnergies also recommended a conforming change to proposed §25.194(f)(5).
+
+
+Commission Response
+
+The commission declines to adopt Google, Lancium, and TotalEnergies' recommendation to
+
+replace "expected schedule" with "expected load ramp schedule." Instead, the commission
+
+modifies the adopted rule to replace "expected schedule" with "expected phased energization
+
+schedule." This approach adds the recommended clarity and uses more precise language that
+
+is consistent with the rest of the adopted rule.
+
+
+Proposed §25.194(d)(6) - Backup generating facilities
+
+Proposed §25.194(d)(6) requires a large load customer to disclose to the interconnecting DSP or
+
+the interconnecting TSP whether the customer plans to have on-site backup generating facilities.
+
+And, if the large load customer does, the large load customer must disclose: (A) the number of
+
+backup generating facilities; (B) the nameplate capacity of each ofthe backup generating facilities;
+
+(C) the fuel source and operational characteristics of each of the backup generating facilities,
+
+including any run hour limitations and any fuel storage limitations under the existing
+Project No. 58481                         Adoption Order                             Page 96 of 270
+
+
+environmental permits; and (D) how quickly each of the backup generating facilities can reach
+
+their full capacity to serve the load.
+
+
+Remove reference to interconnecting TSP
+
+AEP recommended modifying proposed §25.194(d)(6) to remove the reference to interconnecting
+
+TSP because the DSP is the entity providing certificated retail delivery service and the large load
+
+customer should notify the interconnecting DSP if its plans for backup generating facilities
+
+materially changes as this information is needed to meet its obligations as the transmission operator
+
+of the load.
+
+
+Commission Response
+
+The commission declines to adopt AEP's recommendation to modify the adopted rule to
+
+remove the reference to the interconnecting TSP because there may be circumstances in
+
+which the interconnecting TSP should also be made aware of this information.
+
+
+Scope of disclosure requirement
+
+DCC, Google, Lancium, and TotalEnergies, and TPPA recommended modifying proposed
+
+§25.194(d)(6) to change the scope of what must be disclosed. Specifically, DCC recommended
+
+requiring only the disclosure of total nameplate capacity. DCC reasoned that other details of
+
+backup generating facilities are subject to change and requiring disclosure of these details could
+
+produce outdated information. DCC further reasoned that nameplate capacity is "the most critical
+
+data point and is sufficient for reliability planning purposes." DCC recommended a similar
+
+modification to proposed §25.194(f)(6).
+Project No. 58481                        Adoption Order                             Page 97 of 270
+
+
+Google, Lancium, and TotalEnergies recommended modifying proposed §25.194(d)(6) to require
+
+the disclosure of only the percentage of load expected to be served with backup generation,
+
+expressed as nameplate megawatt capacity of backup generation facilities divided by megawatts
+
+of contracted peak demand at the conclusion of the load ramp. Google, Lancium, and
+
+TotalEnergies also recommended a conforming change to proposed §25.194(f)(6).
+
+
+
+Constellation recommended changing the requirement to identify the number ofbackup generating
+
+units to a requirement to identify an estimate ofthe total nameplate capacity ofbackup generating
+
+units; and require the large load customer to disclose the expected fuel source, anticipated instead
+
+of existing environmental permits, and how quickly each backup generating facility can reach fully
+
+capacity to serve the load if known.
+
+
+
+Conversely, TPPA recommended modifying proposed §25.194(d)(6) by broadening the disclosure
+
+requirement to include reporting of plans for backup generation capable of exporting to the grid,
+
+as well as plans for co-located generation.
+
+
+Commission Response
+
+The commission adopts the recommendation of commenters that suggested removing the
+
+requirement to provide the number of backup generating facilities. However, the
+
+commission declines to adopt the additional changes recommended by Constellation, DCC,
+
+Google, Lancium, and Total Energies, and TPPA. Specifically, the commission declines to
+
+adopt DCC's recommendation to require only disclosure of total nameplate capacity, and
+
+Google, Lancium, and TotalEnergies' recommendation to require disclosure of only the
+
+percentage of load expected to be served with backup generation because the data points in
+Project No. 58481                        Adoption Order                             Page 98 of 270
+
+
+the adopted rule are needed by ERCOT to verify which facilities serve at least 50 percent of
+
+on-site demand, the verification of which is needed to effectuate the requirements of PURA
+
+§37.0561(e).
+
+
+
+The commission further declines to adopt Constellation's recommendation to include
+
+qualifiers ahead of the required disclosure data points because the clarification is
+
+unnecessary. While the details of the backup generation or on-site backup generation may
+
+change as the project evolves, nothing precludes the large load customer from providing
+
+updated information when making the same disclosure at the time of SLLIA execution or at
+
+any time before execution. The commission further declines to adopt TPPA's
+
+recommendation to broaden the disclosure requirement to include reporting of plans for
+
+backup generation capable of exporting to the grid, as well as plans for co-located generation,
+
+because it is moot. The commission's modifications to adopted §25.194(d)(1)(H) and
+
+§25.194(f)(1)(H) substantively address TPPA's recommendation.
+
+
+Use ofdisclosed backup generation infbrmation
+
+DCC recommended modifying proposed §25.194(d)(6) by adding a statement that information
+
+disclosed about a customer's backup generation must not be used by a DSP or TSP to discriminate
+
+in curtailment decisions and that a utility cannot direct a customer to operate backup generation in
+
+a manner that would put the customer out of compliance with applicable environmental permits.
+
+DCC recommended a similar modification to proposed §25.194(f)(6).
+
+
+Commission Response
+
+The commission declines to adopt DCC's recommendation to add a statement that
+
+information disclosed about a customer's backup generation must not be used by a DSP or
+Project No. 58481                      Adoption Order                          Page 99 of 270
+
+
+TSP to discriminate in curtailment decisions and that a utility cannot direct a customer to
+
+operate backup generation in a manner that would put the customer out of compliance with
+
+applicable environmental permits. Curtailment decisions and operation of backup
+
+generation should consider safe and reliable operation of the ERCOT system, which is best
+
+addressed in ERCOT protocols.
+
+
+Allow information to be supplemented
+
+Constellation recommended modifying proposed §25.194(d)(6) to state that the disclosure may be
+
+revised as updated information becomes available.
+
+
+Commission Response
+
+The commission declines to adopt Constellation's recommendation to add a statement that
+
+disclosure of backup generating information may be revised as updated information
+
+becomes available. Instead, the commission modifies the adopted rule to add a statement to
+
+the SLLIA requirements that a large load customer must timely disclose to the
+
+interconnecting DSP or the interconnecting TSP any material changes to the large load
+
+customer's plans for on-site generation that is capable of being synchronously
+
+interconnected to the ERCOT system and will provide power to the large load customer.
+
+Although the requirement is specific to on-site generation capable of being synchronously
+
+interconnected to the ERCOT system for purposes ofthe adopted rule, the commission notes
+
+that ERCOT, the interconnecting DSP, and the interconnecting TSP may still require
+
+updates relating to backup generating information. Moreover, nothing in the adopted rule
+
+prevents a large load customer from voluntarily providing such updates related to backup
+
+generating information.
+

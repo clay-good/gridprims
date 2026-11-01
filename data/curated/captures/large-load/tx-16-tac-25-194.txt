@@ -1,0 +1,954 @@
+Source: https://ftp.puc.texas.gov/public/puct-info/agency/rulesnlaws/subrules/electric/25.194/25.194.pdf
+Retrieved: 2026-11-01
+Original: 240603 bytes, SHA-256 3d92702d818dbd05633abe84c4fa875ed638b168b1afd0077d3ed6f27d6209fb
+Capture: pdftotext -layout
+----
+CHAPTER 25. SUBSTANTIVE RULES APPLICABLE TO ELECTRIC SERVICE PROVIDERS.
+Subchapter I. TRANSMISSION AND DISTRIBUTION.
+
+Division 1. Open- Access Comparable Transmission Service for Electrical Utilities in the Electric Reliability
+Council of Texas.
+
+§25.194. Large Load Interconnection Standards.
+
+(a)     Purpose and Scope. This section sets forth the standards and criteria for an electric utility, a municipally
+        owned utility, and electric cooperative to interconnect a large load customer to the ERCOT system. Nothing
+        in this section limits the authority of a municipally owned utility or an electric cooperative to impose electric
+        service requirements for large load customers on their systems in addition to the standards adopted under this
+        section.
+
+(b)     Applicability.
+        (1)    This section applies to a large load customer that has not energized as of the effective date of this
+               section and that seeks:
+               (A)      a new interconnection at a single site that is equal to or exceeds 75 megawatts (MW);
+               (B)      an expanded interconnection at a single site that equals or exceeds 75 MW for the first
+                        time; or
+               (C)      an expanded interconnection at a single site that exceeds 75 MW and is expanding by 75
+                        MW or more; or
+               (D)      to co-locate with a generation resource.
+        (2)    For a large load customer that seeks an expanded interconnection, this section applies to the
+               incremental load addition.
+
+(c)     Definitions. The following words and terms, when used in this section, have the following meanings unless
+        the context indicates otherwise:
+        (1)      Affiliate -- means:
+                 (A)      a person who directly or indirectly owns or holds at least 5.0% of the voting securities of a
+                          large load customer;
+                 (B)      a person in a chain of successive ownership of at least 5.0% of the voting securities of a
+                          large load customer;
+                 (C)      a corporation that has at least 5.0% of its voting securities owned or controlled, directly or
+                          indirectly, by a large load customer;
+                 (D)      a corporation that has at least 5.0% of its voting securities owned or controlled, directly or
+                          indirectly, by:
+                          (i)       a person who directly or indirectly owns or controls at least 5.0% of the voting
+                                    securities of a large load customer; or
+                          (ii)      a person in a chain of successive ownership of at least 5.0% of the voting securities
+                                    of a large load customer; or
+                 (E)      a person who is an officer or director of a large load customer in a chain of successive
+                          ownership of at least 5.0% of the voting securities of a large load customer.
+        (2)      Backup generating facilities -- Generation facilities or energy storage facilities that are not capable
+                 of operating, or are not configured to operate, in parallel with the ERCOT system and cannot export
+                 energy to the ERCOT system.
+        (3)      Batch zero interconnection study -- The set of studies, including the batch study and refinement
+                 study, that are required by ERCOT protocols before a large load customer meeting the requirements
+                 of ERCOT Planning Guide Section 9, as of the effective date of this section, can be interconnected.
+        (4)      Batch zero load -- A large load customer meeting the requirements of ERCOT Planning Guide
+                 Section 9, as of the effective date of this section.
+        (5)      Contracted peak demand -- The total non-coincident peak demand that a large load customer
+                 requests that an interconnecting DSP or an interconnecting TSP serve at a single site and is
+                 ultimately allocated by ERCOT, as stated in the SLLIA.
+
+
+                                                      §25.194-1                                    effective 10/08/2026
+                                                                                                              (P-58481)
+      (6)      Controllable load resource -- Controllable load resource as that term is defined in ERCOT
+               protocols.
+      (7)      Direct interconnection costs -- Direct interconnection costs, as that term is defined in §25.192 of
+               this title (relating to Transmission Service Rates).
+      (8)      End-use customer -- The entity that ultimately consumes power.
+      (9)      Interconnecting distribution service provider (DSP) -- The electric utility, municipally owned
+               utility, or electric cooperative that is certificated or otherwise authorized to provide either retail
+               electric service or retail electric delivery service at the location in which the large load customer’s
+               consuming facility is located.
+      (10)     Interconnecting transmission service provider (TSP) -- The electric utility, municipally owned
+               utility, or electric cooperative that owns or operates the equipment or facilities necessary to transmit
+               or distribute electricity to the large load customer.
+      (11)     Interconnection agreement -- An agreement that was executed, before June 1, 2025, by a large
+               load customer and the interconnecting DSP after completion of an interconnection study that was
+               validated by ERCOT; and that, at a minimum, sets forth the obligations of a large load customer to
+               pay its direct interconnection costs.
+      (12)     Interconnection study -- The set of studies, including the batch study and refinement study, that
+               are required by ERCOT protocols before a large load customer may be interconnected.
+      (13)     Intermediate agreement -- An agreement that is executed by a large load customer, the
+               interconnecting DSP, and, if different from the interconnecting DSP, the interconnecting TSP before
+               a large load customer’s load is included in an interconnection study and that, at a minimum, satisfies
+               subsection (d) of this section.
+      (14)     Large load customer -- An entity requesting a new or expanded interconnection where the
+               customer’s total expected non-coincident peak demand at a single site is equal to or exceeds 75 MW,
+               whether at transmission voltage or distribution voltage.
+      (15)     On-site backup generating facilities -- Generation that is not capable of exporting energy to the
+               ERCOT system and that, in the aggregate, can serve at least 50% of on-site demand.
+      (16)     Requested peak demand -- The total non-coincident peak demand that a large load customer
+               requests, prior to executing an interconnection agreement, that an interconnecting DSP or an
+               interconnecting TSP serve at a single site.
+      (17)     Standard large load interconnection agreement (SLLIA) -- A commission-approved pro forma
+               agreement that is executed by a large load customer, the interconnecting DSP, and if different from
+               the interconnecting DSP, the interconnecting TSP; and that, at a minimum, complies with this
+               section.
+      (18)     System upgrades -- System upgrades as that term is defined in §25.192 of this title.
+
+(d)   Intermediate agreement. Before a large load customer’s interconnection request is included in an
+      interconnection study, the large load customer must execute and fund an intermediate agreement with the
+      interconnecting DSP and, if different from the interconnecting DSP, the interconnecting TSP. If the
+      interconnecting DSP and the interconnecting TSP are different entities, the intermediate agreement must
+      specifically identify each entity’s responsibilities under this section, including which entity will accept the
+      study fee and financial security from the large load customer. The intermediate agreement must meet the
+      requirements of this subsection.
+      (1)      Required disclosures.
+               (A)       Demonstration of site control.
+                         (i)      A large load customer must disclose to the interconnecting DSP or the
+                                  interconnecting TSP the type of property interest that the large load customer
+                                  holds for the proposed site of the load location. The large load customer must be
+                                  able to demonstrate control of the proposed site of the load location through
+                                  provision of one of the following legally binding property interests linking the
+                                  large load customer and the proposed site of the load location:
+                                  (I)       a lease agreement, signed and executed by the large load customer or an
+                                            affiliate of the large load customer, for one or more parcels of land
+                                            sufficient to accommodate the customer’s planned facilities at the
+                                            proposed site of the load location for a duration of at least five years from
+
+                                                     §25.194-2                                    effective 10/08/2026
+                                                                                                             (P-58481)
+                          the date the large load customer is expected to reach the requested peak
+                          demand;
+                (II)      a deed, transferring ownership to the large load customer or an affiliate
+                          of the large load customer, for one or more parcels of land sufficient to
+                          accommodate the customer’s planned facilities at the proposed site of the
+                          load location; or
+                (III)     a signed and executed agreement with an option to purchase or lease one
+                          or more parcels of land sufficient to accommodate the customer’s
+                          planned facilities at the proposed site of the load location. An agreement
+                          with an option to lease land must obligate the large load customer to lease
+                          the land for a duration of at least five years from the date the large load
+                          customer is expected to reach the requested peak demand.
+      (ii)      If the property interest is held by an affiliate, the large load customer must be able
+                to demonstrate an existing legally binding connection linking itself, the affiliate,
+                and the proposed site of the load location.
+(B)   Substantially similar interconnection request. A large load customer must disclose to
+      the interconnecting DSP or the interconnecting TSP whether the large load customer, an
+      affiliate of the large load customer, or the end-use customer the large load customer has
+      contracted to host is pursuing a substantially similar interconnection request for electric
+      service in Texas either directly or indirectly through a third-party developer, the approval
+      of which would result in the customer materially changing, delaying, or withdrawing the
+      interconnection request. A material change or delay includes a delay of one or more years
+      to the project’s projected date to realize its requested peak demand, a 20% or greater change
+      in the requested peak demand, or a change in the location for the point of interconnection.
+      (i)       A large load customer that is pursuing a substantially similar interconnection
+                request for electric service the approval of which would result in the customer
+                materially changing, delaying, or withdrawing the interconnection request,
+                whether directly or indirectly through an affiliate, third-party developer, or end-
+                use customer that the large load customer has contracted to host, must disclose
+                the following information to the interconnecting DSP or the interconnecting TSP:
+                (I)       the ERCOT-assigned serial number for the substantially similar
+                          interconnection request, as applicable;
+                (II)      the location, including the power region and, if in the ERCOT region,
+                          the load zone, of the substantially similar interconnection request;
+                (III)     the requested peak demand of the substantially similar interconnection
+                          request;
+                (IV)      the anticipated timing of energization of the substantially similar
+                          interconnection request; and
+                (V)       the interconnecting DSP and, if different from the interconnecting DSP,
+                          the interconnecting TSP associated with the substantially similar
+                          interconnection request.
+      (ii)      A large load customer that discloses a substantially similar interconnection
+                request under this subsection may anonymize competitively sensitive information
+                in its disclosure to the interconnecting DSP or the interconnecting TSP.
+      (iii)     An interconnecting DSP and an interconnecting TSP must not sell, share, or
+                disclose information submitted to the interconnecting DSP or the interconnecting
+                TSP under this subsection other than a disclosure to the commission or ERCOT.
+(C)   Site-related studies and engineering services. A large load customer must disclose to
+      the interconnecting DSP or the interconnecting TSP the large load customer’s expected
+      development schedule and progress on site-related studies and engineering services
+      required for project development before energization (e.g., geotechnical survey, water,
+      wastewater, or gas). A large load customer must provide updates or progress reports to the
+      interconnecting DSP or the interconnecting TSP when requested.
+(D)   State and local regulatory milestones and approvals. A large load customer must
+      disclose to the interconnecting DSP or the interconnecting TSP the large load customer’s
+
+                                  §25.194-3                                    effective 10/08/2026
+                                                                                          (P-58481)
+                plans, identifying project milestones including expected timing and current progress for
+                obtaining non-ministerial discretionary approvals from state and local regulatory
+                authorities required for development before energization. Such approvals must include, as
+                applicable, permits for water, wastewater, air, or backup generation; abatements for noise,
+                light pollution, or traffic impacts; and agreements related to emergency response or site
+                security. A large load customer must provide updates or progress reports to the
+                interconnecting DSP or the interconnecting TSP when requested.
+      (E)       Schedule for phased energization of requested peak demand. A large load customer
+                must disclose to the interconnecting DSP or the interconnecting TSP the expected schedule,
+                including the month and year, for phased energization of the requested peak demand
+                expressed in MW, power factor (PF), and megavolt-ampere reactive (MVAr) units.
+      (F)       Water. A large load customer must disclose to the interconnecting DSP or the
+                interconnecting TSP:
+                (i)        the anticipated volume of water needed by the large load customer or end-use
+                           customer the large load customer has contracted to host;
+                (ii)       the type of water source that will be used (e.g., potable, non-potable,
+                           groundwater);
+                (iii)      the entity that will supply water to the large load customer or end-use customer
+                           the large load customer has contracted to host (e.g., municipally owned utility,
+                           investor owned utility, self-provided);
+                (iv)       the cooling technology that will be used; and
+                (v)        any other related information.
+      (G)       Backup generating facilities and on-site backup generating facilities. A large load
+                customer must disclose to the interconnecting DSP or the interconnecting TSP whether the
+                customer has or plans to have backup generating facilities or on-site backup generating
+                facilities. If the large load customer has or plans to have backup generating facilities or
+                on-site backup generating facilities, the large load customer must also disclose the
+                following information:
+                (i)        the nameplate capacity of each of the backup generating facilities and on-site
+                           backup generating facilities, as applicable;
+                (ii)       the fuel source and operational characteristics of each of the backup generating
+                           facilities and on-site backup generating facilities, as applicable, including run
+                           hour limitations and fuel storage limitations under the existing environmental
+                           permits; and
+                (iii)      how quickly each of the backup generating facilities and on-site backup
+                           generating facilities, as applicable, can reach their full capacity to serve the load.
+      (H)       Power supply. A large load customer must disclose to the interconnecting DSP or the
+                interconnecting TSP how the large load customer plans to procure power and whether the
+                large load customer has or plans to have on-site generation that is capable of being
+                synchronously interconnected to the ERCOT system and will provide power to the large
+                load customer.
+      (I)       Controllable load resource. A large load customer must disclose to the interconnecting
+                DSP or the interconnecting TSP whether the large load customer plans to register and
+                operate as a controllable load resource.
+(2)   Intermediate financial commitments and obligations. A large load customer must provide
+      satisfactory proof of financial commitment by meeting the requirements described in this
+      subsection.
+      (A)       Study fee.
+                (i)        A large load customer must pay a study fee of $100,000 to the interconnecting
+                           DSP or the interconnecting TSP for transmission studies performed by the
+                           interconnecting DSP, the interconnecting TSP, and ERCOT, as applicable.
+                (ii)       Beginning in 2032, the commission will adjust the $100,000 value on January 1
+                           every five years in accordance with this clause. The commission will publish the
+                           new values of the allowance to be used in the subsequent year on or around
+                           November 1 based on the 2026 values of $100,000.
+
+                                            §25.194-4                                     effective 10/08/2026
+                                                                                                     (P-58481)
+               (I)      The adjustment will be based on the third quarter percentage change in
+                        the national Consumer Price Index (CPI) published by the United States
+                        Department of Labor, Bureau of Labor Statistics from the third quarter
+                        in the first year to the third quarter in the fifth year.
+               (II)     The executive director must designate a substitute index to be used as a
+                        reference for adjustments if the CPI becomes unavailable.
+      (iii)    Notwithstanding this subparagraph, ERCOT protocols may establish an
+               additional flat study fee that must be paid by the large load customer.
+      (iv)     The study fee is due not later than the date that the intermediate agreement is
+               executed.
+      (v)      The interconnecting DSP or the interconnecting TSP must remit payment to
+               ERCOT, on behalf of the large load customer, for ERCOT’s costs to conduct the
+               interconnection study.
+      (vi)     Any unused study amount of the study fee must be returned to the large load
+               customer not later than 60 days after the conclusion of the interconnection study.
+(B)   Intermediate financial security on a dollar per MW basis. A large load customer must
+      post financial security with the interconnecting DSP or the interconnecting TSP in the
+      amount of $50,000 per MW of the requested peak demand for new interconnection requests
+      or $50,000 per MW of the incremental increase in the peak demand for expanded
+      interconnection requests. Financial security under this subsection must be posted with the
+      interconnecting DSP or the interconnecting TSP not later than the date that the intermediate
+      agreement is executed.
+      (i)      Inflation adjustment. Beginning in 2032, the commission will adjust the
+               $50,000 value on January 1 every five years in accordance with this clause. The
+               commission will publish the new values to be used in the subsequent year on or
+               around November 1 based on the 2026 value of $50,000.
+               (I)      The adjustment will be based on the third quarter percentage change in
+                        the national CPI published by the United States Department of Labor,
+                        Bureau of Labor Statistics from the third quarter in the first year to the
+                        third quarter in the fifth year.
+               (II)     The executive director must designate a substitute index to be used as a
+                        reference for adjustments if the CPI becomes unavailable.
+      (ii)     Accepted forms of financial security. The interconnecting DSP or the
+               interconnecting TSP may accept only the following forms of financial security:
+               (I)      cash collateral to be held in a segregated, cash account bearing interest
+                        at a rate equal to at least the rate of the constant maturity one-month U.S.
+                        Treasury bill;
+               (II)     guaranty, only if the guarantor has a U.S. or international credit rating of
+                        at least “BBB-” from Standard & Poor’s, “Baa3” from Moody’s Investor
+                        Service, or “BBB-” from Fitch. If the guarantor is rated by more than
+                        one of these agencies, creditworthiness must be determined by the
+                        second-highest rating; or
+               (III)    a letter of credit issued by a major U.S. commercial bank, or a U.S.
+                        branch office of a major foreign commercial bank, with a U.S. or
+                        international credit rating of at least “A-” from Standard & Poor’s, “A3”
+                        from Moody’s Investor Service, or “A-” from Fitch. If the issuing bank
+                        is rated by more than one of these agencies, creditworthiness must be
+                        determined by the second-highest rating.
+      (iii)    If the large load customer provides a guaranty or letter of credit under this
+               subsection, the interconnecting DSP or the interconnecting TSP may require the
+               submission of financial records or statements to determine the customer’s
+               financial stability.
+(C)   Significant equipment or services.
+      (i)      The interconnecting DSP or the interconnecting TSP must credit the financial
+               security provided under this subsection to the costs of significant equipment or
+
+                                 §25.194-5                                    effective 10/08/2026
+                                                                                         (P-58481)
+                        services if significant equipment or services are procured before a SLLIA is
+                        executed.
+              (ii)      If the financial security provided under this subsection is less than the costs of
+                        significant equipment or services being procured before a SLLIA is executed, then
+                        the large load customer must post additional financial security for the difference
+                        in the costs of significant equipment or services and the amount of financial
+                        security already posted before the interconnecting DSP or the interconnecting
+                        TSP procures the significant equipment or services.
+              (iii)     For purposes of this section, significant equipment or services is equipment with
+                        a lead time of at least 18 months and services are those necessary to interconnect
+                        the large load customer.
+              (iv)      Notwithstanding this subparagraph, a large load customer must pay contribution
+                        in aid of construction (CIAC) in the form of a direct cash payment for significant
+                        equipment or services that meet the definition for direct interconnection costs.
+                        CIAC is not refundable.
+(3)   Return, credit, and forfeiture of financial security.
+      (A)     Outstanding amounts owed.
+              (i)       In all instances under this subsection, the large load customer must pay
+                        outstanding amounts owed before the interconnecting DSP or interconnecting
+                        TSP returns financial security to the large load customer.
+              (ii)      The interconnecting DSP or the interconnecting TSP may elect to either invoice
+                        the large load customer for outstanding amounts owed; or draw down on the large
+                        load customer’s financial security and apply the financial security to outstanding
+                        amounts owed. If the large load customer fails to pay an invoice from the
+                        interconnecting DSP or the interconnecting TSP within 10 working days after the
+                        receipt of an invoice, the interconnecting DSP or the interconnecting TSP must
+                        draw down on the large load customer’s financial security for the amounts
+                        invoiced.
+              (iii)     Outstanding amounts owed include the following:
+                        (I)       costs incurred by the interconnecting DSP or the interconnecting TSP to
+                                  fulfill the large load customer’s request for interconnection;
+                        (II)      costs for equipment that the interconnecting DSP or the interconnecting
+                                  TSP procured and that cannot be canceled or returned with a full refund;
+                        (III)     costs for construction that the interconnecting DSP or the
+                                  interconnecting TSP started and that cannot be canceled or returned with
+                                  a full refund; and
+                        (IV)      costs for services that the interconnecting DSP or the interconnecting
+                                  TSP initiated and that cannot be canceled with a full refund.
+      (B)     Full return after collection of outstanding amounts owed. After collecting payment for
+              outstanding amounts owed, the interconnecting DSP or interconnecting TSP must return
+              to the large load customer the remaining balance of financial security under the following
+              circumstances:
+              (i)       the large load customer withdraws its requests for interconnection before ERCOT
+                        begins the interconnection study; or
+              (ii)      the large load customer is included in an interconnection study, is allocated zero
+                        MW across all study years by ERCOT, and withdraws its interconnection request
+                        before the deadline to execute a SLLIA that is set forth in subsection (f) of this
+                        section.
+      (C)     Partial return after collection of outstanding amounts owed. After collecting payment
+              for outstanding amounts owed and before the interconnecting DSP or the interconnecting
+              TSP returns financial security posted by a large load customer, the interconnecting DSP or
+              interconnecting TSP must subtract 20% of the financial security associated with the
+              transmission capacity allocated by ERCOT to a large load customer that is included in an
+              interconnection study, is allocated some portion of its requested peak demand, and
+
+
+                                         §25.194-6                                   effective 10/08/2026
+                                                                                                (P-58481)
+                       withdraws its interconnection request before the deadline to execute a SLLIA that is set
+                       forth in subsection (f) of this section.
+              (D)      Option for return or credit of financial security if a SLLIA is executed. A large load
+                       customer that is allocated transmission capacity that is equal to some portion of its
+                       requested peak demand and executes a SLLIA may opt to have financial security that the
+                       large load customer posted under an intermediate agreement either returned or credited by
+                       the interconnecting DSP or the interconnecting TSP, as described in subsection (f) of this
+                       section.
+              (E)      Forfeiture. A large load customer that does not withdraw its interconnection request
+                       before the deadline to execute a SLLIA and does not execute a SLLIA before the deadline
+                       set forth in subsection (f) of this section is deemed to have forfeited any financial security
+                       that the large load customer posted under an intermediate agreement.
+      (4)     Attestation and statement by officer or official with binding authority. The intermediate
+              agreement must be executed by an officer or official with binding authority over the large load
+              customer and include:
+              (A)      an attestation that supports all disclosures required under the intermediate agreement; and
+              (B)      a statement acknowledging that the information the large load customer submitted under
+                       the intermediate agreement meets the requirements of this section and is complete and
+                       accurate at the time the intermediate agreement is executed by the large load customer.
+      (5)     Subject to audit and verification.
+              (A)      All information provided or attested to by a large load customer under this subsection is
+                       subject to audit and verification by ERCOT and commission staff. The interconnecting
+                       DSP or the interconnecting TSP must coordinate with ERCOT and commission staff to
+                       obtain information from a large load customer, including supporting documentation, that
+                       is responsive to a request for information submitted by ERCOT or commission staff.
+              (B)      A large load customer or its interconnecting DSP or interconnecting TSP that fails to
+                       comply with ERCOT or commission staff’s audit process or that fails to produce responsive
+                       documentation supporting the completeness or accuracy of information provided under an
+                       intermediate agreement may be found in violation of commission rules and subject to
+                       enforcement action, including the imposition of administrative penalties or loss of
+                       transmission capacity allocated to the large load customer.
+      (6)     Withdrawal of all or a portion of requested peak demand.
+              (A)      Submission of written notice. A large load customer may withdraw all or a portion of its
+                       requested peak demand by submitting notice in writing to the interconnecting DSP or the
+                       interconnecting TSP. Written notice may be processed by the interconnecting DSP or the
+                       interconnecting TSP before ERCOT begins the interconnection study or after ERCOT
+                       allocates transmission capacity but prior to the deadline to execute a SLLIA that is set forth
+                       in subsection (f) of this section.
+              (B)      Notice to ERCOT. Not later than 14 days after receipt of a large load customer’s notice
+                       to withdraw all or a portion of requested peak demand, the interconnecting DSP or the
+                       interconnecting TSP must notify ERCOT via a method prescribed by ERCOT.
+
+(e)   Interconnection study.
+      (1)     Initiation of interconnection study. Not later than 60 days after an intermediate agreement is
+              executed and funded under subsection (d) of this section, the interconnecting DSP or the
+              interconnecting TSP must contact ERCOT to initiate an interconnection study, as prescribed by
+              ERCOT protocols. Notwithstanding this paragraph, ERCOT protocols may establish a process that
+              allows a large load customer to submit its interconnection request directly to ERCOT.
+      (2)     Communication with large load customer.
+              (A)      Initial contact to ERCOT. The interconnecting DSP or the interconnecting TSP must
+                       notify the large load customer not later than five working days after the interconnecting
+                       DSP or the interconnecting TSP contacts ERCOT to initiate an interconnection study.
+              (B)      Commencement of interconnection study.               The interconnecting DSP or the
+                       interconnecting TSP must notify the large load customer not later than five working days
+                       after the interconnection study commences.
+
+                                                  §25.194-7                                    effective 10/08/2026
+                                                                                                          (P-58481)
+               (C)      Communications with ERCOT. The interconnecting DSP or the interconnecting TSP
+                        must provide a large load customer information related to communications that the
+                        interconnecting DSP or the interconnecting TSP receives from ERCOT about the large
+                        load customer’s interconnection request. The interconnecting DSP or the interconnecting
+                        TSP must provide information to the large load customer not later than five working days
+                        after receipt of communications from ERCOT about the large load customer’s
+                        interconnection request.
+               (D)      Transmission capacity allocated. The interconnecting DSP, the interconnecting TSP, or
+                        ERCOT must timely notify the large load customer of the transmission capacity allocated
+                        to the large load customer, as prescribed by ERCOT protocols.
+               (E)      ERCOT communications directly with the large load customer. Notwithstanding this
+                        paragraph, ERCOT may fulfill the interconnecting DSP or the interconnecting TSP’s
+                        obligations to communicate with the large load customer through a process developed in
+                        ERCOT protocols.
+      (3)      ERCOT communication with interconnecting TSP. ERCOT must timely notify the
+               interconnecting TSP when another TSP completes a project that is needed to interconnect a large
+               load customer, as prescribed by ERCOT protocols.
+      (4)      New interconnection request required. A large load customer that materially changes its
+               interconnection request, as described in ERCOT protocols, including by changing its requested peak
+               demand, phased energization schedule, point of interconnection, site configuration, load
+               composition, load type, or any other modification, must submit a new interconnection request to the
+               interconnecting DSP or the interconnecting TSP.
+
+(f)   SLLIA. Not later than 60 days after ERCOT issues a study report that allocates transmission capacity, the
+      large load customer must execute and fund a SLLIA with the interconnecting DSP and, if different from the
+      interconnecting DSP, the interconnecting TSP. The SLLIA must meet the requirements of this subsection.
+      The interconnecting DSP or the interconnecting TSP must cancel the interconnection request and notify
+      ERCOT of the cancellation if the large load customer fails to execute a SLLIA under this subsection.
+      (1)      Required disclosures.
+               (A)     Site control.
+                       (i)       A large load customer must disclose to the interconnecting DSP or the
+                                 interconnecting TSP the type of property interest that the large load customer
+                                 holds for the site of the load location. The large load customer must be able to
+                                 demonstrate control of the site of the load location through provision of one of the
+                                 following legally binding property interests linking the large load customer and
+                                 the site of the load location:
+                                 (I)       a lease agreement, signed and executed by the large load customer or an
+                                           affiliate of the large load customer, for one or more parcels of land
+                                           sufficient to accommodate the customer’s planned facility at the
+                                           proposed load location for a duration of at least five years from the date
+                                           that the large load customer is expected to reach the contracted peak
+                                           demand;
+                                 (II)      a deed, transferring ownership to the large load customer or an affiliate
+                                           of the large load customer, for one or more parcels of land sufficient to
+                                           accommodate the customer’s planned facility at the proposed load
+                                           location; or
+                                 (III)     a purchase and sale agreement, signed and executed by the large load
+                                           customer or an affiliate of the large load customer.
+                       (ii)      If the property interest is held by an affiliate, the large load customer must be able
+                                 to demonstrate an existing legally binding connection linking itself, the affiliate,
+                                 and the site of the load location.
+               (B)     Substantially similar interconnection request. A large load customer must disclose to
+                       the interconnecting DSP or the interconnecting TSP whether the customer, an affiliate of
+                       the large load customer or the end-use customer the large load customer has contracted to
+                       host is pursuing a substantially similar interconnection request for electric service in Texas
+
+                                                    §25.194-8                                    effective 10/08/2026
+                                                                                                            (P-58481)
+      either directly or indirectly through a third-party developer, the approval of which would
+      result in the customer materially changing, delaying, or withdrawing the interconnection
+      request. A material change or delay includes a delay of one or more years to the project’s
+      projected date to realize its contracted peak demand, a 20% or greater change in the
+      contracted peak demand, or a change in the location for the point of interconnection.
+      (i)       A large load customer that is pursuing a substantially similar interconnection
+                request for electric service, the approval of which would result in the customer
+                materially changing, delaying, or withdrawing the interconnection request,
+                whether directly or indirectly through an affiliate, third-party developer, or end-
+                use customer that the large load customer has contracted to host, must disclose
+                the following information to the interconnecting DSP or the interconnecting TSP:
+                (I)       the ERCOT-assigned serial number for the substantially similar
+                          interconnection request, as applicable;
+                (II)      the location, including the power region and if in the ERCOT region the
+                          load zone, of the substantially similar interconnection request;
+                (III)     the requested peak demand of the substantially similar interconnection
+                          request;
+                (IV)      the anticipated timing of energization of the substantially similar
+                          interconnection request; and
+                (V)       the interconnecting DSP and, if different from the interconnecting DSP,
+                          the interconnecting TSP associated with the substantially similar
+                          interconnection request.
+      (ii)      A large load customer that discloses a substantially similar interconnection
+                request under this subsection may anonymize the competitively sensitive
+                information in its disclosure to the interconnecting DSP or the interconnecting
+                TSP.
+      (iii)     An interconnecting DSP and an interconnecting TSP must not sell, share, or
+                disclose information submitted to the interconnecting DSP or the interconnecting
+                TSP under this subsection other than a disclosure to the commission or ERCOT.
+(C)   Site-related studies and engineering services. A large load customer must disclose to
+      the interconnecting DSP or the interconnecting TSP the large load customer’s expected
+      development schedule and progress on site-related studies and engineering services
+      required for project development before energization (e.g., geotechnical survey, water,
+      wastewater, or gas). A large load customer must provide updates or progress reports to the
+      interconnecting DSP or the interconnecting TSP when requested.
+(D)   State and local regulatory milestones and approvals. A large load customer must
+      disclose to the interconnecting DSP or the interconnecting TSP the large load customer’s
+      plans, identifying project milestones including expected timing and current progress for
+      obtaining non-ministerial discretionary approvals from state and local regulatory
+      authorities required for development before energization. Such approvals must include, as
+      applicable, permits for water, wastewater, air, or backup generation; abatements for noise,
+      light pollution, or traffic impacts; and agreements related to emergency response or site
+      security. A large load customer must provide updates or progress reports to the
+      interconnecting DSP or the interconnecting TSP when requested.
+(E)   Schedule for phased energization of contracted peak demand. A large load customer
+      must disclose to the interconnecting DSP or the interconnecting TSP the expected phased
+      energization schedule, including the month and year, for phased energization of the
+      contracted peak demand expressed in MW, PF, and MVAr units.
+(F)   Water. A large load customer must disclose to the interconnecting DSP or the
+      interconnecting TSP:
+      (i)       the anticipated volume of water needed by the large load customer or end-use
+                customer the large load customer has contracted to host;
+      (ii)      the type of water source that will be used (e.g., potable, non-potable,
+                groundwater);
+
+
+                                 §25.194-9                                   effective 10/08/2026
+                                                                                        (P-58481)
+               (iii)      the entity that will supply water to the large load customer or end-use customer
+                          the large load customer has contracted to host (e.g., municipally owned utility,
+                          investor owned utility, or self provided);
+               (iv)       the cooling technology that will be used; and
+               (v)        any other related information.
+      (G)      Backup generating facilities and on-site backup generating facilities. A large load
+               customer must disclose to the interconnecting DSP or the interconnecting TSP whether the
+               customer has or plans to have backup generating facilities or on-site backup generating
+               facilities. A large load customer must timely disclose to the interconnecting DSP or the
+               interconnecting TSP any material changes to the large load customer’s plans for backup
+               generating facilities or on-site backup generating facilities. If the large load customer has
+               or plans to have backup generating facilities or on-site backup generating facilities, the
+               large load customer must also disclose the following information:
+               (i)        the nameplate capacity of each of the backup generating facilities and on-site
+                          backup generating facilities, as applicable;
+               (ii)       the fuel source and operational characteristics of each of the backup generating
+                          facilities and on-site backup generating facilities, as applicable, including run
+                          hour limitations under the existing environmental permits; and
+               (iii)      how quickly each of the backup generating facilities and on-site backup
+                          generating facilities, as applicable, can reach their full capacity to serve the load.
+      (H)      Power supply. A large load customer must disclose to the interconnecting DSP or the
+               interconnecting TSP how the large load customer plans to procure power and whether the
+               large load customer has or plans to have on-site generation that is capable of being
+               synchronously interconnected to the ERCOT system and will provide power to the large
+               load customer. A large load customer must timely disclose to the interconnecting DSP or
+               the interconnecting TSP any material changes to the large load customer’s plans for on-site
+               generation that is capable of being synchronously interconnected to the ERCOT system
+               and will provide power to the large load customer.
+      (I)      Controllable load resource. A large load customer must disclose to the interconnecting
+               DSP or the interconnecting TSP whether the large load customer plans to register and
+               operate a controllable load resource.
+(2)   SLLIA financial commitments and obligations. A large load customer must provide satisfactory
+      proof of financial commitment by meeting the requirements described in this subsection.
+      (A)      Credit and return of financial commitments provided under an intermediate
+               agreement.
+               (i)        Notification of election to return or credit cash collateral. Not later than 30
+                          days after the interconnecting DSP, the interconnecting TSP, or ERCOT notifies
+                          a large load customer of its allocated transmission capacity, the large load
+                          customer must notify the interconnecting DSP or the interconnecting TPS in
+                          writing whether the large load customer elects to have cash collateral provided
+                          under subsection (d) of this section:
+                          (I)       returned to the large load customer; or
+                          (II)      credited toward the financial security requirements under this subsection.
+               (ii)       Failure to notify of election to return or credit cash collateral. If a large load
+                          customer fails to timely notify the interconnecting DSP or the interconnecting
+                          TSP in writing whether the large load customer elects to have the cash collateral
+                          returned or credited under this subsection, the interconnecting DSP or the
+                          interconnecting TSP must credit the cash collateral to the financial security
+                          requirements under this section.
+               (iii)      Return of guaranty and letter of credit. Not later than 30 days after ERCOT
+                          notifies the interconnecting DSP or the interconnecting TSP of a large load
+                          customer’s allocated transmission capacity, the interconnecting DSP or the
+                          interconnecting TSP must return a guaranty or letter of credit provided by a large
+                          load customer under subsection (d) of this section.
+      (B)      SLLIA financial security.
+
+                                           §25.194-10                                    effective 10/08/2026
+                                                                                                    (P-58481)
+      (i)      A large load customer must post financial security with the interconnecting DSP
+               or the interconnecting TSP in an amount that is the greater of:
+               (I)       $50,000 per MW of the contracted peak demand; or
+               (II)      the costs allocated to the large load customer for system upgrades as a
+                         result of a batch zero interconnection study or an interconnection study.
+      (ii)     Notwithstanding this subparagraph, a large load customer may be required to post
+               additional financial security related to the large load minimum billing demand,
+               described in §25.193 of this title (relating to Distribution Service Provide
+               Transmission Cost Recovery Factor (TCRF)).
+      (iii)    Deadline to post financial security. Financial security under this subsection
+               must be posted at the time the SLLIA is executed.
+      (iv)     Inflation adjustment. Beginning in 2032, the commission will adjust the
+               $50,000 value on January 1 every five years in accordance with this clause. The
+               commission will publish the new values to be used in the subsequent year on or
+               around November 1 based on the 2026 value of $50,000.
+               (I)       The adjustment will be based on the percentage change in the national
+                         CPI published by the United States Department of Labor, Bureau of
+                         Labor Statistics from the third quarter in the first year to the third quarter
+                         in the fifth year.
+               (II)      The executive director must designate a substitute index to be used as a
+                         reference for adjustments if the CPI becomes unavailable.
+      (v)      Accepted forms of financial security. The interconnecting DSP or the
+               interconnection TSP may accept only the following forms of financial security:
+               (I)       cash collateral to be held in a segregated, cash account bearing interest
+                         at a rate equal to at least the rate of the constant maturity one-month U.S.
+                         Treasury bill;
+               (II)      guaranty, of if the guarantor has a U.S. or international credit rating of at
+                         least “BBB-” from Standard & Poor’s, “Baa3” from Moody’s Investor
+                         Service, or “BBB-” from Fitch. If the guarantor is rated by more than
+                         one of these agencies, creditworthiness must be determined by the
+                         second-highest rating; or
+               (III)     a letter of credit issued by a major U.S. commercial bank, or a U.S.
+                         branch office of a major foreign commercial bank, with a U.S. or
+                         international credit rating of at least “A-” from Standard & Poor’s, “A3”
+                         from Moody’s Investor Service, or “A-” from Fitch. If the issuing bank
+                         is rated by more than one of these agencies, creditworthiness must be
+                         determined by the second-highest rating.
+      (vi)     If the large load customer provides a guaranty or letter of credit under this
+               subsection, the interconnecting DSP or the interconnecting TSP may require the
+               submission of financial records or statements to determine the customer’s
+               financial stability.
+(C)   CIAC for direct interconnection costs. A large load customer must pay all direct
+      interconnection costs through CIAC, with no standard or other allowance offered to offset
+      the customer’s CIAC payments.
+      (i)      CIAC must be paid in the form of a direct cash payment.
+      (ii)     An interconnecting DSP and an interconnecting TSP must invoice a large load
+               customer for direct interconnection costs before incurring direct interconnection
+               costs.
+      (iii)    If the large load customer fails to pay an invoice from the interconnecting DSP or
+               the interconnecting TSP within 10 working days after the receipt of an invoice,
+               the interconnecting DSP or the interconnecting TSP may draw down on the large
+               load customer’s financial security for the invoiced amount and cancel the large
+               load customer’s interconnection request.
+
+
+
+                                 §25.194-11                                     effective 10/08/2026
+                                                                                           (P-58481)
+               (iv)      The CIAC must be trued-up to reflect the actual costs once the facilities are
+                         completed, and a large load customer may receive a credit or surcharge on their
+                         bill, as applicable, for the difference in actual costs relative to the estimate.
+               (v)       CIAC is not refundable.
+      (D)      Large load minimum billing demand. The SLLIA must include a term of
+               acknowledgment and agreement that the large load customer will pay the large load
+               minimum billing demand described in §25.193 of this title for the set period of time
+               described in §25.193.
+(3)   Return and forfeiture of financial security.
+      (A)      Outstanding amounts owed.
+               (i)       In all instances under this subsection, the large load customer must pay
+                         outstanding amounts owed before the interconnecting DSP or the interconnecting
+                         TSP returns financial security to the large load customer.
+               (ii)      The interconnecting DSP or the interconnecting TSP may elect to either invoice
+                         the large load customer for outstanding amounts owed; or draw down on the large
+                         load customer’s financial security and apply the financial security to outstanding
+                         amounts owed. If the large load customer fails to pay an invoice from the
+                         interconnecting DSP or the interconnecting TSP within 10 working days after the
+                         receipt of an invoice, the interconnecting DSP or the interconnecting TSP must
+                         draw down on the large load customer’s financial security for the amounts
+                         invoiced.
+               (iii)     Outstanding amounts owed include the following:
+                         (I)       costs incurred by the interconnecting DSP or the interconnecting TSP to
+                                   fulfill the large load customer’s request for interconnection;
+                         (II)      costs for equipment that the interconnecting DSP or the interconnecting
+                                   TSP procured and that cannot be canceled or returned with a full refund;
+                         (III)     costs for construction that the interconnecting DSP or the
+                                   interconnecting TSP started and that cannot be canceled or returned with
+                                   a full refund;
+                         (IV)      costs for services that the interconnecting DSP or the interconnecting
+                                   TSP initiated and that cannot be canceled or returned with a full refund;
+                                   and
+                         (V)       the large load minimum billing demand described in §25.193 of this title
+                                   for the set period of time described in §25.193.
+      (B)      Partial return required less outstanding amounts owed. If a large load customer
+               withdraws the customer’s request to interconnect all or a portion of its contracted peak
+               demand, the interconnecting DSP or the interconnecting TSP must collect payment for
+               outstanding amounts owed and then subtract 20% of the financial security associated with
+               the contracted peak demand that is withdrawn before the interconnecting DSP or the
+               interconnecting TSP returns the remaining balance of financial security posted by a large
+               load customer.
+      (C)      Terms for return of financial security for a large load customer that energizes. The
+               interconnecting DSP or the interconnecting TSP must return 20% of the remaining balance
+               of financial security when the large load customer energizes and the remainder ratably in
+               20% increments as the large load customer meets the milestones identified in the
+               customer’s SLLIA for meeting its obligation to pay the large load minimum billing demand
+               described in §25.193 of this title for the set period of time described in §25.193.
+      (D)      Forfeiture. A large load customer that fails to comply with the terms of the SLLIA may
+               be deemed to have forfeited financial security posted under the SLLIA.
+(4)   Attestation and statement by officer or official with binding authority. The SLLIA must be
+      signed by an officer or official with binding authority over the large load customer and include:
+      (A)      an attestation that supports all disclosures required under the SLLIA; and
+      (B)      a statement acknowledging that the information the large load customer submitted under
+               the SLLIA meets the requirements of this section and is complete and accurate at the time
+               the SLLIA is executed by the large load customer.
+
+                                         §25.194-12                                   effective 10/08/2026
+                                                                                                 (P-58481)
+      (5)      Subject to audit and verification.
+               (A)     All information provided or attested to by a large load customer under this subsection is
+                       subject to audit and verification by ERCOT and commission staff. The interconnecting
+                       DSP or the interconnecting TSP must coordinate with ERCOT and commission staff to
+                       obtain information from a large load customer, including supporting documentation, that
+                       is responsive to a request for information submitted by ERCOT or commission staff.
+               (B)     A large load customer or its interconnecting DSP or interconnecting TSP that fails to
+                       comply with ERCOT or commission staff’s audit process or that fails to produce responsive
+                       documentation supporting the completeness and or accuracy of information provided under
+                       a SLLIA may be found in violation of commission rules and subject to enforcement action,
+                       including the imposition of administrative penalties or loss of transmission capacity
+                       allocated to the large load customer.
+      (6)      Withdrawal of all or a portion of contracted peak demand.
+               (A)     Submission of written notice. A large load customer may withdraw all or a portion of its
+                       contracted peak demand by submitting its notice in writing to the interconnecting DSP or
+                       the interconnecting TSP.
+               (B)     Notice to ERCOT. Not later than 14 days after receipt of a large load customer’s notice
+                       to withdraw all or a portion of contracted peak demand, the interconnecting DSP or the
+                       interconnecting TSP must notify ERCOT via a method prescribed by ERCOT.
+
+(g)   Non-utilized transmission capacity.
+      (1)     Not later than 30 days after a large load customer fails, by 24 months, to satisfy a milestone in its
+              schedule for phased energization, as described in the SLLIA at the time of execution, the
+              interconnecting DSP or the interconnecting TSP must notify ERCOT of the large load customer’s
+              non-utilized capacity. The 24-month period applies to the energization schedule as a whole, and not
+              for each energization milestone individually.
+      (2)     Within 60 days of providing notice to ERCOT under this subsection, the interconnecting DSP or the
+              interconnecting TSP must draw down on the large load customer’s financial security and apply the
+              financial security to any outstanding amounts owed. Outstanding amounts owed include the
+              following:
+              (A)      costs incurred by the interconnecting DSP or the interconnecting TSP to fulfill the large
+                       load customer’s request for interconnection;
+              (B)      costs for equipment that the interconnecting DSP or the interconnecting TSP procured and
+                       that cannot be canceled or returned with a full refund;
+              (C)      costs for construction that the interconnecting DSP or the interconnecting TSP started and
+                       that cannot be canceled with a full refund;
+              (D)      costs for services that the interconnecting DSP or the interconnecting TSP initiated and
+                       that cannot be canceled with a full refund; and
+              (E)      the large load minimum billing demand described in §25.193 of this title for the set period
+                       of time described in §25.193.
+      (3)     Within 60 days of providing notice to ERCOT under this subsection and after applying the large
+              load customer’s financial security to any outstanding amounts owed, the interconnecting DSP or the
+              interconnecting TSP must subtract 20% of the financial security associated with the non-utilized
+              transmission capacity and then return the balance to the large load customer.
+      (4)     CIAC is not refundable.
+
+(h)   Batch zero load.
+      (1)     Financial security posted under ERCOT Planning Guide Section 9, as of the effective date of
+              this section.
+              (A)       Outstanding amounts owed.
+                        (i)    In all instances under this subsection, the large load customer must pay
+                               outstanding amounts owed before the interconnecting DSP or interconnecting
+                               TSP returns financial security to the large load customer.
+                        (ii)   The interconnecting DSP or the interconnecting TSP may elect to either invoice
+                               the large load customer for outstanding amounts owed; or draw down on the large
+
+                                                  §25.194-13                                  effective 10/08/2026
+                                                                                                         (P-58481)
+                load customer’s financial security and apply the financial security to outstanding
+                amounts owed. If the large load customer fails to pay an invoice from the
+                interconnecting DSP or the interconnecting TSP within 10 working days after the
+                receipt of an invoice, the interconnecting DSP or the interconnecting TSP must
+                draw down on the large load customer’s financial security for the amounts
+                invoiced.
+      (iii)     Outstanding amounts owed include the following:
+                (I)       costs incurred by the interconnecting DSP or the interconnecting TSP to
+                          fulfill the large load customer’s request for interconnection;
+                (II)      costs for equipment that the interconnecting DSP or the interconnecting
+                          TSP procured and that cannot be canceled or returned with a full refund;
+                (III)     costs for construction that the interconnecting DSP or the
+                          interconnecting TSP started and that cannot be canceled or returned with
+                          a full refund; and
+                (IV)      costs for services that the interconnecting DSP or the interconnecting
+                          TSP initiated and that cannot be canceled with a full refund.
+(B)   Full return after collection of outstanding amounts owed. After collecting payment for
+      outstanding amounts owed, the interconnecting DSP or the interconnecting TSP must
+      return to the large load customer the remaining balance of financial security under the
+      following circumstances:
+      (i)       the large load customer meets the criteria in ERCOT Planning Guide Section
+                9.2.1.1(1)(e), as of the effective date of this section, is included in the batch zero
+                interconnection study, and withdraws its interconnection request before the
+                deadline to execute a SLLIA that is set forth in subsection (f) of this section;
+      (ii)      the large load customer meets the criteria in ERCOT Planning Guide Section
+                9.2.1.1(1)(g), is included in the batch zero interconnection study, and withdraws
+                its interconnection request before the deadline to execute a SLLIA that is set forth
+                in subsection (f) of this section; or
+      (iii)     the large load customer meets the criteria in ERCOT Planning Guide Section
+                9.2.1.2(1), is included in the batch zero interconnection study, is allocated zero
+                MW across all study years by ERCOT, and withdraws its interconnection request
+                before the deadline to execute a SLLIA that is set forth in subsection (f) of this
+                section.
+(C)   Partial return after collection of outstanding amounts owed. After collecting payment
+      for outstanding amounts owed, the interconnecting DSP or the interconnecting TSP must
+      subtract the following before the interconnecting DSP or the interconnecting TSP returns
+      the remaining balance of financial security posted by a large load customer:
+      (i)       50% of the financial security associated with the transmission capacity allocated
+                by ERCOT to a large load customer that meets the criteria in ERCOT Planning
+                Guide Section 9.2.1.1(1)(f), is included in the batch zero interconnection study, is
+                allocated some portion of its requested peak demand, and withdraws its
+                interconnection request before the deadline to execute a SLLIA that is set forth in
+                subsection (f) of this section; or
+      (ii)      20% of the financial security associated with the transmission capacity allocated
+                by ERCOT to a large load customer that meets the criteria in ERCOT Planning
+                Guide Section 9.2.1.2(1), is included in the batch zero interconnection study, is
+                allocated some portion of its requested peak demand, and withdraws its
+                interconnection request before the deadline to execute a SLLIA that is set forth in
+                subsection (f) of this section.
+(D)   Option for return or credit of financial security if a SLLIA is executed. A large load
+      customer that is allocated transmission capacity that is equal to some portion of its
+      requested peak demand and executes a SLLIA may opt to have financial security that the
+      large load customer previously posted either returned or credited by the interconnecting
+      DSP or the interconnecting TSP, as described in subsection (f) of this section. The
+
+
+                                 §25.194-14                                    effective 10/08/2026
+                                                                                          (P-58481)
+                       interconnecting DSP or the interconnecting TSP must credit the large load customer’s
+                       previous cash payments on a dollar-for-dollar basis.
+               (E)     Forfeiture. A large load customer that does not withdraw its interconnection request
+                       before the deadline to execute a SLLIA and does not execute a SLLIA before the deadline
+                       set forth in subsection (f) of this section may be deemed to have forfeited any financial
+                       security that the large load customer posted under an intermediate agreement.
+      (2)      Subject to audit and verification.
+               (A)     All information provided or attested to by a large load customer under ERCOT Planning
+                       Guide Section 9, as of the effective date of this section, is subject to audit and verification
+                       by ERCOT and commission staff. The interconnecting DSP or the interconnecting TSP
+                       must coordinate with ERCOT and commission staff to obtain information from a large load
+                       customer, including supporting documentation, that is responsive to a request for
+                       information submitted by ERCOT or commission staff.
+               (B)     A large load customer or its interconnecting or its interconnecting DSP or interconnecting
+                       TSP that fails to comply with ERCOT or commission staff’s audit process or that fails to
+                       produce responsive documentation supporting the completeness or accuracy of information
+                       provided under ERCOT Planning Guide Section 9 may be found in violation of
+                       commission rules and subject to enforcement, including the imposition of administrative
+                       penalties or loss of transmission capacity allocated to the large load customer.
+      (3)      SLLIA.
+               (A)     A batch zero load must execute a SLLIA in compliance with subsection (f) of this section
+                       to reserve ERCOT’s allocation of transmission capacity as contracted peak demand.
+               (B)     A batch zero load that executed an interconnection agreement on or before June 1, 2025
+                       must pay for direct interconnection costs in accordance with a previously executed
+                       interconnection agreement and is not subject to additional costs under subsection (f)(2)(C)
+                       of this section. All other financial commitments and obligations under subsection (f) of
+                       this section apply to a batch zero load. Any previously posted financial security or cash
+                       payment may be credited on a dollar-for-dollar basis to a large load customer’s financial
+                       commitments and obligations under subsection (f) of this section.
+               (C)     If a batch zero load fails to execute a SLLIA in compliance with this section, the
+                       interconnecting DSP or the interconnecting TSP must cancel the request for
+                       interconnection and notify ERCOT not later than 14 days after the deadline to execute a
+                       SLLIA.
+      (4)      Withdrawal of all or a portion of requested peak demand.
+               (A)     Submission of written notice. A batch zero load may withdraw all or a portion of its
+                       requested peak demand by submitting notice in writing to the interconnecting DSP or the
+                       interconnecting TSP. Written notice may be processed by the interconnecting DSP or the
+                       interconnecting TSP only after ERCOT issues a study report that allocates transmission
+                       capacity and prior to the deadline to execute a SLLIA that is set forth in subsection (f) of
+                       this section.
+               (B)     Notice to ERCOT. Not later than 14 days after receipt of a large load customer’s notice
+                       to withdraw all or a portion of requested peak demand, the interconnecting DSP or the
+                       interconnecting TSP must notify ERCOT via a method prescribed by ERCOT.
+
+(i)   2026 regional transmission plan compliance plan.
+      (1)     A large load customer that executed an agreement with an interconnecting DSP or an
+              interconnecting TSP under §25.370(g) of this title (relating to ERCOT Large Load Forecasting
+              Criteria) must:
+              (A)       withdraw its interconnection request; or
+              (B)       execute a superseding intermediate agreement or SLLIA, as applicable, that complies with
+                        this section.
+      (2)     An interconnecting DSP or an interconnecting TSP must collect payment for outstanding amounts
+              owed before the interconnecting DSP or the interconnecting TSP returns financial security to a large
+              load customer that withdraws its interconnection request under this subsection.
+
+
+                                                   §25.194-15                                   effective 10/08/2026
+                                                                                                           (P-58481)
+               (A)       The interconnecting DSP or the interconnecting TSP may elect to either invoice the large
+                         load customer for outstanding amounts owed; or draw down on the large load customer’s
+                         financial security and apply the financial security to outstanding amounts owed. If the
+                         large load customer fails to pay an invoice from the interconnecting DSP or the
+                         interconnecting TSP within 10 working days after the receipt of an invoice, the
+                         interconnecting DSP or the interconnecting TSP must draw down on the large load
+                         customer’s financial security for the amounts invoiced.
+               (B)       Outstanding amounts owed include the following:
+                         (i)      costs incurred by the interconnecting DSP or the interconnecting TSP to fulfill the
+                                  large load customer’s request for interconnection;
+                         (ii)     costs for equipment that the interconnecting DSP or the interconnecting TSP
+                                  procured and that cannot be canceled or returned with a full refund;
+                         (iii)    costs for construction that the interconnecting DSP or the interconnecting TSP
+                                  started and that cannot be canceled or returned with a full refund; and
+                         (iv)     costs for services that the interconnecting DSP or the interconnecting TSP
+                                  initiated and that cannot be canceled with a full refund.
+      (3)      A large load customer that executed an interconnection agreement on or before June 1, 2025 must
+               pay for direct interconnection costs in accordance with a previously executed interconnection
+               agreement and is not subject to additional costs under subsection (f)(2)(C) of this section. All other
+               financial commitments and obligations under this section apply. Any previously posted financial
+               security or cash payment may be credited on a dollar-for-dollar basis to a large load customer’s
+               financial commitments and obligations under this section.
+      (4)      Notwithstanding this subsection, a large load customer that executed an agreement with a large load
+               customer under §25.370(g) of this title and is a batch zero load must comply with subsection (h) of
+               this section.
+
+(j)   Audit and verification. ERCOT and commission staff may submit a request for information to the
+      interconnecting DSP or the interconnecting TSP for information that ERCOT or commission staff deems
+      necessary to conduct an audit, complete any analysis required as part of a batch zero interconnection study
+      or an interconnection study, or to enforce this section, including to verify the accuracy and completeness of
+      information attested to by a large load customer. The interconnecting DSP or the interconnecting TSP must
+      coordinate with ERCOT and commission staff, as applicable, to obtain from a large load customer and
+      produce to ERCOT or commission staff, as applicable, information, including supporting documentation,
+      that is responsive to a request for information submitted by ERCOT or commission staff under this section.
+      (1)       A large load customer or its interconnecting DSP or interconnecting TSP that fails to comply with
+                ERCOT or commission staff’s audit process or that fails to produce responsive documentation
+                supporting the completeness and accuracy of information provided under this section may be found
+                in violation of commission rules and subject to enforcement action, including the imposition of
+                administrative penalties or loss of transmission capacity allocated to the large load customer.
+      (2)       If the information provided by a large load customer under this section or ERCOT Planning Guide
+                Section 9, as of the effective date of this section, is determined to be false or inaccurate or if the
+                accuracy or completeness of the information cannot be verified through supporting documentation:
+                (A)       the large load customer may be deemed to have forfeited any financial security that the
+                          large load customer posted under this section or ERCOT Planning Guide Section 9, as of
+                          the effective date of this section; and
+                (B)       any transmission capacity allocated to the large load customer may be reallocated by
+                          ERCOT in a future interconnection study and in a manner consistent with ERCOT
+                          protocols.
+      (3)       ERCOT and commission staff must treat competitively sensitive information that is disclosed under
+                this section by a large load customer as Protected Information under ERCOT protocols. Customer-
+                specific or competitively sensitive information disclosed by a large load customer and obtained by
+                ERCOT or commission staff under this section is confidential and not subject to disclosure under
+                Chapter 552 of the Texas Government Code.
+
+(k)   Reallocation of transmission capacity.
+
+                                                   §25.194-16                                   effective 10/08/2026
+                                                                                                           (P-58481)
+(1)   In a future interconnection study, ERCOT may, in a manner consistent with ERCOT protocols
+      reallocate transmission capacity, including transmission capacity associated with:
+      (A)      a canceled request for interconnection;
+      (B)      a withdrawn request for interconnection;
+      (C)      a batch zero load that fails to execute a SLLIA in compliance with this section;
+      (D)      a large load customer that fails, by 24 months, to satisfy a milestone in its schedule for
+               phased energization;
+      (E)      a large load customer that fails to comply with its SLLIA;
+      (F)      a large load customer that fails to comply with ERCOT or commission staff’s audit; or
+      (G)      a large load customer that is determined to have provided false or inaccurate information;
+               or the information provided under this section cannot be verified through supporting
+               documentation.
+(2)   An interconnecting DSP is prohibited from reallocating transmission capacity.
+(3)   An interconnecting TSP is prohibited from reallocating transmission capacity.
+
+
+
+
+                                        §25.194-17                                  effective 10/08/2026
+                                                                                               (P-58481)
+

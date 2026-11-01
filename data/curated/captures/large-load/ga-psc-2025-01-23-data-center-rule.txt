@@ -1,0 +1,68 @@
+Source: https://psc.ga.gov/site/assets/files/8617/media_advisory_data_centers_rule_1-23-2025.pdf
+Retrieved: 2026-11-01
+Original: 99986 bytes, SHA-256 5514cf0cee4f6b2e71b434bf2d1773d91f9c9b34f3d40c095b3ae922df512acf
+Capture: pdftotext -layout
+----
+Contact: Tom Krause
+Phone: 404-656-2316          Georgia Public Service                   244 Washington St S.W.
+                                                                      Atlanta, Georgia 30334
+www.psc.state.ga.us                                                   Phone: 404-656-4501
+                                Commission                            Toll free:1- 800-282-5813
+                                                                      Fax: 404-656-2341
+
+For Immediate Release
+
+                                 NEWS RELEASE
+
+               PSC Approves Rule to Allow New
+              Power Usage Terms for Data Centers
+January 23, 2025 – (ATLANTA) The Georgia Public Service Commission voted
+unanimously on Thursday to approve a new rule that allows Georgia Power to charge new
+data centers in a manner that will protect ratepayers from cost shifting.
+
+The new rule approved Thursday derives from the Public Service Commission’s decision
+on the interim Integrated Resource Plan, unanimously approved by Commissioners in
+April 2024. That docket (55378) added extra capacity to Georgia’s power grid.
+
+The new Georgia Power rule states that any new customers using more than 100
+megawatts of energy can be billed using terms and conditions beyond those used for
+standard customers to address risks associated with these large-load users. In addition to
+site specific costs, the data centers would pay for costs incurred by upstream generation,
+transmission and distribution to these large-load power users as construction of the data
+centers progresses. This protects Georgia Power’s residential and other
+commercial/industrial customers.
+
+The new rule also allows for longer contract lengths (from 5-year contracts to 15-year
+contracts) and minimum billing requirements for high-load customers. This helps ensure
+any new high-usage customers do not shut down and leave the state before paying for new
+infrastructure built specifically to handle the needs of their businesses.
+
+The rule also states that any new Georgia Power contract with a company that fits the 100
+MW usage category must be submitted to the PSC for review.
+
+“The amount of energy these new industries consume is staggering,” said PSC Chairman
+Jason Shaw. “By approving this new rule, the PSC is helping ensure that existing Georgia
+Power customers will be spared additional costs associated with adding these large-load
+customers to the grid.”
+
+
+
+                                                                                             more
+Georgia law requires the Public Service Commissioners to approve all of Georgia Power’s
+new or amended rules.
+
+“Our Commission’s action today protects residential and small business customers from
+data center load financial impacts,” said PSC Vice Chairman Tim Echols. “We want to
+keep Georgia the best place to do business, but data centers will need to bear the cost of
+their electricity acquisition.”
+
+“This rule is one of several actions the PSC is planning to protect ratepayers on this
+subject matter,” said Commissioner Lauren “Bubba” McDonald. “Data center power usage
+will be addressed further in the upcoming 2025 Integrated Resource Plan.”
+
+The Georgia Public Service Commission is a five-member constitutional agency that
+exercises its authority and influence to ensure that consumers receive safe, reliable, and
+reasonably-priced telecommunications, electric and natural gas service from financially
+viable and technically competent companies. For more information on the Commission,
+see the Commission website at https://psc.ga.gov
+

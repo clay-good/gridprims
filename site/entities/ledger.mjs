@@ -26,6 +26,7 @@ export async function ledgerDatasets(root) {
     });
   }
   for (const o of ours) {
+    if (o.curated) { out.push({ ...o, publisher: 'gridprims', ours: true }); continue; }
     const src = manifests.get(o.from);
     if (!src) continue;
     // Our own figures are as old as the build that made them from their source's served version.

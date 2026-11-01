@@ -83,6 +83,7 @@ export function ledgerRecord(dir = DATA_DIR) {
   const manifests = catalog(dir).map((d) => JSON.parse(readFileSync(join(dir, d.id, d.version, 'manifest.json'), 'utf8')));
   const datasets = manifests.map((m) => ({ id: m.dataset, title: m.title, publisher: m.publisher, sourceUrl: m.sourceUrl, cadence: REGISTRY_CADENCE.get(m.dataset) ?? m.cadence, asOf: m.asOf, vintage: m.release ?? m.tables[0]?.dataPeriod ?? m.version, archive: m.raw?.find((r) => r.release)?.release ?? null }));
   for (const o of ourDatasets) {
+    if (o.curated) { datasets.push({ ...o, publisher: 'gridprims', ours: true }); continue; }
     const src = manifests.find((m) => m.dataset === o.from);
     if (src) datasets.push({ ...o, publisher: 'gridprims', ours: true, asOf: src.retrieved, vintage: `from ${o.from} ${src.version}` });
   }

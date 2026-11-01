@@ -14,6 +14,8 @@ const n = (s) => Number(s.replace(/,/g, ''));
  */
 export function parseComponent(line) {
   const m = new RegExp(String.raw`^\s*([^:]+):\s*(.+?)\s+at\s+\$${NUM}\s*/\s*kW-?month\s*$`, 'i').exec(line);
+  const noRate = /^\s*([^:]+):.*\bat\s+\$\s*\/\s*kW-?month\s*$/i.exec(line);
+  if (noRate) return { error: `Enter the demand rate for ${noRate[1].trim()}, such as "at $10/kW-month".` };
   if (!m) return { error: `Write "${line.trim()}" as a name, a minimum, and a rate, such as "generation: 60% at $10/kW-month".` };
   const [, name, f, rate] = m;
   const flat = new RegExp(String.raw`^${NUM}\s*%$`).exec(f.trim());

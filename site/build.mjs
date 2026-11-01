@@ -4,7 +4,7 @@
 // Usage: node site/build.mjs [outDir]
 
 import { createHash } from 'node:crypto';
-import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { TOOLS } from '../core/tools/index.mjs';
@@ -42,6 +42,8 @@ import { carbonData } from './entities/carbon.mjs';
 import { balancingPages } from './entities/balancing.mjs';
 import { fleetCsv, scenarioData } from './entities/scenario.mjs';
 import { largeLoadUtilities } from './entities/large-load.mjs';
+import { capturePath, termsCsv, termsData } from './entities/large-load-terms.mjs';
+import { TERMS_PATH, largeLoadTermsPage } from './templates/large-load-terms.mjs';
 import { scenarioIndexPage, scenarioPage } from './templates/scenario.mjs';
 import { SCENARIO_INDEX, scenarioPath } from './ui/scenario.mjs';
 import { balancingPage, balancingPath } from './templates/balancing.mjs';
@@ -213,7 +215,7 @@ export async function build(opts = {}) {
   // The large-load request card's prefill: every utility's Form 714 peak, retail sales, and average home use.
   if (utilities) {
     mkdirSync(join(outDir, 'large-load'), { recursive: true });
-    writeFileSync(join(outDir, 'large-load/utilities.json'), JSON.stringify({ license: 'CC BY 4.0', sources: { eia861: utilities.sources.eia861.version, ferc714: utilities.sources.ferc714?.release ?? utilities.sources.ferc714?.version ?? null }, utilities: largeLoadUtilities(utilities) }));
+    writeFileSync(join(outDir, 'large-load/utilities.json'), JSON.stringify({ license: 'CC BY 4.0', sources: { eia861: utilities.sources.eia861.version, ferc714: utilities.sources.ferc714?.release ?? utilities.sources.ferc714?.version ?? null }, utilities: largeLoadUtilities(utilities), regulators: Object.fromEntries(regulators.map((r) => [r.state, { name: r.name, docket: r.docket }])) }));
   }
   const withPage = new Set((utilities?.utilities ?? []).filter((u) => u.page).map((u) => u.id));
   const plantIds = new Set((plants?.plants ?? []).map((p) => p.id));
@@ -238,6 +240,14 @@ export async function build(opts = {}) {
       write(balancingPath(region.ba), balancingPage({ region, manifest: balancing.manifest, utilities: inRegion, plants: regionPlants, i18n }));
     }
   }
+  // The large-load terms table, its downloads, and the archived copies of every source it cites.
+  // Freshness is judged on the health record's clock, as the limits page is, so a build is reproducible.
+  const terms = termsData(ROOT, Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z'));
+  write(TERMS_PATH, largeLoadTermsPage({ data: terms, i18n }));
+  mkdirSync(join(outDir, 'large-load/sources'), { recursive: true });
+  writeFileSync(join(outDir, 'large-load/terms/terms.json'), JSON.stringify({ license: 'CC BY 4.0', publisher: 'gridprims', note: 'Each value credits its own primary sources.', entries: terms.entries }, null, 2) + '\n');
+  writeFileSync(join(outDir, 'large-load/terms/terms.csv'), termsCsv(terms));
+  for (const c of terms.captures) copyFileSync(join(ROOT, c), join(outDir, capturePath(c)));
   // The scenario model: every region's fleet and backtest, its page, its downloads, and the fit table.
   const scenarios = scenarioData(join(ROOT, 'data'));
   if (scenarios) {

@@ -7,7 +7,7 @@ export default {
   firstScreen: ['contractMw', 'components', 'ramp', 'actual', 'years'],
   inputs: [
     { name: 'contractMw', label: 'Contract demand', type: 'number', unit: 'MW', range: { min: 0.1, max: 20000 }, precision: 'exact', example: 100 },
-    { name: 'components', label: 'Minimum and rate for each demand charge', type: 'text', multiline: true, example: 'generation: 60% at $10/kW-month', hint: 'One charge a line: a name, the minimum, and the rate. The minimum is a percent of the capacity in force ("60%") or a tier ("57,500 kW + 100% above 75 MW, cap 85%").' },
+    { name: 'components', label: 'Minimum and rate for each demand charge', type: 'text', multiline: true, picker: 'large-load-tariff', example: 'generation: 60% at $10/kW-month', hint: 'One charge a line: a name, the minimum, and the rate. The minimum is a percent of the capacity in force ("60%") or a tier ("57,500 kW + 100% above 75 MW, cap 85%").' },
     { name: 'ramp', label: 'Capacity in force by year', type: 'text', example: '100', hint: 'Percent of contract demand for years 1, 2, 3, …; the last value holds after that. AEP Ohio\'s ramp is 50, 65, 80, 90, 100.' },
     { name: 'actual', label: 'Expected billing demand by year', type: 'text', example: '100, 40', hint: 'MW for years 1, 2, 3, …; the last value holds after that.' },
     { name: 'years', label: 'Contract term', type: 'number', unit: 'years', range: { min: 1, max: 40 }, precision: 'exact', example: 2 },

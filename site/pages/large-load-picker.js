@@ -4,6 +4,7 @@
 
 import { getJson, utilitiesForZip } from './zip-utilities.js';
 import { createI18n } from '../lib/i18n.mjs';
+import { termsFor } from '../ui/large-load-picker.mjs';
 import strings from '../strings/en-US.mjs';
 
 const { t } = createI18n(strings, 'en-US');
@@ -35,6 +36,27 @@ async function showUtility() {
     ? t('largeload.picker.chosen', { utility: f.name, peak: whole(f.peak.mw), peakYear: f.peak.year, sales: whole(f.salesMwh), basis: f.basis, kwh: whole(f.resKwh), year: f.year })
     : t('largeload.picker.noPeak', { utility: f.name, sales: whole(f.salesMwh), basis: f.basis, kwh: whole(f.resKwh), year: f.year })));
   if (f.page) note.append(Object.assign(el('a', t('largeload.picker.page', { utility: f.name })), { href: `/utilities/${f.id}/` }));
+  // Who pays if it leaves: the terms that apply, or where to look when none is on file.
+  const terms = await getJson('/large-load/terms/terms.json').catch(() => ({ entries: [] }));
+  const apply = termsFor(terms, { id: f.id, state: f.state, baCodes: u.bas ?? [] });
+  const who = el('div');
+  who.dataset.whoPays = apply.length ? 'terms' : 'none';
+  who.append(el('p', t('llterms.whoPays')));
+  if (apply.length) {
+    who.append(el('p', t('llterms.forUtility', { utility: f.name })));
+    const ul = el('ul');
+    for (const e of apply) {
+      const li = el('li');
+      li.append(Object.assign(el('a', e.name), { href: `/large-load/terms/#${e.id}` }));
+      ul.append(li);
+    }
+    who.append(ul);
+  } else {
+    const reg = all.regulators?.[f.state];
+    who.append(el('p', t('llterms.noneForUtility', { utility: f.name })));
+    if (reg) who.append(Object.assign(el('a', reg.name), { href: reg.docket }));
+  }
+  note.append(who);
   document.documentElement.dataset.largeLoadChosen = String(f.id);
 }
 
