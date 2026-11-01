@@ -7,6 +7,7 @@
 // here are whole inches above the ground line.
 
 import { parseLength } from './field-length.mjs';
+import { TEMPLATE_IDS } from './standards-template.mjs';
 
 export const SUPPLY = ['primary', 'neutral', 'secondary', 'streetlight', 'transformer'];
 export const COMM = ['catv', 'telephone', 'fiber', 'communication-other'];
@@ -34,8 +35,8 @@ export function parseRules(text) {
       if (!(n >= 0 && n < 1)) problems.push(`row ${row}: ${id} must be a fraction such as 0.1 or 10%`); else rules.push({ id, value: n, row, source, locator });
       return;
     }
-    const kinds = `(?:${SUPPLY.join('|')})`;
-    if (!new RegExp(`^(sep\\.${kinds}\\.comm|sep\\.comm\\.comm|sep\\.midspan\\.(?:${kinds}|comm)\\.comm|ground\\.[a-z-]+\\.[a-z-]+|pole\\.length-step|pole\\.setting-depth\\.add)$`).test(id)) { problems.push(`row ${row}: "${id}" is not a rule id we know`); return; }
+    // The ids the template carries are the ids the checks read; a ground rule may name any surface the file does.
+    if (!TEMPLATE_IDS.includes(id) && !/^ground\.[a-z-]+\.[a-z-]+$/.test(id)) { problems.push(`row ${row}: "${id}" is not a rule id we know`); return; }
     if (/[a-z]/i.test(value) && unit) { problems.push(`row ${row}: the value "${value}" holds a unit; put the unit in its own column`); return; }
     const len = parseLength(unit ? `${value} ${unit}` : value);
     if (len.error) { problems.push(`row ${row}: ${len.error}`); return; }

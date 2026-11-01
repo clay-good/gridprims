@@ -45,6 +45,8 @@ import { largeLoadUtilities } from './entities/large-load.mjs';
 import { capturePath, termsCsv, termsData } from './entities/large-load-terms.mjs';
 import { TERMS_PATH, largeLoadTermsPage } from './templates/large-load-terms.mjs';
 import { GLOSSARY_PATH, glossaryPage } from './templates/glossary.mjs';
+import { templateCsv, templateSheet } from '../core/lib/standards-template.mjs';
+import { writeXlsx } from '../verify/lib/zip-writer.mjs';
 import { scenarioIndexPage, scenarioPage } from './templates/scenario.mjs';
 import { SCENARIO_INDEX, scenarioPath } from './ui/scenario.mjs';
 import { balancingPage, balancingPath } from './templates/balancing.mjs';
@@ -242,6 +244,10 @@ export async function build(opts = {}) {
       write(balancingPath(region.ba), balancingPage({ region, manifest: balancing.manifest, utilities: inRegion, plants: regionPlants, i18n }));
     }
   }
+  // The standards template for the line checks, as CSV and as a workbook from the same rows (design D1).
+  mkdirSync(join(outDir, 'lines'), { recursive: true });
+  writeFileSync(join(outDir, 'lines/standards-template.csv'), templateCsv());
+  writeFileSync(join(outDir, 'lines/standards-template.xlsx'), writeXlsx({ Standards: templateSheet() }));
   // The glossary, as a page and as data agents read with the same words.
   write(GLOSSARY_PATH, glossaryPage({ entries: GLOSSARY, tools: TOOLS, i18n }));
   writeFileSync(join(outDir, 'learn/glossary/glossary.json'), JSON.stringify({ license: 'CC BY 4.0', publisher: 'gridprims', note: 'Entries adapted from the EIA glossary (a public-domain U.S. government work) say so.', entries: GLOSSARY }, null, 2) + '\n');

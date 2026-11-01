@@ -85,15 +85,22 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const col = (i) => (i < 26 ? String.fromCharCode(65 + i) : String.fromCharCode(64 + Math.floor(i / 26)) + String.fromCharCode(65 + (i % 26)));
 const cell = (v, r, i) => (v === null || v === undefined ? '' : typeof v === 'number' ? `<c r="${col(i)}${r}"><v>${v}</v></c>` : `<c r="${col(i)}${r}" t="inlineStr"><is><t xml:space="preserve">${esc(v)}</t></is></c>`);
 
+const REL = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+const CT = 'http://schemas.openxmlformats.org/package/2006/content-types';
+
 /**
- * A minimal .xlsx with inline-string cells, one worksheet per entry, in order.
+ * A minimal .xlsx with inline-string cells, one worksheet per entry, in order. It carries the content types
+ * and the package relationship a spreadsheet program needs to open it, not only the parts our own reader
+ * looks for, so a workbook we publish opens in Excel and in Numbers.
  * @param {Record<string, Array<Array<string | number | null>>>} sheets rows by sheet name
  */
 export function writeXlsx(sheets) {
   const names = Object.keys(sheets);
   return writeZip([
+    { name: '[Content_Types].xml', data: `<Types xmlns="${CT}"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${names.map((_, k) => `<Override PartName="/xl/worksheets/sheet${k + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>` },
+    { name: '_rels/.rels', data: `<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="${REL}/officeDocument" Target="xl/workbook.xml"/></Relationships>` },
     { name: 'xl/workbook.xml', data: `<workbook ${NS}><sheets>${names.map((n, k) => `<sheet name="${esc(n)}" sheetId="${k + 1}" r:id="rId${k + 1}"/>`).join('')}</sheets></workbook>` },
-    { name: 'xl/_rels/workbook.xml.rels', data: `<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${names.map((_, k) => `<Relationship Id="rId${k + 1}" Target="worksheets/sheet${k + 1}.xml"/>`).join('')}</Relationships>` },
+    { name: 'xl/_rels/workbook.xml.rels', data: `<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${names.map((_, k) => `<Relationship Id="rId${k + 1}" Type="${REL}/worksheet" Target="worksheets/sheet${k + 1}.xml"/>`).join('')}</Relationships>` },
     ...names.map((n, k) => ({ name: `xl/worksheets/sheet${k + 1}.xml`, data: `<worksheet ${NS}><sheetData>${sheets[n].map((r, j) => `<row r="${j + 1}">${r.map((v, i) => cell(v, j + 1, i)).join('')}</row>`).join('')}</sheetData></worksheet>` })),
   ]);
 }
