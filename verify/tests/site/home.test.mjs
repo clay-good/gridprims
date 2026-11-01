@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { LANES, checkSimplicity } from '../../../site/ui/home-lanes.mjs';
-import { SECTIONS } from '../../../site/ui/sections.mjs';
+import { PARKED, SECTIONS } from '../../../site/ui/sections.mjs';
 import { TOOLS } from '../../../core/tools/index.mjs';
 import { validateManifest } from '../../../core/contract/manifest.mjs';
 import { walk } from '../../lib/walk.mjs';
@@ -16,12 +16,16 @@ const out = await sharedSite();
 const read = (p) => readFileSync(join(out, p), 'utf8');
 const main = (h) => h.slice(h.indexOf('<main'), h.indexOf('</main>'));
 
-test('without JavaScript the home page is still the instrument: one action, a measured value, its curve and its basis', () => {
+test('without JavaScript the home page asks a plain question, offers two doors, and still proves itself on a sample', () => {
   const html = read('index.html');
   const body = main(html);
-  // One primary action, and it asks for an interval file.
+  assert.match(body, /<h1 class="home-title">Is your electric bill right, and is there a cheaper plan\?<\/h1>/);
+  // Two equal doors, a ZIP code or a meter file, then the sample's own action.
   const primary = [...body.matchAll(/class="button primary"[^>]*>([^<]+)</g)].map((m) => m[1]);
-  assert.deepEqual(primary, ['Choose a file', 'Open this file in the workbench']);
+  assert.deepEqual(primary, ['Find my utility', 'Choose a file', 'Open this file in the workbench']);
+  // The ZIP door works without a script: a plain GET to the lookup, which reads ?zip=.
+  assert.match(body, /<form class="door-form" action="\/lookup\/" method="get">[\s\S]*name="zip"/);
+  assert.match(body, /href="\/tools\/household\/usage-benchmark\/compare\/">See if your use is high</);
   // The sample's measured value, its stepped curve, and the basis band, all server-rendered.
   assert.match(body, /class="number"[^>]*>166\.1/);
   assert.match(body, /<polyline class="series series-measured"/);
@@ -44,9 +48,11 @@ test('tools that are not built appear nowhere, not even as "coming soon"', () =>
   }
 });
 
-test('the catalog lists every published tool with what it needs, and filters on the device', () => {
+test('the catalog lists every published tool but the parked ones, with what each needs, and filters on the device', () => {
   const html = read('tools/index.html');
-  for (const { manifest: m } of TOOLS) assert.ok(html.includes(m.title), m.id);
+  for (const { manifest: m } of TOOLS) assert.equal(html.includes(`href="/tools/${m.id.replace(/\./g, '/')}/"`), !PARKED.has(m.id), m.id);
+  // A parked tool still publishes; it is only off the catalog.
+  for (const id of PARKED) assert.ok(read(`tools/${id.replace(/\./g, '/')}/index.html`), id);
   assert.match(html, /data-needs="zip"[\s\S]*Find my utility|Find my utility[\s\S]*data-needs/);
   assert.match(html, /<select name="needs" data-filter="needs">[\s\S]*<option value="bill">bill totals<\/option>/);
   assert.match(html, /<script type="module" src="\/site\/pages\/catalog\.js">/);

@@ -297,6 +297,17 @@ export function privacyPage({ i18n }) {
   return layout({ i18n, title: `${t('privacy.title')} · ${t('site.name')}`, description: t('privacy.intro'), path: '/privacy/', body });
 }
 
+/** Where the meter file comes from: every refused file and the workbench's "Don't have one?" link land here. */
+export function getYourDataPage({ i18n }) {
+  const { t } = i18n;
+  const body = html`<h1>${t('getData.title')}</h1><p class="purpose">${t('getData.intro')}</p>
+<h2>${t('getData.where')}</h2><ol><li>${t('getData.step1')}</li><li>${t('getData.step2')}</li><li>${t('getData.step3')}</li></ol>
+<h2>${t('getData.formats')}</h2><p>${t('getData.formatsBody')}</p>
+<h2>${t('getData.none')}</h2><p>${t('getData.noneBody')}</p>
+<p><a class="button primary" href="/files/">${t('getData.open')}</a> <a href="/tools/household/bill-totals/check/">${t('getData.totals')}</a></p>`;
+  return layout({ i18n, title: `${t('getData.title')} · ${t('site.name')}`, description: t('getData.intro'), path: '/learn/get-your-data/', body, section: 'bills' });
+}
+
 /** The report page: the dialog opens on arrival, with a payload an agent prepared if the address carries one. */
 export function reportPage({ i18n }) {
   const { t } = i18n;

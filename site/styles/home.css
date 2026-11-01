@@ -13,7 +13,11 @@
 .start-else { margin: var(--s3) 0 0; color: var(--muted); font-size: .875rem; }
 .doors { margin: var(--s5) 0 var(--s7); display: grid; gap: var(--s4); }
 .door { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-sign); padding: var(--s5); }
-.door h3 { margin: 0 0 var(--s2); font-size: 1.25rem; letter-spacing: -0.015em; }
+.door h2 { margin: 0 0 var(--s2); font-size: 1.25rem; letter-spacing: -0.015em; }
+/* The two doors on the home page sit side by side as equal panels, read left to right. */
+.start .doors .door { background: var(--panel); border: 1px solid var(--line); padding: var(--s5); text-align: left; }
+.start .doors .door > p { margin-left: 0; }
+.start .doors .door-form { justify-content: flex-start; }
 .door > p { margin: 0 0 var(--s4); max-width: 44ch; }
 .door .unit-hint { margin: var(--s3) 0 0; color: var(--muted); font-size: .8125rem; }
 .door .button { font-size: .9375rem; padding: 14px 20px; }

@@ -14,3 +14,10 @@ const BY_DOMAIN = { load: 'bills', household: 'bills', ratepayer: 'bills', data:
 
 /** @param {string} toolId */
 export const sectionOf = (toolId) => BY_DOMAIN[toolId.split('.')[0]] ?? 'grid';
+
+/**
+ * Built and reachable by link, but parked off the catalog while the site leads with bills:
+ * engineering calculators, still listed on their section page and still published.
+ */
+export const PARKED = new Set(['calc.power-factor.correct', 'calc.transformer.size', 'calc.storage.basics', 'calc.cost.lcoe', 'calc.line-rating.ampacity', 'electrify.service-headroom.check', 'electrify.backup-power.size', 'reliability.outage-log.indices']);
+

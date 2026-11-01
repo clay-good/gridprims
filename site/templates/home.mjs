@@ -7,7 +7,7 @@ import { html } from '../lib/html.mjs';
 import { layout } from './layout.mjs';
 import { LANES } from '../ui/home-lanes.mjs';
 import { toolPath } from '../ui/tool-page.mjs';
-import { SECTIONS, sectionOf } from '../ui/sections.mjs';
+import { PARKED, SECTIONS, sectionOf } from '../ui/sections.mjs';
 import { STATE_NAMES } from '../entities/regions.mjs';
 import { statePath } from './region.mjs';
 import { LOOKUP_PATH } from './lookup.mjs';
@@ -36,20 +36,32 @@ export function laneCells(lane, { tools, exists, asOf }, { t }) {
   }).filter(Boolean);
 }
 
-/** The two things a visitor can give this site, said plainly, before anything else. */
+/** The two things a visitor can give this site, side by side: a ZIP code, or a meter file. */
 function startDoors({ t }) {
   return html`<section class="start" aria-labelledby="start-title">
-  <p id="start-title" class="start-sub">${t('site.tagline')}</p>
-  <div class="door">
-    <h3>${t('home.start.file')}</h3>
-    <p>${t('home.start.fileWhat')}</p>
-    <p><a class="button primary" href="/files/" data-home-open>${t('home.start.fileAction')}</a>
-      <input type="file" hidden data-home-file aria-label="${t('home.start.fileAction')}" accept=".csv,.txt,.tsv,.xml,.xlsx,.zip"></p>
-    <p class="unit-hint">${t('home.start.filePrivacy')}</p>
+  <p id="start-title" class="start-sub">${t('home.start.sub')}</p>
+  <div class="doors">
+    <div class="door">
+      <h2>${t('home.start.zip')}</h2>
+      <p>${t('home.start.zipWhat')}</p>
+      <form class="door-form" action="${LOOKUP_PATH}" method="get">
+        <div><label for="home-zip">${t('home.start.zipLabel')}</label>
+          <input id="home-zip" name="zip" class="mono" inputmode="numeric" autocomplete="postal-code" maxlength="10" required></div>
+        <button class="button primary" type="submit">${t('home.start.zipAction')}</button>
+      </form>
+      <p class="unit-hint">${t('home.start.zipNote')}</p>
+    </div>
+    <div class="door">
+      <h2>${t('home.start.file')}</h2>
+      <p>${t('home.start.fileWhat')}</p>
+      <p><a class="button primary" href="/files/" data-home-open>${t('home.start.fileAction')}</a>
+        <input type="file" hidden data-home-file aria-label="${t('home.start.fileAction')}" accept=".csv,.txt,.tsv,.xml,.xlsx,.zip"></p>
+      <p class="unit-hint">${t('home.start.filePrivacy')}</p>
+    </div>
   </div>
   <p class="start-else">${t('home.start.elseNoFile')}
-    <a href="${LOOKUP_PATH}">${t('home.start.zipAction')}</a> ·
-    <a href="/tools/household/bill-totals/check/">${t('home.start.billsAction')}</a></p>
+    <a href="/tools/household/bill-totals/check/">${t('home.start.billsAction')}</a> ·
+    <a href="/tools/household/usage-benchmark/compare/">${t('home.start.useAction')}</a></p>
 </section>`;
 }
 
@@ -117,14 +129,14 @@ export function catalogPage({ tools, i18n, exists, asOf }) {
     href: c.path, name: t(`home.cell.${c.id}`), question: t(`home.cell.${c.id}.question`), needs: c.needs, stable: true, section: PAGE_TOOLS.find(([id]) => id === c.id)[1], asOf: c.data ? asOf(c.data) : null,
   }));
   const cells = [
-    ...tools.map(({ manifest: m }) => ({ href: toolPath(m.id), name: m.title, question: m.purpose, needs: [...LANES.home, ...LANES.work].find((c) => c.tool === m.id)?.needs ?? (m.inputs.some((x) => x.type === 'file') ? 'file' : 'none'), stable: m.stability === 'stable', section: sectionOf(m.id), asOf: null })),
+    ...tools.filter(({ manifest: m }) => !PARKED.has(m.id)).map(({ manifest: m }) => ({ href: toolPath(m.id), name: m.title, question: m.purpose, needs: [...LANES.home, ...LANES.work].find((c) => c.tool === m.id)?.needs ?? (m.inputs.some((x) => x.type === 'file') ? 'file' : 'none'), stable: m.stability === 'stable', section: sectionOf(m.id), asOf: null })),
     ...pageTools,
   ].sort((a, b) => a.name.localeCompare(b.name));
   const select = (name, options) => html`<label>${t(`catalog.filter.${name}`)}<select name="${name}" data-filter="${name}"><option value="">${t('catalog.any')}</option>${options.map(([v, label]) => html`<option value="${v}">${label}</option>`)}</select></label>`;
   const body = html`<h1>${t('catalog.title')}</h1>
 <p class="purpose">${t('catalog.intro')}</p>
 <form class="panel" data-catalog-filters>
-  ${select('section', SECTIONS.filter((s) => s.id !== 'home').map((s) => [s.id, t(`nav.${s.id}`)]))}
+  ${select('section', SECTIONS.filter((s) => cells.some((c) => c.section === s.id)).map((s) => [s.id, t(`nav.${s.id}`)]))}
   ${select('needs', ['none', 'zip', 'bill', 'file'].map((n) => [n, t(`section.needs.${n}`)]))}
   ${select('stability', [['stable', t('catalog.stable')], ['experimental', t('catalog.preview')]])}
 </form>

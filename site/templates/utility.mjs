@@ -78,6 +78,10 @@ export function utilityPage({ utility: u, sources, i18n, plantHasPage = () => fa
   <div><dt>${t('utility.revenue', { year: u.year })}</dt><dd class="mono">${dollars(u.totalRevenue)}</dd></div>
 </dl>
 ${sourceStamp(sources.eia861, sources.eia861.tables[0], i18n)}
+${k('bundled')?.res.customers > 0 || k('delivery')?.res.customers > 0 ? html`<section class="panel" data-customer-tools><h2>${t('utility.customerTools', { name: u.name })}</h2>
+<ul><li><a href="/tools/household/bill-totals/check/">${t('utility.customerTools.bill')}</a></li>
+<li><a href="/tools/household/usage-benchmark/compare/">${t('utility.customerTools.use')}</a></li>
+<li><a href="/files/#plans">${t('utility.customerTools.plans')}</a></li></ul></section>` : ''}
 
 <section><h2>${t('utility.charges')}</h2>
 ${['bundled', 'delivery', 'energy'].filter(k).map((kind) => html`<h3>${t(`utility.kind.${kind}`)}</h3>

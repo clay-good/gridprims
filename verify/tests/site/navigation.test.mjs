@@ -15,7 +15,7 @@ const out = await sharedSite();
 const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
 
 test('the rail carries the wordmark, one link and the theme control, and no section tabs', () => {
-  for (const p of ['/', '/files/', '/data/eia-861/', '/tools/calc/energy-units/convert/', '/learn/']) {
+  for (const p of ['/', '/files/', '/data/eia-861/', '/tools/calc/energy-units/convert/', '/learn/get-your-data/']) {
     const html = page(p);
     const rail = html.slice(html.indexOf('<header class="rail"'), html.indexOf('</header>'));
     assert.match(rail, /class="wordmark"[^>]*>gridprims</, p);

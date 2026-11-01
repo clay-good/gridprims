@@ -21,7 +21,7 @@
   .command .wrap { padding-top: var(--s2); padding-bottom: var(--s2); }
   .proof { margin-bottom: var(--s3); }
   .proof-actions .unit-hint { display: none; }
-  .home-title { font-size: 1.1875rem; line-height: 1.25; margin: var(--s3) auto var(--s2); }
+  .home-title { font-size: 1.625rem; line-height: 1.2; margin: var(--s3) auto var(--s2); }
   .lane h2 { margin: var(--s3) 0 var(--s1); }
   .lane .tool-cell { padding: var(--s2) var(--s2) var(--s1); }
   .proof-title { margin-bottom: var(--s2); }
