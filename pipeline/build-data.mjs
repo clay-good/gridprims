@@ -11,7 +11,7 @@ import { readdirSync, existsSync } from 'node:fs';
 import { ROOT, runRecipe } from './run.mjs';
 
 /** Shard and download checksums of a manifest, keyed by path. */
-const sums = (m) => Object.fromEntries(m.tables.flatMap((t) => [...t.shards.map((s) => [s.path, s.sha256]), [t.download.path, t.download.sha256]]));
+const sums = (m) => Object.fromEntries(m.tables.flatMap((t) => [...t.shards.map((s) => [s.path, s.sha256]), ...(t.download ? [[t.download.path, t.download.sha256]] : [])]));
 
 /**
  * @param {{dataDir?: string, fetch?: typeof fetch, inputs?: Record<string, Uint8Array>}} [o] inputs replaces downloads in tests

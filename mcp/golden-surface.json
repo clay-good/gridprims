@@ -463,12 +463,17 @@
         },
         "filter": {
           "type": "object",
-          "description": "Column values to match exactly, such as {\"state\": \"TX\", \"utility_id\": 44372}. Filtering on the partition column (state) reads only that shard."
+          "description": "Column values to match exactly, such as {\"state\": \"TX\", \"utility_id\": 44372}. Filtering on the partition column (state, or ba and year for eia-930) reads only that shard."
         },
         "limit": {
           "type": "integer",
           "minimum": 1,
           "maximum": 500
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Matched rows to skip, to page through a large result such as a year of hours (default 0)."
         }
       }
     },

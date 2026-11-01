@@ -103,6 +103,15 @@ async function checkRolling({ dataset, entry, outDir, f, today, manifest }) {
     const url = entry.releaseWatch.urls[0];
     const found = await head(url, f);
     if (!found) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: `${url} did not answer` };
+    // Many files at fixed addresses (EIA-930, one workbook per region): the runner reads each in turn,
+    // and the as-of date is the Last-Modified of the file the watch asked about.
+    if (entry.releaseWatch.files) {
+      const latest = entry.vintages[Object.keys(entry.vintages).sort().at(-1)];
+      const vintage = { asOf: asOfOf(found.lastModified, today), files: Object.fromEntries(Object.entries(latest.files).map(([k, file]) => [k, { ...file, sha256: null }])) };
+      const r = await runRecipe({ dataset, year: month, retrieved: today, outDir, entry, vintage });
+      if (!r.ok) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: r.failures.join('; ') };
+      return { id: dataset, checked: true, refreshed: true, version: r.version, found: `monthly refresh ${month}` };
+    }
     const res = await f(url);
     if (!res.ok) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: `download ${url}: HTTP ${res.status}` };
     const input = new Uint8Array(await res.arrayBuffer());

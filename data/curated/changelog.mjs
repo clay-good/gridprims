@@ -12,6 +12,7 @@
  */
 export default [
   { date: '2026-10-31', toolId: 'reliability.outage-log.indices', version: '0.1.0', reason: 'First release.' },
+  { date: '2026-10-31', toolId: 'carbon.load-shift.estimate', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'electrify.backup-power.size', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'electrify.service-headroom.check', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'ratepayer.revenue-requirement.explain', version: '0.1.0', reason: 'First release.' },

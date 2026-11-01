@@ -48,26 +48,57 @@ export function findEntry(pattern, entries) {
 /**
  * Row-level changes from a table's previous version, by the table's key: rows
  * added, removed, and changed, and, when the table names a column, the five
- * largest changes in it (EIA-860's nameplate capacity, for one).
- * @param {any[]} rows @param {any[]} before @param {string[]} key @param {string} [column]
+ * largest changes in it (EIA-860's nameplate capacity, for one). A table whose
+ * changelog names `by` also gets its revisions grouped by that column, each
+ * group with the first and last value of `span` among the rows that differ:
+ * EIA-930's revised hours by year, with their date range.
+ * @param {any[]} rows @param {any[]} before @param {string[]} key
+ * @param {{column?: string, by?: string, span?: string, spanFormat?: 'hour'}} [changelog]
  */
-export function changesFrom(rows, before, key, column) {
+export function changesFrom(rows, before, key, changelog = {}) {
+  const { column, by, span } = changelog;
   const k = (r) => key.map((f) => r[f]).join('|');
   const old = new Map(before.map((r) => [k(r), r]));
   const now = new Map(rows.map((r) => [k(r), r]));
   let changed = 0;
   const deltas = [];
+  const groups = new Map();
+  const note = (r, kind) => {
+    if (!by) return;
+    const g = groups.get(r[by]) ?? groups.set(r[by], { group: r[by], changed: 0, added: 0, removed: 0, first: r[span], last: r[span] }).get(r[by]);
+    g[kind]++;
+    if (r[span] < g.first) g.first = r[span];
+    if (r[span] > g.last) g.last = r[span];
+  };
   for (const [id, r] of now) {
     const o = old.get(id);
-    if (!o) continue;
+    if (!o) { note(r, 'added'); continue; }
     if (Object.keys(r).some((c) => r[c] !== o[c])) {
       changed++;
+      note(r, 'changed');
       if (column && r[column] !== o[column]) deltas.push({ key: id, from: o[column] ?? null, to: r[column] ?? null });
     }
   }
+  for (const [id, o] of old) if (!now.has(id)) note(o, 'removed');
   const out = { added: [...now.keys()].filter((id) => !old.has(id)).length, removed: [...old.keys()].filter((id) => !now.has(id)).length, changed };
   if (column) out.largest = deltas.sort((a, b) => Math.abs((b.to ?? 0) - (b.from ?? 0)) - Math.abs((a.to ?? 0) - (a.from ?? 0)) || (a.key < b.key ? -1 : 1)).slice(0, 5);
+  if (by) {
+    // Hours since 1970 read better as UTC hour starts.
+    const fmt = (v) => (changelog.spanFormat === 'hour' ? `${new Date(v * 3_600_000).toISOString().slice(0, 13)}:00Z` : v);
+    out.by = [...groups.values()].sort((a, b) => (a.group < b.group ? -1 : 1)).map((g) => ({ ...g, first: fmt(g.first), last: fmt(g.last) }));
+  }
   return out;
+}
+
+/**
+ * The shard a row belongs in: one column's value, or several joined by "-"
+ * (EIA-930's region and year, "PJM-2024"); null when any is missing.
+ * @param {Record<string, any>} r @param {string | string[]} by
+ */
+export function partOf(r, by) {
+  const keys = Array.isArray(by) ? by : [by];
+  if (keys.some((k) => r[k] === null || r[k] === undefined)) return null;
+  return keys.map((k) => r[k]).join('-');
 }
 
 /**
@@ -117,6 +148,25 @@ async function* linesOf(r) {
   if (rest) yield rest;
   r.sha256 = hash.digest('hex');
   r.size = size;
+}
+
+/**
+ * A workbook too large to hold beside the others (EIA-930's per-region files),
+ * read from its path or URL only when the normalizer asks for it, hashed as it
+ * is read, and parsed to the rows of one sheet. Its bytes are released after.
+ */
+async function xlsxOf(r, sheet) {
+  let bytes;
+  if (r.path) bytes = new Uint8Array(readFileSync(r.path));
+  else {
+    const res = await fetch(r.url);
+    if (!res.ok) throw new Error(`fetch ${r.url}: HTTP ${res.status}`);
+    bytes = new Uint8Array(await res.arrayBuffer());
+    r.lastModified = res.headers.get('last-modified');
+  }
+  r.sha256 = sha256(bytes);
+  r.size = bytes.length;
+  return (await readXlsx(bytes, { sheet })).rows;
 }
 
 /**
@@ -185,6 +235,10 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     } else if (step('read-parquet')) {
       // Parquet files hand the normalizer a reader per file, so it can aggregate a row group at a time.
       input = Object.fromEntries(step('read-parquet').files.map((f) => [f, readParquet(raws[f].bytes)]));
+    } else if (step('read-xlsx').files) {
+      // Several large workbooks, one at a time: the normalizer gets, for each file, a function returning its rows.
+      read = step('read-xlsx');
+      input = Object.fromEntries(read.files.map((f) => [f, () => xlsxOf(raws[f], read.sheet)]));
     } else {
       read = step('read-xlsx');
       // A workbook inside a zip (EIA-860, 861, 923), or the raw file is the workbook (EIA-860M), or one
@@ -233,7 +287,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     const unmatched = step('partition').unmatched ?? null;
     // partition by null: one national shard, for small tables or ones a later join splits by state.
     // An `unmatched` shard name keeps rows a join could not place instead of failing on them.
-    const unplaced = by === null || unmatched ? 0 : rows.filter((r) => r[by] === null || r[by] === undefined).length;
+    const unplaced = by === null || unmatched ? 0 : rows.filter((r) => partOf(r, by) === null).length;
     if (unplaced) bad.push(`${unplaced} rows have no ${by} to partition by`);
     if (bad.length) { failures.push(...bad.map((f) => `${tb.name}: ${f}`)); continue; }
     ready.push({ tb, rows, schema: normalizer.SCHEMA, by, unmatched, entryName, dataPeriod: dataPeriod ?? String(year) });
@@ -256,6 +310,31 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
   // The changelog compares with the version before this one; a re-run in the same month keeps that base.
   const base = previous && (previous.version === version ? previous.previousVersion ?? null : previous.version);
   const baseManifest = base && existsSync(join(datasetDir, base, 'manifest.json')) ? JSON.parse(readFileSync(join(datasetDir, base, 'manifest.json'), 'utf8')) : null;
+  // Every shard and download is encoded before any file is written, so a value the format cannot hold, or a
+  // file over the size limit, fails the run with nothing written and the previous version still live.
+  const encoded = new Map();
+  for (const { tb, rows, schema, by, unmatched } of ready) {
+    const table = tb.name;
+    const placed = (r) => partOf(r, by) ?? unmatched;
+    const parts = by === null ? ['US'] : [...new Set(rows.map(placed))].sort();
+    // A partition marked stable leaves the version out of each shard's header, so a
+    // shard whose rows did not change keeps its bytes (and its stored copy) from version to version.
+    const stable = tb.recipe.find((st) => st.step === 'partition').stable === true;
+    const grouped = by === null ? null : Map.groupBy(rows, placed);
+    let shards;
+    try {
+      shards = parts.map((st) => {
+        const part = by === null ? rows : grouped.get(st);
+        return { path: `${table}/${st}.bin`, state: st, rows: part.length, bytes: writeShard(part, schema, stable ? { dataset, table, state: st } : { dataset, version, table, state: st }) };
+      });
+    } catch (e) { return { ok: false, failures: [`${table}: ${e.message}`] }; }
+    // A table without a write-csv-gz step ships its shards only (EIA-930's hourly
+    // table, whose single CSV would be hundreds of megabytes).
+    const csv = tb.recipe.some((st) => st.step === 'write-csv-gz') ? gzipSync(toCsv(rows, schema), { level: 9 }) : null;
+    const tooBig = [...shards.map((x) => [x.path, x.bytes.length]), ...(csv ? [[`${table}.csv.gz`, csv.length]] : [])].filter(([, b]) => b > MAX_FILE_BYTES);
+    if (tooBig.length) return { ok: false, failures: tooBig.map(([p, b]) => `${p} is ${b} bytes, over the 20 MiB limit`) };
+    encoded.set(table, { shards, csv, placed });
+  }
   const tables = [];
   for (const { tb, rows, schema, by, unmatched, dataPeriod } of ready) {
     const table = tb.name;
@@ -269,26 +348,19 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     const lic = tableLicense([self, ...joinedInputs]);
     if (!lic.ok) return { ok: false, failures: [lic.error] };
     mkdirSync(join(dir, table), { recursive: true });
-    const placed = (r) => (r[by] === null || r[by] === undefined ? unmatched : r[by]);
-    const parts = by === null ? ['US'] : [...new Set(rows.map(placed))].sort();
-    const shards = parts.map((st) => {
-      const part = by === null ? rows : rows.filter((r) => placed(r) === st);
-      const bytes = writeShard(part, schema, { dataset, version, table, state: st });
-      const path = `${table}/${st}.bin`;
+    const { shards: encodedShards, csv, placed } = encoded.get(table);
+    const shards = encodedShards.map(({ path, bytes, ...sh }) => {
       writeFileSync(join(dir, path), bytes);
-      return { path, state: st, rows: part.length, bytes: bytes.length, sha256: sha256(bytes) };
+      return { path, ...sh, bytes: bytes.length, sha256: sha256(bytes) };
     });
-    const csv = gzipSync(toCsv(rows, schema), { level: 9 });
-    writeFileSync(join(dir, `${table}.csv.gz`), csv);
-    const tooBig = [...shards.map((s) => [s.path, s.bytes]), [`${table}.csv.gz`, csv.length]].filter(([, b]) => b > MAX_FILE_BYTES);
-    if (tooBig.length) return { ok: false, failures: tooBig.map(([p, b]) => `${p} is ${b} bytes, over the 20 MiB limit`) };
+    if (csv) writeFileSync(join(dir, `${table}.csv.gz`), csv);
     const bt = baseManifest?.tables.find((x) => x.name === table);
     const before = bt ? bt.shards.flatMap((sh) => readShard(readFileSync(join(datasetDir, base, sh.path))).rows()) : null;
     const key = tb.recipe.find((st) => st.step === 'validate').key;
-    const changes = before ? { from: base, ...changesFrom(rows, before, key, tb.changelog?.column) } : { first: true };
+    const changes = before ? { from: base, ...changesFrom(rows, before, key, tb.changelog) } : { first: true };
     tables.push({
       name: table, title: tb.title, dataPeriod, rows: rows.length, changes, columns: schema, partition: by,
-      shards, download: { path: `${table}.csv.gz`, bytes: csv.length, sha256: sha256(csv), format: 'text/csv; gzip' },
+      shards, download: csv ? { path: `${table}.csv.gz`, bytes: csv.length, sha256: sha256(csv), format: 'text/csv; gzip' } : null,
       license: lic.license, credits: lic.credits, notices: lic.notices,
       ...(joinedFrom[table] ? { joinedFrom: joinedFrom[table] } : {}),
       ...(unmatched ? { unmatched: rows.filter((r) => placed(r) === unmatched).length } : {}),
@@ -304,7 +376,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     asOf: vintage.asOf, retrieved, generatedAt: `${retrieved}T00:00:00Z`, cadence: entry.cadence,
     raw: named.map(([name]) => {
       const r = raws[name];
-      return { url: r.url, name: r.name ?? r.url.split('/').pop(), bytes: r.size, sha256: r.sha256, ...(name ? { file: name } : ready.some((x) => x.entryName) ? { entries: ready.map((x) => x.entryName) } : {}), ...(!name && upstream?.lastModified ? { lastModified: upstream.lastModified } : {}) };
+      return { url: r.url, name: r.name ?? r.url.split('/').pop(), bytes: r.size, sha256: r.sha256, ...(name ? { file: name } : ready.some((x) => x.entryName) ? { entries: ready.map((x) => x.entryName) } : {}), ...(!name && upstream?.lastModified ? { lastModified: upstream.lastModified } : {}), ...(r.lastModified ? { lastModified: r.lastModified } : {}) };
     }),
     ...(vintage.release ? { release: vintage.release } : {}),
     ...(base ? { previousVersion: base } : {}),

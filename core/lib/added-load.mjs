@@ -15,7 +15,7 @@ function standardOffset(zone, year) {
 }
 
 /** A timestamp as UTC milliseconds, read on the stated basis. */
-function stamp(text, zone, basis) {
+export function stamp(text, zone, basis) {
   const t = String(text).trim();
   if (/[zZ]$|[+-]\d{2}:?\d{2}$/.test(t)) return Date.parse(t);
   const m = /^(\d{4})-(\d{2})-(\d{2})[ T](\d{1,2}):(\d{2})/.exec(t);

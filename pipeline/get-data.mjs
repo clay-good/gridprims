@@ -27,7 +27,7 @@ export async function getData(o = {}) {
     if (!existsSync(cur)) continue;
     const { version } = JSON.parse(readFileSync(cur, 'utf8'));
     const manifest = JSON.parse(readFileSync(join(dataDir, id, version, 'manifest.json'), 'utf8'));
-    const files = manifest.tables.flatMap((t) => [...t.shards.map((s) => ({ path: s.path, sha256: s.sha256 })), { path: t.download.path, sha256: t.download.sha256 }]);
+    const files = manifest.tables.flatMap((t) => [...t.shards.map((s) => ({ path: s.path, sha256: s.sha256 })), ...(t.download ? [{ path: t.download.path, sha256: t.download.sha256 }] : [])]);
     for (const file of files) {
       const local = join(dataDir, id, version, file.path);
       const rel = `${id}/${version}/${file.path}`;

@@ -22,16 +22,18 @@ import { ratingTablePanel } from '../ui/line-rating-table.mjs';
 import { conductorPicker } from '../ui/conductor-picker.mjs';
 import { ferc1Picker } from '../ui/ferc1-picker.mjs';
 import { outagePicker } from '../ui/outage-picker.mjs';
+import { cleanestPicker } from '../ui/cleanest-picker.mjs';
 import REGULATORS from '../../data/curated/regulators.mjs';
 import { headroomPanel } from '../ui/workbench-headroom.mjs';
 import { evPanel } from '../ui/workbench-ev.mjs';
 import { addedPanel } from '../ui/workbench-added.mjs';
+import { carbonPanel } from '../ui/workbench-carbon.mjs';
 
 /** Sections a tool's page adds below its inputs, with the script that runs them. */
 const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'] };
 
 /** Pickers that fill a tool's inputs from public data: the section they render and the script that runs it. */
-const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'], 'rus-conductor': [conductorPicker, '/site/pages/conductor-picker.js'], 'ferc1': [ferc1Picker, '/site/pages/ferc1-picker.js'], 'eaglei-county': [outagePicker, '/site/pages/outage-picker.js'] };
+const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'], 'rus-conductor': [conductorPicker, '/site/pages/conductor-picker.js'], 'ferc1': [ferc1Picker, '/site/pages/ferc1-picker.js'], 'eaglei-county': [outagePicker, '/site/pages/outage-picker.js'], 'cleanest-hours': [cleanestPicker, '/site/pages/cleanest-picker.js'] };
 const pickersOf = (manifest) => [...new Set(manifest.inputs.map((i) => i.picker).filter(Boolean))].map((p) => PICKERS[p]);
 
 /** One input control, labeled from the manifest. */
@@ -264,6 +266,7 @@ export function filesPage({ i18n, reviewed = new Set() }) {
   ${headroomPanel(i18n, reviewed)}
   ${evPanel(i18n, reviewed)}
   ${addedPanel(i18n, reviewed)}
+  ${carbonPanel(i18n, reviewed)}
   <section class="panel" data-receipt></section>
 </article>
 <div class="drag-overlay" data-overlay hidden><p>${t('files.dragging')}</p></div>`;
@@ -310,7 +313,10 @@ ${takedown ? html`<p class="warning-chip">${t('data.takedownApplied', { date: da
   <p>${t('data.takedown')}</p>
 </section>
 ${publishes ? html`<section><h2>${t('data.download')}</h2>
-  <ul>${m.tables.map((tb) => html`<li><a href="/data/${m.dataset}/${m.version}/${tb.download.path}" download>${t('data.downloadLine', { table: tb.name, rows: tb.rows.toLocaleString('en-US'), size: tb.download.bytes.toLocaleString('en-US') })}</a><br><span class="mono">${t('data.sha')} ${tb.download.sha256}</span>${lib.perTable(tb)}</li>`)}</ul>
+  <ul>${m.tables.map((tb) => tb.download
+    ? html`<li><a href="/data/${m.dataset}/${m.version}/${tb.download.path}" download>${t('data.downloadLine', { table: tb.name, rows: tb.rows.toLocaleString('en-US'), size: tb.download.bytes.toLocaleString('en-US') })}</a><br><span class="mono">${t('data.sha')} ${tb.download.sha256}</span>${lib.perTable(tb)}</li>`
+    // A table too large for one CSV ships as shards only, listed in the manifest.
+    : html`<li>${t('data.shardsLine', { table: tb.name, rows: tb.rows.toLocaleString('en-US'), count: tb.shards.length.toLocaleString('en-US'), size: tb.shards.reduce((n, sh) => n + sh.bytes, 0).toLocaleString('en-US'), partition: [tb.partition].flat().join(' and ') })} <a href="/data/${m.dataset}/${m.version}/manifest.json">${t('data.manifestLink')}</a>${lib.perTable(tb)}</li>`)}</ul>
   ${lib.urls}
   ${lib.cite}
   <h3>${t('data.raw')}</h3>

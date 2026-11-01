@@ -5,6 +5,7 @@ Dataset fetchers, validators, normalizers, and snapshot writers: the same Node s
 ```sh
 node pipeline/run.mjs eia-861 --year 2025                     # fetch from EIA, validate, snapshot into data/
 node pipeline/run.mjs eia-861 --year 2025 --input f8612025.zip  # the same from a file already downloaded
+node --max-old-space-size=12288 pipeline/run.mjs eia-930 --year 2026-10  # 68 hourly workbooks (about 4 GB), read one at a time
 ```
 
 | Path | What |
@@ -26,3 +27,4 @@ node pipeline/run.mjs eia-861 --year 2025 --input f8612025.zip  # the same from 
 | Dataset | Owner | Served version |
 |---|---|---|
 | EIA-861 sales, revenue, and customers by utility and state (2025 final, released 2026-10-07) | `establish-platform-foundation` | `data/eia-861/2026-10/` |
+| EIA-930 hourly demand, generation by fuel, and CO₂ by balancing authority, from July 2018 (68 regions, one shard per region and year) | `add-hourly-carbon` | `data/eia-930/2026-10/` |

@@ -51,7 +51,8 @@ export function libraryParts({ manifest: m, entry, versions, shas, i18n }) {
     about: html`${entry?.description ? html`<p>${entry.description.contains}</p><p>${t('library.excludes', { what: entry.description.excludes })}</p>` : ''}`,
     perTable: (tb) => html`<p class="unit-hint">${t('library.fileLicense', { license: tb.license })} ${tb.credits.map((c) => c.attribution).join(' ')}</p>
 <p class="unit-hint" data-changes>${change(tb.changes ?? { first: true })}</p>
-${tb.changes?.largest?.length ? html`<ul>${tb.changes.largest.map((x) => html`<li class="mono">${t('library.largest', { key: x.key, from: x.from ?? '', to: x.to ?? '' })}</li>`)}</ul>` : ''}`,
+${tb.changes?.largest?.length ? html`<ul>${tb.changes.largest.map((x) => html`<li class="mono">${t('library.largest', { key: x.key, from: x.from ?? '', to: x.to ?? '' })}</li>`)}</ul>` : ''}
+${tb.changes?.by?.length ? html`<ul data-revised-by>${tb.changes.by.map((g) => html`<li class="mono">${t('library.revisedBy', { group: g.group, changed: whole(g.changed), added: whole(g.added), removed: whole(g.removed), first: g.first, last: g.last })}</li>`)}</ul>` : ''}`,
     urls: html`<h3>${t('library.urlsTitle')}</h3>
 <p class="mono">${t('library.urls', { permanent: `/data/${m.dataset}/${m.version}/<file>`, latest: `/data/${m.dataset}/latest/<file>` })}</p>
 <p>${t('library.urlsNote')} <a href="/developers/#data-api">${t('library.urlsDocs')}</a></p>`,
@@ -77,6 +78,6 @@ export function datasetLd(m, manifestSha, publishes = true) {
     temporalCoverage: years.length > 1 ? `${years[0]}/${years.at(-1)}` : years[0] ?? m.tables[0].dataPeriod,
     dateModified: m.retrieved, isBasedOn: m.sourceUrl, identifier: `sha256:${manifestSha}`,
     // Under the link posture no file is offered, so none is listed.
-    distribution: !publishes ? undefined : m.tables.map((t) => ({ '@type': 'DataDownload', name: t.title ?? t.name, encodingFormat: 'text/csv', contentUrl: `${ORIGIN}/data/${m.dataset}/${m.version}/${t.download.path}`, sha256: t.download.sha256 })),
+    distribution: !publishes ? undefined : m.tables.filter((t) => t.download).map((t) => ({ '@type': 'DataDownload', name: t.title ?? t.name, encodingFormat: 'text/csv', contentUrl: `${ORIGIN}/data/${m.dataset}/${m.version}/${t.download.path}`, sha256: t.download.sha256 })),
   };
 }

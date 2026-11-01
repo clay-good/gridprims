@@ -51,3 +51,30 @@ export function screenCard(input, result, ctx) {
     ...footer(ctx),
   ].join('\n');
 }
+
+const t1 = (x) => x.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const pct1 = (x) => `${x >= 0 ? '+' : '−'}${Math.abs(x).toFixed(1)}%`;
+
+/**
+ * The hourly emissions card (add-hourly-carbon), with the method caveat, the draft-method label when a
+ * supply profile was matched, and the production-based label on the combined score, as the specs require.
+ * @param {any} e from hourlyEmissions @param {any} [m] from matchShares @param {{period: string, version: string, eia930: string}} ctx
+ */
+export function carbonCard(e, m, ctx) {
+  return [
+    `Hourly CO₂ of this load in ${e.ba}, ${ctx.period}: ${t1(e.t)} metric tons (${Math.round(e.lb).toLocaleString('en-US')} lb), from EIA's hourly consumption-based intensity.`,
+    `At ${e.ba}'s flat annual average: ${t1(e.flat.t)} metric tons. Timing: ${pct1(e.timing.pct)}.`,
+    ...(e.egrid ? [`At the ${e.egrid.subregion} rate (${e.egrid.label}): ${t1(e.egrid.t)} metric tons. Region, basis, and year: ${pct1(e.egrid.pct)}.`] : []),
+    ...(e.excluded.hours ? [`${e.excluded.hours.toLocaleString('en-US')} hours excluded (no EIA data), ${(e.excluded.share * 100).toFixed(1)}% of the energy.`] : []),
+    ...(m ? [
+      `Clean supply matched: ${(m.annualShare * 100).toFixed(1)}% over the year, ${(m.hourlyShare * 100).toFixed(1)}% hour by hour.`,
+      ...(m.grid?.combined !== null && m.grid?.combined !== undefined ? [`Combined score: ${(m.grid.combined * 100).toFixed(1)}% (the hourly match plus the grid's clean share, ${(m.grid.cleanShare * 100).toFixed(1)}%, of the rest). ${m.productionLabel}`] : []),
+      m.label,
+    ] : []),
+    `Method: each clock hour's kWh × ${e.ba}'s consumption-based CO₂ intensity for the same UTC hour. ${e.whyFactor}`,
+    e.caveat,
+    SCREENING,
+    `Sources: U.S. Energy Information Administration, Form EIA-930, snapshot ${ctx.eia930}${e.egrid ? `; EPA ${e.egrid.edition}` : ''}.`,
+    `gridprims.com · workbench ${ctx.version}`,
+  ].join('\n');
+}

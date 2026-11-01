@@ -32,4 +32,11 @@ export default [
     usedBy: ['/tools/electrify/service-headroom/check/ (the 2026 edition option)'],
     wouldConfirm: 'Reading 120.87 in the 2026 NEC through NFPA\'s free access.',
   },
+  {
+    id: 'eia-930-lower-48-only',
+    claim: 'EIA-930 publishes hourly data for the lower 48 states only, so Alaska and Hawaii have no balancing authority with hourly CO₂ intensity (inferred from the published region list, which names none there).',
+    brief: 'openspec/changes/add-hourly-carbon/specs/carbon/hourly-emissions/spec.md, "Regions without hourly data"',
+    usedBy: ['/files/ (the hourly emissions panel shows only the eGRID annual result for Alaska and Hawaii)'],
+    wouldConfirm: 'EIA\'s own statement of EIA-930\'s geographic coverage, cited on its About page.',
+  },
 ];

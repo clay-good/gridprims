@@ -1,0 +1,4668 @@
+{
+  "dataset": "eia-930",
+  "version": "2026-10",
+  "title": "Hourly Electric Grid Monitor (Form EIA-930): demand, generation by fuel, and CO₂ by balancing authority",
+  "publisher": "U.S. Energy Information Administration",
+  "sourceUrl": "https://www.eia.gov/electricity/gridmonitor/",
+  "terms": {
+    "url": "https://www.eia.gov/about/copyrights_reuse.php",
+    "section": "Public domain and use of EIA content",
+    "text": "U.S. government publications are in the public domain and are not subject to copyright protection. You may use and/or distribute any of our data, files, databases, reports, graphs, charts, and other information products that are on our website or that you receive through our email distribution service. However, if you use or reproduce any of our information products, you should use an acknowledgment, which includes the publication date, such as: \"Source: U.S. Energy Information Administration (Oct 2008).\"",
+    "captured": "2026-10-31"
+  },
+  "redistributionBasis": {
+    "kind": "public domain",
+    "note": "U.S. federal government work (17 U.S.C. 105)"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "us-federal-public-domain",
+    "reason": "recognized us-federal-public-domain",
+    "agrees": true
+  },
+  "license": "public domain (U.S. federal government work (17 U.S.C. 105))",
+  "attribution": "Source: U.S. Energy Information Administration, Hourly Electric Grid Monitor (Form EIA-930) (Oct 2026).",
+  "asOf": "2026-10-31",
+  "retrieved": "2026-10-31",
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "cadence": {
+    "every": "monthly",
+    "nextRelease": {
+      "date": "2026-11-30",
+      "posted": false,
+      "note": "EIA rebuilds every region's file daily, by about 4 pm Eastern for the day before; gridprims cuts a version once a month"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/AEC.xlsx",
+      "name": "AEC.xlsx",
+      "bytes": 26593784,
+      "sha256": "f9bd6b6e8350c1d59e0f5abf2d2277b78e260c5f2738930184d613bb6ec35a55",
+      "file": "AEC"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/AECI.xlsx",
+      "name": "AECI.xlsx",
+      "bytes": 63793792,
+      "sha256": "0301f1bafb6b8f68355bdea543d97e3ef9c167be8a70d2e651526accc41d0f47",
+      "file": "AECI"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/AVA.xlsx",
+      "name": "AVA.xlsx",
+      "bytes": 67090535,
+      "sha256": "2f3f99d08933c5ad94fdfdbc59d9b4af06dc5632dfd0dd92968f87cb07b648c5",
+      "file": "AVA"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/AVRN.xlsx",
+      "name": "AVRN.xlsx",
+      "bytes": 35297330,
+      "sha256": "757a7008e7a1dabcee6f4b23c9e802c8f22ff37626c26575491ca0673ee9596f",
+      "file": "AVRN"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/AZPS.xlsx",
+      "name": "AZPS.xlsx",
+      "bytes": 84502463,
+      "sha256": "5b110b4777e42312a9f78c2e32f2aa956caab6d4abe9dcf6cb4b72a43c598541",
+      "file": "AZPS"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/BANC.xlsx",
+      "name": "BANC.xlsx",
+      "bytes": 59483272,
+      "sha256": "c818ca86164f37f53c5607500c3558e47a3e5d3ae90507ed7937f0599c5d79e6",
+      "file": "BANC"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/BPAT.xlsx",
+      "name": "BPAT.xlsx",
+      "bytes": 105034496,
+      "sha256": "425b9cc59ed5c0eb1fea190ee00626de9eca2c59b7ad5a878f6497d62a06d704",
+      "file": "BPAT"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/CHPD.xlsx",
+      "name": "CHPD.xlsx",
+      "bytes": 54035492,
+      "sha256": "4118bf05df393eab9be3f492ae44cf73706a20de4de74029632c2e4b8b6c57c9",
+      "file": "CHPD"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/CISO.xlsx",
+      "name": "CISO.xlsx",
+      "bytes": 97979890,
+      "sha256": "4aa43041af375eeb163b6a5c4cfc9fb01ed166cc34e84798e8f8c100282308f2",
+      "file": "CISO"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/CPLE.xlsx",
+      "name": "CPLE.xlsx",
+      "bytes": 71151761,
+      "sha256": "5d78e88890f4ff0841596ceb1f922dacbcf2f3b7637b959c1cd6c67dc58042b2",
+      "file": "CPLE"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/CPLW.xlsx",
+      "name": "CPLW.xlsx",
+      "bytes": 57843337,
+      "sha256": "3d1ad43c4d7e39b7d399abf6c133a572af2997f592372d905e8a45ffd11ad652",
+      "file": "CPLW"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/DEAA.xlsx",
+      "name": "DEAA.xlsx",
+      "bytes": 34185191,
+      "sha256": "db1aabf0bfbbb34efad61977300c2fabffac7596b138ed97c7dc11363438e5a8",
+      "file": "DEAA"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/DOPD.xlsx",
+      "name": "DOPD.xlsx",
+      "bytes": 46960786,
+      "sha256": "025351e25d8a0f78f6646fcb409b4de6e4cd4e3fb15be6185fa754cc55429378",
+      "file": "DOPD"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/DUK.xlsx",
+      "name": "DUK.xlsx",
+      "bytes": 80763635,
+      "sha256": "785e9d942956b6633c095106487e7b90a53b67ae33132d5176d7ab77ab112e1b",
+      "file": "DUK"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/EEI.xlsx",
+      "name": "EEI.xlsx",
+      "bytes": 16026037,
+      "sha256": "96c23dfe0fb9d97d052685664b71d0f7a8c9fdccf87d08ba40ae63605c9c3ffe",
+      "file": "EEI"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/EPE.xlsx",
+      "name": "EPE.xlsx",
+      "bytes": 54271304,
+      "sha256": "914550db333533e340bb25fb1a7c2a257ec072d97ab1de8d4123a45edba5e7c8",
+      "file": "EPE"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/ERCO.xlsx",
+      "name": "ERCO.xlsx",
+      "bytes": 75093919,
+      "sha256": "5adc7971b8b2b2b4314bc612e51e91ee61aabfd2bcd6bc4d0a8d8248561fae51",
+      "file": "ERCO"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/FMPP.xlsx",
+      "name": "FMPP.xlsx",
+      "bytes": 65175203,
+      "sha256": "5d7349559b82e48efa705b21e85e58d6815d89a0300988c435b2d287de3a94db",
+      "file": "FMPP"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/FPC.xlsx",
+      "name": "FPC.xlsx",
+      "bytes": 74716691,
+      "sha256": "25c42f1db7e7fa07d94c139bd6205059cb5ab24b645877f28bfb3cafc0a9a0ae",
+      "file": "FPC"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/FPL.xlsx",
+      "name": "FPL.xlsx",
+      "bytes": 76269878,
+      "sha256": "eb72ca258f091eba6afc71308b25fa196e762277e02ddb38be882f1c0809846d",
+      "file": "FPL"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/GCPD.xlsx",
+      "name": "GCPD.xlsx",
+      "bytes": 53765364,
+      "sha256": "ad34df9f9d9532e3d58a69765ff17e7a22e6517c311c28d241c43aeeaa45a5f0",
+      "file": "GCPD"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/GLHB.xlsx",
+      "name": "GLHB.xlsx",
+      "bytes": 10645915,
+      "sha256": "9ff6b7c4f701dacfa96874b77ca6387b2a173eef141be566b7d1dace436d98e7",
+      "file": "GLHB"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/GRID.xlsx",
+      "name": "GRID.xlsx",
+      "bytes": 46052153,
+      "sha256": "d661b0c6481948d0ac2dcf621b3e23773e54e9bd6eab47e53a7b38fceabfa84d",
+      "file": "GRID"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/GRIF.xlsx",
+      "name": "GRIF.xlsx",
+      "bytes": 24344923,
+      "sha256": "2f176d314825de244e9b1ade7f2df4c4c4a8f062a8cbb294c68a659f87b4b5b9",
+      "file": "GRIF"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/GRMA.xlsx",
+      "name": "GRMA.xlsx",
+      "bytes": 6541244,
+      "sha256": "2c1ce57c14bcee08dc2b7d579d5209c54a442ff4bdbfe8cd43129b93a9d45578",
+      "file": "GRMA"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/GVL.xlsx",
+      "name": "GVL.xlsx",
+      "bytes": 52594617,
+      "sha256": "88550375742688eb68ddc652c34cb6cb7f3ab8e37d631e3b00d5cccd0569080c",
+      "file": "GVL"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/GWA.xlsx",
+      "name": "GWA.xlsx",
+      "bytes": 34563837,
+      "sha256": "6c9846cdea6756d506db7e3bb7fcd12e49d2675582485f4428ccdd78ce5951e5",
+      "file": "GWA"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/HGMA.xlsx",
+      "name": "HGMA.xlsx",
+      "bytes": 28798043,
+      "sha256": "25ad2a927282a88a7886f00acfa2811fc02b35d24991a6065cbef38b8cc3846c",
+      "file": "HGMA"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/HST.xlsx",
+      "name": "HST.xlsx",
+      "bytes": 39560239,
+      "sha256": "99accc2cc4c0184a7556432518d40c75630c5232d6334b560e951b34713e973e",
+      "file": "HST"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/IID.xlsx",
+      "name": "IID.xlsx",
+      "bytes": 58078658,
+      "sha256": "f92f11e445212851e5763ce541235d94018a3e964ab899705b732ac16ef9942a",
+      "file": "IID"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/IPCO.xlsx",
+      "name": "IPCO.xlsx",
+      "bytes": 69323220,
+      "sha256": "6d75205b140b58983aa23f9ec3ae3989170aa2dc73c9cc608fec943d168c5f82",
+      "file": "IPCO"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/ISNE.xlsx",
+      "name": "ISNE.xlsx",
+      "bytes": 78453163,
+      "sha256": "7450c0c649f9ec38e7dd88ffe51db01b28f8b6059775b1dcc14bcce2406c7398",
+      "file": "ISNE"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/JEA.xlsx",
+      "name": "JEA.xlsx",
+      "bytes": 60451193,
+      "sha256": "55f0c5b7df9469e15744fcf3d9e4ef8e44456c51f64b5727a9a0f4e3ecde87b1",
+      "file": "JEA"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/LDWP.xlsx",
+      "name": "LDWP.xlsx",
+      "bytes": 71708998,
+      "sha256": "67e257699f9c6d8077b97efcdee21ae3e743626e7d54c902aeaab94605c980fc",
+      "file": "LDWP"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/LGEE.xlsx",
+      "name": "LGEE.xlsx",
+      "bytes": 64723280,
+      "sha256": "3a4a4a3c6b22c1f97e390985284f668c51c62be168f2b89e199ef4eab65f5724",
+      "file": "LGEE"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/MISO.xlsx",
+      "name": "MISO.xlsx",
+      "bytes": 100918461,
+      "sha256": "e3fe7983d6d6b0739482ebc0dccecd5399fc221169211337eca549cfd6324416",
+      "file": "MISO"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/NEVP.xlsx",
+      "name": "NEVP.xlsx",
+      "bytes": 73972282,
+      "sha256": "5397fb074d901de8c431d6c573b69271f1856f55ede08f4529dc3e157c350e80",
+      "file": "NEVP"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/NSB.xlsx",
+      "name": "NSB.xlsx",
+      "bytes": 14340956,
+      "sha256": "2518b01d62012433292ff698e06fb35d0f7b04fdee6942e01fcd22f235069012",
+      "file": "NSB"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/NWMT.xlsx",
+      "name": "NWMT.xlsx",
+      "bytes": 75282454,
+      "sha256": "2515c3d8780a3cc50d502a290ef44bf8ffb217f4946615dd08e7482b602d79f7",
+      "file": "NWMT"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/NYIS.xlsx",
+      "name": "NYIS.xlsx",
+      "bytes": 85478522,
+      "sha256": "b8d224eb5fa3906fefafe57bcdf9f17db1a8107787ff1bf7f4ba7b47b7e4051c",
+      "file": "NYIS"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/OVEC.xlsx",
+      "name": "OVEC.xlsx",
+      "bytes": 11172328,
+      "sha256": "3b2777f2324da3e11e7be6074b38a6c1bae4841c3fd90433d05a58d66362fbdb",
+      "file": "OVEC"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/PACE.xlsx",
+      "name": "PACE.xlsx",
+      "bytes": 75449792,
+      "sha256": "74b22b0b759db9051598358d4ae826f9dcefeec532a9eecc61467faafcd9bfba",
+      "file": "PACE"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/PACW.xlsx",
+      "name": "PACW.xlsx",
+      "bytes": 71440901,
+      "sha256": "25ac8ef9df6fca13dce53bd1fafb16c6b206c3480fedecffde23b52765705d99",
+      "file": "PACW"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/PGE.xlsx",
+      "name": "PGE.xlsx",
+      "bytes": 56743080,
+      "sha256": "1ef8939fb155b1c311380469d0a655c5d42a487a134aabf76f61d5f6589f3171",
+      "file": "PGE"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/PJM.xlsx",
+      "name": "PJM.xlsx",
+      "bytes": 114508599,
+      "sha256": "3a06d125d4312e1b55d51ef7dfbd8995a4f8cb19acdefdbed8ae1e88d564ce1a",
+      "file": "PJM"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/PNM.xlsx",
+      "name": "PNM.xlsx",
+      "bytes": 86691376,
+      "sha256": "7da2c0d643f97a1d206b716f978474e7e1384fb5cd62a25d1dfca7286d5b0540",
+      "file": "PNM"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/PSCO.xlsx",
+      "name": "PSCO.xlsx",
+      "bytes": 64118332,
+      "sha256": "9fb71fb57f02fdf5809b89a7714e44faef571bddad1fa44ac46ff86811ae3494",
+      "file": "PSCO"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/PSEI.xlsx",
+      "name": "PSEI.xlsx",
+      "bytes": 66180849,
+      "sha256": "451206cb3c6e68aa7756bb651403b39c46e4b5ad439d364f1e4547c6f9b37c92",
+      "file": "PSEI"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/SC.xlsx",
+      "name": "SC.xlsx",
+      "bytes": 69151286,
+      "sha256": "6a6e6a6dc7027a703569eb63365f02ef3129c2c7126720898ac999cf44030e80",
+      "file": "SC"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/SCEG.xlsx",
+      "name": "SCEG.xlsx",
+      "bytes": 67718717,
+      "sha256": "859153c1ee58bf5076bf4bea4cbdaa7289ed12929c537eaccadfc64c8091094e",
+      "file": "SCEG"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/SCL.xlsx",
+      "name": "SCL.xlsx",
+      "bytes": 47870162,
+      "sha256": "614aac944c1d7fd58119ab6fc10bbc5bd61afa6fec290bb8532fecadf911c1e6",
+      "file": "SCL"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/SEC.xlsx",
+      "name": "SEC.xlsx",
+      "bytes": 59728448,
+      "sha256": "9292465ab6f902fc6c89b18988a7670b40e5c668f475d206a58674855d4fde8d",
+      "file": "SEC"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/SEPA.xlsx",
+      "name": "SEPA.xlsx",
+      "bytes": 45697674,
+      "sha256": "06efc29d9f0e8302e67b8defff0242f5d324da073c6a960cc1c50eafe41ee1db",
+      "file": "SEPA"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/SOCO.xlsx",
+      "name": "SOCO.xlsx",
+      "bytes": 86858838,
+      "sha256": "2503d0125ba1315f8f30685e98d8a89079caa94a8b4409fb2d998034d076dcc1",
+      "file": "SOCO"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/SPA.xlsx",
+      "name": "SPA.xlsx",
+      "bytes": 51270230,
+      "sha256": "efcb32974af98e0bf5d096cfb0dbec4685d36969a26726168a33259e2ccf8bae",
+      "file": "SPA"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/SRP.xlsx",
+      "name": "SRP.xlsx",
+      "bytes": 75495189,
+      "sha256": "67ba3088b08441e38f9c74ef954f10d22c1e8fcb6eec2dce576915b093318342",
+      "file": "SRP"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/SWPP.xlsx",
+      "name": "SWPP.xlsx",
+      "bytes": 108152787,
+      "sha256": "26a3c227aca9760f848fbd7bf6fc1d3b1f274bfa2d0712fe1b465862b4e2ff23",
+      "file": "SWPP"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/TAL.xlsx",
+      "name": "TAL.xlsx",
+      "bytes": 50889506,
+      "sha256": "024a4f45b1b3e0e65ac71eb404902511e2ecd599b397244bba1b2244635b68d5",
+      "file": "TAL"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/TEC.xlsx",
+      "name": "TEC.xlsx",
+      "bytes": 64031993,
+      "sha256": "bd58f7d15648e626a1ed72d36b46cb5548fc267af83ef28885d926dbaf0a2d01",
+      "file": "TEC"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/TEPC.xlsx",
+      "name": "TEPC.xlsx",
+      "bytes": 66917047,
+      "sha256": "fe0a5e4a2ba7c4511bf9ed706df04adf0097a6eb06528704e0ae87d0fd3bd07b",
+      "file": "TEPC"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/TIDC.xlsx",
+      "name": "TIDC.xlsx",
+      "bytes": 51646047,
+      "sha256": "ab2558bb257045f3b59bcd99471c79426fd97a195a60bb10f2e4565f0a3ab18a",
+      "file": "TIDC"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/TPWR.xlsx",
+      "name": "TPWR.xlsx",
+      "bytes": 47798559,
+      "sha256": "4e0f3a479701f39e4cc6f4e13e14368660dd93952a98872f91aa728a561eba63",
+      "file": "TPWR"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/TVA.xlsx",
+      "name": "TVA.xlsx",
+      "bytes": 82219547,
+      "sha256": "fa257ada66b68bcc56210ba134a9c805a111b449a06fcdedfe2d4912bdd4e72b",
+      "file": "TVA"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/WACM.xlsx",
+      "name": "WACM.xlsx",
+      "bytes": 69192770,
+      "sha256": "8e10b6036ae8133e9d975ac0386fc91d1f2e7e245e45d9b5b002636c116fb421",
+      "file": "WACM"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/WALC.xlsx",
+      "name": "WALC.xlsx",
+      "bytes": 75988287,
+      "sha256": "20c9bc61b0165c70ea511ba2bd36a0aba750c87030002068345e322140642b59",
+      "file": "WALC"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/WAUW.xlsx",
+      "name": "WAUW.xlsx",
+      "bytes": 46082381,
+      "sha256": "9d626e438b8e9991a4ad58a9c0084587278b230d6a6b4f519c343f7e7d2cea5b",
+      "file": "WAUW"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/WWA.xlsx",
+      "name": "WWA.xlsx",
+      "bytes": 30604908,
+      "sha256": "007a9863f72da5f57fdd9a7f12b6bcac6d4127f2a53912fe26d2f92269ad0cde",
+      "file": "WWA"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/knownissues/xls/YAD.xlsx",
+      "name": "YAD.xlsx",
+      "bytes": 38813009,
+      "sha256": "9e7aa45d6e95be0a6b0ed2435bc750a0cec7d0feb51492d34d09de8f1c114211",
+      "file": "YAD"
+    }
+  ],
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-10-31",
+    "infrastructure": false,
+    "columnsChecked": 25,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Hourly totals for whole balancing authorities; no facility, line, or network detail."
+  },
+  "tables": [
+    {
+      "name": "hourly",
+      "title": "Hourly demand, generation by fuel, and CO₂ by balancing authority, from July 2018",
+      "dataPeriod": "2026-10",
+      "rows": 4553313,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "ba",
+          "type": "str"
+        },
+        {
+          "name": "year",
+          "type": "i32",
+          "unit": "UTC year of the hour start",
+          "scale": 1
+        },
+        {
+          "name": "hour",
+          "type": "i32",
+          "unit": "hours since 1970-01-01T00:00Z, the hour start",
+          "scale": 1
+        },
+        {
+          "name": "demand",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "net_generation",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "interchange",
+          "type": "i32",
+          "unit": "MWh (positive is a net outflow)",
+          "scale": 1
+        },
+        {
+          "name": "gen_col",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_ng",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_nuc",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_oil",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_geo",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_wat",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_ps",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_sun",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_snb",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_wnd",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_wnb",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_bat",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_oes",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_ues",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_oth",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "gen_unk",
+          "type": "i32",
+          "unit": "MWh",
+          "scale": 1
+        },
+        {
+          "name": "co2_generated",
+          "type": "f32",
+          "unit": "metric tons"
+        },
+        {
+          "name": "intensity_generated",
+          "type": "f32",
+          "unit": "lb/kWh (production-based)"
+        },
+        {
+          "name": "intensity_consumed",
+          "type": "f32",
+          "unit": "lb/kWh (consumption-based)"
+        }
+      ],
+      "partition": [
+        "ba",
+        "year"
+      ],
+      "shards": [
+        {
+          "path": "hourly/AEC-2018.bin",
+          "state": "AEC-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "49dfa49301c99bd9083bcc48fde32e45f465047c54ca097648bf1dfa822c102f"
+        },
+        {
+          "path": "hourly/AEC-2019.bin",
+          "state": "AEC-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "185cb09af2d470ce05cdc5f57ae1eb573977381b9eb21b7d2acb5f6c7c209258"
+        },
+        {
+          "path": "hourly/AEC-2020.bin",
+          "state": "AEC-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "ff077fa2a769f87eeb342c9287006a1fe15bf71b2b5ea279576eb5650562e2fb"
+        },
+        {
+          "path": "hourly/AEC-2021.bin",
+          "state": "AEC-2021",
+          "rows": 5837,
+          "bytes": 586624,
+          "sha256": "dc1f95cd323dcf3c566e06ad9d86d05d69f02345014f8477243f1f0ed9302120"
+        },
+        {
+          "path": "hourly/AECI-2018.bin",
+          "state": "AECI-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "0c22fe16e4666ca3784f2d75982ef93bda29377473604aaf8aa07efdb2c3e407"
+        },
+        {
+          "path": "hourly/AECI-2019.bin",
+          "state": "AECI-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "4fdba9301ddf365e6c636d2532bd14df618f8ce8ecae5be7b43120e6929e3cd0"
+        },
+        {
+          "path": "hourly/AECI-2020.bin",
+          "state": "AECI-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "e3f16a5bd66e3c28a03816e4c97a1e9db2a88e3fe3f495a9ee42c24c46b5fa54"
+        },
+        {
+          "path": "hourly/AECI-2021.bin",
+          "state": "AECI-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "eb045639fab9398dd4ce887101fc8c04291eb19b1f847776dd0cd495de0da783"
+        },
+        {
+          "path": "hourly/AECI-2022.bin",
+          "state": "AECI-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "addca3e733401be09f0f1717c0d82f96d7f00a319cd740cc2fee6919b6c5a821"
+        },
+        {
+          "path": "hourly/AECI-2023.bin",
+          "state": "AECI-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "b61a70b5ebada9bd082c32dab95497ef1c2f03f7f82a260a204f6b94d06795e3"
+        },
+        {
+          "path": "hourly/AECI-2024.bin",
+          "state": "AECI-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "528df4312ca55098ce74f8c30e251cb6cd7996ba85d3ffa4c61a8cb42b4de4b8"
+        },
+        {
+          "path": "hourly/AECI-2025.bin",
+          "state": "AECI-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "7c20781a95ca50d9388b7f06042253c7fcbe543a83a76693f35ec7335a469f3e"
+        },
+        {
+          "path": "hourly/AECI-2026.bin",
+          "state": "AECI-2026",
+          "rows": 7301,
+          "bytes": 733016,
+          "sha256": "ff0d3eb24add1982eca8f80d7797981034107026f33d716dc4e03302b1e873e7"
+        },
+        {
+          "path": "hourly/AVA-2018.bin",
+          "state": "AVA-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "d536abc20fa9481fe8e5ceee4f9b08ee1bf66f401beaed718a39877f50a9a8ef"
+        },
+        {
+          "path": "hourly/AVA-2019.bin",
+          "state": "AVA-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "06fd212423a08b36eabe1f342e58d698ee4f637a0a178842fcbc37d3d2dfad45"
+        },
+        {
+          "path": "hourly/AVA-2020.bin",
+          "state": "AVA-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "caeda140dcbf98830d2c1934a2b4e8acf8e13bba58380064481a1b8ce4c94ad9"
+        },
+        {
+          "path": "hourly/AVA-2021.bin",
+          "state": "AVA-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "78c90d4592c10fc23d14a5b68c246bcb2fc576c2022e3ad86f28bd8fd6855924"
+        },
+        {
+          "path": "hourly/AVA-2022.bin",
+          "state": "AVA-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "a1f4103a3c8c2ccde0c1dc4f74ca7cc68fe45d32104ee2659155642a9b412286"
+        },
+        {
+          "path": "hourly/AVA-2023.bin",
+          "state": "AVA-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "5fe69c226b1d89795cfd15878799190f3731349865518f1131b48faa4987bde8"
+        },
+        {
+          "path": "hourly/AVA-2024.bin",
+          "state": "AVA-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "2e60040d825d320b6639bd7586d6fc46f04b57a2f993689a23ca388300aea52d"
+        },
+        {
+          "path": "hourly/AVA-2025.bin",
+          "state": "AVA-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "c2e2892fb936f596f827cc7201c6e1ed3033c9b1aae3ee9773c46f614bb91bf7"
+        },
+        {
+          "path": "hourly/AVA-2026.bin",
+          "state": "AVA-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "13c1712e6354018b67cf254e17d82b395a06917fc16052be1ed1e69d98db823e"
+        },
+        {
+          "path": "hourly/AVRN-2018.bin",
+          "state": "AVRN-2018",
+          "rows": 3689,
+          "bytes": 371816,
+          "sha256": "c8ca351f9dd42523f2547b2f3e7967ce99008b22159ae1634a7d375d187c3cc1"
+        },
+        {
+          "path": "hourly/AVRN-2019.bin",
+          "state": "AVRN-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "f634e3d6d9cd65a356a9ac61babb1480d018c061285dd08e2c08319eeecebfd3"
+        },
+        {
+          "path": "hourly/AVRN-2020.bin",
+          "state": "AVRN-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "da3f2021b7b6793f56f18432f378f9f579d331429c913b443a0e60772b406340"
+        },
+        {
+          "path": "hourly/AVRN-2021.bin",
+          "state": "AVRN-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "0ebb70387159e8e1bcfb2d6dbf6d6224100671a1b6a44a2b33087428e5531125"
+        },
+        {
+          "path": "hourly/AVRN-2022.bin",
+          "state": "AVRN-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "114249e2092b08c0d2ebffb5a4de55c2cec9b38e2e21b5639cefdde20e68251e"
+        },
+        {
+          "path": "hourly/AVRN-2023.bin",
+          "state": "AVRN-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "2d5f52f5f7578b805876d8cf42f6e0e39991b07fc69eafdcd8a058e02d4a1479"
+        },
+        {
+          "path": "hourly/AVRN-2024.bin",
+          "state": "AVRN-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "9700387f78bb428e0742c11f85d0aee427cde9346e46e2a9b3186f9c4cf15c7d"
+        },
+        {
+          "path": "hourly/AVRN-2025.bin",
+          "state": "AVRN-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "0e8b123750ffcb961b16a8ecdb3471e4d2901ad02ca4435f65eefccffb54f035"
+        },
+        {
+          "path": "hourly/AVRN-2026.bin",
+          "state": "AVRN-2026",
+          "rows": 7279,
+          "bytes": 730824,
+          "sha256": "3933b51c53a7f436c013659a11c96ec9b8dd1d20b74a30edaa0e20f3038f0ed2"
+        },
+        {
+          "path": "hourly/AZPS-2018.bin",
+          "state": "AZPS-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "bbc1a604fa0f544a24df37eb907385deb77b4548b3b3a7415eca015065e16210"
+        },
+        {
+          "path": "hourly/AZPS-2019.bin",
+          "state": "AZPS-2019",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "0e99504021829ffa9fe9459f91df869ea5696f4a0bc4b5051803d8672ea53684"
+        },
+        {
+          "path": "hourly/AZPS-2020.bin",
+          "state": "AZPS-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "4c5c6cec1643a937a62e1a0df808846ea6206bb2654e43957fb38e93f45c168f"
+        },
+        {
+          "path": "hourly/AZPS-2021.bin",
+          "state": "AZPS-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "c728ffd17804c8b1a00085be91cf8d50b142a6e9ce99475a271fc57d92104ef5"
+        },
+        {
+          "path": "hourly/AZPS-2022.bin",
+          "state": "AZPS-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "75c49b2ef84cf171ca0bd6df15c6857fd65570c0dde6fbb538e089aa1f9c0e80"
+        },
+        {
+          "path": "hourly/AZPS-2023.bin",
+          "state": "AZPS-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "fd0c064b55b58f36a2d16e3b0016ac206c3b5898b55308899fef0220330ed5f0"
+        },
+        {
+          "path": "hourly/AZPS-2024.bin",
+          "state": "AZPS-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "59a45efd034cf898033f795c8c9c05052eb70c1a6a2bbb1dddea6bbe6a1981fc"
+        },
+        {
+          "path": "hourly/AZPS-2025.bin",
+          "state": "AZPS-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "b0a83d7feaeddddc0f434ec39dc4a21e25a68255afdede8c791b7743cecd628f"
+        },
+        {
+          "path": "hourly/AZPS-2026.bin",
+          "state": "AZPS-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "d2f94b5ccc3a84b2c1826ae4f34a80c9a0a9b3aadfb44cd3bb45f64e2911d0b3"
+        },
+        {
+          "path": "hourly/BANC-2018.bin",
+          "state": "BANC-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "33f89b2b69fd5a011807fa8a45e4e2064170086457b8bb68a3d446cf01ad2fa8"
+        },
+        {
+          "path": "hourly/BANC-2019.bin",
+          "state": "BANC-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "e8fbf7b2ff88c896f6f06d786be77df79b552492732a793afdfb47d5d87f259f"
+        },
+        {
+          "path": "hourly/BANC-2020.bin",
+          "state": "BANC-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "ccfcff1644c73753388a2320519fea75f2bfedfd6c83d8bd5184fa893499c302"
+        },
+        {
+          "path": "hourly/BANC-2021.bin",
+          "state": "BANC-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "1c48e37b2c1cd8a2c5e82bb2c238ccc3e967e0aac2e8ef8b849fd08b2d7ceb95"
+        },
+        {
+          "path": "hourly/BANC-2022.bin",
+          "state": "BANC-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "d7e84e1973ac544193ca8c7abccf865708775bdd2183784853e230a2a32aa570"
+        },
+        {
+          "path": "hourly/BANC-2023.bin",
+          "state": "BANC-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "ec3c176f2f38da7cbb60abe345255d7e7d1b081d364ec7a5007f0f9893f49555"
+        },
+        {
+          "path": "hourly/BANC-2024.bin",
+          "state": "BANC-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "9fae8806d082a932278728c7bddff2c345ea2b2a88411e692c073830aae3be1f"
+        },
+        {
+          "path": "hourly/BANC-2025.bin",
+          "state": "BANC-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "90e2ac69d4581511504c2d1a0d213d821f77ebed03e0b86a1e3486ef4a2431f5"
+        },
+        {
+          "path": "hourly/BANC-2026.bin",
+          "state": "BANC-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "2e06734b53da292b4a8f200871e708c00a8f9930f602aa99b2a4877a44dc642c"
+        },
+        {
+          "path": "hourly/BPAT-2018.bin",
+          "state": "BPAT-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "18ec609e58bc9307e27beefb2207c8386fad0c188ef70591afcbe9e51ba9b41c"
+        },
+        {
+          "path": "hourly/BPAT-2019.bin",
+          "state": "BPAT-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "dd185b97495d90a80775ddc8d2ad23cca70d222e6bb970c6c5f0750479f0604b"
+        },
+        {
+          "path": "hourly/BPAT-2020.bin",
+          "state": "BPAT-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "ec426fd4ef8bd02390760b9057ce5ebe7855c9f2e3dbafdad45f4725e2354f34"
+        },
+        {
+          "path": "hourly/BPAT-2021.bin",
+          "state": "BPAT-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "ad8e159e09b9ea95936d1a4b574a3940261a2347e71016cff5ab9058c1514074"
+        },
+        {
+          "path": "hourly/BPAT-2022.bin",
+          "state": "BPAT-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "bf07c8e1b5706fe1110dcd0c67897b9a9a5ad1e2a0783e96ae28ae2d65e2d86e"
+        },
+        {
+          "path": "hourly/BPAT-2023.bin",
+          "state": "BPAT-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "1d36d257dd36dbc3a112498179b31043da6acf0292382a6dce2108090c7675ba"
+        },
+        {
+          "path": "hourly/BPAT-2024.bin",
+          "state": "BPAT-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "67a42cb4f6c31b64c493ed49b66a11c1082f686c8a4a7244f02debeb1bd28643"
+        },
+        {
+          "path": "hourly/BPAT-2025.bin",
+          "state": "BPAT-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "bba180e061a2bf8388c2ce0d47af86a311a73cd39f3c2a1798ebfd7a2a999d98"
+        },
+        {
+          "path": "hourly/BPAT-2026.bin",
+          "state": "BPAT-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "5e11ea4501e1a4013e6ece8fe7a8a6dfa15ba98f63bf8b41892da919cbd27ef4"
+        },
+        {
+          "path": "hourly/CHPD-2018.bin",
+          "state": "CHPD-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "1f14d0df927c16c7148260995846f4360184d55f8bb5c61ba8e90660d649d141"
+        },
+        {
+          "path": "hourly/CHPD-2019.bin",
+          "state": "CHPD-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "26f5bc5838c064b70806d70c4eb74aa61d5d27ab3f67c70ed7362f8c26f030f5"
+        },
+        {
+          "path": "hourly/CHPD-2020.bin",
+          "state": "CHPD-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "11fae17f7fd36798aadf9bc4f1d0aa5b44dcd94f1528a222890b5d6259b98aba"
+        },
+        {
+          "path": "hourly/CHPD-2021.bin",
+          "state": "CHPD-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "9c0587f4c71a88fa3b59bc62efd05702d19a9cbf4c21dbe5737b07957e2b9702"
+        },
+        {
+          "path": "hourly/CHPD-2022.bin",
+          "state": "CHPD-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "861880267f78a0d82367cd391b04f641ea3bb97377c804ef2b45dbc6b69c5d13"
+        },
+        {
+          "path": "hourly/CHPD-2023.bin",
+          "state": "CHPD-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "696494c9d7e9d5ee903e2b0a376177617a6741248554fbf3157b295edfed838b"
+        },
+        {
+          "path": "hourly/CHPD-2024.bin",
+          "state": "CHPD-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "712a3487eab3677697a6f0df2012e3620854e05e772c8558f2553ff8c4fffb24"
+        },
+        {
+          "path": "hourly/CHPD-2025.bin",
+          "state": "CHPD-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "492236a0cd02e31f5afe771a6a6adea36290cc0000fefc44719a8e293abc6d97"
+        },
+        {
+          "path": "hourly/CHPD-2026.bin",
+          "state": "CHPD-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "3abc08e443883787961daaa0c124e3560a317cae436596c7ed3c1fae8ba0f93c"
+        },
+        {
+          "path": "hourly/CISO-2018.bin",
+          "state": "CISO-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "26a513c36afa60246e610fa3b6743f0908d18f4a2ffad40f24fe971d542481b8"
+        },
+        {
+          "path": "hourly/CISO-2019.bin",
+          "state": "CISO-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "db0785e7bef14f76e29f7bd342360a006d0f56a057e6afaec12f9403be52c871"
+        },
+        {
+          "path": "hourly/CISO-2020.bin",
+          "state": "CISO-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "c1ebbaf5146f86cb0f73396e7cbbbee30779b4e58523fb839579f35dc5356192"
+        },
+        {
+          "path": "hourly/CISO-2021.bin",
+          "state": "CISO-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "e00343a916005956ec4a8eff059d87853f2c9724e9eff876a39d02033263729a"
+        },
+        {
+          "path": "hourly/CISO-2022.bin",
+          "state": "CISO-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "31b0509391e3cb7bd37f251917c4d1971bb9793a167eeb1378486840e0e4397e"
+        },
+        {
+          "path": "hourly/CISO-2023.bin",
+          "state": "CISO-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "a8bd4c841ac30f85636611c44b70aa5cdf67a4954a93185832f4c781a24abcbe"
+        },
+        {
+          "path": "hourly/CISO-2024.bin",
+          "state": "CISO-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "b99242289937dafa633de97d3b939da97ab4f57bcb169355398bf29aa7e0ea33"
+        },
+        {
+          "path": "hourly/CISO-2025.bin",
+          "state": "CISO-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "14db101635a9ca8802e5cb41d55d4773ccfe3342614224fa598d32bb2106a3e3"
+        },
+        {
+          "path": "hourly/CISO-2026.bin",
+          "state": "CISO-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "97992b1d77071e63e1e692017ccbeca8809446046310305486890eb99b34d953"
+        },
+        {
+          "path": "hourly/CPLE-2018.bin",
+          "state": "CPLE-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "b09bf2fe6b4ab4abafb2aa6f64366808a3047806256219dee1e2be08d09c9076"
+        },
+        {
+          "path": "hourly/CPLE-2019.bin",
+          "state": "CPLE-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "33d22f5312d3278f13e3334eaf4d491e4e3da0e4d029ab68f61dcdfe821ca1e4"
+        },
+        {
+          "path": "hourly/CPLE-2020.bin",
+          "state": "CPLE-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "02effa9691148004d7131b6b1fe80815a815bbb54a1bd5ac2c0d63b26aeb2093"
+        },
+        {
+          "path": "hourly/CPLE-2021.bin",
+          "state": "CPLE-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "2c5b2dcac3a5ee995cc178efe8e26637e951d295d95596d85ec5d6ca29c9d293"
+        },
+        {
+          "path": "hourly/CPLE-2022.bin",
+          "state": "CPLE-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "f29f68293fd772e2f1b4a4028792429f052fd255a3b169a6b3f6045db4ad67fd"
+        },
+        {
+          "path": "hourly/CPLE-2023.bin",
+          "state": "CPLE-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "a168c21ca8a094e430959f1fb556e1703ef63aefae1477e10638e1d1da729522"
+        },
+        {
+          "path": "hourly/CPLE-2024.bin",
+          "state": "CPLE-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "d8ad55be5e77f67e22bd591b0adc1fb15967e7db058fb77c75e6ad67d5f0169b"
+        },
+        {
+          "path": "hourly/CPLE-2025.bin",
+          "state": "CPLE-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "cf192440ea1d122ec33f878a8613dcace9929ffc097588e80ababce044fb39f1"
+        },
+        {
+          "path": "hourly/CPLE-2026.bin",
+          "state": "CPLE-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "3f8eb3a481d00d4539f54662764a6e9e7a82ecd8d59a945e2866262e80f50a06"
+        },
+        {
+          "path": "hourly/CPLW-2018.bin",
+          "state": "CPLW-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "85d9396e07ca48c443c466bfea2ba41cdb95ec80f9162e335342704ae719ab8a"
+        },
+        {
+          "path": "hourly/CPLW-2019.bin",
+          "state": "CPLW-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "2de7da5e42268cb78c136bfc381a9063ad0e3a7cebf2aef4258daaa801947504"
+        },
+        {
+          "path": "hourly/CPLW-2020.bin",
+          "state": "CPLW-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "433a32d55417c778ef4722590de46d5d0f9780166dca34fc8066f8166e7d5aaf"
+        },
+        {
+          "path": "hourly/CPLW-2021.bin",
+          "state": "CPLW-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "81520f504fbd36a17bde2684eba73a982445c9bc9894fed117060f8bbea9cb0f"
+        },
+        {
+          "path": "hourly/CPLW-2022.bin",
+          "state": "CPLW-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "f6f16c60ee5e1a3c5bd3178c225a702bcf375f512b81808514539aab6947550d"
+        },
+        {
+          "path": "hourly/CPLW-2023.bin",
+          "state": "CPLW-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "53aba9dbbb8c98194910effef7b680a62194c88053eee90f71fb4e1058e1c729"
+        },
+        {
+          "path": "hourly/CPLW-2024.bin",
+          "state": "CPLW-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "f74dbb8f6f565d1ee86930780f22d1c49e16d4b5c411c5620c3dc760d4ed94e6"
+        },
+        {
+          "path": "hourly/CPLW-2025.bin",
+          "state": "CPLW-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "f2c1ef4688a04a5d7171ad49e2fd5ccd13601df68f987ebc96dbadcea3c99895"
+        },
+        {
+          "path": "hourly/CPLW-2026.bin",
+          "state": "CPLW-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "4eb13150e0410bea498f2f39f8d25081fe9b1a4433c16f286d8fd3fed65395f6"
+        },
+        {
+          "path": "hourly/DEAA-2018.bin",
+          "state": "DEAA-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "fffbfb22efc1566497a2b14aead62f4fe86fda0c413494ce7d9154b92cc8204d"
+        },
+        {
+          "path": "hourly/DEAA-2019.bin",
+          "state": "DEAA-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "da4e1280bc33d2b72c7285ee383082099870d6af16286c3abe18c059e1b31796"
+        },
+        {
+          "path": "hourly/DEAA-2020.bin",
+          "state": "DEAA-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "74569dcb343e54f723493d01c2e81e4e1202d4972ce1f7798bb40f162b7112f8"
+        },
+        {
+          "path": "hourly/DEAA-2021.bin",
+          "state": "DEAA-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "5fb8d5ca15ed36dfbdefc4c6ee0329e9d6b0e185a13d8d9fd63edf5fead4526c"
+        },
+        {
+          "path": "hourly/DEAA-2022.bin",
+          "state": "DEAA-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "9d65d233a41cfd6ba7039833b03c0e0e5d4db3715584ad57d3d2e54602df509e"
+        },
+        {
+          "path": "hourly/DEAA-2023.bin",
+          "state": "DEAA-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "696250a0bf229dfeff69c291eac6ae68fa61f7ca20b2964493e2604fc0655984"
+        },
+        {
+          "path": "hourly/DEAA-2024.bin",
+          "state": "DEAA-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "e317ab5c6f50a153169a165c35bb815a976e273e1bd5fd47a015b14ebdd38d6a"
+        },
+        {
+          "path": "hourly/DEAA-2025.bin",
+          "state": "DEAA-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "646026309df52cf533b3771ef94825b28ec1ce184fa06d0d9ad7547e1328b0f7"
+        },
+        {
+          "path": "hourly/DEAA-2026.bin",
+          "state": "DEAA-2026",
+          "rows": 7279,
+          "bytes": 730824,
+          "sha256": "7f03015267233105924ea34b3c0483710d62d2a4a5af187bb4e21ba47ec834f3"
+        },
+        {
+          "path": "hourly/DOPD-2018.bin",
+          "state": "DOPD-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "f848a89904d423e7981aa661e093ff9864578b9a5e43a4390bffb6c239f4d09d"
+        },
+        {
+          "path": "hourly/DOPD-2019.bin",
+          "state": "DOPD-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "22ba440eab1119b36d9d8a604cd821717d737ab6506494176445376322b1ac60"
+        },
+        {
+          "path": "hourly/DOPD-2020.bin",
+          "state": "DOPD-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "155d9ffb70e687bbd4f0f395267989346cef0cd580660128a135244ef6adf375"
+        },
+        {
+          "path": "hourly/DOPD-2021.bin",
+          "state": "DOPD-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "6330640e5ab1f00745bed64327ec7356517bfc617f07c5d90a9e67d6c8f36bfb"
+        },
+        {
+          "path": "hourly/DOPD-2022.bin",
+          "state": "DOPD-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "e7098c0f475bf0bb5359d7714e2a84fb35cd0bd9af63a6fdb205ed56139995eb"
+        },
+        {
+          "path": "hourly/DOPD-2023.bin",
+          "state": "DOPD-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "9f5db936e22e7a03492c7652f752af939f28568e7db76583bd9cf85a67ec9cc8"
+        },
+        {
+          "path": "hourly/DOPD-2024.bin",
+          "state": "DOPD-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "ff46d08089a8b5cb55018529fa0cd772ba2764da894d7b0e6ddf3264239ccf6f"
+        },
+        {
+          "path": "hourly/DOPD-2025.bin",
+          "state": "DOPD-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "6224ce0889f1a7e6c8912830d47a2ecf40fe26d171a48a75e34b85e1b5a6d2df"
+        },
+        {
+          "path": "hourly/DOPD-2026.bin",
+          "state": "DOPD-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "58a3f677852b99fd4983167434a9eee83da8575091c1f59a5f4912d21888bbeb"
+        },
+        {
+          "path": "hourly/DUK-2018.bin",
+          "state": "DUK-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "fa4cd4ee98461b9864fc6fb48f15a362ffaab91bd468f424fd648fe0272e79b0"
+        },
+        {
+          "path": "hourly/DUK-2019.bin",
+          "state": "DUK-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "30b4965e96dd9e650c5a419538812ae5798727bde3e57009bd1116d7c3f56304"
+        },
+        {
+          "path": "hourly/DUK-2020.bin",
+          "state": "DUK-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "6b37fcaf9d2bb41029cdd3b9fea1440dc70a8589291a1649e4015b2c13db017f"
+        },
+        {
+          "path": "hourly/DUK-2021.bin",
+          "state": "DUK-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "4e1be354de06bdd9d0b69cf27fac6ae16eab76aa2f1bc77eaf213144971f374f"
+        },
+        {
+          "path": "hourly/DUK-2022.bin",
+          "state": "DUK-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "7ef6399c8ff1c1f76ab4b9c2d36b5f7667838836dfc6231a759d842b667f332b"
+        },
+        {
+          "path": "hourly/DUK-2023.bin",
+          "state": "DUK-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "ad38f461d569c686f2318cfb337de236a6885436ff4160a1fec83e12a5350012"
+        },
+        {
+          "path": "hourly/DUK-2024.bin",
+          "state": "DUK-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "d60b7276b0056c3b6322b1b8ed6ca5c36219aa1531fc3c9e553b8b06a7705397"
+        },
+        {
+          "path": "hourly/DUK-2025.bin",
+          "state": "DUK-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "b8a853b58dd8a39a6daeccdd5e23991b5c8bd32c0de5896c6d9b75973a82f474"
+        },
+        {
+          "path": "hourly/DUK-2026.bin",
+          "state": "DUK-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "ee01d6faaf07beeb3a7ccb17bf442632e4b974dfd415ee292d73718ddc15a6c6"
+        },
+        {
+          "path": "hourly/EEI-2018.bin",
+          "state": "EEI-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "b1093a79036ffc77c49e3c1fa1b78e9fb5b01abbcc15374cb063230ab4599bb8"
+        },
+        {
+          "path": "hourly/EEI-2019.bin",
+          "state": "EEI-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "a1f799355ef9e6bccbe7829dfe9241bce6c7657f5c183fdd16d8c95e79c30872"
+        },
+        {
+          "path": "hourly/EEI-2020.bin",
+          "state": "EEI-2020",
+          "rows": 1422,
+          "bytes": 144984,
+          "sha256": "1478ca2b01611c36c1fe84c597e0e60e4aa7d7c9dee10213148ea5ca51cb4cd3"
+        },
+        {
+          "path": "hourly/EPE-2018.bin",
+          "state": "EPE-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "d74b86a80224f2c3fa4c8e7a1df0d8af89d17438fd47802abe166d58511c26c3"
+        },
+        {
+          "path": "hourly/EPE-2019.bin",
+          "state": "EPE-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "97667754d17f7aeb14b5196d82d89ff1d281f2828bf2db605af2597d85091a80"
+        },
+        {
+          "path": "hourly/EPE-2020.bin",
+          "state": "EPE-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "3a54cad3a3b24849269735e05d95481c88bed1bd404f9f633bb562cbc09a1650"
+        },
+        {
+          "path": "hourly/EPE-2021.bin",
+          "state": "EPE-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "a14780228109ef7a619c07968f2012146e9fdd25f92b196676850f91bad580d1"
+        },
+        {
+          "path": "hourly/EPE-2022.bin",
+          "state": "EPE-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "7dac2c614b3d150ef5113f81aa9d4c567a54799eb4dfde360ad68cf7e9c87337"
+        },
+        {
+          "path": "hourly/EPE-2023.bin",
+          "state": "EPE-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "e9c1abcf56057f2a9c54299c32d2a5669c0543acb7d8a8c8cfd630604931bd0c"
+        },
+        {
+          "path": "hourly/EPE-2024.bin",
+          "state": "EPE-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "5b334b9aecb5624ecfc7cc4577217cf9c180ade187e0fd667f652b32b546c555"
+        },
+        {
+          "path": "hourly/EPE-2025.bin",
+          "state": "EPE-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "576a9529523a69a9348eee948b0ac3e13c0d5dc42cb8ed322fbb2653c4d575b3"
+        },
+        {
+          "path": "hourly/EPE-2026.bin",
+          "state": "EPE-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "8c404691f7cc5fd8394bdff7cc0cba576558c1eab952a4f1e18e37db6dcc84d6"
+        },
+        {
+          "path": "hourly/ERCO-2018.bin",
+          "state": "ERCO-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "25b0437bc3f8cdb85addf5992693e9e08fb33be7832f678e4953b8c7567c07d2"
+        },
+        {
+          "path": "hourly/ERCO-2019.bin",
+          "state": "ERCO-2019",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "02671564f2552dd2795a857459c934a0eb761a8f4738f4178b759612de4f1a82"
+        },
+        {
+          "path": "hourly/ERCO-2020.bin",
+          "state": "ERCO-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "d44d2abd1b4b880c9fbde7e7f6aeb920db87bc612033643b768009d0904c36e7"
+        },
+        {
+          "path": "hourly/ERCO-2021.bin",
+          "state": "ERCO-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "6898cde0ce77312e8f81443afda33afea744a37f7f7f36dcaf1bb927c634f38c"
+        },
+        {
+          "path": "hourly/ERCO-2022.bin",
+          "state": "ERCO-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "d52afc6efa076208b2c0ccc087bf0c4ac6c57bffdcc11253eb29882b7cedea20"
+        },
+        {
+          "path": "hourly/ERCO-2023.bin",
+          "state": "ERCO-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "5ac0a81f4eb895e1a4bb2797c625f97a8135ab8ef840892022d5c961a2909d46"
+        },
+        {
+          "path": "hourly/ERCO-2024.bin",
+          "state": "ERCO-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "1249c7d8e43df5fb25f758fe3047b349d2577b56ba759c8fddd3445b67a6705c"
+        },
+        {
+          "path": "hourly/ERCO-2025.bin",
+          "state": "ERCO-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "1d1b4a98c84d9c049d4d8b05409845af5084f019f6cbbb585c3f91cd60b16728"
+        },
+        {
+          "path": "hourly/ERCO-2026.bin",
+          "state": "ERCO-2026",
+          "rows": 7301,
+          "bytes": 733016,
+          "sha256": "2f1e7a45ad11fb405e101bca88f81f0c70b44c4a5c1055d8b1e81d5c46521db5"
+        },
+        {
+          "path": "hourly/FMPP-2018.bin",
+          "state": "FMPP-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "a95745241d2b95bcde5930d2ce2bee54d1bdad78938d186c6f60d7f77b16e8e7"
+        },
+        {
+          "path": "hourly/FMPP-2019.bin",
+          "state": "FMPP-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "719876562439735111efd6a27675cbb73afa567d26417da106c6aa24ea1cf12d"
+        },
+        {
+          "path": "hourly/FMPP-2020.bin",
+          "state": "FMPP-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "f61e55b58a4828bc53b05ffb313678caa311f2b38d73f27e5a623c5bb189b2ef"
+        },
+        {
+          "path": "hourly/FMPP-2021.bin",
+          "state": "FMPP-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "e065cca03c2c2c972bd19bb2bf101f03cabe27293cda9940f2e506a7a5b6a8fd"
+        },
+        {
+          "path": "hourly/FMPP-2022.bin",
+          "state": "FMPP-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "3570d583a154a96168eb51bce00e70f38d8c141ae898871ca4eb36f3e782b178"
+        },
+        {
+          "path": "hourly/FMPP-2023.bin",
+          "state": "FMPP-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "864c18498707905fdda724bdd4477f9d173edaa742bac7a4510a89379b0e47cb"
+        },
+        {
+          "path": "hourly/FMPP-2024.bin",
+          "state": "FMPP-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "206df740700a6fe74a085450fc6bc750cc965cbaae13c3f10e41d7272426ff20"
+        },
+        {
+          "path": "hourly/FMPP-2025.bin",
+          "state": "FMPP-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "bbe5170c7013b36e1432c0c6cd0d96bf54bf22df5305b40ab7e6ff7614971740"
+        },
+        {
+          "path": "hourly/FMPP-2026.bin",
+          "state": "FMPP-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "6b78ef1cdf1f553a95848518dbf968676bbc06c92cfed1541672c54b926eb9b5"
+        },
+        {
+          "path": "hourly/FPC-2018.bin",
+          "state": "FPC-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "373c53a74ad2ff71039e89f7c67057ea843f3ed8e69d34a2a309eb220da4f6cb"
+        },
+        {
+          "path": "hourly/FPC-2019.bin",
+          "state": "FPC-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "4ac9c10319932c95a693ab2ac2d833315e238c82672ab68d259bace00e47ca0b"
+        },
+        {
+          "path": "hourly/FPC-2020.bin",
+          "state": "FPC-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "8096b0f4d78e14b4f5b382f6c2dad9355084088dc3f6961721e9062af22c7448"
+        },
+        {
+          "path": "hourly/FPC-2021.bin",
+          "state": "FPC-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "f473fcf1ba828317bf54ef0dffbedb12445b7e35eedf2277b311f482b0f7a62a"
+        },
+        {
+          "path": "hourly/FPC-2022.bin",
+          "state": "FPC-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "bf32c4888e7f97f25182d1e8fe07f075e3469b7ee88c1eef278796baaaebb6e8"
+        },
+        {
+          "path": "hourly/FPC-2023.bin",
+          "state": "FPC-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "633b0e1cc305b15d6561c9ad1f815b382fd67e24701b6245351bb3382edacb06"
+        },
+        {
+          "path": "hourly/FPC-2024.bin",
+          "state": "FPC-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "811d8953c23021b94cc8837de1d7881edf1f19789f81066723ab14902fd36a49"
+        },
+        {
+          "path": "hourly/FPC-2025.bin",
+          "state": "FPC-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "0f21cbb1c996f8425678c018ba261f0baaa5195f12231e760fcac0063ed70a06"
+        },
+        {
+          "path": "hourly/FPC-2026.bin",
+          "state": "FPC-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "f5c3822a799b371bb4832bd46404804be30b3d29a2b92abfcbace64d9087b3a6"
+        },
+        {
+          "path": "hourly/FPL-2018.bin",
+          "state": "FPL-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "fd386198a5018ee57e0b777651c3cc3b4c409cef7e9eecff701b70acd03603ac"
+        },
+        {
+          "path": "hourly/FPL-2019.bin",
+          "state": "FPL-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "bea6919375a98606ee0dd074f6dc8cb0a14c6f9c6d3cd61d376a4df56c0f7b53"
+        },
+        {
+          "path": "hourly/FPL-2020.bin",
+          "state": "FPL-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "dbfb156b6c83aa43aa38f5df359f5edf108c1c733fadfa57dc21e1f15c002078"
+        },
+        {
+          "path": "hourly/FPL-2021.bin",
+          "state": "FPL-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "842142544a37367ee61d7772e1e70fcb625186f4b6c47239ac3686f4a1f2f07a"
+        },
+        {
+          "path": "hourly/FPL-2022.bin",
+          "state": "FPL-2022",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "0b161c276e81f200057b6d3e954951364862855b01b70cf770d3478e7e45d146"
+        },
+        {
+          "path": "hourly/FPL-2023.bin",
+          "state": "FPL-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "58a94ac2a48d62b47153a034ac9a7419c7d47408f3249d59b4b44d5572dccfd1"
+        },
+        {
+          "path": "hourly/FPL-2024.bin",
+          "state": "FPL-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "2f8191e8212d0e77c2bee28958ceb25649a9d7f0e2f4f8356736e5e57b3faacb"
+        },
+        {
+          "path": "hourly/FPL-2025.bin",
+          "state": "FPL-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "d5f10cfd3bd9f6ceb613197252b83b95d1e851e5bdaefde46c87c793f23cc9c2"
+        },
+        {
+          "path": "hourly/FPL-2026.bin",
+          "state": "FPL-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "f580c27124a0bd98dcd22ecd2e5032f501316b5f949e96754d9c036550242559"
+        },
+        {
+          "path": "hourly/GCPD-2018.bin",
+          "state": "GCPD-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "3b96b2e103522daf15f6aa072caac4846eb5946f86ae8fe581604015b839241c"
+        },
+        {
+          "path": "hourly/GCPD-2019.bin",
+          "state": "GCPD-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "8c3f910e9e9e6fe64100256203d414a18f317a2d2801017c130f730e9ca357ab"
+        },
+        {
+          "path": "hourly/GCPD-2020.bin",
+          "state": "GCPD-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "f516146ff83401044991689cad30d2312f35f95e690e686f69980a7c5c9443df"
+        },
+        {
+          "path": "hourly/GCPD-2021.bin",
+          "state": "GCPD-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "bfb151f4186781fe4eb051bb1fb48eb85dfbf6bbdb8da5747133f346aa783c4e"
+        },
+        {
+          "path": "hourly/GCPD-2022.bin",
+          "state": "GCPD-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "7e359862caac90b2672a2100bf8ef20ecf0b16252da98aeb5484d0bdac6485ef"
+        },
+        {
+          "path": "hourly/GCPD-2023.bin",
+          "state": "GCPD-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "13d35dcbe8d8c2e48c4c27bc127966c9bfafdb7f745ed71620ac7591d0c5f925"
+        },
+        {
+          "path": "hourly/GCPD-2024.bin",
+          "state": "GCPD-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "9d8d58f078ba8f27149e73b373abaee7f2f4fb9fe5af26bd74d2243c49665ab3"
+        },
+        {
+          "path": "hourly/GCPD-2025.bin",
+          "state": "GCPD-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "3c06cda4a744bd7533a89ad9d2466ed6b44abe51d7e96cf74291d0402b07b9ea"
+        },
+        {
+          "path": "hourly/GCPD-2026.bin",
+          "state": "GCPD-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "cd420bd6a1e70ba23816c343e1d823673100c6737abd8ded77b43f4bbde187c6"
+        },
+        {
+          "path": "hourly/GLHB-2020.bin",
+          "state": "GLHB-2020",
+          "rows": 7362,
+          "bytes": 739016,
+          "sha256": "eebe59e3edaddd8a5da7fc098772f1cf97bfd482d76699029da97c12a2f9dfdd"
+        },
+        {
+          "path": "hourly/GLHB-2021.bin",
+          "state": "GLHB-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "eafbc17074d92b6d1b69c1a7e859a931afa0298cfc6caa3c93a57d826a9b31f6"
+        },
+        {
+          "path": "hourly/GLHB-2022.bin",
+          "state": "GLHB-2022",
+          "rows": 5837,
+          "bytes": 586616,
+          "sha256": "758c2bf8921c69d2d4e512be6f2c30e322709e871edd0d9c20975a8f8ce277c2"
+        },
+        {
+          "path": "hourly/GRID-2018.bin",
+          "state": "GRID-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "93294b809c6264a8b5177643f7ecd5638890412f60ecebcff8bf393791a00d62"
+        },
+        {
+          "path": "hourly/GRID-2019.bin",
+          "state": "GRID-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "9efc54ca9d7a75e43e4a5271b6344148b5217b09421ba3b1ab8f049f72e54ff6"
+        },
+        {
+          "path": "hourly/GRID-2020.bin",
+          "state": "GRID-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "7b03f72392a9917049a970f61dd1ab3e396c48b414cd678c24bcc5d9d340baf3"
+        },
+        {
+          "path": "hourly/GRID-2021.bin",
+          "state": "GRID-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "79c4b5d6a50587231e60fa4bf04106c2e7a4aea98903703ad05aeb141665cfde"
+        },
+        {
+          "path": "hourly/GRID-2022.bin",
+          "state": "GRID-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "6e53fa849ac1c905b0aa717f5ff3b803f92af4a7dd9163cff28c9d8a98938eb6"
+        },
+        {
+          "path": "hourly/GRID-2023.bin",
+          "state": "GRID-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "fc5b4b18687f69d351483d8a260521beec51ff5fd959b9312ed378cd449b785e"
+        },
+        {
+          "path": "hourly/GRID-2024.bin",
+          "state": "GRID-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "fffba38bcbac3bd6f5b3b728b8f75d4cbdd17a1c3d80f927f7e96392590cc1cc"
+        },
+        {
+          "path": "hourly/GRID-2025.bin",
+          "state": "GRID-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "5b6602fc68917d65f317b134099d0fa5bd1309e0535c9346e34764e1965f9b44"
+        },
+        {
+          "path": "hourly/GRID-2026.bin",
+          "state": "GRID-2026",
+          "rows": 7279,
+          "bytes": 730824,
+          "sha256": "8b5f8d6741a64fffb6275741a9c753e736d7aa6980dae964540dae5d00b798ca"
+        },
+        {
+          "path": "hourly/GRIF-2018.bin",
+          "state": "GRIF-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "a2f0449930d45d195dac00375640af670115e50db910c079d6b783bd3273d8ab"
+        },
+        {
+          "path": "hourly/GRIF-2019.bin",
+          "state": "GRIF-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "978f4286370d647bb91723df8466f0a8179efa446bec447ae5d964a97fcbb2c7"
+        },
+        {
+          "path": "hourly/GRIF-2020.bin",
+          "state": "GRIF-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "0c555135755ca045ed76da67186e6f581b89e9c9a7d261dd9d562822eef63add"
+        },
+        {
+          "path": "hourly/GRIF-2021.bin",
+          "state": "GRIF-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "70922ebb743b855a5adc15d7ca766176072a8549bb93c3f7152b4ef3b9562fcf"
+        },
+        {
+          "path": "hourly/GRIF-2022.bin",
+          "state": "GRIF-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "f6786123ffcde71b9f06ca6b69401bf0cbb05919ce4b2573eca1a8fe514f723b"
+        },
+        {
+          "path": "hourly/GRIF-2023.bin",
+          "state": "GRIF-2023",
+          "rows": 7303,
+          "bytes": 733224,
+          "sha256": "14a77b3dbb95f3dd060d7a1705e70839fb6a16ac05f58b436512412079b98ac4"
+        },
+        {
+          "path": "hourly/GVL-2018.bin",
+          "state": "GVL-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "f04f5cf557a64dd4edc4d560d60c7ff41140a3362bcc156b5123282fdef982f4"
+        },
+        {
+          "path": "hourly/GVL-2019.bin",
+          "state": "GVL-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "e725954a797c8f17eb7978a6e839bcef6391bcd44868f8e46293dc4b3d5fef3a"
+        },
+        {
+          "path": "hourly/GVL-2020.bin",
+          "state": "GVL-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "d1cc16d85c28c367987414c33faed590d3b1c126414d8b1aa04a7554533e2d21"
+        },
+        {
+          "path": "hourly/GVL-2021.bin",
+          "state": "GVL-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "823b5e89a1891c43ce813a5fa36d69b991a3011e85fed20a2e561a426d849301"
+        },
+        {
+          "path": "hourly/GVL-2022.bin",
+          "state": "GVL-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "483f3e250ba4f5bd101e61179b5a02e8e977453ea954362df7960a891226c589"
+        },
+        {
+          "path": "hourly/GVL-2023.bin",
+          "state": "GVL-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "faa42f76995c5892549433f49ae50a87a21044b4811dc0aaff8c6f93e3fea2c9"
+        },
+        {
+          "path": "hourly/GVL-2024.bin",
+          "state": "GVL-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "80f4c85d83d839ed5f74414d05a70df8fb61da4f0910d059c0330236c8446868"
+        },
+        {
+          "path": "hourly/GVL-2025.bin",
+          "state": "GVL-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "a63d61975664ae94193d381b9753853a53bb4d46791f23c7c167ab288909c472"
+        },
+        {
+          "path": "hourly/GVL-2026.bin",
+          "state": "GVL-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "f99535c06571e72fe0459f3a5f5f2747cea92ca96634280a4d8e64275faf892c"
+        },
+        {
+          "path": "hourly/GWA-2018.bin",
+          "state": "GWA-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "211c66b5c864aa4df55a4d4b3665769de6537793c330e834d41e059f67d00026"
+        },
+        {
+          "path": "hourly/GWA-2019.bin",
+          "state": "GWA-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "6be71e872146e2d1ca533949cfb81fda4fa489d719683fa309011e4d1f985e3a"
+        },
+        {
+          "path": "hourly/GWA-2020.bin",
+          "state": "GWA-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "aafee967be433ab3dcccadfb254c78e9c150f0057e894dcf9128c4ecc158080d"
+        },
+        {
+          "path": "hourly/GWA-2021.bin",
+          "state": "GWA-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "0d243ded082e86c011e4b381d0a90d2c55c3ee8c6f1664e0c37a141c2484a888"
+        },
+        {
+          "path": "hourly/GWA-2022.bin",
+          "state": "GWA-2022",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "aefbf899cbb27368ff9d655397ac9f7e27bfa9ef4a6c8d0ee0a1df52ab7c4e59"
+        },
+        {
+          "path": "hourly/GWA-2023.bin",
+          "state": "GWA-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "65d0a1d0cfa41eb0a4e10c2d6fc258b8a54167949fee9cf338ca4e140ff6a47e"
+        },
+        {
+          "path": "hourly/GWA-2024.bin",
+          "state": "GWA-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "e1e67fdb807229236c5da4b8aaf44b0f1fc0191bca11051cedd26b150da155c5"
+        },
+        {
+          "path": "hourly/GWA-2025.bin",
+          "state": "GWA-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "3d1d072f9511b6b6579f902060e443322e4ad8ff875f540214da5f9cdbbcf701"
+        },
+        {
+          "path": "hourly/GWA-2026.bin",
+          "state": "GWA-2026",
+          "rows": 7278,
+          "bytes": 730616,
+          "sha256": "d66210e2b27ed39a1fffe48ec40f8143d40b21c070b713d5b144a09f7f6a7fc5"
+        },
+        {
+          "path": "hourly/HGMA-2018.bin",
+          "state": "HGMA-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "1a89123338953cd10b47528b03666f8419230cda14fe71a3b28d0c3685a4f9e6"
+        },
+        {
+          "path": "hourly/HGMA-2019.bin",
+          "state": "HGMA-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "7edc5b3ddc03bb087a9a24b05de3f9907c6fa48b8dbeb0e5b651f08ef37efa1f"
+        },
+        {
+          "path": "hourly/HGMA-2020.bin",
+          "state": "HGMA-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "bd7d0d5f1c4bb30a84dd18ea0e22d06fa15f364859724d021e216ba6082f3ad9"
+        },
+        {
+          "path": "hourly/HGMA-2021.bin",
+          "state": "HGMA-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "1db4d1ece3bc10343d9fe3d2d1cd4f12c073d6bd6e454e66a5532ae7b2fab29f"
+        },
+        {
+          "path": "hourly/HGMA-2022.bin",
+          "state": "HGMA-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "9969c261f8496a33b8e75343a8afd69a7c1714f9421c113dad51c49a9e15a6eb"
+        },
+        {
+          "path": "hourly/HGMA-2023.bin",
+          "state": "HGMA-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "887f1bf1983f3872d7ecdc686c353980444c7afb1b49b8fdcdd37acc663eb288"
+        },
+        {
+          "path": "hourly/HGMA-2024.bin",
+          "state": "HGMA-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "6284be053b93cbb1640f3dfbdd419136b276cd7ea27e63d2b31bd473b4eba392"
+        },
+        {
+          "path": "hourly/HGMA-2025.bin",
+          "state": "HGMA-2025",
+          "rows": 3631,
+          "bytes": 366016,
+          "sha256": "167e5ec84c52ac68e35ce94dd18349520bf8f106e8bc4c2d48e6ef6c79a759aa"
+        },
+        {
+          "path": "hourly/HST-2018.bin",
+          "state": "HST-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "d0e523742748dc05011a4b54f76d4eada9837ed66a4c30c9d0cc7808bb080680"
+        },
+        {
+          "path": "hourly/HST-2019.bin",
+          "state": "HST-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "2eee7176fa8d38fabed0668fe5c4fb21385aca917d378272e23674844d6cf7ad"
+        },
+        {
+          "path": "hourly/HST-2020.bin",
+          "state": "HST-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "d2196c2c3879e67cf7d1357697819ac2a80833763bda7c3f2b007199193d5061"
+        },
+        {
+          "path": "hourly/HST-2021.bin",
+          "state": "HST-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "45c1fc5d62d411a003bdd9490e3305e5d005cdae5ad4d053fc727dc7f73ae41f"
+        },
+        {
+          "path": "hourly/HST-2022.bin",
+          "state": "HST-2022",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "63ace843b7a500c5524be98bea27f990105c734ad45871ef686fdb1f45044ba5"
+        },
+        {
+          "path": "hourly/HST-2023.bin",
+          "state": "HST-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "1cb9af5ee3b01664e41db166744fa43a4a8a386ca100cdd4655d0ce6927297ab"
+        },
+        {
+          "path": "hourly/HST-2024.bin",
+          "state": "HST-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "b2329c7d9adadb4442f52338c6e39ab24201a51cadb06d1c442547cbd9df7e71"
+        },
+        {
+          "path": "hourly/HST-2025.bin",
+          "state": "HST-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "8848506f8a0259fed9d059468486bcd48a8ae354cf4fe496d4413d9fdd57d4ba"
+        },
+        {
+          "path": "hourly/HST-2026.bin",
+          "state": "HST-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "07f380ce3e22ae1843e10a4368577640a47fd9d372f6b8c75915e89bf5b0d17c"
+        },
+        {
+          "path": "hourly/IID-2018.bin",
+          "state": "IID-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "db1d679e1da3b685b0b2bccd95048df058a81a6df906de3370652aa8b770328b"
+        },
+        {
+          "path": "hourly/IID-2019.bin",
+          "state": "IID-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "fde71e49395124edfb1e3c519875fad2cc68f85655efd3ef0149871c04e8b2a4"
+        },
+        {
+          "path": "hourly/IID-2020.bin",
+          "state": "IID-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "b7d080cb1bb441396f3e6e02f038aa4a307f1440b12467eb4fe6ebf2fbf3147f"
+        },
+        {
+          "path": "hourly/IID-2021.bin",
+          "state": "IID-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "9e688791b27dd4d5d2d8185940451cfe85d4e1ce4ed0eb25b33b8610db49a02e"
+        },
+        {
+          "path": "hourly/IID-2022.bin",
+          "state": "IID-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "bd50568c2ff6f7bfde1caad2a1ff56c0904cf440498051abc5a63fe2faabf745"
+        },
+        {
+          "path": "hourly/IID-2023.bin",
+          "state": "IID-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "8fc96410d659a97de8b1adaa3e5c083f84b3e2137c712069679f3e0e69c614a5"
+        },
+        {
+          "path": "hourly/IID-2024.bin",
+          "state": "IID-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "8bc3763e90d7e6b78c96c0b128e12191ba4a1b06c45745dc61b4d4b05b7bde8c"
+        },
+        {
+          "path": "hourly/IID-2025.bin",
+          "state": "IID-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "c0daed3e250fa0c985eee8765bcf857b44f4c78f849fd1a374372e98752356c0"
+        },
+        {
+          "path": "hourly/IID-2026.bin",
+          "state": "IID-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "127735a462a07cd75c12f7fb7b859798564c18ed0e5444d57134de21690067b0"
+        },
+        {
+          "path": "hourly/IPCO-2018.bin",
+          "state": "IPCO-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "fbcaef9ddaa2c9796fbae1c53362df48e4b9ed06a64ed081678ca44411f7cd4f"
+        },
+        {
+          "path": "hourly/IPCO-2019.bin",
+          "state": "IPCO-2019",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "a732cabd21abf413bc107565527bc7301144cd77bf259b6b54df0a0045448896"
+        },
+        {
+          "path": "hourly/IPCO-2020.bin",
+          "state": "IPCO-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "339780570d17313f2e1964f791682c9776b175d4d2bebba38c99261adb94e321"
+        },
+        {
+          "path": "hourly/IPCO-2021.bin",
+          "state": "IPCO-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "dbd142e4cab494adee8a8f26c6c10a0e1f3c72928ffa77d72a6a5ab8b3087fe1"
+        },
+        {
+          "path": "hourly/IPCO-2022.bin",
+          "state": "IPCO-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "8c12540215d8c5febdb453b9c6de2b8ac61d955a8dc91fde89a692a8bfd1d364"
+        },
+        {
+          "path": "hourly/IPCO-2023.bin",
+          "state": "IPCO-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "fbcd0c3905b63215546d3b408f0846e4231a2252df4ad4bc1fab57587733b0da"
+        },
+        {
+          "path": "hourly/IPCO-2024.bin",
+          "state": "IPCO-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "232fc1741434fcf323e73bbbf398d7d6695adf390443e273e13abf95ddd4e723"
+        },
+        {
+          "path": "hourly/IPCO-2025.bin",
+          "state": "IPCO-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "b73b3443b7dc2054bb06e2c0ff892b69d77b6de6e9e6a82092e703e914ece842"
+        },
+        {
+          "path": "hourly/IPCO-2026.bin",
+          "state": "IPCO-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "29e8924f7216fa9f713ce542e6ea68416eefdd799bf384adfcc4d408cd87d3db"
+        },
+        {
+          "path": "hourly/ISNE-2018.bin",
+          "state": "ISNE-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "fc0a92d926105afbbfbdf513ca9c6d146e812de1706bc4c30d255364c8108970"
+        },
+        {
+          "path": "hourly/ISNE-2019.bin",
+          "state": "ISNE-2019",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "a6126eb272828e4f26ad03c4fa088073e3db559b5d4d015f57d6096cf5901cac"
+        },
+        {
+          "path": "hourly/ISNE-2020.bin",
+          "state": "ISNE-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "0bd45b50d53e4680a3f6f5aa180eae99af4a82be0a98e79417f07b9c0f55a5e4"
+        },
+        {
+          "path": "hourly/ISNE-2021.bin",
+          "state": "ISNE-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "23da967870163c377c2308cebfb1d86b2d9ec303833e5643c36a2301ec657c0f"
+        },
+        {
+          "path": "hourly/ISNE-2022.bin",
+          "state": "ISNE-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "928c9a57c6a9af9bca0336e36e4de1e44e007ce26462f2b532ae7d7a6c31a244"
+        },
+        {
+          "path": "hourly/ISNE-2023.bin",
+          "state": "ISNE-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "d37aff3101687d2400dc187b652f0215500f7cabaa1828d33994ed378da716a9"
+        },
+        {
+          "path": "hourly/ISNE-2024.bin",
+          "state": "ISNE-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "78833956b3a063c16f9ea670c9464ee4b82e2b97b818cdda19d5caf6ee6288e1"
+        },
+        {
+          "path": "hourly/ISNE-2025.bin",
+          "state": "ISNE-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "daed4fe78c35f4727c4b5464a346d9ffd202100389b07dc0500719e8d89d3d96"
+        },
+        {
+          "path": "hourly/ISNE-2026.bin",
+          "state": "ISNE-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "fe7b47aab32c9873dad44678db8d13144fbbd933d803519f76bba1ea8ee41bee"
+        },
+        {
+          "path": "hourly/JEA-2018.bin",
+          "state": "JEA-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "a168594f7d901b13dc51b1cc725d8a7f5b4bbbfd5071a38cc1e04da860de3a7f"
+        },
+        {
+          "path": "hourly/JEA-2019.bin",
+          "state": "JEA-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "3ae9c35a314e4c8190acdd75f399a6cacc672f2caf63284126703b249db7bed5"
+        },
+        {
+          "path": "hourly/JEA-2020.bin",
+          "state": "JEA-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "56df15644b8cfb233976b7b7a3453288bb5b7b83b1c64d2aa9e6b29fa7ced75c"
+        },
+        {
+          "path": "hourly/JEA-2021.bin",
+          "state": "JEA-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "7d8ed86004975a856cfd383ece62e70edb1ba4a9830cda0dc1511bda36b03107"
+        },
+        {
+          "path": "hourly/JEA-2022.bin",
+          "state": "JEA-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "8274d45dcd1280d7f70123d8edf109dfd9dc64265c95cccc3fb28a9e0bdf8386"
+        },
+        {
+          "path": "hourly/JEA-2023.bin",
+          "state": "JEA-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "257ed4b9b9ca75cde42fb0d0bd05bd46ae4a7ec31c58627db2707b4073d712e1"
+        },
+        {
+          "path": "hourly/JEA-2024.bin",
+          "state": "JEA-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "5592dbced70f200617cd84eb33bd7be0440495de1f9ed3f812f378945863c445"
+        },
+        {
+          "path": "hourly/JEA-2025.bin",
+          "state": "JEA-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "c1168db7e1c5a1720da29a081783d0ef9ab49bf1c09279f06c6079cc13741720"
+        },
+        {
+          "path": "hourly/JEA-2026.bin",
+          "state": "JEA-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "86324f99181ee4b17d904de8d8ff6ed3953514c0e3e693357cd5c654ff6314a0"
+        },
+        {
+          "path": "hourly/LDWP-2018.bin",
+          "state": "LDWP-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "75acc66662fb0e92e8511659a0bd4e9c8f689e3b002d5608278d237bfa0dccfc"
+        },
+        {
+          "path": "hourly/LDWP-2019.bin",
+          "state": "LDWP-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "0119bf0c6da001032c9914964a98a88d919c4c4748012a69e717ef33eba513d1"
+        },
+        {
+          "path": "hourly/LDWP-2020.bin",
+          "state": "LDWP-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "8e91b746ebe1c684476f5f890f2b7a0b850b43ae41494ecbf3f87b431612e02c"
+        },
+        {
+          "path": "hourly/LDWP-2021.bin",
+          "state": "LDWP-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "d729b4005e4f495ccebb615e55f65512902a49f0416bd63ec0ec8183e7308594"
+        },
+        {
+          "path": "hourly/LDWP-2022.bin",
+          "state": "LDWP-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "76f5866c9fc546f4b6ee41c5b9b210a68d196989e1fa5a5fb59ece573379089a"
+        },
+        {
+          "path": "hourly/LDWP-2023.bin",
+          "state": "LDWP-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "f0e8dec9451c4298a4dd5ede576f02da48d7c185392bc772eb3132b1b404b7f0"
+        },
+        {
+          "path": "hourly/LDWP-2024.bin",
+          "state": "LDWP-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "e2c5f7da45a18d938087c4d102bc5568333379e7dab568903b6f993d261ae421"
+        },
+        {
+          "path": "hourly/LDWP-2025.bin",
+          "state": "LDWP-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "f91f7d92fe01171a356719bfeaf45cf57731266ca1e53cdeadc2fc599148d17b"
+        },
+        {
+          "path": "hourly/LDWP-2026.bin",
+          "state": "LDWP-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "fd65723814f9a78a57cfea9bb38090b3f59004bdd48fb6620b41ccd45ec2f89a"
+        },
+        {
+          "path": "hourly/LGEE-2018.bin",
+          "state": "LGEE-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "a597b1cfc5187ad16c6a9f7fe8443870541804eb093a649ab2e8d40600455d29"
+        },
+        {
+          "path": "hourly/LGEE-2019.bin",
+          "state": "LGEE-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "832b9360ee11bcb3846aaf073a27e81b96f870cf532018a76bd7873025ad7af4"
+        },
+        {
+          "path": "hourly/LGEE-2020.bin",
+          "state": "LGEE-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "122761e35c3b04d0842c96a3a91cd808dafa1b978e0d927ea10af070b95f86f8"
+        },
+        {
+          "path": "hourly/LGEE-2021.bin",
+          "state": "LGEE-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "12daa741db4f814543f5d3a2d561e6eaaa5b13abbe90564f5af4dec9578f0898"
+        },
+        {
+          "path": "hourly/LGEE-2022.bin",
+          "state": "LGEE-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "8fb484d86b077bb671cb8d8eb6995cd57ce04264807f7b57363ba6bdf823dc38"
+        },
+        {
+          "path": "hourly/LGEE-2023.bin",
+          "state": "LGEE-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "83a57cd4b2efd54edb3c9371ea8b68cbdb2804f87aba43aaa69c98eb7a46f521"
+        },
+        {
+          "path": "hourly/LGEE-2024.bin",
+          "state": "LGEE-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "d91e7925a65eaa1bdad99ea3a0aee110ee484c909bcfd84396bbbde515c8046c"
+        },
+        {
+          "path": "hourly/LGEE-2025.bin",
+          "state": "LGEE-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "571b9e2fd4522e673502c0ea2a022d3a2bad378a5c26c1c34cce4a2cb9195412"
+        },
+        {
+          "path": "hourly/LGEE-2026.bin",
+          "state": "LGEE-2026",
+          "rows": 7301,
+          "bytes": 733016,
+          "sha256": "80bd19f0d771f9dd961a2892ea627bcd02f0686e040cb73e63e5f4f9608e2f1b"
+        },
+        {
+          "path": "hourly/MISO-2018.bin",
+          "state": "MISO-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "a1ed5b79f156a6b0861324acd75092445e9976923393fea55555de2d40bed3a3"
+        },
+        {
+          "path": "hourly/MISO-2019.bin",
+          "state": "MISO-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "111636c39da2371b65105a2a0dbe6d2c4b316a048e9201adf49af7581c8ee484"
+        },
+        {
+          "path": "hourly/MISO-2020.bin",
+          "state": "MISO-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "6501588fbe04a965eb88295485aa9bd4f2b3f666553f038a6f2f437842b357b6"
+        },
+        {
+          "path": "hourly/MISO-2021.bin",
+          "state": "MISO-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "f7cc434155844958e713c9e2d748f832638eacd0ff676d3cba65e1b6c3750a5f"
+        },
+        {
+          "path": "hourly/MISO-2022.bin",
+          "state": "MISO-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "ec1591261144ae0b5d6036eaf7f080555718cceebed63a6be157b694ea94bd1d"
+        },
+        {
+          "path": "hourly/MISO-2023.bin",
+          "state": "MISO-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "4c9831202d5e649e4ff1b380365eb2b4fc9cadceb8d1fcdd53f61974dcae95f0"
+        },
+        {
+          "path": "hourly/MISO-2024.bin",
+          "state": "MISO-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "ce078574df14e86952fd0794d916d63a2cfb8c930b6f62df627639e91a1e3878"
+        },
+        {
+          "path": "hourly/MISO-2025.bin",
+          "state": "MISO-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "1d65cde519e7612ccce7032fd5e8329b8843f30a8c9d7a96a4577dda4d788df2"
+        },
+        {
+          "path": "hourly/MISO-2026.bin",
+          "state": "MISO-2026",
+          "rows": 7301,
+          "bytes": 733016,
+          "sha256": "14bdc0b0a08410ef45d0f588ceb732ddc19873080b298f81955b6e6f86792028"
+        },
+        {
+          "path": "hourly/NEVP-2018.bin",
+          "state": "NEVP-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "b37cbde33fc55518a87bef3453e836ec4f7e8e5ac783d20035ed91e4f96ca856"
+        },
+        {
+          "path": "hourly/NEVP-2019.bin",
+          "state": "NEVP-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "fb079f0296ab2cef5537dc55b41ff4701398fec826bed1a634ba09700d93fdb6"
+        },
+        {
+          "path": "hourly/NEVP-2020.bin",
+          "state": "NEVP-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "07c27468be97cfe252eb818ab8d2497703f1bfae7bf14dca165fc3002b2eefca"
+        },
+        {
+          "path": "hourly/NEVP-2021.bin",
+          "state": "NEVP-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "df33ff62c7d6e17a978bcc0bae478e58108e210da702590c5dd367c24c21b12b"
+        },
+        {
+          "path": "hourly/NEVP-2022.bin",
+          "state": "NEVP-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "bfcb4e347cb868c1c50347b80c02b02984cf97c39a60bbfe244f342c455c478e"
+        },
+        {
+          "path": "hourly/NEVP-2023.bin",
+          "state": "NEVP-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "11b2f631e688fe4d795c661e9103ad70d3fd6a7814e8cc54aef107cc450b0ea8"
+        },
+        {
+          "path": "hourly/NEVP-2024.bin",
+          "state": "NEVP-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "d51e300184e75800706fb0a8ff7a13d35d7780f2a8ed96231c2d7e3c7800c51f"
+        },
+        {
+          "path": "hourly/NEVP-2025.bin",
+          "state": "NEVP-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "c39b50a2fd8301fd5a483dbecca72334cc9eda9bc9594ea92a7b7d8821ae4ef3"
+        },
+        {
+          "path": "hourly/NEVP-2026.bin",
+          "state": "NEVP-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "bb1317dc4968cd6ac995299fa9598ead1f7d0b5af822c5994dce59e68eda46e2"
+        },
+        {
+          "path": "hourly/NSB-2018.bin",
+          "state": "NSB-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "5783cb914162bcc4c66c569ff8d143331cd0dca38cb5120f47122c6520a29aa0"
+        },
+        {
+          "path": "hourly/NSB-2019.bin",
+          "state": "NSB-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "f3fea3ae5fa2c3ff326d1dbb9eceffcbb7f3688a53fbd17a61a06bfe334fe662"
+        },
+        {
+          "path": "hourly/NSB-2020.bin",
+          "state": "NSB-2020",
+          "rows": 173,
+          "bytes": 20128,
+          "sha256": "bdebfaee3383923b1268371cb12e6e24dd01564d7ca518d1d548a32e50427601"
+        },
+        {
+          "path": "hourly/NWMT-2018.bin",
+          "state": "NWMT-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "9cd728d9c04cdbb2635451204c7e531ed2e922a515f5291d4a186912aab86764"
+        },
+        {
+          "path": "hourly/NWMT-2019.bin",
+          "state": "NWMT-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "08d531741058d51408a00c9341cb127176986f8e296c922c4ba54feab1709d73"
+        },
+        {
+          "path": "hourly/NWMT-2020.bin",
+          "state": "NWMT-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "a5a3b3926514d5a4049fdba66fabc2667561fcd1fffb51a979d6b198554a5115"
+        },
+        {
+          "path": "hourly/NWMT-2021.bin",
+          "state": "NWMT-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "20e02e261418f569eadeff507e8b09c82bcbc0393f20c96fdf322dcb1c16f997"
+        },
+        {
+          "path": "hourly/NWMT-2022.bin",
+          "state": "NWMT-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "a593484f055a9331cae84c40481adc82ed1cf8816af35bcc6bdc36d130820d57"
+        },
+        {
+          "path": "hourly/NWMT-2023.bin",
+          "state": "NWMT-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "0f86455f971a1d6ac8de842e8f15f10fff6666f36ef681f8dc617447139756ff"
+        },
+        {
+          "path": "hourly/NWMT-2024.bin",
+          "state": "NWMT-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "73d2e224c8708bdefaa9747b4a59a989176f3bcaf0e8095368774db54f947fe9"
+        },
+        {
+          "path": "hourly/NWMT-2025.bin",
+          "state": "NWMT-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "602abfac94cdcecb5ccb221daf3c6354617b0bee1594a70c31042f116336d17d"
+        },
+        {
+          "path": "hourly/NWMT-2026.bin",
+          "state": "NWMT-2026",
+          "rows": 7302,
+          "bytes": 733016,
+          "sha256": "34ee6d65180c86640f4ab564581f177ea6e70e0ba72f7cc8c94876dafb26ec3b"
+        },
+        {
+          "path": "hourly/NYIS-2018.bin",
+          "state": "NYIS-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "6a864561356c8d40d320b4af0709b1a1be5ef06093b9bac879dca3da55a5d161"
+        },
+        {
+          "path": "hourly/NYIS-2019.bin",
+          "state": "NYIS-2019",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "759639dd3cb07e8e3a4cea72665884d3d9e95a70bc8ceff2818b6aca646cc798"
+        },
+        {
+          "path": "hourly/NYIS-2020.bin",
+          "state": "NYIS-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "70a49d873f9fdbeb7c145fa7e37a89f14c8cd587846de56b91cca99407a07163"
+        },
+        {
+          "path": "hourly/NYIS-2021.bin",
+          "state": "NYIS-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "3ac9c514b0c326804c2b7aeec2e79cc3562bf74f4635ff4f6ad3ef5af83ad9ec"
+        },
+        {
+          "path": "hourly/NYIS-2022.bin",
+          "state": "NYIS-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "a6f19b803b4902434991431aad364c975aab52c7a6569f72d55649c9bfca1367"
+        },
+        {
+          "path": "hourly/NYIS-2023.bin",
+          "state": "NYIS-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "f2cc6bd8052af71d40e8970c867eb50fdb98fca3cffabb67963cab04f003f350"
+        },
+        {
+          "path": "hourly/NYIS-2024.bin",
+          "state": "NYIS-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "026efbfa22d4cf0539f88582b6e118953c42654e8396d25a008755dd3e77a06a"
+        },
+        {
+          "path": "hourly/NYIS-2025.bin",
+          "state": "NYIS-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "1b76957659fcf64e9601d13a747f8fba5912438c731d5d0d0e5d9dec00d12054"
+        },
+        {
+          "path": "hourly/NYIS-2026.bin",
+          "state": "NYIS-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "32d2d3a2f765387afe57a537c66c3e930bf693f2696c00ec6da953aab56fe43c"
+        },
+        {
+          "path": "hourly/OVEC-2018.bin",
+          "state": "OVEC-2018",
+          "rows": 3677,
+          "bytes": 370616,
+          "sha256": "4144ba3dfdb29822b57fd90e95c906eafc42397cca6d0784a2127131f2922b67"
+        },
+        {
+          "path": "hourly/PACE-2018.bin",
+          "state": "PACE-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "78f407bd198d9f5a6cca7c5cbdefd946555b33c57791bfe91c680181926718b8"
+        },
+        {
+          "path": "hourly/PACE-2019.bin",
+          "state": "PACE-2019",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "40284f0e2f25e3eabb467b4a604c55bd357f4c6d6a49a76bde0b802090305457"
+        },
+        {
+          "path": "hourly/PACE-2020.bin",
+          "state": "PACE-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "a51975f747cf33ebcff91e5d72194ac05ec6498db5b98b364ea396c81ea20cc0"
+        },
+        {
+          "path": "hourly/PACE-2021.bin",
+          "state": "PACE-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "eb52ee6edbbcc8ee784f83643ae2e8b72f82f1f39f9e3751917ae18f947da23a"
+        },
+        {
+          "path": "hourly/PACE-2022.bin",
+          "state": "PACE-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "ad97dbddac990a9441a9262bf29e2074b50e77211e03f1487c7612d97ca91587"
+        },
+        {
+          "path": "hourly/PACE-2023.bin",
+          "state": "PACE-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "59e12daff0ed57194dcfc55456fa988448e80f8ba322a1188bd828d98da63b10"
+        },
+        {
+          "path": "hourly/PACE-2024.bin",
+          "state": "PACE-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "8c62faabfe4f1b37978f238ffd3fdb300f9be09c671d12f63e3523aad0675dc0"
+        },
+        {
+          "path": "hourly/PACE-2025.bin",
+          "state": "PACE-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "a428283b516ac35535e89f6ec4a38d949639ca867ffdcd2e403bdf24bd5e4de2"
+        },
+        {
+          "path": "hourly/PACE-2026.bin",
+          "state": "PACE-2026",
+          "rows": 7302,
+          "bytes": 733016,
+          "sha256": "f4270590ce5b30148085133e657dce6a63408958e4ef1b7a4f838c57e9ea4b76"
+        },
+        {
+          "path": "hourly/PACW-2018.bin",
+          "state": "PACW-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "ca5d78fc7593bfa5b7f734116b771940febdb974fae91e4ff5e9a9fc02a5184e"
+        },
+        {
+          "path": "hourly/PACW-2019.bin",
+          "state": "PACW-2019",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "912be0c102dc1cdae485de774669cfa299e9c787190ace2542cbbe585d7c9d50"
+        },
+        {
+          "path": "hourly/PACW-2020.bin",
+          "state": "PACW-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "cf19e86ec1e5466229135c165d6171107d005048d10f6df79b6b76b7cd5895db"
+        },
+        {
+          "path": "hourly/PACW-2021.bin",
+          "state": "PACW-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "952736794b20b0efc46643fa295762f5bef096fdf33bcc6773edc729daf358a0"
+        },
+        {
+          "path": "hourly/PACW-2022.bin",
+          "state": "PACW-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "d71a8bb3fd50c0216d8a8a818b854766ccc8aad09c0b8ac1904adb1b76a9049d"
+        },
+        {
+          "path": "hourly/PACW-2023.bin",
+          "state": "PACW-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "fecb506c202546271035e46e9638faafbea4cb05c5be187de6e6418f13ce7a72"
+        },
+        {
+          "path": "hourly/PACW-2024.bin",
+          "state": "PACW-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "5c92b47b4735fe392a2f155b7324cc216ed3cec06462c1f3ef7f8fb0aab6a7f4"
+        },
+        {
+          "path": "hourly/PACW-2025.bin",
+          "state": "PACW-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "c2430588c9dcb83745c9b346fd25ea9ec90ad40766b4e77c8ddd8ea6d94c70ca"
+        },
+        {
+          "path": "hourly/PACW-2026.bin",
+          "state": "PACW-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "e6db4c8facc45ef0b55e993f36c2bee48d89097ddc9e6fcca5dc70114e1371ac"
+        },
+        {
+          "path": "hourly/PGE-2018.bin",
+          "state": "PGE-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "3d3fa895d7002c30f63e4afc6d6e2072fc272c29920dedf1cc6d651c3940d3d8"
+        },
+        {
+          "path": "hourly/PGE-2019.bin",
+          "state": "PGE-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "3ba14ecdd82303013ff9ae2074b12342a59d52191d7cf3274f44aa51499ff1f9"
+        },
+        {
+          "path": "hourly/PGE-2020.bin",
+          "state": "PGE-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "b8417ca5099cd5aeeb5a24030ecbb18f00f79957fa0deb3d0c99722b5b327c2b"
+        },
+        {
+          "path": "hourly/PGE-2021.bin",
+          "state": "PGE-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "9399b5fb0c45cdcb46d8747dea134ee257f42f9258d90c8b74fad2b9062d99df"
+        },
+        {
+          "path": "hourly/PGE-2022.bin",
+          "state": "PGE-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "35f9541f77b743f83191571c658582b20f951f3de5d31b0365f5484e0328e2c1"
+        },
+        {
+          "path": "hourly/PGE-2023.bin",
+          "state": "PGE-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "9b6edc3cc45a7532985b89e00d41c2fe186df06cfbc4551016d153b97b65cf11"
+        },
+        {
+          "path": "hourly/PGE-2024.bin",
+          "state": "PGE-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "29d9dccaca37fb9f89bbd759788344f71ad5d172d7a7cafdab3af477e4350dbd"
+        },
+        {
+          "path": "hourly/PGE-2025.bin",
+          "state": "PGE-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "9ef59cf4a9a04073ba3c3fe2d886e969370f44210ce68eff179d5d96f66c3905"
+        },
+        {
+          "path": "hourly/PGE-2026.bin",
+          "state": "PGE-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "4afdfd9c2cda81b2f3245f1e894625bdc4fca2d2daf6ba1e6a9668c9d55c5250"
+        },
+        {
+          "path": "hourly/PJM-2018.bin",
+          "state": "PJM-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "37bcff90c32603862f2d365a5b991928740aa100783fc90f18a891b39062b4c8"
+        },
+        {
+          "path": "hourly/PJM-2019.bin",
+          "state": "PJM-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "ac1eb118e65f3652fca4aa3585c6ef370ab6287cca7796085280910ed800a6aa"
+        },
+        {
+          "path": "hourly/PJM-2020.bin",
+          "state": "PJM-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "92deb69259aee912b1af94a69938c7f7a1b652bb67f58507fb4eb7429a860fbf"
+        },
+        {
+          "path": "hourly/PJM-2021.bin",
+          "state": "PJM-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "7970bd7b5227e61d03b572d6b30bebcb4569024d642205380fd0dc29dac18d4e"
+        },
+        {
+          "path": "hourly/PJM-2022.bin",
+          "state": "PJM-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "e7798a77b1742e4f5905377e43108feaccb095d2fb7117670c3bfdc6d1a35a0c"
+        },
+        {
+          "path": "hourly/PJM-2023.bin",
+          "state": "PJM-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "2d5d382db690e92f2fbfb55434987f56b545ae9e6d2989bef08bbfa061e01dd4"
+        },
+        {
+          "path": "hourly/PJM-2024.bin",
+          "state": "PJM-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "45b4cbffd031c3f2141bcb34fa5cc99a885e9a063bfc91714ae14a8d28412c28"
+        },
+        {
+          "path": "hourly/PJM-2025.bin",
+          "state": "PJM-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "b8cb83718842f434900779126cb049840511d783564e93ba15d935613ec06234"
+        },
+        {
+          "path": "hourly/PJM-2026.bin",
+          "state": "PJM-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "d9fff3f267a3fbb3e3bacd03033376eabb83611ab322777afc9a05c44f338995"
+        },
+        {
+          "path": "hourly/PNM-2018.bin",
+          "state": "PNM-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "9cf3c1a753f2ba349a3ba96b703810af11135742fdc3c6a05de46c2ae8ec8104"
+        },
+        {
+          "path": "hourly/PNM-2019.bin",
+          "state": "PNM-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "5eb2ca2a149e184f48baa5c91c2e49a0ac1835e86ffd4e6d5e44cdabc34c063b"
+        },
+        {
+          "path": "hourly/PNM-2020.bin",
+          "state": "PNM-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "645e207467a8091fd8fef4f78b1f744bc7af29928a67ccb9828c939479c4b4d9"
+        },
+        {
+          "path": "hourly/PNM-2021.bin",
+          "state": "PNM-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "5e1eef4540ef581dfd30a83a73b6c9b27ea335ef0e0ec327e81ff034e3dd97a9"
+        },
+        {
+          "path": "hourly/PNM-2022.bin",
+          "state": "PNM-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "3f41c8158825a5b84bc294023f959e3760ce6a98c08bc8b4582c7d2339edf07d"
+        },
+        {
+          "path": "hourly/PNM-2023.bin",
+          "state": "PNM-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "5ed681354c5ac239f0419c251cc59fd642a6f1bd729ba7a133c42698d96335b0"
+        },
+        {
+          "path": "hourly/PNM-2024.bin",
+          "state": "PNM-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "71322e206a3b445eaf2aa9bc8b9bfa060caf9795a1188f87464c12820ffca0e7"
+        },
+        {
+          "path": "hourly/PNM-2025.bin",
+          "state": "PNM-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "3c929a343c53dde460617c5db0c00a77bd4cad7e44bde43c3eb75a473a2b41a8"
+        },
+        {
+          "path": "hourly/PNM-2026.bin",
+          "state": "PNM-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "b4339ade1ba073d2eb215f93b9a41bc90b194663b29c82224101019bbc451b9e"
+        },
+        {
+          "path": "hourly/PSCO-2018.bin",
+          "state": "PSCO-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "ef0bc6262631a3e45239cd0ec3b9ec27b6cbfe440b7629db6444dbe8e610006c"
+        },
+        {
+          "path": "hourly/PSCO-2019.bin",
+          "state": "PSCO-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "129afa10d7154ebd8bad5e6f338244c1fb2f5f2eb9fd601425aa23e5905b331d"
+        },
+        {
+          "path": "hourly/PSCO-2020.bin",
+          "state": "PSCO-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "210772f486edac73861bc0f869b8a1a53a84bffeab3678a357ae14b280f571be"
+        },
+        {
+          "path": "hourly/PSCO-2021.bin",
+          "state": "PSCO-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "979de08d7375f4b00cd2288541aeb50db74cef18a23bae9251920ca6176c193c"
+        },
+        {
+          "path": "hourly/PSCO-2022.bin",
+          "state": "PSCO-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "aea6292548f8a569e523e8da635da3ce4fb2cf9667cd13b440578bd1bd599088"
+        },
+        {
+          "path": "hourly/PSCO-2023.bin",
+          "state": "PSCO-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "f4a344c05db5f935674b87dfaec1c883777a8f61a4b4a670c91c0763c19e2f55"
+        },
+        {
+          "path": "hourly/PSCO-2024.bin",
+          "state": "PSCO-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "eb4acde5f5cc472e3cae760fef30579612a7a5f51a2af07777131ac79ab8dccc"
+        },
+        {
+          "path": "hourly/PSCO-2025.bin",
+          "state": "PSCO-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "bf51cc7e8251570fd1ea0e7638bfdcdeb198af89b6f098927398acf6ce98e818"
+        },
+        {
+          "path": "hourly/PSCO-2026.bin",
+          "state": "PSCO-2026",
+          "rows": 7302,
+          "bytes": 733016,
+          "sha256": "97dda3482c254e139d3b164999c1e83b0d1fb91564f230a4f759eba9034f7a73"
+        },
+        {
+          "path": "hourly/PSEI-2018.bin",
+          "state": "PSEI-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "bea5a564950aeba920cd79a9fdc5474480d3d69ab7d6752018394edf1e8d5e1d"
+        },
+        {
+          "path": "hourly/PSEI-2019.bin",
+          "state": "PSEI-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "40a0fdd1e844f2d399188f1ae4bb3f9bf4755637fa2dc91d6e8003d27b07784e"
+        },
+        {
+          "path": "hourly/PSEI-2020.bin",
+          "state": "PSEI-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "4996da5cb9894d6547e03714e907e61b2aff54a420f68d1351aef3fe67d49d3d"
+        },
+        {
+          "path": "hourly/PSEI-2021.bin",
+          "state": "PSEI-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "fd920a706a8f343df3fd9e4ed442551f658dca88eea712c44a668b972ebb56e3"
+        },
+        {
+          "path": "hourly/PSEI-2022.bin",
+          "state": "PSEI-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "3c6b3ac4291e3045ad1410452f942b103f13a89e46e76a4484e1d82f28877bea"
+        },
+        {
+          "path": "hourly/PSEI-2023.bin",
+          "state": "PSEI-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "adb2b8bf6c23eca1656b8ff88250bef959c9af442cd628b7ffdcc063b74fe111"
+        },
+        {
+          "path": "hourly/PSEI-2024.bin",
+          "state": "PSEI-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "6f86ac71e921bb4fa177d5cda09d47f023cd06da8875eb311a0783863d251054"
+        },
+        {
+          "path": "hourly/PSEI-2025.bin",
+          "state": "PSEI-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "00b87785d05e8a70227a0aee4da9d71a9df85c10e92da17adc92055e043b526e"
+        },
+        {
+          "path": "hourly/PSEI-2026.bin",
+          "state": "PSEI-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "fd0bf310769ad0d085a108931e0e7de3f63c6b35ff580ae255ad701f38f6c6f5"
+        },
+        {
+          "path": "hourly/SC-2018.bin",
+          "state": "SC-2018",
+          "rows": 4416,
+          "bytes": 444408,
+          "sha256": "6dc71ff40f3b5bc208eb2e6abf755c0e65332ceea828ea54bf2aa692b9e3fb12"
+        },
+        {
+          "path": "hourly/SC-2019.bin",
+          "state": "SC-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "91de19e6bf3028f6ed3fcda5dac2b32e8f2bfa979d9bce9fea34c632ac86bf86"
+        },
+        {
+          "path": "hourly/SC-2020.bin",
+          "state": "SC-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "141ade359fa09f3c9273c405de68215425472d16880c0c5ef5ccbfcb0e1833a0"
+        },
+        {
+          "path": "hourly/SC-2021.bin",
+          "state": "SC-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "23fd4e920dd3b54815fb3cf0c9e70288337d9632c5154e1e397129a7324ce2ff"
+        },
+        {
+          "path": "hourly/SC-2022.bin",
+          "state": "SC-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "03eb29b34e227147ee65f1c0ec1c72a8168238b2a308ddc346bcbc88e572f46d"
+        },
+        {
+          "path": "hourly/SC-2023.bin",
+          "state": "SC-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "b2d0f64c6ca10991f728ba57276bc1fd0d92132ff9458347779b67477df2879b"
+        },
+        {
+          "path": "hourly/SC-2024.bin",
+          "state": "SC-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "ac143259737c79f3e9999dbbc4d3c3ff86c29fbf0f37a589b15a1e4181a0f864"
+        },
+        {
+          "path": "hourly/SC-2025.bin",
+          "state": "SC-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "6bf295d8f1a74569ff2955c66bcabbd5cda5d22874115375fbec8fb4fff5ce7d"
+        },
+        {
+          "path": "hourly/SC-2026.bin",
+          "state": "SC-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "63b978eaa31505771fc0ee3c3995813b449f737786718149fe448de6591bb126"
+        },
+        {
+          "path": "hourly/SCEG-2018.bin",
+          "state": "SCEG-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "00b249168a9a2a569ff3e392eae5496bc1d40567c7c5819239693e6f84d6cac3"
+        },
+        {
+          "path": "hourly/SCEG-2019.bin",
+          "state": "SCEG-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "7652d0c6b26666d2b7b1fa619f49cfc9612dfecdeb05fd18d970c5e5a8d8d6b4"
+        },
+        {
+          "path": "hourly/SCEG-2020.bin",
+          "state": "SCEG-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "b2f02ab2bfb791b4f0bf665086dd02bd01190d57cc09681761e4a0bc9fcbe42c"
+        },
+        {
+          "path": "hourly/SCEG-2021.bin",
+          "state": "SCEG-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "fc7d474672395349d67f60acd43ed8c5fa42cd701c3dae4f9c1cb495ef10666e"
+        },
+        {
+          "path": "hourly/SCEG-2022.bin",
+          "state": "SCEG-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "290be2905d15ff4a91d4f133e2a108b39a66a5a0297fa6c82f7479c6e28b4ddc"
+        },
+        {
+          "path": "hourly/SCEG-2023.bin",
+          "state": "SCEG-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "04268f0bdc5730395c7f501b8d23eb2fc07572f22fae3e98a9ee10824c76fcf3"
+        },
+        {
+          "path": "hourly/SCEG-2024.bin",
+          "state": "SCEG-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "9142f516d34e33177d6adf572e467fa2bf2eb0e98391abc63d936fa6c2a2b00d"
+        },
+        {
+          "path": "hourly/SCEG-2025.bin",
+          "state": "SCEG-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "8b9fd0767a519df6f925d15ca2e102a9514965d3741465a12bd72f4b0e37dc3b"
+        },
+        {
+          "path": "hourly/SCEG-2026.bin",
+          "state": "SCEG-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "75133425378507373ae8bee7518e79f61c2e92152e2c0a0eb39169f96e0e796e"
+        },
+        {
+          "path": "hourly/SCL-2018.bin",
+          "state": "SCL-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "31e9b948e901b16ab059eed6547cef50d9b1ba18f9b20b726ef0ae137d48a97b"
+        },
+        {
+          "path": "hourly/SCL-2019.bin",
+          "state": "SCL-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "833b9f44c5758a1045a704a90763b9bf543d8ca9b5bac52864d2d9fb3d91b488"
+        },
+        {
+          "path": "hourly/SCL-2020.bin",
+          "state": "SCL-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "d5c3479ec68ad6ac08de8721c35395038075f0c4b20f687a0d1ff657a7f12579"
+        },
+        {
+          "path": "hourly/SCL-2021.bin",
+          "state": "SCL-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "d0aa4ed8f91159d28e4de161726f8f89f0d4807b4c300712e1349d32de936b68"
+        },
+        {
+          "path": "hourly/SCL-2022.bin",
+          "state": "SCL-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "74225d0fe11755d71240a27eb1dbd1ac3f9ee28ac0aa8fe4dbe3743ee1ddd896"
+        },
+        {
+          "path": "hourly/SCL-2023.bin",
+          "state": "SCL-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "49826132a8b6a6341643ce59f2c4d79af05503f82de7c19b0faee712b4abc5e7"
+        },
+        {
+          "path": "hourly/SCL-2024.bin",
+          "state": "SCL-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "bc588782989885e94baa76c91b3bbe6fa7f70bff77812ce3b4327987ff963d4b"
+        },
+        {
+          "path": "hourly/SCL-2025.bin",
+          "state": "SCL-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "799b58a13f8485169f33b12585a0bda32ad0870673428b46cca2e936595b40ee"
+        },
+        {
+          "path": "hourly/SCL-2026.bin",
+          "state": "SCL-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "e914e0bb89e256a412b49c9240314b2561f9cdd96d783ee5d6c62912c3e374cf"
+        },
+        {
+          "path": "hourly/SEC-2018.bin",
+          "state": "SEC-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "d90b4ee10d278a72591eed5db3458097d8e77073cc3c05cc6ad92d0d8fcdeab7"
+        },
+        {
+          "path": "hourly/SEC-2019.bin",
+          "state": "SEC-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "2c4bed5a2fe0e71a8b1101bd70110338248fe802ed43a787e556e8ff14932508"
+        },
+        {
+          "path": "hourly/SEC-2020.bin",
+          "state": "SEC-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "91ad2070f9c5aeff04d41774fcae04cf8aed2aab6de77448a711b0862963a7e9"
+        },
+        {
+          "path": "hourly/SEC-2021.bin",
+          "state": "SEC-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "4000cf02cd9db0aa0b5caa62e0d806e072e524f983a7de3e9f6829d37ea210c6"
+        },
+        {
+          "path": "hourly/SEC-2022.bin",
+          "state": "SEC-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "4ae804e3a8c0804b63ad6179f9995bf2c49f3119be5d3a00bc84a61f3cdb61f2"
+        },
+        {
+          "path": "hourly/SEC-2023.bin",
+          "state": "SEC-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "8e3f84824423205dbcd0a4f9a58c7b12140b2fae5e7c93281395517ce6104bd1"
+        },
+        {
+          "path": "hourly/SEC-2024.bin",
+          "state": "SEC-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "adbe257b2fb8e49525f9d5e81a4086bc9d6c79136abac6f5477299a7bdc662d2"
+        },
+        {
+          "path": "hourly/SEC-2025.bin",
+          "state": "SEC-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "7f71a2db8db6e2003596e376e1fc220ab66466b184c7049aca8c5f8894ce0637"
+        },
+        {
+          "path": "hourly/SEC-2026.bin",
+          "state": "SEC-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "eb508290f78debd97b480450dc827eb268480c4ae2e7aadffa4a75773e1bd396"
+        },
+        {
+          "path": "hourly/SEPA-2018.bin",
+          "state": "SEPA-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "0fe2ac89dd39691eb2b81b22a84d3e9d113d181fa02300a13fbecf88f4f4eb7b"
+        },
+        {
+          "path": "hourly/SEPA-2019.bin",
+          "state": "SEPA-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "a0842a391f1b3bbe7f6488fb305022c8bf1d2f916aedbbeeccf10ac9b87876da"
+        },
+        {
+          "path": "hourly/SEPA-2020.bin",
+          "state": "SEPA-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "8245369d56a8481b357abbdc9599ebb44fc0c26980164afea4ebcfdc30b0e4ac"
+        },
+        {
+          "path": "hourly/SEPA-2021.bin",
+          "state": "SEPA-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "4033689bd2f98e984439f2696e67fbe4a7d741ecafc956c3326c4a3113173651"
+        },
+        {
+          "path": "hourly/SEPA-2022.bin",
+          "state": "SEPA-2022",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "30367b753fc7f72eed14bcb69f93077e6063c12d005045c6b4d249df2b51d66d"
+        },
+        {
+          "path": "hourly/SEPA-2023.bin",
+          "state": "SEPA-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "b2f4ca689612a10bb7adcb62491d190426b429dcab4db53961d1eddf52f4920d"
+        },
+        {
+          "path": "hourly/SEPA-2024.bin",
+          "state": "SEPA-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "20bc5c5cc9b92f204d0baec407f25bcd772879b47c7a2c757a2923d759505185"
+        },
+        {
+          "path": "hourly/SEPA-2025.bin",
+          "state": "SEPA-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "f8faeadd4795e0fb723ea5a769ecfa8e83be7ff693cf4e47bb9a6ae1f087dc00"
+        },
+        {
+          "path": "hourly/SEPA-2026.bin",
+          "state": "SEPA-2026",
+          "rows": 7277,
+          "bytes": 730616,
+          "sha256": "982c29f9602ab621256f26dc8f374dcaf5cdcff6c5a723fc698983b7469c842f"
+        },
+        {
+          "path": "hourly/SOCO-2018.bin",
+          "state": "SOCO-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "ed60e1beb5be78af1246331a5bae023bb2d7f1d50e6e2712ed57966eb755ca42"
+        },
+        {
+          "path": "hourly/SOCO-2019.bin",
+          "state": "SOCO-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "00d803a870b08c3419579994c56c8d74b23fc999922103b2095e62bad7b158b4"
+        },
+        {
+          "path": "hourly/SOCO-2020.bin",
+          "state": "SOCO-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "39758c3ca0c50e49bf0ee86126d969b86ba0918b61faa3ea082688371e26e7b3"
+        },
+        {
+          "path": "hourly/SOCO-2021.bin",
+          "state": "SOCO-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "3593a30ec2dd231e5a4b21942c8811272563b40c23f565b5c9c7fc534ea7beaa"
+        },
+        {
+          "path": "hourly/SOCO-2022.bin",
+          "state": "SOCO-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "b658ff3eff5143eaf40d770da7a765f851324f49e781e69ff4ba16ba952dc867"
+        },
+        {
+          "path": "hourly/SOCO-2023.bin",
+          "state": "SOCO-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "7ada1629031ae9bc82e0a8e9544e48e6c71056f2d3bff3fe86ca5347f2539b32"
+        },
+        {
+          "path": "hourly/SOCO-2024.bin",
+          "state": "SOCO-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "0062bb673e58f8b663a03a5ca1c4226330dfcb2783fefeed5169d6b7d38de0e2"
+        },
+        {
+          "path": "hourly/SOCO-2025.bin",
+          "state": "SOCO-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "a0c40cd45b94742ce6e3388041d18bc00f860f61a104702c0cfe014b4571dac7"
+        },
+        {
+          "path": "hourly/SOCO-2026.bin",
+          "state": "SOCO-2026",
+          "rows": 7301,
+          "bytes": 733016,
+          "sha256": "2ad07484c4ea19aeb3ed045a35d6f580728d3c98590f3a2ce2b82ec93faef8ff"
+        },
+        {
+          "path": "hourly/SPA-2018.bin",
+          "state": "SPA-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "911c668ed4c8b614c880d417b2e7da1870f098563b056c166f1d08eecf519580"
+        },
+        {
+          "path": "hourly/SPA-2019.bin",
+          "state": "SPA-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "e928a0f3e0f2ef331017c8ea8955fb8c2fe08342063cf6472879c3bd91e2fd85"
+        },
+        {
+          "path": "hourly/SPA-2020.bin",
+          "state": "SPA-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "c2b5458a568c167ae5c6bd1c1ba5fd5af3e496d5ace2b5c4c1763df83804621b"
+        },
+        {
+          "path": "hourly/SPA-2021.bin",
+          "state": "SPA-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "8267f89aa26cfef3574f862c4eb81ade726985a83c3520d3c54f20b444fab7bd"
+        },
+        {
+          "path": "hourly/SPA-2022.bin",
+          "state": "SPA-2022",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "4861089d65c244641cb64781008a40f0836382f42ded9463631af072d22ffdd7"
+        },
+        {
+          "path": "hourly/SPA-2023.bin",
+          "state": "SPA-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "019c05563970ef232f560904cc2ff1d651b0047eb0c1356e67641c7645252e71"
+        },
+        {
+          "path": "hourly/SPA-2024.bin",
+          "state": "SPA-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "fe2462c7fa7f75abbaee5efd39d34a8f6b619d1e8147689a950944df723b5cdd"
+        },
+        {
+          "path": "hourly/SPA-2025.bin",
+          "state": "SPA-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "c816d0d950d306d05602fd1721577ad9f2f9160615125a7cf88e90209e6b3a4e"
+        },
+        {
+          "path": "hourly/SPA-2026.bin",
+          "state": "SPA-2026",
+          "rows": 7301,
+          "bytes": 733016,
+          "sha256": "63fda7f362ab29d50e3dcca020f43dcf60b65446ad2061f3c5b0328fde28fc80"
+        },
+        {
+          "path": "hourly/SRP-2018.bin",
+          "state": "SRP-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "eba1eddc706841369d222d869ec0031cbf65a9755a6f0a08f6b74f210d626b86"
+        },
+        {
+          "path": "hourly/SRP-2019.bin",
+          "state": "SRP-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "e560d235d7aa9016340b9258357492fb99a7f6ad5d9440db183b7d8b2a09299f"
+        },
+        {
+          "path": "hourly/SRP-2020.bin",
+          "state": "SRP-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "c157f23e9b44a7fc1eaf0d8653dbd6ef9bb0a3eb8ab33681626719aa8a17215c"
+        },
+        {
+          "path": "hourly/SRP-2021.bin",
+          "state": "SRP-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "73372b0f3c1f5b73753cf0d708b6e8e27a908b0808f24a32d66c9fc7b92eabdc"
+        },
+        {
+          "path": "hourly/SRP-2022.bin",
+          "state": "SRP-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "ba656e909f003cb150d701e20791780a6c443493e84e16b72501712f0a9979b6"
+        },
+        {
+          "path": "hourly/SRP-2023.bin",
+          "state": "SRP-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "b3b1cb70a6d737c216c8fd3ce08627f076db658acf8a25bb9bf6fe7eba24ceb6"
+        },
+        {
+          "path": "hourly/SRP-2024.bin",
+          "state": "SRP-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "bedc542b41da7a963b83b6aeea826095302880d15d3d3e92a2414144fa85c080"
+        },
+        {
+          "path": "hourly/SRP-2025.bin",
+          "state": "SRP-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "924c673d51d18c2fb37c5d691f66a7ccc0d5c01758a82dced4c6e96dfb4d4794"
+        },
+        {
+          "path": "hourly/SRP-2026.bin",
+          "state": "SRP-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "697d7da5a9c3c400f5f6f731383a691ca6a9164f73b053940ba02cd8d14c5548"
+        },
+        {
+          "path": "hourly/SWPP-2018.bin",
+          "state": "SWPP-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "9f0db77ada255a4836e94f47e59fc00ccc637780a97fb05803dc6152a73acac9"
+        },
+        {
+          "path": "hourly/SWPP-2019.bin",
+          "state": "SWPP-2019",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "604429c0d9076a52da96727f199d44233a46eac64ba46411756536b132fc60b9"
+        },
+        {
+          "path": "hourly/SWPP-2020.bin",
+          "state": "SWPP-2020",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "c579a79aec06679341e004a0652fab1682211a04dc70de1188d342dd1113fd89"
+        },
+        {
+          "path": "hourly/SWPP-2021.bin",
+          "state": "SWPP-2021",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "a33601b2e13876d5372ae999de7b7c869bab3293b9d9c3dd7ff4f19934d6c178"
+        },
+        {
+          "path": "hourly/SWPP-2022.bin",
+          "state": "SWPP-2022",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "b71d26f2cab4dd487a3f85cf081df619559ab8a41cf85fa9dc52270bddc0d1c4"
+        },
+        {
+          "path": "hourly/SWPP-2023.bin",
+          "state": "SWPP-2023",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "fa5a88f8be2f3c1b542a75cc5c757d2384b531203c49a3110fce58f22ef46eb8"
+        },
+        {
+          "path": "hourly/SWPP-2024.bin",
+          "state": "SWPP-2024",
+          "rows": 8784,
+          "bytes": 881232,
+          "sha256": "80945438d6cf0aff9819cee7cd730f6e42775e05f874c791483cfb26b5106a3b"
+        },
+        {
+          "path": "hourly/SWPP-2025.bin",
+          "state": "SWPP-2025",
+          "rows": 8760,
+          "bytes": 878832,
+          "sha256": "5692478aa3ce17d9c2b110800a9e83ee64f9f4d3d14fa8c82ce7f2b156fddad0"
+        },
+        {
+          "path": "hourly/SWPP-2026.bin",
+          "state": "SWPP-2026",
+          "rows": 7301,
+          "bytes": 733016,
+          "sha256": "57cc4cac0c469f9a40853d2f65fcc4a3bcecc029af027169341f607e2e8a664b"
+        },
+        {
+          "path": "hourly/TAL-2018.bin",
+          "state": "TAL-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "3f09eefd6fde710941294afc9b74de909076653f80ce8708d9e33ffb2735744d"
+        },
+        {
+          "path": "hourly/TAL-2019.bin",
+          "state": "TAL-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "657848de4d98806b03e88ebb693d05fa7300ca9c3c207851f5e7b83f8ac874f3"
+        },
+        {
+          "path": "hourly/TAL-2020.bin",
+          "state": "TAL-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "68febd4c0504486024b9330bc85721f221f086bf1a9fe303470f0a9fe515dd33"
+        },
+        {
+          "path": "hourly/TAL-2021.bin",
+          "state": "TAL-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "b4142fa8d5638dded7628c381019b0a2947c466a1999a5ca765b415c3b650c37"
+        },
+        {
+          "path": "hourly/TAL-2022.bin",
+          "state": "TAL-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "3c2560e3d281110e7d51a366d314abaa241e7083343d153bba637c634255ca5f"
+        },
+        {
+          "path": "hourly/TAL-2023.bin",
+          "state": "TAL-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "0027460392b50c6e7184d991a7424f7efd6a3cae2eb6dd640d77890240c4170b"
+        },
+        {
+          "path": "hourly/TAL-2024.bin",
+          "state": "TAL-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "b6cfb0a48441708c1fe31cc52f9ba6e4fe8bdb6191e99c5dc38a009fbfa472b5"
+        },
+        {
+          "path": "hourly/TAL-2025.bin",
+          "state": "TAL-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "99db8f4f090c5d4f7487fee3d3fa1c607d84f6eff4b998164d3484c679ad9758"
+        },
+        {
+          "path": "hourly/TAL-2026.bin",
+          "state": "TAL-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "5804efcc20ed43004238d1af018e6d41a6cf3c0298d387b8e122572af220240f"
+        },
+        {
+          "path": "hourly/TEC-2018.bin",
+          "state": "TEC-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "178579af5d946b579ca61045a20464d2d39196db617d386886dde97145010c91"
+        },
+        {
+          "path": "hourly/TEC-2019.bin",
+          "state": "TEC-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "bdaa138d344de96cd0e932ee7381349ef5d5cc9550a628b11c9ae5865f78d781"
+        },
+        {
+          "path": "hourly/TEC-2020.bin",
+          "state": "TEC-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "c6f63f3097a2bbca3164a2e9ec0e85fc48b085a290681d185c6dee9ab25eba0b"
+        },
+        {
+          "path": "hourly/TEC-2021.bin",
+          "state": "TEC-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "728a3f896c240c3025349891dde75ee0123a324676ce96b32cd3bf71a541eb2e"
+        },
+        {
+          "path": "hourly/TEC-2022.bin",
+          "state": "TEC-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "54e5f4927d3eac9b4d39662e9371bd2419efe1f3e287ab6ce62ad17879c35dcc"
+        },
+        {
+          "path": "hourly/TEC-2023.bin",
+          "state": "TEC-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "fb350fbbad836547df668c6d4875bbfc6e6da6c268ee9742b30ec227ea95cb3c"
+        },
+        {
+          "path": "hourly/TEC-2024.bin",
+          "state": "TEC-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "c7e2e410f0c4c0ac389b3dca924a6291bdbd6c104edec57e639a7c3e87afa3d2"
+        },
+        {
+          "path": "hourly/TEC-2025.bin",
+          "state": "TEC-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "27578ed5f9a27484d3edbac5b052e9def2a01295372b1c2c0bb8170960a5913b"
+        },
+        {
+          "path": "hourly/TEC-2026.bin",
+          "state": "TEC-2026",
+          "rows": 7300,
+          "bytes": 732816,
+          "sha256": "fa17ad4d666359c7fa72fc98a2a6db07d897bcd170e01a3ee3f554e416889dfe"
+        },
+        {
+          "path": "hourly/TEPC-2018.bin",
+          "state": "TEPC-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "5f3bb83d7fc95b2a8703ee68e74f0482c54e20898cae26d5b3ad8a6b83c295c7"
+        },
+        {
+          "path": "hourly/TEPC-2019.bin",
+          "state": "TEPC-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "483b430e06e9f58386bb673b93b42eb9c27af332c68899631c34f39a2e037728"
+        },
+        {
+          "path": "hourly/TEPC-2020.bin",
+          "state": "TEPC-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "b6f6a1425194983f00819b49c0753fc74aaf98ac639dd7cb4e732ebb26e11104"
+        },
+        {
+          "path": "hourly/TEPC-2021.bin",
+          "state": "TEPC-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "9df3a49cade63581223f368b446be75e6625f18c2023dd23f738f443e3296b4e"
+        },
+        {
+          "path": "hourly/TEPC-2022.bin",
+          "state": "TEPC-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "781f03fb3522d8f048c9897b31402542f15c8de2836045bc252c1ce701d31b49"
+        },
+        {
+          "path": "hourly/TEPC-2023.bin",
+          "state": "TEPC-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "f3630e8d4a0c65f94f9414472bf8d6d620dfe924a3296200a0890a84f4a4dada"
+        },
+        {
+          "path": "hourly/TEPC-2024.bin",
+          "state": "TEPC-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "9be95eaeae3ddc5c075e6264e28c212a1a592711c509971aa79ada22cf988e69"
+        },
+        {
+          "path": "hourly/TEPC-2025.bin",
+          "state": "TEPC-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "0897edf09ad6dc4187b5f042ffad527c05260c0cb98ec49e51d8a3933cc87b89"
+        },
+        {
+          "path": "hourly/TEPC-2026.bin",
+          "state": "TEPC-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "3777e1a5ae8dc1c64256db2e085240559fbe7fd92c58e3b887555a3ea2f1c55a"
+        },
+        {
+          "path": "hourly/TIDC-2018.bin",
+          "state": "TIDC-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "384b1612612ef52c94ecb2fbbad4304e4d39a91fa221afdb103fa39009653d16"
+        },
+        {
+          "path": "hourly/TIDC-2019.bin",
+          "state": "TIDC-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "5065d783319901a1d15d8df02e8e81cf16d33aa97f664ee70e48c05f25df12d1"
+        },
+        {
+          "path": "hourly/TIDC-2020.bin",
+          "state": "TIDC-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "8c08277643630a737411b9c08b1027620386b315cb92a7bfb6fac3a4d2e48115"
+        },
+        {
+          "path": "hourly/TIDC-2021.bin",
+          "state": "TIDC-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "65af10dee5aaa5e495ea1bea2b100dde1965f99d62d1cbab07b772ba4c30fd6f"
+        },
+        {
+          "path": "hourly/TIDC-2022.bin",
+          "state": "TIDC-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "f836d2df1004bf7a5861f5603641ac01895bbd64579baa32ac88482feefa0392"
+        },
+        {
+          "path": "hourly/TIDC-2023.bin",
+          "state": "TIDC-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "434e4cb8344043c6230b7ff4a4fdc09fe350f38cb4d65c7b771cd0f0621fcae3"
+        },
+        {
+          "path": "hourly/TIDC-2024.bin",
+          "state": "TIDC-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "cfc03904ba1ec4caf133f2afe1ab9bde45fe1b22ba7b3db782e1cbb6afd4a5b0"
+        },
+        {
+          "path": "hourly/TIDC-2025.bin",
+          "state": "TIDC-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "182baa307cd5ef2e56edcd8866c64b801a47a15f0015f90438fa1b9a925117c9"
+        },
+        {
+          "path": "hourly/TIDC-2026.bin",
+          "state": "TIDC-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "7dda0a2b94cd274040cda6167bc7c1abe4a37c13d48cf9ed8d0e7fd3ed9facbe"
+        },
+        {
+          "path": "hourly/TPWR-2018.bin",
+          "state": "TPWR-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "6a235484fdb2b9e509eb17282212e6f12af835090dd505d1cbae82a57ceef60d"
+        },
+        {
+          "path": "hourly/TPWR-2019.bin",
+          "state": "TPWR-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "30530d7aab225934987b4f6e7bfc41898a29e92e8703169a9d6a7848e9917c9d"
+        },
+        {
+          "path": "hourly/TPWR-2020.bin",
+          "state": "TPWR-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "3ee8ff63da7ae15b8f1f5e75b25904c66aa0c3c9a8dbdc1f399d7f8072f2d58d"
+        },
+        {
+          "path": "hourly/TPWR-2021.bin",
+          "state": "TPWR-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "548ba7b296876a4ee4a78864c42135cb6e1abe238e4c00703887d46c3a887ecd"
+        },
+        {
+          "path": "hourly/TPWR-2022.bin",
+          "state": "TPWR-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "44fa43fb6105ca971147ef6fd5b0598ddd295041e14734778379ba5d00a46e2f"
+        },
+        {
+          "path": "hourly/TPWR-2023.bin",
+          "state": "TPWR-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "56c10f4b7a0358fe9d7e93cbed8b29d97ba4b27cf5420fd155023de44b3c123d"
+        },
+        {
+          "path": "hourly/TPWR-2024.bin",
+          "state": "TPWR-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "eeb0d67df2b26d53c17aab6db63774a0e9617781a3790c8f5fa0c2069054f2c1"
+        },
+        {
+          "path": "hourly/TPWR-2025.bin",
+          "state": "TPWR-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "0e743578077652495a70b812b44f1a7907615cb097c7e5beebebf8d98f30258e"
+        },
+        {
+          "path": "hourly/TPWR-2026.bin",
+          "state": "TPWR-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "4517b0a8dff2009d48dbac827474191d35cb8ef20c44223eb62ff509ff2d5ca8"
+        },
+        {
+          "path": "hourly/TVA-2018.bin",
+          "state": "TVA-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "3536b678b4bc1d04a8f779ae142e20d6933fdf60d5ef19916c6cbc9e64ac3767"
+        },
+        {
+          "path": "hourly/TVA-2019.bin",
+          "state": "TVA-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "a46300788ae061a6e3f7d7c7a9fd2d1486f22cb1fa6dbaaa3c86b333da0a09ab"
+        },
+        {
+          "path": "hourly/TVA-2020.bin",
+          "state": "TVA-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "24fb8c4418459341d744cc32fd35cc41e6a8f5d1b08d92b2a6959333ff1ea1d5"
+        },
+        {
+          "path": "hourly/TVA-2021.bin",
+          "state": "TVA-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "e5af2f16c138600b2c6544bc8d5e44aac3e28bb515c1989c8e181b4d1507f99c"
+        },
+        {
+          "path": "hourly/TVA-2022.bin",
+          "state": "TVA-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "a081926053c5b6ffe9be813071dabe680e24ffb0c0d97a9805c8f607383984c3"
+        },
+        {
+          "path": "hourly/TVA-2023.bin",
+          "state": "TVA-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "5a0ac53993c64da3d392ca070b0bc70316f272e2b3ddb59efdedc073d83c4416"
+        },
+        {
+          "path": "hourly/TVA-2024.bin",
+          "state": "TVA-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "57d366543cf105da2a40a77498ef671f59137cc233c1438a8cb2bccbe0c9564c"
+        },
+        {
+          "path": "hourly/TVA-2025.bin",
+          "state": "TVA-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "f492a1c6b5eda8d2e4c978ce1507fd366d393f19eabb1940632c0451231e5444"
+        },
+        {
+          "path": "hourly/TVA-2026.bin",
+          "state": "TVA-2026",
+          "rows": 7301,
+          "bytes": 733016,
+          "sha256": "107380ff67a6c4928a0942831199aef8cddeb698737ab0b830a00ee33524018c"
+        },
+        {
+          "path": "hourly/WACM-2018.bin",
+          "state": "WACM-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "2d2f1ca14bb73b7ab22481c96576457d2139493185f79e34e2102aad0d6b1071"
+        },
+        {
+          "path": "hourly/WACM-2019.bin",
+          "state": "WACM-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "146779d16f805798859d279b71cc434cf22a1b2f835134e94ab6a2b6a55cf1d7"
+        },
+        {
+          "path": "hourly/WACM-2020.bin",
+          "state": "WACM-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "9102418b5e8d7a495c8bc6dd141a3632c5c5c2978aa322711ca909be40cecdc3"
+        },
+        {
+          "path": "hourly/WACM-2021.bin",
+          "state": "WACM-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "173e901565065ce8c450b90f28b74c05edc509f3b56258bbb131eaadda733faf"
+        },
+        {
+          "path": "hourly/WACM-2022.bin",
+          "state": "WACM-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "31f1e912c29b2f78474cec66ab38448154a7b706bfc6f50f95186da8df92aa86"
+        },
+        {
+          "path": "hourly/WACM-2023.bin",
+          "state": "WACM-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "6c197a185b861835a47ee033939d646b7fb3a4eb5fa3a986e4094f1ce8dc6474"
+        },
+        {
+          "path": "hourly/WACM-2024.bin",
+          "state": "WACM-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "f0a4ffa99aeb72a66dd6ec3b5665fc41885b566389536cc068c4a16537fa8cc2"
+        },
+        {
+          "path": "hourly/WACM-2025.bin",
+          "state": "WACM-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "4213beb5c56d02e830accaca06ae8d88c67dadcbba4410b06fc7963c01152d2c"
+        },
+        {
+          "path": "hourly/WACM-2026.bin",
+          "state": "WACM-2026",
+          "rows": 2167,
+          "bytes": 219584,
+          "sha256": "bb8385428b0a4f2ee4f837e8e8b730ce2023215202eee434668e83244dad38d5"
+        },
+        {
+          "path": "hourly/WALC-2018.bin",
+          "state": "WALC-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "360392b2b0c27dd494a738d7df44a1e58c5a7a99922e41535f3f7e5528f2862e"
+        },
+        {
+          "path": "hourly/WALC-2019.bin",
+          "state": "WALC-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "1335a343b612385dfcb9269c32c20ec72eccb83521b0f7e0fb799717c63e5787"
+        },
+        {
+          "path": "hourly/WALC-2020.bin",
+          "state": "WALC-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "e282c692c19d623096a8dfca73e94e4173eddd8e27bfa458e231973cd7c683b6"
+        },
+        {
+          "path": "hourly/WALC-2021.bin",
+          "state": "WALC-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "4f670ff74e01360c97b28751f1682dd828cb6ce518240e469c8d1a8d752afedd"
+        },
+        {
+          "path": "hourly/WALC-2022.bin",
+          "state": "WALC-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "7a5b93111d97811fef4e4f08cb3f4344c255842b6486a4bb02a6cbbee52bb9ce"
+        },
+        {
+          "path": "hourly/WALC-2023.bin",
+          "state": "WALC-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "217ec2ae0613deabffdcdab6e778adb6727143312c397b9e4ca035b6c236e047"
+        },
+        {
+          "path": "hourly/WALC-2024.bin",
+          "state": "WALC-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "19f68918fb8f6afda016612e1d689a986e6f7f74c6b2c5d703a23e221eb4f15a"
+        },
+        {
+          "path": "hourly/WALC-2025.bin",
+          "state": "WALC-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "d8a8b5f9dc6d4ab1b3ee40b60dcf6e346b33ec0b33b927d0d4e48016b6e40d09"
+        },
+        {
+          "path": "hourly/WALC-2026.bin",
+          "state": "WALC-2026",
+          "rows": 7303,
+          "bytes": 733216,
+          "sha256": "623af40304cd934fcda1517753c6ee03d66e0f85e11343813d39a2319827e05c"
+        },
+        {
+          "path": "hourly/WAUW-2018.bin",
+          "state": "WAUW-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "dee3f7ab954c57345873a97fa2ccd80750dcee2d9760fd6c43e1d592e282f6f3"
+        },
+        {
+          "path": "hourly/WAUW-2019.bin",
+          "state": "WAUW-2019",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "fc91915363864e080bfb8d1f1ebf30797f9349070016ecebbc700a0a20cecbd4"
+        },
+        {
+          "path": "hourly/WAUW-2020.bin",
+          "state": "WAUW-2020",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "1c430c4116eafbd4f47e8de4ae5873ca67df758f8c413fd9a6ee93ecbd43fede"
+        },
+        {
+          "path": "hourly/WAUW-2021.bin",
+          "state": "WAUW-2021",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "254775597575074dd6fc795629ac24cd547231aeadec46412ed00f62ac0bf898"
+        },
+        {
+          "path": "hourly/WAUW-2022.bin",
+          "state": "WAUW-2022",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "51eb914a63b235646df3a587c582c87ad13471cb939500684cf42cb9c4df8ba3"
+        },
+        {
+          "path": "hourly/WAUW-2023.bin",
+          "state": "WAUW-2023",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "fa8d3f39eaddc5e5cde4a14588c46b3c3e49d4473205add9a317e9ae6f2933ab"
+        },
+        {
+          "path": "hourly/WAUW-2024.bin",
+          "state": "WAUW-2024",
+          "rows": 8784,
+          "bytes": 881224,
+          "sha256": "5f02039cb5b8eccb19dc37fd0f488dea48e0456e0f5ef04d94a9724d5da6177b"
+        },
+        {
+          "path": "hourly/WAUW-2025.bin",
+          "state": "WAUW-2025",
+          "rows": 8760,
+          "bytes": 878824,
+          "sha256": "6a3e7074c74cfa70c480fd459bc15482c608825cb3cf9027385cdcda16bac0db"
+        },
+        {
+          "path": "hourly/WAUW-2026.bin",
+          "state": "WAUW-2026",
+          "rows": 2166,
+          "bytes": 219392,
+          "sha256": "d815a1e3dd44c9aab7e19e096ae5c93e08e352e88d4d5e7b9d0558612f51b087"
+        },
+        {
+          "path": "hourly/WWA-2018.bin",
+          "state": "WWA-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "8b8fd59a69ab4cbe51b27f0a29005d7f9f837cc15c9b80b391a8f86197cbb824"
+        },
+        {
+          "path": "hourly/WWA-2019.bin",
+          "state": "WWA-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "0ce4cc09949dfd0dd73dba31056dd2a57da019e6fea401e4a4d33ccb00e37cb6"
+        },
+        {
+          "path": "hourly/WWA-2020.bin",
+          "state": "WWA-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "03025723f558816ba5815bdd01ed78ceb28867e3d503c698d19b1310dcb2248c"
+        },
+        {
+          "path": "hourly/WWA-2021.bin",
+          "state": "WWA-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "c3ceb81ffd41db515ca8c3676b624a53fcfd9900352b30a0849468b7e69a0f23"
+        },
+        {
+          "path": "hourly/WWA-2022.bin",
+          "state": "WWA-2022",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "3aa97f4110e253d472903f43c4cd24f0eb4bb29cc14a50a66c0342b2e5575e93"
+        },
+        {
+          "path": "hourly/WWA-2023.bin",
+          "state": "WWA-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "ce680d4b02c68635523a7dcc3e6bbd79aa3ed6cffd700d150022070b05b370bf"
+        },
+        {
+          "path": "hourly/WWA-2024.bin",
+          "state": "WWA-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "cc127caa27561b518231b66f90005a5b8e0d08a89de3e63c3a638c0413a12e17"
+        },
+        {
+          "path": "hourly/WWA-2025.bin",
+          "state": "WWA-2025",
+          "rows": 6558,
+          "bytes": 658616,
+          "sha256": "f6b8e08d73ebc988b93e1374b7925bdcb7166e78aa4cdd1804cbb2a9fe87ad2f"
+        },
+        {
+          "path": "hourly/YAD-2018.bin",
+          "state": "YAD-2018",
+          "rows": 4416,
+          "bytes": 444416,
+          "sha256": "abc818d7c4edcda0ad439048d784e7ddac4bdcc82f9e24b298e15f1409f232ad"
+        },
+        {
+          "path": "hourly/YAD-2019.bin",
+          "state": "YAD-2019",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "44abe209080158ac42945682d3c7c875430c794c2e61fe1cadc2b189b0eb0068"
+        },
+        {
+          "path": "hourly/YAD-2020.bin",
+          "state": "YAD-2020",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "1425995a8bf53321337ec54ad3c1f9b32d1bf05715700e951f370f139a94490b"
+        },
+        {
+          "path": "hourly/YAD-2021.bin",
+          "state": "YAD-2021",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "a8971c4a800ac84064aec3e121ebc3ded0ed8a8e71f11f50a012e99af83e686e"
+        },
+        {
+          "path": "hourly/YAD-2022.bin",
+          "state": "YAD-2022",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "92a4633727c12eaaebbe2223e4a80f10a1f9e6ef82777b83c6e3bbda5b4f1afb"
+        },
+        {
+          "path": "hourly/YAD-2023.bin",
+          "state": "YAD-2023",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "56f8eafbe41658c9253380130a7900d341992804cf757b46f1aba71c932e41c1"
+        },
+        {
+          "path": "hourly/YAD-2024.bin",
+          "state": "YAD-2024",
+          "rows": 8784,
+          "bytes": 881216,
+          "sha256": "6dd97aa3ed891a5dd0ed87302db3ed0455a580297f3fc06dee01b47e636d4b74"
+        },
+        {
+          "path": "hourly/YAD-2025.bin",
+          "state": "YAD-2025",
+          "rows": 8760,
+          "bytes": 878816,
+          "sha256": "4f64a799ae21825cbb6e5c17656fab950ec3f889ef2b4c68a35ee65ede5074f5"
+        },
+        {
+          "path": "hourly/YAD-2026.bin",
+          "state": "YAD-2026",
+          "rows": 7276,
+          "bytes": 730416,
+          "sha256": "49f68b84740ebccebfae2ba4be1d92fc9f56bf97bf1257b0b52f3a8dcf77bdf1"
+        }
+      ],
+      "download": null,
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Hourly Electric Grid Monitor (Form EIA-930) (Oct 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}

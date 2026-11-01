@@ -40,7 +40,7 @@ export async function checkRegistry(root) {
     else if (!m.ceiiScreen.passed) errors.push(`${e.id} ${version}: the CEII screen did not pass (${[...m.ceiiScreen.flagged, ...m.ceiiScreen.unconfirmed].join(', ')})`);
     else if (JSON.stringify(m.ceiiScreen) !== JSON.stringify(fresh)) errors.push(`${e.id} ${version}: the CEII screen record is stale against the registry entry; re-run the recipe`);
     for (const t of m.tables) {
-      for (const file of [...t.shards, { path: t.download.path, sha256: t.download.sha256 }]) {
+      for (const file of [...t.shards, ...(t.download ? [{ path: t.download.path, sha256: t.download.sha256 }] : [])]) {
         const p = join(root, 'data', e.id, version, file.path);
         if (!existsSync(p)) { errors.push(`${e.id} ${version}: ${file.path} is missing`); continue; }
         if (createHash('sha256').update(readFileSync(p)).digest('hex') !== file.sha256) errors.push(`${e.id} ${version}: ${file.path} does not match its manifest checksum`);

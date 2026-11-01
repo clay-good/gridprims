@@ -1,0 +1,142 @@
+{
+  "source": "EIA Hourly Electric Grid Monitor: per-region workbooks (eia.gov/electricity/gridmonitor/knownissues/xls/{BA}.xlsx, sheet \"Published Hourly Data\") and six-month BALANCE files (eia.gov/electricity/gridmonitor/sixMonthFiles/)",
+  "retrieved": "2026-10-31",
+  "method": "openpyxl 3.1.5 for the workbook and the csv module for the six-month file; the row whose UTC end is the hour start plus one hour",
+  "samples": [
+    {
+      "ba": "MISO",
+      "hourStart": "2019-02-01T05:00",
+      "workbook": {
+        "demand": 79802.0,
+        "net_generation": 75877.0,
+        "interchange": -4657.0,
+        "gen_ng": 20639.0,
+        "gen_wat": 807.0,
+        "gen_sun": 0.0,
+        "gen_wnd": 4097.0,
+        "co2_generated": 47085.60778933763,
+        "co2_consumed": 49555.619762129296,
+        "intensity_generated": 1.3680628462074582,
+        "intensity_consumed": 1.3565693231512446
+      },
+      "sixMonthCsv": {
+        "demand": 79802.0,
+        "net_generation": 75877.0,
+        "interchange": -4657.0,
+        "gen_ng": 20639.0
+      },
+      "year2024": {
+        "hours": 8733,
+        "sumLbPerMwh": 8256757.328732257
+      }
+    },
+    {
+      "ba": "PJM",
+      "hourStart": "2021-01-20T12:00",
+      "workbook": {
+        "demand": 102820.0,
+        "net_generation": 105432.0,
+        "interchange": 2621.0,
+        "gen_ng": 37604.0,
+        "gen_wat": 3858.0,
+        "gen_sun": 475.0,
+        "gen_wnd": 2656.0,
+        "co2_generated": 42097.01652726231,
+        "co2_consumed": 40384.50613919479,
+        "intensity_generated": 0.8669100711434485,
+        "intensity_consumed": 0.8668843465161202
+      },
+      "sixMonthCsv": {
+        "demand": 102820.0,
+        "net_generation": 105432.0,
+        "interchange": 2621.0,
+        "gen_ng": 37604.0
+      },
+      "year2024": {
+        "hours": 8735,
+        "sumLbPerMwh": 6111662.452380155
+      }
+    },
+    {
+      "ba": "ERCO",
+      "hourStart": "2023-08-10T22:00",
+      "workbook": {
+        "demand": 85432.0,
+        "net_generation": 84618.0,
+        "interchange": -815.0,
+        "gen_ng": 48124.0,
+        "gen_wat": 183.0,
+        "gen_sun": 10431.0,
+        "gen_wnd": 9557.0,
+        "co2_generated": 32131.1759285068,
+        "co2_consumed": 32592.173453781277,
+        "intensity_generated": 0.837139061139529,
+        "intensity_consumed": 0.8410492132978507
+      },
+      "sixMonthCsv": {
+        "demand": 85432.0,
+        "net_generation": 84618.0,
+        "interchange": -815.0,
+        "gen_ng": 48124.0
+      },
+      "year2024": {
+        "hours": 8783,
+        "sumLbPerMwh": 6209231.418102625
+      }
+    },
+    {
+      "ba": "CISO",
+      "hourStart": "2024-07-15T00:00",
+      "workbook": {
+        "demand": 31671.0,
+        "net_generation": 30010.0,
+        "interchange": -2251.0,
+        "gen_ng": 11769.0,
+        "gen_wat": 3504.0,
+        "gen_sun": 10788.0,
+        "gen_wnd": 1422.0,
+        "co2_generated": 4880.784166536796,
+        "co2_consumed": 5327.394252023496,
+        "intensity_generated": 0.35855629420960844,
+        "intensity_consumed": 0.3640581481013
+      },
+      "sixMonthCsv": {
+        "demand": 31671.0,
+        "net_generation": 30010.0,
+        "interchange": -2251.0,
+        "gen_ng": 11769.0
+      },
+      "year2024": {
+        "hours": 8688,
+        "sumLbPerMwh": 3726553.341442926
+      }
+    },
+    {
+      "ba": "BPAT",
+      "hourStart": "2026-03-01T18:00",
+      "workbook": {
+        "demand": 7615.0,
+        "net_generation": 10296.0,
+        "interchange": 2675.0,
+        "gen_ng": 4.0,
+        "gen_wat": 8870.0,
+        "gen_sun": 90.0,
+        "gen_wnd": 27.0,
+        "co2_generated": 40.807460595141094,
+        "co2_consumed": 313.23147476422815,
+        "intensity_generated": 0.008737853902220274,
+        "intensity_consumed": 0.09068369978919405
+      },
+      "sixMonthCsv": {
+        "demand": 7615.0,
+        "net_generation": 10296.0,
+        "interchange": 2675.0,
+        "gen_ng": 4.0
+      },
+      "year2024": {
+        "hours": 8760,
+        "sumLbPerMwh": 1648670.427847233
+      }
+    }
+  ]
+}

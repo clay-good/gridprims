@@ -14,6 +14,7 @@ import { setupProposal } from './workbench-proposal.js';
 import { setupHeadroom } from './workbench-headroom.js';
 import { setupEv } from './workbench-ev.js';
 import { setupAdded } from './workbench-added.js';
+import { setupCarbon } from './workbench-carbon.js';
 import { preselect } from '../../core/lib/coincident-peak.mjs';
 import { formatNumber } from '../../core/lib/precision.mjs';
 import strings from '../strings/en-US.mjs';
@@ -54,6 +55,7 @@ function parse(bytes, name, choices) {
 
 let bill = null;
 let cp = null;
+let carbon = null;
 
 function render() {
   const v = viewOf(current.result, current.index);
@@ -122,12 +124,13 @@ function showOnChart(ms, kw) {
 }
 // The utility picked for the bill sets the coincident-peak program: ERCOT 4CP for a utility in ERCOT.
 let proposal = null;
-bill = setupBill({ i18n, view: () => current?.view ?? null, when, showOnChart, onUtility: (u) => cp?.preselect(preselect(u.bas ?? [])), onPriced: () => proposal?.refresh() });
+bill = setupBill({ i18n, view: () => current?.view ?? null, when, showOnChart, onUtility: (u) => { cp?.preselect(preselect(u.bas ?? [])); carbon?.preselect(u); }, onPriced: () => proposal?.refresh() });
 proposal = setupProposal({ i18n, view: () => current?.view ?? null, priced: () => bill.state().priced, utility: () => bill.utility(), period: () => bill.state().period, version: WORKBENCH_VERSION });
 cp = setupCp({ i18n, view: () => current?.view ?? null, when });
 const headroom = setupHeadroom({ i18n, view: () => current?.view ?? null, when });
 setupEv({ i18n, view: () => current?.view ?? null, priced: () => bill.state().priced, headroom: headroom.state });
 setupAdded({ i18n, view: () => current?.view ?? null, priced: () => bill.state().priced, headroom });
+carbon = setupCarbon({ i18n, view: () => current?.view ?? null, version: WORKBENCH_VERSION });
 // The home page's "Cheapest plan on my data" opens here, at the plan finder.
 if (location.hash === '#plans') $('[data-bill]').scrollIntoView({ block: 'start' });
 

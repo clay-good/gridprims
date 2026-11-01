@@ -38,6 +38,6 @@ export function releaseEntry(m, shortTitle, origin) {
   const changes = m.tables.map((t) => (t.changes?.first ? `${t.name}: first version, ${t.rows.toLocaleString('en-US')} rows` : `${t.name}: ${t.changes.added} added, ${t.changes.removed} removed, ${t.changes.changed} changed`)).join('; ');
   return {
     id: `${origin}/data/${m.dataset}/${m.version}/`, title: `${shortTitle}, version ${m.version}`, updated: m.generatedAt, link: `${origin}/data/${m.dataset}/`,
-    summary: `Version ${m.version}, data for ${[...new Set(m.tables.map((t) => t.dataPeriod))].join(', ')}. ${changes}. Download: ${m.tables.map((t) => `${origin}/data/${m.dataset}/${m.version}/${t.download.path}`).join(' ')}`,
+    summary: `Version ${m.version}, data for ${[...new Set(m.tables.map((t) => t.dataPeriod))].join(', ')}. ${changes}. Download: ${m.tables.map((t) => `${origin}/data/${m.dataset}/${m.version}/${t.download?.path ?? 'manifest.json'}`).join(' ')}`,
   };
 }

@@ -5,9 +5,11 @@
 
 export const MAGIC = 'GPC1';
 export const NULL_INDEX = 0xffffffff;
+/** The missing value of an `i32` column: the one int32 a scaled number never rounds to. */
+export const NULL_I32 = -0x80000000;
 
 /**
- * @typedef {{name: string, type: 'f64' | 'str', unit?: string, nullable: boolean, offset: number, length: number, dictionary?: string[]}} ColumnHeader
+ * @typedef {{name: string, type: 'f64' | 'f32' | 'i32' | 'str', unit?: string, scale?: number, nullable: boolean, offset: number, length: number, dictionary?: string[]}} ColumnHeader
  * @typedef {{format: string, rows: number, columns: ColumnHeader[], meta?: object}} ShardHeader
  */
 
@@ -34,12 +36,23 @@ export function readShard(input) {
         const v = view.getFloat64(at + i * 8, true);
         out[i] = Number.isNaN(v) ? null : v;
       }
-    } else {
+    } else if (c.type === 'f32') {
+      for (let i = 0; i < header.rows; i++) {
+        const v = view.getFloat32(at + i * 4, true);
+        out[i] = Number.isNaN(v) ? null : v;
+      }
+    } else if (c.type === 'i32') {
+      // A scaled integer: the stored int32 divided by the column's scale (EIA-930's hourly values).
+      for (let i = 0; i < header.rows; i++) {
+        const k = view.getInt32(at + i * 4, true);
+        out[i] = k === NULL_I32 ? null : k / c.scale;
+      }
+    } else if (c.type === 'str') {
       for (let i = 0; i < header.rows; i++) {
         const k = view.getUint32(at + i * 4, true);
         out[i] = k === NULL_INDEX ? null : c.dictionary[k];
       }
-    }
+    } else throw new Error(`column ${name} has type ${c.type}, which this reader does not know`);
     return out;
   }
 

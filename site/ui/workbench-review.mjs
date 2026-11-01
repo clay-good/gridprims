@@ -14,6 +14,7 @@ export const WORKBENCH_CAPABILITIES = [
   ['electrify.service-headroom', 'headroom.title', 'data-headroom'],
   ['electrify.ev-fleet', 'ev.title', 'data-ev'],
   ['electrify.added-load', 'added.title', 'data-added'],
+  ['carbon.hourly-emissions', 'carbon.title', 'data-carbon'],
 ];
 
 /** The chip beside a capability's heading: "Review pending" or "Reviewed". */

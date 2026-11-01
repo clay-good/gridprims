@@ -29,9 +29,9 @@ export function catalog(dir = DATA_DIR) {
 /**
  * Rows of a dataset table matching exact column values. A filter on the
  * partition column reads only that shard.
- * @param {{dataset: string, table?: string, filter?: Record<string, any>, limit?: number}} q
+ * @param {{dataset: string, table?: string, filter?: Record<string, any>, limit?: number, offset?: number}} q
  */
-export function query({ dataset, table, filter = {}, limit = 100 }, dir = DATA_DIR) {
+export function query({ dataset, table, filter = {}, limit = 100, offset = 0 }, dir = DATA_DIR) {
   const cur = join(dir, dataset, 'current.json');
   if (!existsSync(cur)) return null;
   const { version } = JSON.parse(readFileSync(cur, 'utf8'));
@@ -40,14 +40,16 @@ export function query({ dataset, table, filter = {}, limit = 100 }, dir = DATA_D
   if (!t) return { manifest: m, error: `No table ${table}. Tables: ${m.tables.map((x) => x.name).join(', ')}.` };
   const unknown = Object.keys(filter).filter((k) => !t.columns.some((c) => c.name === k));
   if (unknown.length) return { manifest: m, error: `No column ${unknown.join(', ')}. Columns: ${t.columns.map((c) => c.name).join(', ')}.` };
-  const shards = filter[t.partition] !== undefined ? t.shards.filter((s) => s.state === filter[t.partition]) : t.shards;
+  // A shard is named by its partition values joined by "-" (EIA-930's "PJM-2024"); each one the filter names narrows the shards read.
+  const keys = t.partition === null ? [] : [t.partition].flat();
+  const shards = t.shards.filter((s) => { const parts = keys.length > 1 ? s.state.split('-') : [s.state]; return keys.every((k, i) => filter[k] === undefined || parts[i] === String(filter[k])); });
   const rows = [];
   let matched = 0;
   for (const s of shards) {
     for (const r of readShard(readFileSync(join(dir, dataset, version, s.path))).rows()) {
       if (Object.entries(filter).every(([k, v]) => r[k] === v)) {
         matched++;
-        if (rows.length < limit) rows.push(r);
+        if (matched > offset && rows.length < limit) rows.push(r);
       }
     }
   }

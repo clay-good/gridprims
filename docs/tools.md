@@ -465,3 +465,34 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 - An average includes homes of every size, age, and heating type; a large or all-electric home can be well above it and use energy well.
 - EIA-861 publishes no distribution of use, so this shows no percentile, rank, or "homes like yours".
 - The averages are for the latest EIA-861 year, which may differ from the year of your bills.
+
+## Cleanest hours and load shifting (`carbon.load-shift.estimate`)
+
+The typical cleanest and dirtiest hours in your grid region, and the CO₂ a flexible load would avoid by moving to cleaner hours.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Flexible load | `kwhPerDay` | kWh a day | 0 to 10000000 | 200 |
+| Typical intensity in the hours you use it now | `currentLbPerMwh` | lb CO₂/MWh | 0 to 5000 | 1000 |
+| Typical intensity in the hours you could move it to | `proposedLbPerMwh` | lb CO₂/MWh | 0 to 5000 | 700 |
+| Days a year | `days` | days | 1 to 366 | 365 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Attributed CO₂ avoided | `changeLb` | lb a year | 0 decimals |
+| Attributed CO₂ avoided | `changeT` | metric tons a year | 1 decimals |
+
+**Method.** CO₂ avoided = kWh a day × (current − proposed typical intensity) ÷ 1,000 × days. Typical intensities are EIA-930 consumption-based CO₂ intensity, the median for each local clock hour of each month over the latest three complete years, averaged over the hours of each window and weighted by days in each month.
+
+**Sources.**
+
+- U.S. Energy Information Administration, Hourly Electric Grid Monitor (Form EIA-930), per-region workbooks, served snapshot 2026-10, CO2 Emissions Intensity for Consumed Electricity (lb/kWh) (https://www.eia.gov/electricity/gridmonitor/)
+- NIST Special Publication 811, 2008, Appendix B.8, pound (avoirdupois) to kilogram (https://www.nist.gov/pml/special-publication-811)
+
+**Known limits.**
+
+- Typical hours come from the latest three complete years; a region adding solar or retiring coal changes them.
+- Average intensity, not marginal: the generators that actually respond to a shift can be cleaner or dirtier.
+- EIA computes hourly CO₂ from generation by fuel times annual average emission factors.

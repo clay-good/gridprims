@@ -9,12 +9,13 @@ export const getJson = (path) => cache.get(path) ?? cache.set(path, fetch(path).
 
 /**
  * @param {string} text the ZIP as typed
- * @returns {Promise<{parsed: any, utilities: any[], shards: Record<string, any>}>}
+ * @returns {Promise<{parsed: any, utilities: any[], subregions: string[], shards: Record<string, any>}>}
  */
 export async function utilitiesForZip(text) {
   const parsed = parseZip(text);
-  if (!parsed.ok) return { parsed, utilities: [], shards: {} };
+  if (!parsed.ok) return { parsed, utilities: [], subregions: [], shards: {} };
   const states = statesFor(parsed.zip, await getJson('/lookup/zip3.json'));
   const shards = Object.fromEntries(await Promise.all(states.map(async (st) => [st, await getJson(`/lookup/${st}.json`)])));
-  return { parsed, utilities: states.length ? lookupZip(parsed.zip, shards).utilities : [], shards };
+  const found = states.length ? lookupZip(parsed.zip, shards) : null;
+  return { parsed, utilities: found?.utilities ?? [], subregions: found?.subregions ?? [], shards };
 }

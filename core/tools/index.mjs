@@ -27,6 +27,8 @@ import billTotalsCheck from './household.bill-totals.check/manifest.mjs';
 import * as billTotalsCheckImpl from './household.bill-totals.check/tool.mjs';
 import usageBenchmark from './household.usage-benchmark.compare/manifest.mjs';
 import * as usageBenchmarkImpl from './household.usage-benchmark.compare/tool.mjs';
+import loadShift from './carbon.load-shift.estimate/manifest.mjs';
+import * as loadShiftImpl from './carbon.load-shift.estimate/tool.mjs';
 
 export const TOOLS = [
   { manifest: energyUnitsConvert, impl: energyUnitsConvertImpl },
@@ -42,6 +44,7 @@ export const TOOLS = [
   { manifest: outageIndices, impl: outageIndicesImpl },
   { manifest: billTotalsCheck, impl: billTotalsCheckImpl },
   { manifest: usageBenchmark, impl: usageBenchmarkImpl },
+  { manifest: loadShift, impl: loadShiftImpl },
 ];
 
 /** @param {string} id */

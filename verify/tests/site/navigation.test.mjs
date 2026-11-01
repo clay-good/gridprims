@@ -31,7 +31,7 @@ test('section pages list only what exists, never "coming soon"', () => {
   assert.match(page('/grid/'), /href="\/tools\/calc\/energy-units\/convert\/">Energy unit converter</);
   assert.match(page('/bills/'), /href="\/files\/">Read your meter file</);
   assert.match(page('/data/'), /href="\/data\/eia-861\/">Annual Electric Power Industry Report/);
-  assert.match(page('/carbon/'), /Nothing in this section has shipped yet/);
+  assert.match(page('/carbon/'), /href="\/tools\/carbon\/load-shift\/estimate\/">Cleanest hours and load shifting</);
   for (const p of pagesOf(out)) assert.doesNotMatch(page(p), /coming soon/i, p);
 });
 

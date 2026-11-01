@@ -1,0 +1,124 @@
+{
+  "toolId": "carbon.load-shift.estimate",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "spec-ev",
+      "result": {
+        "status": "ok",
+        "toolId": "carbon.load-shift.estimate",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "changeLb": {
+            "value": 21900,
+            "unit": "lb a year",
+            "display": "21,900"
+          },
+          "changeT": {
+            "value": 9.9,
+            "unit": "metric tons a year",
+            "display": "9.9"
+          }
+        },
+        "sentence": "Moving 200 kWh a day cuts about 9.9 metric tons of CO₂ a year.",
+        "notes": [],
+        "work": {
+          "method": "CO₂ avoided = kWh a day × (current − proposed typical intensity) ÷ 1,000 × days. Typical intensities are EIA-930 consumption-based CO₂ intensity, the median for each local clock hour of each month over the latest three complete years, averaged over the hours of each window and weighted by days in each month.",
+          "steps": [
+            "Intensity difference: 1,000 − 700 lb/MWh = 300 lb/MWh, or 0.3 lb/kWh.",
+            "200 kWh a day × 0.3 lb/kWh × 365 days = 21,900 lb a year less.",
+            "21,900 lb ÷ 2204.62 lb per metric ton = 9.93 metric tons.",
+            "An estimate from history using average-intensity (attributional) accounting: not a forecast, and not the actual change in grid emissions, which depends on the marginal generators."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The load is spread evenly over the hours of each window.",
+            "The same daily energy moves on every day of the year."
+          ],
+          "citations": [
+            {
+              "source": "U.S. Energy Information Administration, Hourly Electric Grid Monitor (Form EIA-930)",
+              "edition": "per-region workbooks, served snapshot 2026-10",
+              "locator": "CO2 Emissions Intensity for Consumed Electricity (lb/kWh)",
+              "url": "https://www.eia.gov/electricity/gridmonitor/"
+            },
+            {
+              "source": "NIST Special Publication 811",
+              "edition": "2008",
+              "locator": "Appendix B.8, pound (avoirdupois) to kilogram",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "eia-930"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "An estimate from history using average-intensity (attributional) accounting: not a forecast, and not the actual change in grid emissions, which depends on the marginal generators."
+      }
+    },
+    {
+      "example": "dirtier",
+      "result": {
+        "status": "ok",
+        "toolId": "carbon.load-shift.estimate",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "changeLb": {
+            "value": -730,
+            "unit": "lb a year",
+            "display": "-730"
+          },
+          "changeT": {
+            "value": -0.3,
+            "unit": "metric tons a year",
+            "display": "-0.3"
+          }
+        },
+        "sentence": "Moving 10 kWh a day adds about 0.3 metric tons of CO₂ a year.",
+        "notes": [],
+        "work": {
+          "method": "CO₂ avoided = kWh a day × (current − proposed typical intensity) ÷ 1,000 × days. Typical intensities are EIA-930 consumption-based CO₂ intensity, the median for each local clock hour of each month over the latest three complete years, averaged over the hours of each window and weighted by days in each month.",
+          "steps": [
+            "Intensity difference: 600 − 800 lb/MWh = -200 lb/MWh, or -0.2 lb/kWh.",
+            "10 kWh a day × -0.2 lb/kWh × 365 days = 730 lb a year more.",
+            "730 lb ÷ 2204.62 lb per metric ton = 0.33 metric tons.",
+            "An estimate from history using average-intensity (attributional) accounting: not a forecast, and not the actual change in grid emissions, which depends on the marginal generators."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The load is spread evenly over the hours of each window.",
+            "The same daily energy moves on every day of the year."
+          ],
+          "citations": [
+            {
+              "source": "U.S. Energy Information Administration, Hourly Electric Grid Monitor (Form EIA-930)",
+              "edition": "per-region workbooks, served snapshot 2026-10",
+              "locator": "CO2 Emissions Intensity for Consumed Electricity (lb/kWh)",
+              "url": "https://www.eia.gov/electricity/gridmonitor/"
+            },
+            {
+              "source": "NIST Special Publication 811",
+              "edition": "2008",
+              "locator": "Appendix B.8, pound (avoirdupois) to kilogram",
+              "url": "https://www.nist.gov/pml/special-publication-811"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "eia-930"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "An estimate from history using average-intensity (attributional) accounting: not a forecast, and not the actual change in grid emissions, which depends on the marginal generators."
+      }
+    }
+  ]
+}

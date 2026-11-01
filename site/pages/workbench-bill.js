@@ -29,6 +29,7 @@ export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {},
   let asOf = null;
   let priced = null; // {rec, bills}
   let utilityName = '';
+  let subregions = [];
   const last = { ranking: null, screen: null };
   /** The file's first and last local day, for the cards. */
   const period = (v) => { const f = new Intl.DateTimeFormat('en-CA', { timeZone: v.zone }); return `${f.format(new Date(v.series.startMs[0]))} to ${f.format(new Date(v.series.startMs[v.series.startMs.length - 1]))}`; };
@@ -73,7 +74,7 @@ export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {},
   async function showUtility() {
     const u = utilities[Number($('[data-bill-utility]').value)];
     utilityName = u?.name ?? '';
-    if (u) onUtility(u);
+    if (u) onUtility({ ...u, subregions });
     $('[data-bill-rate-field]').hidden = true;
     $('[data-bill-holidays-field]').hidden = true;
     $('[data-bill-result]').replaceChildren();
@@ -96,6 +97,8 @@ export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {},
     $('[data-bill-error]').textContent = parsed.ok ? '' : parsed.reason === 'four-digits' ? t('lookup.error.four', { suggestion: parsed.suggestion }) : t(`lookup.error.${parsed.reason}`);
     if (!parsed.ok) return;
     utilities = found.utilities;
+    // The ZIP's eGRID subregions travel with the utility, for the carbon panel's annual comparison.
+    subregions = found.subregions;
     if (!utilities.length) { $('[data-bill-result]').replaceChildren(el('p', t('bill.picker.noUtility'))); return; }
     $('[data-bill-utility]').replaceChildren(...utilities.map((u, i) => el('option', `${u.name} · ${u.state}`, { value: String(i) })));
     $('[data-bill-utility-field]').hidden = false;
