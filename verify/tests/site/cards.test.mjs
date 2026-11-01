@@ -34,7 +34,7 @@ test('pages name their section\'s card; a shared utility page shows its own titl
   assert.equal(card('tools/calc/energy-units/convert/index.html'), 'https://gridprims.com/site/cards/grid.png');
   const utility = read('utilities/195/index.html');
   assert.equal(card('utilities/195/index.html'), 'https://gridprims.com/site/cards/data.png');
-  assert.match(utility, /<meta property="og:title" content="Alabama Power Co · gridprims">/);
+  assert.match(utility, /<meta property="og:title" content="Alabama Power Co electricity rates · gridprims">/);
   assert.match(utility, /<meta name="twitter:card" content="summary_large_image">/);
   for (const id of CARDS) assert.ok(walk(out).includes(`site/cards/${id}.png`), `${id}.png is deployed`);
 });

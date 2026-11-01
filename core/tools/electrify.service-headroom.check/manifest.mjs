@@ -12,7 +12,7 @@ export default {
     { name: 'volts', label: 'Service voltage', type: 'number', unit: 'V', range: { min: 100, max: 35000 }, precision: 'exact', example: 480 },
     { name: 'phase', label: 'Phase', type: 'enum', options: [{ value: '1', label: 'Single-phase' }, { value: '3', label: 'Three-phase' }], example: '3' },
     { name: 'ratingA', label: 'Service rating', type: 'number', unit: 'A', range: { min: 1, max: 10000 }, precision: 'exact', example: 400 },
-    { name: 'edition', label: 'NEC edition adopted locally', type: 'enum', options: [{ value: '2023', label: '2023 NEC, section 220.87' }, { value: '2026', label: '2026 NEC, section 120.87 (number not yet checked)' }], example: '2023' },
+    { name: 'edition', label: 'NEC edition adopted locally', type: 'enum', options: [{ value: '2023', label: '2023 NEC, section 220.87' }, { value: '2026', label: '2026 NEC, section 120.87 (section number not yet confirmed)' }], example: '2023' },
     { name: 'basis', label: 'Where the demand comes from', type: 'enum', options: [{ value: 'recording', label: 'A recording of 30 days or more' }, { value: 'bills', label: 'Twelve monthly bills' }], example: 'recording' },
     { name: 'powerFactor', label: 'Power factor', type: 'number', unit: 'fraction', range: { min: 0.01, max: 1 }, precision: 'exact', example: 0.95, hint: 'Use the measured power factor when the bill or file shows one; otherwise 1.0, and compare the result at 0.90.' },
     { name: 'generation', label: 'Solar, wind, a battery, or peak shaving on this service', type: 'enum', options: [{ value: 'no', label: 'No' }, { value: 'yes', label: 'Yes' }], example: 'no' },

@@ -49,3 +49,23 @@
 .proof .figure-value { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums slashed-zero; }
 .proof .figure-unit { font-size: .8125rem; font-weight: 500; color: var(--muted); margin-left: var(--s2); letter-spacing: 0; }
 
+
+/* The professional door: three workbench jobs under the two starting doors, one column on a phone. */
+.pro { margin: 0 auto var(--s7); max-width: 64rem; }
+.pro h2 { margin: 0 0 var(--s2); font-size: 1.25rem; letter-spacing: -0.015em; }
+.pro-sub { margin: 0 0 var(--s4); color: var(--muted); max-width: 60ch; }
+.pro-jobs { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+.pro-job { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-sign); padding: var(--s4); }
+.pro-job h3 { margin: 0 0 var(--s2); font-size: 1.0625rem; }
+.pro-job p { margin: 0; font-size: .9375rem; }
+@media (min-width: 760px) {
+  .pro-jobs { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* One centered column for every home block, so the doors, the professional jobs, and the sample line up. */
+.start, .pro, .proof, .home-more { max-width: 56rem; margin-left: auto; margin-right: auto; }
+@media (min-width: 900px) {
+  /* The sample's figures sit beside its plate, not below an empty column. */
+  .proof .answer { grid-column: 1; grid-row: 2; margin: 0; }
+  .proof .figures { grid-column: 2; grid-row: 2 / span 3; align-self: start; }
+}

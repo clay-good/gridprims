@@ -23,7 +23,7 @@ for (const kind of ['chrome', 'firefox']) {
       const text = await browser.evaluate("document.querySelector('[data-insights]').textContent");
       assert.match(text, /Baseload \(5th percentile\)/);
       assert.match(text, /kWh per 15-minute interval × 4/);
-      assert.match(text, /1 month of data: figures cover only that span/);
+      assert.match(text, /1 month of data: these figures cover only that span/);
       assert.match(text, /Coverage: 100% of expected intervals \(1,344 of 1,344\)/);
       // 14 days × 24 hours, plus the six steps of the scale.
       assert.equal(await browser.evaluate("document.querySelectorAll('[data-insights] .heatmap rect').length"), 14 * 24 + 6);

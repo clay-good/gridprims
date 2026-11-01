@@ -9,7 +9,7 @@ import { sourceStamp } from '../ui/source-stamp.mjs';
 import { lineChart, tableView } from '../lib/chart.mjs';
 import { SECTORS } from '../entities/utilities.mjs';
 import { plantPath } from './plant.mjs';
-import { pageTitle } from '../lib/meta.mjs';
+import { DESCRIPTION_MAX, titleOr } from '../lib/meta.mjs';
 
 export const utilityPath = (id) => `/utilities/${id}/`;
 
@@ -57,6 +57,16 @@ ${sources.history ? sourceStamp(sources.history, sources.history.tables[0], i18n
 /**
  * @param {{utility: any, sources: any, i18n: any, plantHasPage?: (id: number) => boolean}} p
  */
+/** The plants a utility operates. Past a dozen the list is longer than the rest of the page, so it folds. */
+const PLANT_LIST_FOLD = 12;
+
+function plantList(owned, { t }) {
+  const items = html`<ul class="tool-list">${owned.map((p) => html`<li><a href="${plantPath(p.id)}">${p.name}</a> · ${p.state} · ${mw(p.nameplateMw)} MW</li>`)}</ul>`;
+  return owned.length <= PLANT_LIST_FOLD
+    ? html`<h3>${t('utility.plants')}</h3>${items}`
+    : html`<details class="panel"><summary>${t('utility.plantsCount', { count: owned.length })}</summary>${items}</details>`;
+}
+
 export function utilityPage({ utility: u, sources, i18n, plantHasPage = () => false, titleName = u.name, extra = '' }) {
   const { t, has } = i18n;
   const fuel = (code) => (has(`fuel.${code}`) ? t(`fuel.${code}`) : code);
@@ -112,7 +122,7 @@ ${u.reliability.length ? tableView([t('utility.col.state'), t('utility.col.stand
 ${fuels.length ? html`${tableView([t('utility.col.fuel'), t('utility.col.capacity'), t('utility.col.netGeneration', { year: u.year })],
     fuels.map((f) => [fuel(f), u.fuelCapacity[f] ? `${mw(u.fuelCapacity[f])} MW` : '', u.fuelNet[f] === undefined ? '' : `${whole(u.fuelNet[f])} MWh`]), t('utility.generation'))}
 <p>${t('utility.generationScope')}</p>
-${owned.length ? html`<h3>${t('utility.plants')}</h3><ul class="tool-list">${owned.map((p) => html`<li><a href="${plantPath(p.id)}">${p.name}</a> · ${p.state} · ${mw(p.nameplateMw)} MW</li>`)}</ul>` : ''}`
+${owned.length ? plantList(owned, i18n) : ''}`
     : html`<p data-generation>${t(Object.keys(u.kinds).every((x) => x === 'delivery') ? 'utility.deliversOnly' : 'utility.buysAll')}</p>`}
 </section>
 
@@ -121,5 +131,9 @@ ${owned.length ? html`<h3>${t('utility.plants')}</h3><ul class="tool-list">${own
 ${sources.urdb && u.rates ? sourceStamp(sources.urdb, sources.urdb.tables[0], i18n) : ''}
 </section>
 ${extra}`;
-  return layout({ i18n, title: pageTitle(titleName), description: t('utility.description', { name: u.name, states: u.states.join(', ') }), path: utilityPath(u.id), body, section: 'bills', card: 'data' });
+  // Search snippets lead with the number people look for, the price a home pays, when the record has it.
+  const homePrice = u.prices.bundled?.res ?? null;
+  const priced = homePrice === null ? null : t('utility.descriptionPriced', { name: u.name, cents: cents(homePrice), year: u.year });
+  const description = priced && priced.length <= DESCRIPTION_MAX ? priced : t('utility.description', { name: u.name, states: u.states.join(', ') });
+  return layout({ i18n, title: titleOr(t('utility.pageTitle', { name: titleName }), titleName), description, path: utilityPath(u.id), body, section: 'bills', card: 'data' });
 }

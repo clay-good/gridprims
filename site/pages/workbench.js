@@ -131,8 +131,8 @@ const headroom = setupHeadroom({ i18n, view: () => current?.view ?? null, when }
 setupEv({ i18n, view: () => current?.view ?? null, priced: () => bill.state().priced, headroom: headroom.state });
 setupAdded({ i18n, view: () => current?.view ?? null, priced: () => bill.state().priced, headroom });
 carbon = setupCarbon({ i18n, view: () => current?.view ?? null, version: WORKBENCH_VERSION });
-// The home page's "Cheapest plan on my data" opens here, at the plan finder.
-if (location.hash === '#plans') $('[data-bill]').scrollIntoView({ block: 'start' });
+// The home page opens here at the plan finder; the battery screen sits inside it, shown once a rate is priced.
+if (location.hash === '#plans' || location.hash === '#battery') $('[data-bill]').scrollIntoView({ block: 'start' });
 
 async function load(bytes, name, { sample = false, kept = false, choices } = {}) {
   $('[data-error]').hidden = true;

@@ -4,6 +4,7 @@
 // JavaScript; the catalog's filters only hide cells.
 
 import { html } from '../lib/html.mjs';
+import { ORIGIN } from '../config.mjs';
 import { layout } from './layout.mjs';
 import { LANES } from '../ui/home-lanes.mjs';
 import { toolPath } from '../ui/tool-page.mjs';
@@ -49,7 +50,6 @@ function startDoors({ t }) {
           <input id="home-zip" name="zip" class="mono" inputmode="numeric" autocomplete="postal-code" maxlength="10" required></div>
         <button class="button primary" type="submit">${t('home.start.zipAction')}</button>
       </form>
-      <p class="unit-hint">${t('home.start.zipNote')}</p>
     </div>
     <div class="door">
       <h2>${t('home.start.file')}</h2>
@@ -62,6 +62,20 @@ function startDoors({ t }) {
   <p class="start-else">${t('home.start.elseNoFile')}
     <a href="/tools/household/bill-totals/check/">${t('home.start.billsAction')}</a> ·
     <a href="/tools/household/usage-benchmark/compare/">${t('home.start.useAction')}</a></p>
+</section>`;
+}
+
+/** What a meter file does for someone who manages energy for a building, fleet, or utility: three workbench jobs, each opening at its panel. */
+function proDoor({ t }) {
+  const job = (id, href) => html`<li class="pro-job"><h3><a href="${href}">${t(`home.pro.${id}`)}</a></h3><p>${t(`home.pro.${id}.what`)}</p></li>`;
+  return html`<section class="pro" aria-labelledby="pro-title">
+  <h2 id="pro-title">${t('home.pro.title')}</h2>
+  <p class="pro-sub">${t('home.pro.sub')}</p>
+  <ul class="pro-jobs">
+    ${job('bill', '/files/#plans')}
+    ${job('peaks', '/files/#peaks')}
+    ${job('battery', '/files/#battery')}
+  </ul>
 </section>`;
 }
 
@@ -100,7 +114,7 @@ function proofPlate(p, { t, date }) {
     ${figure(t('home.proof.loadFactor'), n(p.loadFactor * 100, 1), '%')}
     ${figure(t('home.proof.intervals'), n(p.intervals), '')}
   </div>
-  <p class="proof-actions"><a class="button primary" href="/files/">${t('home.proof.open')}</a> <span class="unit-hint">${t('home.proof.privacy')}</span></p>
+  <p class="proof-actions"><a class="button primary" href="/files/">${t('home.proof.open')}</a></p>
 </section>`;
 }
 
@@ -114,9 +128,10 @@ export function homePage({ tools, i18n, exists, asOf, proof = null }) {
   // The rail already carries the wordmark, so the heading is the tagline: both lanes fit a 360 × 640 first screen.
   const body = html`<h1 class="home-title">${t('home.start.title')}</h1>
 ${startDoors(i18n)}
+${proDoor(i18n)}
 ${proof ? proofPlate(proof, i18n) : ''}
-<p class="home-more"><a href="${CATALOG_PATH}">${t('home.allTools')}</a> · <a href="${LOOKUP_PATH}">${t('home.cell.find-utility')}</a></p>`;
-  return layout({ i18n, title: t('home.pageTitle'), description: t('site.tagline'), path: '/', body, modules: ['/site/pages/home.js'], section: 'home', commandBar: false });
+<p class="home-more"><a href="${CATALOG_PATH}">${t('home.allTools')}</a></p>`;
+  return layout({ i18n, title: t('home.pageTitle'), description: t('home.description'), path: '/', body, modules: ['/site/pages/home.js'], structured: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: t('site.name'), url: `${ORIGIN}/`, description: t('home.description'), applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }], section: 'home', commandBar: false });
 }
 
 /** Tools built as pages rather than manifests (the lookup and the workbench), with their sections. */

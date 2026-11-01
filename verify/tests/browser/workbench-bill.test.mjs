@@ -47,10 +47,10 @@ for (const kind of ['chrome', 'firefox']) {
       const computed = await browser.evaluate("Number(document.querySelector('[data-bill-month] summary').textContent.match(/\\$([\\d,]+\\.\\d\\d)/)[1].replace(/,/g, ''))");
       const actual = (Math.round(computed * 106) / 100).toFixed(2);
       await browser.evaluate(`(() => { const i = document.querySelector('[data-actual="${first}"]'); i.value = '${actual}'; i.dispatchEvent(new Event('input', { bubbles: true })); })()`);
-      await waitFor(browser, `document.querySelector('[data-compare="${first}"]').textContent.includes('Likely causes')`);
+      await waitFor(browser, `document.querySelector('[data-compare="${first}"]').textContent.includes('Common reasons')`);
       const said = await browser.evaluate(`document.querySelector('[data-compare="${first}"]').textContent`);
       assert.match(said, /\(\+6%\)/);
-      assert.match(said, /A difference is not a billing error\./);
+      assert.match(said, /A difference does not mean a billing error\./);
       // Every commercial rate on the file, ranked, then again with 20 kW shifted from 2 pm to 11 am on weekdays.
       await browser.evaluate("document.querySelector('[data-compare-run]').click()");
       await waitFor(browser, "document.querySelector('[data-bill]').dataset.compared === '1'");
@@ -58,7 +58,7 @@ for (const kind of ['chrome', 'firefox']) {
       const listed = await browser.evaluate("document.querySelectorAll('[data-compare-result] li').length");
       assert.equal(ranked.length + listed, austin.filter((r) => r.sector === 'Commercial').length, 'every commercial rate is ranked or listed as not eligible');
       assert.ok(ranked.includes(austin[pick].id));
-      assert.match(await browser.evaluate("document.querySelector('[data-compare-result]').textContent"), /Based on this file's past use\./);
+      assert.match(await browser.evaluate("document.querySelector('[data-compare-result]').textContent"), /Based on how this file used power\./);
       // A proposal: the fixed charge raised by $10 a month shows in the difference list and the impact, and the draft states it.
       assert.equal(await browser.evaluate("document.querySelector('[data-proposal]').hidden"), false);
       const fixedNow = Number(await browser.evaluate("document.querySelector('[data-path=fixed]').value"));

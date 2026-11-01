@@ -14,7 +14,7 @@ const money = (x) => `$${x.toLocaleString('en-US', { minimumFractionDigits: 2, m
 
 /** The panel's form. @param {{t: Function}} i18n @param {Set<string>} [reviewed] */
 export function cpPanel({ t }, reviewed = new Set()) {
-  return html`<section class="panel picker" data-cp aria-labelledby="cp-title">
+  return html`<section class="panel picker" id="peaks" data-cp aria-labelledby="cp-title">
   <h2 id="cp-title">${t('cp.title')} ${reviewChip('load.coincident-peak', reviewed, { t })}</h2>
   <p>${t('cp.intro')}</p>
   <form class="picker-row" data-cp-form novalidate>

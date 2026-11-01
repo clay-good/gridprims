@@ -1,1 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="64" fill="#222624"/><rect x="26" y="26" width="460" height="460" rx="44" fill="none" stroke="#3a403d" stroke-width="4"/><rect x="96" y="150" width="320" height="26" rx="4" fill="#c0c6c2"/><rect x="96" y="238" width="224" height="26" rx="4" fill="#c0c6c2"/><rect x="96" y="326" width="176" height="36" rx="4" fill="#ff7043"/></svg>
+<!-- The mark is a demand profile: a stepped load curve with its peak flagged in
+     the signal color, the one thing every gridprims tool looks for in a meter
+     file. Square caps and mitred joins keep the steps legible at 16 px. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="96" fill="#222624"/><g fill="none" stroke-width="70" stroke-linecap="square" stroke-linejoin="miter"><path d="M105 360H200V160" stroke="#e9ebe8"/><path d="M312 160V290H407" stroke="#e9ebe8"/><path d="M200 160H312" stroke="#ff7043"/></g></svg>

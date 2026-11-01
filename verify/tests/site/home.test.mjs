@@ -19,7 +19,11 @@ const main = (h) => h.slice(h.indexOf('<main'), h.indexOf('</main>'));
 test('without JavaScript the home page asks a plain question, offers two doors, and still proves itself on a sample', () => {
   const html = read('index.html');
   const body = main(html);
-  assert.match(body, /<h1 class="home-title">Is your electric bill right, and is there a cheaper plan\?<\/h1>/);
+  assert.match(body, /<h1 class="home-title">See what your electricity really costs, and what would lower it\.<\/h1>/);
+  // Both audiences are named on the first screen: the two doors, then the three professional jobs.
+  assert.match(body, /<h2 id="pro-title">For energy managers, developers, and utility staff<\/h2>/);
+  assert.match(body, /href="\/files\/#peaks">Coincident-peak exposure</);
+  assert.match(body, /href="\/files\/#battery">Battery and solar payback</);
   // Two equal doors, a ZIP code or a meter file, then the sample's own action.
   const primary = [...body.matchAll(/class="button primary"[^>]*>([^<]+)</g)].map((m) => m[1]);
   assert.deepEqual(primary, ['Find my utility', 'Choose a file', 'Open this file in the workbench']);

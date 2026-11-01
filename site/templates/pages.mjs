@@ -277,14 +277,16 @@ export function filesPage({ i18n, reviewed = new Set() }) {
   ${billPanel(i18n, reviewed)}
   ${proposalPanel(i18n, REGULATORS)}
   ${cpPanel(i18n, reviewed)}
+  <details class="panel more-tools" data-more-electrify><summary>${t('files.more')}</summary>
   ${headroomPanel(i18n, reviewed)}
   ${evPanel(i18n, reviewed)}
   ${addedPanel(i18n, reviewed)}
+  </details>
   ${carbonPanel(i18n, reviewed)}
   <section class="panel" data-receipt></section>
 </article>
 <div class="drag-overlay" data-overlay hidden><p>${t('files.dragging')}</p></div>`;
-  return layout({ i18n, title: `${t('files.title')} · ${t('site.name')}`, description: t('files.purpose'), path: '/files/', body, modules: ['/site/pages/workbench.js'], section: 'bills' });
+  return layout({ i18n, title: `${t('files.pageTitle')} · ${t('site.name')}`, description: t('files.purpose'), path: '/files/', body, modules: ['/site/pages/workbench.js'], section: 'bills' });
 }
 
 /** The privacy page (platform/problem-reports, "Retention"; platform/privacy-and-security). */

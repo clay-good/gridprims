@@ -19,6 +19,9 @@ export function fit(text, max) {
 /** A page title: the page's own name, then the site's, in at most 60 characters. */
 export const pageTitle = (name) => `${fit(name, TITLE_MAX - SUFFIX.length)}${SUFFIX}`;
 
+/** The preferred title when it fits whole, else the fallback, so a long name is never cut mid-phrase. */
+export const titleOr = (preferred, fallback) => pageTitle(preferred.length <= TITLE_MAX - SUFFIX.length ? preferred : fallback);
+
 /**
  * Names made unique for titles: a name shared by several records gets its
  * state, and one still shared gets its id too ("Springfield (IL)", "Solar (CA, plant 123)").

@@ -28,7 +28,7 @@ for (const kind of ['chrome', 'firefox']) {
       await waitFor(browser, "document.documentElement.dataset.lookupDone === '78701'");
       const text = await browser.evaluate("document.querySelector('[data-lookup-result]').textContent");
       assert.match(text, /Travis County, TX/);
-      assert.match(text, /Census ZIP Code Tabulation Areas/);
+      assert.match(text, /Census Bureau's ZIP Code Tabulation Areas/);
       const seen = [...log, ...browser.requests];
       assert.deepEqual(seen.filter((u) => u.includes('78701')), [], 'the ZIP appears in no request');
       // The service worker may precache the page and the prefix table meanwhile; a state shard is fetched only for a lookup.

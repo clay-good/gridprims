@@ -7,7 +7,7 @@ import { sourceStamp } from '../ui/source-stamp.mjs';
 import { tableView } from '../lib/chart.mjs';
 import { utilityPath } from './utility.mjs';
 import { plantPath } from './plant.mjs';
-import { pageTitle } from '../lib/meta.mjs';
+import { pageTitle, titleOr } from '../lib/meta.mjs';
 
 export const statePath = (code) => `/states/${code.toLowerCase()}/`;
 export const subregionPath = (code) => `/subregions/${code.toLowerCase()}/`;
@@ -62,7 +62,7 @@ ${tableView([t('state.col.plant'), t('queue.col.county'), t('plant.nameplate'), 
     [...plants].sort((a, b) => b.nameplateMw - a.nameplateMw || a.name.localeCompare(b.name)).map((p) => [html`<a href="${plantPath(p.id)}">${p.name}</a>`, p.county ?? '', `${mw(p.nameplateMw)} MW`, p.utilityName ?? '']), t('state.plantsCaption', { name: s.name }))}
 </section>` : ''}
 ${extra}`;
-  return layout({ i18n, title: pageTitle(t('state.title', { name: s.name })), description: t('state.description', { name: s.name }), path: statePath(s.code), body, section: 'grid', card: 'data' });
+  return layout({ i18n, title: titleOr(t('state.pageTitle', { name: s.name }), t('state.title', { name: s.name })), description: t('state.description', { name: s.name }), path: statePath(s.code), body, section: 'grid', card: 'data' });
 }
 
 /** @param {{subregion: any, sources: any, i18n: any}} p */

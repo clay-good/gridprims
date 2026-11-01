@@ -40,7 +40,7 @@ test('About names the maintainer and the funding, lists planned costs honestly, 
   const html = page('/about/');
   assert.match(html, /built and run by Clay Good/);
   assert.match(html, /no advertising, sponsorship, affiliate fees, or payments for leads, and has no funders/);
-  assert.match(html, /not deployed yet, so there is no hosting invoice.*\$5 a month/s);
+  assert.match(html, /hosting costs nothing, so the only bill is the domain.*\$5-a-month paid plan/s);
   assert.doesNotMatch(html, /trusted by|used by \d|partners include/i);
 });
 

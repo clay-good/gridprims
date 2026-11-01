@@ -63,6 +63,6 @@ test('the EIA-861 library page\'s Dataset markup names EIA, the license, the per
 });
 
 test('entity titles say what they are, so a state and a plant named Washington do not collide', () => {
-  assert.match(read('states/wa/index.html'), /<title>Electricity in Washington · gridprims<\/title>/);
+  assert.match(read('states/wa/index.html'), /<title>Washington electricity prices and utilities · gridprims<\/title>/);
   assert.match(read('plants/3470/index.html'), /<title>W A Parish power plant · gridprims<\/title>/);
 });

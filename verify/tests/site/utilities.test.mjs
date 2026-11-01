@@ -54,8 +54,9 @@ test('a co-op with no plants buys all of its power; one without reliability says
   assert.match(text(page(108)), /It operates no power plants listed in EIA-860, so it buys all of its power\./);
   assert.match(text(page(55)), /Not reported to EIA for 2025\. Small utilities are often exempt from reporting reliability\./);
   const al = text(page(195));
-  assert.match(al, /This is generation the utility operates, not the full mix of power it buys\./);
-  assert.match(al, /Plants it operates/);
+  assert.match(al, /These are the plants the utility runs, not the full mix of power it buys\./);
+  // Past a dozen the list folds behind a summary that counts them.
+  assert.match(al, /Plants it operates|plants it operates/);
 });
 
 test('rates: the count and newest update from the OpenEI database', () => {
