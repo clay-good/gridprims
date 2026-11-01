@@ -627,6 +627,7 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 | What the line above is | `aboveKind` | choice | `secondary`, `primary`, `comm` | secondary |
 | Separation your rules require at midspan | `midspanSep` |  |  | none |
 | Separation your rules require at the pole | `poleSep` |  |  | none |
+| GO 95 tables the watch found changed | `go95Review` |  |  | none |
 | Also give the sag this far from midspan | `offset` |  |  | none |
 
 | Output | Name | Unit | Rounding |

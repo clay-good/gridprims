@@ -12,7 +12,7 @@ const SURFACE = { road: 'over a road', driveway: 'over a driveway', pedestrian: 
 const len = (field, text) => { const r = parseLength(text); return r.error ? { error: { field, message: r.error } } : r; };
 const optional = (field, text) => (String(text).trim().toLowerCase() === 'none' ? { ft: null } : len(field, text));
 /** A GO 95 cell as a rule: its value, where it is, and its footnotes, which are exceptions this check does not apply. */
-const go95 = (id) => { const f = GO95.fields[id]; return f && { ft: f.value.ft, label: `GO 95 ${f.label}`, footnotes: f.value.footnotes }; };
+const go95 = (id) => { const f = GO95.fields[id]; return f && { ft: f.value.ft, label: `GO 95 ${f.label}`, footnotes: f.value.footnotes, table: /Table (\d)/.exec(f.label)?.[1] ?? null }; };
 const SEP_ABOVE = { secondary: 'sep.secondary.comm', primary: 'sep.primary.comm', comm: 'sep.comm.comm' };
 const inches = (ft, toward) => `${toward === 'up' ? Math.ceil(ft * 12 - 1e-9) : Math.floor(ft * 12 + 1e-9)} in.`;
 
@@ -56,7 +56,9 @@ export function compute(v) {
   if (fromGo95) parsed.required = { ft: ground?.ft ?? null };
   const who = fromGo95 ? 'GO 95 requires' : 'your rules require';
   const exceptions = (r) => (r?.footnotes?.length ? ` Exceptions not checked: ${r.footnotes.map((x) => `(${x})`).join(' ')}.` : '');
-  if (ground) notes.push(`${ground.label}: ${ruleLength(ground.ft)}.${exceptions(ground)}`);
+  // The weekly watch found the CPUC's page no longer matches our capture: say so on every value from it.
+  const review = (r) => (r && String(v.go95Review).split(',').includes(r.table) ? ` Needs review: GO 95 Table ${r.table} has changed since this value was captured.` : '');
+  if (ground) notes.push(`${ground.label}: ${ruleLength(ground.ft)}.${exceptions(ground)}${review(ground)}`);
   if (!checks) sentences.push(`The lowest point is ${where}.`);
   else if (v.crosses === 'not-chosen' || parsed.required.ft === null) sentences.push(`The lowest point is ${where}. What does the span cross?`);
   else {
@@ -72,7 +74,7 @@ export function compute(v) {
     const g = smallestGap(line, above, S);
     gap = g.gap * 12;
     const g95 = fromGo95 ? go95(SEP_ABOVE[v.aboveKind]) : null;
-    if (g95) notes.push(`${g95.label}: ${inches(g95.ft, 'up')} on the same pole and in adjoining midspans.${exceptions(g95)}`);
+    if (g95) notes.push(`${g95.label}: ${inches(g95.ft, 'up')} on the same pole and in adjoining midspans.${exceptions(g95)}${review(g95)}`);
     const sep = g95 ? g95.ft : parsed.midspanSep.ft ?? parsed.poleSep.ft;
     const which = g95 ? 'GO 95 value' : parsed.midspanSep.ft !== null ? 'midspan value' : 'value at the pole';
     const place = g.midspan ? 'at midspan' : `${g.at.toFixed(0)} ft from the first pole`;

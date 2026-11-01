@@ -99,3 +99,12 @@ test('GO 95: the thoroughfare clearance comes from Table 1, Case 3, Column B, wi
   const p = run({ ruleSource: 'go95', crosses: 'pedestrian' });
   assert.match(p.sentence, /above the 10 ft GO 95 requires over an area only people on foot can reach/);
 });
+
+test('a GO 95 value from a table the watch found changed says it needs review', () => {
+  const base = tool.manifest.examples.find((e) => e.id === 'go95-road').inputs;
+  const steps = (go95Review) => runTool(tool.manifest, tool.impl, { ...base, go95Review }).work.steps.join('\n');
+  assert.doesNotMatch(steps('none'), /Needs review/);
+  assert.match(steps('1'), /GO 95 Table 1, Case 3, Column B: 18 ft\. Exceptions not checked: .*\. Needs review: GO 95 Table 1 has changed since this value was captured\./);
+  // A change to the other table does not flag this value.
+  assert.doesNotMatch(steps('2'), /Needs review/);
+});

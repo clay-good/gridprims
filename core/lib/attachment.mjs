@@ -16,46 +16,80 @@ export const MAX_MOVES = 2;
 
 const toIn = (ft) => Math.round(ft * 12);
 
+/** What a rule's value may plausibly be, so a unit mistake is flagged rather than trusted silently. */
+const PLAUSIBLE_IN = { sep: [1, 120], ground: [60, 480], 'pole.length-step': [12, 240], 'pole.setting-depth.add': [0, 120] };
+const plausibleFor = (id) => PLAUSIBLE_IN[id] ?? PLAUSIBLE_IN[id.split('.')[0]] ?? null;
+
+/** A row that is not a rule at all: blank, a header, or a footer note. */
+const isFurniture = (first, line) => !first || /^rule_?id$/i.test(first) || !/^[a-z][a-z0-9-]*(\.[a-z0-9-]+)+$/.test(first) || /^(notes?|source|prepared|revision|page)\b/i.test(line);
+
 /**
- * Rules in the template's columns: rule_id, applies_to, value, unit, source_document, source_locator, note.
- * A header row is skipped. Values are lengths ("40" with unit "in", or "40 in" in the value column).
+ * Read the rules in the template's columns: rule_id, applies_to, value, unit, source_document,
+ * source_locator, note. The reader never guesses. An id it does not know is ignored and listed. A rule given
+ * twice with different values is a conflict, naming both rows, and the checks that need it are refused until
+ * the user picks one. A value with no unit is refused unless the unit is written inside the value. A value
+ * outside its plausible range is flagged and still used as written. Blank, header, and footer rows are
+ * skipped and counted.
  * @param {string} text
- * @returns {{rules: any[], problems: string[]}}
  */
 export function parseRules(text) {
-  const rules = []; const problems = [];
+  const rules = []; const problems = []; const ignored = []; const conflicts = []; let skipped = 0;
   String(text).split('\n').forEach((raw, i) => {
     const line = raw.trim();
-    if (!line || /^rule_id\s*,/i.test(line)) return;
-    const [id, appliesTo = '', value = '', unit = '', source = '', locator = '', note = ''] = line.split(',').map((x) => x.trim());
+    const cells = line.split(',').map((x) => x.trim());
+    const [id, appliesTo = '', value = '', unit = '', source = '', locator = '', note = ''] = cells;
     const row = i + 1;
-    if (/^place\.preference$/.test(id)) { rules.push({ id, value: value.toLowerCase(), row, source, locator }); return; }
-    if (/^pole\.setting-depth\.fraction$/.test(id)) {
+    if (isFurniture(id, line)) { if (line) skipped++; return; }
+    if (!TEMPLATE_IDS.includes(id) && !/^ground\.[a-z-]+\.[a-z-]+$/.test(id)) { ignored.push({ id, row }); return; }
+    if (id === 'place.preference') { rules.push({ id, value: value.toLowerCase(), row, source, locator, shown: value.toLowerCase() }); return; }
+    if (id === 'pole.setting-depth.fraction') {
       const n = Number(value.replace('%', '')) / (value.includes('%') ? 100 : 1);
-      if (!(n >= 0 && n < 1)) problems.push(`row ${row}: ${id} must be a fraction such as 0.1 or 10%`); else rules.push({ id, value: n, row, source, locator });
+      if (!(n >= 0 && n < 1)) problems.push(`row ${row}: ${id} must be a fraction such as 0.1 or 10%`);
+      else rules.push({ id, value: n, row, source, locator, shown: value });
       return;
     }
-    // The ids the template carries are the ids the checks read; a ground rule may name any surface the file does.
-    if (!TEMPLATE_IDS.includes(id) && !/^ground\.[a-z-]+\.[a-z-]+$/.test(id)) { problems.push(`row ${row}: "${id}" is not a rule id we know`); return; }
-    if (/[a-z]/i.test(value) && unit) { problems.push(`row ${row}: the value "${value}" holds a unit; put the unit in its own column`); return; }
-    const len = parseLength(unit ? `${value} ${unit}` : value);
+    const inValue = /[a-z]/i.test(value);
+    if (inValue && unit) { problems.push(`row ${row}: the value "${value}" holds a unit; put the unit in its own column`); return; }
+    if (!inValue && !unit) { problems.push(`row ${row}: ${id} has a value with no unit; write the unit in its column, or inside the value as "40 in"`); return; }
+    const len = parseLength(inValue ? value : `${value} ${unit}`);
     if (len.error) { problems.push(`row ${row}: ${len.error}`); return; }
     let range = null;
     const m = /^(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)\s*kv$/i.exec(appliesTo);
     if (m) range = [Number(m[1]), Number(m[2])];
-    // The value as the file wrote it, for showing beside the answer.
+    const inches = toIn(len.ft);
+    const bounds = plausibleFor(id);
+    // A value far outside the range is most often a unit mistake: name the reading it would have in inches.
+    const maybeInches = !inValue && /^ft$/i.test(unit) && Number(value) >= bounds?.[0] && Number(value) <= bounds?.[1];
+    const flag = bounds && (inches < bounds[0] || inches > bounds[1])
+      ? `Row ${row}: ${id} reads ${len.ft >= 1 ? `${+len.ft.toFixed(2)} ft` : `${inches} in.`}, outside the ${bounds[0]} to ${bounds[1]} in. a rule of this kind usually sets. ${maybeInches ? `Did you mean ${value} in.? ` : ''}It is used as written.`
+      : null;
     const shown = `${value}${unit ? ` ${unit}` : ''}`.replace(/\b(in|ft)$/, '$1.').replace(/\bft\.$/, 'ft');
-    rules.push({ id, ft: len.ft, inches: toIn(len.ft), range, row, source, locator, note, shown });
+    rules.push({ id, ft: len.ft, inches, range, row, source, locator, note, shown, flag, unitFromValue: inValue });
   });
-  // Two rows for the same rule and range disagreeing is a conflict, never a silent pick.
+  // Two rows setting the same rule and range to different values: a conflict, not a silent pick.
   const seen = new Map();
   for (const r of rules) {
     const k = `${r.id}|${r.range?.join('-') ?? ''}`;
     const prev = seen.get(k);
-    if (prev && (prev.inches ?? prev.value) !== (r.inches ?? r.value)) problems.push(`rows ${prev.row} and ${r.row} give ${r.id} two different values`);
-    seen.set(k, r);
+    if (prev && (prev.inches ?? prev.value) !== (r.inches ?? r.value)) conflicts.push({ id: r.id, rows: [prev.row, r.row], values: [prev.shown, r.shown] });
+    else seen.set(k, r);
   }
-  return { rules, problems };
+  const conflicted = new Set(conflicts.map((c) => c.id));
+  return { rules: rules.filter((r) => !conflicted.has(r.id)), problems, ignored, conflicts, skipped };
+}
+
+/**
+ * The receipt of a read: every rule with its value, unit, row and source, the rows ignored or skipped, and
+ * every conflict and flag, so a reader can see what the file gave before any check uses it.
+ * @param {ReturnType<typeof parseRules>} read
+ */
+export function rulesReceipt(read) {
+  const lines = read.rules.map((r) => `Row ${r.row}: ${r.id} = ${r.shown}${r.range ? ` for ${r.range[0]} to ${r.range[1]} kV` : ''}${r.source ? `, from ${r.source}${r.locator ? ` ${r.locator}` : ''}` : ', with no source named'}${r.unitFromValue ? ' (the unit came from the value)' : ''}`);
+  for (const c of read.conflicts) lines.push(`Rows ${c.rows.join(' and ')} both set ${c.id} (${c.values.join(' and ')}). Checks that need it are refused until you pick one.`);
+  for (const r of read.rules.filter((x) => x.flag)) lines.push(r.flag);
+  for (const i of read.ignored) lines.push(`Row ${i.row}: "${i.id}" is not a rule id we know, so it is ignored.`);
+  if (read.skipped) lines.push(`${read.skipped} blank, header, or note ${read.skipped === 1 ? 'row' : 'rows'} skipped.`);
+  return lines;
 }
 
 /**

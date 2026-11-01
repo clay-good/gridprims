@@ -43,6 +43,7 @@ export default {
   related: ['lines.midspan-clearance.check'],
   handoffs: [
     { label: 'The standards template to fill with your own rules (CSV)', url: 'https://gridprims.com/lines/standards-template.csv' },
+    { label: 'The same template as an Excel workbook', url: 'https://gridprims.com/lines/standards-template.xlsx' },
     { label: 'FCC pole attachment make-ready rules, 47 CFR 1.1411', url: 'https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-1/subpart-J/section-1.1411' },
     { label: 'California General Order 95 (overhead line rules)', url: 'https://ia.cpuc.ca.gov/gos/go95/go_95_startup_page.html' },
   ],

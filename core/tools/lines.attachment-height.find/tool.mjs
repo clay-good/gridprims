@@ -5,7 +5,7 @@
 // answer.
 
 import { feetInches, parseLength } from '../../lib/field-length.mjs';
-import { KIND_NAME, existingShortfalls, extraHeight, movePlans, parseAttachments, parseRules, pick, space } from '../../lib/attachment.mjs';
+import { KIND_NAME, existingShortfalls, extraHeight, movePlans, parseAttachments, parseRules, pick, rulesReceipt, space } from '../../lib/attachment.mjs';
 
 const fi = (inches) => feetInches(inches / 12, 'down');
 const by = (inches) => feetInches(inches / 12, 'up');
@@ -13,8 +13,9 @@ const cap = (s) => s[0].toUpperCase() + s.slice(1);
 const cite = (r) => `${r.id}, row ${r.row}${r.source ? ` (${r.source}${r.locator ? `, ${r.locator}` : ''})` : ''}`;
 
 export function compute(v) {
-  const { rules, problems: ruleProblems } = parseRules(v.rules);
-  if (ruleProblems.length) return { status: 'invalid', errors: ruleProblems.map((m) => ({ field: 'rules', message: m })) };
+  const read = parseRules(v.rules);
+  const { rules } = read;
+  if (read.problems.length) return { status: 'invalid', errors: read.problems.map((m) => ({ field: 'rules', message: m })) };
   const { attachments, problems, noPower } = parseAttachments(v.attachments);
   if (problems.length) return { status: 'invalid', errors: problems.map((m) => ({ field: 'attachments', message: m })) };
   let poleLengthFt = null;
@@ -29,11 +30,15 @@ export function compute(v) {
   const add = rules.find((r) => r.id === 'pole.setting-depth.add');
   const poleTopIn = poleLengthFt !== null && frac && add ? Math.floor((poleLengthFt - (poleLengthFt * frac.value + add.ft)) * 12) : null;
   const sp = space(attachments, rules, { noPower, poleTopIn });
-  if (sp.refused) return { status: 'refused', reason: sp.refused };
+  if (sp.refused) {
+    // A rule two rows disagree on reads as missing; say which rows, so the file can be fixed.
+    const clash = read.conflicts.find((c) => sp.refused.includes(c.id));
+    return { status: 'refused', reason: clash ? `Rows ${clash.rows.join(' and ')} both set ${clash.id} (${clash.values.join(' and ')}). Pick one and the check can run.` : sp.refused };
+  }
 
   const preference = v.preference === 'rules' ? rules.find((r) => r.id === 'place.preference')?.value ?? 'highest' : v.preference;
   const comm = attachments.filter((a) => !a.supply);
-  const receipt = attachments.map((a) => `Row ${a.row}: ${KIND_NAME[a.kind]}${a.kv ? ` ${a.kv} kV` : ''}${a.owner ? ` (${a.owner})` : ''} at ${fi(a.inches)}`);
+  const receipt = [...rulesReceipt(read), ...attachments.map((a) => `Row ${a.row}: ${KIND_NAME[a.kind]}${a.kv ? ` ${a.kv} kV` : ''}${a.owner ? ` (${a.owner})` : ''} at ${fi(a.inches)}`)];
   const same = comm.filter((a, i) => comm.some((b, j) => j !== i && b.inches === a.inches));
   if (same.length) receipt.push(`Two lines at one height: ${same.map((a) => `row ${a.row}`).join(' and ')} at ${fi(same[0].inches)}`);
   const sources = [
@@ -48,7 +53,8 @@ export function compute(v) {
   const free = [];
   for (let h = sp.top; h >= sp.bottom; h--) if (comm.every((a) => Math.abs(a.inches - h) >= sp.commSep.inches)) free.push(h);
   const at = pick(free, preference, comm.map((a) => a.inches));
-  const notes = ['Pole loading is not checked. The pole owner and a qualified engineer have the final word.'];
+  // A flagged value is repeated on the result, not only in the receipt.
+  const notes = [...rules.filter((r) => r.flag).map((r) => r.flag), 'Pole loading is not checked. The pole owner and a qualified engineer have the final word.'];
   let answer; const outputs = {};
   if (at !== null) {
     answer = `Attach at ${fi(at)}. No other line needs to move.`;

@@ -26,7 +26,9 @@ test('the CSV, the workbook, and the ids the checks read are the same list', asy
   const filled = (r) => (r.id === 'place.preference' ? 'highest,' : r.id === 'pole.setting-depth.fraction' ? '10%,' : r.id.startsWith('ground.') ? '18,ft' : '40,in');
   const read = parseRules(TEMPLATE_ROWS.map((r) => `${r.id},${r.appliesTo},${filled(r)}`).join('\n'));
   assert.deepEqual(read.problems, []);
-  assert.deepEqual(parseRules('sep.wizard.comm,,4,in').problems, ['row 1: "sep.wizard.comm" is not a rule id we know']);
+  // An id outside the template is not refused: it is ignored and listed, so one stray row cannot stop a file.
+  const stray = parseRules('sep.wizard.comm,,4,in');
+  assert.deepEqual([stray.problems, stray.rules, stray.ignored], [[], [], [{ id: 'sep.wizard.comm', row: 1 }]]);
 });
 
 test('the template ships no NESC value: every value cell is blank and every NESC reference is a number', () => {

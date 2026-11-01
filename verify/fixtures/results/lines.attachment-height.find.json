@@ -25,6 +25,10 @@
         "work": {
           "method": "The communication space runs from the lowest supply attachment less the separation your rules require below it (by kind, and by voltage for a primary) down to your lowest allowed height. Every whole-inch height in it that keeps your separation from each communication line is a fit; one is picked by placement preference, highest by default. With none, plans of one move, then two, of existing communication lines are tried, each moved line keeping every separation; plans rank by fewest moves, least total distance, the new line's height by preference, then moving up. With no plan, the extra height above ground is the least raise of the space that fits the new line, and a replacement pole is the shortest length on your length step whose height above ground, length less your setting depth, gains that much.",
           "steps": [
+            "Row 2: sep.neutral.comm = 40 in., from Our joint use standard §4.2",
+            "Row 3: sep.comm.comm = 12 in., from Our joint use standard §4.3",
+            "Row 4: ground.pole.comm = 18 ft, from Our joint use standard §4.1",
+            "1 blank, header, or note row skipped.",
             "Row 1: neutral (Utility) at 30 ft 2 in.",
             "Row 2: cable TV (Cable Co) at 24 ft 0 in.",
             "Row 3: telephone (Phone Co) at 23 ft 0 in.",
@@ -85,6 +89,10 @@
         "work": {
           "method": "The communication space runs from the lowest supply attachment less the separation your rules require below it (by kind, and by voltage for a primary) down to your lowest allowed height. Every whole-inch height in it that keeps your separation from each communication line is a fit; one is picked by placement preference, highest by default. With none, plans of one move, then two, of existing communication lines are tried, each moved line keeping every separation; plans rank by fewest moves, least total distance, the new line's height by preference, then moving up. With no plan, the extra height above ground is the least raise of the space that fits the new line, and a replacement pole is the shortest length on your length step whose height above ground, length less your setting depth, gains that much.",
           "steps": [
+            "Row 2: sep.neutral.comm = 40 in., from Our joint use standard §4.2",
+            "Row 3: sep.comm.comm = 12 in., from Our joint use standard §4.3",
+            "Row 4: ground.pole.comm = 24 ft, from Our joint use standard §4.1",
+            "1 blank, header, or note row skipped.",
             "Row 1: neutral (Utility) at 30 ft 2 in.",
             "Row 2: cable TV (Cable Co) at 26 ft 4 in.",
             "Row 3: telephone (Phone Co) at 24 ft 9 in.",
@@ -148,6 +156,12 @@
         "work": {
           "method": "The communication space runs from the lowest supply attachment less the separation your rules require below it (by kind, and by voltage for a primary) down to your lowest allowed height. Every whole-inch height in it that keeps your separation from each communication line is a fit; one is picked by placement preference, highest by default. With none, plans of one move, then two, of existing communication lines are tried, each moved line keeping every separation; plans rank by fewest moves, least total distance, the new line's height by preference, then moving up. With no plan, the extra height above ground is the least raise of the space that fits the new line, and a replacement pole is the shortest length on your length step whose height above ground, length less your setting depth, gains that much.",
           "steps": [
+            "Row 1: sep.neutral.comm = 40 in., from Our joint use standard §4.2",
+            "Row 2: sep.comm.comm = 12 in., from Our joint use standard §4.3",
+            "Row 3: ground.pole.comm = 22 ft, from Our joint use standard §4.1",
+            "Row 4: pole.length-step = 5 ft, from Our pole standard §2",
+            "Row 5: pole.setting-depth.fraction = 10%, from Our pole standard §3",
+            "Row 6: pole.setting-depth.add = 2 ft, from Our pole standard §3",
             "Row 1: neutral (Utility) at 25 ft 2 in.",
             "40 in. below the neutral: sep.neutral.comm, row 1 (Our joint use standard, §4.2)",
             "12 in. between communication lines: sep.comm.comm, row 2 (Our joint use standard, §4.3)",

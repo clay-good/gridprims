@@ -65,12 +65,11 @@ test('messy lists: a metric height, two lines at one height, an unknown kind, an
   assert.match(run({ ...ex('fits'), attachments: 'catv, Cable Co, 24 ft' }).reason, /add a line "no power"/);
 });
 
-test('rules: an unknown id, a unit inside the value, and two rows that disagree are named', () => {
-  assert.match(run({ ...ex('fits'), rules: `${RULES}\nsep.wizard.comm,,40,in,,,` }).errors.map((e) => e.message).join(' '), /sep\.wizard\.comm/);
+test('rules: a bad fraction and a unit in both places are refused, naming the row', () => {
   assert.match(run({ ...ex('fits'), rules: `${RULES}\nsep.comm.comm,,40 in,in,,,` }).errors[0].message, /holds a unit/);
-  assert.match(run({ ...ex('fits'), rules: `${RULES}\nsep.comm.comm,,16,in,,,` }).errors[0].message, /rows 3 and 5 give sep\.comm\.comm two different values/);
-  assert.match(run({ ...ex('fits'), rules: 'sep.neutral.comm,,40,in,,,' }).reason, /ground\.pole\.comm/);
-});
+  assert.match(run({ ...ex('fits'), rules: `${RULES}\npole.setting-depth.fraction,,2,,,,` }).errors[0].message, /must be a fraction/);
+  assert.match(run({ ...ex('fits'), rules: 'sep.neutral.comm,,40,in' }).reason, /ground\.pole\.comm/);
+})
 
 test('the first screen holds the rules, the attachments, and the new line, and nothing else', () => {
   assert.deepEqual(tool.manifest.firstScreen, ['rules', 'attachments', 'newKind']);
@@ -88,4 +87,39 @@ test('placement preference: lowest and nearest-existing pick other fits', () => 
   assert.equal(run({ ...ex('fits'), preference: 'nearest-existing' }).sentence, 'Attach at 25 ft 0 in. No other line needs to move.');
   const byRules = run({ ...ex('fits'), rules: `${RULES}\nplace.preference,,lowest,,Our joint use standard,§4.6,` });
   assert.equal(byRules.sentence, 'Attach at 18 ft 0 in. No other line needs to move.');
+});
+
+test('the reader never guesses: an unknown id is ignored, a conflict is refused naming both rows', () => {
+  const unknown = run({ ...ex('fits'), rules: `${RULES}\nsep.antenna.comm,,4,in,,,` });
+  assert.equal(unknown.status, 'ok', 'an id we do not know does not stop the check');
+  assert.ok(unknown.work.steps.some((s) => s === 'Row 5: "sep.antenna.comm" is not a rule id we know, so it is ignored.'));
+  const clash = run({ ...ex('fits'), rules: `${RULES}\nsep.comm.comm,,6,in,,,` });
+  assert.equal(clash.status, 'refused');
+  assert.equal(clash.reason, 'Rows 3 and 5 both set sep.comm.comm (12 in. and 6 in.). Pick one and the check can run.');
+});
+
+test('an implausible value is flagged as a likely unit mistake, used as written, and repeated on the result', () => {
+  const r = run({ ...ex('fits'), rules: RULES.replace('sep.comm.comm,,12,in', 'sep.comm.comm,,12,ft') });
+  const flag = 'Row 3: sep.comm.comm reads 12 ft, outside the 1 to 120 in. a rule of this kind usually sets. Did you mean 12 in.? It is used as written.';
+  assert.ok(r.work.steps.filter((s) => s === flag).length >= 2, 'the flag is in the receipt and beside the result');
+  // Used as written: a 12 ft separation leaves no room, so the existing lines now read as too close.
+  assert.match(r.sentence, /11 ft 0 in\. closer together than your rules allow/);
+});
+
+test('the receipt names each rule with its row and source; blank, header, and note rows are counted', () => {
+  const rules = `rule_id,applies_to,value,unit,source_document,source_locator,note\n${RULES.split('\n').slice(1).join('\n')}\n\nNotes: prepared by the engineering group`;
+  const r = run({ ...ex('fits'), rules });
+  const steps = r.work.steps.join('\n');
+  assert.match(steps, /Row 2: sep\.neutral\.comm = 40 in\., from Our joint use standard §4\.2/);
+  assert.match(steps, /Row 4: ground\.pole\.comm = 18 ft, from Our joint use standard §4\.1/);
+  assert.match(steps, /2 blank, header, or note rows skipped\./);
+});
+
+test('a unit written inside the value reads, and the receipt says where the unit came from', async () => {
+  const { parseRules, rulesReceipt } = await import('../../../core/lib/attachment.mjs');
+  const read = parseRules('sep.comm.comm,,40 in,,,,');
+  assert.deepEqual([read.rules[0].inches, read.problems], [40, []]);
+  assert.match(rulesReceipt(read).join('\n'), /Row 1: sep\.comm\.comm = 40 in\., with no source named \(the unit came from the value\)/);
+  // No unit anywhere is refused rather than assumed.
+  assert.match(parseRules('sep.comm.comm,,40,,,,').problems[0], /has a value with no unit/);
 });
