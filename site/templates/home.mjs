@@ -104,7 +104,7 @@ export function homePage({ tools, i18n, exists, asOf, proof = null }) {
 ${startDoors(i18n)}
 ${proof ? proofPlate(proof, i18n) : ''}
 <p class="home-more"><a href="${CATALOG_PATH}">${t('home.allTools')}</a> · <a href="${LOOKUP_PATH}">${t('home.cell.find-utility')}</a></p>`;
-  return layout({ i18n, title: t('home.pageTitle'), description: t('site.tagline'), path: '/', body, modules: ['/site/pages/home.js'], section: 'home' });
+  return layout({ i18n, title: t('home.pageTitle'), description: t('site.tagline'), path: '/', body, modules: ['/site/pages/home.js'], section: 'home', commandBar: false });
 }
 
 /** Tools built as pages rather than manifests (the lookup and the workbench), with their sections. */

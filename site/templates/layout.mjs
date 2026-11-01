@@ -1,4 +1,6 @@
 // The shell around every page (DESIGN.md Layout): top rail, command bar, main, footer.
+// The home page opts out of the command bar: it has one headline and one action,
+// and a second search field there competes with both (site/home-and-navigation).
 
 import { html, raw } from '../lib/html.mjs';
 import { gridPulse } from '../ui/grid-pulse.mjs';
@@ -26,7 +28,7 @@ export const FOOTER_PAGES = [['about', '/about/'], ['privacy', '/privacy/'], ['l
 /** The trust page set, linked in full from /about/ (site/trust-pages). */
 export const TRUST_PAGES = [['about', '/about/'], ['methods', '/methods/'], ['privacy', '/privacy/'], ['accessibility', '/accessibility/'], ['corrections', '/corrections/'], ['changelog', '/changelog/'], ['license', '/license/'], ['sources', '/sources/'], ['review', '/review-status/'], ['limits', '/limits/'], ['terms', '/terms/'], ['continuity', '/continuity/'], ['developers', '/developers/'], ['security', '/security/'], ['settings', '/settings/'], ['report', '/report/']];
 
-export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null, structured = [], crumbs = null, feed = null, card = null }) {
+export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null, structured = [], crumbs = null, feed = null, card = null, commandBar = true }) {
   const { t } = i18n;
   const summary = fit(description, DESCRIPTION_MAX);
   // Breadcrumbs on every page: home, the section, then the page, as the page's own links show them.
@@ -74,13 +76,13 @@ ${modules.map((m) => html`<script type="module" src="${m}"></script>`)}
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="${t('theme.toggle')}">${t('theme.night')}</button>
   </div>
 </header>
-<div class="command" role="search">
+${commandBar ? html`<div class="command" role="search">
   <div class="wrap">
     <label for="command-input">${t('command.label')}</label>
     <input id="command-input" class="mono" type="search" autocomplete="off" spellcheck="false" placeholder="${t('command.placeholder')}" aria-controls="command-results" aria-expanded="false" aria-autocomplete="list" role="combobox">
     <ul id="command-results" class="command-results mono" role="listbox" aria-label="${t('command.results')}" hidden></ul>
   </div>
-</div>
+</div>` : ''}
 <main id="main" class="wrap">
 ${body}
 </main>

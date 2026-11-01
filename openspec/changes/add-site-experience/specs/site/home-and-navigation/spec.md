@@ -5,14 +5,14 @@ Puts a US energy grid professional in front of a working instrument on the first
 ## ADDED Requirements
 
 ### Requirement: The home page is the instrument, not a menu of them
-The home page SHALL open on the load and bill workbench itself, already working on the shipped sample meter file, so the first screen shows a measured result rather than a promise or a list of links: a headline naming what this is for a grid professional, one primary action (drop or choose an interval file), and the sample's peak demand, the day's stepped load curve, and its basis. Dropping a file SHALL replace the sample in place, without navigating to another page.
+The home page SHALL open on the load and bill workbench itself, already working on the shipped sample meter file, so the first screen shows a measured result rather than a promise or a list of links: a headline naming what this is for a grid professional, one primary action (drop or choose an interval file), and the sample's peak demand, the day's stepped load curve, and its basis. The home page SHALL NOT carry the command bar: one headline and one action are the whole offer, and a search field beside them competes with both. Every other page SHALL keep it. Dropping a file SHALL replace the sample in place, without navigating to another page.
 
 The home page SHALL NOT present lanes, grids, or rows of tool cells. Every other tool SHALL be reachable from one "All tools" link and from the footer, never from the home page's first screen.
 
 #### Scenario: A professional arrives cold
 
 - **WHEN** the home page loads at 1440 × 900 px
-- **THEN** a measured value computed from the sample file is visible without scrolling, beside its curve and its basis, and exactly one primary action asks for an interval file
+- **THEN** a measured value computed from the sample file is visible without scrolling, beside its curve and its basis, exactly one primary action asks for an interval file, and no command bar competes with it
 
 #### Scenario: Phone first screen
 
