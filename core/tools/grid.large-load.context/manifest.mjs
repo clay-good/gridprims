@@ -8,8 +8,8 @@ export default {
   inputs: [
     { name: 'requestMw', label: 'Requested load', type: 'number', unit: 'MW', range: { min: 0.1, max: 100000 }, precision: 'exact', example: 300 },
     { name: 'loadFactor', label: 'Load factor', type: 'number', unit: '%', range: { min: 1, max: 100 }, precision: 'exact', example: 80, hint: 'Average use as a share of the requested peak. Data centers often run near 80%.' },
-    { name: 'peakMw', label: 'Utility\'s annual peak demand', type: 'number', unit: 'MW', range: { min: 0, max: 1000000 }, precision: 'exact', example: 1500, hint: 'From FERC Form 714. Enter 0 if the utility does not report one to FERC.' },
-    { name: 'salesMwh', label: 'Utility\'s annual retail sales', type: 'number', unit: 'MWh', range: { min: 1, max: 1e10 }, precision: 'exact', example: 7000000, hint: 'From EIA-861.' },
+    { name: 'peakMw', label: 'Utility\'s annual peak demand', type: 'number', unit: 'MW', range: { min: 0, max: 1000000 }, precision: 'exact', example: 1500, picker: 'large-load-utility', hint: 'From FERC Form 714. Enter 0 if the utility does not report one to FERC.' },
+    { name: 'salesMwh', label: 'Utility\'s annual retail sales', type: 'number', unit: 'MWh', range: { min: 1, max: 1e10 }, precision: 'exact', example: 7000000, hint: 'From EIA-861: the energy over the utility\'s wires, bundled plus delivery-only sales.' },
     { name: 'residentialKwh', label: 'Utility\'s average residential use', type: 'number', unit: 'kWh a year', range: { min: 100, max: 100000 }, precision: 'exact', example: 12000, hint: 'Residential sales ÷ residential customers, from EIA-861.' },
   ],
   outputs: [

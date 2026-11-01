@@ -41,6 +41,7 @@ import { queuePages } from './entities/queue.mjs';
 import { carbonData } from './entities/carbon.mjs';
 import { balancingPages } from './entities/balancing.mjs';
 import { fleetCsv, scenarioData } from './entities/scenario.mjs';
+import { largeLoadUtilities } from './entities/large-load.mjs';
 import { scenarioIndexPage, scenarioPage } from './templates/scenario.mjs';
 import { SCENARIO_INDEX, scenarioPath } from './ui/scenario.mjs';
 import { balancingPage, balancingPath } from './templates/balancing.mjs';
@@ -209,6 +210,11 @@ export async function build(opts = {}) {
   // Entity pages, one per plant that passes the content minimum (add-public-grid-data: plant pages).
   const plants = plantPages(join(ROOT, 'data'));
   const utilities = utilityPages(join(ROOT, 'data'));
+  // The large-load request card's prefill: every utility's Form 714 peak, retail sales, and average home use.
+  if (utilities) {
+    mkdirSync(join(outDir, 'large-load'), { recursive: true });
+    writeFileSync(join(outDir, 'large-load/utilities.json'), JSON.stringify({ license: 'CC BY 4.0', sources: { eia861: utilities.sources.eia861.version, ferc714: utilities.sources.ferc714?.release ?? utilities.sources.ferc714?.version ?? null }, utilities: largeLoadUtilities(utilities) }));
+  }
   const withPage = new Set((utilities?.utilities ?? []).filter((u) => u.page).map((u) => u.id));
   const plantIds = new Set((plants?.plants ?? []).map((p) => p.id));
   // Titles must be unique: a shared name gets its state, then its id.
@@ -439,7 +445,7 @@ export async function build(opts = {}) {
   // Dataset shards are cached as they are visited, not precached, so the shell stays small as data grows.
   // Entity pages (thousands of plants) are cached as visited too, not precached.
   // So are the lookup's state shards (2.4 MB in all) and the bill tools' rate files (about 50 MB): a visitor needs only their own utility's.
-  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('bills/tariffs/') && !f.startsWith('bills/rates/') && !f.startsWith('outages/') && !f.startsWith('carbon/') && !f.startsWith('weather/') && !f.startsWith('site/cards/'));
+  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('bills/tariffs/') && !f.startsWith('bills/rates/') && !f.startsWith('outages/') && !f.startsWith('carbon/') && !f.startsWith('large-load/') && !f.startsWith('weather/') && !f.startsWith('site/cards/'));
   const version = sha256(shell.map((f) => `${f}:${sha256(readFileSync(join(outDir, f)))}`).join('\n')).slice(0, 12);
   const urls = shell.map((f) => `/${f.replace(/(^|\/)index\.html$/, '$1')}`);
   writeFileSync(join(outDir, 'sw.js'), serviceWorkerSource({ version, files: urls }));

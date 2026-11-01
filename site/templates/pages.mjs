@@ -24,6 +24,7 @@ import { ferc1Picker } from '../ui/ferc1-picker.mjs';
 import { outagePicker } from '../ui/outage-picker.mjs';
 import { cleanestPicker } from '../ui/cleanest-picker.mjs';
 import { weatherPicker } from '../ui/weather-picker.mjs';
+import { largeLoadPicker } from '../ui/large-load-picker.mjs';
 import REGULATORS from '../../data/curated/regulators.mjs';
 import { headroomPanel } from '../ui/workbench-headroom.mjs';
 import { evPanel } from '../ui/workbench-ev.mjs';
@@ -34,7 +35,7 @@ import { carbonPanel } from '../ui/workbench-carbon.mjs';
 const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'] };
 
 /** Pickers that fill a tool's inputs from public data: the section they render and the script that runs it. */
-const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'], 'rus-conductor': [conductorPicker, '/site/pages/conductor-picker.js'], 'ferc1': [ferc1Picker, '/site/pages/ferc1-picker.js'], 'eaglei-county': [outagePicker, '/site/pages/outage-picker.js'], 'cleanest-hours': [cleanestPicker, '/site/pages/cleanest-picker.js'], 'weather-station': [weatherPicker, '/site/pages/weather-picker.js'] };
+const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'], 'rus-conductor': [conductorPicker, '/site/pages/conductor-picker.js'], 'ferc1': [ferc1Picker, '/site/pages/ferc1-picker.js'], 'eaglei-county': [outagePicker, '/site/pages/outage-picker.js'], 'cleanest-hours': [cleanestPicker, '/site/pages/cleanest-picker.js'], 'weather-station': [weatherPicker, '/site/pages/weather-picker.js'], 'large-load-utility': [largeLoadPicker, '/site/pages/large-load-picker.js'] };
 const pickersOf = (manifest) => [...new Set(manifest.inputs.map((i) => i.picker).filter(Boolean))].map((p) => PICKERS[p]);
 
 /** One input control, labeled from the manifest. */

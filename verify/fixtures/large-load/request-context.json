@@ -1,0 +1,102 @@
+{
+ "note": "A 300 MW request at 80% load factor, recomputed by hand in Python from the cited EIA-861 2025 sales rows (bundled and delivery service) and the PUDL FERC Form 714 2025 annual peaks. Residential use is residential sales x 1,000 / residential customers, rounded to the kWh.",
+ "request": {
+  "requestMw": 300,
+  "loadFactor": 80
+ },
+ "cases": [
+  {
+   "utility_id": 195,
+   "name": "Alabama Power Company",
+   "rows": {
+    "sales": [
+     {
+      "state": "AL",
+      "service_type": "Bundled",
+      "tot_sales": 52177426,
+      "res_sales": 18189758,
+      "res_customers": 1342827
+     }
+    ],
+    "peak": [
+     {
+      "year": 2025,
+      "peak_mw": 14872,
+      "respondent_name": "Alabama Power Company"
+     }
+    ]
+   },
+   "hand": {
+    "salesMwh": 52177426,
+    "residentialKwh": 13546,
+    "peakMw": 14872,
+    "energyMwh": 2102400.0,
+    "peakShare": 2.0,
+    "salesShare": 4.0,
+    "homes": 155204
+   }
+  },
+  {
+   "utility_id": 7140,
+   "name": "Georgia Power Company",
+   "rows": {
+    "sales": [
+     {
+      "state": "GA",
+      "service_type": "Bundled",
+      "tot_sales": 89298710,
+      "res_sales": 29462359,
+      "res_customers": 2480484
+     }
+    ],
+    "peak": [
+     {
+      "year": 2025,
+      "peak_mw": 17119,
+      "respondent_name": "Georgia Power Company"
+     }
+    ]
+   },
+   "hand": {
+    "salesMwh": 89298710,
+    "residentialKwh": 11878,
+    "peakMw": 17119,
+    "energyMwh": 2102400.0,
+    "peakShare": 1.8,
+    "salesShare": 2.4,
+    "homes": 176999
+   }
+  },
+  {
+   "utility_id": 12293,
+   "name": "Memphis Light, Gas and Water",
+   "rows": {
+    "sales": [
+     {
+      "state": "TN",
+      "service_type": "Bundled",
+      "tot_sales": 13713352,
+      "res_sales": 5274304,
+      "res_customers": 385015
+     }
+    ],
+    "peak": [
+     {
+      "year": 2025,
+      "peak_mw": 3184,
+      "respondent_name": "Memphis Light, Gas and Water"
+     }
+    ]
+   },
+   "hand": {
+    "salesMwh": 13713352,
+    "residentialKwh": 13699,
+    "peakMw": 3184,
+    "energyMwh": 2102400.0,
+    "peakShare": 9.4,
+    "salesShare": 15.3,
+    "homes": 153471
+   }
+  }
+ ]
+}
