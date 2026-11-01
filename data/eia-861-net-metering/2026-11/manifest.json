@@ -1,0 +1,933 @@
+{
+  "dataset": "eia-861-net-metering",
+  "version": "2026-11",
+  "title": "Net metering and other distributed generation (Form EIA-861), 2021 to 2025",
+  "publisher": "U.S. Energy Information Administration",
+  "sourceUrl": "https://www.eia.gov/electricity/data/eia861/",
+  "terms": {
+    "url": "https://www.eia.gov/about/copyrights_reuse.php",
+    "section": "Public domain and use of EIA content",
+    "text": "U.S. government publications are in the public domain and are not subject to copyright protection. You may use and/or distribute any of our data, files, databases, reports, graphs, charts, and other information products that are on our website or that you receive through our email distribution service. However, if you use or reproduce any of our information products, you should use an acknowledgment, which includes the publication date, such as: \"Source: U.S. Energy Information Administration (Oct 2008).\"",
+    "captured": "2026-10-31"
+  },
+  "redistributionBasis": {
+    "kind": "public domain",
+    "note": "U.S. federal government work (17 U.S.C. 105)"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "us-federal-public-domain",
+    "reason": "recognized us-federal-public-domain",
+    "agrees": true
+  },
+  "license": "public domain (U.S. federal government work (17 U.S.C. 105))",
+  "attribution": "Source: U.S. Energy Information Administration, Form EIA-861, Net Metering and Non-Net Metering Distributed Generation, 2021 to 2025 (Oct 2026).",
+  "asOf": "2026-10-07",
+  "retrieved": "2026-11-01",
+  "generatedAt": "2026-11-01T00:00:00Z",
+  "cadence": {
+    "every": "annual",
+    "nextRelease": {
+      "date": "2027-08-31",
+      "posted": false,
+      "note": "EIA posts an early release each August; the date is inferred, not posted"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://www.eia.gov/electricity/data/eia861/archive/zip/f8612021.zip",
+      "name": "f8612021.zip",
+      "bytes": 4427163,
+      "sha256": "6008618e91bc0e70d841ebbc19283b96b66d7ac95e20b3ad553bd31a20cd7bd4",
+      "file": "2021"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/data/eia861/archive/zip/f8612022.zip",
+      "name": "f8612022.zip",
+      "bytes": 4387531,
+      "sha256": "fe2530295d931c3bc2340918a389745c378e0e6dc960db7c6269b52a616247e0",
+      "file": "2022"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/data/eia861/archive/zip/f8612023.zip",
+      "name": "f8612023.zip",
+      "bytes": 4604583,
+      "sha256": "0acd67ab84cdaef09fd47b4449f2c944f8731c2b3c695ec3a97bb6c0690a4d61",
+      "file": "2023"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/data/eia861/archive/zip/f8612024.zip",
+      "name": "f8612024.zip",
+      "bytes": 4568208,
+      "sha256": "77ce49c60ac5a6bad50c442fc401aad5404a21da875dc5cbaba353af5ede54de",
+      "file": "2024"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/data/eia861/zip/f8612025.zip",
+      "name": "f8612025.zip",
+      "bytes": 4756816,
+      "sha256": "f59f6c732bf685fe0a1591b32227f5ce572dc0dfd26bb5caaeed128ac4e3a396",
+      "file": "2025"
+    }
+  ],
+  "release": "2021 to 2025",
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-11-01",
+    "infrastructure": false,
+    "columnsChecked": 20,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Sales, revenue, customer counts, reliability indices, and served counties by utility and state; no facility, location, or network data."
+  },
+  "tables": [
+    {
+      "name": "net_metering",
+      "title": "Net-metered capacity, installations, and energy sold back by utility, technology, and sector",
+      "dataPeriod": "2025",
+      "rows": 91437,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "data_year",
+          "type": "f64"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "utility_id",
+          "type": "f64"
+        },
+        {
+          "name": "utility_name",
+          "type": "str"
+        },
+        {
+          "name": "ba_code",
+          "type": "str"
+        },
+        {
+          "name": "type",
+          "type": "str",
+          "unit": "EIA's ownership type of the reporting utility"
+        },
+        {
+          "name": "technology",
+          "type": "str",
+          "unit": "the survey's technology group"
+        },
+        {
+          "name": "measure",
+          "type": "str",
+          "unit": "the survey's measure"
+        },
+        {
+          "name": "sector",
+          "type": "str"
+        },
+        {
+          "name": "value",
+          "type": "f64",
+          "unit": "in the measure's unit"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "net_metering/AK.bin",
+          "state": "AK",
+          "rows": 621,
+          "bytes": 33912,
+          "sha256": "9c9174358f54a819215a17b3252459b0b62cf7c02397c73c3e670141f8ff830f"
+        },
+        {
+          "path": "net_metering/AL.bin",
+          "state": "AL",
+          "rows": 288,
+          "bytes": 16552,
+          "sha256": "cc4c5c794bd3c05e8ee70746dccaae1b25b6068308a6a04c14a68025dce6df1c"
+        },
+        {
+          "path": "net_metering/AR.bin",
+          "state": "AR",
+          "rows": 1915,
+          "bytes": 102256,
+          "sha256": "5410d30db442984c4a4cc138e16f9bb8a3cbd4f80a455486b700de2ac55e9f4a"
+        },
+        {
+          "path": "net_metering/AZ.bin",
+          "state": "AZ",
+          "rows": 1680,
+          "bytes": 89688,
+          "sha256": "060e6acab13a58a9f7ea987ae4eb5e8791531a5db0b8a2e55cb0328985f92892"
+        },
+        {
+          "path": "net_metering/CA.bin",
+          "state": "CA",
+          "rows": 3575,
+          "bytes": 188768,
+          "sha256": "d9aeb32ac23ee6644ff770337da13a6eda46a49ca90fe2c7d555fbedf268e4b8"
+        },
+        {
+          "path": "net_metering/CO.bin",
+          "state": "CO",
+          "rows": 3580,
+          "bytes": 188920,
+          "sha256": "9b8ad680a168d424aa9079dc1013604235a082587098271fc6d63f116e8297fe"
+        },
+        {
+          "path": "net_metering/CT.bin",
+          "state": "CT",
+          "rows": 752,
+          "bytes": 41080,
+          "sha256": "ced36beb1436962ea1327e44332ba8f89339f53eedd6ca3a843a1f881e383fe0"
+        },
+        {
+          "path": "net_metering/DC.bin",
+          "state": "DC",
+          "rows": 90,
+          "bytes": 6120,
+          "sha256": "71deaa8806651c8a2bf0dc66178a717b932507ee86c23063d36487015b8bbd1a"
+        },
+        {
+          "path": "net_metering/DE.bin",
+          "state": "DE",
+          "rows": 564,
+          "bytes": 31112,
+          "sha256": "20b65ead741c40efca366bc47d01111b1b187bd188b3c807e9d8cc71f97e7e53"
+        },
+        {
+          "path": "net_metering/FL.bin",
+          "state": "FL",
+          "rows": 3666,
+          "bytes": 193816,
+          "sha256": "5cc15fbcc7c5cbeae84bde90b44e68282a16b228c7208675c17953b7f588acf1"
+        },
+        {
+          "path": "net_metering/GA.bin",
+          "state": "GA",
+          "rows": 3324,
+          "bytes": 176016,
+          "sha256": "0b45f38f8238dac4d1b95102967f4980955006a6524e142b9c42e2f3c6bd5d02"
+        },
+        {
+          "path": "net_metering/HI.bin",
+          "state": "HI",
+          "rows": 604,
+          "bytes": 33048,
+          "sha256": "294a67eec56c8e79eec2b4d362e29f201de20bae801ae2183009ec5b01c0b412"
+        },
+        {
+          "path": "net_metering/IA.bin",
+          "state": "IA",
+          "rows": 2055,
+          "bytes": 109288,
+          "sha256": "7aadc09f90205a40e6150a90cdc3d0b5561a25d117573007de8561993bb35a60"
+        },
+        {
+          "path": "net_metering/ID.bin",
+          "state": "ID",
+          "rows": 940,
+          "bytes": 50944,
+          "sha256": "f71c45f1c94095e05f27ed837d87e0e0dfb1f466a75d0343ccef0fb65b7702de"
+        },
+        {
+          "path": "net_metering/IL.bin",
+          "state": "IL",
+          "rows": 1967,
+          "bytes": 104848,
+          "sha256": "8f93143d5b925cd71a77fbf079391e03a1faec54624be74c9958a3a8e88bfa01"
+        },
+        {
+          "path": "net_metering/IN.bin",
+          "state": "IN",
+          "rows": 3111,
+          "bytes": 164576,
+          "sha256": "f4f1ba04cceeaeabefaf2cd1a60c1d135f08b5b749ba79ddd99fa72599921882"
+        },
+        {
+          "path": "net_metering/KS.bin",
+          "state": "KS",
+          "rows": 1710,
+          "bytes": 91160,
+          "sha256": "cb759639f900ceb8ed885858fdf261b1121b1342b8e9fc0fdff8eee27666f8f4"
+        },
+        {
+          "path": "net_metering/KY.bin",
+          "state": "KY",
+          "rows": 2379,
+          "bytes": 126440,
+          "sha256": "70c07ff27b93be81beb4e62cfc68139cc83e499e9f15aa109baabe37c61ac49b"
+        },
+        {
+          "path": "net_metering/LA.bin",
+          "state": "LA",
+          "rows": 1278,
+          "bytes": 68656,
+          "sha256": "e59bc9991b6db4407a9d5d85336152a8fa6836a3744f5e69c179fc49a33a8cb9"
+        },
+        {
+          "path": "net_metering/MA.bin",
+          "state": "MA",
+          "rows": 1817,
+          "bytes": 96896,
+          "sha256": "37e29f485ad9487c90f5cf162194574f4dca373df871a590128db6cffa3e89cf"
+        },
+        {
+          "path": "net_metering/MD.bin",
+          "state": "MD",
+          "rows": 1017,
+          "bytes": 54992,
+          "sha256": "7f0d8c7a5d9229c0d06bff713d7306fe5776efb0e087f12eebaa06767f71431b"
+        },
+        {
+          "path": "net_metering/ME.bin",
+          "state": "ME",
+          "rows": 528,
+          "bytes": 29272,
+          "sha256": "cccb257502e2b154100ba4935c7a5a1a17bb9b152c1b13e30478269de9aa1ebd"
+        },
+        {
+          "path": "net_metering/MI.bin",
+          "state": "MI",
+          "rows": 2920,
+          "bytes": 154608,
+          "sha256": "949e979c2a152367f8eae4582f7926c9277854b37bd0f5686e317916126fb18e"
+        },
+        {
+          "path": "net_metering/MN.bin",
+          "state": "MN",
+          "rows": 4904,
+          "bytes": 258200,
+          "sha256": "175e5b9d495be9944a4ef79a2ad9ae33b6206b2bb6920412e7bb4119f84d224d"
+        },
+        {
+          "path": "net_metering/MO.bin",
+          "state": "MO",
+          "rows": 3943,
+          "bytes": 208240,
+          "sha256": "640336f82182a3b45db51b138ed1fd94f6ea8f2f683842bcfa42b071302f93e9"
+        },
+        {
+          "path": "net_metering/MS.bin",
+          "state": "MS",
+          "rows": 710,
+          "bytes": 38792,
+          "sha256": "e483078da8c3624e72fa27ed88151ac7f817d9043d5c0539248cf833cac50b30"
+        },
+        {
+          "path": "net_metering/MT.bin",
+          "state": "MT",
+          "rows": 826,
+          "bytes": 44904,
+          "sha256": "68090f50d0a88781bc87f41b5676aecd34f1bc63fe903b3ae0546354e9d1d881"
+        },
+        {
+          "path": "net_metering/NC.bin",
+          "state": "NC",
+          "rows": 2058,
+          "bytes": 109576,
+          "sha256": "868f259b104e0a8524083547ff183310057a4760e6468e7d6c8db156f48cda98"
+        },
+        {
+          "path": "net_metering/ND.bin",
+          "state": "ND",
+          "rows": 649,
+          "bytes": 35488,
+          "sha256": "f1cd847d7d36faa116727817a2a67b28090d5c37d70244030776b303017d25a8"
+        },
+        {
+          "path": "net_metering/NE.bin",
+          "state": "NE",
+          "rows": 2051,
+          "bytes": 109264,
+          "sha256": "40b3280455f36eccf3c8f5effa3966790594b1860c4dae19ab4fc9c72ffb07dd"
+        },
+        {
+          "path": "net_metering/NH.bin",
+          "state": "NH",
+          "rows": 676,
+          "bytes": 37064,
+          "sha256": "4e99bbe42bc516dd58f015f586d6a25e0733c500daa2864166a97a0accb10460"
+        },
+        {
+          "path": "net_metering/NJ.bin",
+          "state": "NJ",
+          "rows": 698,
+          "bytes": 38144,
+          "sha256": "e6a503aa26f8b97ac75ab4f62913f7a4e7429f523a13680456571481d98e9c84"
+        },
+        {
+          "path": "net_metering/NM.bin",
+          "state": "NM",
+          "rows": 1366,
+          "bytes": 73232,
+          "sha256": "3b8997e6a1409bd2ed2f0bd2800f5f374062c4c0526550a3d6ecbecf10726d35"
+        },
+        {
+          "path": "net_metering/NV.bin",
+          "state": "NV",
+          "rows": 833,
+          "bytes": 45120,
+          "sha256": "e32de462af9d64314f0519b9232856c7d7e3515379ccdb65aaa154fa1caa07ff"
+        },
+        {
+          "path": "net_metering/NY.bin",
+          "state": "NY",
+          "rows": 1477,
+          "bytes": 79040,
+          "sha256": "7b08499b98267f2ef84185c1645d7e53cac00095312f9ecae11425a5005fbd6b"
+        },
+        {
+          "path": "net_metering/OH.bin",
+          "state": "OH",
+          "rows": 2009,
+          "bytes": 106864,
+          "sha256": "c7014f0ad684a4d4dac9981c6b01a923f83efab525a0a8afec471e269985139f"
+        },
+        {
+          "path": "net_metering/OK.bin",
+          "state": "OK",
+          "rows": 2135,
+          "bytes": 113792,
+          "sha256": "ab3e5281dacc08060e191379adc575c6b66c30acb54d70211576df5967f8bfc1"
+        },
+        {
+          "path": "net_metering/OR.bin",
+          "state": "OR",
+          "rows": 2202,
+          "bytes": 117000,
+          "sha256": "c9e5d887158549a2ce9715c86d6c6e8f96ab20e3c4ff2e74a7938d088c794502"
+        },
+        {
+          "path": "net_metering/PA.bin",
+          "state": "PA",
+          "rows": 2469,
+          "bytes": 130952,
+          "sha256": "0e1e2a395f26770343e62ddb8c2d272368d800bd21a3f17d922f68c85b03af9c"
+        },
+        {
+          "path": "net_metering/RI.bin",
+          "state": "RI",
+          "rows": 312,
+          "bytes": 18056,
+          "sha256": "67b7bba39c97e97d6f0033659c8d796a89a2df3bf3b0499358f5b739da18b464"
+        },
+        {
+          "path": "net_metering/SC.bin",
+          "state": "SC",
+          "rows": 2114,
+          "bytes": 112592,
+          "sha256": "3f298da605494b19b7343207a76a579d271299e50dca28b110435fc0742db13e"
+        },
+        {
+          "path": "net_metering/SD.bin",
+          "state": "SD",
+          "rows": 691,
+          "bytes": 37600,
+          "sha256": "d4422cf949fee89ee3dad591793ed8b6619186ae40176b0109bb9d03878bb679"
+        },
+        {
+          "path": "net_metering/TN.bin",
+          "state": "TN",
+          "rows": 134,
+          "bytes": 8472,
+          "sha256": "14f7bf520f93a92d4b181cebc686ea6e59ba9737ba4146d4fc8749cfcdfcc901"
+        },
+        {
+          "path": "net_metering/TX.bin",
+          "state": "TX",
+          "rows": 5228,
+          "bytes": 275768,
+          "sha256": "2d2c295cf596a2b7669de78c6a44215075ac4b016f42c0f0aacf3d1539aeff53"
+        },
+        {
+          "path": "net_metering/UT.bin",
+          "state": "UT",
+          "rows": 1308,
+          "bytes": 70352,
+          "sha256": "d0ce285a24bdfdbf01b34a5f15b17bb2b8857917e0681f624d6eaa3e90bc89c5"
+        },
+        {
+          "path": "net_metering/VA.bin",
+          "state": "VA",
+          "rows": 1563,
+          "bytes": 83592,
+          "sha256": "65a12210e6e9b3787e0a123a85399493e8c8adc58563fd2f44c48d5b8ac36148"
+        },
+        {
+          "path": "net_metering/VT.bin",
+          "state": "VT",
+          "rows": 488,
+          "bytes": 27008,
+          "sha256": "f33b0d0a826af2c7023c7a86c7acb583f5521f181d094851d56d54693d90634f"
+        },
+        {
+          "path": "net_metering/WA.bin",
+          "state": "WA",
+          "rows": 3749,
+          "bytes": 198128,
+          "sha256": "eb785678e169c7cce681b65ea2bf749e932761e1f346388088bd7c39a7e8dc13"
+        },
+        {
+          "path": "net_metering/WI.bin",
+          "state": "WI",
+          "rows": 4726,
+          "bytes": 249280,
+          "sha256": "ce0c38b4514a62ae9816c449f0793bd0b7cd0a446accf0d71c28c74b04fba1b8"
+        },
+        {
+          "path": "net_metering/WV.bin",
+          "state": "WV",
+          "rows": 761,
+          "bytes": 41336,
+          "sha256": "ba2753e754c4bc510376f344d84f4b01d57e9ec7f07ac1c1251e78151e59e7e9"
+        },
+        {
+          "path": "net_metering/WY.bin",
+          "state": "WY",
+          "rows": 976,
+          "bytes": 52608,
+          "sha256": "2fede71dc6554aed717b8ab7d57037c7918daedf54fd736fcc08eb9224e377d9"
+        }
+      ],
+      "download": {
+        "path": "net_metering.csv.gz",
+        "bytes": 604289,
+        "sha256": "8372bbf6ee14b1b21ee2090e044bf5c1b1db7e10c9728c031f2e5c85f64f1883",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Form EIA-861, Net Metering and Non-Net Metering Distributed Generation, 2021 to 2025 (Oct 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "non_net",
+      "title": "Distributed generation that is not net metered, by utility, technology, and sector",
+      "dataPeriod": "2025",
+      "rows": 23967,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "data_year",
+          "type": "f64"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "utility_id",
+          "type": "f64"
+        },
+        {
+          "name": "utility_name",
+          "type": "str"
+        },
+        {
+          "name": "ba_code",
+          "type": "str"
+        },
+        {
+          "name": "type",
+          "type": "str",
+          "unit": "EIA's ownership type of the reporting utility"
+        },
+        {
+          "name": "technology",
+          "type": "str",
+          "unit": "the survey's technology group"
+        },
+        {
+          "name": "measure",
+          "type": "str",
+          "unit": "the survey's measure"
+        },
+        {
+          "name": "sector",
+          "type": "str"
+        },
+        {
+          "name": "value",
+          "type": "f64",
+          "unit": "in the measure's unit"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "non_net/AK.bin",
+          "state": "AK",
+          "rows": 420,
+          "bytes": 23584,
+          "sha256": "00b864a75e676492c6511617a196edf8dccf22bfd65446e741150f2348d37686"
+        },
+        {
+          "path": "non_net/AL.bin",
+          "state": "AL",
+          "rows": 858,
+          "bytes": 46736,
+          "sha256": "78b4cd0af4fc07bf87fd7cce5b768e3af0ca760c59d8302d73c37a5b79660293"
+        },
+        {
+          "path": "non_net/AR.bin",
+          "state": "AR",
+          "rows": 165,
+          "bytes": 10136,
+          "sha256": "9e9e50fd8c807782164fad6ad430272f420f4172f3a4ec4d60931dd8c61757ce"
+        },
+        {
+          "path": "non_net/AZ.bin",
+          "state": "AZ",
+          "rows": 198,
+          "bytes": 11992,
+          "sha256": "e4ee51a4120a4c0e5088bb7eeaf1cd151767007fea511c5f8fa53b9b55fb0d5a"
+        },
+        {
+          "path": "non_net/CA.bin",
+          "state": "CA",
+          "rows": 1221,
+          "bytes": 65824,
+          "sha256": "d4031186d4619c300f87a682ad2eacdc378494446c2457c0a7d382697a880983"
+        },
+        {
+          "path": "non_net/CO.bin",
+          "state": "CO",
+          "rows": 660,
+          "bytes": 36392,
+          "sha256": "192bf76f0b21e9e1c8cabd4b8995c7a575612d13ad4c222b19ef26ce2141a0e4"
+        },
+        {
+          "path": "non_net/CT.bin",
+          "state": "CT",
+          "rows": 234,
+          "bytes": 13712,
+          "sha256": "f225d5edd955e1b5e72eafec66539cce3456c3edebd05d2880d9bf89fdcac4f7"
+        },
+        {
+          "path": "non_net/DE.bin",
+          "state": "DE",
+          "rows": 23,
+          "bytes": 2632,
+          "sha256": "da5dfc6e54f67a13cafc985c17cc810950d53c706448546582b9a197dbda1f5b"
+        },
+        {
+          "path": "non_net/FL.bin",
+          "state": "FL",
+          "rows": 492,
+          "bytes": 27448,
+          "sha256": "093c222d042f3042d20149a17115170891267cbfe2bb048c6e7e59238f9db400"
+        },
+        {
+          "path": "non_net/GA.bin",
+          "state": "GA",
+          "rows": 783,
+          "bytes": 42768,
+          "sha256": "5e1760c6d3d46bb480b4404c71a8fc69439727c1448072b05bbadb79f58ade3c"
+        },
+        {
+          "path": "non_net/HI.bin",
+          "state": "HI",
+          "rows": 368,
+          "bytes": 20776,
+          "sha256": "9f3030026f474ff19026a3b237c31d527394b8941d0c017741d6d7bd24752dc4"
+        },
+        {
+          "path": "non_net/IA.bin",
+          "state": "IA",
+          "rows": 935,
+          "bytes": 50624,
+          "sha256": "78fd12ae3c46b295c10aa31cecd20e79b371c824b1d6e45ab7a9bc2d2f763f75"
+        },
+        {
+          "path": "non_net/ID.bin",
+          "state": "ID",
+          "rows": 70,
+          "bytes": 5000,
+          "sha256": "b406e479a22059c2c0fee96441cca579f10ef363369de9749a1d8aa06fef583c"
+        },
+        {
+          "path": "non_net/IL.bin",
+          "state": "IL",
+          "rows": 648,
+          "bytes": 35656,
+          "sha256": "45126d90d96bb0a568680af4972cc00eae60744084661f4d615b21a07f2da497"
+        },
+        {
+          "path": "non_net/IN.bin",
+          "state": "IN",
+          "rows": 620,
+          "bytes": 34200,
+          "sha256": "373f7afc31847d56038f9ae0450b0478db34a7ae48e3134f0b324f248cfacc2b"
+        },
+        {
+          "path": "non_net/KS.bin",
+          "state": "KS",
+          "rows": 236,
+          "bytes": 13832,
+          "sha256": "32f7342b1ce2b371de1c2ec220ce78d2f76ef9e1b44b379b8bdf4168da44d9d5"
+        },
+        {
+          "path": "non_net/KY.bin",
+          "state": "KY",
+          "rows": 920,
+          "bytes": 50064,
+          "sha256": "6ea2a9dbd7f8b214dc24f5b2f86dfbe1e6e0ce45e5e8ca7f635850161abaaf60"
+        },
+        {
+          "path": "non_net/LA.bin",
+          "state": "LA",
+          "rows": 116,
+          "bytes": 7496,
+          "sha256": "1c2a43b606b4120930b3aba09f4839fab985742eb65095040c3b14034a5eeac6"
+        },
+        {
+          "path": "non_net/MA.bin",
+          "state": "MA",
+          "rows": 609,
+          "bytes": 33552,
+          "sha256": "8dbf4d5d1047c9a1b497f6767f06a0b85e18e25a1fe3c41bc9c6ef173757f997"
+        },
+        {
+          "path": "non_net/MD.bin",
+          "state": "MD",
+          "rows": 21,
+          "bytes": 2464,
+          "sha256": "bc36472e881090763b7e4076da5dcf1e7c1c4095bf8461a3a777a7b510011d76"
+        },
+        {
+          "path": "non_net/MI.bin",
+          "state": "MI",
+          "rows": 533,
+          "bytes": 29664,
+          "sha256": "2ca937c111d468e815a6c4fbc26bbb8c9faa306e987808efc038ae814269bdd5"
+        },
+        {
+          "path": "non_net/MN.bin",
+          "state": "MN",
+          "rows": 829,
+          "bytes": 45328,
+          "sha256": "0165d17f9b1c78ff4fc2059bfef72de9e7ccea78cc2555d47409a6badd7838b1"
+        },
+        {
+          "path": "non_net/MO.bin",
+          "state": "MO",
+          "rows": 352,
+          "bytes": 20032,
+          "sha256": "e36eeb094bef6adff7ca5d25b21fae981a3c6be93d044253793285d1488b41ab"
+        },
+        {
+          "path": "non_net/MS.bin",
+          "state": "MS",
+          "rows": 952,
+          "bytes": 51752,
+          "sha256": "6185ad66c73860ec006a8048b7fffe073ae71c910f7e2e55dc5e789b184418e3"
+        },
+        {
+          "path": "non_net/MT.bin",
+          "state": "MT",
+          "rows": 146,
+          "bytes": 9112,
+          "sha256": "76b0cef8d3e3a2c8c51da65bc587e2cecaf6065a9c21fbc86c6d7750587b1c5e"
+        },
+        {
+          "path": "non_net/NC.bin",
+          "state": "NC",
+          "rows": 1493,
+          "bytes": 80208,
+          "sha256": "5fdfd29dc1e18617876ff0591cf67c18a77a205c772605aef2ccb2afeb43307e"
+        },
+        {
+          "path": "non_net/ND.bin",
+          "state": "ND",
+          "rows": 148,
+          "bytes": 9328,
+          "sha256": "3316d860996d7a2e9216e2c5f4e6d294d2f0f14e7033a8188935b2cfa591615a"
+        },
+        {
+          "path": "non_net/NE.bin",
+          "state": "NE",
+          "rows": 378,
+          "bytes": 21464,
+          "sha256": "978c1493225cb3ec989113fe16a1e8fe1c73b80fe140ba39c33e4adda5ba0b0f"
+        },
+        {
+          "path": "non_net/NH.bin",
+          "state": "NH",
+          "rows": 120,
+          "bytes": 7696,
+          "sha256": "b073920fddb3eeabf035a0469c4a336b32e0557d16d60f78bd61549dc1584166"
+        },
+        {
+          "path": "non_net/NJ.bin",
+          "state": "NJ",
+          "rows": 140,
+          "bytes": 8864,
+          "sha256": "5329dd3bd1e1ffd55f8f70be8045603aadba8c8d66f96dbc7e409cae6edc4e1f"
+        },
+        {
+          "path": "non_net/NM.bin",
+          "state": "NM",
+          "rows": 60,
+          "bytes": 4560,
+          "sha256": "57841cb875b1921bb3b3e278054bf58c499d718fd4a043f206e372a87e6f7fe6"
+        },
+        {
+          "path": "non_net/NV.bin",
+          "state": "NV",
+          "rows": 107,
+          "bytes": 7016,
+          "sha256": "b5a98ea62968bd8ecdd42d1131aefe049e1ce5e874af1628dcca68e9bc899017"
+        },
+        {
+          "path": "non_net/NY.bin",
+          "state": "NY",
+          "rows": 377,
+          "bytes": 21400,
+          "sha256": "00c6ea9fd6d4778c2d9ea04065035bec13bdbfd7cd59b13f1f3c50a39f8e0da5"
+        },
+        {
+          "path": "non_net/OH.bin",
+          "state": "OH",
+          "rows": 354,
+          "bytes": 20216,
+          "sha256": "8ce4dfa796b7afb1faca5cc3bad8a61d46d6c54de8ad8eea639a2b5000a062ff"
+        },
+        {
+          "path": "non_net/OK.bin",
+          "state": "OK",
+          "rows": 255,
+          "bytes": 15032,
+          "sha256": "c0847508759e5733e2323029548e32a6ac664109007f24e5928ae0ccd34b5984"
+        },
+        {
+          "path": "non_net/OR.bin",
+          "state": "OR",
+          "rows": 532,
+          "bytes": 29584,
+          "sha256": "57f8dfd200106136f25064f2b5ec165acc7944b14f612435294f94dfbc72a8c5"
+        },
+        {
+          "path": "non_net/PA.bin",
+          "state": "PA",
+          "rows": 101,
+          "bytes": 6816,
+          "sha256": "5d43119d90a841bd180dfd76d5d05fbaab3eafde6f4affd8bb38d636fe18f729"
+        },
+        {
+          "path": "non_net/RI.bin",
+          "state": "RI",
+          "rows": 103,
+          "bytes": 6880,
+          "sha256": "9d36098528d938085ed75b23a81a3f3cc7f88426f4a3e67e8b6613b6ec2777c6"
+        },
+        {
+          "path": "non_net/SC.bin",
+          "state": "SC",
+          "rows": 442,
+          "bytes": 24832,
+          "sha256": "619e03886d92c8f9cd1b959ecd15d1894fa8245d4e74a27565302b97727daffd"
+        },
+        {
+          "path": "non_net/SD.bin",
+          "state": "SD",
+          "rows": 379,
+          "bytes": 21504,
+          "sha256": "5a87d76f0f826272d045c60c31f2b65ac37398ce97f1c22cdf95883ebe8891be"
+        },
+        {
+          "path": "non_net/TN.bin",
+          "state": "TN",
+          "rows": 3076,
+          "bytes": 163480,
+          "sha256": "445799ac9863dde996e911ff6dd19ae7bc5f8e5ea6f37c23a5c1cbefd01ec951"
+        },
+        {
+          "path": "non_net/TX.bin",
+          "state": "TX",
+          "rows": 1489,
+          "bytes": 79992,
+          "sha256": "a2d55c0a5f1be6aa325f200f957a1b681feab88ce6eac349371d852f914c10bc"
+        },
+        {
+          "path": "non_net/UT.bin",
+          "state": "UT",
+          "rows": 300,
+          "bytes": 17384,
+          "sha256": "3979b214104fabfdb80af056ab6b8a142af16dd885ee533d8b251281a157f49a"
+        },
+        {
+          "path": "non_net/VA.bin",
+          "state": "VA",
+          "rows": 340,
+          "bytes": 19392,
+          "sha256": "f7b6984248f8a2f92f7c4bff5f891136d1e32b0dc3f4b7e76623b6d0bfcf50e7"
+        },
+        {
+          "path": "non_net/VT.bin",
+          "state": "VT",
+          "rows": 136,
+          "bytes": 8624,
+          "sha256": "2dff18ede23b58f9f1db02b373d4c8998aacb85c7c467f01d2b03eb3b9a77ea6"
+        },
+        {
+          "path": "non_net/WA.bin",
+          "state": "WA",
+          "rows": 345,
+          "bytes": 19824,
+          "sha256": "c2362484802740feae04282bb0ab222b2d71af7aed9669a0b80d92c4a1a0386f"
+        },
+        {
+          "path": "non_net/WI.bin",
+          "state": "WI",
+          "rows": 778,
+          "bytes": 42784,
+          "sha256": "b6b94544f8cbc026155d21c01b0e73820540a761cad0c6739965d6a0203dea18"
+        },
+        {
+          "path": "non_net/WV.bin",
+          "state": "WV",
+          "rows": 15,
+          "bytes": 2128,
+          "sha256": "d6d1bdbe85ae8e6f5b1a221d84654a13715dd2a268ff53088a16c15466951e75"
+        },
+        {
+          "path": "non_net/WY.bin",
+          "state": "WY",
+          "rows": 90,
+          "bytes": 6160,
+          "sha256": "0defe8fe788b5cd74a0a7edf2c76abe31398e880511a1e6fdf3be563114c467b"
+        }
+      ],
+      "download": {
+        "path": "non_net.csv.gz",
+        "bytes": 166724,
+        "sha256": "a66e2e8aa45ca272c4bea8f36e68e2851c1a4999e6b604d8b33e6b7089b89418",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Form EIA-861, Net Metering and Non-Net Metering Distributed Generation, 2021 to 2025 (Oct 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}

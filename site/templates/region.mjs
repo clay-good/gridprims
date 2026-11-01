@@ -19,7 +19,7 @@ const GROUPS = ['investor', 'cooperative', 'public', 'marketer', 'other'];
 const QUEUE = ['solar', 'wind', 'storage', 'gas', 'hybrid', 'other'];
 
 /** @param {{state: any, sources: any, i18n: any}} p */
-export function statePage({ state: s, sources, i18n, plants = [] }) {
+export function statePage({ state: s, sources, i18n, plants = [], extra = '' }) {
   const { t, has } = i18n;
   const fuel = (code) => (has(`fuel.${code}`) ? t(`fuel.${code}`) : code);
   const byValue = (o) => Object.entries(o).filter(([, v]) => v).sort((a, b) => b[1] - a[1]);
@@ -60,7 +60,8 @@ ${tableView([t('state.col.utility'), t('utility.ownership'), t('utility.col.cust
 ${plants.length ? html`<section><h2>${t('state.plants', { count: plants.length.toLocaleString('en-US') })}</h2>
 ${tableView([t('state.col.plant'), t('queue.col.county'), t('plant.nameplate'), t('plant.operator')],
     [...plants].sort((a, b) => b.nameplateMw - a.nameplateMw || a.name.localeCompare(b.name)).map((p) => [html`<a href="${plantPath(p.id)}">${p.name}</a>`, p.county ?? '', `${mw(p.nameplateMw)} MW`, p.utilityName ?? '']), t('state.plantsCaption', { name: s.name }))}
-</section>` : ''}`;
+</section>` : ''}
+${extra}`;
   return layout({ i18n, title: pageTitle(t('state.title', { name: s.name })), description: t('state.description', { name: s.name }), path: statePath(s.code), body, section: 'grid', card: 'data' });
 }
 

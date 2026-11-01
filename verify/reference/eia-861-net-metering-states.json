@@ -1,0 +1,76 @@
+{
+ "source": "EIA-861 Net_Metering workbooks, sheet \"States- State Level\", 2023 and 2025 files",
+ "states": [
+  "CA",
+  "TX",
+  "NY",
+  "AZ",
+  "MA"
+ ],
+ "years": {
+  "2023": {
+   "AZ": {
+    "pvCapacityMw": 2728.919,
+    "pvInstallations": 299981,
+    "allCapacityMw": 2730.836,
+    "allInstallations": 300252
+   },
+   "CA": {
+    "pvCapacityMw": 16605.797,
+    "pvInstallations": 1967501,
+    "allCapacityMw": 17180.193,
+    "allInstallations": 1982299
+   },
+   "MA": {
+    "pvCapacityMw": 2653.382,
+    "pvInstallations": 163836,
+    "allCapacityMw": 2810.511,
+    "allInstallations": 164375
+   },
+   "NY": {
+    "pvCapacityMw": 2905.315,
+    "pvInstallations": 213251,
+    "allCapacityMw": 4369.539,
+    "allInstallations": 215913
+   },
+   "TX": {
+    "pvCapacityMw": 1005.579,
+    "pvInstallations": 123747,
+    "allCapacityMw": 1023.49,
+    "allInstallations": 125700
+   }
+  },
+  "2025": {
+   "AZ": {
+    "pvCapacityMw": 3150.697,
+    "pvInstallations": 339321,
+    "allCapacityMw": 3151.597,
+    "allInstallations": 339582
+   },
+   "CA": {
+    "pvCapacityMw": 20041.062,
+    "pvInstallations": 2290366,
+    "allCapacityMw": 20713.413,
+    "allInstallations": 2309938
+   },
+   "MA": {
+    "pvCapacityMw": 3077.376,
+    "pvInstallations": 217188,
+    "allCapacityMw": 3152.797,
+    "allInstallations": 217813
+   },
+   "NY": {
+    "pvCapacityMw": 3815.437,
+    "pvInstallations": 262938,
+    "allCapacityMw": 6195.132,
+    "allInstallations": 266059
+   },
+   "TX": {
+    "pvCapacityMw": 1165.804,
+    "pvInstallations": 140052,
+    "allCapacityMw": 1191.527,
+    "allInstallations": 145645
+   }
+  }
+ }
+}

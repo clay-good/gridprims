@@ -201,6 +201,7 @@ export function sectionPage({ id, tools, datasets = [], entries = new Map(), i18
   const { t } = i18n;
   const cells = tools.filter(({ manifest: m }) => sectionOf(m.id) === id).map(({ manifest: m }) => ({ href: toolPath(m.id), section: id, name: m.title, question: m.purpose, needs: m.inputs.some((x) => x.type === 'file') ? 'file' : 'none' }));
   if (id === 'bills') cells.unshift({ href: '/files/', section: 'bills', name: t('section.workbench'), question: t('section.workbench.what'), needs: 'file' });
+  if (id === 'learn') cells.push({ href: '/learn/qualifying-facility/', section: 'learn', name: t('qf.title'), question: t('qf.description'), needs: 'none' });
   const body = html`<h1>${t(`section.${id}`)}</h1><p class="purpose">${t(`section.${id}.intro`)}</p>
 ${cells.length || (id === 'data' && datasets.length) ? '' : html`<p>${t('section.empty')}</p>`}
 ${cells.length ? html`<ul class="tool-list">${cells.map((c) => toolCell(c, i18n))}</ul>` : ''}

@@ -1,0 +1,210 @@
+{
+  "dataset": "nlr-sharing-the-sun",
+  "version": "2026-11",
+  "title": "Sharing the Sun: Community Solar Project Data (National Laboratory of the Rockies)",
+  "publisher": "National Laboratory of the Rockies (NLR), U.S. Department of Energy",
+  "sourceUrl": "https://data.nlr.gov/submissions/244",
+  "terms": {
+    "url": "https://data.nlr.gov/node/244/license",
+    "section": "Dataset License",
+    "text": "The user is granted the right, without any fee or cost, to use or copy the Data, provided that this entire notice appears in all copies of the Data. Further, the user agrees to credit DOE/NLR/ALLIANCE in any publication that results from the use of the Data. The names DOE/NLR/ALLIANCE, however, may not be used in any advertising or publicity to endorse or promote any products or commercial entities unless specific written permission is obtained from DOE/NLR/ ALLIANCE.",
+    "captured": "2026-11-01"
+  },
+  "redistributionBasis": {
+    "kind": "named license",
+    "note": "NLR data license: use and copy with its notice in every copy, and credit DOE/NLR/Alliance; the matcher reads the endorsement clause as restrictive, so only computed values ship"
+  },
+  "posture": "derive",
+  "postureAdvisory": {
+    "posture": "derive",
+    "license": null,
+    "reason": "restrictive wording; only our own computed values may be published",
+    "agrees": true
+  },
+  "license": "named license (NLR data license: use and copy with its notice in every copy, and credit DOE/NLR/Alliance; the matcher reads the endorsement clause as restrictive, so only computed values ship)",
+  "attribution": "Data: Kannan, S., Frey, N., Jayswal, R., Chan, G., and Simmons, I., Sharing the Sun: Community Solar Project Data (September 2026), National Laboratory of the Rockies, doi:10.7799/2438583. Credit: DOE/NLR/Alliance for Energy Innovation.",
+  "asOf": "2026-10-15",
+  "retrieved": "2026-11-01",
+  "generatedAt": "2026-11-01T00:00:00Z",
+  "cadence": {
+    "every": "quarterly",
+    "nextRelease": {
+      "date": "2027-04-30",
+      "posted": false,
+      "note": "Updated twice a year since 2024; the September 2026 data was released in October 2026, and the next date is inferred"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://data.nlr.gov/system/files/244/1793053331-Sharing%20the%20Sun%20Community%20Solar%20Project%20Data%20%28Sep%202026%29.xlsx",
+      "name": "1793053331-Sharing%20the%20Sun%20Community%20Solar%20Project%20Data%20%28Sep%202026%29.xlsx",
+      "bytes": 1408536,
+      "sha256": "46715d524daea49c35f09f326936241555b52c472ae21c470022c23f2e67d3ef"
+    }
+  ],
+  "release": "September 2026",
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-11-01",
+    "infrastructure": false,
+    "columnsChecked": 10,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "State totals of community solar projects; no project location or network detail is published."
+  },
+  "tables": [
+    {
+      "name": "state_projects",
+      "title": "Community solar projects serving customers by state and subscription marketer: our counts and capacity",
+      "dataPeriod": "2026-09",
+      "rows": 75,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "marketer",
+          "type": "str",
+          "unit": "who markets the subscriptions, as the laboratory records it"
+        },
+        {
+          "name": "projects",
+          "type": "f64"
+        },
+        {
+          "name": "mw_ac",
+          "type": "f64",
+          "unit": "MW-AC"
+        }
+      ],
+      "partition": null,
+      "shards": [
+        {
+          "path": "state_projects/US.bin",
+          "state": "US",
+          "rows": 75,
+          "bytes": 2648,
+          "sha256": "12fea9b96919f6353a173624f6a7d1f2c9eb1a0b3249cb2ac9751f9ac430ae80"
+        }
+      ],
+      "download": {
+        "path": "state_projects.csv.gz",
+        "bytes": 751,
+        "sha256": "fd6e6e0da90f2a955e109a878237706b68f6a9d5063279f50d6128f44f25e902",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "National Laboratory of the Rockies (NLR), U.S. Department of Energy",
+          "attribution": "Data: Kannan, S., Frey, N., Jayswal, R., Chan, G., and Simmons, I., Sharing the Sun: Community Solar Project Data (September 2026), National Laboratory of the Rockies, doi:10.7799/2438583. Credit: DOE/NLR/Alliance for Energy Innovation.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "state_years",
+      "title": "Community solar capacity serving customers by state and year of interconnection: our sums",
+      "dataPeriod": "2026-09",
+      "rows": 278,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "year",
+          "type": "f64"
+        },
+        {
+          "name": "projects",
+          "type": "f64"
+        },
+        {
+          "name": "mw_ac",
+          "type": "f64",
+          "unit": "MW-AC"
+        }
+      ],
+      "partition": null,
+      "shards": [
+        {
+          "path": "state_years/US.bin",
+          "state": "US",
+          "rows": 278,
+          "bytes": 8496,
+          "sha256": "7116956ec08bb4d6f108a4eb5423839d61571226fe641a8e8e0fe9993b0671e3"
+        }
+      ],
+      "download": {
+        "path": "state_years.csv.gz",
+        "bytes": 2093,
+        "sha256": "d88e0f9c0deecce742cb0db295abb35f660c2d435b37b313edcee211ce69d7ec",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "National Laboratory of the Rockies (NLR), U.S. Department of Energy",
+          "attribution": "Data: Kannan, S., Frey, N., Jayswal, R., Chan, G., and Simmons, I., Sharing the Sun: Community Solar Project Data (September 2026), National Laboratory of the Rockies, doi:10.7799/2438583. Credit: DOE/NLR/Alliance for Energy Innovation.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "state_queue",
+      "title": "Community solar capacity the laboratory tracks as in queue, by state (market tracking, not a registry)",
+      "dataPeriod": "2026-09",
+      "rows": 10,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "mw_ac",
+          "type": "f64",
+          "unit": "MW-AC in queue"
+        }
+      ],
+      "partition": null,
+      "shards": [
+        {
+          "path": "state_queue/US.bin",
+          "state": "US",
+          "rows": 10,
+          "bytes": 512,
+          "sha256": "b702fbe34b9f9e59a6b2f427df811911031545822f6ba5b73e190fe71acd28ef"
+        }
+      ],
+      "download": {
+        "path": "state_queue.csv.gz",
+        "bytes": 112,
+        "sha256": "9b7abbc4e1c6e1df731b98775b86052a837e1d472f0330803ebce128dd6eaa70",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "National Laboratory of the Rockies (NLR), U.S. Department of Energy",
+          "attribution": "Data: Kannan, S., Frey, N., Jayswal, R., Chan, G., and Simmons, I., Sharing the Sun: Community Solar Project Data (September 2026), National Laboratory of the Rockies, doi:10.7799/2438583. Credit: DOE/NLR/Alliance for Energy Innovation.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}
