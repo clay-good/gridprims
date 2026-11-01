@@ -1,0 +1,616 @@
+{
+ "source": "EIA Hourly Electric Grid Monitor per-region workbooks, sheet \"Published Daily Data\", retrieved 2026-10-31",
+ "unit": "MWh",
+ "regions": {
+  "PJM": {
+   "2026-09-01": {
+    "demand": 3001791,
+    "zone": "Eastern"
+   },
+   "2026-09-02": {
+    "demand": 2965182,
+    "zone": "Eastern"
+   },
+   "2026-09-03": {
+    "demand": 3004852,
+    "zone": "Eastern"
+   },
+   "2026-09-04": {
+    "demand": 2914182,
+    "zone": "Eastern"
+   },
+   "2026-09-05": {
+    "demand": 2552283,
+    "zone": "Eastern"
+   },
+   "2026-09-06": {
+    "demand": 2305056,
+    "zone": "Eastern"
+   },
+   "2026-09-07": {
+    "demand": 2271417,
+    "zone": "Eastern"
+   },
+   "2026-09-08": {
+    "demand": 2506100,
+    "zone": "Eastern"
+   },
+   "2026-09-09": {
+    "demand": 2718914,
+    "zone": "Eastern"
+   },
+   "2026-09-10": {
+    "demand": 2731507,
+    "zone": "Eastern"
+   },
+   "2026-09-11": {
+    "demand": 2575697,
+    "zone": "Eastern"
+   },
+   "2026-09-12": {
+    "demand": 2405506,
+    "zone": "Eastern"
+   },
+   "2026-09-13": {
+    "demand": 2473911,
+    "zone": "Eastern"
+   },
+   "2026-09-14": {
+    "demand": 2362251,
+    "zone": "Eastern"
+   },
+   "2026-09-15": {
+    "demand": 2323941,
+    "zone": "Eastern"
+   },
+   "2026-09-16": {
+    "demand": 2526661,
+    "zone": "Eastern"
+   },
+   "2026-09-17": {
+    "demand": 2633052,
+    "zone": "Eastern"
+   },
+   "2026-09-18": {
+    "demand": 2574253,
+    "zone": "Eastern"
+   },
+   "2026-09-19": {
+    "demand": 2253126,
+    "zone": "Eastern"
+   },
+   "2026-09-20": {
+    "demand": 2284480,
+    "zone": "Eastern"
+   },
+   "2026-09-21": {
+    "demand": 2260865,
+    "zone": "Eastern"
+   },
+   "2026-09-22": {
+    "demand": 2141055,
+    "zone": "Eastern"
+   },
+   "2026-09-23": {
+    "demand": 2076126,
+    "zone": "Eastern"
+   },
+   "2026-09-24": {
+    "demand": 2047666,
+    "zone": "Eastern"
+   },
+   "2026-09-25": {
+    "demand": 2024399,
+    "zone": "Eastern"
+   },
+   "2026-09-26": {
+    "demand": 1929623,
+    "zone": "Eastern"
+   },
+   "2026-09-27": {
+    "demand": 1919195,
+    "zone": "Eastern"
+   },
+   "2026-09-28": {
+    "demand": 2094131,
+    "zone": "Eastern"
+   },
+   "2026-09-29": {
+    "demand": 2158081,
+    "zone": "Eastern"
+   },
+   "2026-09-30": {
+    "demand": 2199228,
+    "zone": "Eastern"
+   }
+  },
+  "MISO": {
+   "2026-09-01": {
+    "demand": 2353631,
+    "zone": "Eastern"
+   },
+   "2026-09-02": {
+    "demand": 2404431,
+    "zone": "Eastern"
+   },
+   "2026-09-03": {
+    "demand": 2358680,
+    "zone": "Eastern"
+   },
+   "2026-09-04": {
+    "demand": 2307526,
+    "zone": "Eastern"
+   },
+   "2026-09-05": {
+    "demand": 2148117,
+    "zone": "Eastern"
+   },
+   "2026-09-06": {
+    "demand": 2002689,
+    "zone": "Eastern"
+   },
+   "2026-09-07": {
+    "demand": 1966298,
+    "zone": "Eastern"
+   },
+   "2026-09-08": {
+    "demand": 2110634,
+    "zone": "Eastern"
+   },
+   "2026-09-09": {
+    "demand": 2176542,
+    "zone": "Eastern"
+   },
+   "2026-09-10": {
+    "demand": 2062890,
+    "zone": "Eastern"
+   },
+   "2026-09-11": {
+    "demand": 2015570,
+    "zone": "Eastern"
+   },
+   "2026-09-12": {
+    "demand": 1968038,
+    "zone": "Eastern"
+   },
+   "2026-09-13": {
+    "demand": 1873741,
+    "zone": "Eastern"
+   },
+   "2026-09-14": {
+    "demand": 1913706,
+    "zone": "Eastern"
+   },
+   "2026-09-15": {
+    "demand": 2040216,
+    "zone": "Eastern"
+   },
+   "2026-09-16": {
+    "demand": 2073471,
+    "zone": "Eastern"
+   },
+   "2026-09-17": {
+    "demand": 2081777,
+    "zone": "Eastern"
+   },
+   "2026-09-18": {
+    "demand": 2026870,
+    "zone": "Eastern"
+   },
+   "2026-09-19": {
+    "demand": 1914729,
+    "zone": "Eastern"
+   },
+   "2026-09-20": {
+    "demand": 1878559,
+    "zone": "Eastern"
+   },
+   "2026-09-21": {
+    "demand": 1895000,
+    "zone": "Eastern"
+   },
+   "2026-09-22": {
+    "demand": 1837631,
+    "zone": "Eastern"
+   },
+   "2026-09-23": {
+    "demand": 1824772,
+    "zone": "Eastern"
+   },
+   "2026-09-24": {
+    "demand": 1821725,
+    "zone": "Eastern"
+   },
+   "2026-09-25": {
+    "demand": 1787865,
+    "zone": "Eastern"
+   },
+   "2026-09-26": {
+    "demand": 1684805,
+    "zone": "Eastern"
+   },
+   "2026-09-27": {
+    "demand": 1682294,
+    "zone": "Eastern"
+   },
+   "2026-09-28": {
+    "demand": 1832515,
+    "zone": "Eastern"
+   },
+   "2026-09-29": {
+    "demand": 1867852,
+    "zone": "Eastern"
+   },
+   "2026-09-30": {
+    "demand": 1925186,
+    "zone": "Eastern"
+   }
+  },
+  "ERCO": {
+   "2026-09-01": {
+    "demand": 1722437,
+    "zone": "Central"
+   },
+   "2026-09-02": {
+    "demand": 1748097,
+    "zone": "Central"
+   },
+   "2026-09-03": {
+    "demand": 1701844,
+    "zone": "Central"
+   },
+   "2026-09-04": {
+    "demand": 1707287,
+    "zone": "Central"
+   },
+   "2026-09-05": {
+    "demand": 1678013,
+    "zone": "Central"
+   },
+   "2026-09-06": {
+    "demand": 1652825,
+    "zone": "Central"
+   },
+   "2026-09-07": {
+    "demand": 1714957,
+    "zone": "Central"
+   },
+   "2026-09-08": {
+    "demand": 1766705,
+    "zone": "Central"
+   },
+   "2026-09-09": {
+    "demand": 1750455,
+    "zone": "Central"
+   },
+   "2026-09-10": {
+    "demand": 1698321,
+    "zone": "Central"
+   },
+   "2026-09-11": {
+    "demand": 1699355,
+    "zone": "Central"
+   },
+   "2026-09-12": {
+    "demand": 1721834,
+    "zone": "Central"
+   },
+   "2026-09-13": {
+    "demand": 1718388,
+    "zone": "Central"
+   },
+   "2026-09-14": {
+    "demand": 1764334,
+    "zone": "Central"
+   },
+   "2026-09-15": {
+    "demand": 1762409,
+    "zone": "Central"
+   },
+   "2026-09-16": {
+    "demand": 1736733,
+    "zone": "Central"
+   },
+   "2026-09-17": {
+    "demand": 1697538,
+    "zone": "Central"
+   },
+   "2026-09-18": {
+    "demand": 1656760,
+    "zone": "Central"
+   },
+   "2026-09-19": {
+    "demand": 1614220,
+    "zone": "Central"
+   },
+   "2026-09-20": {
+    "demand": 1613077,
+    "zone": "Central"
+   },
+   "2026-09-21": {
+    "demand": 1674625,
+    "zone": "Central"
+   },
+   "2026-09-22": {
+    "demand": 1662503,
+    "zone": "Central"
+   },
+   "2026-09-23": {
+    "demand": 1667837,
+    "zone": "Central"
+   },
+   "2026-09-24": {
+    "demand": 1648460,
+    "zone": "Central"
+   },
+   "2026-09-25": {
+    "demand": 1586840,
+    "zone": "Central"
+   },
+   "2026-09-26": {
+    "demand": 1531700,
+    "zone": "Central"
+   },
+   "2026-09-27": {
+    "demand": 1570173,
+    "zone": "Central"
+   },
+   "2026-09-28": {
+    "demand": 1631318,
+    "zone": "Central"
+   },
+   "2026-09-29": {
+    "demand": 1626497,
+    "zone": "Central"
+   },
+   "2026-09-30": {
+    "demand": 1635431,
+    "zone": "Central"
+   }
+  },
+  "CISO": {
+   "2026-09-01": {
+    "demand": 717941,
+    "zone": "Pacific"
+   },
+   "2026-09-02": {
+    "demand": 704943,
+    "zone": "Pacific"
+   },
+   "2026-09-03": {
+    "demand": 708264,
+    "zone": "Pacific"
+   },
+   "2026-09-04": {
+    "demand": 699889,
+    "zone": "Pacific"
+   },
+   "2026-09-05": {
+    "demand": 665255,
+    "zone": "Pacific"
+   },
+   "2026-09-06": {
+    "demand": 626976,
+    "zone": "Pacific"
+   },
+   "2026-09-07": {
+    "demand": 720304,
+    "zone": "Pacific"
+   },
+   "2026-09-08": {
+    "demand": 850254,
+    "zone": "Pacific"
+   },
+   "2026-09-09": {
+    "demand": 964836,
+    "zone": "Pacific"
+   },
+   "2026-09-10": {
+    "demand": 963194,
+    "zone": "Pacific"
+   },
+   "2026-09-11": {
+    "demand": 874301,
+    "zone": "Pacific"
+   },
+   "2026-09-12": {
+    "demand": 759924,
+    "zone": "Pacific"
+   },
+   "2026-09-13": {
+    "demand": 695018,
+    "zone": "Pacific"
+   },
+   "2026-09-14": {
+    "demand": 727848,
+    "zone": "Pacific"
+   },
+   "2026-09-15": {
+    "demand": 720787,
+    "zone": "Pacific"
+   },
+   "2026-09-16": {
+    "demand": 695379,
+    "zone": "Pacific"
+   },
+   "2026-09-17": {
+    "demand": 699337,
+    "zone": "Pacific"
+   },
+   "2026-09-18": {
+    "demand": 678682,
+    "zone": "Pacific"
+   },
+   "2026-09-19": {
+    "demand": 640214,
+    "zone": "Pacific"
+   },
+   "2026-09-20": {
+    "demand": 632020,
+    "zone": "Pacific"
+   },
+   "2026-09-21": {
+    "demand": 673378,
+    "zone": "Pacific"
+   },
+   "2026-09-22": {
+    "demand": 690233,
+    "zone": "Pacific"
+   },
+   "2026-09-23": {
+    "demand": 722444,
+    "zone": "Pacific"
+   },
+   "2026-09-24": {
+    "demand": 740424,
+    "zone": "Pacific"
+   },
+   "2026-09-25": {
+    "demand": 740285,
+    "zone": "Pacific"
+   },
+   "2026-09-26": {
+    "demand": 696054,
+    "zone": "Pacific"
+   },
+   "2026-09-27": {
+    "demand": 657410,
+    "zone": "Pacific"
+   },
+   "2026-09-28": {
+    "demand": 687572,
+    "zone": "Pacific"
+   },
+   "2026-09-29": {
+    "demand": 697432,
+    "zone": "Pacific"
+   },
+   "2026-09-30": {
+    "demand": 733298,
+    "zone": "Pacific"
+   }
+  },
+  "ISNE": {
+   "2026-09-01": {
+    "demand": 330021,
+    "zone": "Eastern"
+   },
+   "2026-09-02": {
+    "demand": 316075,
+    "zone": "Eastern"
+   },
+   "2026-09-03": {
+    "demand": 343389,
+    "zone": "Eastern"
+   },
+   "2026-09-04": {
+    "demand": 344152,
+    "zone": "Eastern"
+   },
+   "2026-09-05": {
+    "demand": 296838,
+    "zone": "Eastern"
+   },
+   "2026-09-06": {
+    "demand": 271791,
+    "zone": "Eastern"
+   },
+   "2026-09-07": {
+    "demand": 265687,
+    "zone": "Eastern"
+   },
+   "2026-09-08": {
+    "demand": 302249,
+    "zone": "Eastern"
+   },
+   "2026-09-09": {
+    "demand": 328411,
+    "zone": "Eastern"
+   },
+   "2026-09-10": {
+    "demand": 355575,
+    "zone": "Eastern"
+   },
+   "2026-09-11": {
+    "demand": 297098,
+    "zone": "Eastern"
+   },
+   "2026-09-12": {
+    "demand": 262948,
+    "zone": "Eastern"
+   },
+   "2026-09-13": {
+    "demand": 310776,
+    "zone": "Eastern"
+   },
+   "2026-09-14": {
+    "demand": 289356,
+    "zone": "Eastern"
+   },
+   "2026-09-15": {
+    "demand": 267506,
+    "zone": "Eastern"
+   },
+   "2026-09-16": {
+    "demand": 294002,
+    "zone": "Eastern"
+   },
+   "2026-09-17": {
+    "demand": 336898,
+    "zone": "Eastern"
+   },
+   "2026-09-18": {
+    "demand": 320618,
+    "zone": "Eastern"
+   },
+   "2026-09-19": {
+    "demand": 249887,
+    "zone": "Eastern"
+   },
+   "2026-09-20": {
+    "demand": 279178,
+    "zone": "Eastern"
+   },
+   "2026-09-21": {
+    "demand": 268712,
+    "zone": "Eastern"
+   },
+   "2026-09-22": {
+    "demand": 263030,
+    "zone": "Eastern"
+   },
+   "2026-09-23": {
+    "demand": 257340,
+    "zone": "Eastern"
+   },
+   "2026-09-24": {
+    "demand": 255202,
+    "zone": "Eastern"
+   },
+   "2026-09-25": {
+    "demand": 268624,
+    "zone": "Eastern"
+   },
+   "2026-09-26": {
+    "demand": 268312,
+    "zone": "Eastern"
+   },
+   "2026-09-27": {
+    "demand": 274679,
+    "zone": "Eastern"
+   },
+   "2026-09-28": {
+    "demand": 293073,
+    "zone": "Eastern"
+   },
+   "2026-09-29": {
+    "demand": 288379,
+    "zone": "Eastern"
+   },
+   "2026-09-30": {
+    "demand": 291215,
+    "zone": "Eastern"
+   }
+  }
+ }
+}

@@ -89,6 +89,13 @@ export const NAMES = {
   YAD: { name: 'Alcoa Power Generating, Inc. - Yadkin Division', generationOnly: true },
 };
 
+/**
+ * The zone each region reports in, from the workbooks' "Time zone" column (checked 2026-10-31): EIA's daily
+ * values are by local date in this zone. "Arizona" is Mountain standard time all year, and "Eastern Standard"
+ * is Eastern standard time all year (Etc/GMT+5, which is UTC−5 despite its sign).
+ */
+export const REPORT_ZONES = { AEC: 'America/Chicago', AECI: 'America/Chicago', AVA: 'America/Los_Angeles', AVRN: 'America/Los_Angeles', AZPS: 'America/Phoenix', BANC: 'America/Los_Angeles', BPAT: 'America/Los_Angeles', CHPD: 'America/Los_Angeles', CISO: 'America/Los_Angeles', CPLE: 'America/New_York', CPLW: 'America/New_York', DEAA: 'America/Phoenix', DOPD: 'America/Los_Angeles', DUK: 'America/New_York', EEI: 'America/Chicago', EPE: 'America/Phoenix', ERCO: 'America/Chicago', FMPP: 'America/New_York', FPC: 'America/New_York', FPL: 'America/New_York', GCPD: 'America/Los_Angeles', GLHB: 'America/Chicago', GRID: 'America/Los_Angeles', GRIF: 'America/Phoenix', GRMA: 'America/Phoenix', GVL: 'America/New_York', GWA: 'America/Denver', HGMA: 'America/Phoenix', HST: 'America/New_York', IID: 'America/Los_Angeles', IPCO: 'America/Los_Angeles', ISNE: 'America/New_York', JEA: 'America/New_York', LDWP: 'America/Los_Angeles', LGEE: 'Etc/GMT+5', MISO: 'Etc/GMT+5', NEVP: 'America/Los_Angeles', NSB: 'America/New_York', NWMT: 'America/Denver', NYIS: 'America/New_York', OVEC: 'America/New_York', PACE: 'America/Denver', PACW: 'America/Los_Angeles', PGE: 'America/Los_Angeles', PJM: 'America/New_York', PNM: 'America/Phoenix', PSCO: 'America/Denver', PSEI: 'America/Los_Angeles', SC: 'America/New_York', SCEG: 'America/New_York', SCL: 'America/Los_Angeles', SEC: 'America/New_York', SEPA: 'America/Chicago', SOCO: 'America/Chicago', SPA: 'America/Chicago', SRP: 'America/Phoenix', SWPP: 'America/Chicago', TAL: 'America/New_York', TEC: 'America/New_York', TEPC: 'America/Phoenix', TIDC: 'America/Los_Angeles', TPWR: 'America/Los_Angeles', TVA: 'America/Chicago', WACM: 'America/Phoenix', WALC: 'America/Phoenix', WAUW: 'America/Denver', WWA: 'America/Denver', YAD: 'America/New_York' };
+
 const URL = (ba) => `https://www.eia.gov/electricity/gridmonitor/knownissues/xls/${ba}.xlsx`;
 /** Each region's workbook, read lazily; the files change daily, so no checksum is pinned (the manifest records each one's). */
 export const FILES = Object.fromEntries(REGIONS.map((ba) => [ba, { url: URL(ba), name: `${ba}.xlsx`, sha256: null, stream: true }]));

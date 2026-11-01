@@ -4,6 +4,11 @@
 
 import { html, raw } from '../lib/html.mjs';
 import { gridPulse } from '../ui/grid-pulse.mjs';
+
+/** The pulse every page shows unless it passes its own: the build sets it once from the EIA-930 rollups. */
+let defaultPulse = null;
+/** @param {any} p {region, asOf, source, values} or null */
+export function setPulse(p) { defaultPulse = p; }
 import { SECTIONS } from '../ui/sections.mjs';
 import { DESCRIPTION_MAX, fit, jsonLd } from '../lib/meta.mjs';
 
@@ -28,7 +33,7 @@ export const FOOTER_PAGES = [['about', '/about/'], ['privacy', '/privacy/'], ['l
 /** The trust page set, linked in full from /about/ (site/trust-pages). */
 export const TRUST_PAGES = [['about', '/about/'], ['methods', '/methods/'], ['privacy', '/privacy/'], ['accessibility', '/accessibility/'], ['corrections', '/corrections/'], ['changelog', '/changelog/'], ['license', '/license/'], ['sources', '/sources/'], ['review', '/review-status/'], ['limits', '/limits/'], ['terms', '/terms/'], ['continuity', '/continuity/'], ['developers', '/developers/'], ['security', '/security/'], ['settings', '/settings/'], ['report', '/report/']];
 
-export function layout({ i18n, title, description, path, body, modules = [], section, pulse = null, structured = [], crumbs = null, feed = null, card = null, commandBar = true }) {
+export function layout({ i18n, title, description, path, body, modules = [], section, pulse = defaultPulse, structured = [], crumbs = null, feed = null, card = null, commandBar = true }) {
   const { t } = i18n;
   const summary = fit(description, DESCRIPTION_MAX);
   // Breadcrumbs on every page: home, the section, then the page, as the page's own links show them.

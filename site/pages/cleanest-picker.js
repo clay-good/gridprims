@@ -67,5 +67,8 @@ if (regions) {
   for (const r of [...regions.regions].filter((x) => x.typicalYears.length).sort((a, b) => a.name.localeCompare(b.name))) region.append(Object.assign(document.createElement('option'), { value: r.ba, textContent: `${r.name} (${r.ba})` }));
 }
 month.value = String(new Date().getMonth() + 1);
+// A region page links here with ?region=PJM.
+const asked = new URLSearchParams(location.search).get('region');
+if (asked && region.querySelector(`option[value="${CSS.escape(asked)}"]`)) { region.value = asked; await show(); }
 for (const el of [region, month, ...picker.querySelectorAll('[data-cleanest-window]')]) el.addEventListener('change', show);
 picker.dataset.ready = 'true';
