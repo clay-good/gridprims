@@ -63,7 +63,7 @@ export default {
         { step: 'read-xlsx', sheet: 'Page 5 Fuel Receipts and Costs', headerRows: 5 },
         { step: 'normalize', module: 'eia-923-receipts' },
         { step: 'quirk', name: 'withheld-cost', note: 'EIA withholds the delivered cost of a quarter of 2025 deliveries (9,100 of 36,789): every one to an unregulated plant and 78 to regulated ones, written as ".". The cost stays blank, never zero, and anything that uses it says how much was substituted.', fixture: 'verify/fixtures/data/eia-923/withheld-cost.json' },
-        { step: 'validate', key: ['line'], rows: { min: 30000, max: 45000, maxDropPct: 10, maxRisePct: 25, from: 'vintage 2025 (36,789 rows)' } },
+        { step: 'validate', key: ['line'], rows: { min: 30000, max: 45000, maxDropPct: 5, maxRisePct: 25, from: 'vintages 2023 (36,835 rows), 2024 (36,356), and 2025 (36,789); largest yearly change −1.3%; the same header in all three' } },
         { step: 'partition', by: 'state' },
         { step: 'write-shards' },
         { step: 'write-csv-gz' },

@@ -75,3 +75,10 @@ test('a refresh attaches the raw file to a release, records the link, and captur
 test('page text extraction drops markup and normalizes quotes', () => {
   assert.equal(pageText('<p>“Source:&nbsp;EIA”</p><script>x()</script>'), '"Source: EIA"');
 });
+
+test('wording that allows both commercial and non-commercial use is not a restriction', async () => {
+  const { matchPosture } = await import('../../../pipeline/lib/registry.mjs');
+  const egrid = matchPosture({ text: 'eGRID data is produced by the United States Environmental Protection Agency (EPA) under the public domain and is available for use both non-commercially and commercially.', factual: true });
+  assert.deepEqual([egrid.posture, egrid.license], ['mirror', 'us-federal-public-domain']);
+  assert.equal(matchPosture({ text: 'Licensed for non-commercial use only.', factual: true }).posture, 'derive');
+});

@@ -16,6 +16,8 @@ export const RECOGNIZED = [
   { id: 'MIT', posture: 'mirror', words: /\bMIT License\b/i },
 ];
 const RESTRICTIVE = /non-?commercial|educational use|written permission|not for redistribution|personal use/i;
+/** Wording that names non-commercial use only to allow commercial use too, which restricts nothing. */
+const PERMISSIVE = /both non-?commercially and commercially|non-?commercially and commercially|commercial(ly)? (and|or) non-?commercial(ly)?/gi;
 
 /**
  * The posture the recorded terms support: mirror, derive, or link.
@@ -24,7 +26,7 @@ const RESTRICTIVE = /non-?commercial|educational use|written permission|not for 
  */
 export function matchPosture(terms) {
   const text = `${terms.license ?? ''} ${terms.text ?? ''}`;
-  if (RESTRICTIVE.test(text)) {
+  if (RESTRICTIVE.test(text.replace(PERMISSIVE, ''))) {
     return terms.factual ? { posture: 'derive', license: null, reason: 'restrictive wording; only our own computed values may be published' } : { posture: 'link', license: null, reason: 'restrictive wording and no basis to compute over the values' };
   }
   const hit = RECOGNIZED.find((r) => r.id === terms.license || r.words.test(text));
