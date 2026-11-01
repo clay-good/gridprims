@@ -29,6 +29,14 @@ export default [
     note: 'Whether NERC publishes a current free class-average download could not be confirmed; its pages did not render outside a browser.',
   },
   {
+    id: 'unit-commitment', added: '2026-11-01',
+    title: 'Unit commitment, or a dispatch that respects start-ups, minimum run times, and ramps',
+    detail: 'The scenario model dispatches the cheapest available units hour by hour and says so on every result.',
+    reason: 'A year of commitment needs millions of on-off decisions and unit inputs (minimum run, start costs, ramp rates) that are not public, and a solver we would have to ship as third-party code.',
+    sources: ['docs/research/15-browser-grid-modeling.md §1 and §1a', 'openspec/changes/add-grid-scenario-model/design.md D1 and D7'],
+    verified: true,
+  },
+  {
     id: 'interconnection-verdict', added: '2026-10-31',
     title: 'A pass or fail interconnection verdict',
     reason: 'Six of the twelve standard screens, including every screen that needs a model of the circuit, cannot be answered from public data.',

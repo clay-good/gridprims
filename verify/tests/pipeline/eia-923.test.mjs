@@ -24,11 +24,25 @@ test('the final workbook builds, found by pattern even when EIA renames it "_Fin
   const r = await run({ outDir: out });
   assert.equal(r.ok, true, r.failures?.join('\n'));
   assert.deepEqual(r.manifest.raw[0].entries, ['EIA923_Schedules_2_3_4_5_M_12_2025_Final_Revision.xlsx']);
-  assert.deepEqual(r.manifest.tables.map((t) => [t.name, t.rows, t.shards.map((s) => s.state).join(' ')]), [['generation', 7, 'AK IA NC SC']]);
+  assert.deepEqual(r.manifest.tables.map((t) => [t.name, t.rows, t.shards.map((s) => s.state).join(' ')]), [['generation', 7, 'AK IA NC SC'], ['fuel_receipts', 3, 'AL CA TX']]);
   const [nuke] = shard(out, 'SC');
   assert.deepEqual([nuke.nuclear_unit_id, nuke.net_generation_mwh, nuke.net_generation_mwh_07], ['2', 6000000, 500000]);
   assert.equal(shard(out, 'AK')[0].nuclear_unit_id, null, 'EIA\'s "." is not reported');
   assert.equal(r.manifest.tables[0].columns.find((c) => c.name === 'net_generation_mwh_12').unit, 'MWh');
+  assert.deepEqual([nuke.fuel_electric_mmbtu_01, r.manifest.tables[0].columns.find((c) => c.name === 'fuel_electric_mmbtu_12').unit], [10, 'MMBtu']);
+});
+
+test('a withheld delivery cost stays blank, never zero; deliveries keep EIA\'s order as their key', async () => {
+  const out = tmp();
+  const r = await run({ outDir: out });
+  const read = (st) => readShard(readFileSync(join(out, 'eia-923/2026-10/fuel_receipts', `${st}.bin`))).rows();
+  const [barry] = read('AL');
+  assert.deepEqual([barry.line, barry.fuel_cost, barry.quantity, barry.heat_content, barry.regulated, barry.ba_code], [1, 455.1, 1015376, 1.022, 'REG', 'SOCO']);
+  const [moss] = read('CA');
+  assert.deepEqual([moss.line, moss.fuel_cost, moss.regulated], [2, null, 'UNR']);
+  assert.equal(r.manifest.tables[1].columns.find((c) => c.name === 'fuel_cost').unit, 'cents per MMBtu');
+  const pinned = JSON.parse(readFileSync(join(ROOT, 'verify/fixtures/data/eia-923/withheld-cost.json'), 'utf8')).cells;
+  assert.ok(pinned.every((c) => c[20] === '.'), 'the pinned rows still carry EIA\'s withheld mark');
 });
 
 test('a CHP status change and the state-fuel increments keep every row; pumped storage stays negative', async () => {

@@ -1,12 +1,13 @@
 // EIA-923, Power Plant Operations Report: net generation and fuel consumed by
-// every plant, by prime mover and fuel, monthly and annual. The final annual
-// file only; the monthly year-to-date file at the same address is not served.
+// every plant, by prime mover and fuel, monthly and annual, and every fuel
+// delivery with its cost. The final annual file only; the monthly year-to-date
+// file at the same address is not served.
 
 export default {
   id: 'eia-923',
   title: 'Power Plant Operations Report (Form EIA-923)',
   shortTitle: 'EIA-923: plant generation and fuel',
-  description: { contains: "Net generation by month and year and fuel consumed in 2025, by plant, prime mover, and fuel, including EIA's state-level estimates for small plants.", excludes: 'Only the final annual file, not the monthly year-to-date one; no fuel receipts, costs, or environmental data.' },
+  description: { contains: "Net generation by month and year and fuel consumed in 2025, by plant, prime mover, and fuel, including EIA's state-level estimates for small plants; and every fuel delivery plants reported, with its heat content and delivered cost where EIA publishes it.", excludes: 'Only the final annual file, not the monthly year-to-date one; no supplier, mine, or fuel quality beyond heat content; no environmental data. EIA withholds the cost of many deliveries, which stay blank.' },
   publisher: 'U.S. Energy Information Administration',
   sourceUrl: 'https://www.eia.gov/electricity/data/eia923/',
   terms: {
@@ -49,6 +50,20 @@ export default {
         { step: 'quirk', name: 'state-fuel-increments', note: 'Plant 99999 rows are EIA\'s state-fuel level increments; they repeat prime mover and fuel across sectors, so sector is part of the key. A plant whose combined heat and power status changed in the year has a row for each status, so that is part of the key too.', fixture: 'verify/fixtures/data/eia-923/increments.json' },
         { step: 'quirk', name: 'blank-frame-row', note: 'A row with no state, no plant name, and every quantity zero is dropped; a stateless row with any value still fails the release.', fixture: 'verify/fixtures/data/eia-923/blank-frame-row.json' },
         { step: 'validate', key: ['plant_id', 'nuclear_unit_id', 'prime_mover', 'fuel_type', 'state', 'sector', 'chp'], rows: { min: 16000, max: 24000, maxDropPct: 5, maxRisePct: 25, from: 'vintages 2023 (17,086 rows), 2024 (17,963), and 2025 (18,888); largest yearly change +5.1%' } },
+        { step: 'partition', by: 'state' },
+        { step: 'write-shards' },
+        { step: 'write-csv-gz' },
+      ],
+    },
+    {
+      name: 'fuel_receipts',
+      title: 'Fuel deliveries by plant and month, with heat content and delivered cost',
+      recipe: [
+        { step: 'unzip', entry: 'EIA923_Schedules_2_3_4_5_M_12_{year}_Final*.xlsx' },
+        { step: 'read-xlsx', sheet: 'Page 5 Fuel Receipts and Costs', headerRows: 5 },
+        { step: 'normalize', module: 'eia-923-receipts' },
+        { step: 'quirk', name: 'withheld-cost', note: 'EIA withholds the delivered cost of a quarter of 2025 deliveries (9,100 of 36,789): every one to an unregulated plant and 78 to regulated ones, written as ".". The cost stays blank, never zero, and anything that uses it says how much was substituted.', fixture: 'verify/fixtures/data/eia-923/withheld-cost.json' },
+        { step: 'validate', key: ['line'], rows: { min: 30000, max: 45000, maxDropPct: 10, maxRisePct: 25, from: 'vintage 2025 (36,789 rows)' } },
         { step: 'partition', by: 'state' },
         { step: 'write-shards' },
         { step: 'write-csv-gz' },

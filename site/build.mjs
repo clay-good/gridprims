@@ -40,6 +40,9 @@ import { SECTIONS } from './ui/sections.mjs';
 import { queuePages } from './entities/queue.mjs';
 import { carbonData } from './entities/carbon.mjs';
 import { balancingPages } from './entities/balancing.mjs';
+import { fleetCsv, scenarioData } from './entities/scenario.mjs';
+import { scenarioIndexPage, scenarioPage } from './templates/scenario.mjs';
+import { SCENARIO_INDEX, scenarioPath } from './ui/scenario.mjs';
 import { balancingPage, balancingPath } from './templates/balancing.mjs';
 import { setPulse } from './templates/layout.mjs';
 import { html } from './lib/html.mjs';
@@ -227,6 +230,18 @@ export async function build(opts = {}) {
       const inRegion = (utilities?.utilities ?? []).filter((u) => u.page && u.baCodes?.includes(region.ba)).sort((a, b) => a.name.localeCompare(b.name));
       const regionPlants = (plants?.plants ?? []).filter((p) => p.baCode === region.ba).sort((a, b) => b.nameplateMw - a.nameplateMw || a.name.localeCompare(b.name));
       write(balancingPath(region.ba), balancingPage({ region, manifest: balancing.manifest, utilities: inRegion, plants: regionPlants, i18n }));
+    }
+  }
+  // The scenario model: every region's fleet and backtest, its page, its downloads, and the fit table.
+  const scenarios = scenarioData(join(ROOT, 'data'));
+  if (scenarios) {
+    write(SCENARIO_INDEX, scenarioIndexPage({ data: scenarios, i18n }));
+    const file = (path, text) => { mkdirSync(dirname(join(outDir, path)), { recursive: true }); writeFileSync(join(outDir, path), text); };
+    file(`${SCENARIO_INDEX}fit.json`, JSON.stringify({ license: 'CC BY 4.0', year: scenarios.year, versions: scenarios.versions, regions: scenarios.regions.map((r) => ({ ba: r.ba, name: r.name, summary: r.fleet.summary, backtest: r.backtest, causes: r.causes, categories: r.categories, unmet: r.unmet })) }));
+    for (const region of scenarios.regions) {
+      write(scenarioPath(region.ba), scenarioPage({ region, year: scenarios.year, versions: scenarios.versions, i18n }));
+      file(`${scenarioPath(region.ba)}fleet.json`, JSON.stringify({ license: 'CC BY 4.0', attribution: 'Derived by gridprims from U.S. Energy Information Administration Forms EIA-860 and EIA-923.', ba: region.ba, name: region.name, zone: region.zone, year: scenarios.year, versions: scenarios.versions, summary: region.fleet.summary, units: region.fleet.units, unplaceable: region.fleet.unplaceable, recorded: region.fleet.recorded }));
+      file(`${scenarioPath(region.ba)}fleet.csv`, fleetCsv(region));
     }
   }
   // The queue explorer, under whatever posture the captured terms give LBNL's file.

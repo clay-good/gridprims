@@ -1,0 +1,1114 @@
+{
+  "dataset": "eia-923",
+  "version": "2026-11",
+  "title": "Power Plant Operations Report (Form EIA-923)",
+  "publisher": "U.S. Energy Information Administration",
+  "sourceUrl": "https://www.eia.gov/electricity/data/eia923/",
+  "terms": {
+    "url": "https://www.eia.gov/about/copyrights_reuse.php",
+    "section": "Public domain and use of EIA content",
+    "text": "U.S. government publications are in the public domain and are not subject to copyright protection. You may use and/or distribute any of our data, files, databases, reports, graphs, charts, and other information products that are on our website or that you receive through our email distribution service. However, if you use or reproduce any of our information products, you should use an acknowledgment, which includes the publication date, such as: \"Source: U.S. Energy Information Administration (Oct 2008).\"",
+    "captured": "2026-10-31"
+  },
+  "redistributionBasis": {
+    "kind": "public domain",
+    "note": "U.S. federal government work (17 U.S.C. 105)"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "us-federal-public-domain",
+    "reason": "recognized us-federal-public-domain",
+    "agrees": true
+  },
+  "license": "public domain (U.S. federal government work (17 U.S.C. 105))",
+  "attribution": "Source: U.S. Energy Information Administration, Form EIA-923 (Sep 2026).",
+  "asOf": "2026-09-11",
+  "retrieved": "2026-11-01",
+  "generatedAt": "2026-11-01T00:00:00Z",
+  "cadence": {
+    "every": "annual",
+    "nextRelease": {
+      "date": "2027-09-30",
+      "posted": false,
+      "note": "EIA posts each year's final data around September of the next year; the date is inferred, not posted"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://www.eia.gov/electricity/data/eia923/xls/f923_2025.zip",
+      "name": "f923_2025.zip",
+      "bytes": 23340452,
+      "sha256": "1bff7092a86f6678c069c986829da5a23104048fc1aafb65b0776e3c904284de",
+      "entries": [
+        "EIA923_Schedules_2_3_4_5_M_12_2025_Final.xlsx"
+      ]
+    }
+  ],
+  "previousVersion": "2026-10",
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-11-01",
+    "infrastructure": false,
+    "columnsChecked": 65,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Generation and fuel totals by plant, prime mover, and fuel; no location beyond the state, and no network data."
+  },
+  "tables": [
+    {
+      "name": "generation",
+      "title": "Net generation and fuel consumed by plant, prime mover, and fuel, by month",
+      "dataPeriod": "2025",
+      "rows": 18888,
+      "changes": {
+        "from": "2026-10",
+        "added": 0,
+        "removed": 0,
+        "changed": 18888
+      },
+      "columns": [
+        {
+          "name": "plant_id",
+          "type": "f64"
+        },
+        {
+          "name": "nuclear_unit_id",
+          "type": "str"
+        },
+        {
+          "name": "prime_mover",
+          "type": "str"
+        },
+        {
+          "name": "fuel_type",
+          "type": "str"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "sector",
+          "type": "f64"
+        },
+        {
+          "name": "sector_name",
+          "type": "str"
+        },
+        {
+          "name": "mer_fuel_type",
+          "type": "str"
+        },
+        {
+          "name": "plant_name",
+          "type": "str"
+        },
+        {
+          "name": "operator_id",
+          "type": "f64"
+        },
+        {
+          "name": "operator_name",
+          "type": "str"
+        },
+        {
+          "name": "chp",
+          "type": "str"
+        },
+        {
+          "name": "census_region",
+          "type": "str"
+        },
+        {
+          "name": "nerc_region",
+          "type": "str"
+        },
+        {
+          "name": "naics",
+          "type": "f64"
+        },
+        {
+          "name": "ba_code",
+          "type": "str"
+        },
+        {
+          "name": "respondent_frequency",
+          "type": "str"
+        },
+        {
+          "name": "physical_unit",
+          "type": "str"
+        },
+        {
+          "name": "fuel_total_quantity",
+          "type": "f64",
+          "unit": "physical units"
+        },
+        {
+          "name": "fuel_electric_quantity",
+          "type": "f64",
+          "unit": "physical units"
+        },
+        {
+          "name": "fuel_total_mmbtu",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "net_generation_mwh",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_01",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_02",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_03",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_04",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_05",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_06",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_07",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_08",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_09",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_10",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_11",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "net_generation_mwh_12",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "fuel_electric_mmbtu_01",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_02",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_03",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_04",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_05",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_06",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_07",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_08",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_09",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_10",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_11",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "fuel_electric_mmbtu_12",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "data_year",
+          "type": "f64"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "generation/AK.bin",
+          "state": "AK",
+          "rows": 229,
+          "bytes": 84440,
+          "sha256": "1e0acfc33e0bd33279cdad385eacfbe4d2d7cceb269d031ccd5729065a9d4a3f"
+        },
+        {
+          "path": "generation/AL.bin",
+          "state": "AL",
+          "rows": 174,
+          "bytes": 65264,
+          "sha256": "cff7da68672e3f868bb2db12c9558b74f4893e9001de73e89de436388b5ff33f"
+        },
+        {
+          "path": "generation/AR.bin",
+          "state": "AR",
+          "rows": 171,
+          "bytes": 65912,
+          "sha256": "bc8c523dddc6aea863c5b99a11eb03503c7c4395a5d9fda21033bd8f85b50aea"
+        },
+        {
+          "path": "generation/AZ.bin",
+          "state": "AZ",
+          "rows": 283,
+          "bytes": 104872,
+          "sha256": "f7b95ece74d1649608fdf2325cb0d9101b28ad4bc1ab49576d8f04d4b4635213"
+        },
+        {
+          "path": "generation/CA.bin",
+          "state": "CA",
+          "rows": 2248,
+          "bytes": 806104,
+          "sha256": "60f0b9e1c98669f472d61bdcbafe97d37629cf3a335a91b770a40625ca4ae74d"
+        },
+        {
+          "path": "generation/CO.bin",
+          "state": "CO",
+          "rows": 390,
+          "bytes": 144816,
+          "sha256": "c8be52bae58e990498c0b1a8ff9444afd653722f9fb38ba5eaab337799273560"
+        },
+        {
+          "path": "generation/CT.bin",
+          "state": "CT",
+          "rows": 272,
+          "bytes": 101576,
+          "sha256": "03ae29c93d6ee48cf0948c331414bc03d23567b0d624983dddfd2d32889e3241"
+        },
+        {
+          "path": "generation/DC.bin",
+          "state": "DC",
+          "rows": 22,
+          "bytes": 13160,
+          "sha256": "0fb4a7d39d37d8911b0397b33c3da964aa594fe832dbc243eccc2be7d44c0280"
+        },
+        {
+          "path": "generation/DE.bin",
+          "state": "DE",
+          "rows": 62,
+          "bytes": 27456,
+          "sha256": "43f69e496e0c6796d1cc8919fb6821f2b293ac3373293a42dc010db796eb3402"
+        },
+        {
+          "path": "generation/FL.bin",
+          "state": "FL",
+          "rows": 617,
+          "bytes": 218512,
+          "sha256": "843912a5de1258b984aae43d2f1ad0d7ef1c36c599747127d8bd779e0271ce23"
+        },
+        {
+          "path": "generation/GA.bin",
+          "state": "GA",
+          "rows": 389,
+          "bytes": 141904,
+          "sha256": "a041f84c82a998aec451a2d4dd199e9c3f9c2a7b6486749d9c1d6c5be4ee7ba2"
+        },
+        {
+          "path": "generation/HI.bin",
+          "state": "HI",
+          "rows": 136,
+          "bytes": 52672,
+          "sha256": "75ec01d6a7783132bd51478c780519b821917aeb6489d3f9236ad3b0b08e9aa8"
+        },
+        {
+          "path": "generation/IA.bin",
+          "state": "IA",
+          "rows": 422,
+          "bytes": 155136,
+          "sha256": "76648b11b8ee68c949f6902d04e0af99358747ec08384c232156850cf67a5b54"
+        },
+        {
+          "path": "generation/ID.bin",
+          "state": "ID",
+          "rows": 165,
+          "bytes": 64928,
+          "sha256": "8cac4b332f65a1552b8cd3b897339ec50f13c9470b3e7669cf5af00b62d3d910"
+        },
+        {
+          "path": "generation/IL.bin",
+          "state": "IL",
+          "rows": 696,
+          "bytes": 256008,
+          "sha256": "9d69b4b08c5506580c2eaa4b6b44db34ca160c85e47b53c8cfe43d97c496b363"
+        },
+        {
+          "path": "generation/IN.bin",
+          "state": "IN",
+          "rows": 306,
+          "bytes": 113680,
+          "sha256": "5a8604e26d24b949da1c59406b1e8eb8fd26033b6fdfab07addd2b74a0cf55d6"
+        },
+        {
+          "path": "generation/KS.bin",
+          "state": "KS",
+          "rows": 276,
+          "bytes": 102896,
+          "sha256": "c26eaef6ab3ec1ef53c9e951105a8fd6e6e050cd8d6299e0e3720b3f7f0c7d60"
+        },
+        {
+          "path": "generation/KY.bin",
+          "state": "KY",
+          "rows": 117,
+          "bytes": 45872,
+          "sha256": "5b436578223762ddd2500d88893c5003a968891d7c68cc60212e9278650995c8"
+        },
+        {
+          "path": "generation/LA.bin",
+          "state": "LA",
+          "rows": 211,
+          "bytes": 78424,
+          "sha256": "6b0d99ac98387d74119dc71f3c9e0aabe5fecc37826d6910abecf0f196742360"
+        },
+        {
+          "path": "generation/MA.bin",
+          "state": "MA",
+          "rows": 913,
+          "bytes": 330752,
+          "sha256": "3d0b0d08ec6db21b0b89f2ec23184f9e4b989f2d88e097a176fe3d075a4fb3c9"
+        },
+        {
+          "path": "generation/MD.bin",
+          "state": "MD",
+          "rows": 288,
+          "bytes": 108744,
+          "sha256": "c09ea62da2deb8332923e82391d6dca5da6781e10aa127aeb0e99b2962f20993"
+        },
+        {
+          "path": "generation/ME.bin",
+          "state": "ME",
+          "rows": 306,
+          "bytes": 114888,
+          "sha256": "45cd7ed57545bce48575975c7a356a76de384aab2dbaefa041906bed178c2058"
+        },
+        {
+          "path": "generation/MI.bin",
+          "state": "MI",
+          "rows": 432,
+          "bytes": 156808,
+          "sha256": "9a55fe3f015ec1fb646cfbddeaa689a6131efef1465887597bf221c827e1f69d"
+        },
+        {
+          "path": "generation/MN.bin",
+          "state": "MN",
+          "rows": 921,
+          "bytes": 333792,
+          "sha256": "b7a8f86fc8089a6895a565caff09bfce1a32358207d6ee925406dfe1dffec6d3"
+        },
+        {
+          "path": "generation/MO.bin",
+          "state": "MO",
+          "rows": 219,
+          "bytes": 81944,
+          "sha256": "93f6062a2edc09390bacbf5a5be2d2a0fe3aaa575c0a74ace8e790b69f9a0db2"
+        },
+        {
+          "path": "generation/MS.bin",
+          "state": "MS",
+          "rows": 119,
+          "bytes": 46888,
+          "sha256": "b2eda3ace78045c9ade481b06d768eee13e37644f38a65fb52c167c9549cf256"
+        },
+        {
+          "path": "generation/MT.bin",
+          "state": "MT",
+          "rows": 89,
+          "bytes": 37448,
+          "sha256": "6bb1e279b22c8fa953af483b1d88c2da5f22cff0bd90578b57ed3732df92db6e"
+        },
+        {
+          "path": "generation/NC.bin",
+          "state": "NC",
+          "rows": 1058,
+          "bytes": 377336,
+          "sha256": "019fc5aa206afa0506d6b0c3009c6444a5b7ebea7f8cb86ec0e88f517ad2fcd6"
+        },
+        {
+          "path": "generation/ND.bin",
+          "state": "ND",
+          "rows": 83,
+          "bytes": 35072,
+          "sha256": "27f4411093f28a066c41c090926351e66d21a2f860f5fcbed51d92ac7bd13a59"
+        },
+        {
+          "path": "generation/NE.bin",
+          "state": "NE",
+          "rows": 214,
+          "bytes": 80424,
+          "sha256": "e4025490d63e57609ac4f57dee90ddd56e2945f12b0f0d24d9b178c6dcc9cf66"
+        },
+        {
+          "path": "generation/NH.bin",
+          "state": "NH",
+          "rows": 93,
+          "bytes": 38152,
+          "sha256": "930b5a7acf583ea4d01e6de853e78099e59eea6c1c4086c08812bf130011c009"
+        },
+        {
+          "path": "generation/NJ.bin",
+          "state": "NJ",
+          "rows": 524,
+          "bytes": 192232,
+          "sha256": "642c86d861e8618be3cbbba059909a431bcba72dadd82f8f95518c7b65858b80"
+        },
+        {
+          "path": "generation/NM.bin",
+          "state": "NM",
+          "rows": 200,
+          "bytes": 77160,
+          "sha256": "0b8a44b20e614ab349ab47a22f3a77771d38e7d8736cefea1e4b9467cd0f55cc"
+        },
+        {
+          "path": "generation/NV.bin",
+          "state": "NV",
+          "rows": 169,
+          "bytes": 65512,
+          "sha256": "6ffa646bc28ae293afe49ce25753ee3e53e00d3732d5e53d7a830905ccb4a724"
+        },
+        {
+          "path": "generation/NY.bin",
+          "state": "NY",
+          "rows": 1391,
+          "bytes": 499928,
+          "sha256": "91669349e8011636aef8375b3c9ad408e2683c405328b6d7a7e2fd0b81c3eda1"
+        },
+        {
+          "path": "generation/OH.bin",
+          "state": "OH",
+          "rows": 309,
+          "bytes": 114680,
+          "sha256": "f7116e0fbe11177c05fb34919a57960c35f1baa7103ad20ceb795d6165a49bf8"
+        },
+        {
+          "path": "generation/OK.bin",
+          "state": "OK",
+          "rows": 215,
+          "bytes": 81424,
+          "sha256": "e2aaa95089000f520dc6e2f4d0eb33b20cb298fa620f9273cc7141cfb55b2b7d"
+        },
+        {
+          "path": "generation/OR.bin",
+          "state": "OR",
+          "rows": 331,
+          "bytes": 123976,
+          "sha256": "a0ec53627cc46ffc0b37765269c5f722fd61518ae862dc8cff47ba3aa71ad877"
+        },
+        {
+          "path": "generation/PA.bin",
+          "state": "PA",
+          "rows": 443,
+          "bytes": 162216,
+          "sha256": "89293338a5560794815171bb0dcc41c56f5a501fad46a6b904bf2c105ce2db5a"
+        },
+        {
+          "path": "generation/RI.bin",
+          "state": "RI",
+          "rows": 131,
+          "bytes": 53216,
+          "sha256": "d5a8c1f7a02e971f93ea223badda0207b4b4482431a703868489b95e473a5c62"
+        },
+        {
+          "path": "generation/SC.bin",
+          "state": "SC",
+          "rows": 307,
+          "bytes": 112744,
+          "sha256": "f5ecbd3c14a20e1dda77b51a407f46b4903eb048c597a4cde8ec4bbc003cce54"
+        },
+        {
+          "path": "generation/SD.bin",
+          "state": "SD",
+          "rows": 69,
+          "bytes": 30096,
+          "sha256": "0d13e6ff72029bf8654f682d859fb06a4403f96d953fc6d561ad177a9771e9e0"
+        },
+        {
+          "path": "generation/TN.bin",
+          "state": "TN",
+          "rows": 147,
+          "bytes": 57024,
+          "sha256": "ad69db896d53ce1f4732e85ceea8e5063927689d32afcab7c9aeb3a080a4713f"
+        },
+        {
+          "path": "generation/TX.bin",
+          "state": "TX",
+          "rows": 1304,
+          "bytes": 467472,
+          "sha256": "d4d033075b6287d8f7d644b347f75040adc05cca0b9308b770d160e07eb53a31"
+        },
+        {
+          "path": "generation/UT.bin",
+          "state": "UT",
+          "rows": 153,
+          "bytes": 60496,
+          "sha256": "abea871f874065ce0cf1686f487a76ba9c3ac75689077f90c3eeab541c56967b"
+        },
+        {
+          "path": "generation/VA.bin",
+          "state": "VA",
+          "rows": 375,
+          "bytes": 137368,
+          "sha256": "5c8a04a140fc853c93bf782b92f97c282e651143bcd9a138e3438cb5aefeae6e"
+        },
+        {
+          "path": "generation/VT.bin",
+          "state": "VT",
+          "rows": 135,
+          "bytes": 53280,
+          "sha256": "07f9d92e13934f304386f52beda689457c9f405c481bed4fd133d07460556297"
+        },
+        {
+          "path": "generation/WA.bin",
+          "state": "WA",
+          "rows": 196,
+          "bytes": 74456,
+          "sha256": "d1d38ee5e68785a64975b0f94f38a8cca6381705dda1e4f8ec5b5a4d4137ab5c"
+        },
+        {
+          "path": "generation/WI.bin",
+          "state": "WI",
+          "rows": 408,
+          "bytes": 146784,
+          "sha256": "4d5e51ea865424200a02b418560e9fae1319a9dab6956c1ba1538dcc9504be71"
+        },
+        {
+          "path": "generation/WV.bin",
+          "state": "WV",
+          "rows": 61,
+          "bytes": 27104,
+          "sha256": "a7e4ae1dfa5216741ba5fe536eea4b1c66c6851598eff1604f10412cf746b6a9"
+        },
+        {
+          "path": "generation/WY.bin",
+          "state": "WY",
+          "rows": 99,
+          "bytes": 39912,
+          "sha256": "4e8a1937943efcfa9214a0abb7e7a1521ed4a202b92c65fdf59b92e36713605a"
+        }
+      ],
+      "download": {
+        "path": "generation.csv.gz",
+        "bytes": 1594787,
+        "sha256": "4808c07c1b1b34b9f63f90cc6e238fe618d72598d10b301e9ef1e5928ca85d45",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Form EIA-923 (Sep 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "fuel_receipts",
+      "title": "Fuel deliveries by plant and month, with heat content and delivered cost",
+      "dataPeriod": "2025",
+      "rows": 36789,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "line",
+          "type": "f64"
+        },
+        {
+          "name": "month",
+          "type": "f64"
+        },
+        {
+          "name": "plant_id",
+          "type": "f64"
+        },
+        {
+          "name": "plant_name",
+          "type": "str"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "ba_code",
+          "type": "str"
+        },
+        {
+          "name": "purchase_type",
+          "type": "str"
+        },
+        {
+          "name": "energy_source",
+          "type": "str"
+        },
+        {
+          "name": "fuel_group",
+          "type": "str"
+        },
+        {
+          "name": "quantity",
+          "type": "f64",
+          "unit": "physical units"
+        },
+        {
+          "name": "heat_content",
+          "type": "f64",
+          "unit": "MMBtu per physical unit"
+        },
+        {
+          "name": "fuel_cost",
+          "type": "f64",
+          "unit": "cents per MMBtu"
+        },
+        {
+          "name": "regulated",
+          "type": "str"
+        },
+        {
+          "name": "operator_id",
+          "type": "f64"
+        },
+        {
+          "name": "operator_name",
+          "type": "str"
+        },
+        {
+          "name": "reporting_frequency",
+          "type": "str"
+        },
+        {
+          "name": "data_year",
+          "type": "f64"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "fuel_receipts/AK.bin",
+          "state": "AK",
+          "rows": 92,
+          "bytes": 11120,
+          "sha256": "d6c33133bc960555506bef6bf5535a8de6a062a0b9aeae97d37919edce4505bf"
+        },
+        {
+          "path": "fuel_receipts/AL.bin",
+          "state": "AL",
+          "rows": 466,
+          "bytes": 49056,
+          "sha256": "e86f4d5783a87f295bf705c426a566445535e739f89ba7e506f59fb7786de565"
+        },
+        {
+          "path": "fuel_receipts/AR.bin",
+          "state": "AR",
+          "rows": 787,
+          "bytes": 81168,
+          "sha256": "9d885efd5dda6516a96423829654d5dd5f818bff6557c25f2b47b74eaf67acd8"
+        },
+        {
+          "path": "fuel_receipts/AZ.bin",
+          "state": "AZ",
+          "rows": 470,
+          "bytes": 49616,
+          "sha256": "f0b0de153797ee9a3aa74915999301954a93ca2fac03d1dac38a0facd945756d"
+        },
+        {
+          "path": "fuel_receipts/CA.bin",
+          "state": "CA",
+          "rows": 755,
+          "bytes": 80032,
+          "sha256": "6dd7f5218f55efa8d1ed083fb5fb546f682c7f3dd189b8112f11c1531866f47c"
+        },
+        {
+          "path": "fuel_receipts/CO.bin",
+          "state": "CO",
+          "rows": 405,
+          "bytes": 43008,
+          "sha256": "9b2f203d408a52f3033f468f3a1358f50960b846e27a9335e8fb4d6dc51c9676"
+        },
+        {
+          "path": "fuel_receipts/CT.bin",
+          "state": "CT",
+          "rows": 133,
+          "bytes": 15552,
+          "sha256": "71c3b28bb58ca243d1ecce86a820c4ea119a4a206704b58720e6d5676de5900e"
+        },
+        {
+          "path": "fuel_receipts/DE.bin",
+          "state": "DE",
+          "rows": 47,
+          "bytes": 6688,
+          "sha256": "5e5ca438d855b1dbbb9308e66632e235462cedf16ffc5ea9eade2ec1c8a26a1f"
+        },
+        {
+          "path": "fuel_receipts/FL.bin",
+          "state": "FL",
+          "rows": 1011,
+          "bytes": 104528,
+          "sha256": "34d52af7b34d4cab15726f07d2aa0c4fd39b1ab1617d1f51a543bdaf61ad5726"
+        },
+        {
+          "path": "fuel_receipts/GA.bin",
+          "state": "GA",
+          "rows": 5060,
+          "bytes": 508912,
+          "sha256": "6abeb60672c949c4904cd1988c5fb6a50137ea2de2d7b0558066ed937e0a7714"
+        },
+        {
+          "path": "fuel_receipts/HI.bin",
+          "state": "HI",
+          "rows": 154,
+          "bytes": 17304,
+          "sha256": "eb92dbce9fc03a593484c7fd453416e821ae5a6070b49593034f8fe0efbae37f"
+        },
+        {
+          "path": "fuel_receipts/IA.bin",
+          "state": "IA",
+          "rows": 722,
+          "bytes": 74536,
+          "sha256": "e7aaa0aa41306ddba48b09650cca979d41c1069b223770d8a9fd669e024ef121"
+        },
+        {
+          "path": "fuel_receipts/ID.bin",
+          "state": "ID",
+          "rows": 77,
+          "bytes": 9616,
+          "sha256": "dd45f81f5190627c6c302ed3cb643a85a2e1098a97838a937c54eedabed847d3"
+        },
+        {
+          "path": "fuel_receipts/IL.bin",
+          "state": "IL",
+          "rows": 740,
+          "bytes": 77536,
+          "sha256": "ba400f3b36e1107bbd444d0bcb815dd7f863cca5d7c7d2d6c12e1e2fb332fdd0"
+        },
+        {
+          "path": "fuel_receipts/IN.bin",
+          "state": "IN",
+          "rows": 1223,
+          "bytes": 125120,
+          "sha256": "3c02be02c383991ff3f5766b2decbb6c739761a51d84d2307246277ccae9d50d"
+        },
+        {
+          "path": "fuel_receipts/KS.bin",
+          "state": "KS",
+          "rows": 456,
+          "bytes": 47840,
+          "sha256": "9df9464c292a838e4b44f10b99c2ee4054a3e65af434379316c1cf35539da046"
+        },
+        {
+          "path": "fuel_receipts/KY.bin",
+          "state": "KY",
+          "rows": 1171,
+          "bytes": 119520,
+          "sha256": "328bd1a44bfc64afb3efcfd906e5dc15c59b322ba6230514f941d8f37f8a2024"
+        },
+        {
+          "path": "fuel_receipts/LA.bin",
+          "state": "LA",
+          "rows": 1589,
+          "bytes": 161744,
+          "sha256": "e5e5e246c3c40a7547600a5905aec99c533cdbffefaeb26c67068fcfcf4b5552"
+        },
+        {
+          "path": "fuel_receipts/MA.bin",
+          "state": "MA",
+          "rows": 411,
+          "bytes": 43736,
+          "sha256": "e187e4be0c8b14a9236207017b10adf89a3981a878c7b0f67563f8cfac436337"
+        },
+        {
+          "path": "fuel_receipts/MD.bin",
+          "state": "MD",
+          "rows": 421,
+          "bytes": 44576,
+          "sha256": "041f45f9c3eafc9ae7a7797d9a0631acc287f0d85bfbc401222124f68b6a5d5a"
+        },
+        {
+          "path": "fuel_receipts/ME.bin",
+          "state": "ME",
+          "rows": 175,
+          "bytes": 19640,
+          "sha256": "b0ff52c1b5620efcfa556198048ae2abca91ee5d0deeb63c845aaafc3b33e31f"
+        },
+        {
+          "path": "fuel_receipts/MI.bin",
+          "state": "MI",
+          "rows": 594,
+          "bytes": 62048,
+          "sha256": "9e4a8fb7f2ba645b42bf9532346db0f58ef2e75dcefea009834ba267e756df14"
+        },
+        {
+          "path": "fuel_receipts/MN.bin",
+          "state": "MN",
+          "rows": 762,
+          "bytes": 78496,
+          "sha256": "32a017759ce5f0e46abea0acc88a69aaa0d779e8343afd4de7f59cf14588f129"
+        },
+        {
+          "path": "fuel_receipts/MO.bin",
+          "state": "MO",
+          "rows": 666,
+          "bytes": 69128,
+          "sha256": "765b93df66d04ea6d9789784cd5f1e340c90d43a7721246ca4df4b0dd6dd9220"
+        },
+        {
+          "path": "fuel_receipts/MS.bin",
+          "state": "MS",
+          "rows": 1601,
+          "bytes": 162608,
+          "sha256": "d145541878615d42460c33adacdff1479917ee7d77f6864a6c75c5fcf1faeee6"
+        },
+        {
+          "path": "fuel_receipts/MT.bin",
+          "state": "MT",
+          "rows": 100,
+          "bytes": 12040,
+          "sha256": "c844cddc95cd8c5d24bd4220f19222098201e2b62c941b5e44a9b2ba3105ad44"
+        },
+        {
+          "path": "fuel_receipts/NC.bin",
+          "state": "NC",
+          "rows": 1798,
+          "bytes": 182296,
+          "sha256": "d871f0abef2f17ab2525372798ebcc771d54d794652050f592e3bd2cfb91cc39"
+        },
+        {
+          "path": "fuel_receipts/ND.bin",
+          "state": "ND",
+          "rows": 174,
+          "bytes": 19520,
+          "sha256": "58211775493d9243daf349003dbf01b71b7ca852a9e4651834a03d09f0e48e79"
+        },
+        {
+          "path": "fuel_receipts/NE.bin",
+          "state": "NE",
+          "rows": 494,
+          "bytes": 51656,
+          "sha256": "0ce908e89c800eedae9884a6e415e674f2a88d3b14016bb9beeedc1ca77e741f"
+        },
+        {
+          "path": "fuel_receipts/NH.bin",
+          "state": "NH",
+          "rows": 44,
+          "bytes": 6328,
+          "sha256": "55b3c8f02d3353a445852e0e54254f9ec44ea98538af81ed8cecc531ef4a3983"
+        },
+        {
+          "path": "fuel_receipts/NJ.bin",
+          "state": "NJ",
+          "rows": 453,
+          "bytes": 48048,
+          "sha256": "ec9f5e2024905e7da33a8e75f416bb90fbe56d69329ed8c30cfa242c0544d9ab"
+        },
+        {
+          "path": "fuel_receipts/NM.bin",
+          "state": "NM",
+          "rows": 175,
+          "bytes": 19600,
+          "sha256": "f5036d06444ac4073b95b5c081d4590bba6d71af1af27201c7e12b113c10bdc7"
+        },
+        {
+          "path": "fuel_receipts/NV.bin",
+          "state": "NV",
+          "rows": 230,
+          "bytes": 25232,
+          "sha256": "6af41791f0df95ccaaffe21c1a795e11d26f6a0343b20a34d79d12823a52cb1f"
+        },
+        {
+          "path": "fuel_receipts/NY.bin",
+          "state": "NY",
+          "rows": 775,
+          "bytes": 80728,
+          "sha256": "74c5c38c38ddd646e68d520ffb879eb3ecdfc8bb4d9e88a2aeed0213ec333eef"
+        },
+        {
+          "path": "fuel_receipts/OH.bin",
+          "state": "OH",
+          "rows": 1020,
+          "bytes": 105232,
+          "sha256": "c26a212330b62ae84110d2523468a7f84f0bd9b5a5b74023c6b8da2e9560e590"
+        },
+        {
+          "path": "fuel_receipts/OK.bin",
+          "state": "OK",
+          "rows": 1275,
+          "bytes": 130032,
+          "sha256": "5f258063462aa194c070c64126cf58583f99e96770b11adf1f8e50cc57c5fa11"
+        },
+        {
+          "path": "fuel_receipts/OR.bin",
+          "state": "OR",
+          "rows": 131,
+          "bytes": 15264,
+          "sha256": "f46f0b902d0af6c3aeda9c6bfb2fd9f40706d184d0d66a14ddae7992fbc79899"
+        },
+        {
+          "path": "fuel_receipts/PA.bin",
+          "state": "PA",
+          "rows": 1128,
+          "bytes": 116928,
+          "sha256": "3f02320a6a1a771ab18b9bbf77149c55d18953683a52f24b59793ac53a8bccb4"
+        },
+        {
+          "path": "fuel_receipts/RI.bin",
+          "state": "RI",
+          "rows": 142,
+          "bytes": 16224,
+          "sha256": "6959897ae3b293224cb36951c8c4af5cfb5c17faf45836bc650fb5ad07d35db5"
+        },
+        {
+          "path": "fuel_receipts/SC.bin",
+          "state": "SC",
+          "rows": 1273,
+          "bytes": 129704,
+          "sha256": "debd8806be251c8d0657b21a5a27a035aa0f892a0909df3534fc249a9ab1a569"
+        },
+        {
+          "path": "fuel_receipts/SD.bin",
+          "state": "SD",
+          "rows": 150,
+          "bytes": 16960,
+          "sha256": "9ca54be24d541f65b852c5a5cff165d7df8971f79d2795ba1412b946a1bab080"
+        },
+        {
+          "path": "fuel_receipts/TN.bin",
+          "state": "TN",
+          "rows": 256,
+          "bytes": 27736,
+          "sha256": "5157d4d30f09431c4ba2d01634a35c8dd0585337fd0417849bbe9a2f74ae1325"
+        },
+        {
+          "path": "fuel_receipts/TX.bin",
+          "state": "TX",
+          "rows": 3957,
+          "bytes": 402336,
+          "sha256": "8f4fef06bc60a16e2d360c7abee53545e5ff22ff5158117289840a5124f8ba3f"
+        },
+        {
+          "path": "fuel_receipts/UT.bin",
+          "state": "UT",
+          "rows": 192,
+          "bytes": 21400,
+          "sha256": "b304b171d0d641f467aa46dc007594c6c16bae0f258e4c844d97b2de45038553"
+        },
+        {
+          "path": "fuel_receipts/VA.bin",
+          "state": "VA",
+          "rows": 793,
+          "bytes": 82112,
+          "sha256": "73d2aa5ad87972a61ae89bbb3ff1dbc144a1a2a6470334a604c7f56b560f6598"
+        },
+        {
+          "path": "fuel_receipts/WA.bin",
+          "state": "WA",
+          "rows": 531,
+          "bytes": 55368,
+          "sha256": "2a7d5f7ef10b5293021f7784326b2df570c59f5908120768574b35b724679464"
+        },
+        {
+          "path": "fuel_receipts/WI.bin",
+          "state": "WI",
+          "rows": 733,
+          "bytes": 75840,
+          "sha256": "f5b9b12076c5550d8004a7bb2b174ed5d75e967f2fa4e01ad12b585ee5e8195f"
+        },
+        {
+          "path": "fuel_receipts/WV.bin",
+          "state": "WV",
+          "rows": 682,
+          "bytes": 70592,
+          "sha256": "3b30e7efeeb209442b085ce40c480609eea8aba417cab63eb80e058ab01369ff"
+        },
+        {
+          "path": "fuel_receipts/WY.bin",
+          "state": "WY",
+          "rows": 295,
+          "bytes": 31640,
+          "sha256": "c802c3c433cf6299fbd94177734d76e385940ffafb5b69128691d73feaa0e9fd"
+        }
+      ],
+      "download": {
+        "path": "fuel_receipts.csv.gz",
+        "bytes": 729359,
+        "sha256": "0183b207fe6bdeb01a5639b6821fba51c74bc655a96efe01e088b9bf08ce36fc",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Form EIA-923 (Sep 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}

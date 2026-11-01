@@ -1,13 +1,22 @@
 // A small workbook shaped exactly like EIA-923's "Page 1 Generation and Fuel
 // Data" sheet (five title rows, the header, "." placeholders, a state-fuel
-// increment row, a plant whose CHP status changed, and the blank frame row),
-// zipped the way EIA ships it, for offline pipeline tests.
+// increment row, a plant whose CHP status changed, and the blank frame row)
+// and its "Page 5 Fuel Receipts and Costs" sheet (a priced delivery and two
+// withheld ones), zipped the way EIA ships it, for offline pipeline tests.
 
 import { readFileSync } from 'node:fs';
 import { writeXlsx, writeZip } from '../../../lib/zip-writer.mjs';
 import { EXPECTED_HEADER } from '../../../../pipeline/normalize/eia-923-generation.mjs';
+import { EXPECTED_HEADER as RECEIPTS_HEADER } from '../../../../pipeline/normalize/eia-923-receipts.mjs';
 
 const blank = JSON.parse(readFileSync(new URL('./blank-frame-row.json', import.meta.url), 'utf8')).cells;
+const withheld = JSON.parse(readFileSync(new URL('./withheld-cost.json', import.meta.url), 'utf8')).cells;
+
+/** Deliveries: a regulated plant's priced gas, then the two withheld ones from the real file. */
+export const sampleReceipts = () => [
+  [2025, 1, 3, 'Barry', 'AL', 'S', '.', 'NG', 'Natural Gas', '', '', '', '', '', 'VARIOUS (NATURAL GAS SPOT PURCHASES ONLY)', 1015376, 1.022, 0, 0, 0, 455.1, 'REG', 'Alabama Power Co', 195, 'M', 'PL', '', 'F', 'F', '.', '.', 'SOCO'],
+  ...withheld,
+];
 
 /** A row: 19 descriptive cells, five monthly quantity groups, 12 monthly MWh, then annual totals and the year. */
 const row = (desc, mwh, year) => [...desc, ...Array(60).fill(10), ...mwh, 120, 120, 600, 600, mwh.reduce((a, b) => a + b, 0), year];
@@ -26,13 +35,14 @@ export function sampleRows(year = 2025) {
   ];
 }
 
-/** @param {{year?: number, rows?: any[][], final?: boolean}} [o] final: false names the workbook the way the year-to-date file does */
+/** @param {{year?: number, rows?: any[][], receipts?: any[][], final?: boolean}} [o] final: false names the workbook the way the year-to-date file does */
 export function eia923Zip(o = {}) {
   const year = o.year ?? 2025;
   const titles = [['U.S. Department of Energy, The Energy Information Administration (EIA)'], [`EIA-923 Monthly Generation and Fuel Consumption Time Series File,  ${year} Final Data`], ['Sources: EIA-923 and EIA-860 Reports'], [], ['']];
   const name = o.final === false ? `EIA923_Schedules_2_3_4_5_M_08_${year}_21OCT${year}.xlsx` : `EIA923_Schedules_2_3_4_5_M_12_${year}_Final_Revision.xlsx`;
   return writeZip([
-    { name, data: writeXlsx({ 'Page 1 Generation and Fuel Data': [...titles, EXPECTED_HEADER, ...(o.rows ?? sampleRows(year))], 'Page 1 Puerto Rico': [] }) },
+    { name, data: writeXlsx({ 'Page 1 Generation and Fuel Data': [...titles, EXPECTED_HEADER, ...(o.rows ?? sampleRows(year))], 'Page 1 Puerto Rico': [],
+      'Page 5 Fuel Receipts and Costs': [...titles.slice(0, 4), RECEIPTS_HEADER, ...(o.receipts ?? sampleReceipts())] }) },
     { name: `EIA923_Schedule_8_Annual_Envir_Infor_${year}_Final.xlsx`, data: 'x' },
   ]);
 }

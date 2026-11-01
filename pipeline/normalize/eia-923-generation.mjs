@@ -1,8 +1,9 @@
 // Normalize EIA-923 Page 1 ("Generation and Fuel Data" sheet) into one row per
 // plant, nuclear unit, prime mover, fuel, state, and sector: annual and
-// monthly net generation (MWh) and fuel consumed. Plant 99999 rows are EIA's
-// state-fuel level increments (its estimate for plants that report annually)
-// and are kept, so state sums match EIA's totals. EIA's "." becomes null.
+// monthly net generation (MWh), fuel consumed, and monthly fuel for
+// electricity. Plant 99999 rows are EIA's state-fuel level increments (its
+// estimate for plants that report annually) and are kept, so state sums match
+// EIA's totals. EIA's "." becomes null.
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const monthly = (prefix) => MONTHS.map((m) => `${prefix}\r\n${m}`);
@@ -25,6 +26,8 @@ const KEPT = [
   ['fuel_total_mmbtu', 'Total Fuel Consumption\r\nMMBtu', 'f64', 'MMBtu'], ['fuel_electric_mmbtu', 'Elec Fuel Consumption\r\nMMBtu', 'f64', 'MMBtu'],
   ['net_generation_mwh', 'Net Generation\r\n(Megawatthours)', 'f64', 'MWh'],
   ...MONTHS.map((m, k) => [`net_generation_mwh_${String(k + 1).padStart(2, '0')}`, `Netgen\r\n${m}`, 'f64', 'MWh']),
+  // Monthly fuel burned for electricity, so a heat rate can carry its spread across months.
+  ...MONTHS.map((m, k) => [`fuel_electric_mmbtu_${String(k + 1).padStart(2, '0')}`, `Elec_MMBtu\r\n${m}`, 'f64', 'MMBtu']),
   ['data_year', 'YEAR', 'f64'],
 ];
 export const SCHEMA = KEPT.map(([name, , type, unit]) => ({ name, type, ...(unit ? { unit } : {}) }));

@@ -36,12 +36,14 @@ test('the registry gate fails a version whose screen record is missing or stale'
   const root = tempDir('gridprims-ceii-');
   for (const p of ['pipeline/registry', 'pipeline/lib', 'openspec/changes/add-public-grid-data', 'data/eia-923']) cpSync(join(ROOT, p), join(root, p), { recursive: true });
   cpSync(join(ROOT, 'pipeline/registry/eia-923.mjs'), join(root, 'pipeline/registry/eia-923.mjs'));
-  const file = join(root, 'data/eia-923/2026-10/manifest.json');
+  // The served version is the one the gate reads.
+  const { version } = JSON.parse(readFileSync(join(root, 'data/eia-923/current.json'), 'utf8'));
+  const file = join(root, `data/eia-923/${version}/manifest.json`);
   const m = JSON.parse(readFileSync(file, 'utf8'));
   writeFileSync(file, JSON.stringify({ ...m, ceiiScreen: undefined }));
-  assert.match((await checkRegistry(root)).join('\n'), /eia-923 2026-10: no CEII screen record/);
+  assert.match((await checkRegistry(root)).join('\n'), new RegExp(`eia-923 ${version}: no CEII screen record`));
   writeFileSync(file, JSON.stringify({ ...m, ceiiScreen: { ...m.ceiiScreen, columnsChecked: 1 } }));
-  assert.match((await checkRegistry(root)).join('\n'), /eia-923 2026-10: the CEII screen record is stale/);
+  assert.match((await checkRegistry(root)).join('\n'), new RegExp(`eia-923 ${version}: the CEII screen record is stale`));
 });
 
 test('a dataset that is not infrastructure may publish named location columns with a reason; an infrastructure one may not', () => {

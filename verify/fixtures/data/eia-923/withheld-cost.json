@@ -1,0 +1,8 @@
+{
+  "note": "Two deliveries from the 2025 final file (Page 5 Fuel Receipts and Costs) whose FUEL_COST EIA writes as \".\": every unregulated plant's delivery cost is withheld (9,022 of 9,022), and 78 of 27,767 regulated ones. The cost must stay blank, never zero.",
+  "source": "EIA923_Schedules_2_3_4_5_M_12_2025_Final.xlsx, rows 7 and 8 of the delivery list",
+  "cells": [
+    [2025,1,260,"Dynegy Moss Landing Power Plant Hybrid","CA","S",".","NG","Natural Gas","","","","","","PG&E",1001104,0.982,0,0,0,".","UNR","Dynegy -Moss Landing LLC",54802,"M","PL","","F","F",".",".","CISO"],
+    [2025,1,298,"Limestone","TX","C",125,"SUB","Coal","S","WY",5,"4801078","EAGLE BUTTE MINE","BLUEGRASS COMMODITIES LP",46499,16.73,0.41,5.3,0,".","UNR","NRG Texas Power LLC",54888,"M","RR","","","",30.24,0,"ERCO"]
+  ]
+}

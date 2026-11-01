@@ -389,7 +389,7 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     asOf: vintage.asOf, retrieved, generatedAt: `${retrieved}T00:00:00Z`, cadence: entry.cadence,
     raw: named.map(([name]) => {
       const r = raws[name];
-      return { url: r.url, name: r.name ?? r.url.split('/').pop(), bytes: r.size, sha256: r.sha256, ...(name ? { file: name } : ready.some((x) => x.entryName) ? { entries: ready.map((x) => x.entryName) } : {}), ...(!name && upstream?.lastModified ? { lastModified: upstream.lastModified } : {}), ...(r.lastModified ? { lastModified: r.lastModified } : {}) };
+      return { url: r.url, name: r.name ?? r.url.split('/').pop(), bytes: r.size, sha256: r.sha256, ...(name ? { file: name } : ready.some((x) => x.entryName) ? { entries: [...new Set(ready.map((x) => x.entryName))] } : {}), ...(!name && upstream?.lastModified ? { lastModified: upstream.lastModified } : {}), ...(r.lastModified ? { lastModified: r.lastModified } : {}) };
     }),
     ...(vintage.release ? { release: vintage.release } : {}),
     ...(base ? { previousVersion: base } : {}),

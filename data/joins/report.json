@@ -102,7 +102,7 @@
    "right": {
     "dataset": "eia-923",
     "table": "generation",
-    "version": "2026-10",
+    "version": "2026-11",
     "keys": 14043,
     "unmatched": 36,
     "sample": [

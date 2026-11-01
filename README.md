@@ -12,6 +12,7 @@ Built for utility engineers, energy managers, solar and storage developers, siti
 - **Line-by-line bills on any tariff.** Price a load on any OpenEI rate, with time-of-use, tiers, demand windows, ratchets, and power factor. Then rank every rate in the same class.
 - **Hourly emissions from your own file.** Your load's CO₂ hour by hour from EIA's hourly grid data, beside the annual averages most reports use, and how much of it a solar array or clean contract covers hour by hour. Plus the cleanest hours in your region for shifting flexible load.
 - **One cited page per entity.** Every utility, power plant, state, and eGRID subregion, built from EIA, EPA, FERC, and LBNL data. Each page names its source and how current it is.
+- **What if a plant closed?** Retire or add a coal, gas, or oil unit in any balancing authority. See which fuels replace it over the year that happened, with the model's error against what actually ran shown first.
 - **Interconnection queues** by state and county, by type, with time in queue and withdrawal rates.
 - **Clean data downloads.** Versioned tables with checksums, licenses, and a citation to copy.
 

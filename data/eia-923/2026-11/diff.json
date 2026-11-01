@@ -1,0 +1,553 @@
+{
+  "dataset": "eia-923",
+  "license": "CC BY 4.0",
+  "from": {
+    "version": "2026-10",
+    "asOf": "2026-09-11",
+    "retrieved": "2026-10-31"
+  },
+  "to": {
+    "version": "2026-11",
+    "asOf": "2026-09-11",
+    "retrieved": "2026-11-01"
+  },
+  "files": {
+    "added": [
+      {
+        "path": "fuel_receipts/AK.bin",
+        "sha256": "d6c33133bc960555506bef6bf5535a8de6a062a0b9aeae97d37919edce4505bf"
+      },
+      {
+        "path": "fuel_receipts/AL.bin",
+        "sha256": "e86f4d5783a87f295bf705c426a566445535e739f89ba7e506f59fb7786de565"
+      },
+      {
+        "path": "fuel_receipts/AR.bin",
+        "sha256": "9d885efd5dda6516a96423829654d5dd5f818bff6557c25f2b47b74eaf67acd8"
+      },
+      {
+        "path": "fuel_receipts/AZ.bin",
+        "sha256": "f0b0de153797ee9a3aa74915999301954a93ca2fac03d1dac38a0facd945756d"
+      },
+      {
+        "path": "fuel_receipts/CA.bin",
+        "sha256": "6dd7f5218f55efa8d1ed083fb5fb546f682c7f3dd189b8112f11c1531866f47c"
+      },
+      {
+        "path": "fuel_receipts/CO.bin",
+        "sha256": "9b2f203d408a52f3033f468f3a1358f50960b846e27a9335e8fb4d6dc51c9676"
+      },
+      {
+        "path": "fuel_receipts/CT.bin",
+        "sha256": "71c3b28bb58ca243d1ecce86a820c4ea119a4a206704b58720e6d5676de5900e"
+      },
+      {
+        "path": "fuel_receipts/DE.bin",
+        "sha256": "5e5ca438d855b1dbbb9308e66632e235462cedf16ffc5ea9eade2ec1c8a26a1f"
+      },
+      {
+        "path": "fuel_receipts/FL.bin",
+        "sha256": "34d52af7b34d4cab15726f07d2aa0c4fd39b1ab1617d1f51a543bdaf61ad5726"
+      },
+      {
+        "path": "fuel_receipts/GA.bin",
+        "sha256": "6abeb60672c949c4904cd1988c5fb6a50137ea2de2d7b0558066ed937e0a7714"
+      },
+      {
+        "path": "fuel_receipts/HI.bin",
+        "sha256": "eb92dbce9fc03a593484c7fd453416e821ae5a6070b49593034f8fe0efbae37f"
+      },
+      {
+        "path": "fuel_receipts/IA.bin",
+        "sha256": "e7aaa0aa41306ddba48b09650cca979d41c1069b223770d8a9fd669e024ef121"
+      },
+      {
+        "path": "fuel_receipts/ID.bin",
+        "sha256": "dd45f81f5190627c6c302ed3cb643a85a2e1098a97838a937c54eedabed847d3"
+      },
+      {
+        "path": "fuel_receipts/IL.bin",
+        "sha256": "ba400f3b36e1107bbd444d0bcb815dd7f863cca5d7c7d2d6c12e1e2fb332fdd0"
+      },
+      {
+        "path": "fuel_receipts/IN.bin",
+        "sha256": "3c02be02c383991ff3f5766b2decbb6c739761a51d84d2307246277ccae9d50d"
+      },
+      {
+        "path": "fuel_receipts/KS.bin",
+        "sha256": "9df9464c292a838e4b44f10b99c2ee4054a3e65af434379316c1cf35539da046"
+      },
+      {
+        "path": "fuel_receipts/KY.bin",
+        "sha256": "328bd1a44bfc64afb3efcfd906e5dc15c59b322ba6230514f941d8f37f8a2024"
+      },
+      {
+        "path": "fuel_receipts/LA.bin",
+        "sha256": "e5e5e246c3c40a7547600a5905aec99c533cdbffefaeb26c67068fcfcf4b5552"
+      },
+      {
+        "path": "fuel_receipts/MA.bin",
+        "sha256": "e187e4be0c8b14a9236207017b10adf89a3981a878c7b0f67563f8cfac436337"
+      },
+      {
+        "path": "fuel_receipts/MD.bin",
+        "sha256": "041f45f9c3eafc9ae7a7797d9a0631acc287f0d85bfbc401222124f68b6a5d5a"
+      },
+      {
+        "path": "fuel_receipts/ME.bin",
+        "sha256": "b0ff52c1b5620efcfa556198048ae2abca91ee5d0deeb63c845aaafc3b33e31f"
+      },
+      {
+        "path": "fuel_receipts/MI.bin",
+        "sha256": "9e4a8fb7f2ba645b42bf9532346db0f58ef2e75dcefea009834ba267e756df14"
+      },
+      {
+        "path": "fuel_receipts/MN.bin",
+        "sha256": "32a017759ce5f0e46abea0acc88a69aaa0d779e8343afd4de7f59cf14588f129"
+      },
+      {
+        "path": "fuel_receipts/MO.bin",
+        "sha256": "765b93df66d04ea6d9789784cd5f1e340c90d43a7721246ca4df4b0dd6dd9220"
+      },
+      {
+        "path": "fuel_receipts/MS.bin",
+        "sha256": "d145541878615d42460c33adacdff1479917ee7d77f6864a6c75c5fcf1faeee6"
+      },
+      {
+        "path": "fuel_receipts/MT.bin",
+        "sha256": "c844cddc95cd8c5d24bd4220f19222098201e2b62c941b5e44a9b2ba3105ad44"
+      },
+      {
+        "path": "fuel_receipts/NC.bin",
+        "sha256": "d871f0abef2f17ab2525372798ebcc771d54d794652050f592e3bd2cfb91cc39"
+      },
+      {
+        "path": "fuel_receipts/ND.bin",
+        "sha256": "58211775493d9243daf349003dbf01b71b7ca852a9e4651834a03d09f0e48e79"
+      },
+      {
+        "path": "fuel_receipts/NE.bin",
+        "sha256": "0ce908e89c800eedae9884a6e415e674f2a88d3b14016bb9beeedc1ca77e741f"
+      },
+      {
+        "path": "fuel_receipts/NH.bin",
+        "sha256": "55b3c8f02d3353a445852e0e54254f9ec44ea98538af81ed8cecc531ef4a3983"
+      },
+      {
+        "path": "fuel_receipts/NJ.bin",
+        "sha256": "ec9f5e2024905e7da33a8e75f416bb90fbe56d69329ed8c30cfa242c0544d9ab"
+      },
+      {
+        "path": "fuel_receipts/NM.bin",
+        "sha256": "f5036d06444ac4073b95b5c081d4590bba6d71af1af27201c7e12b113c10bdc7"
+      },
+      {
+        "path": "fuel_receipts/NV.bin",
+        "sha256": "6af41791f0df95ccaaffe21c1a795e11d26f6a0343b20a34d79d12823a52cb1f"
+      },
+      {
+        "path": "fuel_receipts/NY.bin",
+        "sha256": "74c5c38c38ddd646e68d520ffb879eb3ecdfc8bb4d9e88a2aeed0213ec333eef"
+      },
+      {
+        "path": "fuel_receipts/OH.bin",
+        "sha256": "c26a212330b62ae84110d2523468a7f84f0bd9b5a5b74023c6b8da2e9560e590"
+      },
+      {
+        "path": "fuel_receipts/OK.bin",
+        "sha256": "5f258063462aa194c070c64126cf58583f99e96770b11adf1f8e50cc57c5fa11"
+      },
+      {
+        "path": "fuel_receipts/OR.bin",
+        "sha256": "f46f0b902d0af6c3aeda9c6bfb2fd9f40706d184d0d66a14ddae7992fbc79899"
+      },
+      {
+        "path": "fuel_receipts/PA.bin",
+        "sha256": "3f02320a6a1a771ab18b9bbf77149c55d18953683a52f24b59793ac53a8bccb4"
+      },
+      {
+        "path": "fuel_receipts/RI.bin",
+        "sha256": "6959897ae3b293224cb36951c8c4af5cfb5c17faf45836bc650fb5ad07d35db5"
+      },
+      {
+        "path": "fuel_receipts/SC.bin",
+        "sha256": "debd8806be251c8d0657b21a5a27a035aa0f892a0909df3534fc249a9ab1a569"
+      },
+      {
+        "path": "fuel_receipts/SD.bin",
+        "sha256": "9ca54be24d541f65b852c5a5cff165d7df8971f79d2795ba1412b946a1bab080"
+      },
+      {
+        "path": "fuel_receipts/TN.bin",
+        "sha256": "5157d4d30f09431c4ba2d01634a35c8dd0585337fd0417849bbe9a2f74ae1325"
+      },
+      {
+        "path": "fuel_receipts/TX.bin",
+        "sha256": "8f4fef06bc60a16e2d360c7abee53545e5ff22ff5158117289840a5124f8ba3f"
+      },
+      {
+        "path": "fuel_receipts/UT.bin",
+        "sha256": "b304b171d0d641f467aa46dc007594c6c16bae0f258e4c844d97b2de45038553"
+      },
+      {
+        "path": "fuel_receipts/VA.bin",
+        "sha256": "73d2aa5ad87972a61ae89bbb3ff1dbc144a1a2a6470334a604c7f56b560f6598"
+      },
+      {
+        "path": "fuel_receipts/WA.bin",
+        "sha256": "2a7d5f7ef10b5293021f7784326b2df570c59f5908120768574b35b724679464"
+      },
+      {
+        "path": "fuel_receipts/WI.bin",
+        "sha256": "f5b9b12076c5550d8004a7bb2b174ed5d75e967f2fa4e01ad12b585ee5e8195f"
+      },
+      {
+        "path": "fuel_receipts/WV.bin",
+        "sha256": "3b30e7efeeb209442b085ce40c480609eea8aba417cab63eb80e058ab01369ff"
+      },
+      {
+        "path": "fuel_receipts/WY.bin",
+        "sha256": "c802c3c433cf6299fbd94177734d76e385940ffafb5b69128691d73feaa0e9fd"
+      },
+      {
+        "path": "fuel_receipts.csv.gz",
+        "sha256": "0183b207fe6bdeb01a5639b6821fba51c74bc655a96efe01e088b9bf08ce36fc"
+      }
+    ],
+    "removed": [],
+    "changed": [
+      {
+        "path": "generation/AK.bin",
+        "from": "56d8ce36e28258669bdd65155af8bda9907bd40074b59cc9094b49ff5254ded1",
+        "to": "1e0acfc33e0bd33279cdad385eacfbe4d2d7cceb269d031ccd5729065a9d4a3f"
+      },
+      {
+        "path": "generation/AL.bin",
+        "from": "140714d0900164a11a7fde43e5c6705cbe63333f975d75d5e845dc052ce5cbe3",
+        "to": "cff7da68672e3f868bb2db12c9558b74f4893e9001de73e89de436388b5ff33f"
+      },
+      {
+        "path": "generation/AR.bin",
+        "from": "ee339b98dc02e6b10000abeb32eac71464081e2325a8f26575d2de01587244ca",
+        "to": "bc8c523dddc6aea863c5b99a11eb03503c7c4395a5d9fda21033bd8f85b50aea"
+      },
+      {
+        "path": "generation/AZ.bin",
+        "from": "f10e1e8c0d3262067ff5799409fd83b3025c8ea9d5054b1aa77b543819b578f6",
+        "to": "f7b95ece74d1649608fdf2325cb0d9101b28ad4bc1ab49576d8f04d4b4635213"
+      },
+      {
+        "path": "generation/CA.bin",
+        "from": "7a28a27d6b52b951dbb673696e70851cc3f0307b90bf05b7fbbffa82ee6b1c05",
+        "to": "60f0b9e1c98669f472d61bdcbafe97d37629cf3a335a91b770a40625ca4ae74d"
+      },
+      {
+        "path": "generation/CO.bin",
+        "from": "97065901035990a44cde064b8b63230f3340d8035b2715c03d9bfb43bc0208b0",
+        "to": "c8be52bae58e990498c0b1a8ff9444afd653722f9fb38ba5eaab337799273560"
+      },
+      {
+        "path": "generation/CT.bin",
+        "from": "6d03dc1685997acb1d390b96061787542f7fa99dedac897526a74626599e14bf",
+        "to": "03ae29c93d6ee48cf0948c331414bc03d23567b0d624983dddfd2d32889e3241"
+      },
+      {
+        "path": "generation/DC.bin",
+        "from": "5cc9be0bffa4488505aca9dc84d93bf23bc4b2c3101df78acabc71caae79063a",
+        "to": "0fb4a7d39d37d8911b0397b33c3da964aa594fe832dbc243eccc2be7d44c0280"
+      },
+      {
+        "path": "generation/DE.bin",
+        "from": "fd744d2bfea2fb980bdbb646c0a2b521adc15de3ee8965f9f022ef6798a8081b",
+        "to": "43f69e496e0c6796d1cc8919fb6821f2b293ac3373293a42dc010db796eb3402"
+      },
+      {
+        "path": "generation/FL.bin",
+        "from": "0f614fb9eb32fc3573c3e00cb8f8c129823ada872a93aa1f3b3de864941c15b6",
+        "to": "843912a5de1258b984aae43d2f1ad0d7ef1c36c599747127d8bd779e0271ce23"
+      },
+      {
+        "path": "generation/GA.bin",
+        "from": "6be12fb183a974e8893ce1f937b9a634161117e473d410e9e8781ed1c0a20ae4",
+        "to": "a041f84c82a998aec451a2d4dd199e9c3f9c2a7b6486749d9c1d6c5be4ee7ba2"
+      },
+      {
+        "path": "generation/HI.bin",
+        "from": "2e5104327c7d8921c7cb19649a59802b8f6b06a4d24d5bec4bd11657ba6021ec",
+        "to": "75ec01d6a7783132bd51478c780519b821917aeb6489d3f9236ad3b0b08e9aa8"
+      },
+      {
+        "path": "generation/IA.bin",
+        "from": "a591ad0e0bfd79894a9baf9c17798abe2914fcb292e029468402e02992c63c84",
+        "to": "76648b11b8ee68c949f6902d04e0af99358747ec08384c232156850cf67a5b54"
+      },
+      {
+        "path": "generation/ID.bin",
+        "from": "bb218dc13ab500070a5e8a347f0a7374fb46ed8bdce455fa393c52de7612ce2b",
+        "to": "8cac4b332f65a1552b8cd3b897339ec50f13c9470b3e7669cf5af00b62d3d910"
+      },
+      {
+        "path": "generation/IL.bin",
+        "from": "bc319eab837c109343c8c178089cd7afe70a655b1e374041e6cb7422a49386f1",
+        "to": "9d69b4b08c5506580c2eaa4b6b44db34ca160c85e47b53c8cfe43d97c496b363"
+      },
+      {
+        "path": "generation/IN.bin",
+        "from": "ddeefe45a1a0d2cadece7f35dda1aed50abf13fcf56805dc0b4f8eb17fa8260b",
+        "to": "5a8604e26d24b949da1c59406b1e8eb8fd26033b6fdfab07addd2b74a0cf55d6"
+      },
+      {
+        "path": "generation/KS.bin",
+        "from": "a4560bbd4bd292cf19ea8cb00e1b4c6e2649c5712fc0f84e9a0713f8f281097c",
+        "to": "c26eaef6ab3ec1ef53c9e951105a8fd6e6e050cd8d6299e0e3720b3f7f0c7d60"
+      },
+      {
+        "path": "generation/KY.bin",
+        "from": "ab8fb98a57187b3103a289bcf093062f9dda540c0d63213a08598ca57d9e37a4",
+        "to": "5b436578223762ddd2500d88893c5003a968891d7c68cc60212e9278650995c8"
+      },
+      {
+        "path": "generation/LA.bin",
+        "from": "99b9fb39ef8543cae99e141190b21a5fd9bf2558c6260ca1fefbcc65ef768e56",
+        "to": "6b0d99ac98387d74119dc71f3c9e0aabe5fecc37826d6910abecf0f196742360"
+      },
+      {
+        "path": "generation/MA.bin",
+        "from": "88b60c4052fac42f6acd92bd812731a41611b98c8ea697a03c6fd9b0e6e1b8c1",
+        "to": "3d0b0d08ec6db21b0b89f2ec23184f9e4b989f2d88e097a176fe3d075a4fb3c9"
+      },
+      {
+        "path": "generation/MD.bin",
+        "from": "71e3bf9d6e3f319640b539310c36071efc05dd9b0bcdcd0f567688433a1aa14b",
+        "to": "c09ea62da2deb8332923e82391d6dca5da6781e10aa127aeb0e99b2962f20993"
+      },
+      {
+        "path": "generation/ME.bin",
+        "from": "0582e201efe83aa155258fd695f8b9cbafe98c65b387a618f1e6e52fcce481ed",
+        "to": "45cd7ed57545bce48575975c7a356a76de384aab2dbaefa041906bed178c2058"
+      },
+      {
+        "path": "generation/MI.bin",
+        "from": "10a713e8cef0278df3129d6fe656b215436cbb2c2221b7dd81a4bbb2418fef19",
+        "to": "9a55fe3f015ec1fb646cfbddeaa689a6131efef1465887597bf221c827e1f69d"
+      },
+      {
+        "path": "generation/MN.bin",
+        "from": "4a93980d58105f238d75868086757653324caea66f1bed9e25b29539aa1251eb",
+        "to": "b7a8f86fc8089a6895a565caff09bfce1a32358207d6ee925406dfe1dffec6d3"
+      },
+      {
+        "path": "generation/MO.bin",
+        "from": "d58a00357ec1f4e70370015e822480b039e4b6f30e35f9e4dcad4a0ff38aed15",
+        "to": "93f6062a2edc09390bacbf5a5be2d2a0fe3aaa575c0a74ace8e790b69f9a0db2"
+      },
+      {
+        "path": "generation/MS.bin",
+        "from": "56dbef62a4f70bbbcd4bfec57095cafa888b65f0b3cac68d706b68627c80bd16",
+        "to": "b2eda3ace78045c9ade481b06d768eee13e37644f38a65fb52c167c9549cf256"
+      },
+      {
+        "path": "generation/MT.bin",
+        "from": "738666a3403ed4fd6cd26270b09f2f6af86902e2b09eead9c6babd73194dccf3",
+        "to": "6bb1e279b22c8fa953af483b1d88c2da5f22cff0bd90578b57ed3732df92db6e"
+      },
+      {
+        "path": "generation/NC.bin",
+        "from": "81541ef8543dd2963600c847ded2e172cd274a6589ab880bc4801928b0c0def0",
+        "to": "019fc5aa206afa0506d6b0c3009c6444a5b7ebea7f8cb86ec0e88f517ad2fcd6"
+      },
+      {
+        "path": "generation/ND.bin",
+        "from": "242e8a7976d6030d6d9269f33ae8954c3d2dcd37c26a57cd0a1daed8c8f77ef6",
+        "to": "27f4411093f28a066c41c090926351e66d21a2f860f5fcbed51d92ac7bd13a59"
+      },
+      {
+        "path": "generation/NE.bin",
+        "from": "5468be8f836a23ecfe86c865805f3966eee4c38381f159135905da065648c15d",
+        "to": "e4025490d63e57609ac4f57dee90ddd56e2945f12b0f0d24d9b178c6dcc9cf66"
+      },
+      {
+        "path": "generation/NH.bin",
+        "from": "f20676d75d1fa2d3d532c239d3c50053ce6b8505db6d120bd4670f672e03a64c",
+        "to": "930b5a7acf583ea4d01e6de853e78099e59eea6c1c4086c08812bf130011c009"
+      },
+      {
+        "path": "generation/NJ.bin",
+        "from": "bbc0c22540124041efc68c9d11fef8765119ad9dd84a3619d63d2137d6b4b566",
+        "to": "642c86d861e8618be3cbbba059909a431bcba72dadd82f8f95518c7b65858b80"
+      },
+      {
+        "path": "generation/NM.bin",
+        "from": "67d00617e1fb8d4854988b83002211b4b2ee7a06d56ed0742dba5e33c67fb836",
+        "to": "0b8a44b20e614ab349ab47a22f3a77771d38e7d8736cefea1e4b9467cd0f55cc"
+      },
+      {
+        "path": "generation/NV.bin",
+        "from": "0e03c790728837df999f061152e806340e02891ddb50f7d5b4388fb87cf9ba9e",
+        "to": "6ffa646bc28ae293afe49ce25753ee3e53e00d3732d5e53d7a830905ccb4a724"
+      },
+      {
+        "path": "generation/NY.bin",
+        "from": "82821750e5a60358718f62c0e6eb13de0d375c226d639a4d12914dc1fa98e5e8",
+        "to": "91669349e8011636aef8375b3c9ad408e2683c405328b6d7a7e2fd0b81c3eda1"
+      },
+      {
+        "path": "generation/OH.bin",
+        "from": "5e2cb02e8f431da5cee65094d44d461aa17a0e33c2df2f2c02b029f5c4164d99",
+        "to": "f7116e0fbe11177c05fb34919a57960c35f1baa7103ad20ceb795d6165a49bf8"
+      },
+      {
+        "path": "generation/OK.bin",
+        "from": "560bd4a690eea375b8d398f737e6907c2835d7f777d7512435e71274ff264e00",
+        "to": "e2aaa95089000f520dc6e2f4d0eb33b20cb298fa620f9273cc7141cfb55b2b7d"
+      },
+      {
+        "path": "generation/OR.bin",
+        "from": "01dbe9622cd4a4ce05a7170208ee5165008c84d9a2e3b0718eb5ed6842ec2307",
+        "to": "a0ec53627cc46ffc0b37765269c5f722fd61518ae862dc8cff47ba3aa71ad877"
+      },
+      {
+        "path": "generation/PA.bin",
+        "from": "599195c11475a464dacf6b761412852ff8fba2df32f559f1af2aad6a7fd31008",
+        "to": "89293338a5560794815171bb0dcc41c56f5a501fad46a6b904bf2c105ce2db5a"
+      },
+      {
+        "path": "generation/RI.bin",
+        "from": "73679d5b070ed990631ea2c5d4fe16e3343f5ae584660088dfe0ad430259a25b",
+        "to": "d5a8c1f7a02e971f93ea223badda0207b4b4482431a703868489b95e473a5c62"
+      },
+      {
+        "path": "generation/SC.bin",
+        "from": "658a801e5da11608f3a4c5c37dd6452101eebfd5a1c79daaf7e14702ff98c4cc",
+        "to": "f5ecbd3c14a20e1dda77b51a407f46b4903eb048c597a4cde8ec4bbc003cce54"
+      },
+      {
+        "path": "generation/SD.bin",
+        "from": "d357f0032cefc5a5018bb38035f64c9e72025405b5ae33c46c8371e080f12e1b",
+        "to": "0d13e6ff72029bf8654f682d859fb06a4403f96d953fc6d561ad177a9771e9e0"
+      },
+      {
+        "path": "generation/TN.bin",
+        "from": "f9466b872fe462d7d3a93b7527ef7778f5b7dc95230544d81c825ea5f78ad19b",
+        "to": "ad69db896d53ce1f4732e85ceea8e5063927689d32afcab7c9aeb3a080a4713f"
+      },
+      {
+        "path": "generation/TX.bin",
+        "from": "988d860c07159500debc8ddd73fd133851ecf05e387eded54260430922cbd2ed",
+        "to": "d4d033075b6287d8f7d644b347f75040adc05cca0b9308b770d160e07eb53a31"
+      },
+      {
+        "path": "generation/UT.bin",
+        "from": "ef5676b1054953edca542e9f1b2abd0fab64d6f6bc36fdd83b9ddea8e9ad8e9c",
+        "to": "abea871f874065ce0cf1686f487a76ba9c3ac75689077f90c3eeab541c56967b"
+      },
+      {
+        "path": "generation/VA.bin",
+        "from": "abafe4bb4d2a71031edbc196bb2cd1e39fb8f887f416bff158e8a72d9949629d",
+        "to": "5c8a04a140fc853c93bf782b92f97c282e651143bcd9a138e3438cb5aefeae6e"
+      },
+      {
+        "path": "generation/VT.bin",
+        "from": "6dbfa2bd819ddfecfdaac146387f3076711f39a3e8dfc677db0521091d803ba9",
+        "to": "07f9d92e13934f304386f52beda689457c9f405c481bed4fd133d07460556297"
+      },
+      {
+        "path": "generation/WA.bin",
+        "from": "e85447aebf5b870e864d85371b8cb3e919df4421c525192bd30b8e32f1ddd33f",
+        "to": "d1d38ee5e68785a64975b0f94f38a8cca6381705dda1e4f8ec5b5a4d4137ab5c"
+      },
+      {
+        "path": "generation/WI.bin",
+        "from": "eabce084f6bb4be7e45839861e6be8cfe955ed8ae4f2508b66e2ceb6d865ccd5",
+        "to": "4d5e51ea865424200a02b418560e9fae1319a9dab6956c1ba1538dcc9504be71"
+      },
+      {
+        "path": "generation/WV.bin",
+        "from": "7aa88f70f8f841b0b7221ee3a87f629f90fc1808fc4bc54d09f9e2dca609be30",
+        "to": "a7e4ae1dfa5216741ba5fe536eea4b1c66c6851598eff1604f10412cf746b6a9"
+      },
+      {
+        "path": "generation/WY.bin",
+        "from": "94d11687a3b9d613d1ec99d865851c3c9d5d9ada90ee04a657803215506b0771",
+        "to": "4e8a1937943efcfa9214a0abb7e7a1521ed4a202b92c65fdf59b92e36713605a"
+      },
+      {
+        "path": "generation.csv.gz",
+        "from": "825fc3eaf36ca4caf1b23b15241db44be95231cff7ff9c2f213288c5f25f5b2c",
+        "to": "4808c07c1b1b34b9f63f90cc6e238fe618d72598d10b301e9ef1e5928ca85d45"
+      }
+    ],
+    "unchanged": 0
+  },
+  "tables": [
+    {
+      "name": "generation",
+      "rows": {
+        "before": 18888,
+        "after": 18888,
+        "delta": 0
+      },
+      "columns": {
+        "added": [
+          "fuel_electric_mmbtu_01",
+          "fuel_electric_mmbtu_02",
+          "fuel_electric_mmbtu_03",
+          "fuel_electric_mmbtu_04",
+          "fuel_electric_mmbtu_05",
+          "fuel_electric_mmbtu_06",
+          "fuel_electric_mmbtu_07",
+          "fuel_electric_mmbtu_08",
+          "fuel_electric_mmbtu_09",
+          "fuel_electric_mmbtu_10",
+          "fuel_electric_mmbtu_11",
+          "fuel_electric_mmbtu_12"
+        ],
+        "removed": [],
+        "renamed": [],
+        "unit": []
+      },
+      "changes": {
+        "from": "2026-10",
+        "added": 0,
+        "removed": 0,
+        "changed": 18888
+      }
+    },
+    {
+      "name": "fuel_receipts",
+      "rows": {
+        "before": null,
+        "after": 36789,
+        "delta": null
+      },
+      "columns": {
+        "added": [
+          "line",
+          "month",
+          "plant_id",
+          "plant_name",
+          "state",
+          "ba_code",
+          "purchase_type",
+          "energy_source",
+          "fuel_group",
+          "quantity",
+          "heat_content",
+          "fuel_cost",
+          "regulated",
+          "operator_id",
+          "operator_name",
+          "reporting_frequency",
+          "data_year"
+        ],
+        "removed": [],
+        "renamed": [],
+        "unit": []
+      },
+      "changes": {
+        "first": true
+      }
+    }
+  ],
+  "tablesRemoved": []
+}
