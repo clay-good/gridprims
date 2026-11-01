@@ -86,7 +86,7 @@ import strings from './strings/en-US.mjs';
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 /** Folders the browser imports from, copied as-is: the same files the tests run. */
-const SHARED = ['core', 'parsers', 'site/lib', 'site/ui', 'site/pages', 'site/strings', 'site/samples', 'site/cards', 'site/fonts'];
+const SHARED = ['core', 'parsers', 'data/curated/go95', 'data/curated/regulators.mjs', 'data/curated/cannot-do.mjs', 'data/curated/claims.mjs', 'data/curated/conductors-acsr.json', 'site/lib', 'site/ui', 'site/pages', 'site/strings', 'site/samples', 'site/cards', 'site/fonts'];
 
 /**
  * The stylesheet ships as one file built from three, in this order: the shell
