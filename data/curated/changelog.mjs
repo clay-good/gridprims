@@ -11,6 +11,7 @@
  * @type {Array<{date: string, toolId: string | null, version: string, reason: string, kind?: 'security', credit?: string, sample?: {inputs: object, old: string, new: string}}>}
  */
 export default [
+  { date: '2026-11-01', toolId: 'lines.midspan-clearance.check', version: '0.1.0', reason: 'First release.' },
   { date: '2026-11-01', toolId: 'grid.large-load.take-or-pay', version: '0.1.0', reason: 'First release.' },
   { date: '2026-11-01', toolId: 'grid.large-load.context', version: '0.1.0', reason: 'First release.' },
   { date: '2026-11-01', toolId: 'weather.change.explain', version: '0.1.0', reason: 'First release.' },

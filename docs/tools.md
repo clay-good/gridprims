@@ -605,3 +605,48 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 - A utility's peak and sales come from different forms and may be from different years.
 - It says nothing about where the load connects or what the transmission system can carry.
+
+## Midspan clearance of a line (`lines.midspan-clearance.check`)
+
+How far a line sags between two poles, how high its lowest point is, and how that compares with the clearance your rules require over what the span crosses.
+
+Version 0.1.0 · experimental · validation level 2, cross-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Rules | `ruleSource` | choice | `yours`, `none` | yours |
+| Span length | `span` |  |  | 200 ft |
+| Height at the first pole | `heightA` |  |  | 25 ft |
+| Height at the second pole | `heightB` |  |  | 25 ft |
+| Sag at the design condition | `sag` |  |  | compute |
+| Weight | `weight` | lb/ft | 0.01 to 20 | 0.5 |
+| Horizontal tension | `tension` | lb | 10 to 100000 | 1000 |
+| What the span crosses | `crosses` | choice | `not-chosen`, `road`, `driveway`, `pedestrian`, `rail` | not-chosen |
+| Clearance your rules require over it | `required` |  |  | none |
+| The line above | `above` |  |  | none |
+| Separation your rules require at midspan | `midspanSep` |  |  | none |
+| Separation your rules require at the pole | `poleSep` |  |  | none |
+| Also give the sag this far from midspan | `offset` |  |  | none |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Sag | `sag` | ft | 2 decimals |
+| Lowest point above ground | `lowest` | ft | 2 decimals |
+| Lowest point from the lower pole | `fromLower` | ft | 1 decimals |
+| Margin over the required clearance (negative is short) | `margin` | ft | 2 decimals |
+| Smallest gap to the line above | `gap` | in | 1 decimals |
+| Sag at the offset | `offsetSag` | ft | 3 decimals |
+| Exact catenary sag | `catenary` | ft | 2 decimals |
+
+**Method.** Sag D = wS² ÷ 8H (RUS Bulletin 1724E-152, §2.3.1), or the sag you enter. The line hangs below the straight line between its two attachments by 4D·u(1 − u), where u is the share of the span from the first pole; with heights above the ground at each pole and the ground straight between them, the lowest point above ground is the bottom of that curve, or the lower pole when the bottom falls outside the span. Sag at x from midspan is D(1 − (2x/S)²). The gap to the line above is the smallest difference of the two curves. Sag and shortfalls round up; heights and margins round down.
+
+**Sources.**
+
+- USDA Rural Utilities Service, Bulletin 1724E-152, The Mechanics of Overhead Distribution Line Conductors, July 30, 2003, §2.3.1, Sag Equations: D = WS²/8Th and Dx = D(1 − (2x/S)²) (https://www.rd.usda.gov/files/UEP_Bulletin_1724E-152.pdf)
+- IEEE C2, National Electrical Safety Code, the edition your rules adopt, Rules 232 and 235 (cited by number; the values come from your copy)
+
+**Known limits.**
+
+- Sag is at the condition you entered and is not converted for heat, ice, or wind.
+- The parabolic method understates deep sag; the exact catenary is shown when they differ by more than 1 in.
+- The answer is only as good as the measured heights.

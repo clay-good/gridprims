@@ -37,6 +37,22 @@ export default [
     verified: true,
   },
   {
+    id: 'pdf-standards', added: '2026-11-01',
+    title: 'Reading construction standards from PDFs, markups, photos, or GIS',
+    detail: 'The overhead line checks take your rules as values you enter, or as a filled-in template.',
+    reason: 'Tables in PDFs, drawing markups, and photos do not read reliably without a server or a model, and a misread clearance is a safety problem.',
+    sources: ['openspec/changes/add-overhead-line-checks/design.md D1'],
+    verified: true,
+  },
+  {
+    id: 'pole-loading', added: '2026-11-01',
+    title: 'Whether a pole will hold: pole loading, guys, and anchors',
+    detail: 'The overhead line checks look at heights and gaps only; see the entry on engineering sign-off.',
+    reason: 'Pole strength needs the pole\'s class, condition, and every load on it, and owners ask for a report sealed by a licensed engineer.',
+    sources: ['openspec/changes/add-overhead-line-checks/design.md, Context (PE-sealed pole loading reports)', 'USDA RUS Bulletins 1724E-150 and 1724E-153'],
+    verified: true,
+  },
+  {
     id: 'interconnection-verdict', added: '2026-10-31',
     title: 'A pass or fail interconnection verdict',
     reason: 'Six of the twelve standard screens, including every screen that needs a model of the circuit, cannot be answered from public data.',

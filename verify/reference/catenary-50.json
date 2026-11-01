@@ -1,0 +1,405 @@
+{
+ "note": "Exact catenary sag below the chord at midspan, by bisection on the catenary through both supports; see verify/tools/catenary-cases.py.",
+ "cases": [
+  {
+   "id": 1,
+   "span_ft": 75,
+   "weight_lb_per_ft": 0.1,
+   "tension_lb": 188,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 0.374015
+  },
+  {
+   "id": 2,
+   "span_ft": 100,
+   "weight_lb_per_ft": 1.0,
+   "tension_lb": 208,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 6.068156
+  },
+  {
+   "id": 3,
+   "span_ft": 150,
+   "weight_lb_per_ft": 0.3,
+   "tension_lb": 161,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 5.252115
+  },
+  {
+   "id": 4,
+   "span_ft": 200,
+   "weight_lb_per_ft": 2.0,
+   "tension_lb": 5000,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 2.000367
+  },
+  {
+   "id": 5,
+   "span_ft": 250,
+   "weight_lb_per_ft": 0.5,
+   "tension_lb": 195,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 20.204128
+  },
+  {
+   "id": 6,
+   "span_ft": 300,
+   "weight_lb_per_ft": 0.1,
+   "tension_lb": 83,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 13.598615
+  },
+  {
+   "id": 7,
+   "span_ft": 400,
+   "weight_lb_per_ft": 1.0,
+   "tension_lb": 2500,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 8.004892
+  },
+  {
+   "id": 8,
+   "span_ft": 500,
+   "weight_lb_per_ft": 0.3,
+   "tension_lb": 3750,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 2.500103
+  },
+  {
+   "id": 9,
+   "span_ft": 600,
+   "weight_lb_per_ft": 2.0,
+   "tension_lb": 2500,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 36.173132
+  },
+  {
+   "id": 10,
+   "span_ft": 800,
+   "weight_lb_per_ft": 0.5,
+   "tension_lb": 1429,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 28.039501
+  },
+  {
+   "id": 11,
+   "span_ft": 75,
+   "weight_lb_per_ft": 0.1,
+   "tension_lb": 94,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 0.749764
+  },
+  {
+   "id": 12,
+   "span_ft": 100,
+   "weight_lb_per_ft": 1.0,
+   "tension_lb": 156,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 8.083213
+  },
+  {
+   "id": 13,
+   "span_ft": 150,
+   "weight_lb_per_ft": 0.3,
+   "tension_lb": 125,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 6.768245
+  },
+  {
+   "id": 14,
+   "span_ft": 200,
+   "weight_lb_per_ft": 2.0,
+   "tension_lb": 2500,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 4.007123
+  },
+  {
+   "id": 15,
+   "span_ft": 250,
+   "weight_lb_per_ft": 0.5,
+   "tension_lb": 3125,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 1.250292
+  },
+  {
+   "id": 16,
+   "span_ft": 300,
+   "weight_lb_per_ft": 0.1,
+   "tension_lb": 62,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 18.234239
+  },
+  {
+   "id": 17,
+   "span_ft": 400,
+   "weight_lb_per_ft": 1.0,
+   "tension_lb": 1429,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 14.018662
+  },
+  {
+   "id": 18,
+   "span_ft": 500,
+   "weight_lb_per_ft": 0.3,
+   "tension_lb": 1875,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 5.001666
+  },
+  {
+   "id": 19,
+   "span_ft": 600,
+   "weight_lb_per_ft": 2.0,
+   "tension_lb": 1875,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 48.412625
+  },
+  {
+   "id": 20,
+   "span_ft": 800,
+   "weight_lb_per_ft": 0.5,
+   "tension_lb": 1111,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 36.101046
+  },
+  {
+   "id": 21,
+   "span_ft": 75,
+   "weight_lb_per_ft": 0.1,
+   "tension_lb": 47,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 1.496804
+  },
+  {
+   "id": 22,
+   "span_ft": 100,
+   "weight_lb_per_ft": 1.0,
+   "tension_lb": 2500,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 0.50251
+  },
+  {
+   "id": 23,
+   "span_ft": 150,
+   "weight_lb_per_ft": 0.3,
+   "tension_lb": 94,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 9.023917
+  },
+  {
+   "id": 24,
+   "span_ft": 200,
+   "weight_lb_per_ft": 2.0,
+   "tension_lb": 1429,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 7.009679
+  },
+  {
+   "id": 25,
+   "span_ft": 250,
+   "weight_lb_per_ft": 0.5,
+   "tension_lb": 1562,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 2.501134
+  },
+  {
+   "id": 26,
+   "span_ft": 300,
+   "weight_lb_per_ft": 0.1,
+   "tension_lb": 47,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 24.152993
+  },
+  {
+   "id": 27,
+   "span_ft": 400,
+   "weight_lb_per_ft": 1.0,
+   "tension_lb": 1111,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 18.051862
+  },
+  {
+   "id": 28,
+   "span_ft": 500,
+   "weight_lb_per_ft": 0.3,
+   "tension_lb": 938,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 10.000075
+  },
+  {
+   "id": 29,
+   "span_ft": 600,
+   "weight_lb_per_ft": 2.0,
+   "tension_lb": 30000,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 3.0001
+  },
+  {
+   "id": 30,
+   "span_ft": 800,
+   "weight_lb_per_ft": 0.5,
+   "tension_lb": 833,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 48.254026
+  },
+  {
+   "id": 31,
+   "span_ft": 75,
+   "weight_lb_per_ft": 0.1,
+   "tension_lb": 27,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 2.614108
+  },
+  {
+   "id": 32,
+   "span_ft": 100,
+   "weight_lb_per_ft": 1.0,
+   "tension_lb": 1250,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 1.000333
+  },
+  {
+   "id": 33,
+   "span_ft": 150,
+   "weight_lb_per_ft": 0.3,
+   "tension_lb": 70,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 12.157707
+  },
+  {
+   "id": 34,
+   "span_ft": 200,
+   "weight_lb_per_ft": 2.0,
+   "tension_lb": 1111,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 9.036387
+  },
+  {
+   "id": 35,
+   "span_ft": 250,
+   "weight_lb_per_ft": 0.5,
+   "tension_lb": 781,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 5.005269
+  },
+  {
+   "id": 36,
+   "span_ft": 300,
+   "weight_lb_per_ft": 0.1,
+   "tension_lb": 750,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 1.500083
+  },
+  {
+   "id": 37,
+   "span_ft": 400,
+   "weight_lb_per_ft": 1.0,
+   "tension_lb": 833,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 24.125164
+  },
+  {
+   "id": 38,
+   "span_ft": 500,
+   "weight_lb_per_ft": 0.3,
+   "tension_lb": 536,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 17.522709
+  },
+  {
+   "id": 39,
+   "span_ft": 600,
+   "weight_lb_per_ft": 2.0,
+   "tension_lb": 15000,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 6.001008
+  },
+  {
+   "id": 40,
+   "span_ft": 800,
+   "weight_lb_per_ft": 0.5,
+   "tension_lb": 625,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 64.548196
+  },
+  {
+   "id": 41,
+   "span_ft": 75,
+   "weight_lb_per_ft": 0.1,
+   "tension_lb": 21,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 3.357121
+  },
+  {
+   "id": 42,
+   "span_ft": 100,
+   "weight_lb_per_ft": 1.0,
+   "tension_lb": 625,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 2.011026
+  },
+  {
+   "id": 43,
+   "span_ft": 150,
+   "weight_lb_per_ft": 0.3,
+   "tension_lb": 1125,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 0.750442
+  },
+  {
+   "id": 44,
+   "span_ft": 200,
+   "weight_lb_per_ft": 2.0,
+   "tension_lb": 833,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 12.063174
+  },
+  {
+   "id": 45,
+   "span_ft": 250,
+   "weight_lb_per_ft": 0.5,
+   "tension_lb": 446,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 8.77275
+  },
+  {
+   "id": 46,
+   "span_ft": 300,
+   "weight_lb_per_ft": 0.1,
+   "tension_lb": 375,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 3.002066
+  },
+  {
+   "id": 47,
+   "span_ft": 400,
+   "weight_lb_per_ft": 1.0,
+   "tension_lb": 625,
+   "height_diff_ft": 5,
+   "catenary_sag_ft": 32.276437
+  },
+  {
+   "id": 48,
+   "span_ft": 500,
+   "weight_lb_per_ft": 0.3,
+   "tension_lb": 417,
+   "height_diff_ft": 2,
+   "catenary_sag_ft": 22.542863
+  },
+  {
+   "id": 49,
+   "span_ft": 600,
+   "weight_lb_per_ft": 2.0,
+   "tension_lb": 7500,
+   "height_diff_ft": 0,
+   "catenary_sag_ft": 12.006401
+  },
+  {
+   "id": 50,
+   "span_ft": 800,
+   "weight_lb_per_ft": 0.5,
+   "tension_lb": 10000,
+   "height_diff_ft": 10,
+   "catenary_sag_ft": 4.000446
+  }
+ ]
+}

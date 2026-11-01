@@ -35,6 +35,8 @@ import takeOrPay from './grid.large-load.take-or-pay/manifest.mjs';
 import * as takeOrPayImpl from './grid.large-load.take-or-pay/tool.mjs';
 import largeLoadContext from './grid.large-load.context/manifest.mjs';
 import * as largeLoadContextImpl from './grid.large-load.context/tool.mjs';
+import midspanClearance from './lines.midspan-clearance.check/manifest.mjs';
+import * as midspanClearanceImpl from './lines.midspan-clearance.check/tool.mjs';
 
 export const TOOLS = [
   { manifest: energyUnitsConvert, impl: energyUnitsConvertImpl },
@@ -54,6 +56,7 @@ export const TOOLS = [
   { manifest: weatherChange, impl: weatherChangeImpl },
   { manifest: takeOrPay, impl: takeOrPayImpl },
   { manifest: largeLoadContext, impl: largeLoadContextImpl },
+  { manifest: midspanClearance, impl: midspanClearanceImpl },
 ];
 
 /** @param {string} id */

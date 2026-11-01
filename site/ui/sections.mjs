@@ -10,7 +10,7 @@ export const SECTIONS = [
   { id: 'learn', path: '/learn/' },
 ];
 
-const BY_DOMAIN = { load: 'bills', household: 'bills', ratepayer: 'bills', data: 'data', carbon: 'carbon', calc: 'grid', grid: 'grid', reliability: 'grid', interconnect: 'grid', electrify: 'grid', learn: 'learn' };
+const BY_DOMAIN = { load: 'bills', household: 'bills', ratepayer: 'bills', data: 'data', carbon: 'carbon', calc: 'grid', grid: 'grid', reliability: 'grid', interconnect: 'grid', electrify: 'grid', lines: 'grid', learn: 'learn' };
 
 /** @param {string} toolId */
 export const sectionOf = (toolId) => BY_DOMAIN[toolId.split('.')[0]] ?? 'grid';
