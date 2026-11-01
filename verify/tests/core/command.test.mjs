@@ -51,3 +51,17 @@ test('a command form naming an undeclared input fails validation', () => {
   const m = { ...sample(), commandForms: ['{x} doubled', '{nope} things'] };
   assert.deepEqual(validateManifest(m), ['calc.sample.double: commandForms[1] names {nope}, which is not a number or enum input']);
 });
+
+test('a tool whose id names what was asked for outranks one that only shares a title word', async () => {
+  const { TOOLS } = await import('../../../core/tools/index.mjs');
+  const { toolPath } = await import('../../../site/ui/tool-page.mjs');
+  const index = buildCommandIndex(TOOLS, toolPath, []);
+  const first = (q) => searchCommands(q, index, 1)[0].id;
+  // "Large-load minimum bill and exit fee" shares two title words, but this id names all three.
+  assert.equal(first('minimum load screen'), 'interconnect.minimum-load.screen');
+  assert.equal(first('pole attachment height'), 'lines.attachment-height.find');
+  assert.equal(first('midspan clearance'), 'lines.midspan-clearance.check');
+  assert.equal(first('interconnection process'), 'interconnect.process.route');
+  // A query that fills a tool's inputs still outranks every word match.
+  assert.equal(first('12 MWh to MMBtu'), 'calc.energy-units.convert');
+});

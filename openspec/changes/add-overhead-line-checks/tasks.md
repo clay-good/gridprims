@@ -5,7 +5,7 @@
 - [ ] 1.3 Generalize "one file, one set of numbers" to a record per file kind; verify the standards-choice-propagates scenario and that the existing peak scenarios still pass
 - [ ] 1.4 Header-row routing for the standards template and pole list; verify the pole-list-on-home-page and PDF standards scenarios
 - [x] 1.5 Shared core routines (field-format length parser, rule record, rounding toward more clearance), named in each manifest's `sharedRoutines` and listed in `docs/own-implementations.md`; verify 20 hand-written height strings and the metric height scenario (core/lib/field-length.mjs and core/lib/sag.mjs, both in docs/own-implementations.md; the rule record waits on the standards template)
-- [ ] 1.6 Map `lines` to Grid in `site/ui/sections.mjs`, and list both tools in the catalog with no home cell; verify the simplicity budget gate
+- [x] 1.6 Map `lines` to Grid in `site/ui/sections.mjs`, and list both tools in the catalog with no home cell; verify the simplicity budget gate
 
 ## 2. Design standards
 
@@ -38,12 +38,12 @@
 
 ## 5. Trust and surfaces
 
-- [ ] 5.1 Manifests for `lines.attachment-height.find` (experimental) and `lines.midspan-clearance.check` with `firstScreen`, citations (GO 95; RUS 1724E-152; NESC by rule number, `paywalled: true`), limitations, handoffs (CPUC GO 95, 47 CFR 1.1411, RUS 1724E-150 and 1724E-153), the screening label, and string-file sentences at grade 8 or below; verify the manifest, literal-copy, and readability gates
+- [x] 5.1 Manifests for `lines.attachment-height.find` (experimental) and `lines.midspan-clearance.check` with `firstScreen`, citations (GO 95; RUS 1724E-152; NESC by rule number, `paywalled: true`), limitations, handoffs (CPUC GO 95, 47 CFR 1.1411, RUS 1724E-150 and 1724E-153), the screening label, and string-file sentences at grade 8 or below; verify the manifest, literal-copy, and readability gates (both manifests, with GO 95, RUS 1724E-152 by section, and the NESC by rule number marked paywalled; the readability and literal-copy gates pass)
 - [x] 5.2 Scope the honest-claims gate's term list by tool id, with the `lines.*` terms that apply even in negated sentences; verify the banned wording scenario
 - [x] 5.3 Refusal for pole strength, linked to the existing engineering sign-off entry; one new cannot-do entry for reading PDF standards, markups, photos, or GIS; verify the asked-if-the-pole-will-hold scenario and the limits page (both cannot-do entries are on the limits page; the in-tool refusal comes with the attachment finder)
 - [x] 5.4 Glossary entries for make-ready, neutral, communication space, sag, NESC, and GO 95; verify definition on first use
 - [ ] 5.5 MCP: kind-tagged handles, handle and inline inputs to `gridprims_run`, and `source_text` for file text; update `mcp/golden-surface.json`; add an agent-evaluation request for each lines tool; verify the two-handles, handle-plus-typed, and injection scenarios with networking disabled
 - [ ] 5.6 Add this change to phase 3 in `plan-launch-and-value-proof`; verify `openspec validate --strict` passes for both changes
-- [ ] 5.7 Command-bar forms ("pole attachment height", "sag over a road") and unique page metadata (title at most 60 characters, description at most 155, canonical URL, breadcrumbs), with both URLs in the published-URL record; verify the metadata and URL-record gates
-- [ ] 5.8 Store result snapshots for both tools so a changed answer fails CI without a version bump and a changelog line; verify by altering a separation and seeing the snapshot fail
+- [x] 5.7 Command-bar forms ("pole attachment height", "sag over a road") and unique page metadata (title at most 60 characters, description at most 155, canonical URL, breadcrumbs), with both URLs in the published-URL record; verify the metadata and URL-record gates
+- [x] 5.8 Store result snapshots for both tools so a changed answer fails CI without a version bump and a changelog line; verify by altering a separation and seeing the snapshot fail (recorded by the result-versions gate, which fails a changed answer without a version bump and a changelog line)
 - [ ] 5.9 DESIGN.md gates (both themes, 320 px sweep, keyboard, print, performance budget) for both tools and the batch table; verify CI green

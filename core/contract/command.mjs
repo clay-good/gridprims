@@ -88,6 +88,8 @@ export function buildCommandIndex(tools, pathOf, glossary = []) {
       title: m.title,
       url: pathOf(m.id),
       words: [...new Set([...words(m.title), ...words(m.purpose), ...m.id.split(/[.-]/)])],
+      // A tool whose id names the thing asked for outranks one that merely shares a title word.
+      idWords: [...new Set(m.id.split(/[.-]/))],
       commandForms: m.commandForms ?? [],
       inputs: m.inputs.map(({ name, type, options }) => ({ name, type, ...(options ? { options } : {}) })),
     })),
@@ -128,6 +130,7 @@ export function searchCommands(query, index, limit = 8) {
       if (titleWords.has(w)) score += 2;
       else if (entry.words.some((e) => e === w)) score += 1;
       else if (w.length >= 3 && entry.words.some((e) => e.startsWith(w))) score += 0.5;
+      if (entry.idWords?.includes(w)) score += 1;
     }
     if (score > 0) scored.push({ ...entry, score, values });
   }
