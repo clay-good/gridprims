@@ -1,9 +1,18 @@
 schema: spec-driven
 
 context: |
-  Product: gridprims.com — the US power grid's math, files, and public data in
-  one free tab. A static, client-side catalog of grid tools for the people who
-  plan, build, run, or pay for electricity. Two doors, one engine:
+  Product: gridprims.com — where new load or generation can connect to the US
+  grid, how much, and how long it takes, from public data alone. A static,
+  client-side site whose front page answers that one question; every other
+  tool is reached through the search bar and the tool catalog. Audiences, in
+  order:
+    - "Siting load or generation (lead, confirmed 2026-11-01): data center and
+      manufacturing siting teams, solar and storage developers, fleet and
+      facility electrification planners, co-op and municipal utility
+      engineers, economic development and commission staff, and reporters
+      covering load growth. They arrive with a place and a size, not a file."
+  Behind that question sit the tools already built, for the same people and
+  for:
     - Households (about 143M residential customers): check a bill from its
       totals, compare use with the average home, find the cheapest plan on
       their own use, find their utility, see the grid's cleanest hours.
@@ -28,6 +37,14 @@ context: |
       Cloudflare hosts; public publishers supply data at build time.
 
   Value add, in priority order (why gridprims exists):
+    0. The siting read-out: a place and a size return the serving utility and
+       balancing authority, that size against the utility's own peak and
+       sales, the county's queued requests and their mix, how long that
+       cohort has waited, how many withdrew, and which federal
+       interconnection process applies. Assembled from LBNL Queued Up, FERC
+       Form 714, EIA-861, and the SGIP ladder, all already built here.
+       Resolution stops at county: feeder headroom is CEII and we never
+       estimate it. See openspec/changes/add-siting-and-timing.
     1. Instant, private first look at your own meter data and bill. Drop an
        interval file or Green Button export and get peaks, load factor,
        demand-charge drivers, coincident-peak exposure, tariff re-pricing, and a
@@ -118,9 +135,9 @@ operations:
       - Never add a package dependency; add an own implementation and list
         it in docs/own-implementations.md.
       - Follow the phase order in plan-launch-and-value-proof.
-      - A tool is not done until its worked examples pass and its page passes
-        the DESIGN.md gates: both themes, 320 px sweep, keyboard pass, print,
-        and the performance budget.
+      - "A tool is not done until its worked examples pass and its page
+        passes the DESIGN.md gates: both themes, 320 px sweep, keyboard
+        pass, print, and the performance budget."
       - Any quantity more than one tool reports is computed once in the shared
         core; two tools must never disagree on the same file.
       - A dataset ships only with publisher, license, redistribution basis,
@@ -139,10 +156,10 @@ operations:
       - No step may wait on a person. Where terms, review, or confirmation
         are uncertain, the build takes the safer automatic option and says
         so; it never blocks, and it never asks anyone to sign off.
-      - Everything recurring runs on the git host's CI on a schedule: data
+      - "Everything recurring runs on the git host's CI on a schedule: data
         refresh, validation, build, deploy, archive deposit, ledger, link
         checks, and the restore test. CI runs only our own Node scripts and
-        first-party actions pinned by commit SHA.
+        first-party actions pinned by commit SHA."
       - Credentials are least-privilege and never of a kind that expires on
         a date; forked pull requests reach no secret.
       - The pipeline publishes its own health, so a stalled refresh is
