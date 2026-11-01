@@ -1,0 +1,252 @@
+{
+  "dataset": "eia-930-interchange",
+  "version": "2026-11",
+  "title": "Interchange consistency of EIA-930, 2025: pair and total residuals by balancing authority",
+  "publisher": "U.S. Energy Information Administration",
+  "sourceUrl": "https://www.eia.gov/electricity/gridmonitor/",
+  "terms": {
+    "url": "https://www.eia.gov/about/copyrights_reuse.php",
+    "section": "Public domain and use of EIA content",
+    "text": "U.S. government publications are in the public domain and are not subject to copyright protection. You may use and/or distribute any of our data, files, databases, reports, graphs, charts, and other information products that are on our website or that you receive through our email distribution service. However, if you use or reproduce any of our information products, you should use an acknowledgment, which includes the publication date, such as: \"Source: U.S. Energy Information Administration (Oct 2008).\"",
+    "captured": "2026-10-31"
+  },
+  "redistributionBasis": {
+    "kind": "public domain",
+    "note": "U.S. federal government work (17 U.S.C. 105)"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "us-federal-public-domain",
+    "reason": "recognized us-federal-public-domain",
+    "agrees": true
+  },
+  "license": "public domain (U.S. federal government work (17 U.S.C. 105))",
+  "attribution": "Computed by gridprims from U.S. Energy Information Administration, Hourly Electric Grid Monitor (Form EIA-930), six-month BALANCE and INTERCHANGE files for 2025 (Oct 2026).",
+  "asOf": "2026-10-31",
+  "retrieved": "2026-11-01",
+  "generatedAt": "2026-11-01T00:00:00Z",
+  "cadence": {
+    "every": "monthly",
+    "nextRelease": {
+      "date": "2026-11-30",
+      "posted": false,
+      "note": "EIA rebuilds every region's file daily, by about 4 pm Eastern for the day before; gridprims cuts a version once a month"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/sixMonthFiles/EIA930_INTERCHANGE_2025_Jan_Jun.csv",
+      "name": "EIA930_INTERCHANGE_2025_Jan_Jun.csv",
+      "bytes": 101202449,
+      "sha256": "26346191ea9b738a166f75eeb3291b16d2863c74c51986c7779e71f194a2c32d",
+      "file": "i1"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/sixMonthFiles/EIA930_INTERCHANGE_2025_Jul_Dec.csv",
+      "name": "EIA930_INTERCHANGE_2025_Jul_Dec.csv",
+      "bytes": 104382552,
+      "sha256": "6e9a627d9266975a65cf6a14f39a532332288d06c0ec1c228200585beecf13be",
+      "file": "i2"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/sixMonthFiles/EIA930_BALANCE_2025_Jan_Jun.csv",
+      "name": "EIA930_BALANCE_2025_Jan_Jun.csv",
+      "bytes": 47565054,
+      "sha256": "fac4bb991dfa1dab3b4b35300ccab54ac99be13a40ce91954db8ddafb2816242",
+      "file": "b1"
+    },
+    {
+      "url": "https://www.eia.gov/electricity/gridmonitor/sixMonthFiles/EIA930_BALANCE_2025_Jul_Dec.csv",
+      "name": "EIA930_BALANCE_2025_Jul_Dec.csv",
+      "bytes": 48256021,
+      "sha256": "1146158b972439db7c7f4cc7d0491e07644ddbf244d03b8ecb44cb2c833d10f1",
+      "file": "b2"
+    }
+  ],
+  "release": "2025 six-month files",
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-11-01",
+    "infrastructure": false,
+    "columnsChecked": 21,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Hourly totals for whole balancing authorities; no facility, line, or network detail."
+  },
+  "tables": [
+    {
+      "name": "pair_residuals",
+      "title": "Each pair of neighboring balancing authorities: hours tested, hours unavailable, and how far apart the two reports were",
+      "dataPeriod": "2025",
+      "rows": 157,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "ba",
+          "type": "str"
+        },
+        {
+          "name": "neighbor",
+          "type": "str"
+        },
+        {
+          "name": "year",
+          "type": "f64"
+        },
+        {
+          "name": "hours_tested",
+          "type": "f64",
+          "unit": "hours both reported"
+        },
+        {
+          "name": "hours_unavailable",
+          "type": "f64",
+          "unit": "hours only one reported"
+        },
+        {
+          "name": "throughput_mwh",
+          "type": "f64",
+          "unit": "MWh, the larger report each hour"
+        },
+        {
+          "name": "residual_mwh",
+          "type": "f64",
+          "unit": "MWh, the sum of hourly residual magnitudes"
+        },
+        {
+          "name": "residual_pct",
+          "type": "f64",
+          "unit": "% of throughput"
+        },
+        {
+          "name": "median_mwh",
+          "type": "f64",
+          "unit": "MWh, hourly residual magnitude"
+        },
+        {
+          "name": "p90_mwh",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "max_mwh",
+          "type": "f64",
+          "unit": "MWh"
+        }
+      ],
+      "partition": null,
+      "shards": [
+        {
+          "path": "pair_residuals/US.bin",
+          "state": "US",
+          "rows": 157,
+          "bytes": 14568,
+          "sha256": "743c80057981c6579b10a371f9e5870a5a9d0f23fcbc38b75f91952b3d8961ef"
+        }
+      ],
+      "download": {
+        "path": "pair_residuals.csv.gz",
+        "bytes": 3085,
+        "sha256": "93a845d69bb0103b4fd02eb3aa904f27a28ab302a793abd5635570b43a3f1235",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Computed by gridprims from U.S. Energy Information Administration, Hourly Electric Grid Monitor (Form EIA-930), six-month BALANCE and INTERCHANGE files for 2025 (Oct 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "total_residuals",
+      "title": "Each balancing authority: reported total interchange against the sum of its reported pairs, on both readings of the total",
+      "dataPeriod": "2025",
+      "rows": 62,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "ba",
+          "type": "str"
+        },
+        {
+          "name": "year",
+          "type": "f64"
+        },
+        {
+          "name": "hours_tested",
+          "type": "f64",
+          "unit": "hours with a total and at least one pair"
+        },
+        {
+          "name": "hours_unavailable",
+          "type": "f64",
+          "unit": "hours with a total and no pair, or pairs and no total"
+        },
+        {
+          "name": "reported_residual_pct",
+          "type": "f64",
+          "unit": "% of throughput, against the reported total"
+        },
+        {
+          "name": "adjusted_residual_pct",
+          "type": "f64",
+          "unit": "% of throughput, against EIA's adjusted total"
+        },
+        {
+          "name": "leading_reading",
+          "type": "str",
+          "unit": "the reading with the smaller residual"
+        },
+        {
+          "name": "median_mwh",
+          "type": "f64",
+          "unit": "MWh, hourly residual magnitude on the leading reading"
+        },
+        {
+          "name": "p90_mwh",
+          "type": "f64",
+          "unit": "MWh"
+        },
+        {
+          "name": "max_mwh",
+          "type": "f64",
+          "unit": "MWh"
+        }
+      ],
+      "partition": null,
+      "shards": [
+        {
+          "path": "total_residuals/US.bin",
+          "state": "US",
+          "rows": 62,
+          "bytes": 6256,
+          "sha256": "3190b84df07b0c80ef00d767be7a82f3901b0ce82ee87dd66acf2dd52295e52d"
+        }
+      ],
+      "download": {
+        "path": "total_residuals.csv.gz",
+        "bytes": 981,
+        "sha256": "b614610cda174d99b2d48b177960bc4a0a0ea5bacf6337ba3fad52d94971c27d",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Computed by gridprims from U.S. Energy Information Administration, Hourly Electric Grid Monitor (Form EIA-930), six-month BALANCE and INTERCHANGE files for 2025 (Oct 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    }
+  ]
+}

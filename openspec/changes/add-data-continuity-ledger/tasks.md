@@ -21,13 +21,13 @@
 
 ## 3. Consistency checks
 
-- [ ] 3.1 Implement the pair and total interchange residuals with hours tested and unavailable; verify the pair-residual and what-a-residual-means scenarios
-- [ ] 3.2 Implement the reliability coverage and missing-field share tables; verify both scenarios
-- [ ] 3.3 Implement the conservative-reading rule; verify the ambiguous-identity scenario
-- [ ] 3.4 Keep checks individual with no composite; verify the no-index scenario
-- [ ] 3.5 Publish each check's method, versions, and results as files; verify an independent rerun reproduces them
-- [ ] 3.6 Publish the deferred-checks list with reasons; verify the deferred-reconciliation scenario
-- [ ] 3.7 Cite the publisher's own documentation for every identity tested; verify the identity-cited scenario
+- [x] 3.1 Implement the pair and total interchange residuals with hours tested and unavailable; verify the pair-residual and what-a-residual-means scenarios
+- [x] 3.2 Implement the reliability coverage and missing-field share tables; verify both scenarios
+- [x] 3.3 Implement the conservative-reading rule; verify the ambiguous-identity scenario
+- [x] 3.4 Keep checks individual with no composite; verify the no-index scenario
+- [x] 3.5 Publish each check's method, versions, and results as files; verify an independent rerun reproduces them
+- [x] 3.6 Publish the deferred-checks list with reasons; verify the deferred-reconciliation scenario
+- [x] 3.7 Cite the publisher's own documentation for every identity tested; verify the identity-cited scenario
 
 ## 4. Surfaces
 

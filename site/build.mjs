@@ -53,6 +53,8 @@ import { buildLedger } from '../core/lib/ledger.mjs';
 import { ledgerDatasets } from './entities/ledger.mjs';
 import { LEDGER_PATH, ledgerPage } from './templates/ledger.mjs';
 import { diffPage, diffPath } from './templates/diff.mjs';
+import { CHECKS_PATH, checksPage } from './templates/checks.mjs';
+import { consistencyChecks } from './entities/checks.mjs';
 import ledgerReplies from '../data/curated/ledger-replies.mjs';
 import regulators from '../data/curated/regulators.mjs';
 import { queueIndexPage, queuePath, queueStatePage } from './templates/queue.mjs';
@@ -321,6 +323,9 @@ export async function build(opts = {}) {
   const ledger = buildLedger({ datasets: await ledgerDatasets(ROOT), health, replies: ledgerReplies, generatedAt: health?.generatedAt ?? buildDate, contact: `${ORIGIN}/report/` });
   write(LEDGER_PATH, ledgerPage({ ledger, i18n }));
   writeFileSync(join(outDir, 'ledger/ledger.json'), JSON.stringify(ledger, null, 2) + '\n');
+  const checks = consistencyChecks(join(ROOT, 'data'));
+  write(CHECKS_PATH, checksPage({ checks, i18n }));
+  writeFileSync(join(outDir, 'ledger/checks.json'), JSON.stringify(checks, null, 2) + '\n');
 
   const duplicates = [...titles].filter(([, paths]) => paths.length > 1);
   if (duplicates.length || tooLong.length) {

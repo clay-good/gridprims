@@ -32,6 +32,7 @@ export function ledgerPage({ ledger: L, i18n }) {
   const body = html`<h1>${t('ledger.title')}</h1>
 <p class="sentence" data-ledger-counts>${t('ledger.counts', { tracked: c.tracked, current: c.current, due: c.due, late: c.late, discontinued: c.discontinued })}</p>
 <p>${t('ledger.intro', { grace: L.graceDays })}</p>
+<p><a href="/ledger/checks/">${t('checks.title')}</a></p>
 <p class="mono"><span data-age-from="${L.generatedAt}" data-age-one="${t('data.ageDays', { count: 1 })}" data-age-other="${t('data.ageDays', { count: 2 }).replace('2', '{count}')}"></span> ${t('ledger.generated', { date: date(L.generatedAt.slice(0, 10)) })} <a href="/ledger/ledger.json">${t('ledger.json')}</a></p>
 <p data-ledger-invite>${t('ledger.invite')} <a href="${L.contact}">${t('ledger.reply.link')}</a></p>
 <div class="table-wrap"><table data-ledger>
