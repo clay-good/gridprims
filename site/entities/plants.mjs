@@ -26,7 +26,7 @@ const group = (rows, key) => {
 
 /**
  * @param {string} dataDir
- * @returns {{plants: any[], sources: Record<string, any>} | null} null when EIA-860 is not built
+ * @returns {{plants: any[], stateOf: Map<number, string>, sources: Record<string, any>} | null} null when EIA-860 is not built
  */
 export function plantPages(dataDir) {
   const p860 = served(dataDir, 'eia-860', 'plants');
@@ -47,8 +47,9 @@ export function plantPages(dataDir) {
   for (const p of p860.rows) {
     const list = gens.get(p.plant_id) ?? [];
     const latest = monthlyByPlant.get(p.plant_id) ?? [];
-    // Content minimum: at least one operating or planned generator, in the annual or the monthly file.
-    const live = list.some((g) => g.category === 'operable' || g.category === 'proposed') || latest.some((g) => g.category === 'operating' || g.category === 'planned');
+    // Content minimum: at least one operating generator, in the annual or the monthly file. A plant
+    // that is only proposed has no generation or emissions to show yet, and its page would be thin.
+    const live = list.some((g) => g.category === 'operable') || latest.some((g) => g.category === 'operating');
     if (!live) continue;
     const operable = list.filter((g) => g.category === 'operable');
     const retiredThisYear = list.filter((g) => g.category === 'retired_or_canceled' && g.status === 'RE' && g.retirement_year === year);
@@ -74,5 +75,7 @@ export function plantPages(dataDir) {
       emissions: e ? { co2MetricTons: e.co2_tons === null ? null : shortTonsToMetric(e.co2_tons), co2ShortTons: e.co2_tons, co2RateLbMwh: e.co2_rate_lb_mwh, year: e.data_year, subregion: e.subregion, primaryFuel: e.primary_fuel } : null,
     });
   }
-  return { plants, year, sources: { eia860: p860.manifest, eia860m: g860m?.manifest ?? null, eia923: gen923?.manifest ?? null, egrid: egrid?.manifest ?? null } };
+  // Every plant's state, so a page that falls below the content minimum can redirect to its state page.
+  const stateOf = new Map(p860.rows.map((p) => [p.plant_id, p.state]));
+  return { plants, stateOf, year, sources: { eia860: p860.manifest, eia860m: g860m?.manifest ?? null, eia923: gen923?.manifest ?? null, egrid: egrid?.manifest ?? null } };
 }

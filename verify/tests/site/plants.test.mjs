@@ -51,7 +51,7 @@ test('emissions are in metric tons with the factor shown; a late eGRID names bot
   assert.match(parish, /Carbon dioxide in 2023 9,903,390 metric tons/);
   assert.match(parish, /eGRID reports 10,916,619 short tons\. One short ton is 0\.90718474 metric tons\./);
   assert.match(parish, /Emissions are for 2023, the newest eGRID year\. Generation is for 2025, the newest EIA-923 year\./);
-  assert.match(text(page(59027)), /This plant is not in eGRID2023 \(revision 2\)\./);
+  assert.match(text(page(67957)), /This plant is not in eGRID2023 \(revision 2\)\./);
   assert.match(text(page(65028)), /Above 100%/);
 });
 
@@ -72,6 +72,8 @@ test('20 sampled plants match pyarrow\'s reading of EIA\'s tables within 0.1%', 
   const off = (ours, theirs) => (theirs === 0 ? Math.abs(ours) : Math.abs(ours - theirs) / Math.abs(theirs));
   for (const want of ref.plants) {
     const p = byId.get(want.plant_id);
+    // A sampled plant with no operating capacity and no generation is below the content minimum: no page.
+    if (want.nameplate_mw === 0 && want.net_generation_mwh === null) { assert.equal(p, undefined, `plant ${want.plant_id} has no page`); continue; }
     assert.ok(p, `plant ${want.plant_id} has a page`);
     if (want.net_generation_mwh !== null) assert.ok(off(p.netMwh, want.net_generation_mwh) <= 0.001, `plant ${want.plant_id}: our ${p.netMwh} MWh, EIA's ${want.net_generation_mwh} MWh (snapshot ${version})`);
     assert.ok(off(p.nameplateMw, want.nameplate_mw) <= 0.001, `plant ${want.plant_id}: our ${p.nameplateMw} MW, EIA's ${want.nameplate_mw} MW (snapshot ${version})`);
@@ -91,4 +93,12 @@ test('no plant page carries a coordinate, and every page counted in the build ex
     // A decimal degree has four or more decimals; the only such number on a page is the ton factor.
     assert.deepEqual([...html.matchAll(/-?\d{1,3}\.\d{4,}/g)].map((m) => m[0]).filter((x) => x !== '0.90718474'), [], `plant ${id}`);
   }
+});
+
+test('content minimum: a plant with only proposed generators gets no page until one operates', () => {
+  const gens = served(join(ROOT, 'data'), 'eia-860', 'generators').rows;
+  const operating = new Set([...gens.filter((g) => g.category === 'operable'), ...served(join(ROOT, 'data'), 'eia-860m', 'generators').rows.filter((g) => g.category === 'operating')].map((g) => g.plant_id));
+  const proposedOnly = [...new Set(gens.filter((g) => g.category === 'proposed').map((g) => g.plant_id))].filter((id) => !operating.has(id));
+  assert.ok(proposedOnly.length > 100, `${proposedOnly.length} proposed-only plants`);
+  for (const id of proposedOnly) assert.equal(byId.has(id), false, `plant ${id} has a page`);
 });

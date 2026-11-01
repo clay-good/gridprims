@@ -16,14 +16,19 @@ export const RULE_BUDGET = 1500;
 export const pagesOf = (dist) => walk(dist).filter((f) => f.endsWith('index.html')).map((f) => `/${f.replace(/index\.html$/, '')}`).sort();
 
 /**
- * @param {{pages: string[], published: string[], rules: Array<{from: string, to: string}>, budget?: number}} o
+ * @param {{pages: string[], published: string[], rules: Array<{from: string, to: string}>, moved?: Record<string, string>, budget?: number}} o moved: removed plant pages, by id, and the state page the Worker sends each to
  * @returns {string[]}
  */
-export function checkUrls({ pages, published, rules, budget = RULE_BUDGET }) {
+export function checkUrls({ pages, published, rules, moved = {}, budget = RULE_BUDGET }) {
   const errors = [];
   const live = new Set(pages);
   for (const url of published) {
     if (live.has(url)) continue;
+    const plant = /^\/plants\/(\d+)\/$/.exec(url);
+    if (plant && moved[plant[1]]) {
+      if (!live.has(moved[plant[1]])) errors.push(`${url} redirects to ${moved[plant[1]]}, which is not a page`);
+      continue;
+    }
     const r = redirectFor(url, rules);
     if (!r) errors.push(`${url} was published and now neither resolves nor redirects; add a rule to data/curated/redirects.mjs`);
   }
@@ -43,6 +48,8 @@ export async function checkSiteUrls(root, opts = {}) {
   const out = mkdtempSync(join(tmpdir(), 'gridprims-urls-'));
   await build({ outDir: out });
   const pages = pagesOf(out);
+  const movedFile = join(out, 'moved-plants.json');
+  const moved = existsSync(movedFile) ? JSON.parse(readFileSync(movedFile, 'utf8')) : {};
   rmSync(out, { recursive: true, force: true }); // a built site is about 300 MB
   const file = join(root, 'data/curated/published-urls.json');
   let published = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : [];
@@ -51,5 +58,5 @@ export async function checkSiteUrls(root, opts = {}) {
     writeFileSync(file, JSON.stringify(published, null, 2) + '\n');
   }
   const rules = (await import(pathToFileURL(join(root, 'data/curated/redirects.mjs')).href)).default;
-  return checkUrls({ pages, published, rules });
+  return checkUrls({ pages, published, rules, moved });
 }

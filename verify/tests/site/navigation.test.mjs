@@ -71,3 +71,10 @@ test('pseudo-locale: accented, about 35% longer, placeholders kept', () => {
   assert.match(p, /Yöür péák/);
   assert.ok(p.length >= s.length * 1.3, `${p.length} vs ${s.length}`);
 });
+
+test('a removed plant page passes the URL record through the moved map, and a map pointing nowhere fails', () => {
+  const published = ['/', '/plants/1/', '/states/tx/'];
+  assert.match(checkUrls({ pages: ['/', '/states/tx/'], published, rules: [] })[0], /\/plants\/1\/ was published and now neither resolves nor redirects/);
+  assert.deepEqual(checkUrls({ pages: ['/', '/states/tx/'], published, rules: [], moved: { 1: '/states/tx/' } }), []);
+  assert.match(checkUrls({ pages: ['/'], published, rules: [], moved: { 1: '/states/tx/' } }).join('\n'), /\/plants\/1\/ redirects to \/states\/tx\/, which is not a page/);
+});

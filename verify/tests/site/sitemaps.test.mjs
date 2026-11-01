@@ -27,7 +27,7 @@ test('the sitemaps list every published page and nothing else', () => {
   const listed = entries(read(a, 'sitemaps/sitemap-1.xml')).map(([u]) => u.replace('https://gridprims.com', ''));
   assert.deepEqual(listed, pagesOf(a).sort());
   assert.ok(!listed.includes('/404.html'));
-  assert.ok(listed.length > 17000);
+  assert.ok(listed.length > 16000);
 });
 
 test('each lastmod is the newest as-of date of the data its page shows', () => {

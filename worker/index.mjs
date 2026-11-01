@@ -60,6 +60,13 @@ export default {
     const res = await env.ASSETS.fetch(request);
     if (url.pathname.startsWith('/data/') && res.ok && !url.pathname.endsWith('/')) return openData(await withHeaders(res));
     if (res.status === 404) {
+      // A plant page that fell below the content minimum redirects to its state page (site/build.mjs MOVED_PLANTS).
+      const plant = /^\/plants\/(\d+)\/?$/.exec(url.pathname);
+      if (plant) {
+        const moved = await env.ASSETS.fetch(new Request(new URL('/moved-plants.json', url), request));
+        const to = moved.ok ? (await moved.json())[plant[1]] : null;
+        if (to) return withHeaders(new Response(null, { status: 301, headers: { location: to } }));
+      }
       const notFound = await env.ASSETS.fetch(new Request(new URL('/404.html', url), request));
       return withHeaders(notFound, 404);
     }

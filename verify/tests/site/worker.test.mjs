@@ -58,3 +58,14 @@ test('unknown API routes and non-GET methods are refused', async () => {
   assert.equal((await get('/api/anything')).status, 404);
   assert.equal((await get('/', 'POST')).status, 405);
 });
+
+test('a plant page that fell below the content minimum redirects to its state page; an unknown id is still a 404', async () => {
+  const moved = JSON.parse(readFileSync(join(out, 'moved-plants.json'), 'utf8'));
+  const [id, to] = Object.entries(moved)[0];
+  assert.ok(!existsSync(join(out, `plants/${id}/index.html`)), 'a moved plant has no page');
+  assert.ok(existsSync(join(out, to, 'index.html')), `${to} is a page`);
+  const res = await get(`/plants/${id}/`);
+  assert.equal(res.status, 301);
+  assert.equal(res.headers.get('location'), to);
+  assert.equal((await get('/plants/999999999/')).status, 404);
+});

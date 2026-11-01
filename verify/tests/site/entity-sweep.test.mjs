@@ -36,7 +36,7 @@ test('without JavaScript, each sampled page has its heading, at least four facts
 
 test(`every entity page's HTML is at most ${BUDGETS.entityPageHtmlGzipBytes / 1024} KB compressed`, () => {
   const pages = walk(out).filter((f) => ENTITY_FAMILIES.some((d) => f.startsWith(d)) && f.endsWith('index.html'));
-  assert.ok(pages.length > 17000);
+  assert.ok(pages.length > 16000);
   const over = pages.map((f) => [f, gzipSync(readFileSync(join(out, f))).length]).filter(([, n]) => n > BUDGETS.entityPageHtmlGzipBytes);
   assert.deepEqual(over, []);
 });
