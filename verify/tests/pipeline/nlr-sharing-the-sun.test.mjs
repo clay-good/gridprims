@@ -11,6 +11,8 @@ import { join } from 'node:path';
 import { ROOT } from '../../../pipeline/run.mjs';
 import { postureOf, validateEntry } from '../../../pipeline/lib/registry.mjs';
 import { compareTerms } from '../../../pipeline/lib/terms.mjs';
+import { checkDataset } from '../../../pipeline/check.mjs';
+import { tempDir } from '../../lib/temp.mjs';
 import { served } from '../../../site/entities/plants.mjs';
 import { tableRows } from '../../lib/walk.mjs';
 import { sharedSite } from '../../lib/shared-site.mjs';
@@ -56,4 +58,14 @@ test('a state page shows serving and in-queue capacity apart, never combined, wi
   assert.doesNotMatch(section, /3,472/, 'no headline adds the queue to the capacity serving customers');
   assert.match(section, /data-cs-credit>Data: Kannan, S\./);
   assert.doesNotMatch(section, /sign up|subscribe now|save \$/i);
+});
+
+test('each scheduled run re-captures the license page of this pinned dataset, and a changed page is recorded', async () => {
+  const page = (body) => async (url) => (url === entry.terms.url ? new Response(body, { status: 200 }) : new Response('', { status: 404 }));
+  const same = await checkDataset({ dataset: entry.id, entry, outDir: tempDir('gridprims-sts-check-'), fetch: page(`<html><p>${entry.terms.text}</p></html>`), today: '2026-11-01' });
+  assert.deepEqual([same.posture, same.terms.changed, same.terms.checked], ['derive', false, '2026-11-01']);
+  const moved = await checkDataset({ dataset: entry.id, entry, outDir: tempDir('gridprims-sts-check-'), fetch: page('<html><p>All rights reserved.</p></html>'), today: '2026-11-02' });
+  assert.equal(moved.terms.changed, true);
+  assert.match(moved.terms.excerpt, /All rights reserved/);
+  assert.equal(moved.posture, 'derive', 'a changed page never raises the posture');
 });

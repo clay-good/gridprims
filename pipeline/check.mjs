@@ -28,8 +28,17 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
   const entry = given ?? (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${dataset}.mjs`)).href)).default;
   const cur = join(outDir, dataset, 'current.json');
   const manifest = existsSync(cur) ? JSON.parse(readFileSync(join(outDir, dataset, JSON.parse(readFileSync(cur, 'utf8')).version, 'manifest.json'), 'utf8')) : null;
+  // Capture the terms page every run, a pinned dataset's too; a change lowers the posture until it is
+  // recognized again (add-program-fact-pages 3.1: no person confirms it, and nothing waits on one).
+  let terms = null;
+  try {
+    const res = await f(entry.terms.url, { headers: { 'user-agent': 'gridprims-pipeline (+https://gridprims.com)' } });
+    if (res.ok) terms = { ...compareTerms(entry, await res.text()), checked: today };
+  } catch { terms = null; }
+  const posture = postureInForce(entry, terms);
+  const termsRow = terms ? { checked: today, changed: terms.changed, posture, ...(terms.excerpt ? { excerpt: terms.excerpt } : {}), ...(entry.takedown ? { takedown: entry.takedown } : {}) } : undefined;
   // A dataset pinned to a release (PUDL) has no release watch: a new release is a hand-made bump.
-  if (!entry.releaseWatch) return { id: dataset, checked: false, refreshed: false, version: manifest?.version, waiting: 'pinned to a release; a new one is bumped by hand' };
+  if (!entry.releaseWatch) return { id: dataset, checked: false, refreshed: false, version: manifest?.version, posture, terms: termsRow, waiting: 'pinned to a release; a new one is bumped by hand' };
   // Periods are data years (2025), or months ("2026-09") for a monthly dataset such as EIA-860M.
   const monthly = entry.releaseWatch.period === 'month';
   const servedYear = entry.releaseWatch.period === 'rolling' ? null : manifest
@@ -49,14 +58,6 @@ export async function checkDataset({ dataset, entry: given, outDir = join(ROOT, 
     return null;
   };
 
-  // Capture the terms page every run; a change lowers the posture until it is recognized again.
-  let terms = null;
-  try {
-    const res = await f(entry.terms.url, { headers: { 'user-agent': 'gridprims-pipeline (+https://gridprims.com)' } });
-    if (res.ok) terms = { ...compareTerms(entry, await res.text()), checked: today };
-  } catch { terms = null; }
-  const posture = postureInForce(entry, terms);
-  const termsRow = terms ? { checked: today, changed: terms.changed, posture, ...(terms.excerpt ? { excerpt: terms.excerpt } : {}), ...(entry.takedown ? { takedown: entry.takedown } : {}) } : undefined;
   // A file at one address that the publisher rewrites in place (URDB, daily) is taken at most once a
   // month: the period is the retrieval month.
   if (entry.releaseWatch.period === 'rolling') return { ...(await checkRolling({ dataset, entry, outDir, f, today, manifest })), posture, terms: termsRow };

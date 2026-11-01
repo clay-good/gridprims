@@ -1,5 +1,6 @@
 # Daily release watch and refresh for every watched dataset: EIA-861, EIA-860,
-# EIA-923, EIA-860M, URDB, and EIA-930 (platform/automation). Publishes with no
+# EIA-923, EIA-860M, URDB, EIA-930, and GHCN-Daily, and the terms of the
+# pinned EIA-861 net metering and NLR community solar datasets (platform/automation). Publishes with no
 # approval step: validators are the only gate. Every step is git, node,
 # or a script in this repository; actions are GitHub's own, pinned by SHA.
 name: refresh-data

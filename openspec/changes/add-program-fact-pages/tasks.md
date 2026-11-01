@@ -13,7 +13,7 @@
 
 ## 3. Community solar (phase 3)
 
-- [ ] 3.1 Capture the publisher's landing page automatically and record the license, date, and quoted text in the registry, downgrading the posture to link-only when no terms are found, with no human confirmation step and nothing blocked; verify the capture and downgrade scenarios
+- [x] 3.1 Capture the publisher's landing page automatically and record the license, date, and quoted text in the registry, downgrading the posture to link-only when no terms are found, with no human confirmation step and nothing blocked; verify the capture and downgrade scenarios
 - [x] 3.2 Render state pages with status and program-type splits; verify the status-split and no-combined-headline scenarios
 - [x] 3.3 Add the required credit everywhere the dataset appears; verify the credit scenario
 - [x] 3.4 Run the summary check; verify counts and capacity match for the recorded snapshot
