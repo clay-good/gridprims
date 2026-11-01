@@ -82,3 +82,20 @@ test('the lines tools may never say "meets code", "compliant", "approved", or "s
   assert.deepEqual(findScoped('lines.midspan-clearance.check', 'This is not safe.'), ['This is not safe.']);
   assert.deepEqual(findScoped('calc.energy-units.convert', 'This is safe.'), [], 'other tools are not scoped');
 });
+
+test('GO 95: the thoroughfare clearance comes from Table 1, Case 3, Column B, with its footnotes as exceptions not checked', async () => {
+  const { checkRecord } = await import('../../../pipeline/lib/curated.mjs');
+  const go95 = (await import('../../../data/curated/go95/clearances.mjs')).default;
+  const { problems, publishable } = checkRecord(go95, ROOT);
+  assert.deepEqual(problems, []);
+  assert.deepEqual(publishable['ground.road.comm'], { ft: 18, footnotes: ['c', 'd', 'j', 'l', 'm', 'ii', 'kkk'] });
+  // The values are the ones in the captured table text.
+  const t1 = readFileSync(join(ROOT, 'data/curated/captures/go95/table-1.txt'), 'utf8');
+  assert.match(t1, /^3 \| Crossing or along thoroughfares in urban districts[^\n]*\| 18 Feet \(j\) \(l\) \(m\) \(ii\) \(kkk\) \|/m);
+  assert.match(readFileSync(join(ROOT, 'data/curated/captures/go95/table-2.txt'), 'utf8'), /^8 \| Communication Conductors and Service Drops \| - \| - \| 12 \(j, rr\) \| 48 \(k , l , m , n , pp \) \| 48 \(k\) \|/m);
+  const r = run({ ruleSource: 'go95', required: 'none' });
+  assert.equal(r.sentence, 'The lowest point is 22 ft 6 in., 4 ft 6 in. above the 18 ft GO 95 requires over a road.');
+  assert.ok(r.work.steps.includes('GO 95 Table 1, Case 3, Column B: 18 ft. Exceptions not checked: (c) (d) (j) (l) (m) (ii) (kkk).'));
+  const p = run({ ruleSource: 'go95', crosses: 'pedestrian' });
+  assert.match(p.sentence, /above the 10 ft GO 95 requires over an area only people on foot can reach/);
+});

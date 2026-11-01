@@ -1,0 +1,188 @@
+Source: https://ia.cpuc.ca.gov/gos/go95/go_95_table_1.html
+Retrieved: 2026-11-01
+Original: 246323 bytes, SHA-256 19061e99d62005e82f70bf791dce13a0d91ed5cadc75bc586374e61baa75656b
+Capture: each table row's cells, joined with ' | ', tags removed
+----
+Previous Code | Main Page | GO 95 Startup Page | Change List for this Rule | Search GO 95 | Section Main Page | Next Code
+Case No. | Nature of Clearance | Wire or Conductor Concerned
+A Span Wires (Other than TrolleySpan Wires) Overhead Guys and Messengers | B Communication Conductors (IncludingOpen Wire, Cables and Service Drops), Supply Service Drops of 0 - 750 Volts | C Trolley Contact, Feeder and Span Wires, 0 - 5,000 Volts | D Supply Conductors of 0 - 750 Volts and Supply Cables Treated as in Rule 57.8 | E Supply Conductors and Supply Cables, 750 - 22,500 Volts | F Supply Conductors and Supply Cables, 22.5 - 300 kV | G Supply Conductors and Supply Cables, 300 - 550 kV( mm )
+1 | Crossing above tracks of railroads which transport or propose to transport freight cars (maximum height 15 feet, 6 inches) where not operated by overhead contact wires. (a) (b) (c) (d) | 25 Feet | 25 Feet | 22.5 Feet | 25 Feet | 28 Feet | 34 Feet | 34 Feet (kk)
+2 | Crossing or paralleling above tracks of railroads operated by overhead trolleys. (b) (c) (d) | 26 Feet (e) | 26 Feet (e) (f) (g) | 22.5 Feet (h) (i) (eee) | 20 Feet (ii) | 25 Feet (o) (ii) | 30 Feet (o) (ii) | 30Feet (o) (ii) (kk)
+3 | Crossing or along thoroughfares in urban districts or crossing thoroughfares in rural districts. (c) (d) | 18 Feet (j) (k) (ii) | 18 Feet (j) (l) (m) (ii) (kkk) | 19 Feet (hh) (eee) | 20 Feet (ii) | 25 Feet (o) (ii) | 30 Feet (o) (ii) | 30 Feet (o) (ii) (kk)
+4 | Above ground along thoroughfares in rural districts or across other areas capable of being traversed by vehicles or agricultural equipment. | 15 Feet (k) | 15 Feet (m) (n) (p) | 19 Feet (eee) | 19 Feet | 25 Feet (o) | 30 Feet (o) (p) | 30 Feet (o) (kk)
+5 | Above ground in areas accessible to pedestrians only | 8 Feet | 10 Feet (m) (q) | 19 Feet (eee) | 12 Feet | 17 Feet | 25 Feet (o) | 25 Feet (o) (kk)
+6 | Vertical clearance above walkable surfaces on buildings, (except generating plants or substations) bridges or other structures which do not ordinarily support conductors, whether attached or unattached. | 8 Feet (r) | 8 Feet (r) | 8 Feet | 8 Feet | 12 Feet | 12 Feet | 20 Feet (ll)
+6a | Vertical clearance above non–walkable surfaces on buildings, (except generating plants or substations) bridges or other structures, which do not ordinarily support conductors, whether attached or unattached | 2 Feet | 8 Feet (yy) | 8 Feet | 8 Feet (zz) | 8 Feet | 8 Feet | 20 Feet
+7 | Horizontal clearance of conductor at rest from buildings (except generating plants and substations), bridges or other structures (upon which men may work) where such conductor is not attached thereto (s) (t) | - | 3 Feet (u) | 3 Feet | 3 Feet (u) (v) | 6 Feet (v) | 6 Feet (v) | 15 Feet (v)
+8 | Distance of conductor from center line of pole, whether attached or unattached (w) (x) (y) | - | 15 inches (s) (aa) | 15 inches (aa) (bb) (cc) | 15 inches (o) (aa) (dd) | 15 or 18 inches (o) (dd) (ee) (jj) | 18 inches (dd) (ee) | Not Applicable
+9 | Distance of conductor from surface of pole, crossarm or other overhead line structure upon which it is supported, providing it complies with case 8 above (x) (ee) | - | 3 inches (aa) (ff) | 3 inches (aa) (cc) (gg) | 3 inches (aa) (dd) (gg) | 3 inches (dd) (gg) (jj) | 1/4 Pin Spacing Shown in Table 2 Case 15 (dd) | 1/2 Pin Spacing Shown in Table 2 Case 15 (dd)
+10 | Radial centerline clearance of conductor or cable (unattached) from non–climbable street lighting or traffic signal poles or standards, including mastarms, brackets and lighting fixtures, and from antennas that are not part of the overhead line system. | - | 1 Foot (u) (rr) (ss) | 15 inches (bb) (cc) | 3 Feet (oo) | 6 Feet (pp) | 10 Feet (qq) | 10 Feet (ll)
+11 | Water areas not suitable for sailboating (tt) (uu) (ww) (xx) | 15 Feet | 15 Feet | - | 15 Feet | 17 Feet | 25 Feet | 25 Feet (kk)
+12 | Water areas suitable for sailboating, surface area of: (tt) (vv) (ww) (xx) (A) Less than 20 acres (B) 20 to 200 acres (C) Over 200 to 2,000 acres (D) Over 2,000 acres | 18 Feet 26 Feet 32 Feet 38 Feet | 18 Feet 26 Feet 32 Feet 38 Feet | - - - - | 18 Feet 26 Feet 32 Feet 38 Feet | 20 Feet 28 Feet 34 Feet 40 Feet | 27 Feet 35 Feet 41 Feet 47 Feet | 27 Feet (kk) 35 Feet (kk) 41 Feet (kk) 47 Feet (kk)
+13 | Radial clearance of bare line conductors from tree branches or foliage (aaa) (ddd) | - | - | 18 inches (bbb) | - | 18 inches (bbb) | 1/4 pin spacing shown in Table 2, Case 15 (bbb) (ccc) | 1/2 pin spacing shown in Table 2, Case 15
+14 | Radial clearance of bare line conductors from vegetation in Extreme and Very High Fire Threat Zones in Southern California (aaa) (ddd) (hhh) (jjj) | - | - | 18 inches (bbb) | - | 48 inches (bbb) (iii) | 48 inches (fff) | 120 inches (ggg)
+(a) | Shall not be reduced more than 5% because of temperature or loading - Rule 37
+1. | Supply lines - Rule 54.4–B1
+2. | Communication lines - Rule 84.4–B1
+(b) | Shall be increased for supply conductors on suspension insulators, under certain conditions - Rule 37
+(c) | Special clearances are provided for traffic signal equipment - Rule 58.4–C
+(d) | Special clearances are provided for street lighting equipment - Rule 58.5–B
+(e) | Based on trolley pole throw of 26 feet. may be reduced where suitably protected - Rule 56.4–B2
+1. | Supply guys - Rule 56.4–B2
+2. | Supply cables and messengers - Rule 57.4–B2
+3. | Communication guys - Rule 86.4–B2
+4. | Communication cables and messengers - Rule 87.4–B2
+(f) | May be reduced depending on height of trolley contact conductors
+1. | Supply service drops - Rule 54.8–C5
+2. | Communication service drops - Rule 84.8–D5
+(g) | May be reduced and shall be increased depending on trolley throw
+1. | Supply conductors (except service drops) - Rule 54.4–B2
+2. | Communication conductors (except service drops) - Rule 84.4–B2
+(h) | May be decreased where freight cars are not transported.
+1. | Trolley contact and feeder conductors - Rule 74.4–B1
+2. | Trolley span wires - Rule 77.4–A
+(i) | May be reduced for trolley contact and span wires in subways, tunnels, under bridges and in fenced areas
+1. | Trolley contact conductors - Rule 74.4–E
+2. | Trolley span wires - Rule 77.4–B
+(j) | May be reduced at crossings over private thoroughfares and entrances to private property and over private property
+1. | Supply service drops - Rule 54.8–B2
+2. | Supply guys - Rule 56.4–A
+3. | Communication service drops - Rule 84.8–C2
+4. | Communication guys - Rule 86.4–A
+(k) | May be reduced along thoroughfares where not normally accessible to vehicles
+1. | Supply guys - Rule 56.4–A1
+2. | Communication guys - Rule 86.4–A1
+(l) | May be reduced where within 12 feet of curb line of public thoroughfares
+1. | Supply service drops - Rule 54.8–B1
+2. | Communication service drops - Rule 84.8–C1
+(m) | May be reduced for railway signal cables under special conditions - Rule 84.4–A4
+(n) | May be reduced in rural districts
+1. | Intentionally left blank
+2. | Intentionally left blank
+3. | Communication conductors along roads - Rule 84.4–A2
+(o) | May be reduced for transformer, regulator or capacitor leads
+1. | Transformer leads - Rule 58.1–B
+2. | Regulator or capacitor leads - Rule 58.1–B
+(p) | May be reduced across arid or mountainous areas
+1. | Supply conductors of more than 22,500 volts - Rule 54.4–A1
+2. | Communications conductors - Rule 84.4–A1
+(q) | Shall be increased or may be reduced under special conditions
+1. | Intentionally left blank
+2. | Intentionally left blank
+3. | Communications conductors - Rule 84.4–A3
+4. | Increased for communication service drops on industrial or commercial premises - Rule 84.8–C3a
+5. | Communication service drops on residential premises - Rule 84.8–C3b
+(r) | May be reduced above roofs of buildings under special conditions
+1. | Supply overhead guys - Rule 56.4–G
+2. | Supply service drops - Rule54.8–B4
+3. | Communication overhead guys - Rule 86.4–F
+4. | Communication conductors and cables- Rule 84.4–E
+5. | Communication service drops- Rule 84.8–C4
+(s) | Also applies at fire escapes, etc.
+1. | Supply conductors- Rule 54.4–H1
+2. | Vertical clearances- Rule 54.8B4a
+3. | Horizontal clearance- Rule 54.8–B4b
+4. | Communication conductors- Rule 84.4–E
+(t) | Special clearances where attached to buildings, bridges or other structures
+1. | Supply conductors of 750 - 22,500 volts- Rule 54.4–H2
+2. | Trolley contact conductors- Rule 74.4–E
+3. | Communication conductors- Rule 84.4–F
+(u) | Reduced clearances permitted under special conditions
+1. | Supply service drops on industrial or commercial premises- Rule 54.8–B4a
+2. | Supply cables, grounded - Rule 57.4–G
+3. | Communication cables beside buildings, etc.- Rule84.4–E
+4. | Communication conductors under bridges, etc.- Rule84.4–F
+5. | Communication service drops- Rule 84.8–C4
+6. | Communication cables passing nonclimbable street light poles, etc.- Rule 84.4–D4a
+(v) | May be reduced under special conditions
+1. | Supply conductors of 750 - 7,500 volts- Rule 54.4–H1
+2. | Supply transformer lead and bus wires, where guarded- Rule 58.1
+(w) | May be reduced at angles in lines and transposition points
+1. | Supply conductors- Rule 54.4–D1
+2. | Communication conductors- Rule 84.4–D5
+(x) | May be reduced for suitably protected lateral or vertical runs
+1 . | Supply bond wires- Rule 53.4
+2. | Supply ground wires- Rule 54.6–B
+3. | Supply lateral conductors- Rule54.6–C
+4. | Supply vertical runs- Rule 54.6–D
+5. | Supply risers- Rule 54.6–E
+6. | Communication ground wires- Rule 84.6–B
+7. | Communication lateral conductors- Rule 84.6–C
+8. | Communication vertical runs- Rule84.6–D
+9. | Communication risers - Rule 84.6–E
+(y) | Increased clearances required for certain conductors
+1. | Unattached conductors on colinear and crossing lines- Rule 32.3
+2. | Unattached supply conductors- Rule 54.4–D3
+3. | Supply service drops on clearance crossarms - Rule 54.8–C2
+4. | Supply service drops on pole top extensions- Rule 54.8–C3
+5. | Unattached supply service drops - Rule 54.8–D
+6. | Communication lines, colinear, conflicting or crossing - Rule 84.4–D3
+7. | Communication conductors passing supply poles and unattached thereto- Rule 84.4–D4
+8. | Communication service drops on clearance crossarms - Rule84.8–D2
+9. | Communication service drops on pole top extensions - Rule84.8–D3
+10. | Unattached communication service drops- Rule 84.8–E
+(z) | Special provisions for police and fire alarm conductors require increased clearances- Rule 92.2
+(aa) | May be reduced under special provisions
+1. | Supply conductors of 0 - 750 volts in rack configuration - Rule 54.4–D5
+2. | Service supply drops from racks - Rule 54.8–F
+3. | Supply cables and messengers attached to poles - Rule 57.4–F
+4. | Communication conductors on communication poles - Rule 84.4–D
+5. | Communication conductors on crossarms - Rule 84.4–D1
+6. | Communication conductors attached to poles - Rule 84.4–D2
+7. | Communication service drops attached to poles - Rule 84.8–B
+8. | Communication cables and messengers - Rule 87.4–D
+9. | Supply or communication cables and messengers on jointly used poles - Rule 92.1–B
+10. | Communication open wire on jointly used poles - Rule 92.1–C
+11. | Multiconductor cable with bare neutral - Rule 54.10–B1
+(bb) | May be reduced for class t conductors of not more than 750 volts and of the same potential and polarity - Rule 74.4–D
+(cc) | Not applicable to trolley span wires - Rule 77.4–E
+(dd) | Special clearances for pole–top and deadend construction
+1. | Conductors deadended in vertical configuration on poles - Rule 54.4–C4
+2. | Conductors deadended in horizontal configuration - Rule 54.4–D8
+(ee) | Clearance requirements for certain voltage classifications - Rule 54.4–D2
+(ff) | Not applicable to communication conductors - Rule 84.4–D
+(gg) | Clearance from crossarms may be reduced for certain conductors
+1. | Suitable insulated leads to protect runs - Rule 54.4–E
+2. | Leads of 0 - 5,000 volts to equipment - Rule 54.4–E
+3. | Leads of 0 - 5,000 volts to cutouts or switches - Rule 58.3–A2
+(hh) | Reduced clearance permitted from temporary fixtures and lighting circuits 0 - 300 volts - Rule 78.3–A1
+(ii) | Special Clearances Required Above Public and Private Swimming Pools
+1. | Supply line conductors - Rule 54.4–A3
+2. | Supply service drops - Rule 54.8–B5
+3. | Communication line conductors - Rule 84.4–A5
+4. | Communication service drops - Rule 84.8–C5
+5. | Supply guys, span wires - Rule56.4–A3
+6. | Communication guys - Rule 86.4–A3
+(jj) | May be decreased in partial underground distribution 54.4–D2
+(kk) | Shall be increased by 0.025 feet per kV in excess of 300 kV
+(ll) | Shall be increased by 0.04 feet per KV in excess of 300 kV
+(mm) | Proposed clearances to be submitted to the cpuc prior to construction for circuits in excess of 550 kV.
+(nn) | Voltage shown in the table shall mean line–to–ground voltage for direct current (DC) systems
+(oo) | May Be reduced for grounded or multi–conductor cables
+1. | Grounded cables - Rule 57.4–H
+2. | Multi–Conductor cables - Rule 54.10–B2
+(pp) | May be reduced to 4 feet for voltages below 7,500 volts - Rule 54.4–D3
+(qq) | May be reduced to 6 feet for voltages below 75 kV
+(rr) | May be reduced for supply service drops - Rule 54.8–D1
+(ss) | May be reduced for communications service drops- Rule 84.8–E1
+(tt) | Where a federal agency or surrogate thereof has issued a crossing permit, clearances of that permit shall govern.
+(uu) | Or Where sailboating is prohibited and where other boating activities are allowed
+(vv) | Clearance above contiguous ground shall be 5 feet greater than in cases 11 or 12 for the type of water area served for boat launch facilities and for area contiguous thereto, that are posted, designated or specifically prepared for rigging of sailboats or other watercraft.
+(ww) | For controlled impoundments, the surface areas and corresponding clearances shall be based upon the high water level. for other waters, the surface areashall be that enclosed by its annual flood level. the clearance over rivers, streams and canals shall be based upon the largest surface areas of any one–mile long segment which includes the crossing. the clearance over a canal, river or stream normally used to provide access for sailboats to a larger body of water shall be the same as that required for the larger body of water
+(xx) | Water areas are lakes, ponds, reservoirs, tidal waters, rivers, streams and canals without surface obstructions
+(yy) | May be reduced over non–walkable structures - Rule 54.8 (Table 10 )
+(zz) | May be reduced to 2 feet for conductors insulated in accordance with - Rule 20.9–G
+(aaa) | Special requirements for communication and supply circuits energized at 0 - 750 volts - Rule 35
+(bbb) | May be reduced for conductor of less than 60,000 volts when protected from abrasion and grounding by contact with tree - Rule 35
+(ccc) | For 22.5 kV to 105 kV, minimum clearance shall be 18 inches.
+(ddd) | Clearances in this case shall be maintained for normal annual weather variations, rather than at 60 degrees, no wind.
+(eee) | May be reduced to 18 feet if the voltage does not exceed 1000 volts and the clearance is not reduced to more than 5% below the reduced value of 18 feet because of temperature and loading as specified in Rules 37 and 43 .
+(fff) | Clearances in this case shall be increased for conductors operating above 72 kV, to the following:
+1. | Conductors operating between 72kV and a 110 kV shall maintain a 72 inch clearance
+2. | Conductors operating above 110 kV shall maintain a 120 inch clearance
+(ggg) | Shall be increased by 0.40 inch per kV in excess of 500 kV
+(hhh) | The High Fire-Threat District is defined in GO 95, Rule 21.2-D.
+(iii) | May be reduced to 18 inches for conductors operating less than 2.4 kV.
+(jjj) | Clearances in this case shall not apply to orchards of fruit, nut or citrus trees that are plowed or cultivated. In those areas Case 13 clearances shall apply.
+(kkk) | For communication conductors across or along public thoroughfares see 84.4–A(6).
+Note: | Revised February 1, 1948 by Supplement No. 1 (Decision No. 41134, Case No. 4324) ; January 2, 1962 by Resolution E–1109 ; February 7, 1964 by Decision No. 66707 ; March 29, 1966 by Decision No. 70489; August 9, 1966 by Decision No. 71094; September 18, 1967 by Decision No. 72984; March 30, 1968 by Decision No. 73813; January 8, 1980 by Decision No. 91186; March 9, 1988 by Resolution E–3076; November 21, 1990 by Resolution SU–6; January 21, 1992 by Resolution SU–10; November 6, 1992 by Resolution SU–15, September 20, 1996 by Decision 96–09–097, October 9, 1996 by Resolution SU–40; January 23, 1997 by Decision 97–01–044 , January 13, 2006 by Decision No. 05-01-030, August 20, 2009 by Decision No. 09-08-029, January 12, 2012 by Decision No. 12-01-032, December 21, 2017 by Decision 17-12-024.

@@ -614,7 +614,7 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|
-| Rules | `ruleSource` | choice | `yours`, `none` | yours |
+| Rules | `ruleSource` | choice | `yours`, `go95`, `none` | yours |
 | Span length | `span` |  |  | 200 ft |
 | Height at the first pole | `heightA` |  |  | 25 ft |
 | Height at the second pole | `heightB` |  |  | 25 ft |
@@ -624,6 +624,7 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 | What the span crosses | `crosses` | choice | `not-chosen`, `road`, `driveway`, `pedestrian`, `rail` | not-chosen |
 | Clearance your rules require over it | `required` |  |  | none |
 | The line above | `above` |  |  | none |
+| What the line above is | `aboveKind` | choice | `secondary`, `primary`, `comm` | secondary |
 | Separation your rules require at midspan | `midspanSep` |  |  | none |
 | Separation your rules require at the pole | `poleSep` |  |  | none |
 | Also give the sag this far from midspan | `offset` |  |  | none |
@@ -643,6 +644,7 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 **Sources.**
 
 - USDA Rural Utilities Service, Bulletin 1724E-152, The Mechanics of Overhead Distribution Line Conductors, July 30, 2003, §2.3.1, Sag Equations: D = WS²/8Th and Dx = D(1 − (2x/S)²) (https://www.rd.usda.gov/files/UEP_Bulletin_1724E-152.pdf)
+- California Public Utilities Commission, General Order 95, Table 1 last revised by D.17-12-024; Table 2 by D.09-08-029; checked 2026-11-01, Rule 37, Table 1, Cases 1, 3, 4, and 5, Column B; Rule 38, Table 2, Case 8, Columns C to E (https://ia.cpuc.ca.gov/gos/go95/go_95_table_1.html)
 - IEEE C2, National Electrical Safety Code, the edition your rules adopt, Rules 232 and 235 (cited by number; the values come from your copy)
 
 **Known limits.**

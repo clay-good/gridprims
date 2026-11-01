@@ -6,10 +6,14 @@
 
 import { feetInches, parseLength, ruleLength } from '../../lib/field-length.mjs';
 import { catenarySag, lowestPoint, parabolicSag, sagAt, smallestGap } from '../../lib/sag.mjs';
+import GO95 from '../../../data/curated/go95/clearances.mjs';
 
 const SURFACE = { road: 'over a road', driveway: 'over a driveway', pedestrian: 'over an area only people on foot can reach', rail: 'over a railroad' };
 const len = (field, text) => { const r = parseLength(text); return r.error ? { error: { field, message: r.error } } : r; };
 const optional = (field, text) => (String(text).trim().toLowerCase() === 'none' ? { ft: null } : len(field, text));
+/** A GO 95 cell as a rule: its value, where it is, and its footnotes, which are exceptions this check does not apply. */
+const go95 = (id) => { const f = GO95.fields[id]; return f && { ft: f.value.ft, label: `GO 95 ${f.label}`, footnotes: f.value.footnotes }; };
+const SEP_ABOVE = { secondary: 'sep.secondary.comm', primary: 'sep.primary.comm', comm: 'sep.comm.comm' };
 const inches = (ft, toward) => `${toward === 'up' ? Math.ceil(ft * 12 - 1e-9) : Math.floor(ft * 12 + 1e-9)} in.`;
 
 export function compute(v) {
@@ -45,23 +49,32 @@ export function compute(v) {
   const where = low.atPole ? `at the lower pole, at ${feetInches(low.height, 'down')}` : `${feetInches(low.height, 'down')}${low.midspan ? ', at midspan' : `, ${low.fromLower.toFixed(0)} ft from the lower pole`}`;
   const sentences = [];
   let margin;
-  const checks = v.ruleSource === 'yours';
+  const checks = v.ruleSource !== 'none';
+  // GO 95 fills the clearance and the separation from its tables; your values fill them otherwise.
+  const fromGo95 = v.ruleSource === 'go95';
+  const ground = fromGo95 ? (v.crosses === 'not-chosen' ? null : go95(`ground.${v.crosses}.comm`)) : null;
+  if (fromGo95) parsed.required = { ft: ground?.ft ?? null };
+  const who = fromGo95 ? 'GO 95 requires' : 'your rules require';
+  const exceptions = (r) => (r?.footnotes?.length ? ` Exceptions not checked: ${r.footnotes.map((x) => `(${x})`).join(' ')}.` : '');
+  if (ground) notes.push(`${ground.label}: ${ruleLength(ground.ft)}.${exceptions(ground)}`);
   if (!checks) sentences.push(`The lowest point is ${where}.`);
   else if (v.crosses === 'not-chosen' || parsed.required.ft === null) sentences.push(`The lowest point is ${where}. What does the span cross?`);
   else {
     const req = parsed.required.ft;
     margin = low.height - req;
     sentences.push(margin >= 0
-      ? `The lowest point is ${feetInches(low.height, 'down')}, ${feetInches(margin, 'down')} above the ${ruleLength(req)} your rules require ${SURFACE[v.crosses]}.`
-      : `The lowest point is ${feetInches(-margin, 'up')} lower than the ${ruleLength(req)} your rules require ${SURFACE[v.crosses]}.`);
+      ? `The lowest point is ${feetInches(low.height, 'down')}, ${feetInches(margin, 'down')} above the ${ruleLength(req)} ${who} ${SURFACE[v.crosses]}.`
+      : `The lowest point is ${feetInches(-margin, 'up')} lower than the ${ruleLength(req)} ${who} ${SURFACE[v.crosses]}.`);
     steps.push(`${feetInches(low.height, 'down')} − ${ruleLength(req)} required ${SURFACE[v.crosses]} = ${margin >= 0 ? feetInches(margin, 'down') : `${feetInches(-margin, 'up')} short`}.`);
   }
   let gap;
   if (above) {
     const g = smallestGap(line, above, S);
     gap = g.gap * 12;
-    const sep = parsed.midspanSep.ft ?? parsed.poleSep.ft;
-    const which = parsed.midspanSep.ft !== null ? 'midspan value' : 'value at the pole';
+    const g95 = fromGo95 ? go95(SEP_ABOVE[v.aboveKind]) : null;
+    if (g95) notes.push(`${g95.label}: ${inches(g95.ft, 'up')} on the same pole and in adjoining midspans.${exceptions(g95)}`);
+    const sep = g95 ? g95.ft : parsed.midspanSep.ft ?? parsed.poleSep.ft;
+    const which = g95 ? 'GO 95 value' : parsed.midspanSep.ft !== null ? 'midspan value' : 'value at the pole';
     const place = g.midspan ? 'at midspan' : `${g.at.toFixed(0)} ft from the first pole`;
     steps.push(`The smallest gap to the line above is ${inches(g.gap, 'down')} ${place}.`);
     if (checks && sep !== null) {

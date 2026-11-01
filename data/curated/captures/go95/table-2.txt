@@ -1,0 +1,158 @@
+Source: https://ia.cpuc.ca.gov/gos/go95/go_95_table_2.html
+Retrieved: 2026-11-01
+Original: 195347 bytes, SHA-256 a9b23d2992c6a850128c70c9da0798ef8816a38de41fdbedbff81de625960015
+Capture: each table row's cells, joined with ' | ', tags removed
+----
+Previous Code | Main Page | GO 95 Startup Page | Change List for this Rule | Search GO 95 | Section Main Page | Next Code
+Case No. | Nature of Clearance and Classand Voltage ofWire, Cable or Conductor Concerned | Other Wire, Cable or Conductor Concerned
+Supply Conductors (Including Supply Cables)
+A Span Wires, Guys and Messengers | B Trolley Contact Conductors 0 – 750 Volts | C Communication Conductors (Including Open Wire, Cables and Service Drops) | D 0 – 750 Volts (Including Service Drops) and Trolley Feeders (a) | E 750 - 7,500 Volts | F 7,500 - 20,000 Volts | G 20,000 - 35,000 Volts | H 35,000 - 75,000 Volts | I 75,000 - 150,000 Volts | J 150,000 - 300,000 Volts | K (kk) 300,000 - 550,000 Volts
+Clearance between wires, cables and conductors not supported on the same poles, vertically at crossings in spans and radially where colinear or approaching crossings
+1 | Span wires, guys and messengers (b) | 18 (c) | 48 (d , e ) | 24 (e) | 24 (e) | 36 (f) | 36 | 72 | 72 | 78 | 78 (gg) | 138 (hh)
+2 | Trolley contact conductors, 0 - 750 volts | 48 (d , e ) | - | 48 (d) | 48 (d , h ) | 48 | 72 | 96 | 96 | 96 | 96 (gg) | 156 (hh)
+3 | Communication conductors | 24 (e) | 48 (d) | 24 | 48 (i) | 48 (dd) | 72 | 96 | 96 | 96 | 96 (gg) | 156 (hh)
+4 | Supply conductors, service drops and trolley feeders, 0 - 750 volts (qq) | 24 (e) | 48 (d , h ) | 48 (i) | 24 | 48 | 48 | 96 (oo) | 96 | 96 | 96 (gg) | 156 (hh)
+5 | Supply conductors, 750 - 7,500 volts (qq) | 36 (f) | 48 | 48 (dd) | 48 | 48 (h) | 72 | 96 (oo) | 96 | 96 | 96 (gg) | 156 (hh)
+6 | Supply conductors, 7,500 - 20,000 volts (qq) | 36 | 72 | 72 | 48 | 72 | 72 | 96 (oo) | 96 | 96 | 96 (gg) | 156 (hh)
+7 | Supply conductors, more than 20,000 volts (qq) | 72 ( g ) | 96 ( g ) | 96 ( g ) | 96 ( g , oo ) | 96 ( g , oo ) | 96 ( g , oo ) | 96 (g , oo ) | 96 (g) | 96 | 96 (gg) | 156 (hh)
+Vertical separation between conductors and/or cables, on separate crossarms or other supports at different levels (excepting on related line and buck arms) on the same pole and in adjoining midspans
+8 | Communication Conductors and Service Drops | - | - | 12 (j, rr) | 48 (k , l , m , n , pp ) | 48 (k) | 72 (m , n ) | 72 (m) | 72 | 78 | 87 (gg) | 147 (hh)
+9 | Supply Conductors Service Drops and Trolley Feeders, 0 - 750 Volts | - | - | 48 ( k , l , m , n , pp ) | 24 (h , k , m , o ) | 48( k , m , p ) | 48 ( k , m , q ) | 72 (m , nn ) | 72 | 78 | 87 (gg) | 147 (hh)
+10 | Supply conductors, 750 – 7,500 volts | - | - | 48 (k) | 48 (k , m , p ) | 48 (m , o , r , ee ) | 48 (m , q ) | 48 ( m , q ) | 48 (q) | 60 (ff) | 90 (gg) | 150 (hh)
+11 | Supply conductors, 7,500 – 20,000 volts | - | - | 72 ( m , n ) | 48 ( k , m , q ) | 48 ( m , q ) | 48 (m , o , q , r , ee ) | 48 ( m , q ) | 48 (q) | 60 (ff) | 90 (gg) | 150 (hh)
+12 | Supply conductors, 20,000 – 75,000 volts | - | - | 72 (m ) | 72 ( m, nn ) | 48 (m , q ) | 48 ( m , q ) | 48 (o , q ) | 48 ( o , q ) | 60 (ff) | 90 (gg) | 150 (hh)
+13 | Supply conductors, more than 75,000 volts | - | - | 72 | 72 | 60 (q) | 60 (q) | 60 (q) | 60 (q) | 60 (ff) | 90 (gg) | 150 (hh)
+Vertical clearance between conductors on related line arms and buck arms
+14 | Line arms above or below related buck arms (s , t) | - | - | 6 | 12 (u) | 18 (u) | 18 (u) | 24 | 48 | 60 (ff) | 90 (gg) | 150 (hh)
+Horizontal separation of conductors on same crossarm
+15 | Pin spacing of longitudinal conductors vertical conductors and service drops (zz) | - | - | 3 (x) | 11½ (h , x ) | 11½ (x) | 17½ (x) | 24 (x) | 48 | 60 (ff) | 90 (gg) | 150 (hh)
+Radial separation of conductors on same crossarm, pole or structure—incidental pole wiring
+16 | Conductors, taps or lead wires of different circuits (v , y , z, zz) | - | - | 3 (x) | 11½ ( h , x ) | 11½ (x) | 17½ (x) | 24 (x) | 48 | 60 (ff) | 90 (gg) | 150 (hh)
+16a | Uncovered, grounded, non-dielectric fiber optic cables on metallic structures, in transition (ss) | - | 15 | 15 | 15 | 18 | 18 | 18 | 18 | 24 | 36 | 120
+17 | Conductors, taps or lead wires of the same circuit (v , z , aa , zz) | - | - | 3 | 3 | 6 | 6 | 12 | 24 | 60 (ff) | 90 (gg) | 150 (hh)
+Radial separation between guys and conductors
+18 | Guys passing conductors supported on other poles, or guys approximately parallel to conductors supported on the same poles | - | - | 3 | 11½ | 11½ | 17½ | 24 | 36 | 36 (ff) | 78 (gg) | 138 (hh)
+19 | Guys and span wires passing conductors supported on the same poles | (cc) | - | 3 (bb) | 3 | 6 | 9 | 12 | 18 | 24 | 48 (ii) | 86 (jj)
+Vertical and horizontal insulators clearances between conductors
+20 | Vertical clearance between conductors of the same circuit on horizontal insulators | - | - | - | - | 24 | 24 | 24 | 36 or 48 (ll , mm ) | 48 (mm) | 48 (mm) | 48 (mm)
+Vertical clearance above supply and/or communication lines
+21 | Antennas and associated elements on the same support structure. (tt, uu) | 24(vv) | 48 (vv) | 24 (ww) | 48( vv, xx) | 72 | 72 | 72 | 120 (vv, yy) | - | - | -
+(a) | The clearances in column D are also applicable to supply cables of any voltage under certain conditions 57.4
+(b) | Clearances for guys and span wires apply vertically at crossings (see case 18 for radial clearances from conductors)
+1. | Supply guys and span wires from conductors 56.4–C
+2. | Supply guys and span wires from guys and span wires 56.4–D1
+3. | Communication guys and span wires from conductors 86.4–C
+4. | Communication guys and span wires from guys and span wires 86.4–D1
+(c) | Not applicable between messengers or span wires of the same system
+1. | Supply messengers 57.4–E
+2. | Trolley span wires 77.4–D
+3. | Communication messengers 87.4–G
+(d) | Protection Required on guys, span wires, messengers and cables where within trolley throw
+1. | Supply guys and span wires 56.4–B2
+2. | Supply messengers and cables 57.4-B2
+3. | Communication guys and span wires 86.4–B2
+4. | Communication messengers 87.4–B2
+(e) | Not applicable to certain conductors supported on trolley span wires
+1. | Trolley contact and feeder conductors 74.4–G2
+2. | Trolley feeder conductors 78.1
+3. | Trolley system communication conductors 78.2
+4. | Foreign conductors 78.3
+(f) | Increased clearance required over trolley contact conductors 750 - 7,500 volts 74.4–G2
+(g) | Shall be increased for voltages above 75,000 as required by Table 2, Columns I, J and K N/A
+(h) | May be reduced for certain conductors of Class T Circuits of the same system 74.4–C
+(i) | May be reduced for service drops under special conditions
+1. | Supply service drops and communication line conductors 54.8–C1a
+2. | Supply service drops and communication service drops 54.8–C4
+3. | Communication service drops and supply line conductors 84.8–D1a
+4. | Communication service drops and supply service drops 84.8–D4
+(j) | May be reduced or shall be increased for certain communication conductors or cables
+1. | Open wire conductors, attached to poles, within 3 feet of topmost conductor 84.4C1c
+2. | Line conductors of police or fire–alarm circuits and service drops from other communication circuits 84.8–D1b
+3. | Cables and messengers attached to poles 87.4–C3
+(k) | Special clearances for 0 - 750 volts in rack configuration and messengers and cables attached to poles
+1. | Supply conductors of 0 - 750 volts in rack configuration 54.9
+2. | Supply cables and messengers attached to poles 57.4–F
+3. | Communication cables and messengers attached to poles 87.4–C3
+4. | On jointly used poles 92.1
+(l) | May be reduced for service drops and police and fire–alarm conductors, under special conditions
+1. | Supply service drops and communication line conductors 54.8–C1b
+2. | Supply service drops on clearance arms 54.8–C2
+3. | Supply service drops on pole–top extensions 54.8–C3
+4. | Supply service drops and communication service drops 54.8–C4
+5. | Communication service drops and police, fire–alarm or supply line conductors 84.8–D1b
+6. | Communication service drops on clearance arms 84.8–D2
+7. | Communication service drops on pole–top extensions 84.8–D3
+8. | Communication service drops and supply service drops 84.8–D4
+9. | Police or fire–alarm conductors 92.2
+(m) | May be reduced for lead wires
+1. | Supply lead wires above supply conductors 54.4–C6
+2. | Supply drip loops above communication conductors 92.1–F3
+(n) | May be reduced for supply conductors and private communication conductors of the same ownership 89.2–B
+(o) | May be reduced or shall be increased for triangular or vertical configuration or for pole–top construction
+1. | Triangular or vertical configuration on crossarms 54.4–C1c
+2. | Deadended on pole in vertical configuration 54.4–C4
+(p) | May be reduced for supply service drops of 0 - 750 volts 54.8–C6
+(q) | Shall be increased between circuits where conductors are at pole top 54.4–D8
+(r) | May be reduced under special conditions
+1. | Supply conductors of 750 - 7,500 volts 54.4–C1a
+2. | Supply conductors of 7,500 - 20,000 volts 54.4C1b
+(s) | Does not apply where conductors do not cross
+1. | Supply conductors of different phase or polarity 54.4–C2a
+2. | Communication conductors 84.4–C1a
+(t) | Shall not be applied consecutively both above and below the same supply conductors 54.4–C2a
+(u) | Shall be increased where conductors of different classification are supported on the same crossarm
+1. | Supply conductors of 0 - 750 volts and conductors of 7,500 - 22,500 volts 32.4–A2
+2. | Supply conductors of 0 - 750 volts and conductors of 750 - 7,500 volts 32.4–A3
+(v) | Not applicable to certain kinds of conductors
+1. | Supply conductors of same phase or polarity 54.4–C3c
+2. | Insulated supply conductors in multiple–conductor cables 57.4–C
+3. | Communication insulated conductors or multiple–conductor cables 87.4–C1
+(w) | Shall apply radially to conductors on brackets attached to crossarms
+1. | Supply conductors 54.4–C3b
+2. | Communication conductors 84.4–C1b
+(x) | Shall be increased between conductors of different classification supported on the same crossarm
+1. | Supply conductors of different voltage classification 32.4–A
+2. | Supply circuits of 0 - 750 volts and communication circuits 32.4–B
+3. | Supply circuits and private communications circuits 89.2–A
+(y) | Special clearances for unprotected supply conductors from one level to another level 54.6–A 58.5-B3 92.1–F5
+(z) | Not applicable to the following:
+1. | Clearances between conductors at different levels specified in cases 8 to 13 inclusive…N/A
+2. | Supply lateral conductors, suitably protected 54.6–C
+3. | Supply vertical runs, suitably protected 54.6–D
+4. | Supply risers, suitably protected 54.6–E
+5. | Communication conductor 87.4–C1
+(aa) | Not applicable between cables and their supporting messengers
+1. | Supply 57.4–D
+2. | Communication 87.4–F
+(bb) | May be reduced for guys and communication conductors supported on the same pole
+1. | Supply 56.4–C4
+2. | Communication 86.4–C
+(cc) | Clearance required between guys
+1. | Supply guys, crossing 56.4–D2
+2. | Supply guys, approximately parallel 56.4–D3
+3. | Communication guys, crossing 86.4–D2
+4. | Communication guys, approximately parallel 86.4–D3
+(dd) | Shall be increased where within 6 feet of a pole 103.5
+(ee) | May be decreased in partial underground distribution 54.4–C4c
+(ff) | Shall be increased by 0.40 inch per kV in excess of 75 kV
+(gg) | Shall be increased by 0.40 inch per kV in excess of 150 kV
+(hh) | Shall be increased by 0.40 inch per kV in excess of 300 kV
+(ii) | Shall be increased by 0.25 inch per kV in excess of 150 kV
+(jj) | Shall be increased by 0.25 inch per kV in excess of 300 kV
+(kk) | Proposed clearances to be submitted to the CPUC prior to construction for circuits in excess of 550 kV
+(ll) | 36–inch clearance applies 35 kV to 68 kV. 42–inch clearance applies over 68 kV.
+(mm) | Vertical clearances shall be increased by 1/2 inch for each kV over 68 kV
+(nn) | The vertical separation between supply conductors and service drops of 0 - 750 volts and supply conductors of 20,000 - 22,500 volts may be reduced to 48 inches
+(oo) | May be reduced to 72inches for conductors of 20,000 - 22,500 volts
+(pp) | May be reduced to 36 inches vertically at midspan only when the supply conductors consist of abrasion resistant cable with a grounded metallic sheath or neutral–supported cable as specified in Rules 57 and 54.10 .
+(qq) | Vertical clearances may be reduced between supply conductors of the same circuit at crossings in spans 54.4–C7
+(rr) | Can be less than 12” for strand mounted terminals, splice cases and other equipment located 8” or more from centerline of pole but not less than 1” with mutual agreement between affected owners.
+(ss) | Requirements for transition of Fiber optic cable facilities 87.10
+(tt) | For Antennas utilized by utilities for the sole purpose of operating and monitoring their supply system see Rules 54.4-G and 58.6.
+(uu) | For clearances below supply and communication lines see Rules 94.4-A and 94.4-B
+(vv) | Clearances for exposed associated cables may be reduced by 12 inches.
+(ww) | May be reduced to 10 inches for cables installed by Antenna owner/operator.
+(xx) | Clearance from service drop point of attachment on structure to Antenna(s) and associated supporting elements may be reduced to 10 inches.
+(yy) | Up to 50 kV.
+(zz) | In areas that are subjected to high winds, a utility may need to take extra measures to maintain all required separations. Measures may include but are not limited to, spacer bars and increased pin spacing
+Note: | Revised February 7, 1964 by Decision No. 66707; September 18, 1967 by Decision No. 72984; March 30, 1968 by Decision No. 73813; July 22, 1968 by Decision No. 74342; September 11, 1974 by Decision No. 83420; March 9, 1988 by Resolution E–3076; November 6, 1992 by Resolution No. SU–15, January 19, 1994 by Resolution SU–25; October 9, 1996 by Resolution SU–40, January 13, 2006 by Decision No. 05-01-030, June 29, 2009 by Decision No. 08-10-017 and August 20, 2009 by Decision No. 09-08-029.

@@ -65,6 +65,12 @@
               "url": "https://www.rd.usda.gov/files/UEP_Bulletin_1724E-152.pdf"
             },
             {
+              "source": "California Public Utilities Commission, General Order 95",
+              "edition": "Table 1 last revised by D.17-12-024; Table 2 by D.09-08-029; checked 2026-11-01",
+              "locator": "Rule 37, Table 1, Cases 1, 3, 4, and 5, Column B; Rule 38, Table 2, Case 8, Columns C to E",
+              "url": "https://ia.cpuc.ca.gov/gos/go95/go_95_table_1.html"
+            },
+            {
               "source": "IEEE C2, National Electrical Safety Code",
               "edition": "the edition your rules adopt",
               "locator": "Rules 232 and 235 (cited by number; the values come from your copy)",
@@ -72,7 +78,11 @@
             }
           ]
         },
-        "datasets": [],
+        "datasets": [
+          {
+            "id": "go95-clearances"
+          }
+        ],
         "stability": "experimental",
         "validationLevel": 2,
         "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
@@ -125,6 +135,12 @@
               "url": "https://www.rd.usda.gov/files/UEP_Bulletin_1724E-152.pdf"
             },
             {
+              "source": "California Public Utilities Commission, General Order 95",
+              "edition": "Table 1 last revised by D.17-12-024; Table 2 by D.09-08-029; checked 2026-11-01",
+              "locator": "Rule 37, Table 1, Cases 1, 3, 4, and 5, Column B; Rule 38, Table 2, Case 8, Columns C to E",
+              "url": "https://ia.cpuc.ca.gov/gos/go95/go_95_table_1.html"
+            },
+            {
               "source": "IEEE C2, National Electrical Safety Code",
               "edition": "the edition your rules adopt",
               "locator": "Rules 232 and 235 (cited by number; the values come from your copy)",
@@ -132,7 +148,11 @@
             }
           ]
         },
-        "datasets": [],
+        "datasets": [
+          {
+            "id": "go95-clearances"
+          }
+        ],
         "stability": "experimental",
         "validationLevel": 2,
         "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
@@ -185,6 +205,12 @@
               "url": "https://www.rd.usda.gov/files/UEP_Bulletin_1724E-152.pdf"
             },
             {
+              "source": "California Public Utilities Commission, General Order 95",
+              "edition": "Table 1 last revised by D.17-12-024; Table 2 by D.09-08-029; checked 2026-11-01",
+              "locator": "Rule 37, Table 1, Cases 1, 3, 4, and 5, Column B; Rule 38, Table 2, Case 8, Columns C to E",
+              "url": "https://ia.cpuc.ca.gov/gos/go95/go_95_table_1.html"
+            },
+            {
               "source": "IEEE C2, National Electrical Safety Code",
               "edition": "the edition your rules adopt",
               "locator": "Rules 232 and 235 (cited by number; the values come from your copy)",
@@ -192,7 +218,11 @@
             }
           ]
         },
-        "datasets": [],
+        "datasets": [
+          {
+            "id": "go95-clearances"
+          }
+        ],
         "stability": "experimental",
         "validationLevel": 2,
         "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
@@ -251,6 +281,12 @@
               "url": "https://www.rd.usda.gov/files/UEP_Bulletin_1724E-152.pdf"
             },
             {
+              "source": "California Public Utilities Commission, General Order 95",
+              "edition": "Table 1 last revised by D.17-12-024; Table 2 by D.09-08-029; checked 2026-11-01",
+              "locator": "Rule 37, Table 1, Cases 1, 3, 4, and 5, Column B; Rule 38, Table 2, Case 8, Columns C to E",
+              "url": "https://ia.cpuc.ca.gov/gos/go95/go_95_table_1.html"
+            },
+            {
               "source": "IEEE C2, National Electrical Safety Code",
               "edition": "the edition your rules adopt",
               "locator": "Rules 232 and 235 (cited by number; the values come from your copy)",
@@ -258,7 +294,93 @@
             }
           ]
         },
-        "datasets": [],
+        "datasets": [
+          {
+            "id": "go95-clearances"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 2,
+        "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
+        "screeningLabel": "Screening check against the rules you entered. The pole owner and a qualified engineer have the final word, and pole loading is not checked."
+      }
+    },
+    {
+      "example": "go95-road",
+      "result": {
+        "status": "ok",
+        "toolId": "lines.midspan-clearance.check",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "sag": {
+            "value": 2.5,
+            "unit": "ft",
+            "display": "2.50"
+          },
+          "lowest": {
+            "value": 22.5,
+            "unit": "ft",
+            "display": "22.50"
+          },
+          "fromLower": {
+            "value": 100,
+            "unit": "ft",
+            "display": "100.0"
+          },
+          "margin": {
+            "value": 4.5,
+            "unit": "ft",
+            "display": "4.50"
+          },
+          "catenary": {
+            "value": 2.5,
+            "unit": "ft",
+            "display": "2.50"
+          }
+        },
+        "sentence": "The lowest point is 22 ft 6 in., 4 ft 6 in. above the 18 ft GO 95 requires over a road.",
+        "notes": [],
+        "work": {
+          "method": "Sag D = wS² ÷ 8H (RUS Bulletin 1724E-152, §2.3.1), or the sag you enter. The line hangs below the straight line between its two attachments by 4D·u(1 − u), where u is the share of the span from the first pole; with heights above the ground at each pole and the ground straight between them, the lowest point above ground is the bottom of that curve, or the lower pole when the bottom falls outside the span. Sag at x from midspan is D(1 − (2x/S)²). The gap to the line above is the smallest difference of the two curves. Sag and shortfalls round up; heights and margins round down.",
+          "steps": [
+            "Sag = 0.5 lb/ft × (200 ft)² ÷ (8 × 1,000 lb) = 2.500 ft, or 2 ft 6 in.",
+            "The lowest point is 100.0 ft from the lower pole, 22 ft 6 in. above ground.",
+            "22 ft 6 in. − 18 ft required over a road = 4 ft 6 in.",
+            "At the condition you entered: it does not adjust for hotter or icier conditions.",
+            "GO 95 Table 1, Case 3, Column B: 18 ft. Exceptions not checked: (c) (d) (j) (l) (m) (ii) (kkk)."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The sag is at the condition you enter; it is not converted from the field temperature to a hotter or icier design condition.",
+            "The ground is straight between the poles, and heights are above the ground at each pole.",
+            "Both lines run between the same two poles."
+          ],
+          "citations": [
+            {
+              "source": "USDA Rural Utilities Service, Bulletin 1724E-152, The Mechanics of Overhead Distribution Line Conductors",
+              "edition": "July 30, 2003",
+              "locator": "§2.3.1, Sag Equations: D = WS²/8Th and Dx = D(1 − (2x/S)²)",
+              "url": "https://www.rd.usda.gov/files/UEP_Bulletin_1724E-152.pdf"
+            },
+            {
+              "source": "California Public Utilities Commission, General Order 95",
+              "edition": "Table 1 last revised by D.17-12-024; Table 2 by D.09-08-029; checked 2026-11-01",
+              "locator": "Rule 37, Table 1, Cases 1, 3, 4, and 5, Column B; Rule 38, Table 2, Case 8, Columns C to E",
+              "url": "https://ia.cpuc.ca.gov/gos/go95/go_95_table_1.html"
+            },
+            {
+              "source": "IEEE C2, National Electrical Safety Code",
+              "edition": "the edition your rules adopt",
+              "locator": "Rules 232 and 235 (cited by number; the values come from your copy)",
+              "paywalled": true
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "go95-clearances"
+          }
+        ],
         "stability": "experimental",
         "validationLevel": 2,
         "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",
@@ -317,6 +439,12 @@
               "url": "https://www.rd.usda.gov/files/UEP_Bulletin_1724E-152.pdf"
             },
             {
+              "source": "California Public Utilities Commission, General Order 95",
+              "edition": "Table 1 last revised by D.17-12-024; Table 2 by D.09-08-029; checked 2026-11-01",
+              "locator": "Rule 37, Table 1, Cases 1, 3, 4, and 5, Column B; Rule 38, Table 2, Case 8, Columns C to E",
+              "url": "https://ia.cpuc.ca.gov/gos/go95/go_95_table_1.html"
+            },
+            {
               "source": "IEEE C2, National Electrical Safety Code",
               "edition": "the edition your rules adopt",
               "locator": "Rules 232 and 235 (cited by number; the values come from your copy)",
@@ -324,7 +452,11 @@
             }
           ]
         },
-        "datasets": [],
+        "datasets": [
+          {
+            "id": "go95-clearances"
+          }
+        ],
         "stability": "experimental",
         "validationLevel": 2,
         "validationMeaning": "Results agree with an independent implementation or a published worked example within a stated tolerance.",

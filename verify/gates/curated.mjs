@@ -23,4 +23,4 @@ export async function checkCurated(root) {
 }
 
 /** Folders of hand-maintained records the rules apply to. */
-export const CURATED_DIRS = ['data/curated/facts', 'data/curated/large-load-tariffs'];
+export const CURATED_DIRS = ['data/curated/facts', 'data/curated/large-load-tariffs', 'data/curated/go95'];
