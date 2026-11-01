@@ -61,6 +61,8 @@ export function recordRun(root, run) {
     h.datasets = [...h.datasets.filter((x) => x.id !== d.id), row].sort((a, b) => a.id.localeCompare(b.id));
     if (d.release) row.lastRelease = d.release;
   }
+  // Curated datasets a watch checks: which of their parts now read "needs review", for the chip on a result.
+  if (run.curated) h.curated = { ...(h.curated ?? {}), ...run.curated };
   // Each link keeps when it was checked and when it last worked, so a dead citation shows how long it has been gone.
   if (run.links) h.links = run.links.map((l) => ({ ...l, checked: run.finished, lastOk: l.state === 'ok' ? run.finished : (h.links ?? []).find((x) => x.url === l.url)?.lastOk ?? null }));
   const durationMs = Date.parse(run.finished) - Date.parse(run.started);

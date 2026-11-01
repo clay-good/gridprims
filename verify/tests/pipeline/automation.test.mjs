@@ -111,7 +111,7 @@ test('every run is recorded with what it checked, refreshed, and how long it too
   assert.equal(h.generatedAt, '2026-10-31T09:17:42.000Z');
   assert.equal(h.runs[0].workflow, 'refresh-data');
   assert.equal(h.runs[0].durationMs, 42_000);
-  assert.deepEqual(h.workflows.map((w) => [w.id, w.intervalHours, w.thresholdHours]), [['refresh-data', 24, 72], ['link-check', 168, 504], ['value-log', 744, 2232], ['canary', 168, 504], ['heartbeat', 24, 72]]);
+  assert.deepEqual(h.workflows.map((w) => [w.id, w.intervalHours, w.thresholdHours]), [['refresh-data', 24, 72], ['link-check', 168, 504], ['go95-watch', 168, 504], ['value-log', 744, 2232], ['canary', 168, 504], ['heartbeat', 24, 72]]);
 });
 
 test('staleness thresholds: a daily workflow is stalled after 4 days; a weekly one is not after 9', () => {

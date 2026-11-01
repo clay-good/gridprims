@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T07:24:08.467Z",
+  "generatedAt": "2026-11-01T14:26:11.479Z",
   "workflows": [
     {
       "id": "refresh-data",
@@ -16,6 +16,24 @@
       "thresholdHours": 504,
       "lastSuccess": "2026-11-01T07:24:08.467Z",
       "lastRun": "2026-11-01T07:24:08.467Z",
+      "enabled": true,
+      "events": []
+    },
+    {
+      "id": "go95-watch",
+      "intervalHours": 168,
+      "thresholdHours": 504,
+      "lastSuccess": "2026-11-01T14:26:11.479Z",
+      "lastRun": "2026-11-01T14:26:11.479Z",
+      "enabled": true,
+      "events": []
+    },
+    {
+      "id": "value-log",
+      "intervalHours": 744,
+      "thresholdHours": 2232,
+      "lastSuccess": null,
+      "lastRun": null,
       "enabled": true,
       "events": []
     },
@@ -2621,6 +2639,18 @@
   },
   "runs": [
     {
+      "workflow": "go95-watch",
+      "started": "2026-11-01T14:26:10.391Z",
+      "finished": "2026-11-01T14:26:11.479Z",
+      "durationMs": 1088,
+      "ok": true,
+      "datasets": [],
+      "notes": [
+        "GO 95 Table 1: matches its stored capture",
+        "GO 95 Table 2: matches its stored capture"
+      ]
+    },
+    {
       "workflow": "link-check",
       "started": "2026-11-01T07:23:00.714Z",
       "finished": "2026-11-01T07:24:08.467Z",
@@ -2783,5 +2813,11 @@
       "version": "0.1.0",
       "evidencePassed": "2026-10-31T15:21:53.718Z"
     }
-  ]
+  ],
+  "curated": {
+    "go95-clearances": {
+      "needsReview": [],
+      "checked": "2026-11-01"
+    }
+  }
 }
