@@ -1,0 +1,442 @@
+{
+  "toolId": "grid.large-load.take-or-pay",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "slow-ramp",
+      "result": {
+        "status": "ok",
+        "toolId": "grid.large-load.take-or-pay",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "minimumKw": {
+            "value": 60000,
+            "unit": "kW",
+            "display": "60,000"
+          },
+          "unusedYear": {
+            "value": 2400000,
+            "unit": "$",
+            "display": "2,400,000"
+          },
+          "unusedTotal": {
+            "value": 2400000,
+            "unit": "$",
+            "display": "2,400,000"
+          },
+          "minimumTotal": {
+            "value": 14400000,
+            "unit": "$",
+            "display": "14,400,000"
+          },
+          "exitFee": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          }
+        },
+        "sentence": "In year 2 you pay for at least 60,000 kW. Unused capacity costs $2,400,000 that year.",
+        "notes": [],
+        "work": {
+          "method": "For each contract year: capacity in force = contract demand × the ramp percent. For each charge, the minimum billing demand is the formula on that capacity (a flat percent, or a base plus a percent above a threshold, capped at a percent of capacity), raised to the ratchet percent of the prior year's billing demand if that is larger. Billed demand is the greater of expected demand and the minimum. Minimum bill = minimum demand × rate × 12; unused-capacity payment = (billed − expected) × rate × 12. The exit fee at the end of a year is the minimum bills for the remaining years, or the stated months of that year's minimum bill.",
+          "steps": [
+            "Year 1: capacity in force 100,000 kW, expected 100,000 kW. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 2: capacity in force 100,000 kW, expected 40,000 kW. generation: minimum 60,000 kW, billed 60,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000; unused 20,000 kW × $10 × 12 = $2,400,000."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Demand is flat within each year, so the 11-month lookback of a ratchet at a year's start reaches the year before.",
+            "Expected demand above contract demand is billed at contract demand.",
+            "Rates stay the same every year; energy charges and riders are not included."
+          ],
+          "citations": [
+            {
+              "source": "AEP Ohio, Data Center Tariff (filed under PUCO Case No. 24-0508-EL-ATA, order 2025-07-09, effective 2025-07-23)",
+              "edition": "tariff page as checked 2026-10-29",
+              "locator": "minimum demand: the greater of 85% of the highest billing demand in the past 11 months, or 15,000 kW + 85% above 25,000 kW (25 to 75 MW) or 57,500 kW + 100% above 75,000 kW (over 75 MW), capped at 85% of contract; ramp of at most 4 years at 50/65/80/90%; exit fee of 36 months of minimums",
+              "url": "https://www.aepohio.com/company/about/rates/data-center-tariff"
+            },
+            {
+              "source": "Virginia State Corporation Commission, Final Order, Case No. PUR-2025-00058 (Dominion Energy Virginia, rate schedule GS-5)",
+              "edition": "2025-11-25",
+              "locator": "GS-5 minimum demand: 85% of contracted demand for distribution and transmission, 60% for generation; 14-year term",
+              "url": "https://npr.brightspotcdn.com/b6/ac/706130b64d2b8eee6a9832b97e48/20251125-virginiascc-dominionenergyruling.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Actual obligations depend on the signed contract and the regulator's current order."
+      }
+    },
+    {
+      "example": "aep-tier",
+      "result": {
+        "status": "ok",
+        "toolId": "grid.large-load.take-or-pay",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "minimumKw": {
+            "value": 82500,
+            "unit": "kW",
+            "display": "82,500"
+          },
+          "unusedYear": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          },
+          "unusedTotal": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          },
+          "minimumTotal": {
+            "value": 9900000,
+            "unit": "$",
+            "display": "9,900,000"
+          },
+          "exitFee": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          }
+        },
+        "sentence": "In year 1 you pay for at least 82,500 kW. Unused capacity costs $0 that year.",
+        "notes": [],
+        "work": {
+          "method": "For each contract year: capacity in force = contract demand × the ramp percent. For each charge, the minimum billing demand is the formula on that capacity (a flat percent, or a base plus a percent above a threshold, capped at a percent of capacity), raised to the ratchet percent of the prior year's billing demand if that is larger. Billed demand is the greater of expected demand and the minimum. Minimum bill = minimum demand × rate × 12; unused-capacity payment = (billed − expected) × rate × 12. The exit fee at the end of a year is the minimum bills for the remaining years, or the stated months of that year's minimum bill.",
+          "steps": [
+            "Year 1: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Demand is flat within each year, so the 11-month lookback of a ratchet at a year's start reaches the year before.",
+            "Expected demand above contract demand is billed at contract demand.",
+            "Rates stay the same every year; energy charges and riders are not included."
+          ],
+          "citations": [
+            {
+              "source": "AEP Ohio, Data Center Tariff (filed under PUCO Case No. 24-0508-EL-ATA, order 2025-07-09, effective 2025-07-23)",
+              "edition": "tariff page as checked 2026-10-29",
+              "locator": "minimum demand: the greater of 85% of the highest billing demand in the past 11 months, or 15,000 kW + 85% above 25,000 kW (25 to 75 MW) or 57,500 kW + 100% above 75,000 kW (over 75 MW), capped at 85% of contract; ramp of at most 4 years at 50/65/80/90%; exit fee of 36 months of minimums",
+              "url": "https://www.aepohio.com/company/about/rates/data-center-tariff"
+            },
+            {
+              "source": "Virginia State Corporation Commission, Final Order, Case No. PUR-2025-00058 (Dominion Energy Virginia, rate schedule GS-5)",
+              "edition": "2025-11-25",
+              "locator": "GS-5 minimum demand: 85% of contracted demand for distribution and transmission, 60% for generation; 14-year term",
+              "url": "https://npr.brightspotcdn.com/b6/ac/706130b64d2b8eee6a9832b97e48/20251125-virginiascc-dominionenergyruling.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Actual obligations depend on the signed contract and the regulator's current order."
+      }
+    },
+    {
+      "example": "aep-cap",
+      "result": {
+        "status": "ok",
+        "toolId": "grid.large-load.take-or-pay",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "minimumKw": {
+            "value": 170000,
+            "unit": "kW",
+            "display": "170,000"
+          },
+          "unusedYear": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          },
+          "unusedTotal": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          },
+          "minimumTotal": {
+            "value": 20400000,
+            "unit": "$",
+            "display": "20,400,000"
+          },
+          "exitFee": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          }
+        },
+        "sentence": "In year 1 you pay for at least 170,000 kW. Unused capacity costs $0 that year.",
+        "notes": [],
+        "work": {
+          "method": "For each contract year: capacity in force = contract demand × the ramp percent. For each charge, the minimum billing demand is the formula on that capacity (a flat percent, or a base plus a percent above a threshold, capped at a percent of capacity), raised to the ratchet percent of the prior year's billing demand if that is larger. Billed demand is the greater of expected demand and the minimum. Minimum bill = minimum demand × rate × 12; unused-capacity payment = (billed − expected) × rate × 12. The exit fee at the end of a year is the minimum bills for the remaining years, or the stated months of that year's minimum bill.",
+          "steps": [
+            "Year 1: capacity in force 200,000 kW, expected 200,000 kW. demand: minimum 170,000 kW, billed 200,000 kW; minimum bill 170,000 kW × $10/kW-month × 12 = $20,400,000."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Demand is flat within each year, so the 11-month lookback of a ratchet at a year's start reaches the year before.",
+            "Expected demand above contract demand is billed at contract demand.",
+            "Rates stay the same every year; energy charges and riders are not included."
+          ],
+          "citations": [
+            {
+              "source": "AEP Ohio, Data Center Tariff (filed under PUCO Case No. 24-0508-EL-ATA, order 2025-07-09, effective 2025-07-23)",
+              "edition": "tariff page as checked 2026-10-29",
+              "locator": "minimum demand: the greater of 85% of the highest billing demand in the past 11 months, or 15,000 kW + 85% above 25,000 kW (25 to 75 MW) or 57,500 kW + 100% above 75,000 kW (over 75 MW), capped at 85% of contract; ramp of at most 4 years at 50/65/80/90%; exit fee of 36 months of minimums",
+              "url": "https://www.aepohio.com/company/about/rates/data-center-tariff"
+            },
+            {
+              "source": "Virginia State Corporation Commission, Final Order, Case No. PUR-2025-00058 (Dominion Energy Virginia, rate schedule GS-5)",
+              "edition": "2025-11-25",
+              "locator": "GS-5 minimum demand: 85% of contracted demand for distribution and transmission, 60% for generation; 14-year term",
+              "url": "https://npr.brightspotcdn.com/b6/ac/706130b64d2b8eee6a9832b97e48/20251125-virginiascc-dominionenergyruling.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Actual obligations depend on the signed contract and the regulator's current order."
+      }
+    },
+    {
+      "example": "ratchet",
+      "result": {
+        "status": "ok",
+        "toolId": "grid.large-load.take-or-pay",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "minimumKw": {
+            "value": 85000,
+            "unit": "kW",
+            "display": "85,000"
+          },
+          "unusedYear": {
+            "value": 4200000,
+            "unit": "$",
+            "display": "4,200,000"
+          },
+          "unusedTotal": {
+            "value": 4200000,
+            "unit": "$",
+            "display": "4,200,000"
+          },
+          "minimumTotal": {
+            "value": 20100000,
+            "unit": "$",
+            "display": "20,100,000"
+          },
+          "exitFee": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          }
+        },
+        "sentence": "In year 2 you pay for at least 85,000 kW. Unused capacity costs $4,200,000 that year.",
+        "notes": [],
+        "work": {
+          "method": "For each contract year: capacity in force = contract demand × the ramp percent. For each charge, the minimum billing demand is the formula on that capacity (a flat percent, or a base plus a percent above a threshold, capped at a percent of capacity), raised to the ratchet percent of the prior year's billing demand if that is larger. Billed demand is the greater of expected demand and the minimum. Minimum bill = minimum demand × rate × 12; unused-capacity payment = (billed − expected) × rate × 12. The exit fee at the end of a year is the minimum bills for the remaining years, or the stated months of that year's minimum bill.",
+          "steps": [
+            "Year 1: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 2: capacity in force 100,000 kW, expected 50,000 kW. demand: minimum 85,000 kW (the ratchet, over the formula's 82,500 kW), billed 85,000 kW; minimum bill 85,000 kW × $10/kW-month × 12 = $10,200,000; unused 35,000 kW × $10 × 12 = $4,200,000."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Demand is flat within each year, so the 11-month lookback of a ratchet at a year's start reaches the year before.",
+            "Expected demand above contract demand is billed at contract demand.",
+            "Rates stay the same every year; energy charges and riders are not included."
+          ],
+          "citations": [
+            {
+              "source": "AEP Ohio, Data Center Tariff (filed under PUCO Case No. 24-0508-EL-ATA, order 2025-07-09, effective 2025-07-23)",
+              "edition": "tariff page as checked 2026-10-29",
+              "locator": "minimum demand: the greater of 85% of the highest billing demand in the past 11 months, or 15,000 kW + 85% above 25,000 kW (25 to 75 MW) or 57,500 kW + 100% above 75,000 kW (over 75 MW), capped at 85% of contract; ramp of at most 4 years at 50/65/80/90%; exit fee of 36 months of minimums",
+              "url": "https://www.aepohio.com/company/about/rates/data-center-tariff"
+            },
+            {
+              "source": "Virginia State Corporation Commission, Final Order, Case No. PUR-2025-00058 (Dominion Energy Virginia, rate schedule GS-5)",
+              "edition": "2025-11-25",
+              "locator": "GS-5 minimum demand: 85% of contracted demand for distribution and transmission, 60% for generation; 14-year term",
+              "url": "https://npr.brightspotcdn.com/b6/ac/706130b64d2b8eee6a9832b97e48/20251125-virginiascc-dominionenergyruling.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Actual obligations depend on the signed contract and the regulator's current order."
+      }
+    },
+    {
+      "example": "exit-year-5",
+      "result": {
+        "status": "ok",
+        "toolId": "grid.large-load.take-or-pay",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "minimumKw": {
+            "value": 85000,
+            "unit": "kW",
+            "display": "85,000"
+          },
+          "unusedYear": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          },
+          "unusedTotal": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          },
+          "minimumTotal": {
+            "value": 172200000,
+            "unit": "$",
+            "display": "172,200,000"
+          },
+          "exitFee": {
+            "value": 110700000,
+            "unit": "$",
+            "display": "110,700,000"
+          }
+        },
+        "sentence": "In year 1 you pay for at least 85,000 kW of transmission and distribution. Unused capacity costs $0 that year.",
+        "notes": [],
+        "work": {
+          "method": "For each contract year: capacity in force = contract demand × the ramp percent. For each charge, the minimum billing demand is the formula on that capacity (a flat percent, or a base plus a percent above a threshold, capped at a percent of capacity), raised to the ratchet percent of the prior year's billing demand if that is larger. Billed demand is the greater of expected demand and the minimum. Minimum bill = minimum demand × rate × 12; unused-capacity payment = (billed − expected) × rate × 12. The exit fee at the end of a year is the minimum bills for the remaining years, or the stated months of that year's minimum bill.",
+          "steps": [
+            "Year 1: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 2: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 3: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 4: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 5: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 6: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 7: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 8: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 9: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 10: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 11: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 12: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 13: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Year 14: capacity in force 100,000 kW, expected 100,000 kW. transmission and distribution: minimum 85,000 kW, billed 100,000 kW; minimum bill 85,000 kW × $5/kW-month × 12 = $5,100,000. generation: minimum 60,000 kW, billed 100,000 kW; minimum bill 60,000 kW × $10/kW-month × 12 = $7,200,000.",
+            "Exit at the end of year 5: the minimum bills for years 6 to 14 = $110,700,000."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Demand is flat within each year, so the 11-month lookback of a ratchet at a year's start reaches the year before.",
+            "Expected demand above contract demand is billed at contract demand.",
+            "Rates stay the same every year; energy charges and riders are not included."
+          ],
+          "citations": [
+            {
+              "source": "AEP Ohio, Data Center Tariff (filed under PUCO Case No. 24-0508-EL-ATA, order 2025-07-09, effective 2025-07-23)",
+              "edition": "tariff page as checked 2026-10-29",
+              "locator": "minimum demand: the greater of 85% of the highest billing demand in the past 11 months, or 15,000 kW + 85% above 25,000 kW (25 to 75 MW) or 57,500 kW + 100% above 75,000 kW (over 75 MW), capped at 85% of contract; ramp of at most 4 years at 50/65/80/90%; exit fee of 36 months of minimums",
+              "url": "https://www.aepohio.com/company/about/rates/data-center-tariff"
+            },
+            {
+              "source": "Virginia State Corporation Commission, Final Order, Case No. PUR-2025-00058 (Dominion Energy Virginia, rate schedule GS-5)",
+              "edition": "2025-11-25",
+              "locator": "GS-5 minimum demand: 85% of contracted demand for distribution and transmission, 60% for generation; 14-year term",
+              "url": "https://npr.brightspotcdn.com/b6/ac/706130b64d2b8eee6a9832b97e48/20251125-virginiascc-dominionenergyruling.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Actual obligations depend on the signed contract and the regulator's current order."
+      }
+    },
+    {
+      "example": "aep-exit-36",
+      "result": {
+        "status": "ok",
+        "toolId": "grid.large-load.take-or-pay",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "minimumKw": {
+            "value": 82500,
+            "unit": "kW",
+            "display": "82,500"
+          },
+          "unusedYear": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          },
+          "unusedTotal": {
+            "value": 0,
+            "unit": "$",
+            "display": "0"
+          },
+          "minimumTotal": {
+            "value": 118800000,
+            "unit": "$",
+            "display": "118,800,000"
+          },
+          "exitFee": {
+            "value": 29700000,
+            "unit": "$",
+            "display": "29,700,000"
+          }
+        },
+        "sentence": "In year 1 you pay for at least 82,500 kW. Unused capacity costs $0 that year.",
+        "notes": [],
+        "work": {
+          "method": "For each contract year: capacity in force = contract demand × the ramp percent. For each charge, the minimum billing demand is the formula on that capacity (a flat percent, or a base plus a percent above a threshold, capped at a percent of capacity), raised to the ratchet percent of the prior year's billing demand if that is larger. Billed demand is the greater of expected demand and the minimum. Minimum bill = minimum demand × rate × 12; unused-capacity payment = (billed − expected) × rate × 12. The exit fee at the end of a year is the minimum bills for the remaining years, or the stated months of that year's minimum bill.",
+          "steps": [
+            "Year 1: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 2: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 3: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 4: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 5: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 6: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 7: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 8: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 9: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 10: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 11: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Year 12: capacity in force 100,000 kW, expected 100,000 kW. demand: minimum 82,500 kW, billed 100,000 kW; minimum bill 82,500 kW × $10/kW-month × 12 = $9,900,000.",
+            "Exit at the end of year 9: 36 months of year 9's minimum bill = $9,900,000 ÷ 12 × 36 = $29,700,000."
+          ],
+          "constants": [],
+          "assumptions": [
+            "Demand is flat within each year, so the 11-month lookback of a ratchet at a year's start reaches the year before.",
+            "Expected demand above contract demand is billed at contract demand.",
+            "Rates stay the same every year; energy charges and riders are not included."
+          ],
+          "citations": [
+            {
+              "source": "AEP Ohio, Data Center Tariff (filed under PUCO Case No. 24-0508-EL-ATA, order 2025-07-09, effective 2025-07-23)",
+              "edition": "tariff page as checked 2026-10-29",
+              "locator": "minimum demand: the greater of 85% of the highest billing demand in the past 11 months, or 15,000 kW + 85% above 25,000 kW (25 to 75 MW) or 57,500 kW + 100% above 75,000 kW (over 75 MW), capped at 85% of contract; ramp of at most 4 years at 50/65/80/90%; exit fee of 36 months of minimums",
+              "url": "https://www.aepohio.com/company/about/rates/data-center-tariff"
+            },
+            {
+              "source": "Virginia State Corporation Commission, Final Order, Case No. PUR-2025-00058 (Dominion Energy Virginia, rate schedule GS-5)",
+              "edition": "2025-11-25",
+              "locator": "GS-5 minimum demand: 85% of contracted demand for distribution and transmission, 60% for generation; 14-year term",
+              "url": "https://npr.brightspotcdn.com/b6/ac/706130b64d2b8eee6a9832b97e48/20251125-virginiascc-dominionenergyruling.pdf"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "Actual obligations depend on the signed contract and the regulator's current order."
+      }
+    }
+  ]
+}

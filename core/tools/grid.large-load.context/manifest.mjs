@@ -1,0 +1,45 @@
+export default {
+  id: 'grid.large-load.context',
+  version: '0.1.0',
+  title: 'How big is this large-load request?',
+  purpose: 'A requested load, such as a data center, beside the utility that would serve it: its share of the utility\'s peak and annual sales, and how many average homes use the same energy.',
+  archetype: 'calculator',
+  firstScreen: ['requestMw', 'loadFactor', 'peakMw', 'salesMwh', 'residentialKwh'],
+  inputs: [
+    { name: 'requestMw', label: 'Requested load', type: 'number', unit: 'MW', range: { min: 0.1, max: 100000 }, precision: 'exact', example: 300 },
+    { name: 'loadFactor', label: 'Load factor', type: 'number', unit: '%', range: { min: 1, max: 100 }, precision: 'exact', example: 80, hint: 'Average use as a share of the requested peak. Data centers often run near 80%.' },
+    { name: 'peakMw', label: 'Utility\'s annual peak demand', type: 'number', unit: 'MW', range: { min: 0, max: 1000000 }, precision: 'exact', example: 1500, hint: 'From FERC Form 714. Enter 0 if the utility does not report one to FERC.' },
+    { name: 'salesMwh', label: 'Utility\'s annual retail sales', type: 'number', unit: 'MWh', range: { min: 1, max: 1e10 }, precision: 'exact', example: 7000000, hint: 'From EIA-861.' },
+    { name: 'residentialKwh', label: 'Utility\'s average residential use', type: 'number', unit: 'kWh a year', range: { min: 100, max: 100000 }, precision: 'exact', example: 12000, hint: 'Residential sales ÷ residential customers, from EIA-861.' },
+  ],
+  outputs: [
+    { name: 'peakShare', label: 'Share of the utility\'s peak', unit: '%', rounding: { decimals: 1, fixed: true } },
+    { name: 'energyMwh', label: 'Annual energy', unit: 'MWh', rounding: { decimals: 0, fixed: true } },
+    { name: 'salesShare', label: 'Share of the utility\'s annual sales', unit: '%', rounding: { decimals: 1, fixed: true } },
+    { name: 'homes', label: 'Average homes using the same energy', unit: 'homes', rounding: { sigFigs: 4 } },
+  ],
+  method: 'Share of peak = requested MW ÷ the utility\'s annual peak. Annual energy = requested MW × load factor × 8,760 hours. Share of sales = annual energy ÷ the utility\'s annual retail sales. Homes = annual energy ÷ the utility\'s average residential use per customer.',
+  assumptions: [
+    'The request runs at its load factor every hour of a 365-day year.',
+    'The peak comparison is to the utility\'s own annual peak, not its balancing authority\'s.',
+  ],
+  citations: [
+    { source: 'FERC Form 714, Annual Electric Balancing Authority Area and Planning Area Report, via PUDL', edition: 'PUDL v2026.10.0', locator: 'planning area annual peak demand', url: 'https://catalystcoop-pudl.readthedocs.io/en/latest/data_sources/ferc714.html' },
+    { source: 'U.S. Energy Information Administration, Form EIA-861', edition: '2025 data', locator: 'Sales to Ultimate Customers: total and residential sales and customers', url: 'https://www.eia.gov/electricity/data/eia861/' },
+  ],
+  datasets: ['pudl-ferc714', 'eia-861'],
+  examples: [
+    { id: 'co-op', title: 'A 300 MW data center at a utility peaking at 1,500 MW', inputs: { requestMw: 300, loadFactor: 80, peakMw: 1500, salesMwh: 7000000, residentialKwh: 12000 }, expect: { peakShare: { value: 20, tolerance: { abs: 1e-9 }, display: '20.0' }, energyMwh: { value: 2102400, tolerance: { abs: 1e-6 }, display: '2,102,400' }, salesShare: { value: 30.03, tolerance: { abs: 0.01 }, display: '30.0' }, homes: { value: 175200, tolerance: { abs: 1e-6 }, display: '175,200' } }, source: 'large-load/request-context spec, scenarios "Co-op request" and "Household equivalent": 300 ÷ 1,500 = 20.0%; 300 × 0.8 × 8,760 = 2,102,400 MWh; ÷ 7,000,000 = 30.0%; 2,102,400,000 kWh ÷ 12,000 = 175,200 homes' },
+    { id: 'no-peak', title: 'A utility that files no Form 714', inputs: { requestMw: 50, loadFactor: 80, peakMw: 0, salesMwh: 1000000, residentialKwh: 10000 }, expect: { salesShare: { value: 35.04, tolerance: { abs: 1e-9 }, display: '35.0' } }, source: 'large-load/request-context spec, scenario "No Form 714 peak": 50 × 0.8 × 8,760 = 350,400 MWh ÷ 1,000,000 = 35.0%, and no share of peak' },
+  ],
+  related: ['grid.large-load.take-or-pay'],
+  handoffs: [],
+  stability: 'experimental',
+  validation: { level: 1, evidence: [{ kind: 'own-examples', summary: 'The spec\'s co-op request, household equivalent, and no-Form-714 scenarios, each hand-computed.' }] },
+  toRaise: 'Three utilities recomputed by hand from their cited Form 714 and EIA-861 rows would raise it to cross-checked.',
+  screeningLabel: 'A size comparison, not a study of whether the grid can serve the load.',
+  limitations: [
+    'A utility\'s peak and sales come from different forms and may be from different years.',
+    'It says nothing about where the load connects or what the transmission system can carry.',
+  ],
+};

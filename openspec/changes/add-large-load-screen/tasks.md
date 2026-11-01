@@ -7,10 +7,10 @@
 ## 2. Tools
 
 - [ ] 2.1 Terms table with filters, comparison, and freshness flags; verify the compare and stale-entry scenarios
-- [ ] 2.2 Take-or-pay calculator with prefill, capacity ramps, and tiered minimum formulas; verify the slow-ramp, both AEP Ohio tier, prior-peak ratchet, and year-5 exit scenarios, plus one published-arithmetic fixture per tariff
-- [ ] 2.3 Request context card; verify the 20%-of-peak and household-equivalent scenarios
+- [ ] 2.2 Take-or-pay calculator with prefill, capacity ramps, and tiered minimum formulas; verify the slow-ramp, both AEP Ohio tier, prior-peak ratchet, and year-5 exit scenarios, plus one published-arithmetic fixture per tariff (calculator and the five scenarios shipped as grid.large-load.take-or-pay, with AEP Ohio and GS-5 fixtures; prefill waits on the terms table, 1.1 and 1.2)
+- [ ] 2.3 Request context card; verify the 20%-of-peak and household-equivalent scenarios (shipped as grid.large-load.context with both scenarios and the no-Form-714 case; the utility prefill waits on 1.3)
 
 ## 3. Surfaces
 
-- [ ] 3.1 Run worked examples through the MCP server; verify identical results
+- [x] 3.1 Run worked examples through the MCP server; verify identical results
 - [ ] 3.2 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green

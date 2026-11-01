@@ -1,0 +1,145 @@
+{
+  "toolId": "grid.large-load.context",
+  "version": "0.1.0",
+  "results": [
+    {
+      "example": "co-op",
+      "result": {
+        "status": "ok",
+        "toolId": "grid.large-load.context",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "peakShare": {
+            "value": 20,
+            "unit": "%",
+            "display": "20.0"
+          },
+          "energyMwh": {
+            "value": 2102400,
+            "unit": "MWh",
+            "display": "2,102,400"
+          },
+          "salesShare": {
+            "value": 30,
+            "unit": "%",
+            "display": "30.0"
+          },
+          "homes": {
+            "value": 175200,
+            "unit": "homes",
+            "display": "175,200"
+          }
+        },
+        "sentence": "It is 20.0% of the utility's peak and would use as much energy as 175,200 homes.",
+        "notes": [],
+        "work": {
+          "method": "Share of peak = requested MW ÷ the utility's annual peak. Annual energy = requested MW × load factor × 8,760 hours. Share of sales = annual energy ÷ the utility's annual retail sales. Homes = annual energy ÷ the utility's average residential use per customer.",
+          "steps": [
+            "300 MW ÷ 1,500 MW peak = 20.0% of the peak.",
+            "300 MW × 80% × 8,760 hours = 2,102,400 MWh a year.",
+            "2,102,400 MWh ÷ 7,000,000 MWh of sales = 30.0% of sales.",
+            "2,102,400,000 kWh ÷ 12,000 kWh per home = 175,200 average homes."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The request runs at its load factor every hour of a 365-day year.",
+            "The peak comparison is to the utility's own annual peak, not its balancing authority's."
+          ],
+          "citations": [
+            {
+              "source": "FERC Form 714, Annual Electric Balancing Authority Area and Planning Area Report, via PUDL",
+              "edition": "PUDL v2026.10.0",
+              "locator": "planning area annual peak demand",
+              "url": "https://catalystcoop-pudl.readthedocs.io/en/latest/data_sources/ferc714.html"
+            },
+            {
+              "source": "U.S. Energy Information Administration, Form EIA-861",
+              "edition": "2025 data",
+              "locator": "Sales to Ultimate Customers: total and residential sales and customers",
+              "url": "https://www.eia.gov/electricity/data/eia861/"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "pudl-ferc714"
+          },
+          {
+            "id": "eia-861"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A size comparison, not a study of whether the grid can serve the load."
+      }
+    },
+    {
+      "example": "no-peak",
+      "result": {
+        "status": "ok",
+        "toolId": "grid.large-load.context",
+        "toolVersion": "0.1.0",
+        "outputs": {
+          "energyMwh": {
+            "value": 350400,
+            "unit": "MWh",
+            "display": "350,400"
+          },
+          "salesShare": {
+            "value": 35,
+            "unit": "%",
+            "display": "35.0"
+          },
+          "homes": {
+            "value": 35040,
+            "unit": "homes",
+            "display": "35,040"
+          }
+        },
+        "sentence": "It would use 35.0% of what the utility sells in a year, as much energy as 35,040 homes.",
+        "notes": [],
+        "work": {
+          "method": "Share of peak = requested MW ÷ the utility's annual peak. Annual energy = requested MW × load factor × 8,760 hours. Share of sales = annual energy ÷ the utility's annual retail sales. Homes = annual energy ÷ the utility's average residential use per customer.",
+          "steps": [
+            "The utility reports no annual peak to FERC, so only the sales comparison is shown.",
+            "50 MW × 80% × 8,760 hours = 350,400 MWh a year.",
+            "350,400 MWh ÷ 1,000,000 MWh of sales = 35.0% of sales.",
+            "350,400,000 kWh ÷ 10,000 kWh per home = 35,040 average homes."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The request runs at its load factor every hour of a 365-day year.",
+            "The peak comparison is to the utility's own annual peak, not its balancing authority's."
+          ],
+          "citations": [
+            {
+              "source": "FERC Form 714, Annual Electric Balancing Authority Area and Planning Area Report, via PUDL",
+              "edition": "PUDL v2026.10.0",
+              "locator": "planning area annual peak demand",
+              "url": "https://catalystcoop-pudl.readthedocs.io/en/latest/data_sources/ferc714.html"
+            },
+            {
+              "source": "U.S. Energy Information Administration, Form EIA-861",
+              "edition": "2025 data",
+              "locator": "Sales to Ultimate Customers: total and residential sales and customers",
+              "url": "https://www.eia.gov/electricity/data/eia861/"
+            }
+          ]
+        },
+        "datasets": [
+          {
+            "id": "pudl-ferc714"
+          },
+          {
+            "id": "eia-861"
+          }
+        ],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A size comparison, not a study of whether the grid can serve the load."
+      }
+    }
+  ]
+}

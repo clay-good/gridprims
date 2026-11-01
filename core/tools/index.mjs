@@ -31,6 +31,10 @@ import loadShift from './carbon.load-shift.estimate/manifest.mjs';
 import * as loadShiftImpl from './carbon.load-shift.estimate/tool.mjs';
 import weatherChange from './weather.change.explain/manifest.mjs';
 import * as weatherChangeImpl from './weather.change.explain/tool.mjs';
+import takeOrPay from './grid.large-load.take-or-pay/manifest.mjs';
+import * as takeOrPayImpl from './grid.large-load.take-or-pay/tool.mjs';
+import largeLoadContext from './grid.large-load.context/manifest.mjs';
+import * as largeLoadContextImpl from './grid.large-load.context/tool.mjs';
 
 export const TOOLS = [
   { manifest: energyUnitsConvert, impl: energyUnitsConvertImpl },
@@ -48,6 +52,8 @@ export const TOOLS = [
   { manifest: usageBenchmark, impl: usageBenchmarkImpl },
   { manifest: loadShift, impl: loadShiftImpl },
   { manifest: weatherChange, impl: weatherChangeImpl },
+  { manifest: takeOrPay, impl: takeOrPayImpl },
+  { manifest: largeLoadContext, impl: largeLoadContextImpl },
 ];
 
 /** @param {string} id */

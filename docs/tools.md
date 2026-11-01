@@ -533,3 +533,75 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 - Bills give a looser answer than interval data; a change under 5%, or inside the model's band, is not a finding.
 - The use part is what the weather does not explain; this tool never says what caused it.
 - The station is the nearest first-order NOAA station, which may differ from your home in elevation or exposure.
+
+## Large-load minimum bill and exit fee (`grid.large-load.take-or-pay`)
+
+What a very large customer pays under a minimum-bill tariff if its load arrives late, runs below contract, or leaves early, year by year.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Contract demand | `contractMw` | MW | 0.1 to 20000 | 100 |
+| Minimum and rate for each demand charge | `components` |  |  | generation: 60% at $10/kW-month |
+| Capacity in force by year | `ramp` |  |  | 100 |
+| Expected billing demand by year | `actual` |  |  | 100, 40 |
+| Contract term | `years` | years | 1 to 40 | 2 |
+| Prior-peak ratchet | `ratchetPct` | % | 0 to 100 | 0 |
+| Exit fee | `exitRule` |  |  | none |
+| Leave at the end of year | `exitYear` | year | 0 to 40 | 0 |
+| Year to show | `reportYear` | year | 1 to 40 | 2 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Minimum billing demand in the year shown | `minimumKw` | kW | 0 decimals |
+| Payment for unused capacity in the year shown | `unusedYear` | $ | 0 decimals |
+| Payment for unused capacity over the term | `unusedTotal` | $ | 0 decimals |
+| Minimum bills over the term | `minimumTotal` | $ | 0 decimals |
+| Exit fee | `exitFee` | $ | 0 decimals |
+
+**Method.** For each contract year: capacity in force = contract demand × the ramp percent. For each charge, the minimum billing demand is the formula on that capacity (a flat percent, or a base plus a percent above a threshold, capped at a percent of capacity), raised to the ratchet percent of the prior year's billing demand if that is larger. Billed demand is the greater of expected demand and the minimum. Minimum bill = minimum demand × rate × 12; unused-capacity payment = (billed − expected) × rate × 12. The exit fee at the end of a year is the minimum bills for the remaining years, or the stated months of that year's minimum bill.
+
+**Sources.**
+
+- AEP Ohio, Data Center Tariff (filed under PUCO Case No. 24-0508-EL-ATA, order 2025-07-09, effective 2025-07-23), tariff page as checked 2026-10-29, minimum demand: the greater of 85% of the highest billing demand in the past 11 months, or 15,000 kW + 85% above 25,000 kW (25 to 75 MW) or 57,500 kW + 100% above 75,000 kW (over 75 MW), capped at 85% of contract; ramp of at most 4 years at 50/65/80/90%; exit fee of 36 months of minimums (https://www.aepohio.com/company/about/rates/data-center-tariff)
+- Virginia State Corporation Commission, Final Order, Case No. PUR-2025-00058 (Dominion Energy Virginia, rate schedule GS-5), 2025-11-25, GS-5 minimum demand: 85% of contracted demand for distribution and transmission, 60% for generation; 14-year term (https://npr.brightspotcdn.com/b6/ac/706130b64d2b8eee6a9832b97e48/20251125-virginiascc-dominionenergyruling.pdf)
+
+**Known limits.**
+
+- Demand charges only: energy charges, riders, and collateral are not included.
+- One rate per charge for the whole term.
+- The ratchet uses the prior year's billing demand as the 11-month lookback.
+
+## How big is this large-load request? (`grid.large-load.context`)
+
+A requested load, such as a data center, beside the utility that would serve it: its share of the utility's peak and annual sales, and how many average homes use the same energy.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Requested load | `requestMw` | MW | 0.1 to 100000 | 300 |
+| Load factor | `loadFactor` | % | 1 to 100 | 80 |
+| Utility's annual peak demand | `peakMw` | MW | 0 to 1000000 | 1500 |
+| Utility's annual retail sales | `salesMwh` | MWh | 1 to 10000000000 | 7000000 |
+| Utility's average residential use | `residentialKwh` | kWh a year | 100 to 100000 | 12000 |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Share of the utility's peak | `peakShare` | % | 1 decimals |
+| Annual energy | `energyMwh` | MWh | 0 decimals |
+| Share of the utility's annual sales | `salesShare` | % | 1 decimals |
+| Average homes using the same energy | `homes` | homes | 4 significant figures |
+
+**Method.** Share of peak = requested MW ÷ the utility's annual peak. Annual energy = requested MW × load factor × 8,760 hours. Share of sales = annual energy ÷ the utility's annual retail sales. Homes = annual energy ÷ the utility's average residential use per customer.
+
+**Sources.**
+
+- FERC Form 714, Annual Electric Balancing Authority Area and Planning Area Report, via PUDL, PUDL v2026.10.0, planning area annual peak demand (https://catalystcoop-pudl.readthedocs.io/en/latest/data_sources/ferc714.html)
+- U.S. Energy Information Administration, Form EIA-861, 2025 data, Sales to Ultimate Customers: total and residential sales and customers (https://www.eia.gov/electricity/data/eia861/)
+
+**Known limits.**
+
+- A utility's peak and sales come from different forms and may be from different years.
+- It says nothing about where the load connects or what the transmission system can carry.
