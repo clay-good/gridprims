@@ -187,6 +187,7 @@ export default {
     {
       name: 'stations',
       title: 'Weather stations: name, state, location, elevation, and period of record',
+      uses: ['station', 'state', 'name', 'lat', 'lon', 'elevation', 'first_year', 'last_year'],
       recipe: [
         { step: 'read-lines', files: ['stations', 'inventory'] },
         { step: 'normalize', module: 'ghcn-stations' },
@@ -199,6 +200,8 @@ export default {
     {
       name: 'daily',
       title: 'Daily maximum and minimum temperature by station, from 2019',
+      // What the weather tool's station picker reads.
+      uses: ['station', 'day', 'tmax', 'tmin', 'qflag_tmax', 'qflag_tmin'],
       recipe: [
         { step: 'read-lines', files: ['stations', ...STATIONS.map((id) => `h_${id}`)] },
         { step: 'normalize', module: 'ghcn-daily' },

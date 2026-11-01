@@ -52,6 +52,7 @@ import qfChecklist from '../data/curated/qf-checklist.mjs';
 import { buildLedger } from '../core/lib/ledger.mjs';
 import { ledgerDatasets } from './entities/ledger.mjs';
 import { LEDGER_PATH, ledgerPage } from './templates/ledger.mjs';
+import { diffPage, diffPath } from './templates/diff.mjs';
 import ledgerReplies from '../data/curated/ledger-replies.mjs';
 import regulators from '../data/curated/regulators.mjs';
 import { queueIndexPage, queuePath, queueStatePage } from './templates/queue.mjs';
@@ -192,6 +193,11 @@ export async function build(opts = {}) {
     const shas = Object.fromEntries(versions.map((v) => [v, sha256(readFileSync(join(ROOT, 'data', id, v, 'manifest.json')))]));
     write(`/data/${id}/`, datasetPage({ manifest: { ...JSON.parse(readFileSync(join(ROOT, 'data', id, version, 'manifest.json'), 'utf8')), cadence: entry.cadence }, i18n, posture, termsRow, takedown: entry.takedown, entry, shas,
       versions: versions.map((v) => JSON.parse(readFileSync(join(ROOT, 'data', id, v, 'manifest.json'), 'utf8'))) }));
+    // Each version's diff against the one before, kept for every version we hold.
+    for (const v of versions) {
+      const df = join(ROOT, 'data', id, v, 'diff.json');
+      if (existsSync(df)) write(diffPath(id, v), diffPage({ diff: JSON.parse(readFileSync(df, 'utf8')), entry, i18n }));
+    }
     // Under the link posture no values are published, so none of the dataset's files deploy.
     if (posture === 'link') rmSync(join(outDir, 'data', id), { recursive: true, force: true });
   }

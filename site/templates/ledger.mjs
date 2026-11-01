@@ -18,7 +18,7 @@ export function ledgerPage({ ledger: L, i18n }) {
   const row = (r) => html`<tr id="${r.id}" data-ledger-row="${r.status}">
     <th scope="row">${r.title}<br><span class="mono">${r.id}</span>${r.ours ? html` <span class="warning-chip">${t('ledger.ours')}</span>` : ''}</th>
     <td>${r.publisher}</td>
-    <td>${r.vintage}<br><span class="unit-hint">${t('ledger.asOf', { date: date(r.asOf) })}</span></td>
+    <td>${r.vintage}<br><span class="unit-hint">${t('ledger.asOf', { date: date(r.asOf) })}</span>${r.diff ? html`<br><a href="${r.diff}">${t('diff.link')}</a>` : ''}</td>
     <td>${r.status === 'discontinued' ? '' : html`${date(r.due)}<br><span class="unit-hint">${r.basis}</span>`}</td>
     <td><strong>${status(r)}</strong>${r.status !== 'discontinued' && r.status !== 'late' ? html` <span class="warning-chip" data-late-from="${r.lateFrom}" hidden>${t('ledger.status.late')}</span>` : ''}
       ${r.status === 'discontinued' ? html`<br>${r.discontinued.notice ? html`<a href="${r.discontinued.notice}">${t('ledger.notice')}</a>` : ''}${r.discontinued.successor ? html` · ${t('ledger.successor', { name: r.discontinued.successor })}` : ''}` : ''}</td>
@@ -26,6 +26,7 @@ export function ledgerPage({ ledger: L, i18n }) {
       ${r.moved ? html`<br><span class="unit-hint">${t('ledger.moved', { from: r.moved.from, to: r.moved.to, date: r.moved.date })}</span>` : ''}</td>
     <td>${r.archive ? html`<a href="${r.archive}">${t('ledger.archive')}</a>` : html`<span class="unit-hint">${t('ledger.noArchive')}</span>`}</td>
   </tr>
+  ${r.pinned ? html`<tr><td colspan="7" data-ledger-pinned>${t('ledger.pinned', { held: r.pinned.held, attempted: r.pinned.attempted, what: r.pinned.breaking.map((b) => `${b.table}${b.column ? `.${b.column}` : ''} ${b.change}`).join('; ') })}</td></tr>` : ''}
   ${r.promiseHistory.length ? html`<tr><td colspan="7" data-ledger-promises><strong>${t('ledger.promiseChanged')}</strong><ul>${r.promiseHistory.map((p) => html`<li>${t('ledger.promiseSeen', { date: date(p.seen), text: p.text ?? t('ledger.promiseNone') })}${p.archive ? html` <a href="${p.archive}">${t('ledger.archive')}</a>` : ''}</li>`)}</ul></td></tr>` : ''}
   ${r.replies.map((x) => html`<tr><td colspan="7" data-ledger-reply><strong>${t('ledger.reply', { from: x.from, date: date(x.date) })}</strong> ${x.text}</td></tr>`)}`;
   const body = html`<h1>${t('ledger.title')}</h1>

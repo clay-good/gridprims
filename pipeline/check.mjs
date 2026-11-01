@@ -120,6 +120,7 @@ async function checkRelease({ dataset, entry: given, outDir = join(ROOT, 'data')
     if (!r.ok) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: r.failures.join('; ') };
     // Re-running on unchanged input reproduces the same files, so this is a refresh only when something changed.
     const same = manifest && manifest.version === r.version && JSON.stringify(manifest.tables) === JSON.stringify(r.manifest.tables);
+    if (r.pinned) return { id: dataset, checked: true, refreshed: false, version: r.version, posture, terms: termsRow, pinned: r.pinned };
     return { id: dataset, checked: true, refreshed: !same, version: r.version, posture, terms: termsRow, found: target.why, raw: same ? undefined : { name: r.manifest.raw[0].name, bytes: input, version: r.version } };
   } catch (e) {
     return { id: dataset, checked: false, refreshed: false, version: manifest?.version, failure: `check failed: ${e.message}` };
@@ -141,6 +142,7 @@ async function checkRolling({ dataset, entry, outDir, f, today, manifest }) {
       const vintage = { asOf: asOfOf(found.lastModified, today), files: Object.fromEntries(Object.entries(latest.files).map(([k, file]) => [k, { ...file, sha256: null }])) };
       const r = await runRecipe({ dataset, year: month, retrieved: today, outDir, entry, vintage });
       if (!r.ok) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: r.failures.join('; ') };
+      if (r.pinned) return { id: dataset, checked: true, refreshed: false, version: r.version, pinned: r.pinned };
       return { id: dataset, checked: true, refreshed: true, version: r.version, found: `monthly refresh ${month}` };
     }
     const res = await f(url);
@@ -149,6 +151,7 @@ async function checkRolling({ dataset, entry, outDir, f, today, manifest }) {
     const vintage = { url, asOf: asOfOf(found.lastModified, today), sha256: null };
     const r = await runRecipe({ dataset, year: month, input, retrieved: today, outDir, entry, vintage, upstream: found });
     if (!r.ok) return { id: dataset, checked: true, refreshed: false, version: manifest?.version, failure: r.failures.join('; ') };
+    if (r.pinned) return { id: dataset, checked: true, refreshed: false, version: r.version, pinned: r.pinned };
     return { id: dataset, checked: true, refreshed: true, version: r.version, found: `monthly refresh ${month}`, raw: { name: r.manifest.raw[0].name, bytes: input, version: r.version } };
   } catch (e) {
     return { id: dataset, checked: false, refreshed: false, version: manifest?.version, failure: `check failed: ${e.message}` };

@@ -139,6 +139,8 @@ export default {
       // EIA rebuilds every year's file daily, so each version compares every year with the one before
       // and counts the hours revised in each, with their range (spec carbon/hourly-intensity-data).
       changelog: { by: 'year', span: 'hour', spanFormat: 'hour' },
+      // What the carbon tools, region pages, and the grid pulse read: a breaking change to one pins the dataset.
+      uses: ['ba', 'year', 'hour', 'demand', 'interchange', 'net_generation', 'intensity_consumed', 'intensity_generated', ...['col', 'ng', 'nuc', 'oil', 'geo', 'wat', 'ps', 'sun', 'snb', 'wnd', 'wnb', 'bat', 'oes', 'ues', 'oth', 'unk'].map((f) => `gen_${f}`)],
       recipe: [
         { step: 'read-xlsx', files: REGIONS, sheet: 'Published Hourly Data' },
         { step: 'normalize', module: 'eia-930-hourly' },

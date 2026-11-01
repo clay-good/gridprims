@@ -42,6 +42,7 @@ export function limitsRecord(r) {
       automation: { stalled, note: stalled.length ? 'Some scheduled jobs are stalled: data may be as old as their last successful run.' : null },
       lateDatasets: late,
       failingDatasets: (health?.datasets ?? []).filter((d) => d.failure).map((d) => ({ id: d.id, since: d.failure.since, reason: d.failure.reason })),
+      pinnedDatasets: (health?.datasets ?? []).filter((d) => d.pinned).map((d) => ({ id: d.id, held: d.pinned.held, attempted: d.pinned.attempted, breaking: d.pinned.breaking })),
       postureLimited: (health?.datasets ?? []).filter((d) => d.terms && d.terms.posture !== 'mirror').map((d) => ({ id: d.id, posture: d.terms.posture, termsChanged: d.terms.changed })),
       corrections: { populated: false, note: 'The corrections log is not yet populated; add-trust-and-continuity fills it.' },
       referenceEngineGaps: { populated: false, note: 'The tariff conformance suite will list the charge types its reference engines cannot check.' },

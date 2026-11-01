@@ -21,6 +21,7 @@ export async function ledgerDatasets(root) {
     out.push({
       id: e.id, title: e.shortTitle ?? e.title, publisher: e.publisher, sourceUrl: e.sourceUrl, cadence: e.cadence, asOf: m.asOf,
       vintage: m.release ?? m.tables[0]?.dataPeriod ?? m.version, archive: m.raw?.find((r) => r.release)?.release ?? null,
+      diff: m.previousVersion ? `/data/${e.id}/${m.version}/diff/` : null,
       ...(e.discontinued ? { discontinued: e.discontinued } : {}), ...(e.moved ? { moved: e.moved } : {}),
     });
   }

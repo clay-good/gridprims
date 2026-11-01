@@ -155,6 +155,7 @@ ${health ? healthSection(health, i18n) : ''}
 <h3>${t('limits.lateDatasets')}</h3>
 ${L.problems.lateDatasets.length ? html`<ul>${L.problems.lateDatasets.map((d) => html`<li>${t('limits.lateLine', { title: d.title, due: date(d.due), posted: d.posted ? t('limits.posted') : t('limits.inferred'), days: d.daysLate })}</li>`)}</ul>` : html`<p>${t('limits.lateNone')}</p>`}
 ${L.problems.failingDatasets.length ? '' : html`<p>${t('limits.failingNone')}</p>`}
+${(L.problems.pinnedDatasets ?? []).map((d) => html`<p data-limits-pinned>${t('limits.pinnedLine', { id: d.id, held: d.held, attempted: d.attempted, what: d.breaking.map((b) => `${b.table}${b.column ? `.${b.column}` : ''} ${b.change}`).join('; ') })}</p>`)}
 ${L.problems.postureLimited.map((d) => html`<p>${t('limits.postureLine', { id: d.id, posture: d.posture, changed: d.termsChanged ? t('limits.postureChanged') : '' })}</p>`)}
 <p><strong>${t('limits.notPopulated')}:</strong> ${L.problems.corrections.note}</p>
 <p><strong>${t('limits.notPopulated')}:</strong> ${L.problems.referenceEngineGaps.note}</p>

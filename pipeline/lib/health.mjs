@@ -51,6 +51,8 @@ export function recordRun(root, run) {
       terms: d.terms ?? prev?.terms ?? null,
       // A failure keeps the date it first appeared until a run succeeds.
       failure: d.failure ? { reason: d.failure, since: prev?.failure?.since ?? run.finished, last: run.finished } : null,
+      // Held on a version after a breaking upstream change; a later successful check clears it.
+      pinned: d.pinned ?? (d.checked ? null : prev?.pinned ?? null),
       // The publisher's posted release date as each check read it, a new entry only when its text changes.
       releasePromises: d.releasePromise && d.releasePromise.text !== prev?.releasePromises?.at(-1)?.text
         ? [...(prev?.releasePromises ?? []), { seen: run.finished.slice(0, 10), text: d.releasePromise.text, ...(d.releasePromise.archive ? { archive: d.releasePromise.archive } : {}) }]

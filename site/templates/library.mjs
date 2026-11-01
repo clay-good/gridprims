@@ -60,7 +60,7 @@ ${tb.changes?.by?.length ? html`<ul data-revised-by>${tb.changes.by.map((g) => h
     versions: html`<section><h2>${t('library.versions')}</h2>
 <div class="table-wrap"><table><caption>${t('library.versions')}</caption>
 <thead><tr><th scope="col">${t('library.version')}</th><th scope="col">${t('library.period')}</th><th scope="col">${t('library.retrieved')}</th><th scope="col">${t('library.manifest')}</th></tr></thead>
-<tbody>${versions.map((v) => html`<tr><th scope="row">${v.version}${v.version === m.version ? html` <span class="unit-hint">${t('library.current')}</span>` : ''}</th><td>${periods(v)}</td><td>${date(v.retrieved)}</td><td class="mono"><a href="/data/${m.dataset}/${v.version}/manifest.json">${t('library.manifestFile')}</a> ${shas[v.version]}</td></tr>`)}</tbody>
+<tbody>${versions.map((v) => html`<tr><th scope="row">${v.version}${v.version === m.version ? html` <span class="unit-hint">${t('library.current')}</span>` : ''}</th><td>${periods(v)}</td><td>${date(v.retrieved)}</td><td class="mono"><a href="/data/${m.dataset}/${v.version}/manifest.json">${t('library.manifestFile')}</a> ${shas[v.version]}${v.previousVersion ? html`<br><a href="/data/${m.dataset}/${v.version}/diff/">${t('diff.link')}</a>` : ''}</td></tr>`)}</tbody>
 </table></div></section>`,
   };
 }

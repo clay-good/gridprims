@@ -56,12 +56,14 @@ export function ledgerRow(d, { health, replies = [], now }) {
     url: d.sourceUrl,
     urlCheck: link ? { status: link.status, state: link.state, checked: link.checked ?? health?.generatedAt ?? null, ...(link.finalUrl ? { movedTo: link.finalUrl } : {}) } : null,
     archive: d.archive ?? null,
+    diff: d.diff ?? null,
     ...(d.discontinued ? { discontinued: d.discontinued } : {}),
     ...(d.moved ? { moved: d.moved } : {}),
     // A posted release date that changed or vanished: every version we saw, with its date, and no cause.
     promiseHistory: promises.length > 1 ? promises : [],
     replies: replies.filter((r) => r.dataset === d.id),
     lastRefresh: h?.lastRefresh ?? null, lastCheck: h?.lastCheck ?? null,
+    pinned: h?.pinned ?? null,
   };
 }
 

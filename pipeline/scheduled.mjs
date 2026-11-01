@@ -57,6 +57,10 @@ export async function scheduledRun(workflowId, o = {}) {
     }
     delete r.raw;
     datasets.push(r);
+    // A breaking upstream change pins this dataset only: an issue names the columns and what reads them.
+    if (r.pinned && host.available) {
+      try { await host.openIssue(`Data: ${id} pinned to ${r.pinned.held} after a breaking change`, `The ${r.pinned.attempted} version changed what pages or tools read, so ${id} stays on ${r.pinned.held}:\n${r.pinned.breaking.map((b) => `- ${b.table}${b.column ? `.${b.column}` : ''}: ${b.change}`).join('\n')}\n\nThe new version is kept in data/${id}/${r.pinned.attempted}/ with its diff. Update what reads these columns, and the next scheduled run unpins it.`); } catch (e) { notes.push(`could not open the pin issue for ${id}: ${e.message}`); }
+    }
     if (r.failure && host.available) {
       try { await host.openIssue(`Pipeline: ${id} refresh failed`, `The scheduled check of ${id} failed on ${started.slice(0, 10)}. The previous version stays live.\n\n\`\`\`\n${r.failure}\n\`\`\`\n\nThis issue was opened by pipeline/scheduled.mjs; it closes nothing and blocks nothing.`); } catch (e) { notes.push(`could not open an issue for ${id}: ${e.message}`); }
     }

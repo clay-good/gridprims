@@ -103,7 +103,11 @@ test('a new version\'s changelog counts added, removed, and changed rows by key,
   assert.equal(next.ok, true, next.failures?.join('\n'));
   assert.equal(next.manifest.previousVersion, '2026-10');
   const gens = next.manifest.tables.find((t) => t.name === 'generators').changes;
-  assert.deepEqual({ ...gens, largest: gens.largest.slice(0, 1) }, { from: '2026-10', added: 1, removed: 1, changed: 1, largest: [{ key: '9|1|operable', from: 86.9, to: 120 }] });
+  const { revisions, ...rest } = gens;
+  assert.deepEqual({ ...rest, largest: rest.largest.slice(0, 1) }, { from: '2026-10', added: 1, removed: 1, changed: 1, largest: [{ key: '9|1|operable', from: 86.9, to: 120 }] });
+  // How far the revised capacity moved: one value, by 33.1 MW.
+  assert.equal(revisions.count, 1);
+  assert.ok(Math.abs(revisions.max - 33.1) < 1e-9);
   // A re-run in the same month replaces the version but keeps comparing with the one before.
   const again = await run({ outDir: out, retrieved: '2026-11-30', input: eia860Zip({ generators: g }) });
   assert.equal(again.manifest.tables.find((t) => t.name === 'generators').changes.from, '2026-10');

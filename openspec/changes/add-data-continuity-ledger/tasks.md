@@ -13,11 +13,11 @@
 
 ## 2. Snapshot diffs (phase 1, from the foundation's release process)
 
-- [ ] 2.1 Publish per-version diffs of files, columns, row counts, and keyed row changes; verify the column-dropped and largest-changes scenarios
-- [ ] 2.2 Implement revision reporting with magnitude distributions and neutral wording; verify the history-revised and neutral-wording scenarios
-- [ ] 2.3 Keep every version's diff at a stable URL linked from the library and the ledger; verify the historical-diff scenario
-- [ ] 2.4 On a breaking change to a depended-on column or unit, pin the dataset to its last good snapshot, publish with that pin shown, and open an issue, without failing the build or blocking other datasets or the deploy; verify the breaking-change scenario
-- [ ] 2.5 Publish diffs as JSON with both versions and checksums; verify the diff-JSON scenario
+- [x] 2.1 Publish per-version diffs of files, columns, row counts, and keyed row changes; verify the column-dropped and largest-changes scenarios
+- [x] 2.2 Implement revision reporting with magnitude distributions and neutral wording; verify the history-revised and neutral-wording scenarios
+- [x] 2.3 Keep every version's diff at a stable URL linked from the library and the ledger; verify the historical-diff scenario
+- [x] 2.4 On a breaking change to a depended-on column or unit, pin the dataset to its last good snapshot, publish with that pin shown, and open an issue, without failing the build or blocking other datasets or the deploy; verify the breaking-change scenario
+- [x] 2.5 Publish diffs as JSON with both versions and checksums; verify the diff-JSON scenario
 
 ## 3. Consistency checks
 
@@ -31,6 +31,6 @@
 
 ## 4. Surfaces
 
-- [ ] 4.1 Add ledger rows and diff history to each data library page; verify they match the ledger
+- [x] 4.1 Add ledger rows and diff history to each data library page; verify they match the ledger
 - [ ] 4.2 Feed the limits page's staleness and known-problem rows from the ledger; verify the late-dataset scenario there
 - [ ] 4.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green

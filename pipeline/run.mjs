@@ -16,6 +16,7 @@ import { readParquet } from '../parsers/parquet.mjs';
 import { decodeText, parseDelimited } from '../parsers/delimited.mjs';
 import { writeShard } from './lib/shard-writer.mjs';
 import { readShard } from '../core/lib/shard.mjs';
+import { breakingChanges, diffManifests, magnitudes } from '../core/lib/snapshot-diff.mjs';
 import { postureOf, validateEntry } from './lib/registry.mjs';
 import { tableLicense } from './lib/licenses.mjs';
 import { ceiiScreen } from './lib/ceii.mjs';
@@ -81,6 +82,8 @@ export function changesFrom(rows, before, key, changelog = {}) {
   }
   for (const [id, o] of old) if (!now.has(id)) note(o, 'removed');
   const out = { added: [...now.keys()].filter((id) => !old.has(id)).length, removed: [...old.keys()].filter((id) => !now.has(id)).length, changed };
+  // How far the principal measure moved where it was revised, and the periods those rows cover.
+  if (column) out.revisions = { ...(magnitudes(deltas.filter((d) => typeof d.from === 'number' && typeof d.to === 'number').map((d) => d.to - d.from)) ?? { count: 0 }), ...(changelog.period ? { periods: [...new Set([...now.entries()].filter(([id]) => deltas.some((d) => d.key === id)).map(([, r]) => r[changelog.period]))].sort() } : {}) };
   if (column) out.largest = deltas.sort((a, b) => Math.abs((b.to ?? 0) - (b.from ?? 0)) - Math.abs((a.to ?? 0) - (a.from ?? 0)) || (a.key < b.key ? -1 : 1)).slice(0, 5);
   if (by) {
     // Hours since 1970 read better as UTC hour starts.
@@ -394,6 +397,16 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     tables,
   };
   writeFileSync(join(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
+  // What changed since the version before, kept beside this one for good (snapshot-diffs).
+  let breaking = [];
+  if (baseManifest) {
+    const diff = diffManifests(baseManifest, manifest);
+    writeFileSync(join(dir, 'diff.json'), JSON.stringify(diff, null, 2) + '\n');
+    breaking = breakingChanges(diff, Object.fromEntries(entry.tables.map((t) => [t.name, t.uses ?? []])));
+  }
+  // A column a page or tool reads was removed, renamed, or changed in unit: this dataset stays on the
+  // version it served, the new one is kept for inspection, and nothing else stops.
+  if (breaking.length && previous && previous.version !== version) return { ok: true, version: previous.version, manifest: previous, pinned: { held: previous.version, attempted: version, breaking } };
   writeFileSync(currentPath, JSON.stringify({ dataset, version }, null, 2) + '\n');
   return { ok: true, version, manifest };
 }
