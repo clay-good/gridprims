@@ -1,6 +1,6 @@
 ---
 name: gridprims
-description: The US power grid's math, files, and public data in one free tab. Every number engraved on a plate with its rating basis.
+description: Where new load or generation can connect to the US grid, how much, and how long it takes. Every number engraved on a plate with its rating basis.
 colors:
   # Light theme, the default. These are the normative values; the night column
   # lives in "## Colors" because it is a second set of values for the same tokens.
@@ -384,7 +384,7 @@ The ramp is fixed rem steps, not fluid type. It is denser than a conventional sc
 
 ## Layout
 
-- **Shell.** Dark top rail (min 52px, 56px of content): wordmark, six sections (Home, Bills, Data, Carbon, Grid, Learn), the optional grid pulse, theme toggle pinned right. Directly beneath it the command bar on `bg` with a 1px bottom rule, then `main`, then a hairline-topped footer.
+- **Shell.** Dark top rail (min 52px, 56px of content): wordmark, then a one-line description of what the site answers, the optional grid pulse, theme toggle pinned right. There are no section tabs; breadth is reached through the command bar and the footer's All tools card. On the home page the command bar moves out of the rail and sits centred under the hero; on every other page it stays directly beneath the rail on `bg` with a 1px bottom rule. Then `main`, then a hairline-topped footer of cards.
 - **Container.** `.wrap` is max 1200px centred with `--s4` side padding; `main` carries `--s7` of bottom padding.
 - **Rhythm.** Spacing comes only from `--s1`…`--s8` (4, 8, 12, 16, 24, 32, 48, 64px). Headings take `--s6` above and `--s3` below; a panel's first heading loses its top margin.
 - **Breakpoints, as the stylesheet actually sets them.** 480px (receipt rows collapse to one column), 719/720px (the phone first-screen block and the three-column ruled lane), 767/768px (the rail folds into a menu, the grid pulse appears, the plate number steps to 4.25rem, home lanes go two-up), 900px (the home proof becomes a plate-plus-figures grid). Must hold at 320px with no sideways scroll; wide tables pan inside `.table-wrap`.
@@ -451,7 +451,10 @@ White, 1px `line`, field radius, `--s4` padding, `--s4` vertical margin; a `deta
 Two renditions of one component. Standalone (catalog, states index): white card, `line` border, field radius, `--s4` padding, border turns `field-border` on hover. In a home lane: no card at all — a ruled row with a bottom hairline, name at title size, question in `muted` body-small, what-you-need and as-of right-aligned at 0.75rem, hover tints the row `panel-hover`. The PREVIEW mark is a stamp on the cell (raise field, `work-zone-text`, `line` border, stamp metrics), not a line of body text above the name.
 
 ### Top Rail and Command Bar
-The rail is a `guide` field with a `guide-active` bottom rule and white legends; navigation items sit at note size and 0.82 opacity, full opacity on hover, and the current section is the rail's only orange: full opacity, 600 weight, and a 2px `signal` bottom border. Below 768px with script, the list folds behind a bordered Menu button; without script the list simply stays open. The theme toggle is a bordered ghost button pinned right, uppercase at 0.75rem. The command bar sits on `bg` with a hairline under it: an engraved label (visually hidden below 720px), a mono combobox input, and a results listbox on a white panel with the overlay shadow, selected and hovered rows on `panel-hover`.
+The rail is a `guide` field with a `guide-active` bottom rule and white legends. Beside the wordmark sits one line of description at note size and 0.82 opacity, hidden below 720px where the wordmark stands alone. The theme toggle is a bordered ghost button pinned right, uppercase at 0.75rem, carrying the name of the theme it switches to. The command bar is a mono combobox with an engraved label (visually hidden below 720px) and a results listbox on a white panel with the overlay shadow, selected and hovered rows on `panel-hover`; beneath the rail it sits on `bg` with a hairline under it, and on the home page it is centred under the hero at up to 40rem with its examples listed under it.
+
+### Footer Cards
+The footer is a hairline-topped band of four equal cards, not a list of links: All tools, GitHub, Privacy and about, and the maintainer's credit linking to claygood.com. Each card is a `panel` surface with a `line` border, field radius, a title at note size and a line of `muted` body-small under it; the whole card is the link target, and hover takes `panel-hover`. They sit one per row below 480px, two up to 768px, and four above it. Under the cards the licence and privacy lines stay as plain `muted` body-small, because they are statements rather than destinations.
 
 ### Charts
 SVG on a white panel with a `line` border and field radius. Grid lines in `line` at 1px; axis text 11px mono in `muted`; series at 2px with `vector-effect: non-scaling-stroke`; measured in graphite, what-if in signal, comparison in `service` dashed 6/4; heat cells from the six-step ramp; the highlighted point is a `series-measured` dot ringed in `panel`. Every chart carries a caption in `muted` body-small.

@@ -12,25 +12,29 @@ Plain JavaScript ES modules with JSDoc, web platform APIs, and Node.js built-ins
 
 ## Users
 
-Two doors, one product:
+One lead question, then everything else:
 
-- **Households** (about 143M residential customers): "Is my bill normal? Which plan is cheapest for how I use power? Who is my utility? When is the grid cleanest?" Usually on a phone, often with only monthly bill totals. Confirmed 2026-10-29 as a first-class launch audience.
-- **Professionals**: facility and fleet managers, co-op and municipal utility engineers, solar and storage developers, data center siting teams, city and utility commission staff, ratepayer advocates, reporters, and students. Usually at a desk with a meter export, a bill PDF, and a spreadsheet; sometimes preparing for a meeting or deadline.
+- **People siting load or generation** (lead audience, confirmed 2026-11-01): data center and manufacturing siting teams, solar and storage developers, fleet and facility electrification planners, co-op and municipal utility engineers, economic development staff, commission staff, and reporters covering load growth. Their question is "where can this connect, how much, and how long will it take?" They arrive with a place and a size, not a file.
+- **Everyone else the same data serves**: facility and fleet managers, ratepayer advocates, students, and households (about 143M residential customers) asking "is my bill normal? which plan is cheapest? who is my utility?" These keep every tool already built, reached through the search bar and the tool catalog rather than the front page.
 
 ## Product Purpose
 
-The US power grid's math, files, and public data in one free tab. Drop a meter file and get peaks, a line-by-line bill, cheaper rates, coincident-peak exposure, hourly emissions, and a battery and solar screen in under a second, without uploading anything. Read one cited, dated page for every utility, plant, and grid region. Developers get the same tools offline through a local MCP server.
+Answer, from public data alone, where new load or generation can connect to the US grid, how much, and how long it is likely to take. Give a place and a size and get the utility and balancing authority that would serve it, that size against the utility's own peak and sales, what is already queued nearby, how long those projects have taken, how many withdrew, and which federal interconnection process applies, every figure cited and dated.
 
-Success: people cite gridprims numbers in bills disputes, rate cases, council meetings, news stories, and coursework, and come back.
+Behind that one question sits everything else already built: meter-file analysis, bill and tariff pricing, coincident peaks, hourly emissions, battery and solar screens, household bill checks, and a cited page for every utility, plant, and grid region. They are reached through the search bar and the tool catalog, not the front page. Developers get the same tools offline through a local MCP server.
+
+Success: people cite gridprims numbers in siting decisions, interconnection filings, rate cases, council meetings, and news stories, and come back.
 
 ## Positioning
 
-Nobody free answers "what is my own meter data and bill actually saying, and is the number right?" privately and with sources. gridprims computes on the device, shows its work and the as-of date of every number, and keeps a versioned public copy of federal grid data as it gets harder to find. It hands off to REopt, Interconnection.fyi, GridStatus, and roughlogic.com rather than rebuilding them.
+Nobody free assembles the public record into one answer to "where can this connect, how much, and how long?" The inputs exist and are public (LBNL's queue data, FERC Form 714 peaks, EIA-861 territories and sales, the federal interconnection procedures), but they sit in separate files that each take a day to join. We join them, by place and by size, and say plainly where the public record runs out: feeder and substation headroom is CEII, so we answer at utility, balancing-authority, and county level and never at the parcel.
+
+We also answer, privately and with sources, "what is my own meter data and bill actually saying, and is the number right?" gridprims computes on the device, shows its work and the as-of date of every number, and keeps a versioned public copy of federal grid data as it gets harder to find. It hands off to REopt, Interconnection.fyi, GridStatus, and roughlogic.com rather than rebuilding them.
 
 ## Operating Context
 
-- Inputs people already have: Green Button XML or CSV exports, utility interval CSVs, Excel workbooks, monthly bill totals, a ZIP code.
-- Outputs people take away: a copied result card, a one-page printed report, a CSV export for REopt, a citation, a factual public-comment draft.
+- Inputs people already have: a place and a size (a ZIP or county, and a load or project in MW) for the lead question; Green Button XML or CSV exports, utility interval CSVs, Excel workbooks, monthly bill totals for everything else.
+- Outputs people take away: a cited siting read-out they can paste into a memo or a filing, a copied result card, a one-page printed report, a CSV export for REopt, a citation, a factual public-comment draft.
 - Settings: office desks in daylight, phones on the go, projectors in hearing rooms, printed handouts.
 
 ## Capabilities and Constraints
@@ -62,6 +66,8 @@ Nobody free answers "what is my own meter data and bill actually saying, and is 
 4. Honest about limits: say what is excluded, approximate, or stale, and publish our own error where we can measure it.
 5. Link, don't rebuild.
 6. Stay small on the surface. Capability grows behind a search box and a catalog; the page a visitor lands on does not.
+7. One front page, one question. The home page answers where new load or generation can connect, how much, and how long. Everything else is reached by asking for it.
+8. Say where the public record stops. Feeder and substation headroom is CEII; we answer at utility, balancing-authority, and county level and never pretend to parcel resolution.
 
 ## Accessibility & Inclusion
 
