@@ -1,0 +1,40 @@
+/* Part of the stylesheet. The build concatenates site.css, home.css and
+   responsive.css in that order into one served file; responsive.css is last
+   because its narrow-width rules narrow the rules above them. */
+/* The phone first screen (site/home-and-navigation): the proof keeps one real
+   number, and both lanes still start above the fold. Last in the file so these
+   win over the base rules they narrow. */
+@media (max-width: 719px) {
+  .proof { margin: var(--s2) 0 var(--s4); }
+  .proof > .legend { margin-bottom: var(--s1); }
+  /* One line that still carries a real measured number, so the lanes keep the first screen. */
+  .proof .sign { padding: var(--s2) var(--s3); border-radius: var(--r-field); display: flex; align-items: baseline; gap: var(--s2); flex-wrap: wrap; }
+  .proof .sign .label { margin: 0; }
+  .proof .sign .number { font-size: 1.5rem; }
+  .proof .sign .unit { margin-left: var(--s1); }
+  .proof .sign .sentence, .proof .figures { display: none; }
+  /* The basis stays: a measured number without its basis is the one thing this world refuses. */
+  .proof .sign .source-tab { margin: var(--s2) calc(-1 * var(--s3)) 0; padding: var(--s1) var(--s3); font-size: .625rem; }
+  /* On a phone the plate proves and the lanes navigate: the workbench has its own
+     cell in the work lane, so the plate's own button gives up the room to the basis. */
+  .proof-actions { display: none; }
+  .command .wrap { padding-top: var(--s2); padding-bottom: var(--s2); }
+  .proof { margin-bottom: var(--s3); }
+  .proof-actions .unit-hint { display: none; }
+  .home-title { font-size: 1.1875rem; line-height: 1.25; margin: var(--s3) auto var(--s2); }
+  .lane h2 { margin: var(--s3) 0 var(--s1); }
+  .lane .tool-cell { padding: var(--s2) var(--s2) var(--s1); }
+  .proof-title { margin-bottom: var(--s2); }
+  /* Both doors have to be reachable without scrolling, so they lose their padding, not their words. */
+  .doors { margin: var(--s3) 0 var(--s4); gap: var(--s3); }
+  .start-sub { font-size: .8125rem; margin-bottom: var(--s3); }
+  .start { margin: var(--s3) 0 var(--s4); }
+  .start-else { margin-top: var(--s2); font-size: .8125rem; }
+  .door { padding: var(--s3); }
+  .door h3 { font-size: 1.0625rem; margin-bottom: var(--s1); }
+  .door > p { margin-bottom: var(--s3); font-size: .9375rem; }
+  .door .button { padding: 12px 16px; font-size: .875rem; }
+  .door .unit-hint { margin-top: var(--s2); font-size: .75rem; }
+  .command label { position: absolute; left: -9999px; }
+}
+

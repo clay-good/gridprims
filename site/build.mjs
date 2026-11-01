@@ -57,7 +57,15 @@ import strings from './strings/en-US.mjs';
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 /** Folders the browser imports from, copied as-is: the same files the tests run. */
-const SHARED = ['core', 'parsers', 'site/lib', 'site/ui', 'site/pages', 'site/strings', 'site/samples', 'site/styles/site.css', 'site/cards', 'site/fonts'];
+const SHARED = ['core', 'parsers', 'site/lib', 'site/ui', 'site/pages', 'site/strings', 'site/samples', 'site/cards', 'site/fonts'];
+
+/**
+ * The stylesheet ships as one file built from three, in this order: the shell
+ * and components, then the home page, then every narrow-width and print rule.
+ * Responsive is last because its rules narrow the ones above them, and five
+ * edits were lost to that ordering when it all lived in one long file.
+ */
+const STYLE_PARTS = ['site/styles/site.css', 'site/styles/home.css', 'site/styles/responsive.css'];
 
 /** @param {string} s */
 export const sha256 = (s) => createHash('sha256').update(s).digest('hex');
@@ -71,6 +79,8 @@ export async function build(opts = {}) {
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(outDir, { recursive: true });
   for (const p of SHARED) cpSync(join(ROOT, p), join(outDir, p), { recursive: true, filter: (src) => !src.endsWith('README.md') });
+  mkdirSync(join(outDir, 'site/styles'), { recursive: true });
+  writeFileSync(join(outDir, 'site/styles/site.css'), STYLE_PARTS.map((f) => readFileSync(join(ROOT, f), 'utf8')).join('\n'));
   writeFileSync(join(outDir, 'site/styles/tokens.css'), tokensCss());
   // In the pseudo-locale the browser modules read pseudo strings too, so nothing re-renders in English.
   if (opts.pseudo) writeFileSync(join(outDir, 'site/strings/en-US.mjs'), `export default ${JSON.stringify(pseudoMessages(strings), null, 2)};\n`);

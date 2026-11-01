@@ -1,0 +1,47 @@
+/* Part of the stylesheet. The build concatenates site.css, home.css and
+   responsive.css in that order into one served file; responsive.css is last
+   because its narrow-width rules narrow the rules above them. */
+/* The doors: what a visitor can give this site, said before anything else. */
+.start-title { font-size: 1.0625rem; font-weight: 500; color: var(--muted); letter-spacing: 0; margin: 0 0 var(--s4); max-width: 60ch; }
+.start { margin: var(--s4) auto var(--s7); max-width: 46rem; text-align: center; }
+.start .door { background: none; border: 0; padding: 0; }
+.start .door h3 { display: none; }
+.start .door > p { margin-left: auto; margin-right: auto; }
+.start .door-form { justify-content: center; }
+.start-sub { margin: 0 0 var(--s5); color: var(--muted); font-size: .9375rem; }
+.start-title { font-weight: 400; }
+.start-else { margin: var(--s3) 0 0; color: var(--muted); font-size: .875rem; }
+.doors { margin: var(--s5) 0 var(--s7); display: grid; gap: var(--s4); }
+.door { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-sign); padding: var(--s5); }
+.door h3 { margin: 0 0 var(--s2); font-size: 1.25rem; letter-spacing: -0.015em; }
+.door > p { margin: 0 0 var(--s4); max-width: 44ch; }
+.door .unit-hint { margin: var(--s3) 0 0; color: var(--muted); font-size: .8125rem; }
+.door .button { font-size: .9375rem; padding: 14px 20px; }
+.door-form { display: flex; gap: var(--s2); align-items: flex-end; flex-wrap: wrap; margin: 0; }
+.door-form label { display: block; margin-bottom: var(--s1); }
+.door-form input { min-height: 48px; min-width: 8rem; flex: 1 1 8rem; padding: 10px 12px; border: 1px solid var(--field-border); border-radius: var(--r-field); background: var(--panel); color: var(--ink); font-size: 1rem; }
+.door-form .button { min-height: 48px; }
+.door-third { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: .875rem; }
+.proof-title { font-size: .9375rem; font-weight: 600; color: var(--muted); letter-spacing: 0; margin: 0 0 var(--s3); }
+@media (min-width: 760px) {
+  .doors { grid-template-columns: 1fr 1fr; align-items: start; }
+
+}
+
+/* The curve beside the plate. Two classes, so these beat the later .chart svg rules
+   whatever the order: three edits in this file have already been lost to that. */
+.proof .proof-chart { margin: var(--s4) 0 0; }
+.proof .proof-chart svg { height: 170px; border: 1px solid var(--line); border-radius: var(--r-field); background: var(--panel); }
+.proof .proof-chart .series { stroke-width: 1.5; }
+.proof .proof-chart figcaption { margin-top: var(--s2); }
+.proof .peak-mark { stroke: var(--signal); stroke-width: 1.5; stroke-dasharray: 4 3; vector-effect: non-scaling-stroke; }
+.proof .proof-table { margin: var(--s3) 0 0; padding: var(--s3); }
+.proof .proof-table table { margin-top: var(--s2); }
+
+/* The three supporting figures beside the plate. Written here, before the phone
+   block, because an edit anchored elsewhere has silently lost these twice. */
+.proof .figure { border-top: 1px solid var(--line); padding-top: var(--s2); }
+.proof .figure .legend { margin: 0 0 var(--s1); }
+.proof .figure-value { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums slashed-zero; }
+.proof .figure-unit { font-size: .8125rem; font-weight: 500; color: var(--muted); margin-left: var(--s2); letter-spacing: 0; }
+
