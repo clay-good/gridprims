@@ -43,7 +43,8 @@ function startDoors({ t }) {
   <div class="door">
     <h3>${t('home.start.file')}</h3>
     <p>${t('home.start.fileWhat')}</p>
-    <p><a class="button primary" href="/files/">${t('home.start.fileAction')}</a></p>
+    <p><a class="button primary" href="/files/" data-home-open>${t('home.start.fileAction')}</a>
+      <input type="file" hidden data-home-file aria-label="${t('home.start.fileAction')}" accept=".csv,.txt,.tsv,.xml,.xlsx,.zip"></p>
     <p class="unit-hint">${t('home.start.filePrivacy')}</p>
   </div>
   <p class="start-else">${t('home.start.elseNoFile')}
@@ -62,7 +63,7 @@ function proofPlate(p, { t, date }) {
   // A stepped line: demand holds across each hour rather than sloping between them.
   const steps = p.curve.flatMap((c, i) => [`${x(i)},${y(c.kw)}`, `${x(Math.min(23, i + 1))},${y(c.kw)}`]).join(' ');
   const hour = (h) => `${((h + 11) % 12) + 1} ${h < 12 ? 'am' : 'pm'}`;
-  return html`<section class="proof" aria-labelledby="proof-title">
+  return html`<section class="proof" data-proof aria-labelledby="proof-title">
   <h2 id="proof-title" class="proof-title">${t('home.proof.title')}</h2>
   <div class="answer"><div class="sign">
     <p class="label">${t('home.proof.peak')}</p>
@@ -103,7 +104,7 @@ export function homePage({ tools, i18n, exists, asOf, proof = null }) {
 ${startDoors(i18n)}
 ${proof ? proofPlate(proof, i18n) : ''}
 <p class="home-more"><a href="${CATALOG_PATH}">${t('home.allTools')}</a> · <a href="${LOOKUP_PATH}">${t('home.cell.find-utility')}</a></p>`;
-  return layout({ i18n, title: t('home.pageTitle'), description: t('site.tagline'), path: '/', body, section: 'home' });
+  return layout({ i18n, title: t('home.pageTitle'), description: t('site.tagline'), path: '/', body, modules: ['/site/pages/home.js'], section: 'home' });
 }
 
 /** Tools built as pages rather than manifests (the lookup and the workbench), with their sections. */
