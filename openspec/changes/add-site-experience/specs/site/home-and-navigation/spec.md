@@ -1,23 +1,43 @@
 ## Purpose
 
-Gets every visitor, a household on a phone or a professional at a desk, from the front door to the tool or page that answers their question in one screen, and keeps every page reachable at a stable address.
+Puts a US energy grid professional in front of a working instrument on the first screen, with one thing to do, and keeps every page reachable at a stable address. A household on a phone is served by the same front door, not by a second one.
 
 ## ADDED Requirements
 
-### Requirement: Command-first home with two doors
-The home page SHALL show, in its first viewport at 360 × 640 px and wider, the command bar and both ways to start: dropping a meter file and entering a ZIP code, each saying plainly what it takes and what it gives back. Below them it SHALL show a worked example computed from the shipped sample file, and two labeled lanes of tool cells: "For your home" (check my bill, is my use high, cheapest plan on my data, find my utility, cleanest hours to use power) and "For your work" (load and bill workbench, utility and plant data, hourly emissions, data library, agent server for developers).
+### Requirement: The home page is the instrument, not a menu of them
+The home page SHALL open on the load and bill workbench itself, already working on the shipped sample meter file, so the first screen shows a measured result rather than a promise or a list of links: a headline naming what this is for a grid professional, one primary action (drop or choose an interval file), and the sample's peak demand, the day's stepped load curve, and its basis. Dropping a file SHALL replace the sample in place, without navigating to another page.
+
+The home page SHALL NOT present lanes, grids, or rows of tool cells. Every other tool SHALL be reachable from one "All tools" link and from the footer, never from the home page's first screen.
+
+#### Scenario: A professional arrives cold
+
+- **WHEN** the home page loads at 1440 × 900 px
+- **THEN** a measured value computed from the sample file is visible without scrolling, beside its curve and its basis, and exactly one primary action asks for an interval file
 
 #### Scenario: Phone first screen
 
 - **WHEN** the home page loads at 360 × 640 px
-- **THEN** the command bar and both ways to start are visible without scrolling, and nothing scrolls sideways
+- **THEN** the headline, the primary action, and a measured value are visible without scrolling, and nothing scrolls sideways
+
+#### Scenario: Dropping a file does not navigate
+
+- **WHEN** a visitor drops an interval file on the home page
+- **THEN** the sample's figures are replaced by that file's, on the same page, and nothing is uploaded
 
 #### Scenario: Works without JavaScript
 - **WHEN** the home page loads with JavaScript disabled
-- **THEN** every cell is a working link, and the command bar is replaced by a link to the tool catalog
+- **THEN** the sample's figures, curve and basis are still shown, the primary action is a link to the workbench, and the "All tools" link works
+
+### Requirement: One rail, no sections
+The top rail SHALL carry the wordmark, one "All tools" link, and the theme control, and nothing else. Section tabs SHALL NOT appear in the rail: a visitor who wants breadth goes through "All tools", and a visitor who wants depth is already in the instrument.
+
+#### Scenario: The rail holds three things
+
+- **WHEN** any page loads
+- **THEN** the rail shows the wordmark, "All tools", and the theme control, and no section tabs
 
 ### Requirement: Simplicity budget
-The visitor-facing surface SHALL stay inside fixed limits, checked in the build: at most 6 sections in the top rail; at most 5 tool cells per home-page lane; at most 5 inputs and at most one chart visible on a tool page's first screen; and no modal, overlay, tour, banner, or interstitial on arrival, including cookie and consent notices, which are unnecessary because nothing is stored or tracked.
+The visitor-facing surface SHALL stay inside fixed limits, checked in the build: no section tabs in the top rail; no tool cells on the home page; at most 5 inputs and at most one chart visible on a tool page's first screen; and no modal, overlay, tour, banner, or interstitial on arrival, including cookie and consent notices, which are unnecessary because nothing is stored or tracked.
 
 #### Scenario: Budget exceeded
 - **WHEN** a change would put a seventh section in the top rail or a sixth cell in a lane

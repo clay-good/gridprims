@@ -21,17 +21,7 @@ toggle?.addEventListener('click', () => {
 });
 if (toggle) label();
 
-// The section menu below 768 px: a button that opens and closes the list; Escape closes it.
-const menu = document.querySelector('[data-menu]');
-menu?.addEventListener('click', () => {
-  const open = menu.getAttribute('aria-expanded') !== 'true';
-  menu.setAttribute('aria-expanded', String(open));
-  menu.closest('nav').classList.toggle('open', open);
-  if (open) menu.closest('nav').querySelector('a')?.focus();
-});
-menu?.closest('nav').addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') { menu.click(); menu.focus(); }
-});
+
 
 // Command bar: runs on the device against the prebuilt index; nothing typed is sent anywhere.
 const input = document.querySelector('#command-input');

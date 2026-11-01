@@ -68,10 +68,8 @@ ${modules.map((m) => html`<script type="module" src="${m}"></script>`)}
   <div class="wrap">
     <a class="wordmark" href="/">${t('site.name')}</a>
     <nav aria-label="${t('nav.label')}">
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-list" data-menu>${t('nav.menu')}</button>
-      <ul id="nav-list">
-      ${SECTIONS.map(({ id, path }) => html`<li><a href="${path}"${section === id ? raw(' aria-current="page"') : ''}>${t(`nav.${id}`)}</a></li>`)}
-    </ul></nav>
+      <ul id="nav-list"><li><a href="/tools/"${section === 'tools' ? raw(' aria-current="page"') : ''}>${t('home.allTools')}</a></li></ul>
+    </nav>
     ${gridPulse(pulse, i18n)}
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="${t('theme.toggle')}">${t('theme.night')}</button>
   </div>

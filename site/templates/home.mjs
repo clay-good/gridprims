@@ -38,7 +38,7 @@ export function laneCells(lane, { tools, exists, asOf }, { t }) {
 
 /** The two things a visitor can give this site, said plainly, before anything else. */
 function startDoors({ t }) {
-  return html`<section class="doors" aria-labelledby="start-title">
+  return html`<section class="start" aria-labelledby="start-title">
   <h2 id="start-title" class="start-title">${t('home.start.title')}</h2>
   <div class="door">
     <h3>${t('home.start.file')}</h3>
@@ -46,17 +46,9 @@ function startDoors({ t }) {
     <p><a class="button primary" href="/files/">${t('home.start.fileAction')}</a></p>
     <p class="unit-hint">${t('home.start.filePrivacy')}</p>
   </div>
-  <div class="door">
-    <h3>${t('home.start.zip')}</h3>
-    <p>${t('home.start.zipWhat')}</p>
-    <form class="door-form" action="${LOOKUP_PATH}" method="get">
-      <label class="legend" for="home-zip">${t('home.start.zipLabel')}</label>
-      <input id="home-zip" name="zip" class="mono" inputmode="numeric" autocomplete="postal-code" maxlength="10" placeholder="78701">
-      <button class="button" type="submit">${t('home.start.zipAction')}</button>
-    </form>
-    <p class="unit-hint">${t('home.start.zipNote')}</p>
-  </div>
-  <p class="door-third">${t('home.start.bills')} <a href="/tools/household/bill-totals/check/">${t('home.start.billsAction')}</a></p>
+  <p class="start-else">${t('home.start.elseNoFile')}
+    <a href="${LOOKUP_PATH}">${t('home.start.zipAction')}</a> ·
+    <a href="/tools/household/bill-totals/check/">${t('home.start.billsAction')}</a></p>
 </section>`;
 }
 
@@ -110,9 +102,7 @@ export function homePage({ tools, i18n, exists, asOf, proof = null }) {
   const body = html`<h1 class="home-title">${t('site.tagline')}</h1>
 ${startDoors(i18n)}
 ${proof ? proofPlate(proof, i18n) : ''}
-${lane('home')}
-${lane('work')}
-<p><a href="${CATALOG_PATH}">${t('home.allTools')}</a></p>`;
+<p class="home-more"><a href="${CATALOG_PATH}">${t('home.allTools')}</a> · <a href="${LOOKUP_PATH}">${t('home.cell.find-utility')}</a></p>`;
   return layout({ i18n, title: t('home.pageTitle'), description: t('site.tagline'), path: '/', body, section: 'home' });
 }
 

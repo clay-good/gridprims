@@ -21,30 +21,23 @@ const shell = 'new Promise((r) => { const f = () => document.documentElement.dat
 for (const kind of ['chrome', 'firefox']) {
   const skip = !findBrowser(kind) && `${kind} is not installed`;
 
-  test(`${kind}: below 768 px the sections fold into a keyboard menu`, { skip, timeout: 60_000 }, async () => {
+  test(`${kind}: the rail holds one link at every width, with no section menu to open`, { skip, timeout: 60_000 }, async () => {
     const server = await serve(out);
     const browser = await launch(kind);
     try {
-      await browser.setViewport(360, 740);
-      await browser.goto(`${server.url}/grid/`);
-      await browser.evaluate(shell);
-      const shown = () => browser.evaluate(`getComputedStyle(document.querySelector('#nav-list')).display`);
-      assert.equal(await shown(), 'none');
-      await browser.evaluate(`document.querySelector('[data-menu]').click()`);
-      assert.notEqual(await shown(), 'none');
-      assert.equal(await browser.evaluate(`document.querySelector('[data-menu]').getAttribute('aria-expanded')`), 'true');
-      assert.equal(await browser.evaluate(`document.activeElement.textContent`), 'Home', 'focus moves into the menu');
-      await browser.evaluate(`document.activeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))`);
-      assert.equal(await shown(), 'none');
-      assert.equal(await browser.evaluate(`document.activeElement.dataset.menu !== undefined`), true, 'Escape returns focus to the button');
-      await browser.setViewport(1024, 740);
-      assert.notEqual(await shown(), 'none', 'the full rail returns at 768 px and up');
+      for (const w of [360, 1440]) {
+        await browser.setViewport(w, 720);
+        await browser.goto(`${server.url}/`);
+        await waitFor(browser, "document.documentElement.dataset.shellReady === 'true'");
+        assert.equal(await browser.evaluate("document.querySelectorAll('.rail nav a').length"), 1, `${w} px`);
+        assert.equal(await browser.evaluate("!!document.querySelector('[data-menu]')"), false, `${w} px has no menu button`);
+        assert.ok(await browser.evaluate("document.querySelector('.rail nav a').getBoundingClientRect().width > 0"), `${w} px link is visible`);
+      }
     } finally {
       await browser.close();
       await server.close();
     }
   });
-
   test(`${kind}: the 404 suggests the closest tool and sends the path nowhere`, { skip, timeout: 60_000 }, async () => {
     const server = await serve(out);
     const browser = await launch(kind);

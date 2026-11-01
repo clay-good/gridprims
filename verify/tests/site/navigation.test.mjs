@@ -14,12 +14,16 @@ import { sharedSite } from '../../lib/shared-site.mjs';
 const out = await sharedSite();
 const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
 
-test('every page carries the six sections, marking the current one', () => {
-  for (const [p, current] of [['/', 'Home'], ['/files/', 'Bills'], ['/data/eia-861/', 'Data'], ['/tools/calc/energy-units/convert/', 'Grid'], ['/learn/', 'Learn']]) {
+test('the rail carries the wordmark, one link and the theme control, and no section tabs', () => {
+  for (const p of ['/', '/files/', '/data/eia-861/', '/tools/calc/energy-units/convert/', '/learn/']) {
     const html = page(p);
-    for (const s of ['Home', 'Bills', 'Data', 'Carbon', 'Grid', 'Learn']) assert.match(html, new RegExp(`>${s}</a></li>`), `${p} ${s}`);
-    assert.match(html, new RegExp(`aria-current="page">${current}<`), p);
-    assert.equal((html.match(/aria-current="page"/g) ?? []).length, 1, p);
+    const rail = html.slice(html.indexOf('<header class="rail"'), html.indexOf('</header>'));
+    assert.match(rail, /class="wordmark"[^>]*>gridprims</, p);
+    assert.match(rail, /href="\/tools\/"[^>]*>Every tool, in one list</, p);
+    assert.match(rail, /data-theme-toggle/, p);
+    // A visitor who wants breadth goes through All tools; the rail holds no sections.
+    for (const s of ['Bills', 'Carbon', 'Learn']) assert.doesNotMatch(rail, new RegExp(`>${s}</a>`), `${p} still tabs ${s}`);
+    assert.equal((rail.match(/<li>/g) ?? []).length, 1, `${p} rail holds one link`);
   }
 });
 

@@ -16,15 +16,21 @@ const out = await sharedSite();
 const read = (p) => readFileSync(join(out, p), 'utf8');
 const main = (h) => h.slice(h.indexOf('<main'), h.indexOf('</main>'));
 
-test('without JavaScript the home page shows the command bar and both labeled lanes, each cell saying what you need', () => {
+test('without JavaScript the home page is still the instrument: one action, a measured value, its curve and its basis', () => {
   const html = read('index.html');
-  assert.match(html, /<input id="command-input"/);
-  assert.match(main(html), /<h2>For your home<\/h2>[\s\S]*<h2>For your work<\/h2>/);
-  const cells = [...main(html).matchAll(/<li class="tool-cell"[\s\S]*?<\/li>/g)].map((m) => m[0]);
-  assert.ok(cells.length >= 5);
-  for (const c of cells) assert.match(c, /You need: (nothing|a ZIP code|bill totals|a meter file)/);
-  assert.match(main(html), /Find my utility[\s\S]*data as of Oct 7, 2026/);
-  assert.doesNotMatch(main(html), /<script/);
+  const body = main(html);
+  // One primary action, and it asks for an interval file.
+  const primary = [...body.matchAll(/class="button primary"[^>]*>([^<]+)</g)].map((m) => m[1]);
+  assert.deepEqual(primary, ['Choose a file', 'Open this file in the workbench']);
+  // The sample's measured value, its stepped curve, and the basis band, all server-rendered.
+  assert.match(body, /class="number"[^>]*>166\.1/);
+  assert.match(body, /<polyline class="series series-measured"/);
+  assert.match(body, /Basis · sample-office-15min\.csv/);
+  // No lanes, no tool cells: breadth lives behind one link.
+  assert.doesNotMatch(body, /class="tool-cell"/);
+  assert.doesNotMatch(body, /For your home|For your work/);
+  assert.match(body, /href="\/tools\/">Every tool, in one list</);
+  assert.doesNotMatch(body, /<script/);
 });
 
 test('tools that are not built appear nowhere, not even as "coming soon"', () => {

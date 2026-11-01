@@ -44,13 +44,6 @@ h3 { font-size: 1rem; font-weight: 700; }
 .rail .wrap { display: flex; align-items: center; gap: var(--s4); min-height: 56px; flex-wrap: wrap; }
 .wordmark { color: var(--legend-white); font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.02em; text-decoration: none; }
 .rail nav ul { display: flex; gap: var(--s3); list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
-.menu-button { display: none; background: transparent; color: var(--legend-white); border: 1px solid var(--legend-white); border-radius: var(--r-field); font: 600 .875rem/1 inherit; padding: var(--s2) var(--s3); min-height: 44px; cursor: pointer; }
-/* Below 768 px the sections fold into a menu; without script the list simply stays open. */
-@media (max-width: 767px) {
-  [data-js] .menu-button { display: inline-block; }
-  [data-js] .rail nav ul { display: none; }
-  [data-js] .rail nav.open ul { display: flex; flex-direction: column; width: 100%; padding-bottom: var(--s2); }
-  [data-js] .rail nav.open { flex-basis: 100%; order: 3; }
 }
 .rail nav a {
   color: var(--legend-white); font-weight: 500; font-size: .8125rem; letter-spacing: .01em; text-decoration: none;
@@ -331,6 +324,9 @@ blockquote { border-left: 1px solid var(--field-border); margin: var(--s3) 0; pa
 
 /* The doors: what a visitor can give this site, said before anything else. */
 .start-title { font-size: 1.0625rem; font-weight: 500; color: var(--muted); letter-spacing: 0; margin: 0 0 var(--s4); max-width: 60ch; }
+.start { margin: var(--s5) 0 var(--s7); }
+.start-title { font-weight: 400; }
+.start-else { margin: var(--s3) 0 0; color: var(--muted); font-size: .875rem; }
 .doors { margin: var(--s5) 0 var(--s7); display: grid; gap: var(--s4); }
 .door { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-sign); padding: var(--s5); }
 .door h3 { margin: 0 0 var(--s2); font-size: 1.25rem; letter-spacing: -0.015em; }
@@ -345,7 +341,7 @@ blockquote { border-left: 1px solid var(--field-border); margin: var(--s3) 0; pa
 .proof-title { font-size: .9375rem; font-weight: 600; color: var(--muted); letter-spacing: 0; margin: 0 0 var(--s3); }
 @media (min-width: 760px) {
   .doors { grid-template-columns: 1fr 1fr; align-items: start; }
-  .start-title { grid-column: 1 / -1; margin-bottom: 0; }
+  .start-title { max-width: 62ch; font-size: 1.1875rem; line-height: 1.45; }
 }
 
 /* The curve beside the plate. Two classes, so these beat the later .chart svg rules
@@ -384,7 +380,9 @@ blockquote { border-left: 1px solid var(--field-border); margin: var(--s3) 0; pa
   .proof-title { margin-bottom: var(--s2); }
   /* Both doors have to be reachable without scrolling, so they lose their padding, not their words. */
   .doors { margin: var(--s3) 0 var(--s4); gap: var(--s3); }
-  .start-title { font-size: .9375rem; margin-bottom: var(--s2); }
+  .start-title { font-size: .875rem; line-height: 1.4; margin-bottom: var(--s2); }
+  .start { margin: var(--s3) 0 var(--s4); }
+  .start-else { margin-top: var(--s2); font-size: .8125rem; }
   .door { padding: var(--s3); }
   .door h3 { font-size: 1.0625rem; margin-bottom: var(--s1); }
   .door > p { margin-bottom: var(--s3); font-size: .9375rem; }
