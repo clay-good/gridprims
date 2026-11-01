@@ -37,6 +37,8 @@ import largeLoadContext from './grid.large-load.context/manifest.mjs';
 import * as largeLoadContextImpl from './grid.large-load.context/tool.mjs';
 import midspanClearance from './lines.midspan-clearance.check/manifest.mjs';
 import * as midspanClearanceImpl from './lines.midspan-clearance.check/tool.mjs';
+import attachmentHeight from './lines.attachment-height.find/manifest.mjs';
+import * as attachmentHeightImpl from './lines.attachment-height.find/tool.mjs';
 
 export const TOOLS = [
   { manifest: energyUnitsConvert, impl: energyUnitsConvertImpl },
@@ -57,6 +59,7 @@ export const TOOLS = [
   { manifest: takeOrPay, impl: takeOrPayImpl },
   { manifest: largeLoadContext, impl: largeLoadContextImpl },
   { manifest: midspanClearance, impl: midspanClearanceImpl },
+  { manifest: attachmentHeight, impl: attachmentHeightImpl },
 ];
 
 /** @param {string} id */

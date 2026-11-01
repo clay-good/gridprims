@@ -1,9 +1,12 @@
 // Definition on first use (learn/glossary): the first time a page's text
 // uses a term its tool lists, the word becomes a glossary term whose popover
 // gives the one-line definition and links the entry. Later uses stay plain.
-// Text inside links, buttons, labels, headings, options, and code is left alone.
+// Only running text is marked (paragraphs, list items, table and definition
+// cells); links, buttons, labels, forms, headings, options, and code are left alone.
 
-const SKIP = new Set(['a', 'button', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'option', 'select', 'textarea', 'script', 'style', 'code', 'summary', 'title', 'dt', 'th']);
+const SKIP = new Set(['a', 'button', 'label', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'option', 'select', 'textarea', 'script', 'style', 'code', 'summary', 'title', 'dt', 'th']);
+/** Running text: a term is marked only inside these, where an inline link is the expected size. */
+const TEXT = new Set(['p', 'li', 'td', 'dd', 'figcaption', 'blockquote']);
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const attr = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
@@ -15,15 +18,17 @@ export function markFirstUse(markup, entries) {
   const pending = entries.map((e) => ({ e, re: new RegExp(`(^|[^\\p{L}\\p{N}-])(${[e.term, ...e.aliases].sort((a, b) => b.length - a.length).map(esc).join('|')})(?![\\p{L}\\p{N}-])`, 'iu') }));
   const marked = [];
   const stack = [];
+  const open = [];
   const out = markup.replace(/(<[^>]+>)|([^<]+)/g, (m, tag, text) => {
     if (tag) {
       const name = /^<\/?\s*([a-z0-9]+)/i.exec(tag)?.[1]?.toLowerCase();
-      if (name && SKIP.has(name) && !tag.endsWith('/>')) {
-        if (tag.startsWith('</')) { const i = stack.lastIndexOf(name); if (i >= 0) stack.splice(i, 1); } else stack.push(name);
+      for (const [set, list] of [[SKIP, stack], [TEXT, open]]) {
+        if (!name || !set.has(name) || tag.endsWith('/>')) continue;
+        if (tag.startsWith('</')) { const i = list.lastIndexOf(name); if (i >= 0) list.splice(i, 1); } else list.push(name);
       }
       return tag;
     }
-    if (stack.length || !pending.length) return text;
+    if (stack.length || !open.length || !pending.length) return text;
     let s = text;
     for (let i = 0; i < pending.length; i++) {
       const { e, re } = pending[i];

@@ -650,3 +650,37 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 - Sag is at the condition you entered and is not converted for heat, ice, or wind.
 - The parabolic method understates deep sag; the exact catenary is shown when they differ by more than 1 in.
 - The answer is only as good as the measured heights.
+
+## Where a new line attaches on a pole (`lines.attachment-height.find`)
+
+Where one new communication line can attach on a pole, which lines must move to make room, or how much taller a new pole must be, checked against the rules you enter.
+
+Version 0.1.0 · experimental · validation level 1, self-checked
+
+| Input | Name | Unit | Range | Example |
+|---|---|---|---|---|
+| Your rules | `rules` |  |  | rule_id,applies_to,value,unit,source_document,source_locator,note sep.neutral.comm,,40,in,Our joint use standard,§4.2, sep.comm.comm,,12,in,Our joint use standard,§4.3, ground.pole.comm,,18,ft,Our joint use standard,§4.1, |
+| What is on the pole now | `attachments` |  |  | neutral, Utility, 30 ft 2 in catv, Cable Co, 24 ft 0 in telephone, Phone Co, 23 ft 0 in |
+| The new line | `newKind` | choice | `fiber`, `catv`, `telephone`, `communication-other` | fiber |
+| Pole length | `poleLength` |  |  | unknown |
+| Placement preference | `preference` | choice | `rules`, `highest`, `lowest`, `nearest-existing` | rules |
+
+| Output | Name | Unit | Rounding |
+|---|---|---|---|
+| Attach at | `height` | ft | 2 decimals |
+| Other lines to move | `moves` |  | 0 decimals |
+| Extra height needed above ground | `extra` | in | 0 decimals |
+| Shortest replacement pole | `replacement` | ft | 0 decimals |
+
+**Method.** The communication space runs from the lowest supply attachment less the separation your rules require below it (by kind, and by voltage for a primary) down to your lowest allowed height. Every whole-inch height in it that keeps your separation from each communication line is a fit; one is picked by placement preference, highest by default. With none, plans of one move, then two, of existing communication lines are tried, each moved line keeping every separation; plans rank by fewest moves, least total distance, the new line's height by preference, then moving up. With no plan, the extra height above ground is the least raise of the space that fits the new line, and a replacement pole is the shortest length on your length step whose height above ground, length less your setting depth, gains that much.
+
+**Sources.**
+
+- IEEE C2, National Electrical Safety Code, the edition your rules adopt, Rule 235 and Table 235-5 (cited by number; the values come from your copy)
+- 47 CFR 1.1402 and 1.1411 (FCC pole attachment rules), current eCFR, §1.1402(p) and (q): make-ready is complex or simple by outage and damage risk, not by how many lines move (https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-1/subpart-J/section-1.1402)
+
+**Known limits.**
+
+- One new line per pole; crossarms, framing, and linked spans are not modeled.
+- Moves are limited to two, our own limit for readable plans, not a regulatory test.
+- The answer is only as good as the measured heights and the rules you enter.
