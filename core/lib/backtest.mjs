@@ -5,7 +5,7 @@
 // Causes are listed with what they touch, never chosen.
 
 import { DISPATCHED } from './fleet.mjs';
-import { COLUMN, RECORDED } from './dispatch.mjs';
+import { COLUMN, RECORDED, applyEdits, dispatch } from './dispatch.mjs';
 
 const rank = (v, q) => v[Math.min(v.length - 1, Math.max(0, Math.ceil(q * v.length) - 1))];
 
@@ -103,4 +103,21 @@ export function candidateCauses({ fleet, rows, categories }) {
     { cause: 'unplaceable', share: total ? s.unplaceable_mw / total : 0, of: 'capacity' },
     { cause: 'referenceData', share: rows.length ? (rows.length - reported.length + imbalanced) / rows.length : 0, of: 'hours', missing: rows.length - reported.length, imbalanced, categories },
   ];
+}
+
+/**
+ * A scenario against the unmodified run: the listed edits, each fuel's change read against the bias, the CO2
+ * change, the unmet modeling residual before and after, and whether each added unit ran.
+ * @param {{units: any[], rows: any[], base: any, bt: any, edits?: any[], scale?: Record<string, number>}} p
+ */
+export function scenarioRun({ units, rows, base, bt, edits = [], scale = {} }) {
+  const applied = applyEdits(units, edits);
+  const run = dispatch({ units: applied.units, rows, scale });
+  return {
+    edits: applied.edits, run,
+    changes: againstBias(base, run, bt),
+    co2: { base_t: base.co2_t, now_t: run.co2_t, change_t: run.co2_t - base.co2_t, share: base.co2_t ? (run.co2_t - base.co2_t) / base.co2_t : null },
+    unmet: { base_hours: base.unmet.hours, now_hours: run.unmet.hours },
+    added: applied.edits.filter((e) => e.kind === 'add').map((e) => ({ id: e.id, name: e.name, mwh: run.unit.get(e.id) ?? 0, cost: e.cost })),
+  };
 }

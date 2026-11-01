@@ -5,8 +5,8 @@
 
 import { getJson } from './zip-utilities.js';
 import { readShard } from '../../core/lib/shard.mjs';
-import { applyEdits, dispatch } from '../../core/lib/dispatch.mjs';
-import { againstBias, backtest } from '../../core/lib/backtest.mjs';
+import { dispatch, scaleOf } from '../../core/lib/dispatch.mjs';
+import { backtest, scenarioRun } from '../../core/lib/backtest.mjs';
 import { html } from '../lib/html.mjs';
 import { createI18n } from '../lib/i18n.mjs';
 import strings from '../strings/en-US.mjs';
@@ -23,8 +23,6 @@ const HOUR = 3_600_000;
 const whole = (x) => Math.round(x).toLocaleString('en-US');
 const money = (x) => x.toFixed(2);
 const signed = (x) => `${x < 0 ? '−' : ''}${whole(Math.abs(x))}`;
-const SOLAR = ['gen_sun', 'gen_snb'];
-const WIND = ['gen_wnd', 'gen_wnb'];
 
 let fleet; let rows; let units; let base; let bt; let localKeys;
 
@@ -100,18 +98,16 @@ function fromFragment() {
 function run() {
   const f = readForm();
   if (f.refused) { out.innerHTML = String(html`<p class="errors">${f.refused}</p>`); return; }
-  const { units: edited, edits } = applyEdits(units, f.edits);
-  const scale = Object.fromEntries([...SOLAR.map((c) => [c, f.solar]), ...WIND.map((c) => [c, f.wind])]);
-  const sc = dispatch({ units: edited, rows, scale });
-  const cmp = againstBias(base, sc, bt);
+  const scale = scaleOf(f);
+  const { edits, run: sc, changes: cmp, added: [addedRun] } = scenarioRun({ units, rows, base, bt, edits: f.edits, scale });
   const listed = [
     ...edits.map((e) => (e.kind === 'retire' ? t('scenario.edit.retire', { name: e.name, id: e.id, was: whole(e.was) }) : t('scenario.edit.add', { name: e.name, now: whole(e.now), fuel: t(`scenario.fuel.${e.class}`), cost: money(e.cost) }))),
     ...(f.solar !== 1 ? [t('scenario.edit.scale', { what: t('scenario.solar').replace(/ × $/, ''), now: f.solar })] : []),
     ...(f.wind !== 1 ? [t('scenario.edit.scale', { what: t('scenario.wind').replace(/ × $/, ''), now: f.wind })] : []),
   ];
   const co2 = t('scenario.co2', { t: signed(sc.co2_t - base.co2_t), pct: pct(base.co2_t ? (sc.co2_t - base.co2_t) / base.co2_t : 0), base: whole(base.co2_t), now: whole(sc.co2_t) });
-  const added = edits.find((e) => e.kind === 'add');
-  const addedMwh = added ? sc.unit.get(added.id) : null;
+  const added = addedRun ?? null;
+  const addedMwh = added ? added.mwh : null;
   // Net load against the floor: hours whose residual falls below it, and the energy that would not fit.
   let below = 0; let over = 0;
   if (f.floor !== null) for (let h = 0; h < rows.length; h++) { if (rows[h].demand === null) continue; if (sc.residual[h] < f.floor) { below++; over += f.floor - sc.residual[h]; } }

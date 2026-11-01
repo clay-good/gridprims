@@ -162,12 +162,15 @@ export function createHandlers(ctx) {
       return ok(series === undefined ? value.view : { ...value.view, intervals: page(value, id, series, 0) });
     },
 
-    async gridprims_query_data({ dataset, table, filter, limit = 100, offset = 0, entity: kind, id }) {
+    async gridprims_query_data({ dataset, table, filter, limit = 100, offset = 0, entity: kind, id, scenario }) {
       if (kind !== undefined) {
-        if (id === undefined) return fail('With entity, give an id: a plant code, utility id, state code, subregion code, or ZIP.');
-        const r = await entity(kind, id, ctx.dataDir);
+        if (id === undefined) return fail('With entity, give an id: a plant code, utility id, state code, subregion code, ZIP, or balancing authority code.');
+        if (scenario !== undefined && kind !== 'scenario') return fail('A scenario change goes with entity "scenario" and a balancing authority code.');
+        const r = await entity(kind, id, ctx.dataDir, scenario);
         if (r.error) return fail(r.error);
-        const sources = Object.values(r.sources).filter(Boolean).map((m) => ({ id: m.dataset, version: m.version, publisher: m.publisher, asOf: m.asOf, retrieved: m.retrieved, attribution: m.attribution }));
+        const sources = r.versions
+          ? Object.entries(r.versions).map(([dsId, version]) => ({ id: dsId, version, publisher: 'U.S. Energy Information Administration' }))
+          : Object.values(r.sources).filter(Boolean).map((m) => ({ id: m.dataset, version: m.version, publisher: m.publisher, asOf: m.asOf, retrieved: m.retrieved, attribution: m.attribution }));
         return ok({ kind, entity: r.entity, url: SITE + r.url, sources });
       }
       if (dataset === undefined) return fail('Give a dataset id (the gridprims://datasets resource lists them), or entity and id.');

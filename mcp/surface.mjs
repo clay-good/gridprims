@@ -122,13 +122,23 @@ export const TOOL_SURFACE = [
   {
     name: 'gridprims_query_data',
     title: 'Query public grid data',
-    description: 'Look up or filter the public datasets in this clone\'s data folder (EIA, EPA, LBNL, OpenEI rates), each with its publisher, license, and as-of date; or, with entity and id, get one plant, utility, state, eGRID subregion, or ZIP code exactly as its gridprims.com page shows it. Reads local files only; it never downloads. The gridprims://datasets resource lists what is available.',
+    description: 'Look up or filter the public datasets in this clone\'s data folder (EIA, EPA, LBNL, OpenEI rates), each with its publisher, license, and as-of date; or, with entity and id, get one plant, utility, state, eGRID subregion, or ZIP code exactly as its gridprims.com page shows it. With entity "scenario" and a balancing authority code, get its merit-order screening model\'s backtest against the recorded year, and with a scenario change (units to retire, a unit to add, wind or solar scaled), the change by fuel beside the model\'s own error. Reads local files only; it never downloads. The gridprims://datasets resource lists what is available.',
     inputSchema: {
       type: 'object',
       additionalProperties: false,
       properties: {
-        entity: { type: 'string', enum: ['plant', 'utility', 'state', 'subregion', 'zip'], description: 'Look up one entity as its page shows it, instead of filtering a dataset.' },
-        id: { type: 'string', minLength: 1, maxLength: 20, description: 'With entity: an EIA plant code or utility id, a state code such as TX, an eGRID subregion such as ERCT, or a five-digit ZIP.' },
+        entity: { type: 'string', enum: ['plant', 'utility', 'state', 'subregion', 'zip', 'scenario'], description: 'Look up one entity as its page shows it, instead of filtering a dataset.' },
+        id: { type: 'string', minLength: 1, maxLength: 20, description: 'With entity: an EIA plant code or utility id, a state code such as TX, an eGRID subregion such as ERCT, a five-digit ZIP, or, for a scenario, a balancing authority code such as PACE.' },
+        scenario: {
+          type: 'object', additionalProperties: false,
+          description: 'With entity "scenario": a change to dispatch against the recorded year. The result always carries the backtest error beside it.',
+          properties: {
+            retire: { type: 'array', items: { type: 'string', maxLength: 40 }, maxItems: 50, description: 'Placed unit ids (plant-generator, such as 6165-1) to retire for the whole year.' },
+            add: { type: 'object', additionalProperties: false, required: ['capacity_mw', 'fuel', 'cost'], properties: { name: { type: 'string', maxLength: 80 }, capacity_mw: { type: 'number', exclusiveMinimum: 0, maximum: 100000 }, fuel: { enum: ['coal', 'gas', 'oil'] }, cost: { type: 'number', minimum: 0, maximum: 10000, description: 'Variable cost, $/MWh.' }, co2_t_per_mwh: { type: 'number', minimum: 0, maximum: 3 } } },
+            solar: { type: 'number', minimum: 0, maximum: 20, description: 'Multiply recorded solar output (default 1).' },
+            wind: { type: 'number', minimum: 0, maximum: 20, description: 'Multiply recorded wind output (default 1).' },
+          },
+        },
         dataset: { type: 'string', description: 'A dataset id from the gridprims://datasets resource.' },
         table: { type: 'string', description: 'A table of that dataset, such as reliability. Default: its first table. The gridprims://datasets resource lists each dataset\'s tables.' },
         filter: { type: 'object', description: 'Column values to match exactly, such as {"state": "TX", "utility_id": 44372}. Filtering on the partition column (state, or ba and year for eia-930) reads only that shard.' },

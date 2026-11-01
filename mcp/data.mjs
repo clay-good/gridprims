@@ -109,7 +109,53 @@ async function entities(dir) {
   return entityCache.get(dir);
 }
 
-export const ENTITY_KINDS = ['plant', 'utility', 'state', 'subregion', 'zip'];
+export const ENTITY_KINDS = ['plant', 'utility', 'state', 'subregion', 'zip', 'scenario'];
+
+/** The scenario model's inputs, assembled once per data folder; each region's hours are read when asked for. */
+const scenarioCache = new Map();
+
+/**
+ * A balancing authority's screening model: the unmodified run's backtest always, and a change's result only
+ * beside it, with the label, the omissions, and the shares of derived and substituted inputs.
+ * @param {string} id a balancing authority code such as PACE
+ * @param {{retire?: string[], add?: any, solar?: number, wind?: number} | undefined} change
+ */
+async function scenarioEntity(id, change, dir) {
+  const [{ scenarioInputs, scenarioRegion }, { scenarioRun }, { OMISSIONS, scaleOf }, { default: strings }] = await Promise.all([
+    import('../site/entities/scenario.mjs'), import('../core/lib/backtest.mjs'), import('../core/lib/dispatch.mjs'), import('../site/strings/en-US.mjs'),
+  ]);
+  if (!scenarioCache.has(dir)) scenarioCache.set(dir, scenarioInputs(dir));
+  const inp = scenarioCache.get(dir);
+  if (!inp) return { error: 'The scenario model needs the eia-860, eia-923, and eia-930 datasets, which are not built in this clone.' };
+  const ba = String(id).trim().toUpperCase();
+  const r = scenarioRegion(inp, ba);
+  if (!r) return { error: `No scenario model for ${JSON.stringify(ba)}: it is not a balancing authority with coal, gas, or oil output in ${inp.year}. Balancing authorities with one are listed at https://gridprims.com/scenario/.` };
+  const s = r.fleet.summary;
+  const out = {
+    region: r.ba, name: r.name, year: r.year, label: strings['scenario.label'],
+    omissions: OMISSIONS.map((k) => strings[`scenario.omit.${k}`]),
+    backtest: { ...r.backtest, definitions: { bias: strings['scenario.def.bias'], mae: strings['scenario.def.mae'], marginalMatch: strings['scenario.def.marginal'] } },
+    causes: r.causes,
+    shares: { plantHeatRate: s.plant_rate_share, groupHeatRate: s.derived_share, measuredHeatRate: s.measured_share, substitutedPrice: s.substituted_share },
+    fleet: { placed_mw: s.placed_mw, unplaceable_mw: s.unplaceable_mw, recorded_mw: s.recorded_mw, by_class: s.by_class, units: r.fleet.units.length, unplaceable: r.fleet.unplaceable.map((u) => ({ id: u.id, name: u.plant_name, mw: u.capacity_mw, missing: u.missing })) },
+    unmet: r.unmet, co2_t: r.co2_t,
+    unverified: strings['scenario.unverified'],
+  };
+  if (change) {
+    const known = new Set(r.fleet.units.map((u) => u.id));
+    const unknown = (change.retire ?? []).filter((x) => !known.has(x));
+    if (unknown.length) return { error: `No placed unit ${unknown.map((x) => JSON.stringify(x)).join(', ')} in ${ba}. Unit ids are plant-generator, such as ${r.fleet.units[0].id}; the fleet is at https://gridprims.com/scenario/${ba.toLowerCase()}/fleet.json.` };
+    const edits = [...(change.retire ?? []).map((x) => ({ kind: 'retire', id: x })), ...(change.add ? [{ kind: 'add', unit: { id: 'added-1', name: change.add.name ?? 'Added unit', capacity_mw: change.add.capacity_mw, class: change.add.fuel, cost: change.add.cost, co2_t_per_mwh: change.add.co2_t_per_mwh ?? 0 } }] : [])];
+    const { expandUnit } = await import('../core/lib/fleet.mjs');
+    const sc = scenarioRun({ units: r.fleet.units.map(expandUnit), rows: r.rows, base: r.run, bt: r.backtest, edits, scale: scaleOf(change) });
+    out.scenario = {
+      edits: sc.edits, solar: change.solar ?? 1, wind: change.wind ?? 1,
+      changes: sc.changes, co2: sc.co2, unmet: sc.unmet, added: sc.added,
+      reading: 'A fuel\'s change counts as a finding only when it is larger than the backtest\'s mean bias for that fuel over the same hours (finding: true). The unmet modeling residual measures what the model could not place, not whether the grid would have had enough capacity.',
+    };
+  }
+  return { entity: out, url: `/scenario/${ba.toLowerCase()}/`, sources: {}, versions: r.versions };
+}
 
 /**
  * One entity as its page shows it, with the page's address.
@@ -117,7 +163,8 @@ export const ENTITY_KINDS = ['plant', 'utility', 'state', 'subregion', 'zip'];
  * @param {string} id an EIA plant code or utility id, a state code, an eGRID subregion code, or a five-digit ZIP
  * @returns {Promise<{entity: any, url: string, sources: any} | {error: string}>}
  */
-export async function entity(kind, id, dir = DATA_DIR) {
+export async function entity(kind, id, dir = DATA_DIR, change = undefined) {
+  if (kind === 'scenario') return scenarioEntity(id, change, dir);
   const e = await entities(dir);
   const key = String(id).trim();
   if (kind === 'plant' || kind === 'utility') {

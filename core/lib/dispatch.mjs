@@ -12,6 +12,9 @@ export const OMISSIONS = ['commitment', 'reserves', 'transmission', 'interchange
 /** EIA-930 columns taken as recorded: everything but the dispatched fuels. */
 export const RECORDED = ['gen_nuc', 'gen_wat', 'gen_ps', 'gen_sun', 'gen_snb', 'gen_wnd', 'gen_wnb', 'gen_bat', 'gen_oes', 'gen_ues', 'gen_geo', 'gen_oth', 'gen_unk'];
 export const COLUMN = { coal: 'gen_col', gas: 'gen_ng', oil: 'gen_oil' };
+/** The recorded columns a solar or wind scale multiplies, with and without integrated batteries. */
+export const SCALED = { solar: ['gen_sun', 'gen_snb'], wind: ['gen_wnd', 'gen_wnb'] };
+export const scaleOf = ({ solar = 1, wind = 1 } = {}) => Object.fromEntries([...SCALED.solar.map((c) => [c, solar]), ...SCALED.wind.map((c) => [c, wind])]);
 
 const HOUR = 3_600_000;
 const monthOf = (hour) => new Date(hour * HOUR).getUTCMonth();

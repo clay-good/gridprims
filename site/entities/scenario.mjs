@@ -14,44 +14,66 @@ import { NAMES } from '../../pipeline/registry/eia-930.mjs';
 import { served } from './plants.mjs';
 
 /**
+ * What every region's fleet is built from: the served snapshots and the heat-rate and price tables.
  * @param {string} dataDir
- * @returns {{year: number, versions: Record<string, string>, regions: any[]} | null} null when a needed snapshot is not built
+ * @returns {any | null} null when a needed snapshot is not built
  */
-export function scenarioData(dataDir) {
+export function scenarioInputs(dataDir) {
   const g = served(dataDir, 'eia-860', 'generators');
   const p = served(dataDir, 'eia-860', 'plants');
   const gen = served(dataDir, 'eia-923', 'generation');
   const rc = served(dataDir, 'eia-923', 'fuel_receipts');
   const hourly = served(dataDir, 'eia-930', 'hourly');
   if (!g || !p || !gen || !rc || !hourly) return null;
-  const year = Number(gen.table.dataPeriod);
-  const versions = { 'eia-860': g.manifest.version, 'eia-923': gen.manifest.version, 'eia-930': hourly.manifest.version };
   const rates = plantHeatRates(gen.rows);
-  const groups = groupHeatRates(g.rows, rates);
-  const prices = fuelPrices(rc.rows);
+  return {
+    dataDir, year: Number(gen.table.dataPeriod), generators: g.rows, plants: p.rows, shards: hourly.table.shards,
+    versions: { 'eia-860': g.manifest.version, 'eia-923': gen.manifest.version, 'eia-930': hourly.manifest.version },
+    rates, groups: groupHeatRates(g.rows, rates), prices: fuelPrices(rc.rows),
+  };
+}
+
+/**
+ * One region's fleet, hours, unmodified run, and backtest, or null when it has nothing to dispatch.
+ * @param {ReturnType<typeof scenarioInputs>} inp @param {string} ba
+ */
+export function scenarioRegion(inp, ba) {
+  const s = inp.shards.find((x) => x.state === `${ba}-${inp.year}`);
+  if (!s || NAMES[ba]?.generationOnly) return null;
+  const { year, versions, prices } = inp;
+  const fleet = assembleFleet({ ba, year, generators: inp.generators, plants: inp.plants, rates: inp.rates, groups: inp.groups, prices, versions });
+  if (!fleet.units.length) return null;
+  const rows = readShard(readFileSync(join(inp.dataDir, 'eia-930', versions['eia-930'], s.path))).rows();
+  const run = dispatch({ units: fleet.units, rows });
+  const bt = backtest({ rows, run });
+  // A region whose coal, gas, and oil recorded nothing has no backtest to show.
+  if (!(bt.overall.actual_mwh > 0)) return null;
+  const categories = categoryChanges(rows);
+  return {
+    ba, name: NAMES[ba]?.name ?? ba, zone: REGION_ZONES[ba] ?? 'America/New_York', year, versions,
+    shard: { path: `/data/eia-930/${versions['eia-930']}/${s.path}`, sha256: s.sha256 },
+    fleet: { ...fleet, units: fleet.units.map(compactUnit) },
+    backtest: bt, causes: candidateCauses({ fleet, rows, categories }),
+    categories, unmet: run.unmet, surplus: run.surplus, co2_t: run.co2_t,
+    prices: { deliveries: prices.deliveries, withheld: prices.withheld },
+    rows, run,
+  };
+}
+
+/**
+ * @param {string} dataDir
+ * @returns {{year: number, versions: Record<string, string>, regions: any[]} | null} null when a needed snapshot is not built
+ */
+export function scenarioData(dataDir) {
+  const inp = scenarioInputs(dataDir);
+  if (!inp) return null;
   const regions = [];
-  for (const s of hourly.table.shards.filter((x) => x.state.endsWith(`-${year}`))) {
-    const ba = s.state.split('-')[0];
-    if (NAMES[ba]?.generationOnly) continue;
-    const fleet = assembleFleet({ ba, year, generators: g.rows, plants: p.rows, rates, groups, prices, versions });
-    if (!fleet.units.length) continue;
-    const rows = readShard(readFileSync(join(dataDir, 'eia-930', versions['eia-930'], s.path))).rows();
-    const run = dispatch({ units: fleet.units, rows });
-    const bt = backtest({ rows, run });
-    // A region whose coal, gas, and oil recorded nothing has no backtest to show.
-    if (!(bt.overall.actual_mwh > 0)) continue;
-    const categories = categoryChanges(rows);
-    regions.push({
-      ba, name: NAMES[ba]?.name ?? ba, zone: REGION_ZONES[ba] ?? 'America/New_York',
-      shard: { path: `/data/eia-930/${versions['eia-930']}/${s.path}`, sha256: s.sha256 },
-      fleet: { ...fleet, units: fleet.units.map(compactUnit) },
-      backtest: bt,
-      causes: candidateCauses({ fleet, rows, categories }),
-      categories, unmet: run.unmet, surplus: run.surplus, co2_t: run.co2_t,
-      prices: { deliveries: prices.deliveries, withheld: prices.withheld },
-    });
+  for (const s of inp.shards.filter((x) => x.state.endsWith(`-${inp.year}`))) {
+    const r = scenarioRegion(inp, s.state.split('-')[0]);
+    // The hours and the run stay in memory only while the region is built.
+    if (r) { delete r.rows; delete r.run; regions.push(r); }
   }
-  return { year, versions, regions: regions.sort((a, b) => (a.ba < b.ba ? -1 : 1)) };
+  return { year: inp.year, versions: inp.versions, regions: regions.sort((a, b) => (a.ba < b.ba ? -1 : 1)) };
 }
 
 /** The fleet as CSV: one row per unit, placed and unplaceable, with its sources and methods. */
