@@ -1,6 +1,9 @@
 # Tests and gates on every push and pull request (docs/decisions-day-one.md §6).
 # Every step is git, node, or a script in this repository. Actions are GitHub's
 # own, pinned to full commit SHAs. No install step: there is nothing to install.
+# The suites are three jobs rather than one because together they outgrow a
+# sensible clock: the browser gates alone take a quarter of an hour, and the
+# gates read files rather than run a runtime, so they run once.
 name: ci
 
 on:
@@ -18,7 +21,7 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -33,6 +36,38 @@ jobs:
       - name: Assert the Node floor
         run: node verify/node-floor.mjs
       - name: Tests
-        run: npm test
+        run: npm run test:unit
+
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['24.12.0', '26']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Assert the Node floor
+        run: node verify/node-floor.mjs
+      - name: Browser gates
+        run: npm run test:browser
+
+  gates:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+      - name: Assert the Node floor
+        run: node verify/node-floor.mjs
       - name: Gates
         run: npm run check
