@@ -44,6 +44,8 @@ h3 { font-size: 1rem; font-weight: 700; }
 .rail .wrap { display: flex; align-items: center; gap: var(--s4); min-height: 56px; flex-wrap: wrap; }
 .wordmark { color: var(--legend-white); font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.02em; text-decoration: none; }
 .rail nav ul { display: flex; gap: var(--s3); list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+/* One line beside the wordmark saying what the site answers; it stands down on a phone. */
+.rail-what { margin: 0; margin-right: auto; font-size: .8125rem; opacity: .82; }
 }
 .rail nav a {
   color: var(--legend-white); font-weight: 500; font-size: .8125rem; letter-spacing: .01em; text-decoration: none;
@@ -240,6 +242,14 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
 
 footer { border-top: 1px solid var(--line); margin-top: var(--s8); padding: var(--s5) 0 var(--s6); color: var(--muted); font-size: .8125rem; }
 footer ul { list-style: none; padding: 0; margin: 0 0 var(--s3); display: flex; gap: var(--s4); flex-wrap: wrap; }
+/* The footer's four cards (DESIGN.md "Footer Cards"): the whole card is the link. */
+.footer-cards { display: grid; grid-template-columns: 1fr; gap: var(--s3); margin-bottom: var(--s5); }
+.footer-cards a { display: block; height: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-field); padding: var(--s4); text-decoration: none; color: var(--ink); }
+.footer-cards a:hover { background: var(--panel-hover); }
+.footer-cards .card-title { display: block; font-weight: 600; font-size: .9375rem; }
+.footer-cards .card-note { display: block; margin-top: var(--s1); color: var(--muted); font-size: .8125rem; }
+@media (min-width: 480px) { .footer-cards { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 768px) { .footer-cards { grid-template-columns: repeat(4, 1fr); } }
 .trust-index { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--s2) var(--s4); }
 footer p { margin: var(--s1) 0 0; max-width: 70ch; }
 footer .wordmark-foot { color: var(--ink); font-weight: 700; letter-spacing: -0.02em; }

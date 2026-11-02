@@ -14,16 +14,16 @@ import { sharedSite } from '../../lib/shared-site.mjs';
 const out = await sharedSite();
 const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
 
-test('the rail carries the wordmark, one link and the theme control, and no section tabs', () => {
+test('the rail carries the wordmark, what the site answers, and the theme control, and no section tabs', () => {
   for (const p of ['/', '/files/', '/data/eia-861/', '/tools/calc/energy-units/convert/', '/learn/get-your-data/']) {
     const html = page(p);
     const rail = html.slice(html.indexOf('<header class="rail"'), html.indexOf('</header>'));
     assert.match(rail, /class="wordmark"[^>]*>gridprims</, p);
-    assert.match(rail, /href="\/tools\/"[^>]*>Every tool, in one list</, p);
+    assert.match(rail, /class="rail-what">Where new load or generation can connect, how much, and how long\.</, p);
     assert.match(rail, /data-theme-toggle/, p);
-    // A visitor who wants breadth goes through All tools; the rail holds no sections.
+    // Breadth is reached through the search bar and the footer's All tools card; the rail holds neither.
     for (const s of ['Bills', 'Carbon', 'Learn']) assert.doesNotMatch(rail, new RegExp(`>${s}</a>`), `${p} still tabs ${s}`);
-    assert.equal((rail.match(/<li>/g) ?? []).length, 1, `${p} rail holds one link`);
+    assert.equal((rail.match(/<li>/g) ?? []).length, 0, `${p} rail holds no links`);
   }
 });
 

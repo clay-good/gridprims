@@ -37,7 +37,9 @@ test('without JavaScript the home page asks a plain question, offers two doors, 
   // No lanes, no tool cells: breadth lives behind one link.
   assert.doesNotMatch(body, /class="tool-cell"/);
   assert.doesNotMatch(body, /For your home|For your work/);
-  assert.match(body, /href="\/tools\/">Every tool, in one list</);
+  // Breadth is the one centred search bar; the catalog is a footer card.
+  assert.match(body, /<section class="home-search command" role="search"/);
+  assert.match(body, /id="command-input"/);
   assert.doesNotMatch(body, /<script/);
 });
 

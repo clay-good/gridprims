@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { methodsPage } from '../../../site/templates/pages.mjs';
-import { TRUST_PAGES, FOOTER_PAGES } from '../../../site/templates/layout.mjs';
+import { TRUST_PAGES, FOOTER_PAGES, FOOTER_CARDS } from '../../../site/templates/layout.mjs';
 import { createI18n } from '../../../site/lib/i18n.mjs';
 import strings from '../../../site/strings/en-US.mjs';
 import { TOOLS } from '../../../core/tools/index.mjs';
@@ -17,13 +17,21 @@ import { sharedSite } from '../../lib/shared-site.mjs';
 const out = await sharedSite();
 const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
 
-test('every page\'s footer links the whole trust set, and nothing outside gridprims', () => {
+test('every page\'s footer is the four cards and the report path, and links nothing outside gridprims but the source and the maintainer', () => {
+  const about = page('/about/');
+  // The trust set stays one click away, from the card that names it.
+  for (const [, href] of FOOTER_PAGES) assert.ok(about.includes(`href="${href}"`), `/about/ lacks ${href}`);
   for (const p of pagesOf(out)) {
     const html = page(p);
-    for (const [, href] of FOOTER_PAGES) assert.ok(html.includes(`href="${href}"`), `${p} lacks ${href}`);
+    for (const [, href] of FOOTER_CARDS) assert.ok(html.includes(`href="${href}"`), `${p} lacks the card for ${href}`);
+    // Reporting a problem is how a tool earns its validation level, so it stays on every page.
+    assert.match(html, /<a href="\/report\/" data-report>/, `${p} lacks the report path`);
     // The footer is about gridprims alone; a handoff elsewhere on the page is a different thing.
     const footer = html.slice(html.indexOf('<footer'));
     for (const d of ['sophiewell.com', 'geoprims.com', 'roughlogic.com', 'enklayve.com', 'vaulytica.com', 'encryptalotta.com']) assert.ok(!footer.includes(d), `${p}'s footer still links ${d}`);
+    // The only outbound links are the source repository and the maintainer's own site.
+    const outbound = [...footer.matchAll(/href="(https?:\/\/[^"]+)"/g)].map((m) => new URL(m[1]).host);
+    assert.deepEqual([...new Set(outbound)].sort(), ['claygood.com', 'github.com'], p);
   }
   for (const [id, href] of TRUST_PAGES) if (id !== 'report') assert.ok(pagesOf(out).includes(href), `${href} is not built`);
 });

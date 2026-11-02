@@ -64,3 +64,22 @@ export function queuePages(dataDir) {
   });
   return { asOf, national: summarize(q.rows, asOf), noState: q.rows.filter((r) => !r.state).length, states, manifest: q.manifest };
 }
+
+/**
+ * One state's queue summaries as the browser reads them (siting/where-and-how-long).
+ * Summaries only: project rows, and with them any point of interconnection, never travel.
+ * @param {{asOf: string, manifest: any}} q
+ * @param {{state: string, summary: any, counties: any[]}} state
+ */
+export function queueStateJson(q, state) {
+  const cut = ({ activeMw, activeCount, byType, medianYears, withdrawn }) => ({ activeMw, activeCount, byType, medianYears, withdrawn });
+  return {
+    state: state.state,
+    release: q.manifest.release ?? q.manifest.version ?? null,
+    asOf: q.manifest.asOf ?? null,
+    through: q.asOf,
+    license: q.manifest.license ?? null,
+    summary: cut(state.summary),
+    counties: state.counties.filter((c) => c.fips).map((c) => ({ fips: c.fips, county: c.county, summary: cut(c.summary) })),
+  };
+}

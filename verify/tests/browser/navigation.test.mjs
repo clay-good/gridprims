@@ -21,7 +21,7 @@ const shell = 'new Promise((r) => { const f = () => document.documentElement.dat
 for (const kind of ['chrome', 'firefox']) {
   const skip = !findBrowser(kind) && `${kind} is not installed`;
 
-  test(`${kind}: the rail holds one link at every width, with no section menu to open`, { skip, timeout: 60_000 }, async () => {
+  test(`${kind}: the rail carries what the site answers, no links and no menu, and the search bar works at every width`, { skip, timeout: 60_000 }, async () => {
     const server = await serve(out);
     const browser = await launch(kind);
     try {
@@ -29,9 +29,15 @@ for (const kind of ['chrome', 'firefox']) {
         await browser.setViewport(w, 720);
         await browser.goto(`${server.url}/`);
         await waitFor(browser, "document.documentElement.dataset.shellReady === 'true'");
-        assert.equal(await browser.evaluate("document.querySelectorAll('.rail nav a').length"), 1, `${w} px`);
+        assert.equal(await browser.evaluate("document.querySelectorAll('.rail nav a').length"), 0, `${w} px rail holds no links`);
         assert.equal(await browser.evaluate("!!document.querySelector('[data-menu]')"), false, `${w} px has no menu button`);
-        assert.ok(await browser.evaluate("document.querySelector('.rail nav a').getBoundingClientRect().width > 0"), `${w} px link is visible`);
+        // The description stands down on a phone (DESIGN.md Layout); the wordmark never does.
+        const whatShown = await browser.evaluate("(() => { const el = document.querySelector('.rail-what'); return el ? el.getBoundingClientRect().width > 0 : false; })()");
+        assert.equal(whatShown, w >= 720, `${w} px description visibility`);
+        assert.ok(await browser.evaluate("document.querySelector('.rail .wordmark').getBoundingClientRect().width > 0"), `${w} px wordmark is visible`);
+        // Breadth lives in the one centred search bar, which must be usable at both widths.
+        assert.ok(await browser.evaluate("document.querySelector('.home-search #command-input').getBoundingClientRect().width > 0"), `${w} px search is visible`);
+        assert.equal(await browser.evaluate("document.querySelectorAll('#command-input').length"), 1, `${w} px has one command input`);
       }
     } finally {
       await browser.close();

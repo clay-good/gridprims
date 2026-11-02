@@ -69,3 +69,16 @@ test('a plant page that fell below the content minimum redirects to its state pa
   assert.equal(res.headers.get('location'), to);
   assert.equal((await get('/plants/999999999/')).status, 404);
 });
+
+test('queue summaries are a public table, readable from any origin, and carry no point of interconnection', async () => {
+  const res = await get('/queue/tx.json');
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get('access-control-allow-origin'), '*');
+  const body = await res.json();
+  assert.equal(body.state, 'TX');
+  assert.ok(body.counties.length > 0);
+  // Summaries only: a project row, and with it a substation name, never travels.
+  for (const k of ['poi', 'poi_name', 'projects', 'substation']) assert.ok(!JSON.stringify(body).includes(k), `queue JSON carries ${k}`);
+  const travis = body.counties.find((c) => c.county === 'Travis');
+  assert.ok(travis.fips === '48453' && typeof travis.summary.activeMw === 'number');
+});

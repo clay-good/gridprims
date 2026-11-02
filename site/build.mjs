@@ -37,7 +37,7 @@ import { LOOKUP_PATH, lookupPage } from './templates/lookup.mjs';
 import { CATALOG_PATH, catalogPage, homePage, STATES_PATH, statesIndexPage } from './templates/home.mjs';
 import { checkSimplicity } from './ui/home-lanes.mjs';
 import { SECTIONS } from './ui/sections.mjs';
-import { queuePages } from './entities/queue.mjs';
+import { queuePages, queueStateJson } from './entities/queue.mjs';
 import { carbonData } from './entities/carbon.mjs';
 import { balancingPages } from './entities/balancing.mjs';
 import { fleetCsv, scenarioData } from './entities/scenario.mjs';
@@ -296,6 +296,13 @@ export async function build(opts = {}) {
     if (qPosture !== 'link') {
       write(queuePath(), queueIndexPage({ q, i18n, posture: qPosture }));
       for (const state of q.states) write(queuePath(state.state), queueStatePage({ q, state, i18n, posture: qPosture }));
+      // The same summaries as JSON, one file per state, for the siting read-out
+      // (siting/where-and-how-long). Summaries only: no project rows, so no point
+      // of interconnection can travel with them.
+      mkdirSync(join(outDir, 'queue'), { recursive: true });
+      for (const state of q.states) {
+        writeFileSync(join(outDir, `queue/${state.state.toLowerCase()}.json`), JSON.stringify(queueStateJson(q, state)));
+      }
     }
   }
   // The on-device lookup: a prefix table, one shard per state, and which utilities have pages.

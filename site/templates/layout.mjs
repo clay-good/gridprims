@@ -1,6 +1,6 @@
 // The shell around every page (DESIGN.md Layout): top rail, command bar, main, footer.
-// The home page opts out of the command bar: it has one headline and one action,
-// and a second search field there competes with both (site/home-and-navigation).
+// The home page opts out of the rail's command bar because it carries its own,
+// centred under the read-out (siting/home-and-shell).
 
 import { html, raw } from '../lib/html.mjs';
 import { gridPulse } from '../ui/grid-pulse.mjs';
@@ -11,6 +11,7 @@ let defaultPulse = null;
 export function setPulse(p) { defaultPulse = p; }
 import { SECTIONS } from '../ui/sections.mjs';
 import { DESCRIPTION_MAX, fit, jsonLd } from '../lib/meta.mjs';
+import { MAINTAINER_URL, REPO_URL } from '../config.mjs';
 
 const ORIGIN = 'https://gridprims.com';
 /** The sections with a social card (site/cards/<section>.png); every page shows its section's card. */
@@ -29,6 +30,20 @@ export const THEME_SCRIPT = "document.documentElement.dataset.js='1';try{var t=l
  */
 /** The few the footer itself carries: what a visitor needs while reading a number. */
 export const FOOTER_PAGES = [['about', '/about/'], ['privacy', '/privacy/'], ['limits', '/limits/'], ['sources', '/sources/'], ['terms', '/terms/'], ['report', '/report/']];
+
+/** The footer's four cards (DESIGN.md "Footer Cards"): every other page is reached through one of them. */
+/**
+ * The command bar's fields. One markup, two placements: beneath the rail on every
+ * page, and centred under the read-out on the home page (siting/home-and-shell).
+ * shell.js binds by id, so only one may be on a page.
+ */
+export function commandFields({ t }) {
+  return html`<label for="command-input">${t('command.label')}</label>
+    <input id="command-input" class="mono" type="search" autocomplete="off" spellcheck="false" placeholder="${t('command.placeholder')}" aria-controls="command-results" aria-expanded="false" aria-autocomplete="list" role="combobox">
+    <ul id="command-results" class="command-results mono" role="listbox" aria-label="${t('command.results')}" hidden></ul>`;
+}
+
+export const FOOTER_CARDS = [['tools', '/tools/'], ['source', REPO_URL], ['about', '/about/'], ['maintainer', MAINTAINER_URL]];
 
 /** The trust page set, linked in full from /about/ (site/trust-pages). */
 export const TRUST_PAGES = [['about', '/about/'], ['methods', '/methods/'], ['privacy', '/privacy/'], ['accessibility', '/accessibility/'], ['corrections', '/corrections/'], ['changelog', '/changelog/'], ['license', '/license/'], ['sources', '/sources/'], ['review', '/review-status/'], ['limits', '/limits/'], ['terms', '/terms/'], ['continuity', '/continuity/'], ['developers', '/developers/'], ['security', '/security/'], ['settings', '/settings/'], ['report', '/report/']];
@@ -74,29 +89,23 @@ ${modules.map((m) => html`<script type="module" src="${m}"></script>`)}
 <header class="rail">
   <div class="wrap">
     <a class="wordmark" href="/">${t('site.name')}</a>
-    <nav aria-label="${t('nav.label')}">
-      <ul id="nav-list"><li><a href="/tools/"${section === 'tools' ? raw(' aria-current="page"') : ''}>${t('home.allTools')}</a></li></ul>
-    </nav>
+    <p class="rail-what">${t('site.what')}</p>
     ${gridPulse(pulse, i18n)}
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="${t('theme.toggle')}">${t('theme.night')}</button>
   </div>
 </header>
 ${commandBar ? html`<div class="command" role="search">
-  <div class="wrap">
-    <label for="command-input">${t('command.label')}</label>
-    <input id="command-input" class="mono" type="search" autocomplete="off" spellcheck="false" placeholder="${t('command.placeholder')}" aria-controls="command-results" aria-expanded="false" aria-autocomplete="list" role="combobox">
-    <ul id="command-results" class="command-results mono" role="listbox" aria-label="${t('command.results')}" hidden></ul>
-  </div>
+  <div class="wrap">${commandFields(i18n)}</div>
 </div>` : ''}
 <main id="main" class="wrap">
 ${body}
 </main>
 <footer>
   <div class="wrap">
-    <nav aria-label="${t('footer.trust')}"><ul>
-      ${FOOTER_PAGES.map(([id, href]) => html`<li><a href="${href}"${id === 'report' ? raw(' data-report') : ''}>${id === 'report' ? t('report.title') : t(`nav.${id}`)}</a></li>`)}
+    <nav aria-label="${t('footer.trust')}"><ul class="footer-cards">
+      ${FOOTER_CARDS.map(([id, href]) => html`<li><a href="${href}"${href.startsWith('http') ? raw(' rel="noopener"') : ''}><span class="card-title">${t(`footer.card.${id}`)}</span><span class="card-note">${t(`footer.card.${id}.note`)}</span></a></li>`)}
     </ul></nav>
-    <p>${t('footer.privacy')}</p>
+    <p>${t('footer.privacy')} <a href="/report/" data-report>${t('report.title')}</a></p>
     <p><span class="wordmark-foot">${t('site.name')}</span> · ${t('footer.license')}</p>
   </div>
 </footer>

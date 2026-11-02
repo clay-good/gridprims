@@ -5,7 +5,7 @@
 
 import { html } from '../lib/html.mjs';
 import { ORIGIN } from '../config.mjs';
-import { layout } from './layout.mjs';
+import { commandFields, layout } from './layout.mjs';
 import { LANES } from '../ui/home-lanes.mjs';
 import { toolPath } from '../ui/tool-page.mjs';
 import { PARKED, SECTIONS, sectionOf } from '../ui/sections.mjs';
@@ -79,6 +79,15 @@ function proDoor({ t }) {
 </section>`;
 }
 
+/** The one route to everything else: the command bar, centred under the read-out, with its examples. */
+function homeSearch({ t }) {
+  return html`<section class="home-search command" role="search" aria-labelledby="home-search-title">
+  <h2 id="home-search-title">${t('home.search.title')}</h2>
+  ${commandFields({ t })}
+  <p class="unit-hint">${t('home.search.examples')}</p>
+</section>`;
+}
+
 /** The worked plate: the shipped sample, already read, so the page proves the product before it lists it. */
 function proofPlate(p, { t, date }) {
   const n = (x, d = 0) => x.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -130,7 +139,7 @@ export function homePage({ tools, i18n, exists, asOf, proof = null }) {
 ${startDoors(i18n)}
 ${proDoor(i18n)}
 ${proof ? proofPlate(proof, i18n) : ''}
-<p class="home-more"><a href="${CATALOG_PATH}">${t('home.allTools')}</a></p>`;
+${homeSearch(i18n)}`;
   return layout({ i18n, title: t('home.pageTitle'), description: t('home.description'), path: '/', body, modules: ['/site/pages/home.js'], structured: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: t('site.name'), url: `${ORIGIN}/`, description: t('home.description'), applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }], section: 'home', commandBar: false });
 }
 

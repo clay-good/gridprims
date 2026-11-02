@@ -5,6 +5,8 @@
    number, and both lanes still start above the fold. Last in the file so these
    win over the base rules they narrow. */
 @media (max-width: 719px) {
+  /* The rail's description stands down; the wordmark carries the page alone. */
+  .rail-what { display: none; }
   .proof { margin: var(--s2) 0 var(--s4); }
   .proof > .legend { margin-bottom: var(--s1); }
   /* One line that still carries a real measured number, so the lanes keep the first screen. */

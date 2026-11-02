@@ -69,3 +69,11 @@
   .proof .answer { grid-column: 1; grid-row: 2; margin: 0; }
   .proof .figures { grid-column: 2; grid-row: 2 / span 3; align-self: start; }
 }
+
+/* The one search bar, centred under the read-out: the single route to everything else. */
+.home-search { max-width: 40rem; margin: var(--s7) auto 0; text-align: center; border: 0; background: none; padding: 0; }
+.home-search h2 { font-size: 1.0625rem; margin: 0 0 var(--s3); }
+.home-search label { display: block; margin-bottom: var(--s2); }
+.home-search input { width: 100%; }
+.home-search .command-results { text-align: left; }
+.home-search .unit-hint { margin-top: var(--s3); }

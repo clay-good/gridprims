@@ -58,7 +58,8 @@ export default {
       return openData(await withHeaders(new Response(null, { status: 302, headers: { location: `/data/${latest[1]}/${version}/${latest[2]}`, 'cache-control': 'public, max-age=300' } })));
     }
     const res = await env.ASSETS.fetch(request);
-    if (url.pathname.startsWith('/data/') && res.ok && !url.pathname.endsWith('/')) return openData(await withHeaders(res));
+    // The data library and the queue summaries are public tables: readable from any origin, without credentials.
+    if ((url.pathname.startsWith('/data/') || /^\/queue\/[a-z]{2}\.json$/.test(url.pathname)) && res.ok && !url.pathname.endsWith('/')) return openData(await withHeaders(res));
     if (res.status === 404) {
       // A plant page that fell below the content minimum redirects to its state page (site/build.mjs MOVED_PLANTS).
       const plant = /^\/plants\/(\d+)\/?$/.exec(url.pathname);

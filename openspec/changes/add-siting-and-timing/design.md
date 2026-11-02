@@ -25,6 +25,12 @@
 
 **Decision.** `summarize()` already computes the withdrawal share only for the cohort that entered on or before 2020 and only when at least 20 requests exist. The read-out keeps both guards and, where a county fails them, says so and offers the state figure rather than showing a share computed from three projects.
 
+## D4a. A negative published capacity is shown, not corrected
+
+**Decision.** LBNL's file carries 16 rows whose `mw_1` is negative, so a county's type total can come out below zero (Travis County, TX reads -53 MW of solar today, on the queue page as well as in the new JSON). We do not change a publisher's number. The read-out reports what the file says and names the oddity rather than hiding it.
+
+**Alternatives considered.** Clamping at zero or dropping those rows would make the page look tidier and would silently disagree with LBNL's own totals, which is the failure this project exists to avoid. Open: whether to show the negative inline with a note or to split it out; task 2.4 decides it against the Travis County case.
+
 ## D5. Median years is labelled history
 
 **Decision.** The median is of years already waited by active requests as of the dataset's period end. It is presented with its cohort and its as-of date and never as an expected wait, which keeps it inside the standing refusal on forecasts.
