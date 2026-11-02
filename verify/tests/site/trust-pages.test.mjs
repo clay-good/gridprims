@@ -17,17 +17,22 @@ import { sharedSite } from '../../lib/shared-site.mjs';
 const out = await sharedSite();
 const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
 
-test('every page\'s footer is the four cards and the report path, and links nothing outside gridprims but the source and the maintainer', () => {
+test('every page\'s footer is the four cards alone, and links nothing outside gridprims but the source and the maintainer', () => {
   const about = page('/about/');
+  // Everything the footer used to carry stays one click away, on the About page.
+  assert.match(about, /<a href="\/report\/"/);
+  assert.match(about, /<a href="\/license\/">/);
   // The trust set stays one click away, from the card that names it.
   for (const [, href] of FOOTER_PAGES) assert.ok(about.includes(`href="${href}"`), `/about/ lacks ${href}`);
   for (const p of pagesOf(out)) {
     const html = page(p);
     for (const [, href] of FOOTER_CARDS) assert.ok(html.includes(`href="${href}"`), `${p} lacks the card for ${href}`);
-    // Reporting a problem is how a tool earns its validation level, so it stays on every page.
-    assert.match(html, /<a href="\/report\/" data-report>/, `${p} lacks the report path`);
     // The footer is about gridprims alone; a handoff elsewhere on the page is a different thing.
-    const footer = html.slice(html.indexOf('<footer'));
+    // Bounded at the closing tag: the report dialog that follows is not the footer.
+    const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
+    // The footer is the four cards and nothing else; the licence notice and the
+    // report form live on the pages the About card leads to.
+    assert.doesNotMatch(footer, /<p>/, `${p} has text under the footer cards`);
     for (const d of ['sophiewell.com', 'geoprims.com', 'roughlogic.com', 'enklayve.com', 'vaulytica.com', 'encryptalotta.com']) assert.ok(!footer.includes(d), `${p}'s footer still links ${d}`);
     // The only outbound links are the source repository and the maintainer's own site.
     const outbound = [...footer.matchAll(/href="(https?:\/\/[^"]+)"/g)].map((m) => new URL(m[1]).host);

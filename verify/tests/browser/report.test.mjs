@@ -58,7 +58,8 @@ for (const kind of ['chrome', 'firefox']) {
       const n = await browser.evaluate('Number(document.documentElement.dataset.loads)');
       await browser.evaluate(`(() => { const dt = new DataTransfer(); dt.items.add(new File([Uint8Array.from(atob('${b64}'), (c) => c.charCodeAt(0))], 'iso-timestamp.csv')); const i = document.querySelector('[data-file]'); i.files = dt.files; i.dispatchEvent(new Event('change', { bubbles: true })); })()`);
       await waitFor(browser, `Number(document.documentElement.dataset.loads) > ${n}`);
-      await browser.evaluate(`document.querySelector('footer [data-report]').click()`);
+      // The workbench carries its own trigger now that the footer is four cards.
+      await browser.evaluate(`document.querySelector('[data-workbench] [data-report]').click()`);
       const p = await browser.evaluate(preview);
       assert.equal(p.attachment, undefined);
       assert.doesNotMatch(JSON.stringify(p), /2026-01-01|iso-timestamp/);

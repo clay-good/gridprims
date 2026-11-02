@@ -105,8 +105,6 @@ ${body}
     <nav aria-label="${t('footer.trust')}"><ul class="footer-cards">
       ${FOOTER_CARDS.map(([id, href]) => html`<li><a href="${href}"${href.startsWith('http') ? raw(' rel="noopener"') : ''}><span class="card-title">${t(`footer.card.${id}`)}</span><span class="card-note">${t(`footer.card.${id}.note`)}</span></a></li>`)}
     </ul></nav>
-    <p>${t('footer.privacy')} <a href="/report/" data-report>${t('report.title')}</a></p>
-    <p><span class="wordmark-foot">${t('site.name')}</span> · ${t('footer.license')}</p>
   </div>
 </footer>
 <dialog class="report" data-report-dialog aria-labelledby="report-title">

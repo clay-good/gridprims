@@ -14,7 +14,6 @@ export function sitingReadout({ t }) {
     <div class="field">
       <label for="siting-zip">${t('siting.zip')}</label>
       <input id="siting-zip" name="zip" class="mono" inputmode="numeric" autocomplete="postal-code" maxlength="10" aria-describedby="siting-zip-error">
-      <p class="error" id="siting-zip-error" data-siting-error role="alert"></p>
     </div>
     <div class="field">
       <label for="siting-mw">${t('siting.mw')}</label>
@@ -29,6 +28,7 @@ export function sitingReadout({ t }) {
     </div>
     <button class="button primary" type="submit">${t('siting.run')}</button>
   </form>
+  <p class="error" id="siting-zip-error" data-siting-error role="alert"></p>
   <p class="unit-hint">${t('siting.privacy')}</p>
   <noscript><p class="panel">${t('siting.needsJs')}</p></noscript>
   <div class="siting-answer" data-siting-answer aria-live="polite"></div>

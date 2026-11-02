@@ -271,7 +271,8 @@ export function filesPage({ i18n, reviewed = new Set() }) {
   <section class="answer" aria-live="polite" data-answer></section>
   <p><label><input type="checkbox" data-keep> ${t('files.keep')}</label> <span class="unit-hint">${t('files.keepNote')}</span></p>
   <div data-chart></div>
-  <p><button class="button" type="button" data-make-report>${t('report.make')}</button></p>
+  <p><button class="button" type="button" data-make-report>${t('report.make')}</button>
+    <a class="button" href="/report/" data-report>${t('report.title')}</a></p>
   <section class="panel report-view" data-report-view hidden aria-labelledby="report-view-title"></section>
   <section class="panel" data-insights></section>
   ${billPanel(i18n, reviewed)}
@@ -421,7 +422,7 @@ export function aboutPage({ i18n, maintainer }) {
 <h2>${t('about.money')}</h2><p>${t('about.moneyBody')}</p>
 <h2>${t('about.costs')}</h2><p>${t('about.costsBody')}</p><p>${t('about.users')}</p>
 <h2>${t('about.pages')}</h2>
-<ul class="trust-index">${TRUST_PAGES.filter(([id]) => id !== 'report').map(([id, href]) => html`<li><a href="${href}">${t(`nav.${id}`)}</a></li>`)}</ul>`;
+<ul class="trust-index">${TRUST_PAGES.map(([id, href]) => html`<li><a href="${href}">${id === 'report' ? t('report.title') : t(`nav.${id}`)}</a></li>`)}</ul>`;
   return layout({ i18n, title: `${t('about.title')} · ${t('site.name')}`, description: t('about.what'), path: '/about/', body });
 }
 
