@@ -75,7 +75,8 @@ for (const kind of ['chrome', 'firefox']) {
             const over = document.documentElement.scrollWidth - window.innerWidth;
             const clipped = [...document.querySelectorAll('main *, header *, footer *')].filter((el) => {
               const s = getComputedStyle(el);
-              if (el.closest('.table-wrap, pre, svg') || s.display === 'none' || s.overflowX !== 'visible') return false;
+              // A listbox scrolls its own options: the select carries the overflow, so it is the one judged.
+              if (el.closest('.table-wrap, pre, svg') || el.matches('option, optgroup') || s.display === 'none' || s.overflowX !== 'visible') return false;
               return el.scrollWidth > el.clientWidth + 2 && el.clientWidth > 0;
             }).map((el) => el.tagName.toLowerCase() + (el.className ? '.' + String(el.className).split(' ')[0] : ''));
             return { over, clipped: [...new Set(clipped)].slice(0, 5) };
