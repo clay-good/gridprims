@@ -1,29 +1,25 @@
 # gridprims
 
-**The US power grid's math, files, and public data, free in one browser tab.**
+**Where new load or generation can connect to the US grid, how much, and how long, from public federal data.**
 
 ### [gridprims.com](https://gridprims.com)
 
-## For energy professionals
+Enter a place and a size. Get the utilities that could serve it, how that size compares with their own peak and annual sales, what is already queued in the county, how long those requests have waited, how many were withdrawn, and which federal interconnection process applies. Every figure carries its publisher and date, and the math runs in your browser.
 
-Built for utility engineers, energy managers, solar and storage developers, siting teams, commission staff, ratepayer advocates, and reporters.
+Built from LBNL's Queued Up, FERC Form 714, EIA-861 and the federal Small Generator Interconnection Procedures.
 
-- **Interval data in seconds.** Drop a meter export (CSV, Excel, or Green Button) and get peaks, load factor, and monthly demand. Every parsing choice is shown and can be edited.
-- **Line-by-line bills on any tariff.** Price a load on any OpenEI rate, with time-of-use, tiers, demand windows, ratchets, and power factor. Then rank every rate in the same class.
-- **Hourly emissions from your own file.** Your load's CO₂ hour by hour from EIA's hourly grid data, beside the annual averages most reports use, and how much of it a solar array or clean contract covers hour by hour. Plus the cleanest hours in your region for shifting flexible load.
-- **One cited page per entity.** Every utility, power plant, state, and eGRID subregion, built from EIA, EPA, FERC, and LBNL data. Each page names its source and how current it is.
-- **What if a plant closed?** Retire or add a coal, gas, or oil unit in any balancing authority. See which fuels replace it over the year that happened, with the model's error against what actually ran shown first.
-- **Large-load terms and math.** Compare what utilities and states require of data centers and other very large customers, each term cited to the order or tariff sheet, with an archived copy. Work out the minimum bill and exit fee year by year, and see how a request compares with the utility's whole system.
-- **Interconnection queues** by state and county, by type, with time in queue and withdrawal rates.
+**How close in we can see.** Feeder and substation headroom is Critical Energy/Electric Infrastructure Information, so it is not public and we never estimate it. Answers are for the utility, the balancing authority, and the county. For a feeder, ask the serving utility for its hosting-capacity map.
+
+## Everything else it does
+
+Reached from the search bar and the All tools page, not the front page.
+
+- **Your meter file, read on your device.** Drop a CSV, Excel, or Green Button export and get peaks, load factor, a line-by-line bill on any of the 26,000-plus OpenEI rates, every cheaper rate in the class, coincident-peak exposure, and a battery and solar screen.
+- **Hourly emissions** from that same file, from EIA's hourly grid data, beside the annual averages most reports use.
+- **One cited page per entity.** Every utility, power plant, state, balancing authority, and eGRID subregion, from EIA, EPA, FERC, and LBNL.
+- **Household tools.** Check a bill from its printed totals, find the cheapest plan, see whether a change was the weather, and find your utility from a ZIP code.
+- **Grid and large-load math.** Interconnection screens, large-load tariff terms, a plant-retirement screening model, and calculators with their constants and sources shown.
 - **Clean data downloads.** Versioned tables with checksums, licenses, and a citation to copy.
-
-## For homes
-
-- **Check your electric bill** and see what you should have paid.
-- **Find the cheapest rate plan** for how your home actually uses power.
-- **See how much of a change was the weather.** Compare this year's bills with last year's, and see how much of the change came from a colder winter or a hotter summer, from the nearest NOAA station.
-- **See if your use is high** compared with the average home at your utility and in your state.
-- **Find your utility** from a ZIP code.
 
 ## Private by design
 
