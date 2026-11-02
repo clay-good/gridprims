@@ -19,6 +19,13 @@ export function retailBasis(u) {
 export function largeLoadUtilities({ utilities, year }) {
   return utilities.map((u) => {
     const r = retailBasis(u);
-    return { id: u.id, name: u.name, state: u.homeState, year, salesMwh: Math.round(r.salesMwh), resKwh: r.resKwh, basis: r.basis, peak: u.peak?.mw ? { mw: u.peak.mw, year: u.peak.year } : null, page: u.page };
+    // Only 15 of 1,534 utilities file a Form 714 peak of their own, so the balancing
+    // authority's peak travels too and the read-out says which one it used.
+    return {
+      id: u.id, name: u.name, state: u.homeState, year, salesMwh: Math.round(r.salesMwh), resKwh: r.resKwh, basis: r.basis,
+      peak: u.peak?.mw ? { mw: u.peak.mw, year: u.peak.year } : null,
+      baPeak: u.baPeak?.mw ? { mw: u.baPeak.mw, year: u.baPeak.year, code: u.baPeak.code, name: u.baPeak.name } : null,
+      page: u.page,
+    };
   }).filter((u) => u.salesMwh > 0);
 }
