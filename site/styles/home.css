@@ -77,3 +77,21 @@
 .home-search input { width: 100%; }
 .home-search .command-results { text-align: left; }
 .home-search .unit-hint { margin-top: var(--s3); }
+
+/* The siting read-out: the question, three inputs on one line, then the answer. */
+.siting { max-width: 56rem; margin: 0 auto; }
+.siting .home-title { margin-bottom: var(--s3); }
+.siting .start-sub { text-align: center; max-width: 60ch; margin-left: auto; margin-right: auto; }
+.siting-form { display: flex; gap: var(--s3); align-items: flex-end; flex-wrap: wrap; justify-content: center; margin: var(--s5) 0 var(--s2); }
+.siting-form .field { margin: 0; }
+.siting-form input { min-height: 48px; min-width: 7rem; padding: 10px 12px; border: 1px solid var(--field-border); border-radius: var(--r-field); background: var(--panel); color: var(--ink); font-size: 1rem; }
+.siting-form select { min-height: 48px; }
+.siting-form .button { min-height: 48px; }
+.siting > .unit-hint { text-align: center; }
+.siting-resolution { margin-top: var(--s6); }
+.siting-answer:not(:empty) { margin-top: var(--s6); }
+.siting-utilities { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.siting-utility { border-bottom: 1px solid var(--line); padding: var(--s4) 0; }
+.siting-utility h3 { margin: 0 0 var(--s2); font-size: 1.0625rem; }
+.siting-utility p { margin: var(--s1) 0 0; font-size: .9375rem; }
+.siting-queue h3, .siting-answer .panel h3 { margin-top: 0; }

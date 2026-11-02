@@ -32,7 +32,6 @@ import { lookupData } from './entities/lookup.mjs';
 import { rateRecords, tariffData } from './entities/tariffs.mjs';
 import { served } from './entities/plants.mjs';
 import { countyHistory } from '../core/lib/backup-power.mjs';
-import { loadStats } from '../core/lib/load-stats.mjs';
 import { LOOKUP_PATH, lookupPage } from './templates/lookup.mjs';
 import { CATALOG_PATH, catalogPage, homePage, STATES_PATH, statesIndexPage } from './templates/home.mjs';
 import { checkSimplicity } from './ui/home-lanes.mjs';
@@ -404,32 +403,7 @@ export async function build(opts = {}) {
   // Section pages come after every page they may link, so a cell shows only once its page exists.
   for (const id of ['bills', 'data', 'carbon', 'grid', 'learn']) write(`/${id}/`, sectionPage({ id, tools: TOOLS, datasets, entries, i18n, exists, asOf: datasetDate }));
   write(CATALOG_PATH, catalogPage({ tools: TOOLS, i18n, exists, asOf: datasetDate }));
-  // The home page proves the product with the shipped sample, read here at build time so the
-  // figures are real and the page needs no script to show them.
-  const sampleRows = readFileSync(join(ROOT, 'site/samples/sample-office-15min.csv'), 'utf8').trim().split('\n').slice(1).map((l) => l.split(','));
-  const sampleSeries = {
-    startMs: Float64Array.from(sampleRows, (r) => Date.parse(`${r[0].replace(' ', 'T')}Z`)),
-    kwh: Float64Array.from(sampleRows, (r) => Number(r[1])), intervalMinutes: 15,
-  };
-  const st = loadStats(sampleSeries, 'America/Chicago');
-  // The peak day, hour by hour, for the curve the plate sits beside.
-  const peakDay = new Date(st.peakStartMs).toISOString().slice(0, 10);
-  const hours = Array.from({ length: 24 }, () => ({ kwh: 0, n: 0 }));
-  for (let i = 0; i < sampleSeries.startMs.length; i++) {
-    const d = new Date(sampleSeries.startMs[i]);
-    if (d.toISOString().slice(0, 10) !== peakDay) continue;
-    const h = hours[d.getUTCHours()];
-    h.kwh += sampleSeries.kwh[i];
-    h.n++;
-  }
-  const curve = hours.map((h, hour) => ({ hour, kw: h.n ? (h.kwh / h.n) * 4 : 0 }));
-  const proof = {
-    curve, peakDay, peakHour: new Date(st.peakStartMs).getUTCHours(),
-    peakKw: st.peakKw, totalKwh: st.totalKwh, loadFactor: st.loadFactor, intervals: st.intervals,
-    peakStartMs: st.peakStartMs, fromMs: sampleSeries.startMs[0], toMs: sampleSeries.startMs[sampleSeries.startMs.length - 1],
-    file: 'sample-office-15min.csv',
-  };
-  write('/', homePage({ tools: TOOLS, i18n, exists, asOf: datasetDate, proof }));
+  write('/', homePage({ i18n }));
   // The simplicity budget: six sections at most, five cells a lane at most.
   const overBudget = checkSimplicity(SECTIONS);
   if (overBudget.length) throw new Error(`simplicity budget: ${overBudget.join('; ')}`);

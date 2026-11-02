@@ -13,15 +13,15 @@
 
 ## 3. The siting read-out
 
-- [ ] 3.1 Build the place and size inputs and the on-device join of ZIP shard, large-load prefill, and queue JSON; verify the Travis County scenario end to end in the browser driver and that no request carries the ZIP or the size
-- [ ] 3.2 Report the size against the utility's Form 714 peak, falling back to the balancing authority's with an explicit label; verify both paths against a utility that files and one that does not
-- [ ] 3.3 Report county queue figures with the withdrawal guard and the state fallback; verify a county below the cohort minimum omits the share and offers the state figure
-- [ ] 3.4 Name the applicable federal interconnection process for a generation size and link to the screens tool; verify against the SGIP ladder already encoded in `interconnect.process.route`
-- [ ] 3.5 State the CEII resolution limit beside the answer and link the serving utility's hosting-capacity map where the directory knows one; verify the sentence is present in the served HTML and that no feeder figure is shipped
-- [ ] 3.6 Make the read-out work without JavaScript as far as the served HTML allows; verify the headline, inputs, and resolution statement are in the HTML and the form degrades to an explanatory page
+- [x] 3.1 Build the place and size inputs and the on-device join of ZIP shard, large-load prefill, and queue JSON; verify the Travis County scenario end to end in the browser driver and that no request carries the ZIP or the size
+- [x] 3.2 Report the size against the utility's Form 714 peak, falling back to the balancing authority's with an explicit label; verify both paths against a utility that files and one that does not
+- [x] 3.3 Report county queue figures with the withdrawal guard and the state fallback; verify a county below the cohort minimum omits the share and offers the state figure
+- [x] 3.4 Name the applicable federal interconnection process for a generation size and link to the screens tool; verify against the SGIP ladder already encoded in `interconnect.process.route`
+- [x] 3.5 State the CEII resolution limit beside the answer and link the serving utility's hosting-capacity map where the directory knows one; verify the sentence is present in the served HTML and that no feeder figure is shipped
+- [x] 3.6 Make the read-out work without JavaScript as far as the served HTML allows; verify the headline, inputs, and resolution statement are in the HTML and the form degrades to an explanatory page
 
 ## 4. Home page and index
 
-- [ ] 4.1 Replace the home page body with the read-out; verify the first-screen scenarios at 1440 x 900 and 360 x 640 and that the workbench is still reachable from the catalog and the search bar
+- [x] 4.1 Replace the home page body with the read-out; verify the first-screen scenarios at 1440 x 900 and 360 x 640 and that the workbench is still reachable from the catalog and the search bar
 - [ ] 4.2 Add places to the command index and measure the index size against the performance budget; verify a ZIP, a county, a utility, and a balancing authority each match, and record the measured size in the design's open question
-- [ ] 4.3 Update the home and navigation specs and tests that assert the old home page; verify the full suite and the checks pass
+- [x] 4.3 Update the home and navigation specs and tests that assert the old home page; verify the full suite and the checks pass

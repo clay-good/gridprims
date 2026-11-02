@@ -16,31 +16,31 @@ const out = await sharedSite();
 const read = (p) => readFileSync(join(out, p), 'utf8');
 const main = (h) => h.slice(h.indexOf('<main'), h.indexOf('</main>'));
 
-test('without JavaScript the home page asks a plain question, offers two doors, and still proves itself on a sample', () => {
+test('without JavaScript the home page is the siting read-out: the question, its inputs, and its limits', () => {
   const html = read('index.html');
   const body = main(html);
-  assert.match(body, /<h1 class="home-title">See what your electricity really costs, and what would lower it\.<\/h1>/);
-  // Both audiences are named on the first screen: the two doors, then the three professional jobs.
-  assert.match(body, /<h2 id="pro-title">For energy managers, developers, and utility staff<\/h2>/);
-  assert.match(body, /href="\/files\/#peaks">Coincident-peak exposure</);
-  assert.match(body, /href="\/files\/#battery">Battery and solar payback</);
-  // Two equal doors, a ZIP code or a meter file, then the sample's own action.
+  assert.match(body, /<h1 id="siting-title" class="home-title">Where can new load or generation connect, and how long will it take\?<\/h1>/);
+  // The place and the size are both in the served HTML, with one action.
+  assert.match(body, /<input id="siting-zip" name="zip"/);
+  assert.match(body, /<input id="siting-mw" name="mw"/);
+  assert.match(body, /<option value="generation">New generation<\/option>/);
   const primary = [...body.matchAll(/class="button primary"[^>]*>([^<]+)</g)].map((m) => m[1]);
-  assert.deepEqual(primary, ['Find my utility', 'Choose a file', 'Open this file in the workbench']);
-  // The ZIP door works without a script: a plain GET to the lookup, which reads ?zip=.
-  assert.match(body, /<form class="door-form" action="\/lookup\/" method="get">[\s\S]*name="zip"/);
-  assert.match(body, /href="\/tools\/household\/usage-benchmark\/compare\/">See if your use is high</);
-  // The sample's measured value, its stepped curve, and the basis band, all server-rendered.
-  assert.match(body, /class="number"[^>]*>166\.1/);
-  assert.match(body, /<polyline class="series series-measured"/);
-  assert.match(body, /Basis · sample-office-15min\.csv/);
-  // No lanes, no tool cells: breadth lives behind one link.
+  assert.deepEqual(primary, ['Show me']);
+  // The resolution limit is on the page itself, not only on the limits page.
+  assert.match(body, /Critical Energy\/Electric Infrastructure Information/);
+  assert.match(body, /ask the serving utility for its hosting-capacity map/);
+  // Scripting off still says what the read-out needs.
+  assert.match(body, /<noscript><p class="panel">This read-out needs JavaScript/);
+  // Nothing else competes for the first screen: no tool cells, no dropzone, no worked sample.
   assert.doesNotMatch(body, /class="tool-cell"/);
-  assert.doesNotMatch(body, /For your home|For your work/);
+  assert.doesNotMatch(body, /data-home-file|class="dropzone"/);
+  assert.doesNotMatch(body, /Basis · sample-office-15min\.csv/);
   // Breadth is the one centred search bar; the catalog is a footer card.
   assert.match(body, /<section class="home-search command" role="search"/);
   assert.match(body, /id="command-input"/);
-  assert.doesNotMatch(body, /<script/);
+  // The workbench stays reachable, just not from the first screen.
+  assert.ok(read('files/index.html').includes('<h1>What your meter file says</h1>'));
+  assert.ok(read('tools/index.html').includes('href="/files/"'));
 });
 
 test('tools that are not built appear nowhere, not even as "coming soon"', () => {
