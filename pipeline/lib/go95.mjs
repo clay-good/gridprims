@@ -15,6 +15,12 @@ export const GO95_PAGES = [
 ];
 
 const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', ndash: '–', mdash: '—', rsquo: '’', lsquo: '‘' };
+
+// Windows-1252 differs from Latin-1 only in 0x80-0x9F, and the CPUC's tables use those bytes for
+// dashes and quotes. Decoded here rather than through TextDecoder('windows-1252'), which falls back
+// to Latin-1 on a Node built without the full ICU data, so the extractor reads the same everywhere.
+const HIGH = '\u20ac\u0081\u201a\u0192\u201e\u2026\u2020\u2021\u02c6\u2030\u0160\u2039\u0152\u008d\u017d\u008f\u0090\u2018\u2019\u201c\u201d\u2022\u2013\u2014\u02dc\u2122\u0161\u203a\u0153\u009d\u017e\u0178';
+const decode1252 = (bytes) => Array.from(bytes, (b) => (b >= 0x80 && b <= 0x9f ? HIGH[b - 0x80] : String.fromCharCode(b))).join('');
 const unescape = (s) => s.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (m, e) => {
   if (e[0] === '#') return String.fromCodePoint(Number(e[1] === 'x' || e[1] === 'X' ? `0x${e.slice(2)}` : e.slice(1)));
   return ENTITIES[e.toLowerCase()] ?? m;
@@ -27,7 +33,7 @@ const unescape = (s) => s.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (m, e) => {
  * @returns {string} one line a row
  */
 export function tableText(html) {
-  const text = typeof html === 'string' ? html : new TextDecoder('windows-1252').decode(html);
+  const text = typeof html === 'string' ? html : decode1252(html);
   const body = text.replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ');
   const rows = [];
   for (const m of body.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)) {
