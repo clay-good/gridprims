@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T15:40:34.711Z",
+  "generatedAt": "2026-11-10T15:51:10.680Z",
   "workflows": [
     {
       "id": "refresh-data",
@@ -14,8 +14,8 @@
       "id": "link-check",
       "intervalHours": 168,
       "thresholdHours": 504,
-      "lastSuccess": "2026-11-03T15:18:20.758Z",
-      "lastRun": "2026-11-03T15:18:20.758Z",
+      "lastSuccess": "2026-11-10T15:51:10.680Z",
+      "lastRun": "2026-11-10T15:51:10.680Z",
       "enabled": true,
       "events": []
     },
@@ -134,8 +134,8 @@
         "calc.transformer.size citation",
         "carbon.load-shift.estimate citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/dnav/ng/ng_cons_heat_a_EPG0_VGTH_btucf_a.htm",
@@ -144,8 +144,8 @@
       "usedBy": [
         "calc.energy-units.convert citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/totalenergy/data/monthly/pdf/mer_A_FULL.pdf",
@@ -154,8 +154,8 @@
       "usedBy": [
         "calc.energy-units.convert citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php",
@@ -165,8 +165,8 @@
         "calc.energy-units.convert citation",
         "calc.energy-units.convert handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php",
@@ -175,8 +175,8 @@
       "usedBy": [
         "calc.energy-units.convert citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.epa.gov/egrid",
@@ -186,8 +186,8 @@
         "calc.energy-units.emissions citation",
         "egrid source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.epa.gov/egrid/egrid-technical-guide",
@@ -196,8 +196,8 @@
       "usedBy": [
         "calc.energy-units.emissions citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.epa.gov/egrid/power-profiler",
@@ -206,8 +206,8 @@
       "usedBy": [
         "calc.energy-units.emissions handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.energy.gov/sites/prod/files/2014/04/f15/mc60405.pdf",
@@ -216,8 +216,8 @@
       "usedBy": [
         "calc.power-factor.correct citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.clarkpublicutilities.com/wp-content/uploads/2016/05/ReducePowerFactor-4-page.pdf",
@@ -226,8 +226,8 @@
       "usedBy": [
         "calc.power-factor.correct citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://atb.nlr.gov/",
@@ -239,8 +239,8 @@
         "calc.cost.lcoe citation",
         "calc.cost.lcoe handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://github.com/statnett/linerate",
@@ -250,8 +250,8 @@
         "calc.line-rating.ampacity citation",
         "calc.line-rating.ampacity handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://github.com/gteasoft/pypacity",
@@ -260,8 +260,8 @@
       "usedBy": [
         "calc.line-rating.ampacity citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.raponline.org/knowledge-center/electricity-regulation-in-the-us-a-guide-2/",
@@ -270,7 +270,7 @@
       "usedBy": [
         "ratepayer.revenue-requirement.explain citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": "2026-11-01T07:24:08.467Z"
     },
     {
@@ -283,7 +283,7 @@
         "pudl-ferc1 source",
         "pudl-ferc714 source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": "2026-11-01T07:24:08.467Z"
     },
     {
@@ -294,7 +294,7 @@
       "usedBy": [
         "electrify.service-headroom.check citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -304,8 +304,8 @@
       "usedBy": [
         "electrify.service-headroom.check citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://roughlogic.com/",
@@ -315,7 +315,7 @@
         "electrify.service-headroom.check handoff",
         "interconnect.inverter.size handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": "2026-11-01T07:24:08.467Z"
     },
     {
@@ -326,8 +326,8 @@
         "electrify.backup-power.size citation",
         "electrify.backup-power.size handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/survey/form/eia_861/instructions.pdf",
@@ -337,8 +337,8 @@
         "reliability.outage-log.indices citation",
         "reliability.outage-log.indices handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://site.ieee.org/boston-pes/files/2019/03/IEEE-1366-Reliability-Indices-2-2019.pdf",
@@ -347,8 +347,8 @@
       "usedBy": [
         "reliability.outage-log.indices citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://openei.org/wiki/Utility_Rate_Database",
@@ -357,8 +357,8 @@
       "usedBy": [
         "household.bill-totals.check citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://openei.org/services/doc/rest/util_rates/?version=7",
@@ -367,8 +367,8 @@
       "usedBy": [
         "household.bill-totals.check citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://apps.openei.org/USURDB/",
@@ -379,8 +379,8 @@
         "urdb source",
         "urdb terms"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/electricity/data/eia861/",
@@ -394,8 +394,8 @@
         "eia-861-net-metering source",
         "eia-861 source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/electricity/sales_revenue_price/",
@@ -404,8 +404,8 @@
       "usedBy": [
         "household.usage-benchmark.compare citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/electricity/gridmonitor/",
@@ -416,8 +416,8 @@
         "eia-930-interchange source",
         "eia-930 source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://gridprims.com/files/",
@@ -427,8 +427,8 @@
         "carbon.load-shift.estimate handoff",
         "weather.change.explain handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://docs.caltrack.org/en/latest/methods.html",
@@ -437,8 +437,8 @@
       "usedBy": [
         "weather.change.explain citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines",
@@ -448,7 +448,7 @@
       "usedBy": [
         "weather.change.explain citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -459,7 +459,7 @@
       "usedBy": [
         "weather.change.explain citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -469,8 +469,8 @@
       "usedBy": [
         "weather.change.explain citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.aepohio.com/company/about/rates/data-center-tariff",
@@ -480,8 +480,8 @@
         "grid.large-load.take-or-pay citation",
         "large-load terms (aep-ohio-dct)"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://npr.brightspotcdn.com/b6/ac/706130b64d2b8eee6a9832b97e48/20251125-virginiascc-dominionenergyruling.pdf",
@@ -491,8 +491,8 @@
         "grid.large-load.take-or-pay citation",
         "large-load terms (dominion-gs5)"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://catalystcoop-pudl.readthedocs.io/en/latest/data_sources/ferc714.html",
@@ -501,7 +501,7 @@
       "usedBy": [
         "grid.large-load.context citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -511,7 +511,7 @@
       "usedBy": [
         "lines.midspan-clearance.check citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -521,8 +521,8 @@
       "usedBy": [
         "lines.midspan-clearance.check citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://gridprims.com/lines/standards-template.csv",
@@ -532,8 +532,8 @@
         "lines.midspan-clearance.check handoff",
         "lines.attachment-height.find handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://gridprims.com/lines/standards-template.xlsx",
@@ -543,8 +543,8 @@
         "lines.midspan-clearance.check handoff",
         "lines.attachment-height.find handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://ia.cpuc.ca.gov/gos/go95/go_95_startup_page.html",
@@ -554,8 +554,8 @@
         "lines.midspan-clearance.check handoff",
         "lines.attachment-height.find handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-1/subpart-J/section-1.1411",
@@ -566,7 +566,7 @@
         "lines.midspan-clearance.check handoff",
         "lines.attachment-height.find handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -577,7 +577,7 @@
       "usedBy": [
         "lines.attachment-height.find citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -593,7 +593,7 @@
         "interconnect.fast-track.screens citation",
         "interconnect.fast-track.screens handoff"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -603,8 +603,8 @@
       "usedBy": [
         "interconnect.inverter.size citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://ftp.puc.texas.gov/public/puct-info/agency/rulesnlaws/subrules/electric/25.211/25.211.pdf",
@@ -613,8 +613,8 @@
       "usedBy": [
         "interconnect.inverter.size citation"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.census.gov/geographies/reference-files/time-series/geo/relationship-files.2020.html",
@@ -623,8 +623,8 @@
       "usedBy": [
         "census-zcta-county source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.census.gov/about/policies/citation.html",
@@ -634,8 +634,8 @@
         "census-zcta-county terms",
         "census-zcta-points terms"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.2020.html",
@@ -644,8 +644,8 @@
       "usedBy": [
         "census-zcta-points source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://doi.org/10.6084/m9.figshare.24237376.v4",
@@ -655,7 +655,7 @@
       "usedBy": [
         "eaglei source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -665,8 +665,8 @@
       "usedBy": [
         "eaglei terms"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.epa.gov/egrid/egrid-questions-and-answers",
@@ -676,7 +676,7 @@
       "usedBy": [
         "egrid terms"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -686,8 +686,8 @@
       "usedBy": [
         "eia-860 source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/about/copyrights_reuse.php",
@@ -703,8 +703,8 @@
         "eia-930-interchange terms",
         "eia-930 terms"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/electricity/data/eia860m/",
@@ -713,8 +713,8 @@
       "usedBy": [
         "eia-860m source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.eia.gov/electricity/data/eia923/",
@@ -723,8 +723,8 @@
       "usedBy": [
         "eia-923 source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily",
@@ -733,8 +733,8 @@
       "usedBy": [
         "ghcn-daily source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/readme.txt",
@@ -743,8 +743,8 @@
       "usedBy": [
         "ghcn-daily terms"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://emp.lbl.gov/queues",
@@ -754,7 +754,7 @@
         "lbnl-queued-up source",
         "lbnl-queued-up terms"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -764,8 +764,8 @@
       "usedBy": [
         "nlr-sharing-the-sun source"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://data.nlr.gov/node/244/license",
@@ -774,8 +774,8 @@
       "usedBy": [
         "nlr-sharing-the-sun terms"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://github.com/catalyst-cooperative/pudl/blob/main/README.rst#licensing",
@@ -786,7 +786,7 @@
         "pudl-ferc1 terms",
         "pudl-ferc714 terms"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -796,8 +796,8 @@
       "usedBy": [
         "AL regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.pscpublicaccess.alabama.gov/pscpublicaccess/page/psc-searches/portal.aspx",
@@ -806,8 +806,8 @@
       "usedBy": [
         "AL regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://rca.alaska.gov/",
@@ -816,7 +816,7 @@
       "usedBy": [
         "AK regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -826,7 +826,7 @@
       "usedBy": [
         "AK regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -836,7 +836,7 @@
       "usedBy": [
         "AK regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -846,8 +846,8 @@
       "usedBy": [
         "AZ regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://edocket.azcc.gov/",
@@ -856,8 +856,8 @@
       "usedBy": [
         "AZ regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://efiling.azcc.gov/online-services/utilities-public-comment-external",
@@ -866,8 +866,8 @@
       "usedBy": [
         "AZ regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://apsc.arkansas.gov/",
@@ -876,8 +876,8 @@
       "usedBy": [
         "AR regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://apps.apsc.arkansas.gov/olsv2/docket_search.asp",
@@ -886,8 +886,8 @@
       "usedBy": [
         "AR regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://apps.apsc.arkansas.gov/olsv2/publiccomment.asp",
@@ -896,8 +896,8 @@
       "usedBy": [
         "AR regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.cpuc.ca.gov/",
@@ -906,8 +906,8 @@
       "usedBy": [
         "CA regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://apps.cpuc.ca.gov/apex/f?p=401:1",
@@ -916,8 +916,8 @@
       "usedBy": [
         "CA regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.cpuc.ca.gov/about-cpuc/divisions/news-and-public-information-office/public-advisors-office/providing-public-comments-at-the-cpuc",
@@ -926,8 +926,8 @@
       "usedBy": [
         "CA regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.colorado.gov/",
@@ -936,7 +936,7 @@
       "usedBy": [
         "CO regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -946,8 +946,8 @@
       "usedBy": [
         "CO regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.colorado.gov/participate",
@@ -956,7 +956,7 @@
       "usedBy": [
         "CO regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -966,8 +966,8 @@
       "usedBy": [
         "CT regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://portal.ct.gov/PURA/Docket/Docket-and-Document-Information",
@@ -976,8 +976,8 @@
       "usedBy": [
         "CT regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://portal.ct.gov/PURA/Consumer-Services/File-a-Public-Comment/File-a-Public-Comment",
@@ -986,8 +986,8 @@
       "usedBy": [
         "CT regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://depsc.delaware.gov/",
@@ -996,8 +996,8 @@
       "usedBy": [
         "DE regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://delafile.delaware.gov/AdvancedSearch/AdvancedSearchDocket.aspx",
@@ -1006,8 +1006,8 @@
       "usedBy": [
         "DE regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://delafile.delaware.gov/Complaints/AddPublicComments.aspx",
@@ -1016,8 +1016,8 @@
       "usedBy": [
         "DE regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://dcpsc.org/",
@@ -1026,8 +1026,8 @@
       "usedBy": [
         "DC regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://edocket.dcpsc.org/public/search",
@@ -1036,8 +1036,8 @@
       "usedBy": [
         "DC regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://edocket.dcpsc.org/public/public_comments",
@@ -1046,8 +1046,8 @@
       "usedBy": [
         "DC regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.floridapsc.com/",
@@ -1056,8 +1056,8 @@
       "usedBy": [
         "FL regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.floridapsc.com/dockets",
@@ -1066,8 +1066,8 @@
       "usedBy": [
         "FL regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.floridapsc.com/customer-comment",
@@ -1076,8 +1076,8 @@
       "usedBy": [
         "FL regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.ga.gov/",
@@ -1086,8 +1086,8 @@
       "usedBy": [
         "GA regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.ga.gov/facts-advanced-search/",
@@ -1096,8 +1096,8 @@
       "usedBy": [
         "GA regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.ga.gov/public-comments/",
@@ -1106,8 +1106,8 @@
       "usedBy": [
         "GA regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.hawaii.gov/",
@@ -1116,8 +1116,8 @@
       "usedBy": [
         "HI regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://hpuc.my.site.com/cdms/s/search",
@@ -1126,8 +1126,8 @@
       "usedBy": [
         "HI regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.hawaii.gov/all-puc-faq/what-are-different-ways-to-get-involved-in-puc-proceedings-2/",
@@ -1136,8 +1136,8 @@
       "usedBy": [
         "HI regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.idaho.gov/",
@@ -1146,8 +1146,8 @@
       "usedBy": [
         "ID regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.idaho.gov/case",
@@ -1156,8 +1156,8 @@
       "usedBy": [
         "ID regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.idaho.gov/Form/CaseComment",
@@ -1166,8 +1166,8 @@
       "usedBy": [
         "ID regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://icc.illinois.gov/",
@@ -1176,8 +1176,8 @@
       "usedBy": [
         "IL regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://icc.illinois.gov/docket",
@@ -1186,8 +1186,8 @@
       "usedBy": [
         "IL regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://icc.illinois.gov/consumers/make-a-public-comment",
@@ -1196,8 +1196,8 @@
       "usedBy": [
         "IL regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.in.gov/iurc/",
@@ -1206,8 +1206,8 @@
       "usedBy": [
         "IN regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.in.gov/iurc/docketed-cases/find-a-docketed-case/",
@@ -1216,8 +1216,8 @@
       "usedBy": [
         "IN regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://iuc.iowa.gov/",
@@ -1226,8 +1226,8 @@
       "usedBy": [
         "IA regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://efs.iowa.gov/",
@@ -1236,8 +1236,8 @@
       "usedBy": [
         "IA regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://iuc.iowa.gov/customer-assistance/how-do-i-file-comment-objection-or-letter-support-open-docket",
@@ -1246,8 +1246,8 @@
       "usedBy": [
         "IA regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.kcc.ks.gov/",
@@ -1256,8 +1256,8 @@
       "usedBy": [
         "KS regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://kcc-connect.kcc.ks.gov/s/custom-search",
@@ -1266,8 +1266,8 @@
       "usedBy": [
         "KS regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://kcc-connect.kcc.ks.gov/s/public-comments",
@@ -1276,8 +1276,8 @@
       "usedBy": [
         "KS regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.ky.gov/",
@@ -1286,8 +1286,8 @@
       "usedBy": [
         "KY regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.ky.gov/Case/SearchCases/",
@@ -1296,8 +1296,8 @@
       "usedBy": [
         "KY regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.ky.gov/Case/SearchCasesPublicComments",
@@ -1306,8 +1306,8 @@
       "usedBy": [
         "KY regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://lpsc.louisiana.gov/",
@@ -1316,8 +1316,8 @@
       "usedBy": [
         "LA regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://lpscpubvalence.lpsc.louisiana.gov/portal/lpsc-web-portal",
@@ -1326,8 +1326,8 @@
       "usedBy": [
         "LA regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.maine.gov/mpuc/",
@@ -1336,27 +1336,27 @@
       "usedBy": [
         "ME regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
       "url": "https://mpuc-cms.maine.gov/CQM.Public.WebUI/Common/AdvanceSearch.aspx",
-      "state": "ok",
-      "status": 200,
+      "state": "broken",
+      "status": 0,
       "usedBy": [
         "ME regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": "2026-11-03T15:18:20.758Z"
     },
     {
       "url": "https://mpuc-cms.maine.gov/CQM.Public.WebUI/Comments/CaseNumberSearch.aspx",
-      "state": "ok",
-      "status": 200,
+      "state": "broken",
+      "status": 0,
       "usedBy": [
         "ME regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": "2026-11-03T15:18:20.758Z"
     },
     {
@@ -1366,8 +1366,8 @@
       "usedBy": [
         "MD regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://webpscxb.pscmaryland.com/DMS/home",
@@ -1376,7 +1376,7 @@
       "usedBy": [
         "MD regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": "2026-11-01T07:24:08.467Z"
     },
     {
@@ -1386,8 +1386,8 @@
       "usedBy": [
         "MD regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.mass.gov/orgs/department-of-public-utilities",
@@ -1396,7 +1396,7 @@
       "usedBy": [
         "MA regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1406,8 +1406,8 @@
       "usedBy": [
         "MA regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.michigan.gov/mpsc",
@@ -1416,7 +1416,7 @@
       "usedBy": [
         "MI regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1426,8 +1426,8 @@
       "usedBy": [
         "MI regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.michigan.gov/mpsc/consumer/get-involved",
@@ -1436,7 +1436,7 @@
       "usedBy": [
         "MI regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1446,8 +1446,8 @@
       "usedBy": [
         "MN regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://efiling.web.commerce.state.mn.us/",
@@ -1456,29 +1456,29 @@
       "usedBy": [
         "MN regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
       "url": "https://mn.gov/puc/get-involved/public-comments/",
       "state": "moved",
       "status": 200,
-      "finalUrl": "http://validate.perfdrive.com/d5bd5333eafe8b0ccd6023ba818d1aa6/?ssa=af54afa8-b962-4538-b796-525a5a629d36&ssb=34099207207&ssc=https%3A%2F%2Fmn.gov%2Fpuc%2Fget-involved%2Fpublic-comments%2F&ssi=ae85c092-bf56-4f0e-a2f8-4f6552115e11&ssk=support@shieldsquare.com&ssm=49735377141054270107247858862105&ssn=1c3011f2318067b5c4481617a7185219e631df442726-68e6-4e6a-bf6748&sso=b8136ee4-05f7f8619d416155a38bfb7723c07cb16b0ccd3d4569d7c4&ssp=53107297541793750144179379363810692&ssq=65113181902258625330219022539125558321350&ssr=MjAuMTY5LjczLjE0OQ==&sst=gridprims-link-check%20(+https://gridprims.com)&ssu=&ssv=&ssw=&ssx=W10=",
+      "finalUrl": "http://validate.perfdrive.com/d5bd5333eafe8b0ccd6023ba818d1aa6/?ssa=d6412b5d-e1c6-4850-a7f3-77a70c804f92&ssb=12683281438&ssc=https%3A%2F%2Fmn.gov%2Fpuc%2Fget-involved%2Fpublic-comments%2F&ssi=7f56503d-bf56-42df-a49a-fc94296a474b&ssk=support@shieldsquare.com&ssm=26354993670666176104017004499598&ssn=7479b441f047c6a3083597439bb1752503230be4b9f8-c7cb-4a78-86b92f&sso=6b5ad6ef-a752b1c7f1d10780a02b04d4e41010678e703a5b50e19de3&ssp=89372351911794354443179432321746846&ssq=16893342583482843721425834723208568378148&ssr=MjAuMTY5Ljk5LjEzNA==&sst=gridprims-link-check%20(+https://gridprims.com)&ssu=&ssv=&ssw=&ssx=W10=",
       "usedBy": [
         "MN regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
       "url": "https://www.psc.ms.gov/",
-      "state": "broken",
-      "status": 500,
+      "state": "ok",
+      "status": 200,
       "usedBy": [
         "MS regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-01T07:24:08.467Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://ctsportal.psc.ms.gov/portal/document-search",
@@ -1487,7 +1487,7 @@
       "usedBy": [
         "MS regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": "2026-11-01T07:24:08.467Z"
     },
     {
@@ -1497,8 +1497,8 @@
       "usedBy": [
         "MO regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.efis.psc.mo.gov/",
@@ -1507,8 +1507,8 @@
       "usedBy": [
         "MO regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.mo.gov/General/Submit_Comments",
@@ -1517,8 +1517,8 @@
       "usedBy": [
         "MO regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.mt.gov/",
@@ -1527,7 +1527,7 @@
       "usedBy": [
         "MT regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": "2026-11-01T07:24:08.467Z"
     },
     {
@@ -1538,7 +1538,7 @@
       "usedBy": [
         "MT regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1548,7 +1548,7 @@
       "usedBy": [
         "MT regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": "2026-11-01T07:24:08.467Z"
     },
     {
@@ -1558,8 +1558,8 @@
       "usedBy": [
         "NE regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.puc.nv.gov/",
@@ -1568,8 +1568,8 @@
       "usedBy": [
         "NV regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.puc.nv.gov/dockets/",
@@ -1578,8 +1578,8 @@
       "usedBy": [
         "NV regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.puc.nv.gov/consumers/consumer-participation-in-pucn-proceedings/",
@@ -1588,8 +1588,8 @@
       "usedBy": [
         "NV regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.puc.nh.gov/",
@@ -1598,7 +1598,7 @@
       "usedBy": [
         "NH regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1608,7 +1608,7 @@
       "usedBy": [
         "NH regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1618,7 +1618,7 @@
       "usedBy": [
         "NH regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1628,8 +1628,8 @@
       "usedBy": [
         "NJ regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://publicaccess.bpu.state.nj.us/",
@@ -1638,8 +1638,8 @@
       "usedBy": [
         "NJ regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.prc.nm.gov/",
@@ -1648,8 +1648,8 @@
       "usedBy": [
         "NM regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://e360.prc.nm.gov/portal/public/",
@@ -1658,8 +1658,8 @@
       "usedBy": [
         "NM regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.prc.nm.gov/get-involved/",
@@ -1668,8 +1668,8 @@
       "usedBy": [
         "NM regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://dps.ny.gov/",
@@ -1678,8 +1678,8 @@
       "usedBy": [
         "NY regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://documents.dps.ny.gov/public/common/search.html",
@@ -1688,8 +1688,8 @@
       "usedBy": [
         "NY regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://dps.ny.gov/how-post-comments-and-receive-updates-psc-cases",
@@ -1698,8 +1698,8 @@
       "usedBy": [
         "NY regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.ncuc.gov/",
@@ -1708,8 +1708,8 @@
       "usedBy": [
         "NC regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://starw1.ncuc.gov/NCUC/page/Dockets/portal.aspx",
@@ -1718,7 +1718,7 @@
       "usedBy": [
         "NC regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1728,8 +1728,8 @@
       "usedBy": [
         "NC regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.psc.nd.gov/",
@@ -1738,8 +1738,8 @@
       "usedBy": [
         "ND regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://apps.psc.nd.gov/cases/pscasesearch",
@@ -1748,8 +1748,8 @@
       "usedBy": [
         "ND regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puco.ohio.gov/",
@@ -1758,7 +1758,7 @@
       "usedBy": [
         "OH regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1768,8 +1768,8 @@
       "usedBy": [
         "OH regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://dis.puc.state.oh.us/PublicCommentEfiling.aspx",
@@ -1778,8 +1778,8 @@
       "usedBy": [
         "OH regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://oklahoma.gov/occ.html",
@@ -1788,8 +1788,8 @@
       "usedBy": [
         "OK regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://oklahoma.gov/occ/court-dockets/electronic-case-filing.html",
@@ -1798,8 +1798,8 @@
       "usedBy": [
         "OK regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://oklahoma.gov/occ/divisions/public-utility/case-public-comments.html",
@@ -1808,8 +1808,8 @@
       "usedBy": [
         "OK regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.oregon.gov/puc/Pages/default.aspx",
@@ -1818,8 +1818,8 @@
       "usedBy": [
         "OR regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://apps.puc.state.or.us/edocketsSearch/eDocketsSearch/",
@@ -1828,8 +1828,8 @@
       "usedBy": [
         "OR regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://apps.puc.state.or.us/DocketPublicComment",
@@ -1838,8 +1838,8 @@
       "usedBy": [
         "OR regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.puc.pa.gov/",
@@ -1848,8 +1848,8 @@
       "usedBy": [
         "PA regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.puc.pa.gov/search/document-search/",
@@ -1858,8 +1858,8 @@
       "usedBy": [
         "PA regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.puc.pa.gov/general/onlineforms/pdf/Obj-Com_Proposed_Rate_Increase.pdf",
@@ -1868,8 +1868,8 @@
       "usedBy": [
         "PA regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://ripuc.ri.gov/",
@@ -1878,7 +1878,7 @@
       "usedBy": [
         "RI regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": "2026-11-01T07:24:08.467Z"
     },
     {
@@ -1888,8 +1888,8 @@
       "usedBy": [
         "RI regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.sc.gov/",
@@ -1898,8 +1898,8 @@
       "usedBy": [
         "SC regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://dms.psc.sc.gov/Web/Dockets",
@@ -1908,8 +1908,8 @@
       "usedBy": [
         "SC regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.sd.gov/",
@@ -1918,8 +1918,8 @@
       "usedBy": [
         "SD regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.sd.gov/Dockets/Electric/default.aspx",
@@ -1928,8 +1928,8 @@
       "usedBy": [
         "SD regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.sd.gov/contact/guidelines.aspx",
@@ -1938,8 +1938,8 @@
       "usedBy": [
         "SD regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.tn.gov/tpuc.html",
@@ -1948,7 +1948,7 @@
       "usedBy": [
         "TN regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1958,8 +1958,8 @@
       "usedBy": [
         "TN regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.tn.gov/tpuc/agency/public-participation-/tpuc-online-public-comment-form.html",
@@ -1968,7 +1968,7 @@
       "usedBy": [
         "TN regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -1978,8 +1978,8 @@
       "usedBy": [
         "TX regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://interchange.puc.texas.gov/",
@@ -1988,8 +1988,8 @@
       "usedBy": [
         "TX regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.utah.gov/",
@@ -1998,8 +1998,8 @@
       "usedBy": [
         "UT regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.utah.gov/electric/",
@@ -2008,8 +2008,8 @@
       "usedBy": [
         "UT regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://puc.vermont.gov/",
@@ -2018,8 +2018,8 @@
       "usedBy": [
         "VT regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://epuc.vermont.gov/",
@@ -2028,8 +2028,8 @@
       "usedBy": [
         "VT regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://epuc.vermont.gov/?q=node/63",
@@ -2038,8 +2038,8 @@
       "usedBy": [
         "VT regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.scc.virginia.gov/",
@@ -2048,8 +2048,8 @@
       "usedBy": [
         "VA regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.scc.virginia.gov/docketsearch",
@@ -2058,8 +2058,8 @@
       "usedBy": [
         "VA regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.scc.virginia.gov/case-information/submit-public-comments/",
@@ -2068,8 +2068,8 @@
       "usedBy": [
         "VA regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.utc.wa.gov/",
@@ -2078,8 +2078,8 @@
       "usedBy": [
         "WA regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.utc.wa.gov/documents-and-proceedings/dockets",
@@ -2088,8 +2088,8 @@
       "usedBy": [
         "WA regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.utc.wa.gov/consumers/submit-comment/public-comment-form",
@@ -2098,8 +2098,8 @@
       "usedBy": [
         "WA regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.psc.state.wv.us/",
@@ -2108,8 +2108,8 @@
       "usedBy": [
         "WV regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.psc.state.wv.us/WebDocket/default.htm",
@@ -2118,8 +2118,8 @@
       "usedBy": [
         "WV regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.psc.state.wv.us/scripts/onlinecomments/default.cfm",
@@ -2128,8 +2128,8 @@
       "usedBy": [
         "WV regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.wi.gov/Pages/Home.aspx",
@@ -2138,8 +2138,8 @@
       "usedBy": [
         "WI regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://apps.psc.wi.gov/pages/CMS.htm",
@@ -2148,8 +2148,8 @@
       "usedBy": [
         "WI regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://apps.psc.wi.gov/pages/publicComment.htm",
@@ -2158,8 +2158,8 @@
       "usedBy": [
         "WI regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://psc.wyo.gov/",
@@ -2168,18 +2168,18 @@
       "usedBy": [
         "WY regulator home"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://dms.wyo.gov/external/publicusers.aspx",
       "state": "moved",
       "status": 200,
-      "finalUrl": "https://dms.wyo.gov/(S(wjjdmdokgf3fhqa42e14gzw5))/external/publicusers.aspx",
+      "finalUrl": "https://dms.wyo.gov/(S(uzbtgwdyb2vfdbx0pdrzypkr))/external/publicusers.aspx",
       "usedBy": [
         "WY regulator docket"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -2189,8 +2189,8 @@
       "usedBy": [
         "WY regulator comment"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=AL",
@@ -2199,8 +2199,8 @@
       "usedBy": [
         "AL net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=AK",
@@ -2209,8 +2209,8 @@
       "usedBy": [
         "AK net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=AZ",
@@ -2219,8 +2219,8 @@
       "usedBy": [
         "AZ net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=AR",
@@ -2229,8 +2229,8 @@
       "usedBy": [
         "AR net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=CA",
@@ -2239,8 +2239,8 @@
       "usedBy": [
         "CA net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=CO",
@@ -2249,8 +2249,8 @@
       "usedBy": [
         "CO net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=CT",
@@ -2259,8 +2259,8 @@
       "usedBy": [
         "CT net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=DE",
@@ -2269,8 +2269,8 @@
       "usedBy": [
         "DE net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=DC",
@@ -2279,8 +2279,8 @@
       "usedBy": [
         "DC net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=FL",
@@ -2289,8 +2289,8 @@
       "usedBy": [
         "FL net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=GA",
@@ -2299,8 +2299,8 @@
       "usedBy": [
         "GA net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=HI",
@@ -2309,8 +2309,8 @@
       "usedBy": [
         "HI net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=ID",
@@ -2319,8 +2319,8 @@
       "usedBy": [
         "ID net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=IL",
@@ -2329,8 +2329,8 @@
       "usedBy": [
         "IL net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=IN",
@@ -2339,8 +2339,8 @@
       "usedBy": [
         "IN net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=IA",
@@ -2349,8 +2349,8 @@
       "usedBy": [
         "IA net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=KS",
@@ -2359,8 +2359,8 @@
       "usedBy": [
         "KS net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=KY",
@@ -2369,8 +2369,8 @@
       "usedBy": [
         "KY net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=LA",
@@ -2379,8 +2379,8 @@
       "usedBy": [
         "LA net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=ME",
@@ -2389,8 +2389,8 @@
       "usedBy": [
         "ME net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=MD",
@@ -2399,8 +2399,8 @@
       "usedBy": [
         "MD net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=MA",
@@ -2409,8 +2409,8 @@
       "usedBy": [
         "MA net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=MI",
@@ -2419,8 +2419,8 @@
       "usedBy": [
         "MI net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=MN",
@@ -2429,8 +2429,8 @@
       "usedBy": [
         "MN net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=MS",
@@ -2439,8 +2439,8 @@
       "usedBy": [
         "MS net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=MO",
@@ -2449,8 +2449,8 @@
       "usedBy": [
         "MO net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=MT",
@@ -2459,8 +2459,8 @@
       "usedBy": [
         "MT net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=NE",
@@ -2469,8 +2469,8 @@
       "usedBy": [
         "NE net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=NV",
@@ -2479,8 +2479,8 @@
       "usedBy": [
         "NV net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=NH",
@@ -2489,8 +2489,8 @@
       "usedBy": [
         "NH net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=NJ",
@@ -2499,8 +2499,8 @@
       "usedBy": [
         "NJ net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=NM",
@@ -2509,8 +2509,8 @@
       "usedBy": [
         "NM net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=NY",
@@ -2519,8 +2519,8 @@
       "usedBy": [
         "NY net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=NC",
@@ -2529,8 +2529,8 @@
       "usedBy": [
         "NC net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=ND",
@@ -2539,8 +2539,8 @@
       "usedBy": [
         "ND net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=OH",
@@ -2549,8 +2549,8 @@
       "usedBy": [
         "OH net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=OK",
@@ -2559,8 +2559,8 @@
       "usedBy": [
         "OK net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=OR",
@@ -2569,8 +2569,8 @@
       "usedBy": [
         "OR net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=PA",
@@ -2579,8 +2579,8 @@
       "usedBy": [
         "PA net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=RI",
@@ -2589,8 +2589,8 @@
       "usedBy": [
         "RI net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=SC",
@@ -2599,8 +2599,8 @@
       "usedBy": [
         "SC net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=SD",
@@ -2609,8 +2609,8 @@
       "usedBy": [
         "SD net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=TN",
@@ -2619,8 +2619,8 @@
       "usedBy": [
         "TN net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=TX",
@@ -2629,8 +2629,8 @@
       "usedBy": [
         "TX net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=UT",
@@ -2639,8 +2639,8 @@
       "usedBy": [
         "UT net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=VT",
@@ -2649,8 +2649,8 @@
       "usedBy": [
         "VT net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=VA",
@@ -2659,8 +2659,8 @@
       "usedBy": [
         "VA net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=WA",
@@ -2669,8 +2669,8 @@
       "usedBy": [
         "WA net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=WV",
@@ -2679,8 +2679,8 @@
       "usedBy": [
         "WV net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=WI",
@@ -2689,8 +2689,8 @@
       "usedBy": [
         "WI net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://programs.dsireusa.org/system/program?state=WY",
@@ -2699,8 +2699,8 @@
       "usedBy": [
         "WY net metering rules link"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://www.ecfr.gov/current/title-18/section-292.203",
@@ -2713,7 +2713,7 @@
         "qualifying-facility checklist (18 CFR 292.203(d)(1))",
         "qualifying-facility checklist (18 CFR 292.203(d)(2))"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -2726,7 +2726,7 @@
         "qualifying-facility checklist (18 CFR 292.204(a)(2)(i))",
         "qualifying-facility checklist (18 CFR 292.204(b)(1)(i))"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -2741,7 +2741,7 @@
         "qualifying-facility checklist (18 CFR 292.207(e)(2))",
         "qualifying-facility checklist (18 CFR 292.207(a)(3), (c)(1))"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -2752,7 +2752,7 @@
       "usedBy": [
         "qualifying-facility checklist (18 CFR 292.207(b)(1); 18 CFR 381.505(a))"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -2763,7 +2763,7 @@
       "usedBy": [
         "qualifying-facility checklist (18 CFR 131.80(a), (c))"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -2774,7 +2774,7 @@
       "usedBy": [
         "qualifying-facility checklist form"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
+      "checked": "2026-11-10T15:51:10.680Z",
       "lastOk": null
     },
     {
@@ -2784,8 +2784,8 @@
       "usedBy": [
         "large-load terms (georgia-power-large-load)"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://ftp.puc.texas.gov/public/puct-info/agency/rulesnlaws/subrules/electric/25.194/25.194.pdf",
@@ -2794,8 +2794,8 @@
       "usedBy": [
         "large-load terms (texas-25-194)"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     },
     {
       "url": "https://interchange.puc.texas.gov/Documents/58481_218_1684654.PDF",
@@ -2804,8 +2804,8 @@
       "usedBy": [
         "large-load terms (texas-25-194)"
       ],
-      "checked": "2026-11-03T15:18:20.758Z",
-      "lastOk": "2026-11-03T15:18:20.758Z"
+      "checked": "2026-11-10T15:51:10.680Z",
+      "lastOk": "2026-11-10T15:51:10.680Z"
     }
   ],
   "deposits": {
@@ -2816,6 +2816,17 @@
     "lastHeartbeat": null
   },
   "runs": [
+    {
+      "workflow": "link-check",
+      "started": "2026-11-10T15:38:45.171Z",
+      "finished": "2026-11-10T15:51:10.680Z",
+      "durationMs": 745509,
+      "ok": true,
+      "datasets": [],
+      "notes": [
+        "48 broken or moved links"
+      ]
+    },
     {
       "workflow": "go95-watch",
       "started": "2026-11-05T15:40:31.851Z",
