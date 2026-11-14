@@ -42,6 +42,6 @@
 
 ## 6. Surfaces
 
-- [ ] 6.1 Run every worked example through the MCP server; verify identical structured results and that no tool returns a pass or fail for a model-dependent screen
+- [x] 6.1 Run every worked example through the MCP server; verify identical structured results and that no tool returns a pass or fail for a model-dependent screen
 - [ ] 6.2 Confirm the automatic CEII screen finds no infrastructure data in this change's outputs; verify the documented screen record in the registry, with no signature
 - [ ] 6.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green
