@@ -7,11 +7,11 @@
 
 ## 2. Get your data
 
-- [ ] 2.1 Define the guide record schema with verification levels; verify the screenshot and personal-data checks fail fixtures
-- [ ] 2.2 Write guides for the 25 largest utilities, Smart Meter Texas, and generic co-op and municipal portals from `docs/research/09`; verify each has a level, date, and source
+- [x] 2.1 Define the guide record schema with verification levels; verify the screenshot and personal-data checks fail fixtures
+- [x] 2.2 Write guides for the 25 largest utilities, Smart Meter Texas, and generic co-op and municipal portals from `docs/research/09`; verify each has a level, date, and source (28 guides in data/curated/guides/index.mjs, each at the level the brief's tags support; the bill tools open without the utility preselected, which waits on the tariff picker accepting one)
 - [ ] 2.3 Re-check the launch guides in live accounts where contributors have them; verify upgraded levels are recorded with dates and no personal data
-- [ ] 2.4 Add the fixture-link check; verify the missing-fixture scenario fails
-- [ ] 2.5 Add the fallback request letter and bill-totals route; verify the Duke Energy Carolinas scenario
+- [x] 2.4 Add the fixture-link check; verify the missing-fixture scenario fails
+- [x] 2.5 Add the fallback request letter and bill-totals route; verify the Duke Energy Carolinas scenario
 
 ## 3. Guides
 

@@ -326,13 +326,47 @@ export function privacyPage({ i18n }) {
 }
 
 /** Where the meter file comes from: every refused file and the workbench's "Don't have one?" link land here. */
-export function getYourDataPage({ i18n }) {
+/** The day a guide's check turns 12 months old, when its "Needs review" chip shows on the visitor's device. */
+const yearOn = (iso) => { const d = new Date(`${iso}T00:00:00Z`); d.setUTCFullYear(d.getUTCFullYear() + 1); return d.toISOString().slice(0, 10); };
+
+/** One utility's guide (add-learn-and-data-guides: get your data). */
+function guideSection(g, { i18n, formats, hasPage }) {
+  const { t, date } = i18n;
+  const pages = g.utilityIds.filter(hasPage);
+  return html`<section class="panel" id="${g.id}" data-guide="${g.id}" data-level="${g.level}">
+  <h3>${g.name} <span class="unit-hint">${g.state}</span> <span class="warning-chip" data-late-from="${yearOn(g.checked)}" hidden>${t('getData.needsReview')}</span></h3>
+  <p class="${g.level === 'third-party' ? 'strip' : 'unit-hint'}" data-guide-level>${t(`getData.level.${g.level}`, { date: date(g.checked) })}${g.level === 'third-party' ? html` <a href="/report/">${t('getData.report')}</a>` : ''}</p>
+  ${g.noDownload ? html`<p data-no-download><strong>${t('getData.noDownload', { date: date(g.checked) })}</strong> <a href="#ask">${t('getData.ask')}</a> · <a href="/tools/household/bill-totals/check/">${t('getData.totals')}</a></p>` : ''}
+  <dl>
+    <div><dt>${t('getData.portal')}</dt><dd>${g.portal}${pages.length ? html` · ${pages.map((id) => html`<a href="/utilities/${id}/">${t('getData.utilityPage')}</a>`)}` : ''}</dd></div>
+    <div><dt>${t('getData.computer')}</dt><dd><ol>${g.computer.map((step) => html`<li>${step}</li>`)}</ol></dd></div>
+    <div><dt>${t('getData.phone')}</dt><dd>${g.phone ? html`<ol>${g.phone.map((step) => html`<li>${step}</li>`)}</ol>` : t('getData.phoneUnknown')}</dd></div>
+    ${g.noDownload ? '' : html`<div><dt>${t('getData.offered')}</dt><dd>${g.formats.length ? g.formats.map((f) => formats[f].label).join(', ') : t('getData.offeredUnknown')}</dd></div>`}
+    <div><dt>${t('getData.interval')}</dt><dd>${g.interval}</dd></div>
+    <div><dt>${t('getData.history')}</dt><dd>${g.history}</dd></div>
+    ${g.choose ? html`<div><dt>${t('getData.choose')}</dt><dd>${g.choose}</dd></div>` : ''}
+  </dl>
+  ${g.notes ? html`<p>${g.notes}</p>` : ''}
+  <p class="unit-hint">${t('getData.source', { source: g.source })}${g.noDownload ? '' : html` <a href="#ask">${t('getData.ask')}</a>`}</p>
+</section>`;
+}
+
+/**
+ * @param {{i18n: any, guides?: any[], formats?: Record<string, {label: string}>, hasPage?: (id: number) => boolean}} p
+ */
+export function getYourDataPage({ i18n, guides = [], formats = {}, hasPage = () => false }) {
   const { t } = i18n;
   const body = html`<h1>${t('getData.title')}</h1><p class="purpose">${t('getData.intro')}</p>
 <h2>${t('getData.where')}</h2><ol><li>${t('getData.step1')}</li><li>${t('getData.step2')}</li><li>${t('getData.step3')}</li></ol>
 <h2>${t('getData.formats')}</h2><p>${t('getData.formatsBody')}</p>
+<h2>${t('getData.save')}</h2><ul><li>${t('getData.saveIphone')}</li><li>${t('getData.saveAndroid')}</li><li>${t('getData.saveComputer')}</li></ul>
+<p><a class="button primary" href="/files/">${t('getData.open')}</a> <a href="/tools/household/bill-totals/check/">${t('getData.totals')}</a></p>
+${guides.length ? html`<h2>${t('getData.guidesTitle')}</h2><p>${t('getData.guidesIntro')}</p>
+<nav><ul class="guide-index">${guides.map((g) => html`<li><a href="#${g.id}">${g.name}</a></li>`)}</ul></nav>
+${guides.map((g) => guideSection(g, { i18n, formats, hasPage }))}` : ''}
 <h2>${t('getData.none')}</h2><p>${t('getData.noneBody')}</p>
-<p><a class="button primary" href="/files/">${t('getData.open')}</a> <a href="/tools/household/bill-totals/check/">${t('getData.totals')}</a></p>`;
+<section id="ask"><h2>${t('getData.letterTitle')}</h2><p>${t('getData.letterIntro')}</p>
+<pre class="mono" data-request-letter>${t('getData.letter')}</pre></section>`;
   return layout({ i18n, title: `${t('getData.title')} · ${t('site.name')}`, description: t('getData.intro'), path: '/learn/get-your-data/', body, section: 'bills' });
 }
 

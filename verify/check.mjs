@@ -23,6 +23,7 @@ import { checkGlossary } from './gates/glossary.mjs';
 import { checkCeii } from './gates/ceii.mjs';
 import { checkIndexSize } from './gates/index-size.mjs';
 import { checkProgramLinks } from './gates/program-links.mjs';
+import { checkDataGuides } from './gates/data-guides.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -35,6 +36,7 @@ const gates = [
   ['no CEII fields in the queue JSON', () => checkCeii(join(root, 'dist'))],
   ['command index within its size budget', () => checkIndexSize(join(root, 'dist'))],
   ['program links carry their facts, no tracking, and every handoff', () => checkProgramLinks(root)],
+  ['data guides carry a level, date, and source, no personal data, and fixtures for every format', () => checkDataGuides(root)],
   ['style tokens and contrast', () => checkStyle(root)],
   ['no literal copy in templates', () => checkCopy(root)],
   ['result versions and changelog', () => checkVersions(root, { record: Boolean(process.env.GRIDPRIMS_RECORD) })],
