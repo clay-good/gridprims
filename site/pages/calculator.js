@@ -5,7 +5,7 @@ import { runTool } from '../../core/contract/run.mjs';
 import { createI18n } from '../lib/i18n.mjs';
 import { copyText, renderAnswer, renderWork } from '../ui/tool-page.mjs';
 import { renderFigure } from '../ui/tool-figures.mjs';
-import { decodeState, encodeState, isExampleState } from '../ui/share-state.mjs';
+import { decodeState, encodeState, isExampleState, privateAsked, reportInputs } from '../ui/share-state.mjs';
 import strings from '../strings/en-US.mjs';
 
 const root = document.querySelector('[data-tool]');
@@ -58,8 +58,32 @@ function applyFragment() {
     const el = form.elements.namedItem(name);
     if (el) el.value = value;
   }
-  if (Object.keys(shared).length) update({ pushState: false });
+  // A link made with the sender's own rules names them; the rules themselves are asked for here.
+  const asked = privateAsked(manifest, location.hash).filter((name) => !kept(name));
+  for (const name of asked) form.elements.namedItem(name).value = '';
+  if (Object.keys(shared).length || asked.length) update({ pushState: false });
+  for (const name of asked) {
+    const msg = form.querySelector(`#in-${name}-error`);
+    msg.hidden = false;
+    msg.textContent = i18n.t('tool.askPrivate');
+  }
 }
+
+// Private inputs stay in memory unless the user ticks "Keep": then in this browser's storage, under the tool's id.
+const keepKey = (name) => `gridprims.keep.${id}.${name}`;
+function kept(name) { try { return localStorage.getItem(keepKey(name)) !== null; } catch { return false; } }
+for (const box of root.querySelectorAll('[data-keep]')) {
+  const name = box.dataset.keep;
+  const el = form.elements.namedItem(name);
+  try {
+    const saved = localStorage.getItem(keepKey(name));
+    if (saved !== null) { el.value = saved; box.checked = true; }
+  } catch { /* storage blocked: rules last for this tab */ }
+  const save = () => { try { if (box.checked) localStorage.setItem(keepKey(name), el.value); else localStorage.removeItem(keepKey(name)); } catch { /* storage blocked */ } };
+  box.addEventListener('change', save);
+  el.addEventListener('input', () => { if (box.checked) save(); });
+}
+if (root.querySelector('[data-keep]:checked')) update({ pushState: false });
 applyFragment();
 // A link pasted while the page is open changes only the fragment, so no reload happens.
 addEventListener('hashchange', applyFragment);
@@ -83,7 +107,7 @@ root.querySelector('[data-share]').addEventListener('click', async (e) => {
 globalThis.gridprimsReportAttachment = () => {
   const values = readForm();
   const r = runTool(manifest, impl, values);
-  return { inputs: values, outputs: r.outputs ?? null, status: r.status };
+  return { ...reportInputs(manifest, values, i18n.t('report.privateNote')), outputs: r.outputs ?? null, status: r.status };
 };
 
 document.documentElement.dataset.ready = 'true';

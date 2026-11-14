@@ -91,6 +91,8 @@ export function validateManifest(m, opts = {}) {
     // A file or a handle is loaded, never typed, so it has no example value.
     if (inp.type !== 'file' && inp.type !== 'handle' && inp.example === undefined) fail(`${at}.example`, 'is missing');
     if (inp.optional !== undefined && (inp.optional !== true || ['file', 'handle'].includes(inp.type))) fail(`${at}.optional`, 'must be true, on an input with an example as its neutral value');
+    // A private input holds the user's own rules: never put in a link or a problem report (add-overhead-line-checks 2.3).
+    if (inp.private !== undefined && (inp.private !== true || inp.type !== 'text')) fail(`${at}.private`, 'must be true, on a text input');
     if (inp.type === 'length' && inp.range !== undefined && (typeof inp.range.min !== 'number' || typeof inp.range.max !== 'number')) fail(`${at}.range`, 'needs numeric min and max, in inches');
     if (inp.type === 'handle' && (!Array.isArray(inp.accepts) || !inp.accepts.length || inp.accepts.some((k) => typeof k !== 'string'))) fail(`${at}.accepts`, 'must list the file kinds it takes');
     if (inp.type === 'rows') {

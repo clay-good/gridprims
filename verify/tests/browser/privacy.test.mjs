@@ -179,3 +179,50 @@ for (const kind of ['chrome', 'firefox']) {
     }
   });
 }
+
+// Your own rules stay on the device (add-overhead-line-checks 2.3, lines/design-standards "Standards stay on the device").
+for (const kind of ['chrome', 'firefox']) {
+  test(`${kind}: sentinel egress: your rules never reach the network, a link, or a problem report`, { skip: !findBrowser(kind) && `${kind} is not installed`, timeout: 90_000 }, async () => {
+    const log = [];
+    const server = await serve(out, { onRequest: (r) => log.push(r) });
+    const browser = await launch(kind);
+    const PAGE = `${server.url}/tools/lines/attachment-height/find/`;
+    const ready = 'new Promise((r) => { const f = () => document.documentElement.dataset.ready ? r() : setTimeout(f, 20); f(); })';
+    try {
+      await browser.goto(PAGE);
+      await browser.evaluate(ready);
+      // Three checks with the sentinel in the rules.
+      for (const pref of ['highest', 'lowest', 'highest']) {
+        await browser.evaluate(`(() => { const r = document.querySelector('#in-rules'); if (!r.value.includes('${SENTINEL}')) r.value += '\\nnote.sentinel, all, 1, in, Manual ${SENTINEL}, p. 1'; const p = document.querySelector('#in-preference'); if ([...p.options].some((o) => o.value === '${pref}')) p.value = '${pref}'; r.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+      }
+      const hash = await browser.evaluate('location.hash');
+      assert.doesNotMatch(hash, new RegExp(SENTINEL.replace('.', '\\.')));
+      assert.match(hash, /rules=your\+standards\+file/);
+      const attachment = await browser.evaluate('JSON.stringify(globalThis.gridprimsReportAttachment())');
+      assert.doesNotMatch(attachment, new RegExp(SENTINEL.replace('.', '\\.')));
+      assert.match(attachment, /cannot be rerun from the report/);
+
+      // Kept only when asked: the box stores them, and unticking it forgets them.
+      await browser.evaluate(`(() => { const b = document.querySelector('[data-keep="rules"]'); b.checked = true; b.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+      await browser.goto('about:blank');
+      await browser.goto(PAGE);
+      await browser.evaluate(ready);
+      assert.match(await browser.evaluate(`document.querySelector('#in-rules').value`), new RegExp(SENTINEL.replace('.', '\\.')));
+      await browser.evaluate(`(() => { const b = document.querySelector('[data-keep="rules"]'); b.checked = false; b.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+      assert.equal(await browser.evaluate('Object.keys(localStorage).filter((k) => k.startsWith("gridprims.keep.")).length'), 0);
+
+      // A link made with someone's own rules asks for them.
+      await browser.goto('about:blank');
+      await browser.goto(`${PAGE}${hash}`);
+      await browser.evaluate(ready);
+      assert.equal(await browser.evaluate(`document.querySelector('#in-rules').value`), '');
+      assert.match(await browser.evaluate(`document.querySelector('#in-rules-error').textContent`), /Paste or type your rules here/);
+
+      assert.deepEqual(leaks(log, SENTINEL), []);
+      assert.deepEqual(leaks(browser.requests.map((url) => ({ url })), SENTINEL), []);
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}

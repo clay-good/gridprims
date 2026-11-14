@@ -77,6 +77,7 @@ function field(inp, value, i18n) {
     return html`<div class="field wide"><label for="${id}">${inp.label}</label>
     ${inp.hint ? html`<p class="unit-hint" id="${hintId}">${inp.hint}</p>` : ''}
     <textarea id="${id}" name="${inp.name}" class="mono" rows="4" autocomplete="off" spellcheck="false" aria-describedby="${inp.hint ? `${hintId} ` : ''}${errId}">${value}</textarea>
+    ${inp.private ? html`<p class="unit-hint">${i18n.t('tool.private')}</p><label class="check"><input type="checkbox" data-keep="${inp.name}"> ${i18n.t('tool.keep')}</label>` : ''}
     <p class="error" id="${errId}" hidden></p></div>`;
   }
   // A tariff filled in by the picker: shown, and editable, behind a disclosure.

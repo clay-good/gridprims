@@ -11,7 +11,7 @@ export default {
   archetype: 'calculator',
   firstScreen: ['rules', 'attachments', 'newKind'],
   inputs: [
-    { name: 'rules', label: 'Your rules', type: 'text', multiline: true, example: RULES, hint: 'Rows of the gridprims standards template (download it from the links below): rule_id, applies_to, value, unit, source_document, source_locator, note. For example sep.neutral.comm,,40,in,Our standard,§4.2. gridprims ships no NESC values: enter them from your own copy.' },
+    { name: 'rules', label: 'Your rules', type: 'text', multiline: true, private: true, example: RULES, hint: 'Rows of the gridprims standards template (download it from the links below): rule_id, applies_to, value, unit, source_document, source_locator, note. For example sep.neutral.comm,,40,in,Our standard,§4.2. gridprims ships no NESC values: enter them from your own copy.' },
     { name: 'attachments', label: 'What is on the pole now', type: 'text', multiline: true, example: 'neutral, Utility, 30 ft 2 in\ncatv, Cable Co, 24 ft 0 in\ntelephone, Phone Co, 23 ft 0 in', hint: 'One line each: kind, owner, height above the ground line to the bolt. Kinds: primary 12.47kV, neutral, secondary, streetlight, transformer, catv, telephone, fiber, communication-other. Add a line "no power" for a pole with no supply.' },
     { name: 'newKind', label: 'The new line', type: 'enum', example: 'fiber', options: [{ value: 'fiber', label: 'Fiber' }, { value: 'catv', label: 'Cable TV' }, { value: 'telephone', label: 'Telephone' }, { value: 'communication-other', label: 'Other communication line' }] },
     { name: 'poleLength', label: 'Pole length', type: 'text', example: 'unknown', hint: 'Its full length, such as 40 ft, or unknown.' },

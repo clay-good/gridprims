@@ -94,3 +94,30 @@ test('the page renders a length as a text field that keeps quote marks, with how
   const html = String(calculatorPage({ manifest: midspan.manifest, example: ex, result: runTool(midspan.manifest, midspan.impl, ex.inputs), i18n: createI18n(strings, 'en-US') }));
   assert.match(html, /<input id="in-span" name="span" type="text" inputmode="text" value="200 ft"/);
 });
+
+test('a private input never goes in a link or a report: the link names it, and the page asks for it', async () => {
+  const { encodeState, decodeState, privateAsked, reportInputs, PRIVATE_MARK } = await import('../../../site/ui/share-state.mjs');
+  const { default: m } = await import('../../../core/tools/lines.attachment-height.find/manifest.mjs');
+  assert.equal(m.inputs.find((i) => i.name === 'rules').private, true);
+  const values = Object.fromEntries(m.inputs.filter((i) => i.example !== undefined).map((i) => [i.name, i.example]));
+  // The worked example's rules are ours, so a link may leave them out entirely.
+  assert.doesNotMatch(encodeState(m, values), /rules=/);
+  const mine = { ...values, rules: 'comm.sep.supply, all, 40, in, SENTINEL-RULES, p. 3' };
+  const hash = encodeState(m, mine);
+  assert.doesNotMatch(hash, /SENTINEL/);
+  assert.match(hash, /rules=your\+standards\+file/);
+  assert.equal(new URLSearchParams(hash.slice(1)).get('rules'), PRIVATE_MARK);
+  assert.equal(decodeState(m, hash).rules, undefined, 'the mark never fills the field');
+  assert.deepEqual(privateAsked(m, hash), ['rules']);
+  const report = reportInputs(m, mine, 'not attached');
+  assert.doesNotMatch(JSON.stringify(report), /SENTINEL/);
+  assert.equal(report.note, 'not attached');
+  assert.equal(reportInputs(m, values, 'x').note, undefined, 'the example rules can be attached as they are');
+});
+
+test('only a text input may be private', async () => {
+  const { validateManifest } = await import('../../../core/contract/manifest.mjs');
+  const { default: m } = await import('../../../core/tools/lines.attachment-height.find/manifest.mjs');
+  const bad = { ...m, inputs: m.inputs.map((i) => (i.name === 'preference' ? { ...i, private: true } : i)) };
+  assert.ok(validateManifest(bad).some((e) => /private/.test(e.path ?? e)), 'a private enum is refused');
+});
