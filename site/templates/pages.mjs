@@ -577,7 +577,13 @@ export function continuityPage({ i18n, datasets, node }) {
   const { t } = i18n;
   const body = html`<h1>${t('continuity.title')}</h1><p class="purpose">${t('continuity.intro')}</p>
 <h2>${t('continuity.steps')}</h2><ol><li>${t('continuity.step1', { node })}</li><li>${t('continuity.step2')}</li><li>${t('continuity.step3')}</li><li>${t('continuity.step4')}</li></ol>
-<h2>${t('continuity.upstreams')}</h2><ul class="mono">${datasets.map((d) => html`<li>${d.dataset}: <a href="${d.raw[0].url}">${d.raw[0].url}</a> (${t('data.sha')} ${d.raw[0].sha256})</li>`)}</ul>
-<h2>${t('continuity.archives')}</h2><p>${t('continuity.archivesBody')}</p><p>${t('continuity.licenses')}</p>`;
+<p>${t('continuity.unreachable')}</p>
+<h2>${t('continuity.permission')}</h2><p>${t('continuity.licenses')}</p><p>${t('continuity.inherit')}</p>
+<h2>${t('continuity.upstreams')}</h2><ul data-continuity-upstreams>${datasets.map((d) => {
+    const archived = d.raw?.find((r) => r.release)?.release ?? null;
+    return html`<li data-upstream="${d.dataset}"><strong>${d.title}</strong> (<span class="mono">${d.dataset}</span>, ${d.version}): ${d.license}${d.terms?.url ? html`, ${t('continuity.termsAt')} <a href="${d.terms.url}">${d.terms.url}</a>` : ''}.
+  ${(d.raw ?? []).length ? html`<br><span class="unit-hint">${t('continuity.sourceFile')} <a href="${d.raw[0].url}">${d.raw[0].name}</a>, ${t('data.sha')} <span class="mono">${d.raw[0].sha256}</span>${archived ? html`; ${t('continuity.archivedAt')} <a href="${archived}">${archived}</a>` : ''}.</span>` : ''}</li>`;
+  })}</ul>
+<h2>${t('continuity.archives')}</h2><p>${t('continuity.archivesBody')}</p>`;
   return layout({ i18n, title: `${t('continuity.title')} · ${t('site.name')}`, description: t('continuity.intro'), path: '/continuity/', body });
 }
