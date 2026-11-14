@@ -8,6 +8,9 @@ import { checkPlatformApis } from '../../gates/platform-apis.mjs';
 import { checkOwnImplementations } from '../../gates/own-implementations.mjs';
 import { checkFileCount, FILE_LIMIT } from '../../gates/file-count.mjs';
 import { checkManifests } from '../../gates/manifests.mjs';
+import { checkCeii, ceiiFindings } from '../../gates/ceii.mjs';
+import { sharedSite } from '../../lib/shared-site.mjs';
+import { queueStateJson } from '../../../site/entities/queue.mjs';
 import { fixtureRepo, sample } from '../helpers.mjs';
 
 const repo = join(dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -109,4 +112,33 @@ test('npm test covers every test folder, so a new one is never silently skipped'
   for (const d of readdirSync(join(repo, 'verify/tests'), { withFileTypes: true }).filter((x) => x.isDirectory())) {
     assert.ok(new RegExp(`[{,/]${d.name}[,}/]`).test(script), `verify/tests/${d.name} is not in the npm test script`);
   }
+});
+
+test('CEII gate: the built queue JSON carries no connection detail', async () => {
+  assert.deepEqual(checkCeii(await sharedSite()), []);
+});
+
+test('CEII gate: fails on a queue file whose county row names a point of interconnection or a substation', () => {
+  const clean = { state: 'TX', counties: [{ fips: '48453', county: 'Travis', summary: { activeMw: 10 } }] };
+  const root = fixtureRepo({
+    'dist/queue/tx.json': JSON.stringify(clean),
+    'dist/queue/ok.json': JSON.stringify({ ...clean, state: 'OK', counties: [{ ...clean.counties[0], poi_name: 'Sand Springs 138 kV' }] }),
+    'dist/queue/nm.json': JSON.stringify({ ...clean, state: 'NM', summary: { substation: 'Rio Puerco' } }),
+    'dist/queue/ks.json': '{ not json',
+  });
+  const errors = checkCeii(join(root, 'dist')).join('\n');
+  assert.doesNotMatch(errors, /queue\/tx\.json/);
+  assert.match(errors, /queue\/ok\.json: carries counties\[0\]\.poi_name: a point of interconnection, which is CEII/);
+  assert.match(errors, /queue\/nm\.json: carries summary\.substation: a substation, which is CEII/);
+  assert.match(errors, /queue\/ks\.json: not valid JSON/);
+});
+
+test('CEII gate: the emitter drops connection detail a future queue row might carry', () => {
+  const row = { fips: '48453', county: 'Travis', summary: { activeMw: 1, activeCount: 1, byType: {}, medianYears: 1, withdrawn: null, substation: 'Gilleland Creek' } };
+  const emitted = queueStateJson(
+    { asOf: '2025-12-31', manifest: { release: '2026-10', asOf: '2026-10-01', license: 'CC BY 4.0' } },
+    { state: 'TX', summary: { ...row.summary }, counties: [row] },
+  );
+  assert.deepEqual(ceiiFindings(emitted), []);
+  assert.deepEqual(ceiiFindings(row), ['summary.substation: a substation']);
 });

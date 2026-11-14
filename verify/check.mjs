@@ -20,6 +20,7 @@ import { checkSecrets } from './gates/secrets.mjs';
 import { checkSiteUrls } from './gates/urls.mjs';
 import { checkCurated } from './gates/curated.mjs';
 import { checkGlossary } from './gates/glossary.mjs';
+import { checkCeii } from './gates/ceii.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -29,6 +30,7 @@ const gates = [
   ['own implementations', () => checkOwnImplementations(root)],
   ['deployable file count', () => checkFileCount(join(root, 'dist'))],
   ['manifests and worked examples', () => checkManifests(root)],
+  ['no CEII fields in the queue JSON', () => checkCeii(join(root, 'dist'))],
   ['style tokens and contrast', () => checkStyle(root)],
   ['no literal copy in templates', () => checkCopy(root)],
   ['result versions and changelog', () => checkVersions(root, { record: Boolean(process.env.GRIDPRIMS_RECORD) })],
