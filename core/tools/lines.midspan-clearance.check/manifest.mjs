@@ -2,16 +2,16 @@ const LENGTH_HINT = 'As crews write it: 22\' 4", 22-4, 22 ft 4 in, 22.33 ft, or 
 
 export default {
   id: 'lines.midspan-clearance.check',
-  version: '0.1.0',
+  version: '0.2.0',
   title: 'Midspan clearance of a line',
   purpose: 'How far a line sags between two poles, how high its lowest point is, and how that compares with the clearance your rules require over what the span crosses.',
   archetype: 'calculator',
   firstScreen: ['ruleSource', 'span', 'heightA', 'heightB', 'sag'],
   inputs: [
     { name: 'ruleSource', label: 'Rules', type: 'enum', example: 'yours', options: [{ value: 'yours', label: 'Values you enter from your rules' }, { value: 'go95', label: 'California GO 95 (built in)' }, { value: 'none', label: 'No rules: the geometry only' }] },
-    { name: 'span', label: 'Span length', type: 'text', example: '200 ft', hint: LENGTH_HINT },
-    { name: 'heightA', label: 'Height at the first pole', type: 'text', example: '25 ft', hint: `Above the ground at that pole, to the attachment point. ${LENGTH_HINT}` },
-    { name: 'heightB', label: 'Height at the second pole', type: 'text', example: '25 ft', hint: `Above the ground at that pole. ${LENGTH_HINT}` },
+    { name: 'span', label: 'Span length', type: 'length', example: '200 ft', hint: LENGTH_HINT },
+    { name: 'heightA', label: 'Height at the first pole', type: 'length', example: '25 ft', hint: `Above the ground at that pole, to the attachment point. ${LENGTH_HINT}` },
+    { name: 'heightB', label: 'Height at the second pole', type: 'length', example: '25 ft', hint: `Above the ground at that pole. ${LENGTH_HINT}` },
     { name: 'sag', label: 'Sag at the design condition', type: 'text', example: 'compute', hint: 'From your sag chart, as a length; or compute, to work it out from the weight and tension under More options.' },
     { name: 'weight', label: 'Weight', type: 'number', unit: 'lb/ft', range: { min: 0.01, max: 20 }, precision: 'exact', example: 0.5, hint: 'Of the cable and anything lashed to it, with ice if the design condition has ice.' },
     { name: 'tension', label: 'Horizontal tension', type: 'number', unit: 'lb', range: { min: 10, max: 100000 }, precision: 'exact', example: 1000 },

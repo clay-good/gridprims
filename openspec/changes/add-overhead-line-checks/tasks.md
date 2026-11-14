@@ -1,7 +1,7 @@
 ## 1. Research and platform
 
 - [ ] 1.1 Write `docs/research/18-overhead-line-design.md` from the 2026-10-31 research, tagging each fact verified or unverified; add unverified items the site states to the claim register and the manifests' `claims`; add R.24-10-005 to `docs/research/06`'s re-check list; verify the claims gate passes
-- [ ] 1.2 Add the `rows`, `length`, and `handle` input types to the manifest validator and the page and MCP renderers; verify the length round-trip and handle-kind scenarios
+- [x] 1.2 Add the `rows`, `length`, and `handle` input types to the manifest validator and the page and MCP renderers; verify the length round-trip and handle-kind scenarios
 - [ ] 1.3 Generalize "one file, one set of numbers" to a record per file kind; verify the standards-choice-propagates scenario and that the existing peak scenarios still pass
 - [ ] 1.4 Header-row routing for the standards template and pole list; verify the pole-list-on-home-page and PDF standards scenarios
 - [x] 1.5 Shared core routines (field-format length parser, rule record, rounding toward more clearance), named in each manifest's `sharedRoutines` and listed in `docs/own-implementations.md`; verify 20 hand-written height strings and the metric height scenario (core/lib/field-length.mjs and core/lib/sag.mjs, both in docs/own-implementations.md; the rule record waits on the standards template)

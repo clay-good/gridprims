@@ -9,7 +9,8 @@ import { catenarySag, lowestPoint, parabolicSag, sagAt, smallestGap } from '../.
 import GO95 from '../../../data/curated/go95/clearances.mjs';
 
 const SURFACE = { road: 'over a road', driveway: 'over a driveway', pedestrian: 'over an area only people on foot can reach', rail: 'over a railroad' };
-const len = (field, text) => { const r = parseLength(text); return r.error ? { error: { field, message: r.error } } : r; };
+// A `length` input arrives from the contract in inches; a text one is read here as crews write it.
+const len = (field, x) => { if (typeof x === 'number') return { ft: x / 12 }; const r = parseLength(x); return r.error ? { error: { field, message: r.error } } : r; };
 const optional = (field, text) => (String(text).trim().toLowerCase() === 'none' ? { ft: null } : len(field, text));
 /** A GO 95 cell as a rule: its value, where it is, and its footnotes, which are exceptions this check does not apply. */
 const go95 = (id) => { const f = GO95.fields[id]; return f && { ft: f.value.ft, label: `GO 95 ${f.label}`, footnotes: f.value.footnotes, table: /Table (\d)/.exec(f.label)?.[1] ?? null }; };

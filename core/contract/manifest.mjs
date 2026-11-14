@@ -6,7 +6,9 @@ export const FIRST_SCREEN_MAX = 5;
 
 export const ARCHETYPES = ['calculator', 'file-workbench', 'entity-page', 'explorer'];
 export const STABILITIES = ['experimental', 'stable'];
-export const INPUT_TYPES = ['number', 'enum', 'text', 'file'];
+export const INPUT_TYPES = ['number', 'enum', 'text', 'file', 'length', 'rows', 'handle'];
+/** Column types a `rows` input may hold. */
+export const ROW_COLUMN_TYPES = ['number', 'enum', 'text', 'length'];
 
 /** Plain-sentence meaning of each validation level (platform/citations-and-verification). */
 export const VALIDATION_LEVELS = [
@@ -86,7 +88,20 @@ export function validateManifest(m, opts = {}) {
     inputNames.add(inp.name);
     if (typeof inp.label !== 'string') fail(`${at}.label`, 'is missing');
     if (!INPUT_TYPES.includes(inp.type)) fail(`${at}.type`, `must be one of ${INPUT_TYPES.join(', ')}`);
-    if (inp.type !== 'file' && inp.example === undefined) fail(`${at}.example`, 'is missing');
+    // A file or a handle is loaded, never typed, so it has no example value.
+    if (inp.type !== 'file' && inp.type !== 'handle' && inp.example === undefined) fail(`${at}.example`, 'is missing');
+    if (inp.type === 'length' && inp.range !== undefined && (typeof inp.range.min !== 'number' || typeof inp.range.max !== 'number')) fail(`${at}.range`, 'needs numeric min and max, in inches');
+    if (inp.type === 'handle' && (!Array.isArray(inp.accepts) || !inp.accepts.length || inp.accepts.some((k) => typeof k !== 'string'))) fail(`${at}.accepts`, 'must list the file kinds it takes');
+    if (inp.type === 'rows') {
+      if (!Number.isInteger(inp.maxRows) || inp.maxRows < 1) fail(`${at}.maxRows`, 'must be a whole number of at least 1');
+      if (!Array.isArray(inp.columns) || !inp.columns.length) fail(`${at}.columns`, 'is missing');
+      else inp.columns.forEach((c, j) => {
+        if (typeof c?.name !== 'string' || typeof c.label !== 'string') fail(`${at}.columns[${j}]`, 'needs a name and a label');
+        if (!ROW_COLUMN_TYPES.includes(c?.type)) fail(`${at}.columns[${j}].type`, `must be one of ${ROW_COLUMN_TYPES.join(', ')}`);
+        if (c?.type === 'enum' && (!Array.isArray(c.options) || !c.options.length)) fail(`${at}.columns[${j}].options`, 'is missing');
+        if (c?.type === 'number' && (!c.range || typeof c.range.min !== 'number' || typeof c.range.max !== 'number')) fail(`${at}.columns[${j}].range`, 'needs numeric min and max');
+      });
+    }
     if (inp.type === 'number') {
       if (typeof inp.unit !== 'string' && inp.unitless !== true && !isEnumInput(m, inp.unitFrom)) fail(`${at}.unit`, 'is missing (or name an enum input in unitFrom)');
       if (!inp.range || typeof inp.range.min !== 'number' || typeof inp.range.max !== 'number') fail(`${at}.range`, 'needs numeric min and max');

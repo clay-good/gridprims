@@ -1,13 +1,13 @@
 {
   "toolId": "lines.midspan-clearance.check",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "results": [
     {
       "example": "level",
       "result": {
         "status": "ok",
         "toolId": "lines.midspan-clearance.check",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "sag": {
             "value": 2.5,
@@ -94,7 +94,7 @@
       "result": {
         "status": "ok",
         "toolId": "lines.midspan-clearance.check",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "sag": {
             "value": 2.5,
@@ -164,7 +164,7 @@
       "result": {
         "status": "ok",
         "toolId": "lines.midspan-clearance.check",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "sag": {
             "value": 0.63,
@@ -234,7 +234,7 @@
       "result": {
         "status": "ok",
         "toolId": "lines.midspan-clearance.check",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "sag": {
             "value": 2.5,
@@ -310,7 +310,7 @@
       "result": {
         "status": "ok",
         "toolId": "lines.midspan-clearance.check",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "sag": {
             "value": 2.5,
@@ -392,7 +392,7 @@
       "result": {
         "status": "ok",
         "toolId": "lines.midspan-clearance.check",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "sag": {
             "value": 2.5,

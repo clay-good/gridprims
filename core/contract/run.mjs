@@ -5,6 +5,56 @@
 
 import { VALIDATION_LEVELS } from './manifest.mjs';
 import { applyRounding, formatNumber, sigFigsOf } from '../lib/precision.mjs';
+import { parseLength } from '../lib/field-length.mjs';
+
+const kindWords = (kinds) => kinds.join(' or ');
+
+/** A length as typed (22' 4", 22-4, 6.81 m, or a number of inches), in inches, within the input's range. */
+function lengthOf(given, inp) {
+  let inches;
+  if (typeof given === 'number') inches = given;
+  else {
+    const r = parseLength(given);
+    if (r.error) return { error: r.error };
+    inches = r.ft * 12;
+  }
+  if (!Number.isFinite(inches) || inches < 0) return { error: `${inp.label} must be a length of zero or more.` };
+  if (inp.range && (inches < inp.range.min || inches > inp.range.max)) return { error: `Use a length from ${inp.range.min.toLocaleString('en-US')} to ${inp.range.max.toLocaleString('en-US')} in.` };
+  return { inches };
+}
+
+/**
+ * A list with fixed, typed columns: an array of objects, or text with one row a line and cells separated by
+ * commas in column order. Each cell is coerced by its column; an error names the row and the column.
+ */
+function rowsOf(given, inp) {
+  const list = Array.isArray(given) ? given
+    : String(given).split(/\r?\n/).map((l) => l.trim()).filter(Boolean).map((l) => Object.fromEntries(l.split(',').map((c, i) => [inp.columns[i]?.name ?? `extra${i}`, c.trim()])));
+  if (list.length > inp.maxRows) return { error: `${inp.label} holds at most ${inp.maxRows.toLocaleString('en-US')} rows; there are ${list.length.toLocaleString('en-US')}.` };
+  const rows = [];
+  for (const [i, row] of list.entries()) {
+    const out = {};
+    for (const c of inp.columns) {
+      const v = row?.[c.name];
+      const where = `Row ${i + 1}, ${c.label.toLowerCase()}`;
+      if (v === undefined || v === null || v === '') return { error: `${where}: missing.` };
+      if (c.type === 'number') {
+        const n = Number(String(v).replace(/[,$\s]/g, ''));
+        if (!Number.isFinite(n) || n < c.range.min || n > c.range.max) return { error: `${where}: use a number from ${c.range.min} to ${c.range.max}.` };
+        out[c.name] = n;
+      } else if (c.type === 'enum') {
+        if (!c.options.some((o) => o.value === v)) return { error: `${where}: pick one of ${c.options.map((o) => o.value).join(', ')}.` };
+        out[c.name] = v;
+      } else if (c.type === 'length') {
+        const r = lengthOf(v, c);
+        if (r.error) return { error: `${where}: ${r.error}` };
+        out[c.name] = r.inches;
+      } else out[c.name] = String(v);
+    }
+    rows.push(out);
+  }
+  return { rows };
+}
 
 /**
  * Check raw inputs against the manifest and coerce them to their types.
@@ -24,8 +74,30 @@ export function checkInputs(manifest, raw) {
         field: inp.name,
         message: inp.type === 'enum'
           ? `Choose ${inp.label.toLowerCase()}: one of ${inp.options.map((o) => o.value).join(', ')}.`
-          : `Enter ${inp.label.toLowerCase()}, for example ${inp.example}.`,
+          : inp.type === 'handle'
+            ? `Load a ${kindWords(inp.accepts)} file for ${inp.label.toLowerCase()}.`
+            : `Enter ${inp.label.toLowerCase()}, for example ${inp.example}.`,
       });
+      continue;
+    }
+    if (inp.type === 'handle') {
+      // A loaded file, by kind: a meter file is never read as a standards file, or the other way round.
+      const kind = typeof given === 'object' ? given.kind : null;
+      if (!kind) errors.push({ field: inp.name, message: `Load a ${kindWords(inp.accepts)} file for ${inp.label.toLowerCase()}.` });
+      else if (!inp.accepts.includes(kind)) errors.push({ field: inp.name, message: `${inp.label} takes a ${kindWords(inp.accepts)} file; this is a ${kind} file.` });
+      else values[inp.name] = given;
+      continue;
+    }
+    if (inp.type === 'length') {
+      const r = lengthOf(given, inp);
+      if (r.error) errors.push({ field: inp.name, message: r.error });
+      else values[inp.name] = r.inches;
+      continue;
+    }
+    if (inp.type === 'rows') {
+      const r = rowsOf(given, inp);
+      if (r.error) errors.push({ field: inp.name, message: r.error });
+      else values[inp.name] = r.rows;
       continue;
     }
     if (inp.type === 'number') {

@@ -51,6 +51,27 @@ function field(inp, value, i18n) {
       <p class="error" id="${errId}" hidden></p></div>`;
   }
   const unit = inp.unit ?? '';
+  // A loaded file is chosen in the workbench, never typed and never put in a link.
+  if (inp.type === 'handle') {
+    return html`<div class="field wide" data-handle="${inp.name}"><p>${inp.label}: ${i18n.t('tool.handle', { kinds: inp.accepts.join(', ') })} <a href="/files/">${i18n.t('tool.handleOpen')}</a></p>
+    <p class="error" id="${errId}" hidden></p></div>`;
+  }
+  // A list: one row a line, its cells in column order, separated by commas.
+  if (inp.type === 'rows') {
+    const hintId = `${id}-hint`;
+    return html`<div class="field wide"><label for="${id}">${inp.label}</label>
+    <p class="unit-hint" id="${hintId}">${i18n.t('tool.rows', { columns: inp.columns.map((c) => c.label).join(', '), max: inp.maxRows.toLocaleString('en-US') })}${inp.hint ? ` ${inp.hint}` : ''}</p>
+    <textarea id="${id}" name="${inp.name}" class="mono" rows="4" autocomplete="off" spellcheck="false" aria-describedby="${hintId} ${errId}">${value}</textarea>
+    <p class="error" id="${errId}" hidden></p></div>`;
+  }
+  // A length as field crews write it; the link keeps exactly what was typed.
+  if (inp.type === 'length') {
+    const hintId = `${id}-hint`;
+    return html`<div class="field"><label for="${id}">${inp.label}</label>
+    <input id="${id}" name="${inp.name}" type="text" inputmode="text" value="${value}" autocomplete="off" spellcheck="false" aria-describedby="${hintId} ${errId}">
+    <p class="unit-hint" id="${hintId}">${inp.hint ?? i18n.t('tool.length')}</p>
+    <p class="error" id="${errId}" hidden></p></div>`;
+  }
   if (inp.multiline) {
     const hintId = `${id}-hint`;
     return html`<div class="field wide"><label for="${id}">${inp.label}</label>

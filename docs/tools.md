@@ -610,7 +610,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 How far a line sags between two poles, how high its lowest point is, and how that compares with the clearance your rules require over what the span crosses.
 
-Version 0.1.0 · experimental · validation level 2, cross-checked
+Version 0.2.0 · experimental · validation level 2, cross-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|
