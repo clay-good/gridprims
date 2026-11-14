@@ -1,12 +1,9 @@
 # Safari runs the parser suite through the built-in safaridriver (foundation
 # design D8). macOS minutes cost ten times Linux minutes on a private
-# repository, so this runs when code a browser executes changes, and weekly.
+# repository, and the run held up pushes, so it runs weekly and on demand.
 name: safari
 
 on:
-  push:
-    branches: [main]
-    paths: ['parsers/**', 'core/**', 'site/**', 'verify/browser/**', 'verify/lib/browser.mjs', 'verify/tests/browser/parsers.test.mjs']
   schedule:
     - cron: '53 6 * * 4'
   workflow_dispatch:

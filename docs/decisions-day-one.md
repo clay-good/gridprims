@@ -103,8 +103,9 @@ Tests live in `verify/tests/`, mirroring the folder they test, so nothing under 
 
 | Workflow | Trigger | Interval | Staleness threshold |
 |---|---|---|---|
-| `ci.yml` | push, pull request | on change | n/a |
-| `safari.yml` | push touching browser-run code, and weekly Thursday 06:53 UTC | weekly | 504 hours |
+| `ci.yml` (unit tests on both Node versions, gates) | push, pull request | on change | n/a |
+| `browser.yml` (Chrome and Firefox suite) | pull request, nightly 07:41 UTC, on demand | daily | 72 hours |
+| `safari.yml` | weekly Thursday 06:53 UTC, on demand | weekly | 504 hours |
 | `refresh-data.yml` | schedule | daily 09:17 UTC | 72 hours |
 | `link-check.yml` | schedule | weekly, Tuesday 07:23 UTC | 504 hours |
 | `canary.yml` | schedule (floating runner label) | weekly, Wednesday 05:41 UTC | 504 hours |
