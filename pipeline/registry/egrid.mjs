@@ -13,9 +13,9 @@ export default {
   publisher: 'U.S. Environmental Protection Agency',
   sourceUrl: 'https://www.epa.gov/egrid',
   terms: {
-    url: 'https://www.epa.gov/egrid/egrid-questions-and-answers',
+    url: 'https://www.epa.gov/egrid/frequent-questions-about-egrid',
     section: '25) Can I use eGRID data commercially and how do I cite it?',
-    // Captured 2026-10-31 from that answer on the page above.
+    // Captured 2026-10-31 from that answer; EPA moved the page on 2026-11-14 and the answer above is unchanged there.
     text: 'eGRID data is produced by the United States Environmental Protection Agency (EPA) under the public domain and is available for use both non-commercially and commercially. The following citations for eGRID Data are suggested: APA: United States Environmental Protection Agency (EPA). (2025). Emissions & Generation Resource Integrated Database (eGRID), 2023. Washington DC: Office of Atmospheric Protection, Clean Air and Power Division. https://www.epa.gov/egrid.',
     captured: '2026-10-31',
   },
