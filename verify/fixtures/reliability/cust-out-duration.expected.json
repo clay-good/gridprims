@@ -1,0 +1,7 @@
+{
+  "source": "Synthetic. A small utility's spreadsheet export: a start, a \"Cust Out\" count, and a duration in minutes instead of a restoration time. Zone America/Chicago.",
+  "columns": { "Outage Start": "start", "Cust Out": "customers", "Duration (min)": "minutes", "Cause": "cause" },
+  "events": 2,
+  "minutes": { "2": 40, "3": 15 },
+  "invalid": [], "overlaps": [], "partial": [], "crossesMidnight": [], "crossesDst": []
+}

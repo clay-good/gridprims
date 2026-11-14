@@ -1,0 +1,11 @@
+{
+  "source": "Synthetic. Column names are Oracle NMS's trouble-report export fields as docs/research/11 read them from Oracle's reference guide (Verified); every row is made up. Zone America/Chicago.",
+  "columns": { "Substation": null, "Feeder": "feeder", "Device Name": "device", "Event #": "event", "CI": "customers", "Begin Date Time": "start", "Restore Date Time": "restore" },
+  "events": 7,
+  "minutes": { "2": 95, "3": 20, "4": 45, "5": 90, "6": 130, "7": 105, "9": 150 },
+  "invalid": [{ "row": 8, "reason": "restored before it started" }],
+  "overlaps": [{ "place": "FUSE-101", "rows": [2, 3] }],
+  "partial": [{ "event": "E1003", "rows": [4, 5, 6], "merged": { "customers": 600, "customerMinutes": 44500 } }],
+  "crossesMidnight": [7],
+  "crossesDst": [9]
+}

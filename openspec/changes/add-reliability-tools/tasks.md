@@ -1,7 +1,7 @@
 ## 1. Data and intake
 
 - [x] 1.1 Record the free formula sources (the federal form instructions, the published engineering deck, the reference guide) in `docs/derivations/reliability.md` with author, date, and the exact page or slide for each index; verify every implemented index cites one
-- [ ] 1.2 Build outage-log fixtures for the common vendor export shapes named in `docs/research/11`, with expected receipts, including a restore-before-start row, overlapping rows on one device, partial-restoration rows for one event, and a duration crossing midnight and a daylight-saving change; verify the mapping-corrected, missing-field, restore-before-start, partial-restoration, and crossing-midnight scenarios
+- [x] 1.2 Build outage-log fixtures for the common vendor export shapes named in `docs/research/11`, with expected receipts, including a restore-before-start row, overlapping rows on one device, partial-restoration rows for one event, and a duration crossing midnight and a daylight-saving change; verify the mapping-corrected, missing-field, restore-before-start, partial-restoration, and crossing-midnight scenarios (core/lib/outage-log.mjs reads them; Oracle NMS field names are verified, the Milsoft-style names are not, and each fixture says so; wiring the reader into the workbench's file intake comes with the outage-log workbench)
 - [x] 1.3 Derive cohort tables (ownership type, size class, state and census division) from the EIA-861 reliability file owned by `add-public-grid-data`; verify medians against an independent recomputation for 3 cohorts
 
 ## 2. Index calculator

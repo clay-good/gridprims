@@ -1,0 +1,8 @@
+{
+  "source": "Synthetic. Column names follow the fields a Milsoft OMS brochure lists (start, customers affected and restored, feeder, transformer, cause code); whether they are export columns is Unverified in docs/research/11. US dates with 12-hour times. Zone America/Chicago.",
+  "columns": { "Start Time": "start", "Restore Time": "restore", "Customers Affected": "customers", "Customers Restored": null, "Feeder": "feeder", "Transformer": "device", "Cause Code": "cause", "Type": "planned" },
+  "events": 2,
+  "minutes": { "2": 95, "3": 120 },
+  "planned": [3],
+  "invalid": [], "overlaps": [], "partial": [], "crossesMidnight": [], "crossesDst": []
+}
