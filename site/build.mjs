@@ -13,6 +13,9 @@ import { buildCommandIndex } from '../core/contract/command.mjs';
 import { placeEntries } from './entities/places.mjs';
 import PROGRAM_LINKS, { QUESTIONS as LINK_QUESTIONS } from '../data/curated/program-links.mjs';
 import DATA_GUIDES, { FORMATS as GUIDE_FORMATS } from '../data/curated/guides/index.mjs';
+import EXPLAINERS from '../data/curated/explainers/index.mjs';
+import { resolveExplainer } from './entities/explainers.mjs';
+import { explainerPage, explainerPath } from './templates/explainer.mjs';
 import { LINKS_PATH, programLinksPage } from './templates/program-links.mjs';
 import { OURS as COHORT_CHOICES, cohortTable } from '../core/lib/reliability-peers.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
@@ -284,6 +287,12 @@ export async function build(opts = {}) {
       const regionPlants = (plants?.plants ?? []).filter((p) => p.baCode === region.ba).sort((a, b) => b.nameplateMw - a.nameplateMw || a.name.localeCompare(b.name));
       write(balancingPath(region.ba), balancingPage({ region, manifest: balancing.manifest, utilities: inRegion, plants: regionPlants, i18n }));
     }
+  }
+  // The Learn explainers, every number generated from the data built above or cited (add-learn-and-data-guides 3.1).
+  const peaks = served(join(ROOT, 'data'), 'pudl-ferc714', 'annual_peaks');
+  if (peaks && balancing && utilities) {
+    const ctx = { peaks, balancing, utilities, ledger };
+    for (const e of EXPLAINERS) write(explainerPath(e.id), explainerPage({ explainer: e, resolved: resolveExplainer(e, ctx), i18n }));
   }
   // The standards template for the line checks, as CSV and as a workbook from the same rows (design D1).
   mkdirSync(join(outDir, 'lines'), { recursive: true });
