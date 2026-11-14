@@ -95,3 +95,18 @@ test('trends chart price and customers for every year held, with summaries and a
   assert.match(text(page(44372)), /Residential delivery revenue per kWh \(cents\)/, 'a wires utility\'s trend is its delivery revenue');
   assert.ok(all.utilities.filter((u) => u.page && u.trend.length >= 5).length > 1400);
 });
+
+test('a utility page places its reliability among similar utilities, links the cohort table, and passes no judgement (reliability 4.4)', () => {
+  // Chugach Electric, a cooperative in Alaska reporting by the IEEE standard.
+  const html = text(page(3522));
+  assert.match(html, /Among similar utilities/);
+  assert.match(html, /AK: \d[\d,.]* min including major event days\. \d+ of the \d+ cooperative utilities .* reported less; the median is [\d,.]+ min/);
+  assert.match(html, /The cohorts, the size classes, and the ten-utility minimum are ours; EIA publishes the figures\. Download the cohort table \(CSV\)\./);
+  assert.match(page(3522), /<a href="\/reliability\/cohorts\.csv">/);
+  // The link is a static file: it carries nothing about the visitor.
+  assert.doesNotMatch(page(3522), /cohorts\.csv\?/);
+  assert.doesNotMatch(html, /\b(best|worst|poor|excellent)\b/i);
+  // A utility with no reliability report has no comparison section.
+  const none = all.utilities.find((u) => u.page && !u.reliability.length);
+  assert.doesNotMatch(text(page(none)), /Among similar utilities/);
+});

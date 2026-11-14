@@ -11,6 +11,7 @@ import { TOOLS } from '../core/tools/index.mjs';
 import { runTool } from '../core/contract/run.mjs';
 import { buildCommandIndex } from '../core/contract/command.mjs';
 import { placeEntries } from './entities/places.mjs';
+import { OURS as COHORT_CHOICES, cohortTable } from '../core/lib/reliability-peers.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
 import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
 import { execFileSync } from 'node:child_process';
@@ -226,6 +227,18 @@ export async function build(opts = {}) {
   if (utilities) {
     mkdirSync(join(outDir, 'large-load'), { recursive: true });
     writeFileSync(join(outDir, 'large-load/utilities.json'), JSON.stringify({ license: 'CC BY 4.0', sources: { eia861: utilities.sources.eia861.version, ferc714: utilities.sources.ferc714?.release ?? utilities.sources.ferc714?.version ?? null }, utilities: largeLoadUtilities(utilities), regulators: Object.fromEntries(regulators.map((r) => [r.state, { name: r.name, docket: r.docket }])) }));
+  }
+  // The reliability cohorts the utility pages compare against, downloadable so anyone can check a percentile
+  // (add-reliability-tools 4.1): gridprims' derivation, CC BY 4.0, crediting EIA-861 and its data year.
+  if (utilities?.peerFigures.length) {
+    mkdirSync(join(outDir, 'reliability'), { recursive: true });
+    const cohorts = cohortTable(utilities.peerFigures);
+    const head = { publisher: 'gridprims', license: 'CC BY 4.0', source: `U.S. Energy Information Administration, Form EIA-861, reliability schedule (served version ${utilities.sources.eia861.version})`, dataYear: utilities.year, derived: utilities.sources.eia861.retrieved?.slice(0, 10) ?? null, choices: COHORT_CHOICES };
+    writeFileSync(join(outDir, 'reliability/cohorts.json'), JSON.stringify({ ...head, cohorts }) + '\n');
+    const cell = (x) => (x === null || x === undefined ? '' : /[",\n]/.test(String(x)) ? `"${String(x).replace(/"/g, '""')}"` : String(x));
+    const cols = ['method', 'basis', 'ownership', 'size', 'division', 'name', 'saidi_n', 'saidi_q1', 'saidi_median', 'saidi_q3', 'saifi_n', 'saifi_q1', 'saifi_median', 'saifi_q3'];
+    const lines = cohorts.map((c) => [c.method, c.basis, c.ownership, c.size, c.division, c.name, c.saidi.n, c.saidi.q1, c.saidi.median, c.saidi.q3, c.saifi.n, c.saifi.q1, c.saifi.median, c.saifi.q3].map(cell).join(','));
+    writeFileSync(join(outDir, 'reliability/cohorts.csv'), `# ${head.source}; data year ${head.dataYear}; derived ${head.derived} by gridprims; CC BY 4.0. ${COHORT_CHOICES}\n${cols.join(',')}\n${lines.join('\n')}\n`);
   }
   const withPage = new Set((utilities?.utilities ?? []).filter((u) => u.page).map((u) => u.id));
   const plantIds = new Set((plants?.plants ?? []).map((p) => p.id));
@@ -471,7 +484,7 @@ export async function build(opts = {}) {
   // Dataset shards are cached as they are visited, not precached, so the shell stays small as data grows.
   // Entity pages (thousands of plants) are cached as visited too, not precached.
   // So are the lookup's state shards (2.4 MB in all) and the bill tools' rate files (about 50 MB): a visitor needs only their own utility's.
-  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('bills/tariffs/') && !f.startsWith('bills/rates/') && !f.startsWith('outages/') && !f.startsWith('carbon/') && !f.startsWith('large-load/') && !f.startsWith('weather/') && !f.startsWith('site/cards/'));
+  const shell = walk(outDir).filter((f) => !f.startsWith('_') && !f.startsWith('data/') && !ENTITY_FAMILIES.some((d) => f.startsWith(d)) && !(f.startsWith('lookup/') && f.endsWith('.json') && f !== 'lookup/zip3.json') && !f.startsWith('bills/tariffs/') && !f.startsWith('bills/rates/') && !f.startsWith('outages/') && !f.startsWith('carbon/') && !f.startsWith('large-load/') && !f.startsWith('reliability/') && !f.startsWith('weather/') && !f.startsWith('site/cards/'));
   const version = sha256(shell.map((f) => `${f}:${sha256(readFileSync(join(outDir, f)))}`).join('\n')).slice(0, 12);
   const urls = shell.map((f) => `/${f.replace(/(^|\/)index\.html$/, '$1')}`);
   writeFileSync(join(outDir, 'sw.js'), serviceWorkerSource({ version, files: urls }));

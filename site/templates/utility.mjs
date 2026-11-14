@@ -116,6 +116,10 @@ ${u.reliability.length ? tableView([t('utility.col.state'), t('utility.col.stand
     u.reliability.map((r) => [r.state, t(r.ieee ? 'utility.standard.ieee' : 'utility.standard.other'), r.withMed.saidi ?? '', r.withMed.saifi ?? '', r.withoutMed.saidi ?? '', r.withoutMed.saifi ?? '']), t('utility.reliability'))
     : html`<p data-reliability>${t('utility.reliabilityNone', { year: u.year })}</p>`}
 <p>${t('utility.reliabilityMethod')}</p>
+${u.reliability.some((r) => r.peers) ? html`<h3>${t('utility.peers')}</h3>
+${u.reliability.filter((r) => r.peers).map((r) => html`<div data-peers="${r.state}"><p>${r.state}: ${r.peers.status === 'ok' ? r.peers.sentence : r.peers.reason}</p>
+${r.peers.status === 'ok' ? [r.peers.widenedNote, r.peers.methodNote, r.peers.coverageNote].filter(Boolean).map((n) => html`<p class="unit-hint">${n}</p>`) : ''}</div>`)}
+<p class="unit-hint">${t('utility.peersChoices')} <a href="/reliability/cohorts.csv">${t('utility.peersDownload')}</a></p>` : ''}
 </section>
 
 <section><h2>${t('utility.generation')}</h2>

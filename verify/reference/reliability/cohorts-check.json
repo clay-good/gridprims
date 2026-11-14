@@ -1,0 +1,39 @@
+{
+ "file": "data/eia-861/2026-10/reliability.csv.gz",
+ "sha256": "ef79529e1ae7143f543ac27ef1bdafafcf0455befc11e3ed68d819ae4c3cb4f2",
+ "cohorts": [
+  {
+   "method": "ieee",
+   "basis": "with-med",
+   "ownership": "cooperative",
+   "size": "10k-100k",
+   "division": "West North Central",
+   "n": 48,
+   "q1": 105.2135,
+   "median": 150.45499999999998,
+   "q3": 324.5675
+  },
+  {
+   "method": "ieee",
+   "basis": "without-med",
+   "ownership": "investor-owned",
+   "size": "100k-1m",
+   "division": null,
+   "n": 75,
+   "q1": 80.655,
+   "median": 104.29,
+   "q3": 164.32999999999998
+  },
+  {
+   "method": "ieee",
+   "basis": "with-med",
+   "ownership": "public power",
+   "size": "10k-100k",
+   "division": "East North Central",
+   "n": 24,
+   "q1": 32.7475,
+   "median": 66.61,
+   "q3": 138.11925000000002
+  }
+ ]
+}

@@ -4,6 +4,7 @@
 // for the plants it operates; Form 714 through PUDL for its peak; and URDB for
 // its published rates.
 
+import { compare, figures } from '../../core/lib/reliability-peers.mjs';
 import { served } from './plants.mjs';
 
 export const SECTORS = ['res', 'com', 'ind', 'trn'];
@@ -71,6 +72,12 @@ export function utilityPages(dataDir) {
   const salesBy = group([...sales.rows, ...(delivery?.rows ?? [])].filter((r) => r.utility_id !== 88888), 'utility_id');
   const territoryBy = group(territory?.rows, 'utility_id');
   const reliabilityBy = group(reliability?.rows, 'utility_id');
+  // Every published reliability figure, for placing each utility among its peers (add-reliability-tools 4.4).
+  const peerFigures = reliability ? figures(reliability.rows, sales.rows) : [];
+  const peerOf = (id, state, ieee) => {
+    const f = peerFigures.find((x) => x.utilityId === id && x.state === state && x.method === (ieee ? 'ieee' : 'other') && x.basis === 'with-med');
+    return f ? compare(f, peerFigures) : null;
+  };
   const plantsBy = group(plants?.rows, 'utility_id');
   const operable = group(gens?.rows.filter((g) => g.category === 'operable'), 'plant_id');
   const netBy = group(gen923?.rows.filter((r) => r.plant_id !== 99999), 'plant_id');
@@ -109,7 +116,7 @@ export function utilityPages(dataDir) {
     }
     const peak = peaksNow.find((r) => r.utility_id_eia === id) ?? null;
     const baPeak = peak ? null : peaksNow.find((r) => baCodes.includes(r.balancing_authority_code_eia) && r.respondent_type === 'balancing_authority') ?? null;
-    const rel = (reliabilityBy.get(id) ?? []).map((r) => ({ state: r.state, ieee: r.ieee_with_med_saidi !== null, withMed: { saidi: r.ieee_with_med_saidi ?? r.other_with_med_saidi, saifi: r.ieee_with_med_saifi ?? r.other_with_med_saifi }, withoutMed: { saidi: r.ieee_without_med_saidi ?? r.other_without_med_saidi, saifi: r.ieee_without_med_saifi ?? r.other_without_med_saifi } }));
+    const rel = (reliabilityBy.get(id) ?? []).map((r) => ({ state: r.state, ieee: r.ieee_with_med_saidi !== null, withMed: { saidi: r.ieee_with_med_saidi ?? r.other_with_med_saidi, saifi: r.ieee_with_med_saifi ?? r.other_with_med_saifi }, withoutMed: { saidi: r.ieee_without_med_saidi ?? r.other_without_med_saidi, saifi: r.ieee_without_med_saifi ?? r.other_without_med_saifi }, peers: peerOf(id, r.state, r.ieee_with_med_saidi !== null) }));
     const rates = ratesBy.get(id);
     const customers = Object.values(kinds).reduce((n, k) => n + SECTORS.reduce((m, s) => m + k[s].customers, 0), 0);
     const totalSales = Object.values(kinds).reduce((n, k) => n + SECTORS.reduce((m, s) => m + k[s].sales, 0), 0);
@@ -133,5 +140,5 @@ export function utilityPages(dataDir) {
     });
   }
   utilities.sort((a, b) => a.id - b.id);
-  return { utilities, year, averages, sources: { eia861: sales.manifest, history: history?.manifest ?? null, eia860: plants?.manifest ?? null, eia923: gen923?.manifest ?? null, ferc714: peaks?.manifest ?? null, urdb: urdb?.manifest ?? null } };
+  return { utilities, year, averages, peerFigures, sources: { eia861: sales.manifest, history: history?.manifest ?? null, eia860: plants?.manifest ?? null, eia923: gen923?.manifest ?? null, ferc714: peaks?.manifest ?? null, urdb: urdb?.manifest ?? null } };
 }
