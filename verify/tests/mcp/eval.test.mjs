@@ -15,7 +15,8 @@ import { DIR } from '../../fixtures/intake/make.mjs';
 import { ROOT, modern } from './mcp-helpers.mjs';
 
 const get = (o, path) => path.split('.').reduce((x, k) => x?.[k], o);
-const withFixtures = (args) => JSON.parse(JSON.stringify(args).replace(/\{fixture:([^}]+)\}/g, (_, f) => join(realpathSync(DIR), f)));
+const LINES = join(ROOT, 'verify/fixtures/lines');
+const withFixtures = (args) => JSON.parse(JSON.stringify(args).replace(/\{fixture:([^}]+)\}/g, (_, f) => join(realpathSync(DIR), f)).replace(/\{lines:([^}]+)\}/g, (_, f) => join(realpathSync(LINES), f)));
 
 test('every tool family that exists has at least one request', () => {
   const families = new Set(requests.map((r) => r.family));
@@ -29,7 +30,7 @@ for (const r of requests) {
     assert.ok(tool, `${r.tool} is not a tool`);
     const args = withFixtures(r.arguments);
     assert.equal(checkArguments(tool.inputSchema, args), null);
-    const res = await createServer({ allowDirs: [realpathSync(DIR)] }).handle(modern(1, 'tools/call', { name: r.tool, arguments: args }));
+    const res = await createServer({ allowDirs: [realpathSync(DIR), realpathSync(LINES)] }).handle(modern(1, 'tools/call', { name: r.tool, arguments: args }));
     assert.equal(res.result.isError, false, res.result.content[0].text);
     for (const [path, want] of Object.entries(r.expect)) assert.deepEqual(get(res.result.structuredContent, path), want, path);
   });

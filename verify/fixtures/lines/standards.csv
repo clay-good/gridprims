@@ -1,0 +1,4 @@
+rule_id,applies_to,value,unit,source_document,source_locator,note
+sep.neutral.comm,,40,in,Example joint use standard,4.2,
+sep.comm.comm,,12,in,Example joint use standard,4.3,
+ground.pole.comm,,18,ft,Example joint use standard,4.1,

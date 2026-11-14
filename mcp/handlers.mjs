@@ -13,6 +13,7 @@ import { loadStats } from '../core/lib/load-stats.mjs';
 import { readFileSync } from 'node:fs';
 import { basename } from 'node:path';
 import { entity, query } from './data.mjs';
+import { linesKind, linesView, runLines } from './lines.mjs';
 
 export const SITE = 'https://gridprims.com';
 const toolPath = (id) => `/tools/${id.split('.').join('/')}/`;
@@ -129,6 +130,14 @@ export function createHandlers(ctx) {
     gridprims_run({ tool, inputs }) {
       const t = getTool(tool);
       if (!t) return unknownTool(tool);
+      // Lines tools take handles and lists, and keep file text in source_text (add-overhead-line-checks 5.5).
+      if (t.manifest.id.startsWith('lines.')) {
+        const l = runLines(t, inputs ?? {}, (h) => handles.get(h));
+        if (l.error) return fail(l.error);
+        const r = { ...l.result, source_text: l.source_text };
+        if (r.status === 'invalid') return fail(r.errors.map((e) => `${e.field}: ${e.message}`).join(' '), r);
+        return ok(r);
+      }
       const r = runTool(t.manifest, t.impl, inputs ?? {});
       if (r.status === 'invalid') return fail(r.errors.map((e) => `${e.field}: ${e.message}`).join(' '), r);
       return ok(r);
@@ -145,6 +154,7 @@ export function createHandlers(ctx) {
       if (handle !== undefined && path === undefined) {
         entry = handles.get(handle);
         if (!entry) return fail('That handle is unknown or expired. Analyze the file again to get a new one.');
+        if (entry.kind) return ok(entry.view);
         if (zone === undefined && stampsMark === undefined && quantity === undefined) {
           return ok(series === undefined ? entry.view : { ...entry.view, intervals: page(entry, handle, series, 0) });
         }
@@ -152,6 +162,18 @@ export function createHandlers(ctx) {
       const checked = entry ? { ok: true } : checkPath(path, ctx.allowDirs);
       if (!checked.ok) return fail(checked.message);
       const bytes = entry ? entry.bytes : new Uint8Array(readFileSync(checked.path));
+      // A standards file or pole list goes to the lines tools, not the load intake.
+      if (!entry) {
+        let text = null;
+        try { text = new TextDecoder('utf-8', { fatal: true }).decode(bytes); } catch { /* not text: a workbook or binary */ }
+        const kind = text === null ? null : linesKind(text);
+        if (kind) {
+          const value = { kind, text };
+          const id = handles.put(value);
+          value.view = linesView(kind, text, id);
+          return ok(value.view);
+        }
+      }
       const choices = {
         zone: zone ?? entry?.choices.zone ?? deviceZone, zoneSet: zone !== undefined || Boolean(entry?.choices.zoneSet),
         stampsMark: stampsMark ?? entry?.choices.stampsMark ?? 'auto', quantity: quantity ?? entry?.choices.quantity ?? 'auto',

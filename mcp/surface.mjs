@@ -21,6 +21,8 @@ const RUN_RESULT = {
     outputs: { type: 'object', additionalProperties: { type: 'object', required: ['value', 'unit', 'display'], properties: { value: {}, unit: STR, display: STR } } },
     sentence: STR,
     notes: { type: 'array', items: STR },
+    poles: { type: 'array', items: { type: 'object', required: ['index', 'rows', 'status'], properties: { index: { type: 'integer' }, rows: { type: 'array', items: { type: 'integer' } }, status: STR, outputs: OBJ, sentence: STR, steps: { type: 'array', items: STR } } } },
+    source_text: { type: 'array', items: STR },
     work: OBJ,
     datasets: { type: 'array', items: OBJ },
     stability: { enum: ['experimental', 'stable'] },
@@ -79,7 +81,7 @@ export const TOOL_SURFACE = [
   {
     name: 'gridprims_run',
     title: 'Run a gridprims tool',
-    description: `Run a tool with inputs keyed by input name, exactly as gridprims_describe lists them. Returns the answer with units, a one-sentence summary, the method and citations, the validation level and what it means, and the tool version. Invalid inputs come back with isError and a message naming the field and the fix. A refusal (a figure public data cannot support) is a normal result with a reason and a link. ${SCREENING}`,
+    description: `Run a tool with inputs keyed by input name, exactly as gridprims_describe lists them. Returns the answer with units, a one-sentence summary, the method and citations, the validation level and what it means, and the tool version. Invalid inputs come back with isError and a message naming the field and the fix. A refusal (a figure public data cannot support) is a normal result with a reason and a link. For lines.attachment-height.find, rules takes a lines-standards handle or a rules[] list of template rows, attachments takes an attachments[] list of {kind, owner, height}, and poles takes a lines-pole-list handle for one result per pole. ${UNTRUSTED} ${SCREENING}`,
     inputSchema: {
       type: 'object',
       additionalProperties: false,
@@ -94,7 +96,7 @@ export const TOOL_SURFACE = [
   {
     name: 'gridprims_analyze_file',
     title: 'Analyze a local meter or bill file',
-    description: `Parse a local file (Green Button XML or CSV, utility CSV, Excel) inside a folder the developer allowed at launch with --allow-dir, and return a handle and a parse receipt. Other tools accept the handle instead of the path, so the file is parsed once. The file never leaves this machine. ${UNTRUSTED}`,
+    description: `Parse a local file (Green Button XML or CSV, utility CSV, Excel, or a lines standards file or pole list, told apart by its header row) inside a folder the developer allowed at launch with --allow-dir, and return a handle and a parse receipt. Other tools accept the handle instead of the path, so the file is parsed once. The file never leaves this machine. ${UNTRUSTED}`,
     inputSchema: {
       type: 'object',
       additionalProperties: false,
@@ -111,7 +113,7 @@ export const TOOL_SURFACE = [
     outputSchema: {
       type: 'object',
       properties: {
-        handle: STR, format: STR, receipt: OBJ,
+        handle: STR, format: STR, kind: { enum: ['lines-standards', 'lines-pole-list'] }, receipt: OBJ,
         series: { type: 'array', items: { type: 'object', properties: { index: { type: 'integer' }, channel: STR, intervals: { type: 'integer' }, totalKwh: { type: 'number' }, peakKw: { type: 'number' }, peakStartUtc: STR, loadFactor: {}, monthly: { type: 'array', items: OBJ } } } },
         intervals: OBJ,
         source_text: { type: 'array', items: STR },

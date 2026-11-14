@@ -31,10 +31,11 @@ export function taskProgress(root = ROOT) {
 /** Replay every agent-evaluation request through the server and count the ones whose recorded values come back. */
 export async function evalPassRate(root = ROOT) {
   const fixtures = realpathSync(join(root, 'verify/fixtures/intake/files'));
-  const server = createServer({ allowDirs: [fixtures] });
+  const lines = realpathSync(join(root, 'verify/fixtures/lines'));
+  const server = createServer({ allowDirs: [fixtures, lines] });
   let passed = 0;
   for (const r of requests) {
-    const args = JSON.parse(JSON.stringify(r.arguments).replace(/\{fixture:([^}]+)\}/g, (_, f) => join(fixtures, f)));
+    const args = JSON.parse(JSON.stringify(r.arguments).replace(/\{fixture:([^}]+)\}/g, (_, f) => join(fixtures, f)).replace(/\{lines:([^}]+)\}/g, (_, f) => join(lines, f)));
     const res = await server.handle({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: r.tool, arguments: args, _meta: { 'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientCapabilities': {} } } });
     const out = res.result?.structuredContent;
     if (out && !res.result.isError && Object.entries(r.expect).every(([p, want]) => JSON.stringify(get(out, p)) === JSON.stringify(want))) passed++;
