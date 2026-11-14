@@ -10,5 +10,9 @@ import demandCharges from './demand-charges.mjs';
 import timeOfUse from './time-of-use.mjs';
 import coincidentPeaks from './coincident-peaks.mjs';
 import meterData from './meter-data.mjs';
+import billHigh from './bill-high.mjs';
+import rateCase from './rate-case.mjs';
+import hourlyEmissions from './hourly-emissions.mjs';
+import powerSources from './power-sources.mjs';
 
-export default [timeOfUse, demandCharges, coincidentPeaks, meterData, dataCenterRequest, balancingAuthority, publicData];
+export default [billHigh, timeOfUse, demandCharges, coincidentPeaks, meterData, rateCase, dataCenterRequest, hourlyEmissions, balancingAuthority, powerSources, publicData];

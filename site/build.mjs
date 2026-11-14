@@ -288,12 +288,6 @@ export async function build(opts = {}) {
       write(balancingPath(region.ba), balancingPage({ region, manifest: balancing.manifest, utilities: inRegion, plants: regionPlants, i18n }));
     }
   }
-  // The Learn explainers, every number generated from the data built above or cited (add-learn-and-data-guides 3.1).
-  const peaks = served(join(ROOT, 'data'), 'pudl-ferc714', 'annual_peaks');
-  if (peaks && balancing && utilities) {
-    const ctx = { peaks, balancing, utilities, ledger, ercot4cp: JSON.parse(readFileSync(join(ROOT, 'data/curated/ercot-4cp.json'), 'utf8')) };
-    for (const e of EXPLAINERS) write(explainerPath(e.id), explainerPage({ explainer: e, resolved: resolveExplainer(e, ctx), i18n }));
-  }
   // The standards template for the line checks, as CSV and as a workbook from the same rows (design D1).
   mkdirSync(join(outDir, 'lines'), { recursive: true });
   writeFileSync(join(outDir, 'lines/standards-template.csv'), templateCsv());
@@ -396,6 +390,15 @@ export async function build(opts = {}) {
   }
   // Hourly carbon from EIA-930: every region's shards by year, and its typical hours for the cleanest-hours picker.
   const carbon = carbonData(join(ROOT, 'data'));
+  // The Learn explainers, every number generated from the data built above or cited (add-learn-and-data-guides 3.1).
+  const peaks = served(join(ROOT, 'data'), 'pudl-ferc714', 'annual_peaks');
+  const egridSubregions = served(join(ROOT, 'data'), 'egrid', 'subregions');
+  const history = served(join(ROOT, 'data'), 'eia-861-history', 'sales');
+  if (peaks && balancing && utilities && regions && carbon && egridSubregions && history) {
+    const ctx = { peaks, balancing, utilities, ledger, regions, carbon, egrid: egridSubregions, history, ercot4cp: JSON.parse(readFileSync(join(ROOT, 'data/curated/ercot-4cp.json'), 'utf8')) };
+    for (const e of EXPLAINERS) write(explainerPath(e.id), explainerPage({ explainer: e, resolved: resolveExplainer(e, ctx), i18n }));
+  }
+
   if (carbon) {
     mkdirSync(join(outDir, 'carbon/typical'), { recursive: true });
     writeFileSync(join(outDir, 'carbon/regions.json'), JSON.stringify(carbon.regions));
