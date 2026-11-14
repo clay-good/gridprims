@@ -166,7 +166,10 @@ export async function build(opts = {}) {
   }
   let describes = null;
   try { describes = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(); } catch { describes = null; }
-  const limits = limitsRecord({ tools: TOOLS, cannotDo, claims, health, datasets, generatedAt: health?.generatedAt ?? null, describes, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') });
+  // The continuity ledger, as a page and as JSON, generated with the build's own date so pages age it on the
+  // device. It is built here because the limits page reads its late, stalled, and dead-link rows from it.
+  const ledger = buildLedger({ datasets: await ledgerDatasets(ROOT), health, replies: ledgerReplies, generatedAt: health?.generatedAt ?? buildDate, contact: `${ORIGIN}/report/` });
+  const limits = limitsRecord({ tools: TOOLS, cannotDo, claims, health, ledger, generatedAt: health?.generatedAt ?? null, describes, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') });
   write('/limits/', limitsPage({ limits, i18n, health }));
   if (health) { mkdirSync(join(outDir, 'health'), { recursive: true }); cpSync(healthFile, join(outDir, 'health/pipeline.json')); }
   writeFileSync(join(outDir, 'limits/limits.json'), JSON.stringify(limits, null, 2) + '\n');
@@ -388,8 +391,6 @@ export async function build(opts = {}) {
   write('/404.html', notFoundPage({ tools: TOOLS, i18n }));
   const entries = new Map(await Promise.all(datasets.map(async (d) => [d.dataset, (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${d.dataset}.mjs`)).href)).default])));
   write(QF_PATH, qualifyingFacilityPage({ checklist: qfChecklist, i18n }));
-  // The continuity ledger, as a page and as JSON, generated with the build's own date so pages age it on the device.
-  const ledger = buildLedger({ datasets: await ledgerDatasets(ROOT), health, replies: ledgerReplies, generatedAt: health?.generatedAt ?? buildDate, contact: `${ORIGIN}/report/` });
   write(LEDGER_PATH, ledgerPage({ ledger, i18n }));
   writeFileSync(join(outDir, 'ledger/ledger.json'), JSON.stringify(ledger, null, 2) + '\n');
   const checks = consistencyChecks(join(ROOT, 'data'));

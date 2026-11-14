@@ -32,5 +32,5 @@
 ## 4. Surfaces
 
 - [x] 4.1 Add ledger rows and diff history to each data library page; verify they match the ledger
-- [ ] 4.2 Feed the limits page's staleness and known-problem rows from the ledger; verify the late-dataset scenario there
+- [x] 4.2 Feed the limits page's staleness and known-problem rows from the ledger; verify the late-dataset scenario there
 - [ ] 4.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green

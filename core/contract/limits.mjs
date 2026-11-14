@@ -4,7 +4,6 @@
 // copy, and the MCP resource are all this one object.
 
 import { VALIDATION_LEVELS } from './manifest.mjs';
-import { lateness } from '../lib/lateness.mjs';
 
 export const FRESH_RUN_DAYS = 90;
 const DAY = 86_400_000;
@@ -12,11 +11,11 @@ const DAY = 86_400_000;
 /**
  * @param {{
  *   tools: Array<{manifest: any}>, cannotDo?: any[], claims?: any[], health?: any, signoffs?: Array<{tool: string}>,
- *   datasets?: any[], generatedAt?: string, describes?: string, now?: number,
+ *   ledger?: any, generatedAt?: string, describes?: string, now?: number,
  * }} r
  */
 export function limitsRecord(r) {
-  const { tools, cannotDo = [], claims = [], health = null, signoffs = [], datasets = [], generatedAt = null, describes = null } = r;
+  const { tools, cannotDo = [], claims = [], health = null, signoffs = [], ledger = null, generatedAt = null, describes = null } = r;
   const now = r.now ?? Date.now();
   const passed = new Map((health?.tools ?? []).map((t) => [t.id, t.evidencePassed]));
   const rows = tools.map(({ manifest: m }) => {
@@ -31,8 +30,15 @@ export function limitsRecord(r) {
     };
   });
   const counts = Object.fromEntries(VALIDATION_LEVELS.map((l) => [l.name, rows.filter((t) => t.validationLevel === l.level).length]));
-  const late = datasets.map((d) => ({ id: d.dataset, title: d.title, ...lateness(d, now) })).filter((d) => d.late);
-  const stalled = (health?.workflows ?? []).filter((w) => !w.lastSuccess || now - Date.parse(w.lastSuccess) > w.thresholdHours * 3_600_000).map((w) => ({ id: w.id, lastSuccess: w.lastSuccess, thresholdHours: w.thresholdHours }));
+  // Staleness and the known problems come from the continuity ledger, so the
+  // limits page and the ledger can never disagree about what is late, what has
+  // stalled, or which cited link has died (add-data-continuity-ledger 4.2).
+  // Our own datasets are in it on the same terms as a publisher's.
+  const late = (ledger?.rows ?? []).filter((row) => row.status === 'late')
+    .map(({ id, title, due, posted, daysLate, ours, basis }) => ({ id, title, due, posted, daysLate, ours, basis }));
+  const stalled = (ledger?.automation ?? []).filter((w) => !w.lastSuccess || now - Date.parse(w.lastSuccess) > w.thresholdHours * 3_600_000)
+    .map((w) => ({ id: w.workflow, lastSuccess: w.lastSuccess, thresholdHours: w.thresholdHours }));
+  const deadLinks = (ledger?.deadLinks ?? []).map(({ url, status, lastOk, usedBy }) => ({ url, status, lastOk, usedBy }));
   return {
     generatedAt, describes,
     summary: 'gridprims gives screening estimates, not utility studies. No tool has yet been checked against real bills or a utility\'s own figures. User problem reports are how we find our errors.',
@@ -41,6 +47,7 @@ export function limitsRecord(r) {
     problems: {
       automation: { stalled, note: stalled.length ? 'Some scheduled jobs are stalled: data may be as old as their last successful run.' : null },
       lateDatasets: late,
+      deadLinks,
       failingDatasets: (health?.datasets ?? []).filter((d) => d.failure).map((d) => ({ id: d.id, since: d.failure.since, reason: d.failure.reason })),
       pinnedDatasets: (health?.datasets ?? []).filter((d) => d.pinned).map((d) => ({ id: d.id, held: d.pinned.held, attempted: d.pinned.attempted, breaking: d.pinned.breaking })),
       postureLimited: (health?.datasets ?? []).filter((d) => d.terms && d.terms.posture !== 'mirror').map((d) => ({ id: d.id, posture: d.terms.posture, termsChanged: d.terms.changed })),

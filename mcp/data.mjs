@@ -64,14 +64,14 @@ export function query({ dataset, table, filter = {}, limit = 100, offset = 0 }, 
   return { manifest: m, table: t, rows, matched };
 }
 
-/** The limits record's inputs as the MCP server sees them: curated lists, the health record, and dataset manifests. */
+/**
+ * The limits record's inputs as the MCP server sees them: curated lists, the health record, and the
+ * continuity ledger, which is where staleness and the known problems come from on both surfaces.
+ */
 export function limitsInputs(dir = DATA_DIR) {
   const healthFile = join(dir, 'health/pipeline.json');
   const health = existsSync(healthFile) ? JSON.parse(readFileSync(healthFile, 'utf8')) : null;
-  const datasets = catalog(dir).map((d) => JSON.parse(readFileSync(join(dir, d.id, d.version, 'manifest.json'), 'utf8')));
-  // Lateness is judged on the registry's cadence, as on the website.
-  for (const m of datasets) { const c = REGISTRY_CADENCE.get(m.dataset); if (c) m.cadence = c; }
-  return { cannotDo, claims, health, datasets, generatedAt: health?.generatedAt ?? null, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') };
+  return { cannotDo, claims, health, ledger: ledgerRecord(dir), generatedAt: health?.generatedAt ?? null, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') };
 }
 
 /**

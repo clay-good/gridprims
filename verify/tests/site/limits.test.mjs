@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, writeFileSync, cpSync } from 'node:fs';
 import { join } from 'node:path';
 import { limitsRecord, FRESH_RUN_DAYS } from '../../../core/contract/limits.mjs';
+import { buildLedger } from '../../../core/lib/ledger.mjs';
 import { cannotDo, claims } from '../../../core/contract/limits-inputs.mjs';
 import { limitsPage } from '../../../site/templates/pages.mjs';
 import { createI18n } from '../../../site/lib/i18n.mjs';
@@ -68,13 +69,42 @@ test('sections not yet populated say so and name what will populate them', () =>
   assert.match(html, /Not yet populated:<\/strong> The tariff conformance suite will list the charge types its reference engines cannot check\./);
 });
 
-test('a late dataset and a stalled automation are listed with their dates', () => {
-  const datasets = [{ dataset: 'egrid', title: 'eGRID', asOf: '2024-01-30', cadence: { every: 'annual' } }];
-  const health = { workflows: [{ id: 'refresh-data', lastSuccess: '2026-10-01T09:17:00Z', thresholdHours: 72 }], datasets: [] };
-  const L = record({ datasets, health });
-  assert.equal(L.problems.lateDatasets[0].id, 'egrid');
-  assert.match(page(L, { workflows: [], datasets: [] }), /eGRID was due Jan 30, 2025 \(judged from its usual schedule\); 639 days late\./);
+test('the late, stalled, and dead-link rows are the continuity ledger\'s own (ledger task 4.2)', () => {
+  const health = {
+    workflows: [{ id: 'refresh-data', lastSuccess: '2026-10-01T09:17:00Z', thresholdHours: 72, intervalHours: 24 }],
+    datasets: [],
+    links: [{ url: 'https://example.gov/gone', state: 'broken', status: 404, lastOk: '2026-09-01T00:00:00Z', usedBy: ['eGRID source'] }],
+  };
+  const ledger = buildLedger({
+    datasets: [
+      { id: 'egrid', title: 'eGRID', publisher: 'EPA', sourceUrl: 'https://www.epa.gov/egrid', cadence: { every: 'annual' }, asOf: '2024-01-30' },
+      // Ours is in the ledger on the same terms, so the limits page names it too.
+      { id: 'gridprims-rates', title: 'Rate index', publisher: 'gridprims', ours: true, sourceUrl: 'https://gridprims.com/data/', cadence: { every: 'monthly' }, asOf: '2026-01-31' },
+      { id: 'eia-861', title: 'EIA-861', publisher: 'EIA', sourceUrl: 'https://www.eia.gov/', cadence: { every: 'annual' }, asOf: '2026-10-01' },
+    ],
+    health, generatedAt: '2026-10-31T00:00:00Z', contact: 'https://gridprims.com/report/',
+  });
+  const L = record({ health, ledger });
+  // Exactly what the ledger calls late, ours included, and nothing it calls current.
+  assert.deepEqual(L.problems.lateDatasets.map((d) => d.id), ledger.rows.filter((r) => r.status === 'late').map((r) => r.id));
+  assert.deepEqual(L.problems.lateDatasets.map((d) => d.id), ['egrid', 'gridprims-rates']);
+  assert.equal(L.problems.lateDatasets.find((d) => d.id === 'gridprims-rates').ours, true);
+  const html = page(L, { workflows: [], datasets: [] });
+  assert.match(html, /eGRID was due Jan 30, 2025 \(judged from its usual schedule\); 639 days late\./);
+  assert.match(html, /Rate index was due Mar 3, 2026/);
   assert.deepEqual(L.problems.automation.stalled.map((w) => w.id), ['refresh-data']);
+  // A cited link that died is a known problem, named with what it returns and who cites it.
+  assert.deepEqual(L.problems.deadLinks.map((d) => d.url), ledger.deadLinks.map((d) => d.url));
+  assert.match(html, /https:\/\/example\.gov\/gone now returns 404\. Last seen working Sep 1, 2026\. Cited by eGRID source\./);
+});
+
+test('with no ledger the limits record claims no staleness it cannot show', () => {
+  const L = record();
+  assert.deepEqual(L.problems.lateDatasets, []);
+  assert.deepEqual(L.problems.deadLinks, []);
+  assert.deepEqual(L.problems.automation.stalled, []);
+  assert.match(page(L), /No dataset is past its expected release\./);
+  assert.match(page(L), /Every link we cite resolved at the last check\./);
 });
 
 test('the unverified-claim register is listed, and a manifest citing a claim with no entry fails the build', async () => {

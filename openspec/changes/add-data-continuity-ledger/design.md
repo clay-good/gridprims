@@ -47,6 +47,11 @@ Our own snapshots, derived tables, and link citations are in the ledger on the s
 
 Alternative for D6: exempt ourselves as the measurer. Rejected: a monitor that excludes itself invites exactly the charge that discredits it.
 
+### D6a. The limits page reads the ledger, so the two can never disagree
+The limits page used to judge lateness from the dataset manifests and stalling from the health record, computing both a second time from different inputs. It now takes its late rows, its stalled jobs, and its dead citations straight from the ledger, which means our own datasets appear on it too (D6), and a visitor comparing the two pages sees the same list on both.
+
+Alternative: keep the two computations and test that they agree. Rejected: a test that two paths agree is a test we would have to keep passing forever, where one path is simply the ledger.
+
 ### D7. Conservative to a fault
 Where a check could be read two ways, it reports the reading least damaging to the publisher and names the ambiguity. Where coverage is incomplete, the row says so rather than extrapolating. Where a finding depends on an unverified reading, it is not published.
 
