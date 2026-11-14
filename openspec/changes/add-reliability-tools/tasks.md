@@ -31,5 +31,5 @@
 
 ## 5. Surfaces
 
-- [ ] 5.1 Run every worked example through the MCP server; verify identical structured results
+- [x] 5.1 Run every worked example through the MCP server; verify identical structured results
 - [ ] 5.2 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green
