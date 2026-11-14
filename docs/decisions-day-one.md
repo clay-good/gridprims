@@ -141,8 +141,11 @@ Measured on CI (`ubuntu-24.04`, headless Chrome), 2026-10-31:
 | Parse 35,040 rows of 15-minute CSV in the worker | 1,000 ms | 1,245–1,276 ms (over) | 633–661 ms, after resolving local time once per wall-clock hour |
 | Tool page first answer (largest contentful paint) | 1,500 ms | 744–932 ms | 844–920 ms |
 | Tool page JavaScript, compressed | 150 KB | 22.6 KB in 15 files | 22.7 KB |
+| Command index, compressed (fetched on first focus) | 150 KB | 57.3 KB with 4,825 entries, 3,140 of them counties | — |
 
 The 1 s parse budget stays as set: the measured figure clears it with about 35% headroom.
+
+The command index is measured the same way because it is fetched whole the first time the search bar is focused. Adding every state, county, utility with a page, balancing authority, and eGRID subregion took it from 43.5 KB raw to 541 KB raw, but only to 57.3 KB compressed: the repeated county and state names compress almost to nothing. ZIP codes stay out of it and are recognized by the ranker instead. `verify/gates/index-size.mjs` holds the budget.
 
 ## 9. MCP protocol choices
 

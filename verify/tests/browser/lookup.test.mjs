@@ -58,4 +58,31 @@ for (const kind of ['chrome', 'firefox']) {
       await server.close();
     }
   });
+
+  test(`${kind}: a place from the command bar arrives in the fragment and runs itself`, { skip, timeout: 60_000 }, async () => {
+    const log = [];
+    const server = await serve(out, { onRequest: (r) => log.push(r.url) });
+    const browser = await launch(kind);
+    try {
+      // A county, as the command bar links it (siting task 4.2).
+      await browser.goto(`${server.url}/lookup/#state=TX&county=48453`);
+      await waitFor(browser, "document.querySelector('[data-lookup-result]').textContent.includes('Travis County')");
+      assert.match(await browser.evaluate("document.querySelector('[data-lookup-result]').textContent"), /Travis County, TX/);
+      // A ZIP, likewise: it is in the fragment, so no request carries it. The
+      // visitor comes from another page, as they would from its command bar;
+      // changing only the fragment would not reload the document.
+      await browser.goto(`${server.url}/limits/`);
+      log.length = 0;
+      browser.requests.length = 0;
+      await browser.goto(`${server.url}/lookup/#zip=78701`);
+      await waitFor(browser, "document.documentElement.dataset.lookupDone === '78701'");
+      assert.match(await browser.evaluate("document.querySelector('[data-lookup-result]').textContent"), /Travis County, TX/);
+      // What the host receives is the test: a fragment is never sent, so the
+      // server log holds no ZIP even though the address bar shows one.
+      assert.deepEqual(log.filter((u) => u.includes('78701')), [], 'the host is sent no request carrying the ZIP');
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
 }

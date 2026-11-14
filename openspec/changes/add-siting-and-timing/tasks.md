@@ -23,5 +23,5 @@
 ## 4. Home page and index
 
 - [x] 4.1 Replace the home page body with the read-out; verify the first-screen scenarios at 1440 x 900 and 360 x 640 and that the workbench is still reachable from the catalog and the search bar
-- [ ] 4.2 Add places to the command index and measure the index size against the performance budget; verify a ZIP, a county, a utility, and a balancing authority each match, and record the measured size in the design's open question
+- [x] 4.2 Add places to the command index and measure the index size against the performance budget; verify a ZIP, a county, a utility, and a balancing authority each match, and record the measured size in the design's open question
 - [x] 4.3 Update the home and navigation specs and tests that assert the old home page; verify the full suite and the checks pass

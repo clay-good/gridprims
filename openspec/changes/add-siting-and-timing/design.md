@@ -47,4 +47,6 @@
 
 **Decision.** The index gains entity entries (state, county, utility, balancing authority) so the one search bar can answer a place as well as a tool. The index is already fetched whole on first focus, so size matters: entity entries carry only id, title, url, and words, and counties are included only with their state name attached to keep the file within the performance budget.
 
-**Open.** Whether 3,000-plus county entries fit the budget is measured, not assumed; if they do not, counties are matched through the existing ZIP shard instead and only states, utilities, and balancing authorities join the index.
+**Measured (task 4.2).** They fit. The index holds 4,825 entries — 23 tools, 43 glossary terms, 51 states, 27 eGRID subregions, 67 balancing authorities, 1,474 utilities with pages, and 3,140 counties — at **57 KB compressed** (541 KB raw), well inside the 150 KB compressed budget that §8 of `docs/decisions-day-one.md` sets for page JavaScript. The repeated `", TX"` and `"County"` strings compress to almost nothing, which is why 330 KB of raw county text costs so little on the wire. `verify/gates/index-size.mjs` holds the budget, and the site test prints the measured figure as a `BUDGET` line.
+
+ZIP codes stay out of the index: 33,000 entries would have been the one thing that did not fit, and the ZIP shards already resolve one on the device. The ranker recognizes five digits and sends them to `/lookup/?zip=`. A county entry lands on `/lookup/?state=&county=`, which names its serving utilities, its subregion, and its balancing authority.

@@ -65,3 +65,26 @@ test('a tool whose id names what was asked for outranks one that only shares a t
   // A query that fills a tool's inputs still outranks every word match.
   assert.equal(first('12 MWh to MMBtu'), 'calc.energy-units.convert');
 });
+
+test('a ZIP, a county, a utility, and a balancing authority each match (siting task 4.2)', () => {
+  const places = [
+    { kind: 'place', placeKind: 'county', title: 'Travis, TX', url: '/lookup/#state=TX&county=48453' },
+    { kind: 'place', placeKind: 'utility', title: 'Austin Energy', url: '/utilities/1015/' },
+    { kind: 'place', placeKind: 'balancing-authority', title: 'Electric Reliability Council of Texas', url: '/balancing-authorities/erco/' },
+    { kind: 'place', placeKind: 'state', title: 'Texas', url: '/states/tx/' },
+  ];
+  const withPlaces = [...index, ...places];
+  // A bare ZIP is never indexed; five digits are recognized and sent to the lookup.
+  const [zip] = searchCommands('78701', withPlaces);
+  assert.equal(zip.placeKind, 'zip');
+  assert.equal(zip.url, '/lookup/#zip=78701');
+  assert.equal(zip.title, 'ZIP 78701');
+  // A leading zero survives, so a Massachusetts ZIP is not read as a number.
+  assert.equal(searchCommands('02134', withPlaces)[0].url, '/lookup/#zip=02134');
+  assert.equal(searchCommands('7870', withPlaces).some((r) => r.placeKind === 'zip'), false);
+  assert.equal(searchCommands('travis', withPlaces)[0].url, '/lookup/#state=TX&county=48453');
+  assert.equal(searchCommands('austin energy', withPlaces)[0].url, '/utilities/1015/');
+  assert.equal(searchCommands('electric reliability council', withPlaces)[0].url, '/balancing-authorities/erco/');
+  // A place entry carries no inputs and no command form, so it never claims a parsed value.
+  assert.equal(searchCommands('texas', withPlaces)[0].values, null);
+});

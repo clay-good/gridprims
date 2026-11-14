@@ -107,6 +107,9 @@ export function buildCommandIndex(tools, pathOf, glossary = []) {
   ];
 }
 
+/** A bare five-digit ZIP code. Leading zeros matter, so it stays a string throughout. */
+export const ZIP_RE = /^\s*(\d{5})\s*$/;
+
 /**
  * Rank index entries for a query. A query that fills a tool's inputs ranks
  * first and carries those values; otherwise entries rank by shared words,
@@ -121,15 +124,23 @@ export function searchCommands(query, index, limit = 8) {
   const qWords = words(q);
   const scored = [];
   const asked = askedTerm(q);
+  // ZIP codes are not indexed: 33,000 entries would dwarf the file, and the ZIP
+  // shards already resolve one on the device. Five digits goes straight there.
+  const zip = ZIP_RE.exec(q)?.[1];
+  // The ZIP travels in the fragment, which no request carries, so looking one up
+  // leaves nothing in the host's log (the standing rule: inputs stay on the device).
+  if (zip) scored.push({ kind: 'place', placeKind: 'zip', title: `ZIP ${zip}`, url: `/lookup/#zip=${zip}`, words: [zip], inputs: [], score: 3000, values: null });
   for (const entry of index) {
-    const values = entry.kind === 'term' ? null : parseCommand(q, entry);
+    const values = entry.kind === 'tool' ? parseCommand(q, entry) : null;
     // A query that names a term, or asks what it is, puts that term first.
     let score = values ? 1000 : entry.names?.includes(asked) ? 2000 : 0;
     const titleWords = new Set(words(entry.title));
+    // A place entry carries no word list of its own; its title is its words.
+    const entryWords = entry.words ?? [...titleWords];
     for (const w of qWords) {
       if (titleWords.has(w)) score += 2;
-      else if (entry.words.some((e) => e === w)) score += 1;
-      else if (w.length >= 3 && entry.words.some((e) => e.startsWith(w))) score += 0.5;
+      else if (entryWords.some((e) => e === w)) score += 1;
+      else if (w.length >= 3 && entryWords.some((e) => e.startsWith(w))) score += 0.5;
       if (entry.idWords?.includes(w)) score += 1;
     }
     if (score > 0) scored.push({ ...entry, score, values });

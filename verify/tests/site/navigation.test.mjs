@@ -3,13 +3,15 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { checkUrls, pagesOf } from '../../gates/urls.mjs';
 import { redirectFor, redirectsFile } from '../../../site/lib/redirects.mjs';
 import { pseudoLocalize } from '../../../site/lib/i18n.mjs';
 import { suggest } from '../../../site/pages/not-found.js';
 import { sharedSite } from '../../lib/shared-site.mjs';
+import { searchCommands } from '../../../core/contract/command.mjs';
+import { INDEX_LIMIT, checkIndexSize, indexSize } from '../../gates/index-size.mjs';
 
 const out = await sharedSite();
 const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
@@ -59,6 +61,8 @@ test('404 suggestions are computed from the path on the device, best match first
   const index = JSON.parse(readFileSync(join(out, 'command-index.json'), 'utf8'));
   assert.equal(suggest('/tools/calc/energy-unit/conver/', index)[0].id, 'calc.energy-units.convert');
   assert.deepEqual(suggest('/zzzz/', index), []);
+  // A number in a path is an id, not a word: 404 is not a near miss for utility 4604.
+  assert.deepEqual(suggest('/404.html', index), []);
   const html = readFileSync(join(out, '404.html'), 'utf8');
   assert.match(html, /<h2>Sections<\/h2>/, 'without script it lists the sections');
   assert.match(html, /<h2>Every tool<\/h2>[\s\S]*Energy unit converter/);
@@ -77,4 +81,26 @@ test('a removed plant page passes the URL record through the moved map, and a ma
   assert.match(checkUrls({ pages: ['/', '/states/tx/'], published, rules: [] })[0], /\/plants\/1\/ was published and now neither resolves nor redirects/);
   assert.deepEqual(checkUrls({ pages: ['/', '/states/tx/'], published, rules: [], moved: { 1: '/states/tx/' } }), []);
   assert.match(checkUrls({ pages: ['/'], published, rules: [], moved: { 1: '/states/tx/' } }).join('\n'), /\/plants\/1\/ redirects to \/states\/tx\/, which is not a page/);
+});
+
+test('the command index carries places and stays inside its size budget (siting task 4.2)', () => {
+  const index = JSON.parse(readFileSync(join(out, 'command-index.json'), 'utf8'));
+  const places = index.filter((e) => e.kind === 'place');
+  const kinds = new Set(places.map((e) => e.placeKind));
+  for (const k of ['state', 'county', 'utility', 'balancing-authority', 'subregion']) assert.ok(kinds.has(k), `the index carries ${k} entries`);
+  // Every place leads somewhere the build actually wrote.
+  for (const p of places) {
+    const [path] = p.url.split('#');
+    assert.ok(existsSync(join(out, path, 'index.html')), `${p.title} points at ${path}, which was not built`);
+  }
+  // A ZIP, a county, a utility, and a balancing authority each match against the real index.
+  const top = (q) => searchCommands(q, index, 1)[0];
+  assert.equal(top('78701').url, '/lookup/#zip=78701');
+  assert.match(top('Travis, TX').url, /^\/lookup\/#state=TX&county=48453$/);
+  assert.equal(top('Austin Energy').url, '/utilities/1015/');
+  assert.match(top('Electric Reliability Council of Texas').url, /^\/balancing-authorities\/erco\/$/);
+  // Measured, not assumed: the figure recorded in design D7 of add-siting-and-timing.
+  const size = indexSize(out);
+  assert.deepEqual(checkIndexSize(out), []);
+  console.log(`BUDGET command-index.json ${size.compressed.toLocaleString('en-US')} bytes compressed (${size.bytes.toLocaleString('en-US')} raw), budget ${INDEX_LIMIT.toLocaleString('en-US')}`);
 });

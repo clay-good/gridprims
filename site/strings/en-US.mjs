@@ -118,7 +118,7 @@ export default {
   'theme.night': 'Night',
   'command.label': 'Ask in plain words',
   'command.placeholder': 'Try “12 MWh to MMBtu”',
-  'command.noMatch': 'No tool matches yet. Try a unit or a tool name.',
+  'command.noMatch': 'No match yet. Try a place, a tool name, or a unit.',
   'command.results': 'Results',
   'tool.needsJs': 'This tool runs in your browser and needs JavaScript. The example below was computed when the page was built.',
   'tool.inputs': 'Inputs',

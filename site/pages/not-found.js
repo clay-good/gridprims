@@ -18,7 +18,10 @@ export function suggest(path, index, limit = 5) {
     const have = [...words(e.title), ...words(e.url), ...(e.words ?? [])];
     let score = 0;
     for (const w of want) {
-      const best = Math.min(...have.map((h) => (h === w ? 0 : h.startsWith(w) || w.startsWith(h) ? 0.5 : distance(w, h) / Math.max(w.length, h.length))));
+      // A number in a path is an id: 4604 is not a near miss for 404, so digits
+      // match exactly or not at all. Words still match by distance.
+      const near = (h) => (h === w ? 0 : /^\d+$/.test(w) || /^\d+$/.test(h) ? 1 : h.startsWith(w) || w.startsWith(h) ? 0.5 : distance(w, h) / Math.max(w.length, h.length));
+      const best = Math.min(...have.map(near));
       if (best < 0.34) score += 1 - best;
     }
     return { ...e, score };

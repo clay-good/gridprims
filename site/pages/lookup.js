@@ -8,8 +8,12 @@ import strings from '../strings/en-US.mjs';
 
 const { t } = createI18n(strings, 'en-US');
 const zipForm = document.querySelector('[data-lookup-zip]');
-// Arriving from the home page's ZIP door: fill the field and run it.
-const fromUrl = new URLSearchParams(location.search).get('zip');
+// Arriving from the home page's ZIP door, or from the command bar's place
+// entry: fill the fields and run them.
+// The fragment first: a place typed into the command bar travels there, because
+// a fragment is never sent to the host. A query string is still honoured.
+const params = new URLSearchParams(location.hash.slice(1) || location.search);
+const fromUrl = params.get('zip');
 const countyForm = document.querySelector('[data-lookup-county]');
 const out = document.querySelector('[data-lookup-result]');
 const zipError = document.querySelector('[data-zip-error]');
@@ -79,14 +83,16 @@ zipForm.addEventListener('submit', async (e) => {
   document.documentElement.dataset.lookupDone = parsed.zip;
 });
 
-stateSelect.addEventListener('change', async () => {
-  const st = stateSelect.value;
+/** Fill the county menu from a state's shard; the shard is fetched once and cached. */
+async function fillCounties(st) {
   countySelect.replaceChildren(el('option', st ? t('lookup.chooseCounty') : t('lookup.chooseStateFirst'), { value: '' }));
   countySelect.disabled = !st;
   if (!st) return;
   const s = await shard(st);
   countySelect.append(...countiesMatching(s, '').map((c) => el('option', c.name, { value: c.fips })));
-});
+}
+
+stateSelect.addEventListener('change', () => fillCounties(stateSelect.value));
 
 countyForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -100,6 +106,18 @@ countyForm.addEventListener('submit', async (e) => {
 if (fromUrl) {
   zipForm.elements.namedItem('zip').value = fromUrl;
   zipForm.requestSubmit();
+}
+
+// A county from the command bar: pick the state, fill its counties, and run it.
+const countyState = params.get('state');
+const countyFips = params.get('county');
+if (countyState && countyFips) {
+  stateSelect.value = countyState;
+  fillCounties(countyState).then(() => {
+    countySelect.value = countyFips;
+    // An unknown county leaves the picker ready rather than running an empty lookup.
+    if (countySelect.value === countyFips) countyForm.requestSubmit();
+  }, () => {});
 }
 
 document.documentElement.dataset.ready = '1';

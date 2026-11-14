@@ -10,6 +10,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { TOOLS } from '../core/tools/index.mjs';
 import { runTool } from '../core/contract/run.mjs';
 import { buildCommandIndex } from '../core/contract/command.mjs';
+import { placeEntries } from './entities/places.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
 import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
 import { execFileSync } from 'node:child_process';
@@ -155,7 +156,6 @@ export async function build(opts = {}) {
     if (result.status !== 'ok') throw new Error(`${manifest.id}: first worked example returned ${result.status}`);
     write(toolPath(manifest.id), calculatorPage({ manifest, example, result, i18n }));
   }
-  writeFileSync(join(outDir, 'command-index.json'), JSON.stringify(buildCommandIndex(TOOLS, toolPath, GLOSSARY)) + '\n');
   // The limits record: one object for the page, its JSON copy, and the MCP resource.
   const datasets = existsSync(join(ROOT, 'data')) ? readdirSync(join(ROOT, 'data')).filter((id) => existsSync(join(ROOT, 'data', id, 'current.json'))).map((id) => JSON.parse(readFileSync(join(ROOT, 'data', id, JSON.parse(readFileSync(join(ROOT, 'data', id, 'current.json'), 'utf8')).version, 'manifest.json'), 'utf8'))) : [];
   // Lateness is judged on the registry's cadence, which records what we know now (a decennial Census file,
@@ -319,6 +319,11 @@ export async function build(opts = {}) {
       writeFileSync(join(outDir, 'weather/meta.json'), JSON.stringify({ dataset: w.dataset, version: w.version, release: w.release ?? null, asOf: w.asOf, attribution: w.attribution }));
     }
   }
+  // The command bar's index: tools, glossary terms, and every place with a page.
+  // Written here because places need the entity data built above (design D7).
+  const places = placeEntries({ regions, utilities, balancing, lookup, withPage });
+  writeFileSync(join(outDir, 'command-index.json'), JSON.stringify([...buildCommandIndex(TOOLS, toolPath, GLOSSARY), ...places]) + '\n');
+
   // The bill check's tariff picker: each state's URDB residential rates, fetched only for the chosen utility's state.
   const tariffs = tariffData(join(ROOT, 'data'));
   if (tariffs) {
