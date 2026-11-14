@@ -529,7 +529,7 @@ export function correctionsPage({ entries, i18n }) {
   const body = html`<h1>${t('corrections.title')}</h1>
 <h2>${t('corrections.policy')}</h2>${prose([t('corrections.policyBody'), t('corrections.tiers')])}
 <h2>${t('corrections.log')}</h2>
-${entries.length ? html`<ul>${entries.map((e) => html`<li><span class="mono">${date(e.date)}</span> · ${t(`corrections.tier.${e.tier}`)} · ${t('corrections.line', { subject: e.subject, cause: e.cause })}${e.sample ? html` ${t('corrections.sample', e.sample)}` : ''}</li>`)}</ul>` : html`<p>${t('corrections.none')}</p>`}`;
+${entries.length ? html`<ul>${entries.map((e) => html`<li><span class="mono">${date(e.date)}</span> · ${t(`corrections.tier.${e.tier}`)} · ${t('corrections.line', { subject: e.subject, cause: e.cause })}${e.sample ? html` ${t('corrections.sample', e.sample)}` : ''}${e.comments ? html` <a href="/report/">${t('corrections.comments', { date: date(e.comments) })}</a>` : ''}</li>`)}</ul>` : html`<p>${t('corrections.none')}</p>`}`;
   return layout({ i18n, title: `${t('corrections.title')} · ${t('site.name')}`, description: t('corrections.policyBody'), path: '/corrections/', body, feed: { title: t('feeds.corrections'), href: '/feeds/corrections.xml' } });
 }
 

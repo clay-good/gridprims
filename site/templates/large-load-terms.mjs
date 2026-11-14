@@ -16,7 +16,7 @@ export function largeLoadTermsPage({ data, i18n }) {
   const { t, date } = i18n;
   const states = [...new Set(data.entries.map((e) => e.state))].sort();
   const statuses = [...new Set(data.entries.map((e) => e.fields.status.value).filter(Boolean))].sort();
-  const cell = (f) => (f.value === null ? html`<span class="unit-hint" data-not-public>${t('llterms.notPublic')}</span>` : html`${f.value}${f.label ? html` <span class="warning-chip" data-single-source>${f.label.split(':')[0]}</span>` : ''}
+  const cell = (f) => (f.value === null ? html`<span class="unit-hint" data-not-public>${t('llterms.notPublic')}</span>` : html`${f.value}${f.label ? html` <span class="warning-chip" data-single-source>${f.label.split(':')[0]}</span>` : ''}${f.was ? html` <span class="unit-hint" data-was>${t('llterms.was', { date: date(f.was.date), old: f.was.old })}</span>` : ''}
     <details><summary>${t('llterms.sources')}</summary><ul>${f.citations.map((c) => html`<li><a href="${c.url}">${c.publisher}</a>${c.locator ? `, ${c.locator}` : ''} (<a href="${c.archive}">${t('llterms.archive')}</a>, <span class="mono">${c.sha256.slice(0, 12)}</span>)</li>`)}${f.unreachable.map((u) => html`<li class="unit-hint">${t('llterms.unreachable', { date: date(u.checked), response: u.response })} <a href="${u.url}">${u.publisher}</a></li>`)}</ul></details>`);
   const entry = (e) => html`<section class="panel" id="${e.id}" data-term-entry="${e.id}" data-state="${e.state}" data-status="${e.fields.status.value ?? ''}" data-threshold-mw="${thresholdMw(e)}">
   <h2>${e.name} <span class="mono">${e.state}</span> <span class="unit-hint">${t(`llterms.entry.${e.type}`)}</span>${e.needsReview ? html` <span class="warning-chip" data-needs-review>${t('llterms.needsReview')}</span>` : ''}</h2>

@@ -25,6 +25,7 @@ import { checkIndexSize } from './gates/index-size.mjs';
 import { checkProgramLinks } from './gates/program-links.mjs';
 import { checkDataGuides } from './gates/data-guides.mjs';
 import { checkExplainers } from './gates/explainers.mjs';
+import { checkCuratedChanges } from './gates/curated-changes.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -39,6 +40,7 @@ const gates = [
   ['program links carry their facts, no tracking, and every handoff', () => checkProgramLinks(root)],
   ['data guides carry a level, date, and source, no personal data, and fixtures for every format', () => checkDataGuides(root)],
   ['explainers: short summaries, short sections, and every number generated or cited', () => checkExplainers(root)],
+  ['a published curated figure never moves without a logged change', () => checkCuratedChanges(root)],
   ['style tokens and contrast', () => checkStyle(root)],
   ['no literal copy in templates', () => checkCopy(root)],
   ['result versions and changelog', () => checkVersions(root, { record: Boolean(process.env.GRIDPRIMS_RECORD) })],
