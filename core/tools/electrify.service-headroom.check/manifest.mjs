@@ -2,7 +2,7 @@ const months = [88, 92, 101, 97, 110, 118, 120, 116, 104, 95, 90, 86].join(', ')
 
 export default {
   id: 'electrify.service-headroom.check',
-  version: '0.1.0',
+  version: '0.2.0',
   title: 'Service headroom',
   purpose: 'How much room is left on an existing electric service, from the demand the meter already measured.',
   archetype: 'calculator',
@@ -32,7 +32,7 @@ export default {
     'Utility meter data is the service total and assumes balanced phases.',
   ],
   citations: [
-    { source: 'NFPA 70, National Electrical Code', edition: '2023', locator: 'Section 220.87, Determining Existing Loads (cited and paraphrased; read it through NFPA\'s free access); see docs/derivations/service-headroom.md', url: 'https://www.nfpa.org/freeaccess' },
+    { source: 'NFPA 70, National Electrical Code', edition: '2023', locator: 'Section 220.87, Determining Existing Loads (cited and paraphrased; read it through NFPA\'s free access); see docs/derivations/service-headroom.md', url: 'https://www.nfpa.org/for-professionals/codes-and-standards/list-of-codes-and-standards/free-access' },
     { source: 'Mike Holt, Code Q&A: Calculating feeder or service loads, EC&M', edition: 'August 8, 2014', locator: 'Worked existing-load example, 200 A single-phase service', url: 'https://www.ecmweb.com/national-electrical-code/qa/article/20899437/code-qa-calculating-feeder-or-service-loads' },
   ],
   datasets: [],

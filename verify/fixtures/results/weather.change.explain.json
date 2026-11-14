@@ -1,13 +1,13 @@
 {
   "toolId": "weather.change.explain",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "results": [
     {
       "example": "colder-winter",
       "result": {
         "status": "ok",
         "toolId": "weather.change.explain",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "total": {
             "value": 1109,
@@ -78,7 +78,7 @@
               "source": "Recurve, OpenDSM data sufficiency and disqualification guidelines",
               "edition": "2025",
               "locator": "Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6",
-              "url": "https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines"
+              "url": "https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines/index.html"
             },
             {
               "source": "NOAA NCEI, Global Historical Climatology Network - Daily, Menne et al. (2012)",
@@ -113,7 +113,7 @@
       "result": {
         "status": "ok",
         "toolId": "weather.change.explain",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "total": {
             "value": 2569,
@@ -185,7 +185,7 @@
               "source": "Recurve, OpenDSM data sufficiency and disqualification guidelines",
               "edition": "2025",
               "locator": "Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6",
-              "url": "https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines"
+              "url": "https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines/index.html"
             },
             {
               "source": "NOAA NCEI, Global Historical Climatology Network - Daily, Menne et al. (2012)",
@@ -220,7 +220,7 @@
       "result": {
         "status": "ok",
         "toolId": "weather.change.explain",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "total": {
             "value": 1460,
@@ -292,7 +292,7 @@
               "source": "Recurve, OpenDSM data sufficiency and disqualification guidelines",
               "edition": "2025",
               "locator": "Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6",
-              "url": "https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines"
+              "url": "https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines/index.html"
             },
             {
               "source": "NOAA NCEI, Global Historical Climatology Network - Daily, Menne et al. (2012)",

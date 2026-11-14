@@ -297,7 +297,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 How much room is left on an existing electric service, from the demand the meter already measured.
 
-Version 0.1.0 · experimental · validation level 2, cross-checked
+Version 0.2.0 · experimental · validation level 2, cross-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|
@@ -324,7 +324,7 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 
 **Sources.**
 
-- NFPA 70, National Electrical Code, 2023, Section 220.87, Determining Existing Loads (cited and paraphrased; read it through NFPA's free access); see docs/derivations/service-headroom.md (https://www.nfpa.org/freeaccess)
+- NFPA 70, National Electrical Code, 2023, Section 220.87, Determining Existing Loads (cited and paraphrased; read it through NFPA's free access); see docs/derivations/service-headroom.md (https://www.nfpa.org/for-professionals/codes-and-standards/list-of-codes-and-standards/free-access)
 - Mike Holt, Code Q&A: Calculating feeder or service loads, EC&M, August 8, 2014, Worked existing-load example, 200 A single-phase service (https://www.ecmweb.com/national-electrical-code/qa/article/20899437/code-qa-calculating-feeder-or-service-loads)
 
 **Known limits.**
@@ -501,7 +501,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 How much of a change in your electricity use was the weather, from 12 to 24 bills and the nearest weather station.
 
-Version 0.1.0 · experimental · validation level 2, cross-checked
+Version 0.2.0 · experimental · validation level 2, cross-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|
@@ -524,7 +524,7 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 **Sources.**
 
 - CalTRACK Methods, version 2.0, CC0, Billing methods: candidate models, balance-point search, sufficiency, and CV(RMSE) (https://docs.caltrack.org/en/latest/methods.html)
-- Recurve, OpenDSM data sufficiency and disqualification guidelines, 2025, Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6 (https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines)
+- Recurve, OpenDSM data sufficiency and disqualification guidelines, 2025, Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6 (https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines/index.html)
 - NOAA NCEI, Global Historical Climatology Network - Daily, Menne et al. (2012), version 3.35, served snapshot 2026-11, Daily maximum and minimum temperature (TMAX, TMIN) (https://doi.org/10.7289/V5D21VHZ)
 - NOAA NCEI, U.S. Climate Normals 1991–2020, daily normals, version 1.0.1, Daily heating and cooling degree-day normals (DLY-HTDD, DLY-CLDD) (https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals)
 
