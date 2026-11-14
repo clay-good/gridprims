@@ -72,7 +72,11 @@ function queueBlock(q, negatives) {
     sec.append(el('p', t('siting.out.withdrawnState', { state: q.state, pct: n0(q.stateWithdrawnShare * 100), n: String(q.stateWithdrawnCohort) })));
   }
   // The publisher's own negative capacities are named, never quietly corrected.
-  if (negatives.length) sec.append(el('p', t('siting.out.negative', { types: negatives.join(', ') }), { className: 'unit-hint' }));
+  if (negatives.length) {
+    sec.append(el('p', t('siting.out.negative', {
+      n: String(q.negative?.count ?? negatives.length), types: negatives.join(', '), mw: n0(q.negative?.mw ?? 0),
+    }), { className: 'unit-hint' }));
+  }
   sec.append(el('p', t('siting.out.queueBasis', { release: q.release ?? '', asOf: q.asOf ?? '', through: q.through }), { className: 'unit-hint' }));
   return sec;
 }

@@ -33,7 +33,18 @@ function summaryFacts(s, i18n) {
   <div><dt>${t('queue.medianYears')}</dt><dd class="mono">${years(s.medianYears)}</dd></div>
   <div><dt>${t('queue.withdrawn', { year: WITHDRAWAL_COHORT })}</dt><dd class="mono">${s.withdrawn ? `${Math.round(s.withdrawn.share * 100)}%` : t('queue.tooFew')}</dd></div>
 </dl>
-${tableView([t('state.col.type'), t('state.col.activeMw'), t('state.col.projects')], TYPES.filter((k) => s.byType[k]).map((k) => [t(`state.queueType.${k}`), whole(s.byType[k].mw), whole(s.byType[k].count)]), t('queue.byType'))}`;
+${tableView([t('state.col.type'), t('state.col.activeMw'), t('state.col.projects')], TYPES.filter((k) => s.byType[k]).map((k) => [t(`state.queueType.${k}`), whole(s.byType[k].mw), whole(s.byType[k].count)]), t('queue.byType'))}
+${negativeNote(s, i18n)}`;
+}
+
+/**
+ * A few of LBNL's rows carry a negative capacity, so a total can read below
+ * zero. We name how many and by how much, and leave the publisher's figures
+ * alone (design D4a of add-siting-and-timing).
+ */
+function negativeNote(s, { t }) {
+  if (!s.negative) return '';
+  return html`<p class="unit-hint">${t('queue.negativeNote', { count: whole(s.negative.count), mw: whole(s.negative.mw) })}</p>`;
 }
 
 /** @param {{q: any, i18n: any, posture: string}} p */

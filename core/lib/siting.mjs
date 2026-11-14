@@ -75,6 +75,8 @@ export function countyQueue(stateFile, fips) {
     activeCount: s?.activeCount ?? null,
     byType: s?.byType ?? {},
     medianYears: s?.medianYears ?? null,
+    // The publisher's own negative rows, reported rather than corrected (design D4a).
+    negative: s?.negative ?? null,
     // Reported only when the county's own cohort clears the minimum; otherwise the
     // state figure is offered in its place and labelled as the state's.
     withdrawnShare: withdrawn ? withdrawn.share : null,

@@ -61,3 +61,24 @@ test('summaries: medians, the withdrawal cohort, and types add up to the active 
   assert.ok(Math.abs(Object.values(nat.byType).reduce((n, x) => n + x.mw, 0) - nat.activeMw) < 1e-6);
   assert.ok(nat.withdrawn.share > 0.5 && nat.withdrawn.n > 10000);
 });
+
+test('a negative published capacity is shown as published, named by count, and still reconciles', () => {
+  const travis = tx.counties.find((c) => c.county === 'Travis');
+  assert.ok(travis.summary.byType.solar.mw < 0, 'LBNL publishes a negative solar capacity in Travis County');
+  assert.deepEqual(travis.summary.negative, { count: 1, mw: travis.summary.byType.solar.mw });
+  const html = String(queueStatePage({ q, state: tx, i18n, posture: 'mirror' }));
+  const row = html.split('<tr>').find((r) => r.includes('<th scope="row">Travis</th>'));
+  const cells = [...row.matchAll(/<td[^>]*>([^<]*)<\/td>/g)].map((m) => m[1]);
+  // The publisher's own figure, not a clamp at zero.
+  assert.equal(cells[0], Math.round(travis.summary.activeMw).toLocaleString('en-US'));
+  assert.equal(cells[2], Math.round(travis.summary.byType.solar.mw).toLocaleString('en-US'));
+  assert.ok(text(html).includes(`LBNL\u2019s file gives ${tx.summary.negative.count} of these requests a negative capacity, ${Math.round(tx.summary.negative.mw).toLocaleString('en-US')} MW in all`), 'the state page names how many rows are negative and by how much');
+  // The county figures still add up to the state's, negatives included.
+  const countySolar = tx.counties.reduce((n, c) => n + (c.summary.byType.solar?.mw ?? 0), 0);
+  assert.ok(Math.abs(countySolar - tx.summary.byType.solar.mw) < 1e-6);
+  const countyNegatives = tx.counties.reduce((n, c) => n + (c.summary.negative?.count ?? 0), 0);
+  assert.equal(countyNegatives, tx.summary.negative.count);
+  // A place with no negative row carries no note.
+  const noNegative = q.states.find((s) => !s.summary.negative);
+  assert.doesNotMatch(text(queueStatePage({ q, state: noNegative, i18n, posture: 'mirror' })), /negative capacity/);
+});

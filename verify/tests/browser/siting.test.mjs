@@ -42,7 +42,7 @@ for (const kind of ['chrome', 'firefox']) {
       // Travis is below the cohort minimum, so the state figure is offered and labelled.
       assert.match(text, /Too few requests here to generalize, so this is the TX figure/);
       // LBNL's own negative capacity is named, not corrected.
-      assert.match(text, /negative capacity in the publisher’s file \(solar\)/);
+      assert.match(text, /LBNL’s file gives 1 of these requests a negative capacity, -53 MW in all, so the solar total reads below zero/);
       assert.match(text, /Lawrence Berkeley National Laboratory, Queued Up/);
       // Load is not routed by the federal small generator procedures.
       assert.match(text, /cover generation, not new load/);

@@ -9,7 +9,7 @@
 - [x] 2.1 Emit `dist/queue/<ST>.json` from the summaries `site/entities/queue.mjs` already computes, carrying state and per-county active MW, count, mix by type, median years, withdrawal share with cohort size, release and as-of; verify against the HTML state page that both render identical figures
 - [x] 2.2 Assert in CI that no emitted queue JSON carries a point-of-interconnection or substation field; verify the check fails on a fixture row that contains one
 - [x] 2.3 Serve the queue JSON with the data library's open-data headers; verify in the worker test
-- [ ] 2.4 Decide how a negative published capacity is shown. LBNL's file carries 16 rows with a negative `mw_1`, so a county total can read "-53 MW solar" on the queue page today. Do not alter the publisher's value; either report it as given with a note naming the count, or report the type total and the negative separately. Verify Travis County, TX renders the chosen treatment and that the figure still reconciles with the state page
+- [x] 2.4 Decide how a negative published capacity is shown. LBNL's file carries 16 rows with a negative `mw_1`, so a county total can read "-53 MW solar" on the queue page today. Do not alter the publisher's value; either report it as given with a note naming the count, or report the type total and the negative separately. Verify Travis County, TX renders the chosen treatment and that the figure still reconciles with the state page
 
 ## 3. The siting read-out
 

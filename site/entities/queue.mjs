@@ -35,10 +35,14 @@ export function summarize(rows, asOf) {
   for (const r of rows) byStatus[r.q_status ?? 'unknown'] = (byStatus[r.q_status ?? 'unknown'] ?? 0) + 1;
   const byYear = {};
   for (const r of active) if (r.q_year) byYear[r.q_year] = (byYear[r.q_year] ?? 0) + (r.mw_1 ?? 0);
+  // LBNL publishes a few rows with a negative capacity, so a type total can come
+  // out below zero. We report the publisher's figure and name the rows (design D4a).
+  const negatives = active.filter((r) => (r.mw_1 ?? 0) < 0);
   const cohort = rows.filter((r) => r.q_year && r.q_year <= WITHDRAWAL_COHORT && ['withdrawn', 'operational', 'active', 'suspended'].includes(r.q_status));
   return {
     activeMw: active.reduce((n, r) => n + (r.mw_1 ?? 0), 0), activeCount: active.length, byType, byStatus, byYear,
     medianYears: median(active.filter((r) => r.q_date).map((r) => yearsInQueue(r.q_date, asOf))),
+    negative: negatives.length ? { count: negatives.length, mw: negatives.reduce((n, r) => n + r.mw_1, 0) } : null,
     withdrawn: cohort.length >= WITHDRAWAL_MIN ? { share: cohort.filter((r) => r.q_status === 'withdrawn').length / cohort.length, n: cohort.length } : null,
   };
 }
@@ -72,7 +76,7 @@ export function queuePages(dataDir) {
  * @param {{state: string, summary: any, counties: any[]}} state
  */
 export function queueStateJson(q, state) {
-  const cut = ({ activeMw, activeCount, byType, medianYears, withdrawn }) => ({ activeMw, activeCount, byType, medianYears, withdrawn });
+  const cut = ({ activeMw, activeCount, byType, medianYears, negative, withdrawn }) => ({ activeMw, activeCount, byType, medianYears, negative, withdrawn });
   return {
     state: state.state,
     release: q.manifest.release ?? q.manifest.version ?? null,

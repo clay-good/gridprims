@@ -29,7 +29,9 @@
 
 **Decision.** LBNL's file carries 16 rows whose `mw_1` is negative, so a county's type total can come out below zero (Travis County, TX reads -53 MW of solar today, on the queue page as well as in the new JSON). We do not change a publisher's number. The read-out reports what the file says and names the oddity rather than hiding it.
 
-**Alternatives considered.** Clamping at zero or dropping those rows would make the page look tidier and would silently disagree with LBNL's own totals, which is the failure this project exists to avoid. Open: whether to show the negative inline with a note or to split it out; task 2.4 decides it against the Travis County case.
+**Settled (task 2.4).** The figure stays inline, exactly as published, and a note beside the totals names how many of the requests carry a negative capacity and what they come to (`queue.negativeNote` on the queue pages, `siting.out.negative` in the read-out). Texas reads "4 of these requests a negative capacity, -105 MW in all"; Travis County's solar column still reads -53 MW and the county figures still add up to the state's.
+
+**Alternatives considered.** Clamping at zero or dropping those rows would make the page look tidier and would silently disagree with LBNL's own totals, which is the failure this project exists to avoid. Splitting the negative out into its own column or row was rejected: it would add a column to a table that is already 11 wide for 16 rows in the whole country, and a reader comparing our county total with LBNL's would still have to add the two back together.
 
 ## D5. Median years is labelled history
 

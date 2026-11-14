@@ -43,7 +43,7 @@ const stateFile = {
   state: 'TX', through: '2025-12-31', asOf: '2026-05-07', release: '2026-10',
   summary: { activeMw: 9, activeCount: 9, byType: {}, medianYears: 3, withdrawn: { share: 0.7, n: 900 } },
   counties: [
-    { fips: '48453', county: 'Travis', summary: { activeMw: 631.89, activeCount: 8, byType: { storage: { mw: 610.19, count: 6 }, solar: { mw: -53.3, count: 1 } }, medianYears: 2.2, withdrawn: null } },
+    { fips: '48453', county: 'Travis', summary: { activeMw: 631.89, activeCount: 8, byType: { storage: { mw: 610.19, count: 6 }, solar: { mw: -53.3, count: 1 } }, medianYears: 2.2, negative: { count: 1, mw: -53.3 }, withdrawn: null } },
     { fips: '48201', county: 'Harris', summary: { activeMw: 100, activeCount: 4, byType: {}, medianYears: 1.5, withdrawn: { share: 0.5, n: 40 } } },
   ],
 };
@@ -78,9 +78,14 @@ test('a county the file does not list is reported as not found, not as zero', ()
   assert.equal(q.activeMw, null);
 });
 
-test('a negative published capacity is surfaced, not corrected', () => {
+test('a negative published capacity is surfaced with its count, not corrected', () => {
   assert.deepEqual(negativeTypes(stateFile.counties[0].summary.byType), ['solar']);
   assert.deepEqual(negativeTypes({ storage: { mw: 5, count: 1 } }), []);
+  const q = countyQueue(stateFile, '48453');
+  // The county total is the publisher's own, negative row included.
+  assert.equal(q.activeMw, 631.89);
+  assert.deepEqual(q.negative, { count: 1, mw: -53.3 });
+  assert.equal(countyQueue(stateFile, '48201').negative, null);
 });
 
 test('the federal small generator process applies to generation, never to load', () => {
