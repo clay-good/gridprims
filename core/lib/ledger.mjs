@@ -79,7 +79,11 @@ export function buildLedger({ datasets, health = null, replies = [], generatedAt
     workflow: w.id, lastSuccess: w.lastSuccess ?? null, lastRun: w.lastRun ?? null, enabled: w.enabled ?? null,
     intervalHours: w.intervalHours, thresholdHours: w.thresholdHours, events: w.events ?? [],
   }));
-  const dead = (health?.links ?? []).filter((l) => l.state === 'broken').map((l) => ({ url: l.url, status: l.status, lastOk: l.lastOk ?? null, usedBy: l.usedBy ?? [], archive: l.archive ?? null }));
+  // Only a link that answered the same way twice running: one bad check is usually the
+  // network, and naming a live citation dead on this page is the worse mistake. A record
+  // written before the check recorded `confirmed` is taken as it stands.
+  const dead = (health?.links ?? []).filter((l) => l.state === 'broken' && l.confirmed !== false)
+    .map((l) => ({ url: l.url, status: l.status, lastOk: l.lastOk ?? null, usedBy: l.usedBy ?? [], archive: l.archive ?? null }));
   return {
     generatedAt, license: 'CC BY 4.0', contact,
     counts: { tracked: rows.length, current: count('current'), due: count('due'), late: count('late'), discontinued: count('discontinued') },
