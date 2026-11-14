@@ -13,7 +13,7 @@ import { billCard, rankingCard, screenCard } from '../../core/lib/result-cards.m
 
 /** The workbench's version, printed on every result card. */
 export const WORKBENCH_VERSION = '0.1.0';
-import { getJson, utilitiesForZip } from './zip-utilities.js';
+import { getJson, utilitiesForZip, utilityFromFragment } from './zip-utilities.js';
 
 /**
  * @param {{i18n: any, view: () => any, when: (ms: number, zone: string) => string, showOnChart: (ms: number, kw: number) => void, onUtility?: (u: any) => void}} p
@@ -106,6 +106,17 @@ export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {},
   });
   $('[data-bill-utility]').addEventListener('change', showUtility);
   $('[data-bill-rate]').addEventListener('change', price);
+  // Arriving from a utility page: the utility rides in the fragment, which no request carries. With no ZIP
+  // there are no eGRID subregions to pass on, so the carbon panel leaves its subregion for you to pick.
+  utilityFromFragment(location.hash).then(async (preset) => {
+    if (!preset) return;
+    utilities = [preset.utility];
+    subregions = [];
+    $('[data-bill-utility]').replaceChildren(el('option', `${preset.utility.name} · ${preset.utility.state}`, { value: '0' }));
+    $('[data-bill-utility-field]').hidden = false;
+    await showUtility();
+    document.documentElement.dataset.utilityPreset = String(preset.utility.id);
+  }, () => {});
   // The battery and solar screen, on the rate priced above.
   $('[data-screen]').addEventListener('submit', async (e) => {
     e.preventDefault();

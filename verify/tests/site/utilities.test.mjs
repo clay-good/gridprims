@@ -115,6 +115,7 @@ test('household tool links are preset to the utility by the fragment, and its ow
   const html = page(44372);
   assert.match(html, /<a href="\/tools\/household\/bill-totals\/check\/#utility=44372&amp;state=TX" data-preset>/);
   assert.match(html, /<a href="\/tools\/household\/usage-benchmark\/compare\/#utility=44372&amp;state=TX" data-preset>/);
+  assert.match(html, /<a href="\/files\/#plans&amp;utility=44372&amp;state=TX" data-preset>/);
   assert.match(html, /<a href="\/learn\/get-your-data\/#oncor" data-guide-link>How to download your meter data from this utility<\/a>/);
   assert.doesNotMatch(html, /\?utility=/, 'never a query string');
   // A utility with no guide of its own links the general one.

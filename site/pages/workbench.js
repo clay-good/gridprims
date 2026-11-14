@@ -132,7 +132,9 @@ setupEv({ i18n, view: () => current?.view ?? null, priced: () => bill.state().pr
 setupAdded({ i18n, view: () => current?.view ?? null, priced: () => bill.state().priced, headroom });
 carbon = setupCarbon({ i18n, view: () => current?.view ?? null, version: WORKBENCH_VERSION });
 // The home page opens here at the plan finder; the battery screen sits inside it, shown once a rate is priced.
-if (location.hash === '#plans' || location.hash === '#battery') $('[data-bill]').scrollIntoView({ block: 'start' });
+// "#plans" and "#battery" scroll to the bill panel, also when a utility rides along (#plans&utility=…&state=…).
+const fragment = new URLSearchParams(location.hash.slice(1));
+if (fragment.has('plans') || fragment.has('battery')) $('[data-bill]').scrollIntoView({ block: 'start' });
 
 async function load(bytes, name, { sample = false, kept = false, choices } = {}) {
   $('[data-error]').hidden = true;

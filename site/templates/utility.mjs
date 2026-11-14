@@ -95,7 +95,7 @@ ${sourceStamp(sources.eia861, sources.eia861.tables[0], i18n)}
 ${k('bundled')?.res.customers > 0 || k('delivery')?.res.customers > 0 ? html`<section class="panel" data-customer-tools><h2>${t('utility.customerTools', { name: u.name })}</h2>
 <ul><li><a href="/tools/household/bill-totals/check/${preset}" data-preset>${t('utility.customerTools.bill')}</a></li>
 <li><a href="/tools/household/usage-benchmark/compare/${preset}" data-preset>${t('utility.customerTools.use')}</a></li>
-<li><a href="/files/#plans">${t('utility.customerTools.plans')}</a></li>
+<li><a href="/files/#plans${preset ? `&${preset.slice(1)}` : ''}" data-preset>${t('utility.customerTools.plans')}</a></li>
 <li><a href="/learn/get-your-data/${guide ? `#${guide}` : ''}" data-guide-link>${t(guide ? 'utility.customerTools.guide' : 'utility.customerTools.guideGeneric')}</a></li></ul></section>` : ''}
 
 <section><h2>${t('utility.charges')}</h2>

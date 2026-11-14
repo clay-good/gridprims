@@ -21,6 +21,23 @@ const pick = austin.findIndex((r) => /^Commercial - Secondary Voltage 10kW-300kW
 for (const kind of ['chrome', 'firefox']) {
   const skip = !findBrowser(kind) && `${kind} is not installed`;
 
+  test(`${kind}: opened from a utility page, the bill panel is on that utility's rates without a ZIP`, { skip, timeout: 90_000 }, async () => {
+    const log = [];
+    const server = await serve(out, { onRequest: (r) => log.push(r.url) });
+    const browser = await launch(kind);
+    try {
+      await browser.goto(`${server.url}/files/#plans&utility=1015&state=TX`);
+      await waitFor(browser, "document.documentElement.dataset.ready === 'true' && document.documentElement.dataset.utilityPreset === '1015'");
+      await waitFor(browser, `document.querySelectorAll('#bill-rate option').length === ${austin.length}`);
+      assert.deepEqual(await browser.evaluate("[...document.querySelectorAll('#bill-utility option')].map((o) => o.textContent)"), ['Austin Energy · TX']);
+      assert.equal(await browser.evaluate("document.querySelector('#cp-program').value"), 'ercot-4cp', 'the preset reaches the coincident-peak panel too');
+      assert.deepEqual(log.filter((u) => /utility=|1015/.test(u)), [], 'the fragment is never sent');
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+
   test(`${kind}: the sample file on an Austin Energy demand rate: monthly bills, the demand line's setting interval, shown on the chart`, { skip, timeout: 90_000 }, async () => {
     const log = [];
     const server = await serve(out, { onRequest: (r) => log.push(r.url) });
