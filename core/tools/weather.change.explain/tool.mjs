@@ -6,6 +6,9 @@
 
 import { parsePeriods } from '../../lib/bill-entry.mjs';
 import { CAUSES, changeBand, normalYear, selectModel, splitAtChange, splitChange, sufficiency, tooSmall, totalDegreeDays } from '../../lib/weather-model.mjs';
+import { readWeather } from '../../lib/weather-text.mjs';
+
+export { readWeather };
 
 const DAY = 86_400_000;
 const kwh = (x) => `${Math.round(x).toLocaleString('en-US')} kWh`;
@@ -13,28 +16,6 @@ const signed = (x) => `${x >= 0 ? '+' : '−'}${Math.round(Math.abs(x)).toLocale
 const pct = (x) => `${(x * 100).toFixed(1)}%`;
 const iso = (t) => new Date(t).toISOString().slice(0, 10);
 const clean = (x) => (Math.abs(x) < 1e-6 ? 0 : x);
-
-/**
- * The station's daily mean temperatures and normals, as the picker writes them: a station line, then one
- * "YYYY-MM-DD mean" line a day (°F), then optional "normal MM-DD htdd57 htdd60 ..." lines are not needed here;
- * the normals travel as "normals base hdd cdd" for the base pair the model needs. Kept plain for agents.
- */
-export function readWeather(text) {
-  const means = new Map();
-  let station = null;
-  const normals = [];
-  for (const line of String(text).split(/\r?\n/).map((l) => l.trim()).filter(Boolean)) {
-    let m;
-    if ((m = /^station\s+(\S+)\s*(.*)$/i.exec(line))) station = { id: m[1], name: m[2] || m[1] };
-    else if ((m = /^(\d{4}-\d{2}-\d{2})\s+(-?[\d.]+)$/.exec(line))) means.set(m[1], Number(m[2]));
-    else if ((m = /^normal\s+(\d{2})-(\d{2})\s+(.+)$/i.exec(line))) {
-      const row = { month: Number(m[1]), day: Number(m[2]) };
-      for (const kv of m[3].split(/\s+/)) { const [k, v] = kv.split('='); row[k] = Number(v); }
-      normals.push(row);
-    } else return { error: `"${line.slice(0, 40)}" is not a station line, a "YYYY-MM-DD mean" line, or a normal line.` };
-  }
-  return { station, means, normals };
-}
 
 const CHANGES = ['solar', 'heat pump', 'electric vehicle', 'occupancy change'];
 

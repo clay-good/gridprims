@@ -68,7 +68,9 @@ export function checkInputs(manifest, raw) {
   let measuredSigFigs = Infinity;
   for (const inp of manifest.inputs) {
     if (inp.type === 'file') continue;
-    const given = raw?.[inp.name];
+    let given = raw?.[inp.name];
+    // An optional input left out takes its neutral value, so a caller that never heard of it is not refused.
+    if ((given === undefined || given === null || given === '') && inp.optional) given = inp.example;
     if (given === undefined || given === null || given === '') {
       errors.push({
         field: inp.name,

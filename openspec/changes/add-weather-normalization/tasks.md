@@ -26,5 +26,5 @@
 ## 4. Surfaces
 
 - [x] 4.1 Run every worked example through the MCP server; verify identical structured results
-- [ ] 4.2 Add the "how unusual was this year" line to `household/usage-benchmark` and the rate-case impact results; verify it names the degree-day comparison and its station
+- [ ] 4.2 Add the "how unusual was this year" line to `household/usage-benchmark` and the rate-case impact results; verify it names the degree-day comparison and its station (the usage benchmark carries it, from an optional station, tested in verify/tests/core/usage-weather.test.mjs; the rate-case impact in the workbench is still to come)
 - [ ] 4.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green

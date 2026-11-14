@@ -1,13 +1,13 @@
 {
   "toolId": "household.usage-benchmark.compare",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "results": [
     {
       "example": "above-utility",
       "result": {
         "status": "ok",
         "toolId": "household.usage-benchmark.compare",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "vsUtility": {
             "value": 20,
@@ -76,7 +76,7 @@
       "result": {
         "status": "ok",
         "toolId": "household.usage-benchmark.compare",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "vsUtility": {
             "value": 13.8,

@@ -34,6 +34,7 @@ export default [
   { date: '2026-10-31', toolId: 'calc.transformer.size', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'calc.power-factor.correct', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'calc.energy-units.emissions', version: '0.1.0', reason: 'First release.' },
+  { date: '2026-11-14', toolId: 'household.usage-benchmark.compare', version: '0.2.0', reason: 'An optional nearby station shows how unusual the year\'s weather was: its heating and cooling degree days against NOAA\'s 1991–2020 normals for the same days. With no station, nothing changes.', sample: { inputs: { weather: 'a station' }, old: 'no weather line', new: '18% fewer heating degree days than normal (station shown)' } },
   { date: '2026-10-31', toolId: 'household.usage-benchmark.compare', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'household.bill-totals.check', version: '0.1.0', reason: 'First release.' },
   { date: '2026-10-31', toolId: 'calc.energy-units.convert', version: '0.2.0', reason: 'Cross-checked against NIST SP 811 Appendix B.8 and marked stable. No answer changed; results now report validation level 2. The assumptions now say which therm is used.', sample: { inputs: { value: 1, from: 'therm', to: 'J' }, old: '105,500,000 J (level 1)', new: '105,500,000 J (level 2)' } },

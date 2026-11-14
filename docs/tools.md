@@ -437,7 +437,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 Compare a year of your electricity use with the average home of your utility and your state, and see your seasonal swing.
 
-Version 0.1.0 · experimental · validation level 2, cross-checked
+Version 0.2.0 · experimental · validation level 2, cross-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|
@@ -445,6 +445,7 @@ Version 0.1.0 · experimental · validation level 2, cross-checked
 | Utility average home | `utilityAverage` | kWh a year | 1 to 1000000 | 12000 |
 | State average home | `stateAverage` | kWh a year | 1 to 1000000 | 12000 |
 | Data year of the averages | `dataYear` | year | 1990 to 2100 | 2025 |
+| Weather at a nearby station | `weather` |  |  | none |
 
 | Output | Name | Unit | Rounding |
 |---|---|---|---|
