@@ -15,6 +15,7 @@ import requests from '../mcp/eval/requests.mjs';
 import { createServer } from '../mcp/protocol.mjs';
 import { ledgerRecord } from '../mcp/data.mjs';
 import { ROOT } from './run.mjs';
+import { DECISION_MONTHS, LAUNCHED } from '../data/curated/launch.mjs';
 
 const get = (o, path) => path.split('.').reduce((x, k) => x?.[k], o);
 
@@ -73,13 +74,68 @@ export function launchReady(manifest, root = ROOT) {
 export const NOT_MEASURED = [
   ['Search-console impressions and clicks', 'needs a search-console export the pipeline does not receive'],
   ['Tool-page and download requests', 'needs Cloudflare\'s aggregate logs, which the pipeline does not read yet'],
-  ['GitHub clones, stars, and MCP issues', 'needs the repository to be public'],
+  ['GitHub clones', 'GitHub\'s traffic API needs a token with push access, which the scheduled run does not hold'],
   ['Problem reports and median time to fix', 'counted once reports arrive as issues'],
   ['Citations and practitioner endorsements', 'recorded by hand as they are found; none recorded yet'],
 ];
 
+export const REPO = 'clay-good/gridprims';
+
+/**
+ * Stars, and open issues that mention the MCP server, from GitHub's public API. A failed read is reported as
+ * not measured, never guessed.
+ * @param {{fetch?: typeof fetch, token?: string}} [o]
+ */
+export async function githubCounts(o = {}) {
+  const f = o.fetch ?? fetch;
+  const headers = { accept: 'application/vnd.github+json', 'user-agent': 'gridprims-value-log', ...(o.token ? { authorization: `Bearer ${o.token}` } : {}) };
+  try {
+    const repo = await f(`https://api.github.com/repos/${REPO}`, { headers });
+    const search = await f(`https://api.github.com/search/issues?q=${encodeURIComponent(`repo:${REPO} is:issue MCP`)}`, { headers });
+    if (!repo.ok || !search.ok) return { ok: false, why: `the GitHub API answered ${repo.status} and ${search.status}` };
+    return { ok: true, stars: (await repo.json()).stargazers_count, mcpIssues: (await search.json()).total_count };
+  } catch (e) {
+    return { ok: false, why: `the GitHub API did not answer (${e.message})` };
+  }
+}
+
+/** The day `months` calendar months after an ISO date. */
+export const addMonths = (iso, months) => {
+  const d = new Date(`${iso}T00:00:00Z`);
+  d.setUTCMonth(d.getUTCMonth() + months);
+  return d.toISOString().slice(0, 10);
+};
+
+/**
+ * D3 and D8's phase 2 decision inputs, published on their own six months after launch so the owner's decision
+ * needs no gathering step (task 1.5). Before then, one line says when they are due. Each measure names where
+ * it comes from; a measure the pipeline cannot read says so, and the bar is then not judged.
+ */
+export function phase2Inputs({ launched = LAUNCHED, today, progress, tools = TOOLS, root = ROOT, gh = { ok: false, why: 'not read' } }) {
+  if (!launched) return [`**Phase 2 decision inputs:** due ${DECISION_MONTHS} months after the public launch. The launch is not recorded yet (data/curated/launch.mjs).`, ''];
+  const due = addMonths(launched, DECISION_MONTHS);
+  if (today < due) return [`**Phase 2 decision inputs:** due ${due}, ${DECISION_MONTHS} months after the launch on ${launched}.`, ''];
+  const ready = tools.filter(({ manifest: m }) => launchReady(m, root).every((i) => i.met)).length;
+  const phase1 = progress.filter((p) => ['add-load-and-bill-analyzer', 'add-household-bill-check', 'add-public-grid-data', 'add-hourly-carbon', 'add-learn-and-data-guides', 'add-site-experience', 'add-trust-and-continuity'].includes(p.change));
+  return [
+    `**Phase 2 decision inputs** (due ${due}, ${DECISION_MONTHS} months after the launch on ${launched}). D3's bar: 5,000 monthly visits to tool pages, or 25 independent citations or endorsements. Below the bar, phase 2 waits and the hero tools improve instead.`, '',
+    '| Input | Value | Read from |', '|---|---|---|',
+    '| Monthly visits to tool pages | not yet measured | Cloudflare\'s aggregate logs, which the pipeline does not read yet |',
+    '| Independent citations and endorsements | none recorded | recorded by hand as they are found |',
+    `| GitHub stars, and issues mentioning MCP | ${gh.ok ? `${gh.stars} stars, ${gh.mcpIssues} issues` : `not measured: ${gh.why}`} | GitHub's public API |`,
+    `| Tools launch-ready | ${ready} of ${tools.length} | D2's checklist, below |`,
+    `| Phase 1 tasks done | ${phase1.reduce((n, p) => n + p.done, 0)} of ${phase1.reduce((n, p) => n + p.total, 0)} | openspec/changes/*/tasks.md |`,
+    '| Spanish (D8): adults who are smartphone-only | 16% of adults; 28% of Hispanic adults | Pew Research Center, 2025, in docs/research/09 |',
+    '| Spanish (D8): households speaking Spanish at home | 13.6%; 2.7% are Spanish-speaking with limited English | American Community Survey, 2024, in docs/research/09 |',
+    '| Spanish (D8): rules requiring Spanish materials | Texas, 16 TAC §25.31 (customer information) | docs/research/09 |',
+    '',
+    '**The bar:** not judged. Monthly visits are not measured yet, and no citation is recorded.', '',
+  ];
+}
+
 /** One month's entry, in Markdown. */
-export async function entry({ root = ROOT, now = new Date() } = {}) {
+export async function entry(o = {}) {
+  const { root = ROOT, now = new Date() } = o;
   const month = now.toISOString().slice(0, 7);
   const levels = Object.fromEntries(VALIDATION_LEVELS.map((l) => [l.name, 0]));
   for (const { manifest: m } of TOOLS) levels[VALIDATION_LEVELS[m.validation.level].name]++;
@@ -88,6 +144,7 @@ export async function entry({ root = ROOT, now = new Date() } = {}) {
   const progress = taskProgress(root);
   const ev = await evalPassRate(root);
   const p0 = phase0(root, progress);
+  const gh = o.github ?? await githubCounts({ fetch: o.fetch, token: process.env.GITHUB_TOKEN });
   const lines = [
     `## ${month}`, '',
     `Generated ${now.toISOString().slice(0, 10)} by \`node pipeline/value-log.mjs\`.`, '',
@@ -97,9 +154,11 @@ export async function entry({ root = ROOT, now = new Date() } = {}) {
     `| Published pages | ${(Array.isArray(urls) ? urls : urls.urls ?? Object.keys(urls)).length.toLocaleString('en-US')} | data/curated/published-urls.json |`,
     `| Agent evaluation | ${ev.passed} of ${ev.total} requests reproduce their recorded values | mcp/eval/requests.mjs, replayed |`,
     `| Spec tasks done | ${progress.reduce((n, p) => n + p.done, 0)} of ${progress.reduce((n, p) => n + p.total, 0)} | openspec/changes/*/tasks.md |`,
+    `| GitHub stars, and issues mentioning MCP | ${gh.ok ? `${gh.stars} stars, ${gh.mcpIssues} issues` : `not measured: ${gh.why}`} | GitHub's public API |`,
     ...NOT_MEASURED.map(([m, why]) => `| ${m} | not yet measured | ${why} |`),
     '', `**Phase 0 exit:** ${p0.every((c) => c.met) ? 'met' : `not met: ${p0.filter((c) => !c.met).map((c) => c.criterion).join('; ')}`}.`, '',
     ...p0.map((c) => `- ${c.met ? 'Met' : 'Not met'}: ${c.criterion} (${c.from})`), '',
+    ...phase2Inputs({ today: now.toISOString().slice(0, 10), progress, root, gh, launched: o.launched === undefined ? LAUNCHED : o.launched }),
     '**Launch-ready checklist by tool**', '',
     '| Tool | Items met | Not met |', '|---|---|---|',
     ...TOOLS.map(({ manifest: m }) => { const items = launchReady(m, root); const bad = items.filter((i) => !i.met); return `| \`${m.id}\` | ${items.length - bad.length} of ${items.length} | ${bad.map((i) => `${i.item} (${i.note})`).join('; ') || '—'} |`; }),

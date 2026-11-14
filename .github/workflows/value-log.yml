@@ -28,6 +28,8 @@ jobs:
         run: node verify/node-floor.mjs
       - name: Write this month's entry
         run: node pipeline/value-log.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Publish
         run: |
           git config user.name "gridprims pipeline"
