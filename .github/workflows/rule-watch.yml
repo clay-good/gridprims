@@ -1,0 +1,38 @@
+# Weekly recheck of the rule-status brief's sources (plan-launch-and-value-proof
+# task 1.4). Appends a dated note to docs/research/06 and records the run on the
+# health record; a moved, dead, or changed source flags its item for rereading
+# and blocks nothing.
+name: rule-watch
+
+on:
+  schedule:
+    - cron: '19 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rule-watch
+  cancel-in-progress: false
+
+jobs:
+  recheck:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+      - name: Assert the Node floor
+        run: node verify/node-floor.mjs
+      - name: Recheck the rule-status sources
+        run: node pipeline/rule-watch.mjs
+      - name: Publish
+        run: |
+          git config user.name "gridprims pipeline"
+          git config user.email "pipeline@gridprims.com"
+          git add docs/research data/curated/captures/rule-status data/health
+          git diff --cached --quiet || git commit -m "chore(data): weekly rule-status recheck"
+          git pull --rebase && git push
