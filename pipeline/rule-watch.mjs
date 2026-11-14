@@ -80,9 +80,9 @@ export function noteFor(day, items) {
   const all = items.flatMap((i) => i.results);
   const flagged = (state) => items.filter((i) => i.results.some((r) => r.state === state)).map((i) => i.item);
   const parts = [`${all.length} sources for ${items.length} items checked`];
-  for (const [state, words] of [['moved', 'moved'], ['broken', 'no longer resolve'], ['changed', 'changed since the last check']]) {
+  for (const [state, words] of [['moved', 'moved'], ['broken', 'no longer resolves'], ['changed', 'changed since the last check']]) {
     const names = flagged(state);
-    if (names.length) parts.push(`${names.length} ${names.length === 1 ? 'item' : 'items'} whose source ${words}: ${names.join('; ')}`);
+    if (names.length) parts.push(`${names.length} ${names.length === 1 ? 'item' : 'items'} with a source that ${words}: ${names.join('; ')}`);
   }
   const blocked = flagged('blocked');
   if (blocked.length) parts.push(`${blocked.length} refused an automated reader and keep their last reading: ${blocked.join('; ')}`);

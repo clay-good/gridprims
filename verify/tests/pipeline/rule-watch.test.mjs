@@ -77,9 +77,9 @@ test('the scheduled run seeds, then flags moved, dead, and changed sources, and 
   pages['https://pjm.example/5cp.pdf'] = { body: '5CP', type: 'application/pdf', to: 'https://pjm.example/archive/5cp.pdf' };
   delete pages['https://ercot.example/zip'];
   const second = await runRuleWatch({ root, fetch: host(pages), now: () => '2026-11-23T08:19:00.000Z' });
-  assert.match(second.note, /1 item whose source moved: PJM 5CP/);
-  assert.match(second.note, /1 item whose source no longer resolve: ERCOT 4CP page/);
-  assert.match(second.note, /1 item whose source changed since the last check: PUCT 58000 proposal/);
+  assert.match(second.note, /1 item with a source that moved: PJM 5CP/);
+  assert.match(second.note, /1 item with a source that no longer resolves: ERCOT 4CP page/);
+  assert.match(second.note, /1 item with a source that changed since the last check: PUCT 58000 proposal/);
   assert.match(second.note, /Reread the flagged items before stating them at the next phase gate\./);
 
   const md = readFileSync(join(root, BRIEF), 'utf8');
