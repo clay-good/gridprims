@@ -21,7 +21,7 @@
 - [x] 3.3 Implement the accuracy range and the too-small-to-call rule; verify the 3%-change scenario
 - [x] 3.4 Implement the causes checklist with no diagnosis; verify no sentence asserts a cause in a snapshot test
 - [x] 3.5 Implement the bills-only path; verify the 24-totals scenario
-- [ ] 3.6 Run the five hand-computed fixtures; verify the parts sum exactly and the normalized figure is within 2%
+- [x] 3.6 Run the five hand-computed fixtures; verify the parts sum exactly and the normalized figure is within 2%
 
 ## 4. Surfaces
 
