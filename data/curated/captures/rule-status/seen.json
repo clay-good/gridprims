@@ -1,0 +1,268 @@
+{
+  "http://www.energychoicematters.com/stories/20211130d.html": {
+    "hash": "de7a440de68dec36d537d8b586c7efcd5003f6f04dd38a81dc04454b1be8d0c1",
+    "status": 200,
+    "state": "moved",
+    "checked": "2026-11-14",
+    "finalUrl": "https://www.energychoicematters.com/stories/20211130d.html"
+  },
+  "https://elpc.org/news/final-order-encourages-affordable-clean-energy-for-minnesotans/": {
+    "hash": "01bfd5cc99c9ab2a5083f02ceb859c002debe2d3806c0ef6992b35bdede86a2d",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://ferc.gov/news-events/news/commissioner-rosners-concurrence-order-granting-extension-time-re-miso-inc-under": {
+    "hash": null,
+    "status": 403,
+    "state": "blocked",
+    "checked": "2026-11-14"
+  },
+  "https://fresh-energy.org/regulatory-update-commission-approves-xcel-energys-large-load-tariff": {
+    "hash": "00117f89ee6b7a8a5ecfd3335ffca31adbc010af6278c7af9570763b998bc885",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://ftp.puc.texas.gov/public/puct-info/agency/rulesnlaws/subrules/electric/25.194/25.194.pdf": {
+    "hash": "3d92702d818dbd05633abe84c4fa875ed638b168b1afd0077d3ed6f27d6209fb",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://ghgprotocol.org/blog/scope-2-market-based-method-update-2025-2026-public-consultation-current-status": {
+    "hash": null,
+    "status": 403,
+    "state": "blocked",
+    "checked": "2026-11-14"
+  },
+  "https://ghgprotocol.org/sites/default/files/2025-10/GHG-Protocol-Scope2-Public-Consultation.pdf": {
+    "hash": "2787ed3e7a05baa0b77289182ad6b18926299633b863fd47e97e4476eb18cf12",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://ghgprotocol.org/sites/default/files/2026-07/S2-ExecutiveSummary-PublicConsultation%20ummaryofFeedback-2026.07.29.pdf": {
+    "hash": "305bb651518e7571b0f7c4a2771d0e80224e7cc978e6acadeb92d652cef89759",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://insidelines.pjm.com/pjm-becomes-first-rto-to-implement-ambient-air-ratings-for-transmission-under-ferc-order-881/": {
+    "hash": "ed69d689be51a6285d9c7131b608b32f7184b754b867e8caf8a1cf0805a7cedf",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://interchange.puc.texas.gov/Documents/58000_6_1662424.PDF": {
+    "hash": "510a0c94f8e5d157026484f6e7cb4cf03fa698ece5e3be56fb4f3ec35412ec14",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://interchange.puc.texas.gov/Documents/58000_8_1664102.PDF": {
+    "hash": "6c46e7c3d510b282ea4cc019f5fbee89ac09f61ca6605da1b1fff548eff6ff0a",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://interchange.puc.texas.gov/Documents/58481_218_1684654.PDF": {
+    "hash": "65f81513cb1a8506a3bd42ccdcc73f2f7523863f4e6f1dfe434102dddbe14063",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://interchange.puc.texas.gov/Documents/58484_118_1649020.PDF": {
+    "hash": "cc5fdf568346e7ef7663043eb61f3679e8b0726cb8a64b0b166891b93d954ae7",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://interchange.puc.texas.gov/search/filings/?UtilityType=A&ControlNumber=58000": {
+    "hash": "fda5f468aeb5f1b615992f6c18b35c07726f230b2e06e82e3788f755c50836f7",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://interchange.puc.texas.gov/search/filings/?UtilityType=A&ControlNumber=58484": {
+    "hash": "537599db153650d25665348c6846f8fb061f921ba0ec8fa03b5f10c90bbc016e",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://npr.brightspotcdn.com/b6/ac/706130b64d2b8eee6a9832b97e48/20251125-virginiascc-dominionenergyruling.pdf": {
+    "hash": "f51492f37508b36cf93e0e3432b7f1067f75bdb24204a27e82cd30b2977fd09e",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://psc.ga.gov/site/assets/files/8617/media_advisory_data_centers_rule_1-23-2025.pdf": {
+    "hash": "5514cf0cee4f6b2e71b434bf2d1773d91f9c9b34f3d40c095b3ae922df512acf",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://psc.mo.gov/CMSInternetData/Community%20Outreach/Large%20Load%20Tariff%20Fact%20Sheet.pdf": {
+    "hash": "b192aa153261930ff05606a7013b3c001cb833cd33229973679770b6c4348927",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://revisor.mo.gov/main/OneSection.aspx?section=393.130": {
+    "hash": "bddcdd004a285ff2739140a557b3e49d283603e6037146855ee800f474e5e997",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.aepohio.com/company/about/rates/data-center-tariff": {
+    "hash": "57bab3d9c67f44fdb0c39463d0f60fde9102bb1312bc84b6782f20918564986b",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.caiso.com/documents/jan-27-2025-motion-for-extension-of-time-ferc-order-no-881-er22-2362.pdf": {
+    "hash": "5d09a733f10ac1026e769cf978e9d340ae2201eefb34aa95452232149b860644",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.eia.gov/electricity/": {
+    "hash": "8234d7a89e891d994569bb2c1007afed294746a2f845fbcb31b949f2e80f2e72",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.eia.gov/electricity/data/eia860/": {
+    "hash": "190b33146f4ce4c65b6d5af9b4829beeba29b3dda2172b681e231482cda0ec40",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.eia.gov/electricity/data/eia861/": {
+    "hash": "afbd7635bd90438c75b0450261857e1657e2aa53e7575dbdff53556a106fdb91",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.eia.gov/electricity/gridmonitor/about": {
+    "hash": "9d18784ae9ebf32c7eca748bf67d4d859f193e0eb7f20fbf43ad1f359fc5bc83",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.epa.gov/egrid/download-data": {
+    "hash": "93f3ed32d065df1657914c47f65b5960ee4720ef90ed2dbb63cb179cb8f72245",
+    "status": 200,
+    "state": "moved",
+    "checked": "2026-11-14",
+    "finalUrl": "https://www.epa.gov/egrid/detailed-data"
+  },
+  "https://www.ercot.com/files/docs/2022/01/13/1996-2020_FourCoincidentPeakCalculations.zip": {
+    "hash": "2583f723df58a5cc90a9fb7270bf02346003c4642d541d32cbd0bb837fcd4f03",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.ercot.com/help/terms": {
+    "hash": "71684d87e87ca28f1aa0cbb03af002ccdd0b0f93ea26a567fb146c8b9144faf6",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.ercot.com/misapp/servlets/IceDocListJsonWS?reportTypeId=13037": {
+    "hash": "a6ec28ccd43010ffb0c68260c48a92f519ff495133a95ee1310f3f7b2adfed52",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.ercot.com/misdownload/servlets/mirDownload?doclookupId=1164129560": {
+    "hash": "676a85beafa2071eeb5da33569e4e1d1da93c22cd2cd4c40fdfd00abe2d96a19",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.ercot.com/mktinfo/data_agg/4cp": {
+    "hash": "08310aae470f40f2863ebe65db9997f51899ebd0caa6499b278b37256b2cf079",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.ercot.com/mp/data-products/data-product-details?id=NP9-83-M": {
+    "hash": "132186a470bd1f3a3fad918bf084d1ef7eb5924e3f978efef8e1d2cf903c466f",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.ferc.gov/news-events/news/ferc-launches-aggressive-targeted-action-speed-large-load-integration": {
+    "hash": null,
+    "status": 403,
+    "state": "blocked",
+    "checked": "2026-11-14"
+  },
+  "https://www.ferc.gov/rm26-4": {
+    "hash": null,
+    "status": 403,
+    "state": "blocked",
+    "checked": "2026-11-14"
+  },
+  "https://www.iso-ne.com/participate/support/participant-readiness-outlook/ferc-order-no-881-mtlr": {
+    "hash": "e117c82f7d6c8258523c6674ce754df188d848161bf3764d85735ba78966486a",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.iso-ne.com/static-assets/documents/100029/nov-2025-coo-report.pdf": {
+    "hash": "73ae68d16facbf5a7089eb7816182fafe2475b4fe613c046b0d269ba28bf2ac9",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.iso-ne.com/static-assets/documents/100038/nepool_counsel_memo_motion_for_abeyance.pdf": {
+    "hash": "d7f466f2b7fca5a205d78e1b1cfb10688ca2d1e964349e59d273de8be746027f",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.nyiso.com/documents/20142/54426374/05_Summer%202025%20NYISO%20Hot%20Weather%20Operating%20Conditions%20OC.pdf": {
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "status": 202,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.pjm.com/-/media/DotCom/committees-groups/committees/mic/2026/20261007/20261007-item-05-1---winter-peak-load-calculation---problem-statement.pdf": {
+    "hash": "1e908558f6adf8a64a5aee629300e53770d878722711cdc23945b3d9ac59df62",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.pjm.com/-/media/DotCom/documents/ferc/orders/2026/20260921-el26-67-001.pdf": {
+    "hash": "42f96f55bb25fa92320a781422e652ba3fd7730327d84f540a5cf0899fb314e3",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.pjm.com/-/media/DotCom/planning/res-adeq/load-forecast/summer-2025-peaks-and-5cps.pdf": {
+    "hash": "07e23468ad97607b8894ce3650e4f8d17f51960975d57455bdaa667a59d8f231",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.pjm.com/pjmfiles/directory/etariff/FercDockets/8762/20250306-er25-1525-000.pdf": {
+    "hash": "4963552c00a6eb9300e8e0129a0f4284059b636da44cb0dae81a154494fed70a",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://www.rtoinsider.com/69986-nyiso-asks-ferc-extension-order-881/": {
+    "hash": "23f0b615e75925e09fe657a5096c2da8590415634006f8e4241739873a6fd13a",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  },
+  "https://zenodo.org/records/18968658": {
+    "hash": "153c7abe9a6acd36ef720a4fd36ade68c0cff77e8093b58a3345773f34eb9687",
+    "status": 200,
+    "state": "new",
+    "checked": "2026-11-14"
+  }
+}

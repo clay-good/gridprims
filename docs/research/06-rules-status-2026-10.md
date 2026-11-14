@@ -199,3 +199,9 @@ Source: PJM, "Summer 2025 Peaks and 5CPs," revised 2025-11-14. The PDF says: "Al
 - Georgia PSC release: https://psc.ga.gov/site/assets/files/8617/media_advisory_data_centers_rule_1-23-2025.pdf
 - Xcel MN (advocacy): https://fresh-energy.org/regulatory-update-commission-approves-xcel-energys-large-load-tariff ; https://elpc.org/news/final-order-encourages-affordable-clean-energy-for-minnesotans/
 - Missouri statute: https://revisor.mo.gov/main/OneSection.aspx?section=393.130 ; PSC fact sheet https://psc.mo.gov/CMSInternetData/Community%20Outreach/Large%20Load%20Tariff%20Fact%20Sheet.pdf
+
+## Scheduled rechecks
+
+Written by `pipeline/rule-watch.mjs` each week. Each source is compared with what the previous check saw; a moved, dead, or changed source flags its item for rereading. Nothing here is a finding until a person rereads it.
+
+- **2026-11-14.** 44 sources for 27 items checked. 2 items whose source moved: 2021 4CP dates (trade press); eGRID. 3 refused an automated reader and keep their last reading: MISO extension concurrence; FERC show-cause press release; GHG Protocol Scope 2 draft. Reread the flagged items before stating them at the next phase gate.
