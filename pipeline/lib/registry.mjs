@@ -16,12 +16,19 @@ export const RECOGNIZED = [
   { id: 'MIT', posture: 'mirror', words: /\bMIT License\b/i },
 ];
 const RESTRICTIVE = /non-?commercial|educational use|written permission|not for redistribution|personal use/i;
+/**
+ * Hosts of U.S. federal agencies whose own pages we read terms from. A federal agency's work is not subject to
+ * copyright (17 U.S.C. 105), so a terms page on one of these hosts that names no license and restricts nothing
+ * supports mirroring. State and local .gov sites are not listed, nor national laboratories run by contractors: their works can be copyrighted.
+ */
+export const FEDERAL_HOSTS = ['census.gov', 'noaa.gov', 'eia.gov', 'epa.gov', 'energy.gov', 'ferc.gov', 'usgs.gov'];
+const federal = (url) => { try { const h = new URL(url).hostname; return FEDERAL_HOSTS.some((f) => h === f || h.endsWith(`.${f}`)); } catch { return false; } };
 /** Wording that names non-commercial use only to allow commercial use too, which restricts nothing. */
 const PERMISSIVE = /both non-?commercially and commercially|non-?commercially and commercially|commercial(ly)? (and|or) non-?commercial(ly)?/gi;
 
 /**
  * The posture the recorded terms support: mirror, derive, or link.
- * @param {{text?: string, license?: string, factual?: boolean}} terms
+ * @param {{text?: string, license?: string, url?: string, factual?: boolean}} terms
  * @returns {{posture: 'mirror' | 'derive' | 'link', license: string | null, reason: string}}
  */
 export function matchPosture(terms) {
@@ -31,6 +38,7 @@ export function matchPosture(terms) {
   }
   const hit = RECOGNIZED.find((r) => r.id === terms.license || r.words.test(text));
   if (hit) return { posture: hit.posture, license: hit.id, reason: `recognized ${hit.id}` };
+  if (federal(terms.url)) return { posture: 'mirror', license: 'us-federal-public-domain', reason: 'a U.S. federal agency\'s own terms page that names no license and restricts nothing; its works are not subject to copyright (17 U.S.C. 105)' };
   return terms.factual ? { posture: 'derive', license: null, reason: 'terms absent or unrecognized; values are facts we may compute over' } : { posture: 'link', license: null, reason: 'terms absent or unrecognized' };
 }
 

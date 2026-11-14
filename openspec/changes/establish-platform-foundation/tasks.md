@@ -14,7 +14,7 @@
 - [x] 2.2 Build one real EIA-861 shard end to end and freeze the packed binary column format from what that dataset actually needs (mixed types, nullability); verify the format document names the cases the fixture exercised
 - [x] 2.3 Run the EIA-861 and EIA-923 recipes against the last three published vintages and set the row-count bounds from the observed deltas; verify the recorded bounds and the vintages they came from
 - [ ] 2.4 Fetch the live agent-protocol specification and its published schema, record one real handshake from a client, and amend `agent/mcp-server` where the live spec differs from what `docs/research/04` assumed; verify the recorded handshake and any amendment
-- [ ] 2.5 Set each launch dataset's posture by hand in the registry and run the license matcher as an advisory check beside it; verify the matcher agrees with every hand-set posture before it is made authoritative
+- [x] 2.5 Set each launch dataset's posture by hand in the registry and run the license matcher as an advisory check beside it; verify the matcher agrees with every hand-set posture before it is made authoritative
 
 ## 3. Tool contract
 
