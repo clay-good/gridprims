@@ -44,6 +44,7 @@ export const PAGE_CELLS = {
   learn: [
     { id: 'glossary', path: '/learn/glossary/', needs: 'none' },
     { id: 'qualifying-facility', path: '/learn/qualifying-facility/', needs: 'none' },
+    { id: 'links', path: '/learn/links/', needs: 'none' },
   ],
   bills: [],
   carbon: [],

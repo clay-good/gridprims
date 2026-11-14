@@ -14,6 +14,7 @@ import { TOOLS } from '../core/tools/index.mjs';
 import REGULATORS from '../data/curated/regulators.mjs';
 import QF from '../data/curated/qf-checklist.mjs';
 import LARGE_LOAD from '../data/curated/large-load-tariffs/_index.mjs';
+import PROGRAM_LINKS from '../data/curated/program-links.mjs';
 import { recordRun } from './lib/health.mjs';
 import { github } from './lib/github.mjs';
 import { ROOT } from './run.mjs';
@@ -41,6 +42,8 @@ export async function outboundLinks(root = ROOT) {
   add(QF.form.url, 'qualifying-facility checklist form');
   // Large-load sources that served a capture; the unreachable ones are recorded as such on their records.
   for (const r of LARGE_LOAD) for (const u of new Set(Object.values(r.fields).flatMap((f) => f.sources.filter((x) => !x.unreachable).map((x) => x.url)))) add(u, `large-load terms (${r.id})`);
+  // The program links index: every outside tool we send people to, named so a moved target shows who links it.
+  for (const l of PROGRAM_LINKS) add(l.url, `program links: ${l.name} (/learn/links/#${l.id})`);
   return links;
 }
 

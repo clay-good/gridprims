@@ -1,8 +1,8 @@
 ## 1. Program links (with phase 1 Learn)
 
-- [ ] 1.1 Define the index record schema with last-checked dates; verify an entry missing a maintainer or reason fails the check
-- [ ] 1.2 Write the launch entries and group them by question; verify the completeness check against every manifest handoff
-- [ ] 1.3 Add the weekly link check and the 12-month review chip; verify the moved-target scenario and that no URL carries a tracking parameter
+- [x] 1.1 Define the index record schema with last-checked dates; verify an entry missing a maintainer or reason fails the check
+- [x] 1.2 Write the launch entries and group them by question; verify the completeness check against every manifest handoff
+- [x] 1.3 Add the weekly link check and the 12-month review chip; verify the moved-target scenario and that no URL carries a tracking parameter
 
 ## 2. Net metering (phase 3)
 

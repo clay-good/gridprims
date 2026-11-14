@@ -139,7 +139,7 @@ test('link check: a moved handoff is recorded with its new target and every page
   const m = results.find((x) => x.url === moved);
   assert.equal(m.state, 'moved');
   assert.equal(m.finalUrl, 'https://www.eia.gov/energyexplained/units-and-calculators/');
-  assert.deepEqual(m.usedBy, ['calc.energy-units.convert citation', 'calc.energy-units.convert handoff']);
+  assert.deepEqual(m.usedBy, ['calc.energy-units.convert citation', 'calc.energy-units.convert handoff', 'program links: Energy conversion calculators (/learn/links/#eia-conversion-calculators)']);
   assert.equal(results.find((x) => x.url.includes('nist.gov')).state, 'broken');
   const ri = results.find((x) => x.url === 'https://ripuc.ri.gov/');
   assert.equal(ri.state, 'blocked', 'a site that refuses automated checks is blocked, not broken');

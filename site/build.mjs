@@ -11,6 +11,8 @@ import { TOOLS } from '../core/tools/index.mjs';
 import { runTool } from '../core/contract/run.mjs';
 import { buildCommandIndex } from '../core/contract/command.mjs';
 import { placeEntries } from './entities/places.mjs';
+import PROGRAM_LINKS, { QUESTIONS as LINK_QUESTIONS } from '../data/curated/program-links.mjs';
+import { LINKS_PATH, programLinksPage } from './templates/program-links.mjs';
 import { OURS as COHORT_CHOICES, cohortTable } from '../core/lib/reliability-peers.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
 import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
@@ -181,6 +183,9 @@ export async function build(opts = {}) {
   write('/files/', filesPage({ i18n, reviewed: reviewedIds }));
   write('/privacy/', privacyPage({ i18n }));
   write('/learn/get-your-data/', getYourDataPage({ i18n }));
+  // The program links index, as a page and as a dated dataset (add-program-fact-pages, program links).
+  write(LINKS_PATH, programLinksPage({ links: PROGRAM_LINKS, questions: LINK_QUESTIONS, i18n }));
+  writeFileSync(join(outDir, 'learn/links/links.json'), JSON.stringify({ license: 'CC BY 4.0', publisher: 'gridprims', note: 'Each entry was opened on its lastChecked date. Descriptions only; no ranking or endorsement.', questions: LINK_QUESTIONS, entries: PROGRAM_LINKS }, null, 2) + '\n');
   write('/developers/', developersPage({ i18n }));
   write('/security/', securityPage({ i18n }));
   // The trust page set (site/trust-pages).
