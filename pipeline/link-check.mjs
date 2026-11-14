@@ -15,7 +15,7 @@ import REGULATORS from '../data/curated/regulators.mjs';
 import QF from '../data/curated/qf-checklist.mjs';
 import LARGE_LOAD from '../data/curated/large-load-tariffs/_index.mjs';
 import PROGRAM_LINKS from '../data/curated/program-links.mjs';
-import { recordRun } from './lib/health.mjs';
+import { readHealth, recordRun } from './lib/health.mjs';
 import { github } from './lib/github.mjs';
 import { ROOT } from './run.mjs';
 
@@ -48,6 +48,40 @@ export async function outboundLinks(root = ROOT) {
 }
 
 /**
+ * Hosts that answer an automated check with a wall of their own instead of the
+ * page asked for. eCFR and the Federal Register send one to unblock.federalregister.gov;
+ * Minnesota's PUC sends one to a ShieldSquare challenge. The redirect is an
+ * interception, not a move: following it would store a URL that cites nothing.
+ */
+const INTERSTITIALS = new Set(['unblock.federalregister.gov', 'validate.perfdrive.com']);
+
+/**
+ * Resolvers whose whole job is to redirect. A DOI is the stable name of a dataset
+ * or a paper; where it points is the publisher's business and may change again.
+ * Storing what it resolved to today would replace a permanent citation with a
+ * perishable one, so a DOI that resolves is simply working.
+ */
+const RESOLVERS = new Set(['doi.org', 'dx.doi.org']);
+
+const hostOf = (u) => { try { return new URL(u).host; } catch { return ''; } };
+/** Two addresses for comparison: the fragment is ours, not the server's, and `fetch` drops it. */
+const same = (a, b) => a.replace(/#.*$/, '').replace(/\/$/, '') === b.replace(/#.*$/, '').replace(/\/$/, '');
+
+/**
+ * What one answer means. A 403 or 429 is "blocked": some state sites refuse
+ * automated checks, so a person checks those by hand, and a redirect onto an
+ * interstitial is the same refusal wearing a 200.
+ * @param {{url: string, status: number, finalUrl: string}} r
+ */
+export function classify({ url, status, finalUrl }) {
+  if (status === 403 || status === 429) return 'blocked';
+  if (status === 0 || status >= 400) return 'broken';
+  if (INTERSTITIALS.has(hostOf(finalUrl)) && hostOf(finalUrl) !== hostOf(url)) return 'blocked';
+  if (RESOLVERS.has(hostOf(url))) return 'ok';
+  return same(finalUrl, url) ? 'ok' : 'moved';
+}
+
+/**
  * @param {{fetch?: typeof fetch, host?: any, root?: string, now?: () => Date}} [o]
  */
 export async function linkCheck(o = {}) {
@@ -56,6 +90,8 @@ export async function linkCheck(o = {}) {
   const now = o.now ?? (() => new Date());
   const host = o.host ?? github();
   const started = now().toISOString();
+  // What each link answered last time, so this run can tell a lasting change from a blip.
+  const previous = new Map((readHealth(root).links ?? []).map((l) => [l.url, l]));
   const results = [];
   for (const [url, usedBy] of await outboundLinks(root)) {
     let status = 0;
@@ -73,14 +109,27 @@ export async function linkCheck(o = {}) {
         if (effective) finalUrl = effective;
       } else status = 0;
     }
-    const state = status === 403 || status === 429 ? 'blocked' : status === 0 || status >= 400 ? 'broken' : finalUrl.replace(/\/$/, '') !== url.replace(/\/$/, '') ? 'moved' : 'ok';
-    results.push({ url, state, status, ...(state === 'moved' ? { finalUrl } : {}), usedBy });
+    const state = classify({ url, status, finalUrl });
+    // Since when this link has been answering this way. One bad check is usually the
+    // network or a moment's load, and a site that hands out a fresh session URL every
+    // visit (Wyoming's and Montana's dockets) "moves" every week; both look the same
+    // twice running only when something really changed. Publishing a live citation as
+    // a dead one is the worse mistake, so a result counts only once it is confirmed.
+    const was = previous.get(url);
+    const sameAnswer = Boolean(was && was.state === state && (state !== 'moved' || same(was.finalUrl ?? '', finalUrl)));
+    results.push({ url, state, status, ...(state === 'moved' ? { finalUrl } : {}), held: sameAnswer && was.since ? was.since : null, usedBy });
   }
-  const bad = results.filter((r) => r.state !== 'ok');
+  const finished = now().toISOString();
+  for (const r of results) {
+    r.since = r.state === 'ok' ? null : r.held ?? finished;
+    r.confirmed = r.state !== 'ok' && r.since !== finished;
+    delete r.held;
+  }
+  const bad = results.filter((r) => r.confirmed);
   if (bad.length && host.available) {
-    try { await host.openIssue('Link check: broken or moved links', bad.map((b) => `- ${b.state}: ${b.url}${b.finalUrl ? ` → ${b.finalUrl}` : ''} (HTTP ${b.status}), used by ${b.usedBy.join(', ')}`).join('\n')); } catch { /* recorded below either way */ }
+    try { await host.openIssue('Link check: broken or moved links', bad.map((b) => `- ${b.state}: ${b.url}${b.finalUrl ? ` → ${b.finalUrl}` : ''} (HTTP ${b.status}), unchanged since ${b.since}, used by ${b.usedBy.join(', ')}`).join('\n')); } catch { /* recorded below either way */ }
   }
-  recordRun(root, { workflow: 'link-check', started, finished: now().toISOString(), ok: true, links: results, notes: bad.length ? [`${bad.length} broken or moved links`] : [] });
+  recordRun(root, { workflow: 'link-check', started, finished, ok: true, links: results, notes: bad.length ? [`${bad.length} broken or moved links`] : [] });
   return results;
 }
 
