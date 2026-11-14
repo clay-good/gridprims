@@ -1,7 +1,7 @@
 // Fills the usage benchmark's averages from the chosen utility's EIA-861
 // figures. The ZIP stays on this device.
 
-import { utilitiesForZip } from './zip-utilities.js';
+import { utilitiesForZip, utilityFromFragment } from './zip-utilities.js';
 import { createI18n } from '../lib/i18n.mjs';
 import strings from '../strings/en-US.mjs';
 
@@ -51,5 +51,15 @@ zipForm.addEventListener('submit', async (e) => {
   showUtility();
 });
 utilitySelect.addEventListener('change', showUtility);
+
+// Arriving from a utility page or a data guide, preset to that utility by the fragment.
+utilityFromFragment(location.hash).then((preset) => {
+  if (!preset) return;
+  found = { utilities: [preset.utility], shards: { [preset.utility.state]: preset.shard } };
+  utilitySelect.replaceChildren(el('option', `${preset.utility.name} · ${preset.utility.state}`, { value: '0' }));
+  utilityField.hidden = false;
+  showUtility();
+  document.documentElement.dataset.utilityPreset = String(preset.utility.id);
+}, () => {});
 
 picker.dataset.ready = 'true';

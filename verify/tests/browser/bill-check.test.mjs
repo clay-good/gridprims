@@ -141,4 +141,21 @@ for (const kind of ['chrome', 'firefox']) {
       await server.close();
     }
   });
+
+  test(`${kind}: "Is my use high?" opened from a utility page fills that utility's averages without a ZIP`, { skip, timeout: 60_000 }, async () => {
+    const log = [];
+    const server = await serve(out, { onRequest: (r) => log.push(r.url) });
+    const browser = await launch(kind);
+    try {
+      await browser.goto(`${server.url}/tools/household/usage-benchmark/compare/#utility=1015&state=TX`);
+      await waitFor(browser, "document.documentElement.dataset.averagesChosen === '1015'");
+      const tx = JSON.parse(readFileSync(join(out, 'lookup/TX.json'), 'utf8'));
+      assert.equal(await browser.evaluate("document.querySelector('#in-utilityAverage').value"), String(tx.utilities[1015].resKwh));
+      assert.equal(await browser.evaluate("document.querySelector('#in-stateAverage').value"), String(tx.resKwh));
+      assert.deepEqual(log.filter((u) => /utility=|1015/.test(u)), [], 'the fragment is never sent');
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
 }

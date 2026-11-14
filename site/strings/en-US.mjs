@@ -493,6 +493,8 @@ export default {
   'utility.customerTools.bill': 'Check a bill from its totals',
   'utility.customerTools.use': 'See if your use is high',
   'utility.customerTools.plans': 'Find the cheapest plan on your meter data',
+  'utility.customerTools.guide': 'How to download your meter data from this utility',
+  'utility.customerTools.guideGeneric': 'How to download your meter data',
   'utility.ratesCount': { one: '{count} rate in the OpenEI database, newest updated {newest}.', other: '{count} rates in the OpenEI database, newest updated {newest}.' },
   'utility.ratesNone': 'No rates for this utility in the OpenEI database.',
   'fuel.NG': 'Natural gas', 'fuel.SUB': 'Subbituminous coal', 'fuel.BIT': 'Bituminous coal', 'fuel.LIG': 'Lignite coal', 'fuel.NUC': 'Nuclear',

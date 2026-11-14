@@ -3,6 +3,7 @@
 // Average price appears only for bundled service; delivery-only and
 // energy-only revenue per kWh is labeled as not a full price.
 
+import DATA_GUIDES from '../../data/curated/guides/index.mjs';
 import { html } from '../lib/html.mjs';
 import { layout } from './layout.mjs';
 import { sourceStamp } from '../ui/source-stamp.mjs';
@@ -71,6 +72,9 @@ export function utilityPage({ utility: u, sources, i18n, plantHasPage = () => fa
   const { t, has } = i18n;
   const fuel = (code) => (has(`fuel.${code}`) ? t(`fuel.${code}`) : code);
   const k = (kind) => u.kinds[kind];
+  // Household tools preset to this utility by the fragment (never a query string), and its own data guide.
+  const preset = u.homeState ? `#utility=${u.id}&state=${u.homeState}` : '';
+  const guide = DATA_GUIDES.find((g) => g.utilityIds.length === 1 && g.utilityIds[0] === u.id)?.id ?? null;
   const bundled = k('bundled');
   const res = bundled && bundled.res.sales > 0 ? { revenue: bundled.res.revenue, sales: bundled.res.sales, price: u.prices.bundled.res } : null;
   const fuels = [...new Set([...Object.keys(u.fuelCapacity), ...Object.keys(u.fuelNet)])].sort((a, b) => (u.fuelCapacity[b] ?? 0) - (u.fuelCapacity[a] ?? 0));
@@ -89,9 +93,10 @@ export function utilityPage({ utility: u, sources, i18n, plantHasPage = () => fa
 </dl>
 ${sourceStamp(sources.eia861, sources.eia861.tables[0], i18n)}
 ${k('bundled')?.res.customers > 0 || k('delivery')?.res.customers > 0 ? html`<section class="panel" data-customer-tools><h2>${t('utility.customerTools', { name: u.name })}</h2>
-<ul><li><a href="/tools/household/bill-totals/check/">${t('utility.customerTools.bill')}</a></li>
-<li><a href="/tools/household/usage-benchmark/compare/">${t('utility.customerTools.use')}</a></li>
-<li><a href="/files/#plans">${t('utility.customerTools.plans')}</a></li></ul></section>` : ''}
+<ul><li><a href="/tools/household/bill-totals/check/${preset}" data-preset>${t('utility.customerTools.bill')}</a></li>
+<li><a href="/tools/household/usage-benchmark/compare/${preset}" data-preset>${t('utility.customerTools.use')}</a></li>
+<li><a href="/files/#plans">${t('utility.customerTools.plans')}</a></li>
+<li><a href="/learn/get-your-data/${guide ? `#${guide}` : ''}" data-guide-link>${t(guide ? 'utility.customerTools.guide' : 'utility.customerTools.guideGeneric')}</a></li></ul></section>` : ''}
 
 <section><h2>${t('utility.charges')}</h2>
 ${['bundled', 'delivery', 'energy'].filter(k).map((kind) => html`<h3>${t(`utility.kind.${kind}`)}</h3>

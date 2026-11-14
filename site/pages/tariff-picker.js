@@ -2,7 +2,7 @@
 // rates or from a tariff entered by hand. Requests go only for the ZIP
 // prefix table and the state shards a ZIP needs; the ZIP stays here.
 
-import { getJson as get, utilitiesForZip } from './zip-utilities.js';
+import { getJson as get, utilitiesForZip, utilityFromFragment } from './zip-utilities.js';
 import { createI18n } from '../lib/i18n.mjs';
 import strings from '../strings/en-US.mjs';
 
@@ -104,22 +104,17 @@ zipForm.addEventListener('submit', async (e) => {
 utilitySelect.addEventListener('change', showUtility);
 rateSelect.addEventListener('change', showRate);
 
-// Arriving from a get-your-data guide: the utility and its state ride in the fragment, which no request
-// carries, and the picker opens on that utility's rates without asking for a ZIP.
-const preset = new URLSearchParams(location.hash.slice(1));
-const presetId = Number(preset.get('utility'));
-const presetState = (preset.get('state') ?? '').toUpperCase();
-if (presetId > 0 && /^[A-Z]{2}$/.test(presetState)) {
-  get(`/lookup/${presetState}.json`).then(async (shard) => {
-    const u = shard.utilities?.[presetId];
-    if (!u) return;
-    utilities = [{ id: presetId, name: u.name, state: presetState }];
-    utilitySelect.replaceChildren(el('option', `${u.name} · ${presetState}`, { value: '0' }));
-    utilityField.hidden = false;
-    await showUtility();
-    document.documentElement.dataset.utilityPreset = String(presetId);
-  }, () => {});
-}
+// Arriving from a utility page or a data guide: the utility and its state ride in the fragment, which no
+// request carries, and the picker opens on that utility's rates without asking for a ZIP.
+utilityFromFragment(location.hash).then(async (preset) => {
+  if (!preset) return;
+  const u = preset.utility;
+  utilities = [u];
+  utilitySelect.replaceChildren(el('option', `${u.name} · ${u.state}`, { value: '0' }));
+  utilityField.hidden = false;
+  await showUtility();
+  document.documentElement.dataset.utilityPreset = String(u.id);
+}, () => {});
 
 /** The numbers typed into a group of inputs, by name; a blank is NaN. */
 function values(group) {

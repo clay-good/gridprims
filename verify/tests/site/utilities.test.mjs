@@ -110,3 +110,14 @@ test('a utility page places its reliability among similar utilities, links the c
   const none = all.utilities.find((u) => u.page && !u.reliability.length);
   assert.doesNotMatch(text(page(none)), /Among similar utilities/);
 });
+
+test('household tool links are preset to the utility by the fragment, and its own data guide is linked (grid data 2.1)', () => {
+  const html = page(44372);
+  assert.match(html, /<a href="\/tools\/household\/bill-totals\/check\/#utility=44372&amp;state=TX" data-preset>/);
+  assert.match(html, /<a href="\/tools\/household\/usage-benchmark\/compare\/#utility=44372&amp;state=TX" data-preset>/);
+  assert.match(html, /<a href="\/learn\/get-your-data\/#oncor" data-guide-link>How to download your meter data from this utility<\/a>/);
+  assert.doesNotMatch(html, /\?utility=/, 'never a query string');
+  // A utility with no guide of its own links the general one.
+  const other = all.utilities.find((u) => u.page && u.homeState && !['oncor'].includes(u.id) && (u.kinds.bundled?.res.customers > 0) && u.id === 1015);
+  assert.match(page(other ?? 1015), /<a href="\/learn\/get-your-data\/" data-guide-link>How to download your meter data<\/a>/);
+});
