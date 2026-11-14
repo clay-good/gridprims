@@ -18,7 +18,7 @@
 
 - [x] 3.1 Implement the threshold with every intermediate value shown, both standard-deviation variants, and the day-attribution rule; verify the threshold, days-without-activity, both-thresholds-shown, and interruption-spanning-two-days scenarios
 - [x] 3.2 Implement flagged-day listing and both-basis indices; verify the storm-days scenario
-- [ ] 3.3 Implement the Shapiro-Wilk normality check at the 5% level with its warning; verify the assumption-fails scenario and that the test and level are named as ours
+- [x] 3.3 Implement the Shapiro-Wilk normality check at the 5% level with its warning; verify the assumption-fails scenario and that the test and level are named as ours
 - [x] 3.4 Implement our disclosed minimum and the short-history label; verify the too-few-days and two-years scenarios
 - [ ] 3.5 Store the verified published vector and the daily-table fixture; verify both, and record the two unusable published examples with recomputed values
 

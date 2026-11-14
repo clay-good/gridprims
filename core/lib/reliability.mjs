@@ -6,6 +6,7 @@
 // unavailable instead.
 
 import { utcToLocal } from '../../parsers/time.mjs';
+import { shapiroWilk } from './shapiro-wilk.mjs';
 
 /** EIA-861's instructions: a sustained interruption is one of more than 5 minutes. */
 export const SUSTAINED_MINUTES = 5;
@@ -184,6 +185,7 @@ export function threshold(daily, o = {}) {
   }
   const logs = active.map((d) => Math.log(d.minutesPerCustomer));
   const { mean, sample, population } = spread(logs);
+  const normality = logNormality(logs);
   const of = (beta) => Math.exp(mean + MED_MULTIPLIER * beta);
   const years = calendarDays / 365.25;
   return {
@@ -200,7 +202,32 @@ export function threshold(daily, o = {}) {
     short: years < YEARS_EXPECTED ? `Based on ${round(years, 1)} years of daily values, not the ${YEARS_EXPECTED} the method assumes. Fewer years make the threshold less stable.` : null,
     formula: `e^(${round(mean, 4)} + ${MED_MULTIPLIER} × ${round(sample, 4)}) = ${round(of(sample), 2)} minutes per customer in a day, from ${active.length} days with interruptions (${calendarDays - active.length} quiet days left out before the logarithm).`,
     choice: 'The sample standard deviation (dividing by one less than the number of days) is the value used. That is our choice; the population standard deviation is shown beside it.',
+    normality,
     source: SOURCES.threshold,
+  };
+}
+
+/** Ours, not the method's: the test and its level, since no free source prescribes either. */
+export const NORMALITY_LEVEL = 0.05;
+
+/**
+ * The method assumes the logarithms of the daily values are normal. Check it
+ * with the Shapiro-Wilk test at the 5% level and say what the result means.
+ * @param {number[]} logs natural logarithms of the active days' minutes per customer
+ */
+export function logNormality(logs) {
+  const t = shapiroWilk(logs);
+  const ours = 'The test (Shapiro-Wilk) and the 5% level are our choice; the published method names neither.';
+  if (t.status !== 'ok') return { test: 'Shapiro-Wilk', level: NORMALITY_LEVEL, holds: null, sentence: `The log-normal assumption was not tested: ${t.reason}`, ours };
+  const holds = t.p >= NORMALITY_LEVEL;
+  const stat = `W = ${round(t.W, 4)}, p = ${t.p < 0.0001 ? 'under 0.0001' : round(t.p, 4)}, over ${t.n} days with interruptions`;
+  return {
+    test: 'Shapiro-Wilk', level: NORMALITY_LEVEL, n: t.n, W: t.W, p: t.p, holds,
+    sentence: holds
+      ? `The logarithms of the daily values pass a normality test (${stat}), so the method's log-normal assumption is not contradicted by this data.`
+      : `The logarithms of the daily values fail a normality test (${stat}). The method assumes they are log-normal, so the threshold may be unreliable for this data. It is still shown for reference.`,
+    warning: holds ? null : 'Report the indices on both bases, with and without the flagged days, and state the method you used. This is common for a small utility with few days with interruptions.',
+    ours,
   };
 }
 
