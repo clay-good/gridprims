@@ -51,17 +51,27 @@ export function compute(v) {
   const sentences = [];
   let margin;
   const checks = v.ruleSource !== 'none';
-  // GO 95 fills the clearance and the separation from its tables; your values fill them otherwise.
+  // Where the values come from: GO 95's tables, your values, your values with GO 95 filling the gaps, or
+  // NESC values you copy from your own edition (the code is paywalled, so its values are never built in).
   const fromGo95 = v.ruleSource === 'go95';
-  const ground = fromGo95 ? (v.crosses === 'not-chosen' ? null : go95(`ground.${v.crosses}.comm`)) : null;
-  if (fromGo95) parsed.required = { ft: ground?.ft ?? null };
-  const who = fromGo95 ? 'GO 95 requires' : 'your rules require';
+  const layered = v.ruleSource === 'yours-go95';
+  const nesc = /^nesc-(\d{4})$/.exec(v.ruleSource)?.[1] ?? null;
   const exceptions = (r) => (r?.footnotes?.length ? ` Exceptions not checked: ${r.footnotes.map((x) => `(${x})`).join(' ')}.` : '');
   // The weekly watch found the CPUC's page no longer matches our capture: say so on every value from it.
   const review = (r) => (r && String(v.go95Review).split(',').includes(r.table) ? ` Needs review: GO 95 Table ${r.table} has changed since this value was captured.` : '');
+  const yourWords = nesc ? `the NESC ${nesc} value you entered` : 'your rules';
+  let ground = null;
+  let clearanceFrom = yourWords;
+  if (v.crosses !== 'not-chosen' && (fromGo95 || (layered && parsed.required.ft === null))) {
+    ground = go95(`ground.${v.crosses}.comm`);
+    parsed.required = { ft: ground?.ft ?? null };
+    clearanceFrom = layered ? 'GO 95, filling the value your rules left as none' : 'GO 95';
+  }
+  const who = clearanceFrom.startsWith('GO 95') ? 'GO 95 requires' : nesc ? `the NESC ${nesc} value you entered requires` : 'your rules require';
   if (ground) notes.push(`${ground.label}: ${ruleLength(ground.ft)}.${exceptions(ground)}${review(ground)}`);
-  if (!checks) sentences.push(`The lowest point is ${where}.`);
-  else if (v.crosses === 'not-chosen' || parsed.required.ft === null) sentences.push(`The lowest point is ${where}. What does the span cross?`);
+  if (!checks) sentences.push(`The lowest point is ${where}. No rules were loaded, so there is no pass or fail.`);
+  else if (v.crosses === 'not-chosen') sentences.push(`The lowest point is ${where}. What does the span cross?`);
+  else if (parsed.required.ft === null) sentences.push(nesc ? `The lowest point is ${where}. Enter the clearance from your NESC ${nesc} copy for what it crosses.` : `The lowest point is ${where}. What clearance do your rules require over it?`);
   else {
     const req = parsed.required.ft;
     margin = low.height - req;
@@ -69,17 +79,20 @@ export function compute(v) {
       ? `The lowest point is ${feetInches(low.height, 'down')}, ${feetInches(margin, 'down')} above the ${ruleLength(req)} ${who} ${SURFACE[v.crosses]}.`
       : `The lowest point is ${feetInches(-margin, 'up')} lower than the ${ruleLength(req)} ${who} ${SURFACE[v.crosses]}.`);
     steps.push(`${feetInches(low.height, 'down')} − ${ruleLength(req)} required ${SURFACE[v.crosses]} = ${margin >= 0 ? feetInches(margin, 'down') : `${feetInches(-margin, 'up')} short`}.`);
+    if (layered || nesc) steps.push(`The clearance ${SURFACE[v.crosses]} came from ${clearanceFrom}.`);
   }
   let gap;
   if (above) {
     const g = smallestGap(line, above, S);
     gap = g.gap * 12;
-    const g95 = fromGo95 ? go95(SEP_ABOVE[v.aboveKind]) : null;
+    const typedSep = parsed.midspanSep.ft ?? parsed.poleSep.ft;
+    const g95 = fromGo95 || (layered && typedSep === null) ? go95(SEP_ABOVE[v.aboveKind]) : null;
     if (g95) notes.push(`${g95.label}: ${inches(g95.ft, 'up')} on the same pole and in adjoining midspans.${exceptions(g95)}${review(g95)}`);
-    const sep = g95 ? g95.ft : parsed.midspanSep.ft ?? parsed.poleSep.ft;
-    const which = g95 ? 'GO 95 value' : parsed.midspanSep.ft !== null ? 'midspan value' : 'value at the pole';
+    const sep = g95 ? g95.ft : typedSep;
+    const which = g95 ? 'GO 95 value' : `${nesc ? `NESC ${nesc} ` : ''}${parsed.midspanSep.ft !== null ? 'midspan value' : 'value at the pole'}`;
     const place = g.midspan ? 'at midspan' : `${g.at.toFixed(0)} ft from the first pole`;
     steps.push(`The smallest gap to the line above is ${inches(g.gap, 'down')} ${place}.`);
+    if (layered && sep !== null) steps.push(`The separation came from ${g95 ? 'GO 95, filling the value your rules left as none' : 'your rules'}.`);
     if (checks && sep !== null) {
       const short = sep - g.gap;
       sentences.push(short > 0 ? `The gap to the line above is ${inches(g.gap, 'down')} ${place}, ${inches(short, 'up')} short of the ${inches(sep, 'up')} ${which}.` : `The gap to the line above is ${inches(g.gap, 'down')} ${place}, at or above the ${inches(sep, 'up')} ${which}.`);

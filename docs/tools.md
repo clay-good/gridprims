@@ -611,11 +611,11 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 How far a line sags between two poles, how high its lowest point is, and how that compares with the clearance your rules require over what the span crosses.
 
-Version 0.2.0 · experimental · validation level 2, cross-checked
+Version 0.3.0 · experimental · validation level 2, cross-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|
-| Rules | `ruleSource` | choice | `yours`, `go95`, `none` | yours |
+| Rules | `ruleSource` | choice | `yours`, `yours-go95`, `go95`, `nesc-2023`, `nesc-2028`, `none` | yours |
 | Span length | `span` |  |  | 200 ft |
 | Height at the first pole | `heightA` |  |  | 25 ft |
 | Height at the second pole | `heightB` |  |  | 25 ft |

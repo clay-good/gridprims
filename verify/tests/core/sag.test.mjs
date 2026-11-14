@@ -49,7 +49,7 @@ test('the answer waits for what the span crosses, then gives the margin or the s
   assert.equal(run({ crosses: 'not-chosen' }).sentence, 'The lowest point is 22 ft 6 in., at midspan. What does the span cross?');
   assert.equal(run({}).sentence, 'The lowest point is 22 ft 6 in., 4 ft 6 in. above the 18 ft your rules require over a road.');
   assert.equal(run({ heightA: '20 ft 2 in', heightB: '20 ft 2 in', sag: '2 ft 6 in' }).sentence, 'The lowest point is 4 in. lower than the 18 ft your rules require over a road.');
-  assert.equal(run({ span: '100 ft', heightB: '21 ft', ruleSource: 'none' }).sentence, 'The lowest point is at the lower pole, at 21 ft 0 in.');
+  assert.equal(run({ span: '100 ft', heightB: '21 ft', ruleSource: 'none' }).sentence, 'The lowest point is at the lower pole, at 21 ft 0 in. No rules were loaded, so there is no pass or fail.');
   const gap = run({ crosses: 'not-chosen', sag: '2 ft 6 in', above: '28 ft 4 in, 28 ft 4 in, 4 ft', midspanSep: '30 in' });
   assert.match(gap.sentence, /The gap to the line above is 22 in\. at midspan, 8 in\. short of the 30 in\. midspan value\.$/);
   assert.equal(run({ ruleSource: 'none' }).outputs.margin, undefined, 'no rules, no pass or fail');
@@ -107,4 +107,24 @@ test('a GO 95 value from a table the watch found changed says it needs review', 
   assert.match(steps('1'), /GO 95 Table 1, Case 3, Column B: 18 ft\. Exceptions not checked: .*\. Needs review: GO 95 Table 1 has changed since this value was captured\./);
   // A change to the other table does not flag this value.
   assert.doesNotMatch(steps('2'), /Needs review/);
+});
+
+test('layered and NESC sources: GO 95 fills only what you leave blank, NESC values are yours, and each says where it came from', async () => {
+  const { runTool } = await import('../../../core/contract/run.mjs');
+  const { getTool } = await import('../../../core/tools/index.mjs');
+  const { manifest, impl } = getTool('lines.midspan-clearance.check');
+  const base = manifest.examples.find((e) => e.id === 'level').inputs;
+  const go = (over) => runTool(manifest, impl, { ...base, offset: 'none', ...over });
+  const filled = go({ ruleSource: 'yours-go95', required: 'none' });
+  assert.match(filled.sentence, /above the 18 ft GO 95 requires over a road/);
+  assert.ok(filled.work.steps.includes('The clearance over a road came from GO 95, filling the value your rules left as none.'));
+  assert.ok(filled.work.steps.some((s) => /^GO 95 Table 1, Case 3, Column B: 18 ft/.test(s)));
+  const typed = go({ ruleSource: 'yours-go95', required: '17 ft' });
+  assert.match(typed.sentence, /above the 17 ft your rules require/);
+  assert.ok(!typed.work.steps.some((s) => s.startsWith('GO 95 Table 1')), 'GO 95 is not consulted for a value you gave');
+  assert.match(go({ ruleSource: 'nesc-2028', required: 'none' }).sentence, /Enter the clearance from your NESC 2028 copy for what it crosses\.$/);
+  assert.match(go({ ruleSource: 'nesc-2023', required: '15 ft 6 in' }).sentence, /the 15 ft 6 in\. the NESC 2023 value you entered requires over a road/);
+  // A separation left blank is filled from GO 95 Table 2 when layered.
+  const gap = go({ ruleSource: 'yours-go95', crosses: 'not-chosen', required: 'none', sag: '2 ft 6 in', above: '28 ft 4 in, 28 ft 4 in, 4 ft', aboveKind: 'secondary' });
+  assert.match(gap.sentence, /short of the 48 in\. GO 95 value/);
 });
