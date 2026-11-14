@@ -132,7 +132,8 @@ export function runLines(t, inputs, getHandle) {
   const results = poles.map((p, index) => {
     const red = redactPole(p, index);
     sourceText.push(...red.sourceText);
-    const r = runTool(t.manifest, t.impl, { ...v, ...poleInputs(red.pole) });
+    const { attachments, poleLength } = poleInputs(red.pole);
+    const r = runTool(t.manifest, t.impl, { ...v, attachments, poleLength });
     return { index, rows: p.rows.map((x) => x.row), status: r.status, ...(r.status === 'ok' ? { outputs: r.outputs, sentence: r.sentence, steps: r.work.steps } : r.status === 'refused' ? { reason: r.reason } : { errors: r.errors }) };
   });
   return { result: { status: 'ok', toolId: t.manifest.id, toolVersion: t.manifest.version, poles: results }, source_text: [...new Set(sourceText)] };

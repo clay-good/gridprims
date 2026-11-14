@@ -5,15 +5,20 @@
 const notShared = (inp) => inp.type === 'file' || inp.type === 'handle';
 /** What a link holds in place of the user's own rules, which never go in a URL. */
 export const PRIVATE_MARK = 'your standards file';
+/** What a link holds in place of inputs filled from a loaded file, such as one pole of a pole list. */
+export const FILE_MARK = 'your pole list';
+const MARKS = [PRIVATE_MARK, FILE_MARK];
 
 /**
  * @param {any} manifest
  * @param {Record<string, unknown>} values
+ * @param {string[]} [fromFile] inputs filled from a loaded file: the link names the file instead of holding them
  */
-export function encodeState(manifest, values) {
+export function encodeState(manifest, values, fromFile = []) {
   const p = new URLSearchParams();
   for (const inp of manifest.inputs) {
     if (notShared(inp) || values[inp.name] === undefined) continue;
+    if (fromFile.includes(inp.name)) { p.set(inp.name, FILE_MARK); continue; }
     // The worked example's rules are ours to share; anything else is the user's and is named, not copied.
     if (inp.private) { if (String(values[inp.name]) !== String(inp.example)) p.set(inp.name, PRIVATE_MARK); continue; }
     p.set(inp.name, String(values[inp.name]));
@@ -31,7 +36,7 @@ export function decodeState(manifest, hash) {
   const p = new URLSearchParams(hash.replace(/^#/, ''));
   const out = {};
   for (const inp of manifest.inputs) {
-    if (!notShared(inp) && !inp.private && p.has(inp.name)) out[inp.name] = p.get(inp.name);
+    if (!notShared(inp) && !inp.private && p.has(inp.name) && !MARKS.includes(p.get(inp.name))) out[inp.name] = p.get(inp.name);
   }
   return out;
 }
@@ -42,7 +47,7 @@ export function decodeState(manifest, hash) {
  */
 export function privateAsked(manifest, hash) {
   const p = new URLSearchParams(hash.replace(/^#/, ''));
-  return manifest.inputs.filter((inp) => inp.private && p.has(inp.name)).map((inp) => inp.name);
+  return manifest.inputs.filter((inp) => (inp.private && p.has(inp.name)) || p.get(inp.name) === FILE_MARK).map((inp) => inp.name);
 }
 
 /**

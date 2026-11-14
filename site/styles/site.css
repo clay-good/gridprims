@@ -20,6 +20,7 @@ body {
 input, textarea, select { caret-color: var(--signal); }
 /* Links read as text that happens to lead somewhere, not as the page's decoration. */
 a { color: inherit; text-decoration-color: var(--field-border); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.linkish { background: none; border: 0; padding: 0; min-height: 44px; color: inherit; font: inherit; text-decoration: underline; text-decoration-color: var(--field-border); text-underline-offset: 3px; cursor: pointer; }
 a:hover { text-decoration-color: var(--signal); color: var(--signal-text); }
 .rail a, a.button, a.handoff, a.plate-link { text-decoration: none; }
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {

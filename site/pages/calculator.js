@@ -5,7 +5,7 @@ import { runTool } from '../../core/contract/run.mjs';
 import { createI18n } from '../lib/i18n.mjs';
 import { copyText, renderAnswer, renderWork } from '../ui/tool-page.mjs';
 import { renderFigure } from '../ui/tool-figures.mjs';
-import { decodeState, encodeState, isExampleState, privateAsked, reportInputs } from '../ui/share-state.mjs';
+import { FILE_MARK, decodeState, encodeState, isExampleState, privateAsked, reportInputs } from '../ui/share-state.mjs';
 import strings from '../strings/en-US.mjs';
 
 const root = document.querySelector('[data-tool]');
@@ -24,6 +24,8 @@ let last = null;
 let announceTimer = 0;
 
 const readForm = () => Object.fromEntries(new FormData(form).entries());
+/** Inputs a panel filled from a loaded file (data-from-file on the tool), which links name but never hold. */
+const fromFile = () => (root.dataset.fromFile ? root.dataset.fromFile.split(',') : []);
 
 function showErrors(errors) {
   for (const el of form.querySelectorAll('[name]')) {
@@ -45,7 +47,7 @@ function update({ pushState = true } = {}) {
   work.innerHTML = String(renderWork(manifest, result, i18n));
   figure.innerHTML = String(renderFigure(manifest, impl, values, i18n));
   showErrors(result.status === 'invalid' ? result.errors : []);
-  if (pushState) history.replaceState(null, '', isExample ? location.pathname : encodeState(manifest, values));
+  if (pushState) history.replaceState(null, '', isExample ? location.pathname : encodeState(manifest, values, fromFile()));
   // Announce once, 500 ms after the inputs settle, so screen readers are not flooded.
   clearTimeout(announceTimer);
   announceTimer = setTimeout(() => { announce.textContent = result.status === 'ok' ? result.sentence : i18n.t('answer.invalid'); }, 500);
@@ -59,13 +61,14 @@ function applyFragment() {
     if (el) el.value = value;
   }
   // A link made with the sender's own rules names them; the rules themselves are asked for here.
+  const fileAsked = new URLSearchParams(location.hash.slice(1));
   const asked = privateAsked(manifest, location.hash).filter((name) => !kept(name));
   for (const name of asked) form.elements.namedItem(name).value = '';
   if (Object.keys(shared).length || asked.length) update({ pushState: false });
   for (const name of asked) {
     const msg = form.querySelector(`#in-${name}-error`);
     msg.hidden = false;
-    msg.textContent = i18n.t('tool.askPrivate');
+    msg.textContent = i18n.t(fileAsked.get(name) === FILE_MARK ? 'tool.askFile' : 'tool.askPrivate');
   }
 }
 
@@ -98,7 +101,7 @@ root.querySelector('[data-copy]').addEventListener('click', async (e) => {
   e.currentTarget.textContent = i18n.t('answer.copied');
 });
 root.querySelector('[data-share]').addEventListener('click', async (e) => {
-  const url = `${location.origin}${location.pathname}${encodeState(manifest, readForm())}`;
+  const url = `${location.origin}${location.pathname}${encodeState(manifest, readForm(), fromFile())}`;
   await navigator.clipboard?.writeText(url);
   e.currentTarget.textContent = i18n.t('answer.copied');
 });

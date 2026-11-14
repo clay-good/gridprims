@@ -54,9 +54,29 @@ export function readPoleList(text) {
  * One pole's inputs for lines.attachment-height.find: its attachments a line each, and its length.
  * @param {{rows: Array<{kind: string, owner: string, height: string}>, poleLength: string | null}} pole
  */
-export function poleInputs(pole) {
-  // Each attachment sits on its own line of the file, so the tool's row numbers are the pole list's.
-  const lines = Array.from({ length: Math.max(...pole.rows.map((r) => r.row)) }, () => '');
-  for (const r of pole.rows) lines[r.row - 1] = `${r.kind}, ${r.owner.replace(/,/g, ' ')}, ${r.height}`;
-  return { attachments: lines.join('\n'), poleLength: pole.poleLength ?? 'unknown' };
+export function poleInputs(pole, { absolute = true } = {}) {
+  // Each attachment sits on its own line, so the tool's row numbers are the pole list's. Relative numbering
+  // starts at the pole's first row instead, which keeps a long file linear; the caller adds the offset back.
+  const offset = absolute ? 0 : Math.min(...pole.rows.map((r) => r.row)) - 1;
+  const lines = Array.from({ length: Math.max(...pole.rows.map((r) => r.row)) - offset }, () => '');
+  for (const r of pole.rows) lines[r.row - 1 - offset] = `${r.kind}, ${r.owner.replace(/,/g, ' ')}, ${r.height}`;
+  return { attachments: lines.join('\n'), poleLength: pole.poleLength ?? 'unknown', offset };
+}
+
+/**
+ * A standards workbook as template text: the first sheet whose header row has rule_id and value, read from
+ * the values the workbook stores (never recalculated), with the sheet's name for the receipt.
+ * @param {Uint8Array} bytes
+ * @returns {Promise<{text: string, sheet: string} | {error: string}>}
+ */
+export async function readStandardsWorkbook(bytes) {
+  const { readXlsx } = await import('../../parsers/xlsx.mjs');
+  const { sheets } = await readXlsx(bytes);
+  for (let i = 0; i < sheets.length; i++) {
+    const { sheet, rows } = await readXlsx(bytes, { sheet: i });
+    const lines = rows.map((r) => (r ?? []).map((c) => String(c?.value ?? '').replace(/,/g, ' ').trim()).join(','));
+    const at = lines.findIndex((l) => l.replace(/,/g, '').trim() !== '');
+    if (at >= 0 && linesKind(lines[at]) === 'lines-standards') return { text: lines.slice(at).join('\n'), sheet };
+  }
+  return { error: 'No sheet in this workbook has the standards template\'s header row (rule_id, applies_to, value, unit, ...).' };
 }
