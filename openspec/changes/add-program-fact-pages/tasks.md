@@ -24,5 +24,5 @@
 
 ## 5. Surfaces
 
-- [ ] 5.1 Serve the net metering and community solar figures through `gridprims_query_data`; verify they match the pages
+- [x] 5.1 Serve the net metering and community solar figures through `gridprims_query_data`; verify they match the pages
 - [ ] 5.2 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green
