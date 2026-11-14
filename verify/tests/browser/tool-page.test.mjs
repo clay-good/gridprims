@@ -140,3 +140,29 @@ for (const kind of ['chrome', 'firefox']) {
     }
   });
 }
+
+for (const kind of ['chrome', 'firefox']) {
+  test(`${kind}: the line tools draw their chart on first paint and redraw it on every change`, { skip: !findBrowser(kind) && `${kind} is not installed`, timeout: 90_000 }, async () => {
+    const server = await serve(out);
+    const browser = await launch(kind);
+    try {
+      await browser.goto(`${server.url}/tools/lines/midspan-clearance/check/`);
+      await browser.evaluate(ready);
+      assert.match(await browser.evaluate(text('[data-figure] figcaption')), /lowest at 22 ft 6 in\., 100 ft from the first pole/);
+      await browser.evaluate(`(() => { const i = document.querySelector('#in-heightA'); i.value = '21 ft'; i.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+      assert.match(await browser.evaluate(text('[data-figure] figcaption')), /lowest at 20 ft 1 in\., 60 ft from the first pole/);
+      // Inputs that give no answer leave no stale chart.
+      await browser.evaluate(`(() => { const i = document.querySelector('#in-span'); i.value = 'abc'; i.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+      assert.equal(await browser.evaluate(`document.querySelector('[data-figure]').children.length`), 0);
+
+      await browser.goto(`${server.url}/tools/lines/attachment-height/find/`);
+      await browser.evaluate(ready);
+      assert.match(await browser.evaluate(text('[data-figure] figcaption')), /The new line goes at 26 ft 10 in\./);
+      await browser.setViewport(320, 720);
+      assert.ok(await browser.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), 'page scrolls sideways at 320 px');
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}

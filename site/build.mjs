@@ -8,6 +8,7 @@ import { copyFileSync, cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } 
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { TOOLS } from '../core/tools/index.mjs';
+import { renderFigure } from './ui/tool-figures.mjs';
 import { runTool } from '../core/contract/run.mjs';
 import { buildCommandIndex } from '../core/contract/command.mjs';
 import { placeEntries } from './entities/places.mjs';
@@ -166,7 +167,7 @@ export async function build(opts = {}) {
     const example = manifest.examples[0];
     const result = runTool(manifest, tool.impl, example.inputs);
     if (result.status !== 'ok') throw new Error(`${manifest.id}: first worked example returned ${result.status}`);
-    write(toolPath(manifest.id), calculatorPage({ manifest, example, result, i18n }));
+    write(toolPath(manifest.id), calculatorPage({ manifest, example, result, i18n, figure: renderFigure(manifest, tool.impl, example.inputs, i18n) }));
   }
   // The limits record: one object for the page, its JSON copy, and the MCP resource.
   const datasets = existsSync(join(ROOT, 'data')) ? readdirSync(join(ROOT, 'data')).filter((id) => existsSync(join(ROOT, 'data', id, 'current.json'))).map((id) => JSON.parse(readFileSync(join(ROOT, 'data', id, JSON.parse(readFileSync(join(ROOT, 'data', id, 'current.json'), 'utf8')).version, 'manifest.json'), 'utf8'))) : [];

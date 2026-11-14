@@ -95,5 +95,17 @@ export function compute(v) {
     // Lengths end in "in.", so a sentence ending on one keeps a single period.
     sentence: sentences.join(' ').replace(/\.\./g, '.'),
     steps: [...steps, ...notes].map((x) => x.replace(/\.\./g, '.')),
+    // The span profile the page draws (feet above ground; the ground is straight between the poles).
+    // The contract does not pass it on, so recorded results are unchanged.
+    figure: {
+      span: S, line, above, required: checks && v.crosses !== 'not-chosen' ? parsed.required.ft : null,
+      lowest: { at: line.a <= line.b ? low.fromLower : S - low.fromLower, height: low.height },
+    },
   };
+}
+
+/** The span profile for the page's chart, or null when the inputs give no answer. */
+export function figure(v) {
+  const r = compute(v);
+  return r.status === 'ok' ? r.figure : null;
 }

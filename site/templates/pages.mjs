@@ -95,7 +95,7 @@ function field(inp, value, i18n) {
  * A calculator page, prerendered with its first worked example.
  * @param {{manifest: any, example: any, result: any, i18n: any}} p
  */
-export function calculatorPage({ manifest, example, result, i18n, reviewed = false }) {
+export function calculatorPage({ manifest, example, result, i18n, reviewed = false, figure = '' }) {
   const { t } = i18n;
   const page = html`
 <article data-tool="${manifest.id}" data-tool-version="${manifest.version}" data-reviewed="${reviewed ? 'yes' : 'no'}">
@@ -121,6 +121,7 @@ export function calculatorPage({ manifest, example, result, i18n, reviewed = fal
     ${manifest.inputs.some((i) => i.type !== 'file' && !manifest.firstScreen.includes(i.name)) ? html`<details class="more-options"><summary>${t('tool.moreOptions')}</summary>
     ${manifest.inputs.filter((i) => i.type !== 'file' && !manifest.firstScreen.includes(i.name)).map((i) => field(i, example.inputs[i.name] ?? i.example, i18n))}</details>` : ''}
   </form>
+  <div data-figure>${figure}</div>
   ${EXTRAS[manifest.id] ? EXTRAS[manifest.id][0](i18n) : ''}
   <details class="panel" data-work-panel>
     <summary><h2 class="summary-heading">${t('work.title')}</h2></summary>

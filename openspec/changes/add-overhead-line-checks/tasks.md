@@ -25,7 +25,7 @@
 - [ ] 3.3a Download RUS Bulletin 1728F-700 by hand (it is incorporated by reference in 7 CFR parts 1728 and 1755) and record in `docs/research/18` whether it gives pole lengths and classes we may publish; if it does, add them as cited defaults, and if not, leave pole sizing to the user's rules
 - [x] 3.4 Existing shortfalls and messy attachment lists; verify the existing-line, two-lines-at-one-height, and no-supply scenarios (on a typed attachment list; the pole-list file is 3.5)
 - [ ] 3.5 Pole-list workbench (worker, progress, cancel, consent, in-page pole views, CSV export); verify the batch export and unreadable row scenarios and 10,000 rows in under 2 s on the reference profile
-- [ ] 3.6 Pole elevation chart with text summary and table; verify the chart gates
+- [x] 3.6 Pole elevation chart with text summary and table; verify the chart gates
 - [ ] 3.7 Capture worked placements from public utility joint-use standards, starting with Clark Public Utilities Section 1910 and then Tacoma Power C-OH-1060, Chelan County PUD, and RG&E and NYSEG; when at least 10 reproduce, record them as `published-example` and raise to level 2; otherwise stay Preview with a `toRaise` sentence on the limits page; verify the manifest validator accepts the level and evidence
 
 ## 4. Midspan clearance
@@ -34,7 +34,7 @@
 - [x] 4.2 Clearance by surface, with margin or shortfall and source, asked only after the crossing is chosen; verify the passes, short, and crossing-not-chosen scenarios (against the clearance you enter; the GO 95 and standards-file sources come with section 2)
 - [x] 4.3 Separation from the line above; verify the gap-shrinks scenario
 - [x] 4.4 Generate and commit 50 exact-catenary cases from a separate script, with the RUS 1724E-152 capture listed in `docs/reference-artifacts.md` and both the parabolic and catenary routines in `docs/own-implementations.md`; verify the independent-cases and deep-sag scenarios (the RUS 1724E-152 page itself refuses scripted requests, so its capture waits; the bulletin is cited by section and an archived copy was read)
-- [ ] 4.5 "At the condition you entered" label, catenary note, and span profile chart; verify the measured-sag scenario and the chart gates (the label and the catenary note ship; the span profile chart remains)
+- [x] 4.5 "At the condition you entered" label, catenary note, and span profile chart; verify the measured-sag scenario and the chart gates
 
 ## 5. Trust and surfaces
 

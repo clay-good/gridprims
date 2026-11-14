@@ -4,6 +4,7 @@
 import { runTool } from '../../core/contract/run.mjs';
 import { createI18n } from '../lib/i18n.mjs';
 import { copyText, renderAnswer, renderWork } from '../ui/tool-page.mjs';
+import { renderFigure } from '../ui/tool-figures.mjs';
 import { decodeState, encodeState, isExampleState } from '../ui/share-state.mjs';
 import strings from '../strings/en-US.mjs';
 
@@ -17,6 +18,7 @@ const i18n = createI18n(strings, 'en-US');
 const form = root.querySelector('[data-inputs]');
 const answer = root.querySelector('[data-answer]');
 const work = root.querySelector('[data-work]');
+const figure = root.querySelector('[data-figure]');
 const announce = root.querySelector('[data-announce]');
 let last = null;
 let announceTimer = 0;
@@ -41,6 +43,7 @@ function update({ pushState = true } = {}) {
   last = result;
   answer.innerHTML = String(renderAnswer(manifest, result, i18n, { isExample, reviewed: root.dataset.reviewed === 'yes' }));
   work.innerHTML = String(renderWork(manifest, result, i18n));
+  figure.innerHTML = String(renderFigure(manifest, impl, values, i18n));
   showErrors(result.status === 'invalid' ? result.errors : []);
   if (pushState) history.replaceState(null, '', isExample ? location.pathname : encodeState(manifest, values));
   // Announce once, 500 ms after the inputs settle, so screen readers are not flooded.

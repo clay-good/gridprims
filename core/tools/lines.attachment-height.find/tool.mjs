@@ -56,8 +56,11 @@ export function compute(v) {
   // A flagged value is repeated on the result, not only in the receipt.
   const notes = [...rules.filter((r) => r.flag).map((r) => r.flag), 'Pole loading is not checked. The pole owner and a qualified engineer have the final word.'];
   let answer; const outputs = {};
+  // The pole elevation the page draws: heights in inches above ground, with any planned moves.
+  const fig = { attachments: attachments.map((a) => ({ row: a.row, name: KIND_NAME[a.kind], owner: a.owner ?? '', inches: a.inches, supply: a.supply })), top: sp.top, bottom: sp.bottom, at: null, extra: null, poleTopIn };
   if (at !== null) {
     answer = `Attach at ${fi(at)}. No other line needs to move.`;
+    fig.at = at;
     Object.assign(outputs, { height: at / 12, moves: 0 });
   } else {
     const plans = movePlans(comm, sp, preference);
@@ -69,6 +72,8 @@ export function compute(v) {
       best.moves.forEach((m, i) => notes.unshift(`Step ${i + 1}: ${m.a.owner || 'the owner'} moves its ${KIND_NAME[m.a.kind]} line (row ${m.a.row}) ${m.to > m.a.inches ? 'up' : 'down'} ${by(Math.abs(m.to - m.a.inches))}, from ${fi(m.a.inches)} to ${fi(m.to)}.`));
       if (next) notes.unshift(`Next option: ${cap(next.moves.map(step).join(' Then '))} Then attach at ${fi(next.at)}. It ranks lower: ${next.moves.length > best.moves.length ? 'it moves more lines' : next.distance > best.distance ? `it moves ${by(next.distance - best.distance)} more` : 'it leaves the new line in a less preferred place'}.`.replace(/\.\./g, '.'));
       notes.push('Moves are limited to two, our own limit to keep plans readable.');
+      fig.at = best.at;
+      for (const m of best.moves) fig.attachments.find((a) => a.row === m.a.row).to = m.to;
       Object.assign(outputs, { height: best.at / 12, moves: best.moves.length });
     } else {
       const x = extraHeight(comm, sp, { poleLengthFt, rules });
@@ -78,11 +83,19 @@ export function compute(v) {
         outputs.replacement = x.replacement.lengthFt;
       }
       outputs.extra = x.extra;
+      fig.extra = x.extra;
     }
   }
   return {
     status: 'ok', outputs,
     sentence: [...existing, answer].join(' ').replace(/\.\./g, '.'),
     steps: [...receipt, ...sources, ...existing.map((e) => `Existing condition: ${e}`), ...notes].map((s) => s.replace(/\.\./g, '.')),
+    figure: fig,
   };
+}
+
+/** The pole elevation for the page's chart, or null when the inputs give no answer. */
+export function figure(v) {
+  const r = compute(v);
+  return r.status === 'ok' ? r.figure : null;
 }
