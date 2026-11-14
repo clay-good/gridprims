@@ -126,9 +126,51 @@ export function validateRows(rows, step, previousRows) {
   return failures;
 }
 
+/** Statuses that mean "ask again", not "here is your answer". */
+const RETRYABLE = new Set([408, 425, 429, 500, 502, 503, 504]);
+
+/**
+ * Fetch one publisher file, trying again after a transient failure. EIA-930
+ * republishes a workbook per balancing authority every day and the largest are
+ * over 100 MB, so a single dropped connection used to fail a whole monthly
+ * refresh. `read` consumes the body, inside the attempt, so a failure part-way
+ * through the download is retried too, from the start. Any other status is the
+ * publisher's own answer rather than a blip, and is handed back unread for the
+ * caller to report as it does today.
+ * @param {string} url
+ * @param {(res: Response) => Promise<any>} [read] consumes the body; omitted, the response is returned unread
+ * @param {{attempts?: number, delayMs?: number, fetch?: typeof fetch, sleep?: (ms: number) => Promise<void>}} [o]
+ * @returns {Promise<{res: Response, value: any}>}
+ */
+export async function fetchRaw(url, read, o = {}) {
+  const f = o.fetch ?? fetch;
+  const attempts = o.attempts ?? 3;
+  const delayMs = o.delayMs ?? 2000;
+  const sleep = o.sleep ?? ((ms) => new Promise((r) => setTimeout(r, ms)));
+  let res = null;
+  let err = null;
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    res = null;
+    err = null;
+    try {
+      res = await f(url);
+      if (res.ok) return { res, value: read ? await read(res) : res };
+      if (!RETRYABLE.has(res.status)) return { res, value: null };
+    } catch (e) {
+      err = e;
+    }
+    // Wait longer each time, so a publisher that is briefly overloaded is not hammered.
+    if (attempt < attempts) await sleep(delayMs * attempt);
+  }
+  if (err) throw err;
+  return { res, value: null };
+}
+
 /**
  * The lines of a raw file, from its bytes or streamed from its path or URL. A
  * streamed file's SHA-256 and size are recorded once it has been read to the end.
+ * Only opening the stream is retried: once bytes are flowing, the hash is part-built
+ * and the read cannot restart, so a mid-stream drop still fails the run.
  */
 async function* linesOf(r) {
   const decoder = new TextDecoder();
@@ -139,7 +181,7 @@ async function* linesOf(r) {
   const hash = createHash('sha256');
   let size = 0;
   let rest = '';
-  const source = r.path ? createReadStream(r.path) : Readable.fromWeb((await fetch(r.url)).body);
+  const source = r.path ? createReadStream(r.path) : Readable.fromWeb((await fetchRaw(r.url)).res.body);
   // A gzipped file (GHCN-Daily's per-station CSVs) is hashed as downloaded and read as text after inflating.
   const gunzip = r.gzip ? createGunzip() : null;
   const text = gunzip ? source.on('data', (c) => { hash.update(c); size += c.length; }).pipe(gunzip) : source;
@@ -164,9 +206,9 @@ async function xlsxOf(r, sheet) {
   let bytes;
   if (r.path) bytes = new Uint8Array(readFileSync(r.path));
   else {
-    const res = await fetch(r.url);
+    const { res, value } = await fetchRaw(r.url, (x) => x.arrayBuffer());
     if (!res.ok) throw new Error(`fetch ${r.url}: HTTP ${res.status}`);
-    bytes = new Uint8Array(await res.arrayBuffer());
+    bytes = new Uint8Array(value);
     r.lastModified = res.headers.get('last-modified');
   }
   r.sha256 = sha256(bytes);
@@ -202,9 +244,9 @@ export async function runRecipe({ dataset, year, input, retrieved, outDir = join
     }
     let bytes = name ? input?.[name] : input;
     if (!bytes) {
-      const res = await fetch(file.url);
+      const { res, value } = await fetchRaw(file.url, (x) => x.arrayBuffer());
       if (!res.ok) return { ok: false, failures: [`fetch ${file.url}: HTTP ${res.status}`] };
-      bytes = new Uint8Array(await res.arrayBuffer());
+      bytes = new Uint8Array(value);
     }
     const sum = sha256(bytes);
     if (verifyPin && file.sha256 && file.sha256 !== sum) return { ok: false, failures: [`raw file${name ? ` ${name}` : ''} SHA-256 ${sum} differs from the registry's ${file.sha256}`] };
