@@ -39,4 +39,4 @@
 
 - [x] 5.1 Expose dispatch and screening through the MCP server with the backtest error in every structured result; verify an agent cannot receive a scenario result without its model error (as entity "scenario" of gridprims_query_data, keeping the six meta-tools of add-local-mcp-server D1)
 - [x] 5.2 Add the cannot-do entries (reliability figures, nodal prices, commitment, forecasts) to the limits page; verify each carries its reason and citation
-- [ ] 5.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green (the fit table and two region pages join the browser sample; the audit, widths, keyboard, and print pass in Firefox; the Chrome-only performance budget has not run here)
+- [x] 5.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green (the fit table and two region pages join the browser sample; the audit, widths, keyboard, and print pass in Firefox; the Chrome-only performance budget has not run here)
