@@ -330,13 +330,16 @@ export function privacyPage({ i18n }) {
 const yearOn = (iso) => { const d = new Date(`${iso}T00:00:00Z`); d.setUTCFullYear(d.getUTCFullYear() + 1); return d.toISOString().slice(0, 10); };
 
 /** One utility's guide (add-learn-and-data-guides: get your data). */
-function guideSection(g, { i18n, formats, hasPage }) {
+function guideSection(g, { i18n, formats, hasPage, stateOf }) {
   const { t, date } = i18n;
   const pages = g.utilityIds.filter(hasPage);
+  // One utility: the bill tools open on its rates, by the fragment, which never reaches a server.
+  const billState = g.utilityIds.length === 1 ? stateOf(g.utilityIds[0]) : null;
+  const bill = billState ? `/tools/household/bill-totals/check/#utility=${g.utilityIds[0]}&state=${billState}` : '/tools/household/bill-totals/check/';
   return html`<section class="panel" id="${g.id}" data-guide="${g.id}" data-level="${g.level}">
   <h3>${g.name} <span class="unit-hint">${g.state}</span> <span class="warning-chip" data-late-from="${yearOn(g.checked)}" hidden>${t('getData.needsReview')}</span></h3>
   <p class="${g.level === 'third-party' ? 'strip' : 'unit-hint'}" data-guide-level>${t(`getData.level.${g.level}`, { date: date(g.checked) })}${g.level === 'third-party' ? html` <a href="/report/">${t('getData.report')}</a>` : ''}</p>
-  ${g.noDownload ? html`<p data-no-download><strong>${t('getData.noDownload', { date: date(g.checked) })}</strong> <a href="#ask">${t('getData.ask')}</a> · <a href="/tools/household/bill-totals/check/">${t('getData.totals')}</a></p>` : ''}
+  ${g.noDownload ? html`<p data-no-download><strong>${t('getData.noDownload', { date: date(g.checked) })}</strong> <a href="#ask">${t('getData.ask')}</a> · <a href="${bill}">${t('getData.totals')}</a></p>` : ''}
   <dl>
     <div><dt>${t('getData.portal')}</dt><dd>${g.portal}${pages.length ? html` · ${pages.map((id) => html`<a href="/utilities/${id}/">${t('getData.utilityPage')}</a>`)}` : ''}</dd></div>
     <div><dt>${t('getData.computer')}</dt><dd><ol>${g.computer.map((step) => html`<li>${step}</li>`)}</ol></dd></div>
@@ -347,14 +350,14 @@ function guideSection(g, { i18n, formats, hasPage }) {
     ${g.choose ? html`<div><dt>${t('getData.choose')}</dt><dd>${g.choose}</dd></div>` : ''}
   </dl>
   ${g.notes ? html`<p>${g.notes}</p>` : ''}
-  <p class="unit-hint">${t('getData.source', { source: g.source })}${g.noDownload ? '' : html` <a href="#ask">${t('getData.ask')}</a>`}</p>
+  <p class="unit-hint">${t('getData.source', { source: g.source })}${g.noDownload ? '' : html` <a href="#ask">${t('getData.ask')}</a> · <a href="${bill}" data-guide-bill>${t('getData.billTools')}</a>`}</p>
 </section>`;
 }
 
 /**
- * @param {{i18n: any, guides?: any[], formats?: Record<string, {label: string}>, hasPage?: (id: number) => boolean}} p
+ * @param {{i18n: any, guides?: any[], formats?: Record<string, {label: string}>, hasPage?: (id: number) => boolean, stateOf?: (id: number) => string | null}} p
  */
-export function getYourDataPage({ i18n, guides = [], formats = {}, hasPage = () => false }) {
+export function getYourDataPage({ i18n, guides = [], formats = {}, hasPage = () => false, stateOf = () => null }) {
   const { t } = i18n;
   const body = html`<h1>${t('getData.title')}</h1><p class="purpose">${t('getData.intro')}</p>
 <h2>${t('getData.where')}</h2><ol><li>${t('getData.step1')}</li><li>${t('getData.step2')}</li><li>${t('getData.step3')}</li></ol>
@@ -363,7 +366,7 @@ export function getYourDataPage({ i18n, guides = [], formats = {}, hasPage = () 
 <p><a class="button primary" href="/files/">${t('getData.open')}</a> <a href="/tools/household/bill-totals/check/">${t('getData.totals')}</a></p>
 ${guides.length ? html`<h2>${t('getData.guidesTitle')}</h2><p>${t('getData.guidesIntro')}</p>
 <nav><ul class="guide-index">${guides.map((g) => html`<li><a href="#${g.id}">${g.name}</a></li>`)}</ul></nav>
-${guides.map((g) => guideSection(g, { i18n, formats, hasPage }))}` : ''}
+${guides.map((g) => guideSection(g, { i18n, formats, hasPage, stateOf }))}` : ''}
 <h2>${t('getData.none')}</h2><p>${t('getData.noneBody')}</p>
 <section id="ask"><h2>${t('getData.letterTitle')}</h2><p>${t('getData.letterIntro')}</p>
 <pre class="mono" data-request-letter>${t('getData.letter')}</pre></section>`;

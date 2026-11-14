@@ -104,6 +104,23 @@ zipForm.addEventListener('submit', async (e) => {
 utilitySelect.addEventListener('change', showUtility);
 rateSelect.addEventListener('change', showRate);
 
+// Arriving from a get-your-data guide: the utility and its state ride in the fragment, which no request
+// carries, and the picker opens on that utility's rates without asking for a ZIP.
+const preset = new URLSearchParams(location.hash.slice(1));
+const presetId = Number(preset.get('utility'));
+const presetState = (preset.get('state') ?? '').toUpperCase();
+if (presetId > 0 && /^[A-Z]{2}$/.test(presetState)) {
+  get(`/lookup/${presetState}.json`).then(async (shard) => {
+    const u = shard.utilities?.[presetId];
+    if (!u) return;
+    utilities = [{ id: presetId, name: u.name, state: presetState }];
+    utilitySelect.replaceChildren(el('option', `${u.name} · ${presetState}`, { value: '0' }));
+    utilityField.hidden = false;
+    await showUtility();
+    document.documentElement.dataset.utilityPreset = String(presetId);
+  }, () => {});
+}
+
 /** The numbers typed into a group of inputs, by name; a blank is NaN. */
 function values(group) {
   return Object.fromEntries([...group.querySelectorAll('input')].map((i) => [i.name, i.value.trim() === '' ? NaN : Number(i.value.replace(/[,$¢\s]/g, ''))]));

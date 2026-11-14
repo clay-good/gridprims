@@ -262,6 +262,7 @@ export default {
   'getData.source': 'Source: {source}.',
   'getData.noDownload': 'No self-serve interval download was found as of {date}.',
   'getData.ask': 'Ask for your data',
+  'getData.billTools': 'Check a bill on this utility\u2019s rates',
   'getData.needsReview': 'Needs review: not checked in 12 months',
   'getData.save': 'Saving it and opening it in gridprims',
   'getData.saveIphone': 'On an iPhone, the download goes to Files, in Downloads. In gridprims, choose the file from Browse, then Downloads.',

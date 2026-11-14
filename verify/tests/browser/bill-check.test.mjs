@@ -60,6 +60,30 @@ for (const kind of ['chrome', 'firefox']) {
     }
   });
 
+  test(`${kind}: from a data guide, the utility arrives in the fragment and its rates open without a ZIP`, { skip, timeout: 60_000 }, async () => {
+    const log = [];
+    const server = await serve(out, { onRequest: (r) => log.push(r.url) });
+    const browser = await launch(kind);
+    try {
+      await browser.goto(`${server.url}${PAGE}#utility=1015&state=TX`);
+      await waitFor(browser, "document.documentElement.dataset.utilityPreset === '1015'");
+      await waitFor(browser, "document.documentElement.dataset.tariffChosen === " + JSON.stringify(austin[0].label));
+      assert.deepEqual(await browser.evaluate("[...document.querySelectorAll('#picker-utility option')].map((o) => o.textContent)"), ['Austin Energy · TX']);
+      assert.equal(await browser.evaluate("document.querySelector('[data-picker-utility-field]').hidden"), false);
+      // The fragment is never sent: no request names the utility.
+      assert.deepEqual(log.filter((u) => /utility=|1015/.test(u)), []);
+      // An unknown utility or a malformed state leaves the ZIP form as it was.
+      await browser.goto(`${server.url}/limits/`);
+      await browser.goto(`${server.url}${PAGE}#utility=999999999&state=TX`);
+      await waitFor(browser, "document.documentElement.dataset.ready && document.querySelector('[data-tariff-picker]').dataset.ready");
+      await browser.evaluate('new Promise((r) => setTimeout(r, 300))');
+      assert.equal(await browser.evaluate("document.querySelector('[data-picker-utility-field]').hidden"), true);
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+
   test(`${kind}: a tariff entered by hand prices 800 kWh at $115.00, and overlapping periods are asked about first`, { skip, timeout: 60_000 }, async () => {
     const server = await serve(out);
     const browser = await launch(kind);

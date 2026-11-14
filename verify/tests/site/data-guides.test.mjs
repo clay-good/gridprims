@@ -19,7 +19,7 @@ import { fixtureRepo } from '../helpers.mjs';
 const i18n = createI18n(strings, 'en-US');
 const TODAY = '2026-11-14';
 const check = (guides, formats = FORMATS, root = ROOT) => checkGuides(guides, formats, LEVELS, { root, today: TODAY, fixtures: FIXTURES });
-const page = () => String(getYourDataPage({ i18n, guides: GUIDES, formats: FORMATS, hasPage: () => true }));
+const page = () => String(getYourDataPage({ i18n, guides: GUIDES, formats: FORMATS, hasPage: () => true, stateOf: (id) => ({ 44372: 'TX', 5416: 'NC' })[id] ?? null }));
 const text = (h) => h.replace(/<[^>]+>/g, ' ').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
 
 test('the committed guides pass, and launch coverage is there: the 25 largest, Smart Meter Texas, and the co-op portals', async () => {
@@ -61,6 +61,8 @@ test('Smart Meter Texas: the Oncor guide explains the 15-minute report export an
   assert.match(oncor, /Files offered Smart Meter Texas 15-minute CSV, Green Button XML/);
   assert.match(oncor, /Choose Smart Meter Texas 15-minute CSV/);
   assert.match(page(), /<a href="\/utilities\/44372\/">Utility page<\/a>/);
+  // The bill tools open on Oncor's rates, by the fragment.
+  assert.match(page(), /<a href="\/tools\/household\/bill-totals\/check\/#utility=44372&amp;state=TX" data-guide-bill>Check a bill on this utility’s rates<\/a>/);
 });
 
 test('no download found: Duke Energy Carolinas says so as of the check date, and offers the request and the totals tool', () => {
@@ -68,7 +70,7 @@ test('no download found: Duke Energy Carolinas says so as of the check date, and
   const duke = html.slice(html.indexOf('id="duke-carolinas"'), html.indexOf('id="centerpoint"'));
   assert.match(duke, /No self-serve interval download was found as of Oct 29, 2026\./);
   assert.match(duke, /<a href="#ask">Ask for your data<\/a>/);
-  assert.match(duke, /<a href="\/tools\/household\/bill-totals\/check\/">/);
+  assert.match(duke, /<a href="\/tools\/household\/bill-totals\/check\/#utility=5416&amp;state=NC">Check a bill from its printed totals<\/a>/);
   assert.doesNotMatch(duke, /Files offered/, 'no format is claimed where no download exists');
 });
 

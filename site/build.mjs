@@ -249,7 +249,8 @@ export async function build(opts = {}) {
   const withPage = new Set((utilities?.utilities ?? []).filter((u) => u.page).map((u) => u.id));
   const plantIds = new Set((plants?.plants ?? []).map((p) => p.id));
   // The get-your-data guides, linking each utility's page where one exists (add-learn-and-data-guides 2.2).
-  write('/learn/get-your-data/', getYourDataPage({ i18n, guides: DATA_GUIDES, formats: GUIDE_FORMATS, hasPage: (id) => withPage.has(id) }));
+  const homeState = new Map((utilities?.utilities ?? []).map((u) => [u.id, u.homeState]));
+  write('/learn/get-your-data/', getYourDataPage({ i18n, guides: DATA_GUIDES, formats: GUIDE_FORMATS, hasPage: (id) => withPage.has(id), stateOf: (id) => homeState.get(id) ?? null }));
   // Titles must be unique: a shared name gets its state, then its id.
   const plantNames = uniqueNames((plants?.plants ?? []).map((p) => ({ key: p.id, name: p.name, state: p.state, id: p.id })), 'plant');
   const utilityNames = uniqueNames((utilities?.utilities ?? []).filter((u) => u.page).map((u) => ({ key: u.id, name: u.name, state: u.homeState, id: u.id })), 'utility');
