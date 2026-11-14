@@ -1,13 +1,13 @@
 {
   "toolId": "interconnect.minimum-load.screen",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "results": [
     {
       "example": "over",
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "peakRatio": {
             "value": 25,
@@ -26,6 +26,7 @@
           "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
           "steps": [
             "15%-of-peak screen: 500 kW ÷ 2,000 kW = 25.0%; the rule requires no more than 15%: not met.",
+            "SGIP § 2.4.4.1.1 uses daytime minimum load only for solar with no storage, and absolute minimum load for everything else, so this project uses daytime minimum load, 10 a.m. to 4 p.m.",
             "Minimum daytime load (10 a.m. to 4 p.m.) is unknown, so the screen is computed across the 15% to 40% of peak that utilities assume: 300 kW to 800 kW.",
             "At 15% (300 kW): not met. At 40% (800 kW): met. The rule requires generation less than 100% of minimum load.",
             "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
@@ -56,7 +57,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "peakRatio": {
             "value": 12.5,
@@ -75,6 +76,7 @@
           "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
           "steps": [
             "15%-of-peak screen: 250 kW ÷ 2,000 kW = 12.5%; the rule requires no more than 15%: met.",
+            "SGIP § 2.4.4.1.1 uses daytime minimum load only for solar with no storage, and absolute minimum load for everything else, so this project uses daytime minimum load, 10 a.m. to 4 p.m.",
             "Minimum daytime load (10 a.m. to 4 p.m.) is unknown, so the screen is computed across the 15% to 40% of peak that utilities assume: 300 kW to 800 kW.",
             "At 15% (300 kW): met. At 40% (800 kW): met. The rule requires generation less than 100% of minimum load.",
             "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
@@ -105,7 +107,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "peakRatio": {
             "value": 25,
@@ -124,6 +126,7 @@
           "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
           "steps": [
             "15%-of-peak screen: 500 kW ÷ 2,000 kW = 25.0%; the rule requires no more than 15%: not met.",
+            "SGIP § 2.4.4.1.1 uses daytime minimum load only for solar with no storage, and absolute minimum load for everything else, so this project uses daytime minimum load, 10 a.m. to 4 p.m.",
             "Minimum daytime load (10 a.m. to 4 p.m.) is unknown, so the screen is computed across the 15% to 40% of peak that utilities assume: 300 kW to 800 kW.",
             "At 15% (300 kW): not met. At 40% (800 kW): met. The rule requires generation less than 100% of minimum load.",
             "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
@@ -154,7 +157,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "peakRatio": {
             "value": 3,
@@ -173,6 +176,7 @@
           "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
           "steps": [
             "15%-of-peak screen: 60 kW ÷ 2,000 kW = 3.0%; the rule requires no more than 15%: met.",
+            "SGIP § 2.4.4.1.1 uses daytime minimum load only for solar with no storage, and absolute minimum load for everything else, so this project uses daytime minimum load, 10 a.m. to 4 p.m.",
             "Minimum daytime load (10 a.m. to 4 p.m.) is unknown, so the screen is computed across the 15% to 40% of peak that utilities assume: 300 kW to 800 kW.",
             "At 15% (300 kW): met. At 40% (800 kW): met. The rule requires generation less than 100% of minimum load.",
             "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
@@ -203,7 +207,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "peakRatio": {
             "value": 25,
@@ -222,8 +226,53 @@
           "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
           "steps": [
             "15%-of-peak screen: 500 kW ÷ 2,000 kW = 25.0%; the rule requires no more than 15%: not met.",
-            "Minimum-load screen on a pre-application report: 500 kW is 83.3% of 600 kW; the rule requires less than 100%: met.",
+            "SGIP § 2.4.4.1.1 uses daytime minimum load only for solar with no storage, and absolute minimum load for everything else, so this project uses daytime minimum load, 10 a.m. to 4 p.m.",
+            "Minimum-load screen on a pre-application report, read as daytime minimum load: 500 kW is 83.3% of 600 kW; the rule requires less than 100%: met.",
             "For comparison only, the band would give not met at 15% and met at 40% of peak.",
+            "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
+          ],
+          "constants": [],
+          "assumptions": [
+            "The generation you enter includes every generator already on the line section and yours.",
+            "The line section is bounded by automatic sectionalizing devices, as the rule says."
+          ],
+          "citations": [
+            {
+              "source": "FERC Order No. 792, Small Generator Interconnection Agreements and Procedures, 78 FR 73240",
+              "edition": "December 5, 2013; screens carried forward through Order No. 2023",
+              "locator": "pro forma SGIP §§ 2.2.1.2 (15% of line section annual peak), 2.4.4.1 and 2.4.4.1.1 (less than 100% of minimum load; daytime or absolute)",
+              "url": "https://www.federalregister.gov/documents/2013/12/05/2013-28515/small-generator-interconnection-agreements-and-procedures"
+            }
+          ]
+        },
+        "datasets": [],
+        "stability": "experimental",
+        "validationLevel": 1,
+        "validationMeaning": "Our own worked examples and consistency tests pass, but no independent check has been run yet.",
+        "screeningLabel": "A self-check of two screens, not an interconnection application or a utility study. The utility runs the screens and has the final word."
+      }
+    },
+    {
+      "example": "storage",
+      "result": {
+        "status": "ok",
+        "toolId": "interconnect.minimum-load.screen",
+        "toolVersion": "0.2.0",
+        "outputs": {
+          "peakRatio": {
+            "value": 25,
+            "unit": "%",
+            "display": "25.0"
+          }
+        },
+        "sentence": "The project is 25.0% of peak, so the 15% screen is not met. For this project the minimum-load screen uses absolute minimum load (SGIP § 2.4.4.1.1). The 15% to 40% band is only for daytime load, so the screen needs the utility's value.",
+        "notes": [],
+        "work": {
+          "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
+          "steps": [
+            "15%-of-peak screen: 500 kW ÷ 2,000 kW = 25.0%; the rule requires no more than 15%: not met.",
+            "SGIP § 2.4.4.1.1 uses daytime minimum load only for solar with no storage, and absolute minimum load for everything else, so this project uses absolute minimum load.",
+            "The band utilities assume is for daytime minimum load, so it does not apply here. Without the utility's absolute minimum load the screen cannot be answered.",
             "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
           ],
           "constants": [],
@@ -252,7 +301,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "peakRatio": {
             "value": 25,
@@ -271,7 +320,8 @@
           "method": "The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.",
           "steps": [
             "15%-of-peak screen: 500 kW ÷ 2,000 kW = 25.0%; the rule requires no more than 15%: not met.",
-            "Minimum-load screen on a pre-application report: 500 kW is 100.0% of 500 kW; the rule requires less than 100%: not met.",
+            "SGIP § 2.4.4.1.1 uses daytime minimum load only for solar with no storage, and absolute minimum load for everything else, so this project uses daytime minimum load, 10 a.m. to 4 p.m.",
+            "Minimum-load screen on a pre-application report, read as daytime minimum load: 500 kW is 100.0% of 500 kW; the rule requires less than 100%: not met.",
             "For comparison only, the band would give not met at 15% and met at 40% of peak.",
             "Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it."
           ],

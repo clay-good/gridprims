@@ -17,16 +17,19 @@ export function compute(v) {
   const absolute = v.technology === 'storage' || v.technology === 'other';
   const window = v.technology === 'solar-fixed' ? '10 a.m. to 4 p.m.' : v.technology === 'solar-tracking' ? '8 a.m. to 6 p.m.' : null;
   const outputs = { peakRatio: p.ratio * 100 };
+  // SGIP § 2.4.4.1.1: solar with no storage uses daytime minimum load; everything else, absolute.
+  const which = absolute ? 'absolute minimum load' : `daytime minimum load, ${window}`;
+  steps.push(`SGIP § 2.4.4.1.1 uses daytime minimum load only for solar with no storage, and absolute minimum load for everything else, so this project uses ${which}${which.endsWith('.') ? '' : '.'}`);
   let minSentence;
   if (v.minLoadKw > 0) {
     const met = minLoadMet(v.aggregateKw, v.minLoadKw);
     outputs.minLoadRatio = (v.aggregateKw / v.minLoadKw) * 100;
-    steps.push(`Minimum-load screen on ${SOURCE[v.minLoadSource]}${v.measured !== 'unknown' ? ` (marked ${v.measured})` : ''}: ${kw(v.aggregateKw)} is ${pc(v.aggregateKw / v.minLoadKw)} of ${kw(v.minLoadKw)}; the rule requires less than 100%: ${met ? 'met' : 'not met'}.`);
+    steps.push(`Minimum-load screen on ${SOURCE[v.minLoadSource]}${v.measured !== 'unknown' ? ` (marked ${v.measured})` : ''}, read as ${absolute ? 'absolute' : 'daytime'} minimum load: ${kw(v.aggregateKw)} is ${pc(v.aggregateKw / v.minLoadKw)} of ${kw(v.minLoadKw)}; the rule requires less than 100%: ${met ? 'met' : 'not met'}.`);
     minSentence = `On the utility's minimum load, the minimum-load screen is ${met ? 'met' : 'not met'}.${v.aggregateKw === v.minLoadKw ? ' Equal is not less, so the rule is not met.' : ''}`;
     if (!absolute) { const b = minLoadBand(v.aggregateKw, v.peakKw); steps.push(`For comparison only, the band would give ${b.low.met ? 'met' : 'not met'} at 15% and ${b.high.met ? 'met' : 'not met'} at 40% of peak.`); }
   } else if (absolute) {
-    minSentence = 'For this project the minimum-load screen uses absolute minimum load. The 15% to 40% band is only for daytime load, so the screen needs the utility\'s value.';
-    steps.push('The rule uses absolute minimum load for every project except solar with no storage; the band utilities assume is for daytime minimum load.');
+    minSentence = 'For this project the minimum-load screen uses absolute minimum load (SGIP § 2.4.4.1.1). The 15% to 40% band is only for daytime load, so the screen needs the utility\'s value.';
+    steps.push('The band utilities assume is for daytime minimum load, so it does not apply here. Without the utility\'s absolute minimum load the screen cannot be answered.');
   } else {
     const b = minLoadBand(v.aggregateKw, v.peakKw);
     outputs.flipShare = b.flip * 100;

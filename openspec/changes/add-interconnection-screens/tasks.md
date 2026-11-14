@@ -20,7 +20,7 @@
 - [x] 3.4 Block verdicts on model-dependent screens; verify the fault-current scenario produces no pass or fail
 - [x] 3.5 Implement the status summary without likelihood language; verify the mixed-result scenario in a snapshot test
 - [ ] 3.6 Build the state comparison view from the curated records; verify the different-load-ratio-test and hosting-capacity-is-the-screen scenarios
-- [ ] 3.7 Implement the storage minimum-load distinction; verify the solar-plus-storage scenario
+- [x] 3.7 Implement the storage minimum-load distinction; verify the solar-plus-storage scenario
 - [ ] 3.8 Add last-checked dates and the review chip, and register the threshold dataset as downloadable under CC BY 4.0; verify the stale-jurisdiction and comparison-downloadable scenarios
 
 ## 4. Minimum-load range

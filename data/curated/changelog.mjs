@@ -14,6 +14,7 @@ export default [
   { date: '2026-11-01', toolId: 'interconnect.inverter.size', version: '0.1.0', reason: 'First release.' },
   { date: '2026-11-01', toolId: 'interconnect.fast-track.screens', version: '0.1.0', reason: 'First release.' },
   { date: '2026-11-01', toolId: 'interconnect.process.route', version: '0.1.0', reason: 'First release.' },
+  { date: '2026-11-14', toolId: 'interconnect.minimum-load.screen', version: '0.2.0', reason: 'Every result now says which minimum load the rule uses for your project, daytime or absolute, and cites SGIP § 2.4.4.1.1 for it; a utility value is read the same way. No number changed. A solar-plus-storage worked example was added.', sample: { inputs: { peakKw: 2000, aggregateKw: 500, technology: 'storage', minLoadKw: 0, minLoadSource: 'report', measured: 'unknown' }, old: 'uses absolute minimum load (no citation)', new: 'uses absolute minimum load (SGIP § 2.4.4.1.1)' } },
   { date: '2026-11-01', toolId: 'interconnect.minimum-load.screen', version: '0.1.0', reason: 'First release.' },
   { date: '2026-11-01', toolId: 'lines.attachment-height.find', version: '0.1.0', reason: 'First release.' },
   { date: '2026-11-01', toolId: 'lines.midspan-clearance.check', version: '0.1.0', reason: 'First release.' },

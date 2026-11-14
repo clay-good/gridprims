@@ -33,7 +33,7 @@ test('the answer that flips names the assumption, and a settled one says the ass
 
 test('storage that can export at night uses absolute minimum load: the daytime band does not apply', () => {
   const r = run({ technology: 'storage' });
-  assert.match(r.sentence, /absolute minimum load\. The 15% to 40% band is only for daytime load/);
+  assert.match(r.sentence, /absolute minimum load \(SGIP § 2\.4\.4\.1\.1\)\. The 15% to 40% band is only for daytime load/);
   assert.equal(r.outputs.flipShare, undefined);
 });
 
@@ -47,4 +47,19 @@ test('no peak load, no load-ratio result', () => {
   const r = run({ peakKw: 0 });
   assert.equal(r.status, 'refused');
   assert.match(r.reason, /pre-application report/);
+});
+
+test('the result names which minimum load applies and cites SGIP § 2.4.4.1.1 (screens task 3.7)', () => {
+  const storage = run({ technology: 'storage' });
+  assert.match(storage.sentence, /uses absolute minimum load \(SGIP § 2\.4\.4\.1\.1\)/);
+  assert.equal(storage.outputs.flipShare, undefined, 'no daytime band, so no flip point');
+  assert.ok(storage.work.steps.some((s) => /^SGIP § 2\.4\.4\.1\.1 .* so this project uses absolute minimum load\.$/.test(s)));
+  assert.ok(storage.work.steps.some((s) => /cannot be answered/.test(s)));
+  const fixed = run({ technology: 'solar-fixed' });
+  assert.ok(fixed.work.steps.some((s) => /so this project uses daytime minimum load, 10 a\.m\. to 4 p\.m\.$/.test(s)));
+  const tracked = run({ technology: 'solar-tracking' });
+  assert.ok(tracked.work.steps.some((s) => /so this project uses daytime minimum load, 8 a\.m\. to 6 p\.m\.$/.test(s)));
+  // A utility value is read as the kind of minimum load the rule asks for.
+  assert.ok(run({ technology: 'storage', minLoadKw: 600 }).work.steps.some((s) => /read as absolute minimum load/.test(s)));
+  assert.ok(run({ technology: 'solar-fixed', minLoadKw: 600 }).work.steps.some((s) => /read as daytime minimum load/.test(s)));
 });

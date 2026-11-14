@@ -692,7 +692,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 Whether a solar or other small generator passes the 15%-of-peak screen, and the minimum-load screen across the range of minimum load utilities assume, unless you have the utility's own value.
 
-Version 0.1.0 · experimental · validation level 1, self-checked
+Version 0.2.0 · experimental · validation level 1, self-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|

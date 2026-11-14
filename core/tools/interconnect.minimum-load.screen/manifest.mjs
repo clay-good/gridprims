@@ -2,7 +2,7 @@ const base = { peakKw: 2000, aggregateKw: 500, technology: 'solar-fixed', minLoa
 
 export default {
   id: 'interconnect.minimum-load.screen',
-  version: '0.1.0',
+  version: '0.2.0',
   title: 'Load-ratio screens for a generator',
   purpose: 'Whether a solar or other small generator passes the 15%-of-peak screen, and the minimum-load screen across the range of minimum load utilities assume, unless you have the utility\'s own value.',
   archetype: 'calculator',
@@ -36,6 +36,7 @@ export default {
     { id: 'flips', title: 'The minimum-load answer flips inside the band', inputs: base, expect: { flipShare: { value: 25, tolerance: { abs: 1e-9 }, display: '25.0' } }, source: 'interconnect/minimum-load-range spec, scenario "Answer flips inside the band": met at 40% (800 kW), not met at 15% (300 kW), flips at 500 ÷ 2,000 = 25%' },
     { id: 'settled', title: 'Settled across the band', inputs: { ...base, aggregateKw: 60 }, expect: { flipShare: { value: 3, tolerance: { abs: 1e-9 }, display: '3.0' } }, source: 'interconnect/minimum-load-range spec, scenario "Settled either way": 60 kW is less than 300 kW and 800 kW, so met at both ends' },
     { id: 'utility', title: 'A utility-provided minimum load', inputs: { ...base, minLoadKw: 600 }, expect: { minLoadRatio: { value: 83.3333, tolerance: { abs: 0.0001 }, display: '83.3' } }, source: 'interconnect/minimum-load-range spec, scenario "Pre-application report in hand": 500 ÷ 600 = 83.3%, less than 100%, met' },
+    { id: 'storage', title: 'Solar plus a battery that can export at night', inputs: { ...base, technology: 'storage' }, expect: { peakRatio: { value: 25, tolerance: { abs: 1e-9 }, display: '25.0' } }, source: 'SGIP § 2.4.4.1.1: only solar with no storage uses daytime minimum load, so this project needs absolute minimum load; the daytime band does not apply and no flip point is given (interconnect/minimum-load-range spec, scenario "Storage project")' },
     { id: 'at-threshold', title: 'Exactly at the minimum load', inputs: { ...base, minLoadKw: 500 }, expect: { minLoadRatio: { value: 100, tolerance: { abs: 1e-9 }, display: '100.0' } }, source: 'interconnect/minimum-load-range spec, scenario "Exactly at the threshold": 500 is not less than 100% of 500, so not met' },
   ],
   related: [],
