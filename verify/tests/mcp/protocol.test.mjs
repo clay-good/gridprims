@@ -53,14 +53,28 @@ const SCRIPTS = {
   ],
 };
 
+/**
+ * Resources whose body is live data: the limits record carries the build's own
+ * date, what is late today, and which cited link died this week, so pinning its
+ * text would make this fixture fail on every data refresh rather than on a
+ * protocol change. The envelope stays pinned; the body is checked where it is
+ * built (verify/tests/site/limits.test.mjs).
+ */
+const LIVE = new Set(['gridprims://limits', 'gridprims://ledger']);
+const pinnable = (pairs) => pairs.map(({ request, response }) => (
+  LIVE.has(request.params?.uri) && response.result?.contents
+    ? { request, response: { ...response, result: { ...response.result, contents: response.result.contents.map((c) => ({ ...c, text: `<live ${request.params.uri}>` })) } } }
+    : { request, response }
+));
+
 for (const [version, script] of Object.entries(SCRIPTS)) {
   test(`${version}: recorded pairs replay identically and every message matches the official schema`, async () => {
     const server = createServer();
     const pairs = [];
     for (const request of script) pairs.push({ request, response: await server.handle(request) });
     const file = join(ROOT, `verify/fixtures/mcp/conformance-${version}.json`);
-    if (process.env.GRIDPRIMS_RECORD) writeFileSync(file, JSON.stringify(pairs, null, 2) + '\n');
-    assert.deepEqual(pairs, JSON.parse(readFileSync(file, 'utf8')), 'replay differs from the recorded pairs');
+    if (process.env.GRIDPRIMS_RECORD) writeFileSync(file, JSON.stringify(pinnable(pairs), null, 2) + '\n');
+    assert.deepEqual(pinnable(pairs), JSON.parse(readFileSync(file, 'utf8')), 'replay differs from the recorded pairs');
     for (const { request, response } of pairs) {
       assert.deepEqual(checkDef(S[version], requestDef[request.method], request), [], `request ${request.method}`);
       const def = responseDef(version, request.method, response);
