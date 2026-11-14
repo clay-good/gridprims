@@ -104,6 +104,27 @@ addEventListener('keydown', (e) => {
     input?.focus();
   }
 });
+// Glossary popovers (platform/app-shell, "Popovers that respect the pointer and keyboard"; WCAG 2.2 1.4.13):
+// a term opens on hover or focus and stays open while the pointer or focus is on it or its popover; Escape
+// dismisses it without moving focus, and it stays dismissed until both have left the term.
+for (const term of document.querySelectorAll('.glossary-term')) {
+  const on = () => { if (!term.classList.contains('dismissed')) term.classList.add('open'); };
+  const off = () => setTimeout(() => {
+    if (term.matches(':hover') || term.contains(document.activeElement)) return;
+    term.classList.remove('open', 'dismissed');
+  }, 0);
+  term.addEventListener('mouseenter', on);
+  term.addEventListener('focusin', on);
+  term.addEventListener('mouseleave', off);
+  term.addEventListener('focusout', off);
+}
+addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  for (const term of document.querySelectorAll('.glossary-term.open, .glossary-term:hover, .glossary-term:focus-within')) {
+    term.classList.remove('open');
+    term.classList.add('dismissed');
+  }
+});
 // Staleness is computed here, on the device, at view time: a stalled pipeline
 // cannot hide it by not rebuilding the page.
 const today = new Date().toISOString().slice(0, 10);

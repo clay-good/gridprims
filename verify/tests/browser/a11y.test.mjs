@@ -111,6 +111,33 @@ for (const kind of ['chrome', 'firefox']) {
   });
 }
 
+for (const kind of ['chrome', 'firefox']) {
+  test(`${kind}: a glossary popover opens on focus, Escape closes it, and focus stays on the term`, { skip: !findBrowser(kind) && `${kind} is not installed`, timeout: 60_000 }, async () => {
+    const server = await serve(out, { routes });
+    const browser = await launch(kind);
+    try {
+      await browser.goto(server.url + '/tools/calc/energy-units/convert/');
+      await browser.evaluate(settled);
+      const shown = () => browser.evaluate("getComputedStyle(document.querySelector('.glossary-term .glossary-pop')).display");
+      // Headless browsers have no window focus, so focus events are sent by hand; the link still takes focus.
+      const focus = "(() => { const a = document.querySelector('.glossary-term > a'); a.focus(); a.dispatchEvent(new FocusEvent('focusin', { bubbles: true })); })()";
+      await browser.evaluate(focus);
+      assert.equal(await shown(), 'block', 'focus opens it');
+      await browser.evaluate("dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))");
+      assert.equal(await shown(), 'none', 'Escape closes it');
+      assert.equal(await browser.evaluate("document.activeElement === document.querySelector('.glossary-term > a')"), true, 'focus stays on the term');
+      // Leaving the term and coming back opens it again.
+      await browser.evaluate("(() => { const a = document.querySelector('.glossary-term > a'); a.blur(); a.dispatchEvent(new FocusEvent('focusout', { bubbles: true })); })()");
+      await browser.evaluate('new Promise((r) => setTimeout(r, 50))');
+      await browser.evaluate(focus);
+      assert.equal(await shown(), 'block', 'it opens again after focus leaves and returns');
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+}
+
 test('chrome: pages print without the rail or controls, keeping the answer and the strip', { skip: !findBrowser('chrome') && 'chrome is not installed (print emulation needs the DevTools Protocol)', timeout: 60_000 }, async () => {
   const server = await serve(out, { routes });
   const browser = await launch('chrome');

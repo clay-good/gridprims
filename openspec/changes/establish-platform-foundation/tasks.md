@@ -72,7 +72,7 @@
 - [x] 8.2 "How we got this" panel and the claims gate; verify an untested accuracy claim fails the build
 - [x] 8.3 Shell, DESIGN.md tokens, components, light and night themes, command bar; verify "12 MWh to MMBtu" opens the reference unit converter (D10) filled in, the saved-theme and no-preference scenarios, and the contrast lint against the DESIGN.md ratios
 - [x] 8.4 PWA with offline tools; verify the load workbench parses a file in airplane mode after one visit
-- [ ] 8.5 Budgets on the reference profile, accessibility checks (including the screen-reader pacing and popover scenarios), and 320 px sweep through the own browser driver; verify CI fails on an oversized fixture page
+- [x] 8.5 Budgets on the reference profile, accessibility checks (including the screen-reader pacing and popover scenarios), and 320 px sweep through the own browser driver; verify CI fails on an oversized fixture page
 - [ ] 8.6 Deploy script using Cloudflare's direct-upload API with `fetch` and `crypto`; verify a staging deploy and a digest match
 - [x] 8.7 Build the grid pulse from the latest daily values with its hidden state when no snapshot exists; verify the weekly-snapshot and no-snapshot scenarios
 - [x] 8.8 Implement validation levels in the manifest, the evidence gate, the work-zone strip for levels 0 and 1, and the level in MCP results; verify the level-shown, claimed-level-exceeds-evidence, level-0, copied-result, and agent-result scenarios

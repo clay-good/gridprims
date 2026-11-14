@@ -337,7 +337,8 @@ blockquote { border-left: 1px solid var(--field-border); margin: var(--s3) 0; pa
 .glossary-term { position: relative; }
 .glossary-term > a { color: var(--learn-text); text-decoration: underline dotted; text-underline-offset: 3px; }
 .glossary-pop { display: none; position: absolute; left: 0; top: 100%; z-index: 5; width: min(18rem, 80vw); margin-top: var(--s1); padding: var(--s2); background: var(--panel); color: var(--ink); border: 1px solid var(--learn-text); border-radius: var(--r-field); font-size: 0.875rem; line-height: 1.4; }
-.glossary-term:hover .glossary-pop, .glossary-term:focus-within .glossary-pop { display: block; }
+.glossary-term:hover .glossary-pop, .glossary-term:focus-within .glossary-pop, .glossary-term.open .glossary-pop { display: block; }
+.glossary-term.dismissed .glossary-pop { display: none; }
 @media print { .glossary-pop { display: none !important; } }
 
 /* The workbench's electrification panels, folded under one line until someone asks for them. */
