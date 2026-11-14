@@ -291,7 +291,7 @@ export async function build(opts = {}) {
   // The Learn explainers, every number generated from the data built above or cited (add-learn-and-data-guides 3.1).
   const peaks = served(join(ROOT, 'data'), 'pudl-ferc714', 'annual_peaks');
   if (peaks && balancing && utilities) {
-    const ctx = { peaks, balancing, utilities, ledger };
+    const ctx = { peaks, balancing, utilities, ledger, ercot4cp: JSON.parse(readFileSync(join(ROOT, 'data/curated/ercot-4cp.json'), 'utf8')) };
     for (const e of EXPLAINERS) write(explainerPath(e.id), explainerPage({ explainer: e, resolved: resolveExplainer(e, ctx), i18n }));
   }
   // The standards template for the line checks, as CSV and as a workbook from the same rows (design D1).

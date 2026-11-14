@@ -5,6 +5,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT } from '../../../pipeline/run.mjs';
 import EXPLAINERS from '../../../data/curated/explainers/index.mjs';
@@ -24,6 +25,7 @@ const data = join(ROOT, 'data');
 const ctx = {
   peaks: served(data, 'pudl-ferc714', 'annual_peaks'), balancing: balancingPages(data), utilities: utilityPages(data),
   ledger: buildLedger({ datasets: await ledgerDatasets(ROOT), generatedAt: '2026-11-14T00:00:00Z', contact: 'https://gridprims.com/report/' }),
+  ercot4cp: JSON.parse(readFileSync(join(ROOT, 'data/curated/ercot-4cp.json'), 'utf8')),
 };
 const byId = (id) => EXPLAINERS.find((e) => e.id === id);
 const render = (e) => String(explainerPage({ explainer: e, resolved: resolveExplainer(e, ctx), i18n }));
@@ -77,4 +79,13 @@ test('summaries are short and plain, sections short, and "Try it" stays on the s
   assert.match(checkExplainerRecords([wordy], '2026-11-14').join('\n'), /section "Long" has 301 words; at most 300/);
   const away = { ...e, tryIt: { href: '/tools/x/?utility=1', label: 'x' } };
   assert.match(checkExplainerRecords([away], '2026-11-14').join('\n'), /never a query string/);
+});
+
+test('coincident peaks: ERCOT\'s last four intervals come from its own files, and the proposed change is cited and dated', () => {
+  const html = text(render(EXPLAINERS.find((e) => e.id === 'coincident-peaks')));
+  const c = ctx.ercot4cp;
+  const year = Math.max(...Object.keys(c.years).map(Number).filter((y) => c.years[y]?.intervals?.length === 4));
+  assert.match(html, new RegExp(`For ${year}, ERCOT's four intervals ended at \\w{3} \\d+ \\d\\d:\\d\\d; `));
+  assert.match(html, /Electric Reliability Council of Texas \(ERCOT\), NP9-83-M, as of/);
+  assert.match(html, /30: PUCT Project 58000 proposal, as read for docs\/research\/06 §2, Oct 29, 2026/);
 });

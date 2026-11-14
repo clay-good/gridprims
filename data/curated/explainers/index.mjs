@@ -6,5 +6,9 @@
 import balancingAuthority from './balancing-authority.mjs';
 import dataCenterRequest from './data-center-request.mjs';
 import publicData from './public-data.mjs';
+import demandCharges from './demand-charges.mjs';
+import timeOfUse from './time-of-use.mjs';
+import coincidentPeaks from './coincident-peaks.mjs';
+import meterData from './meter-data.mjs';
 
-export default [dataCenterRequest, balancingAuthority, publicData];
+export default [timeOfUse, demandCharges, coincidentPeaks, meterData, dataCenterRequest, balancingAuthority, publicData];

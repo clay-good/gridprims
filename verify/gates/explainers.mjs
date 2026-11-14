@@ -15,10 +15,12 @@ export const SECTION_WORDS = 300;
 export const CITED_MONTHS = 24;
 
 const sentencesOf = (text) => text.replace(/(\d)\.(\d)/g, '$1$2').split(/(?<=[.!?])\s+(?=[A-Z{])/).filter((s) => s.trim()).length;
-/** Names that hold digits but state no quantity: a form or an order (Form 714, EIA-930, Order No. 2023). */
-const NAMES = /\b(?:Form\s+(?:EIA-)?\d+|EIA-\d+|Order\s+No\.\s*\d+)\b/g;
+/** Names that hold digits but state no quantity: a form, an order, a rule, a peak count, or a name like EV2 (Form 714, EIA-930, Order No. 2023, 4CP). */
+const NAMES = /\b(?:Form\s+(?:EIA-)?\d+|EIA-\d+|Order\s+No\.\s*\d+|\d+\s?TAC\s+§\s?[\d.]+|Project\s+\d+|\d+CP|[A-Za-z]+[\w-]*\d[\w-]*)\b/g;
+/** A year is a date, not a quantity: 2025, 1996. */
+const YEARS = /\b(?:19|20)\d{2}\b/g;
 /** Numbers in prose, outside {placeholders} and names: digit runs with their commas and decimal points. */
-const numbersIn = (text) => text.replace(/\{\w+\}/g, '').replace(NAMES, '').match(/\d[\d,]*(?:\.\d+)?/g) ?? [];
+const numbersIn = (text) => text.replace(/\{\w+\}/g, '').replace(NAMES, '').replace(YEARS, '').match(/\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?/g) ?? [];
 const monthsBefore = (iso, months) => { const d = new Date(`${iso}T00:00:00Z`); d.setUTCMonth(d.getUTCMonth() - months); return d.toISOString().slice(0, 10); };
 
 /**

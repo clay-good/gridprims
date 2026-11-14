@@ -15,6 +15,6 @@
 
 ## 3. Guides
 
-- [ ] 3.1 Write the eleven launch explainers with generated numbers and "Try it" links; verify every number has a source stamp or a dated citation (3 of 11 so far: how big a data center request is, what a balancing authority is, and how gridprims keeps public data)
+- [ ] 3.1 Write the eleven launch explainers with generated numbers and "Try it" links; verify every number has a source stamp or a dated citation (7 of 11 so far: flat versus time-of-use, demand charges, coincident peaks, reading meter data, how big a data center request is, what a balancing authority is, and how gridprims keeps public data)
 - [x] 3.2 Add review-date and stale-number checks; verify the year-old explainer scenario
 - [ ] 3.3 Run DESIGN.md gates on Learn pages (both themes, 320 px, keyboard, print); verify CI green
