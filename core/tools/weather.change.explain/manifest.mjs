@@ -2,7 +2,7 @@ import { billsText, weatherText } from './examples.mjs';
 
 export default {
   id: 'weather.change.explain',
-  version: '0.1.0',
+  version: '0.2.0',
   title: 'Was it the weather?',
   purpose: 'How much of a change in your electricity use was the weather, from 12 to 24 bills and the nearest weather station.',
   archetype: 'calculator',
@@ -29,7 +29,7 @@ export default {
   ],
   citations: [
     { source: 'CalTRACK Methods, version 2.0', edition: 'CC0', locator: 'Billing methods: candidate models, balance-point search, sufficiency, and CV(RMSE)', url: 'https://docs.caltrack.org/en/latest/methods.html' },
-    { source: 'Recurve, OpenDSM data sufficiency and disqualification guidelines', edition: '2025', locator: 'Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6', url: 'https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines' },
+    { source: 'Recurve, OpenDSM data sufficiency and disqualification guidelines', edition: '2025', locator: 'Daily and billing models: CV(RMSE) above 1.0 unless PNRMSE is below 1.6', url: 'https://docs.recurve.com/flex-programs/measurement/energy%20efficiency%20and%20electrification/project-based-measurement-data-sufficiency-and-disqualification-guidelines/index.html' },
     { source: 'NOAA NCEI, Global Historical Climatology Network - Daily, Menne et al. (2012)', edition: 'version 3.35, served snapshot 2026-11', locator: 'Daily maximum and minimum temperature (TMAX, TMIN)', url: 'https://doi.org/10.7289/V5D21VHZ' },
     { source: 'NOAA NCEI, U.S. Climate Normals 1991–2020', edition: 'daily normals, version 1.0.1', locator: 'Daily heating and cooling degree-day normals (DLY-HTDD, DLY-CLDD)', url: 'https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals' },
   ],

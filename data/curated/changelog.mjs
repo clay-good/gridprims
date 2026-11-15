@@ -11,6 +11,8 @@
  * @type {Array<{date: string, toolId: string | null, version: string, reason: string, kind?: 'security', credit?: string, sample?: {inputs: object, old: string, new: string}}>}
  */
 export default [
+  { date: '2026-11-14', toolId: 'electrify.service-headroom.check', version: '0.2.0', reason: 'NFPA moved its free-access page, so the citation to NFPA 70 § 220.87 now gives the page\'s new address, nfpa.org/for-professionals/codes-and-standards/list-of-codes-and-standards/free-access. The section cited and every number are unchanged.' },
+  { date: '2026-11-14', toolId: 'weather.change.explain', version: '0.2.0', reason: 'Recurve moved its data-sufficiency and disqualification guidelines, so that citation now gives the page\'s new address. The thresholds cited and every number are unchanged.' },
   { date: '2026-11-01', toolId: 'interconnect.inverter.size', version: '0.1.0', reason: 'First release.' },
   { date: '2026-11-01', toolId: 'interconnect.fast-track.screens', version: '0.1.0', reason: 'First release.' },
   { date: '2026-11-01', toolId: 'interconnect.process.route', version: '0.1.0', reason: 'First release.' },

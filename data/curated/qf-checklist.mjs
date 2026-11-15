@@ -52,5 +52,5 @@ export default {
       ],
     },
   ],
-  form: { name: 'FERC Form No. 556', url: 'https://www.ferc.gov/docs-filing/forms/form-556/form-556.pdf' },
+  form: { name: 'FERC Form No. 556', url: 'https://www.ferc.gov/sites/default/files/2020-04/form-556_7.pdf' },
 };
