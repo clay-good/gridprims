@@ -6,8 +6,9 @@ import assert from 'node:assert/strict';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { scheduledRun } from '../../../pipeline/scheduled.mjs';
-import { linkCheck, outboundLinks } from '../../../pipeline/link-check.mjs';
+import { classify, linkCheck, outboundLinks } from '../../../pipeline/link-check.mjs';
 import { readHealth } from '../../../pipeline/lib/health.mjs';
+import { buildLedger } from '../../../core/lib/ledger.mjs';
 import { stalled, WORKFLOWS } from '../../../pipeline/workflows.mjs';
 import { checkWorkflows } from '../../gates/workflows.mjs';
 import entry from '../../../pipeline/registry/eia-861.mjs';
@@ -144,10 +145,97 @@ test('link check: a moved handoff is recorded with its new target and every page
   const ri = results.find((x) => x.url === 'https://ripuc.ri.gov/');
   assert.equal(ri.state, 'blocked', 'a site that refuses automated checks is blocked, not broken');
   assert.deepEqual(ri.usedBy, ['RI regulator home']);
-  assert.equal(host.issues.length, 1);
+  assert.equal(host.issues.length, 0, 'the first sighting is held back: one bad check is usually the network');
   // The health record keeps each result, with when it was checked and when it last worked.
   assert.deepEqual(readHealth(r).links.map(({ checked, lastOk, ...l }) => l), results);
   assert.ok(readHealth(r).links.every((l) => l.checked && (l.state === 'ok' ? l.lastOk === l.checked : l.lastOk === null)));
+
+  // The same answer a week later confirms it, and the issue says since when.
+  const again = await linkCheck({ fetch: f, host, root: r, now: at('2026-11-10T07:23:00Z') });
+  assert.equal(again.find((x) => x.url === moved).since, '2026-11-03T07:23:00.000Z');
+  assert.ok(again.find((x) => x.url === moved).confirmed);
+  assert.equal(host.issues.length, 1);
+  assert.match(host.issues[0].body, /moved: .*energy-conversion-calculators\.php .*unchanged since 2026-11-03T07:23:00\.000Z/);
+});
+
+test('link check: a link that fails once and works again is never called broken in public', async () => {
+  const r = root();
+  const nist = (status) => async (url) => {
+    const res = new Response('ok', { status: url.includes('nist.gov') ? status : 200 });
+    Object.defineProperty(res, 'url', { value: url });
+    return res;
+  };
+  const host = fakeHost();
+  const one = await linkCheck({ fetch: nist(500), host, root: r, now: at('2026-11-03T07:23:00Z') });
+  const first = one.find((x) => x.url.includes('nist.gov'));
+  assert.equal(first.state, 'broken', 'the record is honest about what this check saw');
+  assert.equal(first.confirmed, false);
+  assert.deepEqual(buildLedger({ datasets: [], health: readHealth(r), generatedAt: '2026-11-03T08:00:00Z', contact: 'x@y' }).deadLinks, [],
+    'an unconfirmed failure is not published as a dead citation on the limits page');
+
+  const two = await linkCheck({ fetch: nist(200), host, root: r, now: at('2026-11-10T07:23:00Z') });
+  assert.equal(two.find((x) => x.url.includes('nist.gov')).state, 'ok');
+  assert.equal(host.issues.length, 0, 'nothing was ever reported');
+});
+
+test('link check: a page that stays broken is confirmed, reported, and published as a dead citation', async () => {
+  const r = root();
+  const f = async (url) => {
+    const res = new Response('ok', { status: url.includes('nist.gov') ? 404 : 200 });
+    Object.defineProperty(res, 'url', { value: url });
+    return res;
+  };
+  const host = fakeHost();
+  await linkCheck({ fetch: f, host, root: r, now: at('2026-11-03T07:23:00Z') });
+  const two = await linkCheck({ fetch: f, host, root: r, now: at('2026-11-10T07:23:00Z') });
+  const dead = two.find((x) => x.url.includes('nist.gov'));
+  assert.equal(dead.confirmed, true);
+  assert.equal(dead.since, '2026-11-03T07:23:00.000Z');
+  assert.equal(host.issues.length, 1);
+  assert.deepEqual(buildLedger({ datasets: [], health: readHealth(r), generatedAt: '2026-11-10T08:00:00Z', contact: 'x@y' }).deadLinks.map((l) => l.status), [404]);
+});
+
+test('link check: a docket that hands out a fresh session URL every visit has not moved', async () => {
+  const r = root();
+  const docket = 'https://dms.wyo.gov/external/publicusers.aspx';
+  assert.ok((await outboundLinks()).has(docket));
+  let visit = 0;
+  const f = async (url) => {
+    const res = new Response('ok', { status: 200 });
+    Object.defineProperty(res, 'url', { value: url === docket ? `https://dms.wyo.gov/(S(session${visit++}))/external/publicusers.aspx` : url });
+    return res;
+  };
+  const host = fakeHost();
+  await linkCheck({ fetch: f, host, root: r, now: at('2026-11-03T07:23:00Z') });
+  const two = await linkCheck({ fetch: f, host, root: r, now: at('2026-11-10T07:23:00Z') });
+  const w = two.find((x) => x.url === docket);
+  assert.equal(w.state, 'moved', 'this check really was redirected');
+  assert.equal(w.confirmed, false, 'but to somewhere new each time, so there is nothing to update');
+  assert.equal(host.issues.length, 0);
+});
+
+test('classify: an interstitial is the refusal of an automated check, not a move', () => {
+  const ecfr = 'https://www.ecfr.gov/current/title-18/section-292.203';
+  assert.equal(classify({ url: ecfr, status: 200, finalUrl: 'https://unblock.federalregister.gov/' }), 'blocked');
+  assert.equal(classify({ url: 'https://mn.gov/puc/get-involved/public-comments/', status: 200, finalUrl: 'https://validate.perfdrive.com/abc?ssa=1' }), 'blocked');
+  // A redirect to another host is ordinarily a real move.
+  assert.equal(classify({ url: 'https://www.epa.gov/egrid/egrid-questions-and-answers', status: 200, finalUrl: 'https://www.epa.gov/egrid/frequent-questions-about-egrid' }), 'moved');
+  assert.equal(classify({ url: ecfr, status: 403, finalUrl: ecfr }), 'blocked');
+  assert.equal(classify({ url: ecfr, status: 404, finalUrl: ecfr }), 'broken');
+});
+
+test('classify: a DOI that resolves is working, not moved', () => {
+  // Following it would swap a permanent citation for today's address.
+  assert.equal(classify({ url: 'https://doi.org/10.7289/V5D21VHZ', status: 200, finalUrl: 'https://www.ncei.noaa.gov/metadata/geoportal/x/html' }), 'ok');
+  assert.equal(classify({ url: 'https://doi.org/10.6084/m9.figshare.24237376.v4', status: 202, finalUrl: 'https://figshare.com/articles/dataset/x/24237376/4' }), 'ok');
+  assert.equal(classify({ url: 'https://doi.org/10.0000/gone', status: 404, finalUrl: 'https://doi.org/10.0000/gone' }), 'broken', 'a DOI that resolves to nothing is still broken');
+});
+
+test('classify: the fragment is ours, not the server\'s, so dropping it is not a move', () => {
+  const readme = 'https://github.com/catalyst-cooperative/pudl/blob/main/README.rst#licensing';
+  assert.equal(classify({ url: readme, status: 200, finalUrl: 'https://github.com/catalyst-cooperative/pudl/blob/main/README.rst' }), 'ok');
+  assert.equal(classify({ url: 'https://example.gov/a', status: 200, finalUrl: 'https://example.gov/a/' }), 'ok', 'nor is a trailing slash');
+  assert.equal(classify({ url: readme, status: 200, finalUrl: 'https://github.com/catalyst-cooperative/pudl/blob/main/docs.rst' }), 'moved');
 });
 
 test('CI policy: a marketplace action, an unpinned action, pull_request_target, event text in a shell line, and a floating runner all fail', () => {
