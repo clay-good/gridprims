@@ -8,8 +8,8 @@
 
 ## 2. Test vectors
 
-- [ ] 2.1 Define the vector format and its validator, emitting tariffs in the open interchange format with its structural validation in CI; verify the vector-fields and charge-types-declared scenarios
-- [ ] 2.2 Implement the provenance rules, including the refusal of self-generated expected values and the no-personal-data rule for user-supplied bill figures; verify both scenarios
+- [ ] 2.1 Define the vector format and its validator, emitting tariffs in the open interchange format with its structural validation in CI; verify the vector-fields and charge-types-declared scenarios (the vector format and its validator are in pipeline/lib/bill-vectors.mjs and docs/formats/bill-test-vector.md, with both scenarios in verify/tests/pipeline/bill-vectors.test.mjs; emitting our tariffs as URPX and the SHACL check in CI are still to come)
+- [x] 2.2 Implement the provenance rules, including the refusal of self-generated expected values and the no-personal-data rule for user-supplied bill figures; verify both scenarios (checkProvenance in pipeline/lib/bill-vectors.mjs; verify/tests/pipeline/bill-vectors.test.mjs)
 - [ ] 2.3 Build the first release from the ground-truth dataset; verify its coverage table names every charge type with no coverage
 - [ ] 2.4 Publish versioned releases under CC BY 4.0 with a changelog and no account; verify the anyone-can-run-it scenario
 - [ ] 2.5 Gate the bill engine on the suite in CI; verify the our-own-failure scenario blocks a release

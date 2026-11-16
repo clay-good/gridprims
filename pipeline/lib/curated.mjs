@@ -15,7 +15,7 @@ export const PRIMARY = ['order', 'tariff', 'regulator', 'publisher', 'statute', 
 export const SECONDARY = ['news', 'vendor', 'compilation', 'blog', 'unsourced'];
 
 /** Shapes of personal data a contribution must never carry. */
-const PERSONAL = [
+export const PERSONAL = [
   [/\b\d{17}\b/, 'a 17-digit meter identifier (such as an ESIID)'],
   [/\baccount\s*(number|no\.?|#)\s*[:#]?\s*\d{4,}/i, 'an account number'],
   [/\b\d{1,5}\s+\w+(\s\w+)?\s+(street|st|avenue|ave|road|rd|lane|ln|drive|dr|boulevard|blvd)\b/i, 'a street address'],
