@@ -22,6 +22,31 @@ const book = Buffer.from(writeXlsx({ Instructions: [['How to fill in this workbo
 const load = (sel, data, name, type) => `(() => { const dt = new DataTransfer(); dt.items.add(new File([Uint8Array.from(atob('${data}'), (c) => c.charCodeAt(0))], '${name}', { type: '${type}' })); const i = document.querySelector('${sel}'); i.files = dt.files; i.dispatchEvent(new Event('change', { bubbles: true })); })()`;
 
 for (const kind of ['chrome', 'firefox']) {
+  test(`${kind}: a pole list dropped on the workbench opens in the attachment tool with the list loaded, never stored or sent`, { skip: !findBrowser(kind) && `${kind} is not installed`, timeout: 90_000 }, async () => {
+    const log = [];
+    const server = await serve(out, { onRequest: (r) => log.push(r) });
+    const browser = await launch(kind);
+    try {
+      await browser.goto(`${server.url}/files/`);
+      await waitFor(browser, 'document.documentElement.dataset.ready === "true"');
+      const loads = await browser.evaluate('document.documentElement.dataset.loads');
+      await browser.evaluate(load('[data-file]', b64, 'poles.csv', 'text/csv'));
+      await waitFor(browser, '!document.querySelector("[data-lines-handoff]").hidden');
+      assert.match(await browser.evaluate('document.querySelector("[data-lines-handoff]").textContent'), /This is a pole list, not a meter file\./);
+      assert.equal(await browser.evaluate('document.documentElement.dataset.loads'), loads, 'the load workbench does not read it');
+      // The new tab is a same-origin frame here, so the test can follow it.
+      await browser.evaluate('(window.open = (url) => { const f = Object.assign(document.createElement("iframe"), { src: url, title: "tool" }); document.body.append(f); return f.contentWindow; }, true)');
+      await browser.evaluate('(document.querySelector("[data-lines-open]").click(), true)');
+      await waitFor(browser, 'document.querySelector("iframe")?.contentDocument?.querySelector("[data-pole-list]")?.dataset.poles === "120"', 30_000);
+      assert.match(await browser.evaluate('document.querySelector("iframe").contentDocument.querySelector("[data-pole-result]").textContent'), /Row 19: height could not be read\./);
+      assert.deepEqual(leaks(log, MARK), []);
+      assert.equal(await browser.evaluate('document.querySelector("iframe").contentWindow.location.href.includes("POLE")'), false);
+    } finally {
+      await browser.close();
+      await server.close();
+    }
+  });
+
   test(`${kind}: a pole list is checked on the device, exported, and opened one pole at a time`, { skip: !findBrowser(kind) && `${kind} is not installed`, timeout: 90_000 }, async () => {
     const log = [];
     const server = await serve(out, { onRequest: (r) => log.push(r) });

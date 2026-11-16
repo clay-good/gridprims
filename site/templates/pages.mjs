@@ -296,6 +296,8 @@ export function filesPage({ i18n, reviewed = new Set() }) {
   <div class="progress" data-progress hidden><p data-progress-label></p><progress max="1" value="0"></progress>
     <button class="button" type="button" data-cancel>${t('files.cancel')}</button></div>
   <p class="errors" role="alert" data-error hidden></p>
+  <div class="panel" data-lines-handoff hidden><p data-lines-handoff-text></p>
+    <p><button class="button" type="button" data-lines-open>${t('files.lines.open')}</button></p></div>
   <section class="answer" aria-live="polite" data-answer></section>
   <p><label><input type="checkbox" data-keep> ${t('files.keep')}</label> <span class="unit-hint">${t('files.keepNote')}</span></p>
   <div data-chart></div>

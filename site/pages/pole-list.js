@@ -32,16 +32,23 @@ panel.querySelector('[data-rules-file]').addEventListener('change', async (e) =>
   if (bytes[0] === 0x50 && bytes[1] === 0x4b) {
     try { read = await readStandardsWorkbook(bytes); } catch (err) { read = { error: err.message }; }
   } else {
-    const text = new TextDecoder().decode(bytes);
-    read = linesKind(text) === 'lines-standards' ? { text: text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').trim() } : { error: t('poles.rulesNot') };
+    read = rulesText(new TextDecoder().decode(bytes));
   }
+  useRules(read);
+});
+
+/** A standards CSV's text as the rules box takes it, or why it is not one. */
+const rulesText = (text) => (linesKind(text) === 'lines-standards' ? { text: text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').trim() } : { error: t('poles.rulesNot') });
+
+/** Put a read standards file in the rules box, and say what was read. */
+function useRules(read) {
   if (read.error) { rulesOut.replaceChildren(el('p', { className: 'errors', textContent: read.error })); return; }
   const box = form.elements.namedItem('rules');
   box.value = read.text;
   box.dispatchEvent(new Event('input', { bubbles: true }));
   const count = read.text.split('\n').length - 1;
   rulesOut.replaceChildren(el('p', { textContent: read.sheet ? t('poles.rulesSheet', { count, sheet: read.sheet }) : t('poles.rulesRead', { count }) }), ...conflictPickers(box));
-});
+}
 
 // Two rows that set one rule differently: offer each, and a pick rewrites the one rule record the checks read.
 function conflictPickers(box) {
@@ -71,7 +78,13 @@ panel.querySelector('[data-pole-file]').addEventListener('change', async (e) => 
     out.replaceChildren(...pdfAnswer());
     return;
   }
-  text = await file.text();
+  checkList(await file.text());
+});
+
+/** Check every pole of a pole list's text in a worker, with progress. */
+function checkList(listText) {
+  stop();
+  text = listText;
   if (linesKind(text) !== 'lines-pole-list') { out.replaceChildren(el('p', { className: 'errors', textContent: t('poles.notList') })); return; }
   const values = Object.fromEntries(new FormData(form).entries());
   progress.hidden = false;
@@ -86,7 +99,7 @@ panel.querySelector('[data-pole-file]').addEventListener('change', async (e) => 
     show(m.data.batch, values, ms);
   });
   worker.postMessage({ text, values });
-});
+}
 
 function show(batch, values, ms) {
   const checked = batch.poles.filter((p) => p.status === 'checked').length;
@@ -125,4 +138,13 @@ out.addEventListener('click', (e) => {
   form.dispatchEvent(new Event('input', { bubbles: true }));
   form.scrollIntoView({ block: 'start' });
 });
+// A file handed over from the workbench, where it was dropped: it arrives by a same-origin message from the
+// page that opened this one, so it was never stored or sent.
+const handoff = window.opener ?? (parent !== window ? parent : null);
+addEventListener('message', (e) => {
+  if (e.origin !== location.origin || e.source !== handoff || e.data?.type !== 'gridprims-lines-file') return;
+  if (e.data.kind === 'lines-pole-list') checkList(String(e.data.text));
+  else if (e.data.kind === 'lines-standards') useRules(rulesText(String(e.data.text)));
+});
 panel.dataset.ready = 'true';
+handoff?.postMessage({ type: 'gridprims-lines-ready' }, location.origin);

@@ -18,6 +18,7 @@ import { setupCarbon } from './workbench-carbon.js';
 import { preselect } from '../../core/lib/coincident-peak.mjs';
 import { formatNumber } from '../../core/lib/precision.mjs';
 import strings from '../strings/en-US.mjs';
+import { linesKind } from '../../core/lib/lines-files.mjs';
 
 const i18n = createI18n(strings, 'en-US');
 const { t } = i18n;
@@ -160,8 +161,33 @@ async function load(bytes, name, { sample = false, kept = false, choices } = {})
 
 async function fromFile(file) {
   if (!file) return;
-  await load(new Uint8Array(await file.arrayBuffer()), file.name);
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  $('[data-lines-handoff]').hidden = true;
+  // A pole list or standards file is told apart by its header row and goes to the lines tools, not intake.
+  const kind = linesKind(new TextDecoder().decode(bytes.subarray(0, 4096)));
+  if (kind) { linesHandoff(kind, bytes); return; }
+  await load(bytes, file.name);
   await keep(false);
+}
+
+// The attachment tool opens in a new tab, and the file reaches it by a same-origin message once that tab is
+// ready, so it stays in memory: nothing is stored, put in a link, or sent.
+function linesHandoff(kind, bytes) {
+  $('[data-error]').hidden = true;
+  const box = $('[data-lines-handoff]');
+  box.querySelector('[data-lines-handoff-text]').textContent = t(`files.lines.${kind}`);
+  box.hidden = false;
+  box.dataset.kind = kind;
+  const text = new TextDecoder().decode(bytes);
+  box.querySelector('[data-lines-open]').onclick = () => {
+    const tab = open('/tools/lines/attachment-height/find/', '_blank');
+    const send = (e) => {
+      if (e.origin !== location.origin || e.source !== tab || e.data?.type !== 'gridprims-lines-ready') return;
+      removeEventListener('message', send);
+      tab.postMessage({ type: 'gridprims-lines-file', kind, text }, location.origin);
+    };
+    addEventListener('message', send);
+  };
 }
 
 // Receipt choices re-run the read with the new choice.
