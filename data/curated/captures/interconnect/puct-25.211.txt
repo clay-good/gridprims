@@ -1,0 +1,14 @@
+Source: https://ftp.puc.texas.gov/public/puct-info/agency/rulesnlaws/subrules/electric/25.211/25.211.pdf
+Publisher: Public Utility Commission of Texas, 16 TAC § 25.211, Interconnection of On-Site Distributed Generation, PUCT compilation marked "effective 1/5/17" (Project No. 45078)
+Retrieved: 2026-11-16
+Original: 74895 bytes, SHA-256 e4b6103089d697a5a6cde2e04e54f18e9341e01f8e5838279de485d8035f8499
+Capture: subsections (g)(1), (h)(1), and (i), as pdftotext -layout reads them, whitespace collapsed
+----
+[§ 25.211(g)(1)]
+(1) Distributed generation facilities for which no pre-interconnection study fees may be charged. A utility may not charge a customer a fee to conduct a pre-interconnection study for pre-certified distributed generation units up to 500 kW that export not more than 15% of the total load on a single radial feeder and contribute not more than 25% of the maximum potential short circuit current on a single radial feeder.
+
+[§ 25.211(h)(1)]
+(h) Network interconnection of distributed generation. Certain aspects of secondary network systems create technical difficulties that may make interconnection more costly to implement. In instances where customers request interconnection to a secondary network system, the utility and the customer shall use best reasonable efforts to complete the interconnection and the utility shall utilize the following guidelines: (1) A utility shall approve applications for distributed generation facilities that use inverter- based protective functions unless total distributed generation (including the new facility) on affected feeders represents more than 25% of the total load of the secondary network under consideration.
+
+[§ 25.211(i)]
+(i) Pre-Interconnection studies for network interconnection of distributed generation. Prior to charging a pre-interconnection study fee for a network interconnection of distributed generation, a utility shall first advise the customer of the potential problems associated with interconnection of distributed generation with its network system. For potential interconnections to network systems there shall be no pre-interconnection study fee assessed for a facility with inverter systems under 20 kW.
