@@ -39,9 +39,21 @@ test('seasons, tiers, and prices say what the tariff says', () => {
   assert.equal(nodes(document, 'urpx:CoverageClaim')[0]['urpx:completenessResult']['@id'], 'urpx:unknown');
 });
 
-test('time-of-use and daily allowances are refused, not written partly', () => {
-  assert.match(toUrpx({ seasons: [{ name: 'all year', periods: [{ name: 'p1', rate: 0.2 }] }] }, URPX_CASES.flat.meta).error, /time-of-use/);
+test('time-of-use without its hour schedules, and daily allowances, are refused, not written partly', () => {
+  assert.match(toUrpx({ seasons: [{ name: 'all year', periods: [{ name: 'period 1', rate: 0.2 }] }] }, URPX_CASES.flat.meta).error, /time-of-use periods need the weekday and weekend hour schedules/);
   assert.match(toUrpx({ seasons: [{ name: 'all year', tiers: [{ rate: 0.1, upToDaily: 10 }, { rate: 0.2 }] }] }, URPX_CASES.flat.meta).error, /daily tier allowances/);
+});
+
+test('time-of-use: the hours of each period become time brackets, weekdays and weekends apart when they differ', () => {
+  const { document } = toUrpx(URPX_CASES.tou.tariff, URPX_CASES.tou.meta, URPX_CASES.tou.opts);
+  const tiers = nodes(document, 'urpx:TOUTier').map((x) => [x['urpx:tierSourceName'], x['urpx:hasTOUPeriod'].map((p) => p['urpx:name'])]);
+  assert.deepEqual(tiers, [['Period 1', ['June to September, period 1', 'October to May, period 1']], ['Period 2', ['June to September, period 2']], ['Period 3', ['October to May, period 3']]]);
+  const brackets = (name) => nodes(document, 'urpx:TOUPeriod').find((p) => p['urpx:name'] === name)['urpx:hasTimeBracket'].map((b) => `${b['urpx:dayType']['@id'].slice(5)} ${b['urpx:startTime']}-${b['urpx:endTime']}`);
+  assert.deepEqual(brackets('June to September, period 2'), ['weekdayDays 14:00:00-20:00:00']);
+  assert.deepEqual(brackets('June to September, period 1'), ['weekdayDays 00:00:00-14:00:00', 'weekdayDays 20:00:00-00:00:00', 'weekendDays 00:00:00-00:00:00']);
+  const prices = nodes(document, 'urpx:Price').filter((p) => p['urpx:name'].startsWith('Energy')).map((p) => [p['urpx:name'], p['urpx:unitPrice']]);
+  assert.deepEqual(prices, [['Energy, June to September, period 1', '0.09'], ['Energy, June to September, period 2', '0.25'], ['Energy, October to May, period 1', '0.08'], ['Energy, October to May, period 3', '0.18']]);
+  assert.deepEqual(chargeTypesOf(URPX_CASES.tou.tariff), ['fixed', 'tou-energy', 'seasonal-energy']);
 });
 
 test('charge types follow the tariff, and a vector built on an emitted tariff passes the vector check', () => {

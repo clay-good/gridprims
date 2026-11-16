@@ -7,7 +7,7 @@ import { toUrpx } from '../../core/lib/urpx.mjs';
 import { URPX_CASES } from '../fixtures/urpx/cases.mjs';
 
 /** The bytes a case is written as. */
-export const caseBytes = ({ tariff, meta }) => JSON.stringify(toUrpx(tariff, meta).document, null, 2) + '\n';
+export const caseBytes = ({ tariff, meta, opts }) => JSON.stringify(toUrpx(tariff, meta, opts).document, null, 2) + '\n';
 
 if (process.argv[2]) {
   mkdirSync(process.argv[2], { recursive: true });

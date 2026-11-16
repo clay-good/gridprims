@@ -1,9 +1,9 @@
 // Our bill engine's tariff written as URPX, the LF Energy tariff interchange
 // format (add-tariff-conformance-suite design D2): JSON-LD a URPX reader or
-// the SHACL shapes can check, for the tariffs priced from totals: a fixed
-// charge by month or day, a monthly minimum, and energy by season and tier.
-// Time-of-use periods and daily tier allowances are not written yet; the
-// function refuses them and says so rather than emitting something partial.
+// the SHACL shapes can check: a fixed charge by month or day, a monthly
+// minimum, energy by season and tier, and time-of-use energy when the
+// weekday and weekend hour schedules come along. Daily tier allowances are
+// not written yet; the function refuses them rather than writing them partly.
 
 export const URPX_VERSION = 'v0.5.1';
 export const URPX_CONTEXT = `https://urpx.org/ns/context/releases/${URPX_VERSION}/jsonld/urpx-context.jsonld`;
@@ -37,21 +37,36 @@ export function chargeTypesOf(t) {
   return types;
 }
 
+const hh = (h) => `${String(h % 24).padStart(2, '0')}:00:00`;
+
+/** Runs of consecutive hours in one day's 24 period indices that use period p: [start, end) hours. */
+function runs(day, p) {
+  const out = [];
+  for (let h = 0; h < 24; h++) {
+    if (day[h] !== p) continue;
+    if (out.length && out.at(-1)[1] === h) out.at(-1)[1] = h + 1;
+    else out.push([h, h + 1]);
+  }
+  return out;
+}
+
 /**
  * A tariff as a URPX package, or the reason it cannot be written yet.
  * @param {{fixedMonthly?: number, fixedDaily?: number, minimumMonthly?: number, seasons: Array<{name: string, from?: string, tiers?: Array<{rate: number, upTo?: number, upToDaily?: number}>, periods?: any[]}>}} t
  * @param {{id: string, name: string, utility: string, effective: string, zone?: string, source?: {url: string, retrieved: string}}} meta
+ * @param {{schedule?: {weekday: number[][], weekend: number[][]}}} [opts] URDB's 12 × 24 period indices, for time-of-use
  * @returns {{document: any} | {error: string}}
  */
-export function toUrpx(t, meta) {
-  if (t.seasons.some((s) => s.periods)) return { error: 'time-of-use periods are not written as URPX yet' };
+export function toUrpx(t, meta, { schedule } = {}) {
+  const tou = t.seasons.some((s) => s.periods);
+  if (tou && !(schedule?.weekday?.length === 12 && schedule?.weekend?.length === 12)) return { error: 'time-of-use periods need the weekday and weekend hour schedules to be written as URPX' };
   if (t.seasons.some((s) => s.tiers?.some((x) => x.upToDaily !== undefined))) return { error: 'daily tier allowances are not written as URPX yet' };
   const ns = 'gp';
   const id = (local) => `${ns}:${meta.id}-${local}`;
   const many = t.seasons.length > 1;
   const months = seasonMonths(t.seasons);
   const seasonId = (i) => id(`season-${i + 1}`);
-  const tierCount = Math.max(...t.seasons.map((s) => s.tiers.length));
+  const tierCount = tou ? 1 : Math.max(...t.seasons.map((s) => s.tiers.length));
 
   const ledgers = [
     { '@type': 'urpx:Ledger', '@id': id('ledger-energy'), 'urpx:name': 'Energy Prices', 'urpx:ledgerType': ref('urpx:bundledLedger'), 'urpx:referencesMetricInput': ref(id('mi-energy')) },
@@ -71,7 +86,32 @@ export function toUrpx(t, meta) {
     definitions.push({ '@type': 'urpx:PriceDefinition', '@id': id('pd-minimum'), 'urpx:name': 'Minimum Bill', 'urpx:chargeType': ref('urpx:minimumBill'), 'urpx:chargeCategory': ref('urpx:serviceCharge'), 'urpx:billPortion': ref('urpx:bundledPortion'), 'urpx:baseQuantity': '1', 'urpx:referencesLedger': ref(id('ledger-service')) });
     prices.push({ '@type': 'urpx:Price', '@id': id('price-minimum'), 'urpx:referencesPriceDefinition': ref(id('pd-minimum')), 'urpx:name': 'Minimum Bill', 'urpx:startDate': meta.effective, 'urpx:unitPrice': String(t.minimumMonthly) });
   }
-  t.seasons.forEach((s, i) => s.tiers.forEach((tier, k) => {
+  // Time-of-use: one URPX tier per period of the schedule, and in it one URPX period per season that uses it,
+  // with the hours as time brackets (all days when weekdays and weekends match, else each on its own).
+  let touSchedule = null;
+  if (tou) {
+    const tiers = new Map();
+    let n = 0;
+    t.seasons.forEach((s, i) => {
+      const m = Number(String(s.from ?? '01-01').slice(0, 2)) - 1;
+      const wd = schedule.weekday[m]; const we = schedule.weekend[m];
+      const same = JSON.stringify(wd) === JSON.stringify(we);
+      for (const period of s.periods) {
+        const p = Number(/(\d+)$/.exec(period.name)?.[1]) - 1;
+        const number = ++n;
+        const brackets = [];
+        const add = (day, dayType) => runs(day, p).forEach(([a, b], k) => brackets.push({ '@type': 'urpx:TimeBracket', '@id': id(`bracket-s${i + 1}-p${p + 1}-${dayType}-${k + 1}`), 'urpx:startTime': hh(a), 'urpx:endTime': hh(b), ...(many ? { 'urpx:appliesInSeason': ref(seasonId(i)) } : {}), 'urpx:dayType': ref(`urpx:${dayType}`) }));
+        if (same) add(wd, 'allDays'); else { add(wd, 'weekdayDays'); add(we, 'weekendDays'); }
+        const tier = tiers.get(p) ?? tiers.set(p, { '@type': 'urpx:TOUTier', '@id': id(`tou-tier-${p + 1}`), 'urpx:tierSourceName': `Period ${p + 1}`, 'urpx:touTierNumber': p + 1, 'urpx:hasTOUPeriod': [] }).get(p);
+        tier['urpx:hasTOUPeriod'].push({ '@type': 'urpx:TOUPeriod', '@id': id(`tou-period-${number}`), 'urpx:name': `${s.name}, period ${p + 1}`, 'urpx:touPeriodNumber': number, 'urpx:hasTimeBracket': brackets });
+        definitions.push({ '@type': 'urpx:PriceDefinition', '@id': id(`pd-energy-${number}`), 'urpx:name': `Energy, ${s.name}, period ${p + 1}`, 'urpx:chargeType': ref('urpx:usageCharge'), 'urpx:chargeCategory': ref('urpx:auxiliaryCharge'), 'urpx:billPortion': ref('urpx:bundledPortion'), 'urpx:touPeriodNumber': number, 'urpx:referencesLedger': ref(id('ledger-energy')) });
+        prices.push({ '@type': 'urpx:Price', '@id': id(`price-energy-${number}`), 'urpx:referencesPriceDefinition': ref(id(`pd-energy-${number}`)), 'urpx:name': `Energy, ${s.name}, period ${p + 1}`, 'urpx:startDate': meta.effective, 'urpx:unitPrice': String(period.rate), ...(many ? { 'urpx:appliesInSeason': ref(seasonId(i)) } : {}) });
+      }
+    });
+    touSchedule = { '@type': 'urpx:TOUSchedule', '@id': id('tou'), 'urpx:referencesMetricInput': ref(id('mi-energy')), 'urpx:hasTOUTier': [...tiers.values()].sort((a, b) => a['urpx:touTierNumber'] - b['urpx:touTierNumber']) };
+    definitions.splice(definitions.findIndex((d) => d['@id'] === id('pd-energy')), 1);
+  }
+  if (!tou) t.seasons.forEach((s, i) => s.tiers.forEach((tier, k) => {
     prices.push({
       '@type': 'urpx:Price', '@id': id(`price-energy-s${i + 1}-t${k + 1}`), 'urpx:referencesPriceDefinition': ref(id('pd-energy')),
       'urpx:name': `Energy, ${s.name}${tierCount > 1 ? `, tier ${k + 1}` : ''}`, 'urpx:startDate': meta.effective, 'urpx:unitPrice': String(tier.rate),
@@ -103,7 +143,7 @@ export function toUrpx(t, meta) {
     'urpx:serviceRole': ref('urpx:bundledServiceRole'), 'urpx:forRatePlan': ref(id('plan')),
     // We write what our engine's record holds, not the whole tariff sheet, so completeness is not claimed.
     'urpx:changeReason': ref('urpx:changeReasonOther'),
-    'urpx:hasCoverageClaim': { '@type': 'urpx:CoverageClaim', '@id': id('coverage'), 'urpx:completenessResult': ref('urpx:unknown'), 'urpx:selfContained': true, 'urpx:explainedBy': { '@type': 'urpx:Evaluation', '@id': id('evaluation'), 'urpx:description': 'Written by gridprims from the tariff record its bill engine prices: the fixed charge, any monthly minimum, and energy by season and tier. Riders, taxes, and anything else on the tariff sheet that the record does not hold are not included, so completeness is not claimed.' } },
+    'urpx:hasCoverageClaim': { '@type': 'urpx:CoverageClaim', '@id': id('coverage'), 'urpx:completenessResult': ref('urpx:unknown'), 'urpx:selfContained': true, 'urpx:explainedBy': { '@type': 'urpx:Evaluation', '@id': id('evaluation'), 'urpx:description': 'Written by gridprims from the tariff record its bill engine prices: the fixed charge, any monthly minimum, and energy by season, tier, and time-of-use period. Riders, taxes, and anything else on the tariff sheet that the record does not hold are not included, so completeness is not claimed.' } },
     ...(meta.source ? { 'urpx:hasDataSourceReference': { '@type': 'urpx:DataSourceReference', 'urpx:url': meta.source.url, 'urpx:dateRetrieved': meta.source.retrieved } } : {}),
     'urpx:hasPlanElements': {
       '@type': 'urpx:PlanElements',
@@ -112,7 +152,7 @@ export function toUrpx(t, meta) {
         { '@type': 'urpx:MetricInput', '@id': id('mi-energy'), 'urpx:name': 'kWh Energy Consumption', 'urpx:metricInputType': ref('urpx:measuredMetricInput'), 'urpx:hasMetricSpecification': { '@type': 'urpx:MetricSpecification', '@id': id('ms-energy'), 'urpx:measurementKind': ref('urpx:energy'), 'urpx:unitOfMeasure': ref('urpx:kWh') } },
         ...(fixed || t.minimumMonthly ? [{ '@type': 'urpx:MetricInput', '@id': id('mi-meter-count'), 'urpx:name': 'Per Meter', 'urpx:metricInputType': ref('urpx:profileMetricInput'), 'urpx:profileMetricProperty': ref('urpx:meterCount') }] : []),
       ],
-      'urpx:hasBillingModel': { '@type': 'urpx:BillingModel', 'urpx:hasLedger': ledgers, 'urpx:hasPriceDefinition': definitions, ...(serviceTiers.length ? { 'urpx:hasServiceTiers': serviceTiers } : {}) },
+      'urpx:hasBillingModel': { '@type': 'urpx:BillingModel', ...(touSchedule ? { 'urpx:hasTOUSchedule': touSchedule } : {}), 'urpx:hasLedger': ledgers, 'urpx:hasPriceDefinition': definitions, ...(serviceTiers.length ? { 'urpx:hasServiceTiers': serviceTiers } : {}) },
     },
     'urpx:hasPrices': { '@type': 'urpx:Prices', 'urpx:hasPrice': prices },
   };

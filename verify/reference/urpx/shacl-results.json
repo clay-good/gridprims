@@ -10,19 +10,39 @@
   "rdflib": "7.6.0",
   "cases": {
     "flat": {
-      "sha256": "1da73bd6d78f1a91b9290197b660147cb3450da2e08946e3aa9788a54d8348c7",
+      "sha256": "916da8837e864d2f76e2783f8b9dae45b9daaa2a939c69ad15c2fe09318b72be",
       "conforms": true,
       "triples": 85
     },
     "seasonal": {
-      "sha256": "8b2ed095fdecef3d4c3cde32e4d3303606ebcd2e370bece921f90ae9de5171cc",
+      "sha256": "9becd9bfa82d39fa26c86df5b80ceb7a08123052073be531cb871080308314bb",
       "conforms": true,
       "triples": 168
     },
     "tiered": {
-      "sha256": "88c19ba45ffef8005b7b1d0ad99b932cd32b6ffb1fe703590c2b5f11c30e2b3d",
+      "sha256": "e373d566ca40e7ef7faa9b11faba33208a95cf4b5be72996a83f2cebdb6c9515",
       "conforms": true,
       "triples": 128
+    },
+    "tou": {
+      "sha256": "ceb5e5ef36ec4695250d1a5d96325cd0bf433722d16c54bc99a103ba4625fb67",
+      "conforms": true,
+      "triples": 229
+    },
+    "urdb-539f6a0aec4f024411ec8acb": {
+      "sha256": "fb9452843bd3949788ee4f791fcba621cbb0d7641c8672e98f0f5495ccbb882a",
+      "conforms": true,
+      "triples": 171
+    },
+    "urdb-5963ede55457a385144c9f92": {
+      "sha256": "974dab1f711d6606a144083f0ef8a5c2650751b674b4d4504611392e7dcfe340",
+      "conforms": true,
+      "triples": 134
+    },
+    "urdb-5978fc0e5457a3fc3123732c": {
+      "sha256": "f2ffdc2162ea67da7b2aa74d57bee7c4eb37ed8d3fb65f01af2f6dcb5d960fc8",
+      "conforms": true,
+      "triples": 142
     }
   }
 }

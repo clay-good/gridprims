@@ -23,4 +23,4 @@ One case any bill calculator can run: a tariff, a load, and the bill a source in
 
 A vector whose expected bill came from gridprims' own engine is refused: a vector exists to catch our mistakes.
 
-`core/lib/urpx.mjs` writes our engine's tariffs as URPX for fixed charges, monthly minimums, and energy by season and tier; `verify/tools/urpx-shacl.py` checks its output against the URPX shapes, and CI fails if the output changes without a new check. Time-of-use tariffs and the first release of vectors are still to come (`add-tariff-conformance-suite` tasks 2.1 and 2.3).
+`core/lib/urpx.mjs` writes our engine's tariffs as URPX for fixed charges, monthly minimums, energy by season and tier, and time-of-use energy; `verify/tools/urpx-shacl.py` checks its output against the URPX shapes, and CI fails if the output changes without a new check. Demand charges and the first release of vectors are still to come (`add-tariff-conformance-suite` task 2.3).
