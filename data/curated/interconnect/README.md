@@ -12,4 +12,4 @@ Interconnection screen thresholds, one record per jurisdiction and screen (`add-
 | `fields.testBasis` | What the threshold is measured against, such as the line section's annual peak load |
 | `fields.whoAnswers` | `you`, `utility`, or `utility-model` |
 
-Every field cites its source with a `locator` (section, sheet, or screen number) and the `vintage` read (the version or effective date), because superseded copies of these rules circulate and differ. None are entered yet: the federal procedures come first (task 1.2).
+Every field cites its source with a `locator` (section, sheet, or screen number) and the `vintage` read (the version or effective date), because superseded copies of these rules circulate and differ. The ten federal Fast Track screens are in `federal/`, each cited to FERC's pro forma SGIP (as updated through 2018-08-27) and to NYISO's FERC-accepted OATT Attachment Z (effective 2014-12-05), whose stored captures agree on every threshold. State records come next (task 1.2).

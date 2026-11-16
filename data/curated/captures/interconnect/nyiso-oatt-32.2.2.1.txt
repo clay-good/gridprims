@@ -1,0 +1,25 @@
+Source: https://nyisoviewer.etariff.biz/ViewerDocLibrary/MasterTariffs/9TariffSections/427.htm
+Publisher: New York Independent System Operator, OATT Attachment Z section 32.2 (Fast Track Process), effective 2014-12-05, Docket ER14-2573-001, as accepted by FERC
+Retrieved: 2026-11-16
+Original: 56889 bytes, SHA-256 60b51e7a3762dde76c3ea1a7b151c2612370dff9bd025317c0e4c4b25d5adc21
+Capture: sections 32.2.2.1.1 to 32.2.2.1.10, tags removed and whitespace collapsed
+----
+32.2.2.1.1 The proposed Small Generating Facility’s Point of Interconnection must be on a portion of the Connecting Transmission Owner’s Distribution System.
+
+32.2.2.1.2 For interconnection of a proposed Small Generating Facility to a radial distribution circuit, the aggregated generation, including the proposed Small Generating Facility, on the circuit shall not exceed 15% of the line section annual peak load as most recently measured at the substation. A line section is that portion of a Connecting Transmission Owner’s electric system connected to a customer bounded by automatic sectionalizing devices or the end of the distribution line.
+
+32.2.2.1.3. For interconnection of a proposed Small Generating Facility to the load side of spot network protectors, the proposed Small Generating Facility must utilize an inverter-based equipment package and, together with the aggregated other inverter-based generation, shall not exceed the smaller of 5% of a spot network’s maximum load or 50 kW. [3]
+
+32.2.2.1.4. The proposed Small Generating Facility, in aggregation with other generation on the distribution circuit, shall not contribute more than 10% to the distribution circuit’s maximum fault current at the point on the high voltage (primary) level nearest the proposed point of change of ownership.
+
+32.2.2.1.5. The proposed Small Generating Facility, in aggregate with other generation on the distribution circuit, shall not cause any distribution protective devices and equipment (including, but not limited to, substation breakers, fuse cutouts, and line reclosers), or Interconnection Customer equipment on the system to exceed 87.5% of the short circuit interrupting capability; nor shall the interconnection be proposed for a circuit that already exceeds 87.5% of the short circuit interrupting capability.
+
+32.2.2.1.6. Using the table below, determine the type of interconnection to a primary distribution line. This screen includes a review of the type of electrical service provided to the Interconnecting Customer, including line configuration and the transformer connection to limit the potential for creating over-voltages on the Connecting Transmission Owner’s electric power system due to a loss of ground during the operating time of any anti-islanding function. Primary Distribution Line Type Type of Interconnection to Primary Distribution Line Result/Criteria Three-phase, three wire 3-phase or single phase, phase-to-phase Pass screen Three-phase, four wire Effectively-grounded 3 phase or Single-phase, line-to-neutral Pass screen
+
+32.2.2.1.7 If the proposed Small Generating Facility is to be interconnected on single-phase shared secondary, the aggregate generation capacity on the shared secondary, including the proposed Small Generating Facility, shall not exceed 20 kW.
+
+32.2.2.1.8 If the proposed Small Generating Facility is single-phase and is to be interconnected on a center tap neutral of a 240 volt service, its addition shall not create an imbalance between the two sides of the 240 volt service of more than 20% of the nameplate rating of the service transformer.
+
+32.2.2.1.9 The Small Generating Facility, in aggregate with other generation interconnected to the transmission side of a substation transformer feeding the circuit where the Small Generating Facility proposes to interconnect shall not exceed 10 MW in an area where there are known, or posted, transient stability limitations to generating units located in the general electrical vicinity ( e.g., three or four transmission busses from the point of interconnection).
+
+32.2.2.1.10 No construction of facilities by the Connecting Transmission Owner on its own system shall be required to accommodate the Small Generating Facility.
