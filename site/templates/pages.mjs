@@ -21,6 +21,7 @@ import { proposalPanel } from '../ui/workbench-proposal.mjs';
 import { WORKBENCH_CAPABILITIES } from '../ui/workbench-review.mjs';
 import { ratingTablePanel } from '../ui/line-rating-table.mjs';
 import { poleListPanel } from '../ui/pole-list.mjs';
+import { misquotesPanel } from '../ui/screen-misquotes.mjs';
 import { conductorPicker } from '../ui/conductor-picker.mjs';
 import { ferc1Picker } from '../ui/ferc1-picker.mjs';
 import { outagePicker } from '../ui/outage-picker.mjs';
@@ -36,7 +37,7 @@ import { addedPanel } from '../ui/workbench-added.mjs';
 import { carbonPanel } from '../ui/workbench-carbon.mjs';
 
 /** Sections a tool's page adds below its inputs, with the script that runs them. */
-const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'], 'lines.attachment-height.find': [poleListPanel, '/site/pages/pole-list.js'] };
+const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'], 'lines.attachment-height.find': [poleListPanel, '/site/pages/pole-list.js'], 'interconnect.fast-track.screens': [misquotesPanel, null] };
 
 /** Pickers that fill a tool's inputs from public data: the section they render and the script that runs it. */
 const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'], 'rus-conductor': [conductorPicker, '/site/pages/conductor-picker.js'], 'ferc1': [ferc1Picker, '/site/pages/ferc1-picker.js'], 'eaglei-county': [outagePicker, '/site/pages/outage-picker.js'], 'cleanest-hours': [cleanestPicker, '/site/pages/cleanest-picker.js'], 'weather-station': [weatherPicker, '/site/pages/weather-picker.js'], 'large-load-utility': [largeLoadPicker, '/site/pages/large-load-picker.js'], 'large-load-tariff': [termsPicker, '/site/pages/terms-picker.js'] };
@@ -138,7 +139,7 @@ export function calculatorPage({ manifest, example, result, i18n, reviewed = fal
   // Each term the tool lists becomes a glossary term where the page first uses it.
   const terms = (manifest.glossary ?? []).map((id) => GLOSSARY.find((g) => g.id === id));
   const body = raw(markFirstUse(String(page), terms).markup);
-  return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js', ...pickersOf(manifest).map(([, script]) => script), ...(EXTRAS[manifest.id] ? [EXTRAS[manifest.id][1]] : [])], section: sectionOf(manifest.id) });
+  return layout({ i18n, title: `${manifest.title} · ${t('site.name')}`, description: manifest.purpose, path: toolPath(manifest.id), body, modules: ['/site/pages/calculator.js', ...pickersOf(manifest).map(([, script]) => script), ...(EXTRAS[manifest.id]?.[1] ? [EXTRAS[manifest.id][1]] : [])], section: sectionOf(manifest.id) });
 }
 
 /**
