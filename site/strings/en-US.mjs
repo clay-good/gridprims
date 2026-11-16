@@ -1321,6 +1321,7 @@ export default {
   'ledger.pinned': 'Held on version {held}: the {attempted} release changed what pages or tools read ({what}). The new version is kept, and the hold ends once what reads it is updated.',
   'diff.kicker': 'What changed · {id}',
   'diff.title': 'What changed from version {from} to {to}',
+  'diff.pageTitle': '{id}, {from} to {to}: what changed',
   'diff.description': 'Every file, column, row count, and revised value that changed between two versions of {id}.',
   'diff.files': '{added} files added, {removed} removed, {changed} changed, and {unchanged} unchanged.',
   'diff.dates': 'The publisher\'s files of {fromAsOf} against those of {toAsOf}.',

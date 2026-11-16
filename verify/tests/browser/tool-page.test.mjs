@@ -132,7 +132,13 @@ for (const kind of ['chrome', 'firefox']) {
       let id = 0;
       for (const [i, c] of cases.entries()) {
         const r = await mcp.handle({ jsonrpc: '2.0', id: ++id, method: 'tools/call', params: { name: 'gridprims_run', arguments: c } });
-        assert.deepEqual(inPage[i], r.result.structuredContent, `${c.tool} ${JSON.stringify(c.inputs)}`);
+        const agent = r.result.structuredContent;
+        // A lines tool over MCP moves file text (sources, owners, notes) into source_text, so its wording may
+        // differ (agent/mcp-server "Lines file text stays in source_text"); its status and numbers may not.
+        if (c.tool.startsWith('lines.')) {
+          assert.ok(Array.isArray(agent.source_text), `${c.tool}: source_text is listed`);
+          assert.deepEqual([inPage[i].status, inPage[i].toolVersion, inPage[i].outputs], [agent.status, agent.toolVersion, agent.outputs], `${c.tool} ${JSON.stringify(c.inputs)}`);
+        } else assert.deepEqual(inPage[i], agent, `${c.tool} ${JSON.stringify(c.inputs)}`);
       }
     } finally {
       await browser.close();

@@ -32,5 +32,5 @@ ${tb.changes?.largest?.length ? html`<ul>${tb.changes.largest.map((x) => html`<l
 ${tb.changes?.by?.length ? html`<ul>${tb.changes.by.map((g) => html`<li class="mono">${t('library.revisedBy', { group: g.group, changed: whole(g.changed), added: whole(g.added), removed: whole(g.removed), first: g.first, last: g.last })}</li>`)}</ul>` : ''}
 </section>`)}
 ${d.tablesRemoved.length ? html`<p data-diff-tables-removed>${t('diff.tablesRemoved', { list: d.tablesRemoved.join(', ') })}</p>` : ''}`;
-  return layout({ i18n, title: pageTitle(t('diff.title', { from: d.from.version, to: d.to.version })), description: t('diff.description', { id: d.dataset }), path: diffPath(d.dataset, d.to.version), body, section: 'data' });
+  return layout({ i18n, title: pageTitle(t('diff.pageTitle', { id: d.dataset, from: d.from.version, to: d.to.version })), description: t('diff.description', { id: d.dataset }), path: diffPath(d.dataset, d.to.version), body, section: 'data' });
 }
