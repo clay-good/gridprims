@@ -1,0 +1,14 @@
+Source: https://www.clarkpublicutilities.com/wp-content/uploads/2018/02/1910-Joint-Use.pdf
+Publisher: Clark Public Utilities, Construction Standards, Section 1910 Joint Use (JU1 and JU2), 21 pages
+Retrieved: 2026-11-16
+Original: 1304554 bytes, SHA-256 e951ed8f1ae6d24bf99d53f5bb27c1148761aed51324719a5b3088b0b2f107b9 (PDF modified 2025-11-04)
+Capture: the passages the gridprims sample standards file cites, as pdftotext -layout reads them, quoted for verification
+----
+[PDF page 2, JU1 Joint Use Labeling, Typical Pole Details, Not to Scale]
+Drawing labels, top to bottom: LOWEST CPU SECONDARY CONDUCTOR/NEUTRAL; 40" (NESC); CPU FIBER; 12"; MISC. COMMUNICATIONS/FIBER; 12"; CATV; 12"; TELEPHONE; 18' Min. to Street Surface
+
+[PDF page 6, JU2 4.1 Distribution Clearances at Supports]
+A minimum clearance of 40 inches must be maintained between the bottom of the supply space and the top of the communication space. The supply space begins at the bottom of the lowest piece of supply equipment. Supply equipment includes, but is not limited to, neutral and secondary clevises, bare and insulated secondary wires (except for streetlight wire drip loops), guy hardware and equipment platforms (see Figure 4.1 - Figure 4.4).
+
+[PDF page 7, JU2 4.2 Midspan Distribution Clearances]
+Midspan clearance between the supply space and the communications space at any point in the span cannot be less than 30 inches from effectively grounded neutral conductors (NESC 238B) and 5 feet 3 inches from primary conductors (see Figures 4.6 & 4.7).
