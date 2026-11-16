@@ -19,7 +19,7 @@
 - [ ] 3.3 Evaluate the locally answerable screens; verify the service-transformer backfeed scenario and the arithmetic shown (line configuration, shared secondary, and center-tap imbalance are evaluated; the transformer backfeed check is a state screen and waits on the state records)
 - [x] 3.4 Block verdicts on model-dependent screens; verify the fault-current scenario produces no pass or fail
 - [x] 3.5 Implement the status summary without likelihood language; verify the mixed-result scenario in a snapshot test
-- [ ] 3.6 Build the state comparison view from the curated records; verify the different-load-ratio-test and hosting-capacity-is-the-screen scenarios
+- [x] 3.6 Build the state comparison view from the curated records; verify the different-load-ratio-test and hosting-capacity-is-the-screen scenarios (core/lib/screen-compare.mjs and the panel on the fast-track screens page, from data/curated/interconnect; California's hosting-capacity Screen M and Texas's feeder-load test show as different tests beside the federal 15%-of-peak screen, in verify/tests/site/screen-compare.test.mjs; Ohio's 100%-of-minimum-load test joins when Ohio is entered)
 - [x] 3.7 Implement the storage minimum-load distinction; verify the solar-plus-storage scenario
 - [ ] 3.8 Add last-checked dates and the review chip, and register the threshold dataset as downloadable under CC BY 4.0; verify the stale-jurisdiction and comparison-downloadable scenarios
 

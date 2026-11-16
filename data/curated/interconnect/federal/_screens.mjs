@@ -10,10 +10,10 @@ const NYISO = { type: 'tariff', publisher: 'New York Independent System Operator
 /** Every screen: its section, name, threshold, what the threshold is measured against, and who can answer it. */
 export const SCREENS = [
   { n: 1, name: 'The point of interconnection is on the utility\'s tariffed distribution system', threshold: 'yes or no', testBasis: 'where the utility\'s distribution system ends', whoAnswers: 'utility' },
-  { n: 2, name: 'Generation on the line section', threshold: 'at most 15% of the line section\'s annual peak load', testBasis: 'the line section\'s annual peak load, as most recently measured at the substation', whoAnswers: 'utility', numbers: ['15%'] },
-  { n: 3, name: 'Load side of a spot network protector', threshold: 'inverter-based, and at most 5% of the spot network\'s maximum load or 50 kW, whichever is smaller', testBasis: 'the spot network\'s maximum load', whoAnswers: 'utility', numbers: ['5%', '50 kW'] },
+  { n: 2, family: 'aggregate-generation', measure: 'peak-load', comparison: 'at most', name: 'Generation on the line section', threshold: 'at most 15% of the line section\'s annual peak load', testBasis: 'the line section\'s annual peak load, as most recently measured at the substation', whoAnswers: 'utility', numbers: ['15%'] },
+  { n: 3, family: 'network', measure: 'network-load', comparison: 'at most', name: 'Load side of a spot network protector', threshold: 'inverter-based, and at most 5% of the spot network\'s maximum load or 50 kW, whichever is smaller', testBasis: 'the spot network\'s maximum load', whoAnswers: 'utility', numbers: ['5%', '50 kW'] },
   { n: 4, name: 'Fault current contribution', threshold: 'at most 10% of the circuit\'s maximum fault current', testBasis: 'the distribution circuit\'s maximum fault current at the point on the high-voltage (primary) level nearest the proposed point of interconnection', whoAnswers: 'utility-model', numbers: ['10%'] },
-  { n: 5, name: 'Interrupting capability', threshold: 'no protective device or customer equipment above 87.5% of its short-circuit interrupting capability, and no circuit already above it', testBasis: 'the short-circuit interrupting capability of each distribution protective device and the customer\'s equipment', whoAnswers: 'utility-model', numbers: ['87.5%'] },
+  { n: 5, family: 'interrupting-capability', measure: 'interrupting-capability', comparison: 'at most', name: 'Interrupting capability', threshold: 'no protective device or customer equipment above 87.5% of its short-circuit interrupting capability, and no circuit already above it', testBasis: 'the short-circuit interrupting capability of each distribution protective device and the customer\'s equipment', whoAnswers: 'utility-model', numbers: ['87.5%'] },
   { n: 6, name: 'Line configuration and grounding', threshold: 'on a three-phase three-wire line, a three-phase or single-phase phase-to-phase connection; on a three-phase four-wire line, an effectively grounded three-phase or single-phase line-to-neutral connection', testBasis: 'the primary line\'s configuration and the type of interconnection', whoAnswers: 'you' },
   { n: 7, name: 'Shared single-phase secondary', threshold: 'at most 20 kW of generation on the shared secondary', testBasis: 'the aggregate generation capacity on the shared single-phase secondary, including the proposed facility', whoAnswers: 'you', numbers: ['20 kW'] },
   { n: 8, name: 'Imbalance on a 240 V center-tap service', threshold: 'an imbalance of at most 20% of the service transformer\'s nameplate rating', testBasis: 'the nameplate rating of the service transformer', whoAnswers: 'you', numbers: ['20%'] },
@@ -29,6 +29,7 @@ export const record = (n) => {
   const s = SCREENS[n - 1];
   return {
     id: `federal-fast-track-2.2.1.${n}`, kind: 'interconnect-screen', jurisdiction: 'federal', lastChecked: '2026-11-16',
+    ...(s.family ? { family: s.family, measure: s.measure, comparison: s.comparison } : {}),
     contributor: { name: 'gridprims', conflict: 'none' },
     fields: {
       process: field('Fast Track', n),

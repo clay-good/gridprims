@@ -9,8 +9,8 @@ const SOS = { type: 'statute', publisher: 'Texas Secretary of State', url: 'http
 
 /** Each test the rule sets: its subsection, process, name, threshold, what it is measured against, and who answers. */
 export const SCREENS = [
-  { id: 'g-1', locator: '§ 25.211(g)(1)', process: 'Pre-interconnection study (radial)', name: 'No study fee for small pre-certified units', threshold: 'pre-certified units up to 500 kW that export not more than 15% of the total load on a single radial feeder and contribute not more than 25% of its maximum potential short-circuit current', testBasis: 'the total load on the radial feeder and its maximum potential short-circuit current', whoAnswers: 'utility', numbers: ['500 kW', '15%', '25%'] },
-  { id: 'h-1', locator: '§ 25.211(h)(1)', process: 'Network interconnection', name: 'Inverter-based generation on a secondary network', threshold: 'the utility shall approve it unless total distributed generation on the affected feeders, including the new facility, is more than 25% of the total load of the secondary network', testBasis: 'the total load of the secondary network', whoAnswers: 'utility', numbers: ['25%'] },
+  { id: 'g-1', family: 'aggregate-generation', measure: 'feeder-load', comparison: 'at most', locator: '§ 25.211(g)(1)', process: 'Pre-interconnection study (radial)', name: 'No study fee for small pre-certified units', threshold: 'pre-certified units up to 500 kW that export not more than 15% of the total load on a single radial feeder and contribute not more than 25% of its maximum potential short-circuit current', testBasis: 'the total load on the radial feeder and its maximum potential short-circuit current', whoAnswers: 'utility', numbers: ['500 kW', '15%', '25%'] },
+  { id: 'h-1', family: 'network', measure: 'network-load', comparison: 'at most', locator: '§ 25.211(h)(1)', process: 'Network interconnection', name: 'Inverter-based generation on a secondary network', threshold: 'the utility shall approve it unless total distributed generation on the affected feeders, including the new facility, is more than 25% of the total load of the secondary network', testBasis: 'the total load of the secondary network', whoAnswers: 'utility', numbers: ['25%'] },
   { id: 'i', locator: '§ 25.211(i)', process: 'Network interconnection', name: 'No study fee for small inverter systems on a network', threshold: 'no pre-interconnection study fee for a facility with inverter systems under 20 kW', testBasis: 'the facility\'s inverter capacity', whoAnswers: 'you', numbers: ['20 kW'] },
 ];
 
@@ -21,6 +21,7 @@ export const record = (id) => {
   const s = SCREENS.find((x) => x.id === id);
   return {
     id: `tx-25.211-${s.id}`, kind: 'interconnect-screen', jurisdiction: 'TX', lastChecked: '2026-11-16',
+    ...(s.family ? { family: s.family, measure: s.measure, comparison: s.comparison } : {}),
     contributor: { name: 'gridprims', conflict: 'none' },
     fields: {
       process: field(s.process, s),
