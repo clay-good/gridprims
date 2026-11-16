@@ -106,7 +106,7 @@ export function runLines(t, inputs, getHandle) {
   };
   if (typeof v.rules === 'string' && v.rules.startsWith('h_')) { const r = fromHandle('rules', 'lines-standards'); if (r.error) return r; v.rules = r.text; }
   if (Array.isArray(v.rules)) v.rules = rulesText(v.rules);
-  if (v.rules !== undefined) { const r = redactRules(v.rules); v.rules = r.text; sourceText.push(...r.sourceText); }
+  if (v.rules !== undefined && String(v.rules).trim().toLowerCase() !== 'none') { const r = redactRules(v.rules); v.rules = r.text; sourceText.push(...r.sourceText); }
   if (Array.isArray(v.attachments)) v.attachments = attachmentsText(v.attachments);
 
   let poles = null;

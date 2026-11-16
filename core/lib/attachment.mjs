@@ -79,6 +79,34 @@ export function parseRules(text) {
 }
 
 /**
+ * The rule record after the user picks one of two conflicting rows (platform/tool-contract, "One file, one
+ * set of numbers"): the other rows setting the same rule and voltage range are blanked, so row numbers
+ * keep, and every tool reading the record sees the same choice.
+ * @param {string} text @param {number} keepRow
+ */
+export function chooseRow(text, keepRow) {
+  const lines = String(text).split('\n');
+  const key = (line) => { const [id = '', appliesTo = ''] = line.split(',').map((x) => x.trim()); return `${id}|${appliesTo.toLowerCase().replace(/\s+/g, '')}`; };
+  const kept = lines[keepRow - 1];
+  if (kept === undefined || isFurniture(kept.split(',')[0].trim(), kept.trim())) return String(text);
+  const k = key(kept);
+  return lines.map((line, i) => (i !== keepRow - 1 && line.trim() && key(line) === k ? '' : line)).join('\n');
+}
+
+/**
+ * The rule a midspan check reads from the record, by id; for a primary, the row whose voltage range holds
+ * all of 0.75 to 7.5 kV (the line above is supply at 750 to 7,500 V). Null when the record leaves it out;
+ * a conflict when two rows disagree on it.
+ * @param {ReturnType<typeof parseRules>} read @param {string} id
+ */
+export function recordRule(read, id) {
+  const conflict = read.conflicts.find((c) => c.id === id);
+  if (conflict) return { conflict };
+  const rule = read.rules.find((x) => x.id === id && (!x.range || (x.range[0] <= 0.75 && x.range[1] >= 7.5)));
+  return rule ? { rule } : null;
+}
+
+/**
  * The receipt of a read: every rule with its value, unit, row and source, the rows ignored or skipped, and
  * every conflict and flag, so a reader can see what the file gave before any check uses it.
  * @param {ReturnType<typeof parseRules>} read

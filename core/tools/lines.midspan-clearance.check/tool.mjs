@@ -6,6 +6,7 @@
 
 import { feetInches, parseLength, ruleLength } from '../../lib/field-length.mjs';
 import { catenarySag, lowestPoint, parabolicSag, sagAt, smallestGap } from '../../lib/sag.mjs';
+import { parseRules, recordRule } from '../../lib/attachment.mjs';
 import GO95 from '../../../data/curated/go95/clearances.mjs';
 
 const SURFACE = { road: 'over a road', driveway: 'over a driveway', pedestrian: 'over an area only people on foot can reach', rail: 'over a railroad' };
@@ -15,6 +16,8 @@ const optional = (field, text) => (String(text).trim().toLowerCase() === 'none' 
 /** A GO 95 cell as a rule: its value, where it is, and its footnotes, which are exceptions this check does not apply. */
 const go95 = (id) => { const f = GO95.fields[id]; return f && { ft: f.value.ft, label: `GO 95 ${f.label}`, footnotes: f.value.footnotes, table: /Table (\d)/.exec(f.label)?.[1] ?? null }; };
 const SEP_ABOVE = { secondary: 'sep.secondary.comm', primary: 'sep.primary.comm', comm: 'sep.comm.comm' };
+const SEP_FILE = { secondary: ['sep.midspan.secondary.comm', 'sep.secondary.comm'], primary: ['sep.primary.comm'], comm: ['sep.midspan.comm.comm', 'sep.comm.comm'] };
+const cite = (r) => `${r.id}, row ${r.row}${r.source ? ` (${r.source}${r.locator ? `, ${r.locator}` : ''})` : ''}`;
 const inches = (ft, toward) => `${toward === 'up' ? Math.ceil(ft * 12 - 1e-9) : Math.floor(ft * 12 + 1e-9)} in.`;
 
 export function compute(v) {
@@ -60,8 +63,19 @@ export function compute(v) {
   // The weekly watch found the CPUC's page no longer matches our capture: say so on every value from it.
   const review = (r) => (r && String(v.go95Review).split(',').includes(r.table) ? ` Needs review: GO 95 Table ${r.table} has changed since this value was captured.` : '');
   const yourWords = nesc ? `the NESC ${nesc} value you entered` : 'your rules';
+  // Your standards file, read once into the rule record both lines tools share: it fills what you left as
+  // none, before GO 95 does. A value you type still wins.
+  const record = checks && !fromGo95 && String(v.rules ?? 'none').trim() !== '' && String(v.rules ?? 'none').trim().toLowerCase() !== 'none' ? parseRules(v.rules) : null;
+  if (record?.problems.length) return { status: 'invalid', errors: record.problems.map((m) => ({ field: 'rules', message: m })) };
+  const clash = (c) => ({ status: 'refused', reason: `Rows ${c.rows.join(' and ')} both set ${c.id} (${c.values.join(' and ')}). Pick one and the check can run.` });
   let ground = null;
   let clearanceFrom = yourWords;
+  let fileGround = false;
+  if (record && v.crosses !== 'not-chosen' && parsed.required.ft === null) {
+    const r = recordRule(record, `ground.${v.crosses}.comm`);
+    if (r?.conflict) return clash(r.conflict);
+    if (r) { parsed.required = { ft: r.rule.ft }; fileGround = true; steps.push(`The clearance ${SURFACE[v.crosses]} came from your standards file: ${cite(r.rule)}.`); }
+  }
   if (v.crosses !== 'not-chosen' && (fromGo95 || (layered && parsed.required.ft === null))) {
     ground = go95(`ground.${v.crosses}.comm`);
     parsed.required = { ft: ground?.ft ?? null };
@@ -79,20 +93,29 @@ export function compute(v) {
       ? `The lowest point is ${feetInches(low.height, 'down')}, ${feetInches(margin, 'down')} above the ${ruleLength(req)} ${who} ${SURFACE[v.crosses]}.`
       : `The lowest point is ${feetInches(-margin, 'up')} lower than the ${ruleLength(req)} ${who} ${SURFACE[v.crosses]}.`);
     steps.push(`${feetInches(low.height, 'down')} − ${ruleLength(req)} required ${SURFACE[v.crosses]} = ${margin >= 0 ? feetInches(margin, 'down') : `${feetInches(-margin, 'up')} short`}.`);
-    if (layered || nesc) steps.push(`The clearance ${SURFACE[v.crosses]} came from ${clearanceFrom}.`);
+    if ((layered || nesc) && !fileGround) steps.push(`The clearance ${SURFACE[v.crosses]} came from ${clearanceFrom}.`);
   }
   let gap;
   if (above) {
     const g = smallestGap(line, above, S);
     gap = g.gap * 12;
-    const typedSep = parsed.midspanSep.ft ?? parsed.poleSep.ft;
+    let typedSep = parsed.midspanSep.ft ?? parsed.poleSep.ft;
+    let fileSep = null;
+    if (record && typedSep === null) {
+      for (const id of SEP_FILE[v.aboveKind]) {
+        const r = recordRule(record, id);
+        if (r?.conflict) return clash(r.conflict);
+        if (r) { fileSep = r.rule; break; }
+      }
+      if (fileSep) { typedSep = fileSep.ft; steps.push(`The separation from the line above came from your standards file: ${cite(fileSep)}.`); }
+    }
     const g95 = fromGo95 || (layered && typedSep === null) ? go95(SEP_ABOVE[v.aboveKind]) : null;
     if (g95) notes.push(`${g95.label}: ${inches(g95.ft, 'up')} on the same pole and in adjoining midspans.${exceptions(g95)}${review(g95)}`);
     const sep = g95 ? g95.ft : typedSep;
-    const which = g95 ? 'GO 95 value' : `${nesc ? `NESC ${nesc} ` : ''}${parsed.midspanSep.ft !== null ? 'midspan value' : 'value at the pole'}`;
+    const which = g95 ? 'GO 95 value' : `${nesc ? `NESC ${nesc} ` : ''}${parsed.midspanSep.ft !== null || fileSep?.id.startsWith('sep.midspan.') ? 'midspan value' : 'value at the pole'}`;
     const place = g.midspan ? 'at midspan' : `${g.at.toFixed(0)} ft from the first pole`;
     steps.push(`The smallest gap to the line above is ${inches(g.gap, 'down')} ${place}.`);
-    if (layered && sep !== null) steps.push(`The separation came from ${g95 ? 'GO 95, filling the value your rules left as none' : 'your rules'}.`);
+    if (layered && sep !== null && !fileSep) steps.push(`The separation came from ${g95 ? 'GO 95, filling the value your rules left as none' : 'your rules'}.`);
     if (checks && sep !== null) {
       const short = sep - g.gap;
       sentences.push(short > 0 ? `The gap to the line above is ${inches(g.gap, 'down')} ${place}, ${inches(short, 'up')} short of the ${inches(sep, 'up')} ${which}.` : `The gap to the line above is ${inches(g.gap, 'down')} ${place}, at or above the ${inches(sep, 'up')} ${which}.`);

@@ -33,6 +33,13 @@ for (const kind of ['chrome', 'firefox']) {
       await browser.evaluate(load('[data-rules-file]', book, 'standards.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'));
       await waitFor(browser, '/sheet "Standards"/.test(document.querySelector("[data-rules-result]").textContent)');
       assert.match(await browser.evaluate('document.querySelector("#in-rules").value'), /^rule_id,.*\nsep\.neutral\.comm,,40,in,Our standard,4\.2,/s);
+      // Two rows setting one rule differently: the page offers each, and the pick rewrites the record the checks read.
+      const clash = btoa('rule_id,applies_to,value,unit\nsep.neutral.comm,,40,in\nsep.neutral.comm,,30,in\nsep.comm.comm,,12,in\nground.pole.comm,,18,ft');
+      await browser.evaluate(load('[data-rules-file]', clash, 'standards.csv', 'text/csv'));
+      await waitFor(browser, '/Rows 2 and 3 both set sep\\.neutral\\.comm/.test(document.querySelector("[data-rules-result]").textContent)');
+      await browser.evaluate('[...document.querySelectorAll("[data-rules-result] button")].find((b) => /Use row 3/.test(b.textContent)).click()');
+      assert.match(await browser.evaluate('document.querySelector("[data-rules-result]").textContent'), /Using row 3 for sep\.neutral\.comm/);
+      assert.equal(await browser.evaluate('document.querySelector("#in-rules").value'), 'rule_id,applies_to,value,unit\n\nsep.neutral.comm,,30,in\nsep.comm.comm,,12,in\nground.pole.comm,,18,ft');
       // A PDF of standards is not read, and the answer links the template.
       await browser.evaluate(load('[data-rules-file]', btoa('%PDF-1.7'), 'standards.pdf', 'application/pdf'));
       assert.match(await browser.evaluate('document.querySelector("[data-rules-result]").textContent'), /PDF standards are not read/);

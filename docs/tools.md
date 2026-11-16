@@ -611,7 +611,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 How far a line sags between two poles, how high its lowest point is, and how that compares with the clearance your rules require over what the span crosses.
 
-Version 0.3.0 · experimental · validation level 2, cross-checked
+Version 0.4.0 · experimental · validation level 2, cross-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|
@@ -628,6 +628,7 @@ Version 0.3.0 · experimental · validation level 2, cross-checked
 | What the line above is | `aboveKind` | choice | `secondary`, `primary`, `comm` | secondary |
 | Separation your rules require at midspan | `midspanSep` |  |  | none |
 | Separation your rules require at the pole | `poleSep` |  |  | none |
+| Your standards file | `rules` |  |  | none |
 | GO 95 tables the watch found changed | `go95Review` |  |  | none |
 | Also give the sag this far from midspan | `offset` |  |  | none |
 

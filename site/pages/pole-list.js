@@ -3,7 +3,7 @@
 // open any pole in the page above. Nothing is sent or kept.
 
 import { linesKind, readPoleList, readStandardsWorkbook, poleInputs } from '../../core/lib/lines-files.mjs';
-import { parseRules } from '../../core/lib/attachment.mjs';
+import { chooseRow, parseRules } from '../../core/lib/attachment.mjs';
 import { poleBatchCsv } from '../../core/lib/pole-batch.mjs';
 import { createI18n } from '../lib/i18n.mjs';
 import strings from '../strings/en-US.mjs';
@@ -40,8 +40,25 @@ panel.querySelector('[data-rules-file]').addEventListener('change', async (e) =>
   box.value = read.text;
   box.dispatchEvent(new Event('input', { bubbles: true }));
   const count = read.text.split('\n').length - 1;
-  rulesOut.replaceChildren(el('p', { textContent: read.sheet ? t('poles.rulesSheet', { count, sheet: read.sheet }) : t('poles.rulesRead', { count }) }));
+  rulesOut.replaceChildren(el('p', { textContent: read.sheet ? t('poles.rulesSheet', { count, sheet: read.sheet }) : t('poles.rulesRead', { count }) }), ...conflictPickers(box));
 });
+
+// Two rows that set one rule differently: offer each, and a pick rewrites the one rule record the checks read.
+function conflictPickers(box) {
+  return parseRules(box.value).conflicts.map((c) => {
+    const p = el('p', { textContent: t('poles.conflict', { rows: c.rows.join(' and '), id: c.id, values: c.values.join(' and ') }) });
+    c.rows.forEach((row, k) => {
+      const b = el('button', { type: 'button', className: 'linkish', textContent: t('poles.useRow', { row, value: c.values[k] }) });
+      b.addEventListener('click', () => {
+        box.value = chooseRow(box.value, row);
+        box.dispatchEvent(new Event('input', { bubbles: true }));
+        p.replaceChildren(t('poles.picked', { row, id: c.id }));
+      });
+      p.append(' ', b);
+    });
+    return p;
+  });
+}
 
 panel.querySelector('[data-pole-cancel]').addEventListener('click', () => { stop(); out.replaceChildren(el('p', { textContent: t('poles.cancelled') })); });
 
