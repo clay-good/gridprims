@@ -1,0 +1,128 @@
+// Our bill engine's tariff written as URPX, the LF Energy tariff interchange
+// format (add-tariff-conformance-suite design D2): JSON-LD a URPX reader or
+// the SHACL shapes can check, for the tariffs priced from totals: a fixed
+// charge by month or day, a monthly minimum, and energy by season and tier.
+// Time-of-use periods and daily tier allowances are not written yet; the
+// function refuses them and says so rather than emitting something partial.
+
+export const URPX_VERSION = 'v0.5.1';
+export const URPX_CONTEXT = `https://urpx.org/ns/context/releases/${URPX_VERSION}/jsonld/urpx-context.jsonld`;
+const ONTOLOGY = `https://github.com/urpx-org/urpx/raw/${URPX_VERSION}/ontology/urpx-ontology.ttl`;
+const ref = (id) => ({ '@id': id });
+const MONTHS = ['--01', '--02', '--03', '--04', '--05', '--06', '--07', '--08', '--09', '--10', '--11', '--12'];
+
+/** The months each season covers: from its start month up to the next season's start, wrapping the year. */
+function seasonMonths(seasons) {
+  const starts = seasons.map((s) => Number(String(s.from ?? '01-01').slice(0, 2)) - 1);
+  return seasons.map((_, i) => {
+    const out = [];
+    const end = starts[(i + 1) % starts.length];
+    for (let m = starts[i]; out.length < 12; m = (m + 1) % 12) { out.push(MONTHS[m]); if ((m + 1) % 12 === end) break; }
+    return seasons.length === 1 ? MONTHS : out;
+  });
+}
+
+/**
+ * The charge types a tariff exercises, in the conformance suite's words.
+ * @param {{fixedMonthly?: number, fixedDaily?: number, minimumMonthly?: number, seasons: any[]}} t
+ */
+export function chargeTypesOf(t) {
+  const types = [];
+  if (t.fixedMonthly || t.fixedDaily) types.push('fixed');
+  if (t.seasons.some((s) => s.periods)) types.push('tou-energy');
+  if (t.seasons.some((s) => (s.tiers?.length ?? 0) > 1)) types.push('tiered-energy');
+  const rates = new Set(t.seasons.map((s) => JSON.stringify(s.tiers ?? s.periods)));
+  if (rates.size > 1) types.push('seasonal-energy');
+  if (t.minimumMonthly) types.push('minimum-bill');
+  return types;
+}
+
+/**
+ * A tariff as a URPX package, or the reason it cannot be written yet.
+ * @param {{fixedMonthly?: number, fixedDaily?: number, minimumMonthly?: number, seasons: Array<{name: string, from?: string, tiers?: Array<{rate: number, upTo?: number, upToDaily?: number}>, periods?: any[]}>}} t
+ * @param {{id: string, name: string, utility: string, effective: string, zone?: string, source?: {url: string, retrieved: string}}} meta
+ * @returns {{document: any} | {error: string}}
+ */
+export function toUrpx(t, meta) {
+  if (t.seasons.some((s) => s.periods)) return { error: 'time-of-use periods are not written as URPX yet' };
+  if (t.seasons.some((s) => s.tiers?.some((x) => x.upToDaily !== undefined))) return { error: 'daily tier allowances are not written as URPX yet' };
+  const ns = 'gp';
+  const id = (local) => `${ns}:${meta.id}-${local}`;
+  const many = t.seasons.length > 1;
+  const months = seasonMonths(t.seasons);
+  const seasonId = (i) => id(`season-${i + 1}`);
+  const tierCount = Math.max(...t.seasons.map((s) => s.tiers.length));
+
+  const ledgers = [
+    { '@type': 'urpx:Ledger', '@id': id('ledger-energy'), 'urpx:name': 'Energy Prices', 'urpx:ledgerType': ref('urpx:bundledLedger'), 'urpx:referencesMetricInput': ref(id('mi-energy')) },
+  ];
+  const definitions = [
+    { '@type': 'urpx:PriceDefinition', '@id': id('pd-energy'), 'urpx:name': 'Energy Charge', 'urpx:chargeType': ref('urpx:usageCharge'), 'urpx:chargeCategory': ref('urpx:auxiliaryCharge'), 'urpx:billPortion': ref('urpx:bundledPortion'), 'urpx:referencesLedger': ref(id('ledger-energy')) },
+  ];
+  const prices = [];
+  const fixed = t.fixedMonthly ?? t.fixedDaily;
+  if (fixed) {
+    ledgers.push({ '@type': 'urpx:Ledger', '@id': id('ledger-service'), 'urpx:name': 'Service Price', 'urpx:ledgerType': ref('urpx:bundledLedger'), 'urpx:referencesMetricInput': ref(id('mi-meter-count')), 'urpx:hasCalculationMethod': { '@type': 'urpx:CalculationMethod', 'urpx:intervalDuration': t.fixedDaily ? 'P1D' : 'P1M' } });
+    definitions.push({ '@type': 'urpx:PriceDefinition', '@id': id('pd-customer'), 'urpx:name': 'Customer Charge', 'urpx:chargeType': ref('urpx:customerCharge'), 'urpx:chargeCategory': ref('urpx:serviceCharge'), 'urpx:billPortion': ref('urpx:bundledPortion'), 'urpx:baseQuantity': '1', 'urpx:referencesLedger': ref(id('ledger-service')) });
+    prices.push({ '@type': 'urpx:Price', '@id': id('price-customer'), 'urpx:referencesPriceDefinition': ref(id('pd-customer')), 'urpx:name': 'Customer Charge', 'urpx:startDate': meta.effective, 'urpx:unitPrice': String(fixed) });
+  }
+  if (t.minimumMonthly) {
+    if (!fixed) ledgers.push({ '@type': 'urpx:Ledger', '@id': id('ledger-service'), 'urpx:name': 'Service Price', 'urpx:ledgerType': ref('urpx:bundledLedger'), 'urpx:referencesMetricInput': ref(id('mi-meter-count')), 'urpx:hasCalculationMethod': { '@type': 'urpx:CalculationMethod', 'urpx:intervalDuration': 'P1M' } });
+    definitions.push({ '@type': 'urpx:PriceDefinition', '@id': id('pd-minimum'), 'urpx:name': 'Minimum Bill', 'urpx:chargeType': ref('urpx:minimumBill'), 'urpx:chargeCategory': ref('urpx:serviceCharge'), 'urpx:billPortion': ref('urpx:bundledPortion'), 'urpx:baseQuantity': '1', 'urpx:referencesLedger': ref(id('ledger-service')) });
+    prices.push({ '@type': 'urpx:Price', '@id': id('price-minimum'), 'urpx:referencesPriceDefinition': ref(id('pd-minimum')), 'urpx:name': 'Minimum Bill', 'urpx:startDate': meta.effective, 'urpx:unitPrice': String(t.minimumMonthly) });
+  }
+  t.seasons.forEach((s, i) => s.tiers.forEach((tier, k) => {
+    prices.push({
+      '@type': 'urpx:Price', '@id': id(`price-energy-s${i + 1}-t${k + 1}`), 'urpx:referencesPriceDefinition': ref(id('pd-energy')),
+      'urpx:name': `Energy, ${s.name}${tierCount > 1 ? `, tier ${k + 1}` : ''}`, 'urpx:startDate': meta.effective, 'urpx:unitPrice': String(tier.rate),
+      ...(tierCount > 1 ? { 'urpx:serviceTierNumber': k + 1 } : {}), ...(many ? { 'urpx:appliesInSeason': ref(seasonId(i)) } : {}),
+    });
+  }));
+
+  // Tiers: each season's brackets in cumulative kWh a month, the last open-ended.
+  const serviceTiers = tierCount > 1 ? [{
+    '@type': 'urpx:ServiceTiers', '@id': id('tiers'), 'urpx:referencesMetricInput': ref(id('mi-energy')),
+    'urpx:hasServiceTier': Array.from({ length: tierCount }, (_, k) => ({
+      '@type': 'urpx:ServiceTier', '@id': id(`tier-${k + 1}`), 'urpx:name': `Tier ${k + 1}`, 'urpx:serviceTierNumber': k + 1,
+      'urpx:hasServiceBracket': t.seasons.flatMap((s, i) => {
+        if (!s.tiers[k]) return [];
+        const lower = s.tiers.slice(0, k).reduce((sum, x) => sum + (x.upTo ?? 0), 0);
+        return [{
+          '@type': 'urpx:ServiceBracket', '@id': id(`bracket-s${i + 1}-t${k + 1}`), ...(many ? { 'urpx:appliesInSeason': ref(seasonId(i)) } : {}),
+          'urpx:lowerBound': String(lower), 'urpx:lowerBoundOperator': ref(k ? 'urpx:greaterThanOperator' : 'urpx:greaterThanOrEqualOperator'),
+          ...(s.tiers[k].upTo !== undefined ? { 'urpx:upperBound': String(Number((lower + s.tiers[k].upTo).toFixed(6))), 'urpx:upperBoundOperator': ref('urpx:lessThanOrEqualOperator') } : {}),
+        }];
+      }),
+    })),
+  }] : [];
+
+  const version = {
+    '@type': 'urpx:RatePlanVersion', '@id': id('version'),
+    'urpx:offeredBy': { '@type': 'urpx:UtilityOperator', '@id': id('utility'), 'urpx:legalName': meta.utility, 'urpx:organizationType': ref('urpx:utilityOrganization') },
+    'urpx:effectiveDateTime': `${meta.effective}T00:00:00`, 'urpx:priceCurrency': 'USD', 'urpx:commodity': ref('urpx:electricity'),
+    'urpx:serviceRole': ref('urpx:bundledServiceRole'), 'urpx:forRatePlan': ref(id('plan')),
+    // We write what our engine's record holds, not the whole tariff sheet, so completeness is not claimed.
+    'urpx:changeReason': ref('urpx:changeReasonOther'),
+    'urpx:hasCoverageClaim': { '@type': 'urpx:CoverageClaim', '@id': id('coverage'), 'urpx:completenessResult': ref('urpx:unknown'), 'urpx:selfContained': true, 'urpx:explainedBy': { '@type': 'urpx:Evaluation', '@id': id('evaluation'), 'urpx:description': 'Written by gridprims from the tariff record its bill engine prices: the fixed charge, any monthly minimum, and energy by season and tier. Riders, taxes, and anything else on the tariff sheet that the record does not hold are not included, so completeness is not claimed.' } },
+    ...(meta.source ? { 'urpx:hasDataSourceReference': { '@type': 'urpx:DataSourceReference', 'urpx:url': meta.source.url, 'urpx:dateRetrieved': meta.source.retrieved } } : {}),
+    'urpx:hasPlanElements': {
+      '@type': 'urpx:PlanElements',
+      ...(many ? { 'urpx:hasSeasons': t.seasons.map((s, i) => ({ '@type': 'urpx:Season', '@id': seasonId(i), 'urpx:seasonName': s.name, 'urpx:month': months[i] })) } : {}),
+      'urpx:hasMetricInput': [
+        { '@type': 'urpx:MetricInput', '@id': id('mi-energy'), 'urpx:name': 'kWh Energy Consumption', 'urpx:metricInputType': ref('urpx:measuredMetricInput'), 'urpx:hasMetricSpecification': { '@type': 'urpx:MetricSpecification', '@id': id('ms-energy'), 'urpx:measurementKind': ref('urpx:energy'), 'urpx:unitOfMeasure': ref('urpx:kWh') } },
+        ...(fixed || t.minimumMonthly ? [{ '@type': 'urpx:MetricInput', '@id': id('mi-meter-count'), 'urpx:name': 'Per Meter', 'urpx:metricInputType': ref('urpx:profileMetricInput'), 'urpx:profileMetricProperty': ref('urpx:meterCount') }] : []),
+      ],
+      'urpx:hasBillingModel': { '@type': 'urpx:BillingModel', 'urpx:hasLedger': ledgers, 'urpx:hasPriceDefinition': definitions, ...(serviceTiers.length ? { 'urpx:hasServiceTiers': serviceTiers } : {}) },
+    },
+    'urpx:hasPrices': { '@type': 'urpx:Prices', 'urpx:hasPrice': prices },
+  };
+  return {
+    document: {
+      '@context': [URPX_CONTEXT, { [ns]: 'https://gridprims.com/urpx/' }],
+      '@graph': [
+        { '@type': 'urpx:URPXPackage', '@id': id('package'), 'urpx:targetURPXVersion': ONTOLOGY, 'urpx:hasRatePlan': { '@type': 'urpx:RatePlan', '@id': id('plan'), 'urpx:ratePlanUniqueIdentifier': meta.id, 'urpx:name': meta.name, 'urpx:initialEffectiveDate': meta.effective, ...(meta.zone ? { 'urpx:timezoneIdentifier': meta.zone } : {}) } },
+        version,
+      ],
+    },
+  };
+}

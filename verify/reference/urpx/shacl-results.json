@@ -1,0 +1,28 @@
+{
+  "urpx": {
+    "tag": "v0.5.1",
+    "commit": "78e6a93d7eb288332fd4f02c74389a2c25b8bd7d",
+    "shacl_sha256": "aba85cd807d89273c716ec58c61e16f22d722633a1ba4f4c34649d76db9abce6",
+    "ontology_sha256": "3a9c68307ce7d308baaf88fa4e3d691953bd7e7d483002acf8297e8e15dea804",
+    "context_sha256": "50704dade0d182e4e494ec8126c51db1bba33e2c53e64f3b260c76a20429ced4"
+  },
+  "pyshacl": "0.30.1",
+  "rdflib": "7.6.0",
+  "cases": {
+    "flat": {
+      "sha256": "1da73bd6d78f1a91b9290197b660147cb3450da2e08946e3aa9788a54d8348c7",
+      "conforms": true,
+      "triples": 85
+    },
+    "seasonal": {
+      "sha256": "8b2ed095fdecef3d4c3cde32e4d3303606ebcd2e370bece921f90ae9de5171cc",
+      "conforms": true,
+      "triples": 168
+    },
+    "tiered": {
+      "sha256": "88c19ba45ffef8005b7b1d0ad99b932cd32b6ffb1fe703590c2b5f11c30e2b3d",
+      "conforms": true,
+      "triples": 128
+    }
+  }
+}
