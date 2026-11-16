@@ -4,7 +4,11 @@
 // lines from NOAA's 1991–2020 daily normals. Shared by the weather tool and the
 // usage benchmark's "how unusual was this year" line.
 
+import { NORMALS_CAVEAT } from './weather-model.mjs';
+
 const DAY = 86_400_000;
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const longDate = (iso) => `${MONTHS[+iso.slice(5, 7) - 1]} ${+iso.slice(8, 10)}, ${iso.slice(0, 4)}`;
 
 /**
  * The station's daily mean temperatures and normals, as the picker writes them: a station line, then one
@@ -51,4 +55,25 @@ export function againstNormal(w, from, to, base = 65) {
   }
   const rel = (x, normalX) => (normalX > 0 ? x / normalX - 1 : null);
   return { base, days, span, hdd, cdd, normalHdd, normalCdd, hddChange: rel(hdd, normalHdd), cddChange: rel(cdd, normalCdd) };
+}
+
+/**
+ * "How unusual was this year": the period's heating and cooling degree days at one station against its
+ * normal year, with the caveat on the normals, as the lines a result shows. Shared by the usage benchmark
+ * and the workbench's rate-change impact, so both say it the same way.
+ * @param {ReturnType<typeof readWeather>} w a read with a station and normals @param {string} from @param {string} to inclusive
+ * @returns {string[]}
+ */
+export function unusualWeather(w, from, to) {
+  const n = againstNormal(w, from, to);
+  if (!n.days) return [`How unusual the weather was: ${w.station.name} has no readings between ${longDate(from)} and ${longDate(to)}, so it cannot say.`];
+  const dd = (x) => Math.round(x).toLocaleString('en-US');
+  /** Degree days of one kind against normal; a kind the normal year has none of is said plainly. */
+  const kind = (x, normalX, change, what) => (normalX > 0
+    ? `${dd(x)} ${what} degree days, ${Math.abs(Math.round(change * 100))}% ${change >= 0 ? 'more' : 'fewer'} than normal (${dd(normalX)})`
+    : x > 0 ? `${dd(x)} ${what} degree days, where the normal year has none` : `no ${what} degree days, as normal`);
+  return [
+    `How unusual the weather was: from ${longDate(from)} to ${longDate(to)}, ${w.station.name} (station ${w.station.id}) recorded ${kind(n.hdd, n.normalHdd, n.hddChange, 'heating')}, and ${kind(n.cdd, n.normalCdd, n.cddChange, 'cooling')}, at base ${n.base} °F over the ${n.days.toLocaleString('en-US')} days with a reading.${n.days < n.span ? ` ${(n.span - n.days).toLocaleString('en-US')} of the ${n.span.toLocaleString('en-US')} days have no reading and are left out of both sides.` : ''} A year warmer or colder than normal moves use; the weather check splits how much.`,
+    NORMALS_CAVEAT,
+  ];
 }

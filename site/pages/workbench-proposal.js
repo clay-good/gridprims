@@ -5,6 +5,9 @@ import { copyTariff, impactOnIntervals, tariffDifferences } from '../../core/lib
 import { commentDraft } from '../../core/lib/comment-draft.mjs';
 import { readNumber } from '../../core/lib/bill-totals.mjs';
 import { chargeFields, renderImpact } from '../ui/workbench-proposal.mjs';
+import { readWeather, unusualWeather } from '../../core/lib/weather-text.mjs';
+import { formatLocalIso } from '../../parsers/time.mjs';
+import { stationsForZip, stationWeather } from './weather-stations.js';
 
 /** @param {{i18n: any, view: () => any, priced: () => any, utility: () => string, period: () => string, version: string}} p */
 export function setupProposal({ i18n, view, priced, utility, period, version }) {
@@ -36,8 +39,46 @@ export function setupProposal({ i18n, view, priced, utility, period, version }) 
     last = impactOnIntervals(v.series, base, prop, { zone: v.zone });
     panel.querySelector('[data-proposal-result]').innerHTML = String(renderImpact(tariffDifferences(base, prop), last, i18n));
     draftForm.hidden = false;
+    weather.hidden = false;
+    if (stations.length) chooseStation();
     panel.dataset.compared = String(Number(panel.dataset.compared ?? 0) + 1);
   });
+
+  // How unusual the file's weather was (add-weather-normalization 4.2): the nearest station's degree days over
+  // the file's local dates against its normal year, said as the usage benchmark says it.
+  const weather = panel.querySelector('[data-proposal-weather]');
+  const stationSelect = weather.querySelector('[data-proposal-station]');
+  const weatherNote = weather.querySelector('[data-proposal-weather-note]');
+  let stations = [];
+  const para = (text, className = '') => Object.assign(document.createElement('p'), { textContent: text, className });
+  async function chooseStation() {
+    const s = stations[Number(stationSelect.value)];
+    const v = view();
+    weatherNote.replaceChildren();
+    if (!s || !v) return;
+    const day = (ms) => formatLocalIso(v.zone, ms).slice(0, 10);
+    const from = day(v.series.startMs[0]);
+    const to = day(v.series.startMs.at(-1));
+    const { meta, text } = await stationWeather(s, () => [from, to]);
+    if (!text) { weatherNote.append(para(t('weather.none', { name: s.name }))); return; }
+    const w = readWeather(text);
+    if (!w.normals.length) { weatherNote.append(para(t('weather.none', { name: s.name }))); return; }
+    const [line, ...rest] = unusualWeather(w, from, to);
+    weatherNote.append(para(line, 'sentence'), ...rest.map((x) => para(x, 'unit-hint')), para(meta.attribution, 'unit-hint'));
+    panel.dataset.weather = s.station;
+  }
+  weather.querySelector('[data-proposal-weather-zip]').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const { parsed, stations: found, noPoint } = await stationsForZip(new FormData(e.target).get('zip'));
+    weather.querySelector('[data-proposal-weather-error]').textContent = parsed.ok ? '' : parsed.reason === 'four-digits' ? t('lookup.error.four', { suggestion: parsed.suggestion }) : t(`lookup.error.${parsed.reason}`);
+    if (!parsed.ok) return;
+    if (noPoint) { weatherNote.replaceChildren(para(t('weather.noZip'))); return; }
+    stations = found;
+    stationSelect.replaceChildren(...stations.map((s, i) => Object.assign(document.createElement('option'), { value: String(i), textContent: t('weather.option', { name: s.name, miles: s.miles.toFixed(1) }) })));
+    weather.querySelector('[data-proposal-station-field]').hidden = false;
+    await chooseStation();
+  });
+  stationSelect.addEventListener('change', chooseStation);
 
   // A state fills in its regulator's name and links; the person can still type their own.
   const stateSelect = draftForm.querySelector('[name=state]');
@@ -89,6 +130,7 @@ export function setupProposal({ i18n, view, priced, utility, period, version }) 
       form.innerHTML = String(chargeFields(base, i18n));
       panel.querySelector('[data-proposal-result]').replaceChildren();
       draftForm.hidden = true;
+      weather.hidden = true;
     },
   };
 }

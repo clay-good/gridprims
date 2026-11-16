@@ -3,8 +3,7 @@
 
 import { entryQuestions, parsePeriods } from '../../lib/bill-entry.mjs';
 import { annualize, compareWords, percentFrom, seasonalPattern } from '../../lib/usage-benchmark.mjs';
-import { againstNormal, readWeather } from '../../lib/weather-text.mjs';
-import { NORMALS_CAVEAT } from '../../lib/weather-model.mjs';
+import { readWeather, unusualWeather } from '../../lib/weather-text.mjs';
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const longDate = (iso) => `${MONTHS[+iso.slice(5, 7) - 1]} ${+iso.slice(8, 10)}, ${iso.slice(0, 4)}`;
@@ -48,15 +47,7 @@ export function compute({ periods: text, utilityAverage, stateAverage, dataYear,
   }
   if (w) {
     const dates = parsed.periods.flatMap((p) => [p.start, p.end]).sort();
-    const n = againstNormal(w, dates[0], dates.at(-1));
-    const dd = (x) => Math.round(x).toLocaleString('en-US');
-    /** Degree days of one kind against normal; a kind the normal year has none of is said plainly. */
-    const kind = (x, normalX, change, what) => (normalX > 0
-      ? `${dd(x)} ${what} degree days, ${Math.abs(Math.round(change * 100))}% ${change >= 0 ? 'more' : 'fewer'} than normal (${dd(normalX)})`
-      : x > 0 ? `${dd(x)} ${what} degree days, where the normal year has none` : `no ${what} degree days, as normal`);
-    if (n.days) {
-      steps.push(`How unusual the weather was: from ${longDate(dates[0])} to ${longDate(dates.at(-1))}, ${w.station.name} (station ${w.station.id}) recorded ${kind(n.hdd, n.normalHdd, n.hddChange, 'heating')}, and ${kind(n.cdd, n.normalCdd, n.cddChange, 'cooling')}, at base ${n.base} °F over the ${n.days.toLocaleString('en-US')} days with a reading.${n.days < n.span ? ` ${(n.span - n.days).toLocaleString('en-US')} of the ${n.span.toLocaleString('en-US')} days have no reading and are left out of both sides.` : ''} A year warmer or colder than normal moves use; the weather check splits how much.`, NORMALS_CAVEAT);
-    } else steps.push(`How unusual the weather was: ${w.station.name} has no readings between ${longDate(dates[0])} and ${longDate(dates.at(-1))}, so it cannot say.`);
+    steps.push(...unusualWeather(w, dates[0], dates.at(-1)));
   }
   const lead = year.estimated ? `From ${year.days} days, we estimate ${kwh(year.annualKwh)} a year. That` : `This home's ${kwh(year.annualKwh)} a year`;
   return {

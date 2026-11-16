@@ -15,6 +15,18 @@ export function proposalPanel({ t }, regulators) {
   <form data-proposal-form class="picker-row" novalidate></form>
   <p><button class="button" type="button" data-proposal-run>${t('proposal.run')}</button></p>
   <div data-proposal-result aria-live="polite"></div>
+  <div data-proposal-weather hidden>
+    <h3>${t('proposal.weather.title')}</h3>
+    <p class="unit-hint">${t('proposal.weather.intro')}</p>
+    <form class="picker-row" data-proposal-weather-zip novalidate>
+      <div class="field"><label for="proposal-zip">${t('bill.picker.zip')}</label>
+        <input id="proposal-zip" name="zip" class="mono" inputmode="numeric" autocomplete="postal-code" maxlength="10" aria-describedby="proposal-zip-error">
+        <p class="error" id="proposal-zip-error" data-proposal-weather-error role="alert"></p></div>
+      <button class="button" type="submit">${t('weather.find')}</button>
+    </form>
+    <div class="field" data-proposal-station-field hidden><label for="proposal-station">${t('weather.station')}</label><select id="proposal-station" data-proposal-station></select></div>
+    <div data-proposal-weather-note aria-live="polite"></div>
+  </div>
   <form data-draft-form hidden novalidate>
     <h3>${t('draft.title')}</h3>
     <p class="unit-hint">${t('draft.intro')}</p>

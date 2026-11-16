@@ -92,6 +92,14 @@ for (const kind of ['chrome', 'firefox']) {
       // The only actions are copy, print, and links to the regulator's own pages.
       assert.equal(await browser.evaluate("document.querySelectorAll('[data-draft-result] button').length"), 2);
       assert.match(await browser.evaluate("document.querySelector('[data-regulator-links] a').href"), /^https:\/\/[^/]*puc\.texas\.gov\//);
+      // How unusual the file's weather was: the nearest station's degree days over the file's dates against normal.
+      const before = log.length;
+      await browser.evaluate("(() => { document.querySelector('#proposal-zip').value = '78701'; document.querySelector('[data-proposal-weather-zip]').requestSubmit(); })()");
+      await waitFor(browser, "document.querySelector('[data-proposal]').dataset.weather");
+      const unusual = await browser.evaluate("document.querySelector('[data-proposal-weather-note]').textContent");
+      assert.match(unusual, /How unusual the weather was: from June 1, 2026 to June 14, 2026, .+ \(station \w+\) recorded .+cooling degree days.+ at base 65 °F/);
+      assert.match(unusual, /1991–2020 daily normals/);
+      assert.deepEqual(log.slice(before).filter((u) => /78701|USW/.test(u)), [], 'no request names the ZIP or the station');
       // The comparison card: the top three rates, the period, the URDB date, and gridprims.com.
       await browser.evaluate("document.querySelector('[data-copy-card=ranking]').click()");
       await waitFor(browser, "document.querySelector('[data-bill]').dataset.card?.startsWith('What this load would have cost')");

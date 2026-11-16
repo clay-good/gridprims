@@ -1616,6 +1616,8 @@ export default {
   'proposal.col.current': 'Current',
   'proposal.col.proposed': 'Proposed',
   'proposal.col.diff': 'Difference',
+  'proposal.weather.title': 'How unusual was this file\'s weather?',
+  'proposal.weather.intro': 'A hot or cold year moves use, and so the impact. Your ZIP finds the nearest NOAA station on this device, and its degree days over this file\'s dates are set against the normal year.',
   'draft.title': 'A comment draft',
   'draft.intro': 'A short, factual draft from these numbers. Add your own views, then copy or print it and submit it yourself. gridprims sends nothing.',
   'draft.state': 'State',
