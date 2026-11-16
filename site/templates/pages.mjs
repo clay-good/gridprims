@@ -396,7 +396,7 @@ export function datasetPage({ manifest: m, i18n, posture = m.posture, termsRow, 
 ${lib.about}
 ${sourceStamp(m, m.tables[0], i18n)}
 <p class="mono">${t('data.age', { date: date(m.generatedAt.slice(0, 10)) })} <span data-age-from="${m.generatedAt}" data-age-one="${t('data.ageDays', { count: 1 })}" data-age-other="${t('data.ageDays', { count: 2 }).replace('2', '{count}')}"></span></p>
-${takedown ? html`<p class="warning-chip">${t('data.takedownApplied', { date: date(takedown.date) })}</p>` : termsRow?.changed ? html`<p class="warning-chip">${t('data.termsChanged', { date: date(termsRow.checked) })}</p>` : ''}
+${takedown ? html`<p class="warning-chip">${t('data.takedownApplied', { date: date(takedown.date) })}</p>` : termsRow?.changed ? html`<p class="warning-chip">${t('data.termsChanged', { date: date(termsRow.checked) })}</p>` : termsRow?.unreachable && termsRow.captured ? html`<p class="unit-hint" data-terms-unreachable>${t('data.termsUnreachable', { date: date(termsRow.checked), captured: date(termsRow.captured) })}</p>` : ''}
 <p>${late.posted ? t('data.duePosted', { due: date(late.due) }) : t('data.dueInferred', { due: date(late.due) })}</p>
 <section class="panel"><h2>${t('data.posture')}</h2>
   <p><strong>${t(`data.posture.${posture}`)}</strong></p>

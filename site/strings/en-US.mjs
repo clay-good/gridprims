@@ -766,6 +766,7 @@ export default {
   'health.record': 'The full record',
   'data.age': 'Generated {date}',
   'data.ageDays': { one: '{count} day ago', other: '{count} days ago' },
+  'data.termsUnreachable': 'The terms page could not be read on {date}, so the terms recorded on {captured} stand.',
   'data.termsChanged': 'The publisher’s terms page changed on or before {date}. Until it is recognized again, we publish only what the safer posture allows.',
   'data.takedownApplied': 'At the publisher’s request ({date}), we publish no values from this data, only a description and a link.',
   'pulse.label': '{region} daily peak demand, latest {mw} MW, as of {asOf}',

@@ -24,7 +24,7 @@
 ## 5. Lookup and queue
 
 - [x] 5.1 Build state shards, the ZIP-prefix table, and the on-device ZIP lookup with subregions; verify the request-privacy, four-digit, two-state, and two-subregion scenarios
-- [ ] 5.2 Capture LBNL Queued Up's terms from the publisher's own page each refresh and let the posture decide what ships; verify the terms-not-a-recognized-license and recognized-license scenarios
+- [x] 5.2 Capture LBNL Queued Up's terms from the publisher's own page each refresh and let the posture decide what ships; verify the terms-not-a-recognized-license and recognized-license scenarios (each refresh fetches the terms page and compares it with the recorded Copyright Notice, in pipeline/check.mjs; the queue and dataset pages follow the resulting posture; LBNL's page refuses scripted requests, so a refused check is recorded with the date and the dataset page says the terms captured on 2026-10-31 stand; verify/tests/pipeline/lbnl-terms.test.mjs and verify/tests/site/queue.test.mjs)
 - [x] 5.3 Build the queue explorer with credit, summaries, and handoff; verify the county view and credit scenarios
 
 ## 6. Data library

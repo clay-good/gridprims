@@ -64,9 +64,13 @@ async function checkRelease({ dataset, entry: given, outDir = join(ROOT, 'data')
   try {
     const res = await f(entry.terms.url, { headers: { 'user-agent': 'gridprims-pipeline (+https://gridprims.com)' } });
     if (res.ok) terms = { ...compareTerms(entry, await res.text()), checked: today };
-  } catch { terms = null; }
-  const posture = postureInForce(entry, terms);
-  const termsRow = terms ? { checked: today, changed: terms.changed, posture, ...(terms.excerpt ? { excerpt: terms.excerpt } : {}), ...(entry.takedown ? { takedown: entry.takedown } : {}) } : undefined;
+    else terms = { unreachable: `HTTP ${res.status}` };
+  } catch (e) { terms = { unreachable: e.message }; }
+  // A terms page that refuses us (LBNL's refuses scripted requests) leaves the recorded terms in force, and says so.
+  const posture = postureInForce(entry, terms?.unreachable ? null : terms);
+  const termsRow = terms?.unreachable
+    ? { checked: today, unreachable: terms.unreachable, posture, captured: entry.terms.captured ?? null }
+    : terms ? { checked: today, changed: terms.changed, posture, ...(terms.excerpt ? { excerpt: terms.excerpt } : {}), ...(entry.takedown ? { takedown: entry.takedown } : {}) } : undefined;
   // A dataset pinned to a release (PUDL) has no release watch: a new release is a hand-made bump.
   if (!entry.releaseWatch) return { id: dataset, checked: false, refreshed: false, version: manifest?.version, posture, terms: termsRow, waiting: 'pinned to a release; a new one is bumped by hand' };
   // Periods are data years (2025), or months ("2026-09") for a monthly dataset such as EIA-860M.
