@@ -21,7 +21,7 @@ export default {
     { name: 'aboveKind', label: 'What the line above is', type: 'enum', example: 'secondary', options: [{ value: 'secondary', label: 'Supply at 0 to 750 V' }, { value: 'primary', label: 'Supply at 750 to 7,500 V' }, { value: 'comm', label: 'Another communication line' }], hint: 'Used with GO 95, which sets the gap by the line above.' },
     { name: 'midspanSep', label: 'Separation your rules require at midspan', type: 'text', example: 'none', hint: 'A length, or none to use the separation at the pole.' },
     { name: 'poleSep', label: 'Separation your rules require at the pole', type: 'text', example: 'none', hint: 'A length, or none.' },
-    { name: 'rules', label: 'Your standards file', type: 'text', multiline: true, private: true, example: 'none', hint: 'none, or rows of the gridprims standards template (the same rules the attachment tool reads). Its ground and separation rows fill any value above left as none; a value you type wins.' },
+    { name: 'rules', label: 'Your standards file', type: 'text', multiline: true, private: true, optional: true, example: 'none', hint: 'Optional: none, or rows of the gridprims standards template (the same rules the attachment tool reads). Its ground and separation rows fill any value above left as none; a value you type wins.' },
     { name: 'go95Review', label: 'GO 95 tables the watch found changed', type: 'text', example: 'none', hint: 'Filled by the site from the weekly watch: the table numbers whose official page no longer matches our stored capture, or none.' },
     { name: 'offset', label: 'Also give the sag this far from midspan', type: 'text', example: 'none', hint: 'A length, or none.' },
   ],
