@@ -20,7 +20,7 @@
 - [x] 3.2 Implement flagged-day listing and both-basis indices; verify the storm-days scenario
 - [x] 3.3 Implement the Shapiro-Wilk normality check at the 5% level with its warning; verify the assumption-fails scenario and that the test and level are named as ours
 - [x] 3.4 Implement our disclosed minimum and the short-history label; verify the too-few-days and two-years scenarios
-- [ ] 3.5 Store the verified published vector and the daily-table fixture; verify both, and record the two unusable published examples with recomputed values
+- [ ] 3.5 Store the verified published vector and the daily-table fixture; verify both, and record the two unusable published examples with recomputed values (the published vector is tested in verify/tests/core/reliability.test.mjs, and the unusable examples are recorded in docs/derivations/reliability.md with their recomputed values, checked by the same test; the 2011 daily table waits on a copy of the deck saved by hand, since its site and the Internet Archive refuse scripted downloads)
 
 ## 4. Peer comparison
 

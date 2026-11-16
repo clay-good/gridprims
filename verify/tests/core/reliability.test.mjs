@@ -125,6 +125,19 @@ test('the published vector: a mean of −2.86 and a standard deviation of 1.31 i
   assert.equal(t.used, 'sample');
 });
 
+test('the two unusable published examples: recomputed from their own stated inputs, they miss their printed thresholds', () => {
+  // docs/derivations/reliability.md records these with the values below; they are never used as fixtures.
+  const fromStated = (alpha, beta) => {
+    const daily = [...Array(40)].map((_, i) => ({ day: `2025-01-${String(i + 1).padStart(2, '0')}`, minutesPerCustomer: Math.exp(alpha + beta * (i % 2 ? 1 : -1) * Math.sqrt(39 / 40)) }));
+    return Number(threshold(daily, { calendarDays: 365 * 5 }).value.toFixed(2));
+  };
+  // IEEE PES Boston tutorial, slide 86: printed 66.7 minutes.
+  assert.equal(fromStated(-0.557, 1.91), 67.9);
+  // CEA 2015, Table 1.0: printed 6.23 (IEEE method) and 6.70 (modified method).
+  assert.equal(fromStated(-1.98, 1.55), 6.65);
+  assert.equal(fromStated(-3.3, 1.94), 4.71);
+});
+
 test('both standard deviations are shown, and the sample one is named as ours', () => {
   const daily = [...Array(40)].map((_, i) => ({ day: `d${i}`, minutesPerCustomer: 1 + (i % 7) }));
   const t = threshold(daily, { calendarDays: 365 * 5 });

@@ -41,7 +41,17 @@ The federal form collects only the first two, in three bases, and **does not** d
 
 The published vector in `verify/tests/core/reliability.test.mjs`: a mean of −2.86 and a sample standard deviation of 1.31 in log space give **1.51** minutes per customer in a day, matching the published figure at the two decimal places it prints. Daily values that reproduce that mean and standard deviation exactly are built in the test, so no published table is copied.
 
-CEA prints two further threshold vectors that do not reproduce: recomputing from their own stated mean and standard deviation differs in the second decimal place, which is consistent with the printed inputs being rounded. They are recorded here as unusable rather than asserted, as the spec requires.
+Two published examples do not reproduce from their own stated inputs, so they are recorded here as unusable and never used as fixtures. The recomputed values are checked in the same test file.
+
+| Source | Stated inputs | Printed threshold | Recomputed e^(mean + 2.5 × sd) |
+|---|---|---|---|
+| IEEE PES Boston tutorial, slide 86 | mean −0.557, sd 1.91 | 66.7 min | 67.90 min (1.8% higher; the printed inputs look rounded) |
+| CEA 2015, Table 1.0, IEEE method | mean −1.98, sd 1.55 | 6.23 | 6.65 (6.8% higher) |
+| CEA 2015, Table 1.0, modified method | mean −3.30, sd 1.94 | 6.70 | 4.71 (30% lower) |
+
+CEA's province-wide example on page 9 (mean −1.31, sd 1.08, printed 4.04) recomputes to 4.01, within the rounding of its inputs; it is not used either.
+
+The deck's 2011 daily table (slide 89), whose ratios reproduce exactly, is the planned day-flagging fixture. Its site and the Internet Archive both refuse scripted downloads, so it waits on a copy saved by hand.
 
 ## Known limits of the method, which the tool shows rather than hides
 
