@@ -19,6 +19,7 @@ import { checkRepoSize } from './gates/repo-size.mjs';
 import { checkSecrets } from './gates/secrets.mjs';
 import { checkSiteUrls } from './gates/urls.mjs';
 import { checkCurated } from './gates/curated.mjs';
+import { checkVectors } from './gates/vectors.mjs';
 import { checkGlossary } from './gates/glossary.mjs';
 import { checkCeii } from './gates/ceii.mjs';
 import { checkIndexSize } from './gates/index-size.mjs';
@@ -51,6 +52,7 @@ const gates = [
   ['repository size', () => checkRepoSize(root)],
   ['no secrets in outputs or tracked files', () => checkSecrets(root)],
   ['curated facts have primary, archived sources', () => checkCurated(root)],
+  ['the bill engine reproduces every bill test vector', () => checkVectors(root)],
   ['glossary entries are cited, short, and readable, and cover every tool', () => checkGlossary(root)],
   ['published URLs resolve or redirect', () => checkSiteUrls(root, { record: Boolean(process.env.GRIDPRIMS_RECORD) })],
 ];

@@ -12,7 +12,7 @@
 - [x] 2.2 Implement the provenance rules, including the refusal of self-generated expected values and the no-personal-data rule for user-supplied bill figures; verify both scenarios (checkProvenance in pipeline/lib/bill-vectors.mjs; verify/tests/pipeline/bill-vectors.test.mjs)
 - [ ] 2.3 Build the first release from the ground-truth dataset; verify its coverage table names every charge type with no coverage
 - [ ] 2.4 Publish versioned releases under CC BY 4.0 with a changelog and no account; verify the anyone-can-run-it scenario
-- [ ] 2.5 Gate the bill engine on the suite in CI; verify the our-own-failure scenario blocks a release
+- [x] 2.5 Gate the bill engine on the suite in CI; verify the our-own-failure scenario blocks a release (the gate "the bill engine reproduces every bill test vector" in verify/check.mjs runs every vector in data/curated/conformance/vectors through the engine with pipeline/lib/run-vectors.mjs, blocking on a miss unless findings.json records the vector is wrong; the scenario is in verify/tests/gates/vectors.test.mjs; no vectors are published until 2.3)
 - [ ] 2.6 Run the suite on the device from the conformance page; verify the visitor-runs-the-suite scenario
 
 ## 3. Scorecard

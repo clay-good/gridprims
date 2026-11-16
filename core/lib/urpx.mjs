@@ -166,3 +166,51 @@ export function toUrpx(t, meta, { schedule } = {}) {
     },
   };
 }
+
+const all = (doc, type) => { const out = []; const walk = (x) => { if (Array.isArray(x)) x.forEach(walk); else if (x && typeof x === 'object') { if (x['@type'] === type) out.push(x); Object.values(x).forEach(walk); } }; walk(doc); return out; };
+const idOf = (x) => (x && typeof x === 'object' ? x['@id'] : x);
+
+/**
+ * A URPX document read back into the bill engine's tariff, for the subset toUrpx writes: a fixed charge, a
+ * monthly minimum, and energy by season and tier or by time-of-use period. Anything else on a price is named
+ * as unsupported rather than skipped, so a vector the engine cannot price is reported, not mispriced.
+ * @param {any} doc
+ * @returns {{tariff: any} | {error: string}}
+ */
+export function fromUrpx(doc) {
+  const defs = new Map(all(doc, 'urpx:PriceDefinition').map((d) => [d['@id'], d]));
+  const ledgers = new Map(all(doc, 'urpx:Ledger').map((l) => [l['@id'], l]));
+  const seasonNodes = all(doc, 'urpx:Season');
+  const seasons = seasonNodes.length
+    ? seasonNodes.map((s) => ({ id: s['@id'], name: s['urpx:seasonName'], from: `${[].concat(s['urpx:month'])[0].slice(2)}-01` }))
+    : [{ id: null, name: 'all year', from: '01-01' }];
+  const touPeriods = new Map(all(doc, 'urpx:TOUTier').flatMap((t) => (t['urpx:hasTOUPeriod'] ?? []).map((p) => [p['urpx:touPeriodNumber'], t['urpx:touTierNumber']])));
+  const brackets = all(doc, 'urpx:ServiceTier').flatMap((t) => (t['urpx:hasServiceBracket'] ?? []).map((b) => ({ tier: t['urpx:serviceTierNumber'], season: idOf(b['urpx:appliesInSeason']) ?? null, lower: Number(b['urpx:lowerBound']), upper: b['urpx:upperBound'] === undefined ? null : Number(b['urpx:upperBound']) })));
+  const tariff = { seasons: seasons.map((s) => ({ name: s.name, from: s.from })) };
+  const unsupported = [];
+  const seasonFor = (p) => { const id = idOf(p['urpx:appliesInSeason']); const i = id ? seasons.findIndex((s) => s.id === id) : 0; return i < 0 ? null : i; };
+  for (const p of all(doc, 'urpx:Price')) {
+    const d = defs.get(idOf(p['urpx:referencesPriceDefinition']));
+    const type = idOf(d?.['urpx:chargeType']);
+    const rate = Number(p['urpx:unitPrice']);
+    if (type === 'urpx:customerCharge') {
+      const daily = ledgers.get(idOf(d['urpx:referencesLedger']))?.['urpx:hasCalculationMethod']?.['urpx:intervalDuration'] === 'P1D';
+      tariff[daily ? 'fixedDaily' : 'fixedMonthly'] = rate;
+    } else if (type === 'urpx:minimumBill') tariff.minimumMonthly = rate;
+    else if (type === 'urpx:usageCharge') {
+      const i = seasonFor(p);
+      if (i === null) { unsupported.push(`${p['urpx:name']}: a season that is not defined`); continue; }
+      const s = tariff.seasons[i];
+      if (d['urpx:touPeriodNumber'] !== undefined) {
+        const tier = touPeriods.get(d['urpx:touPeriodNumber']);
+        (s.periods ??= []).push({ name: `period ${tier}`, rate });
+      } else {
+        const k = p['urpx:serviceTierNumber'] ?? 1;
+        const b = brackets.find((x) => x.tier === k && (x.season === seasons[i].id || x.season === null));
+        (s.tiers ??= [])[k - 1] = { rate, ...(b?.upper !== null && b ? { upTo: Number((b.upper - b.lower).toFixed(6)) } : {}) };
+      }
+    } else unsupported.push(`${p['urpx:name'] ?? p['@id']}: charge type ${type ?? 'none'}`);
+  }
+  if (unsupported.length) return { error: `not read by the bill engine: ${unsupported.join('; ')}` };
+  return { tariff };
+}
