@@ -1,0 +1,11 @@
+Source: https://codes.ohio.gov/ohio-administrative-code/rule-4901:1-22-07
+Publisher: Ohio Legislative Service Commission, Ohio Administrative Code rule 4901:1-22-07 (Level 2 review procedure), adopted by the Public Utilities Commission of Ohio, effective July 20, 2026
+Retrieved: 2026-11-16
+Original: 25826 bytes, SHA-256 242af8384d454e54e94a837f7d69e52cdde91c3dee382da060de71b8852c2058
+Capture: paragraphs (B)(1)(d) and (B)(1)(f), tags removed and whitespace collapsed
+----
+[4901:1-22-07(B)(1)(d)]
+(d) For interconnection of a proposed DER to a radial distribution circuit, the aggregated generation, including the proposed DER, on the circuit shall not exceed one hundred per cent of the line section's relevant minimum load as most recently measured at the substation or calculated for the line section. The application of this screen addresses back feed and islanding conditions.
+
+[4901:1-22-07(B)(1)(f)]
+(f) The proposed DER, in aggregation with other DER generation on the distribution circuit, may not cause any distribution protective devices and equipment including substation breakers, fuse cutouts, and line reclosers, or other customer equipment on the electric distribution system, to be exposed to fault currents exceeding ninety per cent of the short circuit interrupting capability; nor shall an application requesting interconnection on a circuit that already exceeds ninety per cent of the short circuit interrupting capability be approved.

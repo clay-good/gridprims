@@ -34,6 +34,12 @@ test('different load-ratio test: a state measuring something other than peak loa
   // Same measure, but "less than 15%" where the federal rule says "at most 15%".
   assert.equal(row('aggregate-generation', 'ca-rule-21-m-peak').versusFederal, 'different-threshold');
   assert.equal(row('interrupting-capability', 'ca-rule-21-g').versusFederal, 'same');
+  // Ohio's Level 2 screen tests 100% of minimum load where the federal one tests 15% of peak: a different test.
+  const oh = row('aggregate-generation', 'oh-4901-1-22-07-b-1-d');
+  assert.equal(oh.versusFederal, 'different-test');
+  assert.match(oh.threshold, /100% of the line section's relevant minimum load/);
+  assert.deepEqual(oh.cites.map((c) => c.locator), ['4901:1-22-07(B)(1)(d)']);
+  assert.equal(row('interrupting-capability', 'oh-4901-1-22-07-b-1-f').versusFederal, 'different-threshold');
   // The federal row leads each family that has one; a state screen with no federal kind says so.
   for (const f of families.filter((x) => x.rows.some((r) => r.jurisdiction === 'federal'))) assert.equal(f.rows[0].jurisdiction, 'federal');
   assert.equal(row('transformer-rating', 'ca-rule-21-d').versusFederal, 'no-federal');
