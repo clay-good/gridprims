@@ -1102,6 +1102,8 @@ export default {
   'compare.json': 'JSON',
   'compare.checked': 'Last checked {date}',
   'compare.review': 'Needs review: not checked in 12 months',
+  'compare.family.transformer-rating': 'Service transformer rating',
+  'compare.versus.no-federal': 'No federal screen of this kind',
   'compare.unreachable': 'Second source, {publisher}, could not be read on {date}: one source only.',
   'misquotes.title': 'Thresholds people misquote',
   'misquotes.intro': 'A wrong number remembered from a slide or an article can send a project down the wrong path. Each of these is checked against the rule text, with the version we read.',

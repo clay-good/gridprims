@@ -34,8 +34,9 @@ test('different load-ratio test: a state measuring something other than peak loa
   // Same measure, but "less than 15%" where the federal rule says "at most 15%".
   assert.equal(row('aggregate-generation', 'ca-rule-21-m-peak').versusFederal, 'different-threshold');
   assert.equal(row('interrupting-capability', 'ca-rule-21-g').versusFederal, 'same');
-  // The federal row leads each family.
-  for (const f of families) assert.equal(f.rows[0].jurisdiction, 'federal');
+  // The federal row leads each family that has one; a state screen with no federal kind says so.
+  for (const f of families.filter((x) => x.rows.some((r) => r.jurisdiction === 'federal'))) assert.equal(f.rows[0].jurisdiction, 'federal');
+  assert.equal(row('transformer-rating', 'ca-rule-21-d').versusFederal, 'no-federal');
 });
 
 test('hosting capacity is the screen: the California row names the published profiles and cites both tariffs', () => {

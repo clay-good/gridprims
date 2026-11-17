@@ -7,13 +7,13 @@
 // with another number or comparison.
 
 /** The screen families compared, in page order. */
-export const FAMILIES = ['aggregate-generation', 'interrupting-capability', 'network'];
+export const FAMILIES = ['aggregate-generation', 'interrupting-capability', 'network', 'transformer-rating'];
 
 const numbersIn = (text) => (String(text).match(/\d+(?:\.\d+)?\s?(?:%|kW|kVA|MW)/g) ?? []).map((x) => x.replace(/\s/g, '')).sort().join(' ');
 
 /**
  * @param {any[]} records curated interconnection screen records
- * @returns {Array<{family: string, rows: Array<{id: string, jurisdiction: string, lastChecked: string, screen: string, threshold: string, measure: string, comparison: string, cites: Array<{publisher: string, locator: string, vintage: string, url: string}>, unreachable: Array<{publisher: string, checked: string}>, versusFederal: 'federal' | 'same' | 'different-threshold' | 'different-test'}>}>}
+ * @returns {Array<{family: string, rows: Array<{id: string, jurisdiction: string, lastChecked: string, screen: string, threshold: string, measure: string, comparison: string, cites: Array<{publisher: string, locator: string, vintage: string, url: string}>, unreachable: Array<{publisher: string, checked: string}>, versusFederal: 'federal' | 'same' | 'different-threshold' | 'different-test' | 'no-federal'}>}>}
  */
 export function compareScreens(records) {
   return FAMILIES.map((family) => {
@@ -23,7 +23,8 @@ export function compareScreens(records) {
     const rows = inFamily.map((r) => {
       const sources = r.fields.threshold.sources;
       const versusFederal = r === federal ? 'federal'
-        : !federal || r.measure !== federal.measure ? 'different-test'
+        : !federal ? 'no-federal'
+        : r.measure !== federal.measure ? 'different-test'
           : r.comparison !== federal.comparison || numbersIn(r.fields.threshold.value) !== numbersIn(federal.fields.threshold.value) ? 'different-threshold' : 'same';
       return {
         id: r.id, jurisdiction: r.jurisdiction, screen: r.fields.screen.value, threshold: r.fields.threshold.value, measure: r.measure, comparison: r.comparison, lastChecked: r.lastChecked,
