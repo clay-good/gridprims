@@ -33,8 +33,8 @@
 
 ## 5. Feeder data and equipment
 
-- [ ] 5.1 Write the pre-application report walkthrough per jurisdiction with citations; verify the report-explained and no-such-report scenarios
-- [ ] 5.2 Map returned items to the screens they settle; verify the what-the-fee-buys scenario
+- [x] 5.1 Write the pre-application report walkthrough per jurisdiction with citations; verify the report-explained and no-such-report scenarios (data/curated/pre-application: the federal report from SGIP § 1.2 with its fee, 20-business-day deadline, what to send, and the thirteen items, and Texas's no-report record naming its pre-interconnection study path; shown on the fast-track screens page; verify/tests/site/pre-application.test.mjs; other states join as they are entered)
+- [x] 5.2 Map returned items to the screens they settle; verify the what-the-fee-buys scenario (core/lib/pre-application.mjs, labeled as our reading of § 1.2.3 beside § 2.2.1, with the model-only screens named; verify/tests/site/pre-application.test.mjs)
 - [ ] 5.3 Build the hosting-capacity directory with terms, vintages, and per-feeder minimum-load availability, linking only; verify the viewer-only, utility-publishes-minimum-load, atlas-condition, and nothing-hosted scenarios
 - [ ] 5.4 Add the map caveats and freshness chips; verify the caveat and stale-entry scenarios
 - [ ] 5.5 Write the certification and settings reference with per-value citations; verify the certification-mismatch, setting-cited, and no-free-source scenarios
