@@ -1,0 +1,14 @@
+Source: https://www.hawaiianelectric.com/documents/billing_and_payment/rates/maui_electric_rules/14.pdf
+Publisher: Maui Electric Company, Limited, Rule No. 14, Appendix with the Initial Technical Review screens
+Retrieved: 2026-11-16
+Original: 7573922 bytes, SHA-256 c9f60d3c05c7103ccce061eff5e6d813e1616f10f92c59d713fe474a260ffdbd
+Capture: the Screen 5, 9, and 11 passages, as pdftotext -layout reads them, whitespace collapsed
+----
+[Screen 5]
+Screen 5: Is the aggregate Generating Facility capacity on the Line Section less than or equal to 15% of Line Section peak? If Yes (Pass), continue to Screen 6. If No (Fail), continue to Screen 6; Initial Technical Review Screens 2 through 10 shall be completed in its entirety. If any of the Screens
+
+[Screen 9]
+red. If No (Pass), continue to Screen 10. Significance: This Screen determines whether the Generating Facility, in aggregate with other generation on the distribution circuit, causes any distribution protective devices and equipment on the system to exceed 87.5% of their short circuit interrupting capability. If the Generating Facility passes this screen it can be exp
+
+[Screen 11]
+Screen 11: Is the gross rating of the Generating Facility 100 kVA or less? MAUI ELECTRIC COMPANY, LIMITED Docket No. 2014-0192, D&O No. 33791 dated July 11, 201

@@ -223,6 +223,8 @@ Initial Review results are due within **15 days** (§ F.2.a). Note Screen N's ex
 
 ### 3.3 Hawaii Rule 14H (Verified from the HECO tariff, Appendix I; Docket 2019-0323, Order No. 40670, 2024-03-19)
 
+*Note, 2026-11-16:* in the Rule 14 books posted on hawaiianelectric.com that day, the sheets carrying Screens 5, 9, and 11 are footed "Effective October 22, 2018" (Maui Electric's Screen 11 sheet: August 18, 2016). The thresholds below match; the gridprims records cite the sheets' own dates.
+
 **The current Rule 14H contains no minimum-load screen at all, and the widely cited "120% of DML" screen was never in the tariff.** Screens 1–11 are the Initial Technical Review; 12 and 13 are Supplemental Review. **Verified** — full-text search of the HECO and MECO Rule 14 books returns **zero** occurrences of "daytime minimum," "DML" or "hosting capacity." Screen sheets are effective **2024-04-01** per Order No. 40670 (Docket 2019-0323); Appendix I is harmonized to IEEE 1547-2018 including 1547a-2020.
 
 | Screen | Question | Threshold |

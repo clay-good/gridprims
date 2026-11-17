@@ -1,0 +1,14 @@
+Source: https://www.hawaiianelectric.com/documents/billing_and_payment/rates/hawaiian_electric_rules/14.pdf
+Publisher: Hawaiian Electric Company, Inc., Rule No. 14 (Service Connections and Facilities on Customer's Premises), Appendix with the Initial Technical Review screens
+Retrieved: 2026-11-16
+Original: 3488331 bytes, SHA-256 ee8ac69b350003f8a27f5be9447dbdd28a8ef825ceb4c9cd4a14c448fcc3a590
+Capture: the Screen 5, 9, and 11 passages, as pdftotext -layout reads them, whitespace collapsed
+----
+[Screen 5]
+Screen 5: Is the aggregate Generating Facility capacity on the Line Section less than or equal to 15% of Line Section peak? If Yes (Pass), continue to Screen 6. If No (Fail), continue to Screen 6; Initial Technical Review Screens 2 through 10 shall be completed in its entirety. If any of the Screens
+
+[Screen 9]
+red. If No (Pass), continue to Screen 10. Significance: This Screen determines whether the Generating Facility, in aggregate with other generation on the distribution circuit, causes any distribution protective devices and equipment on the system to exceed 87.5% of their short circuit interrupting capability. If the Generating Facility passes this screen it can be exp
+
+[Screen 11]
+Screen 11: Is the gross rating of the Generating Facility 100 kVA or less? If Yes, the Generating Facility qualifies for Simplified Interconnection. Skip remain

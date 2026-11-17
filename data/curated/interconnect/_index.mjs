@@ -22,5 +22,8 @@ import r_tx_25_211_h_1 from './tx/25.211-h-1.mjs';
 import r_tx_25_211_i from './tx/25.211-i.mjs';
 import r_oh_d from './oh/4901-1-22-07-b-1-d.mjs';
 import r_oh_f from './oh/4901-1-22-07-b-1-f.mjs';
+import r_hi_5 from './hi/rule-14-screen-5.mjs';
+import r_hi_9 from './hi/rule-14-screen-9.mjs';
+import r_hi_11 from './hi/rule-14-screen-11.mjs';
 
-export default [r_ca_rule_21_d, r_ca_rule_21_g, r_ca_rule_21_j, r_ca_rule_21_m_ica, r_ca_rule_21_m_peak, r_ca_rule_21_n, r_federal_fast_track_2_2_1_1, r_federal_fast_track_2_2_1_2, r_federal_fast_track_2_2_1_3, r_federal_fast_track_2_2_1_4, r_federal_fast_track_2_2_1_5, r_federal_fast_track_2_2_1_6, r_federal_fast_track_2_2_1_7, r_federal_fast_track_2_2_1_8, r_federal_fast_track_2_2_1_9, r_federal_fast_track_2_2_1_10, r_tx_25_211_g_1, r_tx_25_211_h_1, r_tx_25_211_i, r_oh_d, r_oh_f];
+export default [r_ca_rule_21_d, r_ca_rule_21_g, r_ca_rule_21_j, r_ca_rule_21_m_ica, r_ca_rule_21_m_peak, r_ca_rule_21_n, r_federal_fast_track_2_2_1_1, r_federal_fast_track_2_2_1_2, r_federal_fast_track_2_2_1_3, r_federal_fast_track_2_2_1_4, r_federal_fast_track_2_2_1_5, r_federal_fast_track_2_2_1_6, r_federal_fast_track_2_2_1_7, r_federal_fast_track_2_2_1_8, r_federal_fast_track_2_2_1_9, r_federal_fast_track_2_2_1_10, r_tx_25_211_g_1, r_tx_25_211_h_1, r_tx_25_211_i, r_oh_d, r_oh_f, r_hi_5, r_hi_9, r_hi_11];
