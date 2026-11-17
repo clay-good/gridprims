@@ -5,9 +5,12 @@
 // minimum-load range). Peak load is always the user's.
 
 import { BAND, minLoadBand, minLoadMet, peakScreen } from '../../lib/min-load.mjs';
+import FALLBACKS from '../../../data/curated/min-load-fallbacks/_index.mjs';
+import PENDING from '../../../data/curated/min-load-fallbacks/_pending.mjs';
 
 const kw = (x) => `${Math.round(x).toLocaleString('en-US')} kW`;
 const pc = (x) => `${(x * 100).toFixed(1)}%`;
+const STATE_NAME = { NM: 'New Mexico', OR: 'Oregon' };
 const SOURCE = { report: 'a pre-application report', published: 'the utility\'s published feeder value', other: 'the utility' };
 
 export function compute(v) {
@@ -40,6 +43,20 @@ export function compute(v) {
       : `The minimum-load screen is met if minimum load is above ${pc(b.flip)} of peak and not met below it, so it turns on data the utility holds.`;
   }
   steps.push('Minimum daytime load is not published for most feeders; the 15% to 40% band is the range utilities themselves assume. A pre-application report or a published feeder value settles it.');
+  // A state that writes its own fallback into its rules: each value against its technology, as the state's rule,
+  // and the result at the user's. A fallback seen only in a secondary source is named but not used.
+  const state = String(v.state ?? 'none').trim().toUpperCase();
+  const fallback = FALLBACKS.find((x) => x.state === state);
+  const pending = PENDING.find((x) => x.state === state);
+  if (fallback) {
+    const share = fallback.fields[v.generatorType === 'rotating' ? 'rotating' : 'inverter'].value;
+    const met = p.ratio * 100 <= share + 1e-9;
+    outputs.stateFallbackShare = share;
+    steps.push(`${STATE_NAME[state] ?? state}'s own rule (${fallback.rule}) sets a fallback for when minimum load data is not available: at most ${fallback.fields.inverter.value}% of peak for inverter-based generation and at most ${fallback.fields.rotating.value}% for rotating generation. It applies to ${fallback.appliesTo}.`);
+    steps.push(`For ${v.generatorType === 'rotating' ? 'rotating' : 'inverter-based'} generation: ${kw(v.aggregateKw)} ÷ ${kw(v.peakKw)} = ${pc(p.ratio)}, against at most ${share}%: ${met ? 'met' : 'not met'}.`);
+  } else if (pending) {
+    steps.push(`${STATE_NAME[state] ?? state} may set its own fallback (${pending.rule}); it is being verified against the rule's own text, so only the band is shown.`);
+  }
   return {
     status: 'ok', outputs,
     sentence: `The project is ${pc(p.ratio)} of peak, so the 15% screen is ${p.met ? 'met' : 'not met'}. ${minSentence}`,

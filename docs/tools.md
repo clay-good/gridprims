@@ -694,7 +694,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 Whether a solar or other small generator passes the 15%-of-peak screen, and the minimum-load screen across the range of minimum load utilities assume, unless you have the utility's own value.
 
-Version 0.2.0 · experimental · validation level 1, self-checked
+Version 0.3.0 · experimental · validation level 1, self-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|
@@ -704,12 +704,15 @@ Version 0.2.0 · experimental · validation level 1, self-checked
 | Minimum load from the utility | `minLoadKw` | kW | 0 to 1000000 | 0 |
 | Where the minimum load came from | `minLoadSource` | choice | `report`, `published`, `other` | report |
 | The utility marked it | `measured` | choice | `unknown`, `measured`, `estimated` | unknown |
+| Your state | `state` |  |  | none |
+| Your generator connects through | `generatorType` | choice | `inverter`, `rotating` | inverter |
 
 | Output | Name | Unit | Rounding |
 |---|---|---|---|
 | Generation as a share of peak | `peakRatio` | % | 1 decimals |
 | Generation as a share of the utility's minimum load | `minLoadRatio` | % | 1 decimals |
 | Minimum load, as a share of peak, at which the answer flips | `flipShare` | % | 1 decimals |
+| Your state's fallback share of peak for your generator | `stateFallbackShare` | % | 0 decimals |
 
 **Method.** The 15%-of-peak screen divides generation on the line section by its annual peak and is met at 15% or less (SGIP § 2.2.1.2). The minimum-load screen is met only when generation is less than 100% of minimum load (SGIP § 2.4.4.1). Solar with no storage uses daytime minimum load (10 a.m. to 4 p.m. fixed, 8 a.m. to 6 p.m. tracking); everything else uses absolute minimum load (§ 2.4.4.1.1). With no utility value, the daytime screen is computed at 15% and 40% of peak, the range utilities assume, and the share where it flips is generation ÷ peak.
 
