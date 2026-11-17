@@ -1,8 +1,8 @@
 ## 1. Ground truth
 
 - [ ] 1.1 Identify every state commission bill-comparison publication, record its terms per state, and exclude any whose terms restrict reuse; verify the redistribution-basis-per-state scenario
-- [ ] 1.2 Extract rows with per-figure provenance (document, date, page, utility, consumption level, stated assumptions); verify the row-provenance, unstated-taxes, and ambiguous-figure scenarios
-- [ ] 1.3 Extract every figure twice by two independent methods, exclude and count disagreements automatically, and publish the rate each release; verify the error-rate scenario
+- [ ] 1.2 Extract rows with per-figure provenance (document, date, page, utility, consumption level, stated assumptions); verify the row-provenance, unstated-taxes, and ambiguous-figure scenarios (Florida first: data/curated/conformance/ground-truth/fl-psc-2025-12-31.json holds 324 typical residential bills for 54 utilities at six consumption levels from the PSC's Comparative Rate Statistics of 2025-12-31, each with its page, utility, level, ownership, the report's stated assumptions, and the report's checksum; other states are still to come)
+- [ ] 1.3 Extract every figure twice by two independent methods, exclude and count disagreements automatically, and publish the rate each release; verify the error-rate scenario (Florida: pipeline/lib/fl-psc-bills.mjs reads every figure from layout text and from word positions, checks the 1,000 kWh column against the report's ranking table, and excludes and counts any disagreement; all 324 agreed; verify/tests/pipeline/fl-psc-bills.test.mjs)
 - [ ] 1.4 Publish coverage by state, commission, utility, and consumption level, with absences and reasons; verify the missing-state scenario
 - [ ] 1.5 State what the regulator figures do and do not prove before every table and download; verify the limits-stated scenario
 

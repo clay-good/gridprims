@@ -1,0 +1,2995 @@
+{
+  "document": {
+    "publisher": "Florida Public Service Commission",
+    "title": "Comparative Rate Statistics as of December 31, 2025",
+    "url": "https://www.floridapsc.com/pscfiles/website-files/PDF/Publications/Reports/General/Comparative/December%2031,%202025.pdf",
+    "retrieved": "2026-11-16",
+    "sha256": "27ecfe13d5f305d7fdd470cc9c7b9ac84d0799871c9ad06bec66ffe6ffcbbf8c",
+    "asOf": "2025-12-31",
+    "assumptions": "Excludes local taxes, franchise fees, and gross receipts taxes billed as a separate line item; includes cost recovery clause factors effective December 2025 (the tables' own footnote). Bills marked ** were sourced by the PSC from the utility's website.",
+    "terms": "A Florida public record (Chapter 119, Florida Statutes); the report states no restriction on reuse. Only the figures are kept here, each with its page."
+  },
+  "extraction": {
+    "methods": [
+      "layout text, line by line",
+      "word positions under the column headers"
+    ],
+    "figures": 324,
+    "agreed": 324,
+    "disagreed": 0,
+    "disagreementRate": 0
+  },
+  "excluded": [],
+  "rows": [
+    {
+      "page": "A-1",
+      "utility": "Florida Power & Light Company",
+      "ownership": "investor-owned",
+      "kwh": 100,
+      "bill": 25,
+      "customerCharge": 25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Power & Light Company",
+      "ownership": "investor-owned",
+      "kwh": 250,
+      "bill": 39.89,
+      "customerCharge": 25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Power & Light Company",
+      "ownership": "investor-owned",
+      "kwh": 500,
+      "bill": 70.15,
+      "customerCharge": 25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Power & Light Company",
+      "ownership": "investor-owned",
+      "kwh": 750,
+      "bill": 100.43,
+      "customerCharge": 25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Power & Light Company",
+      "ownership": "investor-owned",
+      "kwh": 1000,
+      "bill": 130.68,
+      "customerCharge": 25,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Power & Light Company",
+      "ownership": "investor-owned",
+      "kwh": 1500,
+      "bill": 201.25,
+      "customerCharge": 25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "FPL - NW Division",
+      "ownership": "investor-owned",
+      "kwh": 100,
+      "bill": 25,
+      "customerCharge": 25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "FPL - NW Division",
+      "ownership": "investor-owned",
+      "kwh": 250,
+      "bill": 42.2,
+      "customerCharge": 25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "FPL - NW Division",
+      "ownership": "investor-owned",
+      "kwh": 500,
+      "bill": 74.76,
+      "customerCharge": 25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "FPL - NW Division",
+      "ownership": "investor-owned",
+      "kwh": 750,
+      "bill": 107.34,
+      "customerCharge": 25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "FPL - NW Division",
+      "ownership": "investor-owned",
+      "kwh": 1000,
+      "bill": 139.89,
+      "customerCharge": 25,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-1",
+      "utility": "FPL - NW Division",
+      "ownership": "investor-owned",
+      "kwh": 1500,
+      "bill": 215.07,
+      "customerCharge": 25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Duke Energy Florida, LLC",
+      "ownership": "investor-owned",
+      "kwh": 100,
+      "bill": 30.94,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Duke Energy Florida, LLC",
+      "ownership": "investor-owned",
+      "kwh": 250,
+      "bill": 56.64,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Duke Energy Florida, LLC",
+      "ownership": "investor-owned",
+      "kwh": 500,
+      "bill": 99.4,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Duke Energy Florida, LLC",
+      "ownership": "investor-owned",
+      "kwh": 750,
+      "bill": 142.21,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Duke Energy Florida, LLC",
+      "ownership": "investor-owned",
+      "kwh": 1000,
+      "bill": 184.96,
+      "customerCharge": 30,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-1",
+      "utility": "Duke Energy Florida, LLC",
+      "ownership": "investor-owned",
+      "kwh": 1500,
+      "bill": 283.06,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Tampa Electric Company",
+      "ownership": "investor-owned",
+      "kwh": 100,
+      "bill": 28,
+      "customerCharge": 12.9,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Tampa Electric Company",
+      "ownership": "investor-owned",
+      "kwh": 250,
+      "bill": 50.64,
+      "customerCharge": 12.9,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Tampa Electric Company",
+      "ownership": "investor-owned",
+      "kwh": 500,
+      "bill": 88.38,
+      "customerCharge": 12.9,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Tampa Electric Company",
+      "ownership": "investor-owned",
+      "kwh": 750,
+      "bill": 126.09,
+      "customerCharge": 12.9,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Tampa Electric Company",
+      "ownership": "investor-owned",
+      "kwh": 1000,
+      "bill": 163.81,
+      "customerCharge": 12.9,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-1",
+      "utility": "Tampa Electric Company",
+      "ownership": "investor-owned",
+      "kwh": 1500,
+      "bill": 249.29,
+      "customerCharge": 12.9,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Public Utilities Company",
+      "ownership": "investor-owned",
+      "kwh": 100,
+      "bill": 37.01,
+      "customerCharge": 24.4,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Public Utilities Company",
+      "ownership": "investor-owned",
+      "kwh": 250,
+      "bill": 55.89,
+      "customerCharge": 24.4,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Public Utilities Company",
+      "ownership": "investor-owned",
+      "kwh": 500,
+      "bill": 87.41,
+      "customerCharge": 24.4,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Public Utilities Company",
+      "ownership": "investor-owned",
+      "kwh": 750,
+      "bill": 118.9,
+      "customerCharge": 24.4,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Public Utilities Company",
+      "ownership": "investor-owned",
+      "kwh": 1000,
+      "bill": 150.39,
+      "customerCharge": 24.4,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-1",
+      "utility": "Florida Public Utilities Company",
+      "ownership": "investor-owned",
+      "kwh": 1500,
+      "bill": 228.25,
+      "customerCharge": 24.4,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Alachua",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 18.68,
+      "customerCharge": 9.14,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Alachua",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 32.99,
+      "customerCharge": 9.14,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Alachua",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 56.84,
+      "customerCharge": 9.14,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Alachua",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 80.69,
+      "customerCharge": 9.14,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Alachua",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 104.54,
+      "customerCharge": 9.14,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Alachua",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 157.34,
+      "customerCharge": 9.14,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Bartow",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 20.88,
+      "customerCharge": 9.4,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Bartow",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 38.09,
+      "customerCharge": 9.4,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Bartow",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 66.78,
+      "customerCharge": 9.4,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Bartow",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 95.47,
+      "customerCharge": 9.4,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Bartow",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 124.16,
+      "customerCharge": 9.4,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Bartow",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 181.54,
+      "customerCharge": 9.4,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Beaches Energy Services",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 16.03,
+      "customerCharge": 4.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Beaches Energy Services",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 33.32,
+      "customerCharge": 4.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Beaches Energy Services",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 62.15,
+      "customerCharge": 4.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Beaches Energy Services",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 90.97,
+      "customerCharge": 4.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Beaches Energy Services",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 119.79,
+      "customerCharge": 4.5,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Beaches Energy Services",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 177.44,
+      "customerCharge": 4.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Blountstown",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 19.64,
+      "customerCharge": 5.01,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Blountstown",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 41.57,
+      "customerCharge": 5.01,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Blountstown",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 78.14,
+      "customerCharge": 5.01,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Blountstown",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 114.7,
+      "customerCharge": 5.01,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Blountstown",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 151.26,
+      "customerCharge": 5.01,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Blountstown",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 224.39,
+      "customerCharge": 5.01,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Bushnell",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 21.87,
+      "customerCharge": 10,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Bushnell",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 39.66,
+      "customerCharge": 10,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Bushnell",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 69.33,
+      "customerCharge": 10,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Bushnell",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 98.99,
+      "customerCharge": 10,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Bushnell",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 128.65,
+      "customerCharge": 10,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Bushnell",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 187.98,
+      "customerCharge": 10,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "CFTOD",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 13.63,
+      "customerCharge": 2.85,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "CFTOD",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 29.81,
+      "customerCharge": 2.85,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "CFTOD",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 56.77,
+      "customerCharge": 2.85,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "CFTOD",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 83.71,
+      "customerCharge": 2.85,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "CFTOD",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 110.67,
+      "customerCharge": 2.85,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "CFTOD",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 164.59,
+      "customerCharge": 2.85,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Chattahoochee",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 21.97,
+      "customerCharge": 10.55,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Chattahoochee",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 39.1,
+      "customerCharge": 10.55,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Chattahoochee",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 67.66,
+      "customerCharge": 10.55,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Chattahoochee",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 96.21,
+      "customerCharge": 10.55,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Chattahoochee",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 124.76,
+      "customerCharge": 10.55,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Chattahoochee",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 181.87,
+      "customerCharge": 10.55,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Clewiston",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 13.68,
+      "customerCharge": 6.81,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Clewiston",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 23.98,
+      "customerCharge": 6.81,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Clewiston",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 46.41,
+      "customerCharge": 6.81,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Clewiston",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 66.21,
+      "customerCharge": 6.81,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Clewiston",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 86.01,
+      "customerCharge": 6.81,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Clewiston",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 125.61,
+      "customerCharge": 6.81,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Meade",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 26.26,
+      "customerCharge": 12.96,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Meade",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 46.21,
+      "customerCharge": 12.96,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Meade",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 79.46,
+      "customerCharge": 12.96,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Meade",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 112.71,
+      "customerCharge": 12.96,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Meade",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 145.96,
+      "customerCharge": 12.96,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Meade",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 212.46,
+      "customerCharge": 12.96,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Pierce",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 18.39,
+      "customerCharge": 7.06,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Pierce",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 35.37,
+      "customerCharge": 7.06,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Pierce",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 63.69,
+      "customerCharge": 7.06,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Pierce",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 92,
+      "customerCharge": 7.06,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Pierce",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 123.49,
+      "customerCharge": 7.06,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Fort Pierce",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 186.46,
+      "customerCharge": 7.06,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Gainesville",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 28.96,
+      "customerCharge": 17,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Gainesville",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 46.9,
+      "customerCharge": 17,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Gainesville",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 76.8,
+      "customerCharge": 17,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Gainesville",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 106.7,
+      "customerCharge": 17,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Gainesville",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 153.42,
+      "customerCharge": 17,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Gainesville",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 269.27,
+      "customerCharge": 17,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Green Cove Springs",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 31.77,
+      "customerCharge": 18.48,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Green Cove Springs",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 51.71,
+      "customerCharge": 18.48,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Green Cove Springs",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 84.95,
+      "customerCharge": 18.48,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Green Cove Springs",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 119.51,
+      "customerCharge": 18.48,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Green Cove Springs",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 151.41,
+      "customerCharge": 18.48,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Green Cove Springs",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 225.2,
+      "customerCharge": 18.48,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Havana",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 28.87,
+      "customerCharge": 15.19,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Havana",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 49.39,
+      "customerCharge": 15.19,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Havana",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 83.58,
+      "customerCharge": 15.19,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Havana",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 117.78,
+      "customerCharge": 15.19,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Havana",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 151.97,
+      "customerCharge": 15.19,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Havana",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 220.36,
+      "customerCharge": 15.19,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Homestead",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 22.2,
+      "customerCharge": 12.6,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Homestead",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 36.6,
+      "customerCharge": 12.6,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Homestead",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 60.6,
+      "customerCharge": 12.6,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Homestead",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 84.6,
+      "customerCharge": 12.6,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Homestead",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 108.6,
+      "customerCharge": 12.6,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Homestead",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 156.6,
+      "customerCharge": 12.6,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "JEA",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 30.71,
+      "customerCharge": 19.25,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "JEA",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 47.9,
+      "customerCharge": 19.25,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "JEA",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 76.56,
+      "customerCharge": 19.25,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "JEA",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 105.21,
+      "customerCharge": 19.25,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "JEA",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 133.86,
+      "customerCharge": 19.25,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "JEA",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 191.17,
+      "customerCharge": 19.25,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Keys Energy Services",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 41.87,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Keys Energy Services",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 59.66,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Keys Energy Services",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 89.33,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Keys Energy Services",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 118.99,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Keys Energy Services",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 148.65,
+      "customerCharge": 30,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Keys Energy Services",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 207.98,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Kissimmee",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 19.97,
+      "customerCharge": 10.17,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Kissimmee",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 34.66,
+      "customerCharge": 10.17,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Kissimmee",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 59.15,
+      "customerCharge": 10.17,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Kissimmee",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 83.64,
+      "customerCharge": 10.17,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Kissimmee",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 108.13,
+      "customerCharge": 10.17,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Kissimmee",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 163.44,
+      "customerCharge": 10.17,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Lake Worth Beach",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 24.78,
+      "customerCharge": 12.93,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Lake Worth Beach",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 42.55,
+      "customerCharge": 12.93,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Lake Worth Beach",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 72.17,
+      "customerCharge": 12.93,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Lake Worth Beach",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 101.78,
+      "customerCharge": 12.93,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Lake Worth Beach",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 131.4,
+      "customerCharge": 12.93,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Lake Worth Beach",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 203.85,
+      "customerCharge": 12.93,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Lakeland",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 24.6,
+      "customerCharge": 14.45,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Lakeland",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 39.83,
+      "customerCharge": 14.45,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Lakeland",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 65.21,
+      "customerCharge": 14.45,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Lakeland",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 90.6,
+      "customerCharge": 14.45,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Lakeland",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 115.98,
+      "customerCharge": 14.45,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Lakeland",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 170.7,
+      "customerCharge": 14.45,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Leesburg",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 26.29,
+      "customerCharge": 15,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Leesburg",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 43.24,
+      "customerCharge": 15,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Leesburg",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 71.47,
+      "customerCharge": 15,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Leesburg",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 99.71,
+      "customerCharge": 15,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Leesburg",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 127.94,
+      "customerCharge": 15,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Leesburg",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 195.69,
+      "customerCharge": 15,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Moore Haven",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 19.51,
+      "customerCharge": 9.14,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Moore Haven",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 35.07,
+      "customerCharge": 9.14,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Moore Haven",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 61,
+      "customerCharge": 9.14,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Moore Haven",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 86.93,
+      "customerCharge": 9.14,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Moore Haven",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 112.85,
+      "customerCharge": 9.14,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Moore Haven",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 164.71,
+      "customerCharge": 9.14,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Mount Dora",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 22.6,
+      "customerCharge": 12.06,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Mount Dora",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 38.43,
+      "customerCharge": 12.06,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Mount Dora",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 64.79,
+      "customerCharge": 12.06,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Mount Dora",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 91.16,
+      "customerCharge": 12.06,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Mount Dora",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 117.52,
+      "customerCharge": 12.06,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Mount Dora",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 170.25,
+      "customerCharge": 12.06,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "New Smyrna Beach",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 17.87,
+      "customerCharge": 8.25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "New Smyrna Beach",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 32.29,
+      "customerCharge": 8.25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "New Smyrna Beach",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 56.33,
+      "customerCharge": 8.25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "New Smyrna Beach",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 80.37,
+      "customerCharge": 8.25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "New Smyrna Beach",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 104.41,
+      "customerCharge": 8.25,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "New Smyrna Beach",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 160.26,
+      "customerCharge": 8.25,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Newberry",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 23.5,
+      "customerCharge": 10.59,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Newberry",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 42.87,
+      "customerCharge": 10.59,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Newberry",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 75.14,
+      "customerCharge": 10.59,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Newberry",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 107.42,
+      "customerCharge": 10.59,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Newberry",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 139.69,
+      "customerCharge": 10.59,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Newberry",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 204.24,
+      "customerCharge": 10.59,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Ocala",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 32.95,
+      "customerCharge": 20,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Ocala",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 52.36,
+      "customerCharge": 20,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Ocala",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 84.71,
+      "customerCharge": 20,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Ocala",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 117.06,
+      "customerCharge": 20,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Ocala",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 149.41,
+      "customerCharge": 20,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Ocala",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 214.12,
+      "customerCharge": 20,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Orlando",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 30.05,
+      "customerCharge": 18.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Orlando",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 47.38,
+      "customerCharge": 18.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Orlando",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 76.26,
+      "customerCharge": 18.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Orlando",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 105.12,
+      "customerCharge": 18.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Orlando",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 134,
+      "customerCharge": 18.5,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Orlando",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 204.26,
+      "customerCharge": 18.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Quincy",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 19.12,
+      "customerCharge": 6,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Quincy",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 38.8,
+      "customerCharge": 6,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Quincy",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 71.6,
+      "customerCharge": 6,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Quincy",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 104.4,
+      "customerCharge": 6,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Quincy",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 137.2,
+      "customerCharge": 6,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Quincy",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 202.8,
+      "customerCharge": 6,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Starke",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 19.15,
+      "customerCharge": 6.45,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Starke",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 38.21,
+      "customerCharge": 6.45,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Starke",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 69.96,
+      "customerCharge": 6.45,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Starke",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 101.71,
+      "customerCharge": 6.45,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Starke",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 133.46,
+      "customerCharge": 6.45,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Starke",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 207.97,
+      "customerCharge": 6.45,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "St.Cloud",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 31.25,
+      "customerCharge": 19.24,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "St.Cloud",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 49.28,
+      "customerCharge": 19.24,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "St.Cloud",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 79.3,
+      "customerCharge": 19.24,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "St.Cloud",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 109.34,
+      "customerCharge": 19.24,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "St.Cloud",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 139.36,
+      "customerCharge": 19.24,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "St.Cloud",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 212.42,
+      "customerCharge": 19.24,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Tallahassee",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 22.94,
+      "customerCharge": 9.96,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Tallahassee",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 42.41,
+      "customerCharge": 9.96,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Tallahassee",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 74.86,
+      "customerCharge": 9.96,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Tallahassee",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 107.31,
+      "customerCharge": 9.96,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Tallahassee",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 139.75,
+      "customerCharge": 9.96,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Tallahassee",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 204.65,
+      "customerCharge": 9.96,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Wauchula",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 29.35,
+      "customerCharge": 18,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Wauchula",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 46.38,
+      "customerCharge": 18,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Wauchula",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 74.75,
+      "customerCharge": 18,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Wauchula",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 103.13,
+      "customerCharge": 18,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Wauchula",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 131.5,
+      "customerCharge": 18,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Wauchula",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 188.25,
+      "customerCharge": 18,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Williston",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 23.86,
+      "customerCharge": 12.32,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Williston",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 41.18,
+      "customerCharge": 12.32,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Williston",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 70.04,
+      "customerCharge": 12.32,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Williston",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 98.9,
+      "customerCharge": 12.32,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Williston",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 127.75,
+      "customerCharge": 12.32,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Williston",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 185.47,
+      "customerCharge": 12.32,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-2",
+      "utility": "Winter Park",
+      "ownership": "municipal",
+      "kwh": 100,
+      "bill": 26.04,
+      "customerCharge": 16.98,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Winter Park",
+      "ownership": "municipal",
+      "kwh": 250,
+      "bill": 39.62,
+      "customerCharge": 16.98,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Winter Park",
+      "ownership": "municipal",
+      "kwh": 500,
+      "bill": 62.27,
+      "customerCharge": 16.98,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Winter Park",
+      "ownership": "municipal",
+      "kwh": 750,
+      "bill": 84.9,
+      "customerCharge": 16.98,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-2",
+      "utility": "Winter Park",
+      "ownership": "municipal",
+      "kwh": 1000,
+      "bill": 107.54,
+      "customerCharge": 16.98,
+      "websiteSourced": true,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-2",
+      "utility": "Winter Park",
+      "ownership": "municipal",
+      "kwh": 1500,
+      "bill": 179.97,
+      "customerCharge": 16.98,
+      "websiteSourced": true
+    },
+    {
+      "page": "A-3",
+      "utility": "Central Florida",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 48.7,
+      "customerCharge": 37.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Central Florida",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 65.5,
+      "customerCharge": 37.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Central Florida",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 93.5,
+      "customerCharge": 37.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Central Florida",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 121.5,
+      "customerCharge": 37.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Central Florida",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 149.5,
+      "customerCharge": 37.5,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Central Florida",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 220,
+      "customerCharge": 37.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Choctawhatchee",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 54.47,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Choctawhatchee",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 83.67,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Choctawhatchee",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 132.33,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Choctawhatchee",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 180.99,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Choctawhatchee",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 229.65,
+      "customerCharge": 35,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Choctawhatchee",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 326.98,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Clay",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 48.1,
+      "customerCharge": 37,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Clay",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 64.75,
+      "customerCharge": 37,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Clay",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 92.5,
+      "customerCharge": 37,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Clay",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 120.25,
+      "customerCharge": 37,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Clay",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 148,
+      "customerCharge": 37,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Clay",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 209,
+      "customerCharge": 37,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Escambia River",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 57.6,
+      "customerCharge": 45,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Escambia River",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 76.5,
+      "customerCharge": 45,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Escambia River",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 108,
+      "customerCharge": 45,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Escambia River",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 139.5,
+      "customerCharge": 45,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Escambia River",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 171,
+      "customerCharge": 45,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Escambia River",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 234,
+      "customerCharge": 45,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Florida Keys",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 41.96,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Florida Keys",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 59.89,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Florida Keys",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 89.78,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Florida Keys",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 119.67,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Florida Keys",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 149.56,
+      "customerCharge": 30,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Florida Keys",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 225.84,
+      "customerCharge": 30,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Glades",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 57.95,
+      "customerCharge": 45.1,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Glades",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 77.23,
+      "customerCharge": 45.1,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Glades",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 109.35,
+      "customerCharge": 45.1,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Glades",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 141.48,
+      "customerCharge": 45.1,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Glades",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 173.6,
+      "customerCharge": 45.1,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Glades",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 256.6,
+      "customerCharge": 45.1,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Gulf Coast",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 47.21,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Gulf Coast",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 65.52,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Gulf Coast",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 96.04,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Gulf Coast",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 126.55,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Gulf Coast",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 157.07,
+      "customerCharge": 35,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Gulf Coast",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 218.11,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Lee County",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 32.04,
+      "customerCharge": 20,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Lee County",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 50.12,
+      "customerCharge": 20,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Lee County",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 80.22,
+      "customerCharge": 20,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Lee County",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 112.26,
+      "customerCharge": 20,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Lee County",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 144.29,
+      "customerCharge": 20,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Lee County",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 212.16,
+      "customerCharge": 20,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Okefenoke",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 50.2,
+      "customerCharge": 40,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Okefenoke",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 65.51,
+      "customerCharge": 40,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Okefenoke",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 91.02,
+      "customerCharge": 40,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Okefenoke",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 116.53,
+      "customerCharge": 40,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Okefenoke",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 142.04,
+      "customerCharge": 40,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Okefenoke",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 193.06,
+      "customerCharge": 40,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Peace River",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 31.5,
+      "customerCharge": 21,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Peace River",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 47.25,
+      "customerCharge": 21,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Peace River",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 73.5,
+      "customerCharge": 21,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Peace River",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 99.75,
+      "customerCharge": 21,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Peace River",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 126,
+      "customerCharge": 21,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Peace River",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 183.5,
+      "customerCharge": 21,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Sumter",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 49.44,
+      "customerCharge": 39,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Sumter",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 65.1,
+      "customerCharge": 39,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Sumter",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 91.2,
+      "customerCharge": 39,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Sumter",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 117.3,
+      "customerCharge": 39,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Sumter",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 143.4,
+      "customerCharge": 39,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Sumter",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 209.85,
+      "customerCharge": 39,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Suwannee Valley",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 62.5,
+      "customerCharge": 49.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Suwannee Valley",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 82,
+      "customerCharge": 49.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Suwannee Valley",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 114.5,
+      "customerCharge": 49.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Suwannee Valley",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 147,
+      "customerCharge": 49.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Suwannee Valley",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 179.5,
+      "customerCharge": 49.5,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Suwannee Valley",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 265,
+      "customerCharge": 49.5,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Talquin",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 50.61,
+      "customerCharge": 40,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Talquin",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 66.53,
+      "customerCharge": 40,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Talquin",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 93.05,
+      "customerCharge": 40,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Talquin",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 119.58,
+      "customerCharge": 40,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Talquin",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 146.1,
+      "customerCharge": 40,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Talquin",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 212.23,
+      "customerCharge": 40,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Tri-County",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 42.4,
+      "customerCharge": 28,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Tri-County",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 64,
+      "customerCharge": 28,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Tri-County",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 100,
+      "customerCharge": 28,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Tri-County",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 136,
+      "customerCharge": 28,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Tri-County",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 172,
+      "customerCharge": 28,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Tri-County",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 256,
+      "customerCharge": 28,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "West Florida",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 48.44,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "West Florida",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 68.61,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "West Florida",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 102.22,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "West Florida",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 135.82,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "West Florida",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 169.42,
+      "customerCharge": 35,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "West Florida",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 236.34,
+      "customerCharge": 35,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Withlacoochee River",
+      "ownership": "cooperative",
+      "kwh": 100,
+      "bill": 49.39,
+      "customerCharge": 39.16,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Withlacoochee River",
+      "ownership": "cooperative",
+      "kwh": 250,
+      "bill": 64.74,
+      "customerCharge": 39.16,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Withlacoochee River",
+      "ownership": "cooperative",
+      "kwh": 500,
+      "bill": 90.31,
+      "customerCharge": 39.16,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Withlacoochee River",
+      "ownership": "cooperative",
+      "kwh": 750,
+      "bill": 115.89,
+      "customerCharge": 39.16,
+      "websiteSourced": false
+    },
+    {
+      "page": "A-3",
+      "utility": "Withlacoochee River",
+      "ownership": "cooperative",
+      "kwh": 1000,
+      "bill": 141.46,
+      "customerCharge": 39.16,
+      "websiteSourced": false,
+      "checkedAgainst": "A-10"
+    },
+    {
+      "page": "A-3",
+      "utility": "Withlacoochee River",
+      "ownership": "cooperative",
+      "kwh": 1500,
+      "bill": 194.11,
+      "customerCharge": 39.16,
+      "websiteSourced": false
+    }
+  ]
+}
