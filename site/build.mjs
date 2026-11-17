@@ -55,6 +55,8 @@ import { TERMS_PATH, largeLoadTermsPage } from './templates/large-load-terms.mjs
 import { GLOSSARY_PATH, glossaryPage } from './templates/glossary.mjs';
 import { templateCsv, templateSheet } from '../core/lib/standards-template.mjs';
 import { sampleStandardsCsv, samplePolesCsv } from '../core/lib/lines-samples.mjs';
+import { screenRows, screensCsv } from '../core/lib/screen-compare.mjs';
+import SCREEN_RECORDS from '../data/curated/interconnect/_index.mjs';
 import { writeXlsx } from '../verify/lib/zip-writer.mjs';
 import { scenarioIndexPage, scenarioPage } from './templates/scenario.mjs';
 import { SCENARIO_INDEX, scenarioPath } from './ui/scenario.mjs';
@@ -302,6 +304,10 @@ export async function build(opts = {}) {
   // A filled sample of each, for a fictional co-op, every rule an example value from one cited document.
   writeFileSync(join(outDir, 'lines/sample-standards.csv'), sampleStandardsCsv());
   writeFileSync(join(outDir, 'lines/sample-poles.csv'), samplePolesCsv());
+  // The interconnection screen thresholds by jurisdiction, as rows anyone can audit or reuse (CC BY 4.0).
+  mkdirSync(join(outDir, 'interconnect'), { recursive: true });
+  writeFileSync(join(outDir, 'interconnect/screens.csv'), screensCsv(SCREEN_RECORDS));
+  writeFileSync(join(outDir, 'interconnect/screens.json'), JSON.stringify({ publisher: 'gridprims', license: 'CC BY 4.0', credit: 'Each row cites the tariffs and rules it was read from; credit them with gridprims.', asOf: SCREEN_RECORDS.map((r) => r.lastChecked).sort().at(-1), rows: screenRows(SCREEN_RECORDS) }, null, 2) + '\n');
   // The glossary, as a page and as data agents read with the same words.
   write(GLOSSARY_PATH, glossaryPage({ entries: GLOSSARY, tools: TOOLS, i18n }));
   writeFileSync(join(outDir, 'learn/glossary/glossary.json'), JSON.stringify({ license: 'CC BY 4.0', publisher: 'gridprims', note: 'Entries adapted from the EIA glossary (a public-domain U.S. government work) say so.', entries: GLOSSARY }, null, 2) + '\n');

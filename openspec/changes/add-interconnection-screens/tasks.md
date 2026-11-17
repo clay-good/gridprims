@@ -21,7 +21,7 @@
 - [x] 3.5 Implement the status summary without likelihood language; verify the mixed-result scenario in a snapshot test
 - [x] 3.6 Build the state comparison view from the curated records; verify the different-load-ratio-test and hosting-capacity-is-the-screen scenarios (core/lib/screen-compare.mjs and the panel on the fast-track screens page, from data/curated/interconnect; California's hosting-capacity Screen M and Texas's feeder-load test show as different tests beside the federal 15%-of-peak screen, in verify/tests/site/screen-compare.test.mjs; Ohio's 100%-of-minimum-load test joins when Ohio is entered)
 - [x] 3.7 Implement the storage minimum-load distinction; verify the solar-plus-storage scenario
-- [ ] 3.8 Add last-checked dates and the review chip, and register the threshold dataset as downloadable under CC BY 4.0; verify the stale-jurisdiction and comparison-downloadable scenarios
+- [x] 3.8 Add last-checked dates and the review chip, and register the threshold dataset as downloadable under CC BY 4.0; verify the stale-jurisdiction and comparison-downloadable scenarios (each comparison row shows its last-checked date and a needs-review chip revealed 12 months later; gridprims-interconnect-screens is registered in data/curated/our-datasets.mjs and published as /interconnect/screens.csv and screens.json with every citation; verify/tests/site/screen-compare.test.mjs)
 
 ## 4. Minimum-load range
 
