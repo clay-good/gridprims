@@ -21,9 +21,9 @@ const out = await sharedSite();
 const NOW = Date.parse('2026-11-01T00:00:00Z');
 const record = (fields) => ({ ...aep, id: 'test', fields });
 
-test('every committed record passes; each field is single source with its blocked second recorded, or reads "Not public"', () => {
+test('every committed record passes; each field has two archived sources, or one with its blocked second recorded, or reads "Not public"', () => {
   const d = termsData(ROOT, NOW);
-  assert.deepEqual(d.entries.map((e) => e.id), ['aep-ohio-dct', 'dominion-gs5', 'georgia-power-large-load', 'texas-25-194']);
+  assert.deepEqual(d.entries.map((e) => e.id), ['aep-ohio-dct', 'dominion-gs5', 'evergy-missouri-west-llps', 'georgia-power-large-load', 'texas-25-194']);
   for (const e of d.entries) {
     for (const [k, f] of Object.entries(e.fields)) {
       if (f.value === null) { assert.deepEqual(f.citations, [], `${e.id}.${k}`); continue; }
@@ -32,6 +32,13 @@ test('every committed record passes; each field is single source with its blocke
     }
   }
   assert.equal(d.entries.find((e) => e.id === 'georgia-power-large-load').fields.exitFee.value, null, 'Georgia\'s exit fee is not public');
+  // Missouri: the tariff and the PSC fact sheet agree on the term, minimum, and collateral.
+  const mo = d.entries.find((e) => e.id === 'evergy-missouri-west-llps');
+  for (const k of ['minimum', 'term', 'collateral']) {
+    assert.equal(mo.fields[k].citations.length, 2, k);
+    assert.equal(mo.fields[k].label ?? null, null, `${k}: two independent sources, no single-source label`);
+  }
+  assert.match(mo.fields.exitFee.value, /^36 months' written notice/);
 });
 
 test('a term cited only to a news article fails and asks for the order or tariff sheet', () => {

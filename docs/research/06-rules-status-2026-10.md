@@ -166,6 +166,7 @@ Source: PJM, "Summer 2025 Peaks and 5CPs," revised 2025-11-14. The PDF says: "Al
 
 - **Worked minimum-bill example.** I found no dollar example in any filing. AEP Ohio's page gives only an exit-timing example. Its tier formula, applied to a 100 MW contract, gives 57,500 + 25,000 = **82,500 kW (82.5%)**. At 200 MW the formula gives 182,500 kW, which the cap holds to **170,000 kW (85%)**. This is my arithmetic from the published formula; use it as a test case.
 - **Correction to earlier notes.** The 80% / 12-year / 5-year-ramp terms for Missouri come from PSC-approved tariffs, not from §393.130.7.
+- **Correction, 2026-11-16.** Evergy Missouri West's Schedule LLPS (effective 2026-03-09) requires **36 months'** written notice to terminate, with an exit fee of the minimum monthly bill times the months left in the term (at least 12 months); the PSC fact sheet's 24 months does not match that tariff's text. Its applicability threshold is **75 MW**.
 - **What it means for the tool.** Version each tariff by order date and by when the contract was signed (for example, GS-5 terms apply to ESAs signed from 2027-01-01). Model AEP Ohio's minimum as a piecewise function with a cap, not as a flat 85%.
 
 ---

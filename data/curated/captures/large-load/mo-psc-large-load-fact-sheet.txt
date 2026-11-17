@@ -1,0 +1,57 @@
+Source: https://psc.mo.gov/CMSInternetData/Community%20Outreach/Large%20Load%20Tariff%20Fact%20Sheet.pdf
+Publisher: Missouri Public Service Commission, "Utility Tariffs for Large Load Customers in Missouri" fact sheet
+Retrieved: 2026-11-16
+Original: 446907 bytes, SHA-256 b192aa153261930ff05606a7013b3c001cb833cd33229973679770b6c4348927
+Capture: the fact sheet's text, as pdftotext -layout reads it, whitespace collapsed
+----
+Utility Tariffs for Large Load Customers in Missouri
+In 2025, Senate Bill 4 was passed by the General Assembly and signed by Governor Kehoe. It required the
+Missouri Public Service Commission (PSC) to adopt rates for large load customers ­— including data centers
+— that reflected those customers’ share of their costs and prevented other customers ­— like residential and
+commercial customers — from being charged any unjust or unreasonable costs arising from service to large
+load customers. Two of Missouri’s three regulated electric utility companies, Ameren Missouri and Evergy,
+have approved large-load tariffs. Liberty Utilities’ large load tariff case is currently in progress.
+
+In its approval of large load tariffs, the PSC adopted provisions designed to protect residential and
+small‑business customers from costs related to data centers, including:
+
+ ▶ Minimum Service Contracts. Large-load customers must take service for a minimum of 12 years, with
+ the option of taking an additional 5 years as a “ramp up” period until fully using their projected amount
+ of energy, for a potential 17-year commitment.
+
+ ▶ Financial Security and Collateral Requirements. Large load customers must meet creditworthiness
+ and liquidity requirements as well as provide collateral in the amount of two years of minimum
+ monthly bills.
+
+ ▶ Exit and Early Termination Fees. Large-load customers may terminate or change rate schedules
+ before the end of the contract term if written notice is provided at least 24 months prior to the
+ requested change taking effect. In those instances, the customer will be subject to an exit fee. If
+ requesting to terminate with less than 24 months’ notice, the customer is also subject to an early
+ termination fee.
+
+ ▶ Minimum Monthly Bill. Each large-load customer bill will include the sum of all applicable charges,
+ including a monthly demand charge set at 80% of the agreed upon rate.
+
+ ▶ Cost Stabilization Recovery. This requirement ensures that the electric utility can recover all costs
+ associated with serving large load customers and that large load customers are paying their full cost
+ of service.
+
+ ▶ Optional Renewable and Carbon-Free Programs. Large-load customers have the option to invest
+ in additional generation and capacity programs, including nuclear and clean energy programs, at their
+ own expense.
+
+ Submit Comment Missouri Public
+ Ameren Evergy in Liberty Case Service Commission
+ Large Load Tariff Large Load Tariff ET-2026-0184 PSC Website
+
+
+
+
+ https://efis.psc. https://psc.mo.gov/ https://efis.psc.mo.gov/ https://psc.mo.gov/
+ mo.gov/Document/ CMSInternetData/ PublicComment/ default.aspx
+ Display/859644 Community%20Outreach/ EmailForm
+ Evergy%20Large%20
+ Load%20Tariff.pdf
+
+
+ Missouri Public Service Commission

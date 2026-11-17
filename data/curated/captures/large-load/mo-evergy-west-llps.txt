@@ -1,0 +1,20 @@
+Source: https://psc.mo.gov/CMSInternetData/Community%20Outreach/Evergy%20Large%20Load%20Tariff.pdf
+Publisher: Evergy Missouri West, Inc., P.S.C. MO. No. 1, Schedule LLPS (Large Load Power Service), issued February 5, 2026, effective March 9, 2026, as posted by the Missouri Public Service Commission
+Retrieved: 2026-11-16
+Original: 1154399 bytes, SHA-256 9ec53bb169c4ce7ad315ce150bc52013c0a665a965f821d58547174dbf777866
+Capture: the Schedule LLPS passages on applicability, term, minimum demand, termination, and collateral, as pdftotext -layout reads them, whitespace collapsed
+----
+[Applicability]
+APPLICABILITY Service under this schedule is required for, 1. Any new facility beginning service after the effective date of Schedule LLPS with a peak load forecast reasonably expected to be equal to or in excess of a monthly maximum demand of seventy-five megawatts (75 MW) at any time during the Term; or 2. Any existing customers, who expand such that, after March 9, 2026, have a monthly maximum demand that is reasonably expected to exceed their pre-existing demand by seventy-five megawatts (75 MW), then this rate shall be applicable to the expansion load. Alternatively, should customers qualify, service may be received under the Company’s Special High-Load Factor
+
+[Term]
+Schedule LLPS Customers shall take service for a minimum term that includes up to five (5) years of an optional transitional load ramp period plus twelve (12) years. The Term shall commence on the date permanent service begins, or as set forth in the LLPS Service Agreement. During the transitional load ramp period, the Customer’s maximum load may be lower than seventy-five megawatts (75 MW). Specific details of the Customer’s Load Ramp may be addressed in the LLPS Service Agreement.
+
+[Minimum Demand]
+(12) months including the current month. Minimum Demand - Minimum Demand shall be 80% of the annual Contract Capacity.
+
+[Termination or change of schedule]
+TERMINATION OR CHANGE OF SCHEDULE In order to terminate or change rate schedules before the end of the Term or any Extension Term, the Customer must provide written notice thirty-six (36) months prior to the requested date of termination or schedule change. In such circumstance, the Customer will be subject to an Exit Fee equal to the nominal value of the Minimum Monthly Bill times the number of months remaining in the Term or Extension Term, or for twelve (12) months, whichever is greater (the “Exit Fee”). An additional fee shall apply if the Customer seeks to terminate with less than thirty-six (36)-months’ notice (the “Early Termination Fee”). In such case, the Early Termination Fee shall be equal to the Exit Fee plus two (2) times the nominal value of the Minimum Monthly Bill times the number months less than the thirty-six (36)-months’ notice required for termination.
+
+[Collateral]
+COLLATERAL REQUIREMENTS The Company will require Schedule LLPS Customers to provide collateral in an amount equal to two (2) years of Minimum Monthly Bills, as calculated by the Company (the “Collateral Requirement”).
