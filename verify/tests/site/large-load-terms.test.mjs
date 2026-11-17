@@ -23,12 +23,12 @@ const record = (fields) => ({ ...aep, id: 'test', fields });
 
 test('every committed record passes; each field has two archived sources, or one with its blocked second recorded, or reads "Not public"', () => {
   const d = termsData(ROOT, NOW);
-  assert.deepEqual(d.entries.map((e) => e.id), ['aep-ohio-dct', 'dominion-gs5', 'evergy-missouri-west-llps', 'georgia-power-large-load', 'texas-25-194']);
+  assert.deepEqual(d.entries.map((e) => e.id), ['aep-ohio-dct', 'dominion-gs5', 'evergy-missouri-west-llps', 'georgia-power-large-load', 'texas-25-194', 'xcel-minnesota-large-load']);
   for (const e of d.entries) {
     for (const [k, f] of Object.entries(e.fields)) {
       if (f.value === null) { assert.deepEqual(f.citations, [], `${e.id}.${k}`); continue; }
       assert.ok(f.citations.length >= 1 && f.citations.every((c) => c.archive && c.sha256), `${e.id}.${k} cites an archived copy`);
-      if (f.label) assert.match(f.label, /^single source: the second \(.+\) was unreachable on 2026-11-01$/, `${e.id}.${k}`);
+      if (f.label) assert.match(f.label, /^single source: the second \(.+\) was unreachable on 2026-11-(01|16)$/, `${e.id}.${k}`);
     }
   }
   assert.equal(d.entries.find((e) => e.id === 'georgia-power-large-load').fields.exitFee.value, null, 'Georgia\'s exit fee is not public');

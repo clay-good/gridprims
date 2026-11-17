@@ -6,5 +6,6 @@ import dominion from './dominion-gs5.mjs';
 import evergyMo from './evergy-missouri-west-llps.mjs';
 import georgia from './georgia-power-large-load.mjs';
 import texas from './texas-25-194.mjs';
+import xcelMn from './xcel-minnesota-large-load.mjs';
 
-export default [aep, dominion, evergyMo, georgia, texas];
+export default [aep, dominion, evergyMo, georgia, texas, xcelMn];
