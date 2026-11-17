@@ -4,6 +4,8 @@
 // (add-interconnection-screens: screen explainer). Screens that need the
 // utility's data or circuit model stay open, never passed or failed.
 
+import RECORDS from '../../../data/curated/interconnect/_index.mjs';
+
 const UTILITY = 'only the utility';
 const MODEL = 'only the utility, from its circuit model';
 
@@ -36,9 +38,20 @@ export function compute(v) {
     'The federal procedures have no starting-voltage-drop screen and no screen called a penetration test: those are California Rule 21 (Screens C, M, and N), Massachusetts (Screen 7), New York (Screens 3, E, and G), and Hawaii (Screen 5).',
     'If you elect supplemental review after failing a screen, the utility runs the minimum load, voltage and power quality, and safety and reliability screens (§ 2.4.4).',
   ];
+  // A state screen, kept apart from the federal counts: California Rule 21 Screen D compares the gross ratings
+  // on the service transformer with its rating (add-interconnection-screens 3.3).
+  const outputs = { met, notMet, open };
+  if (String(v.state ?? 'none').trim().toUpperCase() === 'CA' && v.aggregateKva > 0 && v.transformerKva > 0) {
+    const d = RECORDS.find((r) => r.id === 'ca-rule-21-d');
+    const share = v.aggregateKva / v.transformerKva;
+    const dMet = v.aggregateKva <= v.transformerKva;
+    outputs.transformerShare = share * 100;
+    const cites = d.fields.threshold.sources.map((x) => `${x.publisher}, ${x.locator}`).join('; ');
+    steps.push(`California Rule 21 Screen D, a state screen the federal procedures do not have: ${v.aggregateKva.toLocaleString('en-US')} kVA of gross ratings on a ${v.transformerKva.toLocaleString('en-US')} kVA service transformer is ${(share * 100).toFixed(1)}% of its rating. The screen fails when the aggregated gross ratings exceed the transformer or secondary conductor rating, as the utility's practice modifies it: ${dMet ? 'met' : 'not met'}. (${cites})`);
+  }
   return {
     status: 'ok',
-    outputs: { met, notMet, open },
+    outputs,
     sentence: `${met} ${met === 1 ? 'screen is' : 'screens are'} met, ${notMet} not met, and ${open} still open. The utility runs every screen and decides.`,
     steps,
   };

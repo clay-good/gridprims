@@ -3,7 +3,7 @@ const base = { lineConfig: '4w', connection: '1ph-ln', sharedKw: 15, imbalanceKv
 
 export default {
   id: 'interconnect.fast-track.screens',
-  version: '0.1.0',
+  version: '0.2.0',
   title: 'The Fast Track screens, one by one',
   purpose: 'Every screen the utility runs on a small generator under the federal Fast Track, what each tests and at what threshold, who can answer it, and a result for the ones you can settle yourself.',
   archetype: 'calculator',
@@ -14,11 +14,14 @@ export default {
     { name: 'sharedKw', label: 'Generation on a shared single-phase secondary', type: 'number', unit: 'kW', range: { min: 0, max: 1e5 }, precision: 'exact', example: 15, hint: 'Yours and your neighbors\' on the same secondary; 0 if it is not shared.' },
     { name: 'imbalanceKva', label: 'Imbalance your system adds on a 240 V center-tap service', type: 'number', unit: 'kVA', range: { min: 0, max: 1e5 }, precision: 'exact', example: 15 },
     { name: 'transformerKva', label: 'Service transformer nameplate rating', type: 'number', unit: 'kVA', range: { min: 0, max: 1e5 }, precision: 'exact', example: 100, hint: '0 if this is not a 240 V center-tap service.' },
+    { name: 'state', label: 'Your state', type: 'text', optional: true, example: 'none', hint: 'Optional: CA to add California Rule 21 Screen D, the service transformer screen; none for the federal screens only.' },
+    { name: 'aggregateKva', label: 'Gross ratings of all generation on your service transformer', type: 'number', unit: 'kVA', range: { min: 0, max: 1e5 }, precision: 'exact', optional: true, example: 0, hint: 'Yours included; 0 if you do not know it. Used by California Rule 21 Screen D.' },
   ],
   outputs: [
     { name: 'met', label: 'Screens met', unitless: true, rounding: { decimals: 0, fixed: true } },
     { name: 'notMet', label: 'Screens not met', unitless: true, rounding: { decimals: 0, fixed: true } },
     { name: 'open', label: 'Screens still open', unitless: true, rounding: { decimals: 0, fixed: true } },
+    { name: 'transformerShare', label: 'Gross ratings as a share of the service transformer rating', unit: '%', rounding: { decimals: 1, fixed: true } },
   ],
   method: 'The ten Initial Review screens of SGIP § 2.2.1, in the rule\'s order, each with its threshold and who can answer it. Three are settled from your entries: line configuration and grounding (§ 2.2.1.6), at most 20 kW on a shared single-phase secondary (§ 2.2.1.7), and an imbalance of at most 20% of the service transformer rating on a 240 V center-tap service (§ 2.2.1.8). The rest need the utility\'s data or circuit model and stay open.',
   assumptions: ['The project follows the federal procedures; state rules number and set their screens differently.'],
@@ -30,6 +33,7 @@ export default {
   examples: [
     { id: 'mixed', title: 'A home system on a four-wire line', inputs: base, expect: { met: { value: 3, tolerance: { abs: 0 }, display: '3' }, notMet: { value: 0, tolerance: { abs: 0 }, display: '0' }, open: { value: 7, tolerance: { abs: 0 }, display: '7' } }, source: 'SGIP § 2.2.1: line-to-neutral on a four-wire line passes § 2.2.1.6; 15 kW is at most 20 kW (§ 2.2.1.7); 15 kVA is at most 20% × 100 kVA = 20 kVA (§ 2.2.1.8); the other seven stay open' },
     { id: 'not-met', title: 'A phase-to-phase connection on a four-wire line', inputs: { ...base, connection: '1ph-ll', sharedKw: 25, imbalanceKva: 10 }, expect: { met: { value: 1, tolerance: { abs: 0 }, display: '1' }, notMet: { value: 2, tolerance: { abs: 0 }, display: '2' }, open: { value: 7, tolerance: { abs: 0 }, display: '7' } }, source: 'SGIP § 2.2.1.6 to 2.2.1.8: phase-to-phase on a four-wire line is not listed as passing; 25 kW is over 20 kW; 10 kVA is within 20% of 100 kVA' },
+    { id: 'ca-backfeed', title: 'A 75 kVA project behind a 50 kVA service transformer in California', inputs: { ...base, state: 'CA', aggregateKva: 75, transformerKva: 50 }, expect: { transformerShare: { value: 150, tolerance: { abs: 1e-9 }, display: '150.0' } }, source: 'interconnect/screen-explainer spec, scenario "Service transformer backfeed", against California Rule 21 Screen D (PG&E sheet 143, SCE sheet 123): 75 ÷ 50 = 150% of the rating, which exceeds it, so not met' },
   ],
   related: ['interconnect.process.route', 'interconnect.minimum-load.screen'],
   handoffs: [{ label: 'FERC Order No. 792 in the Federal Register', url: FR }],

@@ -761,7 +761,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 Every screen the utility runs on a small generator under the federal Fast Track, what each tests and at what threshold, who can answer it, and a result for the ones you can settle yourself.
 
-Version 0.1.0 · experimental · validation level 1, self-checked
+Version 0.2.0 · experimental · validation level 1, self-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|
@@ -770,12 +770,15 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 | Generation on a shared single-phase secondary | `sharedKw` | kW | 0 to 100000 | 15 |
 | Imbalance your system adds on a 240 V center-tap service | `imbalanceKva` | kVA | 0 to 100000 | 15 |
 | Service transformer nameplate rating | `transformerKva` | kVA | 0 to 100000 | 100 |
+| Your state | `state` |  |  | none |
+| Gross ratings of all generation on your service transformer | `aggregateKva` | kVA | 0 to 100000 | 0 |
 
 | Output | Name | Unit | Rounding |
 |---|---|---|---|
 | Screens met | `met` |  | 0 decimals |
 | Screens not met | `notMet` |  | 0 decimals |
 | Screens still open | `open` |  | 0 decimals |
+| Gross ratings as a share of the service transformer rating | `transformerShare` | % | 1 decimals |
 
 **Method.** The ten Initial Review screens of SGIP § 2.2.1, in the rule's order, each with its threshold and who can answer it. Three are settled from your entries: line configuration and grounding (§ 2.2.1.6), at most 20 kW on a shared single-phase secondary (§ 2.2.1.7), and an imbalance of at most 20% of the service transformer rating on a 240 V center-tap service (§ 2.2.1.8). The rest need the utility's data or circuit model and stay open.
 
