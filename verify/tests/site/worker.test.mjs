@@ -70,6 +70,13 @@ test('a plant page that fell below the content minimum redirects to its state pa
   assert.equal((await get('/plants/999999999/')).status, 404);
 });
 
+test('project lists are a public table, readable from any origin', async () => {
+  const res = await get('/projects/tx.json');
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get('access-control-allow-origin'), '*');
+  assert.equal((await res.json()).state, 'TX');
+});
+
 test('queue summaries are a public table, readable from any origin, and carry no point of interconnection', async () => {
   const res = await get('/queue/tx.json');
   assert.equal(res.status, 200);

@@ -356,3 +356,31 @@ blockquote { border-left: 1px solid var(--field-border); margin: var(--s3) 0; pa
 /* The workbench's electrification panels, folded under one line until someone asks for them. */
 .more-tools > summary { font-weight: 600; cursor: pointer; }
 .more-tools[open] > summary { margin-bottom: var(--s3); }
+
+/* The project pipeline (projects/pipeline-pages): five stage tiles, then a list that stacks on narrow screens. */
+.stage-tiles { list-style: none; margin: var(--s3) 0; padding: 0; display: grid; gap: var(--s3); grid-template-columns: minmax(0, 1fr); }
+.stage-tile { min-width: 0; padding: var(--s3); background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--guide); border-radius: var(--r-field); }
+.stage-tile.done { background: var(--raise); border-top-color: var(--field-border); }
+.stage-tile h3 { margin: 0; font-size: 1rem; }
+.stage-tile .unit-hint { margin: var(--s1) 0 0; color: var(--muted); font-size: .8125rem; }
+.stage-mw { margin: var(--s2) 0 0; font-size: 1.5rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums slashed-zero; }
+th.num { text-align: right; }
+.project-filters { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
+.project-filters[hidden] { display: none; }
+.project-filters .field { min-width: 0; margin: 0; }
+.project-filters select { display: block; width: 100%; max-width: 100%; min-height: 44px; }
+.project-status { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s2) var(--s3); min-height: 44px; }
+.project-status p { margin: 0; font-weight: 600; }
+.project-sub { display: block; margin-top: var(--s1); color: var(--muted); font-size: .8125rem; font-weight: 400; }
+.project-table tr[hidden], .project-wrap[hidden] { display: none; }
+@media (min-width: 560px) { .stage-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .stage-tiles { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+@media (max-width: 899px) {
+  .project-wrap { overflow-x: visible; }
+  .project-table, .project-table caption, .project-table tbody, .project-table tr, .project-table tbody th, .project-table td { display: block; }
+  .project-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .project-table tr { padding: var(--s3) 0; border-bottom: 1px solid var(--field-border); }
+  .project-table tbody th, .project-table td { padding: var(--s1) 0; border: 0; text-align: left; overflow-wrap: anywhere; }
+  .project-table td::before { content: attr(data-label); display: block; color: var(--muted); font-size: .75rem; font-weight: 600; }
+}
+@media print { .project-filters, .project-status button { display: none; } }

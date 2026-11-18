@@ -14,7 +14,7 @@ const out = await sharedSite();
 const page = (p) => readFileSync(join(out, p, 'index.html'), 'utf8');
 const SECTIONS = ['bills', 'data', 'carbon', 'grid', 'learn'];
 /** One page of each family a visitor should be able to reach from a section. */
-const FAMILIES = ['/scenario/', '/large-load/terms/', '/learn/glossary/', '/ledger/', '/ledger/checks/', '/states/', '/queue/'];
+const FAMILIES = ['/scenario/', '/large-load/terms/', '/learn/glossary/', '/ledger/', '/ledger/checks/', '/states/', '/queue/', '/projects/'];
 
 test('every page family is linked from a section page or the catalog', () => {
   const linked = new Set();

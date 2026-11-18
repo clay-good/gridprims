@@ -2,7 +2,9 @@
 // is Critical Energy/Electric Infrastructure Information, so the queue JSON the
 // browser reads carries summaries only: no point of interconnection, no
 // substation, no feeder, no line. The published summaries name a place, a
-// capacity, a count, and a date, and nothing that locates a connection.
+// capacity, a count, and a date, and nothing that locates a connection. The
+// project lists (projects/stages) are held to the same rule, and location in
+// any of these files stops at the county.
 
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -15,7 +17,11 @@ export const CEII_FIELDS = [
   ['a circuit', /circuit/],
   ['a transmission line', /transmissionline|linename|lineid|tieline/],
   ['a bus', /^bus(name|id|number|no)?$/],
+  ['a coordinate', /^(lat|latitude|lon|lng|long|longitude|coord|coords|coordinates|geometry|geojson|wkt|googlemap|bingmap|mapurl)$/],
 ];
+
+/** The deploy folders of open JSON the gate reads. */
+const FOLDERS = ['queue', 'projects'];
 
 const normal = (key) => key.toLowerCase().replace(/[^a-z0-9]/g, '');
 
@@ -43,19 +49,21 @@ export function ceiiFindings(value, path = '') {
  * @returns {string[]} errors
  */
 export function checkCeii(distDir) {
-  const dir = join(distDir, 'queue');
-  if (!existsSync(dir)) return [];
   const errors = [];
-  for (const name of readdirSync(dir).filter((n) => n.endsWith('.json')).sort()) {
-    const file = join(dir, name);
-    let parsed;
-    try {
-      parsed = JSON.parse(readFileSync(file, 'utf8'));
-    } catch (e) {
-      errors.push(`queue/${name}: not valid JSON (${e.message})`);
-      continue;
+  for (const folder of FOLDERS) {
+    const dir = join(distDir, folder);
+    if (!existsSync(dir)) continue;
+    for (const name of readdirSync(dir).filter((n) => n.endsWith('.json')).sort()) {
+      const file = join(dir, name);
+      let parsed;
+      try {
+        parsed = JSON.parse(readFileSync(file, 'utf8'));
+      } catch (e) {
+        errors.push(`${folder}/${name}: not valid JSON (${e.message})`);
+        continue;
+      }
+      for (const finding of ceiiFindings(parsed)) errors.push(`${folder}/${name}: carries ${finding}, which is CEII`);
     }
-    for (const finding of ceiiFindings(parsed)) errors.push(`queue/${name}: carries ${finding}, which is CEII`);
   }
   return errors;
 }

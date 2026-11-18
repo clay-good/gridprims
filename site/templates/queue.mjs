@@ -62,13 +62,14 @@ ${sourceStamp(q.manifest, q.manifest.tables[0], i18n)}`;
   return layout({ i18n, title: `${t('queue.title')} · ${t('site.name')}`, description: t('queue.description'), path: queuePath(), body, section: 'grid' });
 }
 
-/** @param {{q: any, state: any, i18n: any, posture: string}} p */
-export function queueStatePage({ q, state: s, i18n, posture }) {
+/** @param {{q: any, state: any, i18n: any, posture: string, projectsHref?: string | null}} p */
+export function queueStatePage({ q, state: s, i18n, posture, projectsHref = null }) {
   const { t, date } = i18n;
   const name = STATE_NAMES[s.state] ?? s.state;
   const body = html`<p class="cell-section"><a href="${queuePath()}">${t('queue.title')}</a></p>
 <h1>${t('queue.stateTitle', { state: name })}</h1>
 ${header(i18n, q.asOf, posture)}
+${projectsHref ? html`<p><a href="${projectsHref}">${t('queue.projectsLink', { state: name })}</a></p>` : ''}
 <section><h2>${t('queue.stateSummary')}</h2>${summaryFacts(s.summary, i18n)}</section>
 <section><h2>${t('queue.byCounty')}</h2>
 ${tableView([t('queue.col.county'), t('state.col.activeMw'), t('state.col.projects'), ...TYPES.map((k) => t(`state.queueType.${k}`)), t('queue.medianYears'), t('queue.withdrawn', { year: WITHDRAWAL_COHORT })],

@@ -133,6 +133,22 @@ test('CEII gate: fails on a queue file whose county row names a point of interco
   assert.match(errors, /queue\/ks\.json: not valid JSON/);
 });
 
+test('CEII gate: fails on a project file that carries a coordinate or a connection field', () => {
+  const clean = { state: 'TX', rows: [{ plantId: 1, plant: 'Alpha', county: 'Travis', mw: 10 }] };
+  const dirty = (extra) => JSON.stringify({ ...clean, rows: [{ ...clean.rows[0], ...extra }] });
+  const root = fixtureRepo({
+    'dist/projects/tx.json': JSON.stringify(clean),
+    'dist/projects/ok.json': dirty({ latitude: 35.1 }),
+    'dist/projects/nm.json': dirty({ poi_name: 'Rio Puerco 345 kV' }),
+    'dist/projects/ks.json': dirty({ substation: 'Wolf Creek' }),
+  });
+  const errors = checkCeii(join(root, 'dist')).join('\n');
+  assert.doesNotMatch(errors, /projects\/tx\.json/);
+  assert.match(errors, /projects\/ok\.json: carries rows\[0\]\.latitude: a coordinate, which is CEII/);
+  assert.match(errors, /projects\/nm\.json: carries rows\[0\]\.poi_name: a point of interconnection, which is CEII/);
+  assert.match(errors, /projects\/ks\.json: carries rows\[0\]\.substation: a substation, which is CEII/);
+});
+
 test('CEII gate: the emitter drops connection detail a future queue row might carry', () => {
   const row = { fips: '48453', county: 'Travis', summary: { activeMw: 1, activeCount: 1, byType: {}, medianYears: 1, withdrawn: null, substation: 'Gilleland Creek' } };
   const emitted = queueStateJson(

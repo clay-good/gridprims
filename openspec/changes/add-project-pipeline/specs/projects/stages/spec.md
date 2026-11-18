@@ -12,7 +12,7 @@ Project data SHALL come only from the `generators` table of the `eia-860m` datas
 - **THEN** it names EIA, Form EIA-860M, publication date 2026-10-23, and inventory month September 2026
 
 ### Requirement: EIA status codes map to five stages
-The build SHALL assign planned generators by EIA status: P to Planned, L to Waiting for approval, T to Approved, and U, V, or TS to Being built. A planned generator with any other status SHALL fail the build with the plant, generator, and status named.
+The build SHALL assign planned generators by EIA status: P to Planned, L to Waiting for approval, T to Approvals received, and U, V, or TS to Being built. A planned generator with any other status SHALL fail the build with the plant, generator, and status named.
 
 #### Scenario: A generator is more than half built
 - **WHEN** a generator in EIA's planned sheet has status V
@@ -33,7 +33,7 @@ Finished SHALL hold generators in EIA's operating sheet whose operating month fa
 The build SHALL produce one row per plant and stage, carrying the plant ID, plant name, reporting entity, state, county, balancing authority, stage, EIA status wording, generator count, technologies, nameplate MW, and reported month or month range. Nameplate MW SHALL be the sum of the row's generators.
 
 #### Scenario: One plant in two stages
-- **WHEN** a plant has one generator Approved and another Being built
+- **WHEN** a plant has one generator Approvals received and another Being built
 - **THEN** it has two rows, and each generator counts in exactly one
 
 ### Requirement: Totals reconcile with EIA's file
@@ -41,7 +41,7 @@ For every release, each stage's generator count SHALL equal the independent coun
 
 #### Scenario: Release 2026-10
 - **WHEN** the reconciliation runs on release 2026-10
-- **THEN** it finds 695 Planned generators at 100,556.7 MW, 406 Waiting for approval at 64,727.3 MW, 228 Approved at 27,036.4 MW, 1,029 Being built at 97,921.6 MW, and 2,176 Finished at 118,972.4 MW
+- **THEN** it finds 695 Planned generators at 100,556.7 MW, 406 Waiting for approval at 64,727.3 MW, 228 Approvals received at 27,036.4 MW, 1,029 Being built at 97,921.6 MW, and 2,176 Finished at 118,972.4 MW
 
 ### Requirement: Messy records are kept and labeled
 The build SHALL NOT alter a published value or infer a missing one. A blank county, or a county that does not match a Census county in the row's state, SHALL be grouped as "County not confirmed" with EIA's text kept on the row. A blank balancing authority SHALL be grouped as "Not reported". A missing planned date SHALL read "Date not reported".

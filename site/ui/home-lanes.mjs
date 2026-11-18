@@ -35,6 +35,7 @@ export const PAGE_CELLS = {
     { id: 'scenario', path: '/scenario/', needs: 'none', data: ['eia-930', 'eia-923'] },
     { id: 'entity-data', path: '/states/', needs: 'none', data: ['eia-861', 'eia-860', 'eia-923'] },
     { id: 'queue', path: '/queue/', needs: 'none', data: ['lbnl-queued-up'] },
+    { id: 'projects', path: '/projects/', needs: 'none', data: ['eia-860m'] },
     { id: 'large-load-terms', path: '/large-load/terms/', needs: 'none' },
   ],
   data: [

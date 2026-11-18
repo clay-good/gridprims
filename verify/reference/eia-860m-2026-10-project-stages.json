@@ -1,0 +1,362 @@
+{
+ "source": "U.S. Energy Information Administration, Form EIA-860M, as served in data/eia-860m",
+ "release": "2026-10",
+ "inventoryMonth": "2026-09",
+ "generatorsCsvGzSha256": "4e0c0ec31dcc040a090a398e378506ec95600c8e6e34e3509e7a4f72793500d6",
+ "method": "Python standard library, decimal arithmetic, independent of gridprims code",
+ "stages": {
+  "approved": {
+   "generators": 228,
+   "plants": 189,
+   "mw": 27036.4
+  },
+  "building": {
+   "generators": 1029,
+   "plants": 849,
+   "mw": 97921.6
+  },
+  "finished": {
+   "generators": 2176,
+   "plants": 1831,
+   "mw": 118972.4
+  },
+  "planned": {
+   "generators": 695,
+   "plants": 320,
+   "mw": 100556.7
+  },
+  "waiting": {
+   "generators": 406,
+   "plants": 269,
+   "mw": 64727.3
+  }
+ },
+ "canceledOrPostponed": {
+  "generators": 1745,
+  "mw": 185356.8
+ },
+ "stateMw": {
+  "AK": {
+   "finished": 54.9,
+   "planned": 9.6,
+   "waiting": 19.8
+  },
+  "AL": {
+   "approved": 397.8,
+   "building": 80.0,
+   "finished": 320.0,
+   "planned": 193.0,
+   "waiting": 1238.0
+  },
+  "AR": {
+   "approved": 14.4,
+   "building": 3517.0,
+   "finished": 1671.6,
+   "planned": 1250.0,
+   "waiting": 1388.1
+  },
+  "AZ": {
+   "approved": 25.0,
+   "building": 6115.6,
+   "finished": 10362.6,
+   "planned": 4725.0,
+   "waiting": 4042.0
+  },
+  "CA": {
+   "approved": 4201.5,
+   "building": 8206.8,
+   "finished": 10583.2,
+   "planned": 5637.7,
+   "waiting": 2218.5
+  },
+  "CO": {
+   "approved": 1179.6,
+   "building": 3632.5,
+   "finished": 2372.8,
+   "planned": 1143.0,
+   "waiting": 1369.1
+  },
+  "CT": {
+   "building": 102.8,
+   "finished": 190.0,
+   "planned": 324.0,
+   "waiting": 204.0
+  },
+  "DC": {
+   "building": 5.7,
+   "finished": 7.4
+  },
+  "DE": {
+   "building": 67.0,
+   "finished": 41.7,
+   "planned": 12.5,
+   "waiting": 120.5
+  },
+  "FL": {
+   "approved": 95.0,
+   "building": 2188.3,
+   "finished": 4590.3,
+   "waiting": 149.9
+  },
+  "GA": {
+   "approved": 372.0,
+   "building": 801.3,
+   "finished": 1837.0,
+   "planned": 2768.6,
+   "waiting": 2930.0
+  },
+  "HI": {
+   "building": 111.7,
+   "finished": 192.8,
+   "planned": 147.3,
+   "waiting": 212.0
+  },
+  "IA": {
+   "approved": 59.0,
+   "building": 302.5,
+   "finished": 855.0,
+   "waiting": 702.0
+  },
+  "ID": {
+   "approved": 359.0,
+   "building": 400.0,
+   "finished": 980.0,
+   "waiting": 200.0
+  },
+  "IL": {
+   "approved": 964.1,
+   "building": 2381.4,
+   "finished": 5132.9,
+   "planned": 3823.8,
+   "waiting": 128.5
+  },
+  "IN": {
+   "approved": 1088.8,
+   "building": 1650.0,
+   "finished": 4840.1,
+   "planned": 2463.0,
+   "waiting": 200.0
+  },
+  "KS": {
+   "approved": 1605.0,
+   "building": 563.2,
+   "finished": 989.8,
+   "planned": 204.6
+  },
+  "KY": {
+   "approved": 221.6,
+   "building": 1622.3,
+   "finished": 1057.0,
+   "planned": 297.2,
+   "waiting": 1110.0
+  },
+  "LA": {
+   "approved": 824.3,
+   "building": 976.4,
+   "finished": 1589.3,
+   "planned": 7837.8,
+   "waiting": 1710.6
+  },
+  "MA": {
+   "approved": 15.0,
+   "building": 287.3,
+   "finished": 1291.9,
+   "waiting": 430.0
+  },
+  "MD": {
+   "building": 19.7,
+   "finished": 716.0
+  },
+  "ME": {
+   "approved": 142.8,
+   "building": 103.0,
+   "finished": 579.9,
+   "planned": 318.0,
+   "waiting": 27.2
+  },
+  "MI": {
+   "approved": 658.6,
+   "building": 3395.4,
+   "finished": 2422.9,
+   "planned": 150.0,
+   "waiting": 1319.0
+  },
+  "MN": {
+   "approved": 242.1,
+   "building": 925.1,
+   "finished": 900.9,
+   "waiting": 620.0
+  },
+  "MO": {
+   "approved": 570.7,
+   "building": 2326.8,
+   "finished": 1767.9,
+   "planned": 2396.9
+  },
+  "MS": {
+   "approved": 441.0,
+   "building": 2169.4,
+   "finished": 783.3,
+   "planned": 989.0,
+   "waiting": 1188.7
+  },
+  "MT": {
+   "building": 80.0,
+   "finished": 259.6,
+   "planned": 637.0,
+   "waiting": 450.0
+  },
+  "NC": {
+   "approved": 226.0,
+   "building": 750.4,
+   "finished": 1268.0,
+   "planned": 451.0,
+   "waiting": 589.0
+  },
+  "ND": {
+   "building": 240.0,
+   "finished": 1253.0,
+   "planned": 628.0,
+   "waiting": 1813.1
+  },
+  "NE": {
+   "approved": 1056.0,
+   "building": 313.2,
+   "finished": 731.0,
+   "planned": 748.0,
+   "waiting": 279.0
+  },
+  "NH": {
+   "building": 20.0,
+   "finished": 6.0
+  },
+  "NJ": {
+   "approved": 1.4,
+   "building": 81.9,
+   "finished": 173.6
+  },
+  "NM": {
+   "approved": 496.0,
+   "building": 1694.9,
+   "finished": 6216.6,
+   "planned": 330.0,
+   "waiting": 1449.0
+  },
+  "NV": {
+   "building": 2670.5,
+   "finished": 1172.8,
+   "planned": 3022.5,
+   "waiting": 1395.0
+  },
+  "NY": {
+   "approved": 500.0,
+   "building": 3323.9,
+   "finished": 1187.9,
+   "planned": 1709.6,
+   "waiting": 1610.3
+  },
+  "OH": {
+   "approved": 350.0,
+   "building": 1755.1,
+   "finished": 3488.7,
+   "planned": 881.5,
+   "waiting": 355.0
+  },
+  "OK": {
+   "approved": 528.0,
+   "building": 2077.0,
+   "finished": 3189.5,
+   "planned": 2424.0
+  },
+  "OR": {
+   "approved": 158.9,
+   "building": 474.8,
+   "finished": 1069.6,
+   "planned": 600.0,
+   "waiting": 6546.5
+  },
+  "PA": {
+   "approved": 352.6,
+   "building": 387.6,
+   "finished": 528.5,
+   "planned": 5249.0,
+   "waiting": 586.2
+  },
+  "RI": {
+   "building": 715.0,
+   "finished": 39.1,
+   "planned": 3.5
+  },
+  "SC": {
+   "approved": 1387.3,
+   "building": 204.3,
+   "finished": 683.4,
+   "planned": 114.0,
+   "waiting": 501.3
+  },
+  "SD": {
+   "building": 136.5,
+   "finished": 8.3,
+   "waiting": 244.2
+  },
+  "TN": {
+   "approved": 194.6,
+   "building": 1144.8,
+   "finished": 1308.0,
+   "planned": 2658.4
+  },
+  "TX": {
+   "approved": 6102.9,
+   "building": 30431.8,
+   "finished": 32116.7,
+   "planned": 39923.7,
+   "waiting": 16240.0
+  },
+  "UT": {
+   "approved": 324.0,
+   "building": 797.3,
+   "finished": 3490.8,
+   "planned": 1866.0,
+   "waiting": 600.0
+  },
+  "VA": {
+   "approved": 308.1,
+   "building": 3548.8,
+   "finished": 1447.3,
+   "planned": 1862.5,
+   "waiting": 1645.6
+  },
+  "VT": {
+   "approved": 20.0,
+   "building": 18.0,
+   "waiting": 70.0
+  },
+  "WA": {
+   "approved": 740.0,
+   "building": 355.0,
+   "finished": 160.0,
+   "planned": 126.0,
+   "waiting": 2380.0
+  },
+  "WI": {
+   "approved": 168.2,
+   "building": 1199.1,
+   "finished": 1275.6,
+   "planned": 1350.0,
+   "waiting": 3493.5
+  },
+  "WV": {
+   "approved": 117.1,
+   "finished": 197.9,
+   "planned": 161.0,
+   "waiting": 943.6
+  },
+  "WY": {
+   "approved": 528.0,
+   "building": 3550.5,
+   "finished": 1569.3,
+   "planned": 1120.0,
+   "waiting": 2008.1
+  }
+ }
+}

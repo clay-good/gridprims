@@ -23,6 +23,9 @@ export const ENTITY_SAMPLE = [
   '/subregions/hims/', // a small island system
   '/queue/', // the national summary
   '/queue/tx/', // the most counties and project rows
+  '/projects/', // the national pipeline
+  '/projects/tx/', // the longest project list
+  '/projects/dc/', // the shortest
   '/scenario/', // the fit table
   '/scenario/pace/', // a small fleet, coal and gas
   '/scenario/miso/', // the largest fleet and download

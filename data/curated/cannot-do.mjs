@@ -81,6 +81,14 @@ export default [
     verified: true,
   },
   {
+    id: 'project-completion', added: '2026-11-18',
+    title: 'Whether a listed power project will be finished, or when',
+    detail: 'The project pipeline shows the stage and date each owner reported to EIA.',
+    reason: 'Owners report plans, not odds, and they update EIA each month only in the last 12 months before a generator starts.',
+    sources: ['Form EIA-860M instructions, Purpose and Required Respondents', 'openspec/changes/add-project-pipeline/design.md D2'],
+    verified: true,
+  },
+  {
     id: 'protected-infrastructure', added: '2026-10-31',
     title: 'Anything that needs protected infrastructure information',
     reason: 'We publish only public data and never Critical Energy/Electric Infrastructure Information.',

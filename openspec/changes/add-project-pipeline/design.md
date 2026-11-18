@@ -11,7 +11,7 @@
 
 ## D2. Five stages, using EIA's own status codes
 
-**Decision.** P is Planned, L is Waiting for approval, T is Approved, and U, V, and TS are Being built. Each row keeps EIA's status wording, so "construction complete, not yet in commercial operation" stays visible inside Being built.
+**Decision.** P is Planned, L is Waiting for approval, T is Approvals received, and U, V, and TS are Being built. Each row keeps EIA's status wording, so "construction complete, not yet in commercial operation" stays visible inside Being built.
 
 **Alternatives considered.** Showing all six codes is more exact, but harder to scan. A separate sixth stage for TS would hold only 157 generators.
 

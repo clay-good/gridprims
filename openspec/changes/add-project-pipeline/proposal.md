@@ -8,7 +8,7 @@ The queue pages show who has asked to connect, and many of those requests are ne
 |---|---|---:|---:|---:|
 | Planned | P | 695 | 320 | 100,557 MW |
 | Waiting for approval | L | 406 | 269 | 64,727 MW |
-| Approved | T | 228 | 189 | 27,036 MW |
+| Approvals received | T | 228 | 189 | 27,036 MW |
 | Being built | U, V, TS | 1,029 | 849 | 97,922 MW |
 | Finished, last 24 months | Online Oct 2024 to Sep 2026 | 2,176 | 1,831 | 118,972 MW |
 
