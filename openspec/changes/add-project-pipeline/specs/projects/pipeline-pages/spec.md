@@ -30,7 +30,7 @@ A state page SHALL let a visitor filter rows by stage, technology, county, balan
 - **THEN** the page says no reported project matches and offers one control to clear the filters
 
 ### Requirement: The limits are stated beside the answer
-Every project page SHALL say that the list holds generators reported to EIA, that it omits transmission lines, pipelines, data centers, and projects not yet reported, that location stops at the county, that capacity is nameplate, and that a reported date is not a forecast. The page SHALL NOT show a likelihood of completion or an estimated finish date.
+Every project page SHALL say that the list holds generators reported to EIA, that it omits transmission lines, pipelines, data centers, and projects not yet reported, that location stops at the county, that capacity is nameplate, that a reported date is not a forecast, and that owners update EIA monthly only in the last 12 months before a generator starts. The page SHALL NOT show a likelihood of completion or an estimated finish date.
 
 #### Scenario: A visitor looks for a transmission project
 - **WHEN** a visitor reads any project page

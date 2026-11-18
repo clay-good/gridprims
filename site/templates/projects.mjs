@@ -26,9 +26,9 @@ const monthFormat = (locale, month) => new Intl.DateTimeFormat(locale, { year: '
 const monthLabel = (d, locale, style = 'short') => (d.length === 4 ? d : monthFormat(locale, style).format(new Date(`${d}-01T00:00:00Z`)));
 
 function numberTable(headers, rows, caption) {
-  return html`<div class="table-wrap"><table>
+  return html`<div class="table-wrap"><table class="stage-table">
   <caption>${caption}</caption>
-  <thead><tr>${headers.map((h, i) => html`<th scope="col"${i ? html` class="num"` : ''}>${h}</th>`)}</tr></thead>
+  <thead><tr><th scope="col">${headers[0]}</th>${headers.slice(1).map((h) => html`<th scope="col" class="num">${h}</th>`)}</tr></thead>
   <tbody>${rows.map(([name, ...values]) => html`<tr><th scope="row">${name}</th>${values.map((v) => html`<td class="num">${v}</td>`)}</tr>`)}</tbody>
 </table></div>`;
 }
@@ -71,7 +71,7 @@ ${limits(i18n)}
 ${stageTiles(p.national, i18n)}
 ${canceledNote(p.canceled, i18n)}
 <section><h2>${t('projects.byState')}</h2>
-${numberTable([t('utility.col.state'), ...stageHeaders(i18n)], p.states.map((s) => [html`<a href="${projectsPath(s.state)}">${STATE_NAMES[s.state] ?? s.state}</a>`, ...stageValues(s.summary)]), t('projects.tableCaption', { place: t('projects.byState'), month }))}</section>
+${numberTable([t('utility.col.state'), ...stageHeaders(i18n)], [...p.states].sort((a, b) => (STATE_NAMES[a.state] ?? a.state).localeCompare(STATE_NAMES[b.state] ?? b.state)).map((s) => [html`<a href="${projectsPath(s.state)}">${STATE_NAMES[s.state] ?? s.state}</a>`, ...stageValues(s.summary)]), t('projects.tableCaption', { place: t('projects.byState'), month }))}</section>
 <section><h2>${t('projects.byBa')}</h2>
 ${numberTable([t('projects.col.ba'), ...stageHeaders(i18n)], p.bas.map((b) => [baName(b.ba), ...stageValues(b.summary)]), t('projects.tableCaption', { place: t('projects.byBa'), month }))}</section>
 ${sourceStamp(p.manifest, p.table, i18n)}`;

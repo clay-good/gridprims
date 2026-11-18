@@ -41,9 +41,11 @@ for (const kind of ['chrome', 'firefox']) {
       for (const mw of big) assert.ok(mw >= 500, `${mw} MW`);
 
       // A combination nothing matches says so, hides the table, and offers one way back.
-      await browser.evaluate(setFilter('stage', 'planned'));
-      await browser.evaluate(setFilter('tech', 'Conventional Hydroelectric'));
-      await browser.evaluate(setFilter('size', '500'));
+      const emptyCounty = await browser.evaluate("(() => { const rows = [...document.querySelectorAll('[data-projects] tbody tr')]; return [...document.querySelector('[name=county]').options].map((o) => o.value).filter(Boolean).find((c) => !rows.some((r) => r.dataset.county === c && r.dataset.stage === 'approved')); })()");
+      await browser.evaluate(setFilter('tech', ''));
+      await browser.evaluate(setFilter('size', ''));
+      await browser.evaluate(setFilter('stage', 'approved'));
+      await browser.evaluate(setFilter('county', emptyCounty));
       assert.equal(await browser.evaluate(count), 'No reported project matches these filters.');
       assert.equal(await browser.evaluate("document.querySelector('[data-project-table]').hidden"), true);
       await browser.evaluate("document.querySelector('[data-project-clear]').click()");
@@ -51,7 +53,12 @@ for (const kind of ['chrome', 'firefox']) {
       assert.equal(await browser.evaluate("document.querySelector('[data-project-clear]').hidden"), true);
       assert.equal(await browser.evaluate("document.activeElement.name"), 'stage', 'focus returns to the first filter');
 
-      assert.deepEqual([...log, ...browser.requests].filter((u) => !/favicon/.test(u)), [], 'filtering makes no request');
+      // The service worker may still be caching the shell in the background, so the check is on what a request carries.
+      const choices = ['building', 'approved', 'Solar', emptyCounty, 'stage=', 'tech=', 'county=', 'size='];
+      for (const u of [...log, ...browser.requests]) {
+        assert.ok(!choices.some((c) => u.includes(c)), `request carries a filter choice: ${u}`);
+        assert.ok(!/\/projects\/[a-z]{2}\.json/.test(u), `filtering fetched data: ${u}`);
+      }
     } finally {
       await browser.close();
       await server.close();

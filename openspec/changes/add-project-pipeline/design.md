@@ -55,9 +55,11 @@
 
 `add-large-load-screen` lists project-level siting data as a non-goal for that screen. It does not limit this page, which republishes EIA's inventory and does not screen a site.
 
-## Open questions
+## D9. "Approvals received" names the third stage
 
-Both are settled by tasks 1.4 and 3.5, and the safer wording ships if neither can be confirmed.
+**Decision.** EIA's status T reads "Regulatory approvals received," so the stage uses those words. The site's claims gate reserves "approved" for evidence about our own work, and we keep that gate as it is.
 
-1. **Coverage wording.** The inventory holds 49 planned generators under 1 MW, so the page cannot simply say "1 MW and larger." Confirm the threshold in EIA's form instructions. Until then, say "as reported to EIA."
-2. **Independent check.** Compare stage totals with a planned-additions table EIA publishes, if its definitions line up. If they do not, the independent Python recount from EIA's own file is the reference.
+## Settled during the build
+
+1. **Coverage wording (task 3.5).** EIA's Form EIA-860M instructions state no size threshold, and the inventory holds 49 planned generators under 1 MW, so the page says "reported to EIA." The instructions also say owners file monthly only once a new generator is within 12 months of operation. The page states that later dates and stages can be older.
+2. **Independent check (task 1.4).** EIA's Electric Power Monthly Table 6.5 is not comparable: the copy checked lists generators from the August 2026 inventory and carries no stage totals. The reference is `verify/tools/project-stages.py`, a Python recount of the published generators file for release 2026-10. Later monthly releases get the build's status check and the CEII gate, not a new recount.

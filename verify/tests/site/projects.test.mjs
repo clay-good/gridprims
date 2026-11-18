@@ -37,6 +37,7 @@ test('a state page lists its projects with the limits, the queue kept apart, and
   assert.match(page('queue/tx'), /href="\/projects\/tx\/"/);
   assert.match(body, /U\.S\. Energy Information Administration/);
   assert.equal((html.match(/<tr data-stage=/g) ?? []).length, state('tx').rows.length, 'every row is in the served HTML');
+  assert.match(html, /<form class="panel project-filters" data-project-filters hidden/, 'the filters wait for JavaScript, so the page never offers a control that does nothing');
 });
 
 test('a row shows its date, stage, and wording; odd records are labeled, not guessed', () => {

@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "roboto",
+        "createdAt": "2026-11-18T14:52:02.981Z",
+        "reason": "DESIGN.md names self-hosted Roboto Mono as the site's data font (Typography, Data Font)"
+      }
+    ]
+  }
+}

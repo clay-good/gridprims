@@ -37,7 +37,7 @@ The build SHALL produce one row per plant and stage, carrying the plant ID, plan
 - **THEN** it has two rows, and each generator counts in exactly one
 
 ### Requirement: Totals reconcile with EIA's file
-For every release, each stage's generator count SHALL equal the independent count from EIA's file exactly, and its nameplate capacity SHALL match within 0.1 MW. State totals and balancing-authority totals SHALL each add up to the national stage totals within 0.1 MW.
+For the committed reference release, each stage's generator and plant counts SHALL equal an independent recount of the published generators file exactly, and its nameplate capacity SHALL match within 0.1 MW. State, county, and balancing-authority totals SHALL each add up to the totals above them within 0.1 MW.
 
 #### Scenario: Release 2026-10
 - **WHEN** the reconciliation runs on release 2026-10
