@@ -1,6 +1,6 @@
 ## Why
 
-**Value up front:** anyone can pick a state and see which power plants are planned, waiting for approval, approved, being built, or recently finished, with each project's size, county, owner, technology, and reported date.
+**Value up front:** anyone can pick a state and see which power plants are planned, waiting for approval, holding their approvals, being built, or recently finished, with each project's size, county, owner, technology, and reported date.
 
 The queue pages show who has asked to connect, and many of those requests are never built: 24,221 of LBNL's 38,201 requests were withdrawn. Siting teams, reporters, and commission staff also need to know what owners have reported to the federal government about their projects. EIA publishes that every month, but as a national workbook of 39,908 generators with status codes. The data is already in this repository and refreshes monthly, yet the site has no view of it by stage, and plant pages leave out plants that are only proposed.
 

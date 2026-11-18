@@ -24,4 +24,4 @@
 
 - [x] 4.1 Add `/projects/`, `/projects/tx/`, and `/projects/dc/` to `verify/browser/pages.mjs`; verify both themes, 320 px width, and accessibility in the Firefox browser run
 - [x] 4.2 Run the targeted tests for the new modules and `npm run check`; verify that both pass before the change is marked complete
-- [ ] 4.3 Run the print and reference-profile performance checks on these pages in Chrome; verify in the CI browser run, because both need the DevTools Protocol and Chrome was not installed where this change was built
+- [ ] 4.3 Run the print, reference-profile performance, and JavaScript-off checks on these pages in Chrome; verify in the CI browser run, because all three need the DevTools Protocol and Chrome was not installed where this change was built (the served HTML already carries the full list with the filters hidden)
