@@ -6,6 +6,7 @@
 // is not eligible for and why, a note on how current the rate data is, and a
 // load-shift what-if.
 
+import { covers, percentDiscount, withAddedBaseline } from './discount-programs.mjs';
 import { intervalBills } from './interval-bill.mjs';
 import { utcToLocal } from '../../parsers/time.mjs';
 
@@ -77,12 +78,30 @@ export function compareRates(series, records, opts) {
 
   const priced = [];
   const notEligible = [];
+  const programs = opts.programs ?? [];
   for (const rec of records) {
     const why = ineligibility(rec, load);
     // The current rate is always priced, with a note when the load is outside its stated limits.
     if (why && rec.id !== opts.currentId) { notEligible.push({ rec, reason: why }); continue; }
-    const bills = intervalBills(series, rec, { zone: opts.zone, received: opts.received, holidays: opts.holidays });
-    priced.push({ rec, months: bills.months, annual: round2(bills.months.reduce((n, m) => n + m.total, 0)), components: components(bills.months), offPeakShare: offPeakShare(rec, bills.months), peakKw: load.peakKw, unmodeled: rec.unmodeled, ...(why ? { outsideLimits: why } : {}) });
+    // Discount and allowance programs the household ticked modify every plan they cover (plan-finder, D5).
+    const applied = [];
+    let priceAs = rec;
+    for (const prog of programs.filter((x) => x.kind === 'baseline-kwh')) {
+      if (!covers(prog, rec)) { applied.push({ id: prog.id, name: prog.name, applied: false, why: 'the program does not cover this plan' }); continue; }
+      const b = withAddedBaseline(priceAs, prog);
+      priceAs = b.rec;
+      applied.push({ id: prog.id, name: prog.name, applied: b.applied, ...(b.why ? { why: b.why } : {}) });
+    }
+    const bills = intervalBills(series, priceAs, { zone: opts.zone, received: opts.received, holidays: opts.holidays });
+    const parts = components(bills.months);
+    let annual = round2(bills.months.reduce((n, m) => n + m.total, 0));
+    for (const prog of programs.filter((x) => x.kind === 'percent')) {
+      if (!covers(prog, rec)) { applied.push({ id: prog.id, name: prog.name, applied: false, why: 'the program does not cover this plan' }); continue; }
+      const off = percentDiscount(prog, { components: parts });
+      annual = round2(annual - off);
+      applied.push({ id: prog.id, name: prog.name, applied: true, discount: off });
+    }
+    priced.push({ rec, months: bills.months, annual, components: parts, offPeakShare: offPeakShare(rec, bills.months), peakKw: load.peakKw, unmodeled: rec.unmodeled, ...(why ? { outsideLimits: why } : {}), ...(applied.length ? { programs: applied } : {}) });
   }
   priced.sort((a, b) => a.annual - b.annual || a.rec.name.localeCompare(b.rec.name));
   const current = priced.find((p) => p.rec.id === opts.currentId) ?? null;

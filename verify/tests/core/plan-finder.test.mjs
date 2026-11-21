@@ -58,3 +58,41 @@ test('moving 10 kWh a day of EV charging from 6–9 pm to midnight–5 am update
   assert.deepEqual(before.ranked.map((x) => x.rec.id), fx.rankingBefore);
   assert.deepEqual(after.ranked.map((x) => x.rec.id), fx.rankingAfter);
 });
+
+test('CARE customer: a 30% discount on covered charges reaches every plan it covers, and the ranking uses the discounted costs', async () => {
+  const plans = [{ ...plan('r1', 'Residential Service', 0.1), utilityId: 14328 }, { ...plan('tou', 'Residential Time-of-Use', 0.0921951), utilityId: 14328 }, { ...plan('other', 'Other Utility Flat', 0.08), utilityId: 99 }];
+  const care = { id: 'care', name: 'CARE', kind: 'percent', percent: 30, utilityIds: [14328] };
+  const r = findPlans(year, plans, { zone: 'UTC', currentId: 'r1', asOf: '2026-10-30', programs: [care] });
+  // $1,640 and $1,512 at 70%; the other utility's plan is not covered and stays at $1,312.
+  assert.deepEqual(r.ranked.map((p) => [p.rec.id, Math.round(p.annual)]), [['tou', 1058], ['r1', 1148], ['other', 1312]]);
+  assert.deepEqual(r.ranked.find((p) => p.rec.id === 'other').programs, [{ id: 'care', name: 'CARE', applied: false, why: 'the program does not cover this plan' }]);
+  assert.equal(r.ranked.find((p) => p.rec.id === 'tou').programs[0].discount, 453.6);
+  assert.equal(r.headline, 'Residential Time-of-Use would have cost $90 less (7.8%) on the last 12 months.');
+});
+
+test('a percent program covers only the charges its tariff text names', async () => {
+  const { percentDiscount } = await import('../../../core/lib/discount-programs.mjs');
+  assert.equal(percentDiscount({ percent: 18, appliesTo: ['energy'] }, { components: { fixed: 120, energy: 1000, demand: 0 } }), 180);
+  assert.equal(percentDiscount({ percent: 30 }, { components: { fixed: 120, energy: 1000, demand: 0 } }), 336);
+});
+
+test('medical baseline adds its allowance to the first tier of a tiered plan, and leaves a flat plan as it is', () => {
+  const tiered = { ...fromManual({ energyRate: 0.1, tierKwh: 500, energyRate2: 0.2 }), id: 't', name: 'Residential Tiered' };
+  const flat = plan('f', 'Residential Flat', 0.12);
+  const med = { id: 'mb', name: 'Medical Baseline', kind: 'baseline-kwh', kwhPerMonth: 500 };
+  const without = findPlans(year, [tiered, flat], { zone: 'UTC', asOf: '2026-10-30' });
+  const withMed = findPlans(year, [tiered, flat], { zone: 'UTC', asOf: '2026-10-30', programs: [med] });
+  const t0 = without.ranked.find((p) => p.rec.id === 't').annual;
+  const t1 = withMed.ranked.find((p) => p.rec.id === 't').annual;
+  // 500 more kWh a month at $0.10 instead of $0.20, for 12 months: $600 less.
+  assert.equal(Math.round(t0 - t1), 600);
+  assert.equal(withMed.ranked.find((p) => p.rec.id === 'f').programs[0].why, 'the plan has no baseline tier to add to');
+});
+
+test('a record that is a discount program is never listed as a plan', () => {
+  const plans = [plan('r1', 'Residential Service', 0.1), plan('care', 'E-1 CARE Residential', 0.07), plan('fera', 'FERA Residential Service', 0.08)];
+  const r = findPlans(year, plans, { zone: 'UTC', currentId: 'r1', have: ['low-income'], asOf: '2026-10-30' });
+  assert.deepEqual(r.ranked.map((p) => p.rec.id), ['r1']);
+  assert.deepEqual(r.requires, []);
+  assert.deepEqual(r.programRecords.map((x) => x.id), ['care', 'fera']);
+});
