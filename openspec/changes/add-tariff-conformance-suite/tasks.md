@@ -23,7 +23,7 @@
 - [x] 3.4 Publish disagreements immediately and record any upstream report afterwards; verify the published-immediately and reported-later scenarios (the build publishes every comparison it computes with nothing waiting on a report; a finding's reported date and reference are added to its wording without moving a figure, tested)
 - [ ] 3.5 Publish the method, versions, checksums, rate list, and results as files; verify an independent rerun reproduces the numbers
 - [x] 3.6 Include our own engine in the table; verify the our-result-shown scenario (engineRow counts the latest vector release the same way, and the page sets URDB's records and our engine side by side with the same rows: 154 URDB figures, 2 within the margin; 24 of ours, all within it)
-- [ ] 3.7 Wire the scorecard into validation levels and the limits page; verify the validation-level-raised scenario
+- [x] 3.7 Wire the scorecard into validation levels and the limits page; verify the validation-level-raised scenario (core/contract/conformance.mjs runs the latest vector release and counts the rates our engine reproduces within 0.5% or $1 and their states; limitsRecord raises the bill tools to cross-checked, with the release and scorecard as evidence, the same build the bar of 20 rates in 5 states is met, and the limits page, limits.json, and the MCP limits resource state the sample against the bar, today 8 rates in 1 state, so the level stays; verify/tests/core/conformance.test.mjs covers both scenarios)
 
 ## 4. Upstream and surfaces
 

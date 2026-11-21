@@ -4,6 +4,7 @@
 // copy, and the MCP resource are all this one object.
 
 import { VALIDATION_LEVELS } from './manifest.mjs';
+import { BILL_TOOLS } from './conformance.mjs';
 
 export const FRESH_RUN_DAYS = 90;
 const DAY = 86_400_000;
@@ -11,19 +12,23 @@ const DAY = 86_400_000;
 /**
  * @param {{
  *   tools: Array<{manifest: any}>, cannotDo?: any[], claims?: any[], health?: any, signoffs?: Array<{tool: string}>,
- *   ledger?: any, generatedAt?: string, describes?: string, now?: number,
+ *   ledger?: any, generatedAt?: string, describes?: string, now?: number, conformance?: any,
  * }} r
  */
 export function limitsRecord(r) {
-  const { tools, cannotDo = [], claims = [], health = null, signoffs = [], ledger = null, generatedAt = null, describes = null } = r;
+  const { tools, cannotDo = [], claims = [], health = null, signoffs = [], ledger = null, generatedAt = null, describes = null, conformance = null } = r;
   const now = r.now ?? Date.now();
   const passed = new Map((health?.tools ?? []).map((t) => [t.id, t.evidencePassed]));
   const rows = tools.map(({ manifest: m }) => {
     const evidencePassed = passed.get(m.id) ?? null;
+    // A bill tool rises to cross-checked the same build the engine clears the scorecard's bar (3.7).
+    const raised = conformance?.met && BILL_TOOLS.includes(m.id) && m.validation.level < 2;
+    const level = raised ? 2 : m.validation.level;
     return {
       id: m.id, title: m.title, version: m.version, stability: m.stability,
-      validationLevel: m.validation.level, validationName: VALIDATION_LEVELS[m.validation.level].name,
-      evidence: m.validation.evidence.map(({ kind, summary }) => ({ kind, summary })),
+      validationLevel: level, validationName: VALIDATION_LEVELS[level].name,
+      evidence: [...m.validation.evidence.map(({ kind, summary }) => ({ kind, summary })),
+        ...(raised ? [{ kind: 'conformance', summary: `Reproduces ${conformance.rates} regulator-published rates across ${conformance.states.length} states within 0.5% or $1.00 (bill test vectors ${conformance.release}, ${conformance.scorecard}).` }] : [])],
       evidencePassed, needsFreshRun: !evidencePassed || now - Date.parse(evidencePassed) > FRESH_RUN_DAYS * DAY,
       review: signoffs.some((s) => s.tool === m.id) ? 'signed off' : 'pending',
       toRaise: m.toRaise ?? null, claims: m.claims ?? [], limitations: m.limitations,
@@ -42,7 +47,7 @@ export function limitsRecord(r) {
   return {
     generatedAt, describes,
     summary: 'gridprims gives screening estimates, not utility studies. No tool has yet been checked against real bills or a utility\'s own figures. User problem reports are how we find our errors.',
-    levels: VALIDATION_LEVELS, counts, tools: rows, cannotDo,
+    levels: VALIDATION_LEVELS, counts, tools: rows, cannotDo, conformance,
     unverifiedClaims: claims,
     problems: {
       automation: { stalled, note: stalled.length ? 'Some scheduled jobs are stalled: data may be as old as their last successful run.' : null },

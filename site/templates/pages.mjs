@@ -174,6 +174,10 @@ ${L.tools.length ? html`<div class="table-wrap"><table>
   </tr>`)}</tbody>
 </table></div>` : html`<p>${t('limits.noTools')}</p>`}
 
+${L.conformance ? html`<h3 id="conformance">${t('limits.conformanceTitle')}</h3>
+<p data-conformance>${t(L.conformance.met ? 'limits.conformanceMet' : 'limits.conformanceShort', { rates: L.conformance.rates, states: L.conformance.states.length, barRates: L.conformance.bar.rates, barStates: L.conformance.bar.states, release: L.conformance.release, date: date(L.conformance.date) })} <a href="${L.conformance.scorecard}">${t('limits.conformanceLink')}</a></p>
+${L.conformance.uncovered.length ? html`<p>${t('limits.conformanceUncovered', { types: L.conformance.uncovered.map((x) => t(`gt.type.${x}`)).join(', ') })}</p>` : ''}` : ''}
+
 <h2 id="cannot">${t('limits.cannot')}</h2>
 <p>${t('limits.cannotIntro')}</p>
 ${L.cannotDo.map((c) => html`<section class="panel" id="${c.id}">

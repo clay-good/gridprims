@@ -19,6 +19,7 @@ import { resolveExplainer } from './entities/explainers.mjs';
 import { explainerPage, explainerPath } from './templates/explainer.mjs';
 import { LINKS_PATH, programLinksPage } from './templates/program-links.mjs';
 import { RELEASES_DIR, changelog as vectorChangelogOf, releaseFile } from '../pipeline/lib/vector-releases.mjs';
+import { readConformance } from '../mcp/data.mjs';
 import { GROUND_TRUTH_PATH, LIMITS, checkPublications, coverage as groundTruthCoverage, groundTruthCsv, groundTruthJson, loadGroundTruth } from './entities/ground-truth.mjs';
 import { groundTruthPage } from './templates/ground-truth.mjs';
 import { readShard } from '../core/lib/shard.mjs';
@@ -195,7 +196,7 @@ export async function build(opts = {}) {
   // The continuity ledger, as a page and as JSON, generated with the build's own date so pages age it on the
   // device. It is built here because the limits page reads its late, stalled, and dead-link rows from it.
   const ledger = buildLedger({ datasets: await ledgerDatasets(ROOT), health, replies: ledgerReplies, generatedAt: health?.generatedAt ?? buildDate, contact: `${ORIGIN}/report/` });
-  const limits = limitsRecord({ tools: TOOLS, cannotDo, claims, health, ledger, generatedAt: health?.generatedAt ?? null, describes, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') });
+  const limits = limitsRecord({ tools: TOOLS, cannotDo, claims, health, ledger, generatedAt: health?.generatedAt ?? null, describes, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z'), conformance: readConformance(join(ROOT, 'data/curated/conformance')) });
   write('/limits/', limitsPage({ limits, i18n, health }));
   if (health) { mkdirSync(join(outDir, 'health'), { recursive: true }); cpSync(healthFile, join(outDir, 'health/pipeline.json')); }
   writeFileSync(join(outDir, 'limits/limits.json'), JSON.stringify(limits, null, 2) + '\n');

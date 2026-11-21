@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { readShard } from '../core/lib/shard.mjs';
 import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
 import { buildLedger } from '../core/lib/ledger.mjs';
+import { conformanceStatus } from '../core/contract/conformance.mjs';
 import ourDatasets from '../data/curated/our-datasets.mjs';
 import ledgerReplies from '../data/curated/ledger-replies.mjs';
 
@@ -71,7 +72,17 @@ export function query({ dataset, table, filter = {}, limit = 100, offset = 0 }, 
 export function limitsInputs(dir = DATA_DIR) {
   const healthFile = join(dir, 'health/pipeline.json');
   const health = existsSync(healthFile) ? JSON.parse(readFileSync(healthFile, 'utf8')) : null;
-  return { cannotDo, claims, health, ledger: ledgerRecord(dir), generatedAt: health?.generatedAt ?? null, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z') };
+  return { cannotDo, claims, health, ledger: ledgerRecord(dir), generatedAt: health?.generatedAt ?? null, now: Date.parse(health?.generatedAt ?? '2026-10-31T00:00:00Z'), conformance: readConformance(join(dir, 'curated/conformance')) };
+}
+
+/** The bill engine's standing in the latest bill test vector release, for the limits record (3.7). */
+export function readConformance(dir) {
+  const log = join(dir, 'releases/changelog.json');
+  if (!existsSync(log)) return null;
+  const latest = JSON.parse(readFileSync(log, 'utf8')).at(-1);
+  if (!latest) return null;
+  const bundle = JSON.parse(readFileSync(join(dir, 'releases', `bill-test-vectors-${latest.version}.json`), 'utf8'));
+  return conformanceStatus(latest, bundle.vectors, bundle.coverage);
 }
 
 /**

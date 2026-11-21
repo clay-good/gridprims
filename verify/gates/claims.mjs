@@ -22,8 +22,10 @@ export function findScoped(toolId, text) {
   return Object.entries(SCOPED_TERMS).filter(([prefix]) => toolId.startsWith(prefix)).flatMap(([, re]) => String(text).split(/(?<=[.!?])\s+/).filter((s) => re.test(s)));
 }
 
-/** Strings shown only when a record supports them: the limits page renders this label only for a tool with a row in docs/review-signoffs.md. */
-export const CONDITIONAL_KEYS = ['limits.review.signed off'];
+/** Strings shown only when a record supports them: the limits page renders the review label only for a tool with a row in docs/review-signoffs.md. */
+// The conformance sentences render only from the status core/contract/conformance.mjs computes by running the
+// gated bill test vectors, and state its counts, so CI backs every number in them.
+export const CONDITIONAL_KEYS = ['limits.review.signed off', 'limits.conformanceShort', 'limits.conformanceMet'];
 
 /**
  * Claims in one text, sentence by sentence.

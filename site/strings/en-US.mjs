@@ -2044,5 +2044,10 @@ export default {
   'sc.reported': 'Reported to URDB on {date}.',
   'sc.untestable': '{n} schedules not compared, and why',
   'gt.scorecardLink': 'How the open tariff database compares with these bills',
+  'limits.conformanceTitle': 'The bill engine against regulator bills',
+  'limits.conformanceShort': 'As of bill test vectors {release} ({date}), our engine reproduces {rates} regulator-published rates in {states} state(s) within 0.5% of the bill or $1. The bill tools rise to cross-checked at {barRates} rates spanning {barStates} states, so their level stays where it is.',
+  'limits.conformanceMet': 'As of bill test vectors {release} ({date}), our engine reproduces {rates} regulator-published rates in {states} states within 0.5% of the bill or $1, past the bar of {barRates} rates spanning {barStates} states, so the bill tools are cross-checked.',
+  'limits.conformanceLink': 'See every comparison',
+  'limits.conformanceUncovered': 'No vector yet exercises: {types}. The suite says nothing about these.',
   'gt.used': '{utilities} utilities, {figures} figures',
 };
