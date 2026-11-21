@@ -40,7 +40,7 @@ export function compareScreens(records) {
 /** The date a record is due for review: 12 months after it was last checked. */
 export const reviewDue = (lastChecked) => `${Number(lastChecked.slice(0, 4)) + 1}${lastChecked.slice(4)}`;
 
-const CSV_COLUMNS = ['id', 'jurisdiction', 'family', 'process', 'screen', 'threshold', 'test_basis', 'who_answers', 'measure', 'comparison', 'last_checked', 'review_due', 'sources', 'unreachable_sources'];
+export const CSV_COLUMNS = ['id', 'jurisdiction', 'family', 'process', 'screen', 'threshold', 'test_basis', 'who_answers', 'measure', 'comparison', 'last_checked', 'review_due', 'sources', 'unreachable_sources'];
 const quote = (v) => (/[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
 
 /** Every record as a row with its citations and last-checked date, in a stable order. */

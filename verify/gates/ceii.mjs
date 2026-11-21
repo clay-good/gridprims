@@ -20,8 +20,8 @@ export const CEII_FIELDS = [
   ['a coordinate', /^(lat|latitude|lon|lng|long|longitude|coord|coords|coordinates|geometry|geojson|wkt|googlemap|bingmap|mapurl)$/],
 ];
 
-/** The deploy folders of open JSON the gate reads. */
-const FOLDERS = ['queue', 'projects'];
+/** The deploy folders of open JSON the gate reads, the interconnection screens among them (add-interconnection-screens 6.2). */
+const FOLDERS = ['queue', 'projects', 'interconnect'];
 
 const normal = (key) => key.toLowerCase().replace(/[^a-z0-9]/g, '');
 

@@ -43,5 +43,5 @@
 ## 6. Surfaces
 
 - [x] 6.1 Run every worked example through the MCP server; verify identical structured results and that no tool returns a pass or fail for a model-dependent screen
-- [ ] 6.2 Confirm the automatic CEII screen finds no infrastructure data in this change's outputs; verify the documented screen record in the registry, with no signature
+- [x] 6.2 Confirm the automatic CEII screen finds no infrastructure data in this change's outputs; verify the documented screen record in the registry, with no signature (gridprims-interconnect-screens in data/curated/our-datasets.mjs carries its CEII record, the build runs pipeline/lib/ceii.mjs's release-time screen on every published column and writes the record into /interconnect/screens.json with the rule, the date, and no signature, failing the build if it flags anything, and the deploy gate in verify/gates/ceii.mjs now reads the interconnect folder; verify/tests/gates/ceii-interconnect.test.mjs)
 - [ ] 6.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green

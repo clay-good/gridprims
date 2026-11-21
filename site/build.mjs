@@ -20,6 +20,9 @@ import { explainerPage, explainerPath } from './templates/explainer.mjs';
 import { LINKS_PATH, programLinksPage } from './templates/program-links.mjs';
 import { RELEASES_DIR, changelog as vectorChangelogOf, releaseFile } from '../pipeline/lib/vector-releases.mjs';
 import { readConformance } from '../mcp/data.mjs';
+import { ceiiScreen } from '../pipeline/lib/ceii.mjs';
+import OUR_DATASETS from '../data/curated/our-datasets.mjs';
+import { CSV_COLUMNS as SCREEN_CSV_COLUMNS } from '../core/lib/screen-compare.mjs';
 import { GROUND_TRUTH_PATH, LIMITS, checkPublications, coverage as groundTruthCoverage, groundTruthCsv, groundTruthJson, loadGroundTruth } from './entities/ground-truth.mjs';
 import { groundTruthPage } from './templates/ground-truth.mjs';
 import { SCORECARD_PATH, scorecardPage } from './templates/scorecard.mjs';
@@ -315,7 +318,11 @@ export async function build(opts = {}) {
   // The interconnection screen thresholds by jurisdiction, as rows anyone can audit or reuse (CC BY 4.0).
   mkdirSync(join(outDir, 'interconnect'), { recursive: true });
   writeFileSync(join(outDir, 'interconnect/screens.csv'), screensCsv(SCREEN_RECORDS));
-  writeFileSync(join(outDir, 'interconnect/screens.json'), JSON.stringify({ publisher: 'gridprims', license: 'CC BY 4.0', credit: 'Each row cites the tariffs and rules it was read from; credit them with gridprims.', asOf: SCREEN_RECORDS.map((r) => r.lastChecked).sort().at(-1), rows: screenRows(SCREEN_RECORDS) }, null, 2) + '\n');
+  // The CEII screen every release runs, on the columns this dataset publishes (add-interconnection-screens 6.2).
+  const screensAsOf = SCREEN_RECORDS.map((r) => r.lastChecked).sort().at(-1);
+  const screensCeii = ceiiScreen(OUR_DATASETS.find((d) => d.id === 'gridprims-interconnect-screens'), [{ name: 'screens', columns: SCREEN_CSV_COLUMNS.map((name) => ({ name })) }], screensAsOf);
+  if (!screensCeii.passed) throw new Error(`interconnect screens: the CEII screen flagged ${screensCeii.flagged.join(', ')}`);
+  writeFileSync(join(outDir, 'interconnect/screens.json'), JSON.stringify({ publisher: 'gridprims', license: 'CC BY 4.0', credit: 'Each row cites the tariffs and rules it was read from; credit them with gridprims.', asOf: screensAsOf, ceiiScreen: screensCeii, rows: screenRows(SCREEN_RECORDS) }, null, 2) + '\n');
   // The regulator ground truth: the limits first, coverage by state with every absence, and the figures cited to the page.
   const publicationProblems = checkPublications(undefined, undefined, ROOT);
   if (publicationProblems.length) throw new Error(`conformance publications:\n${publicationProblems.join('\n')}`);
