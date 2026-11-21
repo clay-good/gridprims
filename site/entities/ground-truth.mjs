@@ -92,11 +92,11 @@ export function coverage(documents, publications = PUBLICATIONS, regulators = RE
 }
 
 const quote = (v) => (v == null ? '' : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
-export const CSV_COLUMNS = ['state', 'commission', 'document', 'document_date', 'document_url', 'document_sha256', 'page', 'utility', 'tariff_as_named', 'ownership', 'kwh', 'bill_usd', 'customer_charge_usd', 'sourced_from_utility_website', 'taxes', 'assumptions'];
+export const CSV_COLUMNS = ['state', 'commission', 'document', 'document_date', 'document_url', 'document_sha256', 'page', 'utility', 'tariff_as_named', 'ownership', 'kwh', 'month', 'rates_as_of', 'before_credits', 'bill_usd', 'customer_charge_usd', 'sourced_from_utility_website', 'taxes', 'assumptions'];
 
 /** Every figure with its provenance, the limits sentence on the first line as a comment. */
 export function groundTruthCsv(documents) {
-  const rows = documents.flatMap((d) => d.rows.map((r) => [d.state, d.document.publisher, d.document.title, d.document.asOf, d.document.url, d.document.sha256, r.page, r.utility, r.schedule ?? d.document.service, r.ownership, r.kwh, r.bill.toFixed(2), r.customerCharge?.toFixed(2), r.websiteSourced, d.document.taxes ?? 'unstated', d.document.assumptions ?? 'unstated']));
+  const rows = documents.flatMap((d) => d.rows.map((r) => [d.state, d.document.publisher, d.document.title, d.document.asOf, d.document.url, d.document.sha256, r.page, r.utility, r.schedule ?? d.document.service, r.ownership, r.kwh, r.month ?? '', r.ratesAsOf ?? '', r.beforeCredits ?? '', r.bill.toFixed(2), r.customerCharge?.toFixed(2), r.websiteSourced, d.document.taxes ?? 'unstated', d.document.assumptions ?? 'unstated']));
   return [`# ${LIMITS}`, CSV_COLUMNS.join(','), ...rows.map((r) => r.map(quote).join(','))].join('\n') + '\n';
 }
 

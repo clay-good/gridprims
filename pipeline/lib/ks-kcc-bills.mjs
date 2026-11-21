@@ -8,8 +8,8 @@
 export const KWH = 899;
 /** The charge columns, in the table's order, then the total without tax. */
 export const CHARGES = ['Customer Charge', 'Energy Charge', 'ECA', 'Winter Storm Uri', 'Energy Efficiency Rider', 'Transmission Delivery Charge', 'Property Tax Surcharge', 'Tax Change Rider'];
-const AMOUNT = /^\$(-|[\d,]+\.\d\d)$/;
-const money = (s) => (s === '$-' ? 0 : Number(s.replace(/[$,]/g, '')));
+const AMOUNT = /^\(?\$(-|[\d,]+\.\d\d)\)?$/;
+const money = (s) => (s === '$-' ? 0 : (/^\(.*\)$/.test(s) ? -1 : 1) * Number(s.replace(/[$,()]/g, '')));
 const COMPANIES = ['Empire', 'Evergy Metro', 'Evergy Central'];
 
 /** One company's figures from its row's tokens: the eight charges and the total, in order. */
@@ -67,6 +67,7 @@ export function reconcile(a, b) {
     if (why) { excluded.push({ utility: r.company, kwh: KWH, why }); continue; }
     rows.push({ page: r.page, utility: r.company, schedule: 'Residential', kwh: KWH, bill: r.total, lines: CHARGES.map((label, i) => ({ label, rate: null, amount: r.lines[i] })).filter((l) => l.amount !== 0) });
   }
+  for (const r of b.filter((x) => !a.some((y) => y.company === x.company))) excluded.push({ utility: r.company, kwh: KWH, why: 'not read from the layout text' });
   const total = rows.length + excluded.length;
   return { rows, excluded, extraction: { methods: ['layout text, line by line', 'word positions on each company\'s row'], figures: total, agreed: rows.length, disagreed: excluded.length, disagreementRate: total ? excluded.length / total : 0 } };
 }

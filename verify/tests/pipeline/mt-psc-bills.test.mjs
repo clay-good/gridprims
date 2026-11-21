@@ -40,3 +40,10 @@ test('the stored dataset: 30 bills at 750 kWh, both utilities, 15 months, all ag
   assert.equal(DATA.rows.find((r) => r.utility === 'NorthWestern Energy' && r.month === '2026-11').bill, 118.7);
   assert.equal(DATA.rows.find((r) => r.utility === 'Montana-Dakota Utilities' && r.month === '2025-12').bill, 88.68);
 });
+
+test('a figure only the word positions found is counted as excluded, not dropped', () => {
+  const a = readByLines(layout).filter((r) => r.utility !== 'Montana-Dakota Utilities');
+  const r = reconcile(a, readByPositions(bbox));
+  assert.equal(r.extraction.figures, 24);
+  assert.equal(r.excluded.filter((x) => x.why === 'not read from the layout text').length, 12);
+});

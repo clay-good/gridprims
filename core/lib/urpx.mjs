@@ -93,8 +93,10 @@ export function toUrpx(t, meta, { schedule } = {}) {
   // tariff rider.
   for (const [k, c] of (t.charges ?? []).entries()) {
     const monthly = c.perKwh === undefined;
-    if (monthly && !ledgers.some((l) => l['@id'] === id('ledger-service'))) ledgers.push({ '@type': 'urpx:Ledger', '@id': id('ledger-service'), 'urpx:name': 'Service Price', 'urpx:ledgerType': ref('urpx:bundledLedger'), 'urpx:referencesMetricInput': ref(id('mi-meter-count')), 'urpx:hasCalculationMethod': { '@type': 'urpx:CalculationMethod', 'urpx:intervalDuration': 'P1M' } });
-    definitions.push({ '@type': 'urpx:PriceDefinition', '@id': id(`pd-rider-${k + 1}`), 'urpx:name': c.label, 'urpx:chargeType': ref(c.urpxType ?? 'urpx:tariffRider'), 'urpx:chargeCategory': ref('urpx:adjustment'), 'urpx:billPortion': ref('urpx:bundledPortion'), ...(monthly ? { 'urpx:baseQuantity': '1' } : {}), 'urpx:referencesLedger': ref(id(monthly ? 'ledger-service' : 'ledger-energy')) });
+    // A monthly rider needs a monthly ledger: the service ledger when it is monthly, its own when the fixed charge is daily.
+    const monthlyLedger = t.fixedDaily ? 'ledger-rider-monthly' : 'ledger-service';
+    if (monthly && !ledgers.some((l) => l['@id'] === id(monthlyLedger))) ledgers.push({ '@type': 'urpx:Ledger', '@id': id(monthlyLedger), 'urpx:name': t.fixedDaily ? 'Monthly Riders' : 'Service Price', 'urpx:ledgerType': ref('urpx:bundledLedger'), 'urpx:referencesMetricInput': ref(id('mi-meter-count')), 'urpx:hasCalculationMethod': { '@type': 'urpx:CalculationMethod', 'urpx:intervalDuration': 'P1M' } });
+    definitions.push({ '@type': 'urpx:PriceDefinition', '@id': id(`pd-rider-${k + 1}`), 'urpx:name': c.label, 'urpx:chargeType': ref(c.urpxType ?? 'urpx:tariffRider'), 'urpx:chargeCategory': ref('urpx:adjustment'), 'urpx:billPortion': ref('urpx:bundledPortion'), ...(monthly ? { 'urpx:baseQuantity': '1' } : {}), 'urpx:referencesLedger': ref(id(monthly ? monthlyLedger : 'ledger-energy')) });
     prices.push({ '@type': 'urpx:Price', '@id': id(`price-rider-${k + 1}`), 'urpx:referencesPriceDefinition': ref(id(`pd-rider-${k + 1}`)), 'urpx:name': c.label, 'urpx:startDate': meta.effective, 'urpx:unitPrice': String(monthly ? c.monthly : c.perKwh) });
   }
   // Time-of-use: one URPX tier per period of the schedule, and in it one URPX period per season that uses it,

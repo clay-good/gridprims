@@ -2,7 +2,7 @@ const base = { peakKw: 2000, aggregateKw: 500, technology: 'solar-fixed', minLoa
 
 export default {
   id: 'interconnect.minimum-load.screen',
-  version: '0.4.0',
+  version: '0.4.1',
   title: 'Load-ratio screens for a generator',
   purpose: 'Whether a solar or other small generator passes the 15%-of-peak screen, and the minimum-load screen across the range of minimum load utilities assume, unless you have the utility\'s own value.',
   archetype: 'calculator',

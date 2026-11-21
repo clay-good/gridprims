@@ -24,7 +24,7 @@ const dollars = (x) => `$${Math.round(Math.abs(x)).toLocaleString('en-US')}`;
 export function findPlans(series, records, opts) {
   const have = new Set(opts.have ?? []);
   // A discount program is a modifier the household ticks, never a plan of its own (plan-finder, D5).
-  const programRecords = records.filter((rec) => PROGRAM_NAMES.test(rec.name));
+  const programRecords = records.filter((rec) => PROGRAM_NAMES.test(rec.name) && rec.id !== opts.currentId);
   records = records.filter((rec) => !programRecords.includes(rec));
   const withConditions = records.map((rec) => ({ rec, conditions: conditionsOf(rec.name) }));
   const open = withConditions.filter((x) => x.conditions.every((c) => have.has(c)) || x.rec.id === opts.currentId).map((x) => x.rec);

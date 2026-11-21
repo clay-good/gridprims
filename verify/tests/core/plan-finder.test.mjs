@@ -96,3 +96,10 @@ test('a record that is a discount program is never listed as a plan', () => {
   assert.deepEqual(r.requires, []);
   assert.deepEqual(r.programRecords.map((x) => x.id), ['care', 'fera']);
 });
+
+test('a household whose current plan is named for CARE keeps it as its current plan', () => {
+  const plans = [plan('care', 'D-LI Domestic Service CARE', 0.07), plan('r1', 'Residential Service', 0.1)];
+  const r = findPlans(year, plans, { zone: 'UTC', currentId: 'care', have: ['low-income'], asOf: '2026-10-30' });
+  assert.equal(r.current.rec.id, 'care');
+  assert.equal(r.programRecords, undefined);
+});

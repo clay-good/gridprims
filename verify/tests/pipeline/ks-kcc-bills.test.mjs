@@ -35,3 +35,13 @@ test('the stored dataset: three utilities at 899 kWh, itemized, every total its 
   assert.equal(DATA.rows.find((r) => r.utility === 'Evergy Central').bill, 139.3);
   assert.equal(CHARGES.length, 8);
 });
+
+test('a credit printed in parentheses is read as negative, and a row only the word positions found is counted', () => {
+  const credit = empire.map((t, i) => (i === 7 ? '($1.00)' : i === 8 ? '$119.39' : t));
+  const lay = `RESIDENTIAL ELECTRIC BILL COMPARISON | JULY 2024 - JUNE 2025\n                    Empire         ${credit.join('  ')}\n`;
+  const a = readByLines(lay);
+  assert.equal(a[0].lines[7], -1);
+  assert.equal(reconcile(a, a).extraction.agreed, 1);
+  const r = reconcile([], readByPositions(bbox, 1));
+  assert.deepEqual(r.excluded.map((x) => x.why), ['not read from the layout text']);
+});

@@ -72,11 +72,9 @@ export function compute(v, { fallbacks = FALLBACKS, pending: pendingList = PENDI
   // The user's utility's own stated assumption, beside the band, cited, as the utility's and not ours.
   const u = ASSUMPTIONS.find((x) => x.id === v.utility);
   if (u) {
-    steps.push(`${u.utility}'s own assumption when minimum daytime load is not available: ${u.assumption}; daytime window ${u.window} (${u.cite.publisher}, ${u.cite.document}).`);
-    if (u.share !== null && !absolute && !(v.minLoadKw > 0)) {
-      const at = (u.share / 100) * v.peakKw;
-      steps.push(`At ${u.share}% of peak (${kw(at)}), the minimum-load screen would be ${minLoadMet(v.aggregateKw, at) ? 'met' : 'not met'}, on ${u.utility}'s assumption.`);
-    }
+    // The utilities stated these for the substation transformer backfeeding screen, so they are shown as that,
+    // beside the band, and not applied to the line-section screen this tool computes.
+    steps.push(`${u.utility}'s own stated assumption, for its substation transformer backfeeding screen, when minimum daytime load is not available: ${u.assumption}; daytime window ${u.window} (${u.cite.publisher}, ${u.cite.document}). It is shown for reference and not applied to the line-section screen above.`);
   }
   return {
     status: 'ok', outputs,

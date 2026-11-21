@@ -143,6 +143,9 @@ export function reconcile(a, b, summary) {
         ...(linesAgree ? { lines: r.lines.map((l) => ({ label: l.label, rate: l.rate, amount: l.amounts[i] })) } : {}) });
     });
   }
+  // A block only the word positions found is counted as excluded, never dropped.
+  const seen = new Set(a.map((r) => `${r.page}|${keyOf(r.name)}`));
+  for (const r of b.filter((x) => !seen.has(`${x.page}|${keyOf(x.name)}`))) for (const kwh of LEVELS) excluded.push({ ...splitName(r.name), page: r.page, kwh, lines: null, positions: r.total[LEVELS.indexOf(kwh)], why: 'not read from the layout text' });
   const total = rows.length + excluded.length;
   return { rows, excluded, notes: [...new Set(notes)], extraction: { methods: ['layout text, line by line', 'word positions under the column headers'], figures: total, agreed: rows.length, disagreed: excluded.length, disagreementRate: total ? excluded.length / total : 0 } };
 }

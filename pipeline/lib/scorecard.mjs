@@ -46,9 +46,11 @@ export function compareSchedule(doc, match, record) {
   const month = monthOf(doc.document);
   const period = { start: `${month}-01`, end: lastDay(month) };
   const levels = rows.map((r) => {
-    const priced = priceTotals({ ...period, kwh: r.kwh }, read.tariff);
+    // A monthly series prices each bill in its own month.
+    const own = r.month ? { start: `${r.month}-01`, end: lastDay(r.month) } : period;
+    const priced = priceTotals({ ...own, kwh: r.kwh }, read.tariff);
     const computed = priced.totalCents / 100;
-    return { kwh: r.kwh, page: r.page, commission: r.bill, database: computed, difference: round2(computed - r.bill), percent: Math.round(((computed - r.bill) / r.bill) * 1000) / 10, agree: agrees(r.bill, computed),
+    return { kwh: r.kwh, ...(r.month ? { month: r.month } : {}), page: r.page, commission: r.bill, database: computed, difference: round2(computed - r.bill), percent: Math.round(((computed - r.bill) / r.bill) * 1000) / 10, agree: agrees(r.bill, computed),
       arithmetic: priced.lines.map((l) => ({ label: l.label, ...(l.kwh !== undefined ? { kwh: l.kwh, rate: l.rate } : {}), amount: l.cents / 100 })),
       ...(r.lines ? { commissionLines: r.lines.filter((l) => l.label !== 'Subtotal').map((l) => ({ label: l.label, amount: l.amount })) } : {}) };
   });

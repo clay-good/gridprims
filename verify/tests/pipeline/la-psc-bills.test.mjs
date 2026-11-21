@@ -100,3 +100,9 @@ test('the stored dataset: every figure agreed and was checked against the summar
   assert.equal(DATA.rows.find((r) => r.utility === 'CLECO' && r.kwh === 1000).bill, 145.71);
   assert.equal(DATA.rows.find((r) => r.utility === 'SLEMCO' && r.schedule === 'Schedule 05' && r.kwh === 5000).bill, 590.19);
 });
+
+test('a block only the word positions found is counted as excluded at every level, not dropped', () => {
+  const r = reconcile([], readByPositions(bbox), readSummary(layout));
+  assert.equal(r.extraction.figures, LEVELS.length);
+  assert.ok(r.excluded.every((x) => x.why === 'not read from the layout text'));
+});

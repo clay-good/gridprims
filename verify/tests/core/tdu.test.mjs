@@ -58,3 +58,9 @@ test('the current versions carry the TDU charges the stored EFLs print, and pric
     assert.equal(priceTotals({ ...period, kwh: 1000 }, plan(fromData)).totalCents, priceTotals({ ...period, kwh: 1000 }, plan(typed)).totalCents, e.id);
   }
 });
+
+test('AEP Texas North: April rates until the unposted interim changes, none between, then the September 29 rates', () => {
+  assert.equal(versionOn(VERSIONS, 'aep-texas-north', '2026-07-29').effective, '2026-04-30');
+  assert.equal(versionOn(VERSIONS, 'aep-texas-north', '2026-08-15'), null);
+  assert.equal(versionOn(VERSIONS, 'aep-texas-north', '2026-10-15').total.centsPerKwh, 5.5751);
+});

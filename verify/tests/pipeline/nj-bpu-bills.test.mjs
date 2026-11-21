@@ -13,7 +13,7 @@ const dates = { issued: '2026-02-12', from: '2026-06-01' };
 test('both methods read each company\'s row, a negative change included', () => {
   const p = page([['ACE', '650', '$201.54', '$0.22', '$201.76', '0.11%'], ['PSE&amp;G', '650', '$183.46', '-$3.23', '$180.23', '-1.8%']]);
   assert.deepEqual(readByCells(p), readByText(p));
-  assert.deepEqual(readByCells(p)[1], { code: 'PSE&G', kwh: 650, current: 183.46, change: -3.23, next: 180.23, percent: -1.8 });
+  assert.deepEqual(readByCells(p)[1], { code: 'PSE&G', kwh: 650, current: 183.46, change: -3.23, next: 180.23, percent: -1.8, percentText: '-1.8' });
   const r = reconcile(readByCells(p), readByText(p), dates);
   assert.equal(r.extraction.agreed, 4);
   assert.deepEqual(r.rows.slice(0, 2).map((x) => [x.bill, x.ratesAsOf]), [[201.54, '2026-02-12'], [201.76, '2026-06-01']]);

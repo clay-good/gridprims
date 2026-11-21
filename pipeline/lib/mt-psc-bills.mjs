@@ -75,6 +75,8 @@ export function reconcile(a, b) {
     if (!other || Math.round(other.bill * 100) !== Math.round(r.bill * 100)) { excluded.push({ ...r, kwh: KWH, lines: r.bill, positions: other?.bill ?? null, why: other ? 'the two methods disagree' : 'not read by word positions' }); continue; }
     rows.push({ page: r.page, utility: r.utility, schedule: 'Residential', month: r.month, kwh: KWH, bill: r.bill });
   }
+  const seen = new Set(a.map(key));
+  for (const r of b.filter((x) => !seen.has(key(x)))) excluded.push({ ...r, kwh: KWH, lines: null, positions: r.bill, why: 'not read from the layout text' });
   const total = rows.length + excluded.length;
   return { rows, excluded, extraction: { methods: ['layout text, line by line', 'word positions under the month headers'], figures: total, agreed: rows.length, disagreed: excluded.length, disagreementRate: total ? excluded.length / total : 0 } };
 }

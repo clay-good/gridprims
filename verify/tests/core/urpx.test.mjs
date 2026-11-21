@@ -81,3 +81,10 @@ test('riders are written in the adjustment category with their charge type, and 
   assert.deepEqual(fromUrpx(document).tariff.charges, URPX_CASES.riders.tariff.charges.map((c) => (c.urpxType === 'urpx:tariffRider' ? (({ urpxType, ...x }) => x)(c) : c)));
   assert.match(nodes(document, 'urpx:Evaluation')[0]['urpx:description'], /the riders the record names/);
 });
+
+test('a monthly rider on a tariff with a daily fixed charge reads back monthly, on its own monthly ledger', () => {
+  const t = { fixedDaily: 0.5, seasons: [{ name: 'all year', from: '01-01', tiers: [{ rate: 0.1 }] }], charges: [{ label: 'Reserve Fund', monthly: 2.5 }, { label: 'Fuel', perKwh: 0.03, urpxType: 'urpx:fuelCharge' }] };
+  const { document } = toUrpx(t, { id: 'daily-rider', name: 'Daily with riders', utility: 'Example', effective: '2026-11-01' });
+  assert.deepEqual(fromUrpx(document).tariff.charges, [{ label: 'Reserve Fund', monthly: 2.5 }, { label: 'Fuel', perKwh: 0.03, urpxType: 'urpx:fuelCharge' }]);
+  assert.equal(fromUrpx(document).tariff.fixedDaily, 0.5);
+});

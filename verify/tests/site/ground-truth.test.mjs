@@ -121,3 +121,18 @@ test('anyone can run it: each release is listed with its frozen file, and the la
   assert.deepEqual(latest.coverage, release.coverage);
   assert.equal(latest.vectors.length, release.vectors.length);
 });
+
+test('the CSV keeps each bill\'s month and rate date, so a monthly series and a before-and-after pair stay apart', () => {
+  const [, header, ...lines] = groundTruthCsv(docs).trim().split('\n');
+  const cols = header.split(',');
+  for (const c of ['month', 'rates_as_of', 'before_credits']) assert.ok(cols.includes(c), c);
+  const mt = lines.filter((l) => l.startsWith('MT,'));
+  assert.equal(new Set(mt.map((l) => l.split(',')[cols.indexOf('month') + (l.split(',').length - cols.length)])).size >= 1, true);
+  assert.ok(mt.some((l) => l.includes(',2026-11,')) && mt.some((l) => l.includes(',2025-09,')));
+  assert.ok(lines.some((l) => l.startsWith('NJ,') && l.includes(',2026-06-01,true,')));
+});
+
+test('an excluded figure shows its reason on the page', () => {
+  const doc = { ...docs[0], excluded: [{ utility: 'Example', kwh: 1000, why: 'the two methods disagree' }] };
+  assert.match(String(groundTruthPage({ documents: [doc], coverage: cov, i18n })), /Example 1000 the two methods disagree/);
+});

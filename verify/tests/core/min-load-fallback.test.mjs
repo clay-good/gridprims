@@ -58,11 +58,11 @@ test('per-utility assumption named: the utility\'s own stated assumption, cited,
   const { default: ASSUMPTIONS } = await import('../../../data/curated/min-load-assumptions.mjs');
   for (const a of ASSUMPTIONS) assert.ok(readFileSync(`${ROOT}/${a.cite.capture}`, 'utf8').includes(a.cite.quote), a.id);
   const ng = run({ utility: 'national-grid-ny' });
-  assert.ok(ng.work.steps.some((x) => /^National Grid \(New York\)'s own assumption when minimum daytime load is not available: 25% of peak load/.test(x) && x.includes('Ver 2 (Joint Utilities responses, 12 March 2024)')));
-  assert.ok(ng.work.steps.includes('At 25% of peak (500 kW), the minimum-load screen would be not met, on National Grid (New York)\'s assumption.'));
+  assert.ok(ng.work.steps.some((x) => /^National Grid \(New York\)'s own stated assumption, for its substation transformer backfeeding screen, when minimum daytime load is not available: 25% of peak load/.test(x) && x.includes('Ver 2 (Joint Utilities responses, 12 March 2024)') && x.includes('not applied to the line-section screen')));
+  assert.ok(!ng.work.steps.some((x) => /on National Grid \(New York\)'s assumption/.test(x)), 'not applied to the line-section screen');
   assert.ok(ng.work.steps.some((x) => /15% to 40% band/.test(x)), 'the band is still shown');
   const ce = run({ utility: 'con-edison' });
-  assert.ok(ce.work.steps.some((x) => /Consolidated Edison's own assumption/.test(x) && /superseded/.test(x)));
+  assert.ok(ce.work.steps.some((x) => /Consolidated Edison's own stated assumption/.test(x) && /superseded/.test(x)));
   assert.ok(!ce.work.steps.some((x) => /on Consolidated Edison's assumption/.test(x)), 'no share of peak is made up for it');
   assert.deepEqual(run({ utility: 'none' }).work.steps, run({}).work.steps);
 });

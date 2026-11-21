@@ -21,7 +21,7 @@ export function readByCells(page) {
   for (const tr of table.split(/<tr[\s>]/i).slice(1)) {
     const cells = [...tr.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) => unescape(m[1].replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim());
     if (cells.length < 6 || !(cells[0] in UTILITIES)) continue;
-    out.push({ code: cells[0], kwh: Number(cells[1]), current: money(cells[2]), change: money(cells[3]), next: money(cells[4]), percent: Number(cells[5].replace('%', '')) });
+    out.push({ code: cells[0], kwh: Number(cells[1]), current: money(cells[2]), change: money(cells[3]), next: money(cells[4]), percent: Number(cells[5].replace('%', '')), percentText: cells[5].replace('%', '') });
   }
   return out;
 }
@@ -35,7 +35,7 @@ export function readByText(page) {
   const text = unescape(page.slice(at, page.indexOf('</table>', at)).replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ');
   const out = [];
   for (const m of text.matchAll(/(ACE|JCP&L|PSE&G|RECO) (\d+) (\$[\d,]+\.\d\d) (-?\$[\d,]+\.\d\d) (\$[\d,]+\.\d\d) (-?[\d.]+)%/g)) {
-    out.push({ code: m[1], kwh: Number(m[2]), current: money(m[3]), change: money(m[4]), next: money(m[5]), percent: Number(m[6]) });
+    out.push({ code: m[1], kwh: Number(m[2]), current: money(m[3]), change: money(m[4]), next: money(m[5]), percent: Number(m[6]), percentText: m[6] });
   }
   return out;
 }
@@ -56,7 +56,7 @@ export function reconcile(a, b, { issued, from }) {
       : ['kwh', 'current', 'change', 'next', 'percent'].some((k) => o[k] !== r[k]) ? 'the two methods disagree'
         : cents(r.current) + cents(r.change) !== cents(r.next) ? 'the current bill and the change do not add up to the new bill'
           // The printed percent is rounded to its last decimal place, so it may be off by half of that place.
-          : Math.abs((r.change / r.current) * 100 - r.percent) > 0.5 * 10 ** -((String(r.percent).split('.')[1] ?? '').length) + 1e-9 ? 'the change does not match the printed percent'
+          : Math.abs((r.change / r.current) * 100 - r.percent) > 0.5 * 10 ** -(((r.percentText ?? String(r.percent)).split('.')[1] ?? '').length) + 1e-9 ? 'the change does not match the printed percent'
             : null;
     const name = UTILITIES[r.code];
     if (why) { excluded.push({ utility: name, kwh: r.kwh, why }); continue; }
