@@ -10,7 +10,7 @@ import { serve } from '../../lib/static-server.mjs';
 import { sharedSite } from '../../lib/shared-site.mjs';
 
 const out = await sharedSite();
-const PAGES = ['/interconnect/hosting-capacity/'];
+const PAGES = ['/interconnect/hosting-capacity/', '/interconnect/inverter-settings/'];
 const WIDTHS = [320, 360, 768, 1024, 1280];
 const routes = { '/verify/browser/a11y-audit.mjs': { body: readFileSync(join(import.meta.dirname, '../../browser/a11y-audit.mjs')), type: 'text/javascript' } };
 const settled = `new Promise((r) => { const f = () => document.documentElement.dataset.shellReady ? setTimeout(r, 100) : setTimeout(f, 20); f(); })`;
@@ -18,7 +18,7 @@ const settled = `new Promise((r) => { const f = () => document.documentElement.d
 for (const kind of ['chrome', 'firefox']) {
   const skip = !findBrowser(kind) && `${kind} is not installed`;
 
-  test(`${kind}: the hosting-capacity directory passes the audit in both themes, never scroll sideways, and every control takes the keyboard`, { skip, timeout: 120_000 }, async () => {
+  test(`${kind}: the hosting-capacity directory and the settings reference pass the audit in both themes, never scroll sideways, and every control takes the keyboard`, { skip, timeout: 120_000 }, async () => {
     const server = await serve(out, { routes });
     const browser = await launch(kind);
     const failures = [];

@@ -1,0 +1,54 @@
+Source: https://www.pge.com/tariffs/assets/pdf/tariffbook/ELEC_RULES_21.pdf
+Publisher: Pacific Gas and Electric Company, Electric Rule No. 21 (Generating Facility Interconnections), Section Hh, Smart Inverter Generating Facility Design and Operating Requirements for UL1741SB Inverters, Advice 7692-E, effective August 29, 2025
+Retrieved: 2026-11-21
+Original: 26422475 bytes, SHA-256 76768f26a08fd5760c4727832b2d538ee8e3c0144a18836f508f3f143f0bfe9f
+Capture: Section Hh's opening paragraph and Tables Hh-2a, Hh-3, and Hh-4 and the volt-watt paragraph, as pdftotext -layout reads them, revision marks removed and whitespace collapsed. Tables Hh-1a and Hh-1b are images on the sheet and have no text to capture.
+----
+[Rule 21 Hh, opening paragraph]
+The inverter requirements are intended to be consistent with UL 1741 – Supplement SB using as the source requirement document ANSI/IEEE 1547- 2018 and IEEE 1547.1-2020 Standard for Interconnecting Distributed Resources with Electric Power Systems where possible. In the event of conflict between this Rule and UL 1741 – Supplement SB and/or IEEE 1547-2018 or IEEE 1547.1-2020, this Rule shall take precedence. The Smart Inverter default settings and default activation states may be modified upon mutual agreement between Applicant or Producer and Distribution Provider.
+
+[Rule 21 Hh-2a, Table Hh-2a: Frequency Trip Settings Table, Cal. P.U.C. Sheet No. 60226-E]
+Table Hh-2a: Frequency Trip Settings Table
+Shall Trip Function Frequency Trip Resulting Default Clearing
+Default Setting Range of Shall Time (s)
+(Hz) Trip Function
+(Hz)
+OF2 62.0 f≥62.0 0.16
+OF1 61.2 61.2≤f<62 300
+Continuous NA 58.5<f<61.2 NA
+Operation
+UF1 58.5 56.5<f≤58.5 300
+UF2 56.5 f≤56.5 0.16
+
+[Rule 21 Hh, Table Hh-3: Voltage and Reactive Default Settings]
+Table Hh-3: Voltage and Reactive Default Settings
+Voltage Voltage Reactive Reactive
+Setpoint Value Setpoint Value Operation
+V1 92.0% Q1 30% Reactive Power Injection
+V2 97.0% Q2 0 Unity Power Factor
+V3 103.0% Q3 0 Unity Power Factor
+V4 107.0% Q4 30% Reactive Power Absorption
+
+[Rule 21 Hh, volt-watt paragraph]
+When the measured voltage is greater than 106% of nominal voltage (Example: 127.2 volts on a 120 volts nominal), the export of active power at the PCC or the production of active power by the Smart Inverter shall be reduced at a rate of 25% of active power nameplate rating per one percent of nominal voltage. Figure Hh-3 Volt-Watt Requirements illustrate the required rate of reduction. When export of active power is controlled, a certified inverter and control system shall be used.
+
+[Rule 21 Hh, Table Hh-4: Default Activation States]
+Table Hh-4: Default Activation States
+Function State
+Anti-islanding Activated
+Low/High Voltage Ride Through Activated
+Low/High Frequency Ride Through Activated
+Dynamic Volt/Var operations Activated
+Enter Service Ramp Control Activated
+Storage Inverter Normal Operation Ramp Deactivated*
+Control
+Fixed power factor Deactivated
+Reconnect by “soft-start” methods Activated
+Frequency/Watt Activated
+Volt/Watt Activated
+Constant Reactive Power Mode Deactivated
+Set Active Power Function Mode(Optional) Activated under
+mutual agreement
+Dynamic Reactive Power Support Mode Activated under
+(Optional) mutual agreement
+These default activation states may be modified by mutual agreement

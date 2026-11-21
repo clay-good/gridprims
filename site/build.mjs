@@ -26,6 +26,8 @@ import { CSV_COLUMNS as SCREEN_CSV_COLUMNS } from '../core/lib/screen-compare.mj
 import { GROUND_TRUTH_PATH, LIMITS, checkPublications, coverage as groundTruthCoverage, groundTruthCsv, groundTruthJson, loadGroundTruth } from './entities/ground-truth.mjs';
 import { groundTruthPage } from './templates/ground-truth.mjs';
 import { HC_PATH, hostingCapacityPage } from './templates/hosting-capacity.mjs';
+import { SETTINGS_PATH, inverterSettingsPage } from './templates/inverter-settings.mjs';
+import * as INVERTER_SETTINGS from '../data/curated/inverter-settings.mjs';
 import HOSTING_CAPACITY, { ATLAS as HC_ATLAS } from '../data/curated/hosting-capacity.mjs';
 import { SCORECARD_PATH, scorecardPage } from './templates/scorecard.mjs';
 import { loadScorecard, ratesCsv, resultsCsv, scorecardJson } from '../pipeline/lib/scorecard-files.mjs';
@@ -347,6 +349,8 @@ export async function build(opts = {}) {
   writeFileSync(join(outDir, SCORECARD_PATH, 'scorecard.json'), JSON.stringify(scorecardJson(sc, LIMITS), null, 2) + '\n');
   writeFileSync(join(outDir, SCORECARD_PATH, 'results.csv'), resultsCsv(sc.card));
   writeFileSync(join(outDir, SCORECARD_PATH, 'rates.csv'), ratesCsv(sc.card));
+  // The certification and settings reference, each value cited to the rule sheet that prints it.
+  write(SETTINGS_PATH, inverterSettingsPage({ data: INVERTER_SETTINGS, i18n }));
   // The hosting-capacity directory: links and descriptions only, never a value from a map.
   write(HC_PATH, hostingCapacityPage({ entries: HOSTING_CAPACITY, atlas: HC_ATLAS, i18n }));
   // The glossary, as a page and as data agents read with the same words.

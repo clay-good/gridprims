@@ -39,7 +39,7 @@ import { addedPanel } from '../ui/workbench-added.mjs';
 import { carbonPanel } from '../ui/workbench-carbon.mjs';
 
 /** Sections a tool's page adds below its inputs, with the script that runs them. */
-const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'], 'lines.attachment-height.find': [poleListPanel, '/site/pages/pole-list.js'], 'interconnect.fast-track.screens': [(i18n) => html`${preApplicationPanel(i18n)}${comparePanel(i18n)}${misquotesPanel(i18n)}${hcLink(i18n)}`, null], 'interconnect.minimum-load.screen': [(i18n) => hcLink(i18n), null] };
+const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'], 'lines.attachment-height.find': [poleListPanel, '/site/pages/pole-list.js'], 'interconnect.fast-track.screens': [(i18n) => html`${preApplicationPanel(i18n)}${comparePanel(i18n)}${misquotesPanel(i18n)}${hcLink(i18n)}`, null], 'interconnect.minimum-load.screen': [(i18n) => hcLink(i18n), null], 'interconnect.inverter.size': [({ t }) => html`<p data-settings-link><a href="/interconnect/inverter-settings/">${t('inv.link')}</a></p>`, null] };
 /** The way to the hosting-capacity directory from the screens that use a feeder's load. */
 const hcLink = ({ t }) => html`<p data-hc-link><a href="/interconnect/hosting-capacity/">${t('hc.link')}</a></p>`;
 
