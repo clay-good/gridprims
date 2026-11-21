@@ -175,6 +175,12 @@ for (const kind of ['chrome', 'firefox']) {
       await browser.evaluate("(() => { const b = document.querySelector('[data-conditions] input[value=electric-vehicle]'); b.checked = true; b.dispatchEvent(new Event('change', { bubbles: true })); })()");
       await waitFor(browser, `document.querySelector('[data-bill]').dataset.compared === '${runs + 2}'`);
       assert.ok(await browser.evaluate(`!!document.querySelector('[data-ranking] [data-rate-id="${evUtility.ev.id}"]')`), 'now ranked');
+      // A discount program is ticked, not chosen as a plan: every ranked plan then says whether it applied, and why not.
+      assert.equal(await browser.evaluate("document.querySelector('[data-programs]').hidden"), false);
+      await browser.evaluate("(() => { const b = document.querySelector('[data-programs] input[value=care]'); b.checked = true; b.dispatchEvent(new Event('change', { bubbles: true })); })()");
+      await waitFor(browser, `document.querySelector('[data-bill]').dataset.compared === '${runs + 3}'`);
+      const notes = JSON.parse(await browser.evaluate("JSON.stringify([...document.querySelectorAll('[data-ranking] [data-rate-id]')].map((r) => r.querySelectorAll('[data-program-note]').length))"));
+      assert.ok(notes.length && notes.every((n) => n >= 1), `every ranked plan carries a program note: ${notes}`);
     } finally {
       await browser.close();
       await server.close();

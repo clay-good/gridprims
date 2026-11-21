@@ -5,6 +5,7 @@
 import { compareActual, intervalBills } from '../../core/lib/interval-bill.mjs';
 import { compareRates, shiftLoad } from '../../core/lib/rate-compare.mjs';
 import { findPlans } from '../../core/lib/plan-finder.mjs';
+import PROGRAMS from '../../data/curated/discount-programs.mjs';
 import { alignSolar, EXCLUDED, netLoad, payback, peakShave, readPvwatts, savings, UPPER_BOUND } from '../../core/lib/storage-screen.mjs';
 import { readNumber } from '../../core/lib/bill-totals.mjs';
 import { rateBucket } from '../../core/lib/tariff-record.mjs';
@@ -49,6 +50,7 @@ export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {},
     $('[data-compare-run]').textContent = t('compare.run', { count: same.length, sector: (rec.sector ?? '').toLowerCase() });
     $('[data-compare-field]').hidden = same.length < 2;
     $('[data-conditions]').hidden = rec.sector !== 'Residential';
+    $('[data-programs]').hidden = rec.sector !== 'Residential';
     $('[data-screen-field]').hidden = false;
     $('[data-compare-result]').replaceChildren();
   }
@@ -62,8 +64,11 @@ export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {},
     const series = shift ? shiftLoad(v.series, { ...shift, zone: v.zone }) : v.series;
     // Household plans: plans with a condition stay under "Requires" until the household checks it.
     const have = [...panel.querySelectorAll('[data-conditions] input:checked')].map((i) => i.value);
+    // Discount and allowance programs the household is on, applied to every plan their tariff sheets cover.
+    const groups = new Set([...panel.querySelectorAll('[data-programs] input:checked')].map((i) => i.value));
+    const programs = PROGRAMS.filter((x) => groups.has(x.group));
     const r = priced.rec.sector === 'Residential'
-      ? findPlans(series, same, { zone: v.zone, currentId: priced.rec.id, received, have, asOf })
+      ? findPlans(series, same, { zone: v.zone, currentId: priced.rec.id, received, have, asOf, programs })
       : compareRates(series, same, { zone: v.zone, currentId: priced.rec.id, received, holidays: $('[data-bill-holidays]').checked, asOf });
     const shifted = shift && t('compare.shifted', { amount: shift.kwhPerDay !== undefined ? t('compare.shift.amountPerDay', { kwh: shift.kwhPerDay }) : `${shift.kw} kW`, from: $('#shift-from').selectedOptions[0].dataset.label, to: $('#shift-to').selectedOptions[0].dataset.label, hours: shift.from[1] - shift.from[0], days: shift.days });
     $('[data-compare-result]').innerHTML = String(renderRanking(r, i18n, { shifted }));
@@ -148,6 +153,7 @@ export function setupBill({ i18n, view, when, showOnChart, onUtility = () => {},
   });
   $('[data-compare-run]').addEventListener('click', () => compare(null));
   $('[data-conditions]').addEventListener('change', () => { if ($('[data-compare-result]').childElementCount) compare(null); });
+  $('[data-programs]').addEventListener('change', () => { if ($('[data-compare-result]').childElementCount) compare(null); });
   $('[data-shift]').addEventListener('submit', (e) => {
     e.preventDefault();
     const f = new FormData(e.target);

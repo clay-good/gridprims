@@ -7,12 +7,13 @@
 const round2 = (x) => Math.round(x * 100) / 100;
 
 /**
- * Whether a program applies to a rate record: the record is the program's utility's, and its name matches
- * none of the rates the tariff text excludes.
- * @param {{utilityIds?: number[], excludes?: string[]}} program @param {{utilityId?: number, name: string}} rec
+ * Whether a program applies to a rate record: the record is the program's utility's, its name is one of the
+ * rates the tariff text lists (when it lists them), and none it excludes.
+ * @param {{utilityIds?: number[], only?: string[], excludes?: string[]}} program @param {{utilityId?: number, name: string}} rec
  */
 export function covers(program, rec) {
-  if (program.utilityIds?.length && !program.utilityIds.includes(rec.utilityId)) return false;
+  if (program.utilityIds?.length && !program.utilityIds.includes(Number(rec.utilityId))) return false;
+  if (program.only && !program.only.some((x) => new RegExp(x, 'i').test(rec.name))) return false;
   return !(program.excludes ?? []).some((x) => new RegExp(x, 'i').test(rec.name));
 }
 

@@ -11,6 +11,9 @@ import { reviewChip } from './workbench-review.mjs';
 const money = (x) => `$${x.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const qty = (x) => formatNumber(x, { decimals: 2 });
 /** The conditions a household can say it meets, in the order the checkboxes show them. */
+/** The discount and allowance program groups a household ticks (data/curated/discount-programs.mjs). */
+export const PROGRAM_GROUPS = ['care', 'fera', 'medical'];
+
 export const CONDITION_BOXES = ['electric-vehicle', 'space-heating', 'net-metering', 'all-electric', 'water-heating', 'low-income', 'elderly-or-disabled', 'seasonal-or-farm'];
 
 export const hourText = (h) => (h % 24 === 0 ? 'midnight' : h === 12 ? 'noon' : h < 12 ? `${h} am` : `${h - 12} pm`);
@@ -35,6 +38,10 @@ export function billPanel({ t }, reviewed = new Set()) {
     <h3>${t('compare.title')} ${reviewChip('load.tariff-comparison', reviewed, { t })}</h3>
     <fieldset data-conditions hidden><legend>${t('plans.conditions')}</legend>
       ${CONDITION_BOXES.map((c) => html`<label class="check"><input type="checkbox" name="have" value="${c}"> ${t(`plans.have.${c}`)}</label>`)}
+    </fieldset>
+    <fieldset data-programs hidden><legend>${t('plans.programs')}</legend>
+      ${PROGRAM_GROUPS.map((g) => html`<label class="check"><input type="checkbox" name="program" value="${g}"> ${t(`plans.program.${g}`)}</label>`)}
+      <p class="unit-hint">${t('plans.programsHint')}</p>
     </fieldset>
     <p><button class="button" type="button" data-compare-run></button></p>
     <form class="picker-row" data-shift novalidate>
@@ -139,7 +146,7 @@ export function renderRanking(r, { t, date }, { shifted } = {}) {
   <p>${r.label ?? t('compare.pastUse')}</p>
   <table data-ranking><thead><tr><th scope="col">${t('compare.col.rate')}</th><th scope="col" class="num">${t('compare.col.year')}</th><th scope="col" class="num">${t('compare.col.diff')}</th></tr></thead>
   <tbody>${r.ranked.map((p) => html`<tr data-rate-id="${p.rec.id}" data-current="${p === r.current ? 'yes' : 'no'}"><td>${p.rec.name}${p === r.current ? html` <span class="chip">${t('compare.current')}</span>` : ''}
-    <br><span class="unit-hint mono">${t('compare.meta', { id: p.rec.id, revised: p.rec.lastRevised ?? p.rec.effective ?? t('bill.picker.noDate') })}${p.rec.source ? html` · <a href="${p.rec.source}">${t('bill.picker.source')}</a>` : ''}</span>${p.sentence ? html`<br><span class="unit-hint">${p.sentence}</span>` : ''}${p.unmodeled.length ? html`<br><span class="unit-hint">${t('compare.excludes', { list: p.unmodeled.join(', ') })}</span>` : ''}${p.outsideLimits ? html`<br><span class="unit-hint">${t('compare.outside', { reason: p.outsideLimits })}</span>` : ''}</td>
+    <br><span class="unit-hint mono">${t('compare.meta', { id: p.rec.id, revised: p.rec.lastRevised ?? p.rec.effective ?? t('bill.picker.noDate') })}${p.rec.source ? html` · <a href="${p.rec.source}">${t('bill.picker.source')}</a>` : ''}</span>${p.sentence ? html`<br><span class="unit-hint">${p.sentence}</span>` : ''}${p.unmodeled.length ? html`<br><span class="unit-hint">${t('compare.excludes', { list: p.unmodeled.join(', ') })}</span>` : ''}${p.outsideLimits ? html`<br><span class="unit-hint">${t('compare.outside', { reason: p.outsideLimits })}</span>` : ''}${(p.programs ?? []).map((x) => html`<br><span class="unit-hint" data-program-note="${x.id}">${x.applied ? (x.discount !== undefined ? t('plans.programApplied', { name: x.name, amount: money(x.discount) }) : t('plans.programAdded', { name: x.name })) : t('plans.programNot', { name: x.name, why: x.why })}</span>`)}</td>
     <td class="num">${money(p.annual)}</td><td class="num">${p.diff === undefined ? '' : `${diff(p.diff)} (${pct(p.pct)})`}</td></tr>`)}</tbody></table>
   ${r.requires?.length ? html`<h4>${t('plans.requires')}</h4><table data-requires><tbody>${r.requires.map((p) => html`<tr data-rate-id="${p.rec.id}"><td>${p.rec.name}<br><span class="unit-hint">${t('plans.requiresWhat', { list: p.conditions.map((c) => t(`bill.condition.${c}`)).join(', ') })}</span></td><td class="num">${money(p.annual)}</td></tr>`)}</tbody></table>` : ''}
   ${r.notEligible.length ? html`<h4>${t('compare.notEligible')}</h4><ul>${r.notEligible.map((x) => html`<li>${x.rec.name}: ${x.reason}</li>`)}</ul>` : ''}
