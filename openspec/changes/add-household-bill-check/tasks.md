@@ -11,7 +11,7 @@
 - [x] 2.2 Totals pricing with day proration; verify the $115.00 and the 480/420 kWh scenarios
 - [x] 2.3 Paid-amount comparison and effective price; verify the +$16.40 and 14.38-cent scenarios
 - [x] 2.5 Mid-cycle forecast with the weekday-scaled method; verify the fourteen-days-in, demand-not-final, and too-little-data scenarios
-- [ ] 2.4 Store five published bill examples and three EFLs; verify to the cent and 0.1 cent per kWh (the five published bills: verify/fixtures/bill/published-examples.mjs names five Louisiana PSC bills, five schedules at the commission's own levels, from the bill test vectors, and verify/tests/core/published-bills.test.mjs runs each through household.bill-totals.check with the tariff as entered JSON, matching to the cent; the three EFLs are still to come)
+- [x] 2.4 Store five published bill examples and three EFLs; verify to the cent and 0.1 cent per kWh (the five published bills: verify/fixtures/bill/published-examples.mjs names five Louisiana PSC bills, five schedules at the commission's own levels, from the bill test vectors, and verify/tests/core/published-bills.test.mjs runs each through household.bill-totals.check with the tariff as entered JSON, matching to the cent; the three EFLs: verify/fixtures/bill/efls.mjs holds Budget Power on Oncor, Reliant on CenterPoint, and Infuse on AEP Texas Central, read from each EFL with its date, version, address, and SHA-256 and the TDU charges it passes through, and verify/tests/core/efl-average.test.mjs gives each printed average to 0.1 cent at 1,000 kWh and within 0.05 cent at 500 and 2,000 kWh, the edge where 16 TAC § 25.475 rounds unrounded charges and a bill rounds each line first)
 
 ## 3. Benchmark and plan finder
 
