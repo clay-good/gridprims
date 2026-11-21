@@ -75,7 +75,7 @@ export function coverage(documents, publications = PUBLICATIONS, regulators = RE
       state: r.state, stateName: r.stateName, commission: p?.publisher ?? r.name, status: p?.status ?? null,
       absence: p ? STATUSES[p.status] : 'no publication found', reason: p?.reason ?? null, checked: p?.checked ?? null,
       title: p?.title ?? null, url: p?.url ?? null,
-      utilities: new Set(rows.map((x) => x.utility)).size, levels: [...new Set(rows.map((x) => x.kwh))].sort((a, b) => a - b), figures: rows.length,
+      utilities: new Set(rows.map((x) => x.utility)).size, schedules: new Set(rows.map((x) => `${x.utility}|${x.schedule ?? ''}`)).size, levels: [...new Set(rows.map((x) => x.kwh))].sort((a, b) => a - b), figures: rows.length,
     };
   });
   const covered = states.filter((s) => s.status === 'used');
@@ -92,11 +92,11 @@ export function coverage(documents, publications = PUBLICATIONS, regulators = RE
 }
 
 const quote = (v) => (v == null ? '' : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
-export const CSV_COLUMNS = ['state', 'commission', 'document', 'document_date', 'document_url', 'document_sha256', 'page', 'utility', 'ownership', 'kwh', 'bill_usd', 'customer_charge_usd', 'sourced_from_utility_website', 'assumptions'];
+export const CSV_COLUMNS = ['state', 'commission', 'document', 'document_date', 'document_url', 'document_sha256', 'page', 'utility', 'tariff_as_named', 'ownership', 'kwh', 'bill_usd', 'customer_charge_usd', 'sourced_from_utility_website', 'taxes', 'assumptions'];
 
 /** Every figure with its provenance, the limits sentence on the first line as a comment. */
 export function groundTruthCsv(documents) {
-  const rows = documents.flatMap((d) => d.rows.map((r) => [d.state, d.document.publisher, d.document.title, d.document.asOf, d.document.url, d.document.sha256, r.page, r.utility, r.ownership, r.kwh, r.bill.toFixed(2), r.customerCharge?.toFixed(2), r.websiteSourced, d.document.assumptions ?? 'unstated']));
+  const rows = documents.flatMap((d) => d.rows.map((r) => [d.state, d.document.publisher, d.document.title, d.document.asOf, d.document.url, d.document.sha256, r.page, r.utility, r.schedule ?? d.document.service, r.ownership, r.kwh, r.bill.toFixed(2), r.customerCharge?.toFixed(2), r.websiteSourced, d.document.taxes ?? 'unstated', d.document.assumptions ?? 'unstated']));
   return [`# ${LIMITS}`, CSV_COLUMNS.join(','), ...rows.map((r) => r.map(quote).join(','))].join('\n') + '\n';
 }
 

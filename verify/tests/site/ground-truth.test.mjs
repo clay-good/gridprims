@@ -52,7 +52,8 @@ test('coverage counts states, commissions, utilities, and levels from the extrac
   assert.equal(cov.totals.utilities, new Set(docs.flatMap((d) => d.rows.map((r) => `${d.state}|${r.utility}`))).size);
   assert.equal(cov.totals.figures, docs.reduce((n, d) => n + d.rows.length, 0));
   assert.equal(cov.totals.states + cov.totals.absent, 51);
-  assert.deepEqual(cov.totals.levels, [100, 250, 500, 750, 1000, 1500]);
+  assert.deepEqual(cov.totals.levels, [...new Set(docs.flatMap((d) => d.rows.map((r) => r.kwh)))].sort((a, b) => a - b));
+  assert.ok(cov.totals.states >= 2, 'Florida and Louisiana');
   assert.equal(cov.extraction.figures, fl.extraction.figures + docs.filter((d) => d !== fl).reduce((n, d) => n + d.extraction.figures, 0));
 });
 

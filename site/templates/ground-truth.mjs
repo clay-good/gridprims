@@ -18,18 +18,19 @@ export function groundTruthPage({ documents, coverage, i18n }) {
   const absent = coverage.states.filter((s) => s.status !== 'used');
   const doc = (d) => {
     const levels = [...new Set(d.rows.map((r) => r.kwh))].sort((a, b) => a - b);
-    const utilities = [...new Map(d.rows.map((r) => [r.utility, r])).values()];
-    const bill = (u, kwh) => d.rows.find((r) => r.utility === u && r.kwh === kwh);
+    const key = (r) => `${r.utility}|${r.schedule ?? ''}`;
+    const utilities = [...new Map(d.rows.map((r) => [key(r), r])).values()];
+    const bill = (u, kwh) => d.rows.find((r) => key(r) === key(u) && r.kwh === kwh);
     return html`<section data-ground-truth-document="${d.state}">
 <h2 id="${d.state.toLowerCase()}">${d.document.publisher}</h2>
 <p class="strip" data-limits>${t('gt.limits')}</p>
 <p><a href="${d.document.url}">${d.document.title}</a> (${t('gt.retrieved', { date: date(d.document.retrieved) })}, <span class="mono">${t('gt.sha256', { sha: d.document.sha256.slice(0, 12) })}</span>)</p>
-<p>${t('gt.assumptions')} ${d.document.assumptions ?? t('gt.unstated')}</p>
+<p>${t(`gt.taxes.${d.document.taxes ?? 'unstated'}`)} ${t('gt.assumptions')} ${d.document.assumptions ?? t('gt.unstated')}</p>${d.rows.some((r) => r.lines) ? html`<p class="unit-hint">${t('gt.lines')}</p>` : ''}
 <p data-extraction>${t('gt.extraction', { figures: d.extraction.figures, disagreed: d.extraction.disagreed, rate: pct(d.extraction.disagreementRate), methods: d.extraction.methods.join('; ') })}</p>
 ${d.excluded.length ? html`<p>${t('gt.excluded')}</p><ul>${d.excluded.map((x) => html`<li>${x.utility ?? ''} ${x.kwh ?? ''} ${x.reason ?? ''}</li>`)}</ul>` : ''}
 <div class="table-wrap"><table data-ground-truth-table><caption>${t('gt.caption', { publisher: d.document.publisher, date: date(d.document.asOf) })}</caption>
 <thead><tr><th scope="col">${t('gt.utility')}</th><th scope="col">${t('gt.page')}</th>${levels.map((k) => html`<th scope="col" class="num">${t('gt.kwh', { kwh: k.toLocaleString('en-US') })}</th>`)}</tr></thead>
-<tbody>${utilities.map((u) => html`<tr><th scope="row">${u.utility}${u.websiteSourced ? html` <span class="unit-hint" data-website-sourced>${t('gt.websiteSourced')}</span>` : ''}</th><td class="mono">${u.page}</td>${levels.map((k) => html`<td class="num mono">${usd(bill(u.utility, k)?.bill)}</td>`)}</tr>`)}</tbody>
+<tbody>${utilities.map((u) => html`<tr><th scope="row">${u.utility}${u.schedule ? html`, ${u.schedule}` : ''}${u.websiteSourced ? html` <span class="unit-hint" data-website-sourced>${t('gt.websiteSourced')}</span>` : ''}</th><td class="mono">${u.page}</td>${levels.map((k) => html`<td class="num mono">${usd(bill(u, k)?.bill)}</td>`)}</tr>`)}</tbody>
 </table></div>
 </section>`;
   };

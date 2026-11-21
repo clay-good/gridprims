@@ -6,6 +6,8 @@
     "retrieved": "2026-11-16",
     "sha256": "27ecfe13d5f305d7fdd470cc9c7b9ac84d0799871c9ad06bec66ffe6ffcbbf8c",
     "asOf": "2025-12-31",
+    "service": "Residential Service",
+    "taxes": "excluded",
     "assumptions": "Excludes local taxes, franchise fees, and gross receipts taxes billed as a separate line item; includes cost recovery clause factors effective December 2025 (the tables' own footnote). Bills marked ** were sourced by the PSC from the utility's website.",
     "terms": "A Florida public record (Chapter 119, Florida Statutes); the report states no restriction on reuse. Only the figures are kept here, each with its page."
   },
