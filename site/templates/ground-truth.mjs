@@ -54,6 +54,7 @@ ${release ? html`<section data-vectors>
 ${release.coverage.uncovered.length ? html`<p data-uncovered>${t('gt.uncovered', { types: release.coverage.uncovered.map((x) => t(`gt.type.${x}`)).join(', ') })}</p>` : ''}
 ${release.untestable.length ? html`<details><summary>${t('gt.untestable', { n: release.untestable.length })}</summary><ul>${release.untestable.map((u) => html`<li data-untestable>${u.utility}, ${u.schedule}: ${u.why.join('; ')}</li>`)}</ul></details>` : ''}
 <p><a href="${GROUND_TRUTH_PATH}vectors.json">${t('gt.vectorsDownload')}</a> <a href="${REPO_URL}/blob/main/docs/formats/bill-test-vector.md">${t('gt.vectorsFormat')}</a></p>
+<div class="panel" data-vector-run data-src="${GROUND_TRUTH_PATH}vectors.json"><h3>${t('gt.run.title')}</h3><p>${t('gt.run.intro')}</p><p><button type="button">${t('gt.run.button')}</button></p><div data-vector-results></div></div>
 <p>${t('gt.releasesIntro')}</p>
 ${releases.length ? html`<h3>${t('gt.releasesCaption')}</h3>
 <ul data-releases>${[...releases].reverse().map((e) => html`<li data-release="${e.version}"><a href="${GROUND_TRUTH_PATH}vectors/${releaseFile(e.version)}">${e.version}</a>, ${date(e.date)}, ${t('gt.releaseVectors', { n: e.vectors })}: ${e.summary} <span class="mono unit-hint">${t('gt.sha256', { sha: e.sha256.slice(0, 12) })}</span></li>`)}</ul>
@@ -67,5 +68,5 @@ ${releases.length ? html`<h3>${t('gt.releasesCaption')}</h3>
 <tbody>${coverage.states.map((s) => html`<tr data-state="${s.state}" data-status="${s.status ?? ''}"><th scope="row">${s.stateName}</th><td>${s.commission}</td><td>${s.status === 'used' ? html`<a href="#${s.state.toLowerCase()}">${t('gt.used', { utilities: s.utilities, figures: s.figures })}</a>` : s.absence}</td><td>${s.url && s.status !== 'used' ? html`<a href="${s.url}">${s.title ?? s.url}</a>. ` : ''}${s.reason ?? ''}</td><td>${s.checked ? date(s.checked) : ''}</td></tr>`)}</tbody>
 </table></div>
 </section>`;
-  return layout({ i18n, title: pageTitle(t('gt.title')), description: t('gt.description'), path: GROUND_TRUTH_PATH, body, section: 'data' });
+  return layout({ i18n, title: pageTitle(t('gt.title')), description: t('gt.description'), path: GROUND_TRUTH_PATH, body, section: 'data', modules: release ? ['/site/pages/vector-run.js'] : [] });
 }
