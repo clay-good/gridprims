@@ -44,6 +44,9 @@
   .answer-actions .button { flex: 1 1 auto; }
   /* Dense tables read tighter on a phone. */
   td, tbody th { padding: var(--s2); font-size: .875rem; }
+  /* A panning table sizes to its content: short columns stay short, long text wraps at a readable width instead of a word per line. */
+  .table-wrap table { width: max-content; min-width: 100%; }
+  .table-wrap :is(td, tbody th) { max-width: 16rem; }
   thead th { padding: var(--s2); }
   .panel { padding: var(--s3); }
   details.panel > summary { margin: calc(-1 * var(--s3)); padding: var(--s3); }

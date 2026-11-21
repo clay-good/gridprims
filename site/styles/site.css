@@ -101,6 +101,8 @@ main { padding-bottom: var(--s7); }
   border: 1px solid var(--line); color: var(--muted); background: var(--raise);
 }
 .glyph { width: 16px; height: 16px; flex: none; }
+/* A hint is secondary by default; a context may size it up. */
+.unit-hint { color: var(--muted); font-size: .875rem; }
 
 /* The home page's worked plate: proof before any list of links. On a phone it
    collapses to one compact line, because both lanes still have to start on a
@@ -269,11 +271,14 @@ tbody th { color: var(--ink); font-size: .9375rem; font-weight: 600; letter-spac
 .tool-cell > a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
 .tool-cell:has(> a:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
 .tool-cell > a:focus-visible { outline: 0; }
-/* The catalog: cards side by side once there is room, each with its needs on the bottom line. */
-.tool-list[data-catalog] { grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
-.tool-list[data-catalog] .tool-cell { display: flex; flex-direction: column; align-items: flex-start; }
-.tool-list[data-catalog] .tool-cell .unit-hint { margin-top: auto; }
-.tool-list[data-catalog] .tool-cell .work-zone { margin-bottom: var(--s2); }
+/* Links inside a cell stay clickable above the cell's own link. */
+.tool-cell :is(p, dl, span) a { position: relative; z-index: 1; }
+/* Tool lists tile once there is room, each card with its needs on the bottom line.
+   The data library keeps one wide card per row for its row of figures. */
+.tool-list:not(.lane .tool-list):not(:has([data-library])) { grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
+.tool-list:not(.lane .tool-list) > .tool-cell { display: flex; flex-direction: column; align-items: flex-start; }
+.tool-list:not(.lane .tool-list) > .tool-cell > .unit-hint { margin-top: auto; padding-top: var(--s2); }
+.tool-list:not(.lane .tool-list) > .tool-cell > .work-zone { margin-bottom: var(--s2); }
 .tool-cell a { font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.01em; text-decoration: none; }
 .tool-cell a:hover { color: var(--signal-text); }
 /* On phones a home lane is two columns of names and what each needs, so both lanes and up to five cells each fit the first screen. */
