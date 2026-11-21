@@ -39,7 +39,9 @@ import { addedPanel } from '../ui/workbench-added.mjs';
 import { carbonPanel } from '../ui/workbench-carbon.mjs';
 
 /** Sections a tool's page adds below its inputs, with the script that runs them. */
-const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'], 'lines.attachment-height.find': [poleListPanel, '/site/pages/pole-list.js'], 'interconnect.fast-track.screens': [(i18n) => html`${preApplicationPanel(i18n)}${comparePanel(i18n)}${misquotesPanel(i18n)}`, null] };
+const EXTRAS = { 'calc.line-rating.ampacity': [ratingTablePanel, '/site/pages/line-rating-table.js'], 'lines.attachment-height.find': [poleListPanel, '/site/pages/pole-list.js'], 'interconnect.fast-track.screens': [(i18n) => html`${preApplicationPanel(i18n)}${comparePanel(i18n)}${misquotesPanel(i18n)}${hcLink(i18n)}`, null], 'interconnect.minimum-load.screen': [(i18n) => hcLink(i18n), null] };
+/** The way to the hosting-capacity directory from the screens that use a feeder's load. */
+const hcLink = ({ t }) => html`<p data-hc-link><a href="/interconnect/hosting-capacity/">${t('hc.link')}</a></p>`;
 
 /** Pickers that fill a tool's inputs from public data: the section they render and the script that runs it. */
 const PICKERS = { 'urdb-tariff': [tariffPicker, '/site/pages/tariff-picker.js'], 'eia-averages': [averagePicker, '/site/pages/average-picker.js'], 'rus-conductor': [conductorPicker, '/site/pages/conductor-picker.js'], 'ferc1': [ferc1Picker, '/site/pages/ferc1-picker.js'], 'eaglei-county': [outagePicker, '/site/pages/outage-picker.js'], 'cleanest-hours': [cleanestPicker, '/site/pages/cleanest-picker.js'], 'weather-station': [weatherPicker, '/site/pages/weather-picker.js'], 'large-load-utility': [largeLoadPicker, '/site/pages/large-load-picker.js'], 'large-load-tariff': [termsPicker, '/site/pages/terms-picker.js'] };

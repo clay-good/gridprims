@@ -6,6 +6,7 @@
 // checks those by hand.
 //   node pipeline/link-check.mjs
 
+import HOSTING_CAPACITY, { ATLAS as HC_ATLAS } from '../data/curated/hosting-capacity.mjs';
 import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -35,6 +36,9 @@ export async function outboundLinks(root = ROOT) {
     if (e.releaseCalendar) add(e.releaseCalendar.url, `${e.id} release calendar`);
   }
   for (const r of REGULATORS) for (const k of ['home', 'docket', 'comment']) add(r[k], `${r.state} regulator ${k}`);
+  // The hosting-capacity directory's landing pages and maps (add-interconnection-screens 5.4: a weekly report of broken links).
+  for (const e of HOSTING_CAPACITY) { add(e.url, `hosting-capacity ${e.id}`); add(e.mapUrl, `hosting-capacity ${e.id} map`); }
+  add(HC_ATLAS.url, 'hosting-capacity federal atlas');
   // Every other place the site cites a URL: the net metering pages' policy database, the qualifying-facility
   // checklist, and each dataset's release calendar.
   for (const r of REGULATORS) add(`https://programs.dsireusa.org/system/program?state=${r.state}`, `${r.state} net metering rules link`);
