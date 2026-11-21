@@ -23,7 +23,7 @@
   .command .wrap { padding-top: var(--s2); padding-bottom: var(--s2); }
   .proof { margin-bottom: var(--s3); }
   .proof-actions .unit-hint { display: none; }
-  .home-title { font-size: 1.625rem; line-height: 1.2; margin: var(--s3) auto var(--s2); }
+  .home-title { line-height: 1.2; margin: var(--s3) auto var(--s2); }
   .lane h2 { margin: var(--s3) 0 var(--s1); }
   .lane .tool-cell { padding: var(--s2) var(--s2) var(--s1); }
   .proof-title { margin-bottom: var(--s2); }
@@ -38,5 +38,16 @@
   .door .button { padding: 12px 16px; font-size: .875rem; }
   .door .unit-hint { margin-top: var(--s2); font-size: .75rem; }
   .command label { position: absolute; left: -9999px; }
+  /* 16px in every field, so a phone never zooms the page when a field takes focus. */
+  .field input, .field select, .field textarea, .command input, form.panel input, form.panel select, .receipt-choice select, .door-form input { font-size: 1rem; }
+  /* Actions share the row evenly instead of leaving a ragged edge. */
+  .answer-actions .button { flex: 1 1 auto; }
+  /* Dense tables read tighter on a phone. */
+  td, tbody th { padding: var(--s2); font-size: .875rem; }
+  thead th { padding: var(--s2); }
+  .panel { padding: var(--s3); }
+  details.panel > summary { margin: calc(-1 * var(--s3)); padding: var(--s3); }
+  details.panel[open] > summary { margin-bottom: 0; }
+  h2 { margin-top: var(--s5); }
 }
 

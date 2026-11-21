@@ -59,7 +59,7 @@ export function layout({ i18n, title, description, path, body, modules = [], sec
 <html lang="${i18n.locale.split('-')[0]}">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${title}</title>
 <meta name="description" content="${summary}">
 <link rel="canonical" href="${ORIGIN}${path}">
