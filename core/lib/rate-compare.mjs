@@ -95,13 +95,16 @@ export function compareRates(series, records, opts) {
     const bills = intervalBills(series, priceAs, { zone: opts.zone, received: opts.received, holidays: opts.holidays });
     const parts = components(bills.months);
     let annual = round2(bills.months.reduce((n, m) => n + m.total, 0));
+    // A percent program comes off each month's covered charges, so the months still add up to the year.
+    let months = bills.months;
     for (const prog of programs.filter((x) => x.kind === 'percent')) {
       if (!covers(prog, rec)) { applied.push({ id: prog.id, name: prog.name, applied: false, why: 'the program does not cover this plan' }); continue; }
       const off = percentDiscount(prog, { components: parts });
+      months = months.map((m) => { const d = percentDiscount(prog, { components: components([m]) }); return { ...m, total: round2(m.total - d), programDiscount: round2((m.programDiscount ?? 0) + d) }; });
       annual = round2(annual - off);
       applied.push({ id: prog.id, name: prog.name, applied: true, discount: off });
     }
-    priced.push({ rec, months: bills.months, annual, components: parts, offPeakShare: offPeakShare(rec, bills.months), peakKw: load.peakKw, unmodeled: rec.unmodeled, ...(why ? { outsideLimits: why } : {}), ...(applied.length ? { programs: applied } : {}) });
+    priced.push({ rec, months, annual, components: parts, offPeakShare: offPeakShare(rec, bills.months), peakKw: load.peakKw, unmodeled: rec.unmodeled, ...(why ? { outsideLimits: why } : {}), ...(applied.length ? { programs: applied } : {}) });
   }
   priced.sort((a, b) => a.annual - b.annual || a.rec.name.localeCompare(b.rec.name));
   const current = priced.find((p) => p.rec.id === opts.currentId) ?? null;

@@ -103,3 +103,11 @@ test('a household whose current plan is named for CARE keeps it as its current p
   assert.equal(r.current.rec.id, 'care');
   assert.equal(r.programRecords, undefined);
 });
+
+test('a percent program comes off each month too, so the months add up to the discounted year', () => {
+  const plans = [{ ...plan('r1', 'Residential Service', 0.1), utilityId: 14328 }];
+  const r = findPlans(year, plans, { zone: 'UTC', currentId: 'r1', asOf: '2026-10-30', programs: [{ id: 'care', name: 'CARE', kind: 'percent', percent: 30, utilityIds: [14328] }] });
+  const p = r.ranked[0];
+  assert.ok(Math.abs(p.months.reduce((t, m) => t + m.total, 0) - p.annual) <= 0.01 * p.months.length);
+  assert.ok(p.months.every((m) => m.programDiscount > 0));
+});

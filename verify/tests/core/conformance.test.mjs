@@ -59,6 +59,8 @@ test('validation level raised: at 20 rates across 5 states the bill tools are cr
     assert.match(bill(L).evidence.at(-1).summary, new RegExp(`20 regulator-published rates across 5 states .*${current.release.replace(/\./g, '\\.')}, /data/ground-truth/scorecard/`));
   }
   assert.match(String(limitsPage({ limits: L, i18n })), /past the bar of 20 rates spanning 5 states, so the bill tools are cross-checked/);
+  assert.match(L.summary, /The bill tools are checked against regulator-published bills/);
+  assert.match(limitsRecord({ tools: TOOLS, conformance: current }).summary, /No tool has yet been checked against real bills/);
   for (const t of L.tools.filter((x) => !BILL_TOOLS.includes(x.id))) assert.ok(!t.evidence.some((e) => e.kind === 'conformance'), t.id);
 });
 

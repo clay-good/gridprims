@@ -46,7 +46,9 @@ export function limitsRecord(r) {
   const deadLinks = (ledger?.deadLinks ?? []).map(({ url, status, lastOk, usedBy }) => ({ url, status, lastOk, usedBy }));
   return {
     generatedAt, describes,
-    summary: 'gridprims gives screening estimates, not utility studies. No tool has yet been checked against real bills or a utility\'s own figures. User problem reports are how we find our errors.',
+    summary: conformance?.met
+      ? 'gridprims gives screening estimates, not utility studies. The bill tools are checked against regulator-published bills (the conformance scorecard); no other tool has yet been checked against real bills or a utility\'s own figures. User problem reports are how we find our errors.'
+      : 'gridprims gives screening estimates, not utility studies. No tool has yet been checked against real bills or a utility\'s own figures. User problem reports are how we find our errors.',
     levels: VALIDATION_LEVELS, counts, tools: rows, cannotDo, conformance,
     unverifiedClaims: claims,
     problems: {
