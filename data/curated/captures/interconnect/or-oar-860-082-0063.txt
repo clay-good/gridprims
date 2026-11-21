@@ -1,0 +1,26 @@
+Source: https://secure.sos.state.or.us/oard/displayDivisionRules.action?selectedDivision=4084 (live site blocks scripts: F5 bot challenge / redirect to maintenance page; captured from Internet Archive snapshot https://web.archive.org/web/20260708223426/https://secure.sos.state.or.us/oard/displayDivisionRules.action;JSESSIONID_OARD=EhNwXjds7vGkIj9iAhNmbU2U10-VZMIJ8D5h9aWgmf2TauW4RcZO!849948759?selectedDivision=4084)
+Publisher: Oregon Secretary of State, Oregon Administrative Rules Database, Public Utility Commission, Chapter 860, Division 82, Small Generator Interconnection Rules, OAR 860-082-0063 Supplemental Review; PUC 4-2024, adopt filed 04/09/2024, effective 04/09/2024 (archived 2026-07-08)
+Retrieved: 2026-11-21
+Original: 167315 bytes, SHA-256 9836568d778b48a8409b2791d41e30b5e0c25007e26e4a2fbc306f22342997c7 (or-860-082-division.html, whole division page)
+Capture: OAR 860-082-0063 heading, section (2), screen (2)(a) with (A)-(B), section (5), and the authority/history note, whitespace collapsed
+----
+[OAR 860-082-0063, rule number]
+860-082-0063
+[OAR 860-082-0063, rule title]
+Supplemental Review
+[OAR 860-082-0063(2)]
+(2) Within 20 business days of an applicant’s election to undergo supplemental review, the public utility must perform supplemental review using the screens set forth below, notify the applicant of the results, and include with the notification a written report of the analysis and data underlying the public utility’s determinations under the screens.
+[OAR 860-082-0063(2)(a)]
+(a) Supplemental Review Penetration Screen: Where 12 months of line section minimum load data (including onsite load, but not station service load served by the proposed small generator facility) are available, can be calculated, can be estimated from existing data, or can be determined from a power flow model, the aggregate export capacity on the feeder or line section is less than 100 percent of the relevant minimum load on the feeder. If minimum load data are not available, or cannot be calculated, estimated, or determined, the aggregated export capacity on the line section is less than 30 percent of the peak load for all line Sections bounded by automatic sectionalizing devices upstream of the proposed project.
+[OAR 860-082-0063(2)(a)(A)]
+(A) Load that is co-located with load-following, non-exporting, or export-limited projects should be appropriately accounted for. The public utility may take the impacts of non-export or export limited generation on the calculation of daytime minimum load when evaluating potential system impacts.
+[OAR 860-082-0063(2)(a)(B)]
+(B) The interconnecting public utility will not consider as part of the aggregate export capacity for purposes of this screen the export capacity of generators known to be already reflected in the minimum load data, including combined heat and power (CHP) facility capacity.
+[OAR 860-082-0063(5)]
+(5) Applicants undergoing Supplemental Review will be able to access, review, and verify minimum load calculations except in cases where the minimum load data contain identifiable individual customer data.
+[OAR 860-082-0063, authority]
+Statutory/Other Authority: ORS 183, ORS 756 & ORS 757
+[OAR 860-082-0063, implemented]
+Statutes/Other Implemented: ORS 756.040 & ORS 756.060
+[OAR 860-082-0063, history]
+History: PUC 4-2024, adopt filed 04/09/2024, effective 04/09/2024

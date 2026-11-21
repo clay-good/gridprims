@@ -1,13 +1,13 @@
 {
   "toolId": "interconnect.minimum-load.screen",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "results": [
     {
       "example": "over",
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.3.0",
+        "toolVersion": "0.4.0",
         "outputs": {
           "peakRatio": {
             "value": 25,
@@ -57,7 +57,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.3.0",
+        "toolVersion": "0.4.0",
         "outputs": {
           "peakRatio": {
             "value": 12.5,
@@ -107,7 +107,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.3.0",
+        "toolVersion": "0.4.0",
         "outputs": {
           "peakRatio": {
             "value": 25,
@@ -157,7 +157,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.3.0",
+        "toolVersion": "0.4.0",
         "outputs": {
           "peakRatio": {
             "value": 3,
@@ -207,7 +207,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.3.0",
+        "toolVersion": "0.4.0",
         "outputs": {
           "peakRatio": {
             "value": 25,
@@ -257,7 +257,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.3.0",
+        "toolVersion": "0.4.0",
         "outputs": {
           "peakRatio": {
             "value": 25,
@@ -301,7 +301,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.3.0",
+        "toolVersion": "0.4.0",
         "outputs": {
           "peakRatio": {
             "value": 25,
@@ -351,7 +351,7 @@
       "result": {
         "status": "ok",
         "toolId": "interconnect.minimum-load.screen",
-        "toolVersion": "0.3.0",
+        "toolVersion": "0.4.0",
         "outputs": {
           "peakRatio": {
             "value": 25,

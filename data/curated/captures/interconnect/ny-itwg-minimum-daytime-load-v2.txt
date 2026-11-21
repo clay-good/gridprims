@@ -1,0 +1,38 @@
+Source: https://dps.ny.gov/system/files/documents/2024/04/2023-03-12-cesir-analysis-minimum-daytime-load-application-assumptions_ju-responses.docx (curl gets 403; captured from Internet Archive snapshot https://web.archive.org/web/20240927230238/https://dps.ny.gov/system/files/documents/2024/04/2023-03-12-cesir-analysis-minimum-daytime-load-application-assumptions_ju-responses.docx)
+Publisher: New York State Department of Public Service, ITWG, "CESIR Analysis Evaluation - Minimum Daytime Load Application & Assumptions", Ver 2, 12 March 2024, Joint Utilities responses (file name says 2023-03-12)
+Retrieved: 2026-11-21
+Original: 25231 bytes, SHA-256 4fcb277f3cffc231281ebd132c50a6614b5e101e7f06b8f8e8facdf8708f5269
+Capture: revision row Ver 2, JU response on 70-80%, Substation Transformer Backfeeding table, daytime-period table, JU note on O&R, JU answers to questions, whitespace collapsed
+----
+[Revision table, Ver 2 row]
+Ver 2 | 12 March 2024 | Joint Utilities | JU responses provided in yellow highlight
+[Current Understanding, JU response]
+JU: The 70-80% value seems outdated. Interval metering exists on more than 70% of distribution circuits in New York State. The JU request clarity on the source of this data.
+[Current Understanding, paragraph 2]
+In a scenario where minimum day time load (MDL) data is not available the utilities determine it based on the assumption that minimum day time load is 15%-40% of peak load. The assumption varies across each utility, “Technical Guidance Matrix for Integrating DER - September 2022” documents the different assumptions.
+[Table: Substation Transformer Backfeeding, column Avangrid]
+15% of the peak load
+[Table: Substation Transformer Backfeeding, column Central Hudson Gas & Electric]
+25% of peak load
+[Table: Substation Transformer Backfeeding, column Consolidated Edison]
+Interval data loading from the area station is available and extrapolated / interpolated to the local area of interconnection.
+[Table: Substation Transformer Backfeeding, column National Grid]
+25% of the peak load
+[Table: Substation Transformer Backfeeding, column Orange and Rockland]
+Interval data available for all stations except: Summitville, Wurtsboro, and Pine Island, where toll grade readings allows calculations with < 3% error. Minimum daytime native load is calculated based on feeder metering data and DER nameplate.
+[Table: daytime periods, Utility NG]
+9 AM – 6 PM, 24 Hours for BESS (Unrestricted)
+[Table: daytime periods, Utility NYSEG]
+10 AM – 6 PM
+[Table: daytime periods, Utility CHG&E]
+10 AM – 3 PM
+[Table: daytime periods, Utility ORU]
+8 AM – 8 PM, for PV systems and 24 hours for BESS.
+[Table: daytime periods, Utility ConEd]
+We have differing minimum load window for each area station and can’t generalize this to a single window.
+[O&R note, JU response]
+JU: For O&R, the 8 AM – 3 PM window was updated to 8 AM – 8 PM in 2020.
+[Questions, JU answer 1]
+JU: This assumption does not apply for all companies. Some companies may use the measured feeder minimum loading values and DER output during the DER’s operational window, or not use the minimum load at all for thermal analyses.
+[Questions, JU answer 2]
+JU: The JU will use measured data from field devices, where available, instead of the assumptions. Where field data is unavailable, minimum load values are based on extrapolation techniques and engineering assumptions based on data from area station and local telemetry values. Some utilities may not use the minimum loading values for the station thermal screen.

@@ -2,7 +2,7 @@ const base = { peakKw: 2000, aggregateKw: 500, technology: 'solar-fixed', minLoa
 
 export default {
   id: 'interconnect.minimum-load.screen',
-  version: '0.3.0',
+  version: '0.4.0',
   title: 'Load-ratio screens for a generator',
   purpose: 'Whether a solar or other small generator passes the 15%-of-peak screen, and the minimum-load screen across the range of minimum load utilities assume, unless you have the utility\'s own value.',
   archetype: 'calculator',
@@ -16,6 +16,7 @@ export default {
     { name: 'measured', label: 'The utility marked it', type: 'enum', example: 'unknown', options: [{ value: 'unknown', label: 'Not marked' }, { value: 'measured', label: 'Measured' }, { value: 'estimated', label: 'Estimated' }] },
     { name: 'state', label: 'Your state', type: 'text', optional: true, example: 'none', hint: 'Optional: a two-letter code such as NM, to show a fallback your state writes into its own rules; none for the federal rule only.' },
     { name: 'generatorType', label: 'Your generator connects through', type: 'enum', optional: true, example: 'inverter', options: [{ value: 'inverter', label: 'An inverter' }, { value: 'rotating', label: 'A rotating machine' }], hint: 'Used where a state sets a different fallback for each.' },
+    { name: 'utility', label: 'Your utility', type: 'enum', optional: true, example: 'none', options: [{ value: 'none', label: 'Not listed, or not given' }, { value: 'avangrid', label: 'Avangrid (NYSEG, RG&E)' }, { value: 'central-hudson', label: 'Central Hudson' }, { value: 'con-edison', label: 'Con Edison' }, { value: 'national-grid-ny', label: 'National Grid (New York)' }, { value: 'orange-rockland', label: 'Orange and Rockland' }], hint: 'Optional: shows the assumption your utility itself states for when minimum load is not available, where we have it recorded.' },
   ],
   outputs: [
     { name: 'peakRatio', label: 'Generation as a share of peak', unit: '%', rounding: { decimals: 1, fixed: true } },

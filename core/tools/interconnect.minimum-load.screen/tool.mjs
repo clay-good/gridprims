@@ -7,13 +7,18 @@
 import { BAND, minLoadBand, minLoadMet, peakScreen } from '../../lib/min-load.mjs';
 import FALLBACKS from '../../../data/curated/min-load-fallbacks/_index.mjs';
 import PENDING from '../../../data/curated/min-load-fallbacks/_pending.mjs';
+import ASSUMPTIONS from '../../../data/curated/min-load-assumptions.mjs';
 
 const kw = (x) => `${Math.round(x).toLocaleString('en-US')} kW`;
 const pc = (x) => `${(x * 100).toFixed(1)}%`;
 const STATE_NAME = { NM: 'New Mexico', OR: 'Oregon' };
 const SOURCE = { report: 'a pre-application report', published: 'the utility\'s published feeder value', other: 'the utility' };
 
-export function compute(v) {
+/**
+ * @param {any} v
+ * @param {{fallbacks?: any[], pending?: any[]}} [lists] the state fallbacks, confirmed and pending; the curated records by default
+ */
+export function compute(v, { fallbacks = FALLBACKS, pending: pendingList = PENDING } = {}) {
   if (!(v.peakKw > 0)) return { status: 'refused', reason: 'No load-ratio result without the line section\'s annual peak load. It comes only from the utility: ask for a pre-application report, or look for your utility\'s hosting-capacity map.' };
   const p = peakScreen(v.aggregateKw, v.peakKw);
   const steps = [`15%-of-peak screen: ${kw(v.aggregateKw)} ÷ ${kw(v.peakKw)} = ${pc(p.ratio)}; the rule requires no more than 15%: ${p.met ? 'met' : 'not met'}.`];
@@ -46,9 +51,16 @@ export function compute(v) {
   // A state that writes its own fallback into its rules: each value against its technology, as the state's rule,
   // and the result at the user's. A fallback seen only in a secondary source is named but not used.
   const state = String(v.state ?? 'none').trim().toUpperCase();
-  const fallback = FALLBACKS.find((x) => x.state === state);
-  const pending = PENDING.find((x) => x.state === state);
-  if (fallback) {
+  const fallback = fallbacks.find((x) => x.state === state);
+  const pending = pendingList.find((x) => x.state === state);
+  if (fallback?.fields.any) {
+    // One value for every kind of generator, and a strict test, as Oregon writes it.
+    const share = fallback.fields.any.value;
+    const met = p.ratio * 100 < share - 1e-9;
+    outputs.stateFallbackShare = share;
+    steps.push(`${STATE_NAME[state] ?? state}'s own rule (${fallback.rule}) sets a fallback for when minimum load data are not available: ${fallback.comparison} ${share}% of peak load for any generator. It applies to ${fallback.appliesTo}.`);
+    steps.push(`${kw(v.aggregateKw)} ÷ ${kw(v.peakKw)} = ${pc(p.ratio)}, against ${fallback.comparison} ${share}%: ${met ? 'met' : 'not met'}. The rule counts export capacity, so enter what your project can export.`);
+  } else if (fallback) {
     const share = fallback.fields[v.generatorType === 'rotating' ? 'rotating' : 'inverter'].value;
     const met = p.ratio * 100 <= share + 1e-9;
     outputs.stateFallbackShare = share;
@@ -56,6 +68,15 @@ export function compute(v) {
     steps.push(`For ${v.generatorType === 'rotating' ? 'rotating' : 'inverter-based'} generation: ${kw(v.aggregateKw)} ÷ ${kw(v.peakKw)} = ${pc(p.ratio)}, against at most ${share}%: ${met ? 'met' : 'not met'}.`);
   } else if (pending) {
     steps.push(`${STATE_NAME[state] ?? state} may set its own fallback (${pending.rule}); it is being verified against the rule's own text, so only the band is shown.`);
+  }
+  // The user's utility's own stated assumption, beside the band, cited, as the utility's and not ours.
+  const u = ASSUMPTIONS.find((x) => x.id === v.utility);
+  if (u) {
+    steps.push(`${u.utility}'s own assumption when minimum daytime load is not available: ${u.assumption}; daytime window ${u.window} (${u.cite.publisher}, ${u.cite.document}).`);
+    if (u.share !== null && !absolute && !(v.minLoadKw > 0)) {
+      const at = (u.share / 100) * v.peakKw;
+      steps.push(`At ${u.share}% of peak (${kw(at)}), the minimum-load screen would be ${minLoadMet(v.aggregateKw, at) ? 'met' : 'not met'}, on ${u.utility}'s assumption.`);
+    }
   }
   return {
     status: 'ok', outputs,

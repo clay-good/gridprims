@@ -694,7 +694,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 Whether a solar or other small generator passes the 15%-of-peak screen, and the minimum-load screen across the range of minimum load utilities assume, unless you have the utility's own value.
 
-Version 0.3.0 · experimental · validation level 1, self-checked
+Version 0.4.0 · experimental · validation level 1, self-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|
@@ -706,6 +706,7 @@ Version 0.3.0 · experimental · validation level 1, self-checked
 | The utility marked it | `measured` | choice | `unknown`, `measured`, `estimated` | unknown |
 | Your state | `state` |  |  | none |
 | Your generator connects through | `generatorType` | choice | `inverter`, `rotating` | inverter |
+| Your utility | `utility` | choice | `none`, `avangrid`, `central-hudson`, `con-edison`, `national-grid-ny`, `orange-rockland` | none |
 
 | Output | Name | Unit | Rounding |
 |---|---|---|---|

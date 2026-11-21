@@ -8,6 +8,7 @@ import { readFileSync } from 'node:fs';
 import { runTool } from '../../../core/contract/run.mjs';
 import { getTool } from '../../../core/tools/index.mjs';
 import NM from '../../../data/curated/min-load-fallbacks/nm-17.9.568.16.mjs';
+import OR from '../../../data/curated/min-load-fallbacks/or-860-082-0063.mjs';
 import { checkRecord } from '../../../pipeline/lib/curated.mjs';
 import { ROOT } from '../../../pipeline/run.mjs';
 
@@ -34,10 +35,36 @@ test('codified fallback: both values against their technology, as the state\'s r
   assert.ok(inverter.work.steps.some((s) => /15% to 40% band/.test(s)));
 });
 
-test('unconfirmed fallback withheld: Oregon is named as being verified, and no state value is used', () => {
-  const r = run({ state: 'OR' });
+test('unconfirmed fallback withheld: a state seen only in a secondary source is named as being verified, and no state value is used', () => {
+  const r = impl.compute({ ...base, state: 'WA' }, { pending: [{ state: 'WA', rule: 'WAC 480-108 (example)', note: 'seen only in a secondary source' }] });
   assert.equal(r.outputs.stateFallbackShare, undefined);
-  assert.ok(r.work.steps.includes('Oregon may set its own fallback (OAR 860-082-0063); it is being verified against the rule\'s own text, so only the band is shown.'));
+  assert.ok(r.steps.some((x) => /may set its own fallback \(WAC 480-108 \(example\)\); it is being verified against the rule's own text, so only the band is shown\./.test(x)));
+});
+
+test('Oregon, now read in the rule: less than 30% of peak for any generator, a strict test on export capacity', () => {
+  const met = run({ state: 'OR' });
+  assert.equal(met.outputs.stateFallbackShare.value, 30);
+  assert.ok(met.work.steps.includes('500 kW ÷ 2,000 kW = 25.0%, against less than 30%: met. The rule counts export capacity, so enter what your project can export.'));
+  const edge = run({ state: 'OR', aggregateKw: 600 });
+  assert.ok(edge.work.steps.some((x) => /= 30\.0%, against less than 30%: not met/.test(x)), 'equal is not less');
+  const rotating = run({ state: 'OR', generatorType: 'rotating' });
+  assert.equal(rotating.outputs.stateFallbackShare.value, 30, 'one value for every generator');
+  const text = readFileSync(`${ROOT}/data/curated/captures/interconnect/or-oar-860-082-0063.txt`, 'utf8');
+  assert.ok(text.includes('the aggregated export capacity on the line section is less than 30 percent of the peak load'));
+  assert.deepEqual(checkRecord(OR, ROOT).problems, []);
+});
+
+test('per-utility assumption named: the utility\'s own stated assumption, cited, beside the band', async () => {
+  const { default: ASSUMPTIONS } = await import('../../../data/curated/min-load-assumptions.mjs');
+  for (const a of ASSUMPTIONS) assert.ok(readFileSync(`${ROOT}/${a.cite.capture}`, 'utf8').includes(a.cite.quote), a.id);
+  const ng = run({ utility: 'national-grid-ny' });
+  assert.ok(ng.work.steps.some((x) => /^National Grid \(New York\)'s own assumption when minimum daytime load is not available: 25% of peak load/.test(x) && x.includes('Ver 2 (Joint Utilities responses, 12 March 2024)')));
+  assert.ok(ng.work.steps.includes('At 25% of peak (500 kW), the minimum-load screen would be not met, on National Grid (New York)\'s assumption.'));
+  assert.ok(ng.work.steps.some((x) => /15% to 40% band/.test(x)), 'the band is still shown');
+  const ce = run({ utility: 'con-edison' });
+  assert.ok(ce.work.steps.some((x) => /Consolidated Edison's own assumption/.test(x) && /superseded/.test(x)));
+  assert.ok(!ce.work.steps.some((x) => /on Consolidated Edison's assumption/.test(x)), 'no share of peak is made up for it');
+  assert.deepEqual(run({ utility: 'none' }).work.steps, run({}).work.steps);
 });
 
 test('without a state, or for a state with no fallback, the answer is the federal one', () => {

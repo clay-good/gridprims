@@ -1,0 +1,40 @@
+Source: https://dps.ny.gov/system/files/documents/2024/02/cesir-analysis-minimum-daytime-load-application-assumptions.docx (curl gets 403; bytes taken from Internet Archive snapshot https://web.archive.org/web/20240927230619/https://dps.ny.gov/system/files/documents/2024/02/cesir-analysis-minimum-daytime-load-application-assumptions.docx; identical SHA-256 to the live file fetched via WebFetch on 2026-11-21)
+Publisher: New York State Department of Public Service, Interconnection Technical Working Group (ITWG), "CESIR Analysis Evaluation - Minimum Daytime Load Application & Assumptions", Ver 1, 13 Feb 2024, edits by Industry
+Retrieved: 2026-11-21
+Original: 14637 bytes, SHA-256 67d5bfa67e63f32a9e679bc51a9570c71ac4f56e6a47247ed116939e7eb8a31b
+Capture: title, revision row, Current Understanding paragraphs, Substation Transformer Backfeeding table, daytime-period table and O&R note, whitespace collapsed (table cells extracted from document.xml, one per line, in document order)
+----
+[Title]
+CESIR Analysis Evaluation - Minimum Daytime Load Application & Assumptions
+[Revision table, Ver 1 row]
+Ver 1 | 13 Feb 2024 | Industry | Summary of CESIR Analysis evaluation and Industry Request & questions
+[Current Understanding, paragraph 1]
+The industry has consistently observed that minimum day time load data is not available for feeders. Based on the frequency of this scenario it is estimated that minimum load data is not available for the majority (70-80%) of the feeders.
+[Current Understanding, paragraph 2]
+In a scenario where minimum day time load (MDL) data is not available the utilities determine it based on the assumption that minimum day time load is 15%-40% of peak load. The assumption varies across each utility, “Technical Guidance Matrix for Integrating DER - September 2022” documents the different assumptions.
+[Table: Substation Transformer Backfeeding, row question]
+How is the minimum daytime load determined when actual transformer loading information is not available?
+[Table: Substation Transformer Backfeeding, column Avangrid]
+15% of the peak load
+[Table: Substation Transformer Backfeeding, column Central Hudson Gas & Electric]
+25% of peak load
+[Table: Substation Transformer Backfeeding, column Consolidated Edison]
+30-40% peak load
+[Table: Substation Transformer Backfeeding, column National Grid]
+25% of the peak load
+[Table: Substation Transformer Backfeeding, column Orange and Rockland]
+Interval data available for all stations except: Summitville, Wurtsboro, and Pine Island, where toll grade readings allows calculations with < 3% error.
+[Daytime periods, lead-in]
+As per the “ITWG CESIR Analysis Evaluation Initiative v5” it is our understanding that the below daytime periods are used by each utility.
+[Table: daytime periods, Utility NG]
+9 AM – 6 PM
+[Table: daytime periods, Utility NYSEG]
+10 AM – 6 PM
+[Table: daytime periods, Utility CHG&E]
+10 AM – 3 PM
+[Table: daytime periods, Utility ORU]
+8 AM – 8 PM, for PV systems and 24 hours for BESS.
+[Table: daytime periods, Utility ConEd]
+11 AM - 2 PM
+[Daytime periods, O&R note]
+O&R has indicated a different daytime load period of 8AM - 3PM in the “Technical Guidance Matrix for Integrating DER - September 2022”. Please confirm the latest per period.
