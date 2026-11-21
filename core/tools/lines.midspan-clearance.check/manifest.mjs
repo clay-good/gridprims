@@ -65,6 +65,8 @@ export default {
     { label: 'California General Order 95 (overhead line rules)', url: 'https://ia.cpuc.ca.gov/gos/go95/go_95_startup_page.html' },
     { label: 'FCC pole attachment make-ready rules, 47 CFR 1.1411', url: 'https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-1/subpart-J/section-1.1411' },
   ],
+  // GO 95's values ship as law the CPUC wrote; that reading is a legal judgment not yet checked (docs/research/18).
+  claims: ['go95-law-republishable'],
   stability: 'experimental',
   validation: { level: 2, evidence: [{ kind: 'own-examples', summary: 'The spec\'s level, unequal, at-a-pole, short, offset, and gap scenarios, each hand-computed.' }, { kind: 'reference-output', path: 'verify/reference/catenary-50.json', summary: 'Fifty exact-catenary cases from a separate script: parabolic sag within 1% of the catenary wherever sag is under 5% of the span (worst 0.55%), with deep-sag cases recorded and labeled.' }] },
   toRaise: 'Worked sag examples published by a utility or a regulator, reproduced, would add published-example evidence; field-verified needs measured spans users choose to send.',

@@ -39,4 +39,11 @@ export default [
     usedBy: ['/files/ (the hourly emissions panel shows only the eGRID annual result for Alaska and Hawaii)'],
     wouldConfirm: 'EIA\'s own statement of EIA-930\'s geographic coverage, cited on its About page.',
   },
+  {
+    id: 'go95-law-republishable',
+    claim: 'CPUC General Order 95 is law the Commission wrote, so its clearance values may be republished, as Georgia v. Public.Resource.Org (2020) held for annotations a legislature wrote.',
+    brief: 'docs/research/18-overhead-line-design.md, Codes and their values',
+    usedBy: ['/tools/lines/midspan-clearance/check/ (GO 95 clearances shipped with the check)', 'the go95-clearances dataset'],
+    wouldConfirm: 'A reading of the decision against GO 95 by counsel, or the CPUC\'s own statement on reuse of its general orders.',
+  },
 ];
