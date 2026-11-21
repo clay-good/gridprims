@@ -1,0 +1,27 @@
+Source: https://www.coned.com/-/media/files/coned/documents/rates/electric/psc-10/addenda.pdf
+Publisher: Consolidated Edison Company of New York, Inc., P.S.C. No. 10 - Electricity, Addendum Type SIR, Addendum Number 23 (reproduces "New York State Standardized Interconnection Requirements and Application Process ... 5 MW or Less"), Initial Effective Date: 10/01/2026, "Issued in compliance with order in Case 24-E-0621 and Case 24-E-0415 dated 08/17/2026"
+Retrieved: 2026-11-21
+Original: 2455802 bytes, SHA-256 311800b422715ffd7487bf37d54dff6bff93361a111de5e41906cd04846ec74c
+Capture: Addendum SIR-23, Appendix G - Application Screening: Screen 3, Screen D (item 1 text, table row 3, item 2), Screen E, Screen F, Screen I item 3; pdftotext -layout, whitespace collapsed. The file holds all PSC 10 addenda (244 pages); SIR-23 begins on PDF p.3; captured text is on PDF pp.101-104 (Appendix G printed pages -2-, -3-, -5-).
+Note: the Screen D table row is shown cell by cell (" | " separates the three columns); cell text is verbatim, with each cell's wrapped lines rejoined (the wrap "four-/wire)" is rejoined as "four-wire)"). Text is identical to the PSC's own SIR PDF (see ny-sir-2026-10-01.txt).
+----
+[Addendum SIR-23, Appendix G, Screen 3; PDF p.101, App. G p.-2-]
+Screen 3: Simplified Penetration Test 3(a) Is the aggregate interconnected and proposed DER capacity (including this proposed project) less than 15% of the minimum load of the network? 3(b) Is the sum of the aggregate interconnected and proposed DER capacity (inclusive of this proposed project) in the local network less than 50% of the minimum load on the transformer(s) in this area? ● If answer to Items 3(a) and 3(b) is Yes (Pass Screen) ● If answer to Item 3(a) or 3(b) is No (Fail Screen)
+
+[Addendum SIR-23, Appendix G, Screen D, item 1; PDF p.101]
+Screen D: Is the Line and Grounding Configuration Compatible with the Interconnection Type? 1. Identify primary distribution line configuration that will serve the distributed generation or energy storage. Based on the DER interconnection and using the table below, determine compatibility with the electric power service, including, phase balance, line and grounding configuration. The following table shall be used to determine risk for ineffective grounding
+
+[Addendum SIR-23, Appendix G, Screen D, item 1 table, row 3 (columns: Primary distribution line configuration | Type of DER connection to primary | Result/Criteria); PDF p.101]
+All Three-phase, four-wire (For any line that has sections or mixed three-wire and four-wire) | All others | Fail. To pass aggregate DER AC nameplate rating must be less than or equal to 10% of line-section peak load
+
+[Addendum SIR-23, Appendix G, Screen D, item 2; PDF p.101]
+2. Based on aggregate DER on the feeder, is phase balancing maintained within utility limits? ● If items 1 & 2 pass, (Pass Screen) ● If items 1 or 2 fail, (Fail Screen)
+
+[Addendum SIR-23, Appendix G, Screen E; PDF p.102, App. G p.-3-]
+Screen E: Simplified Penetration Test If the aggregate DER capacity on any medium voltage line section (existing and approved prior to application) is less than the daytime minimum load (where 12 months of line section minimum load data are available or alternatively can be estimated from existing data, or determined from a power flow model) or 15% of the annual peak load (where daytime minimum load data is not available) for all line sections bounded by automatic sectionalizing devices upstream of the DER? ● Yes (Pass Screen) ● No (Fail Screen)
+
+[Addendum SIR-23, Appendix G, Screen F; PDF p.102]
+Screen F: Is Feeder Capacity Adequate for Individual and Aggregate DER? 1. Is the feeder available short circuit capacity at the medium voltage PCC, divided by the rating of the individual DER, greater than 25? 2. Is the feeder available short circuit capacity at the substation divided by the capacity all aggregate DER on the feeder, greater than 25? ● If items 1 & 2 pass, (Pass Screen) ● If items 1 or 2 fail, (Fail Screen)
+
+[Addendum SIR-23, Appendix G, Screen I ("Operating Limits, Protection Adequacy and Coordination Evaluation"), item 3; PDF p.104, App. G p.-5-]
+3. Identify equipment where fault current exceeds 90% of its short circuit current interrupting capability.

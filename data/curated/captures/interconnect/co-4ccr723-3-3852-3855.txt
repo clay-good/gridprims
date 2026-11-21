@@ -1,0 +1,30 @@
+Source: https://www.coloradosos.gov/CCR/GenerateRulePdf.do?ruleVersionId=12548&fileName=4%20CCR%20723-3
+Publisher: Colorado Secretary of State, Code of Colorado Regulations, Department of Regulatory Agencies, Public Utilities Commission, 4 CCR 723-3 "Rules Regulating Electric Utilities" (Interconnection Procedures and Standards, Rules 3850-3859), current version effective 06/14/2026 per the CCR rule-info page (ruleId 2259, ruleVersionId 12548)
+Retrieved: 2026-11-21
+Original: 1505615 bytes, SHA-256 2cf1a7b323deae224bd3126846a2286def3e3111b4a6dc48b99a66a3b4c25237
+Capture: Rule 3852(f); Rule 3855(b)(I), (II), (III), (IV), (VII); Rule 3855(d)(VI) heading, (VI)(A)(i), (VI)(A)(iii); pdftotext -layout, whitespace collapsed. PDF pages = printed CCR page numbers (279, 306, 307, 310, 311).
+Note: "off- season" and "single- phase" keep the line-break hyphen-space produced by collapsing the PDF's line-end hyphens.
+----
+[4 CCR 723-3, Rule 3852(f) (Definitions, highly seasonal circuit); PDF p.279]
+(f) “Highly seasonal circuit” means a circuit with a ratio of annual peak load to off- season peak load greater than six.
+
+[4 CCR 723-3, Rule 3855(b)(I) (Level 2 initial review; highly seasonal circuits); PDF p.306]
+(I) The proposed interconnection resource’s point of interconnection must be on a portion of the utility’s distribution system that is subject to the utility’s tariffs. Proposed interconnection resources on highly seasonal circuits shall also be subject to the supplemental review pursuant to paragraph 3855(d).
+
+[4 CCR 723-3, Rule 3855(b)(II) (15 percent of line-section annual peak); PDF p.306]
+(II) For interconnection of a proposed interconnection resources to a radial distribution circuit, the aggregated generation, including the proposed interconnection resources, on the line section(s) shall not exceed 15 percent of the line section’s annual peak load as most recently measured at the substation or calculated for the line section(s). A line section is that portion of a utility’s electric system connected to a customer bounded by automatic sectionalizing devices or the end of the distribution line. A fuse is not an automatic sectionalizing device. Energy storage system(s) capacity for purposes of this screen shall be based on subparagraph 3853(c)(III).
+
+[4 CCR 723-3, Rule 3855(b)(III) (fault current contribution); PDF p.306]
+(III) The proposed interconnection resource, in aggregation with other generation on the distribution circuit, shall not contribute more than ten percent to the distribution circuit's maximum fault current at the point on the distribution feeder voltage (primary) level nearest the proposed point of change of ownership.
+
+[4 CCR 723-3, Rule 3855(b)(IV) (interrupting capability); PDF p.306]
+(IV) The proposed interconnection resource, in aggregate with other interconnection resource on the distribution circuit, shall not cause any distribution protective devices and equipment (including, but not limited to, substation breakers, fuse cutouts, and line reclosers), or interconnection customer equipment on the system to exceed 87.5 percent of the short circuit interrupting capability; nor shall the interconnection be proposed for a circuit that already exceeds 87.5 percent of the short circuit interrupting capability.
+
+[4 CCR 723-3, Rule 3855(b)(VII) (single-phase shared secondary); PDF p.307]
+(VII) If the proposed interconnection resource is to be interconnected on single- phase shared secondary, the aggregate generation capacity on the shared secondary, including the proposed small generating facility, shall not exceed 25 kW. Energy storage system(s) capacity for purposes of this screen, shall be based on subparagraph 3853(c)(III).
+
+[4 CCR 723-3, Rule 3855(d)(VI) heading and (VI)(A)(i) (supplemental minimum load screen); PDF p.310]
+(VI) Supplemental review screens. (A) Minimum load screen. (i) The interconnection resource capacity on the line section(s) shall be less than 100 percent of the minimum load for all line sections bounded by automatic sectionalizing devices upstream of the proposed interconnection resource. Energy storage system(s), proposed and aggregated capacity for purposes of this screen, shall be based on subparagraph 3853(c)(III).
+
+[4 CCR 723-3, Rule 3855(d)(VI)(A)(iii) (daytime vs absolute minimum load); PDF p.311]
+(iii) The type of interconnection resource shall be taken into account when calculating or estimating circuit or line section(s) minimum load. The utility shall use daytime minimum load for solar photovoltaic (PV) interconnection resource with no battery storage (i.e.,10 a.m. to 4 p.m. for fixed panel systems and 8 a.m. to 6 p.m. for PV systems utilizing tracking systems). The utility shall use absolute minimum load for all other types of interconnection resource.

@@ -1,0 +1,28 @@
+Source: https://dps.ny.gov/nys-standardized-interconnection-requirements-effective-october-1-2026
+Publisher: New York State Public Service Commission / Department of Public Service, "New York State Standardized Interconnection Requirements and Application Process for New Distributed Generators and/or Energy Storage Systems 5 MW or Less Connected in Parallel with Utility Distribution Systems," Effective: October 1, 2026 (Case 24-E-0621; order of August 17, 2026)
+Retrieved: 2026-11-21
+Original: 1266161 bytes, SHA-256 08be792bbdcb925761593cfe1f82d6188218e150f03a0880c143592f6861527e
+Capture: Appendix G - Application Screening: Screen 3, Screen D (item 1 text, table row 3, item 2), Screen E, Screen F, Screen I item 3; pdftotext -layout, whitespace collapsed. PDF pages 99-102 of 120 (Appendix G printed pages -2-, -3-, -5-).
+Note: dps.ny.gov returns HTTP 403 to curl (bot wall); the PDF bytes were fetched via the WebFetch tool, which saved the server's raw response. The page URL serves the PDF directly (application/pdf, 120 pages).
+Note: the Screen D table row is shown cell by cell (" | " separates the three columns); cell text is verbatim, with each cell's wrapped lines rejoined (the wrap "four-/wire)" is rejoined as "four-wire)").
+----
+[Appendix G, Preliminary Screening, Screen 3 (networked secondary); PDF p.99, App. G p.-2-]
+Screen 3: Simplified Penetration Test 3(a) Is the aggregate interconnected and proposed DER capacity (including this proposed project) less than 15% of the minimum load of the network? 3(b) Is the sum of the aggregate interconnected and proposed DER capacity (inclusive of this proposed project) in the local network less than 50% of the minimum load on the transformer(s) in this area? ● If answer to Items 3(a) and 3(b) is Yes (Pass Screen) ● If answer to Item 3(a) or 3(b) is No (Fail Screen)
+
+[Appendix G, Screen D, item 1; PDF p.99]
+Screen D: Is the Line and Grounding Configuration Compatible with the Interconnection Type? 1. Identify primary distribution line configuration that will serve the distributed generation or energy storage. Based on the DER interconnection and using the table below, determine compatibility with the electric power service, including, phase balance, line and grounding configuration. The following table shall be used to determine risk for ineffective grounding
+
+[Appendix G, Screen D, item 1 table, row 3 (columns: Primary distribution line configuration | Type of DER connection to primary | Result/Criteria); PDF p.99]
+All Three-phase, four-wire (For any line that has sections or mixed three-wire and four-wire) | All others | Fail. To pass aggregate DER AC nameplate rating must be less than or equal to 10% of line-section peak load
+
+[Appendix G, Screen D, item 2; PDF p.99]
+2. Based on aggregate DER on the feeder, is phase balancing maintained within utility limits? ● If items 1 & 2 pass, (Pass Screen) ● If items 1 or 2 fail, (Fail Screen)
+
+[Appendix G, Screen E (radial); PDF p.100, App. G p.-3-]
+Screen E: Simplified Penetration Test If the aggregate DER capacity on any medium voltage line section (existing and approved prior to application) is less than the daytime minimum load (where 12 months of line section minimum load data are available or alternatively can be estimated from existing data, or determined from a power flow model) or 15% of the annual peak load (where daytime minimum load data is not available) for all line sections bounded by automatic sectionalizing devices upstream of the DER? ● Yes (Pass Screen) ● No (Fail Screen)
+
+[Appendix G, Screen F; PDF p.100]
+Screen F: Is Feeder Capacity Adequate for Individual and Aggregate DER? 1. Is the feeder available short circuit capacity at the medium voltage PCC, divided by the rating of the individual DER, greater than 25? 2. Is the feeder available short circuit capacity at the substation divided by the capacity all aggregate DER on the feeder, greater than 25? ● If items 1 & 2 pass, (Pass Screen) ● If items 1 or 2 fail, (Fail Screen)
+
+[Appendix G, Supplemental Screening Analysis, Screen I ("Operating Limits, Protection Adequacy and Coordination Evaluation"), item 3; PDF p.102, App. G p.-5-]
+3. Identify equipment where fault current exceeds 90% of its short circuit current interrupting capability.
