@@ -84,13 +84,13 @@ export default [
     state: "GA", publisher: "Georgia Public Service Commission", title: "Residential Rate Survey (Summer 2026)",
     url: "https://psc.ga.gov/utilities/electric/residential-rate-survey/", checked: '2026-11-21', asOf: "Summer 2026 (survey selector offers Winter/Summer 2021 to 2026)",
     terms: { url: "https://psc.ga.gov/", says: "©2026 Georgia Public Service Commission. All rights reserved." },
-    status: "not extracted", reason: "The commission publishes a twice-yearly residential rate survey covering every Georgia electric utility (investor-owned, EMC and municipal); the site has no terms page, only an \"All rights reserved\" copyright footer. Format: HTML table rendered on the page (no PDF link), filterable by survey season and utility type; monthly bill and cents/kWh at 500, 1,000, 1,500 and 2,000 kWh.",
+    status: 'excluded', reason: 'Excluded under the cautious reading: the site\'s only terms are its footer, "All rights reserved," read here as restricting reuse until the Commission says otherwise. The survey covers every Georgia utility at 500 to 2,000 kWh, so a grant of permission would make it usable.',
   },
   {
     state: "HI", publisher: "Hawaii Public Utilities Commission", title: "PUC Annual Report Fiscal Year 2025, Appendix B Table 2: Five-Year Comparison of Effective Residential Energy Rates and Monthly Residential Electric Bill, Based on an Average Usage of 500 kWh",
     url: "https://puc.hawaii.gov/wp-content/uploads/2026/01/PUC-Annual-Report-Fiscal-Year-2025.pdf", checked: '2026-11-21', asOf: "June 2025 (columns June 2021 through June 2025; report submitted January 2026)",
     terms: { url: "https://puc.hawaii.gov/disclaimer-notice/", says: "The Hawaii Public Utilities Commission's web site, HawaiiPUC , including the information found on the web site, is provided as a public service, and should not be construed as official government records. ... Users of the web site are therefore fully responsible for determining the accuracy, completeness, and/or suitability of the information. [Footer:] Copyright © 2026, State of Hawaii. All rights reserved. [Linked portal Terms of Use, https://portal.ehawaii.gov/terms-of-use.html, contains only: © 2026 State of Hawaiʻi. All Rights Reserved.]" },
-    status: "not extracted", reason: "The FY2025 annual report has a table of the 500 kWh monthly residential bill and effective rate for HECO, HELCO, MECO Maui/Lanai/Molokai and KIUC each June 2021-2025; the site shows only a generic 'All rights reserved' footer and a no-warranty disclaimer, with no explicit reuse restriction. Format: Text PDF (pdftotext extracts cleanly); one consumption level, 500 kWh, six utility divisions, five June snapshots; rates rounded to the cent.",
+    status: 'excluded', reason: 'Excluded under the cautious reading: the site\'s footer and the state portal\'s terms say "All rights reserved," read here as restricting reuse until the Commission says otherwise.',
   },
   {
     state: "IA", publisher: "Iowa Utilities Commission (formerly Iowa Utilities Board)", title: null,
@@ -246,7 +246,7 @@ export default [
     state: "PA", publisher: "Pennsylvania Public Utility Commission", title: "Rate Comparison Report (2026)",
     url: "https://www.puc.pa.gov/media/3901/rate_comparison_report_2026.pdf", checked: '2026-11-21', asOf: "Report dated 2026-04-15; rates as of 2026-01-31 (default service, non-shoppers)",
     terms: { url: "https://www.puc.pa.gov/", says: "© PUC All Rights Reserved" },
-    status: "not extracted", reason: "Statutory annual report with an 'Electric Utilities Comparison' table of monthly bills for 11 EDC rate areas plus per-utility component breakdowns; only a plain 'All Rights Reserved' footer was found (pa.gov privacy policy linked from the footer only says 'We cannot authorize the use of copyrighted materials contained in external websites'), so not excluded. Format: Text PDF (pdftotext -layout extracts cleanly); residential 500 kWh and residential heating 2,000 kWh, plus commercial/industrial at 1,000/10,000/200,000/400,000 kWh with demand, and LED street lighting",
+    status: 'excluded', reason: 'Excluded under the cautious reading: the site\'s only terms are its footer, "All Rights Reserved," read here as restricting reuse until the Commission says otherwise.',
   },
   {
     state: "RI", publisher: "Rhode Island Public Utilities Commission", title: "Rhode Island Energy Electric Bill: Residential and Commercial Billing by Component, April 2026",
@@ -258,7 +258,7 @@ export default [
     state: "SC", publisher: "South Carolina Office of Regulatory Staff", title: "Historical Residential Bills (Avg. Bill for 1000 kWh), one PDF per utility: Duke Energy Carolinas Schedule RS, Duke Energy Progress Schedule RES, Dominion Energy South Carolina Rate 8",
     url: "https://ors.sc.gov/sites/scors/files/Documents/2026/regulated-utilities/electric-%26-natural-gas/electric/historical-electric-residential-bills/duke-energy-carolinas-rate-history-schedule-rs-2026-11-01.pdf", checked: '2026-11-21', asOf: "Latest entries: DEC 11/01/2026 ($163.17), DEP 09/01/2026 ($168.59), DESC 07/01/2026 ($171.35)",
     terms: { url: "https://ors.sc.gov/disclaimer", says: "While the ORS attempts to keep such information accurate and up-to-date, it does not warrant the authenticity or reliability of such information. ... Information is subject to being changed without notice. [footer: 'Copyright © State of South Carolina']" },
-    status: "not extracted", reason: "ORS (the SC PSC page just links to ORS) publishes a 7-year history of each IOU's average residential bill at 1,000 kWh with effective dates; it is a single consumption level, split across three PDFs rather than one comparison table; the disclaimer has no reuse restriction, only a plain copyright footer. Format: Text PDFs (machine-extractable), one per utility, single level 1,000 kWh, with effective date and reason for each change. Other two URLs: https://ors.sc.gov/sites/scors/files/Documents/2026/regulated-utilities/electric-%26-natural-gas/electric/historical-electric-residential-bills/duke-energy-progress-rate-history-schedule-res-2026-09-01.pdf and https://ors.sc.gov/sites/scors/files/Documents/2026/regulated-utilities/electric-%26-natural-gas/documents/Dominion_Energy_SC_Rate_History_Rate_8.pdf; index page https://ors.sc.gov/regulated-utilities/electric-natural-gas/electric/historical-electric-residential-bills",
+    status: 'excluded', reason: 'Excluded under the cautious reading: the page carries "Copyright © State of South Carolina" and no grant of reuse, read here as restricting reuse until the Office of Regulatory Staff says otherwise.',
   },
   {
     state: "SD", publisher: "South Dakota Public Utilities Commission", title: null,
