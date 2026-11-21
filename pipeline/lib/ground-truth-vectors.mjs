@@ -41,6 +41,8 @@ export function classifyLine(label, rate, at) {
  * @param {any[]} rows one ground-truth document's rows for one schedule, every level
  */
 export function scheduleTariff(rows) {
+  // From one consumption level, a charge billed per month and one billed per kWh look the same.
+  if (new Set(rows.map((r) => r.kwh)).size < 2 && rows[0].lines.some((l) => l.rate === null)) return { why: ['the publication gives one consumption level and no rates, so charges per month and per kWh cannot be told apart'] };
   const at = (j) => rows.map((r) => ({ kwh: r.kwh, amount: r.lines[j].amount }));
   const tariff = { seasons: [], charges: [] };
   const why = []; const zero = []; const lines = [];

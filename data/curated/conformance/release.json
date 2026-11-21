@@ -30,7 +30,7 @@
     "states": [
       "LA"
     ],
-    "untestable": 8
+    "untestable": 11
   },
   "vectors": [
     "la-beauregard-rs-2026-11-250kwh",
@@ -59,6 +59,30 @@
     "la-slemco-05-2026-11-5000kwh"
   ],
   "untestable": [
+    {
+      "state": "KS",
+      "utility": "Empire",
+      "schedule": "Residential",
+      "why": [
+        "the publication gives one consumption level and no rates, so charges per month and per kWh cannot be told apart"
+      ]
+    },
+    {
+      "state": "KS",
+      "utility": "Evergy Metro",
+      "schedule": "Residential",
+      "why": [
+        "the publication gives one consumption level and no rates, so charges per month and per kWh cannot be told apart"
+      ]
+    },
+    {
+      "state": "KS",
+      "utility": "Evergy Central",
+      "schedule": "Residential",
+      "why": [
+        "the publication gives one consumption level and no rates, so charges per month and per kWh cannot be told apart"
+      ]
+    },
     {
       "state": "LA",
       "utility": "CLAIBORNE",

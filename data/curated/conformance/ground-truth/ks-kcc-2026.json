@@ -1,0 +1,139 @@
+{
+  "document": {
+    "publisher": "Kansas Corporation Commission",
+    "title": "2026 Utilities and Common Carriers Report: Residential Electric Bill Comparison, July 2024 - June 2025",
+    "url": "https://www.kcc.ks.gov/images/PDFs/legislative-reports/2026%20Utilities%20%20Common%20Carriers%20Report.pdf",
+    "retrieved": "2026-11-21",
+    "sha256": "02d14e0f8a2a961fdd0b1d0acbdd8aef774d2afca357229bbf8992308a29e099",
+    "asOf": "2025-06-30",
+    "service": "Residential",
+    "taxes": "excluded",
+    "assumptions": "Monthly bills at the average residential use of 899 kWh over July 2024 to June 2025, itemized by charge; the total is the bill without tax, as the table labels it.",
+    "terms": "A Kansas public record; the report states no restriction on reuse. Only the figures are kept here, each with its page."
+  },
+  "extraction": {
+    "methods": [
+      "layout text, line by line",
+      "word positions on each company's row"
+    ],
+    "figures": 3,
+    "agreed": 3,
+    "disagreed": 0,
+    "disagreementRate": 0
+  },
+  "excluded": [],
+  "rows": [
+    {
+      "page": 34,
+      "utility": "Empire",
+      "schedule": "Residential",
+      "kwh": 899,
+      "bill": 120.39,
+      "lines": [
+        {
+          "label": "Customer Charge",
+          "rate": null,
+          "amount": 14.25
+        },
+        {
+          "label": "Energy Charge",
+          "rate": null,
+          "amount": 55.61
+        },
+        {
+          "label": "ECA",
+          "rate": null,
+          "amount": 21.1
+        },
+        {
+          "label": "Winter Storm Uri",
+          "rate": null,
+          "amount": 5.09
+        },
+        {
+          "label": "Transmission Delivery Charge",
+          "rate": null,
+          "amount": 22.7
+        },
+        {
+          "label": "Property Tax Surcharge",
+          "rate": null,
+          "amount": 1.64
+        }
+      ]
+    },
+    {
+      "page": 34,
+      "utility": "Evergy Metro",
+      "schedule": "Residential",
+      "kwh": 899,
+      "bill": 119.55,
+      "lines": [
+        {
+          "label": "Customer Charge",
+          "rate": null,
+          "amount": 14.25
+        },
+        {
+          "label": "Energy Charge",
+          "rate": null,
+          "amount": 75.51
+        },
+        {
+          "label": "ECA",
+          "rate": null,
+          "amount": 19.32
+        },
+        {
+          "label": "Transmission Delivery Charge",
+          "rate": null,
+          "amount": 8.98
+        },
+        {
+          "label": "Property Tax Surcharge",
+          "rate": null,
+          "amount": 1.49
+        }
+      ]
+    },
+    {
+      "page": 34,
+      "utility": "Evergy Central",
+      "schedule": "Residential",
+      "kwh": 899,
+      "bill": 139.3,
+      "lines": [
+        {
+          "label": "Customer Charge",
+          "rate": null,
+          "amount": 15.25
+        },
+        {
+          "label": "Energy Charge",
+          "rate": null,
+          "amount": 81.19
+        },
+        {
+          "label": "ECA",
+          "rate": null,
+          "amount": 19.81
+        },
+        {
+          "label": "Energy Efficiency Rider",
+          "rate": null,
+          "amount": 1.54
+        },
+        {
+          "label": "Transmission Delivery Charge",
+          "rate": null,
+          "amount": 20.96
+        },
+        {
+          "label": "Property Tax Surcharge",
+          "rate": null,
+          "amount": 0.55
+        }
+      ]
+    }
+  ]
+}

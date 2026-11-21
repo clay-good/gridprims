@@ -114,7 +114,7 @@ export default [
     state: "KS", publisher: "Kansas Corporation Commission", title: "2026 Utilities and Common Carriers Report: Residential Electric Bill Comparison | July 2024 - June 2025",
     url: "https://www.kcc.ks.gov/images/PDFs/legislative-reports/2026%20Utilities%20%20Common%20Carriers%20Report.pdf", checked: '2026-11-21', asOf: "July 2024 - June 2025 (averages; report dated 2026)",
     terms: null,
-    status: "not extracted", reason: "Opened the 2026 report (page 32-33): a table of monthly residential bills for Empire (Liberty), Evergy Metro and Evergy Central at 899 kWh with component breakdown, KS weighted average and national average; no terms-of-use or disclaimer page found on kcc.ks.gov (footer has only Site Map, Accessibility, Contact Us, Subscribe). Format: Text PDF (pdftotext extracts the table); single consumption level, 899 kWh/month, three investor-owned utilities with customer charge, energy charge, ECA, riders, taxes, total bill, cost per kWh. Similar table also in the 2024 FY In Review PDF.",
+    status: 'used', file: 'ks-kcc-2026.json', reason: 'Monthly bills at the average residential use of 899 kWh for Empire, Evergy Metro, and Evergy Central over July 2024 to June 2025, itemized by charge, read twice by independent methods and checked against their own totals.',
   },
   {
     state: "KY", publisher: "Kentucky Public Service Commission", title: null,
