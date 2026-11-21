@@ -19,8 +19,13 @@ import { resolveExplainer } from './entities/explainers.mjs';
 import { explainerPage, explainerPath } from './templates/explainer.mjs';
 import { LINKS_PATH, programLinksPage } from './templates/program-links.mjs';
 import { RELEASES_DIR, changelog as vectorChangelogOf, releaseFile } from '../pipeline/lib/vector-releases.mjs';
-import { GROUND_TRUTH_PATH, checkPublications, coverage as groundTruthCoverage, groundTruthCsv, groundTruthJson, loadGroundTruth } from './entities/ground-truth.mjs';
+import { GROUND_TRUTH_PATH, LIMITS, checkPublications, coverage as groundTruthCoverage, groundTruthCsv, groundTruthJson, loadGroundTruth } from './entities/ground-truth.mjs';
 import { groundTruthPage } from './templates/ground-truth.mjs';
+import { readShard } from '../core/lib/shard.mjs';
+import { SCORECARD_PATH, scorecardPage } from './templates/scorecard.mjs';
+import { engineRow, scorecard } from '../pipeline/lib/scorecard.mjs';
+import { runVector } from '../core/lib/run-vector.mjs';
+import URDB_CROSSWALK from '../data/curated/conformance/urdb-crosswalk.mjs';
 import { OURS as COHORT_CHOICES, cohortTable } from '../core/lib/reliability-peers.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
 import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
@@ -328,6 +333,16 @@ export async function build(opts = {}) {
   if (vectorChangelog.length) copyFileSync(join(ROOT, RELEASES_DIR, releaseFile(vectorChangelog.at(-1).version)), join(outDir, GROUND_TRUTH_PATH, 'vectors.json'));
   writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'ground-truth.csv'), groundTruthCsv(groundTruth));
   writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'ground-truth.json'), JSON.stringify(groundTruthJson(groundTruth, gtCoverage), null, 2) + '\n');
+  // The accuracy scorecard: URDB's records and our engine against the same commission bills, no composite score.
+  const urdbVersion = JSON.parse(readFileSync(join(ROOT, 'data/urdb/current.json'), 'utf8')).version;
+  const crossStates = [...new Set(URDB_CROSSWALK.map((c) => c.state))];
+  const urdbRecords = new Map(crossStates.flatMap((st) => readShard(readFileSync(join(ROOT, 'data/urdb', urdbVersion, 'rates', `${st}.bin`))).rows()).map((r) => [r.label, r]));
+  const card = scorecard(groundTruth, URDB_CROSSWALK, urdbRecords, JSON.parse(readFileSync(join(ROOT, 'data/curated/conformance/scorecard-findings.json'), 'utf8')));
+  const releaseVectors = vectorChangelog.length ? JSON.parse(readFileSync(join(ROOT, RELEASES_DIR, releaseFile(vectorChangelog.at(-1).version)), 'utf8')).vectors : [];
+  const engineCounts = engineRow(releaseVectors, runVector, vectorRelease.untestable);
+  const scVersions = { urdb: urdbVersion, vectors: vectorChangelog.at(-1)?.version ?? null };
+  write(SCORECARD_PATH, scorecardPage({ card, engine: engineCounts, versions: scVersions, i18n }));
+  writeFileSync(join(outDir, SCORECARD_PATH, 'scorecard.json'), JSON.stringify({ license: 'CC BY 4.0', limits: LIMITS, versions: scVersions, margin: 'within 0.5% of the published bill or $1.00, whichever is larger', counts: card.counts, engine: engineCounts, entries: card.entries, untestable: card.untestable }, null, 2) + '\n');
   // The glossary, as a page and as data agents read with the same words.
   write(GLOSSARY_PATH, glossaryPage({ entries: GLOSSARY, tools: TOOLS, i18n }));
   writeFileSync(join(outDir, 'learn/glossary/glossary.json'), JSON.stringify({ license: 'CC BY 4.0', publisher: 'gridprims', note: 'Entries adapted from the EIA glossary (a public-domain U.S. government work) say so.', entries: GLOSSARY }, null, 2) + '\n');

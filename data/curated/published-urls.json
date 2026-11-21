@@ -90,6 +90,7 @@
   "/data/eia-930/",
   "/data/ghcn-daily/",
   "/data/ground-truth/",
+  "/data/ground-truth/scorecard/",
   "/data/lbnl-queued-up/",
   "/data/nlr-sharing-the-sun/",
   "/data/pudl-ferc1/",
