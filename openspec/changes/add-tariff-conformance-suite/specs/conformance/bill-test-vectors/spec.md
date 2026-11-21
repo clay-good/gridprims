@@ -63,7 +63,7 @@ The suite SHALL be runnable on the device from the site, so a visitor can see th
 - **THEN** every case executes on their device and shows pass, fail, or skipped with the expected and computed values
 
 ### Requirement: Coverage is stated, not implied
-Each release SHALL publish how many vectors exercise each charge type (fixed, tiered energy, seasonal energy, time-of-use energy, flat demand, time-of-use demand, ratchet, power factor, minimum bill, rider) and SHALL state plainly which types have no coverage.
+Each release SHALL publish how many vectors exercise each charge type (fixed, flat energy, tiered energy, seasonal energy, time-of-use energy, flat demand, time-of-use demand, ratchet, power factor, minimum bill, rider) and SHALL state plainly which types have no coverage.
 
 #### Scenario: Uncovered charge type
 - **WHEN** no vector exercises a ratchet

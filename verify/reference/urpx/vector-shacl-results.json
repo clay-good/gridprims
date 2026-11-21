@@ -1,0 +1,53 @@
+{
+  "urpx": {
+    "tag": "v0.5.1",
+    "commit": "78e6a93d7eb288332fd4f02c74389a2c25b8bd7d",
+    "shacl_sha256": "aba85cd807d89273c716ec58c61e16f22d722633a1ba4f4c34649d76db9abce6",
+    "ontology_sha256": "3a9c68307ce7d308baaf88fa4e3d691953bd7e7d483002acf8297e8e15dea804",
+    "context_sha256": "50704dade0d182e4e494ec8126c51db1bba33e2c53e64f3b260c76a20429ced4"
+  },
+  "pyshacl": "0.30.1",
+  "rdflib": "7.6.0",
+  "cases": {
+    "la-beauregard-rs": {
+      "sha256": "68b66bd88ec47b015ca1a23374004af1f85bff83e5c5adde955f990b92897deb",
+      "conforms": true,
+      "triples": 102
+    },
+    "la-concordia-a": {
+      "sha256": "6da5c3cd829c507f84da0dbac7abb13a1fa98ebdf60bfc371ee72590a7171e00",
+      "conforms": true,
+      "triples": 129
+    },
+    "la-jefferson-davis-a": {
+      "sha256": "a92c7008bb6a466a0e31be4bf45e126e3b830d394361c1f5b74c23e3848b5645",
+      "conforms": true,
+      "triples": 115
+    },
+    "la-northeast-a": {
+      "sha256": "d9a0bc20e54d973602dd6f6cb2a2e9a569a820fbd1a25908c696fc4f7989441b",
+      "conforms": true,
+      "triples": 102
+    },
+    "la-panola-harrison-r": {
+      "sha256": "0463ad9f809306cdfc38b7a22a553e518fc9a0163742425290090db899428a18",
+      "conforms": true,
+      "triples": 102
+    },
+    "la-pointe-coupee-100-101": {
+      "sha256": "087dbb23eba2e60fdc562f1969d6f7cd51fbec070c304f3a19a26f3d9851d777",
+      "conforms": true,
+      "triples": 129
+    },
+    "la-slemco-01": {
+      "sha256": "2be66a8dfb1326074d8eac3e892dfdd90d1769d530991c24e088efcf46abf0f4",
+      "conforms": true,
+      "triples": 128
+    },
+    "la-slemco-05": {
+      "sha256": "99bae51361f7df7da79fa2e528e100426efd8a72643d917140b542fc838956f3",
+      "conforms": true,
+      "triples": 128
+    }
+  }
+}

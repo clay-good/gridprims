@@ -38,7 +38,7 @@ test('charge types declared: a fixed charge and tiered energy declare those two 
   assert.match(problems({ chargeTypes: ['fixed', 'tiered-energy', 'flat-demand'] }), /declares flat-demand, but no expected line exercises it/);
   assert.match(problems({ chargeTypes: ['fixed'] }), /exercises tiered-energy, which the vector does not declare/);
   assert.match(problems({ chargeTypes: ['fixed', 'tiered-energy', 'demand'] }), /"demand" is not a charge type the suite counts/);
-  assert.equal(CHARGE_TYPES.length, 10);
+  assert.equal(CHARGE_TYPES.length, 11);
 });
 
 test('accepted sources: each of the four kinds passes with its citation, and is named when a field is missing', () => {

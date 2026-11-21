@@ -18,7 +18,7 @@ import EXPLAINERS from '../data/curated/explainers/index.mjs';
 import { resolveExplainer } from './entities/explainers.mjs';
 import { explainerPage, explainerPath } from './templates/explainer.mjs';
 import { LINKS_PATH, programLinksPage } from './templates/program-links.mjs';
-import { GROUND_TRUTH_PATH, checkPublications, coverage as groundTruthCoverage, groundTruthCsv, groundTruthJson, loadGroundTruth } from './entities/ground-truth.mjs';
+import { GROUND_TRUTH_PATH, LIMITS, checkPublications, coverage as groundTruthCoverage, groundTruthCsv, groundTruthJson, loadGroundTruth } from './entities/ground-truth.mjs';
 import { groundTruthPage } from './templates/ground-truth.mjs';
 import { OURS as COHORT_CHOICES, cohortTable } from '../core/lib/reliability-peers.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
@@ -317,7 +317,10 @@ export async function build(opts = {}) {
   if (publicationProblems.length) throw new Error(`conformance publications:\n${publicationProblems.join('\n')}`);
   const groundTruth = loadGroundTruth(ROOT);
   const gtCoverage = groundTruthCoverage(groundTruth);
-  write(GROUND_TRUTH_PATH, groundTruthPage({ documents: groundTruth, coverage: gtCoverage, i18n }));
+  const vectorRelease = JSON.parse(readFileSync(join(ROOT, 'data/curated/conformance/release.json'), 'utf8'));
+  write(GROUND_TRUTH_PATH, groundTruthPage({ documents: groundTruth, coverage: gtCoverage, release: vectorRelease, i18n }));
+  const vectorDir = join(ROOT, 'data/curated/conformance/vectors');
+  writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'vectors.json'), JSON.stringify({ ...vectorRelease, limits: LIMITS, vectors: vectorRelease.vectors.map((id) => JSON.parse(readFileSync(join(vectorDir, `${id}.json`), 'utf8'))) }) + '\n');
   writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'ground-truth.csv'), groundTruthCsv(groundTruth));
   writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'ground-truth.json'), JSON.stringify(groundTruthJson(groundTruth, gtCoverage), null, 2) + '\n');
   // The glossary, as a page and as data agents read with the same words.

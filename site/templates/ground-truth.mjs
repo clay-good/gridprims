@@ -7,11 +7,12 @@ import { html } from '../lib/html.mjs';
 import { layout } from './layout.mjs';
 import { pageTitle } from '../lib/meta.mjs';
 import { GROUND_TRUTH_PATH } from '../entities/ground-truth.mjs';
+import { REPO_URL } from '../config.mjs';
 
 const usd = (n) => (n == null ? '' : n.toFixed(2));
 
-/** @param {{documents: any[], coverage: ReturnType<typeof import('../entities/ground-truth.mjs').coverage>, i18n: any}} p */
-export function groundTruthPage({ documents, coverage, i18n }) {
+/** @param {{documents: any[], coverage: ReturnType<typeof import('../entities/ground-truth.mjs').coverage>, release?: any, i18n: any}} p */
+export function groundTruthPage({ documents, coverage, release = null, i18n }) {
   const { t, date } = i18n;
   const { totals, extraction } = coverage;
   const pct = (x) => `${(x * 100).toFixed(1)}%`;
@@ -41,6 +42,18 @@ ${d.excluded.length ? html`<p>${t('gt.excluded')}</p><ul>${d.excluded.map((x) =>
 <p data-error-rate>${t('gt.errorRate', { figures: extraction.figures, disagreed: extraction.disagreed, rate: pct(extraction.rate) })}</p>
 <p><a href="${GROUND_TRUTH_PATH}ground-truth.csv" download>${t('gt.download')}</a> <a href="${GROUND_TRUTH_PATH}ground-truth.json">${t('gt.downloadJson')}</a> ${t('gt.license')}</p>
 ${documents.map(doc)}
+${release ? html`<section data-vectors>
+<h2 id="vectors">${t('gt.vectors')}</h2>
+<p class="strip" data-limits>${t('gt.limits')}</p>
+<p>${t('gt.vectorsIntro', { vectors: release.coverage.vectors, schedules: release.coverage.schedules, untestable: release.coverage.untestable })}</p>
+<div class="table-wrap"><table data-vector-coverage><caption>${t('gt.vectorsCaption')}</caption>
+<thead><tr><th scope="col">${t('gt.chargeType')}</th><th scope="col" class="num">${t('gt.vectorCount')}</th></tr></thead>
+<tbody>${Object.entries(release.coverage.byChargeType).map(([type, n]) => html`<tr data-charge-type="${type}"><th scope="row">${t(`gt.type.${type}`)}</th><td class="num mono">${n}</td></tr>`)}</tbody>
+</table></div>
+${release.coverage.uncovered.length ? html`<p data-uncovered>${t('gt.uncovered', { types: release.coverage.uncovered.map((x) => t(`gt.type.${x}`)).join(', ') })}</p>` : ''}
+${release.untestable.length ? html`<details><summary>${t('gt.untestable', { n: release.untestable.length })}</summary><ul>${release.untestable.map((u) => html`<li data-untestable>${u.utility}, ${u.schedule}: ${u.why.join('; ')}</li>`)}</ul></details>` : ''}
+<p><a href="${GROUND_TRUTH_PATH}vectors.json">${t('gt.vectorsDownload')}</a> <a href="${REPO_URL}/blob/main/docs/formats/bill-test-vector.md">${t('gt.vectorsFormat')}</a></p>
+</section>` : ''}
 <section>
 <h2 id="coverage">${t('gt.coverage')}</h2>
 <p class="strip" data-limits>${t('gt.limits')}</p>

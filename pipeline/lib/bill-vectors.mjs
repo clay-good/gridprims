@@ -8,7 +8,7 @@
 import { PERSONAL } from './curated.mjs';
 
 /** The charge types the suite counts coverage by, in the order the coverage table lists them. */
-export const CHARGE_TYPES = ['fixed', 'tiered-energy', 'seasonal-energy', 'tou-energy', 'flat-demand', 'tou-demand', 'ratchet', 'power-factor', 'minimum-bill', 'rider'];
+export const CHARGE_TYPES = ['fixed', 'flat-energy', 'tiered-energy', 'seasonal-energy', 'tou-energy', 'flat-demand', 'tou-demand', 'ratchet', 'power-factor', 'minimum-bill', 'rider'];
 
 /** Where an expected bill may come from, and the citation fields each needs. */
 export const PROVENANCE = {
@@ -55,7 +55,10 @@ export function checkVector(v) {
   }
   if (money(v.expected?.total) && lines.length && lines.every(money)) {
     const sum = lines.reduce((s, l) => s + l.amount, 0);
-    need(Math.abs(sum - v.expected.total.amount) < 0.005, `the expected lines sum to $${sum.toFixed(2)}, not the expected total of $${v.expected.total.amount.toFixed(2)}`);
+    // A publisher that rounds its total from unrounded charges may print lines that miss it by up to half a
+    // cent each; a vector says so in expected.rounding, and nothing wider is accepted.
+    const slack = present(v.expected.rounding) ? lines.length * 0.005 + 1e-9 : 0.005;
+    need(Math.abs(sum - v.expected.total.amount) < slack, `the expected lines sum to $${sum.toFixed(2)}, not the expected total of $${v.expected.total.amount.toFixed(2)}${present(v.expected.rounding) ? ', more than half a cent a line' : ''}`);
   }
 
   // The tolerance, with its unit.

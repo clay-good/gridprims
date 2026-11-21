@@ -14,6 +14,11 @@
       "conforms": true,
       "triples": 85
     },
+    "riders": {
+      "sha256": "ba956662b6d887f80aef14b02d745160131cd279fc949bb5d58af0f445263dcf",
+      "conforms": true,
+      "triples": 125
+    },
     "seasonal": {
       "sha256": "9becd9bfa82d39fa26c86df5b80ceb7a08123052073be531cb871080308314bb",
       "conforms": true,

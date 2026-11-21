@@ -34,6 +34,8 @@ export function chargeTypesOf(t) {
   const rates = new Set(t.seasons.map((s) => JSON.stringify(s.tiers ?? s.periods)));
   if (rates.size > 1) types.push('seasonal-energy');
   if (t.minimumMonthly) types.push('minimum-bill');
+  if (t.charges?.length) types.push('rider');
+  if (!types.some((x) => x.endsWith('-energy')) && t.seasons.length && t.seasons.every((s) => s.tiers?.length === 1)) types.push('flat-energy');
   return types;
 }
 
@@ -85,6 +87,15 @@ export function toUrpx(t, meta, { schedule } = {}) {
     if (!fixed) ledgers.push({ '@type': 'urpx:Ledger', '@id': id('ledger-service'), 'urpx:name': 'Service Price', 'urpx:ledgerType': ref('urpx:bundledLedger'), 'urpx:referencesMetricInput': ref(id('mi-meter-count')), 'urpx:hasCalculationMethod': { '@type': 'urpx:CalculationMethod', 'urpx:intervalDuration': 'P1M' } });
     definitions.push({ '@type': 'urpx:PriceDefinition', '@id': id('pd-minimum'), 'urpx:name': 'Minimum Bill', 'urpx:chargeType': ref('urpx:minimumBill'), 'urpx:chargeCategory': ref('urpx:serviceCharge'), 'urpx:billPortion': ref('urpx:bundledPortion'), 'urpx:baseQuantity': '1', 'urpx:referencesLedger': ref(id('ledger-service')) });
     prices.push({ '@type': 'urpx:Price', '@id': id('price-minimum'), 'urpx:referencesPriceDefinition': ref(id('pd-minimum')), 'urpx:name': 'Minimum Bill', 'urpx:startDate': meta.effective, 'urpx:unitPrice': String(t.minimumMonthly) });
+  }
+  // Riders: each named charge per kWh on the energy ledger, or per month on the service ledger, in URPX's
+  // adjustment category, with the charge type the record names (a power cost adjustment, a fuel charge) or a
+  // tariff rider.
+  for (const [k, c] of (t.charges ?? []).entries()) {
+    const monthly = c.perKwh === undefined;
+    if (monthly && !ledgers.some((l) => l['@id'] === id('ledger-service'))) ledgers.push({ '@type': 'urpx:Ledger', '@id': id('ledger-service'), 'urpx:name': 'Service Price', 'urpx:ledgerType': ref('urpx:bundledLedger'), 'urpx:referencesMetricInput': ref(id('mi-meter-count')), 'urpx:hasCalculationMethod': { '@type': 'urpx:CalculationMethod', 'urpx:intervalDuration': 'P1M' } });
+    definitions.push({ '@type': 'urpx:PriceDefinition', '@id': id(`pd-rider-${k + 1}`), 'urpx:name': c.label, 'urpx:chargeType': ref(c.urpxType ?? 'urpx:tariffRider'), 'urpx:chargeCategory': ref('urpx:adjustment'), 'urpx:billPortion': ref('urpx:bundledPortion'), ...(monthly ? { 'urpx:baseQuantity': '1' } : {}), 'urpx:referencesLedger': ref(id(monthly ? 'ledger-service' : 'ledger-energy')) });
+    prices.push({ '@type': 'urpx:Price', '@id': id(`price-rider-${k + 1}`), 'urpx:referencesPriceDefinition': ref(id(`pd-rider-${k + 1}`)), 'urpx:name': c.label, 'urpx:startDate': meta.effective, 'urpx:unitPrice': String(monthly ? c.monthly : c.perKwh) });
   }
   // Time-of-use: one URPX tier per period of the schedule, and in it one URPX period per season that uses it,
   // with the hours as time brackets (all days when weekdays and weekends match, else each on its own).
@@ -143,14 +154,14 @@ export function toUrpx(t, meta, { schedule } = {}) {
     'urpx:serviceRole': ref('urpx:bundledServiceRole'), 'urpx:forRatePlan': ref(id('plan')),
     // We write what our engine's record holds, not the whole tariff sheet, so completeness is not claimed.
     'urpx:changeReason': ref('urpx:changeReasonOther'),
-    'urpx:hasCoverageClaim': { '@type': 'urpx:CoverageClaim', '@id': id('coverage'), 'urpx:completenessResult': ref('urpx:unknown'), 'urpx:selfContained': true, 'urpx:explainedBy': { '@type': 'urpx:Evaluation', '@id': id('evaluation'), 'urpx:description': 'Written by gridprims from the tariff record its bill engine prices: the fixed charge, any monthly minimum, and energy by season, tier, and time-of-use period. Riders, taxes, and anything else on the tariff sheet that the record does not hold are not included, so completeness is not claimed.' } },
+    'urpx:hasCoverageClaim': { '@type': 'urpx:CoverageClaim', '@id': id('coverage'), 'urpx:completenessResult': ref('urpx:unknown'), 'urpx:selfContained': true, 'urpx:explainedBy': { '@type': 'urpx:Evaluation', '@id': id('evaluation'), 'urpx:description': t.charges?.length ? 'Written by gridprims from the tariff record its bill engine prices: the fixed charge, any monthly minimum, energy by season, tier, and time-of-use period, and the riders the record names, per kWh or per month. Taxes and anything else on the tariff sheet that the record does not hold are not included, so completeness is not claimed.' : 'Written by gridprims from the tariff record its bill engine prices: the fixed charge, any monthly minimum, and energy by season, tier, and time-of-use period. Riders, taxes, and anything else on the tariff sheet that the record does not hold are not included, so completeness is not claimed.' } },
     ...(meta.source ? { 'urpx:hasDataSourceReference': { '@type': 'urpx:DataSourceReference', 'urpx:url': meta.source.url, 'urpx:dateRetrieved': meta.source.retrieved } } : {}),
     'urpx:hasPlanElements': {
       '@type': 'urpx:PlanElements',
       ...(many ? { 'urpx:hasSeasons': t.seasons.map((s, i) => ({ '@type': 'urpx:Season', '@id': seasonId(i), 'urpx:seasonName': s.name, 'urpx:month': months[i] })) } : {}),
       'urpx:hasMetricInput': [
         { '@type': 'urpx:MetricInput', '@id': id('mi-energy'), 'urpx:name': 'kWh Energy Consumption', 'urpx:metricInputType': ref('urpx:measuredMetricInput'), 'urpx:hasMetricSpecification': { '@type': 'urpx:MetricSpecification', '@id': id('ms-energy'), 'urpx:measurementKind': ref('urpx:energy'), 'urpx:unitOfMeasure': ref('urpx:kWh') } },
-        ...(fixed || t.minimumMonthly ? [{ '@type': 'urpx:MetricInput', '@id': id('mi-meter-count'), 'urpx:name': 'Per Meter', 'urpx:metricInputType': ref('urpx:profileMetricInput'), 'urpx:profileMetricProperty': ref('urpx:meterCount') }] : []),
+        ...(fixed || t.minimumMonthly || t.charges?.some((c) => c.perKwh === undefined) ? [{ '@type': 'urpx:MetricInput', '@id': id('mi-meter-count'), 'urpx:name': 'Per Meter', 'urpx:metricInputType': ref('urpx:profileMetricInput'), 'urpx:profileMetricProperty': ref('urpx:meterCount') }] : []),
       ],
       'urpx:hasBillingModel': { '@type': 'urpx:BillingModel', ...(touSchedule ? { 'urpx:hasTOUSchedule': touSchedule } : {}), 'urpx:hasLedger': ledgers, 'urpx:hasPriceDefinition': definitions, ...(serviceTiers.length ? { 'urpx:hasServiceTiers': serviceTiers } : {}) },
     },
@@ -172,7 +183,7 @@ const idOf = (x) => (x && typeof x === 'object' ? x['@id'] : x);
 
 /**
  * A URPX document read back into the bill engine's tariff, for the subset toUrpx writes: a fixed charge, a
- * monthly minimum, and energy by season and tier or by time-of-use period. Anything else on a price is named
+ * monthly minimum, energy by season and tier or by time-of-use period, and riders per kWh or per month. Anything else on a price is named
  * as unsupported rather than skipped, so a vector the engine cannot price is reported, not mispriced.
  * @param {any} doc
  * @returns {{tariff: any} | {error: string}}
@@ -197,6 +208,11 @@ export function fromUrpx(doc) {
       const daily = ledgers.get(idOf(d['urpx:referencesLedger']))?.['urpx:hasCalculationMethod']?.['urpx:intervalDuration'] === 'P1D';
       tariff[daily ? 'fixedDaily' : 'fixedMonthly'] = rate;
     } else if (type === 'urpx:minimumBill') tariff.minimumMonthly = rate;
+    else if (idOf(d?.['urpx:chargeCategory']) === 'urpx:adjustment') {
+      const ledger = ledgers.get(idOf(d['urpx:referencesLedger']));
+      const perMeter = ledger?.['urpx:hasCalculationMethod']?.['urpx:intervalDuration'] === 'P1M';
+      (tariff.charges ??= []).push({ label: p['urpx:name'], ...(perMeter ? { monthly: rate } : { perKwh: rate }), ...(type !== 'urpx:tariffRider' ? { urpxType: type } : {}) });
+    }
     else if (type === 'urpx:usageCharge') {
       const i = seasonFor(p);
       if (i === null) { unsupported.push(`${p['urpx:name']}: a season that is not defined`); continue; }

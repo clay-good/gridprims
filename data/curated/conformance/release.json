@@ -1,0 +1,150 @@
+{
+  "license": "CC BY 4.0",
+  "format": "https://github.com/clay-good/gridprims/blob/main/docs/formats/bill-test-vector.md",
+  "coverage": {
+    "vectors": 24,
+    "schedules": 8,
+    "byChargeType": {
+      "fixed": 24,
+      "flat-energy": 24,
+      "tiered-energy": 0,
+      "seasonal-energy": 0,
+      "tou-energy": 0,
+      "flat-demand": 0,
+      "tou-demand": 0,
+      "ratchet": 0,
+      "power-factor": 0,
+      "minimum-bill": 0,
+      "rider": 24
+    },
+    "uncovered": [
+      "tiered-energy",
+      "seasonal-energy",
+      "tou-energy",
+      "flat-demand",
+      "tou-demand",
+      "ratchet",
+      "power-factor",
+      "minimum-bill"
+    ],
+    "states": [
+      "LA"
+    ],
+    "untestable": 8
+  },
+  "vectors": [
+    "la-beauregard-rs-2026-11-250kwh",
+    "la-beauregard-rs-2026-11-1000kwh",
+    "la-beauregard-rs-2026-11-5000kwh",
+    "la-concordia-a-2026-11-250kwh",
+    "la-concordia-a-2026-11-1000kwh",
+    "la-concordia-a-2026-11-5000kwh",
+    "la-jefferson-davis-a-2026-11-250kwh",
+    "la-jefferson-davis-a-2026-11-1000kwh",
+    "la-jefferson-davis-a-2026-11-5000kwh",
+    "la-northeast-a-2026-11-250kwh",
+    "la-northeast-a-2026-11-1000kwh",
+    "la-northeast-a-2026-11-5000kwh",
+    "la-panola-harrison-r-2026-11-250kwh",
+    "la-panola-harrison-r-2026-11-1000kwh",
+    "la-panola-harrison-r-2026-11-5000kwh",
+    "la-pointe-coupee-100-101-2026-11-250kwh",
+    "la-pointe-coupee-100-101-2026-11-1000kwh",
+    "la-pointe-coupee-100-101-2026-11-5000kwh",
+    "la-slemco-01-2026-11-250kwh",
+    "la-slemco-01-2026-11-1000kwh",
+    "la-slemco-01-2026-11-5000kwh",
+    "la-slemco-05-2026-11-250kwh",
+    "la-slemco-05-2026-11-1000kwh",
+    "la-slemco-05-2026-11-5000kwh"
+  ],
+  "untestable": [
+    {
+      "state": "LA",
+      "utility": "CLAIBORNE",
+      "schedule": "Schedule A",
+      "why": [
+        "FRP Rider: its rate is printed as \"13.00%\", a percentage of other charges"
+      ]
+    },
+    {
+      "state": "LA",
+      "utility": "CLECO",
+      "schedule": "Schedule RS",
+      "why": [
+        "Rate Schedule SRCA: its rate is printed as \"**\", with the arithmetic in a footnote",
+        "TCJA Bill Credit: its rate is printed as \"***\", with the arithmetic in a footnote",
+        "Energy Transition Charge Adjustment: its rate is printed as \"****\", with the arithmetic in a footnote"
+      ]
+    },
+    {
+      "state": "LA",
+      "utility": "DEMCO",
+      "schedule": "Schedule R",
+      "why": [
+        "Delivery Charge: its rate is printed as \"*\", with the arithmetic in a footnote"
+      ]
+    },
+    {
+      "state": "LA",
+      "utility": "Entergy Louisiana",
+      "schedule": "Schedule RS-G (Legacy EGSL)",
+      "why": [
+        "FRP Rider: its rate is printed as \"100.6980%\", a percentage of other charges",
+        "Rider FSC-ELL-IV: its rate is printed as \"17.5102%\", a percentage of other charges",
+        "Rider FSC-ELL-V: its rate is printed as \"9.5262%\", a percentage of other charges",
+        "Rider SCO-I: its rate is printed as \"-0.5379%\", a percentage of other charges",
+        "Rider SCO-II: its rate is printed as \"-0.5466%\", a percentage of other charges",
+        "Rider SCO-III: its rate is printed as \"-0.2136%\", a percentage of other charges",
+        "Rider SCO-IV: its rate is printed as \"-1.6398%\", a percentage of other charges",
+        "Rider SCO-V: its rate is printed as \"-0.0881%\", a percentage of other charges",
+        "Resilience Plan Cost Recovery Rider: its rate is printed as \"7.9118%\", a percentage of other charges",
+        "Vegetation Management Rider Schedule: its rate is printed as \"2.5771%\", a percentage of other charges"
+      ]
+    },
+    {
+      "state": "LA",
+      "utility": "Entergy Louisiana",
+      "schedule": "Schedule RS-L (Legacy ELL)",
+      "why": [
+        "FRP Rider: its rate is printed as \"100.6980%\", a percentage of other charges",
+        "Rider FSC-ELL-IV: its rate is printed as \"17.5102%\", a percentage of other charges",
+        "Rider FSC-ELL-V: its rate is printed as \"9.5262%\", a percentage of other charges",
+        "Rider SCO I: its rate is printed as \"-0.4022%\", a percentage of other charges",
+        "Rider SCO II: its rate is printed as \"-0.2035%\", a percentage of other charges",
+        "Rider SCO III: its rate is printed as \"-0.4572%\", a percentage of other charges",
+        "Rider SCO IV: its rate is printed as \"-1.6398%\", a percentage of other charges",
+        "Rider SCO-V: its rate is printed as \"-0.0881%\", a percentage of other charges",
+        "Resilience Plan Cost Recovery Rider: its rate is printed as \"7.9118%\", a percentage of other charges",
+        "Vegetation Management Rider Schedule: its rate is printed as \"2.5771%\", a percentage of other charges"
+      ]
+    },
+    {
+      "state": "LA",
+      "utility": "SLECA",
+      "schedule": "Schedule A",
+      "why": [
+        "Formula Rate Plan Adjustment: its rate is printed as \"27.49%\", a percentage of other charges"
+      ]
+    },
+    {
+      "state": "LA",
+      "utility": "SWEPCO",
+      "schedule": "Schedule RS",
+      "why": [
+        "Energy Charge: its rate is printed as \"*\", with the arithmetic in a footnote",
+        "Formula Rate Plan Rider: its rate is printed as \"16.7858%\", a percentage of other charges",
+        "Storm Cost Recovery Rider: its rate is printed as \"8.4187%\", a percentage of other charges"
+      ]
+    },
+    {
+      "state": "LA",
+      "utility": "WASHINGTON-ST.TAMMANY",
+      "schedule": "Schedule A-5",
+      "why": [
+        "Energy Charge: its rate is printed as \"*\", with the arithmetic in a footnote",
+        "Formula Rate Plan Adjustment: its rate is printed as \"8.77%\", a percentage of other charges"
+      ]
+    }
+  ]
+}

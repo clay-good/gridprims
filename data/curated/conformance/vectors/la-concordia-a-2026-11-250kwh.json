@@ -1,0 +1,356 @@
+{
+  "id": "la-concordia-a-2026-11-250kwh",
+  "tariff": {
+    "format": "URPX",
+    "version": "v0.5.1",
+    "document": {
+      "@context": [
+        "https://urpx.org/ns/context/releases/v0.5.1/jsonld/urpx-context.jsonld",
+        {
+          "gp": "https://gridprims.com/urpx/"
+        }
+      ],
+      "@graph": [
+        {
+          "@type": "urpx:URPXPackage",
+          "@id": "gp:la-concordia-a-package",
+          "urpx:targetURPXVersion": "https://github.com/urpx-org/urpx/raw/v0.5.1/ontology/urpx-ontology.ttl",
+          "urpx:hasRatePlan": {
+            "@type": "urpx:RatePlan",
+            "@id": "gp:la-concordia-a-plan",
+            "urpx:ratePlanUniqueIdentifier": "la-concordia-a",
+            "urpx:name": "CONCORDIA, Schedule A",
+            "urpx:initialEffectiveDate": "2026-11-01",
+            "urpx:timezoneIdentifier": "America/Chicago"
+          }
+        },
+        {
+          "@type": "urpx:RatePlanVersion",
+          "@id": "gp:la-concordia-a-version",
+          "urpx:offeredBy": {
+            "@type": "urpx:UtilityOperator",
+            "@id": "gp:la-concordia-a-utility",
+            "urpx:legalName": "CONCORDIA",
+            "urpx:organizationType": {
+              "@id": "urpx:utilityOrganization"
+            }
+          },
+          "urpx:effectiveDateTime": "2026-11-01T00:00:00",
+          "urpx:priceCurrency": "USD",
+          "urpx:commodity": {
+            "@id": "urpx:electricity"
+          },
+          "urpx:serviceRole": {
+            "@id": "urpx:bundledServiceRole"
+          },
+          "urpx:forRatePlan": {
+            "@id": "gp:la-concordia-a-plan"
+          },
+          "urpx:changeReason": {
+            "@id": "urpx:changeReasonOther"
+          },
+          "urpx:hasCoverageClaim": {
+            "@type": "urpx:CoverageClaim",
+            "@id": "gp:la-concordia-a-coverage",
+            "urpx:completenessResult": {
+              "@id": "urpx:unknown"
+            },
+            "urpx:selfContained": true,
+            "urpx:explainedBy": {
+              "@type": "urpx:Evaluation",
+              "@id": "gp:la-concordia-a-evaluation",
+              "urpx:description": "Written by gridprims from the tariff record its bill engine prices: the fixed charge, any monthly minimum, energy by season, tier, and time-of-use period, and the riders the record names, per kWh or per month. Taxes and anything else on the tariff sheet that the record does not hold are not included, so completeness is not claimed."
+            }
+          },
+          "urpx:hasDataSourceReference": {
+            "@type": "urpx:DataSourceReference",
+            "urpx:url": "https://lpsc.louisiana.gov/docs/utilities/Comparisons/Electric/Residential-Electric-Bill-Comparison-November-2026.pdf",
+            "urpx:dateRetrieved": "2026-11-21"
+          },
+          "urpx:hasPlanElements": {
+            "@type": "urpx:PlanElements",
+            "urpx:hasMetricInput": [
+              {
+                "@type": "urpx:MetricInput",
+                "@id": "gp:la-concordia-a-mi-energy",
+                "urpx:name": "kWh Energy Consumption",
+                "urpx:metricInputType": {
+                  "@id": "urpx:measuredMetricInput"
+                },
+                "urpx:hasMetricSpecification": {
+                  "@type": "urpx:MetricSpecification",
+                  "@id": "gp:la-concordia-a-ms-energy",
+                  "urpx:measurementKind": {
+                    "@id": "urpx:energy"
+                  },
+                  "urpx:unitOfMeasure": {
+                    "@id": "urpx:kWh"
+                  }
+                }
+              },
+              {
+                "@type": "urpx:MetricInput",
+                "@id": "gp:la-concordia-a-mi-meter-count",
+                "urpx:name": "Per Meter",
+                "urpx:metricInputType": {
+                  "@id": "urpx:profileMetricInput"
+                },
+                "urpx:profileMetricProperty": {
+                  "@id": "urpx:meterCount"
+                }
+              }
+            ],
+            "urpx:hasBillingModel": {
+              "@type": "urpx:BillingModel",
+              "urpx:hasLedger": [
+                {
+                  "@type": "urpx:Ledger",
+                  "@id": "gp:la-concordia-a-ledger-energy",
+                  "urpx:name": "Energy Prices",
+                  "urpx:ledgerType": {
+                    "@id": "urpx:bundledLedger"
+                  },
+                  "urpx:referencesMetricInput": {
+                    "@id": "gp:la-concordia-a-mi-energy"
+                  }
+                },
+                {
+                  "@type": "urpx:Ledger",
+                  "@id": "gp:la-concordia-a-ledger-service",
+                  "urpx:name": "Service Price",
+                  "urpx:ledgerType": {
+                    "@id": "urpx:bundledLedger"
+                  },
+                  "urpx:referencesMetricInput": {
+                    "@id": "gp:la-concordia-a-mi-meter-count"
+                  },
+                  "urpx:hasCalculationMethod": {
+                    "@type": "urpx:CalculationMethod",
+                    "urpx:intervalDuration": "P1M"
+                  }
+                }
+              ],
+              "urpx:hasPriceDefinition": [
+                {
+                  "@type": "urpx:PriceDefinition",
+                  "@id": "gp:la-concordia-a-pd-energy",
+                  "urpx:name": "Energy Charge",
+                  "urpx:chargeType": {
+                    "@id": "urpx:usageCharge"
+                  },
+                  "urpx:chargeCategory": {
+                    "@id": "urpx:auxiliaryCharge"
+                  },
+                  "urpx:billPortion": {
+                    "@id": "urpx:bundledPortion"
+                  },
+                  "urpx:referencesLedger": {
+                    "@id": "gp:la-concordia-a-ledger-energy"
+                  }
+                },
+                {
+                  "@type": "urpx:PriceDefinition",
+                  "@id": "gp:la-concordia-a-pd-customer",
+                  "urpx:name": "Customer Charge",
+                  "urpx:chargeType": {
+                    "@id": "urpx:customerCharge"
+                  },
+                  "urpx:chargeCategory": {
+                    "@id": "urpx:serviceCharge"
+                  },
+                  "urpx:billPortion": {
+                    "@id": "urpx:bundledPortion"
+                  },
+                  "urpx:baseQuantity": "1",
+                  "urpx:referencesLedger": {
+                    "@id": "gp:la-concordia-a-ledger-service"
+                  }
+                },
+                {
+                  "@type": "urpx:PriceDefinition",
+                  "@id": "gp:la-concordia-a-pd-rider-1",
+                  "urpx:name": "Emergency Fund Reserve Rider",
+                  "urpx:chargeType": {
+                    "@id": "urpx:tariffRider"
+                  },
+                  "urpx:chargeCategory": {
+                    "@id": "urpx:adjustment"
+                  },
+                  "urpx:billPortion": {
+                    "@id": "urpx:bundledPortion"
+                  },
+                  "urpx:baseQuantity": "1",
+                  "urpx:referencesLedger": {
+                    "@id": "gp:la-concordia-a-ledger-service"
+                  }
+                },
+                {
+                  "@type": "urpx:PriceDefinition",
+                  "@id": "gp:la-concordia-a-pd-rider-2",
+                  "urpx:name": "Capital Improvement Rider",
+                  "urpx:chargeType": {
+                    "@id": "urpx:tariffRider"
+                  },
+                  "urpx:chargeCategory": {
+                    "@id": "urpx:adjustment"
+                  },
+                  "urpx:billPortion": {
+                    "@id": "urpx:bundledPortion"
+                  },
+                  "urpx:referencesLedger": {
+                    "@id": "gp:la-concordia-a-ledger-energy"
+                  }
+                },
+                {
+                  "@type": "urpx:PriceDefinition",
+                  "@id": "gp:la-concordia-a-pd-rider-3",
+                  "urpx:name": "Wholesale Power Charge",
+                  "urpx:chargeType": {
+                    "@id": "urpx:adjustmentPowerCost"
+                  },
+                  "urpx:chargeCategory": {
+                    "@id": "urpx:adjustment"
+                  },
+                  "urpx:billPortion": {
+                    "@id": "urpx:bundledPortion"
+                  },
+                  "urpx:referencesLedger": {
+                    "@id": "gp:la-concordia-a-ledger-energy"
+                  }
+                }
+              ]
+            }
+          },
+          "urpx:hasPrices": {
+            "@type": "urpx:Prices",
+            "urpx:hasPrice": [
+              {
+                "@type": "urpx:Price",
+                "@id": "gp:la-concordia-a-price-customer",
+                "urpx:referencesPriceDefinition": {
+                  "@id": "gp:la-concordia-a-pd-customer"
+                },
+                "urpx:name": "Customer Charge",
+                "urpx:startDate": "2026-11-01",
+                "urpx:unitPrice": "15"
+              },
+              {
+                "@type": "urpx:Price",
+                "@id": "gp:la-concordia-a-price-rider-1",
+                "urpx:referencesPriceDefinition": {
+                  "@id": "gp:la-concordia-a-pd-rider-1"
+                },
+                "urpx:name": "Emergency Fund Reserve Rider",
+                "urpx:startDate": "2026-11-01",
+                "urpx:unitPrice": "2.21"
+              },
+              {
+                "@type": "urpx:Price",
+                "@id": "gp:la-concordia-a-price-rider-2",
+                "urpx:referencesPriceDefinition": {
+                  "@id": "gp:la-concordia-a-pd-rider-2"
+                },
+                "urpx:name": "Capital Improvement Rider",
+                "urpx:startDate": "2026-11-01",
+                "urpx:unitPrice": "0.0058"
+              },
+              {
+                "@type": "urpx:Price",
+                "@id": "gp:la-concordia-a-price-rider-3",
+                "urpx:referencesPriceDefinition": {
+                  "@id": "gp:la-concordia-a-pd-rider-3"
+                },
+                "urpx:name": "Wholesale Power Charge",
+                "urpx:startDate": "2026-11-01",
+                "urpx:unitPrice": "0.09328"
+              },
+              {
+                "@type": "urpx:Price",
+                "@id": "gp:la-concordia-a-price-energy-s1-t1",
+                "urpx:referencesPriceDefinition": {
+                  "@id": "gp:la-concordia-a-pd-energy"
+                },
+                "urpx:name": "Energy, November 2026",
+                "urpx:startDate": "2026-11-01",
+                "urpx:unitPrice": "0.04027"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "load": {
+    "kind": "monthly",
+    "periods": [
+      {
+        "start": "2026-11-01",
+        "end": "2026-11-30",
+        "kwh": 250
+      }
+    ]
+  },
+  "expected": {
+    "total": {
+      "amount": 52.05,
+      "unit": "USD"
+    },
+    "lines": [
+      {
+        "label": "Energy Charge",
+        "type": "flat-energy",
+        "amount": 10.07,
+        "unit": "USD"
+      },
+      {
+        "label": "Monthly Service Charge",
+        "type": "fixed",
+        "amount": 15,
+        "unit": "USD"
+      },
+      {
+        "label": "Emergency Fund Reserve Rider",
+        "type": "rider",
+        "amount": 2.21,
+        "unit": "USD"
+      },
+      {
+        "label": "Capital Improvement Rider",
+        "type": "rider",
+        "amount": 1.45,
+        "unit": "USD"
+      },
+      {
+        "label": "Wholesale Power Charge",
+        "type": "rider",
+        "amount": 23.32,
+        "unit": "USD"
+      }
+    ]
+  },
+  "tolerance": {
+    "amount": 0.05,
+    "unit": "USD",
+    "why": "The commission itemizes every charge with no tax line, so the figure is the listed charges alone; five cents covers rounding each line to the cent."
+  },
+  "chargeTypes": [
+    "fixed",
+    "flat-energy",
+    "rider"
+  ],
+  "provenance": {
+    "kind": "commission-publication",
+    "publisher": "Louisiana Public Service Commission",
+    "document": "Louisiana Public Service Commission Jurisdictional Electric Utilities Residential Bill Comparison, November 2026",
+    "url": "https://lpsc.louisiana.gov/docs/utilities/Comparisons/Electric/Residential-Electric-Bill-Comparison-November-2026.pdf",
+    "sha256": "44b6f7f5978f6df04bb72bc875d345c199d39c69cb24083b796bdf0486a017ea",
+    "date": "2026-11-13",
+    "page": 2,
+    "utility": "CONCORDIA",
+    "schedule": "Schedule A",
+    "consumptionLevel": "250 kWh"
+  },
+  "notes": [
+    "The tariff holds the rates and riders the commission's report applies in the 2026-11 billing month, read from the report's own rate column; other months' rates are not included."
+  ]
+}

@@ -6,7 +6,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { chargeTypesOf, toUrpx, URPX_CONTEXT } from '../../../core/lib/urpx.mjs';
+import { chargeTypesOf, fromUrpx, toUrpx, URPX_CONTEXT } from '../../../core/lib/urpx.mjs';
 import { checkVector } from '../../../pipeline/lib/bill-vectors.mjs';
 import { URPX_CASES } from '../../fixtures/urpx/cases.mjs';
 import { caseBytes } from '../../tools/urpx-emit.mjs';
@@ -57,7 +57,8 @@ test('time-of-use: the hours of each period become time brackets, weekdays and w
 });
 
 test('charge types follow the tariff, and a vector built on an emitted tariff passes the vector check', () => {
-  assert.deepEqual(chargeTypesOf(URPX_CASES.flat.tariff), ['fixed']);
+  assert.deepEqual(chargeTypesOf(URPX_CASES.flat.tariff), ['fixed', 'flat-energy']);
+  assert.deepEqual(chargeTypesOf(URPX_CASES.riders.tariff), ['fixed', 'rider', 'flat-energy']);
   assert.deepEqual(chargeTypesOf(URPX_CASES.tiered.tariff), ['fixed', 'tiered-energy', 'minimum-bill']);
   assert.deepEqual(chargeTypesOf(URPX_CASES.seasonal.tariff), ['fixed', 'tiered-energy', 'seasonal-energy']);
   const vector = {
@@ -70,4 +71,13 @@ test('charge types follow the tariff, and a vector built on an emitted tariff pa
     chargeTypes: ['fixed', 'tiered-energy'],
   };
   assert.deepEqual(checkVector(vector), []);
+});
+
+test('riders are written in the adjustment category with their charge type, and read back as the engine\'s charges', () => {
+  const { document } = toUrpx(URPX_CASES.riders.tariff, URPX_CASES.riders.meta);
+  const riders = nodes(document, 'urpx:PriceDefinition').filter((d) => d['urpx:chargeCategory']['@id'] === 'urpx:adjustment');
+  assert.deepEqual(riders.map((d) => [d['urpx:name'], d['urpx:chargeType']['@id'], d['urpx:referencesLedger']['@id'].split('-').at(-1)]),
+    [['Power Cost Adjustment', 'urpx:adjustmentPowerCost', 'energy'], ['Fuel Adjustment Clause', 'urpx:fuelCharge', 'energy'], ['Emergency Reserve Fund Rider', 'urpx:tariffRider', 'service']]);
+  assert.deepEqual(fromUrpx(document).tariff.charges, URPX_CASES.riders.tariff.charges.map((c) => (c.urpxType === 'urpx:tariffRider' ? (({ urpxType, ...x }) => x)(c) : c)));
+  assert.match(nodes(document, 'urpx:Evaluation')[0]['urpx:description'], /the riders the record names/);
 });

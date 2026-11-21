@@ -2,7 +2,8 @@
 // v0.5.1 SHACL shapes by verify/tools/urpx-shacl.py. Each covers one shape the
 // emitter writes: a flat rate, tiers with a monthly minimum, seasonal tiers
 // with a daily fixed charge across a season that wraps the year, and
-// time-of-use with weekday peaks that differ by season.
+// time-of-use with weekday peaks that differ by season, and riders per kWh
+// and per month in URPX's adjustment category.
 
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -20,6 +21,7 @@ export const URPX_CASES = {
   tiered: { tariff: { fixedMonthly: 10, minimumMonthly: 15, seasons: [{ name: 'all year', from: '01-01', tiers: [{ rate: 0.1, upTo: 500 }, { rate: 0.13 }] }] }, meta: { id: 'tiered', name: 'Residential tiered', utility: 'Example Electric', effective: '2026-01-01', zone: 'America/Chicago' } },
   seasonal: { tariff: { fixedDaily: 0.5, seasons: [{ name: 'June to September', from: '06-01', tiers: [{ rate: 0.12, upTo: 600 }, { rate: 0.15 }] }, { name: 'October to May', from: '10-01', tiers: [{ rate: 0.1, upTo: 800 }, { rate: 0.11 }] }] }, meta: { id: 'seasonal', name: 'Residential seasonal', utility: 'Example Electric', effective: '2026-01-01', zone: 'America/Chicago', source: { url: 'https://example.com/tariff.pdf', retrieved: '2026-11-16' } } },
   tou: { tariff: { fixedMonthly: 12, seasons: [{ name: 'June to September', from: '06-01', periods: [{ name: 'period 1', rate: 0.09 }, { name: 'period 2', rate: 0.25 }] }, { name: 'October to May', from: '10-01', periods: [{ name: 'period 1', rate: 0.08 }, { name: 'period 3', rate: 0.18 }] }] }, meta: { id: 'tou', name: 'Residential time-of-use', utility: 'Example Electric', effective: '2026-01-01', zone: 'America/Chicago' }, opts: { schedule: { weekday, weekend } } },
+  riders: { tariff: { fixedMonthly: 15, seasons: [{ name: 'all year', from: '01-01', tiers: [{ rate: 0.10764 }] }], charges: [{ label: 'Power Cost Adjustment', perKwh: -0.012404, urpxType: 'urpx:adjustmentPowerCost' }, { label: 'Fuel Adjustment Clause', perKwh: 0.03172, urpxType: 'urpx:fuelCharge' }, { label: 'Emergency Reserve Fund Rider', monthly: 2.5 }] }, meta: { id: 'riders', name: 'Residential with riders', utility: 'Example Electric', effective: '2026-11-01', zone: 'America/Chicago' } },
   ...urdbCases(),
 };
 

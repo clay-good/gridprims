@@ -97,3 +97,13 @@ test('the extraction is published under CC BY 4.0 and the committed file is what
   const file = JSON.parse(readFileSync(join(ROOT, 'data/curated/conformance/ground-truth/fl-psc-2025-12-31.json'), 'utf8'));
   assert.equal(docs.find((d) => d.state === 'FL').rows.length, file.rows.length);
 });
+
+test('the vector section lists every charge type with its count, names the uncovered ones, and keeps the limits first', async () => {
+  const release = JSON.parse(readFileSync(join(ROOT, 'data/curated/conformance/release.json'), 'utf8'));
+  const html = String(groundTruthPage({ documents: docs, coverage: cov, release, i18n }));
+  const section = /<section data-vectors>(.*?)<\/section>/s.exec(html)[1];
+  assert.ok(section.indexOf('data-limits') < section.indexOf('<table'));
+  for (const [type, n] of Object.entries(release.coverage.byChargeType)) assert.match(section, new RegExp(`data-charge-type="${type}"><th scope="row">[^<]+</th><td class="num mono">${n}</td>`));
+  assert.match(section, /No vector exercises: [^<]*Demand ratchet[^<]*\. The suite proves nothing about these\./);
+  assert.equal([...section.matchAll(/data-untestable/g)].length, release.untestable.length);
+});
