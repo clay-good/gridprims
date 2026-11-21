@@ -2,7 +2,7 @@
 
 - [x] 1.1 Build the station history pipeline (trim to station, date, maximum, minimum) and register it with the federal-works basis and requested citation; verify the registry entry and row counts against the source files
 - [x] 1.2 Ship the published 1991–2020 daily normals with the smoothed-fit caveat; verify the caveat appears wherever a normal-year figure does
-- [ ] 1.3 Implement on-device degree-day computation at any base; verify the base-65 scenario and the 5-division, 24-month comparison with the publisher's published division series, and record that the normals are not a verification target
+- [x] 1.3 Implement on-device degree-day computation at any base; verify the base-65 scenario and the 5-station, 24-month comparison with the publisher's monthly station series, and record that the normals are not a verification target (degreeDays in core/lib/weather-model.mjs takes any base; verify/tests/core/degree-days-gsom.test.mjs checks the base-65 day and Denver, Los Angeles, Miami, Atlanta, and Dallas against NOAA's Global Summary of the Month for September 2024 to August 2026, every month within its 0.1 °C-day rounding. The division comparison the task first named was run and fails by design, NOAA's divisional degree days coming from a statistical algorithm with population weights; docs/derivations/weather-normalization.md records the numbers, and the spec scenario now names the station series)
 - [x] 1.4 Pack station history and the station index into the existing state shards with on-device distance ranking; verify the request-privacy and station-receipt scenarios and that no asset URL names a station, county, or ZIP
 - [x] 1.5 Implement coverage and gap reporting; verify the 9-day gap scenario
 

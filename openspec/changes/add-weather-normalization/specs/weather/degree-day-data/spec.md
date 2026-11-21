@@ -29,9 +29,9 @@ Heating and cooling degree days SHALL be computed in the browser from the daily 
 - **WHEN** a day has a maximum of 80 °F and a minimum of 56 °F
 - **THEN** the mean is 68 °F, giving 3 cooling degree days and 0 heating degree days at base 65 °F
 
-#### Scenario: Verified against the publisher's division series
-- **WHEN** CI compares our computed base-65 monthly degree days, aggregated to a climate division, with the publisher's own published monthly division series for 5 divisions and 24 months
-- **THEN** every month agrees within 5% or 10 degree days, whichever is larger, and the remaining difference is documented as the publisher's population weighting rather than a defect
+#### Scenario: Verified against the publisher's monthly station series
+- **WHEN** CI compares our computed base-65 monthly degree days with NOAA's Global Summary of the Month for 5 first-order stations in 5 states and 24 months
+- **THEN** every month both publish agrees within the series' own rounding (0.1 °C degree day), and the method notes record why NOAA's climate-division series is not a target: it is derived from adjusted monthly temperatures by a statistical algorithm and weighted by population, so station sums cannot match it
 
 #### Scenario: Normals are not a check
 - **WHEN** a maintainer compares our computed degree days with the published 1991–2020 normals
