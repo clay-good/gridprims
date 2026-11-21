@@ -1974,7 +1974,7 @@ export default {
   'gt.extraction': '{figures} figures read by two methods ({methods}); {disagreed} disagreed ({rate}).',
   'gt.excluded': 'Left out because the two methods disagreed or the figure could not be read:',
   'gt.caption': 'Typical residential monthly bill in dollars, {publisher}, as of {date}',
-  'gt.captionMonthly': 'Average residential monthly bill in dollars at {kwh} kWh, {publisher}, at the rates in force on the first of each month',
+  'gt.captionMonthly': 'Average residential monthly bill in dollars at {kwh} kWh, {publisher}, by the month of the rates used',
   'gt.taxes.included': 'Taxes: included, as the commission states.',
   'gt.utility': 'Utility',
   'gt.page': 'Page',
