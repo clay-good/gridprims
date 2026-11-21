@@ -1,0 +1,9 @@
+[
+  {
+    "version": "2026.11.0",
+    "date": "2026-11-21",
+    "summary": "First release: 24 vectors from 8 Louisiana schedules (November 2026 billing month) at 250, 1,000, and 5,000 kWh, exercising fixed charges, flat energy rates, and riders; 8 schedules could not be written yet, each listed with why.",
+    "vectors": 24,
+    "sha256": "ebb88f482a5aa5827f8c14ef3b2806dacd24bb9a70a6c8919346ababadc3e575"
+  }
+]

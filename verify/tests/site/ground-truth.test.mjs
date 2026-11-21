@@ -107,3 +107,17 @@ test('the vector section lists every charge type with its count, names the uncov
   assert.match(section, /No vector exercises: [^<]*Demand ratchet[^<]*\. The suite proves nothing about these\./);
   assert.equal([...section.matchAll(/data-untestable/g)].length, release.untestable.length);
 });
+
+test('anyone can run it: each release is listed with its frozen file, and the latest file holds vectors, format, coverage, and limits', async () => {
+  const { changelog, releaseFile } = await import('../../../pipeline/lib/vector-releases.mjs');
+  const log = changelog(ROOT);
+  const release = JSON.parse(readFileSync(join(ROOT, 'data/curated/conformance/release.json'), 'utf8'));
+  const html = String(groundTruthPage({ documents: docs, coverage: cov, release, releases: log, i18n }));
+  for (const e of log) assert.ok(html.includes(`href="/data/ground-truth/vectors/${releaseFile(e.version)}"`), e.version);
+  const latest = JSON.parse(readFileSync(join(ROOT, 'data/curated/conformance/releases', releaseFile(log.at(-1).version)), 'utf8'));
+  assert.equal(latest.license, 'CC BY 4.0');
+  assert.equal(latest.limits, LIMITS);
+  assert.match(latest.formatDocumentation, /^# Bill test vector/);
+  assert.deepEqual(latest.coverage, release.coverage);
+  assert.equal(latest.vectors.length, release.vectors.length);
+});

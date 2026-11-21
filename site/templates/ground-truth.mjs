@@ -8,11 +8,12 @@ import { layout } from './layout.mjs';
 import { pageTitle } from '../lib/meta.mjs';
 import { GROUND_TRUTH_PATH } from '../entities/ground-truth.mjs';
 import { REPO_URL } from '../config.mjs';
+import { releaseFile } from '../../pipeline/lib/vector-releases.mjs';
 
 const usd = (n) => (n == null ? '' : n.toFixed(2));
 
-/** @param {{documents: any[], coverage: ReturnType<typeof import('../entities/ground-truth.mjs').coverage>, release?: any, i18n: any}} p */
-export function groundTruthPage({ documents, coverage, release = null, i18n }) {
+/** @param {{documents: any[], coverage: ReturnType<typeof import('../entities/ground-truth.mjs').coverage>, release?: any, releases?: any[], i18n: any}} p */
+export function groundTruthPage({ documents, coverage, release = null, releases = [], i18n }) {
   const { t, date } = i18n;
   const { totals, extraction } = coverage;
   const pct = (x) => `${(x * 100).toFixed(1)}%`;
@@ -53,6 +54,10 @@ ${release ? html`<section data-vectors>
 ${release.coverage.uncovered.length ? html`<p data-uncovered>${t('gt.uncovered', { types: release.coverage.uncovered.map((x) => t(`gt.type.${x}`)).join(', ') })}</p>` : ''}
 ${release.untestable.length ? html`<details><summary>${t('gt.untestable', { n: release.untestable.length })}</summary><ul>${release.untestable.map((u) => html`<li data-untestable>${u.utility}, ${u.schedule}: ${u.why.join('; ')}</li>`)}</ul></details>` : ''}
 <p><a href="${GROUND_TRUTH_PATH}vectors.json">${t('gt.vectorsDownload')}</a> <a href="${REPO_URL}/blob/main/docs/formats/bill-test-vector.md">${t('gt.vectorsFormat')}</a></p>
+<p>${t('gt.releasesIntro')}</p>
+${releases.length ? html`<h3>${t('gt.releasesCaption')}</h3>
+<ul data-releases>${[...releases].reverse().map((e) => html`<li data-release="${e.version}"><a href="${GROUND_TRUTH_PATH}vectors/${releaseFile(e.version)}">${e.version}</a>, ${date(e.date)}, ${t('gt.releaseVectors', { n: e.vectors })}: ${e.summary} <span class="mono unit-hint">${t('gt.sha256', { sha: e.sha256.slice(0, 12) })}</span></li>`)}</ul>
+<p><a href="${GROUND_TRUTH_PATH}vectors/changelog.json">${t('gt.changelogJson')}</a></p>` : ''}
 </section>` : ''}
 <section>
 <h2 id="coverage">${t('gt.coverage')}</h2>

@@ -18,7 +18,8 @@ import EXPLAINERS from '../data/curated/explainers/index.mjs';
 import { resolveExplainer } from './entities/explainers.mjs';
 import { explainerPage, explainerPath } from './templates/explainer.mjs';
 import { LINKS_PATH, programLinksPage } from './templates/program-links.mjs';
-import { GROUND_TRUTH_PATH, LIMITS, checkPublications, coverage as groundTruthCoverage, groundTruthCsv, groundTruthJson, loadGroundTruth } from './entities/ground-truth.mjs';
+import { RELEASES_DIR, changelog as vectorChangelogOf, releaseFile } from '../pipeline/lib/vector-releases.mjs';
+import { GROUND_TRUTH_PATH, checkPublications, coverage as groundTruthCoverage, groundTruthCsv, groundTruthJson, loadGroundTruth } from './entities/ground-truth.mjs';
 import { groundTruthPage } from './templates/ground-truth.mjs';
 import { OURS as COHORT_CHOICES, cohortTable } from '../core/lib/reliability-peers.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
@@ -318,9 +319,13 @@ export async function build(opts = {}) {
   const groundTruth = loadGroundTruth(ROOT);
   const gtCoverage = groundTruthCoverage(groundTruth);
   const vectorRelease = JSON.parse(readFileSync(join(ROOT, 'data/curated/conformance/release.json'), 'utf8'));
-  write(GROUND_TRUTH_PATH, groundTruthPage({ documents: groundTruth, coverage: gtCoverage, release: vectorRelease, i18n }));
-  const vectorDir = join(ROOT, 'data/curated/conformance/vectors');
-  writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'vectors.json'), JSON.stringify({ ...vectorRelease, limits: LIMITS, vectors: vectorRelease.vectors.map((id) => JSON.parse(readFileSync(join(vectorDir, `${id}.json`), 'utf8'))) }) + '\n');
+  const vectorChangelog = vectorChangelogOf(ROOT);
+  write(GROUND_TRUTH_PATH, groundTruthPage({ documents: groundTruth, coverage: gtCoverage, release: vectorRelease, releases: vectorChangelog, i18n }));
+  // Every release at its own frozen address, the changelog beside them, and vectors.json as the latest.
+  mkdirSync(join(outDir, GROUND_TRUTH_PATH, 'vectors'), { recursive: true });
+  for (const e of vectorChangelog) copyFileSync(join(ROOT, RELEASES_DIR, releaseFile(e.version)), join(outDir, GROUND_TRUTH_PATH, 'vectors', releaseFile(e.version)));
+  writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'vectors', 'changelog.json'), JSON.stringify(vectorChangelog, null, 2) + '\n');
+  if (vectorChangelog.length) copyFileSync(join(ROOT, RELEASES_DIR, releaseFile(vectorChangelog.at(-1).version)), join(outDir, GROUND_TRUTH_PATH, 'vectors.json'));
   writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'ground-truth.csv'), groundTruthCsv(groundTruth));
   writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'ground-truth.json'), JSON.stringify(groundTruthJson(groundTruth, gtCoverage), null, 2) + '\n');
   // The glossary, as a page and as data agents read with the same words.
