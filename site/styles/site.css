@@ -398,6 +398,20 @@ dialog.report textarea { width: 100%; border: 1px solid var(--field-border); bor
 .source-stamp { color: var(--muted); font-size: .75rem; line-height: 1.6; }
 .warning-chip { display: inline-flex; align-items: center; gap: var(--s1); background: var(--warning); color: var(--legend-black); border-radius: var(--r-pill); padding: 4px 10px; font-weight: 600; font-family: Archivo, system-ui, sans-serif; }
 .warning-chip[hidden] { display: none; }
+.warning-chip { font-size: .8125rem; line-height: 1.3; }
+/* A checkbox or radio takes the ink, the way a filled field would. */
+input[type="checkbox"], input[type="radio"] { accent-color: var(--ink); width: 18px; height: 18px; margin: 0; flex: none; }
+label:has(> input[type="checkbox"]) { display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; cursor: pointer; }
+/* A plain term list in a panel reads as ruled rows: the term as an engraved legend, its value beside it once there is room. */
+.panel > dl:not([class]) { margin: var(--s3) 0 0; border-top: 1px solid var(--line); }
+.panel > dl:not([class]) > dt { font-size: .6875rem; font-weight: 600; letter-spacing: .085em; text-transform: uppercase; color: var(--muted); padding-top: var(--s3); }
+.panel > dl:not([class]) > dd { margin: var(--s1) 0 0; padding-bottom: var(--s3); border-bottom: 1px solid var(--line); }
+.panel > dl:not([class]) > dd details { margin-top: var(--s1); font-size: .875rem; }
+@media (min-width: 720px) {
+  .panel > dl:not([class]) { display: grid; grid-template-columns: minmax(9rem, 13rem) minmax(0, 1fr); column-gap: var(--s5); }
+  .panel > dl:not([class]) > dt { border-bottom: 1px solid var(--line); padding-bottom: var(--s3); }
+  .panel > dl:not([class]) > dd { padding-top: var(--s3); margin: 0; }
+}
 blockquote { border-left: 1px solid var(--field-border); margin: var(--s3) 0; padding: var(--s2) var(--s4); }
 
 [data-health-row].stalled { color: var(--warning-text); font-weight: 700; }
