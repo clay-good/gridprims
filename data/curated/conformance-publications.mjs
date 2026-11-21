@@ -174,7 +174,7 @@ export default [
     state: "MT", publisher: "Montana Public Service Commission", title: "2026 Gas and Electric Rate Summary (Average Bill - Electric, Assume 30 days/750 kwh)",
     url: "https://psc.mt.gov/_docs/Energy/pdf/2026GasandElectricRateSummary.pdf", checked: '2026-11-21', asOf: "Rates as of November 1, 2026 (monthly series Sep 2025 - Nov 2026)",
     terms: null,
-    status: "not extracted", reason: "Opened the 2026 summary: monthly residential total rates and service charges for NorthWestern Energy and MDU electric, plus average electric bill at 750 kWh/30 days per month (e.g., Nov-26 NWE $118.70, MDU $93.54); no terms-of-use or disclaimer page found on psc.mt.gov (footer has only a Nondiscrimination Policy link). Format: Text PDF; one consumption level (750 kWh, 30 days) for two utilities (NWE, MDU), monthly bill series plus per-kWh total/supply rates and service charges; annual editions 2022-2026 exist.",
+    status: 'used', file: 'mt-psc-2026-11.json', reason: 'Average residential bills at 750 kWh for NorthWestern Energy and Montana-Dakota Utilities, each month from September 2025 to November 2026, read twice by independent methods.',
   },
   {
     state: "NC", publisher: "Public Staff - North Carolina Utilities Commission", title: "Bill Comparison for North Carolina's Electric Utilities",

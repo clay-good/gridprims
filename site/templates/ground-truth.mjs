@@ -19,10 +19,12 @@ export function groundTruthPage({ documents, coverage, release = null, releases 
   const pct = (x) => `${(x * 100).toFixed(1)}%`;
   const absent = coverage.states.filter((s) => s.status !== 'used');
   const doc = (d) => {
-    const levels = [...new Set(d.rows.map((r) => r.kwh))].sort((a, b) => a - b);
+    // A monthly series (one level, many months) is laid out by month; a level table by consumption level.
+    const byMonth = d.rows.some((r) => r.month);
+    const levels = byMonth ? [...new Set(d.rows.map((r) => r.month))].sort() : [...new Set(d.rows.map((r) => r.kwh))].sort((a, b) => a - b);
     const key = (r) => `${r.utility}|${r.schedule ?? ''}`;
     const utilities = [...new Map(d.rows.map((r) => [key(r), r])).values()];
-    const bill = (u, kwh) => d.rows.find((r) => key(r) === key(u) && r.kwh === kwh);
+    const bill = (u, col) => d.rows.find((r) => key(r) === key(u) && (byMonth ? r.month === col : r.kwh === col));
     return html`<section data-ground-truth-document="${d.state}">
 <h2 id="${d.state.toLowerCase()}">${d.document.publisher}</h2>
 <p class="strip" data-limits>${t('gt.limits')}</p>
@@ -30,8 +32,8 @@ export function groundTruthPage({ documents, coverage, release = null, releases 
 <p>${t(`gt.taxes.${d.document.taxes ?? 'unstated'}`)} ${t('gt.assumptions')} ${d.document.assumptions ?? t('gt.unstated')}</p>${d.rows.some((r) => r.lines) ? html`<p class="unit-hint">${t('gt.lines')}</p>` : ''}
 <p data-extraction>${t('gt.extraction', { figures: d.extraction.figures, disagreed: d.extraction.disagreed, rate: pct(d.extraction.disagreementRate), methods: d.extraction.methods.join('; ') })}</p>
 ${d.excluded.length ? html`<p>${t('gt.excluded')}</p><ul>${d.excluded.map((x) => html`<li>${x.utility ?? ''} ${x.kwh ?? ''} ${x.reason ?? ''}</li>`)}</ul>` : ''}
-<div class="table-wrap"><table data-ground-truth-table><caption>${t('gt.caption', { publisher: d.document.publisher, date: date(d.document.asOf) })}</caption>
-<thead><tr><th scope="col">${t('gt.utility')}</th><th scope="col">${t('gt.page')}</th>${levels.map((k) => html`<th scope="col" class="num">${t('gt.kwh', { kwh: k.toLocaleString('en-US') })}</th>`)}</tr></thead>
+<div class="table-wrap"><table data-ground-truth-table><caption>${byMonth ? t('gt.captionMonthly', { publisher: d.document.publisher, kwh: d.rows[0].kwh.toLocaleString('en-US') }) : t('gt.caption', { publisher: d.document.publisher, date: date(d.document.asOf) })}</caption>
+<thead><tr><th scope="col">${t('gt.utility')}</th><th scope="col">${t('gt.page')}</th>${levels.map((k) => html`<th scope="col" class="num">${byMonth ? k : t('gt.kwh', { kwh: k.toLocaleString('en-US') })}</th>`)}</tr></thead>
 <tbody>${utilities.map((u) => html`<tr><th scope="row">${u.utility}${u.schedule ? html`, ${u.schedule}` : ''}${u.websiteSourced ? html` <span class="unit-hint" data-website-sourced>${t('gt.websiteSourced')}</span>` : ''}</th><td class="mono">${u.page}</td>${levels.map((k) => html`<td class="num mono">${usd(bill(u, k)?.bill)}</td>`)}</tr>`)}</tbody>
 </table></div>
 </section>`;

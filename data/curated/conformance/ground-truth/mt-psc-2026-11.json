@@ -1,0 +1,267 @@
+{
+  "document": {
+    "publisher": "Montana Public Service Commission",
+    "title": "2026 Gas and Electric Rate Summary (Average Bill - Electric, Assume 30 days/750 kwh)",
+    "url": "https://psc.mt.gov/_docs/Energy/pdf/2026GasandElectricRateSummary.pdf",
+    "retrieved": "2026-11-21",
+    "sha256": "06a6437e842e2763d60940f047b2b9ca34620de3a1a4f68aaac7a81e5d36f1d5",
+    "asOf": "2026-11-01",
+    "service": "Residential",
+    "taxes": "included",
+    "assumptions": "A 30-day month at 750 kWh, at the rates filed and processed for each utility as of the first day of the month; mid-month changes appear the next month. Tax tracking adjustments are included. Montana-Dakota Utilities' bills from April 2026 include an interim increase of 22.008% on the monthly service charge and the energy charge (Docket 2025.09.072).",
+    "terms": "A Montana public record; the summary states no restriction on reuse. Only the figures are kept here, each with its page."
+  },
+  "extraction": {
+    "methods": [
+      "layout text, line by line",
+      "word positions under the month headers"
+    ],
+    "figures": 30,
+    "agreed": 30,
+    "disagreed": 0,
+    "disagreementRate": 0
+  },
+  "excluded": [],
+  "rows": [
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2025-09",
+      "kwh": 750,
+      "bill": 122.69
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2025-10",
+      "kwh": 750,
+      "bill": 111.57
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2025-11",
+      "kwh": 750,
+      "bill": 111.57
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2025-12",
+      "kwh": 750,
+      "bill": 111.57
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-01",
+      "kwh": 750,
+      "bill": 118.1
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-02",
+      "kwh": 750,
+      "bill": 115.95
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-03",
+      "kwh": 750,
+      "bill": 115.95
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-04",
+      "kwh": 750,
+      "bill": 122.74
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-05",
+      "kwh": 750,
+      "bill": 124.34
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-06",
+      "kwh": 750,
+      "bill": 124.34
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-07",
+      "kwh": 750,
+      "bill": 130.23
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-08",
+      "kwh": 750,
+      "bill": 130.23
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-09",
+      "kwh": 750,
+      "bill": 130.23
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-10",
+      "kwh": 750,
+      "bill": 121.6
+    },
+    {
+      "page": 2,
+      "utility": "NorthWestern Energy",
+      "schedule": "Residential",
+      "month": "2026-11",
+      "kwh": 750,
+      "bill": 118.7
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2025-09",
+      "kwh": 750,
+      "bill": 101.68
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2025-10",
+      "kwh": 750,
+      "bill": 89
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2025-11",
+      "kwh": 750,
+      "bill": 89.41
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2025-12",
+      "kwh": 750,
+      "bill": 88.68
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-01",
+      "kwh": 750,
+      "bill": 89.25
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-02",
+      "kwh": 750,
+      "bill": 89.15
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-03",
+      "kwh": 750,
+      "bill": 90.78
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-04",
+      "kwh": 750,
+      "bill": 103.67
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-05",
+      "kwh": 750,
+      "bill": 100.93
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-06",
+      "kwh": 750,
+      "bill": 117.53
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-07",
+      "kwh": 750,
+      "bill": 115.36
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-08",
+      "kwh": 750,
+      "bill": 113.48
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-09",
+      "kwh": 750,
+      "bill": 115.35
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-10",
+      "kwh": 750,
+      "bill": 96.11
+    },
+    {
+      "page": 2,
+      "utility": "Montana-Dakota Utilities",
+      "schedule": "Residential",
+      "month": "2026-11",
+      "kwh": 750,
+      "bill": 93.54
+    }
+  ]
+}
