@@ -106,6 +106,17 @@ for (const kind of ['chrome', 'firefox']) {
       await browser.evaluate(setPeriods('2026-07-01 to 2026-07-31, 1,000 kWh'));
       await waitFor(browser, `${answer} === '$163.34'`);
       assert.deepEqual(await browser.evaluate("[...document.querySelectorAll('[data-tariff-picker] a')].map((a) => a.href).filter((h) => !h.startsWith(location.origin))"), ['https://www.powertochoose.org/'], 'the only provider-related element is a link to Power to Choose');
+      // Choosing the delivery company fills in its charges in force today, from its own tariff book (task 1.3).
+      const { versionOn } = await import('../../../core/lib/tdu.mjs');
+      const { default: tdus } = await import('../../../data/curated/tdu-rates.mjs');
+      const today = await browser.evaluate('new Date().toISOString().slice(0, 10)');
+      const v = versionOn(tdus, 'oncor', today);
+      await browser.evaluate("(() => { const s = document.querySelector('[data-retail-tdu]'); s.value = 'oncor'; s.dispatchEvent(new Event('change')); })()");
+      const filled = JSON.parse(await browser.evaluate("JSON.stringify(['tduMonthly', 'tduKwh'].map((n) => document.querySelector('[data-picker-retail] [name=' + n + ']').value))"));
+      if (v) {
+        assert.deepEqual(filled.map(Number), [v.total.dollarsPerMonth, Math.round(v.perKwh.reduce((t, c) => t + c.cents, 0) * 1e5) / 1e5]);
+        assert.match(await browser.evaluate("document.querySelector('[data-retail-tdu-note]').textContent"), new RegExp(`in force since ${v.effective}`));
+      }
       await browser.evaluate(setPeriods('2026-03-01 to 2026-03-30, 800 kWh\n2026-03-26 to 2026-04-28, 700 kWh'));
       await waitFor(browser, "document.querySelector('[data-answer] .sign').dataset.state === 'invalid'");
       assert.match(await browser.evaluate("document.querySelector('#in-periods-error').textContent"), /Lines 1 and 2 overlap by 5 days\. Which dates are correct\?/);

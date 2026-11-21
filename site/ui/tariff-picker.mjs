@@ -4,6 +4,7 @@
 // input. It sits outside the tool's form, so only the tariff it writes is an
 // input; the ZIP never leaves the device.
 
+import { TDUS } from '../../core/lib/tdu.mjs';
 import { html } from '../lib/html.mjs';
 
 /** @param {{t: Function}} i18n */
@@ -33,6 +34,8 @@ export function tariffPicker({ t }) {
   <details data-picker-retail>
     <summary>${t('bill.retail.title')}</summary>
     <p class="unit-hint">${t('bill.retail.intro')} <a href="https://www.powertochoose.org/">${t('bill.retail.powerToChoose')}</a></p>
+    <div class="field"><label for="retail-tdu">${t('bill.retail.tdu')}</label><select id="retail-tdu" data-retail-tdu><option value="">${t('bill.retail.tduNone')}</option>${TDUS.map((id) => html`<option value="${id}">${t(`bill.retail.tdu.${id}`)}</option>`)}</select></div>
+    <p class="unit-hint" data-retail-tdu-note aria-live="polite"></p>
     <div class="picker-row">
       ${[['energy', 'bill.retail.energy'], ['base', 'bill.retail.base'], ['tduMonthly', 'bill.retail.tduMonthly'], ['tduKwh', 'bill.retail.tduKwh'], ['creditKwh', 'bill.retail.creditKwh'], ['credit', 'bill.retail.credit']].map(([name, label]) => html`<div class="field"><label for="retail-${name}">${t(label)}</label><input id="retail-${name}" name="${name}" class="mono" inputmode="decimal" autocomplete="off"></div>`)}
     </div>

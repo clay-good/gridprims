@@ -2,6 +2,8 @@
 // rates or from a tariff entered by hand. Requests go only for the ZIP
 // prefix table and the state shards a ZIP needs; the ZIP stays here.
 
+import { chargesFor } from '../../core/lib/tdu.mjs';
+import TDU_RATES from '../../data/curated/tdu-rates.mjs';
 import { getJson as get, utilitiesForZip, utilityFromFragment } from './zip-utilities.js';
 import { createI18n } from '../lib/i18n.mjs';
 import strings from '../strings/en-US.mjs';
@@ -120,6 +122,20 @@ utilityFromFragment(location.hash).then(async (preset) => {
 function values(group) {
   return Object.fromEntries([...group.querySelectorAll('input')].map((i) => [i.name, i.value.trim() === '' ? NaN : Number(i.value.replace(/[,$¢\s]/g, ''))]));
 }
+
+// The TDU's delivery charges in force today, from its own tariff book, filled in for the person to check.
+const tduSelect = retail.querySelector('[data-retail-tdu]');
+tduSelect.addEventListener('change', () => {
+  const tduNote = retail.querySelector('[data-retail-tdu-note]');
+  const today = new Date().toISOString().slice(0, 10);
+  const r = tduSelect.value ? chargesFor(TDU_RATES, tduSelect.value, { start: today, end: today }) : null;
+  if (!r) { tduNote.textContent = tduSelect.value ? t('bill.retail.tduNotOnFile') : ''; return; }
+  const set = (name, value) => { const i = retail.querySelector(`[name=${name}]`); i.value = String(value); };
+  set('tduMonthly', r.version.total.dollarsPerMonth);
+  set('tduKwh', Math.round(r.charges.at(-1).perKwh * 1e7) / 1e5);
+  tduNote.replaceChildren(t('bill.retail.tduFrom', { date: r.version.effective, title: r.version.title }), ' ', Object.assign(document.createElement('a'), { href: r.version.url, textContent: t('bill.retail.tduSheet') }));
+  retail.dispatchEvent(new Event('input'));
+});
 
 // A Texas plan from its Electricity Facts Label, plus the TDU's delivery charges from the bill.
 retail.addEventListener('input', () => {
