@@ -94,7 +94,8 @@ export function toTariff(r) {
   const rateOf = (t) => {
     if (t.adj) adj = true;
     // URDB stores a few rates as text ("8.18").
-    return Number((Number(t.rate ?? 0) + Number(t.adj ?? 0)).toFixed(6));
+    // Nine decimals clears floating-point noise from the sum without cutting URDB's own seven-decimal rates.
+    return Number((Number(t.rate ?? 0) + Number(t.adj ?? 0)).toFixed(9));
   };
   const tierList = (period) => {
     let below = 0;

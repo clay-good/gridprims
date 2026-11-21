@@ -404,7 +404,7 @@ Version 0.1.0 · experimental · validation level 1, self-checked
 
 Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.
 
-Version 0.1.0 · experimental · validation level 1, self-checked
+Version 0.2.0 · experimental · validation level 1, self-checked
 
 | Input | Name | Unit | Range | Example |
 |---|---|---|---|---|

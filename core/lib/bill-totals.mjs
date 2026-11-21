@@ -2,7 +2,7 @@
 // bill-totals). Entry checks, pricing of fixed, minimum, tiered, and
 // seasonal charges with day proration, the comparison with what was paid,
 // the effective price, and the mid-cycle projection. Money is kept in whole
-// micro-dollars, so every cent rounds exactly.
+// nano-dollars, so every cent rounds exactly.
 
 const DAY = 86_400_000;
 const MICRO = 1_000_000n;
@@ -50,10 +50,10 @@ export function checkPeriods(periods) {
   return flags;
 }
 
-/** A dollar or $/kWh amount as micro-dollars, exactly (rates carry at most six decimals). */
-const micro = (x) => BigInt(Math.round(x * 1e6));
-/** Micro-dollars to whole cents, rounding half up. */
-const cents = (m) => (m >= 0n ? (m + 5000n) / 10000n : -((-m + 5000n) / 10000n));
+/** A dollar or $/kWh amount as nano-dollars, exactly (rates carry at most nine decimals; URDB has seven). */
+const nano = (x) => BigInt(Math.round(x * 1e9));
+/** Nano-dollars to whole cents, rounding half up. */
+const cents = (m) => (m >= 0n ? (m + 5_000_000n) / 10_000_000n : -((-m + 5_000_000n) / 10_000_000n));
 
 /**
  * The season in force on a day: seasons list {name, from: 'MM-DD', tiers}, and a season runs from its
@@ -96,12 +96,12 @@ export function priceTotals(period, tariff, { prorate = true } = {}) {
   const lines = [];
   let total = 0n;
   if (tariff.fixedMonthly) {
-    const m = micro(tariff.fixedMonthly);
+    const m = nano(tariff.fixedMonthly);
     lines.push({ label: 'fixed', cents: Number(cents(m)) });
     total += m;
   }
   if (tariff.fixedDaily) {
-    const m = micro(tariff.fixedDaily) * BigInt(days);
+    const m = nano(tariff.fixedDaily) * BigInt(days);
     lines.push({ label: 'fixed', days, cents: Number(cents(m)) });
     total += m;
   }
@@ -115,7 +115,7 @@ export function priceTotals(period, tariff, { prorate = true } = {}) {
         if (!p) throw new Error(`${r.season.name} has no ${name}`);
         const used = i === runs.length - 1 ? rest : Math.round(k * (r.days / days));
         rest -= used;
-        const m = (micro(p.rate) * BigInt(Math.round(used * 1000))) / 1000n;
+        const m = (nano(p.rate) * BigInt(Math.round(used * 1000))) / 1000n;
         lines.push({ label: `${r.season.name} ${name}`, kwh: used, rate: p.rate, cents: Number(cents(m)), ...(crosses ? { days: r.days } : {}) });
         total += m;
       });
@@ -133,25 +133,25 @@ export function priceTotals(period, tariff, { prorate = true } = {}) {
       const cap = t.upToDaily !== undefined ? t.upToDaily * r.days : t.upTo === undefined ? Infinity : t.upTo * share;
       const used = Math.min(rest, cap);
       rest -= used;
-      const m = (micro(t.rate) * BigInt(Math.round(used * 1000))) / 1000n;
+      const m = (nano(t.rate) * BigInt(Math.round(used * 1000))) / 1000n;
       lines.push({ label: `${r.season.name} tier ${k + 1}`, kwh: used, rate: t.rate, cents: Number(cents(m)), ...(crosses ? { days: r.days } : {}) });
       total += m;
     });
   });
   // Named charges billed on every kWh or every month, and usage credits, each on its own line.
   for (const c of tariff.charges ?? []) {
-    const m = c.perKwh !== undefined ? (micro(c.perKwh) * BigInt(Math.round(kwh * 1000))) / 1000n : micro(c.monthly ?? 0);
+    const m = c.perKwh !== undefined ? (nano(c.perKwh) * BigInt(Math.round(kwh * 1000))) / 1000n : nano(c.monthly ?? 0);
     lines.push({ label: c.label, ...(c.perKwh !== undefined ? { kwh, rate: c.perKwh } : {}), cents: Number(cents(m)) });
     total += m;
   }
   for (const c of tariff.credits ?? []) {
     if (kwh < c.atLeastKwh || (c.atMostKwh !== undefined && kwh > c.atMostKwh)) continue;
-    const m = -micro(c.amount);
+    const m = -nano(c.amount);
     lines.push({ label: c.label, cents: Number(cents(m)) });
     total += m;
   }
-  if (tariff.minimumMonthly && total < micro(tariff.minimumMonthly)) {
-    const top = micro(tariff.minimumMonthly) - total;
+  if (tariff.minimumMonthly && total < nano(tariff.minimumMonthly)) {
+    const top = nano(tariff.minimumMonthly) - total;
     lines.push({ label: 'minimum bill', cents: Number(cents(top)) });
     total += top;
   }

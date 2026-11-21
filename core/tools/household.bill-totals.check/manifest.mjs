@@ -3,7 +3,7 @@ const seasonal = JSON.stringify({ seasons: [{ name: 'non-summer', from: '01-01',
 
 export default {
   id: 'household.bill-totals.check',
-  version: '0.1.0',
+  version: '0.2.0',
   title: 'Bill check',
   purpose: 'Price your bills from the kWh printed on them, line by line, and see how they compare with what you paid.',
   archetype: 'calculator',
@@ -47,7 +47,7 @@ export default {
       { kind: 'own-examples', summary: 'Three worked examples from the spec\'s scenarios, and 21 URDB rates classified and converted by hand, pass to the cent.' },
     ],
   },
-  toRaise: 'Five published residential bill examples (state regulators\' typical-bill tables) reproduced to the cent would raise it to cross-checked.',
+  toRaise: 'Reproducing state regulators\' published bills for 20 rates spanning 5 states within 0.5% of the bill or $1 (the bill test vectors on /data/ground-truth/) raises it to cross-checked; the limits page shows the sample so far.',
   limitations: [
     'Taxes, local fees, and riders that the tariff data leaves out are not included, so a real bill is usually higher.',
     'Time-of-use energy is priced only from the kWh in each period as the bill prints them; a tiered time-of-use rate cannot be priced from totals.',

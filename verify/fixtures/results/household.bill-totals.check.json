@@ -1,13 +1,13 @@
 {
   "toolId": "household.bill-totals.check",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "results": [
     {
       "example": "tiered",
       "result": {
         "status": "ok",
         "toolId": "household.bill-totals.check",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "total": {
             "value": 115,
@@ -64,7 +64,7 @@
       "result": {
         "status": "ok",
         "toolId": "household.bill-totals.check",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "total": {
             "value": 106.8,
@@ -121,7 +121,7 @@
       "result": {
         "status": "ok",
         "toolId": "household.bill-totals.check",
-        "toolVersion": "0.1.0",
+        "toolVersion": "0.2.0",
         "outputs": {
           "total": {
             "value": 115,

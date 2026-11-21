@@ -60,7 +60,7 @@ test('conditions come from the rate name: low income, elderly or disabled, EV, s
 
 test('tiers: URDB max is cumulative, the engine wants each tier\'s own allowance, and adj is added to the rate', () => {
   const { tariff, notes } = toTariff(rate('5963ede55457a385144c9f92'));
-  assert.deepEqual(tariff, { fixedMonthly: 11.83, seasons: [{ name: 'all year', from: '01-01', tiers: [{ rate: 0.118961, upTo: 2000 }, { rate: 0.118501, upTo: 13000 }, { rate: 0.117941 }] }] });
+  assert.deepEqual(tariff, { fixedMonthly: 11.83, seasons: [{ name: 'all year', from: '01-01', tiers: [{ rate: 0.1189607, upTo: 2000 }, { rate: 0.1185007, upTo: 13000 }, { rate: 0.1179407 }] }] });
   assert.match(notes[0], /adjustment/);
 });
 
@@ -77,7 +77,7 @@ test('seasons come from the months, and December running into January makes one 
 
 test('daily allowances: Seattle\'s 10 kWh a day in summer gives a 30-day period 300 kWh in the first tier', () => {
   const { tariff } = toTariff(rate('59f2314d5457a3ff610d792e'));
-  assert.deepEqual(tariff.seasons[1], { name: 'April to September', from: '04-01', tiers: [{ rate: 0.027901, upToDaily: 10 }, { rate: 0.051724 }] });
+  assert.deepEqual(tariff.seasons[1], { name: 'April to September', from: '04-01', tiers: [{ rate: 0.0279012, upToDaily: 10 }, { rate: 0.0517244 }] });
   const r = priceTotals({ start: '2026-06-01', end: '2026-06-30', kwh: 500 }, tariff);
   assert.deepEqual(r.lines.filter((l) => l.kwh).map((l) => l.kwh), [300, 200]);
   // $2.00 + 300 × 2.7901¢ + 200 × 5.1724¢ = $2.00 + $8.37 + $10.34

@@ -54,7 +54,8 @@ ${BINS.map(([b, label]) => row(t('sc.rowBin', { bin: label }), c.size[b], engine
 ${Object.keys(c.byChargeType).map((type) => row(t('sc.rowType', { type: t(`gt.type.${type}`) }), `${c.byChargeType[type].disagree} / ${c.byChargeType[type].figures}`, `${engine.byChargeType[type].disagree} / ${engine.byChargeType[type].figures}`))}
 </tbody></table></div>
 <p class="unit-hint">${t('sc.engineNote')}</p>
-<p class="unit-hint">${t('sc.versions', { urdb: versions.urdb, release: versions.vectors ?? '' })} <a href="${SCORECARD_PATH}scorecard.json">${t('sc.download')}</a></p>
+<p class="unit-hint">${t('sc.versions', { urdb: versions.urdb, release: versions.vectors ?? '' })} <a href="${SCORECARD_PATH}scorecard.json">${t('sc.download')}</a> <a href="${SCORECARD_PATH}results.csv" download>${t('sc.resultsCsv')}</a> <a href="${SCORECARD_PATH}rates.csv" download>${t('sc.ratesCsv')}</a></p>
+<p class="unit-hint">${t('sc.rerun')}</p>
 <h2 id="schedules">${t('sc.schedules')}</h2>
 <p class="strip" data-limits>${t('gt.limits')}</p>
 ${card.entries.map(entry)}
