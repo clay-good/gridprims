@@ -27,3 +27,6 @@ export function conformanceStatus(release, vectors, coverage = {}) {
   return { release: release.version, date: release.date, rates: matched.length, states, missed: byRate.size - matched.length, bar: BAR,
     met: matched.length >= BAR.rates && states.length >= BAR.states, uncovered: coverage.uncovered ?? [], scorecard: SCORECARD_URL };
 }
+
+/** A bill tool's level given its declared level and the engine's standing: cross-checked once the bar is met. */
+export const billLevel = (declared, status) => (status?.met && declared < 2 ? 2 : declared);

@@ -60,7 +60,7 @@ const SCRIPTS = {
  * protocol change. The envelope stays pinned; the body is checked where it is
  * built (verify/tests/site/limits.test.mjs).
  */
-const LIVE = new Set(['gridprims://limits', 'gridprims://ledger']);
+const LIVE = new Set(['gridprims://limits', 'gridprims://ledger', 'gridprims://conformance']);
 const pinnable = (pairs) => pairs.map(({ request, response }) => (
   LIVE.has(request.params?.uri) && response.result?.contents
     ? { request, response: { ...response, result: { ...response.result, contents: response.result.contents.map((c) => ({ ...c, text: `<live ${request.params.uri}>` })) } } }

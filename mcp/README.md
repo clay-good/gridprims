@@ -31,4 +31,4 @@ The documented client commands add Node's permission model (`--permission` with 
 | `gridprims_analyze_file` | Working: CSV, Excel, and Green Button files inside `--allow-dir` folders, held in memory under handles for 60 idle minutes; receipt choices (zone, stamps, quantity) re-read from memory; intervals paged 1,000 rows at a time; a lines standards file or pole list is told apart by its header row and gets a `lines-standards` or `lines-pole-list` handle; file text only in `source_text` |
 | `gridprims_query_data` | Answers that no datasets are built yet |
 
-Resources: `gridprims://limits` (every tool's validation level and limits) and `gridprims://datasets` (the dataset catalog).
+Resources: `gridprims://limits` (every tool's validation level and limits), `gridprims://datasets` (the dataset catalog), `gridprims://ledger` (whether each dataset is current), and `gridprims://conformance` (the latest bill test vector release run through the bill engine on your machine, each result with the bill tools' validation level).

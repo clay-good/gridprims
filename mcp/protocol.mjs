@@ -6,7 +6,7 @@ import { TOOL_SURFACE, SERVER_INSTRUCTIONS } from './surface.mjs';
 import { createHandlers, fail } from './handlers.mjs';
 import { TOOLS } from '../core/tools/index.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
-import { catalog, ledgerRecord, limitsInputs } from './data.mjs';
+import { DATA_DIR, catalog, conformanceRun, ledgerRecord, limitsInputs } from './data.mjs';
 
 export const MODERN = '2026-07-28';
 export const LEGACY = ['2025-11-25', '2025-06-18'];
@@ -34,11 +34,13 @@ const RESOURCES = [
   { uri: 'gridprims://limits', name: 'limits', title: 'Limits record', description: 'Every tool\'s stability, validation level with its evidence, and known limits.', mimeType: 'application/json' },
   { uri: 'gridprims://datasets', name: 'datasets', title: 'Dataset catalog', description: 'Every public dataset in this clone with its publisher, license, and as-of date.', mimeType: 'application/json' },
   { uri: 'gridprims://ledger', name: 'ledger', title: 'Data continuity ledger', description: 'Whether each dataset is current, due, late, or discontinued, with the notice, the link check, and the pipeline\'s own health.', mimeType: 'application/json' },
+  { uri: 'gridprims://conformance', name: 'conformance', title: 'Bill test vector suite, run here', description: 'The latest bill test vector release run through gridprims\' bill engine on this machine: each vector\'s pass, fail, or skip with the commission\'s bill and the computed one, and the bill tools\' validation level.', mimeType: 'application/json' },
 ];
 const resourceBody = (uri) => {
   if (uri === 'gridprims://limits') return limitsRecord({ tools: TOOLS, ...limitsInputs() });
   if (uri === 'gridprims://datasets') return { datasets: catalog() };
   if (uri === 'gridprims://ledger') return ledgerRecord();
+  if (uri === 'gridprims://conformance') return conformanceRun(DATA_DIR, TOOLS);
   return null;
 };
 

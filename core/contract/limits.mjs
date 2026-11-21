@@ -4,7 +4,7 @@
 // copy, and the MCP resource are all this one object.
 
 import { VALIDATION_LEVELS } from './manifest.mjs';
-import { BILL_TOOLS } from './conformance.mjs';
+import { BILL_TOOLS, billLevel } from './conformance.mjs';
 
 export const FRESH_RUN_DAYS = 90;
 const DAY = 86_400_000;
@@ -22,8 +22,8 @@ export function limitsRecord(r) {
   const rows = tools.map(({ manifest: m }) => {
     const evidencePassed = passed.get(m.id) ?? null;
     // A bill tool rises to cross-checked the same build the engine clears the scorecard's bar (3.7).
-    const raised = conformance?.met && BILL_TOOLS.includes(m.id) && m.validation.level < 2;
-    const level = raised ? 2 : m.validation.level;
+    const level = BILL_TOOLS.includes(m.id) ? billLevel(m.validation.level, conformance) : m.validation.level;
+    const raised = level !== m.validation.level;
     return {
       id: m.id, title: m.title, version: m.version, stability: m.stability,
       validationLevel: level, validationName: VALIDATION_LEVELS[level].name,

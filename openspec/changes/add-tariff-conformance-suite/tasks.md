@@ -28,5 +28,5 @@
 ## 4. Upstream and surfaces
 
 - [ ] 4.1 File every schema gap found against the open interchange format upstream, recording the date and reference; verify each namespaced extension has a filed upstream issue
-- [ ] 4.2 Run the suite through the MCP server; verify identical structured results and that the validation level accompanies every bill result
+- [x] 4.2 Run the suite through the MCP server; verify identical structured results and that the validation level accompanies every bill result (reading the gridprims://conformance resource runs the latest release through core/lib/run-vector.mjs, the function the gate and the website use, and returns each result with the bill tools' validation level and the engine's standing; verify/tests/mcp/conformance-resource.test.mjs checks the results equal the gate's and the level equals the limits resource's)
 - [ ] 4.3 DESIGN.md gates (both themes, 320 px sweep, keyboard pass, print, performance budget); verify CI green

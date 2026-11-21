@@ -8,7 +8,9 @@ import { fileURLToPath } from 'node:url';
 import { readShard } from '../core/lib/shard.mjs';
 import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
 import { buildLedger } from '../core/lib/ledger.mjs';
-import { conformanceStatus } from '../core/contract/conformance.mjs';
+import { BILL_TOOLS, billLevel, conformanceStatus } from '../core/contract/conformance.mjs';
+import { VALIDATION_LEVELS } from '../core/contract/manifest.mjs';
+import { runVector } from '../core/lib/run-vector.mjs';
 import ourDatasets from '../data/curated/our-datasets.mjs';
 import ledgerReplies from '../data/curated/ledger-replies.mjs';
 
@@ -204,4 +206,31 @@ export async function entity(kind, id, dir = DATA_DIR, change = undefined) {
   if (!z.ok) return { error: z.reason === 'four-digits' ? `A ZIP code has five digits. Did you mean ${z.suggestion}?` : 'A ZIP code is five digits, such as 78701.' };
   const shards = Object.fromEntries(statesFor(z.zip, e.lookup.zip3).map((st) => [st, e.lookup.shards.get(st)]));
   return { entity: { ...lookupZip(z.zip, shards), note: 'ZIP areas are approximated by Census ZCTAs; an address may be served by only one of the utilities listed.' }, url: '/lookup/', sources: e.lookup.sources };
+}
+
+/**
+ * The bill test vector suite run here (add-tariff-conformance-suite 4.2): the latest release's vectors through
+ * the same function the release gate and the website use, each result with the bill tools' validation level.
+ * @param {string} dir the clone's data folder
+ * @param {Array<{manifest: any}>} tools
+ */
+export function conformanceRun(dir, tools) {
+  const log = join(dir, 'curated/conformance/releases/changelog.json');
+  if (!existsSync(log)) return { release: null, results: [], note: 'No bill test vector release is in this clone.' };
+  const latest = JSON.parse(readFileSync(log, 'utf8')).at(-1);
+  const bundle = JSON.parse(readFileSync(join(dir, 'curated/conformance/releases', `bill-test-vectors-${latest.version}.json`), 'utf8'));
+  const status = conformanceStatus(latest, bundle.vectors, bundle.coverage);
+  const validation = BILL_TOOLS.map((id) => {
+    const m = tools.find((t) => t.manifest.id === id).manifest;
+    const level = billLevel(m.validation.level, status);
+    return { tool: id, level, name: VALIDATION_LEVELS[level].name };
+  });
+  const results = bundle.vectors.map(runVector);
+  const count = (s) => results.filter((r) => r.status === s).length;
+  return {
+    release: latest.version, date: latest.date, license: bundle.license, limits: bundle.limits, standing: status,
+    summary: { vectors: results.length, pass: count('pass'), fail: count('fail'), skipped: count('skipped') },
+    results: results.map((r) => ({ ...r, validation })),
+    page: 'https://gridprims.com/data/ground-truth/',
+  };
 }

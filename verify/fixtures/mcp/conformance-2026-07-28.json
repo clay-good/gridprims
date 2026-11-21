@@ -818,6 +818,13 @@
             "title": "Data continuity ledger",
             "description": "Whether each dataset is current, due, late, or discontinued, with the notice, the link check, and the pipeline's own health.",
             "mimeType": "application/json"
+          },
+          {
+            "uri": "gridprims://conformance",
+            "name": "conformance",
+            "title": "Bill test vector suite, run here",
+            "description": "The latest bill test vector release run through gridprims' bill engine on this machine: each vector's pass, fail, or skip with the commission's bill and the computed one, and the bill tools' validation level.",
+            "mimeType": "application/json"
           }
         ],
         "ttlMs": 86400000,
