@@ -40,6 +40,9 @@ jobs:
         run: node pipeline/joins.mjs
       - name: Gates on the result
         run: node verify/check.mjs
+        env:
+          # The refresh publishes each new release's diff page on purpose: record the new URLs, and only those.
+          GRIDPRIMS_RECORD_URLS: '1'
       - name: Record that every tool's evidence passed
         run: node pipeline/record-evidence.mjs
       - name: Publish

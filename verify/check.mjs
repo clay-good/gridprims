@@ -56,7 +56,9 @@ const gates = [
   ['the bill engine reproduces every bill test vector', () => checkVectors(root)],
   ['bill test vector releases are frozen, and the vectors never change without one', () => checkReleases(root)],
   ['glossary entries are cited, short, and readable, and cover every tool', () => checkGlossary(root)],
-  ['published URLs resolve or redirect', () => checkSiteUrls(root, { record: Boolean(process.env.GRIDPRIMS_RECORD) })],
+  // A scheduled data refresh publishes new pages on purpose (each release's diff page, a new plant), so its
+  // workflow records them with GRIDPRIMS_RECORD_URLS, which touches no other gate's snapshot.
+  ['published URLs resolve or redirect', () => checkSiteUrls(root, { record: Boolean(process.env.GRIDPRIMS_RECORD || process.env.GRIDPRIMS_RECORD_URLS) })],
 ];
 
 let failed = 0;

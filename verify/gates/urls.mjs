@@ -1,7 +1,9 @@
 // Stable URLs (site/home-and-navigation): every URL ever published resolves or
 // redirects, every new page is recorded, redirect targets exist, and the rule
 // count stays within the 1,500 budget, with the largest groups named.
-// GRIDPRIMS_RECORD=1 adds new pages to data/curated/published-urls.json.
+// GRIDPRIMS_RECORD=1 adds new pages to data/curated/published-urls.json; GRIDPRIMS_RECORD_URLS=1 does only
+// that, for the scheduled data refresh, whose new release pages are published on purpose. A page that
+// disappears still fails until it redirects.
 
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
