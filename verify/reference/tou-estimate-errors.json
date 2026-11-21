@@ -1,0 +1,33 @@
+{
+  "tested": "2026-11-21",
+  "method": "Each home's 2018 priced exactly from its hourly meter data and again from its monthly totals spread by the state's typical single-family pattern, on the same URDB rate.",
+  "homes": [
+    {
+      "state": "CO",
+      "building": "100014",
+      "rate": "City of Colorado Springs, Colorado (Utility Company), Residential Service Time of Day (ETR)",
+      "urdb": "5d260edf5457a31715dc1324",
+      "exact": 785.5,
+      "estimate": 818.76,
+      "percent": 4.2
+    },
+    {
+      "state": "TX",
+      "building": "100",
+      "rate": "Entergy Texas Inc., Residential Service - Time Of Day",
+      "urdb": "67d32c46e3755f399109c6fe",
+      "exact": 1579.81,
+      "estimate": 1503.13,
+      "percent": -4.9
+    },
+    {
+      "state": "CA",
+      "building": "100004",
+      "rate": "Pacific Gas & Electric Co, E-TOU-D Residential Time of Use",
+      "urdb": "69de75bd6c6b1b3352045e3c",
+      "exact": 1860.11,
+      "estimate": 1866.88,
+      "percent": 0.4
+    }
+  ]
+}
