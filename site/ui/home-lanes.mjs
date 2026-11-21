@@ -41,6 +41,7 @@ export const PAGE_CELLS = {
   data: [
     { id: 'ledger', path: '/ledger/', needs: 'none' },
     { id: 'checks', path: '/ledger/checks/', needs: 'none' },
+    { id: 'ground-truth', path: '/data/ground-truth/', needs: 'none' },
   ],
   learn: [
     { id: 'glossary', path: '/learn/glossary/', needs: 'none' },

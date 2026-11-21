@@ -8,6 +8,7 @@ import glossary, { CHECKED as GLOSSARY_CHECKED } from './glossary.mjs';
 import go95 from './go95/clearances.mjs';
 import programLinks from './program-links.mjs';
 import screens from './interconnect/_index.mjs';
+import publications from './conformance-publications.mjs';
 
 /** A hand-maintained folder is as old as its most recently checked record. */
 const checked = (records) => ({ asOf: records.map((r) => r.lastChecked).sort().at(-1), vintage: `${records.length} records` });
@@ -22,5 +23,6 @@ export default [
   { id: 'gridprims-reliability-cohorts', title: 'Reliability cohorts: SAIDI and SAIFI quartiles by ownership, size, and census division', sourceUrl: 'https://gridprims.com/reliability/cohorts.csv', cadence: { every: 'annual' }, from: 'eia-861' },
   { id: 'gridprims-program-links', title: 'Tools and sources we link to instead of rebuilding, each dated', sourceUrl: 'https://gridprims.com/learn/links/', cadence: { every: 'annual' }, curated: 'program-links', ...checked(programLinks) },
   { id: 'gridprims-interconnect-screens', title: 'Interconnection screen thresholds by jurisdiction, each cited to its tariff or rule', sourceUrl: 'https://gridprims.com/interconnect/screens.csv', cadence: { every: 'annual' }, curated: 'interconnect', ...checked(screens) },
+  { id: 'gridprims-regulator-bills', title: 'Typical residential bills state commissions publish, cited to the page, with coverage by state', sourceUrl: 'https://gridprims.com/data/ground-truth/', cadence: { every: 'annual' }, curated: 'conformance', asOf: publications.map((p) => p.checked).sort().at(-1), vintage: `${publications.filter((p) => p.status === 'used').length} commission(s) used, ${publications.length} looked at` },
   { id: 'gridprims-weather-stations', title: 'Weather station index and nearest-station search', sourceUrl: 'https://gridprims.com/tools/weather/change/explain/', cadence: { every: 'monthly' }, from: 'ghcn-daily' },
 ];

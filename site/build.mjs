@@ -18,6 +18,8 @@ import EXPLAINERS from '../data/curated/explainers/index.mjs';
 import { resolveExplainer } from './entities/explainers.mjs';
 import { explainerPage, explainerPath } from './templates/explainer.mjs';
 import { LINKS_PATH, programLinksPage } from './templates/program-links.mjs';
+import { GROUND_TRUTH_PATH, checkPublications, coverage as groundTruthCoverage, groundTruthCsv, groundTruthJson, loadGroundTruth } from './entities/ground-truth.mjs';
+import { groundTruthPage } from './templates/ground-truth.mjs';
 import { OURS as COHORT_CHOICES, cohortTable } from '../core/lib/reliability-peers.mjs';
 import { limitsRecord } from '../core/contract/limits.mjs';
 import { cannotDo, claims } from '../core/contract/limits-inputs.mjs';
@@ -310,6 +312,14 @@ export async function build(opts = {}) {
   mkdirSync(join(outDir, 'interconnect'), { recursive: true });
   writeFileSync(join(outDir, 'interconnect/screens.csv'), screensCsv(SCREEN_RECORDS));
   writeFileSync(join(outDir, 'interconnect/screens.json'), JSON.stringify({ publisher: 'gridprims', license: 'CC BY 4.0', credit: 'Each row cites the tariffs and rules it was read from; credit them with gridprims.', asOf: SCREEN_RECORDS.map((r) => r.lastChecked).sort().at(-1), rows: screenRows(SCREEN_RECORDS) }, null, 2) + '\n');
+  // The regulator ground truth: the limits first, coverage by state with every absence, and the figures cited to the page.
+  const publicationProblems = checkPublications(undefined, undefined, ROOT);
+  if (publicationProblems.length) throw new Error(`conformance publications:\n${publicationProblems.join('\n')}`);
+  const groundTruth = loadGroundTruth(ROOT);
+  const gtCoverage = groundTruthCoverage(groundTruth);
+  write(GROUND_TRUTH_PATH, groundTruthPage({ documents: groundTruth, coverage: gtCoverage, i18n }));
+  writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'ground-truth.csv'), groundTruthCsv(groundTruth));
+  writeFileSync(join(outDir, GROUND_TRUTH_PATH, 'ground-truth.json'), JSON.stringify(groundTruthJson(groundTruth, gtCoverage), null, 2) + '\n');
   // The glossary, as a page and as data agents read with the same words.
   write(GLOSSARY_PATH, glossaryPage({ entries: GLOSSARY, tools: TOOLS, i18n }));
   writeFileSync(join(outDir, 'learn/glossary/glossary.json'), JSON.stringify({ license: 'CC BY 4.0', publisher: 'gridprims', note: 'Entries adapted from the EIA glossary (a public-domain U.S. government work) say so.', entries: GLOSSARY }, null, 2) + '\n');
