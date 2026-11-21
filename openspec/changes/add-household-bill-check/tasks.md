@@ -11,7 +11,7 @@
 - [x] 2.2 Totals pricing with day proration; verify the $115.00 and the 480/420 kWh scenarios
 - [x] 2.3 Paid-amount comparison and effective price; verify the +$16.40 and 14.38-cent scenarios
 - [x] 2.5 Mid-cycle forecast with the weekday-scaled method; verify the fourteen-days-in, demand-not-final, and too-little-data scenarios
-- [ ] 2.4 Store five published bill examples and three EFLs; verify to the cent and 0.1 cent per kWh
+- [ ] 2.4 Store five published bill examples and three EFLs; verify to the cent and 0.1 cent per kWh (the five published bills: verify/fixtures/bill/published-examples.mjs names five Louisiana PSC bills, five schedules at the commission's own levels, from the bill test vectors, and verify/tests/core/published-bills.test.mjs runs each through household.bill-totals.check with the tariff as entered JSON, matching to the cent; the three EFLs are still to come)
 
 ## 3. Benchmark and plan finder
 
