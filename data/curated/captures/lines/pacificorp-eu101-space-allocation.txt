@@ -1,0 +1,77 @@
+Source: https://pscdocs.utah.gov/electric/10docs/1003543/68400ExhibitC.pdf
+Publisher: PacifiCorp (Rocky Mountain Power), Exhibit C - Construction Standards to its Pole Attachment Agreement, filed with the Utah PSC in docket 10-035-97; EU 101 Joint Use - Pole Space Allocation, dated 22 Mar 07
+Retrieved: 2026-11-21
+Original: 1206760 bytes, SHA-256 f51f6c816d844d10b9be33b69c7925f38939ba0bb3c0d7217598a5fa114b5709
+Capture: EU 101 Figures 1 and 3 (PDF pages 7 and 9) as pdftotext -layout reads them
+----
+[PDF page 7, EU 101 Figure 1, Space Allocation on 40 Foot Basic Joint Use Pole]
+
+                     Height Above Ground                 34’--0”   Height Above Ground
+
+
+                  Electric
+                   Utility
+                  Space            7’--8”
+
+                                                                          Usual Point of Attachment for
+                                                         26’--4”          Lowermost Electric Utility, Secondary,
+                  Separation                                              Service, or Streetlighting
+                    Space           3’--4”                                Conductor or Cable
+                                                         23’              Usual Point of Attachment
+                                              1’                          for CATV Cable
+            Communication                                22’
+                                                                          Usual Point of Attachment
+                                   3’--0”
+               Space
+                                                         20’--0”          for Uppermost Telephone
+                                                                          Company Cable
+                                                                          Usual Point of Attachment
+                                                                          for Lowermost Telephone
+                                                                          Company Cable
+                                    20’--0”
+
+
+                     Ground Line
+
+
+                                   6’--0”
+                      Setting
+                      Depth
+
+
+[PDF page 9, EU 101 Figure 3, Space Allocation on 45 Foot Basic Joint Use Pole]
+
+                   Height Above Ground                   38’--6”” Height Above Ground
+
+
+                  Electric
+
+                                   10’--2”
+                   Utility
+                  Space
+
+                                                                          Usual Point of Attachment for
+                                                         28’--4”          Lowermost Electric Utility, Secondary,
+                  Separation                                              Service, or Streetlighting
+                    Space           3’--4”                                Conductor or Cable
+                                                         25’              Usual Point of Attachment
+                                              1’                          for CATV Cable
+            Communication                                24’
+                                                                          Usual Point of Attachment
+                                   5’--0”
+               Space
+                                                                          for Uppermost Telephone
+                                                         20’--0”
+                                                                          Company Cable
+                                                                          Usual Point of Attachment
+                                                                          for Lowermost Telephone
+                                                                          Company Cable
+                                    20’--0”
+
+
+                    Ground Line
+
+
+                                    6’--6”
+                     Setting
+                     Depth

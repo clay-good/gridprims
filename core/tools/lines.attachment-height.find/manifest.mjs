@@ -51,7 +51,7 @@ export default {
   ],
   stability: 'experimental',
   validation: { level: 1, evidence: [{ kind: 'own-examples', summary: 'The spec\'s fits-as-is, one-move, ranked-plan, pole-too-short, length-unknown, existing-shortfall, and voltage-range scenarios, each hand-computed.' }] },
-  toRaise: 'At least 10 worked placements from published utility joint-use standards (Clark Public Utilities Section 1910, Tacoma Power C-OH-1060, Chelan County PUD), reproduced, would raise it to cross-checked.',
+  toRaise: 'At least 10 worked placements from published utility joint-use standards, reproduced, would raise it to cross-checked. So far 4 of the 10 reproduce (PacifiCorp EU 101, Figures 1 and 3); Clark Public Utilities, Tacoma Power, and Chelan County PUD publish separations but no worked heights, and RG&E and NYSEG\'s standards could not be fetched.',
   screeningLabel: 'Preview. Screening check against the rules you entered. The pole owner and a qualified engineer have the final word, and pole loading is not checked.',
   limitations: [
     'One new line per pole; crossarms, framing, and linked spans are not modeled.',
