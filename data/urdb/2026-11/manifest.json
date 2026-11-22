@@ -1,0 +1,697 @@
+{
+  "dataset": "urdb",
+  "version": "2026-11",
+  "title": "U.S. Utility Rate Database (OpenEI)",
+  "publisher": "OpenEI (National Laboratory of the Rockies), with rates entered by contributors",
+  "sourceUrl": "https://apps.openei.org/USURDB/",
+  "terms": {
+    "url": "https://apps.openei.org/USURDB/",
+    "section": "Page footer",
+    "text": "Content is available under Creative Commons Zero unless otherwise noted.",
+    "captured": "2026-10-31",
+    "license": "CC0-1.0"
+  },
+  "redistributionBasis": {
+    "kind": "named license",
+    "note": "CC0 1.0; no credit required, given as a courtesy"
+  },
+  "posture": "mirror",
+  "postureAdvisory": {
+    "posture": "mirror",
+    "license": "CC0-1.0",
+    "reason": "recognized CC0-1.0",
+    "agrees": true
+  },
+  "license": "named license (CC0 1.0; no credit required, given as a courtesy)",
+  "attribution": "U.S. Utility Rate Database, OpenEI (apps.openei.org/USURDB), CC0, retrieved Nov 2026.",
+  "asOf": "2026-11-22",
+  "retrieved": "2026-11-22",
+  "generatedAt": "2026-11-22T00:00:00Z",
+  "cadence": {
+    "every": "monthly",
+    "nextRelease": {
+      "date": "2026-11-30",
+      "posted": false,
+      "note": "OpenEI rewrites the bulk file daily; gridprims takes it once a month"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://apps.openei.org/USURDB/download/usurdb.json.gz",
+      "name": "usurdb.json.gz",
+      "bytes": 15274489,
+      "sha256": "419b2a89cb81e2f84f66c37b7ceea642d36ffd3bd1b3b0d7469f0455511f82de",
+      "lastModified": "Sun, 22 Nov 2026 12:24:32 GMT",
+      "release": "https://github.com/clay-good/gridprims/releases/download/data-urdb-2026-11/usurdb.json.gz"
+    }
+  ],
+  "previousVersion": "2026-10",
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-11-22",
+    "infrastructure": false,
+    "columnsChecked": 49,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Published retail tariffs; no facility, location, or network data."
+  },
+  "tables": [
+    {
+      "name": "rates",
+      "title": "Rates in effect, by state, with their structures and schedules",
+      "dataPeriod": "2026-11",
+      "rows": 38765,
+      "changes": {
+        "from": "2026-10",
+        "added": 0,
+        "removed": 0,
+        "changed": 0
+      },
+      "columns": [
+        {
+          "name": "label",
+          "type": "str"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "utility_id",
+          "type": "f64"
+        },
+        {
+          "name": "utility_states",
+          "type": "f64",
+          "unit": "count"
+        },
+        {
+          "name": "utility_name",
+          "type": "str"
+        },
+        {
+          "name": "rate_name",
+          "type": "str"
+        },
+        {
+          "name": "sector",
+          "type": "str"
+        },
+        {
+          "name": "service_type",
+          "type": "str"
+        },
+        {
+          "name": "description",
+          "type": "str"
+        },
+        {
+          "name": "source_reference",
+          "type": "str"
+        },
+        {
+          "name": "supersedes",
+          "type": "str"
+        },
+        {
+          "name": "fixed_charge_units",
+          "type": "str"
+        },
+        {
+          "name": "min_charge_units",
+          "type": "str"
+        },
+        {
+          "name": "demand_rate_units",
+          "type": "str"
+        },
+        {
+          "name": "flat_demand_units",
+          "type": "str"
+        },
+        {
+          "name": "coincident_rate_units",
+          "type": "str"
+        },
+        {
+          "name": "voltage_category",
+          "type": "str"
+        },
+        {
+          "name": "phase_wiring",
+          "type": "str"
+        },
+        {
+          "name": "dg_rules",
+          "type": "str"
+        },
+        {
+          "name": "approved",
+          "type": "str"
+        },
+        {
+          "name": "is_default",
+          "type": "str"
+        },
+        {
+          "name": "effective_date",
+          "type": "str"
+        },
+        {
+          "name": "end_date",
+          "type": "str"
+        },
+        {
+          "name": "last_revised",
+          "type": "str"
+        },
+        {
+          "name": "fixed_charge",
+          "type": "f64",
+          "unit": "$ per fixed_charge_units"
+        },
+        {
+          "name": "min_charge",
+          "type": "f64",
+          "unit": "$ per min_charge_units"
+        },
+        {
+          "name": "demand_min_kw",
+          "type": "f64",
+          "unit": "kW"
+        },
+        {
+          "name": "demand_max_kw",
+          "type": "f64",
+          "unit": "kW"
+        },
+        {
+          "name": "energy_min_kwh",
+          "type": "f64",
+          "unit": "kWh"
+        },
+        {
+          "name": "energy_max_kwh",
+          "type": "f64",
+          "unit": "kWh"
+        },
+        {
+          "name": "service_min_v",
+          "type": "f64",
+          "unit": "V"
+        },
+        {
+          "name": "service_max_v",
+          "type": "f64",
+          "unit": "V"
+        },
+        {
+          "name": "lookback_percent",
+          "type": "f64",
+          "unit": "fraction"
+        },
+        {
+          "name": "lookback_range",
+          "type": "f64",
+          "unit": "months"
+        },
+        {
+          "name": "demand_window",
+          "type": "f64",
+          "unit": "minutes"
+        },
+        {
+          "name": "reactive_power_charge",
+          "type": "f64",
+          "unit": "$ per kVAR"
+        },
+        {
+          "name": "energy_rate_structure",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "energy_weekday_schedule",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "energy_weekend_schedule",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "demand_rate_structure",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "demand_weekday_schedule",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "demand_weekend_schedule",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "flat_demand_structure",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "flat_demand_months",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "coincident_rate_structure",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "coincident_schedule",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "demand_ratchet_percentage",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "lookback_months",
+          "type": "str",
+          "unit": "JSON"
+        },
+        {
+          "name": "fuel_adjustments_monthly",
+          "type": "str",
+          "unit": "JSON"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "rates/AK.bin",
+          "state": "AK",
+          "rows": 350,
+          "bytes": 184472,
+          "sha256": "b6474c843cd90e87f9818590fff6a6d0e1cc2795c3cb0b0d3836a93150bfcda3"
+        },
+        {
+          "path": "rates/AL.bin",
+          "state": "AL",
+          "rows": 624,
+          "bytes": 384296,
+          "sha256": "c553b0ea0aaaf559b6bdaf5ec294d3189ad702a0bc1a19970b451b24f5ed9e43"
+        },
+        {
+          "path": "rates/AR.bin",
+          "state": "AR",
+          "rows": 481,
+          "bytes": 367672,
+          "sha256": "360435191fba379d510048487d897fbf99e45ee4c41483a13a7067c26abf2833"
+        },
+        {
+          "path": "rates/AZ.bin",
+          "state": "AZ",
+          "rows": 905,
+          "bytes": 804648,
+          "sha256": "3879c086cec56e161690f0f0b051cdfc9588abe3ba62843a4accd838239ff882"
+        },
+        {
+          "path": "rates/CA.bin",
+          "state": "CA",
+          "rows": 1540,
+          "bytes": 1492744,
+          "sha256": "a9c38976c408b61b8734136fc72472186d173d6851f456963521e4af006ead34"
+        },
+        {
+          "path": "rates/CO.bin",
+          "state": "CO",
+          "rows": 944,
+          "bytes": 645976,
+          "sha256": "34015e7fc7f2639e58d16ea6894220e5d691b9b64b96cb7c909757fadda10317"
+        },
+        {
+          "path": "rates/CT.bin",
+          "state": "CT",
+          "rows": 158,
+          "bytes": 111592,
+          "sha256": "121139263739c8acd6bfe8f9091f21eb1b0b01d8a1c4106e1157a790ed2d30a5"
+        },
+        {
+          "path": "rates/DC.bin",
+          "state": "DC",
+          "rows": 54,
+          "bytes": 60472,
+          "sha256": "93432cef08777a8e5c44584633733537e9cc2f5611e1a3b584c4d18efb87d0a0"
+        },
+        {
+          "path": "rates/DE.bin",
+          "state": "DE",
+          "rows": 112,
+          "bytes": 100776,
+          "sha256": "e790b60937fe6b255cff3d3d5441b63d95f72b01115b3afbde0208dd1deac206"
+        },
+        {
+          "path": "rates/FL.bin",
+          "state": "FL",
+          "rows": 736,
+          "bytes": 532200,
+          "sha256": "cf454ef2d9eb9a4c887f0bb180f0f627eef91bfdf796930c9afbf4bf4f8e71da"
+        },
+        {
+          "path": "rates/GA.bin",
+          "state": "GA",
+          "rows": 915,
+          "bytes": 623088,
+          "sha256": "e80db3e9f7be4e9606eb43ef9f08ac5dced7b56e612e0062de1fccc196a206cd"
+        },
+        {
+          "path": "rates/HI.bin",
+          "state": "HI",
+          "rows": 120,
+          "bytes": 116728,
+          "sha256": "f9b0bd704432d0d136756c3d07244e166fb9c839a8aac68aadd2ebe71113457a"
+        },
+        {
+          "path": "rates/IA.bin",
+          "state": "IA",
+          "rows": 1308,
+          "bytes": 761744,
+          "sha256": "0916c046ed81f1ba1112b3f6a9f93e016246ea5e1a723bb7f5c027c0f5097a2d"
+        },
+        {
+          "path": "rates/ID.bin",
+          "state": "ID",
+          "rows": 695,
+          "bytes": 471504,
+          "sha256": "6945c744f33baaa18b49d9dd46d28977fed7c6547401e54d52ae758625a37a6f"
+        },
+        {
+          "path": "rates/IL.bin",
+          "state": "IL",
+          "rows": 797,
+          "bytes": 511472,
+          "sha256": "96182ee6dc0db29696e366e8bbda92c1dc9656f77c3bb68b85ff1d9d6b243513"
+        },
+        {
+          "path": "rates/IN.bin",
+          "state": "IN",
+          "rows": 1252,
+          "bytes": 806176,
+          "sha256": "b9536a96241be53c9b64b20a05c91d4241cc1c7ccff2ffccb9073056cec018a4"
+        },
+        {
+          "path": "rates/KS.bin",
+          "state": "KS",
+          "rows": 1181,
+          "bytes": 740312,
+          "sha256": "04fe086296941b1e466460bd1ab99c3dbc953325154a478e1c79ecf5105d4544"
+        },
+        {
+          "path": "rates/KY.bin",
+          "state": "KY",
+          "rows": 711,
+          "bytes": 431968,
+          "sha256": "2801fef5238112e7bb546d0bb1ab4ad5940c405f1d4b8d0173eb2993ac2a2aeb"
+        },
+        {
+          "path": "rates/LA.bin",
+          "state": "LA",
+          "rows": 374,
+          "bytes": 298512,
+          "sha256": "d02606fa7d6e646784a8c9e5f36254c9dfbde5dceffd7771d62ba965b9bfa7d1"
+        },
+        {
+          "path": "rates/MA.bin",
+          "state": "MA",
+          "rows": 555,
+          "bytes": 421272,
+          "sha256": "81bcd8e9b73ea8037ca5d21e538c7f000e8952f49cb29d50eb0bae1608abb5bc"
+        },
+        {
+          "path": "rates/MD.bin",
+          "state": "MD",
+          "rows": 254,
+          "bytes": 226144,
+          "sha256": "6e9aad5601fa321679ca26610ee4146f0eb5666eaa90a27a27f74ef1f2ce26eb"
+        },
+        {
+          "path": "rates/ME.bin",
+          "state": "ME",
+          "rows": 104,
+          "bytes": 102432,
+          "sha256": "68743534d62ed888330ee25949dd8ff48b97a32b978290c3a05f52773b54cc79"
+        },
+        {
+          "path": "rates/MI.bin",
+          "state": "MI",
+          "rows": 1151,
+          "bytes": 704008,
+          "sha256": "2544c7538c1e148556f44e7acfc60d15843527b93f5c66556860d170fee68c78"
+        },
+        {
+          "path": "rates/MN.bin",
+          "state": "MN",
+          "rows": 1703,
+          "bytes": 1028656,
+          "sha256": "71a368c542237c3a48d6c6f707525058d3aa5fc93d3b3f173f322ea03501651b"
+        },
+        {
+          "path": "rates/MO.bin",
+          "state": "MO",
+          "rows": 957,
+          "bytes": 639496,
+          "sha256": "b55067b4497c4255287bf1be5936dadbdb60f69cd92996631ca472dca372049c"
+        },
+        {
+          "path": "rates/MS.bin",
+          "state": "MS",
+          "rows": 457,
+          "bytes": 305216,
+          "sha256": "e3145bc7e7c52cb6887bf8fcce2d87ba945237fb82ea30da7d9c0eb23f14fe53"
+        },
+        {
+          "path": "rates/MT.bin",
+          "state": "MT",
+          "rows": 675,
+          "bytes": 386584,
+          "sha256": "6f268e4539ec547e5f853886a5e1c00a476e2cffb90b0b3d9636fe2b778f3ee9"
+        },
+        {
+          "path": "rates/NC.bin",
+          "state": "NC",
+          "rows": 1720,
+          "bytes": 1315592,
+          "sha256": "1b9b947bfe349a1ee618a496f2efb1e41c15b0bf01e1767cdec59cfbd0cc29d9"
+        },
+        {
+          "path": "rates/ND.bin",
+          "state": "ND",
+          "rows": 544,
+          "bytes": 386072,
+          "sha256": "902849a448eb9a9bc4adc7f5b0e7913d50dfac6f52e544b9d36fc34bfe9989a3"
+        },
+        {
+          "path": "rates/NE.bin",
+          "state": "NE",
+          "rows": 1695,
+          "bytes": 998488,
+          "sha256": "26d1c290e80c6191f78abe50248456fda3b345fc09be3d0bc66931689fc06781"
+        },
+        {
+          "path": "rates/NH.bin",
+          "state": "NH",
+          "rows": 148,
+          "bytes": 101568,
+          "sha256": "5d962e39d26768e017b6d4f6adf661b210c2c7aea6e02e8cdd2e032db5d9d164"
+        },
+        {
+          "path": "rates/NJ.bin",
+          "state": "NJ",
+          "rows": 185,
+          "bytes": 140216,
+          "sha256": "478b3aa6e247bbc6baa374d854a52ea53a0259b88506dd500d4a9bee0349c26f"
+        },
+        {
+          "path": "rates/NM.bin",
+          "state": "NM",
+          "rows": 609,
+          "bytes": 447864,
+          "sha256": "d957cfee2663b8664ddb9db4e8047a6b8d03270454f2c37f9894cf8727161481"
+        },
+        {
+          "path": "rates/NV.bin",
+          "state": "NV",
+          "rows": 540,
+          "bytes": 507144,
+          "sha256": "cd42def58c0f7f784728866be8372bb48c630f31a2eae37d6af119868a671754"
+        },
+        {
+          "path": "rates/NY.bin",
+          "state": "NY",
+          "rows": 813,
+          "bytes": 502856,
+          "sha256": "4eeb0daed0967d964565a9214d0d7621ec4115d5b6f2a280fdf911928650c4c7"
+        },
+        {
+          "path": "rates/OH.bin",
+          "state": "OH",
+          "rows": 946,
+          "bytes": 614520,
+          "sha256": "fde809980ce0db20896fae37d55b72274b70d590433b2b6c3a0eeb17576963a3"
+        },
+        {
+          "path": "rates/OK.bin",
+          "state": "OK",
+          "rows": 898,
+          "bytes": 611664,
+          "sha256": "538ced86e8d4dd8665e8f676fe1434a6b3c5cef62c8df6fbf263fa225f3ab5a6"
+        },
+        {
+          "path": "rates/OR.bin",
+          "state": "OR",
+          "rows": 849,
+          "bytes": 602280,
+          "sha256": "5f12fcdea0998ac47598910a123cdd819401b7b90a042144019ac2995b556a16"
+        },
+        {
+          "path": "rates/PA.bin",
+          "state": "PA",
+          "rows": 420,
+          "bytes": 267536,
+          "sha256": "bf0dba51001881d7b5ec98ab8b955065eedbfdaa9135d0a4c61a07c333d82a58"
+        },
+        {
+          "path": "rates/RI.bin",
+          "state": "RI",
+          "rows": 32,
+          "bytes": 26616,
+          "sha256": "fa65afc4a801f86bec89a3a64b5af920b6c7f6b544d398ddf56fea82ccddf898"
+        },
+        {
+          "path": "rates/SC.bin",
+          "state": "SC",
+          "rows": 512,
+          "bytes": 457480,
+          "sha256": "2a71d2a4bd466c5d63687d212a68b24289ebcbb7550107e9dbc5905f51d47a81"
+        },
+        {
+          "path": "rates/SD.bin",
+          "state": "SD",
+          "rows": 936,
+          "bytes": 602688,
+          "sha256": "3afb3213d4b65cb7f99c9653b8c0cbe1a189ee198d443033974592bddf2c7811"
+        },
+        {
+          "path": "rates/TN.bin",
+          "state": "TN",
+          "rows": 909,
+          "bytes": 591704,
+          "sha256": "ef94fe9c8161214dd1e7888916d549b686dabf05b68339d1d5443050a7d3d4fa"
+        },
+        {
+          "path": "rates/TX.bin",
+          "state": "TX",
+          "rows": 1807,
+          "bytes": 1118896,
+          "sha256": "9f55655c052ab65c3d2e1aef5b88b4cd5aaae28d29feb247f021d2f1868f6be9"
+        },
+        {
+          "path": "rates/UT.bin",
+          "state": "UT",
+          "rows": 601,
+          "bytes": 446384,
+          "sha256": "dd5803da6bd808bfcbd79195437416f0e719758918b3ce70a747e36b3ad26ce3"
+        },
+        {
+          "path": "rates/VA.bin",
+          "state": "VA",
+          "rows": 515,
+          "bytes": 420024,
+          "sha256": "fda41c17abdc42b2c6871a460e847f7d75b12fe5d2b55326fe889eb0df8d0e1b"
+        },
+        {
+          "path": "rates/VT.bin",
+          "state": "VT",
+          "rows": 238,
+          "bytes": 158192,
+          "sha256": "c14cfce9abab465d1351d0ab46309c300af12b3f83d4f9e24c4ea8644d409ea5"
+        },
+        {
+          "path": "rates/WA.bin",
+          "state": "WA",
+          "rows": 1094,
+          "bytes": 739144,
+          "sha256": "14d6a73a580b72dd2a367c004f5d02bb6eed42e7adf5956f8259e42b1af1be9a"
+        },
+        {
+          "path": "rates/WI.bin",
+          "state": "WI",
+          "rows": 2031,
+          "bytes": 1153056,
+          "sha256": "71f0d9a32f040fdb0646b56a48fe44e9e9964982c726636110880793cd9554ff"
+        },
+        {
+          "path": "rates/WV.bin",
+          "state": "WV",
+          "rows": 190,
+          "bytes": 199544,
+          "sha256": "b4863fb730efed10cfcb442ba58379921c5773a4f4d1252cbc618f442b892bf5"
+        },
+        {
+          "path": "rates/WY.bin",
+          "state": "WY",
+          "rows": 713,
+          "bytes": 527880,
+          "sha256": "06efe19bfa01a609fde7ff314cce2f1462f6a71cde4c15030ddd10d1057ec61f"
+        },
+        {
+          "path": "rates/unmatched.bin",
+          "state": "unmatched",
+          "rows": 707,
+          "bytes": 563792,
+          "sha256": "6d0b906a78e8d9e982b9867495df18ade3fa9da790c9fff4e566be25eac8aed0"
+        }
+      ],
+      "download": {
+        "path": "rates.csv.gz",
+        "bytes": 5487750,
+        "sha256": "89bd026559ed1fb67cf41b4ebeb8030ba29393831efe34802da584f859636424",
+        "format": "text/csv; gzip"
+      },
+      "license": "CC-BY-4.0",
+      "credits": [
+        {
+          "publisher": "OpenEI (National Laboratory of the Rockies), with rates entered by contributors",
+          "attribution": "U.S. Utility Rate Database, OpenEI (apps.openei.org/USURDB), CC0, retrieved Nov 2026.",
+          "note": "Modified by gridprims."
+        },
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Form EIA-861 (Oct 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": [],
+      "joinedFrom": [
+        {
+          "dataset": "eia-861",
+          "table": "sales",
+          "version": "2026-10"
+        },
+        {
+          "dataset": "eia-861",
+          "table": "service_territory",
+          "version": "2026-10"
+        }
+      ],
+      "unmatched": 707
+    }
+  ]
+}

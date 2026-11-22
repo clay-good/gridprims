@@ -904,7 +904,7 @@
    "left": {
     "dataset": "urdb",
     "table": "rates",
-    "version": "2026-10",
+    "version": "2026-11",
     "keys": 2826,
     "unmatched": 1668,
     "sample": [

@@ -1,0 +1,339 @@
+{
+  "dataset": "eia-930",
+  "license": "CC BY 4.0",
+  "from": {
+    "version": "2026-10",
+    "asOf": "2026-10-31",
+    "retrieved": "2026-10-31"
+  },
+  "to": {
+    "version": "2026-11",
+    "asOf": "2026-11-21",
+    "retrieved": "2026-11-22"
+  },
+  "files": {
+    "added": [],
+    "removed": [],
+    "changed": [
+      {
+        "path": "hourly/AECI-2026.bin",
+        "from": "ff0d3eb24add1982eca8f80d7797981034107026f33d716dc4e03302b1e873e7",
+        "to": "93e1657fc661c6c5bdabfa7d80e7d413c2936550f227f9185ef5cb8f0bf4f332"
+      },
+      {
+        "path": "hourly/AVA-2026.bin",
+        "from": "13c1712e6354018b67cf254e17d82b395a06917fc16052be1ed1e69d98db823e",
+        "to": "f8b7ed611807e308f7bae4b7209fd006b37b7288f171261534022abf99a6cb1b"
+      },
+      {
+        "path": "hourly/AVRN-2026.bin",
+        "from": "3933b51c53a7f436c013659a11c96ec9b8dd1d20b74a30edaa0e20f3038f0ed2",
+        "to": "c5b194e013493644d0484a6404f2d2ad0434c65e33f696d5e2120a7208822f71"
+      },
+      {
+        "path": "hourly/AZPS-2026.bin",
+        "from": "d2f94b5ccc3a84b2c1826ae4f34a80c9a0a9b3aadfb44cd3bb45f64e2911d0b3",
+        "to": "0904830d306ed64423edc743f629b174ba185ef169df5cc09e4c8abc47e1f1a5"
+      },
+      {
+        "path": "hourly/BANC-2026.bin",
+        "from": "2e06734b53da292b4a8f200871e708c00a8f9930f602aa99b2a4877a44dc642c",
+        "to": "495a3c8406d79f15754404d42c2a203bbc9729aa38c3b8923b4309e1360a512a"
+      },
+      {
+        "path": "hourly/BPAT-2026.bin",
+        "from": "5e11ea4501e1a4013e6ece8fe7a8a6dfa15ba98f63bf8b41892da919cbd27ef4",
+        "to": "5736cf4dc645253d482e691b6be948143addc0e122b839e2abe97dd2d103886c"
+      },
+      {
+        "path": "hourly/CHPD-2026.bin",
+        "from": "3abc08e443883787961daaa0c124e3560a317cae436596c7ed3c1fae8ba0f93c",
+        "to": "f06fb8a59f057489b14eb95ae7f440b657c725dc4150c30153bc7458c3e3f453"
+      },
+      {
+        "path": "hourly/CISO-2026.bin",
+        "from": "97992b1d77071e63e1e692017ccbeca8809446046310305486890eb99b34d953",
+        "to": "1587962f61e59414f246c2fda0d77094d190b84e53b5f85c39963e761b556538"
+      },
+      {
+        "path": "hourly/CPLE-2026.bin",
+        "from": "3f8eb3a481d00d4539f54662764a6e9e7a82ecd8d59a945e2866262e80f50a06",
+        "to": "9386144ec5c26bb968db4e79dccf5a96bd9fd87fd848204b210e2c02b7590d9a"
+      },
+      {
+        "path": "hourly/CPLW-2026.bin",
+        "from": "4eb13150e0410bea498f2f39f8d25081fe9b1a4433c16f286d8fd3fed65395f6",
+        "to": "02f3df4f285c414db846e00342dd707d2e4010b4daea19d833b8b998f5124b2b"
+      },
+      {
+        "path": "hourly/DEAA-2026.bin",
+        "from": "7f03015267233105924ea34b3c0483710d62d2a4a5af187bb4e21ba47ec834f3",
+        "to": "79597992bb6291d28807b45e6257ef2cd17435a3f424a4c0cc71ddefd3e6741c"
+      },
+      {
+        "path": "hourly/DOPD-2026.bin",
+        "from": "58a3f677852b99fd4983167434a9eee83da8575091c1f59a5f4912d21888bbeb",
+        "to": "d29a1f264b221c03942cd815b13f85ec68e67e9e00a6e344f042ce8881a02e17"
+      },
+      {
+        "path": "hourly/DUK-2026.bin",
+        "from": "ee01d6faaf07beeb3a7ccb17bf442632e4b974dfd415ee292d73718ddc15a6c6",
+        "to": "9fd6a6859625ef80aba03e459fa5ecdfe667a93e116651aadacde6b391a0b8f0"
+      },
+      {
+        "path": "hourly/EPE-2026.bin",
+        "from": "8c404691f7cc5fd8394bdff7cc0cba576558c1eab952a4f1e18e37db6dcc84d6",
+        "to": "454d9298f7b170c48a370dfd7e90f24e6f710bcac772b1d22ee9ba4e2fafb038"
+      },
+      {
+        "path": "hourly/ERCO-2026.bin",
+        "from": "2f1e7a45ad11fb405e101bca88f81f0c70b44c4a5c1055d8b1e81d5c46521db5",
+        "to": "e4ebb1f24e979e2ad3762f19d29fda3e8bd73889d53793235d56fd14ba0b755c"
+      },
+      {
+        "path": "hourly/FMPP-2026.bin",
+        "from": "6b78ef1cdf1f553a95848518dbf968676bbc06c92cfed1541672c54b926eb9b5",
+        "to": "689b4f8241b07eaab8bcca3bf21085f8b7f059cd962d7c7d16248ef2a1c028a0"
+      },
+      {
+        "path": "hourly/FPC-2026.bin",
+        "from": "f5c3822a799b371bb4832bd46404804be30b3d29a2b92abfcbace64d9087b3a6",
+        "to": "d83643877389ff2d741232a75a376146157a7c83e12266e51b00f5e2a2aa101e"
+      },
+      {
+        "path": "hourly/FPL-2026.bin",
+        "from": "f580c27124a0bd98dcd22ecd2e5032f501316b5f949e96754d9c036550242559",
+        "to": "67268809ff5e84dc5b4743247896bcd45d04e961b83b03f7e97307aba9015f09"
+      },
+      {
+        "path": "hourly/GCPD-2026.bin",
+        "from": "cd420bd6a1e70ba23816c343e1d823673100c6737abd8ded77b43f4bbde187c6",
+        "to": "68eda6ffe63cdaa06b9ffecbca191d52e61022374fd4c7657d044e25f3eb34e0"
+      },
+      {
+        "path": "hourly/GRID-2026.bin",
+        "from": "8b5f8d6741a64fffb6275741a9c753e736d7aa6980dae964540dae5d00b798ca",
+        "to": "62f3c138329f467eda7ddb9cb61e80abbcedc060d88251474cbd62ffa0c1a98c"
+      },
+      {
+        "path": "hourly/GVL-2026.bin",
+        "from": "f99535c06571e72fe0459f3a5f5f2747cea92ca96634280a4d8e64275faf892c",
+        "to": "18edf3f0cbc79d69d636781f3cbb3b7a77d410c41dc3485e96105dd0b9197113"
+      },
+      {
+        "path": "hourly/GWA-2026.bin",
+        "from": "d66210e2b27ed39a1fffe48ec40f8143d40b21c070b713d5b144a09f7f6a7fc5",
+        "to": "5b8588b72ec981bc92d559c26b8bb142d1b0d9152535dcc0ee4217be103ce00e"
+      },
+      {
+        "path": "hourly/HST-2026.bin",
+        "from": "07f380ce3e22ae1843e10a4368577640a47fd9d372f6b8c75915e89bf5b0d17c",
+        "to": "050e0f7022c14bf30b3a46d925acd4ba92eccbb827d5c7d1d4c90ce192c43b4b"
+      },
+      {
+        "path": "hourly/IID-2026.bin",
+        "from": "127735a462a07cd75c12f7fb7b859798564c18ed0e5444d57134de21690067b0",
+        "to": "72d46246cdff46ac1231afe431b2da2eab69a5bb4931933ce4eee24d0b559065"
+      },
+      {
+        "path": "hourly/IPCO-2026.bin",
+        "from": "29e8924f7216fa9f713ce542e6ea68416eefdd799bf384adfcc4d408cd87d3db",
+        "to": "bd82358fde8cac1c7402a95c66fa2dc72189549a0ad2472a45dc2595582fc1b3"
+      },
+      {
+        "path": "hourly/ISNE-2026.bin",
+        "from": "fe7b47aab32c9873dad44678db8d13144fbbd933d803519f76bba1ea8ee41bee",
+        "to": "b39d75307b19bff4a531ee958dc4c60ba901bfc4afdbb998f1357162e9b94e54"
+      },
+      {
+        "path": "hourly/JEA-2026.bin",
+        "from": "86324f99181ee4b17d904de8d8ff6ed3953514c0e3e693357cd5c654ff6314a0",
+        "to": "5e7e8c21a1d98149521cdcb4a8d2a32ffe4caaf6f5fdf9e66d15b85a989f5aa5"
+      },
+      {
+        "path": "hourly/LDWP-2026.bin",
+        "from": "fd65723814f9a78a57cfea9bb38090b3f59004bdd48fb6620b41ccd45ec2f89a",
+        "to": "d60f9f2a5075b34cf2e7313dd4c114c2b0fd2b43e28000fd3fffaded85b12006"
+      },
+      {
+        "path": "hourly/LGEE-2026.bin",
+        "from": "80bd19f0d771f9dd961a2892ea627bcd02f0686e040cb73e63e5f4f9608e2f1b",
+        "to": "e206a5df2673de22747643eecbc0cc0766696c6182674262095ac73697935499"
+      },
+      {
+        "path": "hourly/MISO-2026.bin",
+        "from": "14bdc0b0a08410ef45d0f588ceb732ddc19873080b298f81955b6e6f86792028",
+        "to": "fd954b5761272e3dd2ec82aadaf1edd717036b08f485ef4d1e9ea764cf0b7a6c"
+      },
+      {
+        "path": "hourly/NEVP-2026.bin",
+        "from": "bb1317dc4968cd6ac995299fa9598ead1f7d0b5af822c5994dce59e68eda46e2",
+        "to": "a7f62d4379d059a863adca1a2fc4703241b2fffbdbeb957e0a49d04fbbff7a2d"
+      },
+      {
+        "path": "hourly/NWMT-2026.bin",
+        "from": "34ee6d65180c86640f4ab564581f177ea6e70e0ba72f7cc8c94876dafb26ec3b",
+        "to": "8d84de36c7f7bbb378d67f76d4066c8d15a4be2e3cecf26700d91abeb2a27217"
+      },
+      {
+        "path": "hourly/NYIS-2026.bin",
+        "from": "32d2d3a2f765387afe57a537c66c3e930bf693f2696c00ec6da953aab56fe43c",
+        "to": "2189983997f77a6ac94591a871df5e6cad027aa0026f47417cf83e2ceb71bf84"
+      },
+      {
+        "path": "hourly/PACE-2026.bin",
+        "from": "f4270590ce5b30148085133e657dce6a63408958e4ef1b7a4f838c57e9ea4b76",
+        "to": "b4a609b96fbbb27d8e43f470fec7326dc293497a988f72511d3181ec2504abeb"
+      },
+      {
+        "path": "hourly/PACW-2026.bin",
+        "from": "e6db4c8facc45ef0b55e993f36c2bee48d89097ddc9e6fcca5dc70114e1371ac",
+        "to": "c798e3d0400684cfecfd49807b87f41d5ae947f52302ef8715624363ce9d9d0e"
+      },
+      {
+        "path": "hourly/PGE-2026.bin",
+        "from": "4afdfd9c2cda81b2f3245f1e894625bdc4fca2d2daf6ba1e6a9668c9d55c5250",
+        "to": "a3063f4b3eda55776ae2b6a5aaa9bdea07794c6cc225e69247931646088965b2"
+      },
+      {
+        "path": "hourly/PJM-2026.bin",
+        "from": "d9fff3f267a3fbb3e3bacd03033376eabb83611ab322777afc9a05c44f338995",
+        "to": "ca4eb1ba31a85e0d54103ae7e7814eb8c5ecbca8d97f9624e768cd5fbc9b2a4e"
+      },
+      {
+        "path": "hourly/PNM-2026.bin",
+        "from": "b4339ade1ba073d2eb215f93b9a41bc90b194663b29c82224101019bbc451b9e",
+        "to": "943fbfc39fe0f1b9aef035eb25429c1cdf438013a726a85f899586467f9dcd23"
+      },
+      {
+        "path": "hourly/PSCO-2026.bin",
+        "from": "97dda3482c254e139d3b164999c1e83b0d1fb91564f230a4f759eba9034f7a73",
+        "to": "2b5224ea0a466f4fc308a4733c8af9088d25c1cc8e1cc8c73a54bff8e1755aaf"
+      },
+      {
+        "path": "hourly/PSEI-2026.bin",
+        "from": "fd0bf310769ad0d085a108931e0e7de3f63c6b35ff580ae255ad701f38f6c6f5",
+        "to": "32a601d379f85338686d406ef5ea5d6b92bff879c575933948b6f70f2f894fbd"
+      },
+      {
+        "path": "hourly/SC-2026.bin",
+        "from": "63b978eaa31505771fc0ee3c3995813b449f737786718149fe448de6591bb126",
+        "to": "1f89c8a23d760af1b03480f585158803c7f1a88375acb7b50858b463daf023a3"
+      },
+      {
+        "path": "hourly/SCEG-2026.bin",
+        "from": "75133425378507373ae8bee7518e79f61c2e92152e2c0a0eb39169f96e0e796e",
+        "to": "48a20ee54a8881a04404fdc219043b02fa0043fea60078523c0c2237cb50a07e"
+      },
+      {
+        "path": "hourly/SCL-2026.bin",
+        "from": "e914e0bb89e256a412b49c9240314b2561f9cdd96d783ee5d6c62912c3e374cf",
+        "to": "1ffd343ac74604e4db4bc725c72b6b5e0f0ac29c4d2b65ccd4799392985651ba"
+      },
+      {
+        "path": "hourly/SEC-2026.bin",
+        "from": "eb508290f78debd97b480450dc827eb268480c4ae2e7aadffa4a75773e1bd396",
+        "to": "b0c82680b9ce6c715d69be6ba7d59baf370935e4f2f4e4f109855d60763c4289"
+      },
+      {
+        "path": "hourly/SEPA-2026.bin",
+        "from": "982c29f9602ab621256f26dc8f374dcaf5cdcff6c5a723fc698983b7469c842f",
+        "to": "2c129a85b7d68b8bb94c52e8232943bfc24385c8616426a23a69393111b8c824"
+      },
+      {
+        "path": "hourly/SOCO-2026.bin",
+        "from": "2ad07484c4ea19aeb3ed045a35d6f580728d3c98590f3a2ce2b82ec93faef8ff",
+        "to": "e8b3e0b2ca0fb339954f618f79661736c0110396f2b33fcdae8c4b3efec563c3"
+      },
+      {
+        "path": "hourly/SPA-2026.bin",
+        "from": "63fda7f362ab29d50e3dcca020f43dcf60b65446ad2061f3c5b0328fde28fc80",
+        "to": "7b5e84a01fc36d2de427c263d54a9c7fa1fb0a770dee671dc1122eac9cbc096d"
+      },
+      {
+        "path": "hourly/SRP-2026.bin",
+        "from": "697d7da5a9c3c400f5f6f731383a691ca6a9164f73b053940ba02cd8d14c5548",
+        "to": "d7fc6112f3ba11b16503dea08f79a51ffbe0d812eb603bde5e9c27c4e9c9a968"
+      },
+      {
+        "path": "hourly/SWPP-2026.bin",
+        "from": "57cc4cac0c469f9a40853d2f65fcc4a3bcecc029af027169341f607e2e8a664b",
+        "to": "e7e33f9e4018116bac6ff035a6080e22b9d42d362da0b996d79c4da4e478868b"
+      },
+      {
+        "path": "hourly/TAL-2026.bin",
+        "from": "5804efcc20ed43004238d1af018e6d41a6cf3c0298d387b8e122572af220240f",
+        "to": "ba297e754ad30a2275f940df5838bef4e16e3abfbcaa6c7964bbc8d08b78525c"
+      },
+      {
+        "path": "hourly/TEC-2026.bin",
+        "from": "fa17ad4d666359c7fa72fc98a2a6db07d897bcd170e01a3ee3f554e416889dfe",
+        "to": "4fa1dfdf4ff6200f8f320586fdd5a74cccd8e9d7f78deda781d99d5fc9228a17"
+      },
+      {
+        "path": "hourly/TEPC-2026.bin",
+        "from": "3777e1a5ae8dc1c64256db2e085240559fbe7fd92c58e3b887555a3ea2f1c55a",
+        "to": "300807f65412510374c713f2ad416ca250b3831725a96991f786a9cd0501caa5"
+      },
+      {
+        "path": "hourly/TIDC-2026.bin",
+        "from": "7dda0a2b94cd274040cda6167bc7c1abe4a37c13d48cf9ed8d0e7fd3ed9facbe",
+        "to": "333957698f790d7d31e3704e3d00dfe14036a38b788fbb831322ee8ec2a2f528"
+      },
+      {
+        "path": "hourly/TPWR-2026.bin",
+        "from": "4517b0a8dff2009d48dbac827474191d35cb8ef20c44223eb62ff509ff2d5ca8",
+        "to": "c3c9f8e689e2ef2198a0cf6d2d11ead4e2a4a2b8ec0fe19cccb5d4c0df50368c"
+      },
+      {
+        "path": "hourly/TVA-2026.bin",
+        "from": "107380ff67a6c4928a0942831199aef8cddeb698737ab0b830a00ee33524018c",
+        "to": "13f149a66dfdbda16c66d4f9595631328ab7f2040d4d1aaa5eacac9061ec3bd6"
+      },
+      {
+        "path": "hourly/WALC-2026.bin",
+        "from": "623af40304cd934fcda1517753c6ee03d66e0f85e11343813d39a2319827e05c",
+        "to": "cd6a4db1b63a79048b06e64d85f77c89b83d927420b9d2e7d6aadaae0930747d"
+      },
+      {
+        "path": "hourly/YAD-2026.bin",
+        "from": "49f68b84740ebccebfae2ba4be1d92fc9f56bf97bf1257b0b52f3a8dcf77bdf1",
+        "to": "6ee649ea05bf4e2c76978625753d343bb664926aab925dcf1b8712a12a091f64"
+      }
+    ],
+    "unchanged": 510
+  },
+  "tables": [
+    {
+      "name": "hourly",
+      "rows": {
+        "before": 4553313,
+        "after": 4582089,
+        "delta": 28776
+      },
+      "columns": {
+        "added": [],
+        "removed": [],
+        "renamed": [],
+        "unit": []
+      },
+      "changes": {
+        "from": "2026-10",
+        "added": 28776,
+        "removed": 0,
+        "changed": 69015,
+        "by": [
+          {
+            "group": 2026,
+            "changed": 69015,
+            "added": 28776,
+            "removed": 0,
+            "first": "2026-04-01T06:00Z",
+            "last": "2026-11-22T07:00Z"
+          }
+        ]
+      }
+    }
+  ],
+  "tablesRemoved": []
+}
