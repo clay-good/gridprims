@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T17:22:37.560Z",
+  "generatedAt": "2026-11-23T20:20:09.172Z",
   "workflows": [
     {
       "id": "refresh-data",
@@ -32,8 +32,8 @@
       "id": "rule-watch",
       "intervalHours": 168,
       "thresholdHours": 504,
-      "lastSuccess": "2026-11-16T18:38:24.653Z",
-      "lastRun": "2026-11-16T18:38:24.653Z",
+      "lastSuccess": "2026-11-23T20:20:09.172Z",
+      "lastRun": "2026-11-23T20:20:09.172Z",
       "enabled": true,
       "events": []
     },
@@ -3550,6 +3550,17 @@
     "lastHeartbeat": null
   },
   "runs": [
+    {
+      "workflow": "rule-watch",
+      "started": "2026-11-23T20:19:41.958Z",
+      "finished": "2026-11-23T20:20:09.172Z",
+      "durationMs": 27214,
+      "ok": true,
+      "datasets": [],
+      "notes": [
+        "45 sources for 28 items checked. 2 items with a source that moved: 2021 4CP dates (trade press); eGRID. 7 items with a source that changed since the last check: PUCT 58000 proposal; ISO-NE Order 881 page; PJM AAR go-live; NYISO request (trade press); eGRID; EIA; AEP Ohio tariff. 3 refused an automated reader and keep their last reading: MISO extension concurrence; FERC show-cause press release; GHG Protocol Scope 2 draft. Reread the flagged items before stating them at the next phase gate."
+      ]
+    },
     {
       "workflow": "refresh-data",
       "started": "2026-11-22T17:10:31.819Z",
