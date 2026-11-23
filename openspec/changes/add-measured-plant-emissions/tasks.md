@@ -8,9 +8,9 @@
 
 ## 2. Plant and region views
 
-- [ ] 2.1 Add the plant page measured section beside the estimated figures; verify the measured-beside-estimated and not-monitored scenarios
-- [ ] 2.2 Show coverage share on every measured figure; verify the partial-coverage scenario
-- [ ] 2.3 Flag apportioned units; verify the shared-stack scenario
+- [x] 2.1 Add the plant page measured section beside the estimated figures; verify the measured-beside-estimated and not-monitored scenarios (1,259 plant pages gain a "Measured at the stack" section with the year's measured carbon dioxide in metric tons, sulfur dioxide and nitrogen oxides in pounds, heat input, gross load, the implied lb/MWh rate, a month-by-month table and a unit-by-unit table; the eGRID estimate stays above it and the page names which is a measurement, which is an estimate, and that they are different years. A plant with no monitored unit says what the monitors cover and keeps its estimated figures. `core/lib/measured-emissions.mjs`, checked in `verify/tests/core/measured-emissions.test.mjs` and `verify/tests/site/plant-measured.test.mjs`)
+- [x] 2.2 Show coverage share on every measured figure; verify the partial-coverage scenario (the section states the monitored units' capacity as a share of the plant's operating capacity, and their measured gross load as a share of the net generation the plant reported, with the years of both named. Neither share is capped: above 100% means the agencies disagree about the plant's size, or that gross load includes the plant's own use, and the page says which)
+- [x] 2.3 Flag apportioned units; verify the shared-stack scenario (a unit EPA lists with an associated stack carries "Shares a stack" in the unit table, and the section says EPA divides one measured total between those units, so their unit figures are a share of a measurement)
 - [ ] 2.4 Build the peak-hour generation detail view; verify the peak-hour scenario
 
 ## 3. Estimated against measured

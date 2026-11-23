@@ -12,6 +12,51 @@ import { pageTitle } from '../lib/meta.mjs';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const mw = (x) => x.toLocaleString('en-US', { maximumFractionDigits: 1 });
 const whole = (x) => Math.round(x).toLocaleString('en-US');
+const pct = (x) => `${(x * 100).toFixed(x < 0.1 ? 1 : 0)}%`;
+
+/**
+ * What the monitors measured, where this plant carries them: the year's totals,
+ * the share of the plant they cover, the months, and the units
+ * (add-measured-plant-emissions: plant page section). Nothing here is an
+ * estimate, and nothing here is the whole plant.
+ */
+function measuredSection(p, sources, { t, date }) {
+  const m = p.measured;
+  const camd = sources.camd;
+  if (!m || !camd) return html`<section><h2>${t('plant.measured')}</h2><p>${t('plant.measured.notMonitored')}</p></section>`;
+  const y = m.latest;
+  const c = m.coverage;
+  const table = camd.tables.find((x) => x.name === 'units_monthly');
+  const measure = (row) => [
+    whole(row.co2_tonnes), whole(row.so2_lbs), whole(row.nox_lbs), whole(row.heat_input_mmbtu),
+    whole(row.gross_load_mwh), row.rate_lb_mwh === null ? '' : whole(row.rate_lb_mwh),
+  ];
+  const headers = ['co2', 'so2', 'nox', 'heat', 'load', 'rate'].map((k) => t(`plant.measured.th.${k}`));
+  return html`<section><h2>${t('plant.measured')}</h2>
+<dl class="facts">
+  <div><dt>${t('plant.measured.co2', { year: y.year })}</dt><dd class="mono">${whole(y.co2_tonnes)} ${t('plant.metricTons')}</dd></div>
+  <div><dt>${t('plant.measured.so2')}</dt><dd class="mono">${whole(y.so2_lbs)} ${t('plant.measured.pounds')}</dd></div>
+  <div><dt>${t('plant.measured.nox')}</dt><dd class="mono">${whole(y.nox_lbs)} ${t('plant.measured.pounds')}</dd></div>
+  <div><dt>${t('plant.measured.heat')}</dt><dd class="mono">${whole(y.heat_input_mmbtu)} MMBtu</dd></div>
+  <div><dt>${t('plant.measured.load')}</dt><dd class="mono">${whole(y.gross_load_mwh)} MWh</dd></div>
+  <div><dt>${t('plant.measured.rate')}</dt><dd class="mono" data-measured-rate>${y.rate_lb_mwh === null ? t('plant.notReported') : `${whole(y.rate_lb_mwh)} lb/MWh`}</dd></div>
+</dl>
+<p>${t('plant.measured.units', { count: y.units })} ${c.capacityShare === null ? '' : t('plant.measured.coverageCapacity', { monitored: mw(c.monitoredMw), nameplate: mw(c.nameplateMw), share: pct(c.capacityShare) })}</p>
+${c.capacityShare !== null && c.capacityShare > 1 ? html`<p class="strip">${t('plant.measured.coverageWide', { monitored: mw(c.monitoredMw), nameplate: mw(c.nameplateMw) })}</p>` : ''}
+<p data-measured-coverage>${c.generationShare === null ? t('plant.measured.coverageNoGeneration') : t('plant.measured.coverageGeneration', { share: pct(c.generationShare), measured: c.generationYears.measured, reported: c.generationYears.reported })}</p>
+<p>${t('plant.measured.gross')}</p>
+${m.apportioned ? html`<p class="strip">${t('plant.measured.apportioned')}</p>` : ''}
+${p.emissions && p.emissions.co2MetricTons !== null ? html`<p class="strip">${t('plant.measured.vsEstimated', { measuredYear: y.year, edition: sources.egrid?.release ?? '', estimatedYear: p.emissions.year })}</p>` : ''}
+<h3>${t('plant.measured.byMonth', { year: y.year })}</h3>
+${tableView([t('plant.measured.month'), ...headers], m.monthly.map((row) => [MONTHS[row.month - 1], ...measure(row)]), t('plant.measured.byMonthCaption', { name: p.name, year: y.year }))}
+<h3>${t('plant.measured.byUnit', { year: y.year })}</h3>
+${tableView([t('plant.measured.unit'), t('plant.measured.unitType'), t('plant.measured.unitFuel'), t('plant.measured.unitNameplate'), t('plant.measured.unitApportioned'), ...headers],
+    m.units.map((u) => [u.unit_id, u.unit_type ?? '', u.primary_fuel ?? '', u.nameplate_mw === null ? '' : `${mw(u.nameplate_mw)} MW`, u.apportioned ? t('plant.measured.yes') : t('plant.measured.no'), ...measure(u)]),
+    t('plant.measured.byUnitCaption', { name: p.name, year: y.year }))}
+<p><a href="/data/epa-camd/">${t('plant.measured.dataset')}</a></p>
+${sourceStamp(camd, table, { t, date })}
+</section>`;
+}
 
 export const plantPath = (id) => `/plants/${id}/`;
 
@@ -78,6 +123,8 @@ ${e && e.co2MetricTons !== null ? html`<dl class="facts">
 ${e && e.year !== p.year ? html`<p class="strip">${t('plant.yearsDiffer', { egridYear: e.year, year: p.year })}</p>` : ''}
 ${sources.egrid ? sourceStamp(sources.egrid, sources.egrid.tables[0], i18n) : ''}
 </section>
+
+${measuredSection(p, sources, i18n)}
 
 <section><h2>${t('plant.generators')}</h2>
 ${tableView([t('plant.gen.id'), t('plant.gen.technology'), t('plant.gen.fuel'), t('plant.gen.nameplate'), t('plant.gen.year'), t('plant.gen.status')],

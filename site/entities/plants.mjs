@@ -7,6 +7,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { readShard } from '../../core/lib/shard.mjs';
 import { capacityFactor, hoursInService, shortTonsToMetric } from '../../core/lib/plant-math.mjs';
+import { plantMeasured } from '../../core/lib/measured-emissions.mjs';
 
 /** A served dataset's manifest and every row of one of its tables, or null when it is not built. */
 export function served(dataDir, dataset, table) {
@@ -35,6 +36,9 @@ export function plantPages(dataDir) {
   const g860m = served(dataDir, 'eia-860m', 'generators');
   const gen923 = served(dataDir, 'eia-923', 'generation');
   const egrid = served(dataDir, 'egrid', 'plants');
+  // EPA's monitored units and their monthly measurements, for the plants that carry monitors.
+  const camdUnits = served(dataDir, 'epa-camd', 'units');
+  const camdMonths = served(dataDir, 'epa-camd', 'units_monthly');
   const year = Number(gen923?.table.dataPeriod ?? p860.table.dataPeriod);
   const gens = group(g860?.rows, 'plant_id');
   const monthly = new Map((g860m?.rows ?? []).map((g) => [`${g.plant_id}|${g.generator_id}`, g]));
@@ -42,6 +46,8 @@ export function plantPages(dataDir) {
   const netByPlant = new Map();
   for (const r of gen923?.rows ?? []) if (r.plant_id !== 99999) netByPlant.set(r.plant_id, (netByPlant.get(r.plant_id) ?? 0) + (r.net_generation_mwh ?? 0));
   const egridByPlant = new Map((egrid?.rows ?? []).map((r) => [r.plant_id, r]));
+  const unitsByPlant = group(camdUnits?.rows, 'plant_id');
+  const monthsByPlant = group(camdMonths?.rows, 'plant_id');
 
   const plants = [];
   for (const p of p860.rows) {
@@ -65,17 +71,24 @@ export function plantPages(dataDir) {
         monthlyStatus: m ? { category: m.category, status: m.status, description: m.status_description } : null,
       };
     }).sort((a, b) => (a.id < b.id ? -1 : 1));
+    const nameplateMw = operable.reduce((n, g) => n + (g.nameplate_mw ?? 0), 0);
+    // Measured at the stack, where EPA's monitors cover part of this plant. Joined on the EIA plant code.
+    const measured = camdMonths ? plantMeasured({
+      units: unitsByPlant.get(p.plant_id) ?? [], months: monthsByPlant.get(p.plant_id) ?? [],
+      netMwh: net, netYear: year, nameplateMw: nameplateMw || null,
+    }) : null;
     const facts = [p.plant_name, p.utility_name, p.state, p.county, p.ba_code, operable.length ? 1 : null, net, e].filter((x) => x !== null && x !== undefined).length;
     if (facts < 4) continue;
     plants.push({
       id: p.plant_id, name: p.plant_name, utilityId: p.utility_id, utilityName: p.utility_name, state: p.state, county: p.county, baCode: p.ba_code, baName: p.ba_name, sector: p.sector_name,
-      nameplateMw: operable.reduce((n, g) => n + (g.nameplate_mw ?? 0), 0), summerMw: operable.reduce((n, g) => n + (g.summer_mw ?? 0), 0),
+      nameplateMw, summerMw: operable.reduce((n, g) => n + (g.summer_mw ?? 0), 0),
       generators, plannedRetirements: generators.filter((g) => g.category === 'operable' && g.plannedRetirementYear).length, proposed: generators.filter((g) => g.category === 'proposed').length,
       year, netMwh: net, capacityFactor: cf,
+      measured,
       emissions: e ? { co2MetricTons: e.co2_tons === null ? null : shortTonsToMetric(e.co2_tons), co2ShortTons: e.co2_tons, co2RateLbMwh: e.co2_rate_lb_mwh, year: e.data_year, subregion: e.subregion, primaryFuel: e.primary_fuel } : null,
     });
   }
   // Every plant's state, so a page that falls below the content minimum can redirect to its state page.
   const stateOf = new Map(p860.rows.map((p) => [p.plant_id, p.state]));
-  return { plants, stateOf, year, sources: { eia860: p860.manifest, eia860m: g860m?.manifest ?? null, eia923: gen923?.manifest ?? null, egrid: egrid?.manifest ?? null } };
+  return { plants, stateOf, year, sources: { eia860: p860.manifest, eia860m: g860m?.manifest ?? null, eia923: gen923?.manifest ?? null, egrid: egrid?.manifest ?? null, camd: camdMonths?.manifest ?? null } };
 }

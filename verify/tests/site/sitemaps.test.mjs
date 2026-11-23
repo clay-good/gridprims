@@ -32,11 +32,13 @@ test('the sitemaps list every published page and nothing else', () => {
 
 test('each lastmod is the newest as-of date of the data its page shows', () => {
   const dates = new Map(entries(read(a, 'sitemaps/sitemap-1.xml')).map(([u, d]) => [u.replace('https://gridprims.com', ''), d]));
-  const asOf = (id) => JSON.parse(read(a, `data/${id}/2026-10/manifest.json`)).asOf;
+  // Each dataset's served version, so a refresh moves the date without editing this test.
+  const asOf = (id) => JSON.parse(read(a, `data/${id}/${JSON.parse(read(a, `data/${id}/current.json`)).version}/manifest.json`)).asOf;
   assert.equal(dates.get('/data/egrid/'), asOf('egrid'));
   assert.equal(dates.get('/subregions/erct/'), asOf('egrid'));
   assert.equal(dates.get('/queue/tx/'), asOf('lbnl-queued-up'));
-  assert.equal(dates.get('/plants/3470/'), ['eia-860', 'eia-860m', 'eia-923', 'egrid'].map(asOf).sort().at(-1));
+  // A plant page shows EIA-860, 860M, 923, eGRID, and EPA's measured emissions.
+  assert.equal(dates.get('/plants/3470/'), ['eia-860', 'eia-860m', 'eia-923', 'egrid', 'epa-camd'].map(asOf).sort().at(-1));
   assert.equal(dates.get('/tools/calc/energy-units/convert/'), '2026-10-31', 'a tool page is dated by its version');
 });
 
