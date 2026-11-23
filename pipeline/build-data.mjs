@@ -28,12 +28,15 @@ export async function buildData(o = {}) {
     const year = /^\d{4}-\d{2}$/.test(period) ? period : Number(period.slice(-4)); // "2025", a month "2026-09", or the last year of "2006-2025"
     const entry = (await import(pathToFileURL(join(ROOT, 'pipeline/registry', `${id}.mjs`)).href)).default;
     const get = async (r) => new Uint8Array(await (await (o.fetch ?? fetch)(r.release ?? r.url)).arrayBuffer());
+    // Files the registry streams (EAGLE-I's yearly CSVs, EPA's hourly files: gigabytes each)
+    // are left to the recipe, which reads them a line at a time; holding them whole would not fit.
+    const streamed = new Set(Object.values(entry.vintages ?? {}).flatMap((v) => Object.entries(v.files ?? {}).filter(([, f]) => f.stream).map(([k]) => k)));
     // A release of several files (PUDL) is fetched file by file and passed by name.
     const several = committed.raw.some((r) => r.file);
     let input = o.inputs?.[id];
-    if (!input) input = several ? Object.fromEntries(await Promise.all(committed.raw.map(async (r) => [r.file, await get(r)]))) : await get(committed.raw[0]);
+    if (!input) input = several ? Object.fromEntries(await Promise.all(committed.raw.filter((r) => !streamed.has(r.file)).map(async (r) => [r.file, await get(r)]))) : await get(committed.raw[0]);
     const vintage = several
-      ? { release: committed.release, asOf: committed.asOf, files: Object.fromEntries(committed.raw.map((r) => [r.file, { url: r.url, sha256: null }])) }
+      ? { release: committed.release, asOf: committed.asOf, files: Object.fromEntries(committed.raw.map((r) => [r.file, { url: r.url, sha256: null, ...(streamed.has(r.file) ? { stream: true, name: r.name } : {}) }])) }
       : { url: committed.raw[0].url, asOf: committed.asOf, sha256: null };
     const out = mkdtempSync(join(tmpdir(), 'gridprims-rebuild-'));
     const r = await runRecipe({ dataset: id, year, input, retrieved: committed.retrieved, outDir: out, joinDir: dataDir, entry, vintage });

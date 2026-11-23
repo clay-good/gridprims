@@ -14,6 +14,10 @@ export const SECRET_PATTERNS = [
   ['bearer header', /\bauthorization:\s*bearer\s+[A-Za-z0-9._-]{20,}/i],
   ['Cloudflare API token variable', /CLOUDFLARE_API_TOKEN\s*[=:]\s*["']?[A-Za-z0-9_-]{30,}/],
   ['AWS key', /\bAKIA[0-9A-Z]{16}\b/],
+  // The free api.data.gov key the EPA interface takes for incremental refreshes: it lives
+  // in the build environment only, and never in a shipped file (add-measured-plant-emissions 1.3).
+  ['api.data.gov key variable', /\b(EPA_[A-Z0-9_]*API_KEY|CAMPD_API_KEY|API_DATA_GOV_KEY)\s*[=:]\s*["']?[A-Za-z0-9]{20,}/],
+  ['api.data.gov key header', /\bx-api-key["']?\s*[=:]\s*["']?[A-Za-z0-9]{20,}/i],
 ];
 
 /** @param {string} text */

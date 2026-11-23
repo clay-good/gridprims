@@ -281,6 +281,8 @@ test('secret scan: credential-shaped strings are found; ordinary text is not', a
   assert.deepEqual(findSecrets(`token ghp_${'a'.repeat(36)}`), ['GitHub token']);
   assert.deepEqual(findSecrets('-----BEGIN PRIVATE KEY-----'), ['private key']);
   assert.deepEqual(findSecrets('authorization: Bearer abcdefghijklmnopqrstuvwxyz123456'), ['bearer header']);
+  assert.deepEqual(findSecrets(`x-api-key: ${'b'.repeat(40)}`), ['api.data.gov key header']);
+  assert.deepEqual(findSecrets(`EPA_CAMD_API_KEY=${'c'.repeat(40)}`), ['api.data.gov key variable']);
   assert.deepEqual(findSecrets('GITHUB_TOKEN: ${{ github.token }} and sha256 f59f6c732bf685fe0a1591b32227f5ce572dc0dfd26bb5caaeed128ac4e3a396'), []);
   assert.deepEqual(checkSecrets(join(import.meta.dirname, '../../..')), []);
 });

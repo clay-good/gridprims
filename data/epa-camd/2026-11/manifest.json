@@ -1,0 +1,2537 @@
+{
+  "dataset": "epa-camd",
+  "version": "2026-11",
+  "title": "Measured power plant emissions from continuous monitors (EPA Clean Air Markets Program Data)",
+  "publisher": "United States Environmental Protection Agency, Clean Air Markets Program Data (CAMPD)",
+  "sourceUrl": "https://campd.epa.gov/data",
+  "terms": {
+    "url": "https://www.epa.gov/web-policies-and-procedures/epa-disclaimers",
+    "section": "Copyright Status",
+    "text": "The U.S. Government retains a nonexclusive, royalty-free license to publish or reproduce these documents, or allow others to do so, for U.S. Government purposes. These documents may be freely distributed and used for non-commercial, scientific and educational purposes. Commercial use of the documents available from the EPA websites may be protected under the U.S. and Foreign Copyright Laws. Individual documents on the EPA website may have different copyright conditions, and that will be noted in those documents.",
+    "captured": "2026-11-23"
+  },
+  "redistributionBasis": {
+    "kind": "named license",
+    "note": "EPA's own stated terms (the Copyright Status disclaimer above), not a public-domain dedication and not an SPDX license: free distribution for non-commercial, scientific, and educational purposes, with commercial use possibly protected by copyright. Only EPA's geospatial data is stated public domain, which this is not. The matcher reads the wording as restrictive, so only values we computed ship and EPA's own files are linked, not republished."
+  },
+  "posture": "derive",
+  "postureAdvisory": {
+    "posture": "derive",
+    "license": null,
+    "reason": "restrictive wording; only our own computed values may be published",
+    "agrees": true
+  },
+  "license": "named license (EPA's own stated terms (the Copyright Status disclaimer above), not a public-domain dedication and not an SPDX license: free distribution for non-commercial, scientific, and educational purposes, with commercial use possibly protected by copyright. Only EPA's geospatial data is stated public domain, which this is not. The matcher reads the wording as restrictive, so only values we computed ship and EPA's own files are linked, not republished.)",
+  "attribution": "U.S. Environmental Protection Agency (EPA). Clean Air Markets Program Data. Washington, DC: Office of Atmospheric Protection, Clean Air Markets Division. Available from EPA's Air Markets Program Data web site: https://campd.epa.gov. Retrieved Nov 2026. Aggregated by gridprims under EPA's stated terms.",
+  "asOf": "2026-11-20",
+  "retrieved": "2026-11-23",
+  "generatedAt": "2026-11-23T00:00:00Z",
+  "cadence": {
+    "every": "quarterly",
+    "nextRelease": {
+      "date": "2027-02-28",
+      "posted": false,
+      "note": "Facilities report quarterly with about a 30-day lag and EPA rewrites the bulk files in place; the date is inferred, not posted"
+    }
+  },
+  "raw": [
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/facility/facility-2024.csv",
+      "name": "facility-2024.csv",
+      "bytes": 1568997,
+      "sha256": "b0222264bdb9a58bd38a445efb67159b60fbaa126be6a565c27a73fed9f35dcf",
+      "file": "f2024"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/facility/facility-2025.csv",
+      "name": "facility-2025.csv",
+      "bytes": 1555513,
+      "sha256": "4d0970eacd32f092585d928006dda30f89d945f675f0721e832aa85b88443b02",
+      "file": "f2025"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-al.csv",
+      "name": "emissions-hourly-2024-al.csv",
+      "bytes": 192824887,
+      "sha256": "56d238ec4414a0b9655d3db05ff3bc3b3dceb6ec13ed40016c7472bffd840c8f",
+      "file": "h2024-al"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ak.csv",
+      "name": "emissions-hourly-2024-ak.csv",
+      "bytes": 2003225,
+      "sha256": "73bb36f7e88114eb32c50692fe24e2b9e04ad041c1ed84571925e0dff4ab3d3c",
+      "file": "h2024-ak"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-az.csv",
+      "name": "emissions-hourly-2024-az.csv",
+      "bytes": 183084007,
+      "sha256": "5ce287666af38d5a17fe3d28b2c2beb475d95a67b333c5070aa497a081e7f572",
+      "file": "h2024-az"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ar.csv",
+      "name": "emissions-hourly-2024-ar.csv",
+      "bytes": 84519544,
+      "sha256": "5b8d907ff2c7437811bcedcafb5c727b4689eb8f2d4c4d9ae729770802c89cae",
+      "file": "h2024-ar"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ca.csv",
+      "name": "emissions-hourly-2024-ca.csv",
+      "bytes": 429758940,
+      "sha256": "5e3e89fb27379dd28ffed801b7cc5e9d951b38b2768132bd8c8ea0105b878414",
+      "file": "h2024-ca"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-co.csv",
+      "name": "emissions-hourly-2024-co.csv",
+      "bytes": 134816751,
+      "sha256": "6853cf4b2f0dd94c6ef5e19bba081911e58580685b402f3b426cc87843c1d289",
+      "file": "h2024-co"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ct.csv",
+      "name": "emissions-hourly-2024-ct.csv",
+      "bytes": 92449797,
+      "sha256": "c1e4adf91b350cd369693a2078a921c4b61f4d03c8f703ff28def1fb4a30756d",
+      "file": "h2024-ct"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-de.csv",
+      "name": "emissions-hourly-2024-de.csv",
+      "bytes": 38297473,
+      "sha256": "34d4d22e50fd455e2e293881d974ceb90f517c75407e3cde61c86189aefdc14e",
+      "file": "h2024-de"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-dc.csv",
+      "name": "emissions-hourly-2024-dc.csv",
+      "bytes": 4535011,
+      "sha256": "9f95b92bbd64300b78cc40c3e95275829ac62915436d0ece9f4aadd1321af87a",
+      "file": "h2024-dc"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-fl.csv",
+      "name": "emissions-hourly-2024-fl.csv",
+      "bytes": 428643936,
+      "sha256": "2f659466ec48d0906d0b6fc4edc09e6d7e34ba0ade02ed77e121b872457ac9c3",
+      "file": "h2024-fl"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ga.csv",
+      "name": "emissions-hourly-2024-ga.csv",
+      "bytes": 250055132,
+      "sha256": "85b62cc30cfb54621e11156ba2ffd68febfc8e9f8e6993621dc77d3775e0f1cd",
+      "file": "h2024-ga"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-id.csv",
+      "name": "emissions-hourly-2024-id.csv",
+      "bytes": 16058144,
+      "sha256": "15dc57375fe85043542b7d590146f2cb7d1ca66e7a5a28eee8dbdf7e13a1eb68",
+      "file": "h2024-id"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-il.csv",
+      "name": "emissions-hourly-2024-il.csv",
+      "bytes": 365291186,
+      "sha256": "f159866cb35892ebdcc2b2aff7c8eb43ed74806f08c9d3463d6f12d2e9a8d0ee",
+      "file": "h2024-il"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-in.csv",
+      "name": "emissions-hourly-2024-in.csv",
+      "bytes": 277694421,
+      "sha256": "c8f3b61a2eee940965cee97fb72fadc80a98a58c85ccb1029f07060f00617d99",
+      "file": "h2024-in"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ia.csv",
+      "name": "emissions-hourly-2024-ia.csv",
+      "bytes": 88026237,
+      "sha256": "c44db438d3973304042909544ad0ea92ef86083397a37512bf0ea2db3328bc75",
+      "file": "h2024-ia"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ks.csv",
+      "name": "emissions-hourly-2024-ks.csv",
+      "bytes": 86269356,
+      "sha256": "cbbfaa361bda6c885f5d1dafa98d7a83d255fd805738bb8223264c0de42bb66e",
+      "file": "h2024-ks"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ky.csv",
+      "name": "emissions-hourly-2024-ky.csv",
+      "bytes": 197391026,
+      "sha256": "b3a1789104b722f3abb6f9a5f927fe22f66f7f028b2bc6c68296bfc245609f24",
+      "file": "h2024-ky"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-la.csv",
+      "name": "emissions-hourly-2024-la.csv",
+      "bytes": 163197366,
+      "sha256": "be0e324294100d97f28eea4390ec30d8bd9444ca12f00a35234a9c40575cfe08",
+      "file": "h2024-la"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-me.csv",
+      "name": "emissions-hourly-2024-me.csv",
+      "bytes": 15453587,
+      "sha256": "1dd854cd06a036e31f97967eba276cc4be70d3c95cbf75d6826427152f143a11",
+      "file": "h2024-me"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-md.csv",
+      "name": "emissions-hourly-2024-md.csv",
+      "bytes": 87637808,
+      "sha256": "399d27ce1d876b448a5db17ded724d95d4f215eff688ec5a675598ead869135f",
+      "file": "h2024-md"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ma.csv",
+      "name": "emissions-hourly-2024-ma.csv",
+      "bytes": 110894306,
+      "sha256": "f7c3621e112b603ada1bd54a2fcae8f86c11c431fe7285570dffdb5637cd589b",
+      "file": "h2024-ma"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-mi.csv",
+      "name": "emissions-hourly-2024-mi.csv",
+      "bytes": 229393538,
+      "sha256": "1eb7230a2c1a1738fd6a9b912a13292792f978b14d11f4cdab116e90b16e44f5",
+      "file": "h2024-mi"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-mn.csv",
+      "name": "emissions-hourly-2024-mn.csv",
+      "bytes": 103572409,
+      "sha256": "30495d5f723ba1a269c995e4caab8e2e1951ef4db23aa2bec3c28c221ff690f7",
+      "file": "h2024-mn"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ms.csv",
+      "name": "emissions-hourly-2024-ms.csv",
+      "bytes": 126574544,
+      "sha256": "3db40e36f2a92493a5df69b2bc0eb5dee7c51875213329cdb931f14779b5275c",
+      "file": "h2024-ms"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-mo.csv",
+      "name": "emissions-hourly-2024-mo.csv",
+      "bytes": 192841689,
+      "sha256": "b9707ca96c617da9eb60c0ea02c94f316d9e7da568ccf2138b1ced18fbbc8063",
+      "file": "h2024-mo"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-mt.csv",
+      "name": "emissions-hourly-2024-mt.csv",
+      "bytes": 25665054,
+      "sha256": "d1403cdc2247dbf04e85f5c5acafdd9c1f1c3223b636d0617572caf289000473",
+      "file": "h2024-mt"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ne.csv",
+      "name": "emissions-hourly-2024-ne.csv",
+      "bytes": 83637731,
+      "sha256": "3f67fba0af6637002536f383ce3ccce9430acad8d1587afb7a947e0b8c4b2245",
+      "file": "h2024-ne"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-nv.csv",
+      "name": "emissions-hourly-2024-nv.csv",
+      "bytes": 115181214,
+      "sha256": "26c03ee41d910fa7c6a6899bb705833a1e12bba7a85608c58058c0461a7f3737",
+      "file": "h2024-nv"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-nh.csv",
+      "name": "emissions-hourly-2024-nh.csv",
+      "bytes": 26571322,
+      "sha256": "2c2625b8ec89c01dfe3fcb09fa961b20c004f590a804070d13d7c81c4d8e73b3",
+      "file": "h2024-nh"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-nj.csv",
+      "name": "emissions-hourly-2024-nj.csv",
+      "bytes": 173226360,
+      "sha256": "e1a838835d6491fa22fadcf5248cb81553176b56b6551c909591541ca36782e0",
+      "file": "h2024-nj"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-nm.csv",
+      "name": "emissions-hourly-2024-nm.csv",
+      "bytes": 53991423,
+      "sha256": "405d1e7dfe5567e50fcd809e5fe0fa6beaaaad245f2999df1027c9c804f43503",
+      "file": "h2024-nm"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ny.csv",
+      "name": "emissions-hourly-2024-ny.csv",
+      "bytes": 464374265,
+      "sha256": "ef2c20a7f8d5d9d0c6da6eb0880b9c83764c88b0df5831fd6ac69d11ca2a8623",
+      "file": "h2024-ny"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-nc.csv",
+      "name": "emissions-hourly-2024-nc.csv",
+      "bytes": 248963663,
+      "sha256": "807fd2fa8f17a78a814915168265a474ea01fc586f2b40d2ce366ae290f76834",
+      "file": "h2024-nc"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-nd.csv",
+      "name": "emissions-hourly-2024-nd.csv",
+      "bytes": 55358630,
+      "sha256": "3be7d2eec48b99ed890e5e8f99e29421dca3578d5041821d797aa9b04d65f1e9",
+      "file": "h2024-nd"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-oh.csv",
+      "name": "emissions-hourly-2024-oh.csv",
+      "bytes": 243902150,
+      "sha256": "5bf30513ca4c060f31c4b7ebf13f9999dc73a452dab212809ff9593d2d109df3",
+      "file": "h2024-oh"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ok.csv",
+      "name": "emissions-hourly-2024-ok.csv",
+      "bytes": 165293466,
+      "sha256": "c50b59f89a6c2a7fab3dfd6cf5247c408f8f220fcf1caf5c54739501102afb57",
+      "file": "h2024-ok"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-or.csv",
+      "name": "emissions-hourly-2024-or.csv",
+      "bytes": 30068353,
+      "sha256": "fbfc1b0c7662ca0582f6f20336d2e590ffe113e6184398f228f888d3c81399e4",
+      "file": "h2024-or"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-pa.csv",
+      "name": "emissions-hourly-2024-pa.csv",
+      "bytes": 375642762,
+      "sha256": "9864c0a0f56b263acd0eb70f632edfe38c326d138d4cf7d7d12e6a51466d5663",
+      "file": "h2024-pa"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ri.csv",
+      "name": "emissions-hourly-2024-ri.csv",
+      "bytes": 23397138,
+      "sha256": "dc68a0eb3ae23e1d6c1d1414ab9cc36d10fdf8c0dae66c12f37831c48ecbb57b",
+      "file": "h2024-ri"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-sc.csv",
+      "name": "emissions-hourly-2024-sc.csv",
+      "bytes": 130299824,
+      "sha256": "5443eae019439caf81bcc1e506d07ce407c35c68d14bfc824a761bd0651fa602",
+      "file": "h2024-sc"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-sd.csv",
+      "name": "emissions-hourly-2024-sd.csv",
+      "bytes": 20010905,
+      "sha256": "becffd10af7f2041f8574013f426a0fee31f21d41038e74b2111783a666a2e31",
+      "file": "h2024-sd"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-tn.csv",
+      "name": "emissions-hourly-2024-tn.csv",
+      "bytes": 164014151,
+      "sha256": "2b0ae04a2636c97527bc391edf406f4d723a4b37a076df9641aac5e09ca5e1aa",
+      "file": "h2024-tn"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-tx.csv",
+      "name": "emissions-hourly-2024-tx.csv",
+      "bytes": 875055865,
+      "sha256": "8689e735e5c8e9dc31e949d7189d5432f0a882064c223b1855c1f8b632006ac9",
+      "file": "h2024-tx"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-ut.csv",
+      "name": "emissions-hourly-2024-ut.csv",
+      "bytes": 62064106,
+      "sha256": "8bc3b250c742e61d3a13636c71106e1257f27c0fe29cc7e7fb41bcdf25e98203",
+      "file": "h2024-ut"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-vt.csv",
+      "name": "emissions-hourly-2024-vt.csv",
+      "bytes": 6105900,
+      "sha256": "85df5ae6be3ea7538cc062f4e5a2626cabc52e0e9de5965012fe81926aa3aa67",
+      "file": "h2024-vt"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-va.csv",
+      "name": "emissions-hourly-2024-va.csv",
+      "bytes": 226701816,
+      "sha256": "3d5fabc5a97c8ecebc3dd98557324bf533c248da3bc5ce9e3b1252d263ed2d29",
+      "file": "h2024-va"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-wa.csv",
+      "name": "emissions-hourly-2024-wa.csv",
+      "bytes": 38185872,
+      "sha256": "90df9d864da8ab1e072927129d4de0299102196fbb32a26177c319b1a80d45e8",
+      "file": "h2024-wa"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-wv.csv",
+      "name": "emissions-hourly-2024-wv.csv",
+      "bytes": 111158640,
+      "sha256": "d23607ece8c76a30f7e425ed4e1788ae354ae464f924524b56b325d374ae6d40",
+      "file": "h2024-wv"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-wi.csv",
+      "name": "emissions-hourly-2024-wi.csv",
+      "bytes": 173120690,
+      "sha256": "b1a74749669df5674b4480afcfa9bc99518d499cec5834e0601bb136158b6b9f",
+      "file": "h2024-wi"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-wy.csv",
+      "name": "emissions-hourly-2024-wy.csv",
+      "bytes": 70222054,
+      "sha256": "dec5cadcb07bbc8074eb4db3f1eebf33be3a5c097087c61ebb1a0fb19df0871a",
+      "file": "h2024-wy"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2024-pr.csv",
+      "name": "emissions-hourly-2024-pr.csv",
+      "bytes": 4235515,
+      "sha256": "35029b8e7dc8fc6d04310e5ff46a18c5e3dbf9c643286589cd5a25e38abe273f",
+      "file": "h2024-pr"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-al.csv",
+      "name": "emissions-hourly-2025-al.csv",
+      "bytes": 192175514,
+      "sha256": "68fad26be504a6d709fa6c970142a6686a24d50cf22bb050a75561b759a48587",
+      "file": "h2025-al"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ak.csv",
+      "name": "emissions-hourly-2025-ak.csv",
+      "bytes": 1999505,
+      "sha256": "e4d6669eac49677cf5edf5b700561b4274a8b7002e395c8122844316b52ec0ee",
+      "file": "h2025-ak"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-az.csv",
+      "name": "emissions-hourly-2025-az.csv",
+      "bytes": 184024624,
+      "sha256": "7050a4b2e453bad8874c08a2c1ed0c9cb2872579c61307212005ce462f996b9a",
+      "file": "h2025-az"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ar.csv",
+      "name": "emissions-hourly-2025-ar.csv",
+      "bytes": 83894746,
+      "sha256": "8417aa93b65f8ebee4bf49dd0b9a4c2dc038ae34984bd54731d0ba88a1a0d653",
+      "file": "h2025-ar"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ca.csv",
+      "name": "emissions-hourly-2025-ca.csv",
+      "bytes": 430393670,
+      "sha256": "5d003b00538192e127ce02773ba5a78e92d378ac11fef6cb31394a714dcb300f",
+      "file": "h2025-ca"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-co.csv",
+      "name": "emissions-hourly-2025-co.csv",
+      "bytes": 139731402,
+      "sha256": "2485a7b300bb7e156c6f2994bb78f21134f8ccc2d3fb2156f245a8cb3dc81959",
+      "file": "h2025-co"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ct.csv",
+      "name": "emissions-hourly-2025-ct.csv",
+      "bytes": 92095738,
+      "sha256": "da7f5f2fa3dfa7a8b2cc1dd33a5844e4c655272bef39fd9be6b42afd73ef34c3",
+      "file": "h2025-ct"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-de.csv",
+      "name": "emissions-hourly-2025-de.csv",
+      "bytes": 38664039,
+      "sha256": "a65bafe77e47ffb375fc6b22807a2ce5a054cd9862bc8837b282c311ae0c10e4",
+      "file": "h2025-de"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-dc.csv",
+      "name": "emissions-hourly-2025-dc.csv",
+      "bytes": 4557555,
+      "sha256": "c49e3752724edb31bff347ca9a53fab8efb246d96da2db2d60c25b1c0020c99b",
+      "file": "h2025-dc"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-fl.csv",
+      "name": "emissions-hourly-2025-fl.csv",
+      "bytes": 422083015,
+      "sha256": "6d617b3d93fa38e6ce0410f002fb81ea8a0a4f674066b242072ffa4fbaef5f3e",
+      "file": "h2025-fl"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ga.csv",
+      "name": "emissions-hourly-2025-ga.csv",
+      "bytes": 250912646,
+      "sha256": "0fbb1b000c9c826b0e671a02df62e02fd8fa4416fb8db421aa19400915596c1e",
+      "file": "h2025-ga"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-id.csv",
+      "name": "emissions-hourly-2025-id.csv",
+      "bytes": 16027474,
+      "sha256": "282a0caec41d53608682b6eeab7d182782dce86dd5741e6387228f2ae88ecdef",
+      "file": "h2025-id"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-il.csv",
+      "name": "emissions-hourly-2025-il.csv",
+      "bytes": 357786004,
+      "sha256": "30836d33d1a9d7fcf64a0c85f865c0f4182a3a07f91013a66bd0dd94e46a93ca",
+      "file": "h2025-il"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-in.csv",
+      "name": "emissions-hourly-2025-in.csv",
+      "bytes": 277781989,
+      "sha256": "5e2ef0e1dc289fd59301abc5962b3d65613e754ed672544a2eff39380c9f9d75",
+      "file": "h2025-in"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ia.csv",
+      "name": "emissions-hourly-2025-ia.csv",
+      "bytes": 90448051,
+      "sha256": "7f66df5cd4eb213a042ff60075c5932a16a6a7be0d5507110e31a826ff96ddb5",
+      "file": "h2025-ia"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ks.csv",
+      "name": "emissions-hourly-2025-ks.csv",
+      "bytes": 85045102,
+      "sha256": "4a599f2fe97d047cd24788089fc69f4225279403765cb11320d3bede8b5ae60f",
+      "file": "h2025-ks"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ky.csv",
+      "name": "emissions-hourly-2025-ky.csv",
+      "bytes": 198972176,
+      "sha256": "9fd24f363836f3c6a218f9fb3d28b98392b7d381b826ca1bfcb71a80bdf68a03",
+      "file": "h2025-ky"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-la.csv",
+      "name": "emissions-hourly-2025-la.csv",
+      "bytes": 162969529,
+      "sha256": "57c104eeeb40be787521d54c327bf4171ba1fedeb71ea282a6b4d10ace51455f",
+      "file": "h2025-la"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-me.csv",
+      "name": "emissions-hourly-2025-me.csv",
+      "bytes": 15099684,
+      "sha256": "181846b5d1c52576f25bf73c0267c2e7550806b502b4f9476d8a39bf85ee1b7e",
+      "file": "h2025-me"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-md.csv",
+      "name": "emissions-hourly-2025-md.csv",
+      "bytes": 86709002,
+      "sha256": "8c1d1b134df8b23da513c9cd978fa3a8173c15d3460c966d4ebc2afc4d3791ee",
+      "file": "h2025-md"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ma.csv",
+      "name": "emissions-hourly-2025-ma.csv",
+      "bytes": 104943827,
+      "sha256": "90543818e73342ec2a8282850237b67a038e3a69d297440b52edf3dbe78a019d",
+      "file": "h2025-ma"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-mi.csv",
+      "name": "emissions-hourly-2025-mi.csv",
+      "bytes": 234392329,
+      "sha256": "323b7f3a6e354632fb9549e736189b3c3cc5249be310573daf2df5a81dfa3e34",
+      "file": "h2025-mi"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-mn.csv",
+      "name": "emissions-hourly-2025-mn.csv",
+      "bytes": 100410171,
+      "sha256": "07bd02ed5883d5c7ff01b0f1082efe90e5be7acb935bd47f1cb246ff7f667526",
+      "file": "h2025-mn"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ms.csv",
+      "name": "emissions-hourly-2025-ms.csv",
+      "bytes": 128018330,
+      "sha256": "9a92a9cf33fe42cf046aded0f3481f32274959b29aadeabab7b93669bceb2cb3",
+      "file": "h2025-ms"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-mo.csv",
+      "name": "emissions-hourly-2025-mo.csv",
+      "bytes": 188889375,
+      "sha256": "fe96299ef32fd8f33202cdc9f9d34bfba2af3db0bdf1608631597ec69ae64066",
+      "file": "h2025-mo"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-mt.csv",
+      "name": "emissions-hourly-2025-mt.csv",
+      "bytes": 25321609,
+      "sha256": "00fc5da81f590a3da81616beb462a7cfb843fe5c52beadee55822d76740bea31",
+      "file": "h2025-mt"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ne.csv",
+      "name": "emissions-hourly-2025-ne.csv",
+      "bytes": 86121222,
+      "sha256": "f4291372dbfb6b632c0fe0fac8f043d3b9e76f7b096858f07175455f11236f6d",
+      "file": "h2025-ne"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-nv.csv",
+      "name": "emissions-hourly-2025-nv.csv",
+      "bytes": 115151735,
+      "sha256": "ae3a89d77435161a568d33276401fab483f51d686ec0d7ae5134f79ff531e48e",
+      "file": "h2025-nv"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-nh.csv",
+      "name": "emissions-hourly-2025-nh.csv",
+      "bytes": 27535385,
+      "sha256": "f3cc7adfb04a7d4b2244683258478cd84ca642d0fcff4e1005a5528b82241f20",
+      "file": "h2025-nh"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-nj.csv",
+      "name": "emissions-hourly-2025-nj.csv",
+      "bytes": 171477210,
+      "sha256": "c0919c8172663843e998c8536c73513a1ea6155426e7cc0a9d702b6933027183",
+      "file": "h2025-nj"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-nm.csv",
+      "name": "emissions-hourly-2025-nm.csv",
+      "bytes": 52923138,
+      "sha256": "5db13d3404af5fd5d03e199fe2ac454dee229ad5920d757034feb3f1e37a92fc",
+      "file": "h2025-nm"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ny.csv",
+      "name": "emissions-hourly-2025-ny.csv",
+      "bytes": 442207147,
+      "sha256": "a2d0cfba9466fc2347fec867fafd9bba8c39d5a1b821664e5e792901e6148f6a",
+      "file": "h2025-ny"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-nc.csv",
+      "name": "emissions-hourly-2025-nc.csv",
+      "bytes": 244478805,
+      "sha256": "f05d1aa243a6ae8fc2dd84a0681e8d555ae93e400ba7e9c59478eef0ac705ec1",
+      "file": "h2025-nc"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-nd.csv",
+      "name": "emissions-hourly-2025-nd.csv",
+      "bytes": 55192284,
+      "sha256": "31395cea49aa8196f1b4b7c35c314cc6629e7e807db9c13a427c558e549b984a",
+      "file": "h2025-nd"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-oh.csv",
+      "name": "emissions-hourly-2025-oh.csv",
+      "bytes": 247233110,
+      "sha256": "28855fd93cbfccddce7cd2aec39ef24fb10c26b0d062d6064d64fb73ec0995d6",
+      "file": "h2025-oh"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ok.csv",
+      "name": "emissions-hourly-2025-ok.csv",
+      "bytes": 157873328,
+      "sha256": "e3991bae63187e7f7274d578b34a1948e54b4504f4e414524d6cd7f51812b057",
+      "file": "h2025-ok"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-or.csv",
+      "name": "emissions-hourly-2025-or.csv",
+      "bytes": 28833470,
+      "sha256": "4027fe537137940de78a3f5346767fb3525f76ccde7733a9a7d9a273297a8915",
+      "file": "h2025-or"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-pa.csv",
+      "name": "emissions-hourly-2025-pa.csv",
+      "bytes": 380475861,
+      "sha256": "6ac5e7c33085928b9a308d0a2175f6b2be7ee2d950512125b3db3c2f943553b0",
+      "file": "h2025-pa"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ri.csv",
+      "name": "emissions-hourly-2025-ri.csv",
+      "bytes": 23229036,
+      "sha256": "1d8301f1e6ef6739566a63f702d14be9e6dff82efbb8243e72ad48eff63a8bc1",
+      "file": "h2025-ri"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-sc.csv",
+      "name": "emissions-hourly-2025-sc.csv",
+      "bytes": 132478890,
+      "sha256": "4f099e41a6d447fc02ba12bba1367721d18fd8d19f56e249fd4b774af17d24d7",
+      "file": "h2025-sc"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-sd.csv",
+      "name": "emissions-hourly-2025-sd.csv",
+      "bytes": 18476333,
+      "sha256": "fec134eb147b9a7ab03052e3ce94a8bc445e076189d067a5ca94529c2d626162",
+      "file": "h2025-sd"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-tn.csv",
+      "name": "emissions-hourly-2025-tn.csv",
+      "bytes": 169435457,
+      "sha256": "703c454ab4307ed7793e941e85dd9cf21634236cfe352acae2bbd6f6cc9d0482",
+      "file": "h2025-tn"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-tx.csv",
+      "name": "emissions-hourly-2025-tx.csv",
+      "bytes": 874492152,
+      "sha256": "e36f03343d8006fb1b80efb5f09d9be3ba1e839ac91335888961f67b1efaa591",
+      "file": "h2025-tx"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-ut.csv",
+      "name": "emissions-hourly-2025-ut.csv",
+      "bytes": 62772004,
+      "sha256": "d990f5887a42d21da4b13ff5b69025bfc81f3a04f4413e2a8d4c532631d295a2",
+      "file": "h2025-ut"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-vt.csv",
+      "name": "emissions-hourly-2025-vt.csv",
+      "bytes": 6032165,
+      "sha256": "b189c0df82aa6bd8330f0629026e25534cf5c9f5e6495bcd116eb47a75c1e644",
+      "file": "h2025-vt"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-va.csv",
+      "name": "emissions-hourly-2025-va.csv",
+      "bytes": 227461017,
+      "sha256": "95a0a22f9e298bafb951424a97b069f79245f371b5478c89d40366b4a9a58513",
+      "file": "h2025-va"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-wa.csv",
+      "name": "emissions-hourly-2025-wa.csv",
+      "bytes": 36123429,
+      "sha256": "f3f9217f3d43ad11cea28f7637baf1348752b438c4094d7604130100c03cbbfc",
+      "file": "h2025-wa"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-wv.csv",
+      "name": "emissions-hourly-2025-wv.csv",
+      "bytes": 110066910,
+      "sha256": "89d4995e018e2241122caec0df1997f461098a10da054cef253c936fd3a68b59",
+      "file": "h2025-wv"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-wi.csv",
+      "name": "emissions-hourly-2025-wi.csv",
+      "bytes": 167473707,
+      "sha256": "9113b8d23f256763e3ca0df366727d274fd004e430b2a1bacaca4466eb5f52ba",
+      "file": "h2025-wi"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-wy.csv",
+      "name": "emissions-hourly-2025-wy.csv",
+      "bytes": 70186573,
+      "sha256": "3d6c1418b736515a0877bb3522636c7316fc7b04bc1743583e1436e881fecd55",
+      "file": "h2025-wy"
+    },
+    {
+      "url": "https://api.epa.gov/easey/bulk-files/emissions/hourly/state/emissions-hourly-2025-pr.csv",
+      "name": "emissions-hourly-2025-pr.csv",
+      "bytes": 4225760,
+      "sha256": "4c19c56de7957f5b04006d128de0fc9af46e60da067e97f986872db4efa979b6",
+      "file": "h2025-pr"
+    }
+  ],
+  "release": "2024-2025 as reported",
+  "ceiiScreen": {
+    "rule": "18 CFR 388.113",
+    "screened": "2026-11-23",
+    "infrastructure": true,
+    "checklist": {
+      "publicSourceOnly": true,
+      "noPlanningModels": true,
+      "noSubstationPoints": true,
+      "noOneLineDiagrams": true,
+      "noBusImpedances": true,
+      "noNdaData": true
+    },
+    "columnsChecked": 45,
+    "flagged": [],
+    "unconfirmed": [],
+    "passed": true,
+    "note": "Measured emissions and gross load per monitored unit, as EPA publishes them, with the plant's county. Latitude and longitude stay in EPA's file."
+  },
+  "tables": [
+    {
+      "name": "units",
+      "title": "Monitored units, their plants, regions, types, fuels, and programs, by year",
+      "dataPeriod": "2024-2025",
+      "rows": 8149,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "region",
+          "type": "str",
+          "unit": "eGRID balancing-authority code for the plant"
+        },
+        {
+          "name": "subregion",
+          "type": "str",
+          "unit": "eGRID subregion for the plant"
+        },
+        {
+          "name": "egrid_match",
+          "type": "str",
+          "unit": "yes when eGRID places the plant, by its ORISPL id"
+        },
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "plant_id",
+          "type": "i32",
+          "scale": 1
+        },
+        {
+          "name": "plant_name",
+          "type": "str"
+        },
+        {
+          "name": "unit_id",
+          "type": "str"
+        },
+        {
+          "name": "year",
+          "type": "i32",
+          "scale": 1
+        },
+        {
+          "name": "county",
+          "type": "str"
+        },
+        {
+          "name": "county_code",
+          "type": "str"
+        },
+        {
+          "name": "source_category",
+          "type": "str"
+        },
+        {
+          "name": "unit_type",
+          "type": "str"
+        },
+        {
+          "name": "primary_fuel",
+          "type": "str"
+        },
+        {
+          "name": "secondary_fuel",
+          "type": "str"
+        },
+        {
+          "name": "so2_controls",
+          "type": "str"
+        },
+        {
+          "name": "nox_controls",
+          "type": "str"
+        },
+        {
+          "name": "operating_status",
+          "type": "str"
+        },
+        {
+          "name": "commercial_operation_date",
+          "type": "str"
+        },
+        {
+          "name": "programs",
+          "type": "str"
+        },
+        {
+          "name": "owner_operator",
+          "type": "str"
+        },
+        {
+          "name": "max_heat_input_mmbtu_hr",
+          "type": "f64",
+          "unit": "MMBtu/hr"
+        },
+        {
+          "name": "nameplate_mw",
+          "type": "f64",
+          "unit": "MW, summed over the generators EPA associates with the unit"
+        },
+        {
+          "name": "associated_stacks",
+          "type": "str"
+        },
+        {
+          "name": "apportioned",
+          "type": "str",
+          "unit": "yes when the unit shares a stack and EPA divides the measured total"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "units/AK.bin",
+          "state": "AK",
+          "rows": 4,
+          "bytes": 3496,
+          "sha256": "af5c1cb3c037589a445729df42012e63f428418e734fd065eb7d07ab2ecbbcf7"
+        },
+        {
+          "path": "units/AL.bin",
+          "state": "AL",
+          "rows": 176,
+          "bytes": 26008,
+          "sha256": "3de858840826e998ad94aeab8bab9133690927ff6011b350931b33f62aa97887"
+        },
+        {
+          "path": "units/AR.bin",
+          "state": "AR",
+          "rows": 82,
+          "bytes": 15008,
+          "sha256": "3833ec0ceb00d3fdeba346a7bae9dc454009958cc93b848fa935620092ddb2c0"
+        },
+        {
+          "path": "units/AZ.bin",
+          "state": "AZ",
+          "rows": 188,
+          "bytes": 28112,
+          "sha256": "991aa207849b2b6414d826b0061b0a6fb71e0509db7cd751ec0dd5b8977ad9ba"
+        },
+        {
+          "path": "units/CA.bin",
+          "state": "CA",
+          "rows": 490,
+          "bytes": 68520,
+          "sha256": "3661f31775ad620400da40be17df7bb0ab0deb833aff66e3035e2c926993b071"
+        },
+        {
+          "path": "units/CO.bin",
+          "state": "CO",
+          "rows": 146,
+          "bytes": 23744,
+          "sha256": "a1f9b3c120553410c36d93dccb7334f573938237754256a9898df6b956f907ab"
+        },
+        {
+          "path": "units/CT.bin",
+          "state": "CT",
+          "rows": 114,
+          "bytes": 18480,
+          "sha256": "7d249ff547421778372441cfa73531c989f04b143b73644f11f783dba3aed3b6"
+        },
+        {
+          "path": "units/DC.bin",
+          "state": "DC",
+          "rows": 6,
+          "bytes": 3592,
+          "sha256": "de907076181cdbeb21925cf98c9a9b177ce7741c3830d051f2d5be70718450e3"
+        },
+        {
+          "path": "units/DE.bin",
+          "state": "DE",
+          "rows": 68,
+          "bytes": 12272,
+          "sha256": "b01c078b800d27ea0e01ab94c7754e4970e097656db84047f488aa52dfd1f811"
+        },
+        {
+          "path": "units/FL.bin",
+          "state": "FL",
+          "rows": 414,
+          "bytes": 55896,
+          "sha256": "f2ea5476236e0b9abcd3ebfc92657a4ef83fa5087415b0650a64405b4172537d"
+        },
+        {
+          "path": "units/GA.bin",
+          "state": "GA",
+          "rows": 262,
+          "bytes": 35552,
+          "sha256": "20acddbfc719fe3238479b8ca338ac65516590357d3a6aede56cea9133877c6b"
+        },
+        {
+          "path": "units/HI.bin",
+          "state": "HI",
+          "rows": 24,
+          "bytes": 5632,
+          "sha256": "7a98e392128344596f175355a66c9680a290c8798f7293b21d6aa3ac5d5dca98"
+        },
+        {
+          "path": "units/IA.bin",
+          "state": "IA",
+          "rows": 88,
+          "bytes": 17096,
+          "sha256": "b51189daee063ec56ccd3b1e906b82e6af8f0afd2252d867294a0aaa6dc270a8"
+        },
+        {
+          "path": "units/ID.bin",
+          "state": "ID",
+          "rows": 16,
+          "bytes": 5096,
+          "sha256": "e076adfd2a3c1b919f805651edb977fefedd06d3d2da6a860e6acfa7fa177eca"
+        },
+        {
+          "path": "units/IL.bin",
+          "state": "IL",
+          "rows": 420,
+          "bytes": 57160,
+          "sha256": "3e12a4be5847e5d0364e07e971ca58ef5daeaf63d40dac052619c6de207958a0"
+        },
+        {
+          "path": "units/IN.bin",
+          "state": "IN",
+          "rows": 268,
+          "bytes": 38920,
+          "sha256": "a8414180bbe441080317153fa6d0d8eb633755365d31ce94090987a71a50bdcf"
+        },
+        {
+          "path": "units/KS.bin",
+          "state": "KS",
+          "rows": 93,
+          "bytes": 15984,
+          "sha256": "9c01cd4227fc1876eca41483c743b4ce2afbca0f3748b842f805f720d7a924e8"
+        },
+        {
+          "path": "units/KY.bin",
+          "state": "KY",
+          "rows": 179,
+          "bytes": 27088,
+          "sha256": "2cee57c0b1be73eb96e7401d0238e92a95a7b143610d05ea66cbcb767dc36d05"
+        },
+        {
+          "path": "units/LA.bin",
+          "state": "LA",
+          "rows": 157,
+          "bytes": 24664,
+          "sha256": "25b88afb7a56fc9bc6035e4250967f39e57a36014aa5b38f6a020db97a58eb8e"
+        },
+        {
+          "path": "units/MA.bin",
+          "state": "MA",
+          "rows": 126,
+          "bytes": 21456,
+          "sha256": "03c621d971a3e27f071929581219c360bd43bacd8e22ca99b25e3c03bf13e33e"
+        },
+        {
+          "path": "units/MD.bin",
+          "state": "MD",
+          "rows": 95,
+          "bytes": 17416,
+          "sha256": "057bbbec33af7089681b855713bb04f2a63932c889decc2d1f73c8c65ddcf873"
+        },
+        {
+          "path": "units/ME.bin",
+          "state": "ME",
+          "rows": 16,
+          "bytes": 5736,
+          "sha256": "69e4d416264d3a075c4193d243de0fda71c11d955e64043291d76c7c0deba852"
+        },
+        {
+          "path": "units/MI.bin",
+          "state": "MI",
+          "rows": 235,
+          "bytes": 34312,
+          "sha256": "a72a0108c0854c7e07ccab8d96c248852c90ee3ca3716efce465567d4c791026"
+        },
+        {
+          "path": "units/MN.bin",
+          "state": "MN",
+          "rows": 116,
+          "bytes": 19216,
+          "sha256": "d0700818eee4e4109f63a470f2580e256196da95d536ff5428183590a63f3e01"
+        },
+        {
+          "path": "units/MO.bin",
+          "state": "MO",
+          "rows": 204,
+          "bytes": 29472,
+          "sha256": "d4ee86830c2ca0dfc4292f41a3da5cfac50d97b28518888e8f6bfb3122f04c91"
+        },
+        {
+          "path": "units/MS.bin",
+          "state": "MS",
+          "rows": 120,
+          "bytes": 18392,
+          "sha256": "793a6c80c5d767ff136d36c1ac09c717ae385523e63780081c1beab888b5f669"
+        },
+        {
+          "path": "units/MT.bin",
+          "state": "MT",
+          "rows": 28,
+          "bytes": 7648,
+          "sha256": "c10022ea75629fb34423c4e231357edcd3424ce64e59bfb373b73ecc56b428c4"
+        },
+        {
+          "path": "units/NC.bin",
+          "state": "NC",
+          "rows": 254,
+          "bytes": 35144,
+          "sha256": "b4c13506bf8f7d9aa72557ec957aff1f6274caf5295a3d9478c39eb064267783"
+        },
+        {
+          "path": "units/ND.bin",
+          "state": "ND",
+          "rows": 44,
+          "bytes": 9760,
+          "sha256": "561ac265688890a22401c9ad77b0f9a8357c05d656006c575fb8fcdef0494ac5"
+        },
+        {
+          "path": "units/NE.bin",
+          "state": "NE",
+          "rows": 92,
+          "bytes": 14968,
+          "sha256": "0eb16fec538794da511370d4e2f94af9eafd0888a48e531646c19d0864c9c9b3"
+        },
+        {
+          "path": "units/NH.bin",
+          "state": "NH",
+          "rows": 32,
+          "bytes": 7848,
+          "sha256": "ab926ab38abdb63ac82fd4f73c93d1e0a508aff072e8ef4f47b76a527f1cffde"
+        },
+        {
+          "path": "units/NJ.bin",
+          "state": "NJ",
+          "rows": 176,
+          "bytes": 26200,
+          "sha256": "127e7369887be5bc7f3fe4a39e15099bf5f5bd6d3303151fb71d5e03ef3b0604"
+        },
+        {
+          "path": "units/NM.bin",
+          "state": "NM",
+          "rows": 58,
+          "bytes": 11152,
+          "sha256": "436e2f9f3283e77f20d51cb7da93672bf8212d4094e4bbc36dff3567c15fd4ac"
+        },
+        {
+          "path": "units/NV.bin",
+          "state": "NV",
+          "rows": 132,
+          "bytes": 19664,
+          "sha256": "3e21f704aaa1b3e1c7e2088b9c75b07c653879db1cab8a1061d9cae298466863"
+        },
+        {
+          "path": "units/NY.bin",
+          "state": "NY",
+          "rows": 492,
+          "bytes": 66768,
+          "sha256": "8f9dd7c84e2934e143ee275c926422e5f9ca9f75365ccd14c8c194ac57e0cc45"
+        },
+        {
+          "path": "units/OH.bin",
+          "state": "OH",
+          "rows": 242,
+          "bytes": 36008,
+          "sha256": "3d96e88bc4842269f682a0e4c26cfae0a4cd52120d75573c66410b1966c46104"
+        },
+        {
+          "path": "units/OK.bin",
+          "state": "OK",
+          "rows": 186,
+          "bytes": 26720,
+          "sha256": "babfbf3db553f8a09c5b56acb3e1e89ce7c8e10b5ed8e66904517c3f784204da"
+        },
+        {
+          "path": "units/OR.bin",
+          "state": "OR",
+          "rows": 28,
+          "bytes": 6824,
+          "sha256": "f4567786c51386a5858e4ded70a16038a1693f4373553dd890adf72e6a9a5238"
+        },
+        {
+          "path": "units/PA.bin",
+          "state": "PA",
+          "rows": 342,
+          "bytes": 50840,
+          "sha256": "5994f8ec27946f805e1f6601203ef082973fdd5292f6ffa810d63f486fe30f9c"
+        },
+        {
+          "path": "units/PR.bin",
+          "state": "PR",
+          "rows": 32,
+          "bytes": 7192,
+          "sha256": "d640d7a5d4b4ec26247d96a17666419bb16de19d652fd112ff8a085fb494b84a"
+        },
+        {
+          "path": "units/RI.bin",
+          "state": "RI",
+          "rows": 20,
+          "bytes": 5864,
+          "sha256": "8e1fdbc97954dabeb664684ae8f3c4b409bd6fe93ec1a82971d8c1a6925c3f5f"
+        },
+        {
+          "path": "units/SC.bin",
+          "state": "SC",
+          "rows": 124,
+          "bytes": 20088,
+          "sha256": "35573221b44dfa28d9437737d72358f17632b5ed0b211fd790d6ab4bc1346895"
+        },
+        {
+          "path": "units/SD.bin",
+          "state": "SD",
+          "rows": 24,
+          "bytes": 6656,
+          "sha256": "e54b257743be274191bf2c1fbeec12decf265635ec83106c37cbcb86f6afc38d"
+        },
+        {
+          "path": "units/TN.bin",
+          "state": "TN",
+          "rows": 203,
+          "bytes": 28576,
+          "sha256": "e5ddca0d6a91b9f2148df9eee37a386232c48c06ccc2e1ea5a40eed946fc0b8a"
+        },
+        {
+          "path": "units/TX.bin",
+          "state": "TX",
+          "rows": 871,
+          "bytes": 116448,
+          "sha256": "e5394a68c198e7a83c16e5e69c279f2daedb050eff2eca82b0b3f3cda9778d50"
+        },
+        {
+          "path": "units/UT.bin",
+          "state": "UT",
+          "rows": 60,
+          "bytes": 11672,
+          "sha256": "1430309a076090385bcc14156b49c65934508d915f81cde956cbfb732622139f"
+        },
+        {
+          "path": "units/VA.bin",
+          "state": "VA",
+          "rows": 220,
+          "bytes": 31720,
+          "sha256": "bf8e372b0015cc5c505159d2633b2ad45eb093dff631eda3e859bceccdae4b35"
+        },
+        {
+          "path": "units/VT.bin",
+          "state": "VT",
+          "rows": 12,
+          "bytes": 4736,
+          "sha256": "67eced3fcec65fd5ca382dd75ec3c4e5150804b9275e20266a208072d4e66606"
+        },
+        {
+          "path": "units/WA.bin",
+          "state": "WA",
+          "rows": 34,
+          "bytes": 8096,
+          "sha256": "0ca2c6efafe3474a3a6780228f74a00178dfc811f319154aaedde50566bceb6d"
+        },
+        {
+          "path": "units/WI.bin",
+          "state": "WI",
+          "rows": 174,
+          "bytes": 27328,
+          "sha256": "d00181ee60f10dcd0a01a6f7bb8aaf5c5c584e91a858cec52d0a4d5c0e99bf64"
+        },
+        {
+          "path": "units/WV.bin",
+          "state": "WV",
+          "rows": 112,
+          "bytes": 18288,
+          "sha256": "1a55dfa85678b1fae5e72684a3fc704bb1b2d672b21f9c86e640f4dee62d97ac"
+        },
+        {
+          "path": "units/WY.bin",
+          "state": "WY",
+          "rows": 50,
+          "bytes": 10904,
+          "sha256": "85e5a55dc4ac84f570f1f66712f3783b446efb22a3011064e54726b0a3c6d974"
+        }
+      ],
+      "download": {
+        "path": "units.csv.gz",
+        "bytes": 134015,
+        "sha256": "ca82f3e52cb7bebb4833253877593c5384b62a9251421996cc2ee7608badeaf3",
+        "format": "text/csv; gzip"
+      },
+      "license": "publisher-terms",
+      "credits": [
+        {
+          "publisher": "United States Environmental Protection Agency, Clean Air Markets Program Data (CAMPD)",
+          "attribution": "U.S. Environmental Protection Agency (EPA). Clean Air Markets Program Data. Washington, DC: Office of Atmospheric Protection, Clean Air Markets Division. Available from EPA's Air Markets Program Data web site: https://campd.epa.gov. Retrieved Nov 2026. Aggregated by gridprims under EPA's stated terms.",
+          "note": "Modified by gridprims."
+        },
+        {
+          "publisher": "U.S. Environmental Protection Agency",
+          "attribution": "United States Environmental Protection Agency (EPA). Emissions & Generation Resource Integrated Database (eGRID), eGRID2023 (revision 2), Jun 2025. https://www.epa.gov/egrid",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": [],
+      "joinedFrom": [
+        {
+          "dataset": "egrid",
+          "table": "plants",
+          "version": "2026-10"
+        }
+      ]
+    },
+    {
+      "name": "units_monthly",
+      "title": "Measured emissions, heat input, and gross load by monitored unit and month",
+      "dataPeriod": "2024-2025",
+      "rows": 93558,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "state",
+          "type": "str"
+        },
+        {
+          "name": "plant_id",
+          "type": "i32",
+          "scale": 1,
+          "unit": "EPA/EIA ORISPL facility id"
+        },
+        {
+          "name": "unit_id",
+          "type": "str"
+        },
+        {
+          "name": "year",
+          "type": "i32",
+          "scale": 1
+        },
+        {
+          "name": "month",
+          "type": "i32",
+          "scale": 1
+        },
+        {
+          "name": "co2_tonnes",
+          "type": "f64",
+          "unit": "metric tons"
+        },
+        {
+          "name": "so2_lbs",
+          "type": "f64",
+          "unit": "lb"
+        },
+        {
+          "name": "nox_lbs",
+          "type": "f64",
+          "unit": "lb"
+        },
+        {
+          "name": "heat_input_mmbtu",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "gross_load_mwh",
+          "type": "f64",
+          "unit": "MWh (gross)"
+        },
+        {
+          "name": "operating_hours",
+          "type": "f64",
+          "unit": "hours"
+        },
+        {
+          "name": "hours_reported",
+          "type": "i32",
+          "scale": 1,
+          "unit": "hours with a record"
+        },
+        {
+          "name": "apportioned",
+          "type": "str",
+          "unit": "yes when the unit shares a stack and EPA divides the measured total"
+        }
+      ],
+      "partition": "state",
+      "shards": [
+        {
+          "path": "units_monthly/AK.bin",
+          "state": "AK",
+          "rows": 24,
+          "bytes": 3312,
+          "sha256": "1534d7b7b5dc295912b82897a9d9fb7f2863ba0045f38368bba2a0de9c6b9109"
+        },
+        {
+          "path": "units_monthly/AL.bin",
+          "state": "AL",
+          "rows": 2112,
+          "bytes": 162408,
+          "sha256": "7180e04043981d24bb7c504712007d3bf39a54584b88f80013d4df5e63fa0a39"
+        },
+        {
+          "path": "units_monthly/AR.bin",
+          "state": "AR",
+          "rows": 984,
+          "bytes": 76488,
+          "sha256": "f6e0634456d2fbd10e5eaf9dd29eb8ee618031dd289f6f72d7d18ed77b0b4af0"
+        },
+        {
+          "path": "units_monthly/AZ.bin",
+          "state": "AZ",
+          "rows": 2220,
+          "bytes": 170664,
+          "sha256": "c23de2cad0c4668f0a5d8c35a9858861ebd96a6a386e33e8363299f04490effc"
+        },
+        {
+          "path": "units_monthly/CA.bin",
+          "state": "CA",
+          "rows": 5760,
+          "bytes": 439832,
+          "sha256": "9d10192b985d4a41d3a15cb615c1a2104ec48bd25429f4fee8658468d64caf4c"
+        },
+        {
+          "path": "units_monthly/CO.bin",
+          "state": "CO",
+          "rows": 1698,
+          "bytes": 130912,
+          "sha256": "a6d00ed0a4ce05f09a535aa79988b44ef2ec229ac3b1b1d224befd91c3c38882"
+        },
+        {
+          "path": "units_monthly/CT.bin",
+          "state": "CT",
+          "rows": 1212,
+          "bytes": 93856,
+          "sha256": "63bd1e10c872cffc61c725bc892aa8ba85d03b89a02662bc358de0d7e5e704d2"
+        },
+        {
+          "path": "units_monthly/DC.bin",
+          "state": "DC",
+          "rows": 72,
+          "bytes": 6984,
+          "sha256": "4376be749f6234b09e6a7389149818c839f63cd4408f7c68e9fe1f07b62f29ea"
+        },
+        {
+          "path": "units_monthly/DE.bin",
+          "state": "DE",
+          "rows": 504,
+          "bytes": 39888,
+          "sha256": "0156635c79c5eb89d5610169f98d2b69142c2ebf920cc802a0289fb5dec44594"
+        },
+        {
+          "path": "units_monthly/FL.bin",
+          "state": "FL",
+          "rows": 4947,
+          "bytes": 378680,
+          "sha256": "0b95add2f65d5f4b75bd5cc99ad4263ad45b38fb05dfa38bff904f3b007f7ca4"
+        },
+        {
+          "path": "units_monthly/GA.bin",
+          "state": "GA",
+          "rows": 3144,
+          "bytes": 240936,
+          "sha256": "93816fa6ac98b5437d1a57bb890d7f82d8eebc70416da3dd2a1e0107fed62ebd"
+        },
+        {
+          "path": "units_monthly/IA.bin",
+          "state": "IA",
+          "rows": 1056,
+          "bytes": 81912,
+          "sha256": "2d8420f03087eed1ddd61f904c13decb4e72f0eafd865459eeb29b7e4f2a722a"
+        },
+        {
+          "path": "units_monthly/ID.bin",
+          "state": "ID",
+          "rows": 192,
+          "bytes": 16144,
+          "sha256": "c901ce127782407ba8639f204f657d12c6facccd6b7a8cc0af710d75882ca61b"
+        },
+        {
+          "path": "units_monthly/IL.bin",
+          "state": "IL",
+          "rows": 4782,
+          "bytes": 366104,
+          "sha256": "f7419ebc97f2722d6c7e0671aa976f76e02681d776b9d933cebbc3468c4e3249"
+        },
+        {
+          "path": "units_monthly/IN.bin",
+          "state": "IN",
+          "rows": 2949,
+          "bytes": 226208,
+          "sha256": "a9683853476326d5b5f489ed67a6dc56ad4f4b3c77b5bfd367d8c1f0f09a4699"
+        },
+        {
+          "path": "units_monthly/KS.bin",
+          "state": "KS",
+          "rows": 1104,
+          "bytes": 85632,
+          "sha256": "fa7b3c9015c490d8206b0fe695dbaa2d812d3b7a270ea6561c9d7c25c69fd657"
+        },
+        {
+          "path": "units_monthly/KY.bin",
+          "state": "KY",
+          "rows": 2076,
+          "bytes": 159688,
+          "sha256": "296b2893c6512f09b105476b71e46421df23805b638359365478856ed86ad0e0"
+        },
+        {
+          "path": "units_monthly/LA.bin",
+          "state": "LA",
+          "rows": 1878,
+          "bytes": 144640,
+          "sha256": "7ffd3682b754f098d9401419ce7653276c74867e6a30f34e484d9fc5793dd6d8"
+        },
+        {
+          "path": "units_monthly/MA.bin",
+          "state": "MA",
+          "rows": 1446,
+          "bytes": 111640,
+          "sha256": "7a4e85372178a76d1d4158766037eba294215dd9b875a7f77976a051ca917d2f"
+        },
+        {
+          "path": "units_monthly/MD.bin",
+          "state": "MD",
+          "rows": 1134,
+          "bytes": 87928,
+          "sha256": "787a6075286c49410055f35776db8af0625df40bf329945d0882d0dab2f69a6f"
+        },
+        {
+          "path": "units_monthly/ME.bin",
+          "state": "ME",
+          "rows": 192,
+          "bytes": 16120,
+          "sha256": "c07212cb59aefb6246201e993c23963efd0d3add37822147078847feb9f5f4c2"
+        },
+        {
+          "path": "units_monthly/MI.bin",
+          "state": "MI",
+          "rows": 2670,
+          "bytes": 205032,
+          "sha256": "090483f1dec5a8c67a0b7404339139619073b83117ac4bd35b59593c2245a47b"
+        },
+        {
+          "path": "units_monthly/MN.bin",
+          "state": "MN",
+          "rows": 1350,
+          "bytes": 104328,
+          "sha256": "8d043d8f3ddda756df8f80cb9f987394c29eb7fd6b4db98213c7558dedf96d57"
+        },
+        {
+          "path": "units_monthly/MO.bin",
+          "state": "MO",
+          "rows": 2448,
+          "bytes": 187944,
+          "sha256": "6eed1d3e00347fd5edc872b714f9a9f706e13bb4bbd85ea02f5fa6489fd4795a"
+        },
+        {
+          "path": "units_monthly/MS.bin",
+          "state": "MS",
+          "rows": 1440,
+          "bytes": 111232,
+          "sha256": "6b5769bdec9c98c4d18f55f755bfb430856df2028709ada8bfcb1d3264ce897d"
+        },
+        {
+          "path": "units_monthly/MT.bin",
+          "state": "MT",
+          "rows": 264,
+          "bytes": 21648,
+          "sha256": "3999dd407f6d024c044375d4ae6e9ea7cd74b8e1f83ae1bba4205918177e9628"
+        },
+        {
+          "path": "units_monthly/NC.bin",
+          "state": "NC",
+          "rows": 2937,
+          "bytes": 225184,
+          "sha256": "dc591ac16a76c8440ba2f06a394feebbbb759f675fe05b2a5d7a04ef380105a5"
+        },
+        {
+          "path": "units_monthly/ND.bin",
+          "state": "ND",
+          "rows": 510,
+          "bytes": 40344,
+          "sha256": "7b3e97da17413596152df111b91f69063f67cbd62aafd2b6a98f4306379077ef"
+        },
+        {
+          "path": "units_monthly/NE.bin",
+          "state": "NE",
+          "rows": 1098,
+          "bytes": 85120,
+          "sha256": "35678f3c6ff78e7422dde0edd2bf413be7ecb7edfa70896ea6020808c160a071"
+        },
+        {
+          "path": "units_monthly/NH.bin",
+          "state": "NH",
+          "rows": 324,
+          "bytes": 26200,
+          "sha256": "ceb5c82cf7ff7da9ebbbaebfe0ee5cd4ace5b06f7cd6a516704d1f72dc45a4e6"
+        },
+        {
+          "path": "units_monthly/NJ.bin",
+          "state": "NJ",
+          "rows": 1965,
+          "bytes": 151336,
+          "sha256": "0fcc448e2ac0243412d4362dfb3e905bfda672d78524cde07ea47c87628da31c"
+        },
+        {
+          "path": "units_monthly/NM.bin",
+          "state": "NM",
+          "rows": 693,
+          "bytes": 54344,
+          "sha256": "e953b4db8e09aaac235a3b82ae2bb220f65681bb480e3f6574ecf9cd17c20baf"
+        },
+        {
+          "path": "units_monthly/NV.bin",
+          "state": "NV",
+          "rows": 1572,
+          "bytes": 121344,
+          "sha256": "03cd1af0665eb6aff7b1917b4debabd4e22a49bb043b06591971c17e782961bf"
+        },
+        {
+          "path": "units_monthly/NY.bin",
+          "state": "NY",
+          "rows": 5736,
+          "bytes": 438704,
+          "sha256": "8f87145d6b4bd7afaf868f0cec180f35d91973f2dd8befe2c61179b7fb459e23"
+        },
+        {
+          "path": "units_monthly/OH.bin",
+          "state": "OH",
+          "rows": 2706,
+          "bytes": 207648,
+          "sha256": "6b6860882691d1651d3f5cfa4e7487dff2e0325e724b024694a9b26c59ba8199"
+        },
+        {
+          "path": "units_monthly/OK.bin",
+          "state": "OK",
+          "rows": 2151,
+          "bytes": 165448,
+          "sha256": "c9349b0f7c335ea6d3537cf951ec15e9881013233e2e01f0c944e28f2acc2934"
+        },
+        {
+          "path": "units_monthly/OR.bin",
+          "state": "OR",
+          "rows": 336,
+          "bytes": 27144,
+          "sha256": "f193500f2b10f16f520e9484ebdd249d148c8a1a125b5e908b1abd8a1379799d"
+        },
+        {
+          "path": "units_monthly/PA.bin",
+          "state": "PA",
+          "rows": 3948,
+          "bytes": 302200,
+          "sha256": "126839329b2f535f66912bb55627678b8932554061eb26906acbcced25d637b3"
+        },
+        {
+          "path": "units_monthly/PR.bin",
+          "state": "PR",
+          "rows": 48,
+          "bytes": 5152,
+          "sha256": "441a20cbb0b6e7e255c3869a610da9341a00c024765fa363edafbfa72169c9b5"
+        },
+        {
+          "path": "units_monthly/RI.bin",
+          "state": "RI",
+          "rows": 240,
+          "bytes": 19800,
+          "sha256": "7a8313f70603a8265dd42e8573ab1de57de1f99a17293d17e79c7c751e7cd593"
+        },
+        {
+          "path": "units_monthly/SC.bin",
+          "state": "SC",
+          "rows": 1470,
+          "bytes": 113536,
+          "sha256": "e0c78a44c1d0870d00e1b448c31a88da15384bfb1ca535420b4128f262860e2e"
+        },
+        {
+          "path": "units_monthly/SD.bin",
+          "state": "SD",
+          "rows": 282,
+          "bytes": 23016,
+          "sha256": "cec1b55cba1b1621e4752e7daebef121b1b538bc893e9ee7e0751645e9961f31"
+        },
+        {
+          "path": "units_monthly/TN.bin",
+          "state": "TN",
+          "rows": 2139,
+          "bytes": 164832,
+          "sha256": "01167099668d01feef53c30de19d211c8ec62a9507fc7b0d144dd4d304de558d"
+        },
+        {
+          "path": "units_monthly/TX.bin",
+          "state": "TX",
+          "rows": 10206,
+          "bytes": 778696,
+          "sha256": "8b910e4f557dbdefa681ee3e8289a8d129168946cbd3b3d9c01a042d40b86cae"
+        },
+        {
+          "path": "units_monthly/UT.bin",
+          "state": "UT",
+          "rows": 705,
+          "bytes": 55272,
+          "sha256": "d0366bcac9466eba47968a5237676b5568f5f8e22b0db321986463440adf0dd2"
+        },
+        {
+          "path": "units_monthly/VA.bin",
+          "state": "VA",
+          "rows": 2496,
+          "bytes": 191688,
+          "sha256": "7f12764dc7a239c7b817066f146b7e99c11449c60938850ab02b7958d27937fe"
+        },
+        {
+          "path": "units_monthly/VT.bin",
+          "state": "VT",
+          "rows": 120,
+          "bytes": 10640,
+          "sha256": "c4ba1facf6be5603c1497d48a61d0c768cfbdc36c42ad4d1bed017a837202ac2"
+        },
+        {
+          "path": "units_monthly/WA.bin",
+          "state": "WA",
+          "rows": 408,
+          "bytes": 32608,
+          "sha256": "ff9a2b63c38edbb2d25b93708f1d898bea5dab23651e13058a39348fae407816"
+        },
+        {
+          "path": "units_monthly/WI.bin",
+          "state": "WI",
+          "rows": 2034,
+          "bytes": 156456,
+          "sha256": "e34c2866d0e4d51ab7e563ff6d2f50e970a9ad31b26b0a44dd2360a3e8ce1ff4"
+        },
+        {
+          "path": "units_monthly/WV.bin",
+          "state": "WV",
+          "rows": 1176,
+          "bytes": 91128,
+          "sha256": "0984fcef31b96021418b46970d8df20c1b2399fb3e8c2f4e49995f73e5f4914b"
+        },
+        {
+          "path": "units_monthly/WY.bin",
+          "state": "WY",
+          "rows": 600,
+          "bytes": 47240,
+          "sha256": "005be70c7ce8a3573727233850b5bcca7ef84fc72abc2bc2be951f026b832bbc"
+        }
+      ],
+      "download": {
+        "path": "units_monthly.csv.gz",
+        "bytes": 2320675,
+        "sha256": "45147a6677e294d910e04092072e56c96319dcdc06de9ed8e8d9549908e103ad",
+        "format": "text/csv; gzip"
+      },
+      "license": "publisher-terms",
+      "credits": [
+        {
+          "publisher": "United States Environmental Protection Agency, Clean Air Markets Program Data (CAMPD)",
+          "attribution": "U.S. Environmental Protection Agency (EPA). Clean Air Markets Program Data. Washington, DC: Office of Atmospheric Protection, Clean Air Markets Division. Available from EPA's Air Markets Program Data web site: https://campd.epa.gov. Retrieved Nov 2026. Aggregated by gridprims under EPA's stated terms.",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": []
+    },
+    {
+      "name": "region_hourly",
+      "title": "Measured emissions, heat input, and gross load by balancing authority and hour",
+      "dataPeriod": "2024-2025",
+      "rows": 894744,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "region",
+          "type": "str",
+          "unit": "eGRID balancing-authority code"
+        },
+        {
+          "name": "year",
+          "type": "i32",
+          "scale": 1
+        },
+        {
+          "name": "date",
+          "type": "str",
+          "unit": "YYYY-MM-DD, local standard time"
+        },
+        {
+          "name": "hour",
+          "type": "i32",
+          "scale": 1,
+          "unit": "hour of the day, 0 to 23, local standard time"
+        },
+        {
+          "name": "co2_tonnes",
+          "type": "f64",
+          "unit": "metric tons"
+        },
+        {
+          "name": "heat_input_mmbtu",
+          "type": "f64",
+          "unit": "MMBtu"
+        },
+        {
+          "name": "gross_load_mwh",
+          "type": "f64",
+          "unit": "MWh (gross)"
+        },
+        {
+          "name": "units_reporting",
+          "type": "i32",
+          "scale": 1,
+          "unit": "monitored units with a record in the hour"
+        }
+      ],
+      "partition": [
+        "region",
+        "year"
+      ],
+      "shards": [
+        {
+          "path": "region_hourly/AECI-2024.bin",
+          "state": "AECI-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "2c9a6d4b36157c85193dd012b083f2b40f8e82ddd493efb464d6400b0d25f47e"
+        },
+        {
+          "path": "region_hourly/AECI-2025.bin",
+          "state": "AECI-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "45f0051f7b11bd291ce3c9441086ce0a575ddc8cc6cecba20ec4f4ec93d9789c"
+        },
+        {
+          "path": "region_hourly/AVA-2024.bin",
+          "state": "AVA-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "b450e2a3e36cc2ad4b24389fc2f337f56ba53b8df0b1adc48e135f65d8e7363d"
+        },
+        {
+          "path": "region_hourly/AVA-2025.bin",
+          "state": "AVA-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "456b153c44a00db3e5389a61d44a37ada735cfecb0ee4e075f8a29a5cfeadc1c"
+        },
+        {
+          "path": "region_hourly/AVRN-2024.bin",
+          "state": "AVRN-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "93f71a9a0cdcffafec4869fc2464b511ae1a53d23af69adfcb6bcabe7ec4803c"
+        },
+        {
+          "path": "region_hourly/AVRN-2025.bin",
+          "state": "AVRN-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "0d686db82bc8cada8104c6d1ae20d90745dce04264522c8e2dc0b433ea1f5428"
+        },
+        {
+          "path": "region_hourly/AZPS-2024.bin",
+          "state": "AZPS-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "9fdf8e7beca67fff65c751c9bb869244c069dc3d5bd39558a00209b5e41266f3"
+        },
+        {
+          "path": "region_hourly/AZPS-2025.bin",
+          "state": "AZPS-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "0d9bd7df83e587169e66ce9c9e4aa05267f15d8434ed75eb21af81c0fc46ba7e"
+        },
+        {
+          "path": "region_hourly/BANC-2024.bin",
+          "state": "BANC-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "c28388913322d497c67f73198306df21170db00cf4c5cdc2a98d9779fbfa5fc1"
+        },
+        {
+          "path": "region_hourly/BANC-2025.bin",
+          "state": "BANC-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "bc7ed421aaf143e565681b0eef8daca5baabb128fe4b7ed1d56601b075675dfe"
+        },
+        {
+          "path": "region_hourly/BPAT-2024.bin",
+          "state": "BPAT-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "9427b98f5ed91481dc5fb82e4f2a5ff162b013cc471b1f060767b647da17590d"
+        },
+        {
+          "path": "region_hourly/BPAT-2025.bin",
+          "state": "BPAT-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "04a9d4edf17985f1ffc79dbde064ed2608a9236e8eace0bdbcae4dc093933aa6"
+        },
+        {
+          "path": "region_hourly/CISO-2024.bin",
+          "state": "CISO-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "3bdc31ea9611292ea93857a6c4d709443d56c1e523ecf0cbe79f1a0afb584521"
+        },
+        {
+          "path": "region_hourly/CISO-2025.bin",
+          "state": "CISO-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "91b537991208cae05687fe98b83dc7c0c71bbecfb05d3a4ae4a0c18202ff06bb"
+        },
+        {
+          "path": "region_hourly/CPLE-2024.bin",
+          "state": "CPLE-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "b7c052253c93975064563ef84f9db5f54ea3d4adb40ad79a9d1cd593245ca096"
+        },
+        {
+          "path": "region_hourly/CPLE-2025.bin",
+          "state": "CPLE-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "b9ba20f06d48908d9b6a65d5205d4b88fdbad8422c63c4db48f9972af68a6b1f"
+        },
+        {
+          "path": "region_hourly/DEAA-2024.bin",
+          "state": "DEAA-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "ed2137ca86a685074162ba714329ff4cbfb40080ac67040fb4a5681b391f684f"
+        },
+        {
+          "path": "region_hourly/DEAA-2025.bin",
+          "state": "DEAA-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "19679efc2f8bbce2f65d1a60693c0bec04d3848c30385fd18af5be8cae838fac"
+        },
+        {
+          "path": "region_hourly/DUK-2024.bin",
+          "state": "DUK-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "878ab9a73742f94fc8de3a58487a8d48069ca7e3a5e80c28f1609d9f7f36c4ec"
+        },
+        {
+          "path": "region_hourly/DUK-2025.bin",
+          "state": "DUK-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "bc75824143cb21899699a9075aaa058b2d8bc2fb6a8bc82e8f99ce7861d8558f"
+        },
+        {
+          "path": "region_hourly/EPE-2024.bin",
+          "state": "EPE-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "787bf2c6c8484184263891a4c074a9443c662c71f3c0d57de6d371f93c6d6327"
+        },
+        {
+          "path": "region_hourly/EPE-2025.bin",
+          "state": "EPE-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "3e35736a9dedb0d524e33c8eaab6de6f655b087d3eb86434fc613b571c83b64d"
+        },
+        {
+          "path": "region_hourly/ERCO-2024.bin",
+          "state": "ERCO-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "eab94501827d285de4b34b7bb349f97f926fe0c1c6af9a8c1a5ca350dd3b5ce6"
+        },
+        {
+          "path": "region_hourly/ERCO-2025.bin",
+          "state": "ERCO-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "973543f8994965f5280d7c43f595961931c3bd0bcc03991ac4efb84c6a413de9"
+        },
+        {
+          "path": "region_hourly/FMPP-2024.bin",
+          "state": "FMPP-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "02bdfc18181d2b31c4b2e463707bc1512a293c51168f38fbe03218059e821170"
+        },
+        {
+          "path": "region_hourly/FMPP-2025.bin",
+          "state": "FMPP-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "e44670a73f7a83ba376cedb829683b5f9f53876b0a0aec78490eb74d770d2092"
+        },
+        {
+          "path": "region_hourly/FPC-2024.bin",
+          "state": "FPC-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "f6a061a11b7f60d2ff70907300b8416fcabb3cba69b0e5be605dc7cab72c4d23"
+        },
+        {
+          "path": "region_hourly/FPC-2025.bin",
+          "state": "FPC-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "d48e7f60669430a3132c0f3b447c13d7368de1ecd98798ce4c3fd75e47adcd24"
+        },
+        {
+          "path": "region_hourly/FPL-2024.bin",
+          "state": "FPL-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "7504350726bff6813e4ba5ad365afa79ddce790ffb81d861b6c4da09e03ec7aa"
+        },
+        {
+          "path": "region_hourly/FPL-2025.bin",
+          "state": "FPL-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "d6a8098f74e21238e5db9ef4564ff1f4dd48f97a38d2c6a785fe444fda629b7f"
+        },
+        {
+          "path": "region_hourly/GRID-2024.bin",
+          "state": "GRID-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "641883d69d84e123e0fc2844f15be13b7cec08457dd1825d56576453608f2121"
+        },
+        {
+          "path": "region_hourly/GRID-2025.bin",
+          "state": "GRID-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "f09be38038be7277a2b9d4406604dce06df47ac265bdaafa969532f8790430bf"
+        },
+        {
+          "path": "region_hourly/GRIF-2024.bin",
+          "state": "GRIF-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "d551742cf899f93bc9a6fbc8f8137c7b3ec1e8afc6e72cb54c9c212586f47d3d"
+        },
+        {
+          "path": "region_hourly/GRIF-2025.bin",
+          "state": "GRIF-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "1333ae533572bcb58b504e79e91f7d23d742b7b1f5dd14b06cfdd9e776fb9d67"
+        },
+        {
+          "path": "region_hourly/GVL-2024.bin",
+          "state": "GVL-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "fc1202e3d201969a652643afb6de7bea5ae10dcc478e554681c1e761395689bc"
+        },
+        {
+          "path": "region_hourly/GVL-2025.bin",
+          "state": "GVL-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "f8640356c002feb837cdafd52fad43511a59ac154cc2da43af63cd5becaf70d4"
+        },
+        {
+          "path": "region_hourly/HGMA-2024.bin",
+          "state": "HGMA-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "d02fa26a4a97963ba7a9f57d72301eaafcdff495c4958cbcd1dc08f51d8b4174"
+        },
+        {
+          "path": "region_hourly/HGMA-2025.bin",
+          "state": "HGMA-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "6016ee6f9779f76a5bb852511dac4f158371e44b5c5ca3994242c3e8fa673430"
+        },
+        {
+          "path": "region_hourly/IID-2024.bin",
+          "state": "IID-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "8ec32d4daed856dade0e6d210460d8f911306acbd56bcf3e2757cd944760124f"
+        },
+        {
+          "path": "region_hourly/IID-2025.bin",
+          "state": "IID-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "48cb9371a5d97b5304d802e1ddec95d4dfcad7a7cb3698ec10572c7846de25de"
+        },
+        {
+          "path": "region_hourly/IPCO-2024.bin",
+          "state": "IPCO-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "a910334bf90cf0bae16ae1b2482b86aa45d96b329fc764809819e67e4852e7dd"
+        },
+        {
+          "path": "region_hourly/IPCO-2025.bin",
+          "state": "IPCO-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "3902321cdce47c0de29b3737a0e546285ec3403818b50ab79fffa8dca3920f17"
+        },
+        {
+          "path": "region_hourly/ISNE-2024.bin",
+          "state": "ISNE-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "ad2a9b0d13b4565aedff10dcaadfb03837e369d5045d2e53a1958f994f0cdadd"
+        },
+        {
+          "path": "region_hourly/ISNE-2025.bin",
+          "state": "ISNE-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "541d6237c113b46173241fe9b6274d3e2cb92dcbb72063d31153864ff5ba9daf"
+        },
+        {
+          "path": "region_hourly/JEA-2024.bin",
+          "state": "JEA-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "17bc37014824223a1479cf5c0c24f013b16176b2760f71c071d911f5083fe96e"
+        },
+        {
+          "path": "region_hourly/JEA-2025.bin",
+          "state": "JEA-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "a5252722d599e0c66fd3e1389b1e1ecc4756f3fe6e3671b604df391581e6fa1d"
+        },
+        {
+          "path": "region_hourly/LDWP-2024.bin",
+          "state": "LDWP-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "eaf363d00397dc8215fcd0c3853bc0ec5608656c148bf8e53b07e2a3434c01f6"
+        },
+        {
+          "path": "region_hourly/LDWP-2025.bin",
+          "state": "LDWP-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "bf34121c0922111e92b155e2716c4271179b3998dc81b6095fb0c1f9d9826a74"
+        },
+        {
+          "path": "region_hourly/LGEE-2024.bin",
+          "state": "LGEE-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "5564206ca4437d3b3d1f038af8d784ac87f463c8578f7cd06c5986cf817779ac"
+        },
+        {
+          "path": "region_hourly/LGEE-2025.bin",
+          "state": "LGEE-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "4c802f00d5ba41cc474db671d9fd6e786f76770181ac6da4a37627f090bd8985"
+        },
+        {
+          "path": "region_hourly/MISO-2024.bin",
+          "state": "MISO-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "64d23f50a8082ac94cc2f03bd9c043be06aff6c46a3d9bba85a7841bb40a4bc7"
+        },
+        {
+          "path": "region_hourly/MISO-2025.bin",
+          "state": "MISO-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "3f8bc299b2a258edd1d13e591dcdb7883eaca4e796a4563dcebdb89273aac8d0"
+        },
+        {
+          "path": "region_hourly/NEVP-2024.bin",
+          "state": "NEVP-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "eed6259349feef5a148298c288c50239ff5224f534c637a975262c44efc68098"
+        },
+        {
+          "path": "region_hourly/NEVP-2025.bin",
+          "state": "NEVP-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "61b804a718f2f9f10d8af540903396d94102f20427c7ebc80166857bb0c61446"
+        },
+        {
+          "path": "region_hourly/NWMT-2024.bin",
+          "state": "NWMT-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "fc86dfab7f457fb358df3fa517004f91ba0f1fbdae184ccdc1d8bb3ecacdd6c8"
+        },
+        {
+          "path": "region_hourly/NWMT-2025.bin",
+          "state": "NWMT-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "68e1d034141933e0f861777368b6d8bb8ef2d883dde94e8716ca44628011b964"
+        },
+        {
+          "path": "region_hourly/NYIS-2024.bin",
+          "state": "NYIS-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "00438ef648dd6774473afce3bb2ea95b3e4de7bf167e1e6a7bfff3d6bb667a22"
+        },
+        {
+          "path": "region_hourly/NYIS-2025.bin",
+          "state": "NYIS-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "da3e4edd361e45af9ab84761d7b70c70ec6ed0f895530e6246d5bcef101264d6"
+        },
+        {
+          "path": "region_hourly/PACE-2024.bin",
+          "state": "PACE-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "9c492a18a98d0b8563199026e265cd4c5c24bb949d007e0e94a141200af82c02"
+        },
+        {
+          "path": "region_hourly/PACE-2025.bin",
+          "state": "PACE-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "b4b0feacd29f1323847826be4dc90517a55e87d3299be10820b584ddf2c2194c"
+        },
+        {
+          "path": "region_hourly/PACW-2024.bin",
+          "state": "PACW-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "b187afb86466c3c2d14548cb0d1368773b21c53d17e86c59fc4355190218f1a5"
+        },
+        {
+          "path": "region_hourly/PACW-2025.bin",
+          "state": "PACW-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "c2ecc1f21bb22ec752a518cd8c1153b9bffbde6e35db2c5fdbdb4eef1f138b55"
+        },
+        {
+          "path": "region_hourly/PGE-2024.bin",
+          "state": "PGE-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "7ba080201f39a5d5d1d43ceebd429062ed84321e33bc9c5cd1608bebf4731e11"
+        },
+        {
+          "path": "region_hourly/PGE-2025.bin",
+          "state": "PGE-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "91f97d30d9a0e3c81f82e69e72eb0015ec1d3d462bd7d171a1643bca9f7bec96"
+        },
+        {
+          "path": "region_hourly/PJM-2024.bin",
+          "state": "PJM-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "72f5ec90d5b328a0765c883b148965701af730b26ca90429ce3beda89855ea89"
+        },
+        {
+          "path": "region_hourly/PJM-2025.bin",
+          "state": "PJM-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "5f68999fa4052f19ecd5fe715abf666771cd1553330e6b633205a0074ada4d7b"
+        },
+        {
+          "path": "region_hourly/PNM-2024.bin",
+          "state": "PNM-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "a9f7c655590d4d0876e0561ed8dc88d66ef81febf8e013a8400a98a9a31d9b7f"
+        },
+        {
+          "path": "region_hourly/PNM-2025.bin",
+          "state": "PNM-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "d803527e81471bd9d1fe30739e71c111477aa76bccecf84943957411233e4eec"
+        },
+        {
+          "path": "region_hourly/PSCO-2024.bin",
+          "state": "PSCO-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "b89b55343f9cf437c375af79b0898fea0a261e41b7cbe9e7dcce8e3f27de5687"
+        },
+        {
+          "path": "region_hourly/PSCO-2025.bin",
+          "state": "PSCO-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "89ac6c83ea7b4f3b4a73e06c74050a141cdbd766081b571b850c1d917c1aae89"
+        },
+        {
+          "path": "region_hourly/PSEI-2024.bin",
+          "state": "PSEI-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "a2d28e2d8dcf024f3ca794b7961a72b5265f47be4e7de14ef73ac190a65f0991"
+        },
+        {
+          "path": "region_hourly/PSEI-2025.bin",
+          "state": "PSEI-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "3e86099a061262e1339e34cf12d641bb9b9c5c81065cc67393d2e108e1ce0f2e"
+        },
+        {
+          "path": "region_hourly/SC-2024.bin",
+          "state": "SC-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "839f3c67c39415b5f362d699b113b049f11b1f2cfe47b16384d8f9c144974d88"
+        },
+        {
+          "path": "region_hourly/SC-2025.bin",
+          "state": "SC-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "1bd6f00298d87b373e58be5f020ddfa75b214d3b7eb43abfdd252fb5dfd8c4a3"
+        },
+        {
+          "path": "region_hourly/SCEG-2024.bin",
+          "state": "SCEG-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "33ce959d9b56121f457bbcb28be0aa23fdceb9a84fd59300bbf4304d508f9125"
+        },
+        {
+          "path": "region_hourly/SCEG-2025.bin",
+          "state": "SCEG-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "ad0f974de56c8f3c8ee5f878c7f7b6c5184c67832f6ba2002934191741216205"
+        },
+        {
+          "path": "region_hourly/SEC-2024.bin",
+          "state": "SEC-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "a0d070819bbc97f0d72ddca0cd8c5f0d0fdbff8bc54f83fa4b95b8b5c5705153"
+        },
+        {
+          "path": "region_hourly/SEC-2025.bin",
+          "state": "SEC-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "897c20b1ff5ad3c2f397ed931bb91dbf5c7b0bec84f97abcb3e3baf6a4352cfc"
+        },
+        {
+          "path": "region_hourly/SOCO-2024.bin",
+          "state": "SOCO-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "3f537d4caa98cde7e15bb0cd08091d7d76fab0ed84876e7664a01cbb05631be3"
+        },
+        {
+          "path": "region_hourly/SOCO-2025.bin",
+          "state": "SOCO-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "5a2d5797990e3a868940183f1c8f039bfbc4d2de00f7e7f28c3cb0aa095738ce"
+        },
+        {
+          "path": "region_hourly/SPA-2024.bin",
+          "state": "SPA-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "6175c150b9aa32c2a443713290816313baf516e3062d7183d9c9295a8609f8f1"
+        },
+        {
+          "path": "region_hourly/SPA-2025.bin",
+          "state": "SPA-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "3e836f4c4424f31f805970b6d44d5a760fff02a929f3b77416ee32dffe8db554"
+        },
+        {
+          "path": "region_hourly/SRP-2024.bin",
+          "state": "SRP-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "d127aea7c40ff6f08eb26bdc1dcb8646c803fbfdc3f66ee30c63b3bad6f64ded"
+        },
+        {
+          "path": "region_hourly/SRP-2025.bin",
+          "state": "SRP-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "d0a926e4c68e9038ccfa3e6ec07997217fec0cab153b24a65f0f8b57b16f6ae2"
+        },
+        {
+          "path": "region_hourly/SWPP-2024.bin",
+          "state": "SWPP-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "674b5c5f312b72d4f8b4c8e7ece38e2901e69263ca3eed9b95183301a4203d7e"
+        },
+        {
+          "path": "region_hourly/SWPP-2025.bin",
+          "state": "SWPP-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "9f239129119363fabf79bdd72adf1199e6c27b9ee79841b3ad01dd0ba10a09b1"
+        },
+        {
+          "path": "region_hourly/TAL-2024.bin",
+          "state": "TAL-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "67993a5468a7b823913c28f153b1ab8532df08c5c01d5ea6aafbfc310551fcab"
+        },
+        {
+          "path": "region_hourly/TAL-2025.bin",
+          "state": "TAL-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "8c80e413e5be4a11e0237caab2968012839f53e72f0b344420a11829d7381064"
+        },
+        {
+          "path": "region_hourly/TEC-2024.bin",
+          "state": "TEC-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "c3cba0e45866e083c34c05b3b2d17a44266c72c3c10b58f42a3a117758df6a84"
+        },
+        {
+          "path": "region_hourly/TEC-2025.bin",
+          "state": "TEC-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "e5269b5e280417e652e6f766b112d41dd086233ad797cdb591c8dd65e6766c1b"
+        },
+        {
+          "path": "region_hourly/TEPC-2024.bin",
+          "state": "TEPC-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "6f9a7ddd1bf0f4c34f1ded9c116bfdd9688b1938229fb4645ad3a2911c9bc612"
+        },
+        {
+          "path": "region_hourly/TEPC-2025.bin",
+          "state": "TEPC-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "6657ae09a6fa9a5fc7f5e024e6573c566e2df9196bf8385baa922dec196691ca"
+        },
+        {
+          "path": "region_hourly/TIDC-2024.bin",
+          "state": "TIDC-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "3a586b0e44a8cef329ef10e5fcb3401c1b99ef29d55ffc486130763ef026d30c"
+        },
+        {
+          "path": "region_hourly/TIDC-2025.bin",
+          "state": "TIDC-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "a0f1045a0c6c446c56a128da1749f92381c72d13c31be3fd5974739969f555e5"
+        },
+        {
+          "path": "region_hourly/TVA-2024.bin",
+          "state": "TVA-2024",
+          "rows": 8784,
+          "bytes": 392368,
+          "sha256": "15efa7f0f55b709d97318cb23435519e7816abff80ea55a4d4d7922519637573"
+        },
+        {
+          "path": "region_hourly/TVA-2025.bin",
+          "state": "TVA-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "5890d2def39736d3f5ab093fc43797355ab3700b7f8d68e95f5943c3d26ccc1a"
+        },
+        {
+          "path": "region_hourly/WACM-2024.bin",
+          "state": "WACM-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "f2507bc0d14c02589a00b58989e9c19f12c4ef6cbff4ab780d032f1883cee893"
+        },
+        {
+          "path": "region_hourly/WACM-2025.bin",
+          "state": "WACM-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "ba4af66dd0f5cb7753442b0080837a17501e5ab93ce79cbef4455fc87d350274"
+        },
+        {
+          "path": "region_hourly/WALC-2024.bin",
+          "state": "WALC-2024",
+          "rows": 8784,
+          "bytes": 392376,
+          "sha256": "999ff26309a84b7d4480f6f8160180ab73b844003f6172807aeaba778354af26"
+        },
+        {
+          "path": "region_hourly/WALC-2025.bin",
+          "state": "WALC-2025",
+          "rows": 8760,
+          "bytes": 391304,
+          "sha256": "c2ef5458f79c7d81769d66c6f21a7ba4eab0bc47d42f0f42e3e43fb0bc0c30c5"
+        },
+        {
+          "path": "region_hourly/unmatched.bin",
+          "state": "unmatched",
+          "rows": 17544,
+          "bytes": 782560,
+          "sha256": "ef8c16b227347fe36d36344caee0c6dc287d3974cbc3689cac13e7129d112ac4"
+        }
+      ],
+      "download": null,
+      "license": "publisher-terms",
+      "credits": [
+        {
+          "publisher": "United States Environmental Protection Agency, Clean Air Markets Program Data (CAMPD)",
+          "attribution": "U.S. Environmental Protection Agency (EPA). Clean Air Markets Program Data. Washington, DC: Office of Atmospheric Protection, Clean Air Markets Division. Available from EPA's Air Markets Program Data web site: https://campd.epa.gov. Retrieved Nov 2026. Aggregated by gridprims under EPA's stated terms.",
+          "note": "Modified by gridprims."
+        },
+        {
+          "publisher": "U.S. Environmental Protection Agency",
+          "attribution": "United States Environmental Protection Agency (EPA). Emissions & Generation Resource Integrated Database (eGRID), eGRID2023 (revision 2), Jun 2025. https://www.epa.gov/egrid",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": [],
+      "joinedFrom": [
+        {
+          "dataset": "egrid",
+          "table": "plants",
+          "version": "2026-10"
+        }
+      ],
+      "unmatched": 17544
+    }
+  ]
+}
