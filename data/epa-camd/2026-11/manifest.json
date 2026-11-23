@@ -777,7 +777,7 @@
       "noBusImpedances": true,
       "noNdaData": true
     },
-    "columnsChecked": 48,
+    "columnsChecked": 61,
     "flagged": [],
     "unconfirmed": [],
     "passed": true,
@@ -2898,6 +2898,757 @@
         }
       ],
       "unmatched": 17549
+    },
+    {
+      "name": "peak_hour_units",
+      "title": "What ran in each region's ten highest-demand hours, unit by unit",
+      "dataPeriod": "2024-2025",
+      "rows": 57864,
+      "changes": {
+        "first": true
+      },
+      "columns": [
+        {
+          "name": "region",
+          "type": "str",
+          "unit": "eGRID balancing-authority code"
+        },
+        {
+          "name": "year",
+          "type": "i32",
+          "scale": 1
+        },
+        {
+          "name": "hour",
+          "type": "i32",
+          "scale": 1,
+          "unit": "hours since 1970-01-01T00:00Z"
+        },
+        {
+          "name": "rank",
+          "type": "i32",
+          "scale": 1,
+          "unit": "the hour's place among the year's highest-demand hours, 1 is the highest"
+        },
+        {
+          "name": "demand_mwh",
+          "type": "f64",
+          "unit": "MWh, the region's demand in the hour (EIA-930)"
+        },
+        {
+          "name": "plant_id",
+          "type": "i32",
+          "scale": 1,
+          "unit": "EPA/EIA ORISPL facility id"
+        },
+        {
+          "name": "unit_id",
+          "type": "str"
+        },
+        {
+          "name": "fuel",
+          "type": "str",
+          "unit": "EIA-930 fuel category: col, ng, oil, or oth"
+        },
+        {
+          "name": "operating_hours",
+          "type": "f64",
+          "unit": "the fraction of the hour the unit ran"
+        },
+        {
+          "name": "gross_load_mwh",
+          "type": "f64",
+          "unit": "MWh (gross)"
+        },
+        {
+          "name": "co2_tonnes",
+          "type": "f64",
+          "unit": "metric tons"
+        },
+        {
+          "name": "rate_lb_mwh",
+          "type": "f64",
+          "unit": "lb of carbon dioxide per MWh of gross load"
+        },
+        {
+          "name": "apportioned",
+          "type": "str",
+          "unit": "yes when the unit shares a stack and EPA divides the measured total"
+        }
+      ],
+      "partition": [
+        "region",
+        "year"
+      ],
+      "shards": [
+        {
+          "path": "peak_hour_units/AECI-2024.bin",
+          "state": "AECI-2024",
+          "rows": 182,
+          "bytes": 14952,
+          "sha256": "2e127d3f71ac55ed5b6a61a69ba55d1d6842056e927492b26da44a89900022cc"
+        },
+        {
+          "path": "peak_hour_units/AECI-2025.bin",
+          "state": "AECI-2025",
+          "rows": 180,
+          "bytes": 14800,
+          "sha256": "0022b1594de6240f4e2914b8cbcceffa845d8252bcf9553821c7d067765abed3"
+        },
+        {
+          "path": "peak_hour_units/AVA-2024.bin",
+          "state": "AVA-2024",
+          "rows": 22,
+          "bytes": 3384,
+          "sha256": "acbc94bda00b231de30f759337495d1c7f4f72d317812c4c8a7470c466a3e9d0"
+        },
+        {
+          "path": "peak_hour_units/AVA-2025.bin",
+          "state": "AVA-2025",
+          "rows": 27,
+          "bytes": 3784,
+          "sha256": "33a2b31e4baa065db68f5ce1b20ee513894e636cca4003df6ba91dd7019f4ba6"
+        },
+        {
+          "path": "peak_hour_units/AZPS-2024.bin",
+          "state": "AZPS-2024",
+          "rows": 85,
+          "bytes": 8040,
+          "sha256": "4df41301c811fad9d8b12092be1f0884fc4f578b8a654246eb2318c765189081"
+        },
+        {
+          "path": "peak_hour_units/AZPS-2025.bin",
+          "state": "AZPS-2025",
+          "rows": 81,
+          "bytes": 7752,
+          "sha256": "5959413d9e688b9f6a952fff1866e187127a0d6e6dd21d7cc04ae929abf85612"
+        },
+        {
+          "path": "peak_hour_units/BANC-2024.bin",
+          "state": "BANC-2024",
+          "rows": 137,
+          "bytes": 11760,
+          "sha256": "97628b78d0061da8c63e08ee0a8cb6daa7f930edbe6a3da410c3646433d57a1a"
+        },
+        {
+          "path": "peak_hour_units/BANC-2025.bin",
+          "state": "BANC-2025",
+          "rows": 131,
+          "bytes": 11344,
+          "sha256": "851b81c8018fa288ebc8a0dcbb38bd23c876931a7185e2549129e5b4f829abd2"
+        },
+        {
+          "path": "peak_hour_units/BPAT-2024.bin",
+          "state": "BPAT-2024",
+          "rows": 54,
+          "bytes": 5720,
+          "sha256": "9473ca15af945a2a598af6d1e9b52a6ab28b48e99f983434756c880569a49e3b"
+        },
+        {
+          "path": "peak_hour_units/BPAT-2025.bin",
+          "state": "BPAT-2025",
+          "rows": 70,
+          "bytes": 6880,
+          "sha256": "04f3915e5fe4b6f5e420c96afa0e493ee3dfc178879e96e3650d65f0ab88e445"
+        },
+        {
+          "path": "peak_hour_units/CISO-2024.bin",
+          "state": "CISO-2024",
+          "rows": 1485,
+          "bytes": 109200,
+          "sha256": "bbf9c575a9f9404bc61590cbc73f36986e48b808a0cba4c03982529d9433c0c1"
+        },
+        {
+          "path": "peak_hour_units/CISO-2025.bin",
+          "state": "CISO-2025",
+          "rows": 1368,
+          "bytes": 100728,
+          "sha256": "b61d343bfffb038f4130e97700e9cfe8924584e2766c0cb8139dfa4354b69a78"
+        },
+        {
+          "path": "peak_hour_units/CPLE-2024.bin",
+          "state": "CPLE-2024",
+          "rows": 440,
+          "bytes": 33800,
+          "sha256": "b8c658c8527d60a600f6648bfa5b374fccf50b19d83dc9e89784fe1a46ccfed4"
+        },
+        {
+          "path": "peak_hour_units/CPLE-2025.bin",
+          "state": "CPLE-2025",
+          "rows": 512,
+          "bytes": 38984,
+          "sha256": "0b2db886bfdfbb6a5c3185c2f030d7c3a196acaa37b58f0cc7bf6c3918318a57"
+        },
+        {
+          "path": "peak_hour_units/DUK-2024.bin",
+          "state": "DUK-2024",
+          "rows": 418,
+          "bytes": 32120,
+          "sha256": "440931565ce97eb94459f8442f2d00ef3a12bcb7f7213cb8c603866bba03820f"
+        },
+        {
+          "path": "peak_hour_units/DUK-2025.bin",
+          "state": "DUK-2025",
+          "rows": 431,
+          "bytes": 33096,
+          "sha256": "6db8565f7d823336165008176d84d3e9b09d8b650b3e728777f19548672fad60"
+        },
+        {
+          "path": "peak_hour_units/EPE-2024.bin",
+          "state": "EPE-2024",
+          "rows": 144,
+          "bytes": 12272,
+          "sha256": "e95972262a16a2576e2d5804b6bc80959b686de6f4821da03e5834a8e26bdc35"
+        },
+        {
+          "path": "peak_hour_units/EPE-2025.bin",
+          "state": "EPE-2025",
+          "rows": 128,
+          "bytes": 11112,
+          "sha256": "57ed0856d0b7ad7ee67c6bd29f225c0dd26ac278eb4b797dcb89428a88164e5d"
+        },
+        {
+          "path": "peak_hour_units/ERCO-2024.bin",
+          "state": "ERCO-2024",
+          "rows": 2976,
+          "bytes": 217360,
+          "sha256": "08c8c3e83c148411ef319406ac7c75aef1526625c16147cb864d007753092585"
+        },
+        {
+          "path": "peak_hour_units/ERCO-2025.bin",
+          "state": "ERCO-2025",
+          "rows": 2603,
+          "bytes": 190504,
+          "sha256": "8c9f749b8c5c8cc83ca8154ce08f02a44bc44da3890814f97ddfe197fe54b451"
+        },
+        {
+          "path": "peak_hour_units/FMPP-2024.bin",
+          "state": "FMPP-2024",
+          "rows": 94,
+          "bytes": 8616,
+          "sha256": "c00631f3d2c4e16cbb47b7d96733b20ac96de11ae36d27bdcfb57f5dc093a49c"
+        },
+        {
+          "path": "peak_hour_units/FMPP-2025.bin",
+          "state": "FMPP-2025",
+          "rows": 113,
+          "bytes": 10024,
+          "sha256": "884f4cab16db24558a564c4d8b8eae9ef93ffbffc39de0c99646f0fcb297cfe3"
+        },
+        {
+          "path": "peak_hour_units/FPC-2024.bin",
+          "state": "FPC-2024",
+          "rows": 418,
+          "bytes": 32128,
+          "sha256": "f4cd6ca32ca21c47b4737200df5616d58010b667bb24867b41501bc6f4aa95c6"
+        },
+        {
+          "path": "peak_hour_units/FPC-2025.bin",
+          "state": "FPC-2025",
+          "rows": 408,
+          "bytes": 31400,
+          "sha256": "62f0ac14a78e726c64163190335860df293dd325fdd673941c748c895a3d17b6"
+        },
+        {
+          "path": "peak_hour_units/FPL-2024.bin",
+          "state": "FPL-2024",
+          "rows": 563,
+          "bytes": 42968,
+          "sha256": "ccdbb6933996c71072103033252550f711860631965250e10ac539b36e694690"
+        },
+        {
+          "path": "peak_hour_units/FPL-2025.bin",
+          "state": "FPL-2025",
+          "rows": 638,
+          "bytes": 48352,
+          "sha256": "48a590bb23295b113bfb6dd5e10a9e1e3c2447c569427461c2cb436004a7ced5"
+        },
+        {
+          "path": "peak_hour_units/GVL-2024.bin",
+          "state": "GVL-2024",
+          "rows": 36,
+          "bytes": 4416,
+          "sha256": "ce2cce665c06d1d664dd914e69746aa0e953745230b49cafe1e9cfe8eaa5be23"
+        },
+        {
+          "path": "peak_hour_units/GVL-2025.bin",
+          "state": "GVL-2025",
+          "rows": 40,
+          "bytes": 4712,
+          "sha256": "b61e9d31ae1cc4451156d12936bbfc17e6d99b0aebd730b2f3d9a3fe75cc11e4"
+        },
+        {
+          "path": "peak_hour_units/IID-2024.bin",
+          "state": "IID-2024",
+          "rows": 50,
+          "bytes": 5424,
+          "sha256": "0ec049ade331d12c0b74a0ecca2f6252ef31d7742f7137a0d1eba908974b3b1b"
+        },
+        {
+          "path": "peak_hour_units/IID-2025.bin",
+          "state": "IID-2025",
+          "rows": 47,
+          "bytes": 5240,
+          "sha256": "71a658d1732c4734698024d2469630fffed3c44f2e5fc7b6c98ed9140f552924"
+        },
+        {
+          "path": "peak_hour_units/IPCO-2024.bin",
+          "state": "IPCO-2024",
+          "rows": 50,
+          "bytes": 5424,
+          "sha256": "94efefa765b03a5e818136a392754267de31ea8fe6e68167b98da5ca03b74c1e"
+        },
+        {
+          "path": "peak_hour_units/IPCO-2025.bin",
+          "state": "IPCO-2025",
+          "rows": 41,
+          "bytes": 4808,
+          "sha256": "8d9dd13689befb9d2c60acc67d6c1fa52aa4794c6f50660cfecf97448684b885"
+        },
+        {
+          "path": "peak_hour_units/ISNE-2024.bin",
+          "state": "ISNE-2024",
+          "rows": 929,
+          "bytes": 69160,
+          "sha256": "4eac468fa9dcc7e02454582142ff064938387a6b2508ca3150882616119f6033"
+        },
+        {
+          "path": "peak_hour_units/ISNE-2025.bin",
+          "state": "ISNE-2025",
+          "rows": 1156,
+          "bytes": 85472,
+          "sha256": "9dbe7a7a9e77573452cca9e14e49a4f361339d6a8ff48db77e8c3df3794aefc3"
+        },
+        {
+          "path": "peak_hour_units/JEA-2024.bin",
+          "state": "JEA-2024",
+          "rows": 88,
+          "bytes": 8168,
+          "sha256": "1ab4ee4456e1279cdab3a53683e673e1dde776fe7c7562f3187afd898aa90fff"
+        },
+        {
+          "path": "peak_hour_units/JEA-2025.bin",
+          "state": "JEA-2025",
+          "rows": 90,
+          "bytes": 8312,
+          "sha256": "54a1e390343a9c22053fb4bad696b17c36a13472b67b919dbca98a1ba3e1e891"
+        },
+        {
+          "path": "peak_hour_units/LDWP-2024.bin",
+          "state": "LDWP-2024",
+          "rows": 224,
+          "bytes": 18040,
+          "sha256": "700c39ec69d04158ffdd1c35097b822de66de6461ee18f61cf468e728155b0fd"
+        },
+        {
+          "path": "peak_hour_units/LDWP-2025.bin",
+          "state": "LDWP-2025",
+          "rows": 148,
+          "bytes": 12560,
+          "sha256": "49f1e332a2d2b7a013d59e038a0c4d70da2ce12b32ca3433c402c6c821bfc642"
+        },
+        {
+          "path": "peak_hour_units/LGEE-2024.bin",
+          "state": "LGEE-2024",
+          "rows": 289,
+          "bytes": 22784,
+          "sha256": "85dcc5b1d1808a0ac6d9d94af0c43d116dc0e660720538616b442969f6ae56b9"
+        },
+        {
+          "path": "peak_hour_units/LGEE-2025.bin",
+          "state": "LGEE-2025",
+          "rows": 316,
+          "bytes": 24704,
+          "sha256": "64c8f8b6e91f9d612a8ea403bfa8698a5132ca39f6e695b285952a9dc94cb9d6"
+        },
+        {
+          "path": "peak_hour_units/MISO-2024.bin",
+          "state": "MISO-2024",
+          "rows": 5276,
+          "bytes": 383536,
+          "sha256": "8b48308e47cc9ac3489a6d08596fed3b9703c674de023e4787e5734bd2b4b656"
+        },
+        {
+          "path": "peak_hour_units/MISO-2025.bin",
+          "state": "MISO-2025",
+          "rows": 5205,
+          "bytes": 378416,
+          "sha256": "649e58454394a8343a9af1f9f65a7d63a1687c5319c9ecedd0799837fab4c57e"
+        },
+        {
+          "path": "peak_hour_units/NEVP-2024.bin",
+          "state": "NEVP-2024",
+          "rows": 386,
+          "bytes": 29864,
+          "sha256": "59950e7f5c9b714d43882fc21882b4b4cae0b1a76aef7e5073fb16680d75184a"
+        },
+        {
+          "path": "peak_hour_units/NEVP-2025.bin",
+          "state": "NEVP-2025",
+          "rows": 355,
+          "bytes": 27672,
+          "sha256": "bb9efdd5b64437981e7ac117df49926acf2307500cd95904f53708d3b65c4ba1"
+        },
+        {
+          "path": "peak_hour_units/NWMT-2024.bin",
+          "state": "NWMT-2024",
+          "rows": 88,
+          "bytes": 8192,
+          "sha256": "6d7b8e5a781f3235c8cdc97a6c38e5eafa2e004b74967e126d849efeadbbec8d"
+        },
+        {
+          "path": "peak_hour_units/NWMT-2025.bin",
+          "state": "NWMT-2025",
+          "rows": 84,
+          "bytes": 7904,
+          "sha256": "7ae4f58981b0997b421cf9e1c97b0ac64c7a3abb9adc8026926f61eaf943b01c"
+        },
+        {
+          "path": "peak_hour_units/NYIS-2024.bin",
+          "state": "NYIS-2024",
+          "rows": 1613,
+          "bytes": 119008,
+          "sha256": "527c59184ba98a8178594968e9a080111ffa2490e8d1cc2618c0909040e98d57"
+        },
+        {
+          "path": "peak_hour_units/NYIS-2025.bin",
+          "state": "NYIS-2025",
+          "rows": 1899,
+          "bytes": 139672,
+          "sha256": "824872ae1603df7a916d1509ee2c3ec07678f23f8658d4636601d26eeb3d68fb"
+        },
+        {
+          "path": "peak_hour_units/PACE-2024.bin",
+          "state": "PACE-2024",
+          "rows": 360,
+          "bytes": 27920,
+          "sha256": "2f6ab3e8e3457d6011c39cb24e9505428c85910df919fd8f82d15fcda65545d1"
+        },
+        {
+          "path": "peak_hour_units/PACE-2025.bin",
+          "state": "PACE-2025",
+          "rows": 336,
+          "bytes": 26184,
+          "sha256": "ae174a3da0b34967025a49483183b2ba2dee2bb1c4f8645833f03275b50456d4"
+        },
+        {
+          "path": "peak_hour_units/PACW-2024.bin",
+          "state": "PACW-2024",
+          "rows": 20,
+          "bytes": 3232,
+          "sha256": "2bb69d0661748982bd9b990a49cfb55873e50035f9ed68bf3cb534a0b7fe2c63"
+        },
+        {
+          "path": "peak_hour_units/PACW-2025.bin",
+          "state": "PACW-2025",
+          "rows": 20,
+          "bytes": 3232,
+          "sha256": "676186c1adbaf9186d00a59bce951168b4816c8e5b551a5098f571d7e01757b0"
+        },
+        {
+          "path": "peak_hour_units/PGE-2024.bin",
+          "state": "PGE-2024",
+          "rows": 40,
+          "bytes": 4704,
+          "sha256": "02d1ae13f762583d5a9461f1f7783a260783355580ee37e9e7e29b86ef6353b3"
+        },
+        {
+          "path": "peak_hour_units/PGE-2025.bin",
+          "state": "PGE-2025",
+          "rows": 40,
+          "bytes": 4704,
+          "sha256": "845613698f6b466c444d63e710dabc66d196c62d5841a62c7259307835147833"
+        },
+        {
+          "path": "peak_hour_units/PJM-2024.bin",
+          "state": "PJM-2024",
+          "rows": 5598,
+          "bytes": 406904,
+          "sha256": "c707660eba0edef5c6d4eb81049d89ade64e31bb430173c742f6178f7e3d13d5"
+        },
+        {
+          "path": "peak_hour_units/PJM-2025.bin",
+          "state": "PJM-2025",
+          "rows": 6096,
+          "bytes": 442912,
+          "sha256": "3e79ae0d376eb5c67a9652db6d46e93b0ab310e10a8606412b3877742704fed0"
+        },
+        {
+          "path": "peak_hour_units/PNM-2024.bin",
+          "state": "PNM-2024",
+          "rows": 89,
+          "bytes": 8272,
+          "sha256": "0c1e286f293b4765642988cda1f4ea685e1b32f672fd2401fabad9e69112257c"
+        },
+        {
+          "path": "peak_hour_units/PNM-2025.bin",
+          "state": "PNM-2025",
+          "rows": 93,
+          "bytes": 8560,
+          "sha256": "2cbb8e33077b34fe19ee831556ac46ee1ef86260f45303f5f9aba6224737e426"
+        },
+        {
+          "path": "peak_hour_units/PSCO-2024.bin",
+          "state": "PSCO-2024",
+          "rows": 384,
+          "bytes": 29696,
+          "sha256": "3329b13d8dd99491813e1a0b3dadb2c6beef4ac89582d5b101b7443b59ccc05f"
+        },
+        {
+          "path": "peak_hour_units/PSCO-2025.bin",
+          "state": "PSCO-2025",
+          "rows": 393,
+          "bytes": 30384,
+          "sha256": "6381db7f4cea0d1a1890a83eeb5e5182db9b12ae39370574ff6c5ec47d602d97"
+        },
+        {
+          "path": "peak_hour_units/PSEI-2024.bin",
+          "state": "PSEI-2024",
+          "rows": 80,
+          "bytes": 7608,
+          "sha256": "25be8a8460d03a701afc59aba7d7ed8799a9f74d5250680b8de04b701b16b10f"
+        },
+        {
+          "path": "peak_hour_units/PSEI-2025.bin",
+          "state": "PSEI-2025",
+          "rows": 80,
+          "bytes": 7608,
+          "sha256": "cfff4cda8ad7177f9161946e85c5b101cbc62652418918c0560b5c3eef15137f"
+        },
+        {
+          "path": "peak_hour_units/SC-2024.bin",
+          "state": "SC-2024",
+          "rows": 168,
+          "bytes": 13984,
+          "sha256": "050d084e913d958f99787bacffb9ae42ac3fb708699e717f2f253c318f4151ce"
+        },
+        {
+          "path": "peak_hour_units/SC-2025.bin",
+          "state": "SC-2025",
+          "rows": 167,
+          "bytes": 13952,
+          "sha256": "ca30ca6ce16d94d34bd971f891e0091ec0f581b58489a9038fac3b0f85c0717a"
+        },
+        {
+          "path": "peak_hour_units/SCEG-2024.bin",
+          "state": "SCEG-2024",
+          "rows": 147,
+          "bytes": 12544,
+          "sha256": "bd08432bf3f079871005083092a6cca5d3f2a9ff6622712c8cc6065a6791016b"
+        },
+        {
+          "path": "peak_hour_units/SCEG-2025.bin",
+          "state": "SCEG-2025",
+          "rows": 166,
+          "bytes": 13888,
+          "sha256": "64d2c65e2426cce63b4275d1a1b46fde9fc82371c4381013e9fe3a73026d95d7"
+        },
+        {
+          "path": "peak_hour_units/SEC-2024.bin",
+          "state": "SEC-2024",
+          "rows": 41,
+          "bytes": 4808,
+          "sha256": "e555422d03f4d98e22ece75c088c84395a9b21561e6b748c54e8aa8cc501563d"
+        },
+        {
+          "path": "peak_hour_units/SEC-2025.bin",
+          "state": "SEC-2025",
+          "rows": 46,
+          "bytes": 5136,
+          "sha256": "377daa8bf2fa728f8b7b4f3f7a066f26e97199dda325bb621c37f1f809405266"
+        },
+        {
+          "path": "peak_hour_units/SOCO-2024.bin",
+          "state": "SOCO-2024",
+          "rows": 1539,
+          "bytes": 113256,
+          "sha256": "5a8ca21bf768d43fa38e29aca641f8718ecf563b0656be95674b4f34b200d307"
+        },
+        {
+          "path": "peak_hour_units/SOCO-2025.bin",
+          "state": "SOCO-2025",
+          "rows": 1670,
+          "bytes": 122640,
+          "sha256": "8106a437db61883bd945c15e27076e06bcf14086f4828a9b4c6291b1ca6bd60b"
+        },
+        {
+          "path": "peak_hour_units/SPA-2024.bin",
+          "state": "SPA-2024",
+          "rows": 9,
+          "bytes": 2456,
+          "sha256": "190909c7e08b0e233d4922d924a791fd9cbb222388aef30c77f3692ede2f16d5"
+        },
+        {
+          "path": "peak_hour_units/SPA-2025.bin",
+          "state": "SPA-2025",
+          "rows": 7,
+          "bytes": 2312,
+          "sha256": "3a3f2f77c5b2930b4c85f102d2235cdcd6163df104e582e5f8a8754892316fa8"
+        },
+        {
+          "path": "peak_hour_units/SRP-2024.bin",
+          "state": "SRP-2024",
+          "rows": 296,
+          "bytes": 23344,
+          "sha256": "8170d478227df3e1b9f5644d5da22c6453d2b87d6610ef7e89b4a8a7d326d3a1"
+        },
+        {
+          "path": "peak_hour_units/SRP-2025.bin",
+          "state": "SRP-2025",
+          "rows": 340,
+          "bytes": 26552,
+          "sha256": "2eec83d5c62f68a1577046417f2a32f1e5a8db73605cdc4b6a28641d3a518b78"
+        },
+        {
+          "path": "peak_hour_units/SWPP-2024.bin",
+          "state": "SWPP-2024",
+          "rows": 2135,
+          "bytes": 156480,
+          "sha256": "edc8ee908849af5ca5af58cea60a1684fc97f8ed58c18b8f6777a9aacfb82cba"
+        },
+        {
+          "path": "peak_hour_units/SWPP-2025.bin",
+          "state": "SWPP-2025",
+          "rows": 2154,
+          "bytes": 157912,
+          "sha256": "318671769c1154b288117f262a339abf01f45751ef339d65f56a00dcd667be7b"
+        },
+        {
+          "path": "peak_hour_units/TAL-2024.bin",
+          "state": "TAL-2024",
+          "rows": 35,
+          "bytes": 4368,
+          "sha256": "eaf764059799ffa1259194ea96aa5302b26e46f4ad50315743d38ff54d2538cf"
+        },
+        {
+          "path": "peak_hour_units/TAL-2025.bin",
+          "state": "TAL-2025",
+          "rows": 37,
+          "bytes": 4512,
+          "sha256": "c055ccf2257370c2f526d84346add122105a5e3c4bb6f4d1257c5379b32f8ef8"
+        },
+        {
+          "path": "peak_hour_units/TEC-2024.bin",
+          "state": "TEC-2024",
+          "rows": 154,
+          "bytes": 13056,
+          "sha256": "fcd6f93d8eb581bb1627892da42c171e75c8d7e663f1144c677c6c738bb47208"
+        },
+        {
+          "path": "peak_hour_units/TEC-2025.bin",
+          "state": "TEC-2025",
+          "rows": 175,
+          "bytes": 14600,
+          "sha256": "71a467bc9bf27da674bf6d3b7406f6013f781ba2b891563fa86ce624e2a7dbdd"
+        },
+        {
+          "path": "peak_hour_units/TEPC-2024.bin",
+          "state": "TEPC-2024",
+          "rows": 80,
+          "bytes": 7584,
+          "sha256": "1134b51f7755f76156f8435d505dccfd1b5fcca414b145aa8a10ef2a2136f651"
+        },
+        {
+          "path": "peak_hour_units/TEPC-2025.bin",
+          "state": "TEPC-2025",
+          "rows": 80,
+          "bytes": 7584,
+          "sha256": "9a606ab95a97ab2e0d823c89fce30437df16cabc982ba343c20efd0d01b5b009"
+        },
+        {
+          "path": "peak_hour_units/TIDC-2024.bin",
+          "state": "TIDC-2024",
+          "rows": 49,
+          "bytes": 5376,
+          "sha256": "f595d1a5eae70d4c1e78fe893104e0dea2199008d8707ed06e95b7d7daa8afe6"
+        },
+        {
+          "path": "peak_hour_units/TIDC-2025.bin",
+          "state": "TIDC-2025",
+          "rows": 49,
+          "bytes": 5376,
+          "sha256": "391489fec10cebe02a456c120bf48ed4882476c160651e32b39b0e2f0fe3fa17"
+        },
+        {
+          "path": "peak_hour_units/TVA-2024.bin",
+          "state": "TVA-2024",
+          "rows": 862,
+          "bytes": 64328,
+          "sha256": "bae6a10a3bcb329ea72bb0a3b43b8e49d926c511db3b3bec06ac8849560914bf"
+        },
+        {
+          "path": "peak_hour_units/TVA-2025.bin",
+          "state": "TVA-2025",
+          "rows": 995,
+          "bytes": 74104,
+          "sha256": "e2d1f4c5f608d7256f1f8b6d229072daf1523441a1280e587426f0d4232ecc92"
+        },
+        {
+          "path": "peak_hour_units/WACM-2024.bin",
+          "state": "WACM-2024",
+          "rows": 276,
+          "bytes": 21816,
+          "sha256": "0b67291a6a0ef3846486e877b9dd5571bb4cb10aa383926945b659566079a176"
+        },
+        {
+          "path": "peak_hour_units/WACM-2025.bin",
+          "state": "WACM-2025",
+          "rows": 245,
+          "bytes": 19600,
+          "sha256": "5738d3596936385085ffb835a0d518a459cdebf6632640db8b7a0bdfe5d0a708"
+        },
+        {
+          "path": "peak_hour_units/WALC-2024.bin",
+          "state": "WALC-2024",
+          "rows": 74,
+          "bytes": 7200,
+          "sha256": "cc188ae03de5dfdf9d80a50164fb9877f506cc3e4dad014c5cabb868f1f11860"
+        },
+        {
+          "path": "peak_hour_units/WALC-2025.bin",
+          "state": "WALC-2025",
+          "rows": 121,
+          "bytes": 10648,
+          "sha256": "ff7104688249434a3217efbce6c21a235accb50c8cc8e594e5685e79e1ca79cc"
+        }
+      ],
+      "download": {
+        "path": "peak_hour_units.csv.gz",
+        "bytes": 818918,
+        "sha256": "8c7a199618b6ad1c61a4e24fb52ec694d598a10d9abe642653b0e034167b4ee3",
+        "format": "text/csv; gzip"
+      },
+      "license": "publisher-terms",
+      "credits": [
+        {
+          "publisher": "United States Environmental Protection Agency, Clean Air Markets Program Data (CAMPD)",
+          "attribution": "U.S. Environmental Protection Agency (EPA). Clean Air Markets Program Data. Washington, DC: Office of Atmospheric Protection, Clean Air Markets Division. Available from EPA's Air Markets Program Data web site: https://campd.epa.gov. Retrieved Nov 2026. Aggregated by gridprims under EPA's stated terms.",
+          "note": "Modified by gridprims."
+        },
+        {
+          "publisher": "U.S. Environmental Protection Agency",
+          "attribution": "United States Environmental Protection Agency (EPA). Emissions & Generation Resource Integrated Database (eGRID), eGRID2023 (revision 2), Jun 2025. https://www.epa.gov/egrid",
+          "note": "Modified by gridprims."
+        },
+        {
+          "publisher": "U.S. Energy Information Administration",
+          "attribution": "Source: U.S. Energy Information Administration, Hourly Electric Grid Monitor (Form EIA-930) (Nov 2026).",
+          "note": "Modified by gridprims."
+        }
+      ],
+      "notices": [],
+      "joinedFrom": [
+        {
+          "dataset": "egrid",
+          "table": "plants",
+          "version": "2026-10"
+        },
+        {
+          "dataset": "eia-930",
+          "table": "hourly",
+          "version": "2026-11"
+        }
+      ]
     }
   ]
 }

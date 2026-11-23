@@ -75,6 +75,7 @@ import { scenarioIndexPage, scenarioPage } from './templates/scenario.mjs';
 import { SCENARIO_INDEX, scenarioPath } from './ui/scenario.mjs';
 import { balancingPage, balancingPath } from './templates/balancing.mjs';
 import { COMPARISON_PATH, comparisonCsv, comparisonJson, comparisonSummary, forRegion, loadComparison } from './entities/estimated-vs-measured.mjs';
+import { loadPeakHours, peakHoursFor } from './entities/peak-hours.mjs';
 import { estimatedVsMeasuredPage } from './templates/estimated-vs-measured.mjs';
 import { setPulse } from './templates/layout.mjs';
 import { html } from './lib/html.mjs';
@@ -315,12 +316,14 @@ export async function build(opts = {}) {
     // The small index the carbon tools read beside their caveat, so a result names the figure.
     writeFileSync(join(outDir, COMPARISON_PATH, 'summary.json'), JSON.stringify(comparisonSummary(comparison), null, 2) + '\n');
   }
+  // What ran in each region's highest-demand hours, from the shipped peak-hour table.
+  const peakHours = loadPeakHours(join(ROOT, 'data'));
   // Balancing authority pages, from daily and monthly rollups of the EIA-930 hourly snapshot.
   if (balancing) {
     for (const region of balancing.regions) {
       const inRegion = (utilities?.utilities ?? []).filter((u) => u.page && u.baCodes?.includes(region.ba)).sort((a, b) => a.name.localeCompare(b.name));
       const regionPlants = (plants?.plants ?? []).filter((p) => p.baCode === region.ba).sort((a, b) => b.nameplateMw - a.nameplateMw || a.name.localeCompare(b.name));
-      write(balancingPath(region.ba), balancingPage({ region, manifest: balancing.manifest, utilities: inRegion, plants: regionPlants, i18n, comparison: forRegion(comparison, region.ba), comparisonSource: comparison?.sources.camd ?? null }));
+      write(balancingPath(region.ba), balancingPage({ region, manifest: balancing.manifest, utilities: inRegion, plants: regionPlants, i18n, comparison: forRegion(comparison, region.ba), comparisonSource: comparison?.sources.camd ?? peakHours?.manifest ?? null, peak: peakHoursFor(peakHours, region.ba) }));
     }
   }
   // The standards template for the line checks, as CSV and as a workbook from the same rows (design D1).

@@ -54,7 +54,9 @@ const small = (() => {
     vintages: { '2026-11': { ...v, files: Object.fromEntries(keys.map((k) => [k, v.files[k]])) } },
     tables: entry.tables.map((t) => ({
       ...t,
-      recipe: t.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 1, max: 1000 } }
+      // The peak-hour table can come back empty on a fixture whose hours are not among a real
+      // region's ten busiest, so the fixture's floor is zero rows.
+      recipe: t.recipe.map((s) => (s.step === 'validate' ? { ...s, rows: { ...s.rows, min: 0, max: 1000 } }
         : s.step === 'read-lines' ? { ...s, files: s.files.filter((f) => keys.includes(f)) } : s)),
     })),
   };
@@ -151,6 +153,28 @@ test('regional hours are summed on a common clock, under eGRID\'s balancing auth
   // Gross load is split by the fuel categories EIA-930 reports, so the estimate can be set beside it.
   assert.equal(first.load_ng_mwh, 110);
   assert.equal(first.load_col_mwh, 0);
+});
+
+test('the highest-demand hours carry the units that ran in them, with their measured rate', { skip: !egridBuilt && 'egrid is not built' }, async () => {
+  const out = tempDir('gridprims-camd-out-');
+  const r = await run(fixture(tempDir('gridprims-camd-in-')), out);
+  assert.equal(r.ok, true, JSON.stringify(r.failures));
+  const { version } = JSON.parse(readFileSync(join(ROOT, 'data/egrid/current.json'), 'utf8'));
+  const ba = readShard(readFileSync(join(ROOT, 'data/egrid', version, 'plants/AL.bin'))).rows().find((p) => p.plant_id === 3).ba_code;
+  const table = r.manifest.tables.find((t) => t.name === 'peak_hour_units');
+  assert.ok(table, 'the peak-hour table is built');
+  const shard = table.shards.find((sh) => sh.state === `${ba}-2024`);
+  if (!shard) return; // the fixture's hours are not among the region's ten busiest in the served EIA snapshot
+  const rows = readShard(readFileSync(join(out, 'epa-camd/2026-11', shard.path))).rows();
+  for (const row of rows) {
+    assert.equal(row.region, ba);
+    assert.ok(row.demand_mwh > 0 && row.rank >= 1 && row.rank <= 10);
+    assert.ok(row.operating_hours > 0, 'only units that ran are listed');
+    if (row.gross_load_mwh > 0) {
+      const want = (row.co2_tonnes * 2204.62262185) / row.gross_load_mwh;
+      assert.ok(Math.abs(row.rate_lb_mwh - want) <= Math.max(0.01, Math.abs(want) * 1e-3));
+    }
+  }
 });
 
 test('a changed hourly header is refused rather than misread', { skip: !egridBuilt && 'egrid is not built' }, async () => {

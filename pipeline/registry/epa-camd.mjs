@@ -220,5 +220,20 @@ export default {
         { step: 'write-shards' },
       ],
     },
+    {
+      name: 'peak_hour_units',
+      title: 'What ran in each region\'s ten highest-demand hours, unit by unit',
+      uses: ['region', 'year', 'hour', 'rank', 'demand_mwh', 'plant_id', 'unit_id', 'fuel', 'gross_load_mwh', 'co2_tonnes', 'rate_lb_mwh', 'apportioned'],
+      recipe: [
+        { step: 'read-lines', files: HOURLY_FILES.map((f) => f.key) },
+        { step: 'join', dataset: 'egrid', table: 'plants', columns: ['plant_id', 'ba_code'] },
+        { step: 'join', dataset: 'eia-930', table: 'hourly', columns: ['ba', 'year', 'hour', 'demand'] },
+        { step: 'normalize', module: 'camd-peak-hours' },
+        { step: 'validate', key: ['region', 'hour', 'plant_id', 'unit_id'], rows: { min: 30000, max: 120000, maxDropPct: 15, maxRisePct: 25, from: 'the 2026-11 build: 57,864 unit-hours over 90 region-years' } },
+        { step: 'partition', by: ['region', 'year'] },
+        { step: 'write-shards' },
+        { step: 'write-csv-gz' },
+      ],
+    },
   ],
 };

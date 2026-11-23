@@ -15,6 +15,7 @@ import { pageTitle } from '../lib/meta.mjs';
 import { toolPath } from '../ui/tool-page.mjs';
 import { FUELS } from '../../core/lib/grid-rollups.mjs';
 import { COMPARISON_PATH, worstHours } from '../entities/estimated-vs-measured.mjs';
+import { plantPath as plantPage } from './plant.mjs';
 
 export const balancingPath = (code) => `/balancing-authorities/${code.toLowerCase()}/`;
 
@@ -55,9 +56,35 @@ ${source ? sourceStamp(source, source.tables.find((x) => x.name === 'region_hour
 }
 
 /**
- * @param {{region: any, manifest: any, utilities: any[], plants: any[], i18n: any, comparison?: any[], comparisonSource?: any}} p
+ * The region's highest-demand hours and what the monitors measured in them
+ * (add-measured-plant-emissions 2.4): the hour on the region's own clock, its
+ * demand, and the units that were running, with their generation, their
+ * measured carbon dioxide, and the rate that implies.
  */
-export function balancingPage({ region: r, manifest, utilities, plants, i18n, comparison = [], comparisonSource = null }) {
+function peakHoursSection(peak, source, { t, date }, regionName) {
+  if (!peak?.length) return '';
+  const latest = peak[0];
+  if (!latest.hours.length) return '';
+  const top = latest.hours[0];
+  const table = source?.tables.find((x) => x.name === 'peak_hour_units') ?? null;
+  return html`<section data-peak-hours><h2 id="peak-hours">${t('peak.title')}</h2>
+<p>${t('peak.intro', { count: latest.hours.length, year: latest.year })}</p>
+${tableView([t('peak.hour'), t('peak.rank'), t('peak.demand'), t('peak.units'), t('peak.load'), t('peak.co2'), t('peak.rate'), t('peak.share')],
+    latest.hours.map((h) => [h.localStart, h.rank, whole(h.demandMwh), h.units.length, whole(h.grossLoadMwh), whole(h.co2Tonnes), h.rateLbMwh === null ? '' : whole(h.rateLbMwh), h.coveredShare === null ? '' : pct(h.coveredShare, 0)]),
+    t('peak.caption', { year: latest.year }))}
+<details data-peak-detail><summary>${t('peak.detail', { year: latest.year, hour: top.localStart })}</summary>
+${tableView([t('peak.plant'), t('peak.unit'), t('peak.fuel'), t('peak.unitLoad'), t('peak.unitCo2'), t('peak.unitRate'), t('peak.apportioned')],
+    top.units.map((u) => [String(u.plant_id), u.unit_id, t(`peak.fuel.${u.fuel}`), whole(u.gross_load_mwh), whole(u.co2_tonnes), u.rate_lb_mwh === null ? '' : whole(u.rate_lb_mwh), u.apportioned === 'yes' ? t('plant.measured.yes') : t('plant.measured.no')]),
+    t('peak.detailCaption', { region: regionName, hour: top.localStart }))}</details>
+<p class="unit-hint">${t('peak.note')}</p>
+${table && source ? sourceStamp(source, table, { t, date }) : ''}
+</section>`;
+}
+
+/**
+ * @param {{region: any, manifest: any, utilities: any[], plants: any[], i18n: any, comparison?: any[], comparisonSource?: any, peak?: any[]}} p
+ */
+export function balancingPage({ region: r, manifest, utilities, plants, i18n, comparison = [], comparisonSource = null, peak = [] }) {
   const { t } = i18n;
   const fuels = FUELS.filter((f) => r.months.some((m) => m.generation[f]));
   const spikes = r.days.reduce((n, d) => n + d.spikes, 0);
@@ -85,6 +112,7 @@ ${chart || ''}
 <p class="unit-hint">${t('ba.monthlyNote')}</p>
 ${sourceStamp(manifest, manifest.tables[0], i18n)}
 </section>
+${peakHoursSection(peak, comparisonSource, i18n, r.name)}
 ${comparisonSection(comparison, comparisonSource, i18n, r.name)}
 <section><h2>${t('ba.inside')}</h2>
 ${utilities.length ? html`<p>${t('ba.utilities', { count: whole(utilities.length) })}</p><ul>${utilities.map((u) => html`<li><a href="${utilityPath(u.id)}">${u.name}</a></li>`)}</ul>` : html`<p>${t('ba.noUtilities')}</p>`}

@@ -21,6 +21,8 @@ export const ENTITY_SAMPLE = [
   '/states/dc/', // the smallest
   '/subregions/erct/', // every rate reported
   '/subregions/hims/', // a small island system
+  '/balancing-authorities/pjm/', // the largest region: measured emissions, the peak hours, and our estimate's error
+  '/balancing-authorities/gvl/', // a small municipal region whose comparison cannot carry a difference
   '/queue/', // the national summary
   '/queue/tx/', // the most counties and project rows
   '/projects/', // the national pipeline

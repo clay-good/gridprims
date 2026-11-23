@@ -17,13 +17,13 @@ const q = (args) => createServer().handle(modern(1, 'tools/call', { name: 'gridp
 const built = existsSync(join(ROOT, 'data/epa-camd/current.json'));
 const skip = !built && 'epa-camd is not built';
 
-test('the dataset is in the catalog with EPA\'s own terms and its three tables', { skip }, () => {
+test('the dataset is in the catalog with EPA\'s own terms and its four tables', { skip }, () => {
   const d = catalog().find((x) => x.id === 'epa-camd');
   assert.ok(d, 'epa-camd is in the catalog');
   assert.equal(d.posture, 'derive');
   assert.match(d.publisher, /Environmental Protection Agency/);
   assert.match(d.attribution, /Clean Air Markets Program Data/);
-  assert.deepEqual(d.tables.map((t) => t.name).sort(), ['region_hourly', 'units', 'units_monthly']);
+  assert.deepEqual(d.tables.map((t) => t.name).sort(), ['peak_hour_units', 'region_hourly', 'units', 'units_monthly']);
   for (const t of d.tables) assert.equal(t.dataPeriod, '2024-2025');
 });
 

@@ -13,8 +13,9 @@ EPA's Clean Air Markets Program Data publishes hourly, unit-level records from t
 | `units` | a monitored unit in a data year | state |
 | `units_monthly` | a monitored unit in a month | state |
 | `region_hourly` | a balancing authority in an hour | region and year |
+| `peak_hour_units` | a monitored unit in one of its region's ten highest-demand hours of the year | region and year |
 
-Raw hourly per-unit records are never shipped: they are hundreds of files past our per-file budget, and EPA publishes them itself.
+Raw hourly per-unit records are never shipped: they are hundreds of files past our per-file budget, and EPA publishes them itself. The one exception is narrow and deliberate: the ten hours a year per region that people ask about, where the unit-by-unit detail is the answer.
 
 ## The conversions and conventions
 

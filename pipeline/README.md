@@ -28,7 +28,7 @@ node --max-old-space-size=12288 pipeline/run.mjs eia-930 --year 2026-10  # 68 ho
 |---|---|---|
 | EIA-861 sales, revenue, and customers by utility and state (2025 final, released 2026-10-07) | `establish-platform-foundation` | `data/eia-861/2026-10/` |
 | EIA-930 hourly demand, generation by fuel, and CO₂ by balancing authority, from July 2018 (68 regions, one shard per region and year) | `add-hourly-carbon` | `data/eia-930/2026-10/` |
-| EPA CAMPD measured emissions from continuous monitors, 2024 and 2025: monthly per unit, hourly per balancing authority | `add-measured-plant-emissions` | `data/epa-camd/2026-11/` |
+| EPA CAMPD measured emissions from continuous monitors, 2024 and 2025: monthly per unit, hourly per balancing authority, and unit by unit in each region's ten busiest hours | `add-measured-plant-emissions` | `data/epa-camd/2026-11/` |
 
 EPA's hourly files are about 6.5 GB a data year, so the recipe streams them and the refresh reads each one twice (once per streamed table). Download them once and run from disk when rebuilding:
 
