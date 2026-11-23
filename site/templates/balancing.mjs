@@ -14,6 +14,7 @@ import { plantPath } from './plant.mjs';
 import { pageTitle } from '../lib/meta.mjs';
 import { toolPath } from '../ui/tool-page.mjs';
 import { FUELS } from '../../core/lib/grid-rollups.mjs';
+import { COMPARISON_PATH, worstHours } from '../entities/estimated-vs-measured.mjs';
 
 export const balancingPath = (code) => `/balancing-authorities/${code.toLowerCase()}/`;
 
@@ -23,10 +24,40 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 const longDate = (iso) => `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${Number(iso.slice(8, 10))}, ${iso.slice(0, 4)}`;
 const monthName = (ym) => `${MONTHS[Number(ym.slice(5, 7)) - 1].slice(0, 3)} ${ym.slice(0, 4)}`;
 
+const pct = (x, places = 1) => (x === null || x === undefined || Number.isNaN(x) ? '' : `${(x * 100).toFixed(places)}%`);
+const signed = (x) => (x === null || x === undefined ? '' : `${x > 0 ? '+' : ''}${(x * 100).toFixed(1)}%`);
+const clockHour = (h) => `${String(h).padStart(2, '0')}:00`;
+
 /**
- * @param {{region: any, manifest: any, utilities: any[], plants: any[], i18n: any}} p
+ * Our estimated hourly carbon against what EPA's monitors measured in this
+ * region (add-measured-plant-emissions 3.2): the year's gap, where in the day
+ * it runs furthest off, and the months behind it. A year the comparison cannot
+ * speak about says so and why.
  */
-export function balancingPage({ region: r, manifest, utilities, plants, i18n }) {
+function comparisonSection(comparison, source, { t, date }, regionName) {
+  if (!comparison?.length) return '';
+  const latest = comparison[0];
+  const hours = worstHours(latest, { count: 3 });
+  return html`<section data-estimated-vs-measured><h2 id="estimated-vs-measured">${t('evm.region.title')}</h2>
+${comparison.map((c) => html`<p data-comparison-year="${c.year}">${c.informative
+    ? t('evm.region.informative', { year: c.year, percent: pct(Math.abs(c.difference)), direction: t(c.difference > 0 ? 'evm.region.more' : 'evm.region.less'), coverage: pct(c.coverage, 0) })
+    : t('evm.region.uninformative', { year: c.year, why: t(`evm.not.${c.uninformativeBecause[0]}`, { coverage: pct(c.coverage, 0), floor: pct(c.floor, 0), fuels: c.fuelMismatch.map((f) => t(`evm.fuel.${f}`)).join(', '), r2: (c.fit.r2 ?? 0).toFixed(3), minR2: c.minR2 }) })}</p>`)}
+${latest.informative && hours.length ? html`<p data-worst-hours>${t('evm.region.hours', { hours: hours.map((h) => t('evm.region.hour', { hour: clockHour(h.key), percent: signed(h.difference) })).join(', ') })}</p>
+<details><summary>${t('evm.region.byMonth', { year: latest.year })}</summary>
+${tableView([t('evm.region.month'), t('evm.region.measured'), t('evm.region.estimated'), t('evm.region.gap')],
+    latest.byMonth.map((m) => [MONTHS[m.key - 1], whole(m.measured_tonnes), whole(m.estimated_tonnes), signed(m.difference)]), t('evm.region.byMonthCaption', { region: regionName, year: latest.year }))}</details>
+<details><summary>${t('evm.region.byHour', { year: latest.year })}</summary>
+${tableView([t('evm.region.hourColumn'), t('evm.region.measured'), t('evm.region.estimated'), t('evm.region.gap')],
+    latest.byHourOfDay.map((h) => [clockHour(h.key), whole(h.measured_tonnes), whole(h.estimated_tonnes), signed(h.difference)]), t('evm.region.byHourCaption', { region: regionName, year: latest.year }))}</details>` : ''}
+<p><a href="${COMPARISON_PATH}">${t('evm.region.link')}</a></p>
+${source ? sourceStamp(source, source.tables.find((x) => x.name === 'region_hourly'), { t, date }) : ''}
+</section>`;
+}
+
+/**
+ * @param {{region: any, manifest: any, utilities: any[], plants: any[], i18n: any, comparison?: any[], comparisonSource?: any}} p
+ */
+export function balancingPage({ region: r, manifest, utilities, plants, i18n, comparison = [], comparisonSource = null }) {
   const { t } = i18n;
   const fuels = FUELS.filter((f) => r.months.some((m) => m.generation[f]));
   const spikes = r.days.reduce((n, d) => n + d.spikes, 0);
@@ -54,12 +85,13 @@ ${chart || ''}
 <p class="unit-hint">${t('ba.monthlyNote')}</p>
 ${sourceStamp(manifest, manifest.tables[0], i18n)}
 </section>
+${comparisonSection(comparison, comparisonSource, i18n, r.name)}
 <section><h2>${t('ba.inside')}</h2>
 ${utilities.length ? html`<p>${t('ba.utilities', { count: whole(utilities.length) })}</p><ul>${utilities.map((u) => html`<li><a href="${utilityPath(u.id)}">${u.name}</a></li>`)}</ul>` : html`<p>${t('ba.noUtilities')}</p>`}
 ${plants.length ? html`<p>${t('ba.plants', { count: whole(plants.length) })}</p><ul>${plants.slice(0, 25).map((p) => html`<li><a href="${plantPath(p.id)}">${p.name}</a>, ${whole(p.nameplateMw)} MW</li>`)}</ul>` : ''}
 </section>
 <section><h2>${t('ba.more')}</h2>
-<ul><li><a href="/data/eia-930/">${t('ba.dataset')}</a></li>${r.record && !r.generationOnly ? html`<li><a href="${toolPath('carbon.load-shift.estimate')}?region=${r.ba}">${t('ba.cleanest', { name: r.name })}</a></li>` : ''}</ul>
+<ul><li><a href="/data/eia-930/">${t('ba.dataset')}</a></li>${comparison.length ? html`<li><a href="${COMPARISON_PATH}">${t('evm.region.link')}</a></li>` : ''}${r.record && !r.generationOnly ? html`<li><a href="${toolPath('carbon.load-shift.estimate')}?region=${r.ba}">${t('ba.cleanest', { name: r.name })}</a></li>` : ''}</ul>
 </section>`;
   return layout({ i18n, title: pageTitle(`${r.name} (${r.ba})`), description: t('ba.description', { name: r.name, code: r.ba }), path: balancingPath(r.ba), body, section: 'grid', card: 'grid' });
 }

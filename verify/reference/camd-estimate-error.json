@@ -1,0 +1,294 @@
+{
+  "cases": [
+    {
+      "coverage": 0.527945,
+      "difference": -0.122205,
+      "differenceTonnes": -3011884.872,
+      "estimatedTonnes": 21634367.569,
+      "factorsTonnesPerMwh": {
+        "COL": 1.016892,
+        "NG": 0.392747,
+        "OIL": 0.925268,
+        "OTH": 0.011827
+      },
+      "fitR2": 0.999893,
+      "fuelMismatch": [],
+      "hours": 8784,
+      "informative": true,
+      "inputs": [
+        {
+          "file": "ISNE.xlsx",
+          "sha256": "f812fdbba987d97645a58a3769f006a54e7e7a5ec546c9bbb58306015f21f67d"
+        },
+        {
+          "file": "emissions-hourly-2024-ct.csv",
+          "sha256": "c1e4adf91b350cd369693a2078a921c4b61f4d03c8f703ff28def1fb4a30756d"
+        },
+        {
+          "file": "emissions-hourly-2024-ma.csv",
+          "sha256": "f7c3621e112b603ada1bd54a2fcae8f86c11c431fe7285570dffdb5637cd589b"
+        },
+        {
+          "file": "emissions-hourly-2024-me.csv",
+          "sha256": "1dd854cd06a036e31f97967eba276cc4be70d3c95cbf75d6826427152f143a11"
+        },
+        {
+          "file": "emissions-hourly-2024-nh.csv",
+          "sha256": "2c2625b8ec89c01dfe3fcb09fa961b20c004f590a804070d13d7c81c4d8e73b3"
+        },
+        {
+          "file": "emissions-hourly-2024-ny.csv",
+          "sha256": "ef2c20a7f8d5d9d0c6da6eb0880b9c83764c88b0df5831fd6ac69d11ca2a8623"
+        },
+        {
+          "file": "emissions-hourly-2024-ri.csv",
+          "sha256": "dc68a0eb3ae23e1d6c1d1414ab9cc36d10fdf8c0dae66c12f37831c48ecbb57b"
+        },
+        {
+          "file": "emissions-hourly-2024-vt.csv",
+          "sha256": "85df5ae6be3ea7538cc062f4e5a2626cabc52e0e9de5965012fe81926aa3aa67"
+        }
+      ],
+      "measuredTonnes": 24646252.44,
+      "monitoredMwh": 54949213.86,
+      "region": "ISNE",
+      "regionMwh": 104081267,
+      "unmatchedHours": 0,
+      "year": 2024
+    },
+    {
+      "coverage": 0.52013,
+      "difference": -0.125254,
+      "differenceTonnes": -3180199.604,
+      "estimatedTonnes": 22209891.584,
+      "factorsTonnesPerMwh": {
+        "COL": 1.019799,
+        "NG": 0.392673,
+        "OIL": 0.92553,
+        "OTH": 0.012905
+      },
+      "fitR2": 0.999929,
+      "fuelMismatch": [],
+      "hours": 8760,
+      "informative": true,
+      "inputs": [
+        {
+          "file": "ISNE.xlsx",
+          "sha256": "f812fdbba987d97645a58a3769f006a54e7e7a5ec546c9bbb58306015f21f67d"
+        },
+        {
+          "file": "emissions-hourly-2025-ct.csv",
+          "sha256": "da7f5f2fa3dfa7a8b2cc1dd33a5844e4c655272bef39fd9be6b42afd73ef34c3"
+        },
+        {
+          "file": "emissions-hourly-2025-ma.csv",
+          "sha256": "90543818e73342ec2a8282850237b67a038e3a69d297440b52edf3dbe78a019d"
+        },
+        {
+          "file": "emissions-hourly-2025-me.csv",
+          "sha256": "181846b5d1c52576f25bf73c0267c2e7550806b502b4f9476d8a39bf85ee1b7e"
+        },
+        {
+          "file": "emissions-hourly-2025-nh.csv",
+          "sha256": "f3cc7adfb04a7d4b2244683258478cd84ca642d0fcff4e1005a5528b82241f20"
+        },
+        {
+          "file": "emissions-hourly-2025-ny.csv",
+          "sha256": "a2d0cfba9466fc2347fec867fafd9bba8c39d5a1b821664e5e792901e6148f6a"
+        },
+        {
+          "file": "emissions-hourly-2025-ri.csv",
+          "sha256": "1d8301f1e6ef6739566a63f702d14be9e6dff82efbb8243e72ad48eff63a8bc1"
+        },
+        {
+          "file": "emissions-hourly-2025-vt.csv",
+          "sha256": "b189c0df82aa6bd8330f0629026e25534cf5c9f5e6495bcd116eb47a75c1e644"
+        }
+      ],
+      "measuredTonnes": 25390091.188,
+      "monitoredMwh": 55727511.25,
+      "region": "ISNE",
+      "regionMwh": 107141550,
+      "unmatchedHours": 0,
+      "year": 2025
+    },
+    {
+      "coverage": 0.560517,
+      "difference": 0.061317,
+      "differenceTonnes": 1930009.172,
+      "estimatedTonnes": 33405783.284,
+      "factorsTonnesPerMwh": {
+        "COL": null,
+        "NG": 0.455501,
+        "OIL": 0.929263,
+        "OTH": 0.006678
+      },
+      "fitR2": 0.999898,
+      "fuelMismatch": [],
+      "hours": 8784,
+      "informative": true,
+      "inputs": [
+        {
+          "file": "NYIS.xlsx",
+          "sha256": "8c4c3db54486cfb7c948212ff014c294abd5065d152d36ae7a40ff3d60fc6426"
+        },
+        {
+          "file": "emissions-hourly-2024-nj.csv",
+          "sha256": "e1a838835d6491fa22fadcf5248cb81553176b56b6551c909591541ca36782e0"
+        },
+        {
+          "file": "emissions-hourly-2024-ny.csv",
+          "sha256": "ef2c20a7f8d5d9d0c6da6eb0880b9c83764c88b0df5831fd6ac69d11ca2a8623"
+        }
+      ],
+      "measuredTonnes": 31475774.111,
+      "monitoredMwh": 73166793.2,
+      "region": "NYIS",
+      "regionMwh": 130534444,
+      "unmatchedHours": 0,
+      "year": 2024
+    },
+    {
+      "coverage": 0.571774,
+      "difference": 0.041071,
+      "differenceTonnes": 1368648.366,
+      "estimatedTonnes": 34692935.13,
+      "factorsTonnesPerMwh": {
+        "COL": null,
+        "NG": 0.456246,
+        "OIL": 0.908979,
+        "OTH": 0.004455
+      },
+      "fitR2": 0.999913,
+      "fuelMismatch": [],
+      "hours": 8760,
+      "informative": true,
+      "inputs": [
+        {
+          "file": "NYIS.xlsx",
+          "sha256": "8c4c3db54486cfb7c948212ff014c294abd5065d152d36ae7a40ff3d60fc6426"
+        },
+        {
+          "file": "emissions-hourly-2025-nj.csv",
+          "sha256": "c0919c8172663843e998c8536c73513a1ea6155426e7cc0a9d702b6933027183"
+        },
+        {
+          "file": "emissions-hourly-2025-ny.csv",
+          "sha256": "a2d0cfba9466fc2347fec867fafd9bba8c39d5a1b821664e5e792901e6148f6a"
+        }
+      ],
+      "measuredTonnes": 33324286.765,
+      "monitoredMwh": 75754154.59,
+      "region": "NYIS",
+      "regionMwh": 132489659,
+      "unmatchedHours": 0,
+      "year": 2025
+    },
+    {
+      "coverage": 0.715469,
+      "difference": 0.025086,
+      "differenceTonnes": 2426338.312,
+      "estimatedTonnes": 99146763.742,
+      "factorsTonnesPerMwh": {
+        "COL": 1.00761,
+        "NG": 0.404668,
+        "OIL": 0.972312,
+        "OTH": 0.02739
+      },
+      "fitR2": 0.999917,
+      "fuelMismatch": [],
+      "hours": 8785,
+      "informative": true,
+      "inputs": [
+        {
+          "file": "SOCO.xlsx",
+          "sha256": "5112ff1dd6c91b2663497101ff062c2ef2bbe5abfff23542b48a6d57efece2bf"
+        },
+        {
+          "file": "emissions-hourly-2024-al.csv",
+          "sha256": "56d238ec4414a0b9655d3db05ff3bc3b3dceb6ec13ed40016c7472bffd840c8f"
+        },
+        {
+          "file": "emissions-hourly-2024-fl.csv",
+          "sha256": "2f659466ec48d0906d0b6fc4edc09e6d7e34ba0ade02ed77e121b872457ac9c3"
+        },
+        {
+          "file": "emissions-hourly-2024-ga.csv",
+          "sha256": "85b62cc30cfb54621e11156ba2ffd68febfc8e9f8e6993621dc77d3775e0f1cd"
+        },
+        {
+          "file": "emissions-hourly-2024-ma.csv",
+          "sha256": "f7c3621e112b603ada1bd54a2fcae8f86c11c431fe7285570dffdb5637cd589b"
+        },
+        {
+          "file": "emissions-hourly-2024-ms.csv",
+          "sha256": "3db40e36f2a92493a5df69b2bc0eb5dee7c51875213329cdb931f14779b5275c"
+        }
+      ],
+      "measuredTonnes": 96720425.43,
+      "monitoredMwh": 179036732.57,
+      "region": "SOCO",
+      "regionMwh": 250236968,
+      "unmatchedHours": 0,
+      "year": 2024
+    },
+    {
+      "coverage": 0.712667,
+      "difference": 0.041916,
+      "differenceTonnes": 4128906.97,
+      "estimatedTonnes": 102632981.036,
+      "factorsTonnesPerMwh": {
+        "COL": 1.01462,
+        "NG": 0.403901,
+        "OIL": 0.949997,
+        "OTH": 0.0
+      },
+      "fitR2": 0.993619,
+      "fuelMismatch": [],
+      "hours": 8761,
+      "informative": true,
+      "inputs": [
+        {
+          "file": "SOCO.xlsx",
+          "sha256": "5112ff1dd6c91b2663497101ff062c2ef2bbe5abfff23542b48a6d57efece2bf"
+        },
+        {
+          "file": "emissions-hourly-2025-al.csv",
+          "sha256": "68fad26be504a6d709fa6c970142a6686a24d50cf22bb050a75561b759a48587"
+        },
+        {
+          "file": "emissions-hourly-2025-fl.csv",
+          "sha256": "6d617b3d93fa38e6ce0410f002fb81ea8a0a4f674066b242072ffa4fbaef5f3e"
+        },
+        {
+          "file": "emissions-hourly-2025-ga.csv",
+          "sha256": "0fbb1b000c9c826b0e671a02df62e02fd8fa4416fb8db421aa19400915596c1e"
+        },
+        {
+          "file": "emissions-hourly-2025-ma.csv",
+          "sha256": "90543818e73342ec2a8282850237b67a038e3a69d297440b52edf3dbe78a019d"
+        },
+        {
+          "file": "emissions-hourly-2025-ms.csv",
+          "sha256": "9a92a9cf33fe42cf046aded0f3481f32274959b29aadeabab7b93669bceb2cb3"
+        }
+      ],
+      "measuredTonnes": 98504074.066,
+      "monitoredMwh": 181271722.82,
+      "region": "SOCO",
+      "regionMwh": 254356919,
+      "unmatchedHours": 0,
+      "year": 2025
+    }
+  ],
+  "describes": "The estimated-against-measured difference recomputed in Python from EPA's hourly files, EIA's per-region workbooks, and eGRID's plant sheet, independent of gridprims code.",
+  "egrid": {
+    "file": "egrid2023_data_rev2.xlsx",
+    "sha256": "895cd81dd8662406189ad8adf5a2578dcb362cdb5cff7cca81b10ee6bd2447c6"
+  },
+  "gates": {
+    "coverageFloor": 0.4,
+    "grossAllowance": 1.25,
+    "minFitR2": 0.99
+  }
+}

@@ -12,7 +12,7 @@ import { ROOT, runRecipe } from '../../../pipeline/run.mjs';
 import { postureOf, validateEntry } from '../../../pipeline/lib/registry.mjs';
 import { readShard } from '../../../core/lib/shard.mjs';
 import entry from '../../../pipeline/registry/epa-camd.mjs';
-import { SHORT_TON_TO_TONNE, splitCsvLine } from '../../../pipeline/normalize/camd-common.mjs';
+import { SHORT_TON_TO_TONNE, SPLIT_ZONE_STATES, STANDARD_OFFSETS, splitCsvLine, utcHourOf } from '../../../pipeline/normalize/camd-common.mjs';
 import { tempDir } from '../../lib/temp.mjs';
 
 const HOURLY_HEADER = '"State","Facility Name","Facility ID","Unit ID","unit_id","Associated Stacks","Date","Hour","Operating Time","Gross Load (MW)","Steam Load (1000 lb/hr)","SO2 Mass (lbs)","SO2 Mass Measure Indicator","SO2 Rate (lbs/mmBtu)","SO2 Rate Measure Indicator","CO2 Mass (short tons)","CO2 Mass Measure Indicator","CO2 Rate (short tons/mmBtu)","CO2 Rate Measure Indicator","NOx Mass (lbs)","NOx Mass Measure Indicator","NOx Rate (lbs/mmBtu)","NOx Rate Measure Indicator","Heat Input (mmBtu)","Heat Input Measure Indicator","Primary Fuel Type","Secondary Fuel Type","Unit Type","SO2 Controls","NOx Controls","PM Controls","Hg Controls","Program Code"';
@@ -133,18 +133,24 @@ test('monitored units carry their plant, fuels, and summed nameplate, and no coo
   for (const c of ['latitude', 'longitude']) assert.ok(!columns.has(c), `${c} stays in EPA's file`);
 });
 
-test('regional hours are summed under eGRID\'s balancing authority, one shard per region and year', { skip: !egridBuilt && 'egrid is not built' }, async () => {
+test('regional hours are summed on a common clock, under eGRID\'s balancing authority, one shard per region and year', { skip: !egridBuilt && 'egrid is not built' }, async () => {
   const out = tempDir('gridprims-camd-out-');
   assert.equal((await run(fixture(tempDir('gridprims-camd-in-')), out)).ok, true);
   const { version } = JSON.parse(readFileSync(join(ROOT, 'data/egrid/current.json'), 'utf8'));
   const ba = readShard(readFileSync(join(ROOT, 'data/egrid', version, 'plants/AL.bin'))).rows().find((p) => p.plant_id === 3).ba_code;
   const rows = readShard(readFileSync(join(out, 'epa-camd/2026-11/region_hourly', `${ba}-2024.bin`))).rows();
-  const first = rows.find((x) => x.date === '2024-01-01' && x.hour === 0);
+  // Alabama keeps Central standard time, so midnight on the plant's clock is 06:00 UTC.
+  const hour = Date.UTC(2024, 0, 1, 6) / 3_600_000;
+  const first = rows.find((x) => x.hour === hour);
+  assert.ok(first, 'the hour is on the UTC clock');
   // Both Alabama units ran in that hour: 50 and 5 short tons.
   assert.equal(first.co2_tonnes, Math.round(55 * SHORT_TON_TO_TONNE * 1e6) / 1e6);
   assert.equal(first.gross_load_mwh, 110);
   assert.equal(first.units_reporting, 2);
   assert.equal(first.region, ba);
+  // Gross load is split by the fuel categories EIA-930 reports, so the estimate can be set beside it.
+  assert.equal(first.load_ng_mwh, 110);
+  assert.equal(first.load_col_mwh, 0);
 });
 
 test('a changed hourly header is refused rather than misread', { skip: !egridBuilt && 'egrid is not built' }, async () => {
@@ -154,6 +160,16 @@ test('a changed hourly header is refused rather than misread', { skip: !egridBui
   const r = await run(input, tempDir('gridprims-camd-out-'));
   assert.equal(r.ok, false);
   assert.match(r.failures.join('\n'), /AL 2024: the hourly header is missing/);
+});
+
+test('a plant\'s hour is placed by its own state\'s clock, so a region spanning two zones does not mix hours', () => {
+  // Noon on January 1 reads as 17:00 UTC in Georgia (Eastern standard) and 18:00 in Alabama (Central).
+  assert.equal(utcHourOf('2025-01-01', 12, STANDARD_OFFSETS.GA) * 3_600_000, Date.UTC(2025, 0, 1, 17));
+  assert.equal(utcHourOf('2025-01-01', 12, STANDARD_OFFSETS.AL) * 3_600_000, Date.UTC(2025, 0, 1, 18));
+  // Every state the registry downloads a file for has an offset, and the split-zone ones are among them.
+  const states = [...new Set(Object.keys(entry.vintages['2026-11'].files).map((k) => /^h\d{4}-([a-z]{2})$/.exec(k)?.[1]?.toUpperCase()).filter(Boolean))];
+  for (const st of states) assert.equal(typeof STANDARD_OFFSETS[st], 'number', st);
+  assert.ok(SPLIT_ZONE_STATES.every((st) => states.includes(st)));
 });
 
 test('EPA\'s quoted fields survive the split, commas and all', () => {

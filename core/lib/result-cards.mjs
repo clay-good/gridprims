@@ -58,7 +58,7 @@ const pct1 = (x) => `${x >= 0 ? '+' : '−'}${Math.abs(x).toFixed(1)}%`;
 /**
  * The hourly emissions card (add-hourly-carbon), with the method caveat, the draft-method label when a
  * supply profile was matched, and the production-based label on the combined score, as the specs require.
- * @param {any} e from hourlyEmissions @param {any} [m] from matchShares @param {{period: string, version: string, eia930: string}} ctx
+ * @param {any} e from hourlyEmissions @param {any} [m] from matchShares @param {{period: string, version: string, eia930: string, evm?: any}} ctx
  */
 export function carbonCard(e, m, ctx) {
   return [
@@ -73,6 +73,10 @@ export function carbonCard(e, m, ctx) {
     ] : []),
     `Method: each clock hour's kWh × ${e.ba}'s consumption-based CO₂ intensity for the same UTC hour. ${e.whyFactor}`,
     e.caveat,
+    // The caveat carries a number: our estimate's own published error for this region and year.
+    ...(ctx.evm ? [ctx.evm.informative
+      ? `Our estimate against EPA's monitors in ${ctx.evm.region}, ${ctx.evm.year}: the estimate put ${(Math.abs(ctx.evm.difference) * 100).toFixed(1)}% ${ctx.evm.difference > 0 ? 'more' : 'less'} carbon on the region's monitored units than they measured, over ${(ctx.evm.coverage * 100).toFixed(1)}% of its generation. gridprims.com/carbon/estimated-vs-measured/`
+      : `Our estimate against EPA's monitors in ${ctx.evm.region}, ${ctx.evm.year}: the comparison cannot speak about this region (${ctx.evm.because.join(', ')}). gridprims.com/carbon/estimated-vs-measured/`] : []),
     SCREENING,
     `Sources: U.S. Energy Information Administration, Form EIA-930, snapshot ${ctx.eia930}${e.egrid ? `; EPA ${e.egrid.edition}` : ''}.`,
     `gridprims.com · workbench ${ctx.version}`,

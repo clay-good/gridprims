@@ -208,13 +208,14 @@ export default {
     },
     {
       name: 'region_hourly',
-      title: 'Measured emissions, heat input, and gross load by balancing authority and hour',
-      uses: ['region', 'year', 'date', 'hour', 'co2_tonnes', 'heat_input_mmbtu', 'gross_load_mwh', 'units_reporting'],
+      title: 'Measured emissions, heat input, and gross load by balancing authority and UTC hour',
+      uses: ['region', 'year', 'hour', 'co2_tonnes', 'heat_input_mmbtu', 'gross_load_mwh', 'units_reporting', 'load_col_mwh', 'load_ng_mwh', 'load_oil_mwh', 'load_oth_mwh'],
       recipe: [
         { step: 'read-lines', files: HOURLY_FILES.map((f) => f.key) },
         { step: 'join', dataset: 'egrid', table: 'plants', columns: ['plant_id', 'ba_code', 'subregion'] },
         { step: 'normalize', module: 'camd-region-hourly' },
-        { step: 'validate', key: ['region', 'date', 'hour'], rows: { min: 600000, max: 1600000, maxDropPct: 10, maxRisePct: 25, from: 'the 2026-11 build: 894,744 region-hours, 50 regions over two years' } },
+        { step: 'quirk', name: 'hours-are-moved-to-utc', note: 'EPA reports each record in the plant\'s own local standard time. Records are moved to UTC by the state\'s standard offset before they are added up, so a region spanning two time zones does not mix hours; a state split between zones takes the zone that holds most of it.', fixture: 'verify/tests/pipeline/epa-camd.test.mjs' },
+        { step: 'validate', key: ['region', 'hour'], rows: { min: 600000, max: 1600000, maxDropPct: 10, maxRisePct: 25, from: 'the 2026-11 build: 894,744 region-hours, 50 regions over two years' } },
         { step: 'partition', by: ['region', 'year'], unmatched: 'unmatched' },
         { step: 'write-shards' },
       ],

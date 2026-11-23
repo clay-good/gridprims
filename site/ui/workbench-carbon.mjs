@@ -44,7 +44,22 @@ export function carbonPanel({ t }, reviewed = new Set()) {
 }
 
 /**
- * @param {any} r {status, reason?, steps, e?, m?, egridOnly?, notes}
+ * The estimate's own error, beside the caveat (add-measured-plant-emissions
+ * 3.4): what the published comparison says for this region and year, or that
+ * it cannot say. The caveat carries a number instead of only a warning.
+ * @param {any} evm one region-year of /carbon/estimated-vs-measured/summary.json
+ * @param {{t: Function}} i18n
+ */
+function evmLine(evm, { t }) {
+  if (!evm) return '';
+  const reasons = { coverage: t('evm.not.coverage', { coverage: pc(evm.coverage ?? 0), floor: pc(evm.floor ?? 0.4) }), fit: t('evm.not.fit', { r2: (evm.r2 ?? 0).toFixed(3), minR2: evm.minR2 ?? 0.99 }), mapping: t('evm.not.mapping', { fuels: (evm.fuelMismatch ?? []).map((f) => t(`evm.fuel.${f}`)).join(', ') }) };
+  return html`<p data-carbon-evm>${evm.informative
+    ? t('carbon.evm.informative', { ba: evm.region, year: evm.year, percent: pc(Math.abs(evm.difference)), direction: t(evm.difference > 0 ? 'carbon.evm.more' : 'carbon.evm.less'), coverage: pc(evm.coverage) })
+    : t('carbon.evm.uninformative', { ba: evm.region, year: evm.year, why: reasons[(evm.because ?? [])[0]] ?? '' })} <a href="/carbon/estimated-vs-measured/">${t('carbon.evm.link')}</a></p>`;
+}
+
+/**
+ * @param {any} r {status, reason?, steps, e?, m?, egridOnly?, notes, evm?}
  * @param {{t: Function}} i18n
  */
 export function renderCarbon(r, { t }) {
@@ -66,6 +81,7 @@ export function renderCarbon(r, { t }) {
   ${e.excluded.hours ? html`<p data-carbon-excluded>${t('carbon.excluded', { hours: whole(e.excluded.hours), share: pc(e.excluded.share) })}</p>` : ''}
   <p class="unit-hint">${e.whyFactor}</p>
   <p class="strip">${e.caveat}</p>
+  ${evmLine(r.evm, { t })}
   ${m ? html`<h3>${t('carbon.matchTitle')}</h3>
   <p class="sentence" data-carbon-match>${t('carbon.match', { annual: pc(m.annualShare), hourly: pc(m.hourlyShare) })}</p>
   <p>${t('carbon.surplus', { surplus: whole(m.surplus), shortfall: whole(m.shortfall) })}</p>

@@ -4,21 +4,27 @@
 // eGRID's balancing-authority code for the plant; a plant eGRID does not place
 // goes to the unmatched shard rather than being dropped.
 //
-// Hours are EPA's: local standard time, without daylight saving, as the
-// monitors report them. Comparing them with an hourly series in UTC means
-// applying the region's standard-time offset; nothing here shifts them.
+// EPA reports each record in the plant's own local standard time, so a region
+// spanning two time zones (Alabama and Georgia in Southern Company's) would mix
+// different real hours if the labels were added up as published. Every record
+// is moved to UTC by its state's standard offset first, the same clock EIA's
+// hourly series uses, and the hour here is hours since 1970 UTC.
 
 import { SHORT_TON_TO_TONNE, hourlyFilesIn, periodOf, readHourly } from './camd-common.mjs';
 
+/** The fuel categories EIA-930 reports generation under, as columns of measured gross load. */
+const FUELS = ['col', 'ng', 'oil', 'oth'];
+
 export const SCHEMA = [
   { name: 'region', type: 'str', unit: 'eGRID balancing-authority code' },
-  { name: 'year', type: 'i32', scale: 1 },
-  { name: 'date', type: 'str', unit: 'YYYY-MM-DD, local standard time' },
-  { name: 'hour', type: 'i32', scale: 1, unit: 'hour of the day, 0 to 23, local standard time' },
+  { name: 'year', type: 'i32', scale: 1, unit: 'calendar year of the UTC hour' },
+  { name: 'hour', type: 'i32', scale: 1, unit: 'hours since 1970-01-01T00:00Z' },
   { name: 'co2_tonnes', type: 'f64', unit: 'metric tons' },
   { name: 'heat_input_mmbtu', type: 'f64', unit: 'MMBtu' },
   { name: 'gross_load_mwh', type: 'f64', unit: 'MWh (gross)' },
   { name: 'units_reporting', type: 'i32', scale: 1, unit: 'monitored units with a record in the hour' },
+  // Gross load by fuel, so the hourly estimate can be set beside the measurement fuel by fuel.
+  ...FUELS.map((f) => ({ name: `load_${f}_mwh`, type: 'f32', unit: 'MWh (gross)' })),
 ];
 
 /** A real balancing-authority code, not eGRID's "NA - AK" for a plant it places in none. */
@@ -40,18 +46,24 @@ export async function normalize(input, _headerRows, o) {
   const groups = new Map();
   const problems = files.length ? await readHourly(input, (r) => {
     const ba = region.get(r.plantId) ?? null;
-    const key = `${ba ?? ''}|${r.date}|${r.hour}`;
+    const key = `${ba ?? ''}|${r.utcHour}`;
     let g = groups.get(key);
     if (!g) {
-      g = { region: ba, year: r.year, date: r.date, hour: r.hour, co2_tonnes: 0, heat_input_mmbtu: 0, gross_load_mwh: 0, units_reporting: 0 };
+      g = { region: ba, year: new Date(r.utcHour * 3_600_000).getUTCFullYear(), hour: r.utcHour, co2_tonnes: 0, heat_input_mmbtu: 0, gross_load_mwh: 0, units_reporting: 0, ...Object.fromEntries(FUELS.map((f) => [`load_${f}_mwh`, 0])) };
       groups.set(key, g);
     }
     g.co2_tonnes += (r.co2Tons ?? 0) * SHORT_TON_TO_TONNE;
     g.heat_input_mmbtu += r.heatMmbtu ?? 0;
-    g.gross_load_mwh += (r.loadMw ?? 0) * r.operating;
+    const mwh = (r.loadMw ?? 0) * r.operating;
+    g.gross_load_mwh += mwh;
+    g[`load_${r.fuel}_mwh`] += mwh;
     g.units_reporting++;
   }, files) : ['no hourly files to read'];
-  const rows = [...groups.values()].map((g) => ({ ...g, co2_tonnes: r6(g.co2_tonnes), heat_input_mmbtu: r6(g.heat_input_mmbtu), gross_load_mwh: r6(g.gross_load_mwh) }));
-  rows.sort((a, b) => ((a.region ?? '') < (b.region ?? '') ? -1 : (a.region ?? '') > (b.region ?? '') ? 1 : a.date < b.date ? -1 : a.date > b.date ? 1 : a.hour - b.hour));
+  // Float32 columns are rounded to what float32 holds, so a value read back equals the row.
+  const rows = [...groups.values()].map((g) => ({
+    ...g, co2_tonnes: r6(g.co2_tonnes), heat_input_mmbtu: r6(g.heat_input_mmbtu), gross_load_mwh: r6(g.gross_load_mwh),
+    ...Object.fromEntries(FUELS.map((f) => [`load_${f}_mwh`, Math.fround(g[`load_${f}_mwh`])])),
+  }));
+  rows.sort((a, b) => ((a.region ?? '') < (b.region ?? '') ? -1 : (a.region ?? '') > (b.region ?? '') ? 1 : a.hour - b.hour));
   return { rows, problems, dataPeriod: periodOf(files.map((f) => f.year)) };
 }

@@ -75,6 +75,18 @@ export function setupCarbon({ i18n, view, version }) {
     return { status: 'ok', ...alignSupply(load.keys(), s, v.zone) };
   }
 
+  // The small index of our estimate's own error, read once and only when a result needs it.
+  let evmSummary;
+  async function evmFor(ba, years) {
+    if (evmSummary === undefined) evmSummary = await getJson('/carbon/estimated-vs-measured/summary.json').catch(() => null);
+    if (!evmSummary) return null;
+    const mine = Object.values(evmSummary.regions).filter((x) => x.region === ba);
+    if (!mine.length) return null;
+    // The newest year the load covers that the comparison has, else the newest it has.
+    const covered = mine.filter((x) => years.includes(x.year)).sort((a, b) => b.year - a.year);
+    return { ...(covered[0] ?? mine.sort((a, b) => b.year - a.year)[0]), floor: evmSummary.floor };
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const v = view();
@@ -112,7 +124,10 @@ export function setupCarbon({ i18n, view, version }) {
       if (region.ba === 'CISO' || rows.some((r) => r.gen_geo > 0)) notes.push(t('carbon.geothermal', { ba: region.ba }));
     }
     last = { e: result, m };
-    show({ status: 'ok', e: result, m, steps, notes });
+    // The published difference between this estimate and EPA's measurements, for this region and year.
+    const evm = await evmFor(region.ba, years);
+    last.evm = evm;
+    show({ status: 'ok', e: result, m, steps, notes, evm });
   });
 
   // The result card: the result, the method, the caveat, and the labels, never the file's readings.
@@ -121,7 +136,7 @@ export function setupCarbon({ i18n, view, version }) {
     const v = view();
     if (!b || !v || !last) return;
     const f = new Intl.DateTimeFormat('en-CA', { timeZone: v.zone });
-    const text = carbonCard(last.e, last.m, { period: `${f.format(new Date(v.series.startMs[0]))} to ${f.format(new Date(v.series.startMs[v.series.startMs.length - 1]))}`, version, eia930: regions.version });
+    const text = carbonCard(last.e, last.m, { evm: last.evm, period: `${f.format(new Date(v.series.startMs[0]))} to ${f.format(new Date(v.series.startMs[v.series.startMs.length - 1]))}`, version, eia930: regions.version });
     panel.dataset.card = text;
     await navigator.clipboard?.writeText(text).catch(() => {});
     b.textContent = t('answer.copied');

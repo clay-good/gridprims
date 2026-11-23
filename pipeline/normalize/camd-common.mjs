@@ -6,6 +6,31 @@
 export const SHORT_TON_TO_TONNE = 0.90718474;
 
 /**
+ * The standard-time offset from UTC of each state's clocks, in hours. EPA's
+ * hourly records are in the plant's own local standard time, with no daylight
+ * saving, so an hour can only be put back on a common clock state by state.
+ *
+ * A state split between two zones is placed in the zone that holds most of it,
+ * which leaves a one-hour error for the few monitored plants on the other side:
+ * the Florida panhandle, El Paso, western Kansas, Nebraska, the Dakotas,
+ * northwest Indiana, western Kentucky and Tennessee, Michigan's Menominee
+ * county, and eastern Oregon and Idaho. `SPLIT_ZONE_STATES` names them so the
+ * approximation travels with the data.
+ */
+export const STANDARD_OFFSETS = {
+  AL: -6, AK: -9, AZ: -7, AR: -6, CA: -8, CO: -7, CT: -5, DE: -5, DC: -5, FL: -5, GA: -5, HI: -10, ID: -8, IL: -6,
+  IN: -5, IA: -6, KS: -6, KY: -5, LA: -6, ME: -5, MD: -5, MA: -5, MI: -5, MN: -6, MS: -6, MO: -6, MT: -7, NE: -6,
+  NV: -8, NH: -5, NJ: -5, NM: -7, NY: -5, NC: -5, ND: -6, OH: -5, OK: -6, OR: -8, PA: -5, RI: -5, SC: -5, SD: -6,
+  TN: -6, TX: -6, UT: -7, VT: -5, VA: -5, WA: -8, WV: -5, WI: -6, WY: -7, PR: -4,
+};
+
+/** States whose clocks are split between two zones, where the offset above is the majority zone. */
+export const SPLIT_ZONE_STATES = ['FL', 'ID', 'IN', 'KS', 'KY', 'MI', 'ND', 'NE', 'OR', 'SD', 'TN', 'TX'];
+
+/** The UTC hour number (hours since 1970) of one of EPA's local-standard-time records. */
+export const utcHourOf = (date, hour, offsetHours) => Math.round(Date.parse(`${date}T00:00:00Z`) / 3_600_000) + hour - offsetHours;
+
+/**
  * One line of EPA's CSV: fields are quoted when they hold a comma
  * ("ARP, CSNOX"), and a quote inside a quoted field is doubled.
  * @param {string} line @returns {string[]}
@@ -62,7 +87,22 @@ export const periodOf = (years) => { const y = [...new Set(years)].sort(); retur
 const num = (s) => (s === undefined || s === '' ? null : Number(s));
 
 /** The hourly columns we read. Everything else in the file is left where it is. */
-export const HOURLY_COLUMNS = ['State', 'Facility ID', 'Unit ID', 'Associated Stacks', 'Date', 'Hour', 'Operating Time', 'Gross Load (MW)', 'SO2 Mass (lbs)', 'CO2 Mass (short tons)', 'NOx Mass (lbs)', 'Heat Input (mmBtu)'];
+export const HOURLY_COLUMNS = ['State', 'Facility ID', 'Unit ID', 'Associated Stacks', 'Date', 'Hour', 'Operating Time', 'Gross Load (MW)', 'SO2 Mass (lbs)', 'CO2 Mass (short tons)', 'NOx Mass (lbs)', 'Heat Input (mmBtu)', 'Primary Fuel Type'];
+
+/**
+ * EPA's fuel name in the fuel categories EIA-930 reports generation under, so
+ * measured load can be set beside the estimate for the same fuel: coal, natural
+ * gas, oil, and everything else. A unit EPA lists with two fuels is placed by
+ * the first, because the hourly record does not say which burned in the hour.
+ * @param {string | null | undefined} fuel @returns {'col' | 'ng' | 'oil' | 'oth'}
+ */
+export function fuelCategory(fuel) {
+  const first = String(fuel ?? '').split(',')[0].trim().toLowerCase();
+  if (first === 'coal' || first === 'coal refuse') return 'col';
+  if (first === 'pipeline natural gas' || first === 'natural gas') return 'ng';
+  if (first.endsWith('oil')) return 'oil';
+  return 'oth';
+}
 
 /**
  * Read every hourly state-year file a line at a time, handing each record to
@@ -70,7 +110,7 @@ export const HOURLY_COLUMNS = ['State', 'Facility ID', 'Unit ID', 'Associated St
  * than being misread.
  * @param {Record<string, () => AsyncIterable<string>>} input lines by file key
  * @param {Array<{key: string, year: number, state: string}>} [files] the hourly files to read (default: all of them)
- * @param {(r: {state: string, plantId: number, unitId: string, stacks: string, year: number, month: number, date: string, hour: number, operating: number, loadMw: number | null, so2Lbs: number | null, co2Tons: number | null, noxLbs: number | null, heatMmbtu: number | null}) => void} onRow
+ * @param {(r: {state: string, plantId: number, unitId: string, stacks: string, year: number, month: number, date: string, hour: number, operating: number, loadMw: number | null, so2Lbs: number | null, co2Tons: number | null, noxLbs: number | null, heatMmbtu: number | null, fuel: 'col' | 'ng' | 'oil' | 'oth'}) => void} onRow
  * @returns {Promise<string[]>} problems
  */
 export async function readHourly(input, onRow, files = hourlyFilesIn(input)) {
@@ -105,6 +145,9 @@ export async function readHourly(input, onRow, files = hourlyFilesIn(input)) {
         co2Tons: num(f[at['CO2 Mass (short tons)']]),
         noxLbs: num(f[at['NOx Mass (lbs)']]),
         heatMmbtu: num(f[at['Heat Input (mmBtu)']]),
+        fuel: fuelCategory(f[at['Primary Fuel Type']]),
+        // The same record on a common clock: EPA's local standard hour, moved to UTC by the state's offset.
+        utcHour: utcHourOf(date, Number(f[at.Hour]), STANDARD_OFFSETS[f[at.State] || state] ?? 0),
       });
     }
   }
