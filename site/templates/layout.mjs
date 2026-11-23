@@ -31,7 +31,7 @@ export const THEME_SCRIPT = "document.documentElement.dataset.js='1';try{var t=l
 /** The few the footer itself carries: what a visitor needs while reading a number. */
 export const FOOTER_PAGES = [['about', '/about/'], ['privacy', '/privacy/'], ['limits', '/limits/'], ['sources', '/sources/'], ['terms', '/terms/'], ['report', '/report/']];
 
-/** The footer's four cards (DESIGN.md "Footer Cards"): every other page is reached through one of them. */
+/** The footer's four cards (DESIGN.md "Footer"): every other page is reached through one of them. */
 /**
  * The command bar's fields. One markup, two placements: beneath the rail on every
  * page, and centred under the read-out on the home page (siting/home-and-shell).

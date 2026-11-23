@@ -30,17 +30,19 @@ a:hover { text-decoration-color: var(--signal); color: var(--signal-text); }
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
   outline: 3px solid var(--focus); outline-offset: 2px;
 }
-h1, h2, h3 { text-wrap: balance; line-height: 1.12; margin: var(--s6) 0 var(--s3); letter-spacing: -0.015em; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.15; margin: var(--s7) 0 var(--s3); letter-spacing: -0.015em; }
 .panel h2, .panel h3 { margin-top: 0; }
-h1 { font-size: clamp(1.5rem, 1.25rem + 1.1vw, 1.875rem); font-weight: 700; letter-spacing: -0.02em; }
-h2 { font-size: 1.1875rem; font-weight: 700; }
-h3 { font-size: 1rem; font-weight: 700; }
+h1 { font-size: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin-top: var(--s7); margin-bottom: var(--s4); }
+h2 { font-size: 1.375rem; font-weight: 700; letter-spacing: -0.02em; }
+h3 { font-size: 1.0625rem; font-weight: 700; margin-top: var(--s5); margin-bottom: var(--s2); }
+/* Body copy: a little more open, and paragraphs spaced by the scale. */
+main p { text-wrap: pretty; }
 /* The engraved legend: every small label on a plate, a table head, or a field. */
 .legend, .cell-section, .field label, th, .facts dt, caption, .command label {
   font-size: .6875rem; font-weight: 600; letter-spacing: .085em; text-transform: uppercase; color: var(--muted);
 }
 /* Running prose keeps a readable line on wide screens. */
-main :is(p, li):not([class]) { max-width: 75ch; }
+main :is(p, li):not([class]) { max-width: 68ch; }
 .mono, code, .data { font-family: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace; font-size: .875rem; font-weight: 500; font-variant-numeric: tabular-nums slashed-zero; }
 .skip { position: absolute; left: -9999px; }
 .skip:focus { left: var(--s4); top: var(--s2); background: var(--panel); padding: var(--s2) var(--s3); z-index: 10; }
@@ -75,7 +77,9 @@ main :is(p, li):not([class]) { max-width: 75ch; }
 /* Command bar */
 .command { background: var(--bg); border-bottom: 1px solid var(--line); }
 .command .wrap { padding-top: var(--s3); padding-bottom: var(--s3); position: relative; }
-.command label { display: block; margin-bottom: var(--s1); }
+.command label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.command:not(.home-search) input { max-width: 40rem; display: block; }
+.command:not(.home-search) .command-results { right: auto; width: min(40rem, calc(100% - 2 * var(--s4))); }
 .command input {
   width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--field-border); border-radius: var(--r-field);
   background: var(--panel); color: var(--ink); transition: border-color .12s ease-out;
@@ -95,7 +99,7 @@ main :is(p, li):not([class]) { max-width: 75ch; }
 main { padding-bottom: var(--s7); }
 .tool-head { display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap; }
 .tool-head h1 { margin-bottom: var(--s2); }
-.purpose { margin-top: 0; max-width: 72ch; }
+.purpose { margin-top: 0; max-width: 64ch; font-size: 1.125rem; line-height: 1.5; color: var(--ink); }
 .chip {
   display: inline-flex; align-items: center; gap: var(--s1); border-radius: var(--r-field); padding: 3px 8px;
   font-size: .6875rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
@@ -159,7 +163,7 @@ main { padding-bottom: var(--s7); }
 .strip a { color: var(--ink); }
 .answer-actions { display: flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s3); }
 .button {
-  min-height: 44px; padding: 12px 18px; border-radius: var(--r-field); font: 600 .8125rem/1 Archivo, system-ui, -apple-system, "Segoe UI", sans-serif; cursor: pointer;
+  min-height: 44px; padding: 12px 20px; border-radius: var(--r-field); font: 600 .9375rem/1.2 Archivo, system-ui, -apple-system, "Segoe UI", sans-serif; cursor: pointer;
   background: var(--panel); color: var(--ink); border: 1px solid var(--field-border);
   display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); text-align: center;
   transition: background-color .12s ease-out, border-color .12s ease-out, transform .12s ease-out;
@@ -197,7 +201,7 @@ label.check { display: flex; gap: var(--s2); align-items: center; min-height: 44
 .picker-row { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); align-items: end; }
 
 /* Regulatory panels: work, sources, limits */
-.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-field); padding: var(--s4); margin: var(--s4) 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-field); padding: var(--s5); margin: var(--s5) 0; }
 .panel > h2, .panel > h3 { letter-spacing: -0.01em; }
 details > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: var(--s2); min-height: 24px; }
 details > summary::-webkit-details-marker { display: none; }
@@ -207,11 +211,13 @@ details > summary::before {
   transition: transform var(--fast) var(--ease);
 }
 details[open] > summary::before { transform: rotate(45deg); }
-details.panel > summary { font-weight: 700; min-height: 24px; margin: calc(-1 * var(--s4)); padding: var(--s4); border-radius: var(--r-field); transition: background-color .12s ease-out; }
+details.panel > summary { font-weight: 700; min-height: 24px; margin: calc(-1 * var(--s5)); padding: var(--s4) var(--s5); border-radius: var(--r-field); transition: background-color .12s ease-out; }
 details.panel > summary:hover { background: var(--panel-hover); }
-details.panel[open] > summary { margin-bottom: 0; }
+details.panel[open] > summary { margin-bottom: var(--s3); }
 .summary-heading { display: inline; font-size: 1rem; margin: 0; }
-.panel h3 { font-size: 1rem; margin: var(--s4) 0 var(--s2); }
+.panel h3 { font-size: 1rem; margin: var(--s5) 0 var(--s2); }
+.panel > h2 { font-size: 1.125rem; }
+.panel > :last-child { margin-bottom: 0; }
 /* Form controls in a panel (the lookup's ZIP and county forms) stack and never outgrow it, whatever the option text. */
 form.panel label { display: block; margin-top: var(--s2); font-size: .75rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
 form.panel label + :is(input, select) { margin-top: var(--s2); }
@@ -230,7 +236,7 @@ form[data-catalog-filters] select { margin-top: var(--s2); color: var(--ink); te
 .handoff {
   display: inline-flex; gap: var(--s2); align-items: center; background: var(--panel); color: var(--ink);
   border: 1px solid var(--field-border); border-radius: var(--r-field); padding: 10px 14px;
-  font-weight: 600; font-size: .8125rem; text-decoration: none; min-height: 44px;
+  font-weight: 600; font-size: .9375rem; text-decoration: none; min-height: 44px;
   transition: border-color .12s ease-out, color .12s ease-out;
 }
 .handoff:hover { border-color: var(--signal); color: var(--signal-text); }
@@ -239,7 +245,9 @@ form[data-catalog-filters] select { margin-top: var(--s2); color: var(--ink); te
 /* In a panning table, words stay whole: the box scrolls instead of a name breaking mid-word. */
 .table-wrap :is(th, td) { overflow-wrap: normal; }
 table { border-collapse: collapse; width: 100%; }
-th, td { text-align: left; padding: var(--s2) var(--s3); border-bottom: 1px solid var(--line); vertical-align: top; }
+th, td { text-align: left; padding: var(--s3); border-bottom: 1px solid var(--line); vertical-align: top; }
+th:first-child, td:first-child { padding-left: 0; }
+th:last-child, td:last-child { padding-right: 0; }
 thead th { border-bottom: 1px solid var(--field-border); white-space: nowrap; }
 tbody tr:last-child > * { border-bottom: 0; }
 td { font-variant-numeric: tabular-nums slashed-zero; }
@@ -260,7 +268,7 @@ tbody th { color: var(--ink); font-size: .9375rem; font-weight: 600; letter-spac
   .lane .tool-cell .unit-hint { grid-column: 3; margin: 0; text-align: right; white-space: nowrap; }
   .lane .tool-cell .work-zone { grid-column: 1; grid-row: 2; margin: var(--s1) 0 0; justify-self: start; }
 }
-.tool-cell .question { margin: var(--s1) 0 var(--s2); color: var(--muted); font-size: .875rem; }
+.tool-cell .question { margin: var(--s1) 0 var(--s2); color: var(--muted); font-size: .9375rem; max-width: 52ch; }
 .tool-cell .unit-hint { margin: 0; font-size: .75rem; color: var(--muted); }
 /* "Preview" is a stamped legend on the cell, not a line of body text above the name. */
 .tool-cell .work-zone {
@@ -281,11 +289,18 @@ tbody th { color: var(--ink); font-size: .9375rem; font-weight: 600; letter-spac
 .tool-cell :is(p, dl, span) a { position: relative; z-index: 1; }
 /* Tool lists tile once there is room, each card with its needs on the bottom line.
    The data library keeps one wide card per row for its row of figures. */
-.tool-list:not(.lane .tool-list):not(:has([data-library])) { grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
-.tool-list:not(.lane .tool-list) > .tool-cell { display: flex; flex-direction: column; align-items: flex-start; }
-.tool-list:not(.lane .tool-list) > .tool-cell > .unit-hint { margin-top: auto; padding-top: var(--s2); }
-.tool-list:not(.lane .tool-list) > .tool-cell > .work-zone { margin-bottom: var(--s2); }
-.tool-cell a { font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.01em; text-decoration: none; }
+.tool-list:not(.lane .tool-list):not(:has([data-library])) { grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); column-gap: var(--s6); row-gap: 0; }
+.tool-list:not(.lane .tool-list) { gap: 0 var(--s6); margin: var(--s5) 0; }
+.tool-list:not(.lane .tool-list) > .tool-cell {
+  display: flex; flex-direction: column; align-items: flex-start;
+  background: none; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: var(--s4) 0 var(--s5);
+}
+.tool-list:not(.lane .tool-list) > .tool-cell:hover { border-top-color: var(--ink); }
+.tool-list:not(.lane .tool-list) > .tool-cell > .unit-hint { margin-top: auto; padding-top: var(--s1); }
+/* The PREVIEW stamp sits on the bottom line, so every name in a row starts at the same height. */
+.tool-list:not(.lane .tool-list) > .tool-cell > .work-zone { order: 5; margin: var(--s2) 0 0; }
+.tool-list:not(.lane .tool-list) > .tool-cell > p:not([class]) { margin: var(--s1) 0 var(--s2); color: var(--muted); font-size: .9375rem; max-width: 52ch; }
+.tool-cell a { font-weight: 700; font-size: 1.0625rem; line-height: 1.3; letter-spacing: -0.01em; text-decoration: none; }
 .tool-cell a:hover { color: var(--signal-text); }
 /* On phones a home lane is two columns of names and what each needs, so both lanes and up to five cells each fit the first screen. */
 @media (max-width: 767px) {
@@ -297,15 +312,15 @@ tbody th { color: var(--ink); font-size: .9375rem; font-weight: 600; letter-spac
   .lane .tool-cell .unit-hint { margin: var(--s1) 0 0; font-size: .75rem; }
 }
 
-footer { border-top: 1px solid var(--line); margin-top: var(--s8); padding: var(--s5) 0 var(--s6); color: var(--muted); font-size: .8125rem; }
+footer { border-top: 1px solid var(--line); margin-top: var(--s7); padding: var(--s6) 0 var(--s7); color: var(--muted); font-size: .8125rem; }
 footer ul { list-style: none; padding: 0; margin: 0 0 var(--s3); display: flex; gap: var(--s4); flex-wrap: wrap; }
-/* The footer's four cards (DESIGN.md "Footer Cards"): the whole card is the link. */
-.footer-cards { display: grid; grid-template-columns: 1fr; gap: var(--s2); margin-bottom: 0; }
-.footer-cards a { display: block; height: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-field); padding: var(--s3); text-decoration: none; color: var(--ink); }
-.footer-cards a { transition: background-color .12s ease-out, border-color .12s ease-out; }
-.footer-cards a:hover { background: var(--panel-hover); border-color: var(--field-border); }
+/* The footer (DESIGN.md "Footer"): four ruled columns, each whole block the link. */
+.footer-cards { display: grid; grid-template-columns: 1fr; gap: 0 var(--s5); margin-bottom: 0; }
+.footer-cards a { display: block; height: 100%; padding: var(--s3) 0; text-decoration: none; color: var(--ink); }
+.footer-cards a { transition: color .12s ease-out; }
+.footer-cards a:hover .card-title { color: var(--signal-text); text-decoration: underline; text-decoration-color: var(--signal); text-underline-offset: 3px; }
 .footer-cards .card-title { display: block; font-weight: 600; font-size: .875rem; }
-.footer-cards .card-note { display: block; margin-top: 2px; color: var(--muted); font-size: .75rem; }
+.footer-cards .card-note { display: block; margin-top: 2px; color: var(--muted); font-size: .8125rem; }
 @media (min-width: 480px) { .footer-cards { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 768px) { .footer-cards { grid-template-columns: repeat(4, 1fr); } }
 .trust-index { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--s2) var(--s4); }
@@ -326,9 +341,9 @@ footer .wordmark-foot { color: var(--ink); font-weight: 700; letter-spacing: -0.
 }
 
 /* Charts (DESIGN.md Charts): series colors by role, references muted and dashed. */
-.chart { margin: var(--s4) 0; }
+.chart { margin: var(--s5) 0; }
 /* A chart scales with its box, axis text included: capped on wide screens, and on a phone it pans inside its own box rather than shrink its axis text past reading. */
-.chart:not(.elevation) svg { max-width: 60rem; }
+.chart:not(.elevation) svg { max-width: 40rem; }
 .heatmap svg { max-width: 40rem; }
 @media (max-width: 719px) {
   .chart:not(.elevation):not(.proof-chart) { overflow-x: auto; overscroll-behavior-x: contain; }
@@ -361,6 +376,8 @@ footer .wordmark-foot { color: var(--ink); font-weight: 700; letter-spacing: -0.
 .chart-highlight circle { fill: var(--series-measured); stroke: var(--panel); stroke-width: 2; }
 .chart-highlight text { fill: var(--ink); font: 600 12px Archivo, system-ui, sans-serif; }
 caption { text-align: left; color: var(--muted); padding: var(--s2) 0; }
+/* A table straight under its own heading is already named; the caption stays for screen readers. */
+:is(h2, h3) + .table-wrap > table > caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 /* File workbench */
 .dropzone { border: 2px dashed var(--field-border); border-radius: var(--r-field); padding: var(--s4); margin: var(--s4) 0; background: var(--panel); }
@@ -370,10 +387,10 @@ caption { text-align: left; color: var(--muted); padding: var(--s2) 0; }
 .progress { display: flex; gap: var(--s3); align-items: center; flex-wrap: wrap; }
 .progress[hidden], .errors[hidden] { display: none; }
 .progress progress { flex: 1 1 200px; accent-color: var(--guide); }
-.facts { display: grid; gap: var(--s3) var(--s5); grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr)); margin: var(--s4) 0; }
+.facts { display: grid; gap: var(--s4) var(--s5); grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr)); margin: var(--s5) 0 var(--s4); }
 .facts > div { border-top: 1px solid var(--line); padding-top: var(--s2); min-width: 0; }
 .facts dt { color: var(--muted); font-family: Archivo, system-ui, sans-serif; font-weight: 600; }
-.facts dd { margin: 0; font-size: 1.125rem; }
+.facts dd { margin: var(--s1) 0 0; font-size: 1.125rem; font-weight: 500; }
 .receipt div { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr; gap: var(--s3); padding: var(--s2) 0; border-bottom: 1px solid var(--line); }
 @media (max-width: 480px) { .receipt div { grid-template-columns: 1fr; gap: var(--s1); } }
 .receipt dt { color: var(--muted); }
@@ -395,7 +412,7 @@ dialog.report textarea { width: 100%; border: 1px solid var(--field-border); bor
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 /* Source stamp and warning chip */
-.source-stamp { color: var(--muted); font-size: .75rem; line-height: 1.6; }
+.source-stamp, .source-stamp.mono { color: var(--muted); font: 400 .8125rem/1.55 Archivo, system-ui, -apple-system, "Segoe UI", sans-serif; font-variant-numeric: tabular-nums; max-width: 88ch; }
 .warning-chip { display: inline-flex; align-items: center; gap: var(--s1); background: var(--warning); color: var(--legend-black); border-radius: var(--r-pill); padding: 4px 10px; font-weight: 600; font-family: Archivo, system-ui, sans-serif; }
 .warning-chip[hidden] { display: none; }
 .warning-chip { font-size: .8125rem; line-height: 1.3; }
@@ -420,10 +437,13 @@ blockquote { border-left: 1px solid var(--field-border); margin: var(--s3) 0; pa
 .pulse { display: none; margin: 0 0 0 auto; align-items: center; gap: var(--s2); color: var(--legend-white); font-size: .75rem; }
 @media (min-width: 768px) { .pulse { display: flex; } .pulse + .theme-toggle { margin-left: var(--s3); } }
 
-.cell-section { color: var(--muted); font-size: .875rem; font-weight: 600; margin: 0 0 var(--s1); }
+.cell-section { color: var(--muted); font-size: .875rem; font-weight: 500; margin: 0 0 var(--s1); }
+main > .cell-section:first-child { margin: var(--s7) 0 0; text-transform: none; letter-spacing: 0; font-size: .9375rem; }
+main > .cell-section:first-child + h1 { margin-top: var(--s2); }
+.tool-cell .cell-section { text-transform: none; letter-spacing: 0; font-size: .8125rem; }
 
 /* Home: the tagline as a modest heading, and lanes close enough that both start on a phone's first screen. */
-.home-title { max-width: 46rem; margin: var(--s7) auto var(--s3); text-align: center; font-size: clamp(1.625rem, 1.2rem + 1.8vw, 2.25rem); line-height: 1.18; letter-spacing: -0.025em; font-weight: 700; }
+.home-title { max-width: 44rem; margin: var(--s8) auto var(--s4); text-align: center; font-size: clamp(1.875rem, 1.3rem + 2.4vw, 3rem); line-height: 1.08; letter-spacing: -0.03em; font-weight: 700; }
 .lane h2 { margin: var(--s6) 0 var(--s3); }
 
 /* Glossary terms (learn/glossary): the learn sign, a dotted underline, and a popover on hover or focus. */

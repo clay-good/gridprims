@@ -72,18 +72,19 @@
 
 /* The one search bar, centred under the read-out: the single route to everything else. */
 .home-search { max-width: 40rem; margin: var(--s7) auto 0; text-align: center; border: 0; background: none; padding: 0; }
-.home-search h2 { font-size: 1.0625rem; margin: 0 0 var(--s3); }
+.home-search h2 { font-size: 1.125rem; margin: 0 0 var(--s3); }
 .home-search label { display: block; margin-bottom: var(--s2); }
 .home-search input { width: 100%; }
 .home-search .command-results { text-align: left; }
-.home-search .unit-hint { margin-top: var(--s3); }
+.home-search .unit-hint { margin-top: var(--s3); font-size: .875rem; }
+.home-search input { min-height: 48px; font-size: 1rem; }
 
 /* The siting read-out: the question, three controls on one row, then the answer.
    The controls share one height, one type size, and one baseline; the error sits
    below the row so no single field can push its own control out of line. */
 .siting { max-width: 56rem; margin: 0 auto; }
 .siting .home-title { margin-bottom: var(--s3); }
-.siting .start-sub { text-align: center; max-width: 60ch; margin-left: auto; margin-right: auto; }
+.siting .start-sub { text-align: center; max-width: 52ch; margin-left: auto; margin-right: auto; font-size: 1.125rem; line-height: 1.5; color: var(--muted); }
 .siting-form { display: grid; grid-template-columns: 1fr; gap: var(--s3); max-width: 21rem; margin: var(--s5) auto var(--s2); text-align: left; }
 .siting-form .field { margin: 0; }
 .siting-form input, .siting-form select, .siting-form .button {
@@ -96,9 +97,11 @@
 @media (min-width: 720px) {
   /* Two equal data fields, the choice, then the action: every column sized to its
      content so the row reads as one group, centred under the question. */
-  .siting-form { grid-template-columns: repeat(3, 9rem) auto; align-items: end; justify-content: center; max-width: none; }
+  .siting-form { grid-template-columns: repeat(3, 10rem) auto; align-items: end; justify-content: center; max-width: none; }
 }
 .siting-resolution { margin-top: var(--s6); }
+/* The limit of what public data can see: said plainly under the answer, not boxed as a warning. */
+p.panel.siting-resolution { background: none; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: var(--s4) 0 0; margin: var(--s7) auto 0; max-width: 60ch; color: var(--muted); font-size: .9375rem; text-align: center; }
 .siting-answer:not(:empty) { margin-top: var(--s6); }
 .siting-utilities { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
 .siting-utility { border-bottom: 1px solid var(--line); padding: var(--s4) 0; }

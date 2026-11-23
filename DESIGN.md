@@ -71,10 +71,10 @@ typography:
     letterSpacing: "0"
   display:
     fontFamily: "Archivo, system-ui, -apple-system, \"Segoe UI\", sans-serif"
-    fontSize: "1.875rem"
+    fontSize: "2.5rem"
     fontWeight: 700
-    lineHeight: 1.12
-    letterSpacing: "-0.015em"
+    lineHeight: 1.1
+    letterSpacing: "-0.025em"
   tagline:
     fontFamily: "Archivo, system-ui, -apple-system, \"Segoe UI\", sans-serif"
     fontSize: "1.5rem"
@@ -83,7 +83,7 @@ typography:
     letterSpacing: "-0.02em"
   headline:
     fontFamily: "Archivo, system-ui, -apple-system, \"Segoe UI\", sans-serif"
-    fontSize: "1.1875rem"
+    fontSize: "1.375rem"
     fontWeight: 700
     lineHeight: 1.12
     letterSpacing: "-0.015em"
@@ -357,18 +357,19 @@ Neither family is loaded from Google or any CDN; the build ships both woff2 file
 
 The ramp is fixed rem steps, except three display sizes that scale with the viewport between fixed floors and ceilings (`clamp()`): the plate number, the page title, and the home tagline. It is denser than a conventional scale on purpose: a working page stacks many small engraved labels around a few very large numbers, and the middle of the ramp is deliberately narrow.
 
-- **Plate number** (700, fluid 2.75rem → 4.25rem, line-height 0.95, −0.035em, tabular + slashed zero): the measured value on a plate, in `signal`. The only type in the system above 2rem.
+- **Plate number** (700, fluid 2.75rem → 4.25rem, line-height 0.95, −0.035em, tabular + slashed zero): the measured value on a plate, in `signal`. The largest type in the system.
 - **Plate number, inline** (700, 1.5rem): the same value when a plate collapses to one line below 720px.
 - **Plate unit** (500, 0.9375rem): the unit beside the number, baseline-aligned, never inside it.
-- **Display** (700, fluid 1.5rem → 1.875rem, 1.12, −0.02em): `h1`, the page title. The home tagline runs fluid 1.625rem → 2.25rem.
+- **Display** (700, fluid 1.75rem → 2.5rem, 1.1, −0.025em): `h1`, the page title, with `--s7` above it. The home question runs fluid 1.875rem → 3rem at 1.08 and −0.03em.
+- **Lead** (400, 1.125rem/1.5, 64ch): the `.purpose` sentence under a page title, and the home sub-line in `muted`.
 - **Tagline** (700, 1.5rem, 1.2, −0.02em; 1rem below 720px): the home page's one heading.
-- **Headline** (700, 1.1875rem): `h2`, section heads.
+- **Headline** (700, 1.375rem, −0.02em; 1.25rem on phones): `h2`, section heads, with `--s7` above and `--s3` below. Inside a panel, 1.125rem.
 - **Title** (700, 1.0625rem, −0.01em; 1rem on phones): a tool cell's name and the rail wordmark (−0.02em).
-- **Subhead** (700, 1rem): `h3` and a panel's inline summary heading.
-- **Body** (400, 1rem/1.55): sentences; prose caps at 72ch, a plate's sentence at 62ch, a validation stamp at 88ch.
+- **Subhead** (700, 1.0625rem; 1rem in a panel): `h3`, with `--s5` above and `--s2` below.
+- **Body** (400, 1rem/1.55, `text-wrap: pretty`): sentences; prose caps at 68ch, a plate's sentence at 62ch, a validation stamp at 88ch.
 - **Body small** (400, 0.875rem): a tool cell's question, field hints, field errors, captions, chart captions.
 - **Note** (500, 0.8125rem): validation stamp, screening strip, footer, rail navigation (0.01em).
-- **Control** (600, 0.8125rem/1): buttons and handoffs. The menu button and the plain-link button run 0.875rem.
+- **Control** (600, 0.9375rem/1.2): buttons and handoffs. The menu button and the plain-link button run 0.875rem.
 - **Data** (500, 0.875rem mono, tabular + slashed zero): every number outside a plate, plus inputs, the command bar, receipts, and citation lists. Chart axes use 11px mono 500; a chart's highlight label 12px Archivo 600.
 - **Legend** (600, 0.6875rem, 0.085em, uppercase, `muted`): the engraved legend. Every small label on a plate, a table head, a field label, a caption, a section marker, the command-bar label. The plate's own label is the same metrics in `legend-white` at 0.72 opacity.
 - **Band** (500, 0.6875rem, 0.06em, uppercase; 0.625rem on phones): the basis band stamped along the plate's lower edge.
@@ -384,10 +385,12 @@ The ramp is fixed rem steps, except three display sizes that scale with the view
 
 ## Layout
 
-- **Shell.** Dark top rail (min 52px, 56px of content): wordmark, then a one-line description of what the site answers, the optional grid pulse, theme toggle pinned right. There are no section tabs; breadth is reached through the command bar and the footer's All tools card. On the home page the command bar moves out of the rail and sits centred under the hero; on every other page it stays directly beneath the rail on `bg` with a 1px bottom rule. Then `main`, then a hairline-topped footer of cards. The rail is sticky at the top of the viewport and never wraps: below the width where everything fits, its description truncates with an ellipsis. Anchors scroll clear of it (`scroll-padding-top`).
+- **Shell.** Dark top rail (min 52px, 56px of content): wordmark, then a one-line description of what the site answers, the optional grid pulse, theme toggle pinned right. There are no section tabs; breadth is reached through the command bar and the footer's All tools card. On the home page the command bar moves out of the rail and sits centred under the hero; on every other page it stays directly beneath the rail on `bg` with a 1px bottom rule, one field up to 40rem wide, its label kept for screen readers only. Then `main`, then a hairline-topped footer of cards. The rail is sticky at the top of the viewport and never wraps: below the width where everything fits, its description truncates with an ellipsis. Anchors scroll clear of it (`scroll-padding-top`).
+- **Place line.** An entity page may open with one quiet line naming what the page is (`.cell-section`: "Electric utility · EIA utility id 10000"), in `muted` sentence case at 0.9375rem, `--s2` above the title. It is a trail, never an engraved kicker.
+- **Source lines.** A dataset's citation line (`.source-stamp`) is a sentence, so it sets in Archivo 0.8125rem `muted` with tabular figures, capped at 88ch; mono is for values, not for prose about them.
 - **Container.** `.wrap` is max 1200px centred with `--s4` side padding (`--s5` from 768px, never less than the device's safe-area inset); `main` carries `--s7` of bottom padding.
 - **Rhythm.** Spacing comes only from `--s1`…`--s8` (4, 8, 12, 16, 24, 32, 48, 64px). Headings take `--s6` above and `--s3` below; a panel's first heading loses its top margin.
-- **Breakpoints, as the stylesheet actually sets them.** 480px (receipt rows collapse to one column), 719/720px (the phone first-screen block and the three-column ruled lane), 767/768px (the rail folds into a menu, the grid pulse appears, the plate number steps to 4.25rem, home lanes go two-up), 900px (the home proof becomes a plate-plus-figures grid). Must hold at 320px with no sideways scroll; wide tables pan inside `.table-wrap`. Below 720px a panning table sizes to its content and wraps long text at 16rem, words never break mid-word inside it, and a chart pans inside its own box at a 36rem minimum (heatmap 28rem) so axis text stays legible; on wide screens a chart caps at 60rem (heatmap 40rem). Every field is 16px on a phone so focusing one never zooms the page.
+- **Breakpoints, as the stylesheet actually sets them.** 480px (receipt rows collapse to one column), 719/720px (the phone first-screen block and the three-column ruled lane), 767/768px (the rail folds into a menu, the grid pulse appears, the plate number steps to 4.25rem, home lanes go two-up), 900px (the home proof becomes a plate-plus-figures grid). Must hold at 320px with no sideways scroll; wide tables pan inside `.table-wrap`. Below 720px a panning table sizes to its content and wraps long text at 16rem, words never break mid-word inside it, and a chart pans inside its own box at a 36rem minimum (heatmap 28rem) so axis text stays legible; on wide screens a chart caps at 40rem, its native 640px drawing size, so axis text never grows past 11px. Every field is 16px on a phone so focusing one never zooms the page.
 - **Density.** Tool lanes are ruled index rows, not a grid of boxes: `border-top` on the list, `border-bottom` per row, no card chrome. At ≥720px a row is name / question / what-you-need in three columns; below 768px it becomes a two-column list of names and needs so both lanes start on a 360×640 first screen.
 - **Phone first screen.** Below 720px the home proof plate collapses to one line — label, number, unit — and drops its sentence, its figures, and its own button. **It keeps the basis band.** The band moves to 0.625rem and stays stamped under the number.
 - **Motion.** Tokens `--fast` 150ms, `--med` 220ms, `--slow` 400ms with `--ease` `cubic-bezier(.2,.7,.2,1)` are defined in `tokens.mjs`; the shipped component rules transition `background-color`, `border-color`, and `color` at 120ms `ease-out`. Theme switching is instant. `prefers-reduced-motion: reduce` kills every transition and animation.
@@ -397,7 +400,7 @@ The ramp is fixed rem steps, except three display sizes that scale with the view
 
 **The Basis Band Rule.** A plate never ships without the band stamped along its lower edge: source, interval count, date range, as-of, validation. At every width, in every rendition, including the one-line phone plate. A measured number without its basis is the one thing this world refuses.
 
-**The Ruled Index Rule.** Repeating navigational rows are ruled, not boxed. A card border around every item in a list is wrong here; one hairline between items is right.
+**The Ruled Index Rule.** Repeating navigational rows are ruled, not boxed. A card border around every item in a list is wrong here; one hairline between items is right. This holds for the catalog grid and the footer too.
 
 ## Elevation & Depth
 
@@ -445,16 +448,16 @@ An outlined pill-free rectangle at field radius, white panel, `field-border` str
 Mono text at data size, white panel, 1px `field-border`, field radius, 10px/12px padding, 44px minimum; hover darkens the stroke to `ink`. The label above is an engraved legend at 0.75rem and 0.07em, one step up from the plate legend because a thumb has to find it. Checkboxes and radios take `ink` as their accent at 18px, inside a 44px label. `aria-invalid="true"` turns the stroke `stop` and prints the error beneath in `stop` at body-small. The caret is `signal`. Focus is the system ring, never a glow.
 
 ### Panels
-White, 1px `line`, field radius, `--s4` padding, `--s4` vertical margin; a `details.panel` uses a 700-weight summary. Panels are the regulatory surface: sources, method, receipts, citation lists, filter forms. Every disclosure draws its own chevron (2px `currentColor`, rotating a quarter turn on open) in place of the browser's triangle; in a `details.panel` the whole panel head is the target and hovers to `panel-hover`. A plain term list in a panel is ruled rows: the term as an engraved legend, the value beside it from 720px. A table's row header is a name at 600 weight in `ink`, never a legend.
+White, 1px `line`, field radius, `--s5` padding (`--s4` on phones), `--s5` vertical margin; a `details.panel` uses a 700-weight summary. Panels are the regulatory surface: sources, method, receipts, citation lists, filter forms. Every disclosure draws its own chevron (2px `currentColor`, rotating a quarter turn on open) in place of the browser's triangle; in a `details.panel` the whole panel head is the target and hovers to `panel-hover`. A plain term list in a panel is ruled rows: the term as an engraved legend, the value beside it from 720px. A table's row header is a name at 600 weight in `ink`, never a legend.
 
 ### Tool Cell
-Two renditions of one component. Standalone (catalog, section pages, states index): white card, `line` border, field radius, `--s4` padding, border turns `field-border` on hover; the whole card is the link, and the cards tile at a 22rem minimum with what-you-need on the bottom line. The data library keeps one wide card per row. In a home lane: no card at all — a ruled row with a bottom hairline, name at title size, question in `muted` body-small, what-you-need and as-of right-aligned at 0.75rem, hover tints the row `panel-hover`. The PREVIEW mark is a stamp on the cell (raise field, `work-zone-text`, `line` border, stamp metrics), not a line of body text above the name.
+Two renditions of one component. Standalone (catalog, section pages, states index): no card, a `line` hairline on top that turns `ink` on hover, `--s4` above and `--s5` below, tiling at a 20rem minimum with `--s6` between columns; the whole cell is the link, the question in `muted` at 0.9375rem and 52ch, and what-you-need then the PREVIEW stamp on the bottom lines so every name in a row starts at the same height. The data library keeps one wide card per row. In a home lane: no card at all — a ruled row with a bottom hairline, name at title size, question in `muted` body-small, what-you-need and as-of right-aligned at 0.75rem, hover tints the row `panel-hover`. The PREVIEW mark is a stamp on the cell (raise field, `work-zone-text`, `line` border, stamp metrics), not a line of body text above the name.
 
 ### Top Rail and Command Bar
 The rail is a `guide` field with a `guide-active` bottom rule and white legends. Beside the wordmark sits one line of description at note size and 0.82 opacity, hidden below 720px where the wordmark stands alone. The theme toggle is a bordered ghost button pinned right, uppercase at 0.75rem, carrying the name of the theme it switches to. The command bar is a mono combobox with an engraved label (visually hidden below 720px) and a results listbox on a white panel with the overlay shadow, selected and hovered rows on `panel-hover`; beneath the rail it sits on `bg` with a hairline under it, and on the home page it is centred under the hero at up to 40rem with its examples listed under it.
 
-### Footer Cards
-The footer is a hairline-topped band of four equal cards, not a list of links: All tools, GitHub, Privacy and about, and the maintainer's credit linking to claygood.com. Each card is a `panel` surface with a `line` border, field radius, a title at note size and a line of `muted` body-small under it; the whole card is the link target, and hover takes `panel-hover`. They sit one per row below 480px, two up to 768px, and four above it. Under the cards the licence and privacy lines stay as plain `muted` body-small, because they are statements rather than destinations.
+### Footer
+The footer is a hairline-topped band of four equal columns: All tools, GitHub, Privacy and about, and the maintainer's credit linking to claygood.com. No boxes: each is a title at 0.875rem in `ink` with a line of `muted` 0.8125rem under it; the whole block is the link target, and hover underlines the title in `signal`. They sit one per row below 480px, two up to 768px, and four above it. Under the cards the licence and privacy lines stay as plain `muted` body-small, because they are statements rather than destinations.
 
 ### Charts
 SVG on a white panel with a `line` border and field radius. Grid lines in `line` at 1px; axis text 11px mono in `muted`; series at 2px with `vector-effect: non-scaling-stroke`; measured in graphite, what-if in signal, comparison in `service` dashed 6/4; heat cells from the six-step ramp; the highlighted point is a `series-measured` dot ringed in `panel`. Every chart carries a caption in `muted` body-small.
