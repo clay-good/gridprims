@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-23T20:20:09.172Z",
+  "generatedAt": "2026-11-23T21:28:53.866Z",
   "workflows": [
     {
       "id": "refresh-data",
       "intervalHours": 24,
       "thresholdHours": 72,
-      "lastSuccess": "2026-11-22T17:22:37.560Z",
-      "lastRun": "2026-11-22T17:22:37.560Z",
+      "lastSuccess": "2026-11-23T21:28:53.866Z",
+      "lastRun": "2026-11-23T21:28:53.866Z",
       "enabled": true,
       "events": []
     },
@@ -68,12 +68,12 @@
   "datasets": [
     {
       "id": "eia-860",
-      "lastCheck": "2026-11-22T17:22:37.560Z",
+      "lastCheck": "2026-11-23T21:28:53.866Z",
       "lastRefresh": null,
       "version": "2026-10",
       "posture": "mirror",
       "terms": {
-        "checked": "2026-11-22",
+        "checked": "2026-11-23",
         "changed": false,
         "posture": "mirror"
       },
@@ -83,12 +83,12 @@
     },
     {
       "id": "eia-860m",
-      "lastCheck": "2026-11-22T17:22:37.560Z",
+      "lastCheck": "2026-11-23T21:28:53.866Z",
       "lastRefresh": null,
       "version": "2026-10",
       "posture": "mirror",
       "terms": {
-        "checked": "2026-11-22",
+        "checked": "2026-11-23",
         "changed": false,
         "posture": "mirror"
       },
@@ -98,12 +98,12 @@
     },
     {
       "id": "eia-861",
-      "lastCheck": "2026-11-22T17:22:37.560Z",
+      "lastCheck": "2026-11-23T21:28:53.866Z",
       "lastRefresh": null,
       "version": "2026-10",
       "posture": "mirror",
       "terms": {
-        "checked": "2026-11-22",
+        "checked": "2026-11-23",
         "changed": false,
         "posture": "mirror"
       },
@@ -118,7 +118,7 @@
       "version": "2026-11",
       "posture": "mirror",
       "terms": {
-        "checked": "2026-11-22",
+        "checked": "2026-11-23",
         "changed": false,
         "posture": "mirror"
       },
@@ -128,12 +128,12 @@
     },
     {
       "id": "eia-923",
-      "lastCheck": "2026-11-22T17:22:37.560Z",
+      "lastCheck": "2026-11-23T21:28:53.866Z",
       "lastRefresh": null,
       "version": "2026-11",
       "posture": "mirror",
       "terms": {
-        "checked": "2026-11-22",
+        "checked": "2026-11-23",
         "changed": false,
         "posture": "mirror"
       },
@@ -143,12 +143,12 @@
     },
     {
       "id": "eia-930",
-      "lastCheck": "2026-11-22T17:22:37.560Z",
+      "lastCheck": "2026-11-23T21:28:53.866Z",
       "lastRefresh": "2026-11-22T17:22:37.560Z",
       "version": "2026-11",
       "posture": "mirror",
       "terms": {
-        "checked": "2026-11-22",
+        "checked": "2026-11-23",
         "changed": false,
         "posture": "mirror"
       },
@@ -158,12 +158,12 @@
     },
     {
       "id": "ghcn-daily",
-      "lastCheck": "2026-11-22T17:22:37.560Z",
+      "lastCheck": "2026-11-23T21:28:53.866Z",
       "lastRefresh": null,
       "version": "2026-11",
       "posture": "mirror",
       "terms": {
-        "checked": "2026-11-22",
+        "checked": "2026-11-23",
         "changed": false,
         "posture": "mirror"
       },
@@ -178,7 +178,7 @@
       "version": "2026-11",
       "posture": null,
       "terms": {
-        "checked": "2026-11-22",
+        "checked": "2026-11-23",
         "unreachable": "HTTP 503",
         "captured": "2026-11-01"
       },
@@ -188,19 +188,18 @@
     },
     {
       "id": "urdb",
-      "lastCheck": "2026-11-22T17:22:37.560Z",
+      "lastCheck": "2026-11-23T21:28:53.866Z",
       "lastRefresh": "2026-11-22T17:22:37.560Z",
       "version": "2026-11",
       "posture": "mirror",
       "terms": {
-        "checked": "2026-11-22",
+        "checked": "2026-11-23",
         "changed": false,
         "posture": "mirror"
       },
       "failure": null,
       "pinned": null,
-      "releasePromises": [],
-      "lastRelease": "https://github.com/clay-good/gridprims/releases/download/data-urdb-2026-11/usurdb.json.gz"
+      "releasePromises": []
     }
   ],
   "links": [
@@ -3551,6 +3550,91 @@
   },
   "runs": [
     {
+      "workflow": "refresh-data",
+      "started": "2026-11-23T21:28:48.782Z",
+      "finished": "2026-11-23T21:28:53.866Z",
+      "durationMs": 5084,
+      "ok": true,
+      "datasets": [
+        {
+          "id": "eia-861",
+          "checked": true,
+          "refreshed": false,
+          "version": "2026-10",
+          "posture": "mirror",
+          "termsChanged": false
+        },
+        {
+          "id": "eia-860",
+          "checked": true,
+          "refreshed": false,
+          "version": "2026-10",
+          "posture": "mirror",
+          "termsChanged": false
+        },
+        {
+          "id": "eia-923",
+          "checked": true,
+          "refreshed": false,
+          "version": "2026-11",
+          "posture": "mirror",
+          "termsChanged": false
+        },
+        {
+          "id": "eia-860m",
+          "checked": true,
+          "refreshed": false,
+          "version": "2026-10",
+          "posture": "mirror",
+          "termsChanged": false
+        },
+        {
+          "id": "urdb",
+          "checked": true,
+          "refreshed": false,
+          "version": "2026-11",
+          "waiting": "already taken this month (2026-11)",
+          "posture": "mirror",
+          "termsChanged": false
+        },
+        {
+          "id": "eia-930",
+          "checked": true,
+          "refreshed": false,
+          "version": "2026-11",
+          "waiting": "already taken this month (2026-11)",
+          "posture": "mirror",
+          "termsChanged": false
+        },
+        {
+          "id": "ghcn-daily",
+          "checked": true,
+          "refreshed": false,
+          "version": "2026-11",
+          "waiting": "already taken this month (2026-11)",
+          "posture": "mirror",
+          "termsChanged": false
+        },
+        {
+          "id": "eia-861-net-metering",
+          "checked": false,
+          "refreshed": false,
+          "version": "2026-11",
+          "posture": "mirror",
+          "waiting": "pinned to a release; a new one is bumped by hand",
+          "termsChanged": false
+        },
+        {
+          "id": "nlr-sharing-the-sun",
+          "checked": false,
+          "refreshed": false,
+          "version": "2026-11",
+          "waiting": "pinned to a release; a new one is bumped by hand"
+        }
+      ],
+      "notes": []
+    },
+    {
       "workflow": "rule-watch",
       "started": "2026-11-23T20:19:41.958Z",
       "finished": "2026-11-23T20:20:09.172Z",
@@ -3869,117 +3953,117 @@
     {
       "id": "calc.energy-units.convert",
       "version": "0.2.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "calc.energy-units.emissions",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "calc.power-factor.correct",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "calc.transformer.size",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "calc.storage.basics",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "calc.cost.lcoe",
       "version": "0.2.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "calc.line-rating.ampacity",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "ratepayer.revenue-requirement.explain",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "electrify.service-headroom.check",
       "version": "0.2.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "electrify.backup-power.size",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "reliability.outage-log.indices",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "household.bill-totals.check",
       "version": "0.2.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "household.usage-benchmark.compare",
       "version": "0.2.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "carbon.load-shift.estimate",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "weather.change.explain",
       "version": "0.2.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "grid.large-load.take-or-pay",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "grid.large-load.context",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "lines.midspan-clearance.check",
       "version": "0.4.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "lines.attachment-height.find",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "interconnect.minimum-load.screen",
       "version": "0.4.1",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "interconnect.process.route",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "interconnect.fast-track.screens",
       "version": "0.2.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     },
     {
       "id": "interconnect.inverter.size",
       "version": "0.1.0",
-      "evidencePassed": "2026-11-22T17:24:02.797Z"
+      "evidencePassed": "2026-11-23T21:30:30.046Z"
     }
   ],
   "curated": {
