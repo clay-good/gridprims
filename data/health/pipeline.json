@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T18:58:44.697Z",
+  "generatedAt": "2026-11-26T17:49:10.551Z",
   "workflows": [
     {
       "id": "refresh-data",
@@ -23,8 +23,8 @@
       "id": "go95-watch",
       "intervalHours": 168,
       "thresholdHours": 504,
-      "lastSuccess": "2026-11-19T16:40:54.230Z",
-      "lastRun": "2026-11-19T16:40:54.230Z",
+      "lastSuccess": "2026-11-26T17:49:10.551Z",
+      "lastRun": "2026-11-26T17:49:10.551Z",
       "enabled": true,
       "events": []
     },
@@ -4199,6 +4199,18 @@
   },
   "runs": [
     {
+      "workflow": "go95-watch",
+      "started": "2026-11-26T17:49:09.306Z",
+      "finished": "2026-11-26T17:49:10.551Z",
+      "durationMs": 1245,
+      "ok": true,
+      "datasets": [],
+      "notes": [
+        "GO 95 Table 1: matches its stored capture",
+        "GO 95 Table 2: matches its stored capture"
+      ]
+    },
+    {
       "workflow": "link-check",
       "started": "2026-11-24T18:56:45.387Z",
       "finished": "2026-11-24T18:58:44.697Z",
@@ -4729,7 +4741,7 @@
   "curated": {
     "go95-clearances": {
       "needsReview": [],
-      "checked": "2026-11-19"
+      "checked": "2026-11-26"
     }
   }
 }
